@@ -87,19 +87,19 @@ class Setup
 
     protected function setupProjectBasePath()
     {
-        $valid = true;
+        $saveToConfig = false;
         $projectBasePath = $this->getProjectBasePath();
         $defaultProjectBasePath = dirname(getcwd());
 
         while (!is_dir($projectBasePath)) {
-            $valid = false;
+            $saveToConfig = true;
             fwrite(STDOUT, ' - ' . static::PROJECT_BASE_PATH . ' is not set or is not a valid directory' . PHP_EOL);
             fwrite(STDOUT, '   Please enter new path [' . $defaultProjectBasePath . ']: ');
             $projectBasePath = trim(fgets(STDIN)) ?: $defaultProjectBasePath;
         }
 
         fwrite(STDOUT, ' + ' . static::PROJECT_BASE_PATH . ' set as \'' . $projectBasePath . '\'' . PHP_EOL);
-        if (!$valid) {
+        if ($saveToConfig) {
             $this->getConfig()->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
         }
     }
