@@ -112,7 +112,7 @@ class Setup
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
         $this->setupEnvironment();
-        $this->commandList();
+        while ($this->commandList());
     }
 
     protected function setupEnvironment()
@@ -258,7 +258,7 @@ class Setup
 
         for ($i = 1; $commands->valid(); $i++, $commands->next()) {
             fwrite(
-                STROUT,
+                STDOUT,
                 str_repeat(' ', 3) . str_pad($i, strlen($commands->count()), ' ', STR_PAD_LEFT)
                     . ': ' . $commands->current()->getName() . PHP_EOL
             );
@@ -281,10 +281,10 @@ class Setup
         }
 
         $commands->rewind();
-        for ($i = 0; $i < $command; $i++) {
+        for ($i = 1; $i < $command; $i++) {
             $commands->next();
         }
 
-        $commands->current()->run($this->getArguments(), $this->getConfig());
+        return $commands->current()->run($this->getArguments(), $this->getConfig());
     }
 }

@@ -13,3 +13,5 @@ if (!is_file('vendor/autoload.php')) {
 
 $autoloader = require 'vendor/autoload.php';
 $autoloader->set('CG\Skeleton', __DIR__);
+
+$commands = require_once('commands.php');

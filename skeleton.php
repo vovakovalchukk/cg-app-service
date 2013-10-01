@@ -7,8 +7,6 @@ use Zend\Config\Config;
 use CG\Skeleton\Setup;
 use CG\Skeleton\Arguments;
 
-$commands = new SplObjectStorage();
-
 $config = array();
 if (is_file(SKELETON_CONFIG)) {
     $config = Factory::fromFile(SKELETON_CONFIG) ?: array();
