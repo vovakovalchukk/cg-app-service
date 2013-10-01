@@ -7,6 +7,9 @@ use Zend\Config\Config;
 class Setup
 {
     const PROJECT_BASE_PATH = 'PROJECT_BASE_PATH';
+    const INFRASTRUCTURE_PATH = 'INFRASTRUCTURE_PATH';
+    const INFRASTRUCTURE_NAME = 'CGInfrastructure-V4';
+    const INFRASTRUCTURE_REPOSITORY = 'git@bitbucket.org:channelgrabber/cginfrastructure-v4.git';
     const NODE = 'NODE';
     const APP_NAME = 'APP_NAME';
     const HOST_NAME = 'HOST_NAME';
@@ -59,14 +62,23 @@ class Setup
     {
         $projectBasePath = $this->getConfig()->get(static::PROJECT_BASE_PATH);
         if ($projectBasePath) {
-            return $projectBasePath;
+            return rtrim($projectBasePath, '/');
         }
 
         if (isset($_SERVER[static::PROJECT_BASE_PATH])) {
-            return $_SERVER[static::PROJECT_BASE_PATH];
+            return rtrim($_SERVER[static::PROJECT_BASE_PATH], '/');
         }
 
         return '';
+    }
+
+    public function getInfrastructurePath()
+    {
+        $infrastructurePath = $this->getConfig()->get(static::INFRASTRUCTURE_PATH);
+        if ($infrastructurePath) {
+            return $infrastructurePath;
+        }
+        return $this->getProjectBasePath() . '/cginfrastructure-v4';
     }
 
     public function getNode()
@@ -86,7 +98,7 @@ class Setup
 
     public function getVmPath()
     {
-        return $this->getConfig()->get(static::VM_PATH);
+        return rtrim($this->getConfig()->get(static::VM_PATH), '/');
     }
 
     public function run()
@@ -100,6 +112,7 @@ class Setup
     {
         fwrite(STDOUT, PHP_EOL);
         $this->setupProjectBasePath();
+        $this->setupInfrastructurePath();
         $this->setupNode();
         $this->setupAppName();
         $this->setupHostname();
@@ -123,6 +136,31 @@ class Setup
         fwrite(STDOUT, ' + ' . static::PROJECT_BASE_PATH . ' set as \'' . $projectBasePath . '\'' . PHP_EOL);
         if ($saveToConfig) {
             $this->getConfig()->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
+        }
+    }
+
+    protected function setupInfrastructurePath()
+    {
+        $saveToConfig = false;
+        $infrastructurePath = $this->getInfrastructurePath();
+
+        while (!is_dir($infrastructurePath)) {
+            $saveToConfig = false;
+            fwrite(STDOUT, '   Do you have a local copy of ' . static::INFRASTRUCTURE_NAME . ' [Y,n]: ');
+
+            $localCopy = strtolower(trim(fgets(STDIN))) ?: 'y';
+            if ($localCopy == 'y') {
+                $saveToConfig = true;
+                fwrite(STDOUT, '   Please enter new path: ');
+                $infrastructurePath = trim(fgets(STDIN));
+            } else if ($localCopy == 'n') {
+                passthru('git clone ' . static::INFRASTRUCTURE_REPOSITORY . ' ' . $infrastructurePath);
+            }
+        }
+
+        fwrite(STDOUT, ' + ' . static::INFRASTRUCTURE_PATH . ' set as \'' . $infrastructurePath . '\'' . PHP_EOL);
+        if ($saveToConfig) {
+            $this->getConfig()->offsetSet(static::INFRASTRUCTURE_PATH, $infrastructurePath);
         }
     }
 
