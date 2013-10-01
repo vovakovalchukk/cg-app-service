@@ -203,8 +203,8 @@ class Setup
         exec(
             'cd ' . $this->getInfrastructurePath() . ';'
                 . ' git fetch;'
-                . ' git ls-remote --exit-code . ' . $branch
-                . ' || git ls-remote --exit-code . origin/' . $branch,
+                . ' git ls-remote --exit-code . ' . $branch . '  > /dev/null'
+                . ' || git ls-remote --exit-code . origin/' . $branch . '  > /dev/null',
             $output,
             $exitCode
         );
