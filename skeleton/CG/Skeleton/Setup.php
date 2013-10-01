@@ -8,6 +8,7 @@ class Setup
 {
     const PROJECT_BASE_PATH = 'PROJECT_BASE_PATH';
     const NODE = 'NODE';
+    const APP_NAME = 'APP_NAME';
 
     protected $commands;
     protected $arguments;
@@ -70,6 +71,11 @@ class Setup
         return $this->getConfig()->get(static::NODE);
     }
 
+    public function getAppName()
+    {
+        return $this->getConfig()->get(static::APP_NAME);
+    }
+
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
@@ -82,6 +88,7 @@ class Setup
         fwrite(STDOUT, PHP_EOL);
         $this->setupProjectBasePath();
         $this->setupNode();
+        $this->setupAppName();
         fwrite(STDOUT, PHP_EOL);
     }
 
@@ -115,6 +122,19 @@ class Setup
 
         fwrite(STDOUT, ' + ' . static::NODE . ' set as \'' . $node . '\'' . PHP_EOL);
         $this->getConfig()->offsetSet(static::NODE, $node);
+    }
+
+    protected function setupAppName()
+    {
+        $appName = $this->getAppName();
+        while (!$appName) {
+            fwrite(STDOUT, ' - ' . static::APP_NAME . ' is not set' . PHP_EOL);
+            fwrite(STDOUT, '   What will your app be called: ');
+            $appName = trim(fgets(STDIN));
+        }
+
+        fwrite(STDOUT, ' + ' . static::APP_NAME . ' set as \'' . $appName . '\'' . PHP_EOL);
+        $this->getConfig()->offsetSet(static::APP_NAME, $appName);
     }
 
     protected function commandList()
