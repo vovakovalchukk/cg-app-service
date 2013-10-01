@@ -10,6 +10,8 @@ class Setup
     const INFRASTRUCTURE_PATH = 'INFRASTRUCTURE_PATH';
     const INFRASTRUCTURE_NAME = 'CGInfrastructure-V4';
     const INFRASTRUCTURE_REPOSITORY = 'git@bitbucket.org:channelgrabber/cginfrastructure-v4.git';
+    const INFRASTRUCTURE_BRANCH = 'origin/master';
+    const BRANCH = 'BRANCH';
     const NODE = 'NODE';
     const APP_NAME = 'APP_NAME';
     const HOST_NAME = 'HOST_NAME';
@@ -81,6 +83,11 @@ class Setup
         return $this->getProjectBasePath() . '/cginfrastructure-v4';
     }
 
+    public function getBranch()
+    {
+        return $this->getConfig()->get(static::BRANCH);
+    }
+
     public function getNode()
     {
         return $this->getConfig()->get(static::NODE);
@@ -113,6 +120,7 @@ class Setup
         fwrite(STDOUT, PHP_EOL);
         $this->setupProjectBasePath();
         $this->setupInfrastructurePath();
+        $this->setupBranch();
         $this->setupNode();
         $this->setupAppName();
         $this->setupHostname();
@@ -162,6 +170,46 @@ class Setup
         if ($saveToConfig) {
             $this->getConfig()->offsetSet(static::INFRASTRUCTURE_PATH, $infrastructurePath);
         }
+    }
+
+    protected function setupBranch()
+    {
+        $branch = $this->getBranch();
+        while (!$branch || !$this->validateBranch($branch)) {
+            if ($branch) {
+                fwrite(STDOUT, '   Do you want to create branch \'' . $branch . '\' [Y,n]: ');
+                $newBranch = strtolower(trim(fgets(STDIN))) ?: 'y';
+
+                if ($newBranch == 'y') {
+                    passthru(
+                        'cd ' . $this->getInfrastructurePath() . ';'
+                            . ' git branch --no-track ' . $branch . ' ' . static::INFRASTRUCTURE_BRANCH
+                    );
+                    break;
+                }
+            }
+
+            fwrite(STDOUT, ' - ' . static::BRANCH . ' is not set' . PHP_EOL);
+            fwrite(STDOUT, '   Please enter branch name: ');
+            $branch = trim(fgets(STDIN));
+        }
+
+        fwrite(STDOUT, ' + ' . static::BRANCH . ' set as \'' . $branch . '\'' . PHP_EOL);
+        $this->getConfig()->offsetSet(static::BRANCH, $branch);
+    }
+
+    protected function validateBranch($branch)
+    {
+        exec(
+            'cd ' . $this->getInfrastructurePath() . ';'
+                . ' git fetch;'
+                . ' git ls-remote --exit-code . ' . $branch
+                . ' || git ls-remote --exit-code . origin/' . $branch,
+            $output,
+            $exitCode
+        );
+
+        return $exitCode == 0;
     }
 
     protected function setupConfigValue($key, $value, $question, $default = null)
