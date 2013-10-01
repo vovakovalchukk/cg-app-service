@@ -7,6 +7,7 @@ use Zend\Config\Config;
 class Setup
 {
     const PROJECT_BASE_PATH = 'PROJECT_BASE_PATH';
+    const NODE = 'NODE';
 
     protected $commands;
     protected $arguments;
@@ -64,6 +65,11 @@ class Setup
         return '';
     }
 
+    public function getNode()
+    {
+        return $this->getConfig()->get(static::NODE);
+    }
+
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
@@ -75,6 +81,7 @@ class Setup
     {
         fwrite(STDOUT, PHP_EOL);
         $this->setupProjectBasePath();
+        $this->setupNode();
         fwrite(STDOUT, PHP_EOL);
     }
 
@@ -95,6 +102,19 @@ class Setup
         if (!$valid) {
             $this->getConfig()->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
         }
+    }
+
+    protected function setupNode()
+    {
+        $node = $this->getNode();
+        while (!$node) {
+            fwrite(STDOUT, ' - ' . static::NODE . ' is not set' . PHP_EOL);
+            fwrite(STDOUT, '   What node will your application go on: ');
+            $node = trim(fgets(STDIN));
+        }
+
+        fwrite(STDOUT, ' + ' . static::NODE . ' set as \'' . $node . '\'' . PHP_EOL);
+        $this->getConfig()->offsetSet(static::NODE, $node);
     }
 
     protected function commandList()
