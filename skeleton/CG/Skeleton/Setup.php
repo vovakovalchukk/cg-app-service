@@ -255,10 +255,20 @@ class Setup
 
         $commands = $this->getCommands();
         $commands->rewind();
+
         for ($i = 1; $commands->valid(); $i++, $commands->next()) {
-            fwrite(STROUT, str_repeat(' ', 3) . $i . ': ' . $commands->current()->getName() . PHP_EOL);
+            fwrite(
+                STROUT,
+                str_repeat(' ', 3) . str_pad($i, strlen($commands->count()), ' ', STR_PAD_LEFT)
+                    . ': ' . $commands->current()->getName() . PHP_EOL
+            );
         }
-        fwrite(STDOUT, str_repeat(' ', 3) . '0: Exit' . PHP_EOL . PHP_EOL);
+
+        fwrite(
+            STDOUT,
+            str_repeat(' ', 3) . str_pad('0', strlen($commands->count()), ' ', STR_PAD_LEFT)
+                . ': Exit' . PHP_EOL . PHP_EOL
+        );
 
         $command = null;
         while (!is_numeric($command) || $command < 0 || $command > $commands->count()) {
