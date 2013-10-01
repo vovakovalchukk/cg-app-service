@@ -1,6 +1,8 @@
 <?php
 chdir(dirname(__DIR__));
 
+define('SKELETON_CONFIG', __DIR__ . '/config.xml');
+
 if (!is_file('composer.phar')) {
     passthru('curl -sS https://getcomposer.org/installer | php');
 }
