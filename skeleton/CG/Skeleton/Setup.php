@@ -11,6 +11,7 @@ class Setup
     const APP_NAME = 'APP_NAME';
     const HOST_NAME = 'HOST_NAME';
     const DOMAIN = 'channelgrabber.com';
+    const VM_PATH = 'VM_PATH';
 
     protected $commands;
     protected $arguments;
@@ -83,6 +84,11 @@ class Setup
         return $this->getConfig()->get(static::HOST_NAME, $this->getAppName() . '.' . static::DOMAIN);
     }
 
+    public function getVmPath()
+    {
+        return $this->getConfig()->get(static::VM_PATH);
+    }
+
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
@@ -97,6 +103,7 @@ class Setup
         $this->setupNode();
         $this->setupAppName();
         $this->setupHostname();
+        $this->setupVmPath();
         fwrite(STDOUT, PHP_EOL);
     }
 
@@ -119,12 +126,12 @@ class Setup
         }
     }
 
-    protected function setupConfigValue($key, $value, $question)
+    protected function setupConfigValue($key, $value, $question, $default = null)
     {
         while (!$value) {
             fwrite(STDOUT, ' - ' . $key . ' is not set' . PHP_EOL);
-            fwrite(STDOUT, '   ' . $question . ': ');
-            $value = trim(fgets(STDIN));
+            fwrite(STDOUT, '   ' . $question . ($default ? ' [' . $default . ']' : '') . ': ');
+            $value = trim(fgets(STDIN)) ?: $default;
         }
 
         fwrite(STDOUT, ' + ' . $key . ' set as \'' . $value . '\'' . PHP_EOL);
@@ -144,6 +151,16 @@ class Setup
     protected function setupHostname()
     {
         $this->setupConfigValue(static::HOST_NAME, $this->getHostname(), 'What url will your app be available at');
+    }
+
+    protected function setupVmPath()
+    {
+        $this->setupConfigValue(
+            static::VM_PATH,
+            $this->getVmPath(),
+            'What is the absolute path of your app on the vm',
+            '/var/www/' . $this->getAppName()
+        );
     }
 
     protected function commandList()
