@@ -3,7 +3,7 @@
 require 'skeleton/bootstrap.php';
 
 use Zend\Config\Factory;
-use Zend\Config\Config;
+use CG\Skeleton\Config;
 use CG\Skeleton\Setup;
 use CG\Skeleton\Arguments;
 

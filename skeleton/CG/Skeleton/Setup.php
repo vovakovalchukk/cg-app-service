@@ -2,22 +2,9 @@
 namespace CG\Skeleton;
 
 use SplObjectStorage;
-use Zend\Config\Config;
 
 class Setup
 {
-    const PROJECT_BASE_PATH = 'PROJECT_BASE_PATH';
-    const INFRASTRUCTURE_PATH = 'INFRASTRUCTURE_PATH';
-    const INFRASTRUCTURE_NAME = 'CGInfrastructure-V4';
-    const INFRASTRUCTURE_REPOSITORY = 'git@bitbucket.org:channelgrabber/cginfrastructure-v4.git';
-    const INFRASTRUCTURE_BRANCH = 'origin/master';
-    const BRANCH = 'BRANCH';
-    const NODE = 'NODE';
-    const APP_NAME = 'APP_NAME';
-    const HOST_NAME = 'HOST_NAME';
-    const DOMAIN = 'channelgrabber.com';
-    const VM_PATH = 'VM_PATH';
-
     protected $commands;
     protected $arguments;
     protected $config;
@@ -60,54 +47,6 @@ class Setup
         return $this->config;
     }
 
-    public function getProjectBasePath()
-    {
-        $projectBasePath = $this->getConfig()->get(static::PROJECT_BASE_PATH);
-        if ($projectBasePath) {
-            return rtrim($projectBasePath, '/');
-        }
-
-        if (isset($_SERVER[static::PROJECT_BASE_PATH])) {
-            return rtrim($_SERVER[static::PROJECT_BASE_PATH], '/');
-        }
-
-        return '';
-    }
-
-    public function getInfrastructurePath()
-    {
-        $infrastructurePath = $this->getConfig()->get(static::INFRASTRUCTURE_PATH);
-        if ($infrastructurePath) {
-            return $infrastructurePath;
-        }
-        return $this->getProjectBasePath() . '/cginfrastructure-v4';
-    }
-
-    public function getBranch()
-    {
-        return $this->getConfig()->get(static::BRANCH);
-    }
-
-    public function getNode()
-    {
-        return $this->getConfig()->get(static::NODE);
-    }
-
-    public function getAppName()
-    {
-        return $this->getConfig()->get(static::APP_NAME);
-    }
-
-    public function getHostname()
-    {
-        return $this->getConfig()->get(static::HOST_NAME, $this->getAppName() . '.' . static::DOMAIN);
-    }
-
-    public function getVmPath()
-    {
-        return rtrim($this->getConfig()->get(static::VM_PATH), '/');
-    }
-
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
@@ -131,30 +70,30 @@ class Setup
     protected function setupProjectBasePath()
     {
         $saveToConfig = false;
-        $projectBasePath = $this->getProjectBasePath();
+        $projectBasePath = $this->getConfig()->getProjectBasePath();
         $defaultProjectBasePath = dirname(getcwd());
 
         while (!is_dir($projectBasePath)) {
             $saveToConfig = true;
-            fwrite(STDOUT, ' - ' . static::PROJECT_BASE_PATH . ' is not set or is not a valid directory' . PHP_EOL);
+            fwrite(STDOUT, ' - ' . Config::PROJECT_BASE_PATH . ' is not set or is not a valid directory' . PHP_EOL);
             fwrite(STDOUT, '   Please enter new path [' . $defaultProjectBasePath . ']: ');
             $projectBasePath = trim(fgets(STDIN)) ?: $defaultProjectBasePath;
         }
 
-        fwrite(STDOUT, ' + ' . static::PROJECT_BASE_PATH . ' set as \'' . $projectBasePath . '\'' . PHP_EOL);
+        fwrite(STDOUT, ' + ' . Config::PROJECT_BASE_PATH . ' set as \'' . $projectBasePath . '\'' . PHP_EOL);
         if ($saveToConfig) {
-            $this->getConfig()->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
+            $this->getConfig()->offsetSet(Config::PROJECT_BASE_PATH, $projectBasePath);
         }
     }
 
     protected function setupInfrastructurePath()
     {
         $saveToConfig = false;
-        $infrastructurePath = $this->getInfrastructurePath();
+        $infrastructurePath = $this->getConfig()->getInfrastructurePath();
 
         while (!is_dir($infrastructurePath)) {
             $saveToConfig = false;
-            fwrite(STDOUT, '   Do you have a local copy of ' . static::INFRASTRUCTURE_NAME . ' [Y,n]: ');
+            fwrite(STDOUT, '   Do you have a local copy of ' . Config::INFRASTRUCTURE_NAME . ' [Y,n]: ');
 
             $localCopy = strtolower(trim(fgets(STDIN))) ?: 'y';
             if ($localCopy == 'y') {
@@ -162,19 +101,19 @@ class Setup
                 fwrite(STDOUT, '   Please enter new path: ');
                 $infrastructurePath = trim(fgets(STDIN));
             } else if ($localCopy == 'n') {
-                passthru('git clone ' . static::INFRASTRUCTURE_REPOSITORY . ' ' . $infrastructurePath);
+                passthru('git clone ' . Config::INFRASTRUCTURE_REPOSITORY . ' ' . $infrastructurePath);
             }
         }
 
-        fwrite(STDOUT, ' + ' . static::INFRASTRUCTURE_PATH . ' set as \'' . $infrastructurePath . '\'' . PHP_EOL);
+        fwrite(STDOUT, ' + ' . Config::INFRASTRUCTURE_PATH . ' set as \'' . $infrastructurePath . '\'' . PHP_EOL);
         if ($saveToConfig) {
-            $this->getConfig()->offsetSet(static::INFRASTRUCTURE_PATH, $infrastructurePath);
+            $this->getConfig()->offsetSet(Config::INFRASTRUCTURE_PATH, $infrastructurePath);
         }
     }
 
     protected function setupBranch()
     {
-        $branch = $this->getBranch();
+        $branch = $this->getConfig()->getBranch();
         while (!$branch || !$this->validateBranch($branch)) {
             if ($branch) {
                 fwrite(STDOUT, '   Do you want to create branch \'' . $branch . '\' [Y,n]: ');
@@ -182,26 +121,26 @@ class Setup
 
                 if ($newBranch == 'y') {
                     passthru(
-                        'cd ' . $this->getInfrastructurePath() . ';'
-                            . ' git branch --no-track ' . $branch . ' ' . static::INFRASTRUCTURE_BRANCH
+                        'cd ' . $this->getConfig()->getInfrastructurePath() . ';'
+                            . ' git branch --no-track ' . $branch . ' ' . Config::INFRASTRUCTURE_BRANCH
                     );
                     break;
                 }
             }
 
-            fwrite(STDOUT, ' - ' . static::BRANCH . ' is not set' . PHP_EOL);
+            fwrite(STDOUT, ' - ' . Config::BRANCH . ' is not set' . PHP_EOL);
             fwrite(STDOUT, '   Please enter branch name: ');
             $branch = trim(fgets(STDIN));
         }
 
-        fwrite(STDOUT, ' + ' . static::BRANCH . ' set as \'' . $branch . '\'' . PHP_EOL);
-        $this->getConfig()->offsetSet(static::BRANCH, $branch);
+        fwrite(STDOUT, ' + ' . Config::BRANCH . ' set as \'' . $branch . '\'' . PHP_EOL);
+        $this->getConfig()->offsetSet(Config::BRANCH, $branch);
     }
 
     protected function validateBranch($branch)
     {
         exec(
-            'cd ' . $this->getInfrastructurePath() . ';'
+            'cd ' . $this->getConfig()->getInfrastructurePath() . ';'
                 . ' git fetch;'
                 . ' git ls-remote --exit-code . ' . $branch . '  > /dev/null'
                 . ' || git ls-remote --exit-code . origin/' . $branch . '  > /dev/null',
@@ -226,26 +165,26 @@ class Setup
 
     protected function setupNode()
     {
-        $this->setupConfigValue(static::NODE, $this->getNode(), 'What node will your application go on');
+        $this->setupConfigValue(Config::NODE, $this->getConfig()->getNode(), 'What node will your application go on');
     }
 
     protected function setupAppName()
     {
-        $this->setupConfigValue(static::APP_NAME, $this->getAppName(), 'What will your app be called');
+        $this->setupConfigValue(Config::APP_NAME, $this->getConfig()->getAppName(), 'What will your app be called');
     }
 
     protected function setupHostname()
     {
-        $this->setupConfigValue(static::HOST_NAME, $this->getHostname(), 'What url will your app be available at');
+        $this->setupConfigValue(Config::HOST_NAME, $this->getConfig()->getHostname(), 'What url will your app be available at');
     }
 
     protected function setupVmPath()
     {
         $this->setupConfigValue(
-            static::VM_PATH,
-            $this->getVmPath(),
+            Config::VM_PATH,
+            $this->getConfig()->getVmPath(),
             'What is the absolute path of your app on the vm',
-            '/var/www/' . $this->getAppName()
+            '/var/www/' . $this->getConfig()->getAppName()
         );
     }
 

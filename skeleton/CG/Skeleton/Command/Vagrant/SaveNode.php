@@ -3,7 +3,7 @@ namespace CG\Skeleton\Command\Vagrant;
 
 use CG\Skeleton\Command;
 use CG\Skeleton\Arguments;
-use Zend\Config\Config;
+use CG\Skeleton\Config;
 
 class SaveNode implements Command
 {
