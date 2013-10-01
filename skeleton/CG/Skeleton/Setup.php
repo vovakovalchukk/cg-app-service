@@ -9,6 +9,8 @@ class Setup
     const PROJECT_BASE_PATH = 'PROJECT_BASE_PATH';
     const NODE = 'NODE';
     const APP_NAME = 'APP_NAME';
+    const HOST_NAME = 'HOST_NAME';
+    const DOMAIN = 'channelgrabber.com';
 
     protected $commands;
     protected $arguments;
@@ -76,6 +78,11 @@ class Setup
         return $this->getConfig()->get(static::APP_NAME);
     }
 
+    public function getHostname()
+    {
+        return $this->getConfig()->get(static::HOST_NAME, $this->getAppName() . '.' . static::DOMAIN);
+    }
+
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
@@ -89,6 +96,7 @@ class Setup
         $this->setupProjectBasePath();
         $this->setupNode();
         $this->setupAppName();
+        $this->setupHostname();
         fwrite(STDOUT, PHP_EOL);
     }
 
@@ -111,30 +119,31 @@ class Setup
         }
     }
 
-    protected function setupNode()
+    protected function setupConfigValue($key, $value, $question)
     {
-        $node = $this->getNode();
-        while (!$node) {
-            fwrite(STDOUT, ' - ' . static::NODE . ' is not set' . PHP_EOL);
-            fwrite(STDOUT, '   What node will your application go on: ');
-            $node = trim(fgets(STDIN));
+        while (!$value) {
+            fwrite(STDOUT, ' - ' . $key . ' is not set' . PHP_EOL);
+            fwrite(STDOUT, '   ' . $question . ': ');
+            $value = trim(fgets(STDIN));
         }
 
-        fwrite(STDOUT, ' + ' . static::NODE . ' set as \'' . $node . '\'' . PHP_EOL);
-        $this->getConfig()->offsetSet(static::NODE, $node);
+        fwrite(STDOUT, ' + ' . $key . ' set as \'' . $value . '\'' . PHP_EOL);
+        $this->getConfig()->offsetSet($key, $value);
+    }
+
+    protected function setupNode()
+    {
+        $this->setupConfigValue(static::NODE, $this->getNode(), 'What node will your application go on');
     }
 
     protected function setupAppName()
     {
-        $appName = $this->getAppName();
-        while (!$appName) {
-            fwrite(STDOUT, ' - ' . static::APP_NAME . ' is not set' . PHP_EOL);
-            fwrite(STDOUT, '   What will your app be called: ');
-            $appName = trim(fgets(STDIN));
-        }
+        $this->setupConfigValue(static::APP_NAME, $this->getAppName(), 'What will your app be called');
+    }
 
-        fwrite(STDOUT, ' + ' . static::APP_NAME . ' set as \'' . $appName . '\'' . PHP_EOL);
-        $this->getConfig()->offsetSet(static::APP_NAME, $appName);
+    protected function setupHostname()
+    {
+        $this->setupConfigValue(static::HOST_NAME, $this->getHostname(), 'What url will your app be available at');
     }
 
     protected function commandList()
