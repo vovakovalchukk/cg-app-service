@@ -50,6 +50,7 @@ class CommandList
         $indent = 3 + strlen($commands->count());
 
         $i = 1;
+        $commands->rewind();
         foreach ($commands as $command) {
             $this->displayCommand($indent, $i++, $command->getName());
         }
@@ -66,12 +67,15 @@ class CommandList
         }
 
         $i = 1;
+        $commands->rewind();
         foreach ($commands as $command) {
-            if ($i++ == $selected) {
+            if ($selected != $i++) {
                 continue;
             }
             $command->run($arguments, $config);
         }
+
+        return (boolean) $selected;
     }
 
     protected function displayCommand($indent, $index, $command)

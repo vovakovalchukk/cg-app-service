@@ -118,6 +118,6 @@ class Setup
     protected function commandList()
     {
         $commandList = new CommandList($this->getConsole(), $this->getCommands());
-        $commandList->askAndRun($this->getArguments(), $this->getConfig());
+        return $commandList->askAndRun($this->getArguments(), $this->getConfig());
     }
 }
