@@ -1,4 +1,7 @@
 <?php
 namespace CG\Skeleton;
 
-interface ShutdownCommand extends Command {}
+interface ShutdownCommand
+{
+    public function run(Arguments $arguments, Config $config);
+}

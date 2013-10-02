@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Command\Vagrant;
+namespace CG\Skeleton\StartupCommand\Vagrant;
 
 use CG\Skeleton\StartupCommand;
 use CG\Skeleton\Arguments;

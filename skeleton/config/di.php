@@ -18,14 +18,11 @@ return array(
     'instance' => array(
         'CG\Skeleton\Setup' => array(
             'injections' => array(
-                'CG\Skeleton\Command\Vagrant\SaveNode'
+                'CG\Skeleton\StartupCommand\Vagrant\SaveNode'
             ),
             'shared' => true
         ),
         'CG\Skeleton\Arguments' => array(
-            'shared' => true
-        ),
-        'CG\Skeleton\Command\Vagrant\SaveNode' => array(
             'shared' => true
         )
     )

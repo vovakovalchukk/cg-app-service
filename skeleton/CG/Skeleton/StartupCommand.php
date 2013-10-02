@@ -1,4 +1,7 @@
 <?php
 namespace CG\Skeleton;
 
-interface StartupCommand extends Command {}
+interface StartupCommand
+{
+    public function run(Arguments $arguments, Config $config);
+}
