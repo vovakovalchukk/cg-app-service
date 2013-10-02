@@ -14,6 +14,7 @@ class StartupCommand implements StartupCommandInterface
 
     const NODE_DATA_PATH = 'data/nodeData.json';
     const DEFAULT_RAM = '768';
+    const DEFAULT_BOX = 'cg-precise64';
 
     protected $console;
     protected $defaults;
@@ -49,6 +50,7 @@ class StartupCommand implements StartupCommandInterface
 
         $this->setVmRam($nodeData, $node, $config, $vagrantConfig);
         $this->setVmIp($nodeData, $node, $config, $vagrantConfig);
+        $this->setBox($nodeData, $node, $config, $vagrantConfig);
 
         $nodeData->save();
 
@@ -105,5 +107,18 @@ class StartupCommand implements StartupCommandInterface
         );
 
         $this->getConsole()->writeStatus('VM ip saved to /etc/hosts');
+    }
+
+    protected function setBox(NodeData $nodeData, Node $node, SkeletonConfig $config, Config $vagrantConfig)
+    {
+        $box = $vagrantConfig->getBox();
+        while (!$box) {
+            $this->getConsole()->writeErrorStatus('Vagrant box is not selected');
+            $box = $this->getConsole()->ask('Please enter vagrant box to use', static::DEFAULT_BOX);
+        }
+
+        $this->getConsole()->writeStatus('Vagrant box is set as \'' . $box . '\'');
+        $node->setBox($box);
+        $vagrantConfig->setBox($box);
     }
 }
