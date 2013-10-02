@@ -73,6 +73,37 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setVmIp(NodeData $nodeData, Node $node, SkeletonConfig $config, Config $vagrantConfig)
     {
+        $vmIp = $vagrantConfig->getVmIp();
+        $vmIps = $nodeData->getIpsInUse();
 
+        while (!filter_var($vmIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $this->getConsole()->writeErrorStatus('VM ip is not set or is invalid');
+
+            if (!empty($vmIps)) {
+                $this->getConsole()->writeln('The following ips are in use');
+                foreach ($vmIps as $nodeName => $ip) {
+                    $this->getConsole()->writeln('   * ' . $ip . ' => ' . $nodeName);
+                }
+                $this->getConsole()->writeln('Please remember other ips may be in use, please confer with other developers before setting an ip address');
+            }
+
+            $vmIp = $this->getConsole()->ask('What local ip address would you like to access the vm for this node', '192.168.33.21');
+        }
+
+        $this->getConsole()->writeStatus('VM ip set as \'' . $vmIp . '\'');
+        $node->setVmIp($vmIp);
+        $vagrantConfig->setVmIp($vmIp);
+
+        $this->getConsole()->writeStatus(
+            'Saving VM ip to /etc/hosts '
+            . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
+        );
+
+        exec(
+            'grep -q -e "' . $vmIp . ' ' . $config->getHostname() . '.local" /etc/hosts'
+            . ' || echo "' . $vmIp . ' ' . $config->getHostname() . '.local" | sudo tee -a /etc/hosts'
+        );
+
+        $this->getConsole()->writeStatus('VM ip saved to /etc/hosts');
     }
 }

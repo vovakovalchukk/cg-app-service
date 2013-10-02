@@ -58,6 +58,7 @@ class Config extends ZendConfig
     public function setChefRoles(array $chefRoles)
     {
         $this->offsetSet(Node::CHEF_ROLES, $chefRoles);
+        return $this;
     }
 
     public function getChefRecipes()

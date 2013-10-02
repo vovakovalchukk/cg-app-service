@@ -15,7 +15,7 @@ class Node extends ArrayObject
 
     public function getVmRam()
     {
-        return $this->offsetGet(static::VM_RAM);
+        return $this->offsetExists(static::VM_RAM) ? $this->offsetGet(static::VM_RAM) : null;
     }
 
     public function setVmRam($vmRam)
@@ -26,7 +26,7 @@ class Node extends ArrayObject
 
     public function getVmIp()
     {
-        return $this->offsetGet(static::VM_IP);
+        return $this->offsetExists(static::VM_IP) ? $this->offsetGet(static::VM_IP) : null;
     }
 
     public function setVmIp($vmIp)
@@ -37,7 +37,7 @@ class Node extends ArrayObject
 
     public function getBox()
     {
-        return $this->offsetGet(static::BOX);
+        return $this->offsetExists(static::BOX) ? $this->offsetGet(static::BOX) : null;
     }
 
     public function setBox($box)
@@ -48,7 +48,7 @@ class Node extends ArrayObject
 
     public function getChefAttributes()
     {
-        return $this->offsetGet(static::CHEF_ATTRIBUTES) ?: array();
+        return $this->offsetExists(static::CHEF_ATTRIBUTES) ? $this->offsetGet(static::CHEF_ATTRIBUTES) : array();
     }
 
     public function addChefAttribute($chefAttribute)
@@ -61,7 +61,7 @@ class Node extends ArrayObject
 
     public function getChefRoles()
     {
-        return $this->offsetGet(static::CHEF_ROLES) ?: array();
+        return $this->offsetExists(static::CHEF_ROLES) ? $this->offsetGet(static::CHEF_ROLES) : array();
     }
 
     public function addChefRole($chefRole)
@@ -74,7 +74,7 @@ class Node extends ArrayObject
 
     public function getChefRecipes()
     {
-        return $this->offsetGet(static::CHEF_RECIPES) ?: array();
+        return $this->offsetExists(static::CHEF_RECIPES) ? $this->offsetGet(static::CHEF_RECIPES) : array();
     }
 
     public function addChefRecipe($chefRecipe)
@@ -87,7 +87,7 @@ class Node extends ArrayObject
 
     public function getSyncedFolders()
     {
-        return $this->offsetGet(static::SYNCED_FOLDERS) ?: array();
+        return $this->offsetExists(static::SYNCED_FOLDERS) ? $this->offsetGet(static::SYNCED_FOLDERS) : array();
     }
 
     public function addSyncedFolder($syncedFolder)

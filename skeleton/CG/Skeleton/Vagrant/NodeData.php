@@ -41,6 +41,19 @@ class NodeData
         return $nodeData;
     }
 
+    public function getIpsInUse()
+    {
+        $ips = array();
+        foreach ($this->data as $node => $nodeData) {
+            $ip = $nodeData->getVmIp();
+            if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                continue;
+            }
+            $ips[$node] = $ip;
+        }
+        return $ips;
+    }
+
     public function save()
     {
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
