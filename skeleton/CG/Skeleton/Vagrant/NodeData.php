@@ -31,6 +31,16 @@ class NodeData
         }
     }
 
+    public function getNode($node)
+    {
+        if (!isset($this->data[$node])) {
+            $this->data[$node] = new Node();
+        }
+
+        $nodeData =& $this->data[$node];
+        return $nodeData;
+    }
+
     public function save()
     {
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));

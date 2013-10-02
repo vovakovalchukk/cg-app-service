@@ -17,6 +17,21 @@ class Config extends ZendConfig
     const DOMAIN = 'channelgrabber.com';
     const VM_PATH = 'VM_PATH';
 
+    protected $classMap = array(
+        'Vagrant' => 'CG\Skeleton\Vagrant\Config'
+    );
+
+    public function __construct(array $config, $allowModifications = false)
+    {
+        foreach ($config as $entry => $value) {
+            if (!isset($this->classMap[$entry])) {
+                continue;
+            }
+            $config[$entry] = new $this->classMap[$entry]($value, $allowModifications);
+        }
+        parent::__construct($config, $allowModifications);
+    }
+
     public function getProjectBasePath()
     {
         $projectBasePath = $this->get(static::PROJECT_BASE_PATH);
