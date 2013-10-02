@@ -14,4 +14,10 @@ if (!is_file('vendor/autoload.php')) {
 $autoloader = require 'vendor/autoload.php';
 $autoloader->set('CG\Skeleton', __DIR__);
 
-$commands = require_once('commands.php');
+$config = array();
+if (is_file(SKELETON_CONFIG)) {
+    $config = Zend\Config\Factory::fromFile(SKELETON_CONFIG) ?: array();
+}
+
+$di = new Zend\Di\Di(null, null, new Zend\Di\Config(require_once 'config/di.php'));
+$di->instanceManager()->addSharedInstance(new CG\Skeleton\Config($config, true), 'CG\Skeleton\Config');
