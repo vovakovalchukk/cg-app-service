@@ -255,7 +255,7 @@ class Setup
         }
 
         if ($command == 0) {
-            return;
+            return false;
         }
 
         $commands->rewind();
@@ -263,6 +263,7 @@ class Setup
             $commands->next();
         }
 
-        return $commands->current()->run($this->getArguments(), $this->getConfig());
+        $commands->current()->run($this->getArguments(), $this->getConfig());
+        return true;
     }
 }

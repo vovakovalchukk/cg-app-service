@@ -10,9 +10,11 @@ use CG\Skeleton\Chef\Node;
 
 class StartupCommand implements StartupCommandInterface
 {
+    use CommandTrait;
+
     const ROLE = 'role';
-    const ROLES = 'tools/chef/roles/';
-    const NODES = 'tools/chef/nodes/';
+    const ROLES = 'roles/';
+    const NODES = 'nodes/';
 
     protected $defaults;
 
@@ -21,19 +23,12 @@ class StartupCommand implements StartupCommandInterface
         $this->defaults = array();
     }
 
-    public function run(Arguments $arguments, Config $config)
+    public function runCommands(Arguments $arguments, Config $config)
     {
-        $cwd = getcwd();
-        chdir($config->getInfrastructurePath());
-        exec('git checkout ' . $config->getBranch() . ' > /dev/null');
-
         $chefConfig = $config->get('Chef', new ZendConfig($this->defaults, true));
         $this->saveRole($config, $chefConfig);
         $this->saveNode($config, $chefConfig);
         $config->offsetSet('Chef', $chefConfig);
-
-        chdir($cwd);
-        return true;
     }
 
     protected function saveRole(Config $config, ZendConfig $chefConfig)
