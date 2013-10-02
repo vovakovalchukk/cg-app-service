@@ -125,7 +125,7 @@ class StartupCommand implements StartupCommandInterface
 
                 if ($newBranch == 'y') {
                     passthru(
-                        'cd ' . $this->getConfig()->getInfrastructurePath() . ';'
+                        'cd ' . $config->getInfrastructurePath() . ';'
                         . ' git branch --no-track ' . $branch . ' ' . Config::INFRASTRUCTURE_BRANCH
                     );
                     break;
