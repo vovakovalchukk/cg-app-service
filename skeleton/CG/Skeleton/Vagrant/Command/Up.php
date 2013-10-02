@@ -17,6 +17,6 @@ class Up implements CommandInterface
 
     protected function runCommands(Arguments $arguments, Config $config)
     {
-        exec(' vagrant up ' . $config->getNode());
+        passthru('vagrant up ' . $config->getNode());
     }
 }
