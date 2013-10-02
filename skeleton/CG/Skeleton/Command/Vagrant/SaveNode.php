@@ -1,14 +1,14 @@
 <?php
 namespace CG\Skeleton\Command\Vagrant;
 
-use CG\Skeleton\Command;
+use CG\Skeleton\StartupCommand;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
 
-class SaveNode implements Command
+class SaveNode implements StartupCommand
 {
     const ROLE = 'role';
     const ROLES = 'tools/chef/roles/';

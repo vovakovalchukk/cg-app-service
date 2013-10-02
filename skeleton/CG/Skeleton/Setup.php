@@ -80,8 +80,17 @@ class Setup
     public function run()
     {
         fwrite(STDOUT, 'Welcome to the Skeleton Application Setup' . PHP_EOL);
+
         $this->setupEnvironment();
+        foreach ($this->getStartupCommands() as $command) {
+            $command->run($this->getArguments(), $this->getConfig());
+        }
+
         while ($this->commandList());
+
+        foreach ($this->getShutdownCommands() as $command) {
+            $command->run($this->getArguments(), $this->getConfig());
+        }
     }
 
     protected function setupEnvironment()
