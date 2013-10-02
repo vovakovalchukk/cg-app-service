@@ -2,6 +2,7 @@
 namespace CG\Skeleton;
 
 use SplObjectStorage;
+use CG\Skeleton\Console\CommandList;
 
 class Setup
 {
@@ -116,41 +117,7 @@ class Setup
 
     protected function commandList()
     {
-        fwrite(STDOUT, 'The following commands are available' . PHP_EOL . PHP_EOL);
-
-        $commands = $this->getCommands();
-        $commands->rewind();
-
-        for ($i = 1; $commands->valid(); $i++, $commands->next()) {
-            fwrite(
-                STDOUT,
-                str_repeat(' ', 3) . str_pad($i, strlen($commands->count()), ' ', STR_PAD_LEFT)
-                    . ': ' . $commands->current()->getName() . PHP_EOL
-            );
-        }
-
-        fwrite(
-            STDOUT,
-            str_repeat(' ', 3) . str_pad('0', strlen($commands->count()), ' ', STR_PAD_LEFT)
-                . ': Exit' . PHP_EOL . PHP_EOL
-        );
-
-        $command = null;
-        while (!is_numeric($command) || $command < 0 || $command > $commands->count()) {
-            fwrite(STDOUT, '?> ');
-            $command = trim(fgets(STDIN));
-        }
-
-        if ($command == 0) {
-            return false;
-        }
-
-        $commands->rewind();
-        for ($i = 1; $i < $command; $i++) {
-            $commands->next();
-        }
-
-        $commands->current()->run($this->getArguments(), $this->getConfig());
-        return true;
+        $commandList = new CommandList($this->getConsole(), $this->getCommands());
+        $commandList->askAndRun($this->getArguments(), $this->getConfig());
     }
 }
