@@ -5,24 +5,18 @@ use SplObjectStorage;
 
 class Setup
 {
-    protected $commands;
     protected $arguments;
     protected $config;
+    protected $startupCommands;
+    protected $commands;
+    protected $shutdownCommands;
 
-    public function __construct(SplObjectStorage $commands, Arguments $arguments, Config $config)
+    public function __construct(Arguments $arguments, Config $config)
     {
-        $this->setCommands($commands)->setArguments($arguments)->setConfig($config);
-    }
-
-    public function setCommands(SplObjectStorage $commands)
-    {
-        $this->commands = $commands;
-        return $this;
-    }
-
-    public function getCommands()
-    {
-        return $this->commands;
+        $this->setArguments($arguments)->setConfig($config);
+        $this->startupCommands = new SplObjectStorage();
+        $this->commands = new SplObjectStorage();
+        $this->shutdownCommands = new SplObjectStorage();
     }
 
     public function setArguments(Arguments $arguments)
@@ -45,6 +39,42 @@ class Setup
     public function getConfig()
     {
         return $this->config;
+    }
+
+    public function addStartupCommand(StartupCommand $startupCommand)
+    {
+        $this->startupCommands->attach($startupCommand);
+    }
+
+    public function setStartupCommands($startupCommands)
+    {
+        $this->startupCommands = $startupCommands;
+        return $this;
+    }
+
+    public function getStartupCommands()
+    {
+        return $this->startupCommands;
+    }
+
+    public function getCommands()
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command)
+    {
+        $this->commands->attach($command);
+    }
+
+    public function addShutdownCommand(ShutdownCommand $shutdownCommand)
+    {
+        $this->shutdownCommands->attach($shutdownCommand);
+    }
+
+    public function getShutdownCommands()
+    {
+        return $this->shutdownCommands;
     }
 
     public function run()
