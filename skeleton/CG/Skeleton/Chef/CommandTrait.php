@@ -10,7 +10,7 @@ trait CommandTrait
     {
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
-        exec('git checkout ' . $config->getBranch() . ' > /dev/null;');
+        exec('git checkout ' . $config->getBranch() . ' 2>1 >/dev/null;');
         $this->runCommands($arguments, $config);
         chdir($cwd);
     }

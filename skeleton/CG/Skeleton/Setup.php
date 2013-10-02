@@ -180,9 +180,9 @@ class Setup
     {
         exec(
             'cd ' . $this->getConfig()->getInfrastructurePath() . ';'
-                . ' git fetch > /dev/null;'
-                . ' git ls-remote --exit-code . ' . $branch . ' > /dev/null'
-                . ' || git ls-remote --exit-code . origin/' . $branch . ' > /dev/null',
+                . ' git fetch 2>1 >/dev/null;'
+                . ' git ls-remote --exit-code . ' . $branch . ' 2>1 >/dev/null'
+                . ' || git ls-remote --exit-code . origin/' . $branch . ' 2>1 >/dev/null',
             $output,
             $exitCode
         );
