@@ -76,23 +76,23 @@ class StartupCommand implements StartupCommandInterface
 
     protected function configureCapistranoOnNode(Node $node, Config $config)
     {
-        $node->setKey('cg.capistrano.' . $config->getAppName() . '.deploy_to', $config->getVmPath());
-        $node->setKey('cg.capistrano.' . $config->getAppName() . '.shared_structure.config', 'config');
-        $node->setKey('cg.capistrano.' . $config->getAppName() . '.shared_structure.config/autoload', 'config/autoload');
-        $node->setKey('cg.capistrano.' . $config->getAppName() . '.symlinks.config/host.php', 'config/host.php');
+        $node->setKey('cg.capistrano|' . $config->getAppName() . '|deploy_to', $config->getVmPath());
+        $node->setKey('cg.capistrano|' . $config->getAppName() . '|shared_structure|config', 'config');
+        $node->setKey('cg.capistrano|' . $config->getAppName() . '|shared_structure|config/autoload', 'config/autoload');
+        $node->setKey('cg.capistrano|' . $config->getAppName() . '|symlinks|config/host.php', 'config/host.php');
     }
 
     protected function configureSiteOnNode(Node $node, Config $config)
     {
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.docroot', $config->getVmPath());
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.webroot', 'public');
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.configroot', 'config');
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.dataroot', 'data');
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.datadiroot', 'data/di');
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.hostname', $config->getHostname());
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.enabled', true);
-        $node->setKey('configure_sites.include_certificates_in_dataroot', true);
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.configautoloadroot', 'config/autoload');
-        $node->setKey('configure_sites.sites.' . $config->getAppName() . '.certificateroot', 'data/certificates');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|docroot', $config->getVmPath());
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|webroot', 'public');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configroot', 'config');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|dataroot', 'data');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|datadiroot', 'data/di');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|hostname', $config->getHostname());
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|enabled', true);
+        $node->setKey('configure_sites|include_certificates_in_dataroot', true);
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configautoloadroot', 'config/autoload');
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|certificateroot', 'data/certificates');
     }
 }

@@ -42,7 +42,7 @@ class Node
     public function setKey($key, $value)
     {
         $data =& $this->data;
-        foreach (explode('.', $key) as $currentKey) {
+        foreach (explode('|', $key) as $currentKey) {
             $data =& $data[$currentKey];
         }
         $data = $value;
