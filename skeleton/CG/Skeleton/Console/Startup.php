@@ -17,7 +17,7 @@ class Startup extends Console
         parent::write($string);
     }
 
-    public function writeln($string)
+    public function writeln($string = '')
     {
         $this->newLine = true;
         parent::writeln($string);

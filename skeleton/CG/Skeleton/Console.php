@@ -42,12 +42,12 @@ class Console
         fwrite($this->errStream, $string);
     }
 
-    public function writeln($string)
+    public function writeln($string = '')
     {
         $this->write($string . PHP_EOL);
     }
 
-    public function writelnErr($string)
+    public function writelnErr($string = '')
     {
         $this->writeErr($string . PHP_EOL);
     }
