@@ -21,7 +21,7 @@ class Node
             return;
         }
 
-        $jsonData = json_decode($this->path, true);
+        $jsonData = json_decode(file_get_contents($this->path), true);
         if (!is_array($jsonData)) {
             return;
         }
