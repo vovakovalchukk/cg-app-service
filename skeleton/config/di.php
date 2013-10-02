@@ -12,6 +12,11 @@ return array(
                 'addShutdownCommand' => array(
                     'command' => array('type' => 'CG\Skeleton\ShutdownCommandInterface', 'required' => true)
                 )
+            ),
+            'CG\Skeleton\Module\Command' => array(
+                'addModule' => array(
+                    'module' => array('type' => 'CG\Skeleton\Module\ModuleInterface', 'required' => true)
+                )
             )
         )
     ),
@@ -25,6 +30,7 @@ return array(
                 'CG\Skeleton\Vagrant\Command\Provision',
                 'CG\Skeleton\Vagrant\Command\Reload',
                 'CG\Skeleton\Vagrant\Command\Halt',
+                'CG\Skeleton\Module\Command',
                 'CG\Skeleton\Environment\ShutdownCommand'
             ),
             'shared' => true

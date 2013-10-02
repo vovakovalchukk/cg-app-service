@@ -19,7 +19,8 @@ class Config extends ZendConfig
     const ROLE = 'ROLE';
 
     protected $classMap = array(
-        'Vagrant' => 'CG\Skeleton\Vagrant\Config'
+        'Vagrant' => 'CG\Skeleton\Vagrant\Config',
+        'Module' => 'CG\Skeleton\Module\Config'
     );
 
     public function __construct(array $config, $allowModifications = false)

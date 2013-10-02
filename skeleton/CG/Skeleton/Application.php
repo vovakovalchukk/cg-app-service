@@ -57,11 +57,6 @@ class Application
     public function addStartupCommand(StartupCommandInterface $startupCommand)
     {
         $this->startupCommands->attach($startupCommand);
-    }
-
-    public function setStartupCommands($startupCommands)
-    {
-        $this->startupCommands = $startupCommands;
         return $this;
     }
 
@@ -70,19 +65,21 @@ class Application
         return $this->startupCommands;
     }
 
+    public function addCommand(CommandInterface $command)
+    {
+        $this->commands->attach($command);
+        return $this;
+    }
+
     public function getCommands()
     {
         return $this->commands;
     }
 
-    public function addCommand(CommandInterface $command)
-    {
-        $this->commands->attach($command);
-    }
-
     public function addShutdownCommand(ShutdownCommandInterface $shutdownCommand)
     {
         $this->shutdownCommands->attach($shutdownCommand);
+        return $this;
     }
 
     public function getShutdownCommands()
