@@ -8,7 +8,7 @@ class Config extends ZendConfig
 {
     public function getVmRam()
     {
-        $this->get(Node::VM_RAM);
+        return $this->get(Node::VM_RAM);
     }
 
     public function setVmRam($vmRam)
@@ -19,7 +19,7 @@ class Config extends ZendConfig
 
     public function getVmIp()
     {
-        $this->get(Node::VM_IP);
+        return $this->get(Node::VM_IP);
     }
 
     public function setVmIp($vmIp)
@@ -30,7 +30,7 @@ class Config extends ZendConfig
 
     public function getBox()
     {
-        $this->get(Node::BOX);
+        return $this->get(Node::BOX);
     }
 
     public function setBox($box)
@@ -41,7 +41,7 @@ class Config extends ZendConfig
 
     public function getChefAttributes()
     {
-        $this->get(Node::CHEF_ATTRIBUTES, array());
+        return $this->get(Node::CHEF_ATTRIBUTES, array());
     }
 
     public function setChefAttributes(array $chefAttributes)
@@ -52,7 +52,7 @@ class Config extends ZendConfig
 
     public function getChefRoles()
     {
-        $this->get(Node::CHEF_ROLES, array());
+        return $this->get(Node::CHEF_ROLES, array());
     }
 
     public function setChefRoles(array $chefRoles)
@@ -62,7 +62,7 @@ class Config extends ZendConfig
 
     public function getChefRecipes()
     {
-        $this->get(Node::CHEF_ROLES, array());
+        return $this->get(Node::CHEF_ROLES, array());
     }
 
     public function setChefRecipes(array $chefRecipes)
@@ -73,7 +73,7 @@ class Config extends ZendConfig
 
     public function getSyncedFolders()
     {
-        $this->get(Node::SYNCED_FOLDERS, array());
+        return $this->get(Node::SYNCED_FOLDERS, array());
     }
 
     public function setSyncedFolders(array $syncedFolders)
