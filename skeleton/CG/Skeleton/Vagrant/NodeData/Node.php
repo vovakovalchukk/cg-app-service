@@ -123,4 +123,13 @@ class Node extends ArrayObject
         $this->offsetSet(static::SYNCED_FOLDERS, $syncedFolders);
         return $this;
     }
+
+    public function getArrayCopy()
+    {
+        $arrayCopy = parent::getArrayCopy();
+        if (isset($arrayCopy[static::CHEF_ATTRIBUTES])) {
+            $arrayCopy[static::CHEF_ATTRIBUTES] = (object) $arrayCopy[static::CHEF_ATTRIBUTES];
+        }
+        return $arrayCopy;
+    }
 }
