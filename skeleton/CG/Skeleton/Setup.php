@@ -41,7 +41,7 @@ class Setup
         return $this->config;
     }
 
-    public function addStartupCommand(StartupCommand $startupCommand)
+    public function addStartupCommand(StartupCommandInterface $startupCommand)
     {
         $this->startupCommands->attach($startupCommand);
     }
@@ -62,12 +62,12 @@ class Setup
         return $this->commands;
     }
 
-    public function addCommand(Command $command)
+    public function addCommand(CommandInterface $command)
     {
         $this->commands->attach($command);
     }
 
-    public function addShutdownCommand(ShutdownCommand $shutdownCommand)
+    public function addShutdownCommand(ShutdownCommandInterface $shutdownCommand)
     {
         $this->shutdownCommands->attach($shutdownCommand);
     }
