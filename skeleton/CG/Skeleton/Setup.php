@@ -141,9 +141,9 @@ class Setup
     {
         exec(
             'cd ' . $this->getConfig()->getInfrastructurePath() . ';'
-                . ' git fetch;'
-                . ' git ls-remote --exit-code . ' . $branch . '  > /dev/null'
-                . ' || git ls-remote --exit-code . origin/' . $branch . '  > /dev/null',
+                . ' git fetch > /dev/null;'
+                . ' git ls-remote --exit-code . ' . $branch . ' > /dev/null'
+                . ' || git ls-remote --exit-code . origin/' . $branch . ' > /dev/null',
             $output,
             $exitCode
         );

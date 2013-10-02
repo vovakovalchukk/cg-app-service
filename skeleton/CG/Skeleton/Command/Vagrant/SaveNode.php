@@ -71,7 +71,8 @@ class SaveNode implements Command
         $node = new Node($nodeFile);
 
         $this->addRoleToNode($node, $config, $chefConfig);
-        $this->configureNode($node, $config, $chefConfig);
+        $this->configureCapistranoOnNode($node, $config, $chefConfig);
+        $this->configureSiteOnNode($node, $config, $chefConfig);
 
         $node->save();
 
@@ -86,13 +87,7 @@ class SaveNode implements Command
         $node->addToRunList('role[' . $chefConfig->get(static::ROLE) . ']');
     }
 
-    protected function configureNode(Node $node, Config $config, ZendConfig $chefConfig)
-    {
-        $this->configureCapistranoNode($node, $config, $chefConfig);
-        $this->configureSiteNode($node, $config, $chefConfig);
-    }
-
-    protected function configureCapistranoNode(Node $node, Config $config, ZendConfig $chefConfig)
+    protected function configureCapistranoOnNode(Node $node, Config $config, ZendConfig $chefConfig)
     {
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.deploy_to', $config->getVmPath());
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.shared_structure.config', 'config');
@@ -100,7 +95,7 @@ class SaveNode implements Command
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.symlinks.config/host.php', 'config/host.php');
     }
 
-    protected function configureSiteNode(Node $node, Config $config, ZendConfig $chefConfig)
+    protected function configureSiteOnNode(Node $node, Config $config, ZendConfig $chefConfig)
     {
         $node->setKey('configure_sites.sites.' . $config->getAppName() . '.docroot', $config->getVmPath());
         $node->setKey('configure_sites.sites.' . $config->getAppName() . '.webroot', 'public');
