@@ -35,21 +35,17 @@ class Config extends ZendConfig
 
     public function getProjectBasePath()
     {
-        $projectBasePath = $this->get(static::PROJECT_BASE_PATH);
-        if ($projectBasePath) {
-            return rtrim($projectBasePath, '/');
-        }
-
-        if (isset($_SERVER[static::PROJECT_BASE_PATH])) {
-            return rtrim($_SERVER[static::PROJECT_BASE_PATH], '/');
-        }
-
-        return '';
+        return rtrim(getenv(static::PROJECT_BASE_PATH) ?: '', '/');
     }
 
     public function setProjectBasePath($projectBasePath)
     {
-        $this->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
+        $_SERVER[static::PROJECT_BASE_PATH] = $projectBasePath;
+
+        $export = static::PROJECT_BASE_PATH . '=' . $projectBasePath;
+        exec('echo "\n#CONFIGURED BY SKELETON:\nexport ' . $export . '" >> ~/.bash_profile');
+        putenv($export);
+
         return $this;
     }
 

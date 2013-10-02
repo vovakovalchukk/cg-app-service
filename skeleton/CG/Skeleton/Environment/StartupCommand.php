@@ -75,6 +75,7 @@ class StartupCommand implements StartupCommandInterface
 
         $this->getConsole()->writeStatus('Projects Base Path set as \'' . $projectBasePath . '\'');
         if ($saveToConfig) {
+            $this->getConsole()->writeStatus('Projects Base Path written to ~/.bash_profile');
             $config->setProjectBasePath($projectBasePath);
         }
     }
