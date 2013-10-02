@@ -18,7 +18,7 @@ return array(
     'instance' => array(
         'CG\Skeleton\Setup' => array(
             'injections' => array(
-                'CG\Skeleton\Vagrant\StartupCommand\SaveNode',
+                'CG\Skeleton\Chef\StartupCommand\SaveNode',
                 'CG\Skeleton\Vagrant\Command\Up'
             ),
             'shared' => true

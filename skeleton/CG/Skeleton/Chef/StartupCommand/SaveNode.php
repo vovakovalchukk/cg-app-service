@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Vagrant\StartupCommand;
+namespace CG\Skeleton\Chef\StartupCommand;
 
 use CG\Skeleton\StartupCommand;
 use CG\Skeleton\Arguments;
