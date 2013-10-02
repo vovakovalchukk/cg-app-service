@@ -83,7 +83,7 @@ class SaveNode implements Command
 
     protected function addRoleToNode(Node $node, Config $config, ZendConfig $chefConfig)
     {
-        $node->addToRunList($chefConfig->get(static::ROLE));
+        $node->addToRunList('role[' . $chefConfig->get(static::ROLE) . ']');
     }
 
     protected function configureNode(Node $node, Config $config, ZendConfig $chefConfig)
