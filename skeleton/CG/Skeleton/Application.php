@@ -4,7 +4,7 @@ namespace CG\Skeleton;
 use SplObjectStorage;
 use CG\Skeleton\Console\CommandList;
 
-class Setup
+class Application
 {
     protected $console;
     protected $arguments;

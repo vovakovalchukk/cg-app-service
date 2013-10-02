@@ -2,7 +2,7 @@
 return array(
     'definition' => array(
         'class' => array(
-            'CG\Skeleton\Setup' => array(
+            'CG\Skeleton\Application' => array(
                 'addStartupCommand' => array(
                     'command' => array('type' => 'CG\Skeleton\StartupCommandInterface', 'required' => true)
                 ),
@@ -16,12 +16,13 @@ return array(
         )
     ),
     'instance' => array(
-        'CG\Skeleton\Setup' => array(
+        'CG\Skeleton\Application' => array(
             'injections' => array(
                 'CG\Skeleton\Environment\StartupCommand',
                 'CG\Skeleton\Vagrant\StartupCommand',
                 'CG\Skeleton\Chef\StartupCommand',
-                'CG\Skeleton\Vagrant\Command\Up'
+                'CG\Skeleton\Vagrant\Command\Up',
+                'CG\Skeleton\Environment\ShutdownCommand'
             ),
             'shared' => true
         ),
