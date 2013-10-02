@@ -8,6 +8,7 @@ class Node extends ArrayObject
     const VM_RAM = 'VM-RAM';
     const VM_IP = 'VM-ip';
     const BOX = 'box';
+    const APPLICATIONS = 'application';
     const CHEF_ATTRIBUTES = 'chef_attributes';
     const CHEF_ROLES = 'chef_roles';
     const CHEF_RECIPES = 'chef_recipes';
@@ -46,15 +47,31 @@ class Node extends ArrayObject
         return $this;
     }
 
+    public function getApplications()
+    {
+        return $this->offsetExists(static::APPLICATIONS) ? $this->offsetGet(static::APPLICATIONS) : array();
+    }
+
+    public function addApplication($application, $value)
+    {
+        $applications = $this->getApplications();
+        if (isset($applications[$application])) {
+            $value = array_merge($applications[$application], $value);
+        }
+        $applications[$application] = $value;
+        $this->offsetSet(static::APPLICATIONS, $applications);
+        return $this;
+    }
+
     public function getChefAttributes()
     {
         return $this->offsetExists(static::CHEF_ATTRIBUTES) ? $this->offsetGet(static::CHEF_ATTRIBUTES) : array();
     }
 
-    public function addChefAttribute($chefAttribute)
+    public function addChefAttribute($attribute, $value)
     {
         $chefAttributes = $this->getChefAttributes();
-        $chefAttributes[] = $chefAttribute;
+        $chefAttributes[$attribute] = $value;
         $this->offsetSet(static::CHEF_ATTRIBUTES, $chefAttributes);
         return $this;
     }
@@ -67,6 +84,9 @@ class Node extends ArrayObject
     public function addChefRole($chefRole)
     {
         $chefRoles = $this->getChefRoles();
+        if (isset(array_flip($chefRoles)[$chefRole])) {
+            return;
+        }
         $chefRoles[] = $chefRole;
         $this->offsetSet(static::CHEF_ROLES, $chefRoles);
         return $this;
@@ -80,6 +100,9 @@ class Node extends ArrayObject
     public function addChefRecipe($chefRecipe)
     {
         $chefRecipes = $this->getChefRecipes();
+        if (isset(array_flip($chefRecipes)[$chefRecipe])) {
+            return;
+        }
         $chefRecipes[] = $chefRecipe;
         $this->offsetSet(static::CHEF_RECIPES, $chefRecipes);
         return $this;
@@ -93,6 +116,9 @@ class Node extends ArrayObject
     public function addSyncedFolder($syncedFolder)
     {
         $syncedFolders = $this->getSyncedFolders();
+        if (isset(array_flip($syncedFolders)[$syncedFolder])) {
+            return;
+        }
         $syncedFolders[] = $syncedFolder;
         $this->offsetSet(static::SYNCED_FOLDERS, $syncedFolders);
         return $this;

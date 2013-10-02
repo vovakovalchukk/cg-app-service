@@ -51,6 +51,7 @@ class StartupCommand implements StartupCommandInterface
         $this->setVmRam($nodeData, $node, $config, $vagrantConfig);
         $this->setVmIp($nodeData, $node, $config, $vagrantConfig);
         $this->setBox($nodeData, $node, $config, $vagrantConfig);
+        $this->setApplication($nodeData, $node, $config, $vagrantConfig);
 
         $nodeData->save();
 
@@ -120,5 +121,16 @@ class StartupCommand implements StartupCommandInterface
         $this->getConsole()->writeStatus('Vagrant box is set as \'' . $box . '\'');
         $node->setBox($box);
         $vagrantConfig->setBox($box);
+    }
+
+    protected function setApplication(NodeData $nodeData, Node $node, SkeletonConfig $config, Config $vagrantConfig)
+    {
+        $node->addApplication(
+            $config->getNode(),
+            array(
+                'localDirectory' => PROJECT_NAME,
+                'role' => $config->getRole()
+            )
+        );
     }
 }

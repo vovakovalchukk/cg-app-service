@@ -16,6 +16,7 @@ class Config extends ZendConfig
     const HOST_NAME = 'HOST_NAME';
     const DOMAIN = 'channelgrabber.com';
     const VM_PATH = 'VM_PATH';
+    const ROLE = 'ROLE';
 
     protected $classMap = array(
         'Vagrant' => 'CG\Skeleton\Vagrant\Config'
@@ -119,6 +120,17 @@ class Config extends ZendConfig
     public function setVmPath($vmPath)
     {
         $this->offsetSet(static::VM_PATH, $vmPath);
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->get(static::ROLE);
+    }
+
+    public function setRole($role)
+    {
+        $this->offsetSet(static::ROLE, $role);
         return $this;
     }
 }

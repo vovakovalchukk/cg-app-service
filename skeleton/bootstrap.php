@@ -1,6 +1,7 @@
 <?php
 chdir(dirname(__DIR__));
 
+define('PROJECT_NAME', basename(dirname(__DIR__)));
 define('SKELETON_CONFIG', __DIR__ . '/config.xml');
 
 if (!is_file('composer.phar')) {

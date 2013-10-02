@@ -12,7 +12,6 @@ class StartupCommand implements StartupCommandInterface
 {
     use CommandTrait;
 
-    const ROLE = 'role';
     const ROLES = 'roles/';
     const NODES = 'nodes/';
 
@@ -25,18 +24,16 @@ class StartupCommand implements StartupCommandInterface
 
     public function runCommands(Arguments $arguments, Config $config)
     {
-        $chefConfig = $config->get('Chef', new ZendConfig($this->defaults, true));
-        $this->saveRole($config, $chefConfig);
-        $this->saveNode($config, $chefConfig);
-        $config->offsetSet('Chef', $chefConfig);
+        $this->saveRole($config);
+        $this->saveNode($config);
     }
 
-    protected function saveRole(Config $config, ZendConfig $chefConfig)
+    protected function saveRole(Config $config)
     {
-        $roleName = $chefConfig->get(static::ROLE);
+        $roleName = $config->getRole();
         if (!$roleName) {
             $roleName = $config->getAppName();
-            $chefConfig->offsetSet(static::ROLE, $roleName);
+            $config->setRole($roleName);
         }
 
         $roleFile = static::ROLES . $roleName . '.json';
@@ -55,14 +52,14 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-    protected function saveNode(Config $config, ZendConfig $chefConfig)
+    protected function saveNode(Config $config)
     {
         $nodeFile = static::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
 
-        $this->addRoleToNode($node, $config, $chefConfig);
-        $this->configureCapistranoOnNode($node, $config, $chefConfig);
-        $this->configureSiteOnNode($node, $config, $chefConfig);
+        $this->addRoleToNode($node, $config);
+        $this->configureCapistranoOnNode($node, $config);
+        $this->configureSiteOnNode($node, $config);
 
         $node->save();
 
@@ -72,12 +69,12 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-    protected function addRoleToNode(Node $node, Config $config, ZendConfig $chefConfig)
+    protected function addRoleToNode(Node $node, Config $config)
     {
-        $node->addToRunList('role[' . $chefConfig->get(static::ROLE) . ']');
+        $node->addToRunList('role[' . $config->getRole() . ']');
     }
 
-    protected function configureCapistranoOnNode(Node $node, Config $config, ZendConfig $chefConfig)
+    protected function configureCapistranoOnNode(Node $node, Config $config)
     {
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.deploy_to', $config->getVmPath());
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.shared_structure.config', 'config');
@@ -85,7 +82,7 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('cg.capistrano.' . $config->getAppName() . '.symlinks.config/host.php', 'config/host.php');
     }
 
-    protected function configureSiteOnNode(Node $node, Config $config, ZendConfig $chefConfig)
+    protected function configureSiteOnNode(Node $node, Config $config)
     {
         $node->setKey('configure_sites.sites.' . $config->getAppName() . '.docroot', $config->getVmPath());
         $node->setKey('configure_sites.sites.' . $config->getAppName() . '.webroot', 'public');
