@@ -22,6 +22,9 @@ return array(
                 'CG\Skeleton\Vagrant\StartupCommand',
                 'CG\Skeleton\Chef\StartupCommand',
                 'CG\Skeleton\Vagrant\Command\Up',
+                'CG\Skeleton\Vagrant\Command\Provision',
+                'CG\Skeleton\Vagrant\Command\Reload',
+                'CG\Skeleton\Vagrant\Command\Halt',
                 'CG\Skeleton\Environment\ShutdownCommand'
             ),
             'shared' => true
