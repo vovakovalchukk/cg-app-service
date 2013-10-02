@@ -30,9 +30,9 @@ class StartupCommand implements StartupCommandInterface
     {
         exec(
             'cd ' . $config->getInfrastructurePath() . ';'
-            . ' git fetch 2>1 >/dev/null;'
-            . ' git ls-remote --exit-code . ' . $branch . ' 2>1 >/dev/null'
-            . ' || git ls-remote --exit-code . origin/' . $branch . ' 2>1 >/dev/null',
+            . ' git fetch 2>&1;'
+            . ' git ls-remote --exit-code . ' . $branch . ' 2>&1'
+            . ' || git ls-remote --exit-code . origin/' . $branch . ' 2>&1',
             $output,
             $exitCode
         );
