@@ -20,6 +20,7 @@ class StartupCommand implements StartupCommandInterface
 
     public function __construct(Startup $console)
     {
+        $this->setConsole($console);
         $this->defaults = array();
     }
 

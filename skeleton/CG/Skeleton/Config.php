@@ -46,6 +46,12 @@ class Config extends ZendConfig
         return '';
     }
 
+    public function setProjectBasePath($projectBasePath)
+    {
+        $this->offsetSet(static::PROJECT_BASE_PATH, $projectBasePath);
+        return $this;
+    }
+
     public function getInfrastructurePath()
     {
         $infrastructurePath = $this->get(static::INFRASTRUCTURE_PATH);
@@ -55,9 +61,21 @@ class Config extends ZendConfig
         return $this->getProjectBasePath() . '/cginfrastructure-v4';
     }
 
+    public function setInfrastructurePath($infrastructurePath)
+    {
+        $this->offsetSet(static::INFRASTRUCTURE_PATH, $infrastructurePath);
+        return $this;
+    }
+
     public function getBranch()
     {
         return $this->get(static::BRANCH);
+    }
+
+    public function setBranch($branch)
+    {
+        $this->offsetSet(static::BRANCH, $branch);
+        return $this;
     }
 
     public function getNode()
@@ -65,9 +83,21 @@ class Config extends ZendConfig
         return $this->get(static::NODE);
     }
 
+    public function setNode($node)
+    {
+        $this->offsetSet(static::NODE, $node);
+        return $this;
+    }
+
     public function getAppName()
     {
         return $this->get(static::APP_NAME);
+    }
+
+    public function setAppName($appName)
+    {
+        $this->offsetSet(static::APP_NAME, $appName);
+        return $this;
     }
 
     public function getHostname()
@@ -75,8 +105,20 @@ class Config extends ZendConfig
         return $this->get(static::HOST_NAME, $this->getAppName() . '.' . static::DOMAIN);
     }
 
+    public function setHostname($hostname)
+    {
+        $this->offsetSet(static::HOST_NAME, $hostname);
+        return $this;
+    }
+
     public function getVmPath()
     {
         return rtrim($this->get(static::VM_PATH), '/');
+    }
+
+    public function setVmPath($vmPath)
+    {
+        $this->offsetSet(static::VM_PATH, $vmPath);
+        return $this;
     }
 }

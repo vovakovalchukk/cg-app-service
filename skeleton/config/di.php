@@ -16,13 +16,9 @@ return array(
         )
     ),
     'instance' => array(
-        'CG\Skeleton\Vagrant\StartupCommand' => array(
-            'parameter' => array(
-                'console' => 'CG\Skeleton\Console\Startup'
-            )
-        ),
         'CG\Skeleton\Setup' => array(
             'injections' => array(
+                'CG\Skeleton\Environment\StartupCommand',
                 'CG\Skeleton\Vagrant\StartupCommand',
                 'CG\Skeleton\Chef\StartupCommand',
                 'CG\Skeleton\Vagrant\Command\Up'

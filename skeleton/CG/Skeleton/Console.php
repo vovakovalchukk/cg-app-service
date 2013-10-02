@@ -62,4 +62,39 @@ class Console
         $this->write(static::COLOR_BLUE . $question . static::COLOR_LIGHT_GREEN . ($default ? ' [' . $default . ']' : '') . ': ' . static::COLOR_RESET);
         return $this->readln() ?: $default;
     }
+
+    public function askWithOptions($question, array $options, $default = null)
+    {
+        if (empty($options)) {
+            return;
+        }
+
+        $options = array_combine(
+            array_map('strtolower', $options),
+            $options
+        );
+
+        if (!isset($options[strtolower($default)])) {
+            $options[strtolower($default)] = $default;
+        }
+
+        $displayOptions = array_map(
+            function($option) use ($default) {
+                return (strcasecmp($option, $default) == 0 ? strtoupper($option) : $option);
+            },
+            array_keys($options)
+        );
+
+        $this->write(
+            static::COLOR_BLUE . $question
+            . static::COLOR_LIGHT_GREEN . ' [' . implode(',', $displayOptions) . ']' . ': '
+            . static::COLOR_RESET
+        );
+
+        $option = strtolower($this->readln() ?: $default);
+        if (!isset($options[$option]) && !$default) {
+            $this->askWithOptions($question, $options, $default);
+        }
+        return $options[$option];
+    }
 }
