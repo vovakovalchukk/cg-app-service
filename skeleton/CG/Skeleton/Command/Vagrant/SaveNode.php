@@ -30,7 +30,7 @@ class SaveNode implements Command
     {
         $cwd = getcwd();
         chdir($config->getInfrastructurePath());
-        exec('git checkout ' . $config->getBranch());
+        exec('git checkout ' . $config->getBranch() . ' > /dev/null');
 
         $chefConfig = $config->get('Chef', new ZendConfig($this->defaults, true));
         $this->saveRole($config, $chefConfig);
