@@ -1,14 +1,14 @@
 <?php
-namespace CG\Skeleton\Chef\StartupCommand;
+namespace CG\Skeleton\Chef;
 
-use CG\Skeleton\StartupCommand;
+use CG\Skeleton\StartupCommandInterface;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
 
-class SaveNode implements StartupCommand
+class StartupCommand implements StartupCommandInterface
 {
     const ROLE = 'role';
     const ROLES = 'tools/chef/roles/';
@@ -19,11 +19,6 @@ class SaveNode implements StartupCommand
     public function __construct()
     {
         $this->defaults = array();
-    }
-
-    public function getName()
-    {
-        return 'Save Node Data';
     }
 
     public function run(Arguments $arguments, Config $config)

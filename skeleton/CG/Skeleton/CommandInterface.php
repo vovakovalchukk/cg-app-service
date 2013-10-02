@@ -1,7 +1,8 @@
 <?php
 namespace CG\Skeleton;
 
-interface StartupCommand
+interface CommandInterface
 {
+    public function getName();
     public function run(Arguments $arguments, Config $config);
 }

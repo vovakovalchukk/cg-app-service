@@ -1,11 +1,11 @@
 <?php
 namespace CG\Skeleton\Vagrant\Command;
 
-use CG\Skeleton\Command;
+use CG\Skeleton\CommandInterface;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 
-abstract class AbstractCommand implements Command
+abstract class AbstractCommand implements CommandInterface
 {
     const VAGRANT_PATH = '/tools/vagrant';
 

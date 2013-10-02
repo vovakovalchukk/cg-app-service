@@ -1,7 +1,7 @@
 <?php
 namespace CG\Skeleton;
 
-interface ShutdownCommand
+interface ShutdownCommandInterface
 {
     public function run(Arguments $arguments, Config $config);
 }

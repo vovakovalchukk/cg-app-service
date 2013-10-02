@@ -4,13 +4,13 @@ return array(
         'class' => array(
             'CG\Skeleton\Setup' => array(
                 'addStartupCommand' => array(
-                    'command' => array('type' => 'CG\Skeleton\StartupCommand', 'required' => true)
+                    'command' => array('type' => 'CG\Skeleton\StartupCommandInterface', 'required' => true)
                 ),
                 'addCommand' => array(
-                    'command' => array('type' => 'CG\Skeleton\Command', 'required' => true)
+                    'command' => array('type' => 'CG\Skeleton\CommandInterface', 'required' => true)
                 ),
                 'addShutdownCommand' => array(
-                    'command' => array('type' => 'CG\Skeleton\ShutdownCommand', 'required' => true)
+                    'command' => array('type' => 'CG\Skeleton\ShutdownCommandInterface', 'required' => true)
                 )
             )
         )
@@ -18,7 +18,7 @@ return array(
     'instance' => array(
         'CG\Skeleton\Setup' => array(
             'injections' => array(
-                'CG\Skeleton\Chef\StartupCommand\SaveNode',
+                'CG\Skeleton\Chef\StartupCommand',
                 'CG\Skeleton\Vagrant\Command\Up'
             ),
             'shared' => true
