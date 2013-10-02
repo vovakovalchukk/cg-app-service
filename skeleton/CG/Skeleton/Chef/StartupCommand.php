@@ -42,7 +42,7 @@ class StartupCommand implements StartupCommandInterface
         $role->addToRunList('role[apt]')
              ->addToRunList('role[cg]')
              ->addToRunList('role[percona]')
-             ->addToRunList('role[web]');
+             ->addToRunList('role[web_app]');
 
         $role->save();
 
