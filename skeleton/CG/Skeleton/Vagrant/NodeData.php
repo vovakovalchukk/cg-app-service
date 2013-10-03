@@ -11,12 +11,21 @@ class NodeData
     public function __construct($path)
     {
         $this->path = $path;
-        $this->data = array();
-        $this->load();
     }
 
-    protected function load()
+    public function getPath()
     {
+        return $this->path;
+    }
+
+    protected function load($reload = false)
+    {
+        if (is_array($this->data) && $reload == false) {
+            return;
+        }
+
+        $this->data = array();
+
         if (!is_file($this->path)) {
             return;
         }
@@ -33,6 +42,7 @@ class NodeData
 
     public function getNode($node)
     {
+        $this->load();
         if (!isset($this->data[$node])) {
             $this->data[$node] = new Node();
         }
@@ -43,6 +53,7 @@ class NodeData
 
     public function getIpsInUse()
     {
+        $this->load();
         $ips = array();
         foreach ($this->data as $node => $nodeData) {
             $ip = $nodeData->getVmIp();
@@ -56,6 +67,7 @@ class NodeData
 
     public function save()
     {
+        $this->load();
         $data = array();
         foreach ($this->data as $node => $nodeData) {
             $data[$node] = $nodeData->getArrayCopy();

@@ -42,6 +42,11 @@ return array(
         ),
         'CG\Skeleton\Arguments' => array(
             'shared' => true
+        ),
+        'CG\Skeleton\Vagrant\NodeData' => array(
+            'parameters' => array(
+                'path' => 'data/nodeData.json'
+            )
         )
     )
 );

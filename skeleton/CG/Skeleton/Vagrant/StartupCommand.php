@@ -12,16 +12,16 @@ class StartupCommand implements StartupCommandInterface
 {
     use CommandTrait;
 
-    const NODE_DATA_PATH = 'data/nodeData.json';
     const DEFAULT_RAM = '768';
     const DEFAULT_BOX = 'cg-precise64';
 
     protected $console;
+    protected $nodeData;
     protected $defaults;
 
-    public function __construct(Startup $console)
+    public function __construct(Startup $console, NodeData $nodeData)
     {
-        $this->setConsole($console);
+        $this->setConsole($console)->setNodeData($nodeData);
         $this->defaults = array();
     }
 
@@ -36,6 +36,17 @@ class StartupCommand implements StartupCommandInterface
         return $this->console;
     }
 
+    public function setNodeData(NodeData $nodeData)
+    {
+        $this->nodeData = $nodeData;
+        return $this;
+    }
+
+    public function getNodeData()
+    {
+        return $this->nodeData;
+    }
+
     protected function runCommands(Arguments $arguments, SkeletonConfig $config)
     {
         $vagrantConfig = $config->get('Vagrant', new Config($this->defaults, true));
@@ -45,7 +56,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function saveNodeData(SkeletonConfig $config, Config $vagrantConfig)
     {
-        $nodeData = new NodeData(static::NODE_DATA_PATH);
+        $nodeData = $this->getNodeData();
         $node = $nodeData->getNode($config->getNode());
 
         $this->setVmRam($nodeData, $node, $config, $vagrantConfig);
@@ -56,8 +67,8 @@ class StartupCommand implements StartupCommandInterface
         $nodeData->save();
 
         exec(
-            'git add ' . static::NODE_DATA_PATH . ';'
-            . ' git commit -m "SKELETON: Updated node data for ' . $config->getNode() . '" --only -- ' . static::NODE_DATA_PATH
+            'git add ' . $nodeData->getPath() . ';'
+            . ' git commit -m "SKELETON: Updated node data for ' . $config->getNode() . '" --only -- ' . $nodeData->getPath()
         );
     }
 
