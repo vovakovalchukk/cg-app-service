@@ -20,6 +20,7 @@ class Console
     const COLOR_LIGHT_CYAN = "\033[1;36m";
     const COLOR_LIGHT_GRAY = "\033[0;37m";
     const COLOR_WHITE = "\033[1;37m";
+    const CLEAR = "\033[0;0H\033[2J";
 
     protected $inStream;
     protected $outStream;
@@ -96,5 +97,10 @@ class Console
             $this->askWithOptions($question, $options, $default);
         }
         return $options[$option];
+    }
+
+    public function clear()
+    {
+        $this->write(static::CLEAR);
     }
 }

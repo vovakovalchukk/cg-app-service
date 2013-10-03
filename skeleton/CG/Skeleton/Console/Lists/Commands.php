@@ -70,6 +70,7 @@ class Commands
         $commands = $this->getCommands();
 
         if ($commands->count() == 0) {
+            $this->getConsole()->clear();
             return;
         }
 
@@ -90,6 +91,7 @@ class Commands
         }
 
         if ($selected == 0) {
+            $this->getConsole()->clear();
             return;
         }
 
@@ -99,8 +101,10 @@ class Commands
             if ($selected != $i++) {
                 continue;
             }
+            $this->getConsole()->clear();
             $this->runCommand($arguments, $config, $command);
         }
+
 
         return (boolean) $selected;
     }

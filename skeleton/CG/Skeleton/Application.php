@@ -89,6 +89,7 @@ class Application
 
     public function run()
     {
+        $this->getConsole()->clear();
         $this->getConsole()->writeln(Console::COLOR_BLUE . 'Welcome to the Skeleton Application Setup' . Console::COLOR_RESET);
 
         $startupCommands = $this->getStartupCommands();
@@ -104,11 +105,9 @@ class Application
 
         $shutdownCommands = $this->getShutdownCommands();
         if ($shutdownCommands->count() > 0) {
-            $this->getConsole()->writeln();
             foreach ($shutdownCommands as $command) {
                 $command->run($this->getArguments(), $this->getConfig());
             }
-            $this->getConsole()->writeln();
         }
     }
 
