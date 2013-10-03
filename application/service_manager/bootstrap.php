@@ -34,7 +34,6 @@ $serviceManager->setService('ServiceManager', $serviceManager);
 $serviceManager->setAlias('Zend\ServiceManager\ServiceLocatorInterface', 'ServiceManager');
 $serviceManager->setAlias('Zend\ServiceManager\ServiceManager', 'ServiceManager');
 
-$serviceManager->setAlias('Di', 'Zend\Di\Di');
 $serviceManager->addAbstractFactory(
     new DiAbstractServiceFactory(
         $serviceManager->get('Di'),
