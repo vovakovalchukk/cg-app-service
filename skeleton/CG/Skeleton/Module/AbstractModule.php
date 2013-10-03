@@ -33,12 +33,7 @@ abstract class AbstractModule implements ModuleInterface
 
     public function getName()
     {
-        return __CLASS__ . ' Module';
-    }
-
-    public function getModuleName()
-    {
-        return __CLASS__;
+        return $this->getModuleName() . ' Module';
     }
 
     abstract public function getConfigClass();

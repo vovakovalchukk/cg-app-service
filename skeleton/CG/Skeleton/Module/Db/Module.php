@@ -9,6 +9,11 @@ use CG\Skeleton\Module\BaseConfig;
 
 class Module extends AbstractModule implements EnableInterface
 {
+    public function getModuleName()
+    {
+        return 'Db';
+    }
+
     public function getConfigClass()
     {
         return 'CG\Skeleton\Module\BaseConfig';
