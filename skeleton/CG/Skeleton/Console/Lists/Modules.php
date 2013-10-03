@@ -33,6 +33,22 @@ class Modules extends Commands
         return $this->moduleConfig;
     }
 
+    protected function getDisplayName(CommandInterface $command)
+    {
+        if (!($command instanceof ModuleInterface)) {
+            throw new InvalidArgumentException('$command should be an instance of CG\Skeleton\Module\ModuleInterface');
+        }
+
+        $moduleConfig = $this->getModuleConfig()->getModule($command->getModuleName());
+        if ($moduleConfig->isEnabled()) {
+            $status = Console::COLOR_GREEN . 'Enabled' . Console::COLOR_RESET;
+        } else {
+            $status = Console::COLOR_RED . 'Disabled' . Console::COLOR_RESET;
+        }
+
+        return $command->getName() . ' [' . $status . ']';
+    }
+
     protected function runCommand(Arguments $arguments, Config $config, CommandInterface $command)
     {
         if (!($command instanceof ModuleInterface)) {
