@@ -2,6 +2,7 @@
 namespace CG\Skeleton\Module\Db;
 
 use CG\Skeleton\Module\BaseConfig;
+use Zend\Config\Config as ZendConfig;
 
 class Config extends BaseConfig
 {
@@ -33,7 +34,13 @@ class Config extends BaseConfig
 
     public function getDatabaseUsers()
     {
-        return $this->get(static::DATABASE_USERS, array());
+        $databaseUsers = $this->get(static::DATABASE_USERS, array());
+        if (is_string($databaseUsers)) {
+            $databaseUsers = array($databaseUsers);
+        } else if ($databaseUsers instanceof ZendConfig) {
+            $databaseUsers = $databaseUsers->toArray();
+        }
+        return $databaseUsers;
     }
 
     public function setDatabaseUsers(array $databaseUsers)

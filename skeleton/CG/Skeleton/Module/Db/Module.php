@@ -166,6 +166,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         $databaseUsers = $moduleConfig->getDatabaseUsers();
         while (true) {
+            $databaseUsers = array_unique($databaseUsers);
             foreach ($databaseUsers as $index => $user) {
                 if (isset($availableUsers[$user])) {
                     continue;
