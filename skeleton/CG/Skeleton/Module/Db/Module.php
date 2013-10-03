@@ -80,7 +80,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
             $storageNode = $this->getConsole()->ask(
                 'Please specify the storage node you wish to connect to',
-                $storageNode ?: $config->getNode()
+                $storageNode ?: reset($storageNodes)
             );
         }
 
@@ -127,7 +127,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
             $databaseName = $this->getConsole()->ask(
                 'Please specify the database you wish to connect to',
-                $databaseName ?: $config->getAppName()
+                $databaseName ?: reset($databases)
             );
         }
         $moduleConfig->setDatabaseName($databaseName);
@@ -186,12 +186,13 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                 ' ',
                 $this->getConsole()->ask(
                     'Please specify one or more users you wish to connect as (separated by spaces)',
-                    implode(' ', $databaseUsers)
+                    implode(' ', $databaseUsers ?: $availableUsers)
                 )
             );
 
             $reconfigure = false;
         };
+        $moduleConfig->setDatabaseUsers($databaseUsers);
 
         chdir($cwd);
     }
