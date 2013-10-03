@@ -6,7 +6,7 @@ use CG\Skeleton\Console\Startup;
 use SplObjectStorage;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
-use CG\Skeleton\Module\ConfigureInterface;
+use CG\Skeleton\Module\ApplyConfigurationInterface;
 use CG\Skeleton\Module\Config as ModuleConfig;
 
 class StartupCommand implements StartupCommandInterface
@@ -31,7 +31,7 @@ class StartupCommand implements StartupCommandInterface
         return $this->console;
     }
 
-    public function addModule(ConfigureInterface $module)
+    public function addModule(ApplyConfigurationInterface $module)
     {
         $this->modules->attach($module);
         return $this;

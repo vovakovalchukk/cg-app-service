@@ -20,7 +20,7 @@ return array(
             ),
             'CG\Skeleton\Module\StartupCommand' => array(
                 'addModule' => array(
-                    'module' => array('type' => 'CG\Skeleton\Module\ConfigureInterface', 'required' => true)
+                    'module' => array('type' => 'CG\Skeleton\Module\ApplyConfigurationInterface', 'required' => true)
                 )
             ),
             'CG\Skeleton\Module\Command' => array(

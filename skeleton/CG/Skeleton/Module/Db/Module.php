@@ -34,7 +34,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     {
         $this->validateConfig($moduleConfig);
         $this->configureModule($arguments, $config, $moduleConfig, true);
-        $this->applyConfiguration($arguments, $config, $moduleConfig);
     }
 
     public function configureModule(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)

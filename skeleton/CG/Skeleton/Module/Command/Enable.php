@@ -4,6 +4,7 @@ namespace CG\Skeleton\Module\Command;
 use CG\Skeleton\CommandInterface;
 use CG\Skeleton\Module\EnableInterface;
 use CG\Skeleton\Module\ConfigureInterface;
+use CG\Skeleton\Module\ApplyConfigurationInterface;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
@@ -53,6 +54,9 @@ class Enable implements CommandInterface
         $this->getEnableCommand()->enable($arguments, $config, $this->getModuleConfig());
         if ($this->getEnableCommand() instanceof ConfigureInterface) {
             $this->getEnableCommand()->configure($arguments, $config, $this->getModuleConfig());
+        }
+        if ($this->getEnableCommand() instanceof ApplyConfigurationInterface) {
+            $this->getEnableCommand()->applyConfiguration($arguments, $config, $this->getModuleConfig());
         }
     }
 }
