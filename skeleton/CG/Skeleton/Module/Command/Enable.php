@@ -6,6 +6,7 @@ use CG\Skeleton\Module\EnableInterface;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
+use CG\Skeleton\Console;
 
 class Enable implements CommandInterface
 {
@@ -41,7 +42,7 @@ class Enable implements CommandInterface
 
     public function getName()
     {
-        return 'Enable Module';
+        return ($this->getModuleConfig()->isEnabled() ? Console::COLOR_RED : '') .  'Enable Module';
     }
 
     public function run(Arguments $arguments, Config $config)
