@@ -58,12 +58,18 @@ abstract class AbstractModule implements ModuleInterface
             $commands->attach(new Disable($this, $moduleConfig));
         }
 
-        while ($this->commandList($commands, $arguments, $config));
+        while ($this->commandList($commands, $arguments, $config, $moduleConfig));
     }
 
-    protected function commandList(SplObjectStorage $commands, Arguments $arguments, SkeletonConfig $config)
+    protected function commandList(SplObjectStorage $commands, Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
-        $commandList = new Commands($this->getConsole(), $commands);
+        if ($moduleConfig->isEnabled()) {
+            $status = Console::COLOR_GREEN . 'Enabled' . Console::COLOR_RESET;
+        } else {
+            $status = Console::COLOR_RED . 'Disabled' . Console::COLOR_RESET;
+        }
+
+        $commandList = new Commands($this->getConsole(), $commands, $this->getName() . ' [' . $status . ']');
         return $commandList->askAndRun($arguments, $config);
     }
 }

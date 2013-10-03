@@ -13,10 +13,11 @@ class Commands
 
     protected $console;
     protected $commands;
+    protected $header;
 
-    public function __construct(Console $console, SplObjectStorage $commands)
+    public function __construct(Console $console, SplObjectStorage $commands, $header = '')
     {
-        $this->setConsole($console)->setCommands($commands);
+        $this->setConsole($console)->setCommands($commands)->setHeader($header);
     }
 
     public function setConsole(Console $console)
@@ -41,6 +42,29 @@ class Commands
         return $this->commands;
     }
 
+    public function setHeader($header)
+    {
+        $this->header = trim($header);
+        return $this;
+    }
+
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    protected function getTagLine()
+    {
+        $tagLine = static::TAGLINE;
+
+        $header = $this->getHeader();
+        if (strlen($header) == 0) {
+            return $tagLine;
+        }
+
+        return $header . ' - ' . $tagLine;
+    }
+
     public function askAndRun(Arguments $arguments, Config $config)
     {
         $commands = $this->getCommands();
@@ -49,7 +73,7 @@ class Commands
             return;
         }
 
-        $this->getConsole()->writeln(static::TAGLINE);
+        $this->getConsole()->writeln($this->getTagLine());
         $indent = 3 + strlen($commands->count());
 
         $i = 1;
