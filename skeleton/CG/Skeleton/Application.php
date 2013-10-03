@@ -92,6 +92,13 @@ class Application
         $this->getConsole()->clear();
         $this->getConsole()->writeln(Console::COLOR_BLUE . 'Welcome to the Skeleton Application Setup' . Console::COLOR_RESET);
 
+        $this->startup();
+        while ($this->commandList());
+        $this->shutdown();
+    }
+
+    public function startup()
+    {
         $startupCommands = $this->getStartupCommands();
         if ($startupCommands->count() > 0) {
             $this->getConsole()->writeln();
@@ -100,15 +107,17 @@ class Application
             }
             $this->getConsole()->writeln();
         }
+    }
 
-        while ($this->commandList());
-
+    public function shutdown()
+    {
         $shutdownCommands = $this->getShutdownCommands();
         if ($shutdownCommands->count() > 0) {
             foreach ($shutdownCommands as $command) {
                 $command->run($this->getArguments(), $this->getConfig());
             }
         }
+        exit();
     }
 
     protected function commandList()

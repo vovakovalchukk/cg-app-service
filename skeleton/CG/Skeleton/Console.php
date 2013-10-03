@@ -55,6 +55,12 @@ class Console
 
     public function readln()
     {
+        do {
+            $read = array($this->inStream);
+            $write = null;
+            $except = array($this->inStream);
+        } while(@stream_select($read, $write, $except, 0, 200000) === 0);
+
         return trim(fgets($this->inStream));
     }
 
