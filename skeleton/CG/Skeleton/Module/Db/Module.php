@@ -48,6 +48,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configureStorageNode(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
+        if (!$moduleConfig->isEnabled()) {
+            return;
+        }
+
         $storageNodes = array();
         for (
             $iterator = new DirectoryIterator($config->getInfrastructurePath() . '/tools/chef/data_bags/');
@@ -62,7 +66,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         if (empty($storageNodes)) {
             $moduleConfig->setEnabled(false);
-            $moduleConfig->setStorageNode('');
             $this->getConsole()->writelnErr('No Storage Nodes Available - ' . $this->getModuleName() . ' Disabled');
             return;
         }
@@ -88,7 +91,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configureDatabaseName(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
-        if (!$moduleConfig->getStorageNode()) {
+        if (!$moduleConfig->isEnabled()) {
             return;
         }
 
@@ -106,11 +109,11 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         if (empty($databases)) {
             $moduleConfig->setEnabled(false);
-            $moduleConfig->setDatabaseName('');
             $this->getConsole()->writelnErr(
                 'No Databases Available for \'' . $moduleConfig->getStorageNode() . '\' - ' . $this->getModuleName() . ' Disabled'
             );
             chdir($cwd);
+            return;
         }
 
         $databaseName = $moduleConfig->getDatabaseName();
