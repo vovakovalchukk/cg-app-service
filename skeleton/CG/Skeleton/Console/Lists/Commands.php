@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Console;
+namespace CG\Skeleton\Console\Lists;
 
 use CG\Skeleton\Console;
 use SplObjectStorage;
@@ -7,7 +7,7 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use CG\Skeleton\CommandInterface;
 
-class CommandList
+class Commands
 {
     const TAGLINE = 'The following commands are available:';
 
@@ -75,7 +75,7 @@ class CommandList
             if ($selected != $i++) {
                 continue;
             }
-            $command->run($arguments, $config);
+            $this->runCommand($arguments, $config, $command);
         }
 
         return (boolean) $selected;
@@ -92,5 +92,10 @@ class CommandList
             Console::COLOR_GREEN . str_pad($index, $indent, ' ', STR_PAD_LEFT) . ': '
             . Console::COLOR_RESET . $command
         );
+    }
+
+    protected function runCommand(Arguments $arguments, Config $config, CommandInterface $command)
+    {
+        $command->run($arguments, $config);
     }
 }

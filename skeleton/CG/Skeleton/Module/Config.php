@@ -5,6 +5,8 @@ use Zend\Config\Config as ZendConfig;
 
 class Config extends ZendConfig
 {
+    const BASE_CLASS = 'CG\\Skeleton\\Module\\BaseConfig';
+
     public function __construct(array $config, $allowModifications = false)
     {
         foreach ($config as $entry => $value) {
@@ -21,8 +23,8 @@ class Config extends ZendConfig
     protected function getConfigClass($name)
     {
         $configClass = __NAMESPACE__ . '\\' . $name . '\\Config';
-        if (!class_exists($configClass)) {
-            $configClass = 'Zend\\Config\\Config';
+        if (!class_exists($configClass) || !is_subclass_of($configClass, static::BASE_CLASS)) {
+            $configClass = static::BASE_CLASS;
         }
         return $configClass;
     }
@@ -31,5 +33,11 @@ class Config extends ZendConfig
     {
         $configClass = $this->getConfigClass($name);
         return $this->get($name, new $configClass(array(), $this->allowModifications));
+    }
+
+    public function setModule($name, BaseConfig $module)
+    {
+        $this->offsetSet($name, $module);
+        return $this;
     }
 }

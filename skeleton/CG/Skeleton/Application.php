@@ -2,7 +2,7 @@
 namespace CG\Skeleton;
 
 use SplObjectStorage;
-use CG\Skeleton\Console\CommandList;
+use CG\Skeleton\Console\Lists\Commands;
 
 class Application
 {
@@ -114,7 +114,7 @@ class Application
 
     protected function commandList()
     {
-        $commandList = new CommandList($this->getConsole(), $this->getCommands());
+        $commandList = new Commands($this->getConsole(), $this->getCommands());
         return $commandList->askAndRun($this->getArguments(), $this->getConfig());
     }
 }

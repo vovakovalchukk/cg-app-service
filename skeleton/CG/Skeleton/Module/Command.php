@@ -6,7 +6,7 @@ use CG\Skeleton\Console;
 use SplObjectStorage;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
-use CG\Skeleton\Console\ModuleList;
+use CG\Skeleton\Console\Lists\Modules;
 
 class Command implements CommandInterface
 {
@@ -51,14 +51,13 @@ class Command implements CommandInterface
     public function run(Arguments $arguments, SkeletonConfig $config)
     {
         $moduleConfig = $config->get('Module', new Config($this->defaults, true));
+        while ($this->moduleList($arguments, $config, $moduleConfig));
         $config->offsetSet('Module', $moduleConfig);
-
-        while ($this->moduleList($arguments, $config));
     }
 
-    public function moduleList(Arguments $arguments, SkeletonConfig $config)
+    public function moduleList(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig)
     {
-        $moduleList = new ModuleList($this->getConsole(), $this->getModules());
+        $moduleList = new Modules($this->getConsole(), $this->getModules(), $moduleConfig);
         return $moduleList->askAndRun($arguments, $config);
     }
 }
