@@ -56,6 +56,14 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         if ($moduleConfig->isEnabled()) {
             $node->setKey('database|enabled', true);
+            $node->setKey('database|storage_choice', $moduleConfig->getStorageNode());
+            $node->setKey('database|database_choice', $moduleConfig->getDatabaseName());
+
+            $node->removeKey('database|users_choice');
+            foreach ($moduleConfig->getDatabaseUsers() as $user) {
+                $node->setKey('database|users_choice|' . $user, true);
+            }
+
             $node->setKey(
                 'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/database.local.php',
                 'config/autoload/database.local.php'

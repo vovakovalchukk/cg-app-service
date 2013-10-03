@@ -11,7 +11,7 @@ class Config extends BaseConfig
 
     public function getStorageNode()
     {
-        return $this->get(static::STORAGE_NODE);
+        return $this->get(static::STORAGE_NODE, '');
     }
 
     public function setStorageNode($storageNode)
@@ -22,7 +22,7 @@ class Config extends BaseConfig
 
     public function getDatabaseName()
     {
-        return $this->get(static::DATABASE_NAME);
+        return $this->get(static::DATABASE_NAME, '');
     }
 
     public function setDatabaseName($databaseName)
