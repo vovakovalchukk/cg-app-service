@@ -36,11 +36,17 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
-        $this->configureStorageNode($arguments, $config, $moduleConfig);
+        $this->validateConfiguration($arguments, $config, $moduleConfig, true);
         $this->applyConfiguration($arguments, $config, $moduleConfig);
     }
 
-    public function configureStorageNode(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig)
+    public function validateConfiguration(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
+    {
+        $this->configureStorageNode($arguments, $config, $moduleConfig, $reconfigure);
+        $this->configureDatabaseName($arguments, $config, $moduleConfig, $reconfigure);
+    }
+
+    public function configureStorageNode(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
         $storageNodes = array();
         for (
@@ -56,7 +62,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         $storageNode = $moduleConfig->getStorageNode();
 
-        while (!$storageNode) {
+        while ($reconfigure || (!$storageNode && !isset($storageNodes[$storageNode]))) {
+            $reconfigure = false;
+
             $this->getConsole()->writeln('Available Storage Nodes:');
             foreach ($storageNodes as $node) {
                 $this->getConsole()->writeln('   * ' . $node);
@@ -64,7 +72,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
             $storageNode = $this->getConsole()->ask(
                 'Please specify the storage node you wish to connect to',
-                $config->getNode()
+                $storageNode ?: $config->getNode()
             );
 
             if ($storageNode && !isset($storageNodes[$storageNode])) {
@@ -86,6 +94,8 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                         0700,
                         true
                     );
+
+                    $storageNodes[$storageNode] = $storageNode;
                 } else {
                     $storageNode = '';
                 }
@@ -95,9 +105,23 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $moduleConfig->setStorageNode($storageNode);
     }
 
+    public function configureDatabaseName(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
+    {
+        $databaseName = $moduleConfig->getDatabaseName();
+        while ($reconfigure || !$databaseName) {
+            $reconfigure = false;
+            $databaseName = $this->getConsole()->ask(
+                'Please specify the database you wish to connect to',
+                $databaseName ?: $config->getAppName()
+            );
+        }
+        $moduleConfig->setDatabaseName($databaseName);
+    }
+
     public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
+        $this->validateConfiguration($arguments, $config, $moduleConfig);
 
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
