@@ -3,16 +3,18 @@ namespace CG\Skeleton\Module\Command;
 
 use CG\Skeleton\CommandInterface;
 use CG\Skeleton\Module\EnableInterface;
+use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 
 class Enable implements CommandInterface
 {
     protected $enableCommand;
+    protected $moduleConfig;
 
-    public function __construct(EnableInterface $enableCommand)
+    public function __construct(EnableInterface $enableCommand, BaseConfig $moduleConfig)
     {
-        $this->setEnableCommand($enableCommand);
+        $this->setEnableCommand($enableCommand)->setModuleConfig($moduleConfig);
     }
 
     public function setEnableCommand(EnableInterface $enableCommand)
@@ -26,6 +28,17 @@ class Enable implements CommandInterface
         return $this->enableCommand;
     }
 
+    public function setModuleConfig(BaseConfig $moduleConfig)
+    {
+        $this->moduleConfig = $moduleConfig;
+        return $this;
+    }
+
+    public function getModuleConfig()
+    {
+        return $this->moduleConfig;
+    }
+
     public function getName()
     {
         return 'Enable Module';
@@ -33,6 +46,6 @@ class Enable implements CommandInterface
 
     public function run(Arguments $arguments, Config $config)
     {
-        $this->getEnableCommand()->enable($arguments, $config);
+        $this->getEnableCommand()->enable($arguments, $config, $this->getModuleConfig());
     }
 }

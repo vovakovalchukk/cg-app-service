@@ -51,12 +51,12 @@ abstract class AbstractModule implements ModuleInterface
 
         $commands = new SplObjectStorage();
         if ($this instanceof EnableInterface) {
-            $commands->attach(new Enable($this));
+            $commands->attach(new Enable($this, $moduleConfig));
         }
-        while ($this->commandList($commands, $arguments, $config, $moduleConfig));
+        while ($this->commandList($commands, $arguments, $config));
     }
 
-    protected function commandList(SplObjectStorage $commands, Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    protected function commandList(SplObjectStorage $commands, Arguments $arguments, SkeletonConfig $config)
     {
         $commandList = new Commands($this->getConsole(), $commands);
         return $commandList->askAndRun($arguments, $config);
