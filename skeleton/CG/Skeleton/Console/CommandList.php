@@ -5,9 +5,12 @@ use CG\Skeleton\Console;
 use SplObjectStorage;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
+use CG\Skeleton\CommandInterface;
 
 class CommandList
 {
+    const TAGLINE = 'The following commands are available:';
+
     protected $console;
     protected $commands;
 
@@ -46,13 +49,13 @@ class CommandList
             return;
         }
 
-        $this->getConsole()->writeln('The following commands are available:');
+        $this->getConsole()->writeln(static::TAGLINE);
         $indent = 3 + strlen($commands->count());
 
         $i = 1;
         $commands->rewind();
         foreach ($commands as $command) {
-            $this->displayCommand($indent, $i++, $command->getName());
+            $this->displayCommand($indent, $i++, $this->getDisplayName($command));
         }
         $this->displayCommand($indent, 0, 'Cancel');
 
@@ -76,6 +79,11 @@ class CommandList
         }
 
         return (boolean) $selected;
+    }
+
+    protected function getDisplayName(CommandInterface $command)
+    {
+        return $command->getName();
     }
 
     protected function displayCommand($indent, $index, $command)
