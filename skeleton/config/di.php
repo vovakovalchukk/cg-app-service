@@ -35,6 +35,11 @@ return array(
             ),
             'shared' => true
         ),
+        'CG\Skeleton\Module\Command' => array(
+            'injections' => array(
+                'CG\Skeleton\Module\Db\Module'
+            )
+        ),
         'CG\Skeleton\Arguments' => array(
             'shared' => true
         )
