@@ -101,8 +101,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $databasesJson = json_decode(ob_get_clean(), true) ?: array();
 
         $databases = array();
-        foreach (array_keys($databasesJson) as $database) {
-            $databases[$database] = $database;
+        if (isset($databasesJson['db'])) {
+            foreach (array_keys($databasesJson['db']) as $database) {
+                $databases[$database] = $database;
+            }
         }
 
         if (empty($databases)) {
@@ -147,8 +149,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $databaseUsersJson = json_decode(ob_get_clean(), true) ?: array();
 
         $availableUsers = array();
-        foreach (array_keys($databaseUsersJson) as $databaseUser) {
-            $availableUsers[$databaseUser] = $databaseUser;
+        if (isset($databaseUsersJson['users'])) {
+            foreach (array_keys($databaseUsersJson['users']) as $databaseUser) {
+                $availableUsers[$databaseUser] = $databaseUser;
+            }
         }
 
         if (empty($availableUsers)) {
