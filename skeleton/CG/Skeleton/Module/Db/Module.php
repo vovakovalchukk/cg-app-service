@@ -60,9 +60,16 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             }
         }
 
+        if (empty($storageNodes)) {
+            $moduleConfig->setEnabled(false);
+            $moduleConfig->setStorageNode('');
+            $this->getConsole()->writelnErr('No Storage Nodes Available - ' . $this->getModuleName() . ' Disabled');
+            return;
+        }
+
         $storageNode = $moduleConfig->getStorageNode();
 
-        while ($reconfigure || (!$storageNode && !isset($storageNodes[$storageNode]))) {
+        while ($reconfigure || !$storageNode || !isset($storageNodes[$storageNode])) {
             $reconfigure = false;
 
             $this->getConsole()->writeln('Available Storage Nodes:');
@@ -74,32 +81,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                 'Please specify the storage node you wish to connect to',
                 $storageNode ?: $config->getNode()
             );
-
-            if ($storageNode && !isset($storageNodes[$storageNode])) {
-                $createStorageNode = $this->getConsole()->askWithOptions(
-                    'Create new storage node \'' . $storageNode . '\'',
-                    array('y', 'n'),
-                    'y'
-                );
-
-                if ($createStorageNode == 'y') {
-                    mkdir(
-                        $config->getInfrastructurePath() . '/tools/chef/data_bags/storage_' . $storageNode ,
-                        0700,
-                        true
-                    );
-
-                    mkdir(
-                        $config->getInfrastructurePath() . '/tools/chef/data_bags/storage_' . $storageNode . '_users',
-                        0700,
-                        true
-                    );
-
-                    $storageNodes[$storageNode] = $storageNode;
-                } else {
-                    $storageNode = '';
-                }
-            }
         }
 
         $moduleConfig->setStorageNode($storageNode);
@@ -107,15 +88,48 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configureDatabaseName(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
+        if (!$moduleConfig->getStorageNode()) {
+            return;
+        }
+
+        $cwd = getcwd();
+        chdir($config->getInfrastructurePath() . '/tools/chef');
+
+        ob_start();
+        passthru('knife solo data bag show storage_' . $moduleConfig->getStorageNode() . ' local -F json 2>/dev/null');
+        $databasesJson = json_decode(ob_get_clean(), true) ?: array();
+
+        $databases = array();
+        foreach (array_keys($databasesJson) as $database) {
+            $databases[$database] = $database;
+        }
+
+        if (empty($databases)) {
+            $moduleConfig->setEnabled(false);
+            $moduleConfig->setDatabaseName('');
+            $this->getConsole()->writelnErr(
+                'No Databases Available for \'' . $moduleConfig->getStorageNode() . '\' - ' . $this->getModuleName() . ' Disabled'
+            );
+            chdir($cwd);
+        }
+
         $databaseName = $moduleConfig->getDatabaseName();
-        while ($reconfigure || !$databaseName) {
+        while ($reconfigure || !$databaseName || !isset($databases[$databaseName])) {
             $reconfigure = false;
+
+            $this->getConsole()->writeln('Available Databases:');
+            foreach ($databases as $database) {
+                $this->getConsole()->writeln('   * ' . $database);
+            }
+
             $databaseName = $this->getConsole()->ask(
                 'Please specify the database you wish to connect to',
                 $databaseName ?: $config->getAppName()
             );
         }
         $moduleConfig->setDatabaseName($databaseName);
+
+        chdir($cwd);
     }
 
     public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
