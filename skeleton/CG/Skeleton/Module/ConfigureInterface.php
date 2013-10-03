@@ -5,7 +5,8 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Module\BaseConfig;
 
-interface ConfigureInterface
+interface ConfigureInterface extends ModuleInterface
 {
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig);
+    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig);
 }

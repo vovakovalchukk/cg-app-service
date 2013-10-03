@@ -25,12 +25,17 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         if ($moduleConfig->isEnabled()) {
             return;
         }
-        $this->configure($arguments, $config, $moduleConfig);
         $moduleConfig->setEnabled(true);
+        $this->configure($arguments, $config, $moduleConfig);
     }
 
     public function configure(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
     {
-        
+        $this->applyConfiguration($arguments, $config, $moduleConfig);
+    }
+
+    public function applyConfiguration(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
+    {
+
     }
 }
