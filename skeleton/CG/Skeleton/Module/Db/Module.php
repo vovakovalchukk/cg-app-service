@@ -57,11 +57,11 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         if ($moduleConfig->isEnabled()) {
             $node->setKey('database|enabled', true);
             $node->setKey(
-                'cg|capistrano|' . $config->getNode() . '|symlinks|config/autoload/database.local.php',
+                'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/database.local.php',
                 'config/autoload/database.local.php'
             );
         } else {
-            $node->removeKey('cg|capistrano|' . $config->getNode() . '|symlinks|config/autoload/database.local.php');
+            $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/database.local.php');
             $node->removeKey('database');
         }
 
