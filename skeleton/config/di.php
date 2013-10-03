@@ -42,6 +42,7 @@ return array(
                 'CG\Skeleton\Vagrant\Command\Reload',
                 'CG\Skeleton\Vagrant\Command\Halt',
                 'CG\Skeleton\Module\Command',
+                'CG\Skeleton\Environment\Command\PushInfrastructure',
                 'CG\Skeleton\Environment\ShutdownCommand'
             ),
             'shared' => true
