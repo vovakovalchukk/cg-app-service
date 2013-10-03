@@ -53,9 +53,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     {
         $nodeFile = Chef::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
-        $node->setKey('database|enabled', $moduleConfig->isEnabled());
 
         if ($moduleConfig->isEnabled()) {
+            $node->setKey('database|enabled', true);
             $node->setKey(
                 'cg|capistrano|' . $config->getNode() . '|symlinks|config/autoload/database.local.php',
                 'config/autoload/database.local.php'
