@@ -137,7 +137,7 @@ class StartupCommand implements StartupCommandInterface
     protected function setApplication(NodeData $nodeData, Node $node, SkeletonConfig $config, Config $vagrantConfig)
     {
         $node->addApplication(
-            $config->getNode(),
+            $config->getAppName(),
             array(
                 'localDirectory' => PROJECT_NAME,
                 'role' => $config->getRole()
