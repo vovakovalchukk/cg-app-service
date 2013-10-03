@@ -1,28 +1,12 @@
 <?php
 namespace CG\Skeleton\Module\Db;
 
-use CG\Skeleton\Module\ModuleInterface;
-use CG\Skeleton\Arguments;
-use CG\Skeleton\Config as SkeletonConfig;
-use CG\Skeleton\Module\BaseConfig;
-use InvalidArgumentException;
+use CG\Skeleton\Module\AbstractModule;
 
-class Module implements ModuleInterface
+class Module extends AbstractModule
 {
-    public function getName()
+    public function getConfigClass()
     {
-        return 'Db Module';
-    }
-
-    public function getModuleName()
-    {
-        return __CLASS__;
-    }
-
-    public function run(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig = null)
-    {
-        if (!($moduleConfig instanceof BaseConfig)) {
-            throw new InvalidArgumentException('$moduleConfig should be an instance of CG\Skeleton\Module\BaseConfig');
-        }
+        return 'CG\Skeleton\Module\BaseConfig';
     }
 }
