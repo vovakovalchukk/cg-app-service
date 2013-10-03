@@ -54,9 +54,6 @@ abstract class AbstractModule implements ModuleInterface
         if ($this instanceof EnableInterface) {
             $commands->attach(new Enable($this, $moduleConfig));
         }
-        if ($this instanceof ConfigureInterface) {
-            $commands->attach(new Configure($this, $moduleConfig));
-        }
 
         while ($this->commandList($commands, $arguments, $config));
     }

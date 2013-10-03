@@ -3,6 +3,7 @@ namespace CG\Skeleton\Module\Command;
 
 use CG\Skeleton\CommandInterface;
 use CG\Skeleton\Module\EnableInterface;
+use CG\Skeleton\Module\ConfigureInterface;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
@@ -42,11 +43,16 @@ class Enable implements CommandInterface
 
     public function getName()
     {
-        return ($this->getModuleConfig()->isEnabled() ? Console::COLOR_RED : '') .  'Enable Module';
+        return 'Enable'
+            . ($this->getEnableCommand() instanceof ConfigureInterface ? ' & Configure' : '')
+            . ' Module';
     }
 
     public function run(Arguments $arguments, Config $config)
     {
         $this->getEnableCommand()->enable($arguments, $config, $this->getModuleConfig());
+        if ($this->getEnableCommand() instanceof ConfigureInterface) {
+            $this->getEnableCommand()->configure($arguments, $config, $this->getModuleConfig());
+        }
     }
 }
