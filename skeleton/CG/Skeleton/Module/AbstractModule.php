@@ -10,7 +10,7 @@ use InvalidArgumentException;
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
 use CG\Skeleton\Module\Command\Enable;
-use CG\Skeleton\Module\Command\Configure;
+use CG\Skeleton\Module\Command\Disable;
 
 abstract class AbstractModule implements ModuleInterface
 {
@@ -53,6 +53,9 @@ abstract class AbstractModule implements ModuleInterface
         $commands = new SplObjectStorage();
         if ($this instanceof EnableInterface) {
             $commands->attach(new Enable($this, $moduleConfig));
+        }
+        if ($this instanceof DisableInterface) {
+            $commands->attach(new Disable($this, $moduleConfig));
         }
 
         while ($this->commandList($commands, $arguments, $config));

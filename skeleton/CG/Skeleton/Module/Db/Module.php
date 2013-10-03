@@ -4,6 +4,7 @@ namespace CG\Skeleton\Module\Db;
 use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\EnableInterface;
 use CG\Skeleton\Module\ConfigureInterface;
+use CG\Skeleton\Module\DisableInterface;
 use CG\Skeleton\Console;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
@@ -12,7 +13,7 @@ use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
 use DirectoryIterator;
 
-class Module extends AbstractModule implements EnableInterface, ConfigureInterface
+class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
     public function getModuleName()
     {
@@ -177,5 +178,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             'git add ' . $nodeFile . ';'
             . ' git commit -m "SKELETON: Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
         );
+    }
+
+    public function disable(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    {
+        $moduleConfig->setEnabled(false);
     }
 }
