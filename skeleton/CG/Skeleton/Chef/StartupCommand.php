@@ -76,10 +76,10 @@ class StartupCommand implements StartupCommandInterface
 
     protected function configureCapistranoOnNode(Node $node, Config $config)
     {
-        $node->setKey('cg.capistrano|' . $config->getAppName() . '|deploy_to', $config->getVmPath());
-        $node->setKey('cg.capistrano|' . $config->getAppName() . '|shared_structure|config', 'config');
-        $node->setKey('cg.capistrano|' . $config->getAppName() . '|shared_structure|config/autoload', 'config/autoload');
-        $node->setKey('cg.capistrano|' . $config->getAppName() . '|symlinks|config/host.php', 'config/host.php');
+        $node->setKey('cg|capistrano|' . $config->getAppName() . '|deploy_to', $config->getVmPath());
+        $node->setKey('cg|capistrano|' . $config->getAppName() . '|shared_structure|config', 'config');
+        $node->setKey('cg|capistrano|' . $config->getAppName() . '|shared_structure|config/autoload', 'config/autoload');
+        $node->setKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/host.php', 'config/host.php');
     }
 
     protected function configureSiteOnNode(Node $node, Config $config)
