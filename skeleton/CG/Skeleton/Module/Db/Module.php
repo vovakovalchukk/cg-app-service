@@ -4,11 +4,13 @@ namespace CG\Skeleton\Module\Db;
 use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\EnableInterface;
 use CG\Skeleton\Module\ConfigureInterface;
+use CG\Skeleton\Console;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
+use DirectoryIterator;
 
 class Module extends AbstractModule implements EnableInterface, ConfigureInterface
 {
@@ -34,8 +36,63 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
-
+        $this->configureStorageNode($arguments, $config, $moduleConfig);
         $this->applyConfiguration($arguments, $config, $moduleConfig);
+    }
+
+    public function configureStorageNode(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig)
+    {
+        $storageNodes = array();
+        for (
+            $iterator = new DirectoryIterator($config->getInfrastructurePath() . '/tools/chef/data_bags/');
+            $iterator->valid();
+            $iterator->next()
+        ) {
+            $match = array();
+            if ($iterator->isDir() && preg_match('/^storage_(?<node>.+)_users$/', $iterator->getBasename(), $match)) {
+                $storageNodes[$match['node']] = $match['node'];
+            }
+        }
+
+        $storageNode = $moduleConfig->getStorageNode();
+
+        while (!$storageNode) {
+            $this->getConsole()->writeln('Available Storage Nodes:');
+            foreach ($storageNodes as $node) {
+                $this->getConsole()->writeln('   * ' . $node);
+            }
+
+            $storageNode = $this->getConsole()->ask(
+                'Please specify the storage node you wish to connect to',
+                $config->getNode()
+            );
+
+            if ($storageNode && !isset($storageNodes[$storageNode])) {
+                $createStorageNode = $this->getConsole()->askWithOptions(
+                    'Create new storage node \'' . $storageNode . '\'',
+                    array('y', 'n'),
+                    'y'
+                );
+
+                if ($createStorageNode == 'y') {
+                    mkdir(
+                        $config->getInfrastructurePath() . '/tools/chef/data_bags/storage_' . $storageNode ,
+                        0700,
+                        true
+                    );
+
+                    mkdir(
+                        $config->getInfrastructurePath() . '/tools/chef/data_bags/storage_' . $storageNode . '_users',
+                        0700,
+                        true
+                    );
+                } else {
+                    $storageNode = '';
+                }
+            }
+        }
+
+        $moduleConfig->setStorageNode($storageNode);
     }
 
     public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
