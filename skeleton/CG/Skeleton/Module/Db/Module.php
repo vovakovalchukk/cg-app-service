@@ -5,7 +5,7 @@ use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\EnableInterface;
 use CG\Skeleton\Module\ConfigureInterface;
 use CG\Skeleton\Arguments;
-use CG\Skeleton\Config;
+use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
@@ -22,7 +22,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         return 'CG\Skeleton\Module\BaseConfig';
     }
 
-    public function enable(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
+    public function enable(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         if ($moduleConfig->isEnabled()) {
             return;
@@ -31,14 +31,14 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $this->configure($arguments, $config, $moduleConfig);
     }
 
-    public function configure(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
+    public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
 
         $this->applyConfiguration($arguments, $config, $moduleConfig);
     }
 
-    public function applyConfiguration(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
+    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
 
@@ -49,7 +49,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($cwd);
     }
 
-    protected function updateNode(Arguments $arguments, Config $config, BaseConfig $moduleConfig)
+    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $nodeFile = Chef::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
