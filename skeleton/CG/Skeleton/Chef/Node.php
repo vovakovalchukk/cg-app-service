@@ -43,9 +43,28 @@ class Node
     {
         $data =& $this->data;
         foreach (explode('|', $key) as $currentKey) {
+            if (!isset($data[$currentKey])) {
+                $data[$currentKey] = array();
+            }
             $data =& $data[$currentKey];
         }
         $data = $value;
+    }
+
+    public function removeKey($key)
+    {
+        $data =& $this->data;
+        $keys = explode('|', $key);
+        $key = array_pop($keys);
+
+        foreach ($keys as $currentKey) {
+            if (!isset($data[$currentKey])) {
+                return;
+            }
+            $data =& $data[$currentKey];
+        }
+
+        unset($data[$key]);
     }
 
     public function save()

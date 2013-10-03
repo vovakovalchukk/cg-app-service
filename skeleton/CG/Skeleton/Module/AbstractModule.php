@@ -39,11 +39,16 @@ abstract class AbstractModule implements ModuleInterface
 
     abstract public function getConfigClass();
 
-    public function run(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig = null)
+    protected function validateConfig(BaseConfig $moduleConfig = null)
     {
         if (!is_a($moduleConfig, $this->getConfigClass())) {
             throw new InvalidArgumentException('$moduleConfig should be an instance of ' . $this->getConfigClass());
         }
+    }
+
+    public function run(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig = null)
+    {
+        $this->validateConfig($moduleConfig);
 
         $commands = new SplObjectStorage();
         if ($this instanceof EnableInterface) {
@@ -52,6 +57,7 @@ abstract class AbstractModule implements ModuleInterface
         if ($this instanceof ConfigureInterface) {
             $commands->attach(new Configure($this, $moduleConfig));
         }
+
         while ($this->commandList($commands, $arguments, $config));
     }
 
