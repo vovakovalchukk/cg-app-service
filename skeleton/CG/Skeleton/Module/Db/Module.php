@@ -27,24 +27,21 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function enable(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
-        if ($moduleConfig->isEnabled()) {
-            return;
-        }
         $moduleConfig->setEnabled(true);
-        $this->configure($arguments, $config, $moduleConfig);
     }
 
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
-        $this->validateConfiguration($arguments, $config, $moduleConfig, true);
+        $this->configureModule($arguments, $config, $moduleConfig, true);
         $this->applyConfiguration($arguments, $config, $moduleConfig);
     }
 
-    public function validateConfiguration(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
+    public function configureModule(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
         $this->configureStorageNode($arguments, $config, $moduleConfig, $reconfigure);
         $this->configureDatabaseName($arguments, $config, $moduleConfig, $reconfigure);
+        $this->configureDatabaseUsers($arguments, $config, $moduleConfig, $reconfigure);
     }
 
     public function configureStorageNode(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
@@ -136,10 +133,69 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($cwd);
     }
 
+    public function configureDatabaseUsers(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
+    {
+        if (!$moduleConfig->isEnabled()) {
+            return;
+        }
+
+        $cwd = getcwd();
+        chdir($config->getInfrastructurePath() . '/tools/chef');
+
+        ob_start();
+        passthru('knife solo data bag show storage_' . $moduleConfig->getStorageNode() . '_users local -F json 2>/dev/null');
+        $databaseUsersJson = json_decode(ob_get_clean(), true) ?: array();
+
+        $availableUsers = array();
+        foreach (array_keys($databaseUsersJson) as $databaseUser) {
+            $availableUsers[$databaseUser] = $databaseUser;
+        }
+
+        if (empty($availableUsers)) {
+            $moduleConfig->setEnabled(false);
+            $this->getConsole()->writelnErr(
+                'No Database Users Available for \'' . $moduleConfig->getDatabaseName() . '\' - ' . $this->getModuleName() . ' Disabled'
+            );
+            chdir($cwd);
+            return;
+        }
+
+        $databaseUsers = $moduleConfig->getDatabaseUsers();
+        while (true) {
+            foreach ($databaseUsers as $index => $user) {
+                if (isset($availableUsers[$user])) {
+                    continue;
+                }
+                unset($databaseUsers[$index]);
+            }
+
+            if (!$reconfigure && !empty($databaseUsers)) {
+                break;
+            }
+
+            $this->getConsole()->writeln('Available Database Users:');
+            foreach ($availableUsers as $user) {
+                $this->getConsole()->writeln('   * ' . $user);
+            }
+
+            $databaseUsers = explode(
+                ' ',
+                $this->getConsole()->ask(
+                    'Please specify one or more users you wish to connect as (separated by spaces)',
+                    implode(' ', $databaseUsers)
+                )
+            );
+
+            $reconfigure = false;
+        };
+
+        chdir($cwd);
+    }
+
     public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $this->validateConfig($moduleConfig);
-        $this->validateConfiguration($arguments, $config, $moduleConfig);
+        $this->configureModule($arguments, $config, $moduleConfig);
 
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
