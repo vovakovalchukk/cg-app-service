@@ -1,6 +1,7 @@
 <?php
 $modules = array(
-    'CG\Skeleton\Module\Db\Module'
+    'CG\Skeleton\Module\Db\Module',
+    'CG\Skeleton\Module\Redis\Module'
 );
 
 return array(

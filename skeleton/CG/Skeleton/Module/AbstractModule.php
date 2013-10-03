@@ -37,7 +37,10 @@ abstract class AbstractModule implements ModuleInterface
         return $this->getModuleName() . ' Module';
     }
 
-    abstract public function getConfigClass();
+    public function getConfigClass()
+    {
+        return 'CG\\Skeleton\\Module\\BaseConfig';
+    }
 
     protected function validateConfig(BaseConfig $moduleConfig = null)
     {
