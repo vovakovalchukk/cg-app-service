@@ -39,7 +39,7 @@ class Console
 
     public function writeErr($string)
     {
-        fwrite($this->errStream, $string);
+        fwrite($this->errStream, static::COLOR_RED . $string . static::COLOR_RESET);
     }
 
     public function writeln($string = '')
