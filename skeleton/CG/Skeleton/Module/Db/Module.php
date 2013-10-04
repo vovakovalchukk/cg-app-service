@@ -207,6 +207,20 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
+
+        $this->updateComposer($moduleConfig);
+    }
+
+    protected function updateComposer(BaseConfig $moduleConfig)
+    {
+        if ($moduleConfig->isEnabled()) {
+            exec(
+                'php composer.phar require robmorgan/phinx:*;'
+            );
+        } else {
+            // remove
+            echo "IMPLEMENT REMOVE!\n";
+        }
     }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)

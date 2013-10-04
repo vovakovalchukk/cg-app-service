@@ -31,6 +31,7 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
+
         $this->updateComposer($moduleConfig);
     }
 
