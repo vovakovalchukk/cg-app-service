@@ -31,6 +31,20 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
+        $this->updateComposer($moduleConfig);
+    }
+
+    protected function updateComposer(BaseConfig $moduleConfig)
+    {
+        if ($moduleConfig->isEnabled()) {
+            exec(
+                'php composer.phar require --no-update predis/predis:~0.8.3;' .
+                'php composer.phar require channelgrabber/predis:~1.0.1;'
+            );
+        } else {
+            // remove
+            echo "IMPLEMENT REMOVE!\n";
+        }
     }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
