@@ -29,7 +29,10 @@
         "codeception/codeception" : "1.6.5",
         "nocarrier/hal" : "dev-develop as 0.9.3",
         "guzzle/guzzle" : "~3.7",
-        "channelgrabber/http" : "~1.1.2"
+        "channelgrabber/http" : "~1.1.2",
+        "predis/predis": "~0.8.3",
+        "robmorgan/phinx": "*",
+        "channelgrabber/predis": "~1.0.1"
     },
     "scripts": {
         "post-install-cmd" : [

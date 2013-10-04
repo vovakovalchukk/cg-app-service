@@ -32,20 +32,22 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $this->updateComposer($moduleConfig);
+        $this->updateComposer($config, $moduleConfig);
     }
 
-    protected function updateComposer(BaseConfig $moduleConfig)
+    protected function updateComposer(SkeletonConfig $config, BaseConfig $moduleConfig)
     {
-        if ($moduleConfig->isEnabled()) {
-            exec(
-                'php composer.phar require --no-update predis/predis:~0.8.3;' .
-                'php composer.phar require channelgrabber/predis:~1.0.1;'
-            );
-        } else {
-            // remove
-            echo "IMPLEMENT REMOVE!\n";
-        }
+        echo filemtime($config->getProjectBasePath() . '/composer.json');
+//        if ($moduleConfig->isEnabled()) {
+//            exec(
+//                'php composer.phar require --no-update predis/predis:~0.8.3;' .
+//                'php composer.phar require --no-update channelgrabber/predis:~1.0.1;' .
+//                'php composer.phar update predis/predis channelgrabber/predis'
+//            );
+//        } else {
+//            // remove
+//            echo "IMPLEMENT REMOVE!\n";
+//        }
     }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)

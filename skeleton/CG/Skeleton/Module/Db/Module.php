@@ -215,7 +215,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     {
         if ($moduleConfig->isEnabled()) {
             exec(
-                'php composer.phar require robmorgan/phinx:*;'
+                'php composer.phar require --no-update robmorgan/phinx:*;'
             );
         } else {
             // remove
