@@ -34,13 +34,13 @@ class Config extends BaseConfig
 
     public function getDatabaseAdapters()
     {
-        $databaseUsers = $this->get(static::DATABASE_ADAPTERS, array());
-        if (is_string($databaseUsers)) {
-            $databaseUsers = array($databaseUsers);
-        } else if ($databaseUsers instanceof ZendConfig) {
-            $databaseUsers = $databaseUsers->toArray();
+        $databaseAdapters = $this->get(static::DATABASE_ADAPTERS, array());
+        if (is_string($databaseAdapters)) {
+            $databaseAdapters = array($databaseAdapters);
+        } else if ($databaseAdapters instanceof ZendConfig) {
+            $databaseAdapters = $databaseAdapters->toArray();
         }
-        return $databaseUsers;
+        return $databaseAdapters;
     }
 
     public function setDatabaseAdapters(array $databaseAdapters)
