@@ -165,17 +165,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             return;
         }
 
-        $databaseUsers = $moduleConfig->getDatabaseUsers();
+        $configuredAdapters = $moduleConfig->getDatabaseAdapters();
         while (true) {
-            $databaseUsers = array_unique($databaseUsers);
-            foreach ($databaseUsers as $index => $user) {
-                if (isset($availableUsers[$user])) {
-                    continue;
-                }
-                unset($databaseUsers[$index]);
-            }
-
-            if (!$reconfigure && !empty($databaseUsers)) {
+            if (!$reconfigure && !empty($configuredAdapters)) {
                 break;
             }
 
@@ -186,11 +178,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
 
             $availableAdapters = array('readAdapter', 'writeAdapter', 'fastReadAdapter');
-            $configuredAdapters = array();
             foreach ($availableAdapters as $adapter) {
                 $user = $this->getConsole()->ask(
                     'Please the use you wish to use for adapter "'. $adapter .'"');
-                $configuredAdapters[] = array('user' => $user);
+                $configuredAdapters[$adapter] = array('user' => $user);
             }
 
             $reconfigure = false;
@@ -202,6 +193,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configureDatabaseUsers(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
+        echo "in configure users WHY?!\n";
         if (!$moduleConfig->isEnabled()) {
             return;
         }
@@ -289,16 +281,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             $node->setKey('database|storage_choice', $moduleConfig->getStorageNode());
             $node->setKey('database|database_choice', $moduleConfig->getDatabaseName());
 
-
-            // TODO: REMOVE ME
-            $node->removeKey('database|users_choice');
-            foreach ($moduleConfig->getDatabaseUsers() as $user) {
-                $node->setKey('database|users_choice|' . $user, true);
-            }
-
             $node->removeKey('database|adapters');
             foreach ($moduleConfig->getDatabaseAdapters() as $adapter => $user) {
-                $node->setKey('database|adapters|' . $adapter . '|user', $user);
+                $node->setKey('database|adapters|' . $adapter, $user);
             }
 
             $node->setKey(
