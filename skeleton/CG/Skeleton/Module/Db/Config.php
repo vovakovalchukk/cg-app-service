@@ -9,6 +9,7 @@ class Config extends BaseConfig
     const STORAGE_NODE = 'StorageNode';
     const DATABASE_NAME = 'DatabaseName';
     const DATABASE_USERS = 'DatabaseUsers';
+    const DATABASE_ADAPTERS = 'DatabaseAdapters';
 
     public function getStorageNode()
     {
@@ -46,6 +47,17 @@ class Config extends BaseConfig
     public function setDatabaseUsers(array $databaseUsers)
     {
         $this->offsetSet(static::DATABASE_USERS, $databaseUsers);
+        return $this;
+    }
+
+    public function getDatabaseAdapters()
+    {
+        return $this->get(static::DATABASE_ADAPTERS, array())->toArray();
+    }
+
+    public function setDatabaseAdapters(array $databaseAdapters)
+    {
+        $this->offsetSet(static::DATABASE_ADAPTERS, $databaseAdapters);
         return $this;
     }
 }
