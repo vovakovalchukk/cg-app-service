@@ -15,6 +15,8 @@ use DirectoryIterator;
 
 class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
+    use \CG\Skeleton\ComposerTrait;
+
     public function getModuleName()
     {
         return 'Db';
@@ -208,19 +210,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $this->updateComposer($moduleConfig);
-    }
-
-    protected function updateComposer(BaseConfig $moduleConfig)
-    {
-        if ($moduleConfig->isEnabled()) {
-            exec(
-                'php composer.phar require --no-update robmorgan/phinx:*;'
-            );
-        } else {
-            // remove
-            echo "IMPLEMENT REMOVE!\n";
-        }
+        $this->updateComposer($moduleConfig, array(
+            'robmorgan/phinx:*'
+        ));
     }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)

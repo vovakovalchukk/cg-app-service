@@ -14,6 +14,8 @@ use CG\Skeleton\Chef\Node;
 
 class Module extends AbstractModule implements EnableInterface, ApplyConfigurationInterface, DisableInterface
 {
+    use \CG\Skeleton\ComposerTrait;
+
     public function getModuleName()
     {
         return 'Redis';
@@ -32,29 +34,29 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $this->updateComposer($moduleConfig);
+        $this->updateComposer($moduleConfig, 'predis/predis:~0.8.3');
     }
 
-    protected function updateComposer(BaseConfig $moduleConfig)
-    {
-        $beforeHash = hash_file('md5', 'composer.json');
-
-        if ($moduleConfig->isEnabled()) {
-            exec(
-                'php composer.phar require --no-update predis/predis:~0.8.3;' .
-                'php composer.phar require --no-update channelgrabber/predis:~1.0.1;'
-            );
-            $afterHash = hash_file('md5', 'composer.json');
-
-            if ($beforeHash != $afterHash) {
-                $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
-                exec('php composer.phar update predis/predis channelgrabber/predis');
-            }
-        } else {
-            // remove
-            echo "IMPLEMENT REMOVE!\n";
-        }
-    }
+//    protected function updateComposer(BaseConfig $moduleConfig)
+//    {
+//        $beforeHash = hash_file('md5', 'composer.json');
+//
+//        if ($moduleConfig->isEnabled()) {
+//            exec(
+//                'php composer.phar require --no-update predis/predis:~0.8.3;' .
+//                'php composer.phar require --no-update channelgrabber/predis:~1.0.1;'
+//            );
+//            $afterHash = hash_file('md5', 'composer.json');
+//
+//            if ($beforeHash != $afterHash) {
+//                $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
+//                exec('php composer.phar update predis/predis channelgrabber/predis');
+//            }
+//        } else {
+//            // remove
+//            echo "IMPLEMENT REMOVE!\n";
+//        }
+//    }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
