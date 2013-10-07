@@ -16,7 +16,8 @@ trait ComposerTrait
             $afterHash = hash_file('md5', 'composer.json');
 
             if ($beforeHash != $afterHash) {
-                $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* " . implode("\n\t* ",$requires) . Console::COLOR_GREEN);
+                $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
+                                             . implode("\n\t* ",$requires) . Console::COLOR_GREEN);
                 exec('php composer.phar update predis/predis channelgrabber/predis');
             }
         }
