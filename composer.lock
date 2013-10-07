@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c5b330b6afff6df863cbca46578514fa",
+    "hash": "9b9835c45ade2ca6262cb42529939060",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -376,6 +376,26 @@
             "time": "2013-04-13 23:52:11"
         },
         {
+            "name": "channelgrabber/codeception",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
+                "reference": "31976b31a878f5f1075db5341a971a74ff16a242"
+            },
+            "require": {
+                "codeception/codeception": "1.6.5",
+                "nocarrier/hal": "dev-develop as 0.9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Codeception\\": ""
+                }
+            },
+            "time": "2013-10-03 09:56:55"
+        },
+        {
             "name": "channelgrabber/http",
             "version": "1.1.2",
             "source": {
@@ -393,25 +413,6 @@
                 }
             },
             "time": "2013-09-25 07:52:49"
-        },
-        {
-            "name": "channelgrabber/predis",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "d4ad458b30dc2b52a01e7a30fa19b0b9f6dbe613"
-            },
-            "require": {
-                "predis/predis": "v0.8.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "CG\\Predis\\": ""
-                }
-            },
-            "time": "2013-07-09 15:10:32"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -652,21 +653,21 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.7.3",
+            "version": "v3.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "0f16aad385528b5cf790392cb4a4d16cf600e944"
+                "reference": "b170b028c6bb5799640e46c8803015b0f9a45ed9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0f16aad385528b5cf790392cb4a4d16cf600e944",
-                "reference": "0f16aad385528b5cf790392cb4a4d16cf600e944",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b170b028c6bb5799640e46c8803015b0f9a45ed9",
+                "reference": "b170b028c6bb5799640e46c8803015b0f9a45ed9",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.2",
+                "php": ">=5.3.3",
                 "symfony/event-dispatcher": ">=2.1"
             },
             "replace": {
@@ -740,20 +741,20 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-09-08 21:09:18"
+            "time": "2013-10-02 20:47:00"
         },
         {
             "name": "instaclick/php-webdriver",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver.git",
-                "reference": "10dcea308e5cf4c182c8fd0ca7f8381aefc4a416"
+                "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/10dcea308e5cf4c182c8fd0ca7f8381aefc4a416",
-                "reference": "10dcea308e5cf4c182c8fd0ca7f8381aefc4a416",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/47a6019553a7a5b42d35493276ffc2c9252c53d5",
+                "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5",
                 "shasum": ""
             },
             "require": {
@@ -798,7 +799,7 @@
                 "webdriver",
                 "webtest"
             ],
-            "time": "2013-08-08 13:56:39"
+            "time": "2013-10-04 15:03:51"
         },
         {
             "name": "monolog/monolog",
@@ -868,12 +869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "60e1fce0739ec652755f34e4cde35ee12f42f3a5"
+                "reference": "03c7253e0a2f30b7a028084c85508d40e5c3e2de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/60e1fce0739ec652755f34e4cde35ee12f42f3a5",
-                "reference": "60e1fce0739ec652755f34e4cde35ee12f42f3a5",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/03c7253e0a2f30b7a028084c85508d40e5c3e2de",
+                "reference": "03c7253e0a2f30b7a028084c85508d40e5c3e2de",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +922,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-07-09 11:07:03"
+            "time": "2013-10-04 10:33:14"
         },
         {
             "name": "phpspec/php-diff",
@@ -962,12 +963,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "79f91276fc8c853596b8180103d93762072e457a"
+                "reference": "d8f64251d27dc1bb17b76608d620374b6b51f9ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/79f91276fc8c853596b8180103d93762072e457a",
-                "reference": "79f91276fc8c853596b8180103d93762072e457a",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/d8f64251d27dc1bb17b76608d620374b6b51f9ff",
+                "reference": "d8f64251d27dc1bb17b76608d620374b6b51f9ff",
                 "shasum": ""
             },
             "require": {
@@ -1022,7 +1023,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-09-02 20:20:07"
+            "time": "2013-10-04 08:02:36"
         },
         {
             "name": "phpspec/prophecy",
@@ -1493,53 +1494,6 @@
             "time": "2013-03-08 08:21:40"
         },
         {
-            "name": "predis/predis",
-            "version": "v0.8.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Predis": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete PHP client library for Redis",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2013-02-18 14:03:45"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1576,61 +1530,6 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "robmorgan/phinx",
-            "version": "v0.2.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6fe8fb428e96a567333fe6af4286c328ef8baada",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/class-loader": "2.*",
-                "symfony/config": "2.*",
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "bin/phinx"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Phinx": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Morgan",
-                    "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au"
-                }
-            ],
-            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-            "homepage": "http://phinx.org",
-            "keywords": [
-                "database",
-                "database migrations",
-                "db",
-                "migrations",
-                "phinx"
-            ],
-            "time": "2013-08-25 10:17:27"
         },
         {
             "name": "symfony/browser-kit",
@@ -2186,21 +2085,24 @@
         },
         {
             "name": "videlalvaro/php-amqplib",
-            "version": "v2.1.0",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/videlalvaro/php-amqplib.git",
-                "reference": "adc2a425ab214517a5e76557a9370bdc6f212576"
+                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/adc2a425ab214517a5e76557a9370bdc6f212576",
-                "reference": "adc2a425ab214517a5e76557a9370bdc6f212576",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/ffed6c575260d9ccf796e213f1383e3489b3256c",
+                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
             "autoload": {
@@ -2224,7 +2126,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2013-06-17 19:25:27"
+            "time": "2013-10-04 16:26:56"
         },
         {
             "name": "zendframework/zend-code",
