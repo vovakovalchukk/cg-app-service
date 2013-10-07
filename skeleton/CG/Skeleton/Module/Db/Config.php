@@ -8,7 +8,6 @@ class Config extends BaseConfig
 {
     const STORAGE_NODE = 'StorageNode';
     const DATABASE_NAME = 'DatabaseName';
-    const DATABASE_USERS = 'DatabaseUsers';
     const DATABASE_ADAPTERS = 'DatabaseAdapters';
 
     public function getStorageNode()
@@ -30,23 +29,6 @@ class Config extends BaseConfig
     public function setDatabaseName($databaseName)
     {
         $this->offsetSet(static::DATABASE_NAME, $databaseName);
-        return $this;
-    }
-
-    public function getDatabaseUsers()
-    {
-        $databaseUsers = $this->get(static::DATABASE_USERS, array());
-        if (is_string($databaseUsers)) {
-            $databaseUsers = array($databaseUsers);
-        } else if ($databaseUsers instanceof ZendConfig) {
-            $databaseUsers = $databaseUsers->toArray();
-        }
-        return $databaseUsers;
-    }
-
-    public function setDatabaseUsers(array $databaseUsers)
-    {
-        $this->offsetSet(static::DATABASE_USERS, $databaseUsers);
         return $this;
     }
 

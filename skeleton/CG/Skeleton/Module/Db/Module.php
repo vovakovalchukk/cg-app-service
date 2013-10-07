@@ -42,7 +42,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
     {
         $this->configureStorageNode($arguments, $config, $moduleConfig, $reconfigure);
         $this->configureDatabaseName($arguments, $config, $moduleConfig, $reconfigure);
-        //$this->configureDatabaseUsers($arguments, $config, $moduleConfig, $reconfigure);
         $this->configureDatabaseAdapters($arguments, $config, $moduleConfig, $reconfigure);
     }
 
@@ -188,70 +187,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         };
 
         $moduleConfig->setDatabaseAdapters($configuredAdapters);
-        chdir($cwd);
-    }
-
-    public function configureDatabaseUsers(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
-    {
-        echo "in configure users WHY?!\n";
-        if (!$moduleConfig->isEnabled()) {
-            return;
-        }
-
-        $cwd = getcwd();
-        chdir($config->getInfrastructurePath() . '/tools/chef');
-
-        ob_start();
-        passthru('knife solo data bag show storage_' . $moduleConfig->getStorageNode() . '_users local -F json 2>/dev/null');
-        $databaseUsersJson = json_decode(ob_get_clean(), true) ?: array();
-
-        $availableUsers = array();
-        if (isset($databaseUsersJson['users'])) {
-            foreach (array_keys($databaseUsersJson['users']) as $databaseUser) {
-                $availableUsers[$databaseUser] = $databaseUser;
-            }
-        }
-
-        if (empty($availableUsers)) {
-            $moduleConfig->setEnabled(false);
-            $this->getConsole()->writelnErr(
-                'No Database Users Available for \'' . $moduleConfig->getDatabaseName() . '\' - ' . $this->getModuleName() . ' Disabled'
-            );
-            chdir($cwd);
-            return;
-        }
-
-        $databaseUsers = $moduleConfig->getDatabaseUsers();
-        while (true) {
-            $databaseUsers = array_unique($databaseUsers);
-            foreach ($databaseUsers as $index => $user) {
-                if (isset($availableUsers[$user])) {
-                    continue;
-                }
-                unset($databaseUsers[$index]);
-            }
-
-            if (!$reconfigure && !empty($databaseUsers)) {
-                break;
-            }
-
-            $this->getConsole()->writeln('Available Database Users:');
-            foreach ($availableUsers as $user) {
-                $this->getConsole()->writeln('   * ' . $user);
-            }
-
-            $databaseUsers = explode(
-                ' ',
-                $this->getConsole()->ask(
-                    'Please specify one or more users you wish to connect as (separated by spaces)',
-                    implode(' ', $databaseUsers ?: $availableUsers)
-                )
-            );
-
-            $reconfigure = false;
-        };
-        $moduleConfig->setDatabaseUsers($databaseUsers);
-
         chdir($cwd);
     }
 
