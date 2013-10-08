@@ -179,7 +179,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             $availableAdapters = array('readAdapter', 'writeAdapter', 'fastReadAdapter');
             foreach ($availableAdapters as $adapter) {
                 $user = $this->getConsole()->ask(
-                    'Please the use you wish to use for adapter "'. $adapter .'"');
+                    'Please choose the user you wish to use for adapter "'. $adapter .'"');
                 $configuredAdapters[$adapter] = array('user' => $user);
             }
 
