@@ -12,6 +12,10 @@
         {
             "type" : "composer",
             "url"  : "http://packages.zendframework.com"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:channelgrabber/cgslimhal.git"
         }
     ],
     "autoload": {
@@ -30,8 +34,9 @@
         "codeception/codeception" : "1.6.5",
         "nocarrier/hal" : "~0.9.3",
         "guzzle/guzzle" : "~3.7",
-        "channelgrabber/http" : "~1.1.2",
-        "channelgrabber/codeception" : "1.0.*"
+        "channelgrabber/http" : "~1.2.0",
+        "channelgrabber/codeception" : "1.0.*",
+        "channelgrabber/slim-hal" : "dev-CGIV-391"
     },
     "scripts": {
         "post-install-cmd" : [

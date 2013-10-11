@@ -29,8 +29,7 @@ return array(
                     }
                 }
 
-                $im->addSharedInstance($di, 'Zend\Di\Di');
-
+                $im->addSharedInstance($di, 'Di');
                 return $di;
             }
         ),
