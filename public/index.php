@@ -20,12 +20,19 @@ $fromJson = function($request) {
     return ($request == '') ? $request : Hal::fromJson($request, PHP_INT_MAX);
 };
 
-$app->add($di->get(ContentTypes::class, array(
-    'application/hal+xml' => $fromXml,
-    'application/hal+json' => $fromJson,
-    'application/xml' => $fromXml,
-    'application/json' => $fromJson
-)));
+$app->add(
+    $di->get(
+        ContentTypes::class,
+        array(
+            'settings' => array(
+                'application/hal+xml' => $fromXml,
+                'application/hal+json' => $fromJson,
+                'application/xml' => $fromXml,
+                'application/json' => $fromJson
+            )
+        )
+    )
+);
 
 $options = $di->get(Options::class, array('app' => $app));
 
