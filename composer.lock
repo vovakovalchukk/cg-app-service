@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e8a15f300709222d2eace2556ab8fc32",
+    "hash": "0ef4df295d875c1fdb27e1f7e1bbfa4d",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -377,11 +377,11 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "32533efdf5bd13814a28d87f804d0372039377f9"
+                "reference": "f2c9fd80ab02b7e75493c5c5f43bb562d5d269c6"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -394,7 +394,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2013-10-09 15:08:10"
+            "time": "2013-10-14 10:50:29"
         },
         {
             "name": "channelgrabber/http",
@@ -416,17 +416,21 @@
             "time": "2013-10-08 11:09:02"
         },
         {
-            "name": "channelgrabber/slim-hal",
-            "version": "dev-CGIV-391",
+            "name": "channelgrabber/slim",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgslimhal.git",
-                "reference": "f5376a1a6e4c6a3313fa50c7f70e9adb11eec54c"
+                "url": "git@bitbucket.org:channelgrabber/cgslim.git",
+                "reference": "600b4fad47f322d94573ba32ce54ed87454dba73"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
                 "nocarrier/hal": "0.9.*",
-                "php": ">=5.4.0"
+                "php": ">=5.4.0",
+                "slim/slim": "2.3.*"
+            },
+            "replace": {
+                "channelgrabber/slim-hal": "<=1.0.3"
             },
             "type": "library",
             "autoload": {
@@ -434,7 +438,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-10-11 13:20:17"
+            "time": "2013-10-15 10:19:31"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -2529,8 +2533,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phpspec/phpspec": 20,
-        "channelgrabber/slim-hal": 20
+        "phpspec/phpspec": 20
     },
     "platform": [
 

@@ -15,7 +15,7 @@
         },
         {
             "type": "git",
-            "url": "git@bitbucket.org:channelgrabber/cgslimhal.git"
+            "url": "git@bitbucket.org:channelgrabber/cgslim.git"
         }
     ],
     "autoload": {
@@ -36,7 +36,7 @@
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.2.0",
         "channelgrabber/codeception" : "1.0.*",
-        "channelgrabber/slim-hal" : "dev-CGIV-391"
+        "channelgrabber/slim" : "~1.0.5"
     },
     "scripts": {
         "post-install-cmd" : [

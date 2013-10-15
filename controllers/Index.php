@@ -5,7 +5,6 @@ use Zend\ServiceManager\Exception\ExceptionInterface;
 use Slim\Slim;
 use Slim\View;
 use Zend\Db\Adapter\Adapter;
-use Nocarrier\Hal;
 
 class Index implements ServiceLocatorAwareInterface
 {

@@ -1,10 +1,5 @@
 <?php
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\Exception\ExceptionInterface;
 use Slim\Slim;
-use Slim\View;
-use Zend\Db\Adapter\Adapter;
 use Nocarrier\Hal;
 
 class RestExample
