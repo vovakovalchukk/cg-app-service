@@ -15,7 +15,9 @@ $di = $serviceManager->get('Di');
 $app = $serviceManager->get(Slim::class);
 $app->add($di->get(Renderer::class));
 
-$fromXml = function($request) { return Hal::fromXml($request); };
+$fromXml = function($request) {
+    return ($request == '') ? $request : Hal::fromXml($request);
+};
 $fromJson = function($request) {
     return ($request == '') ? $request : Hal::fromJson($request, PHP_INT_MAX);
 };
