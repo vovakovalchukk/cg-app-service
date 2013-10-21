@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8b0de9056125c3b220a369477367937c",
+    "hash": "9c927ae3bffa7594c20e05b19fa9083d",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -1532,61 +1532,6 @@
             "time": "2012-12-21 11:40:51"
         },
         {
-            "name": "robmorgan/phinx",
-            "version": "v0.2.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6fe8fb428e96a567333fe6af4286c328ef8baada",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/class-loader": "2.*",
-                "symfony/config": "2.*",
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "bin/phinx"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Phinx": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Morgan",
-                    "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au"
-                }
-            ],
-            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-            "homepage": "http://phinx.org",
-            "keywords": [
-                "database",
-                "database migrations",
-                "db",
-                "migrations",
-                "phinx"
-            ],
-            "time": "2013-08-25 10:17:27"
-        },
-        {
             "name": "symfony/browser-kit",
             "version": "v2.3.5",
             "target-dir": "Symfony/Component/BrowserKit",
@@ -2461,55 +2406,6 @@
                 "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/release-2.2.3"
             },
             "time": "2013-08-21 17:07:36"
-        },
-        {
-            "name": "zendframework/zend-session",
-            "version": "2.2.4",
-            "target-dir": "Zend/Session",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendSession.git",
-                "reference": "01c52bdef0876aaa6b073b4e06823c3dc94e1b5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-session-01c52bdef0876aaa6b073b4e06823c3dc94e1b5b-zip-2c0567.zip",
-                "reference": "2.2.4",
-                "shasum": "aa71eb46d71be6bb8f10dc0b8ec249a51255c20f"
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "zendframework/zend-stdlib": "self.version"
-            },
-            "suggest": {
-                "zendframework/zend-eventmanager": "Zend\\EventManager component",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
-                "zendframework/zend-validator": "Zend\\Validator component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev",
-                    "dev-develop": "2.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Zend\\Session\\": ""
-                }
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "manage and preserve session data, a logical complement of cookie data, across multiple page requests by the same client",
-            "keywords": [
-                "session",
-                "zf2"
-            ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendSession/tree/release-2.2.3"
-            },
-            "time": "2013-08-21 17:08:13"
         },
         {
             "name": "zendframework/zend-stdlib",
