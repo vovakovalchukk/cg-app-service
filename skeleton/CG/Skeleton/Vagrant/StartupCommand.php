@@ -11,6 +11,7 @@ use CG\Skeleton\Vagrant\NodeData\Node;
 class StartupCommand implements StartupCommandInterface
 {
     use CommandTrait;
+    use \CG\Skeleton\GitTicketIdTrait;
 
     const DEFAULT_RAM = '768';
     const DEFAULT_BOX = 'cg-precise64';

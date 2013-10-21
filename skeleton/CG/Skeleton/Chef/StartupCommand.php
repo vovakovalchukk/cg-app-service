@@ -11,6 +11,7 @@ use CG\Skeleton\Chef\Node;
 class StartupCommand implements StartupCommandInterface
 {
     use CommandTrait;
+    use \CG\Skeleton\GitTicketIdTrait;
 
     const ROLES = 'roles/';
     const NODES = 'nodes/';
