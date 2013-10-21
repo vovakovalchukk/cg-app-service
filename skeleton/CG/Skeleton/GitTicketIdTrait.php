@@ -5,10 +5,12 @@ define('TICKET_REGEX','/([A-Z]+-[0-9]+)/');
 
 trait GitTicketIdTrait
 {
-    public function getGitTicketId()
+    protected function getGitTicketId()
     {
         $branch = shell_exec('git rev-parse --abbrev-ref HEAD');
-        preg_match(TICKET_REGEX, $branch, $matches);
+        if(!preg_match(TICKET_REGEX, $branch, $matches)) {
+            return "";
+        }
         return $matches[0];
     }
 }
