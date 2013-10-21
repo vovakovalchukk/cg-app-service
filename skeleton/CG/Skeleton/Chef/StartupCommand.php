@@ -48,7 +48,7 @@ class StartupCommand implements StartupCommandInterface
 
         exec(
             'git add ' . $roleFile . ';'
-            . ' git commit -m "SKELETON: Updated role ' . $roleName . '" --only -- ' . $roleFile
+            . ' git commit --no-verify -m "SKELETON: Updated role ' . $roleName . '" --only -- ' . $roleFile
         );
     }
 
@@ -65,7 +65,7 @@ class StartupCommand implements StartupCommandInterface
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit -m "SKELETON: Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
+            . ' git commit --no-verify -m "SKELETON: Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
         );
     }
 
