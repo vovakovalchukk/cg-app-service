@@ -9,7 +9,7 @@ trait GitTicketIdTrait
     {
         $branch = shell_exec('git rev-parse --abbrev-ref HEAD');
         if(!preg_match(TICKET_REGEX, $branch, $matches)) {
-            return "";
+            return;
         }
         return $matches[0];
     }
