@@ -68,7 +68,7 @@ class StartupCommand implements StartupCommandInterface
 
         exec(
             'git add ' . $nodeData->getPath() . ';'
-            . ' git commit --no-verify -m "SKELETON: Updated node data for ' . $config->getNode() . '" --only -- ' . $nodeData->getPath()
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node data for ' . $config->getNode() . '" --only -- ' . $nodeData->getPath()
         );
     }
 

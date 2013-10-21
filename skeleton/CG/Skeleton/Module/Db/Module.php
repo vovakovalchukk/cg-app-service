@@ -240,7 +240,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit --no-verify -m "SKELETON: Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
         );
     }
 
