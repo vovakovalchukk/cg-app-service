@@ -14,4 +14,10 @@ class Local implements EnvironmentInterface {
     {
 
     }
+
+    protected function getIpsInUse()
+    {
+        // this is a local env specific thing, as the user is asked to choose one in local env.
+        // move to Environment/Local/
+    }
 }

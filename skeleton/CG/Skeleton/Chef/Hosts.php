@@ -44,12 +44,6 @@ class Hosts
         // sets in env specific tree
     }
 
-    public function getIpsInUse()
-    {
-        // this is a local env specific thing, as the user is asked to choose one in local env.
-        // move to Environment/Local/
-    }
-
     public function save()
     {
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
