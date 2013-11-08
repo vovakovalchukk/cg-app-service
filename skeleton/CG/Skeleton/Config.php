@@ -146,7 +146,7 @@ class Config extends ZendConfig
 
     public function getEnvironment()
     {
-        return $this->get(static::ROLE);
+        return $this->get(static::ENVIRONMENT, 'local');
     }
 
     public function setEnvironment($environment)
