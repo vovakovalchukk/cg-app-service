@@ -18,6 +18,7 @@ class Config extends ZendConfig
     const VM_PATH = 'VM_PATH';
     const ROLE = 'ROLE';
     const IP = 'IP';
+    const ENVIRONMENT = 'ENVIRONMENT';
 
     protected $classMap = array(
         'Vagrant' => 'CG\Skeleton\Vagrant\Config',
@@ -141,5 +142,15 @@ class Config extends ZendConfig
     {
         $this->offsetSet(static::ROLE, $role);
         return $this;
+    }
+
+    public function getEnvironment()
+    {
+        return $this->get(static::ROLE);
+    }
+
+    public function setEnvironment($environment)
+    {
+        $this->offsetSet(static::ENVIRONMENT, $environment);
     }
 }

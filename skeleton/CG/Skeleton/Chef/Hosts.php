@@ -26,17 +26,28 @@ class Hosts
         $this->data = array_merge($this->data, $jsonData);
     }
 
-    public function setHost($host, $hostname, $ip)
+//    public function setHost($host, $hostname, $ip)
+//    {
+//        $this->data[$host] = array(
+//            'hostname' => $hostname,
+//            'ip' => $ip
+//        );
+//    }
+
+    public function setHostname($hostname)
     {
-        $this->data[$host] = array(
-            'hostname' => $hostname,
-            'ip' => $ip
-        );
+        // sets in config as it does now (top level)
+    }
+
+    public function setIp($ip, $environment)
+    {
+        // sets in env specific tree
     }
 
     public function getIpsInUse()
     {
-
+        // this is a local env specific thing, as the user is asked to choose one in local env.
+        // move to Environment/Local/
     }
 
     public function save()

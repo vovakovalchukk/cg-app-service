@@ -3,6 +3,7 @@ namespace CG\Skeleton;
 
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
+use CG\Skeleton\Console;
 
 class Application
 {
@@ -109,6 +110,12 @@ class Application
         }
     }
 
+    public function getHeader()
+    {
+        return "Application:" . CONSOLE::COLOR_BLUE . $this->getConfig()->getAppName() . CONSOLE::COLOR_RESET
+               . " Environment:" . CONSOLE::COLOR_CYAN . $this->getConfig()->getEnvironment() . CONSOLE::COLOR_RESET;
+    }
+
     public function shutdown()
     {
         $shutdownCommands = $this->getShutdownCommands();
@@ -122,7 +129,7 @@ class Application
 
     protected function commandList()
     {
-        $commandList = new Commands($this->getConsole(), $this->getCommands());
+        $commandList = new Commands($this->getConsole(), $this->getCommands(), $this->getHeader());
         return $commandList->askAndRun($this->getArguments(), $this->getConfig());
     }
 }

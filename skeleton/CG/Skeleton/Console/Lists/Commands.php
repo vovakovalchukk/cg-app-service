@@ -62,7 +62,7 @@ class Commands
             return $tagLine;
         }
 
-        return $header . ' - ' . $tagLine;
+        return $header . "\n" . $tagLine;
     }
 
     public function askAndRun(Arguments $arguments, Config $config)
