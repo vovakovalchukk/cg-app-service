@@ -7,5 +7,5 @@ interface EnvironmentInterface
 {
     public function getName();
 
-    public function setupIp(Config $config);
+    public function setupIp();
 }

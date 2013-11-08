@@ -43,7 +43,6 @@ class StartupCommand implements StartupCommandInterface
     {
         $this->saveRole($config);
         $this->saveNode($config);
-        $this->setupHostname($config);
         $this->setupIp($config);
     }
 
@@ -88,20 +87,20 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-    protected function setupHostname(Config $config)
+    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
     {
-        $hostname = $config->getHostname();
+        $hostname = $currentEnvironmentConfig->getHostname();
         while (!$hostname) {
             $this->getConsole()->writeErrorStatus('Application hostname is not set');
             $hostname = $this->getConsole()->ask('What url will your app be available at');
         }
         $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
-        $config->setHostname($hostname);
+        $currentEnvironmentConfig->setHostname($hostname);
     }
 
     protected function setupIp(Config $config)
     {
-        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment())->setupIp($config);
+        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp(); // TODO move env to class level for other methods to use
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.
