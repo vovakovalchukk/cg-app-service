@@ -7,6 +7,7 @@ use CG\Skeleton\Config;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
+use CG\Skeleton\Chef\Environment\EnvironmentFactory;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -85,8 +86,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setupIp(Config $config)
     {
-        // set up ip dependent on current environment
-
+        EnvironmentFactory::build($config->getEnvironment())->setupIp();
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.
