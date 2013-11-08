@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Chef\Environment\Dual;
+namespace CG\Skeleton\Chef\Environment;
 
 use CG\Skeleton\Chef\EnvironmentInterface;
 

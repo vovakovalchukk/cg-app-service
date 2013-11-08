@@ -1,18 +1,25 @@
 <?php
-namespace CG\Skeleton\Chef\Environment\Local;
+namespace CG\Skeleton\Chef\Environment;
 
-use CG\Skeleton\Chef\EnvironmentInterface;
+use CG\Skeleton\Chef\AbstractEnvironment;
+use CG\Skeleton\Config;
 
-class Local implements EnvironmentInterface {
+class Local extends AbstractEnvironment {
 
     public function getName()
     {
         return 'Local';
     }
 
-    public function setupIp()
+    public function setupIp(Config $config)
     {
-        echo "Hello World\n";
+        $ip = $config->getIp();
+        while (!$ip) {
+            $this->getConsole()->writeErrorStatus('IP address for ' . $this->getName() . ' environment is not set');
+            $ip = $this->getConsole()->ask('What ip?');
+        }
+        $this->getConsole()->writeStatus('IP set to \'' . $ip . '\'');
+        $config->setIp($ip);
     }
 
     protected function getIpsInUse()

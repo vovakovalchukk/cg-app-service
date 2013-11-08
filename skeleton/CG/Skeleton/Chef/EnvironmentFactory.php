@@ -1,13 +1,15 @@
 <?php
 namespace CG\Skeleton\Chef;
 
-use CG\Skeleton\Chef\Environment\Local;
-use CG\Skeleton\Chef\Environment\Dual;
+use CG\Skeleton\Console\Startup;
 
 class EnvironmentFactory
 {
-    public static function build($environmentString)
+    const ENVIRONMENT_NAMESPACE = 'CG\Skeleton\Chef\Environment\\';
+
+    public static function build(Startup $console, $environmentString)
     {
-        return new $environmentString;
+        $environmentClass = self::ENVIRONMENT_NAMESPACE . $environmentString;
+        return new $environmentClass($console);
     }
 }

@@ -7,7 +7,8 @@ use CG\Skeleton\Config;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
-use CG\Skeleton\Chef\Environment\EnvironmentFactory;
+use CG\Skeleton\Chef\EnvironmentFactory;
+use CG\Skeleton\Console\Startup;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -19,10 +20,23 @@ class StartupCommand implements StartupCommandInterface
     const HOSTS = 'data_bags/hosts/';
 
     protected $defaults;
+    protected $console;
 
-    public function __construct()
+    public function __construct(Startup $console)
     {
+        $this->setConsole($console);
         $this->defaults = array();
+    }
+
+    public function setConsole(Startup $console)
+    {
+        $this->console = $console;
+        return $this;
+    }
+
+    public function getConsole()
+    {
+        return $this->console;
     }
 
     public function runCommands(Arguments $arguments, Config $config)
@@ -87,7 +101,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setupIp(Config $config)
     {
-        EnvironmentFactory::build($config->getEnvironment())->setupIp();
+        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment())->setupIp($config);
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.
