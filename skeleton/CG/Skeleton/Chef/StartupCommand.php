@@ -28,6 +28,7 @@ class StartupCommand implements StartupCommandInterface
     {
         $this->saveRole($config);
         $this->saveNode($config);
+        $this->setupHostname($config);
     }
 
     protected function saveRole(Config $config)
@@ -71,6 +72,18 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
+    protected function setupHostname(Config $config)
+    {
+        $hostname = $config->getHostname();
+        while (!$hostname) {
+            $this->getConsole()->writeErrorStatus('Application hostname is not set');
+            $hostname = $this->getConsole()->ask('What url will your app be available at');
+        }
+        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
+        $config->setHostname($hostname);
+    }
+
+    // Load Hosts object with current file data. Add new host. Save Hosts.
     protected function saveHost(Config $config)
     {
         $host = $config->getHost();
@@ -78,6 +91,7 @@ class StartupCommand implements StartupCommandInterface
         $hostsFile = static::HOSTS . 'local' . '.json';
         $hosts = new Hosts($hostsFile);
 
+        // Save to config
         $hosts->setHost('host', 'hostname', '127.0.0.1');
 
         $hosts->save();

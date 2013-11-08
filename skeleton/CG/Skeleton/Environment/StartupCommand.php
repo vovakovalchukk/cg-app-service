@@ -58,7 +58,6 @@ class StartupCommand implements StartupCommandInterface
         $this->setupBranch($config);
         $this->setupNode($config);
         $this->setupAppName($config);
-        $this->setupHostname($config);
         $this->setupVmPath($config);
     }
 
@@ -161,17 +160,6 @@ class StartupCommand implements StartupCommandInterface
         }
         $this->getConsole()->writeStatus('Application is called \'' . $appName . '\'');
         $config->setAppName($appName);
-    }
-
-    protected function setupHostname(Config $config)
-    {
-        $hostname = $config->getHostname();
-        while (!$hostname) {
-            $this->getConsole()->writeErrorStatus('Application hostname is not set');
-            $hostname = $this->getConsole()->ask('What url will your app be available at');
-        }
-        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
-        $config->setHostname($hostname);
     }
 
     protected function setupVmPath(Config $config)
