@@ -7,7 +7,6 @@ use CG\Skeleton\Config;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
-use CG\Skeleton\Chef\EnvironmentFactory;
 use CG\Skeleton\Console\Startup;
 
 class StartupCommand implements StartupCommandInterface

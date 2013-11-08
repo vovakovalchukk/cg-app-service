@@ -1,9 +1,9 @@
 <?php
-namespace CG\Skeleton\StartupCommand;
+namespace CG\Skeleton\DevelopmentEnvironment;
 
 use CG\Skeleton\StartupCommandInterface;
 use CG\Skeleton\Arguments;
-use CG\Skeleton\Config;
+use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\DevelopmentEnvironment\CommandTrait;
 use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\DevelopmentEnvironment\EnvironmentFactory;
@@ -36,7 +36,7 @@ class StartupCommand implements StartupCommandInterface
         return $this->console;
     }
 
-    public function runCommands(Arguments $arguments, Config $config)
+    public function runCommands(Arguments $arguments, SkeletonConfig $config)
     {
         $this->setupIp($config);
     }
