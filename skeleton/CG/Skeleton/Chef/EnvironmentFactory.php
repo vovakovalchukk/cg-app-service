@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Chef\Environment;
+namespace CG\Skeleton\Chef;
 
 use CG\Skeleton\Chef\Environment\Local;
 use CG\Skeleton\Chef\Environment\Dual;

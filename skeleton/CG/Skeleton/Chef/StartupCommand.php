@@ -30,6 +30,7 @@ class StartupCommand implements StartupCommandInterface
         $this->saveRole($config);
         $this->saveNode($config);
         $this->setupHostname($config);
+        $this->setupIp($config);
     }
 
     protected function saveRole(Config $config)

@@ -1,7 +1,7 @@
 <?php
 namespace CG\Skeleton\Chef\Environment\Local;
 
-use CG\Skeleton\Chef\Environment\EnvironmentInterface;
+use CG\Skeleton\Chef\EnvironmentInterface;
 
 class Local implements EnvironmentInterface {
 
@@ -12,7 +12,7 @@ class Local implements EnvironmentInterface {
 
     public function setupIp()
     {
-
+        echo "Hello World\n";
     }
 
     protected function getIpsInUse()

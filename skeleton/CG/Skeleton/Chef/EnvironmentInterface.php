@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Chef\Environment;
+namespace CG\Skeleton\Chef;
 
 interface EnvironmentInterface
 {

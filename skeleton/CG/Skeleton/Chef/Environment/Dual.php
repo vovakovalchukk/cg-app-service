@@ -1,7 +1,7 @@
 <?php
 namespace CG\Skeleton\Chef\Environment\Dual;
 
-use CG\Skeleton\Chef\Environment\EnvironmentInterface;
+use CG\Skeleton\Chef\EnvironmentInterface;
 
 class Dual implements EnvironmentInterface {
 
