@@ -83,6 +83,12 @@ class StartupCommand implements StartupCommandInterface
         $config->setHostname($hostname);
     }
 
+    protected function setupIp(Config $config)
+    {
+        // set up ip dependent on current environment
+
+    }
+
     // Load Hosts object with current file data. Add new host. Save Hosts.
     protected function saveHost(Config $config)
     {
@@ -92,7 +98,7 @@ class StartupCommand implements StartupCommandInterface
         $hosts = new Hosts($hostsFile);
 
         // Save to config
-        $hosts->setHost('host', 'hostname', '127.0.0.1');
+        $hosts->setHost('host', $config->getHostname(), '127.0.0.1');
 
         $hosts->save();
 
