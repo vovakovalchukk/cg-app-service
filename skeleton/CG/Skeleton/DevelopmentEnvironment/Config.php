@@ -1,8 +1,7 @@
 <?php
-namespace CG\Skeleton\Chef;
+namespace CG\Skeleton\DevelopmentEnvironment;
 
 use Zend\Config\Config as ZendConfig;
-use CG\Skeleton\Vagrant\NodeData\Node;
 
 class Config extends ZendConfig
 {

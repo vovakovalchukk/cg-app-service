@@ -1,7 +1,7 @@
 <?php
-namespace CG\Skeleton\Chef\Environment;
+namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 
-use CG\Skeleton\Chef\AbstractEnvironment;
+use CG\Skeleton\DevelopmentEnvironment\AbstractEnvironment;
 
 class Local extends AbstractEnvironment {
 

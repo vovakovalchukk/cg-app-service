@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Chef;
+namespace CG\Skeleton\DevelopmentEnvironment;
 
 class Hosts
 {
