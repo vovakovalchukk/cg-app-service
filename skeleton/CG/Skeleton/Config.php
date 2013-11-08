@@ -13,16 +13,14 @@ class Config extends ZendConfig
     const BRANCH = 'BRANCH';
     const NODE = 'NODE';
     const APP_NAME = 'APP_NAME';
-    const HOST_NAME = 'HOST_NAME';
-    const DOMAIN = 'channelgrabber.com';
     const VM_PATH = 'VM_PATH';
     const ROLE = 'ROLE';
-    const IP = 'IP';
     const ENVIRONMENT = 'ENVIRONMENT';
 
     protected $classMap = array(
         'Vagrant' => 'CG\Skeleton\Vagrant\Config',
-        'Module' => 'CG\Skeleton\Module\Config'
+        'Module' => 'CG\Skeleton\Module\Config',
+        'Environment' =>
     );
 
     public function __construct(array $config, $allowModifications = false)
@@ -97,28 +95,6 @@ class Config extends ZendConfig
     public function setAppName($appName)
     {
         $this->offsetSet(static::APP_NAME, $appName);
-        return $this;
-    }
-
-    public function getHostname()
-    {
-        return $this->get(static::HOST_NAME, $this->getAppName() . '.' . static::DOMAIN);
-    }
-
-    public function setHostname($hostname)
-    {
-        $this->offsetSet(static::HOST_NAME, $hostname);
-        return $this;
-    }
-
-    public function getIp()
-    {
-        return $this->get(static::IP);
-    }
-
-    public function setIp($ip)
-    {
-        $this->offsetSet(static::IP, $ip);
         return $this;
     }
 
