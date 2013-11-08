@@ -17,6 +17,7 @@ class Config extends ZendConfig
     const DOMAIN = 'channelgrabber.com';
     const VM_PATH = 'VM_PATH';
     const ROLE = 'ROLE';
+    const IP = 'IP';
 
     protected $classMap = array(
         'Vagrant' => 'CG\Skeleton\Vagrant\Config',
@@ -106,6 +107,17 @@ class Config extends ZendConfig
     public function setHostname($hostname)
     {
         $this->offsetSet(static::HOST_NAME, $hostname);
+        return $this;
+    }
+
+    public function getIp()
+    {
+        return $this->get(static::IP);
+    }
+
+    public function setIp($ip)
+    {
+        $this->offsetSet(static::IP, $ip);
         return $this;
     }
 

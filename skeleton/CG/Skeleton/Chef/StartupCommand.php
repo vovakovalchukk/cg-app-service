@@ -73,25 +73,18 @@ class StartupCommand implements StartupCommandInterface
 
     protected function saveHost(Config $config)
     {
-        // TODO save host to config
-        $hostsFile = static::HOSTS . 'local' . '.json'; // TODO save to all environments?
+        $host = $config->getHost();
 
+        $hostsFile = static::HOSTS . 'local' . '.json';
+        $hosts = new Hosts($hostsFile);
 
-    }
-
-    protected function saveHosts(SkeletonConfig $config, Config $vagrantConfig)
-    {
-        $hosts = $this->getHosts();
-        $host = $hosts->getHost($config->getHost());
-
-        $this->setHostname();
-        $this->setIp();
+        $hosts->setHost('host', 'hostname', '127.0.0.1');
 
         $hosts->save();
 
         exec(
-            'git add ' . $hosts->getPath() . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated host for ' . $config->getNode() . '" --only -- ' . $hosts->getPath()
+            'git add ' . $hostsFile . ';'
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated role ' . $host . '" --only -- ' . $hostsFile
         );
     }
 
