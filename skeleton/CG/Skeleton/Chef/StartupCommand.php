@@ -15,6 +15,7 @@ class StartupCommand implements StartupCommandInterface
 
     const ROLES = 'roles/';
     const NODES = 'nodes/';
+    const HOSTS = 'data_bags/hosts/';
 
     protected $defaults;
 
@@ -70,6 +71,35 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
+    protected function saveHost(Config $config)
+    {
+        // TODO save host to config
+        $hostsFile = static::HOSTS . 'local' . '.json'; // TODO save to all environments?
+
+
+    }
+
+    protected function saveHosts(SkeletonConfig $config, Config $vagrantConfig)
+    {
+        $hosts = $this->getHosts();
+        $host = $hosts->getHost($config->getHost());
+
+        $this->setHostname();
+        $this->setIp();
+
+        $hosts->save();
+
+        exec(
+            'git add ' . $hosts->getPath() . ';'
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated host for ' . $config->getNode() . '" --only -- ' . $hosts->getPath()
+        );
+    }
+
+    public function getHosts()
+    {
+        return $this->hosts;
+    }
+
     protected function addRoleToNode(Node $node, $role)
     {
         $node->addToRunList('role[' . $role . ']');
@@ -92,7 +122,7 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configroot', 'config');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|dataroot', 'data');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|datadiroot', 'data/di');
-        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|hostname', $config->getHostname());
+        //$node->setKey('configure_sites|sites|' . $config->getAppName() . '|hostname', $config->getHostname()); // TODO remove me
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|enabled', true);
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configautoloadroot', 'config/autoload');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|certificateroot', 'data/certificates');
