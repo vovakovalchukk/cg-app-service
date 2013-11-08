@@ -20,7 +20,7 @@ class Config extends ZendConfig
     protected $classMap = array(
         'Vagrant' => 'CG\Skeleton\Vagrant\Config',
         'Module' => 'CG\Skeleton\Module\Config',
-        'Environment' =>
+        'Environment' => 'CG\Skeleton\DevelopmentEnvironment\Config'
     );
 
     public function __construct(array $config, $allowModifications = false)
