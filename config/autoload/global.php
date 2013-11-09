@@ -57,8 +57,7 @@ return array(
         'instance' => array(
             'aliases' => array(
                 'Di' => 'Zend\Di\Di',
-                'PasswordResetTokenCollectionService' => 'CG\PasswordResetToken\CollectionService'
-            ),
+             ),
             'CG\RestExample\Service' => array(
                 'parameter' => array(
                     'Repository' => 'CG\RestExample\Repository',
