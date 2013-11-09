@@ -97,6 +97,6 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configautoloadroot', 'config/autoload');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|certificateroot', 'data/certificates');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configmoduleroot', 'config/module');
-        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|modules', new Class());
+        $node->setKey('configure_sites|sites|' . $config->getAppName() . '|modules', new \stdClass());
     }
 }
