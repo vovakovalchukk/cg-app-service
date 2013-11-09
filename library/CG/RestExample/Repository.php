@@ -3,6 +3,7 @@ namespace CG\RestExample;
 
 use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use Exception;
 
 class Repository
 {
@@ -19,6 +20,10 @@ class Repository
         if ($status == 409) {
             throw new Conflict('a conflict occurred');
         }
+        if ($status == 400) {
+            throw new Exception('unexpected exception');
+        }
+
         return new Entity($status, true);
     }
 }
