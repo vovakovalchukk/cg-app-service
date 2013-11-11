@@ -34,6 +34,17 @@ class ChangeEnvironment implements CommandInterface
 
     public function run(Arguments $arguments, Config $config, Environment $environment)
     {
-        $this->getConsole()->ask('Hello World');
+        //$this->getConsole()->askWithOptions('Please choose a development environment', array('Local', 'Dual'), 'Local');
+
+        $availableEnvironments = array('Local', 'Dual'); // TODO temp
+
+        $this->getConsole()->writeln('Available Development Environments:');
+        foreach ($availableEnvironments as $environmentName) {
+            $this->getConsole()->writeln('   * ' . $environmentName);
+        }
+
+        $chosenEnvironment = $this->getConsole()->ask('Please specify a development environment');
+
+        $config->setEnvironment($chosenEnvironment);
     }
 }
