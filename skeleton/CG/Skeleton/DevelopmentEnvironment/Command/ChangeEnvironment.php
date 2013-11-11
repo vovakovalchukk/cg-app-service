@@ -6,6 +6,7 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use CG\Skeleton\Console;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
+use CG\Skeleton\Environment\ShutdownCommand;
 
 class ChangeEnvironment implements CommandInterface
 {
@@ -44,7 +45,10 @@ class ChangeEnvironment implements CommandInterface
         }
 
         $chosenEnvironment = $this->getConsole()->ask('Please specify a development environment');
+        $this->getConsole()->clear();
 
         $config->setEnvironment($chosenEnvironment);
+
+        $this->getConsole()->write(Console::COLOR_RED . "Warning: Skeleton must be restarted for environment changes to take effect.\n" . Console::COLOR_RESET);
     }
 }
