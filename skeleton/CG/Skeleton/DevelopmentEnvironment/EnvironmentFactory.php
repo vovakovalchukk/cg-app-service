@@ -8,9 +8,9 @@ class EnvironmentFactory
 {
     const ENVIRONMENT_NAMESPACE = 'CG\Skeleton\Chef\Environment\\';
 
-    public static function build(Startup $console, $environmentString, Config $config)
+    public static function build(Startup $console, Config $config)
     {
-        $environmentClass = static::ENVIRONMENT_NAMESPACE . $environmentString;
+        $environmentClass = static::ENVIRONMENT_NAMESPACE . $config->getEnvironment();
         return new $environmentClass($console, $config);
     }
 }

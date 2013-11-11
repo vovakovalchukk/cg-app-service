@@ -4,6 +4,7 @@ namespace CG\Skeleton;
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
 use CG\Skeleton\Console;
+use CG\Skeleton\DevelopmentEnvironment\EnvironmentFactory;
 
 class Application
 {
@@ -13,10 +14,14 @@ class Application
     protected $startupCommands;
     protected $commands;
     protected $shutdownCommands;
+    protected $environment;
 
     public function __construct(Console $console, Arguments $arguments, Config $config)
     {
-        $this->setConsole($console)->setArguments($arguments)->setConfig($config);
+        $this->setConsole($console)
+             ->setArguments($arguments)
+             ->setConfig($config)
+             ->setEnvironment($config);
         $this->startupCommands = new SplObjectStorage();
         $this->commands = new SplObjectStorage();
         $this->shutdownCommands = new SplObjectStorage();
@@ -31,6 +36,17 @@ class Application
     public function getConsole()
     {
         return $this->console;
+    }
+
+    public function setEnvironment(Config $config)
+    {
+        $this->environment = EnvironmentFactory::build($this->getConsole(), $config);
+        return $this;
+    }
+
+    public function getEnvironment()
+    {
+        return $this->environment;
     }
 
     public function setArguments(Arguments $arguments)
@@ -112,7 +128,7 @@ class Application
 
     public function getHeader()
     {
-        return "Application:" . CONSOLE::COLOR_BLUE . $this->getConfig()->getAppName() . CONSOLE::COLOR_RESET
+        return "Application:" . CONSOLE::COLOR_LIGHT_BLUE . $this->getConfig()->getAppName() . CONSOLE::COLOR_RESET
                . " Environment:" . CONSOLE::COLOR_CYAN . $this->getConfig()->getEnvironment() . CONSOLE::COLOR_RESET;
     }
 
