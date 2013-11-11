@@ -20,9 +20,9 @@ class Config extends ZendConfig
         return $this;
     }
 
-    public function getHostname()
+    public function getHostname($appName)
     {
-        return $this->get(static::HOSTNAME, $this->getAppName() . '.' . static::DOMAIN);
+        return $this->get(static::HOSTNAME, $appName . '.' . static::DOMAIN);
     }
 
     public function setHostname($hostname)

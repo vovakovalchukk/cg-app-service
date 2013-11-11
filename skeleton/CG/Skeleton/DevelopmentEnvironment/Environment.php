@@ -10,7 +10,7 @@ abstract class Environment implements EnvironmentInterface {
 
     public function __construct(SkeletonConfig $config)
     {
-        $this->skeletonConfig = $config;
+        $this->setConfig($config);
         $this->setEnvironmentConfig();
     }
 
@@ -26,6 +26,17 @@ abstract class Environment implements EnvironmentInterface {
 
         $environmentConfig->offsetSet($this->skeletonConfig->getEnvironment(), $this->environmentConfig);
         $this->skeletonConfig->offsetSet('Environment', $environmentConfig);
+        return $this;
+    }
+
+    public function getConfig()
+    {
+        return $this->skeletonConfig;
+    }
+
+    public function setConfig(SkeletonConfig $config)
+    {
+        $this->skeletonConfig = $config;
         return $this;
     }
 

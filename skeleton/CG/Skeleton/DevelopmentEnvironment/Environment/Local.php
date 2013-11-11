@@ -24,7 +24,7 @@ class Local extends Environment {
 
     public function setupHostname(Startup $console)
     {
-        $hostname = $this->getEnvironmentConfig()->getHostname();
+        $hostname = $this->getEnvironmentConfig()->getHostname($this->getConfig()->getAppName());
         while (!$hostname) {
             $console->writeErrorStatus('Application hostname is not set');
             $hostname = $console->ask('What url will your app be available at');
