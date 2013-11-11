@@ -38,7 +38,7 @@ class StartupCommand implements StartupCommandInterface
 
     public function runCommands(Arguments $arguments, SkeletonConfig $config)
     {
-        $this->setupIp($config);
+        //$this->setupIp($config);
     }
 
     protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
@@ -54,7 +54,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setupIp(Config $config)
     {
-        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp();
+        //EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp();
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.

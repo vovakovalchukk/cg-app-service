@@ -1,6 +1,7 @@
 <?php
 namespace CG\Skeleton\Chef;
 
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\StartupCommandInterface;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
@@ -38,11 +39,12 @@ class StartupCommand implements StartupCommandInterface
         return $this->console;
     }
 
-    public function runCommands(Arguments $arguments, Config $config)
+    public function runCommands(Arguments $arguments, Config $config, Environment $environment)
     {
         $this->saveRole($config);
         $this->saveNode($config);
-        $this->setupIp($config);
+        $this->setupIp($config, $environment);
+        $this->setupHostname($config, $environment);
     }
 
     protected function saveRole(Config $config)
@@ -86,20 +88,25 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
+//    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
+//    {
+//        $hostname = $currentEnvironmentConfig->getHostname();
+//        while (!$hostname) {
+//            $this->getConsole()->writeErrorStatus('Application hostname is not set');
+//            $hostname = $this->getConsole()->ask('What url will your app be available at');
+//        }
+//        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
+//        $currentEnvironmentConfig->setHostname($hostname);
+//    }
+
+    protected function setupHostname(Config $config, Environment $environment)
     {
-        $hostname = $currentEnvironmentConfig->getHostname();
-        while (!$hostname) {
-            $this->getConsole()->writeErrorStatus('Application hostname is not set');
-            $hostname = $this->getConsole()->ask('What url will your app be available at');
-        }
-        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
-        $currentEnvironmentConfig->setHostname($hostname);
+        $environment->setupHostname($this->getConsole());
     }
 
-    protected function setupIp(Config $config)
+    protected function setupIp(Config $config, Environment $environment)
     {
-        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp(); // TODO move env to class level for other methods to use
+        $environment->setupIp($this->getConsole());
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.

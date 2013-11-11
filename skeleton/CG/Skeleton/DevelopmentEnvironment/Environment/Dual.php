@@ -10,7 +10,12 @@ class Dual implements EnvironmentInterface {
         return 'Dual';
     }
 
-    public function setupIp()
+    public function setupIp(Startup $console)
+    {
+
+    }
+
+    public function setupHostname(Startup $console)
     {
 
     }
