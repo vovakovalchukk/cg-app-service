@@ -120,7 +120,7 @@ class Application
         if ($startupCommands->count() > 0) {
             $this->getConsole()->writeln();
             foreach ($startupCommands as $command) {
-                $command->run($this->getArguments(), $this->getConfig());
+                $command->run($this->getArguments(), $this->getConfig(), $this->getEnvironment());
             }
             $this->getConsole()->writeln();
         }
@@ -137,7 +137,7 @@ class Application
         $shutdownCommands = $this->getShutdownCommands();
         if ($shutdownCommands->count() > 0) {
             foreach ($shutdownCommands as $command) {
-                $command->run($this->getArguments(), $this->getConfig());
+                $command->run($this->getArguments(), $this->getConfig(), $this->getEnvironment());
             }
         }
         exit();
@@ -146,6 +146,6 @@ class Application
     protected function commandList()
     {
         $commandList = new Commands($this->getConsole(), $this->getCommands(), $this->getHeader());
-        return $commandList->askAndRun($this->getArguments(), $this->getConfig());
+        return $commandList->askAndRun($this->getArguments(), $this->getConfig(), $this->getEnvironment());
     }
 }
