@@ -101,10 +101,9 @@ class StartupCommand implements StartupCommandInterface
             $environment->getEnvironmentConfig()->getIp()
         );
 
-        var_dump($hosts);
-
         $hosts->save();
 
+// TODO enable git commits
 //        exec(
 //            'git add ' . $nodeFile . ';'
 //            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
@@ -119,25 +118,6 @@ class StartupCommand implements StartupCommandInterface
     protected function setupIp(Config $config, Environment $environment)
     {
         $environment->setupIp($this->getConsole());
-    }
-
-    // Load Hosts object with current file data. Add new host. Save Hosts.
-    protected function saveHost(Config $config)
-    {
-        $host = $config->getHost();
-
-        $hostsFile = static::HOSTS . 'local' . '.json';
-        $hosts = new Hosts($hostsFile);
-
-        // Save to config
-        $hosts->setHost('host', $config->getHostname(), '127.0.0.1');
-
-        $hosts->save();
-
-        exec(
-            'git add ' . $hostsFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated role ' . $host . '" --only -- ' . $hostsFile
-        );
     }
 
     public function getHosts()

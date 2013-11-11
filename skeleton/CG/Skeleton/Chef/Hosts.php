@@ -24,7 +24,6 @@ class Hosts
             return;
         }
 
-        var_dump($this->data);
         $this->data = array_merge($this->data, $jsonData);
     }
 
