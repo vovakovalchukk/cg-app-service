@@ -9,6 +9,7 @@ use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use CG\Skeleton\Console;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class Enable implements CommandInterface
 {
@@ -49,7 +50,7 @@ class Enable implements CommandInterface
             . ' Module';
     }
 
-    public function run(Arguments $arguments, Config $config)
+    public function run(Arguments $arguments, Config $config, Environment $environment)
     {
         $this->getEnableCommand()->enable($arguments, $config, $this->getModuleConfig());
         if ($this->getEnableCommand() instanceof ConfigureInterface) {

@@ -5,6 +5,7 @@ use CG\Skeleton\StartupCommandInterface;
 use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -50,7 +51,7 @@ class StartupCommand implements StartupCommandInterface
         return trim(ob_get_clean());
     }
 
-    public function run(Arguments $arguments, Config $config)
+    public function run(Arguments $arguments, Config $config, Environment $environment)
     {
         $this->runBundleInstall($config);
         $this->setupProjectBasePath($config);
