@@ -4,7 +4,7 @@ namespace CG\Skeleton\DevelopmentEnvironment;
 use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Config;
 
-abstract class AbstractEnvironment implements EnvironmentInterface {
+abstract class Environment implements EnvironmentInterface {
 
     protected $console;
     protected $skeletonConfig;
