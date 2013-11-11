@@ -120,11 +120,6 @@ class StartupCommand implements StartupCommandInterface
         $environment->setupIp($this->getConsole());
     }
 
-    public function getHosts()
-    {
-        return $this->hosts;
-    }
-
     protected function addRoleToNode(Node $node, $role)
     {
         $node->addToRunList('role[' . $role . ']');

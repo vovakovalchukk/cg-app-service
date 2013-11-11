@@ -13,6 +13,11 @@ class Hosts
         $this->load();
     }
 
+    public function getData()
+    {
+        return $this->data;
+    }
+
     protected function load()
     {
         if (!is_file($this->path)) {
