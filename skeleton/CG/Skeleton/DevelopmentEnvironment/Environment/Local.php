@@ -33,18 +33,6 @@ class Local extends Environment {
             $ipAddress = $console->ask('What IP address would you like to access the vm for this node', '192.168.33.21');
         }
 
-
-//        $console->writeln('IP addresses already in use:');
-//        foreach ($configuredHosts as $host) {
-//            $this->getConsole()->writeln('   * ' . $host);
-//        }
-//
-//        $ip = $this->getEnvironmentConfig()->getIp();
-//        while (!$ip) {
-//            $console->writeErrorStatus('IP address for ' . $this->getName() . ' environment is not set');
-//            $ip = $console->ask('What ip?');
-//        }
-
         $console->writeStatus('IP address set to \'' . $ipAddress . '\'');
         $this->getEnvironmentConfig()->setIp($ipAddress);
     }
