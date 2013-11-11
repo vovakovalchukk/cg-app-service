@@ -4,6 +4,7 @@ namespace CG\Skeleton;
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
 use CG\Skeleton\Console;
+use CG\Skeleton\Console\Startup;
 use CG\Skeleton\DevelopmentEnvironment\EnvironmentFactory;
 
 class Application

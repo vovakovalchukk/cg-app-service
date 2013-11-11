@@ -1,7 +1,7 @@
 <?php
 namespace CG\Skeleton\DevelopmentEnvironment;
 
-use CG\Skeleton\Config;
+use CG\Skeleton\Config as SkeletonConfig;
 
 interface EnvironmentInterface
 {

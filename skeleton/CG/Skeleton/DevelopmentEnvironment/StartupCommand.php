@@ -54,7 +54,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setupIp(Config $config)
     {
-        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp(); // TODO move env to class level for other methods to use
+        EnvironmentFactory::build($this->getConsole(), $config->getEnvironment(), $config)->setupIp();
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.

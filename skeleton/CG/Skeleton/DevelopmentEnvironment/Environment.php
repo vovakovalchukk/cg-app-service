@@ -2,7 +2,7 @@
 namespace CG\Skeleton\DevelopmentEnvironment;
 
 use CG\Skeleton\Console\Startup;
-use CG\Skeleton\Config;
+use CG\Skeleton\Config as SkeletonConfig;
 
 abstract class Environment implements EnvironmentInterface {
 
@@ -10,7 +10,7 @@ abstract class Environment implements EnvironmentInterface {
     protected $skeletonConfig;
     protected $environmentConfig;
 
-    public function __construct(Startup $console, Config $config)
+    public function __construct(Startup $console, SkeletonConfig $config)
     {
         $this->skeletonConfig = $config;
         $this->setEnvironmentConfig();

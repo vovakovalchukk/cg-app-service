@@ -1,9 +1,9 @@
 <?php
 namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 
-use CG\Skeleton\DevelopmentEnvironment\AbstractEnvironment;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
-class Local extends AbstractEnvironment {
+class Local extends Environment {
 
     public function getName()
     {
