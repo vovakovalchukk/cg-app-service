@@ -128,5 +128,6 @@ class Config extends ZendConfig
     public function setEnvironment($environment)
     {
         $this->offsetSet(static::ENVIRONMENT, $environment);
+        return $this;
     }
 }
