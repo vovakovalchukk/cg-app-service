@@ -1,31 +1,17 @@
 <?php
 namespace CG\Skeleton\DevelopmentEnvironment;
 
-use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Config as SkeletonConfig;
 
 abstract class Environment implements EnvironmentInterface {
 
-    protected $console;
     protected $skeletonConfig;
     protected $environmentConfig;
 
-    public function __construct(Startup $console, SkeletonConfig $config)
+    public function __construct(SkeletonConfig $config)
     {
         $this->skeletonConfig = $config;
         $this->setEnvironmentConfig();
-        $this->setConsole($console);
-    }
-
-    public function setConsole(Startup $console)
-    {
-        $this->console = $console;
-        return $this;
-    }
-
-    public function getConsole()
-    {
-        return $this->console;
     }
 
     public function getEnvironmentConfig()

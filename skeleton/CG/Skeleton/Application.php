@@ -4,7 +4,6 @@ namespace CG\Skeleton;
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
 use CG\Skeleton\Console;
-use CG\Skeleton\Console\Startup;
 use CG\Skeleton\DevelopmentEnvironment\EnvironmentFactory;
 
 class Application
@@ -41,7 +40,7 @@ class Application
 
     public function setEnvironment(Config $config)
     {
-        $this->environment = EnvironmentFactory::build($this->getConsole(), $config);
+        $this->environment = EnvironmentFactory::build($config);
         return $this;
     }
 
