@@ -2,39 +2,21 @@
 chdir(dirname(__DIR__));
 
 use Slim\Slim;
-use Slim\Middleware\ContentTypes;
+use CG\Slim\ContentTypes;
 use CG\Slim\Rest\Options;
 use CG\Slim\Rest\UnusedMethods;
-use CG\Slim\Hal\Renderer;
-use Nocarrier\Hal;
+use CG\Slim\Renderer;
+use CG\Slim\VndError\VndError;
 
 require_once 'application/bootstrap.php';
 require_once 'config/routing.php';
 
 $di = $serviceManager->get('Di');
 $app = $serviceManager->get(Slim::class);
+
+$app->add($di->get(ContentTypes::class));
+$app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
-
-$fromXml = function($request) {
-    return ($request == '') ? $request : Hal::fromXml($request);
-};
-$fromJson = function($request) {
-    return ($request == '') ? $request : Hal::fromJson($request, PHP_INT_MAX);
-};
-
-$app->add(
-    $di->get(
-        ContentTypes::class,
-        array(
-            'settings' => array(
-                'application/hal+xml' => $fromXml,
-                'application/hal+json' => $fromJson,
-                'application/xml' => $fromXml,
-                'application/json' => $fromJson
-            )
-        )
-    )
-);
 
 $options = $di->get(Options::class, array('app' => $app));
 
@@ -54,4 +36,3 @@ foreach ($routes as $route => $request) {
 
 $di->instanceManager()->addSharedInstance($app, Slim::class);
 $app->run();
-

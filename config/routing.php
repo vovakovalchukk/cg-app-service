@@ -1,6 +1,6 @@
 <?php
 use Slim\Slim;
-use RestExample;
+use CG\Controllers\RestExample;
 
 $routes = array(
     '/' => array (
@@ -20,7 +20,7 @@ $routes = array(
             $controller = $di->get(RestExample::class);
 
             $app->view()->set(
-                'Hal',
+                'RestResponse',
                 $controller->$method()
             );
         },

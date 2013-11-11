@@ -56,10 +56,17 @@ return array(
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'Di' => 'Zend\Di\Di'
+                'Di' => 'Zend\Di\Di',
+             ),
+            'CG\RestExample\Service' => array(
+                'parameter' => array(
+                    'Repository' => 'CG\RestExample\Repository',
+                    "Mapper" => 'CG\RestExample\Mapper'
+                )
             ),
             'preferences' => array(
-                'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
+                'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
+                'CG\RestExample\ServiceInterface' => 'CG\RestExample\Service',
             )
         )
     )
