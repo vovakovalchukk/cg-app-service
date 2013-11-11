@@ -41,16 +41,16 @@ class StartupCommand implements StartupCommandInterface
         //$this->setupIp($config);
     }
 
-    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
-    {
-        $hostname = $currentEnvironmentConfig->getHostname();
-        while (!$hostname) {
-            $this->getConsole()->writeErrorStatus('Application hostname is not set');
-            $hostname = $this->getConsole()->ask('What url will your app be available at');
-        }
-        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
-        $currentEnvironmentConfig->setHostname($hostname);
-    }
+//    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
+//    {
+//        $hostname = $currentEnvironmentConfig->getHostname();
+//        while (!$hostname) {
+//            $this->getConsole()->writeErrorStatus('Application hostname is not set');
+//            $hostname = $this->getConsole()->ask('What url will your app be available at');
+//        }
+//        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
+//        $currentEnvironmentConfig->setHostname($hostname);
+//    }
 
     protected function setupIp(Config $config)
     {
@@ -58,26 +58,26 @@ class StartupCommand implements StartupCommandInterface
     }
 
     // Load Hosts object with current file data. Add new host. Save Hosts.
-    protected function saveHost(Config $config)
-    {
-        $host = $config->getHost();
-
-        $hostsFile = static::HOSTS . 'local' . '.json';
-        $hosts = new Hosts($hostsFile);
-
-        // Save to config
-        $hosts->setHost('host', $config->getHostname(), '127.0.0.1');
-
-        $hosts->save();
-
-        exec(
-            'git add ' . $hostsFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated role ' . $host . '" --only -- ' . $hostsFile
-        );
-    }
-
-    public function getHosts()
-    {
-        return $this->hosts;
-    }
+//    protected function saveHost(Config $config)
+//    {
+//        $host = $config->getHost();
+//
+//        $hostsFile = static::HOSTS . 'local' . '.json';
+//        $hosts = new Hosts($hostsFile);
+//
+//        // Save to config
+//        $hosts->setHost('host', $config->getHostname(), '127.0.0.1');
+//
+//        $hosts->save();
+//
+//        exec(
+//            'git add ' . $hostsFile . ';'
+//            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated role ' . $host . '" --only -- ' . $hostsFile
+//        );
+//    }
+//
+//    public function getHosts()
+//    {
+//        return $this->hosts;
+//    }
 }

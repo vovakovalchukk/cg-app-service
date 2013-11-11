@@ -9,6 +9,7 @@ use Zend\Config\Config as ZendConfig;
 use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Chef\Node;
 use CG\Skeleton\Console\Startup;
+use CG\Skeleton\Chef\Hosts;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -45,6 +46,7 @@ class StartupCommand implements StartupCommandInterface
         $this->saveNode($config);
         $this->setupIp($config, $environment);
         $this->setupHostname($config, $environment);
+        $this->saveHosts($config, $environment);
     }
 
     protected function saveRole(Config $config)
@@ -88,16 +90,26 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-//    protected function setupHostname(Config $config, Config $currentEnvironmentConfig)
-//    {
-//        $hostname = $currentEnvironmentConfig->getHostname();
-//        while (!$hostname) {
-//            $this->getConsole()->writeErrorStatus('Application hostname is not set');
-//            $hostname = $this->getConsole()->ask('What url will your app be available at');
-//        }
-//        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
-//        $currentEnvironmentConfig->setHostname($hostname);
-//    }
+    protected function saveHosts(Config $config, Environment $environment)
+    {
+        $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
+        $hosts = new Hosts($hostsFile, $environment->getName());
+
+        $hosts->setHost(
+            $config->getAppName(),
+            $environment->getEnvironmentConfig()->getHostname($config),
+            $environment->getEnvironmentConfig()->getIp()
+        );
+
+        var_dump($hosts);
+
+        $hosts->save();
+
+//        exec(
+//            'git add ' . $nodeFile . ';'
+//            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
+//        );
+    }
 
     protected function setupHostname(Config $config, Environment $environment)
     {

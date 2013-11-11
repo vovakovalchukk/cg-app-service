@@ -2,6 +2,7 @@
 namespace CG\Skeleton\DevelopmentEnvironment;
 
 use Zend\Config\Config as ZendConfig;
+use CG\Skeleton\Config as SkeletonConfig;
 
 class Config extends ZendConfig
 {
@@ -20,9 +21,9 @@ class Config extends ZendConfig
         return $this;
     }
 
-    public function getHostname($appName)
+    public function getHostname(SkeletonConfig $config)
     {
-        return $this->get(static::HOSTNAME, $appName . '.' . static::DOMAIN);
+        return $this->get(static::HOSTNAME, $config->getAppName() . '.' . static::DOMAIN);
     }
 
     public function setHostname($hostname)

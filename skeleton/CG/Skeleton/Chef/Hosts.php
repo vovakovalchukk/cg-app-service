@@ -1,14 +1,15 @@
 <?php
-namespace CG\Skeleton\DevelopmentEnvironment;
+namespace CG\Skeleton\Chef;
 
 class Hosts
 {
     protected $path;
     protected $data;
 
-    public function __construct($path)
+    public function __construct($path, $environmentName)
     {
         $this->path = $path;
+        $this->data = array("id" => $environmentName, "hosts" => array());
         $this->load();
     }
 
@@ -23,25 +24,16 @@ class Hosts
             return;
         }
 
+        var_dump($this->data);
         $this->data = array_merge($this->data, $jsonData);
     }
 
-//    public function setHost($host, $hostname, $ip)
-//    {
-//        $this->data[$host] = array(
-//            'hostname' => $hostname,
-//            'ip' => $ip
-//        );
-//    }
-
-    public function setHostname($hostname)
+    public function setHost($host, $hostname, $ip)
     {
-        // sets in config as it does now (top level)
-    }
-
-    public function setIp($ip, $environment)
-    {
-        // sets in env specific tree
+        $this->data['hosts'][$host] = array(
+            'hostname' => $hostname,
+            'ip' => $ip
+        );
     }
 
     public function save()
