@@ -44,17 +44,6 @@ class Local extends Environment {
         $this->getEnvironmentConfig()->setIp($ipAddress);
     }
 
-    public function setupHostname(Startup $console)
-    {
-        $hostname = $this->getEnvironmentConfig()->getHostname($this->getConfig());
-        while (!$hostname) {
-            $console->writeErrorStatus('Application hostname is not set');
-            $hostname = $console->ask('What url will your app be available at');
-        }
-        $console->writeStatus('Application hostname set to \'' . $hostname . '\'');
-        $this->getEnvironmentConfig()->setHostname($hostname);
-    }
-
     public function vagrantUp(Console $console)
     {
         passthru('vagrant up ' . $this->getConfig()->getNode());

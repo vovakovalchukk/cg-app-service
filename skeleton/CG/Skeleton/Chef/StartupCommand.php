@@ -97,7 +97,7 @@ class StartupCommand implements StartupCommandInterface
 
         $hosts->setHost(
             $config->getAppName(),
-            $environment->getEnvironmentConfig()->getHostname($config),
+            $environment->getEnvironmentConfig()->getHostname($config, $environment),
             $environment->getEnvironmentConfig()->getIp()
         );
 
@@ -112,7 +112,13 @@ class StartupCommand implements StartupCommandInterface
 
     protected function setupHostname(Config $config, Environment $environment)
     {
-        $environment->setupHostname($this->getConsole());
+        $hostname = $environment->getEnvironmentConfig()->getHostname($config, $environment);
+        while (!$hostname) {
+            $this->getConsole()->writeErrorStatus('Application hostname is not set');
+            $hostname = $this->getConsole()->ask('What url will your app be available at');
+        }
+        $this->getConsole()->writeStatus('Application hostname set to \'' . $hostname . '\'');
+        $environment->getEnvironmentConfig()->setHostname($hostname);
     }
 
     protected function setupIp(Config $config, Environment $environment)

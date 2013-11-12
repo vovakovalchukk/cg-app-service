@@ -41,11 +41,6 @@ class Dual extends Environment {
         $this->getEnvironmentConfig()->setIp($ipAddress);
     }
 
-    public function setupHostname(Startup $console)
-    {
-        // TODO implement hostname
-    }
-
     public function vagrantUp(Console $console)
     {
         foreach($this->environmentNodes as $node) {

@@ -11,7 +11,6 @@ interface EnvironmentInterface
     public function getSuffix();
 
     public function setupIp(Startup $console);
-    public function setupHostname(Startup $console);
 
     public function vagrantUp(Console $console);
     public function vagrantSsh(Console $console);

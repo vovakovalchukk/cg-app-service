@@ -21,9 +21,9 @@ class Config extends ZendConfig
         return $this;
     }
 
-    public function getHostname(SkeletonConfig $config)
+    public function getHostname(SkeletonConfig $config, Environment $environment)
     {
-        return $this->get(static::HOSTNAME, $config->getAppName() . '.' . static::DOMAIN);
+        return $this->get(static::HOSTNAME, $config->getAppName() . '.' . static::DOMAIN . $environment->getSuffix());
     }
 
     public function setHostname($hostname)
