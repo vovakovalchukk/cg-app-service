@@ -6,6 +6,7 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use CG\Skeleton\Console;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
+use CG\Skeleton\DevelopmentEnvironment\EnvironmentFactory;
 
 class ChangeEnvironment implements CommandInterface
 {
@@ -34,7 +35,7 @@ class ChangeEnvironment implements CommandInterface
 
     public function run(Arguments $arguments, Config $config, Environment $environment)
     {
-        $availableEnvironments = array('Local', 'Dual'); // TODO temp
+        $availableEnvironments = EnvironmentFactory::getEnvironments();
 
         $this->getConsole()->writeln('Available Development Environments:');
         foreach ($availableEnvironments as $environmentName) {
