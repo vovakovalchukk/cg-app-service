@@ -8,7 +8,6 @@ use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
-use Nocarrier\Hal;
 
 require_once 'application/bootstrap.php';
 require_once 'config/routing.php';
