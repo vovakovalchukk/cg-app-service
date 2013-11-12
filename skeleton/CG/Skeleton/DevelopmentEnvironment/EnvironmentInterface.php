@@ -11,4 +11,6 @@ interface EnvironmentInterface
 
     public function setupIp(Startup $console);
     public function setupHostname(Startup $console);
+
+    public function vagrantUp();
 }

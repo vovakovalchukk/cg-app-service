@@ -12,9 +12,9 @@ trait CommandTrait
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
-        $this->runCommands($arguments, $config);
+        $this->runCommands($arguments, $config, $environment);
         chdir($cwd);
     }
 
-    abstract protected function runCommands(Arguments $arguments, SkeletonConfig $config);
+    abstract protected function runCommands(Arguments $arguments, SkeletonConfig $config, Environment $environment);
 }

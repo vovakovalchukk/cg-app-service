@@ -55,4 +55,24 @@ class Local extends Environment {
         $console->writeStatus('Application hostname set to \'' . $hostname . '\'');
         $this->getEnvironmentConfig()->setHostname($hostname);
     }
+
+    public function vagrantUp()
+    {
+        passthru('vagrant up ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantSsh()
+    {
+        passthru('vagrant ssh ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantReload()
+    {
+        passthru('vagrant reload ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantHalt()
+    {
+        passthru('vagrant halt ' . $this->getConfig()->getNode());
+    }
 }
