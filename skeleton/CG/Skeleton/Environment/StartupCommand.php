@@ -152,6 +152,11 @@ class StartupCommand implements StartupCommandInterface
         $config->setAppName($appName);
     }
 
+    protected function setupNode(Environment $environment)
+    {
+        $environment->setupNode($this->getConsole());
+    }
+
     protected function setupVmPath(Config $config)
     {
         $vmPath = $config->getVmPath();
