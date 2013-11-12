@@ -103,11 +103,10 @@ class StartupCommand implements StartupCommandInterface
 
         $hosts->save();
 
-// TODO enable git commits
-//        exec(
-//            'git add ' . $nodeFile . ';'
-//            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
-//        );
+        exec(
+            'git add ' . $hostsFile . ';'
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated hosts with ' . $config->getAppName() . '" --only -- ' . $hostsFile
+        );
     }
 
     protected function setupHostname(Config $config, Environment $environment)
@@ -148,7 +147,6 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configroot', 'config');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|dataroot', 'data');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|datadiroot', 'data/di');
-        //$node->setKey('configure_sites|sites|' . $config->getAppName() . '|hostname', $config->getHostname()); // TODO remove me
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|enabled', true);
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|configautoloadroot', 'config/autoload');
         $node->setKey('configure_sites|sites|' . $config->getAppName() . '|certificateroot', 'data/certificates');
