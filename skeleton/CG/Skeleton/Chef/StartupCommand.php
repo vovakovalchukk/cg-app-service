@@ -78,7 +78,6 @@ class StartupCommand implements StartupCommandInterface
         foreach ($environment->getInitialNodeRunList() as $role) {
             $this->addRoleToNode($node, $role);
         }
-        $this->addRoleToNode($node, $config->getRole());
 
         $this->configureCapistranoOnNode($node, $config);
         $this->configureSiteOnNode($node, $config);
