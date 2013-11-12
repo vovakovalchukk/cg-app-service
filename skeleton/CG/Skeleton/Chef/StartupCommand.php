@@ -43,7 +43,7 @@ class StartupCommand implements StartupCommandInterface
     public function runCommands(Arguments $arguments, Config $config, Environment $environment)
     {
         $this->saveRole($config);
-        $this->saveNode($config);
+        $this->saveNode($config, $environment);
         $this->setupIp($config, $environment);
         $this->setupHostname($config, $environment);
         $this->saveHosts($config, $environment);

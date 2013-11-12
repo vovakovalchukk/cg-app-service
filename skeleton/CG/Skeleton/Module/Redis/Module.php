@@ -11,6 +11,7 @@ use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class Module extends AbstractModule implements EnableInterface, ApplyConfigurationInterface, DisableInterface
 {

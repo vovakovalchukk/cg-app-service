@@ -80,13 +80,7 @@ class Dual extends Environment {
 
     public function setupNode(Startup $console)
     {
-        $hosts = $this->getHosts();
-
-        var_dump($hosts);
-        $ip = $this->getEnvironmentConfig()->getIp();
-        var_dump($ip);
-        $node = $hosts[$ip];
-        var_dump($node);
+        $node = $this->getEnvironmentConfig()->getNode();
 
         while (!$node) {
             $console->writeErrorStatus('No node set');

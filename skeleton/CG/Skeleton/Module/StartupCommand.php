@@ -47,7 +47,7 @@ class StartupCommand implements StartupCommandInterface
     {
         $moduleConfig = $config->get('Module', new ModuleConfig(array(), true));
         foreach ($this->getModules() as $module) {
-            $module->applyConfiguration($arguments, $config, $moduleConfig->getModule($module->getModuleName()));
+            $module->applyConfiguration($arguments, $config, $moduleConfig->getModule($module->getModuleName()), $environment);
             $this->getConsole()->writeStatus('Applied Configuration for ' . $module->getName());
         }
     }
