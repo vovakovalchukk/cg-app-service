@@ -26,8 +26,13 @@ class Dual extends Environment {
     {
         $ipAddress = $this->getEnvironmentConfig()->getIp();
         $configuredHosts = $this->getHosts();
+        $node = $this->getEnvironmentConfig()->getNode();
 
         while (!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            if (isset($node)) {
+                $ipAddress = $configuredHosts[$node]['ip'];
+                break;
+            }
             $console->writeErrorStatus('IP address is not set or is invalid');
             $chosenNode = $console->askWithOptions(
                 'Which node would you like to run your app on?',
