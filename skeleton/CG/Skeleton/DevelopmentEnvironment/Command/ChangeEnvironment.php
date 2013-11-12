@@ -6,7 +6,6 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config;
 use CG\Skeleton\Console;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
-use CG\Skeleton\Environment\ShutdownCommand;
 
 class ChangeEnvironment implements CommandInterface
 {
@@ -35,8 +34,6 @@ class ChangeEnvironment implements CommandInterface
 
     public function run(Arguments $arguments, Config $config, Environment $environment)
     {
-        //$this->getConsole()->askWithOptions('Please choose a development environment', array('Local', 'Dual'), 'Local');
-
         $availableEnvironments = array('Local', 'Dual'); // TODO temp
 
         $this->getConsole()->writeln('Available Development Environments:');

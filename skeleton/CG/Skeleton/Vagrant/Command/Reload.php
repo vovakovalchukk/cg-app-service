@@ -18,6 +18,6 @@ class Reload implements CommandInterface
 
     protected function runCommands(Arguments $arguments, Config $config, Environment $environment)
     {
-        $environment->vagrantReload();
+        $environment->vagrantReload($this->getConsole());
     }
 }

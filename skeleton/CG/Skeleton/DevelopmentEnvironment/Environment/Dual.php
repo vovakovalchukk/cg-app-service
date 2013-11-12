@@ -3,9 +3,7 @@ namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 
 use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\Console\Startup;
-use CG\Skeleton\Chef\StartupCommand;
-use CG\Skeleton\Chef\Hosts;
-
+use CG\Skeleton\Console;
 
 class Dual extends Environment {
 
@@ -45,6 +43,26 @@ class Dual extends Environment {
 
     public function setupHostname(Startup $console)
     {
+        // TODO implement hostname
+    }
 
+    public function vagrantUp(Console $console)
+    {
+        passthru('vagrant up ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantSsh(Console $console)
+    {
+        passthru('vagrant ssh ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantReload(Console $console)
+    {
+        passthru('vagrant reload ' . $this->getConfig()->getNode());
+    }
+
+    public function vagrantHalt(Console $console)
+    {
+        passthru('vagrant halt ' . $this->getConfig()->getNode());
     }
 }

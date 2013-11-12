@@ -3,8 +3,7 @@ namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 
 use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\Console\Startup;
-use CG\Skeleton\Chef\StartupCommand;
-use CG\Skeleton\Chef\Hosts;
+use CG\Skeleton\Console;
 
 class Local extends Environment {
 
@@ -56,22 +55,22 @@ class Local extends Environment {
         $this->getEnvironmentConfig()->setHostname($hostname);
     }
 
-    public function vagrantUp()
+    public function vagrantUp(Console $console)
     {
         passthru('vagrant up ' . $this->getConfig()->getNode());
     }
 
-    public function vagrantSsh()
+    public function vagrantSsh(Console $console)
     {
         passthru('vagrant ssh ' . $this->getConfig()->getNode());
     }
 
-    public function vagrantReload()
+    public function vagrantReload(Console $console)
     {
         passthru('vagrant reload ' . $this->getConfig()->getNode());
     }
 
-    public function vagrantHalt()
+    public function vagrantHalt(Console $console)
     {
         passthru('vagrant halt ' . $this->getConfig()->getNode());
     }

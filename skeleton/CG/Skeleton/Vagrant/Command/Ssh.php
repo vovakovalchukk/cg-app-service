@@ -18,6 +18,6 @@ class Ssh implements CommandInterface
 
     protected function runCommands(Arguments $arguments, Config $config, Environment $environment)
     {
-        $environment->vagrantSsh();
+        $environment->vagrantSsh($this->getConsole());
     }
 }
