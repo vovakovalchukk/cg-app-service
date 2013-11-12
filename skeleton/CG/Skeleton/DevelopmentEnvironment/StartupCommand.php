@@ -33,7 +33,7 @@ class StartupCommand implements StartupCommandInterface
         return $this->console;
     }
 
-    public function runCommands(Arguments $arguments, SkeletonConfig $config)
+    public function runCommands(Arguments $arguments, SkeletonConfig $config, Environment $environment)
     {
         $this->setupEnvironment($config);
     }

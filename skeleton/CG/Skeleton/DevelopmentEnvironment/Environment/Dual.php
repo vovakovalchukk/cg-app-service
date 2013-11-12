@@ -85,6 +85,11 @@ class Dual extends Environment {
         passthru('vagrant halt ' . $nodeChoice);
     }
 
+    public function getInitialNodeRunList()
+    {
+        return array('cg');
+    }
+
     public function setupNode(Startup $console)
     {
         $node = $this->getEnvironmentConfig()->getNode();
@@ -105,17 +110,18 @@ class Dual extends Environment {
 
     protected function setupEnvironmentRole()
     {
-        $chosenEnvironmentNode = $this->getEnvironmentConfig()->getNode();
+        $cwd = getcwd();
+        chdir($this->getConfig()->getInfrastructurePath() . '/tools/chef');
+        exec('git checkout ' . $this->getConfig()->getBranch() . ' 2>&1;');
 
+        $chosenEnvironmentNode = $this->getEnvironmentConfig()->getNode();
         $roleFile = Chef::ROLES . $chosenEnvironmentNode . '.json';
         $role = new Role($roleFile);
 
         $role->addToRunList('role[' . $this->getConfig()->getAppName() . ']');
         $role->save();
+
+        chdir($cwd);
     }
 
-    public function getInitialNodeRunList()
-    {
-        return array('cg');
-    }
 }
