@@ -74,4 +74,9 @@ class Local extends Environment {
         $console->writeStatus('Application configured for node \'' . $node . '\'');
         $this->getEnvironmentConfig()->setNode($node);
     }
+
+    public function getInitialNodeRunList()
+    {
+        return array('cg', 'database_storage');
+    }
 }

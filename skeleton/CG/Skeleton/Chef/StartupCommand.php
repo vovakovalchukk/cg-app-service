@@ -75,9 +75,10 @@ class StartupCommand implements StartupCommandInterface
         $nodeFile = static::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
-        $this->addRoleToNode($node, 'cg')
-             ->addRoleToNode($node, 'database_storage')
-             ->addRoleToNode($node, $config->getRole());
+        foreach ($environment->getInitialNodeRunList() as $role) {
+            $this->addRoleToNode($node, $role);
+        }
+        $this->addRoleToNode($node, $config->getRole());
 
         $this->configureCapistranoOnNode($node, $config);
         $this->configureSiteOnNode($node, $config);

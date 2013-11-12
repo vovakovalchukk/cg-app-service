@@ -18,4 +18,6 @@ interface EnvironmentInterface
     public function vagrantSsh(Console $console);
     public function vagrantReload(Console $console);
     public function vagrantHalt(Console $console);
+
+    public function getInitialNodeRunList();
 }
