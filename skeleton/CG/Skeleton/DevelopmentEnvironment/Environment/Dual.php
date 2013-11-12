@@ -10,7 +10,7 @@ class Dual extends Environment {
     protected $name = 'Dual';
     protected $suffix = '.local';
 
-    protected $environmentNodes = array('services', 'frontend', 'infrastructure');
+    protected $environmentNodes = array('infrastructure', 'services', 'frontend');
 
     public function getName()
     {
@@ -32,7 +32,7 @@ class Dual extends Environment {
             $chosenNode = $console->askWithOptions(
                 'Which node would you like to run your app on?',
                 $this->environmentNodes,
-                $this->environmentNodes[0]
+                $this->environmentNodes[1]
             );
             $ipAddress = $configuredHosts[$chosenNode]['ip'];
         }
@@ -48,21 +48,38 @@ class Dual extends Environment {
 
     public function vagrantUp(Console $console)
     {
-        passthru('vagrant up ' . $this->getConfig()->getNode());
+        foreach($this->environmentNodes as $node) {
+            passthru('vagrant up ' . $node);
+        }
     }
 
     public function vagrantSsh(Console $console)
     {
-        passthru('vagrant ssh ' . $this->getConfig()->getNode());
+        $nodeChoice = $console->askWithOptions(
+            'Which node would you like to connect to',
+            $this->environmentNodes,
+            $this->environmentNodes[1]
+        );
+        passthru('vagrant ssh ' . $nodeChoice);
     }
 
     public function vagrantReload(Console $console)
     {
-        passthru('vagrant reload ' . $this->getConfig()->getNode());
+        $nodeChoice = $console->askWithOptions(
+            'Which node would you like to restart',
+            $this->environmentNodes,
+            $this->environmentNodes[1]
+        );
+        passthru('vagrant reload ' . $nodeChoice);
     }
 
     public function vagrantHalt(Console $console)
     {
-        passthru('vagrant halt ' . $this->getConfig()->getNode());
+        $nodeChoice = $console->askWithOptions(
+            'Which node would you like to stop',
+            $this->environmentNodes,
+            $this->environmentNodes[1]
+        );
+        passthru('vagrant halt ' . $nodeChoice);
     }
 }
