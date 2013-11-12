@@ -9,7 +9,7 @@ use CG\Skeleton\Chef\Hosts;
 
 class Dual extends Environment {
 
-    protected $nodes = array('frontend', 'services', 'infrastructure');
+    protected $environmentNodes = array('services', 'frontend', 'infrastructure');
 
     public function getName()
     {
@@ -19,8 +19,17 @@ class Dual extends Environment {
     public function setupIp(Startup $console)
     {
         $ipAddress = $this->getEnvironmentConfig()->getIp();
+        $configuredHosts = $this->getHosts();
 
-        $ipAddress = $console->askWithOptions('Which node would you like to run your app on?', $this->nodes, 'services');
+        while (!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $console->writeErrorStatus('IP address is not set or is invalid');
+            $chosenNode = $console->askWithOptions(
+                'Which node would you like to run your app on?',
+                $this->environmentNodes,
+                $this->environmentNodes[0]
+            );
+            $ipAddress = $configuredHosts[$chosenNode]['ip'];
+        }
 
         $console->writeStatus('IP address set to \'' . $ipAddress . '\'');
         $this->getEnvironmentConfig()->setIp($ipAddress);

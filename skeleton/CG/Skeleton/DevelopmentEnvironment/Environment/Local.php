@@ -47,11 +47,4 @@ class Local extends Environment {
         $console->writeStatus('Application hostname set to \'' . $hostname . '\'');
         $this->getEnvironmentConfig()->setHostname($hostname);
     }
-
-    protected function getHosts()
-    {
-        $hostsFile = StartupCommand::HOSTS . strtolower($this->getName()) . '.json';
-        $hosts = new Hosts($hostsFile, $this->getName());
-        return $hosts->getData()['hosts'];
-    }
 }

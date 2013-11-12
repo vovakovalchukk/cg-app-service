@@ -2,6 +2,8 @@
 namespace CG\Skeleton\DevelopmentEnvironment;
 
 use CG\Skeleton\Config as SkeletonConfig;
+use CG\Skeleton\Chef\StartupCommand;
+use CG\Skeleton\Chef\Hosts;
 
 abstract class Environment implements EnvironmentInterface {
 
@@ -38,6 +40,13 @@ abstract class Environment implements EnvironmentInterface {
     {
         $this->skeletonConfig = $config;
         return $this;
+    }
+
+    protected function getHosts()
+    {
+        $hostsFile = StartupCommand::HOSTS . strtolower($this->getName()) . '.json';
+        $hosts = new Hosts($hostsFile, $this->getName());
+        return $hosts->getData()['hosts'];
     }
 
 }
