@@ -4,6 +4,8 @@ namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Console;
+use CG\Skeleton\Chef\StartupCommand as Chef;
+use CG\Skeleton\Chef\Role;
 
 class Dual extends Environment {
 
@@ -97,6 +99,19 @@ class Dual extends Environment {
         }
         $console->writeStatus('Application configured for node \'' . $node . '\'');
         $this->getEnvironmentConfig()->setNode($node);
+
+        $this->setupEnvironmentRole();
+    }
+
+    protected function setupEnvironmentRole()
+    {
+        $chosenEnvironmentNode = $this->getEnvironmentConfig()->getNode();
+
+        $roleFile = Chef::ROLES . $chosenEnvironmentNode . '.json';
+        $role = new Role($roleFile);
+
+        $role->addToRunList('role[' . $this->getConfig()->getAppName() . ']');
+        $role->save();
     }
 
     public function getInitialNodeRunList()

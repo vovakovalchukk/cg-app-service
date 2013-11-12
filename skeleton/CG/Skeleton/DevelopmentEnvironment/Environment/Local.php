@@ -77,6 +77,6 @@ class Local extends Environment {
 
     public function getInitialNodeRunList()
     {
-        return array('cg', 'database_storage');
+        return array('cg', 'database_storage', $this->getConfig()->getRole());
     }
 }
