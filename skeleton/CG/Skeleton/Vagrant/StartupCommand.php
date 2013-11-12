@@ -62,7 +62,6 @@ class StartupCommand implements StartupCommandInterface
         $node = $nodeData->getNode($environment->getEnvironmentConfig()->getNode());
 
         $this->setVmRam($nodeData, $node, $config, $vagrantConfig);
-        //$this->setVmIp($nodeData, $node, $config, $vagrantConfig);
         $this->setBox($nodeData, $node, $config, $vagrantConfig);
         $this->setApplication($nodeData, $node, $config, $vagrantConfig);
 
