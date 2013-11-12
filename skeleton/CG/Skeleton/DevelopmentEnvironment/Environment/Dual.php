@@ -97,6 +97,6 @@ class Dual extends Environment {
             );
         }
         $console->writeStatus('Application configured for node \'' . $node . '\'');
-        $this->getConfig()->setNode($node);
+        $this->getEnvironmentConfig()->setNode($node);
     }
 }

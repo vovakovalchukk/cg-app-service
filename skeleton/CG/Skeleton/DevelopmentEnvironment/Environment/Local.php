@@ -72,6 +72,6 @@ class Local extends Environment {
             $node = $console->ask('What node will this application go on');
         }
         $console->writeStatus('Application configured for node \'' . $node . '\'');
-        $this->getConfig()->setNode($node);
+        $this->getEnvironmentConfig()->setNode($node);
     }
 }
