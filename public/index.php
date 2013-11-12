@@ -35,7 +35,7 @@ foreach ($routes as $route => $request) {
     }
     call_user_func_array(array($route, 'via'), $request['via']);
 }
-$app->add($di->get(Validator::class));
+$app->add($validator);
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
