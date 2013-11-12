@@ -9,6 +9,7 @@ class Config extends ZendConfig
     const IP = 'IP';
     const HOSTNAME = 'hostname';
     const DOMAIN = 'channelgrabber.com';
+    const NODE = 'node';
 
     public function getIp()
     {
@@ -29,6 +30,17 @@ class Config extends ZendConfig
     public function setHostname($hostname)
     {
         $this->offsetSet(static::HOSTNAME, $hostname);
+        return $this;
+    }
+
+    public function getNode()
+    {
+        return $this->get(static::NODE);
+    }
+
+    public function setNode($node)
+    {
+        $this->offsetSet(static::NODE, $node);
         return $this;
     }
 }
