@@ -7,6 +7,7 @@ use CG\Skeleton\Console\Startup;
 interface EnvironmentInterface
 {
     public function getName();
+    public function getSuffix();
 
     public function setupIp(Startup $console);
     public function setupHostname(Startup $console);

@@ -9,11 +9,19 @@ use CG\Skeleton\Chef\Hosts;
 
 class Dual extends Environment {
 
+    protected $name = 'Dual';
+    protected $suffix = '.local';
+
     protected $environmentNodes = array('services', 'frontend', 'infrastructure');
 
     public function getName()
     {
-        return 'Dual';
+        return $this->name;
+    }
+
+    public function getSuffix()
+    {
+        return $this->suffix;
     }
 
     public function setupIp(Startup $console)

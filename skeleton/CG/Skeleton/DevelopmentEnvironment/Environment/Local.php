@@ -8,9 +8,17 @@ use CG\Skeleton\Chef\Hosts;
 
 class Local extends Environment {
 
+    protected $name = 'Local';
+    protected $suffix = '.local';
+
     public function getName()
     {
-        return 'Local';
+        return $this->name;
+    }
+
+    public function getSuffix()
+    {
+        return $this->suffix;
     }
 
     public function setupIp(Startup $console)
