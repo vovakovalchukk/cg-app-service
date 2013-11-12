@@ -18,6 +18,6 @@ class Provision implements CommandInterface
 
     protected function runCommands(Arguments $arguments, Config $config, Environment $environment)
     {
-        $environment->vagrantUp();
+        $environment->vagrantProvision();
     }
 }
