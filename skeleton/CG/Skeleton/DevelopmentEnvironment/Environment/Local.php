@@ -63,4 +63,15 @@ class Local extends Environment {
     {
         passthru('vagrant halt ' . $this->getConfig()->getNode());
     }
+
+    public function setupNode(Startup $console)
+    {
+        $node = $this->getConfig()->getNode();
+        while (!$node) {
+            $console->writeErrorStatus('No node set');
+            $node = $console->ask('What node will this application go on');
+        }
+        $console->writeStatus('Application configured for node \'' . $node . '\'');
+        $this->getConfig()->setNode($node);
+    }
 }

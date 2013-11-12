@@ -12,6 +12,8 @@ interface EnvironmentInterface
 
     public function setupIp(Startup $console);
 
+    public function setupNode(Startup $console);
+
     public function vagrantUp(Console $console);
     public function vagrantSsh(Console $console);
     public function vagrantReload(Console $console);

@@ -57,7 +57,7 @@ class StartupCommand implements StartupCommandInterface
         $this->setupProjectBasePath($config);
         $this->setupInfrastructurePath($config);
         $this->setupBranch($config);
-        $this->setupNode($config);
+        $this->setupNode($environment);
         $this->setupAppName($config);
         $this->setupVmPath($config);
     }
@@ -141,15 +141,17 @@ class StartupCommand implements StartupCommandInterface
         $config->setBranch($branch);
     }
 
-    protected function setupNode(Config $config)
+    protected function setupNode(Environment $environment)
     {
-        $node = $config->getNode();
-        while (!$node) {
-            $this->getConsole()->writeErrorStatus('No node set');
-            $node = $this->getConsole()->ask('What node will this application go on');
-        }
-        $this->getConsole()->writeStatus('Application configured for node \'' . $node . '\'');
-        $config->setNode($node);
+//        $node = $config->getNode();
+//        while (!$node) {
+//            $this->getConsole()->writeErrorStatus('No node set');
+//            $node = $this->getConsole()->ask('What node will this application go on');
+//        }
+//        $this->getConsole()->writeStatus('Application configured for node \'' . $node . '\'');
+//        $config->setNode($node);
+
+          $environment->setupNode($this->getConsole());
     }
 
     protected function setupAppName(Config $config)

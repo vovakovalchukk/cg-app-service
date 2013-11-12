@@ -77,4 +77,9 @@ class Dual extends Environment {
         );
         passthru('vagrant halt ' . $nodeChoice);
     }
+
+    public function setupNode(Startup $console)
+    {
+        echo "hi\n";
+    }
 }
