@@ -8,6 +8,7 @@ use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
+use Nocarrier\Hal;
 
 require_once 'application/bootstrap.php';
 require_once 'config/routing.php';
@@ -22,8 +23,11 @@ $app->any('.+', $unusedMethods);
 
 foreach ($routes as $route => $request) {
     if (isset($request["validation"])) {
-        $app->add($di->get(Validator::class, array("rules" => $request["validation"]["rules"],
-            "flatten" => $request["validation"]["flatten"] )));
+        $app->add($di->get(Validator::class, array("filterRules" => $request["validation"]["filterRules"],
+            "dataRules" => $request["validation"]["dataRules"],
+            "flatten" => $request["validation"]["flatten"],
+            "methods" =>  $request['via'],
+            "route" => $route)));
     }
     $route = $app->map(
         $route,
