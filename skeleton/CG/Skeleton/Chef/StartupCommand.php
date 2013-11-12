@@ -33,7 +33,7 @@ class StartupCommand implements StartupCommandInterface
     {
         $roleName = $config->getRole();
         if (!$roleName) {
-            $roleName = $config->getAppName();
+            $roleName = str_replace(" ", "-", $config->getAppName());
             $config->setRole($roleName);
         }
 
