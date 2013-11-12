@@ -42,4 +42,3 @@ $app->add($di->get(Renderer::class));
 
 $di->instanceManager()->addSharedInstance($app, Slim::class);
 $app->run();
-
