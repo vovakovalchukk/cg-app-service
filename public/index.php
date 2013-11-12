@@ -24,7 +24,7 @@ $validator = $di->get(Validator::class);
 foreach ($routes as $route => $request) {
     if (isset($request["validation"])) {
         $validator->attach($request["validation"]["flatten"], $route, $request["validation"]["dataRules"],
-            $request["validation"]["filterRules"]);
+                           $request["validation"]["filterRules"]);
     }
     $route = $app->map(
         $route,
