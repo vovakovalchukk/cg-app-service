@@ -12,6 +12,7 @@ use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
 use DirectoryIterator;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
@@ -191,7 +192,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($cwd);
     }
 
-    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
     {
         $this->validateConfig($moduleConfig);
         $this->configureModule($arguments, $config, $moduleConfig);
@@ -199,7 +200,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
-        $this->updateNode($arguments, $config, $moduleConfig);
+        $this->updateNode($arguments, $config, $moduleConfig, $environment);
         chdir($cwd);
 
         $this->updateComposer($moduleConfig, array(
@@ -207,9 +208,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         ));
     }
 
-    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
     {
-        $nodeFile = Chef::NODES . $config->getNode() . '.json';
+        $nodeFile = Chef::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
         if ($moduleConfig->isEnabled()) {
@@ -241,7 +242,8 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $environment->getEnvironmentConfig()->getNode()
+            . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
         );
     }
 

@@ -46,27 +46,27 @@ class Local extends Environment {
 
     public function vagrantUp(Console $console)
     {
-        passthru('vagrant up ' . $this->getConfig()->getNode());
+        passthru('vagrant up ' . $this->getEnvironmentConfig()->getNode());
     }
 
     public function vagrantSsh(Console $console)
     {
-        passthru('vagrant ssh ' . $this->getConfig()->getNode());
+        passthru('vagrant ssh ' . $this->getEnvironmentConfig()->getNode());
     }
 
     public function vagrantReload(Console $console)
     {
-        passthru('vagrant reload ' . $this->getConfig()->getNode());
+        passthru('vagrant reload ' . $this->getEnvironmentConfig()->getNode());
     }
 
     public function vagrantHalt(Console $console)
     {
-        passthru('vagrant halt ' . $this->getConfig()->getNode());
+        passthru('vagrant halt ' . $this->getEnvironmentConfig()->getNode());
     }
 
     public function setupNode(Startup $console)
     {
-        $node = $this->getConfig()->getNode();
+        $node = $this->getEnvironmentConfig()->getNode();
         while (!$node) {
             $console->writeErrorStatus('No node set');
             $node = $console->ask('What node will this application go on');

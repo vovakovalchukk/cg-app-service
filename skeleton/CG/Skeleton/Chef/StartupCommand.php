@@ -70,9 +70,9 @@ class StartupCommand implements StartupCommandInterface
         );
     }
 
-    protected function saveNode(Config $config)
+    protected function saveNode(Config $config, Environment $environment)
     {
-        $nodeFile = static::NODES . $config->getNode() . '.json';
+        $nodeFile = static::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
         $this->addRoleToNode($node, 'cg')
@@ -86,7 +86,7 @@ class StartupCommand implements StartupCommandInterface
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . '" --only -- ' . $nodeFile
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $environment->getEnvironmentConfig()->getNode() . '" --only -- ' . $nodeFile
         );
     }
 

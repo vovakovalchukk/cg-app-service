@@ -7,6 +7,7 @@ use CG\Skeleton\Arguments;
 use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Vagrant\NodeData;
 use CG\Skeleton\Vagrant\NodeData\Node;
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -48,17 +49,17 @@ class StartupCommand implements StartupCommandInterface
         return $this->nodeData;
     }
 
-    protected function runCommands(Arguments $arguments, SkeletonConfig $config)
+    protected function runCommands(Arguments $arguments, SkeletonConfig $config, Environment $environment)
     {
         $vagrantConfig = $config->get('Vagrant', new Config($this->defaults, true));
-        $this->saveNodeData($config, $vagrantConfig);
+        $this->saveNodeData($config, $vagrantConfig, $environment);
         $config->offsetSet('Vagrant', $vagrantConfig);
     }
 
-    protected function saveNodeData(SkeletonConfig $config, Config $vagrantConfig)
+    protected function saveNodeData(SkeletonConfig $config, Config $vagrantConfig, Environment $environment)
     {
         $nodeData = $this->getNodeData();
-        $node = $nodeData->getNode($config->getNode());
+        $node = $nodeData->getNode($environment->getEnvironmentConfig()->getNode());
 
         $this->setVmRam($nodeData, $node, $config, $vagrantConfig);
         //$this->setVmIp($nodeData, $node, $config, $vagrantConfig);
@@ -69,7 +70,7 @@ class StartupCommand implements StartupCommandInterface
 
         exec(
             'git add ' . $nodeData->getPath() . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node data for ' . $config->getNode() . '" --only -- ' . $nodeData->getPath()
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node data for ' . $environment->getEnvironmentConfig()->getNode() . '" --only -- ' . $nodeData->getPath()
         );
     }
 
