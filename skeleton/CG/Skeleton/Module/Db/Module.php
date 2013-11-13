@@ -213,14 +213,16 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $nodeFile = Chef::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
+        $databaseApplicationKey = 'configure_sites|sites|' . $config->getAppName() . 'database_application|';
         if ($moduleConfig->isEnabled()) {
-            $node->setKey('database|enabled', true);
-            $node->setKey('database|storage_choice', $moduleConfig->getStorageNode());
-            $node->setKey('database|database_choice', $moduleConfig->getDatabaseName());
 
-            $node->removeKey('database|adapters');
+            $node->setKey($databaseApplicationKey . 'enabled', true);
+            $node->setKey($databaseApplicationKey . 'storage_choice', $moduleConfig->getStorageNode());
+            $node->setKey($databaseApplicationKey . 'database_choice', $moduleConfig->getDatabaseName());
+
+            $node->removeKey($databaseApplicationKey . 'adapters');
             foreach ($moduleConfig->getDatabaseAdapters() as $adapter => $user) {
-                $node->setKey('database|adapters|' . $adapter, $user);
+                $node->setKey($databaseApplicationKey . 'adapters|' . $adapter, $user);
             }
 
             $node->setKey(
@@ -228,15 +230,15 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                 'config/autoload/database.local.php'
             );
             $node->setKey('configure_sites|sites|' . $config->getAppName() . '|phinxroot', 'phinx');
-            $node->setKey(
-                'cg|capistrano|' . $config->getAppName() . '|symlinks|phinx/phinx.yml', 'phinx/phinx.yml'
-            );
+            $node->setKey( 'cg|capistrano|' . $config->getAppName() . '|symlinks|phinx/phinx.yml', 'phinx/phinx.yml');
         } else {
             $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/database.local.php');
             $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|phinxroot');
             $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|phinx/phinx.yml');
-            $node->removeKey('database');
+            $node->removeKey($databaseApplicationKey);
         }
+
+        
 
         $node->save();
 
