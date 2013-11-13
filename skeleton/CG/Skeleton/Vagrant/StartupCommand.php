@@ -151,9 +151,7 @@ class StartupCommand implements StartupCommandInterface
 
     protected function saveEnvironment(Environment $environment)
     {
-        $environmentPath = static::ENVIRONMENT_PATH;
-        $environmentFile = new EnvironmentFile($environmentPath, strtolower($environment->getName()));
-
+        $environmentFile = new EnvironmentFile(static::ENVIRONMENT_PATH, strtolower($environment->getName()));
         $environmentFile->save();
     }
 }
