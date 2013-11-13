@@ -83,7 +83,7 @@ class Local extends Environment {
         return array('cg', 'database_storage', $this->getConfig()->getRole());
     }
 
-    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node)
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node &$node)
     {
         $databaseStorageKey = 'database_application|';
         if ($moduleConfig->isEnabled()) {

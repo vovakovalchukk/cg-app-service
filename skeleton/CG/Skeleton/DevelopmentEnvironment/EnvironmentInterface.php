@@ -24,5 +24,5 @@ interface EnvironmentInterface
 
     public function getInitialNodeRunList();
 
-    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node);
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node &$node);
 }

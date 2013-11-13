@@ -239,7 +239,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         }
 
         $environment->setDatabaseStorageKey($config, $moduleConfig, $node);
-
         $node->save();
 
         exec(

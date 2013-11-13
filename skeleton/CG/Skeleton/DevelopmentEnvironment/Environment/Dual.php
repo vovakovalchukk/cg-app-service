@@ -127,7 +127,7 @@ class Dual extends Environment {
         chdir($cwd);
     }
 
-    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node)
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node &$node)
     {
         $infrastructureNodeFile = Chef::NODES . 'infrastructure.json';
         $infrastructureNode = new Node($infrastructureNodeFile);
@@ -139,6 +139,8 @@ class Dual extends Environment {
         } else {
             $infrastructureNode->removeKey($databaseStorageKey);
         }
+
+        $infrastructureNode->save();
     }
 
 }
