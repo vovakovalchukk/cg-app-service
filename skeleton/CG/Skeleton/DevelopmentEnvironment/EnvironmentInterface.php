@@ -1,9 +1,12 @@
 <?php
 namespace CG\Skeleton\DevelopmentEnvironment;
 
-use CG\Skeleton\Config as SkeletonConfig;
+
 use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Console;
+use CG\Skeleton\Module\BaseConfig;
+use CG\Skeleton\Chef\Node;
+use CG\Skeleton\Config as SkeletonConfig;
 
 interface EnvironmentInterface
 {
@@ -20,4 +23,6 @@ interface EnvironmentInterface
     public function vagrantHalt(Console $console);
 
     public function getInitialNodeRunList();
+
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node);
 }

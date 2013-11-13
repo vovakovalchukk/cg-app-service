@@ -6,6 +6,9 @@ use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Console;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Role;
+use CG\Skeleton\Module\BaseConfig;
+use CG\Skeleton\Chef\Node;
+use CG\Skeleton\Config as SkeletonConfig;
 
 class Dual extends Environment {
 
@@ -122,6 +125,20 @@ class Dual extends Environment {
         $role->save();
 
         chdir($cwd);
+    }
+
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node)
+    {
+        $infrastructureNodeFile = Chef::NODES . 'infrastructure.json';
+        $infrastructureNode = new Node($infrastructureNodeFile);
+
+        $databaseStorageKey = 'database_application|';
+        if ($moduleConfig->isEnabled()) {
+            $infrastructureNode->setKey($databaseStorageKey . 'enabled', true);
+            $infrastructureNode->setKey($databaseStorageKey . 'storage_choice', $moduleConfig->getStorageNode());
+        } else {
+            $infrastructureNode->removeKey($databaseStorageKey);
+        }
     }
 
 }

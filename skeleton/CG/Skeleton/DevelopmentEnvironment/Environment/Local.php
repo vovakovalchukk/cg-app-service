@@ -4,6 +4,9 @@ namespace CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\Console\Startup;
 use CG\Skeleton\Console;
+use CG\Skeleton\Module\BaseConfig;
+use CG\Skeleton\Chef\Node;
+use CG\Skeleton\Config as SkeletonConfig;
 
 class Local extends Environment {
 
@@ -78,5 +81,16 @@ class Local extends Environment {
     public function getInitialNodeRunList()
     {
         return array('cg', 'database_storage', $this->getConfig()->getRole());
+    }
+
+    public function setDatabaseStorageKey(SkeletonConfig $config, BaseConfig $moduleConfig, Node $node)
+    {
+        $databaseStorageKey = 'database_application|';
+        if ($moduleConfig->isEnabled()) {
+            $node->setKey($databaseStorageKey . 'enabled', true);
+            $node->setKey($databaseStorageKey . 'storage_choice', $moduleConfig->getStorageNode());
+        } else {
+            $node->removeKey($databaseStorageKey);
+        }
     }
 }
