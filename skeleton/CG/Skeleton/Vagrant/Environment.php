@@ -15,13 +15,11 @@ class Environment
 
     public function setEnvironment($environmentName)
     {
-        var_dump($environmentName);
         $this->data['current_environment'] = $environmentName;
     }
 
     public function save()
     {
-        var_dump($this->data);
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
     }
 }
