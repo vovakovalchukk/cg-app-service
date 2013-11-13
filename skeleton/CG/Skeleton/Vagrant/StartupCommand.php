@@ -8,6 +8,7 @@ use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Vagrant\NodeData;
 use CG\Skeleton\Vagrant\NodeData\Node;
 use CG\Skeleton\DevelopmentEnvironment\Environment;
+use CG\Skeleton\Vagrant\Environment as EnvironmentFile;
 
 class StartupCommand implements StartupCommandInterface
 {
@@ -16,6 +17,7 @@ class StartupCommand implements StartupCommandInterface
 
     const DEFAULT_RAM = '384';
     const DEFAULT_BOX = 'cg-precise64';
+    const ENVIRONMENT_PATH = 'data/environment.json';
 
     protected $console;
     protected $nodeData;
@@ -54,6 +56,7 @@ class StartupCommand implements StartupCommandInterface
         $vagrantConfig = $config->get('Vagrant', new Config($this->defaults, true));
         $this->saveNodeData($config, $vagrantConfig, $environment);
         $config->offsetSet('Vagrant', $vagrantConfig);
+        $this->saveEnvironment($environment);
     }
 
     protected function saveNodeData(SkeletonConfig $config, Config $vagrantConfig, Environment $environment)
@@ -144,5 +147,13 @@ class StartupCommand implements StartupCommandInterface
                 'role' => $config->getRole()
             )
         );
+    }
+
+    protected function saveEnvironment(Environment $environment)
+    {
+        $environmentPath = static::ENVIRONMENT_PATH;
+        $environmentFile = new EnvironmentFile($environmentPath, strtolower($environment->getName()));
+
+        $environmentFile->save();
     }
 }
