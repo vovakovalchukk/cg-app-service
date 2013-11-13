@@ -9,7 +9,8 @@ class Environment
     public function __construct($path, $environmentName)
     {
         $this->path = $path;
-        $this->data = array("current_environment" => $environmentName);
+        $this->data = array();
+        $this->setEnvironment($environmentName);
         $this->load();
     }
 
@@ -34,6 +35,7 @@ class Environment
 
     public function setEnvironment($environmentName)
     {
+        var_dump($environmentName);
         $this->data['current_environment'] = $environmentName;
     }
 
