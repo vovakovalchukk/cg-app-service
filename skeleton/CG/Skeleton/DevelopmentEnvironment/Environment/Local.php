@@ -52,6 +52,11 @@ class Local extends Environment {
         passthru('vagrant up ' . $this->getEnvironmentConfig()->getNode());
     }
 
+    public function vagrantProvision(Console $console)
+    {
+        passthru('vagrant provision ' . $this->getEnvironmentConfig()->getNode());
+    }
+
     public function vagrantSsh(Console $console)
     {
         passthru('vagrant ssh ' . $this->getEnvironmentConfig()->getNode());

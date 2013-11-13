@@ -58,6 +58,16 @@ class Dual extends Environment {
         }
     }
 
+    public function vagrantProvision(Console $console)
+    {
+        $nodeChoice = $console->askWithOptions(
+            'Which node would you like to provision',
+            $this->environmentNodes,
+            $this->environmentNodes[1]
+        );
+        passthru('vagrant provision ' . $nodeChoice);
+    }
+
     public function vagrantSsh(Console $console)
     {
         $nodeChoice = $console->askWithOptions(
