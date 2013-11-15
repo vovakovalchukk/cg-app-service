@@ -453,4 +453,51 @@ class OrderPage extends RootPage
 
         return $expectedResult;
     }
+
+    public static function getSearchTermFilterFields()
+    {
+        return ["externalId",
+                "shippingMethod",
+                "billingAddress.addressFullName",
+                "billingAddress.address1",
+                "billingAddress.addressCity",
+                "billingAddress.addressCounty",
+                "billingAddress.addressCountry",
+                "billingAddress.addressPostcode",
+                "billingAddress.emailAddress",
+                "shippingAddress.addressFullName",
+                "shippingAddress.address1",
+                "shippingAddress.addressCity",
+                "shippingAddress.addressCounty",
+                "shippingAddress.addressCountry",
+                "shippingAddress.addressPostcode",
+                "shippingAddress.emailAddress",
+                "buyerMessage"];
+    }
+
+    public static function getSearchTermFilterExpectedFieldValue($searchTerm)
+    {
+        $testOrderCollection = static::getTestCollection();
+        $fieldPaths = static::getSearchTermFilterFields();
+        $expectedResult = [];
+        foreach ($testOrderCollection as $testOrder) {
+            $stringToSearchIn = '';
+            foreach ($fieldPaths as $fieldPath) {
+                $filterFields = explode('.', $fieldPath);
+
+                $tempEntity = $testOrder;
+                foreach($filterFields as $filterField){
+                    $tempEntity = $tempEntity[$filterField];
+                }
+
+                $stringToSearchIn .= "|" . $tempEntity;
+            }
+
+            if (strpos($stringToSearchIn, (String) $searchTerm) !== false) {
+                $expectedResult[] = $testOrder;
+            }
+        }
+
+        return $expectedResult;
+    }
 }
