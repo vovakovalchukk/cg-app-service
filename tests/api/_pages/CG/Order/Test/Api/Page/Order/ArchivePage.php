@@ -10,11 +10,13 @@ class ArchivePage extends OrderEntityPage
     const URL = "/archive";
     const EMBEDDED_RESOURCE = "archive";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
                 static::GET => static::GET,
                 static::POST => static::POST,
@@ -23,8 +25,8 @@ class ArchivePage extends OrderEntityPage
         ];
     }
 
-    public static function getTestCollection(){
-
+    public static function getTestCollection()
+    {
         return [
                 [
                  "timestamp" => "2013-10-10 01:00:00"
@@ -44,17 +46,20 @@ class ArchivePage extends OrderEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["timestamp"];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "timestamp" => []
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["timestamp"];
     }
 }

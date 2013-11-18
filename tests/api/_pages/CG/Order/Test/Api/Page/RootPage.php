@@ -12,18 +12,21 @@ class RootPage extends RestPage implements EndpointsPageInterface
     const SECONDARY_ID     = 2;
     const NON_EXISTENT_ID  = 0;
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return "/";
     }
 
-    public static function getEndpoints(){
+    public static function getEndpoints()
+    {
         return [
                 "self"      => array("href" => static::getUrl()),
                 "order"     => array("href" => OrderPage::getUrl())
         ];
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST,
                 static::PUT => static::PUT,

@@ -8,7 +8,8 @@ class RootCest
 {
     use EndpointsTrait;
 
-    protected function getPageClass(){
+    protected function getPageClass()
+    {
         return RootPage::class;
     }
 }

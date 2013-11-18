@@ -10,11 +10,13 @@ class UserChangesPage extends OrderEntityPage
     const URL = "/userChanges";
     const EMBEDDED_RESOURCE = "userChanges";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
                 static::GET => static::GET,
                 static::POST => static::POST,
@@ -23,8 +25,8 @@ class UserChangesPage extends OrderEntityPage
         ];
     }
 
-    public static function getTestCollection(){
-
+    public static function getTestCollection()
+    {
         return [
                 [
                     "shippingAddress" => ["addressCompanyName" => "Wilki Ltd"]
@@ -54,15 +56,18 @@ class UserChangesPage extends OrderEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return [];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return [];
     }
 }

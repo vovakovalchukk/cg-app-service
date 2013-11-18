@@ -10,19 +10,21 @@ class NotePage extends OrderEntityPage
     const URL = "/note";
     const EMBEDDED_RESOURCE = "note";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
                 static::PUT => static::PUT,
                 static::DELETE => static::DELETE
         ];
     }
 
-    public static function getTestCollection(){
-
+    public static function getTestCollection()
+    {
         return [
                 ["id" => 1,
                  "orderId" => "1411-10",
@@ -57,11 +59,13 @@ class NotePage extends OrderEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderId", "userId", "note", "timestamp"];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "orderId" => [],
                 "userId" => "ABC",
@@ -70,7 +74,8 @@ class NotePage extends OrderEntityPage
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderId", "userId", "note", "timestamp"];
     }
 }

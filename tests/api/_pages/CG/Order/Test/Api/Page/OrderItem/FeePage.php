@@ -10,11 +10,13 @@ class FeePage extends OrderItemEntityPage
     const URL = "/fee";
     const EMBEDDED_RESOURCE = "fee";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
             static::GET => static::GET,
             static::POST => static::POST,
@@ -23,7 +25,8 @@ class FeePage extends OrderItemEntityPage
         ];
     }
 
-    public static function getTestCollection(){
+    public static function getTestCollection()
+    {
 
         return [
                 ["orderItemId" => "1411-11",
@@ -69,11 +72,13 @@ class FeePage extends OrderItemEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderItemId", "fee" => ["name", "amount"]];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "orderItemId" => [],
                 "fee" => [
@@ -84,7 +89,8 @@ class FeePage extends OrderItemEntityPage
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderItemId", "fee" => ["name", "amount"]];
     }
 }

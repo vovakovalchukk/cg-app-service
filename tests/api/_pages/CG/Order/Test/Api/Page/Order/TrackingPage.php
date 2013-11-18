@@ -10,11 +10,13 @@ class TrackingPage extends OrderEntityPage
     const URL = "/tracking";
     const EMBEDDED_RESOURCE = "tracking";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
                 static::GET => static::GET,
                 static::POST => static::POST,
@@ -23,8 +25,8 @@ class TrackingPage extends OrderEntityPage
         ];
     }
 
-    public static function getTestCollection(){
-
+    public static function getTestCollection()
+    {
         return [
                 ["orderId" => "1411-10",
                  "userId" => 1,
@@ -59,11 +61,13 @@ class TrackingPage extends OrderEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderId", "userId", "number", "carrier", "timestamp"];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "orderId" => [],
                 "userId" => "ABC",
@@ -73,7 +77,8 @@ class TrackingPage extends OrderEntityPage
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderId", "userId", "number", "carrier", "timestamp"];
     }
 }

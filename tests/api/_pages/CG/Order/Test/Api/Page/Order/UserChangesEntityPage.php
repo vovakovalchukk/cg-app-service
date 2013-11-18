@@ -9,11 +9,13 @@ class UserChangesEntityPage extends UserChangesPage implements EntityPageInterfa
 {
     use EntityPageTrait;
 
-    public static function getCollectionPage(){
+    public static function getCollectionPage()
+    {
         return UserChangesPage::class;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST,
                 static::PUT => static::PUT

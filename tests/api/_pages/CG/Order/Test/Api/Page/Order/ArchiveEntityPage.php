@@ -9,11 +9,13 @@ class ArchiveEntityPage extends ArchivePage implements EntityPageInterface
 {
     use EntityPageTrait;
 
-    public static function getCollectionPage(){
+    public static function getCollectionPage()
+    {
         return ArchivePage::class;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST
         ];

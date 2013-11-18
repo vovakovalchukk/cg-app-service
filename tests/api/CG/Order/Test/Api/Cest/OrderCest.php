@@ -21,7 +21,8 @@ class OrderCest
      * @group get
      * @group custom
      **/
-    public function checkCountryFilter(ApiGuy $I){
+    public function checkCountryFilter(ApiGuy $I)
+    {
         $page = static::getPageClass();
 
         $filters = $page::getCountryFilter();
@@ -41,7 +42,8 @@ class OrderCest
      * @group get
      * @group custom
      **/
-    public function checkCountryExcludeFilter(ApiGuy $I){
+    public function checkCountryExcludeFilter(ApiGuy $I)
+    {
         $page = static::getPageClass();
 
         $filters = $page::getCountryExcludeFilter();
@@ -61,7 +63,8 @@ class OrderCest
      * @group get
      * @group custom
      **/
-    public function checkMultiLineFilter(ApiGuy $I){
+    public function checkMultiLineFilter(ApiGuy $I)
+    {
         $page = static::getPageClass();
 
         $filters = $page::getMultiLineFilter();
@@ -87,7 +90,8 @@ class OrderCest
      * @group get
      * @group custom
      **/
-    public function checkMultiSameItemFilter(ApiGuy $I){
+    public function checkMultiSameItemFilter(ApiGuy $I)
+    {
         $page = static::getPageClass();
 
         $filters = $page::getMultiSameItemFilter();

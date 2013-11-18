@@ -9,11 +9,13 @@ class FeeEntityPage extends FeePage implements EntityPageInterface
 {
     use EntityPageTrait;
 
-    public static function getCollectionPage(){
+    public static function getCollectionPage()
+    {
         return FeePage::class;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST,
                 static::DELETE => static::DELETE
