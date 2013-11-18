@@ -2,6 +2,7 @@
 namespace CG\Order\Test\Api\Cest;
 
 use CG\Order\Test\Api\Page\OrderPage;
+use CG\Order\Test\Api\Page\OrderItemPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
@@ -107,42 +108,4 @@ class OrderCest
         }
     }
 
-    /**
-     * @group filter
-     * @group get
-     * @group custom
-     **/
-    public function checkSearchTermFilters(ApiGuy $I)
-    {
-        $page = static::getPageClass();
-
-        $filters = $page::getSearchTermFilterFields();
-        $testCollection = $page::getTestCollection();
-        $testEntity = $testCollection[0];
-
-        foreach ($filters as $filter) {
-            $filterField = explode('.', $filter);
-            $searchTerm = $this->findSearchTermValue($filterField, $testEntity);
-            $expected = $page::getSearchTermFilterExpectedFieldValue($searchTerm);
-            $this->checkSearchTermFilter($I, $searchTerm, $expected);
-        }
-    }
-
-    protected function findSearchTermValue($filterField, $testEntity)
-    {
-        foreach($filterField as $field){
-            $testEntity = $testEntity[$field];
-        }
-        return $testEntity;
-    }
-
-    protected function checkSearchTermFilter(ApiGuy $I, $searchTerm, $expected)
-    {
-        $page = static::getPageClass();
-        $I->wantTo('see the Order Collection returns correct results when filtered by searchTerm');
-        $I->prepareRequest();
-        $I->sendGET($this->appendFilters($page::getUrl(), ["searchTerm" => $searchTerm]));
-        $I->seeResponseCodeIs(HttpStatus::OK);
-        $I->seeJsonFieldContainsArrayValues("_embedded.".$page::EMBEDDED_RESOURCE, $expected);
-    }
 }

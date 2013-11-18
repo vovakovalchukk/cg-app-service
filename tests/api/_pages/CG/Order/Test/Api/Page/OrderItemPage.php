@@ -127,4 +127,9 @@ class OrderItemPage extends RootPage
                 "itemVariationAttribute" => []
         ];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
+    }
 }

@@ -472,32 +472,13 @@ class OrderPage extends RootPage
                 "shippingAddress.addressCountry",
                 "shippingAddress.addressPostcode",
                 "shippingAddress.emailAddress",
-                "buyerMessage"];
+                "buyerMessage",
+                "orderItem[].itemSku",
+                "orderItem[].itemName"];
     }
 
-    public static function getSearchTermFilterExpectedFieldValue($searchTerm)
+    public static function getChildPageClass()
     {
-        $testOrderCollection = static::getTestCollection();
-        $fieldPaths = static::getSearchTermFilterFields();
-        $expectedResult = [];
-        foreach ($testOrderCollection as $testOrder) {
-            $stringToSearchIn = '';
-            foreach ($fieldPaths as $fieldPath) {
-                $filterFields = explode('.', $fieldPath);
-
-                $tempEntity = $testOrder;
-                foreach($filterFields as $filterField){
-                    $tempEntity = $tempEntity[$filterField];
-                }
-
-                $stringToSearchIn .= "|" . $tempEntity;
-            }
-
-            if (strpos($stringToSearchIn, (String) $searchTerm) !== false) {
-                $expectedResult[] = $testOrder;
-            }
-        }
-
-        return $expectedResult;
+        return OrderItemPage::class;
     }
 }
