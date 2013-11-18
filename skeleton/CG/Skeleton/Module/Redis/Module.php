@@ -80,7 +80,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             return;
         }
 
-        $configuredAdapters = $moduleConfig->getRedisAdapters();
+        $configuredAdapters = array();
         while (true) {
             if (!$reconfigure && !empty($configuredAdapters)) {
                 break;
