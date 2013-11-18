@@ -47,13 +47,13 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
         $node = new Node($nodeFile);
 
         if ($moduleConfig->isEnabled()) {
-            $node->setKey('redis|enabled', true);
+            $node->setKey('configure_sites|sites|' . $config->getAppName() . '|redis_client|enabled', true);
             $node->setKey(
                 'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php',
                 'config/autoload/di.redis.global.php'
             );
         } else {
-            $node->removeKey('redis');
+            $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|redis_client');
             $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php');
         }
 
