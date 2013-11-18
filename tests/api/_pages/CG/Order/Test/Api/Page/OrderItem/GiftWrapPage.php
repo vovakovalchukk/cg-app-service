@@ -10,11 +10,13 @@ class GiftWrapPage extends OrderItemEntityPage
     const URL = "/giftWrap";
     const EMBEDDED_RESOURCE = "giftWrap";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
             static::GET => static::GET,
             static::POST => static::POST,
@@ -23,7 +25,8 @@ class GiftWrapPage extends OrderItemEntityPage
         ];
     }
 
-    public static function getTestCollection(){
+    public static function getTestCollection()
+    {
 
         return [
                 ["orderItemId" => "1411-11",
@@ -59,11 +62,13 @@ class GiftWrapPage extends OrderItemEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "orderItemId" => [],
                 "giftWrapType" => [],
@@ -73,7 +78,8 @@ class GiftWrapPage extends OrderItemEntityPage
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
     }
 }

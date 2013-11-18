@@ -14,7 +14,8 @@ class AlertPage extends OrderEntityPage
         return self::URL;
     }
 
-    static public function notAllowedMethods(){
+    static public function notAllowedMethods()
+    {
         return [
                 static::GET => static::GET,
                 static::POST => static::POST,
@@ -23,8 +24,8 @@ class AlertPage extends OrderEntityPage
         ];
     }
 
-    public static function getTestCollection(){
-
+    public static function getTestCollection()
+    {
         return [
                 ["orderId" => "1411-10",
                  "userId" => 1,
@@ -54,11 +55,13 @@ class AlertPage extends OrderEntityPage
                ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderId", "userId", "alert", "timestamp"];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return [
                 "orderId" => [],
                 "userId" => "ABC",
@@ -67,7 +70,8 @@ class AlertPage extends OrderEntityPage
                ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderId", "userId", "alert", "timestamp"];
     }
 }

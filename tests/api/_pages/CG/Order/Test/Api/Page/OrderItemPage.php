@@ -89,7 +89,8 @@ class OrderItemPage extends RootPage
         ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["orderId",
                 "accountId",
                 "itemName",
@@ -102,7 +103,8 @@ class OrderItemPage extends RootPage
         ];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return ["orderId" => [],
                 "accountId" => "ABC",
                 "itemName" => [],
@@ -115,7 +117,8 @@ class OrderItemPage extends RootPage
         ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["orderId",
                 "accountId",
                 "itemName",

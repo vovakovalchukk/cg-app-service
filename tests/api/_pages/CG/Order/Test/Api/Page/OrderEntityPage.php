@@ -9,11 +9,13 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
 {
     use EntityPageTrait;
 
-    public static function getCollectionPage(){
+    public static function getCollectionPage()
+    {
         return OrderPage::class;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST
         ];

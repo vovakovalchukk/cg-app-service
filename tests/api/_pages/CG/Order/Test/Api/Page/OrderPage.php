@@ -11,11 +11,13 @@ class OrderPage extends RootPage
     const URL = "/order";
     const EMBEDDED_RESOURCE = "order";
 
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return self::URL;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST    => static::POST,
                 static::PUT    => static::PUT,
@@ -244,7 +246,8 @@ class OrderPage extends RootPage
         ];
     }
 
-    public static function getRequiredEntityFields(){
+    public static function getRequiredEntityFields()
+    {
         return ["accountId",
                 "channel",
                 "organisationUnitId",
@@ -272,7 +275,8 @@ class OrderPage extends RootPage
         ];
     }
 
-    public static function getInvalidEntityData(){
+    public static function getInvalidEntityData()
+    {
         return ["accountId" => "ABC",
                 "channel" => [],
                 "organisationUnitId" => "ABC",
@@ -300,7 +304,8 @@ class OrderPage extends RootPage
         ];
     }
 
-    public static function getInvalidEntityFields(){
+    public static function getInvalidEntityFields()
+    {
         return ["accountId",
                 "channel",
                 "organisationUnitId",

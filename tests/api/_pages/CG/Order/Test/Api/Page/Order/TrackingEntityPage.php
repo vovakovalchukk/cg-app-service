@@ -9,11 +9,13 @@ class TrackingEntityPage extends TrackingPage implements EntityPageInterface
 {
     use EntityPageTrait;
 
-    public static function getCollectionPage(){
+    public static function getCollectionPage()
+    {
         return TrackingPage::class;
     }
 
-    public static function notAllowedMethods(){
+    public static function notAllowedMethods()
+    {
         return [
                 static::POST => static::POST
         ];
