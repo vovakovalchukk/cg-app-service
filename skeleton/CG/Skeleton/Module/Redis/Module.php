@@ -2,8 +2,8 @@
 namespace CG\Skeleton\Module\Redis;
 
 use CG\Skeleton\Module\AbstractModule;
+use CG\Skeleton\Module\ConfigureInterface;
 use CG\Skeleton\Module\EnableInterface;
-use CG\Skeleton\Module\ApplyConfigurationInterface;
 use CG\Skeleton\Module\DisableInterface;
 use CG\Skeleton\Console;
 use CG\Skeleton\Arguments;
@@ -12,7 +12,7 @@ use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
 
-class Module extends AbstractModule implements EnableInterface, ApplyConfigurationInterface, DisableInterface
+class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
     use \CG\Skeleton\ComposerTrait;
     use \CG\Skeleton\GitTicketIdTrait;
@@ -39,6 +39,12 @@ class Module extends AbstractModule implements EnableInterface, ApplyConfigurati
             'predis/predis:~0.8.3',
             'channelgrabber/predis:~1.0.1'
         ));
+    }
+
+    public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    {
+        $this->validateConfig($moduleConfig);
+        $this->configureModule($arguments, $config, $moduleConfig, true);
     }
 
     protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
