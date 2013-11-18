@@ -109,8 +109,17 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $nodeFile = Chef::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
 
+        $configKey = 'configure_sites|sites|' . $config->getAppName() . '|redis_client|';
+
         if ($moduleConfig->isEnabled()) {
-            $node->setKey('configure_sites|sites|' . $config->getAppName() . '|redis_client|enabled', true);
+            $node->setKey($configKey . 'enabled', true);
+            $adapters = array();
+            foreach ($moduleConfig->getRedisAdapters() as $adapter => $enabled) {
+                if ($enabled) {
+                    $adapters[] = $adapter;
+                }
+            }
+            $node->setKey($configKey . 'adapters', $adapters);
             $node->setKey(
                 'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php',
                 'config/autoload/di.redis.global.php'
