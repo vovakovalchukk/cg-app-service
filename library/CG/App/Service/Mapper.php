@@ -1,131 +1,69 @@
 <?php
-namespace Application\Service;
 
+namespace CG\App\Service;
+
+use CG\App\Service\Entity as ServiceEntity;
 use CG\Stdlib\Mapper\FromArrayInterface;
-use Application\Urls\Service as ServiceUrls;
-use Application\Mapper\GetHalModelTrait;
+use Nocarrier\Hal as NocarrierHal;
+use CG\Slim\Mapper\CollectionToHalTrait;
+use CG\Slim\Renderer\ResponseType\Hal;
 use Zend\Di\Di;
-use Application\Service\Event\Mapper as EventMapper;
-use Application\Controller\ServiceEntityController;
-use Application\Controller\ServiceEventEntityController;
-use SplObjectStorage;
-use Nocarrier\Hal;
-use Application\Validator\ArrayData as ArrayValidator;
 
 class Mapper implements FromArrayInterface
 {
-    use GetHalModelTrait;
+    use CollectionToHalTrait;
 
     protected $di;
-    protected $arrayValidator;
     protected $eventMapper;
 
-    public function __construct(Di $di, ArrayValidator $arrayValidator, EventMapper $eventMapper)
+    const FIRST_PAGE = 1;
+
+    public function __construct(Di $di)
     {
         $this->setDi($di);
-        $this->setEventMapper($eventMapper);
+    }
+
+    public function fromHal(NocarrierHal $hal)
+    {
+        $service = $hal->getData();
+        return $this->fromArray($service);
+    }
+
+    public function fromArray(array $service)
+    {
+        return $this->getDi()->get(ServiceEntity::class, $service);
+    }
+
+    public function toHal($entity)
+    {
+        $hal =  $this->getDi()->get(
+            Hal::class, array(
+                'uri' => '/service/' . $entity->getId(),
+                'data' => $entity->toArray()
+            )
+        );
+        $hal->addLink("up", '/service');
+        return $hal;
+    }
+
+    public function getEmbeddedResource(ServiceEntity $service)
+    {
+        return "service";
+    }
+
+    public function getFirstPage()
+    {
+        return static::FIRST_PAGE;
     }
 
     public function setDi(Di $di)
     {
         $this->di = $di;
+        return $this;
     }
 
     public function getDi()
     {
         return $this->di;
-    }
-
-    public function setArrayValidator(ArrayValidator $arrayValidator)
-    {
-        $this->arrayValidator = $arrayValidator;
-    }
-
-    public function getArrayValidator()
-    {
-        return $this->arrayValidator;
-    }
-
-    public function setEventMapper(EventMapper $eventMapper)
-    {
-        $this->eventMapper = $eventMapper;
-    }
-
-    public function getEventMapper()
-    {
-        return $this->eventMapper;
-    }
-
-    public function toHalModel(Entity $entity, ServiceUrls $urls, $addLinks = true)
-    {
-        $model = $this->getHalModel($urls->getServiceUrl($entity->getId()));
-        $model->setVariables(array(
-            'id' => $entity->getId(),
-            'type' => $entity->getType(),
-            'endpoint' => $entity->getEndpoint()
-        ));
-
-        if ($addLinks) {
-            $model->addLink(
-                $this->getHalModel($urls->getServiceListUrl()),
-                'all'
-            );
-        }
-
-        $model->addLink(
-            $this->getHalModel($urls->getServiceEventList($entity->getId())),
-            'subscribedEvents'
-        );
-
-        foreach ($entity->getSubscribedEvents() as $event) {
-            $model->addResource(
-                $this->getEventMapper()->toHalModel($event, $urls, false),
-                'subscribedEvents'
-            );
-        }
-
-        return $model;
-    }
-
-    public function collectionToHalModel(SplObjectStorage $collection, ServiceUrls $urls)
-    {
-        $model = $this->getHalModel(
-            $urls->getServiceListUrl()
-        );
-
-        foreach ($collection as $entity) {
-            $model->addResource(
-                $this->toHalModel($entity, $urls, false),
-                'service'
-            );
-        }
-
-        return $model;
-    }
-
-    public function toArray(Entity $entity)
-    {
-        return array(
-            'id' => $entity->getId(),
-            'type' => $entity->getType(),
-            'endpoint' => $entity->getEndpoint()
-        );
-    }
-
-    public function fromArray(array $entityData)
-    {
-        $this->getArrayValidator()->validate($entityData);
-        return $this->getDi()->get('Application\Service\Entity', $entityData);
-    }
-
-    public function fromHal(Hal $entityHal)
-    {
-        return $this->fromArray($entityHal->getData());
-    }
-
-    public function eventHalFromHal(Hal $entityHal)
-    {
-        $resources = $entityHal->getResources();
-        return isset($resources['subscribedEvents']) ? $resources['subscribedEvents'] : array();
     }
 }

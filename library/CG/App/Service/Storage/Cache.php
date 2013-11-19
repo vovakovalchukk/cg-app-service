@@ -1,11 +1,12 @@
 <?php
-namespace Application\Service\Storage;
+namespace CG\App\Service\Storage;
 
+use CG\App\Service\Entity;
 use CG\Cache\StorageTrait;
 use CG\Cache\Storage\CollectionTrait as StorageCollectionTrait;
 use CG\Cache\Strategy\EntityInterface;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategyInterface;
-use Application\Service\Storage;
+use CG\App\Service\Storage;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 
 class Cache implements Storage, SaveCollectionInterface
@@ -48,8 +49,7 @@ class Cache implements Storage, SaveCollectionInterface
     
     protected function getEntityClass()
     {
-        // PHP 5.5 would allow us to use Entity::class if we had Entity in a use statement
-        return 'Application\\Service\\Entity';
+        return Entity::class;
     }
     
     protected function getDefaultTtl()

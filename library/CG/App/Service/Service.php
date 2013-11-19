@@ -1,14 +1,12 @@
 <?php
-namespace Application\Service;
+namespace CG\App\Service;
 
-use Application\Urls\Service as ServiceUrls;
-use Application\Controller\ServiceEntityController;
-use Application\Controller\ServiceEventEntityController;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use Application\Service\Event\Service as EventService;
-use SplObjectStorage;
 use Nocarrier\Hal;
-use UnexpectedValueException;
+use CG\App\Service\Repository;
+use CG\App\Service\Mapper;
+use CG\App\Service\Entity;
+use CG\App\Service\Event\Service as EventService;
 
 class Service
 {
@@ -18,49 +16,18 @@ class Service
 
     public function __construct(Repository $repository, Mapper $mapper, EventService $eventService)
     {
-        $this->setRepository($repository);
-        $this->setMapper($mapper);
+        $this->setRepository($repository)
+             ->setMapper($mapper)
+             ->setEventService($eventService);
     }
 
-    public function setRepository(Repository$repository)
+    public function fetchAsHal($id)
     {
-        $this->repository = $repository;
+        $entity = $this->fetch($id);
+        return $this->getMapper()->toHal($entity);
     }
 
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
-    public function setMapper(Mapper $mapper)
-    {
-        $this->mapper = $mapper;
-    }
-
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
-    public function setEventService($eventService)
-    {
-        $this->eventService = $eventService;
-    }
-
-    public function getEventService()
-    {
-        return $this->eventService;
-    }
-
-    public function toHalModel(ServiceUrls $urls, Entity $entity)
-    {
-        return $this->getMapper()->toHalModel(
-            $entity,
-            $urls
-        );
-    }
-
-    public function fetch($id)
+    protected function fetch($id)
     {
         $entity = $this->getRepository()->fetch($id);
         try {
@@ -73,15 +40,13 @@ class Service
         return $entity;
     }
 
-    public function fetchAsHalModel($id, ServiceUrls $urls)
+    public function fetchCollectionAsHal()
     {
-        return $this->getMapper()->toHalModel(
-            $this->fetch($id),
-            $urls
-        );
+        $collection = $this->fetchAll();
+        return $this->getMapper()->collectionToHal($collection, "/service");
     }
 
-    public function fetchAll()
+    protected function fetchAll()
     {
         $collection = $this->getRepository()->fetchAll();
 
@@ -104,51 +69,57 @@ class Service
         return $collection;
     }
 
-    public function fetchAllAsHalModel(ServiceUrls $urls)
+    public function saveHal(Hal $hal)
     {
-        try {
-            $collection = $this->fetchAll();
-        } catch (NotFound $exception) {
-            $collection = new SplObjectStorage();
-        }
-
-        return $this->getMapper()->collectionToHalModel($collection, $urls);
+        $entity = $this->getMapper()->fromHal($hal);
+        $this->save($entity);
+        return $entity;
     }
 
-    public function save(Entity $entity)
+    protected function save(Entity $entity)
     {
         $this->getRepository()->save($entity);
     }
 
-    public function insertFromHal(Hal $entityHal)
+    public function remove($id)
     {
-        $entity = $this->getMapper()->fromHal($entityHal);
-        if ($entity->getId() !== null) {
-            throw new UnexpectedValueException('New Entities should not have a id');
-        }
-
-        $this->save($entity);
-        return $entity;
-    }
-
-    public function updateFromHal($id, Hal $entityHal)
-    {
-        $this->fetch($id);
-
-        $entity = $this->getMapper()->fromHal($entityHal);
-        if ($entity->getId() != $id) {
-            throw new UnexpectedValueException('Can not change Entity id');
-        }
-
-        $this->save($entity);
-        return $entity;
-    }
-
-    public function remove(Entity $entity)
-    {
+        $entity = $this->fetch($id);
         foreach ($entity->getSubscribedEvents() as $eventEntity) {
             $this->getEventService()->remove($eventEntity);
         }
         $this->getRepository()->remove($entity);
+    }
+
+    public function setEventService(EventService $eventService)
+    {
+        $this->eventService = $eventService;
+        return $this;
+    }
+
+    public function getEventService()
+    {
+        return $this->eventService;
+    }
+
+    public function setMapper(Mapper $mapper)
+    {
+        $this->mapper = $mapper;
+        return $this;
+    }
+
+    public function getMapper()
+    {
+        return $this->mapper;
+    }
+
+    public function setRepository(Repository $repository)
+    {
+        $this->repository = $repository;
+        return $this;
+    }
+
+    public function getRepository()
+    {
+        return $this->repository;
     }
 }

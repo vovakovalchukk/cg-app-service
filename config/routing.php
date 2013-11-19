@@ -1,8 +1,13 @@
 <?php
 use Slim\Slim;
 
-use CG\InputValidation\App\Service as ServiceEntityValidationRules;
-use CG\InputValidation\App\Service\Event as ServiceEventEntityValidationRules;
+use CG\Controllers\Root;
+use CG\Controllers\App\Service\Collection as ServiceCollection;
+use CG\Controllers\App\Service as Service;
+use CG\Controllers\App\Event\Collection as EventCollection;
+use CG\Controllers\App\Event;
+use CG\InputValidation\App\Service\Entity as ServiceEntityValidationRules;
+use CG\InputValidation\App\Event\Entity as EventEntityValidationRules;
 
 $routes = array(
     '/' => array (
@@ -66,7 +71,7 @@ $routes = array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'ServiceEventEntity',
-        'validation' => array("dataRules" => ServiceEventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/service/:id/event/:eventType' => array (
         'controllers' => function($id, $eventType) use ($serviceManager) {
@@ -82,6 +87,6 @@ $routes = array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'ServiceEventEntity',
-        'validation' => array("dataRules" => ServiceEventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     )
 );

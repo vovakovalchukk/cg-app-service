@@ -95,46 +95,6 @@ class ServiceListCest
     /**
      * @group service
      * @group collection
-     * @group post
-     * @group unsupported
-     */
-    public function attemptToAddNewServiceWithUnsupportedContentType(ApiGuy $I)
-    {
-        $this->fetchTestData();
-
-        $I->wantToTest('that attempting to add a service with unsupported content-type will fail');
-        $url = ServiceListPage::getUrl();
-
-        $I->dontSeeInDatabase('service', array('id' => ServicePage::NEW_ID));
-
-        $I->prepareRequest();
-        $I->sendPOST($url, $this->newService);
-        $I->seeResponseCodeIs(HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE);
-    }
-
-    /**
-     * @group service
-     * @group collection
-     * @group post
-     * @group conflict
-     */
-    public function attemptToReAddService(ApiGuy $I)
-    {
-        $this->fetchTestData();
-
-        $I->wantToTest('that attempting to re-register a service will fail');
-        $url = ServiceListPage::getUrl();
-
-        $I->seeInDatabase('service', array('id' => ServicePage::VALID_ID));
-
-        $I->prepareRequestForContent();
-        $I->sendPOST($url, $this->validService);
-        $I->seeResponseCodeIs(HTTP_STATUS_CONFLICT);
-    }
-
-    /**
-     * @group service
-     * @group collection
      * @group put
      * @group delete
      * @group notAllowed

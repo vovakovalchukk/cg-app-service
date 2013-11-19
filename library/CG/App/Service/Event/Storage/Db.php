@@ -1,15 +1,13 @@
 <?php
-namespace Application\Service\Event\Storage;
+namespace CG\App\Service\Event\Storage;
 
-use Application\Service\Event\Storage;
+use CG\App\Service\Event\Storage;
 use CG\Stdlib\Storage\Db\Zend\Sql as SqlStorage;
 use Zend\Db\Sql\Sql;
-use Application\Service\Event\Mapper;
-use Zend\Db\Sql\Select;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use Application\Service\Event\Collection;
-use Application\Service\Event\Entity;
-use Application\Service\Storage\Db as ServiceDb;
+use CG\App\Service\Event\Mapper;
+use CG\App\Service\Event\Collection;
+use CG\App\Service\Event\Entity;
+use CG\App\Service\Storage\Db as ServiceDb;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 
@@ -28,16 +26,17 @@ class Db implements Storage, EventManagerAwareInterface
 
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper, EventManagerInterface $eventManager)
     {
-        $this->setReadSql($readSql);
-        $this->setFastReadSql($fastReadSql);
-        $this->setWriteSql($writeSql);
-        $this->setMapper($mapper);
-        $this->setEventManager($eventManager);
+        $this->setReadSql($readSql)
+             ->setFastReadSql($fastReadSql)
+             ->setWriteSql($writeSql)
+             ->setMapper($mapper)
+             ->setEventManager($eventManager);
     }
 
     public function setReadSql(Sql $readSql)
     {
         $this->readSql = $readSql;
+        return $this;
     }
 
     public function getReadSql()
@@ -48,6 +47,7 @@ class Db implements Storage, EventManagerAwareInterface
     public function setFastReadSql(Sql $fastReadSql)
     {
         $this->fastReadSql = $fastReadSql;
+        return $this;
     }
 
     public function getFastReadSql()
@@ -58,6 +58,7 @@ class Db implements Storage, EventManagerAwareInterface
     public function setWriteSql(Sql $writeSql)
     {
         $this->writeSql = $writeSql;
+        return $this;
     }
 
     public function getWriteSql()
@@ -72,6 +73,7 @@ class Db implements Storage, EventManagerAwareInterface
             get_class($this)
         ));
         $this->eventManager = $eventManager;
+        return $this;
     }
     
     public function getEventManager()
@@ -124,6 +126,7 @@ class Db implements Storage, EventManagerAwareInterface
     public function setMapper(Mapper $mapper)
     {
         $this->mapper = $mapper;
+        return $this;
     }
 
     public function getMapper()
@@ -292,4 +295,6 @@ class Db implements Storage, EventManagerAwareInterface
 
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
+
+
 }

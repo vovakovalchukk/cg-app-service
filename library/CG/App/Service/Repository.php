@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service;
+namespace CG\App\Service;
 
 use CG\Stdlib\Repository\FetchInterface;
 use CG\Stdlib\Repository\FetchByIdsInterface;
