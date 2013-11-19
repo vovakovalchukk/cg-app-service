@@ -37,14 +37,16 @@
         "nocarrier/hal" : "dev-develop",
         "phpspec/phpspec" : "2.0.*@dev",
         "phpspec/prophecy" : "~1.0",
-        "robmorgan/phinx": "v0.2.8",
+        "robmorgan/phinx": "*",
         "slim/slim": "2.3.*",
         "zendframework/zend-config" : "2.2.*",
         "zendframework/zend-db" : "2.2.*",
         "zendframework/zend-di" : "2.2.*",
         "zendframework/zend-inputfilter" : "~2.2.4",
         "zendframework/zend-servicemanager" : "2.2.*",
-        "zendframework/zend-validator" : "~2.2.4"
+        "zendframework/zend-validator" : "~2.2.4",
+        "predis/predis": "~0.8.3",
+        "channelgrabber/predis": "~1.0.1"
     },
     "scripts": {
         "post-install-cmd" : [
