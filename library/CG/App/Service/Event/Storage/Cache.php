@@ -1,13 +1,13 @@
 <?php
-namespace Application\Service\Event\Storage;
+namespace CG\App\Service\Event\Storage;
 
 use CG\Cache\StorageTrait;
 use CG\Cache\Storage\CollectionTrait as StorageCollectionTrait;
 use CG\Cache\Strategy\EntityInterface;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategyInterface;
-use Application\Service\Event\Storage;
+use CG\App\Service\Event\Storage;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
-use Application\Service\Event\Collection;
+use CG\App\Service\Event\Collection;
 
 class Cache implements Storage, SaveCollectionInterface
 {
@@ -21,8 +21,8 @@ class Cache implements Storage, SaveCollectionInterface
     
     public function __construct(EntityInterface $entityStrategy, CollectionStrategyInterface $collectionStrategy)
     {
-        $this->setEntityStrategy($entityStrategy);
-        $this->setCollectionStrategy($collectionStrategy);
+        $this->setEntityStrategy($entityStrategy)
+             ->setCollectionStrategy($collectionStrategy);
     }
     
     public function fetchCollectionByServiceIdAndType($serviceId, $type)

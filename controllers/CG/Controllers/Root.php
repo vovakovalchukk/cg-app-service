@@ -1,5 +1,5 @@
 <?php
-namespace CG\Controllers\App;
+namespace CG\Controllers;
 
 use CG\Root\Mapper;
 use CG\Slim\ControllerTrait;

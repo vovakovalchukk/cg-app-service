@@ -1,13 +1,12 @@
 <?php
-namespace Application\Service\Storage;
+namespace CG\App\Service\Storage;
 
-use Application\Service\Storage;
+use CG\App\Service\Storage;
 use CG\Stdlib\Storage\Db\Zend\Sql as SqlStorage;
 use Zend\Db\Sql\Sql;
-use Application\Service\Mapper;
-use Zend\Db\Sql\Select;
-use Application\Service\Collection;
-use Application\Service\Entity;
+use CG\App\Service\Mapper;
+use CG\App\Service\Collection;
+use CG\App\Service\Entity;
 
 class Db implements Storage
 {
@@ -23,40 +22,10 @@ class Db implements Storage
 
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {
-        $this->setReadSql($readSql);
-        $this->setFastReadSql($fastReadSql);
-        $this->setWriteSql($writeSql);
-        $this->setMapper($mapper);
-    }
-
-    public function setReadSql(Sql $readSql)
-    {
-        $this->readSql = $readSql;
-    }
-
-    public function getReadSql()
-    {
-        return $this->readSql;
-    }
-
-    public function setFastReadSql(Sql $fastReadSql)
-    {
-        $this->fastReadSql = $fastReadSql;
-    }
-
-    public function getFastReadSql()
-    {
-        return $this->fastReadSql;
-    }
-
-    public function setWriteSql($writeSql)
-    {
-        $this->writeSql = $writeSql;
-    }
-
-    public function getWriteSql()
-    {
-        return $this->writeSql;
+        $this->setReadSql($readSql)
+             ->setFastReadSql($fastReadSql)
+             ->setWriteSql($writeSql)
+             ->setMapper($mapper);
     }
 
     protected function getSelect()
@@ -140,7 +109,7 @@ class Db implements Storage
 
     protected function insertEntity($entity)
     {
-        $insert = $this->getInsert()->values($this->getMapper()->toArray($entity));
+        $insert = $this->getInsert()->values($entity->toArray());
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
 
         $entity->setId(
@@ -151,9 +120,7 @@ class Db implements Storage
 
     protected function updateEntity($entity)
     {
-        $update = $this->getUpdate()->set(
-            $this->getMapper()->toArray($entity)
-        )->where(array(
+        $update = $this->getUpdate()->set($entity->toArray())->where(array(
             'id' => $entity->getId()
         ));
 
@@ -167,5 +134,38 @@ class Db implements Storage
         ));
 
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+    }
+
+    public function setFastReadSql(Sql $fastReadSql)
+    {
+        $this->fastReadSql = $fastReadSql;
+        return $this;
+    }
+
+    public function getFastReadSql()
+    {
+        return $this->fastReadSql;
+    }
+
+    public function setReadSql(Sql $readSql)
+    {
+        $this->readSql = $readSql;
+        return $this;
+    }
+
+    public function getReadSql()
+    {
+        return $this->readSql;
+    }
+
+    public function setWriteSql(Sql $writeSql)
+    {
+        $this->writeSql = $writeSql;
+        return $this;
+    }
+
+    public function getWriteSql()
+    {
+        return $this->writeSql;
     }
 }
