@@ -77,7 +77,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         $configuredAdapters = array();
         while ($reconfigure || empty($configuredAdapters)) {
-            $this->getConsole()->writeln('Available Redis Adapters:');
+            $this->getConsole()->writeln('Available Mongo Adapters:');
             foreach ($mongoInstances as $instance) {
                 $this->getConsole()->writeln('   * ' . $instance);
             }
