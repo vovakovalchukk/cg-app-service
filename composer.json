@@ -23,6 +23,10 @@
         },
         {
             "type": "git",
+            "url": "git@bitbucket.org:channelgrabber/cg-order.git"
+        },
+        {
+            "type": "git",
             "url": "git@bitbucket.org:channelgrabber/cg-vnd-field-error.git"
         }
     ],
@@ -41,7 +45,7 @@
         "phpspec/prophecy" : "~1.0",
         "davedevelopment/phpmig" : "0.4",
         "codeception/codeception" : "1.6.5",
-        "nocarrier/hal" : "dev-develop",
+        "nocarrier/hal" : "0.9.4",
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.2.1",
         "channelgrabber/codeception" : "1.1.0",
@@ -49,6 +53,7 @@
         "channelgrabber/predis" : "~1.0.1",
         "channelgrabber/validation" : "~1.1.0",
         "channelgrabber/vnderror" : "~1.0.0",
+        "channelgrabber/order" : "dev-master",
         "zendframework/zend-validator" : "2.2.*",
         "zendframework/zend-inputfilter" : "2.2.*",
         "zendframework/zend-servicemanager" : "2.2.*",

@@ -8,6 +8,7 @@ use CG\Controllers\App\Event\Collection as EventCollection;
 use CG\Controllers\App\Event;
 use CG\InputValidation\App\Service\Entity as ServiceEntityValidationRules;
 use CG\InputValidation\App\Event\Entity as EventEntityValidationRules;
+use CG\InputValidation\Order\Filter as OrderFilterValidationRules;
 
 $routes = array(
     '/' => array (
@@ -88,5 +89,21 @@ $routes = array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'ServiceEventEntity',
         'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
-    )
+    ),
+    '/order' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ServiceCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => array('GET'),
+        'name' => 'OrderCollection',
+        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
+    ),
 );
