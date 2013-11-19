@@ -93,4 +93,9 @@ class FeePage extends OrderItemEntityPage
     {
         return ["orderItemId", "fee" => ["name", "amount"]];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderItemId";
+    }
 }

@@ -82,4 +82,9 @@ class GiftWrapPage extends OrderItemEntityPage
     {
         return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderItemId";
+    }
 }
