@@ -11,7 +11,7 @@ class AlertPage extends OrderEntityPage
     const EMBEDDED_RESOURCE = "alert";
 
     public static function getUrl(){
-        return self::URL;
+        return parent::getEntityUrl() . self::URL;
     }
 
     static public function notAllowedMethods()
@@ -73,5 +73,10 @@ class AlertPage extends OrderEntityPage
     public static function getInvalidEntityFields()
     {
         return ["orderId", "userId", "alert", "timestamp"];
+    }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
     }
 }

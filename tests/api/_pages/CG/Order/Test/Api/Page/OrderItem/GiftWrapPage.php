@@ -12,7 +12,7 @@ class GiftWrapPage extends OrderItemEntityPage
 
     public static function getUrl()
     {
-        return self::URL;
+        return parent::getEntityUrl() . self::URL;
     }
 
     static public function notAllowedMethods()
@@ -81,5 +81,10 @@ class GiftWrapPage extends OrderItemEntityPage
     public static function getInvalidEntityFields()
     {
         return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
+    }
+
+    public static function getParentIdField()
+    {
+        return "orderItemId";
     }
 }

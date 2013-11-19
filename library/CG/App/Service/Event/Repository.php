@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service\Event;
+namespace CG\App\Service\Event;
 
 use CG\Stdlib\Repository\FetchInterface;
 use CG\Stdlib\Repository\FetchByIdsInterface;

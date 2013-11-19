@@ -12,7 +12,7 @@ class UserChangesPage extends OrderEntityPage
 
     public static function getUrl()
     {
-        return self::URL;
+        return parent::getEntityUrl() . self::URL;
     }
 
     static public function notAllowedMethods()

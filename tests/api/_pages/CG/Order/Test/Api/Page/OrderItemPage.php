@@ -9,6 +9,8 @@ class OrderItemPage extends RootPage
 
     const URL = "/orderItem";
     const EMBEDDED_RESOURCE = "orderItem";
+    const PRIMARY_ID = "1411-11";
+    const SECONDARY_ID = "1411-12";
 
     public static function getUrl(){
         return self::URL;

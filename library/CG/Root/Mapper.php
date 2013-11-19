@@ -1,13 +1,11 @@
 <?php
 namespace CG\Root;
 
-use CG\Slim\ToHalTrait;
+use CG\Slim\Renderer\ResponseType\Hal;
 use Zend\Di\Di;
 
 class Mapper
 {
-    use ToHalTrait;
-
     protected $di;
 
     public function __construct(Di $di)
@@ -17,8 +15,11 @@ class Mapper
 
     public function getHal()
     {
-        return $this->toHal('/')
-                    ->addLink('service', '/service');
+        return $this->getDi()->get(
+            Hal::class,array(
+                'uri' => "/"
+            )
+        )->addLink('service', '/service');
     }
 
     public function setDi(Di $di)

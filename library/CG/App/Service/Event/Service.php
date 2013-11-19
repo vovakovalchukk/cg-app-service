@@ -1,13 +1,10 @@
 <?php
-namespace Application\Service\Event;
+namespace CG\App\Service\Event;
 
-use Application\Urls\Service as ServiceUrls;
-use Application\Controller\ServiceEntityController;
-use Application\Controller\ServiceEventEntityController;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use SplObjectStorage;
 use Nocarrier\Hal;
-use UnexpectedValueException;
+use CG\App\Service\Event\Repository;
+use CG\App\Service\Event\Mapper;
+use CG\App\Service\Event\Entity;
 
 class Service
 {
@@ -16,23 +13,71 @@ class Service
 
     public function __construct(Repository $repository, Mapper $mapper)
     {
-        $this->setRepository($repository);
-        $this->setMapper($mapper);
+        $this->setRepository($repository)
+            ->setMapper($mapper);
     }
 
-    public function setRepository(Repository $repository)
+    public function fetchAsHal($id)
     {
-        $this->repository = $repository;
+        $entity = $this->fetch($id);
+        return $this->getMapper()->toHal($entity);
     }
 
-    public function getRepository()
+    protected function fetch($id)
     {
-        return $this->repository;
+        return $this->getRepository()->fetch($id);
+    }
+
+    public function fetchCollectionByServiceIdAsHal($serviceId)
+    {
+        $collection = $this->fetchCollectionByServiceId($serviceId);
+        return $this->getMapper()->collectionToHal($collection, $this->getUrl($serviceId));
+    }
+
+    protected function fetchCollectionByServiceId($serviceId)
+    {
+        return $this->getRepository()->fetchCollectionByServiceId($serviceId);
+    }
+
+    public function fetchByServiceIdAndTypeAsHal($serviceId, $type)
+    {
+        $collection = $this->fetchByServiceIdAndType($serviceId, $type);
+        return $this->getMapper()->collectionToHal($collection, $this->getUrl($serviceId));
+    }
+
+    protected function getUrl($serviceId)
+    {
+        return "/service/" . $serviceId . "/event";
+    }
+
+    protected function fetchByServiceIdAndType($serviceId, $type)
+    {
+        $collection = $this->getRepository()->fetchCollectionByServiceIdAndType($serviceId, $type);
+        $collection->rewind();
+        return $collection->current();
+    }
+
+    public function saveHal(Hal $hal)
+    {
+        $entity = $this->getMapper()->fromHal($hal);
+        $this->save($entity);
+        return $entity;
+    }
+
+    protected function save(Entity $entity)
+    {
+        $this->getRepository()->save($entity);
+    }
+
+    public function remove(Entity $entity)
+    {
+        $this->getRepository()->remove($entity);
     }
 
     public function setMapper(Mapper $mapper)
     {
         $this->mapper = $mapper;
+        return $this;
     }
 
     public function getMapper()
@@ -40,102 +85,15 @@ class Service
         return $this->mapper;
     }
 
-    public function toHalModel(ServiceUrls $urls, Entity $entity)
+    public function setRepository(Repository $repository)
     {
-        return $this->getMapper()->toHalModel(
-            $entity,
-            $urls
-        );
+        $this->repository = $repository;
+        return $this;
     }
 
-    public function fetch($id)
+    public function getRepository()
     {
-        return $this->getRepository()->fetch($id);
-    }
-
-    public function fetchAsHalModel($id, ServiceUrls $urls)
-    {
-        $this->getMapper()->toHalModel($this->fetch($id), $urls);
-    }
-
-    public function fetchByServiceIdAndType($serviceId, $type)
-    {
-        $collection = $this->getRepository()->fetchCollectionByServiceIdAndType($serviceId, $type);
-        $collection->rewind();
-        return $collection->current();
-    }
-
-    public function fetchByServiceIdAndTypeAsHalModel($serviceId, $type, ServiceUrls $urls)
-    {
-        return $this->getMapper()->toHalModel($this->fetchByServiceIdAndType($serviceId, $type), $urls);
-    }
-
-    public function fetchAll()
-    {
-        return $this->getRepository()->fetchAll();
-    }
-
-    public function fetchCollectionByServiceId($serviceId)
-    {
-        return $this->getRepository()->fetchCollectionByServiceId($serviceId);
-    }
-
-    public function fetchCollectionByServiceIdAsHalModel($serviceId, ServiceUrls $urls)
-    {
-        try {
-            $collection = $this->fetchCollectionByServiceId($serviceId);
-        } catch (NotFound $exception) {
-            $collection = new SplObjectStorage();
-        }
-
-        return $this->getMapper()->collectionToHalModel($serviceId, $collection, $urls);
-    }
-
-    public function fetchCollectionByType($type)
-    {
-        return $this->getRepository()->fetchCollectionByType($type);
-    }
-
-    public function save(Entity $entity)
-    {
-        $this->getRepository()->save($entity);
-    }
-
-    public function insertFromHal($serviceId, Hal $entityHal)
-    {
-        $entity = $this->getMapper()->fromHal($serviceId, $entityHal);
-        try {
-            $this->fetchByServiceIdAndType($serviceId, $entity->getType());
-            throw new UnexpectedValueException(
-                'Event of this type already exists for this Service'
-            );
-        } catch (NotFound $exception) {
-            // NotFound Exception means we are safe to add the new event type
-        }
-        $this->save($entity);
-        return $entity;
-    }
-
-    public function updateFromHal($serviceId, Hal $entityHal)
-    {
-        $entity = $this->getMapper()->fromHal($serviceId, $entityHal);
-        try {
-            $entity->setId(
-                $this->fetchByServiceIdAndType($serviceId, $entity->getType())->getId()
-            );
-        } catch (NotFound $exception) {
-            throw new UnexpectedValueException(
-                'Event of selected type does not exists for this Service',
-                0,
-                $exception
-            );
-        }
-        $this->save($entity);
-        return $entity;
-    }
-
-    public function remove(Entity $entity)
-    {
-        $this->getRepository()->remove($entity);
+        return $this->repository;
     }
 }
+

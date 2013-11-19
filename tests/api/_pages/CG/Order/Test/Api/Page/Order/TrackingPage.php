@@ -12,7 +12,7 @@ class TrackingPage extends OrderEntityPage
 
     public static function getUrl()
     {
-        return self::URL;
+        return parent::getEntityUrl() . self::URL;
     }
 
     static public function notAllowedMethods()
@@ -80,5 +80,10 @@ class TrackingPage extends OrderEntityPage
     public static function getInvalidEntityFields()
     {
         return ["orderId", "userId", "number", "carrier", "timestamp"];
+    }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
     }
 }

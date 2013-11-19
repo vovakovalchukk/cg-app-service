@@ -12,7 +12,7 @@ class NotePage extends OrderEntityPage
 
     public static function getUrl()
     {
-        return self::URL;
+        return parent::getEntityUrl() . self::URL;
     }
 
     static public function notAllowedMethods()
@@ -77,5 +77,10 @@ class NotePage extends OrderEntityPage
     public static function getInvalidEntityFields()
     {
         return ["orderId", "userId", "note", "timestamp"];
+    }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
     }
 }

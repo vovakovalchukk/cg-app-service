@@ -1,10 +1,8 @@
 <?php
-namespace Application\Service;
+namespace CG\App\Service;
 
 use CG\Stdlib\CachableInterface;
 use CG\Stdlib\CachableEntityTrait;
-use SplObjectStorage;
-use Application\Service\Event\Entity as Event;
 
 class Entity implements CachableInterface
 {
@@ -17,16 +15,8 @@ class Entity implements CachableInterface
 
     public function __construct($type, $endpoint)
     {
-        $this->setDirty(false);
-        $this->setNewlyInserted(false);
-        $this->setType($type);
-        $this->setEndpoint($endpoint);
-        $this->subscribedEvents = new SplObjectStorage();
-    }
-
-    protected function getCacheTypeSeparator()
-    {
-        return Collection::CACHE_TYPE_SEPARATOR;
+        $this->setType($type)
+             ->setEndpoint($endpoint);
     }
 
     public function setId($id)
@@ -62,14 +52,12 @@ class Entity implements CachableInterface
         return $this->endpoint;
     }
 
-    public function addSubscribedEvent(Event $event)
+    public function  toArray()
     {
-        $this->subscribedEvents->attach($event);
-        return $this;
-    }
-
-    public function getSubscribedEvents()
-    {
-        return $this->subscribedEvents;
+        return array(
+            "id" => $this->getId(),
+            "endpoint" => $this->getEndpoint(),
+            "type" => $this->getType()
+        );
     }
 }

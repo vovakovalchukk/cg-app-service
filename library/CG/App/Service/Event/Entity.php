@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service\Event;
+namespace CG\App\Service\Event;
 
 use CG\Stdlib\CachableInterface;
 use CG\Stdlib\CachableEntityTrait;
@@ -16,12 +16,10 @@ class Entity implements CachableInterface
 
     public function __construct($serviceId, $type, $instances, $endpoint)
     {
-        $this->setDirty(false);
-        $this->setNewlyInserted(false);
-        $this->setServiceId($serviceId);
-        $this->setType($type);
-        $this->setInstances($instances);
-        $this->setEndpoint($endpoint);
+        $this->setServiceId($serviceId)
+             ->setType($type)
+             ->setInstances($instances)
+             ->setEndpoint($endpoint);
     }
 
     protected function getCacheTypeSeparator()
@@ -82,5 +80,16 @@ class Entity implements CachableInterface
     public function getEndpoint()
     {
         return $this->endpoint;
+    }
+
+    public function toArray()
+    {
+        return array(
+            "id" => $this->getId(),
+            "serviceId" => $this->getServiceId(),
+            "type" => $this->getType(),
+            "instances" => $this->getInstances(),
+            "endpoint" => $this->getEndpoint()
+        );
     }
 }
