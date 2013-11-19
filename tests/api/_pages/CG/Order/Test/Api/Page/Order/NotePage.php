@@ -78,4 +78,9 @@ class NotePage extends OrderEntityPage
     {
         return ["orderId", "userId", "note", "timestamp"];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
+    }
 }

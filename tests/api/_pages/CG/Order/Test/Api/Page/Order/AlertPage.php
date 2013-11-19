@@ -74,4 +74,9 @@ class AlertPage extends OrderEntityPage
     {
         return ["orderId", "userId", "alert", "timestamp"];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
+    }
 }

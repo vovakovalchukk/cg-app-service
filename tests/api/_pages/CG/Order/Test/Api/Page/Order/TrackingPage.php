@@ -81,4 +81,9 @@ class TrackingPage extends OrderEntityPage
     {
         return ["orderId", "userId", "number", "carrier", "timestamp"];
     }
+
+    public static function getParentIdField()
+    {
+        return "orderId";
+    }
 }
