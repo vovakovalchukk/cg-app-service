@@ -44,7 +44,9 @@
         "zendframework/zend-di" : "2.2.*",
         "zendframework/zend-inputfilter" : "~2.2.4",
         "zendframework/zend-servicemanager" : "2.2.*",
-        "zendframework/zend-validator" : "~2.2.4"
+        "zendframework/zend-validator" : "~2.2.4",
+        "predis/predis": "~0.8.3",
+        "channelgrabber/predis": "~1.0.1"
     },
     "scripts": {
         "post-install-cmd" : [
