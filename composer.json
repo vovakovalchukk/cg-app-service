@@ -27,12 +27,12 @@
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.1.2"
     },
-	"require-dev": {
+    "require-dev": {
         "codeception/codeception" : "1.6.5",
         "phpspec/phpspec" : "2.0.*@dev",
         "phpspec/prophecy" : "~1.0",
         "channelgrabber/codeception" : "1.0.*"
-	},
+    },
     "scripts": {
         "post-install-cmd" : [
             "php bin/compile_di.php"
