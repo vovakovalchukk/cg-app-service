@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "69e51d29fb0ab28e5498dbfbd6dd80ea",
+    "hash": "03f3723e7290fb06792079cb98bc71bc",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -376,20 +376,71 @@
             "time": "2013-04-13 23:52:11"
         },
         {
+            "name": "channelgrabber/cache",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgcache.git",
+                "reference": "48da5da2648a1bb378332226f17793158f0bf1d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-1.0.0-7c852c.zip",
+                "reference": "48da5da2648a1bb378332226f17793158f0bf1d5",
+                "shasum": "1dcaef368251f67000fd28e2004c6995cfa42c3c"
+            },
+            "require": {
+                "channelgrabber/predis": "1.0.1",
+                "channelgrabber/stdlib": "2.0.*",
+                "predis/predis": "v0.8.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.0.*@dev",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CG\\Cache\\": ""
+                }
+            },
+            "time": "2013-10-09 17:02:34"
+        },
+        {
             "name": "channelgrabber/codeception",
-            "version": "dev-CGIV-636",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "9d1d0a6feb2f98c0f111be83a5c4f5ddabc97ca2"
+                "reference": "5ed0c6ec4f634e8e0f78e1f58718ecb9f32f984a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.3-6e385f.zip",
+                "reference": "5ed0c6ec4f634e8e0f78e1f58718ecb9f32f984a",
+                "shasum": "9d05d053334e553f172068659c280ced8cfbef9d"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2013-11-08 16:50:17"
+            "time": "2013-11-19 17:30:53"
         },
         {
             "name": "channelgrabber/http",
@@ -417,48 +468,94 @@
             "time": "2013-10-28 11:26:16"
         },
         {
-            "name": "channelgrabber/slim",
-            "version": "1.0.12",
+            "name": "channelgrabber/predis",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "019176c4b7f0578e76c9d6ef98359b57a59a963e"
+                "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
+                "reference": "d4ad458b30dc2b52a01e7a30fa19b0b9f6dbe613"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.0.12-166993.zip",
-                "reference": "019176c4b7f0578e76c9d6ef98359b57a59a963e",
-                "shasum": "619389c79945f1e510f80052170d632aba5c09bc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.1-7df584.zip",
+                "reference": "d4ad458b30dc2b52a01e7a30fa19b0b9f6dbe613",
+                "shasum": "878e40d1d7e00601622bc0eea757d96196264c2f"
+            },
+            "require": {
+                "predis/predis": "v0.8.3"
+            },
+            "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CG\\Predis\\": ""
+                }
+            },
+            "time": "2013-07-09 15:10:32"
+        },
+        {
+            "name": "channelgrabber/slim",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgslim.git",
+                "reference": "acf11ecc6d19f4d92ed42a97a8380d44cdb42e34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.3.1-bca064.zip",
+                "reference": "acf11ecc6d19f4d92ed42a97a8380d44cdb42e34",
+                "shasum": "84ff373139d4391b6a5fc330a4cbd20812de5e60"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-11-08 16:46:52"
+            "time": "2013-11-19 11:49:00"
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.1.0",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "24a5d99d98b8aef8a69beadce8779e8093e8b256"
+                "reference": "37030cbcd3143e87a7a3a0cef0f351f66d8fb5d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.1.0-a89ef2.zip",
-                "reference": "24a5d99d98b8aef8a69beadce8779e8093e8b256",
-                "shasum": "ebf2726e3a30a2c57f7a0189dc3d13319c6a86db"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.0.9-07acae.zip",
+                "reference": "37030cbcd3143e87a7a3a0cef0f351f66d8fb5d1",
+                "shasum": "c1c8887353a0053b273529812c28c0470a9d2f40"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Stdlib\\": ""
@@ -467,33 +564,40 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2013-11-08 12:25:11"
+            "time": "2013-11-04 09:32:30"
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "43b5591b2122aee827c27352d40f787d509babce"
+                "reference": "6c2943dfce1d4482cb819ef2b5e03e3eee9c0dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.0.0-15bf9c.zip",
-                "reference": "43b5591b2122aee827c27352d40f787d509babce",
-                "shasum": "aa2ab83cd1fd1f5d0398692062895a816946fac5"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.0-08ba7d.zip",
+                "reference": "6c2943dfce1d4482cb819ef2b5e03e3eee9c0dc9",
+                "shasum": "e2bad661d5fbf129cd0d07c5f52f95ccf3094fac"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
                 "zendframework/zend-validator": "~2.2.4"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2013-10-31 16:32:58"
+            "time": "2013-11-11 20:53:27"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -582,6 +686,64 @@
             "time": "2013-08-09 03:01:50"
         },
         {
+            "name": "davedevelopment/phpmig",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davedevelopment/phpmig.git",
+                "reference": "37a9e11cd33e848545b50e670a2475d1bd1868b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davedevelopment/phpmig/zipball/37a9e11cd33e848545b50e670a2475d1bd1868b0",
+                "reference": "37a9e11cd33e848545b50e670a2475d1bd1868b0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "pimple/pimple": "1.*",
+                "symfony/class-loader": "2.*",
+                "symfony/config": "2.*",
+                "symfony/console": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "*@dev",
+                "phpunit/phpunit": "3.*"
+            },
+            "bin": [
+                "bin/phpmig"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phpmig": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                },
+                {
+                    "name": "David Nielsen",
+                    "email": "david@panmedia.co.nz"
+                }
+            ],
+            "description": "Simple migrations system for php",
+            "homepage": "http://github.com/davedevelopment/phpmig",
+            "keywords": [
+                "database migrations",
+                "migrations"
+            ],
+            "time": "2013-02-17 23:06:00"
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v1.0.3",
             "source": {
@@ -639,22 +801,25 @@
         },
         {
             "name": "facebook/php-sdk",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/facebook-php-sdk.git",
-                "reference": "bf99924386be074da30a8e9d6bbcb49d3333da12"
+                "reference": "6714042fa2f5979d4c64c7d11fb4bcab16bdf6cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk/zipball/bf99924386be074da30a8e9d6bbcb49d3333da12",
-                "reference": "bf99924386be074da30a8e9d6bbcb49d3333da12",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk/zipball/6714042fa2f5979d4c64c7d11fb4bcab16bdf6cb",
+                "reference": "6714042fa2f5979d4c64c7d11fb4bcab16bdf6cb",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
             "autoload": {
@@ -678,7 +843,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2013-01-15 21:37:15"
+            "time": "2013-11-19 23:11:14"
         },
         {
             "name": "guzzle/guzzle",
@@ -832,16 +997,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "f72392d0e6eb855118f5a84e89ac2d257c704abd"
+                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f72392d0e6eb855118f5a84e89ac2d257c704abd",
-                "reference": "f72392d0e6eb855118f5a84e89ac2d257c704abd",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6225b22de9dcf36546be3a0b2fa8e3d986153f57",
+                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57",
                 "shasum": ""
             },
             "require": {
@@ -849,21 +1014,26 @@
                 "psr/log": "~1.0"
             },
             "require-dev": {
+                "aws/aws-sdk-php": "~2.4.8",
                 "doctrine/couchdb": "dev-master",
                 "mlehner/gelf-php": "1.0.*",
-                "raven/raven": "0.5.*"
+                "phpunit/phpunit": "~3.7.0",
+                "raven/raven": "0.5.*",
+                "ruflin/elastica": "0.90.*"
             },
             "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "raven/raven": "Allow sending log messages to a Sentry server"
+                "raven/raven": "Allow sending log messages to a Sentry server",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -890,7 +1060,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-07-28 22:38:30"
+            "time": "2013-11-14 19:48:31"
         },
         {
             "name": "nocarrier/hal",
@@ -898,12 +1068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "35aa7e7f83559c453551b35467040fd5bf73ca1f"
+                "reference": "7a69d0e044b447ad92399fc20c24793263aa72e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/35aa7e7f83559c453551b35467040fd5bf73ca1f",
-                "reference": "35aa7e7f83559c453551b35467040fd5bf73ca1f",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/7a69d0e044b447ad92399fc20c24793263aa72e9",
+                "reference": "7a69d0e044b447ad92399fc20c24793263aa72e9",
                 "shasum": ""
             },
             "require": {
@@ -951,7 +1121,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-10-14 12:59:12"
+            "time": "2013-11-19 12:03:10"
         },
         {
             "name": "phpspec/php-diff",
@@ -992,12 +1162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "2f1542aef3f6e0ab7d8ca2568b84764d755a6b27"
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/2f1542aef3f6e0ab7d8ca2568b84764d755a6b27",
-                "reference": "2f1542aef3f6e0ab7d8ca2568b84764d755a6b27",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
                 "shasum": ""
             },
             "require": {
@@ -1052,7 +1222,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-11-08 13:57:52"
+            "time": "2013-11-13 10:07:05"
         },
         {
             "name": "phpspec/prophecy",
@@ -1477,6 +1647,99 @@
             "time": "2013-01-13 10:24:48"
         },
         {
+            "name": "pimple/pimple",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fabpot/Pimple.git",
+                "reference": "471c7d7c52ad6594e17b8ec33efdd1be592b5d83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fabpot/Pimple/zipball/471c7d7c52ad6594e17b8ec33efdd1be592b5d83",
+                "reference": "471c7d7c52ad6594e17b8ec33efdd1be592b5d83",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2013-09-19 04:53:08"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/8c0498a893ec1bee5a98c602ad3a07855aa22113",
+                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2013-02-18 14:03:45"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1516,16 +1779,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.2.8",
+            "version": "v0.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada"
+                "reference": "c9d6fa7f053f783d94e3c3ade99dbeec16805368"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6fe8fb428e96a567333fe6af4286c328ef8baada",
-                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/c9d6fa7f053f783d94e3c3ade99dbeec16805368",
+                "reference": "c9d6fa7f053f783d94e3c3ade99dbeec16805368",
                 "shasum": ""
             },
             "require": {
@@ -1567,7 +1830,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2013-08-25 10:17:27"
+            "time": "2013-11-16 13:49:20"
         },
         {
             "name": "slim/slim",
@@ -1615,7 +1878,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/BrowserKit",
             "source": {
                 "type": "git",
@@ -1670,7 +1933,7 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/ClassLoader",
             "source": {
                 "type": "git",
@@ -1720,7 +1983,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
@@ -1768,17 +2031,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7"
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/f880062d56edefb25b36f2defa65aafe65959dc7",
-                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/00848d3e13cf512e77c7498c2b3b0192f61f4b18",
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18",
                 "shasum": ""
             },
             "require": {
@@ -1817,21 +2080,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-25 06:04:15"
+            "time": "2013-11-13 21:27:40"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/CssSelector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "4e01c74f19ea049773fa3ee9fb2bb5bf5e14f7eb"
+                "reference": "8df20c54ffa650df860a3e42dbcd1fbd25a24977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/4e01c74f19ea049773fa3ee9fb2bb5bf5e14f7eb",
-                "reference": "4e01c74f19ea049773fa3ee9fb2bb5bf5e14f7eb",
+                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/8df20c54ffa650df860a3e42dbcd1fbd25a24977",
+                "reference": "8df20c54ffa650df860a3e42dbcd1fbd25a24977",
                 "shasum": ""
             },
             "require": {
@@ -1868,21 +2131,21 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:45:20"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/DomCrawler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "f3c321861994f5a1882b4045ea1f8759be47601a"
+                "reference": "4dc2c596b28884892da24729d9b32d01d89c1a59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/f3c321861994f5a1882b4045ea1f8759be47601a",
-                "reference": "f3c321861994f5a1882b4045ea1f8759be47601a",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/4dc2c596b28884892da24729d9b32d01d89c1a59",
+                "reference": "4dc2c596b28884892da24729d9b32d01d89c1a59",
                 "shasum": ""
             },
             "require": {
@@ -1921,21 +2184,21 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-25 09:22:53"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9"
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/2d8ece3c610726a73d0c95c885134efea182610e",
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e",
                 "shasum": ""
             },
             "require": {
@@ -1975,11 +2238,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:45:20"
+            "time": "2013-10-13 06:32:10"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
@@ -2026,7 +2289,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
@@ -2073,17 +2336,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "81191e354fe9dad0451036ccf0fdf283649d3f1e"
+                "reference": "82898108f79040314a7b3ba430a72c32c7f61d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/81191e354fe9dad0451036ccf0fdf283649d3f1e",
-                "reference": "81191e354fe9dad0451036ccf0fdf283649d3f1e",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/82898108f79040314a7b3ba430a72c32c7f61d14",
+                "reference": "82898108f79040314a7b3ba430a72c32c7f61d14",
                 "shasum": ""
             },
             "require": {
@@ -2116,21 +2379,21 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-09 21:17:57"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "6bb881b948368482e1abf1a75c08bcf88a1c5fc3"
+                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6bb881b948368482e1abf1a75c08bcf88a1c5fc3",
-                "reference": "6bb881b948368482e1abf1a75c08bcf88a1c5fc3",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/c1bda5b459d792cb253de12c65beba3040163b2b",
+                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b",
                 "shasum": ""
             },
             "require": {
@@ -2163,7 +2426,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-22 18:04:39"
+            "time": "2013-10-17 11:48:01"
         },
         {
             "name": "videlalvaro/php-amqplib",
@@ -2707,9 +2970,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/codeception": 20,
-        "nocarrier/hal": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "nocarrier/hal": 20
     },
     "platform": [
 
