@@ -28,42 +28,6 @@ class Db implements Storage
              ->setMapper($mapper);
     }
 
-    protected function getSelect()
-    {
-        return $this->getReadSql()
-            ->select(static::TABLE)
-            ->columns(array(
-                'id',
-                'type',
-                'endpoint'
-            ));
-    }
-
-    protected function getInsert()
-    {
-        return $this->getWriteSql()->insert(static::TABLE);
-    }
-
-    protected function getUpdate()
-    {
-        return $this->getWriteSql()->update(static::TABLE);
-    }
-
-    protected function getDelete()
-    {
-        return $this->getWriteSql()->delete(static::TABLE);
-    }
-
-    public function setMapper(Mapper $mapper)
-    {
-        $this->mapper = $mapper;
-    }
-
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
     public function fetch($id)
     {
         return $this->fetchEntity(
@@ -107,6 +71,26 @@ class Db implements Storage
         $this->insertEntity($entity);
     }
 
+    protected function getSelect()
+    {
+        return $this->getReadSql()
+            ->select(static::TABLE)
+            ->columns(array(
+                'id',
+                'type',
+                'endpoint'
+            ));
+    }
+
+    public function remove($entity)
+    {
+        $delete = $this->getDelete()->where(array(
+            'id' => $entity->getId()
+        ));
+
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+    }
+
     protected function insertEntity($entity)
     {
         $insert = $this->getInsert()->values($entity->toArray());
@@ -127,13 +111,19 @@ class Db implements Storage
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
     }
 
-    public function remove($entity)
+    protected function getInsert()
     {
-        $delete = $this->getDelete()->where(array(
-            'id' => $entity->getId()
-        ));
+        return $this->getWriteSql()->insert(static::TABLE);
+    }
 
-        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+    protected function getUpdate()
+    {
+        return $this->getWriteSql()->update(static::TABLE);
+    }
+
+    protected function getDelete()
+    {
+        return $this->getWriteSql()->delete(static::TABLE);
     }
 
     public function setFastReadSql(Sql $fastReadSql)
@@ -167,5 +157,15 @@ class Db implements Storage
     public function getWriteSql()
     {
         return $this->writeSql;
+    }
+
+    public function setMapper(Mapper $mapper)
+    {
+        $this->mapper = $mapper;
+    }
+
+    public function getMapper()
+    {
+        return $this->mapper;
     }
 }

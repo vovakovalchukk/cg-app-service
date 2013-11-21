@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\Log;
+namespace CG\InputValidation\Order;
 
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
@@ -392,6 +392,21 @@ class Filter implements RulesInterface
                 'name'       => 'shippingMethod',
                 'required'   => false,
                 'validators' => array(
+                )
+            ),
+            'orderBy' => array(
+                'name'       => 'orderBy',
+                'required'   => false,
+                'validators' => array(
+                    /* list of fields */
+                )
+            ),
+            'orderDirection' => array(
+                'name'       => 'orderDirection',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->get(InArray::class)
+                                  ->setHaystack(array("ASC", "DESC"))
                 )
             ),
         );

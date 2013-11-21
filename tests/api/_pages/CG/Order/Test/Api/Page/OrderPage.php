@@ -488,4 +488,27 @@ class OrderPage extends RootPage
     {
         return OrderItemPage::class;
     }
+
+    //Lazyness at its peak
+    public static function generateDumpFromTestData()
+    {
+        foreach (OrderPage::getTestCollection() as $entity) {
+
+            foreach ($entity as $field => $value) {
+                if (is_array($value) || $field == "archived") {
+                    $$field = $value;
+                    unset($entity[$field]);
+                }
+            }
+
+            echo "INSERT INTO `order` (`" . implode("`, `", array_keys($entity)) . "`) VALUES ('";
+            echo @implode("', '", $entity) . "');\n";
+
+            echo "INSERT INTO `address` (`" . implode("`, `", array_keys($billingAddress)) . "`) VALUES ('";
+            echo @implode("', '", $billingAddress) . "');\n";
+
+            echo "INSERT INTO `address` (`" . implode("`, `", array_keys($shippingAddress)) . "`) VALUES ('";
+            echo @implode("', '", $shippingAddress) . "');\n";
+        }
+    }
 }

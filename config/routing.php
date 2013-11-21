@@ -6,6 +6,7 @@ use CG\Controllers\App\Service\Collection as ServiceCollection;
 use CG\Controllers\App\Service as Service;
 use CG\Controllers\App\Event\Collection as EventCollection;
 use CG\Controllers\App\Event;
+use CG\Controllers\Order\Order\Collection as OrderCollection;
 use CG\InputValidation\App\Service\Entity as ServiceEntityValidationRules;
 use CG\InputValidation\App\Event\Entity as EventEntityValidationRules;
 use CG\InputValidation\Order\Filter as OrderFilterValidationRules;
@@ -96,7 +97,7 @@ $routes = array(
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
-                $controller = $di->get(ServiceCollection::class, array());
+                $controller = $di->get(OrderCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
                     $controller->$method($app->request()->getBody())

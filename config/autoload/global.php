@@ -21,6 +21,13 @@ use CG\App\Service\Event\Service as EventService;
 use CG\App\Service\Event\Storage\Db as EventDb;
 use CG\App\Service\Event\Storage\Cache as EventCache;
 use CG\App\Service\Event\Repository as EventRepository;
+use CG\Order\Service\Service as OrderService;
+use CG\Order\Shared\Repository as OrderRepository;
+use CG\Order\Service\Storage\Cache as OrderCacheStorage;
+use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
+use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
+
 use Zend\EventManager\EventManager;
 
 return array(
@@ -141,6 +148,25 @@ return array(
                     'repository' => 'EventDbRepo'
                 )
             ),
+            OrderService::class => array(
+                'parameter' => array(
+                    'repository' => OrderRepository::class,
+                    'storage' => OrderElasticSearchStorage::class
+                )
+            ),
+            OrderRepository::class => array(
+                'parameter' => array(
+                    'storage' => OrderCacheStorage::class,
+                    'repository' => OrderPeristentStorage::class
+                )
+            ),
+            OrderPeristentDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -148,7 +174,8 @@ return array(
                 'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
-                'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard'
+                'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
+                \MongoClient::class => "mongodb"
             )
         )
     )
