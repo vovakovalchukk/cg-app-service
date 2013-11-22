@@ -1,0 +1,68 @@
+<?php
+
+namespace CG\App\Service\Event;
+
+use CG\App\Service\Event\Entity as EventEntity;
+use Nocarrier\Hal as NocarrierHal;
+use CG\Slim\Mapper\CollectionToHalTrait;
+use CG\Slim\Renderer\ResponseType\Hal;
+use Zend\Di\Di;
+
+class Mapper
+{
+    use CollectionToHalTrait;
+
+    protected $di;
+    protected $eventMapper;
+
+    const FIRST_PAGE = 1;
+
+    public function __construct(Di $di)
+    {
+        $this->setDi($di);
+    }
+
+    public function fromHal(NocarrierHal $hal)
+    {
+        $service = $hal->getData();
+        return $this->fromArray($service);
+    }
+
+    public function fromArray(array $service)
+    {
+        return $this->getDi()->get(EventEntity::class, $service);
+    }
+
+    public function toHal($entity)
+    {
+        $hal =  $this->getDi()->get(
+            Hal::class, array(
+                'uri' => '/service/' . $entity->getServiceId() . "/event/" . $entity->getId(),
+                'data' => $entity->toArray()
+            )
+        );
+        $hal->addLink("up", '/service/' . $entity->getServiceId() . '/event');
+        return $hal;
+    }
+
+    public function getEmbeddedResource(EventEntity $service)
+    {
+        return "subscribedEvent";
+    }
+
+    public function getFirstPage()
+    {
+        return static::FIRST_PAGE;
+    }
+
+    public function setDi(Di $di)
+    {
+        $this->di = $di;
+        return $this;
+    }
+
+    public function getDi()
+    {
+        return $this->di;
+    }
+}

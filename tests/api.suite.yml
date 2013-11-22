@@ -1,10 +1,22 @@
 class_name: ApiGuy
 modules:
-    enabled: [REST, PhpBrowser, ApiHelper, Db]
+    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis]
     config:
         PhpBrowser:
-            url: 'http://localhost/myapp/'
+            url: 'http://cg_app.channelgrabber.com.local'
         REST:
-            url: 'http://localhost/myapp/'
+            url: 'http://cg_app.channelgrabber.com.local'
         ApiHelper:
-            url: 'http://localhost/myapp/'
+            url: 'http://cg_app.channelgrabber.com.local'
+        Db:
+            dsn: 'mysql:host=localhost;dbname=cg_app'
+            user: 'root'
+            password: 'password'
+            dump: 'tests/_data/dump.sql'
+            populate: true
+            cleanup: true
+        Redis:
+            cleanup: true
+            host: 'localhost'
+            port: '6379'
+            database: '0'

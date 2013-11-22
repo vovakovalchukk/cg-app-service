@@ -11,10 +11,22 @@
  * file.
  */
 
+use Zend\Db\Sql\Sql;
+use Zend\Di\Di;
+use CG\App\Service\Storage\Db as ServiceDb;
+use CG\App\Service\Storage\Cache as ServiceCache;
+use CG\App\Service\Repository as ServiceRepository;
+use CG\App\Service\Service as ServiceService;
+use CG\App\Service\Event\Service as EventService;
+use CG\App\Service\Event\Storage\Db as EventDb;
+use CG\App\Service\Event\Storage\Cache as EventCache;
+use CG\App\Service\Event\Repository as EventRepository;
+use Zend\EventManager\EventManager;
+
 return array(
     'service_manager' => array(
         'factories' => array(
-            'Zend\Di\Di' => function($serviceManager) {
+            Di::Class => function($serviceManager) {
                 $configuration = $serviceManager->get('Config');
 
                 $im = new Zend\Di\InstanceManager();
@@ -45,17 +57,87 @@ return array(
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'Di' => 'Zend\Di\Di',
+                'ReadSql' => Sql::class,
+                'FastReadSql' => Sql::class,
+                'WriteSql' => Sql::class,
+                'Di' => Di::class,
+                'ServiceDbRepo' => ServiceRepository::class,
+                'ServiceDbStorage' => ServiceDb::class,
+                'ServiceCacheRepo' => ServiceRepository::class,
+                'EventDbRepo' => EventRepository::class,
+                'EventDbStorage' => EventDb::class,
+                'EventCacheRepo' => EventRepository::class,
              ),
-            'CG\RestExample\Service' => array(
+            'ReadSql' => array(
                 'parameter' => array(
-                    'Repository' => 'CG\RestExample\Repository',
-                    "Mapper" => 'CG\RestExample\Mapper'
+                    'adapter' => 'readAdapter'
+                )
+            ),
+            'FastReadSql' => array(
+                'parameter' => array(
+                    'adapter' => 'fastReadAdapter'
+                )
+            ),
+            'WriteSql' => array(
+                'parameter' => array(
+                    'adapter' => 'writeAdapter'
+                )
+            ),
+            'ServiceDbRepo' => array(
+                'parameter' => array(
+                    'storage' => 'ServiceDbStorage'
+                )
+            ),
+            'ServiceDbStorage' => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            'ServiceCacheRepo' => array(
+                'parameter' => array(
+                    'storage' => ServiceCache::class,
+                    'repository' => 'ServiceDbRepo'
+                )
+            ),
+            ServiceService::class => array(
+                'parameter' => array(
+                    'repository' => 'ServiceCacheRepo'
+                )
+            ),
+            EventService::class => array(
+                'parameter' => array(
+                    'repository' => 'EventCacheRepo'
+                )
+            ),
+            'EventDbRepo' => array(
+                'parameter' => array(
+                    'storage' => 'EventDbStorage'
+                )
+            ),
+            'EventDbStorage' => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'eventManager' => EventManager::class
+                )
+            ),
+            'EventCacheRepo' => array(
+                'parameter' => array(
+                    'storage' => EventCache::class,
+                    'repository' => 'EventDbRepo'
                 )
             ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
-                'CG\RestExample\ServiceInterface' => 'CG\RestExample\Service',
+                'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
+                'CG\Cache\ClientPipelineInterface' => 'CG\Cache\Client\RedisPipeline',
+                'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
+                'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
+                'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
+                'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard'
             )
         )
     )
