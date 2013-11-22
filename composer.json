@@ -30,7 +30,7 @@
         "psr-0" : { "" : "library/" }
     },
     "require": {
-        "robmorgan/phinx": "*",
+        "robmorgan/phinx": "v0.2.9",
         "slim/slim": "2.3.*",
         "zendframework/zend-config" : "2.2.*",
         "zendframework/zend-db" : "2.2.*",
@@ -41,7 +41,6 @@
         "phpspec/prophecy" : "~1.0",
         "davedevelopment/phpmig" : "0.4",
         "codeception/codeception" : "1.6.5",
-        "nocarrier/hal" : "dev-develop",
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.2.1",
         "channelgrabber/codeception" : "~1.1.3",
@@ -52,7 +51,8 @@
         "zendframework/zend-validator" : "2.2.*",
         "zendframework/zend-inputfilter" : "2.2.*",
         "zendframework/zend-servicemanager" : "2.2.*",
-        "predis/predis": "~0.8.3"
+        "predis/predis": "~0.8.3",
+        "nocarrier/hal" : "~0.9.4"
     },
     "scripts": {
         "post-install-cmd" : [
