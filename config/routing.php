@@ -103,7 +103,7 @@ $routes = array(
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => array('GET'),
+        'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderCollection',
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
     ),

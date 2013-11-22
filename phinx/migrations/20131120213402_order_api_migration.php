@@ -44,10 +44,11 @@ class OrderApiMigration extends AbstractMigration
                   `address3` varchar(255) NOT NULL,
                   `addressCity` varchar(255) NOT NULL,
                   `addressCounty` varchar(255) NOT NULL,
-                  `addressCountry` varchar(2) NOT NULL,
+                  `addressCountry` varchar(255) NOT NULL,
                   `addressPostcode` varchar(20) NOT NULL,
                   `emailAddress` varchar(255) NOT NULL,
                   `phoneNumber` varchar(20) NOT NULL,
+                  `addressCountryCode` varchar(2) NOT NULL,
                   PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         $this->execute($sql);
@@ -63,9 +64,9 @@ class OrderApiMigration extends AbstractMigration
      */
     public function down()
     {
-        $sql = 'DROP TABLE IF EXISTS `address`';
-        $this->execute($sql);
         $sql = 'DROP TABLE IF EXISTS `order`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `address`';
         $this->execute($sql);
     }
 }

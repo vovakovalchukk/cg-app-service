@@ -292,7 +292,7 @@ class Filter implements RulesInterface
                                   ->setMessages(array('notBetween' => 'page should be at least %min%'))
                 )
             ),
-            'id ' => array(
+            'id' => array(
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => array(
@@ -303,14 +303,14 @@ class Filter implements RulesInterface
                 'name'       => 'timeFrom',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
+                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
                 )
             ),
             'timeTo' => array(
                 'name'       => 'timeTo',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
+                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
                 )
             ),
             'organisationUnitId' => array(
@@ -350,16 +350,16 @@ class Filter implements RulesInterface
                 'name'       => 'includeArchived',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false"))
+                    $this->getDi()->newInstance(InArray::class)
+                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
                 )
             ),
             'country' => array(
                 'name'       => 'country',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                                  ->setHaystack($this->getCountryCodes())
+                    //$this->getDi()->newInstance(InArray::class)
+                    //              ->setHaystack($this->getCountryCodes())
                     /* array of of haystacks? */
                 )
             ),
@@ -367,8 +367,8 @@ class Filter implements RulesInterface
                 'name'       => 'countryExclude',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                                  ->setHaystack($this->getCountryCodes())
+                    //$this->getDi()->newInstance(InArray::class)
+                    //              ->setHaystack($this->getCountryCodes())
                     /* array of haystacks? */
                 )
             ),
@@ -376,16 +376,16 @@ class Filter implements RulesInterface
                 'name'       => 'multiLineOrder',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false"))
+                    $this->getDi()->newInstance(InArray::class)
+                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
                 )
             ),
             'multiSameItem' => array(
                 'name'       => 'multiSameItem',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false"))
+                    $this->getDi()->newInstance(InArray::class)
+                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
                 )
             ),
             'shippingMethod' => array(
@@ -405,7 +405,7 @@ class Filter implements RulesInterface
                 'name'       => 'orderDirection',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->get(InArray::class)
+                    $this->getDi()->newInstance(InArray::class)
                                   ->setHaystack(array("ASC", "DESC"))
                 )
             ),

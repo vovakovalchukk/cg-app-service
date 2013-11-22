@@ -23,28 +23,27 @@ class Collection
     public function get()
     {
         try {
-            $filterEntity = $this->getDi()->get(FilterEntity::class,
-                array("limit" => $this->getParams('limit'),
-                    "page" => $this->getParams('page'),
-                    "id" => $this->getParams('id') ? $this->getParams('id') : array(),
-                    "organisationUnitId" => $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array(),
-                    "status" => $this->getParams('status') ? $this->getParams('status') : array(),
-                    "accountId" => $this->getParams('accountId') ? $this->getParams('accountId') : array(),
-                    "channel" => $this->getParams('channel') ? $this->getParams('channel') : array(),
-                    "country" => $this->getParams('country') ? $this->getParams('country') : array(),
-                    "countryExclude" => $this->getParams('countryExclude') ? $this->getParams('countryExclude') : array(),
-                    "shippingMethod" => $this->getParams('shippingMethod') ? $this->getParams('shippingMethod') : array(),
-                    "searchTerm" => $this->getParams('searchTerm'),
-                    "includeArchived" => $this->getParams('includeArchived'),
-                    "multiLineSameOrder" => $this->getParams('multiLineSameOrder'),
-                    "multiSameItem" => $this->getParams('multiSameItem'),
-                    "timeFrom" => $this->getParams('timeFrom'),
-                    "timeTo" => $this->getParams('timeTo'),
-                    "orderBy" => $this->getParams('orderBy'),
-                    "orderDirection" => $this->getParams('orderDirection')
-                )
+            $filterEntity = new FilterEntity(
+                    $this->getParams('limit'),
+                    $this->getParams('page'),
+                    $this->getParams('id') ? $this->getParams('id') : array(),
+                    $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array(),
+                    $this->getParams('status') ? $this->getParams('status') : array(),
+                    $this->getParams('accountId') ? $this->getParams('accountId') : array(),
+                    $this->getParams('channel') ? $this->getParams('channel') : array(),
+                    $this->getParams('country') ? $this->getParams('country') : array(),
+                    $this->getParams('countryExclude') ? $this->getParams('countryExclude') : array(),
+                    $this->getParams('shippingMethod') ? $this->getParams('shippingMethod') : array(),
+                    $this->getParams('searchTerm'),
+                    $this->getParams('includeArchived'),
+                    $this->getParams('multiLineSameOrder'),
+                    $this->getParams('multiSameItem'),
+                    $this->getParams('timeFrom'),
+                    $this->getParams('timeTo'),
+                    $this->getParams('orderBy'),
+                    $this->getParams('orderDirection')
             );
-            return $this->getService()->fetchCollectionAsHal($filterEntity);
+            return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }

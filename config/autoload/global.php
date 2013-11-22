@@ -27,7 +27,7 @@ use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
-
+use Zend\Config\Config;
 use Zend\EventManager\EventManager;
 
 return array(
@@ -74,6 +74,7 @@ return array(
                 'EventDbRepo' => EventRepository::class,
                 'EventDbStorage' => EventDb::class,
                 'EventCacheRepo' => EventRepository::class,
+                'config' => Config::class
              ),
             'ReadSql' => array(
                 'parameter' => array(
