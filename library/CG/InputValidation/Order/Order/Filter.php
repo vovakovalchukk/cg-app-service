@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\Order;
+namespace CG\InputValidation\Order\Order;
 
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;

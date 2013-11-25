@@ -9,8 +9,10 @@ use CG\Controllers\App\Event;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
 use CG\InputValidation\App\Service\Entity as ServiceEntityValidationRules;
 use CG\InputValidation\App\Event\Entity as EventEntityValidationRules;
-use CG\InputValidation\Order\Filter as OrderFilterValidationRules;
+use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
+use CG\InputValidation\Order\Order\Entity as OrderEntityValidationRules;
 use CG\Controllers\Order\Note\Collection as NoteCollection;
+use CG\Controllers\Order\Order;
 use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
 
 $routes = array(
@@ -108,6 +110,22 @@ $routes = array(
         'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderCollection',
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
+    ),
+    '/order/:orderId' => array (
+        'controllers' => function($orderId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Order::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderCollection',
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/note' => array (
         'controllers' => function($orderId) use ($serviceManager) {
