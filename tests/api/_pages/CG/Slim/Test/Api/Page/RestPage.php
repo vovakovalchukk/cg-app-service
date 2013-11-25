@@ -6,8 +6,6 @@ use CG\Slim\Test\Api\Page\RootPage;
 
 class RestPage extends RootPage
 {
-    use CollectionPageTrait;
-
     const URL = "/rest";
 
     public static function getUrl()

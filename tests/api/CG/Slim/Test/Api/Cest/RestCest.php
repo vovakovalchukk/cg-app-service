@@ -4,26 +4,13 @@ namespace CG\Slim\Test\Api\Cest;
 use CG\Slim\Test\Api\Page\RestPage;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
+use Codeception\Module\ApiHelper;
 
 class RestCest
 {
     protected function getPageClass()
     {
         return RestPage::class;
-    }
-
-    protected function appendFilters($url, $filters = array())
-    {
-        if (empty($filters)) {
-            return $url;
-        }
-        http_build_url(
-            $url,
-            array('query' => urldecode(http_build_query($filters))),
-            HTTP_URL_JOIN_QUERY,
-            $parts
-        );
-        return preg_replace('/\[\d+\]/','[]', urldecode($parts['path'] . "?" . $parts['query']));
     }
 
     /**
@@ -42,7 +29,7 @@ class RestCest
 
         foreach ($filters as $filter) {
             foreach ($filter as $filterField => $filterValue) {
-                $url = $this->appendFilters($page::getUrl(), [$filterField => $filterValue]);
+                $url = ApiHelper::appendFilters($page::getUrl(), [$filterField => $filterValue]);
 
                 $I->wantTo('see the Rest page returns correct results when filtered by status');
                 $I->prepareRequest();
