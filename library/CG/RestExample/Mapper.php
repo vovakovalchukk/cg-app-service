@@ -7,8 +7,6 @@ use Zend\Di\Di;
 
 class Mapper
 {
-    //use ToHalTrait;
-
     const URL = '/test';
 
     protected $di;
