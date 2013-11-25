@@ -57,6 +57,20 @@ class OrderApiMigration extends AbstractMigration
         $this->execute($sql);
         $sql = "ALTER TABLE `order` ADD CONSTRAINT `order_billingAddressId` FOREIGN KEY (`billingAddressId`) REFERENCES `address` (`id`)";
         $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `note` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `note` text NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
+
+        $sql = "ALTER TABLE `note` ADD CONSTRAINT `note_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);";
+        $this->execute($sql);
     }
 
     /**
@@ -67,6 +81,8 @@ class OrderApiMigration extends AbstractMigration
         $sql = 'DROP TABLE IF EXISTS `order`';
         $this->execute($sql);
         $sql = 'DROP TABLE IF EXISTS `address`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `note`';
         $this->execute($sql);
     }
 }

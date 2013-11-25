@@ -27,6 +27,10 @@ use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
+use CG\Order\Service\Note\Service as NoteService;
+use CG\Order\Shared\Note\Repository as NoteRepository;
+use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
+use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
 
@@ -151,6 +155,24 @@ return array(
                 )
             ),
             OrderPeristentDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            NoteService::class => array(
+                'parameter' => array(
+                    'repository' => NoteRepository::class
+                )
+            ),
+            NoteRepository::class => array(
+                'parameter' => array(
+                    'storage' => NoteCacheStorage::class,
+                    'repository' => NoteDbStorage::class
+                )
+            ),
+            NoteDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
