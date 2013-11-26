@@ -1,6 +1,7 @@
 <?php
 use Slim\Slim;
 use CG\Controllers\RestExample;
+use CG\InputValidation\RestExample\Filter;
 
 $routes = array(
     '/' => array (
@@ -12,6 +13,11 @@ $routes = array(
         'name' => 'index'
     ),
     "/rest" => array (
+        "validation" => [
+            "flatten" => true,
+            "dataRules" => null,
+            "filterRules" => Filter::class
+        ],
         "controllers" => function() use ($serviceManager) {
             $di = $serviceManager->get('Di');
             $app = $di->get(Slim::class);
@@ -24,9 +30,7 @@ $routes = array(
                 $controller->$method()
             );
         },
-        "via" => array(
-            'GET','OPTIONS'
-        ),
+        "via" => ['GET','OPTIONS'],
         "name" => "restExample"
     )
 );

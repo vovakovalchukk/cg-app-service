@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c97545508fabc2ae9da924019f3718dc",
+    "hash": "c9c793890a669ba9a34a2d7f4cceb9f4",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -409,42 +409,49 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.3.4",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "5b15b4e2291bbdd10d29d96e1ff6710d21c3d9b7"
+                "reference": "49b7f0ca4f47bc133d225d4c4a54e7960024886e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.3.4-a9484e.zip",
-                "reference": "5b15b4e2291bbdd10d29d96e1ff6710d21c3d9b7",
-                "shasum": "472be9ef7a66fd5a8dab30d49c7777fd8aa4a031"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.3.6-a02816.zip",
+                "reference": "49b7f0ca4f47bc133d225d4c4a54e7960024886e",
+                "shasum": "f17965ac296d0c54a9063d163d6fbecda4803afb"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-11-22 10:22:37"
+            "time": "2013-11-26 13:38:51"
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.1.1",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "ad09a9459a93d25c43e1a1555a56eee9c9847737"
+                "reference": "f75a7d27a1405622d769791802a84a475258ee48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.1.1-3bb88a.zip",
-                "reference": "ad09a9459a93d25c43e1a1555a56eee9c9847737",
-                "shasum": "e3b2b22b4e089364a831e61ba805835815f809c3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.2.1-a0f519.zip",
+                "reference": "f75a7d27a1405622d769791802a84a475258ee48",
+                "shasum": "3804493d13e05fd3458c58f3c06e7b466e4e5ac6"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -465,33 +472,40 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2013-11-20 16:24:49"
+            "time": "2013-11-22 16:37:51"
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.0.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "43b5591b2122aee827c27352d40f787d509babce"
+                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.0.0-15bf9c.zip",
-                "reference": "43b5591b2122aee827c27352d40f787d509babce",
-                "shasum": "aa2ab83cd1fd1f5d0398692062895a816946fac5"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.2-5ff566.zip",
+                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b",
+                "shasum": "cac6766b8d4b9b145bd239a3f4ff154d8dab9787"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
                 "zendframework/zend-validator": "~2.2.4"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2013-10-31 16:32:58"
+            "time": "2013-11-22 11:34:08"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -2572,6 +2586,13 @@
                 "shasum": "a2dae86e29d9bacdd301dc2cebd87f96ccb4a8eb"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Codeception\\": ""
