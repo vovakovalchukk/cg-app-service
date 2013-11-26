@@ -32,4 +32,25 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
                 "tracking" => TrackingPage::class,
                 "alert" => AlertPage::class];
     }
+
+    public static function getPrimaryTestEntity()
+    {
+        $entity = static::getTestCollection()[0];
+        unset($entity["archived"]);
+        return $entity;
+    }
+
+    public static function getSecondaryTestEntity()
+    {
+        $entity = static::getTestCollection()[1];
+        unset($entity["archived"]);
+        return $entity;
+    }
+
+    public static function getNewEntityData(){
+        $newEntityData = self::getTestCollection()[0];
+        unset($newEntityData['id']);
+        unset($newEntityData['archived']);
+        return $newEntityData;
+    }
 }

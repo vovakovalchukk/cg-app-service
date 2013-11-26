@@ -4,6 +4,7 @@ namespace CG\Controllers\Order;
 use CG\Http\StatusCode;
 use CG\Order\Service\Service as ServiceService;
 use CG\Slim\ControllerTrait;
+use Selenium\Exception;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;

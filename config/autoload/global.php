@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Global Configuration Override
  *
@@ -33,6 +33,12 @@ use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
+use CG\Slim\Stdlib\Http\Headers;
+use CG\Controllers\Order\Order as OrderController;
+use CG\Controllers\Order\Order\Collection as OrderCollectionController;
+use CG\ETag\Storage\Predis as OrderPredis;
+use CG\Order\Service\Storage\ETag as OrderETagStorage;
+use Slim\Http\Headers as SlimHttpHeaders;
 
 return array(
     'service_manager' => array(
@@ -78,8 +84,24 @@ return array(
                 'EventDbRepo' => EventRepository::class,
                 'EventDbStorage' => EventDb::class,
                 'EventCacheRepo' => EventRepository::class,
-                'config' => Config::class
-             ),
+                'config' => Config::class,
+                'RequestHeaders' => Headers::class,
+                'ResponseHeaders' => Headers::class,
+                'OrderService' => OrderService::class,
+                'OrderCollectionService' => OrderService::class,
+                'SlimRequestHeaders' => SlimHttpHeaders::class,
+                'SlimResponseHeaders' => SlimHttpHeaders::class
+            ),
+            'RequestHeaders' => array(
+                'parameters' => array(
+                    'slimHeaders' => 'SlimRequestHeaders'
+                )
+            ),
+            'ResponseHeaders' => array(
+                'parameters' => array(
+                    'slimHeaders' => 'SlimResponseHeaders'
+                )
+            ),
             'ReadSql' => array(
                 'parameter' => array(
                     'adapter' => 'readAdapter'
@@ -142,16 +164,45 @@ return array(
                     'repository' => 'EventDbRepo'
                 )
             ),
-            OrderService::class => array(
-                'parameter' => array(
-                    'repository' => OrderRepository::class,
-                    'storage' => OrderElasticSearchStorage::class
-                )
-            ),
             OrderRepository::class => array(
                 'parameter' => array(
                     'storage' => OrderCacheStorage::class,
                     'repository' => OrderPeristentStorage::class
+                )
+            ),
+            'OrderService' => array(
+                'parameters' => array(
+                    'repository' => OrderETagStorage::class,
+                    'storage' => OrderElasticSearchStorage::class
+                )
+            ),
+            'OrderCollectionService' => array(
+                'parameters' => array(
+                    'repository' => OrderRepository::class,
+                    'storage' => OrderElasticSearchStorage::class
+                )
+            ),
+            OrderETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => OrderRepository::class,
+                    'eTagStorage' => OrderPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            OrderPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Shared_Entity'; }
+                )
+            ),
+            OrderController::class => array(
+                'parameters' => array(
+                    'service' => 'OrderService'
+                )
+            ),
+            OrderCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'OrderCollectionService'
                 )
             ),
             OrderPeristentDbStorage::class => array(

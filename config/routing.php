@@ -124,8 +124,8 @@ $routes = array(
                 );
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-        'name' => 'OrderCollection',
-        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
+        'name' => 'OrderEntity',
+        'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/note' => array (
         'controllers' => function($orderId) use ($serviceManager) {

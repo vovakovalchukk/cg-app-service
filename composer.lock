@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "03f3723e7290fb06792079cb98bc71bc",
+    "hash": "0adff2138ad4805b3f836f3e9755a044",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -415,32 +415,64 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.3",
+            "version": "1.1.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "5ed0c6ec4f634e8e0f78e1f58718ecb9f32f984a"
+                "reference": "a7a52f455a0f4e1d587b52cb5bb17c1bd09992ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.3-6e385f.zip",
-                "reference": "5ed0c6ec4f634e8e0f78e1f58718ecb9f32f984a",
-                "shasum": "9d05d053334e553f172068659c280ced8cfbef9d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.9-16bc72.zip",
+                "reference": "a7a52f455a0f4e1d587b52cb5bb17c1bd09992ff",
+                "shasum": "97356721fb5b6465cd555d480a440f8d71f16fe8"
             },
             "type": "library",
-            "extra": {
-                "context-options": {
-                    "ssl": {
-                        "local_cert": "composer.pem"
-                    }
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2013-11-19 17:30:53"
+            "time": "2013-11-25 09:53:32"
+        },
+        {
+            "name": "channelgrabber/constants",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
+                "reference": "0681842e8f32bbbd20cf08dc5117ad9278ca97a2"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG": ""
+                }
+            },
+            "time": "2013-11-20 11:14:40"
+        },
+        {
+            "name": "channelgrabber/etag",
+            "version": "dev-CGIV-874-Update-Stdlib-Dependancy",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgetag.git",
+                "reference": "4154757205215b1563d262f6b3170471b785d706"
+            },
+            "require": {
+                "channelgrabber/stdlib": ">=2.0.7, <2.3.0",
+                "predis/predis": "v0.8.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\ETag\\": ""
+                }
+            },
+            "time": "2013-11-22 14:05:44"
         },
         {
             "name": "channelgrabber/http",
@@ -466,6 +498,22 @@
                 }
             },
             "time": "2013-10-28 11:26:16"
+        },
+        {
+            "name": "channelgrabber/order",
+            "version": "dev-CGIV-812",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-order.git",
+                "reference": "4b41067cd18e5e34cc84e334b6f5cb9c03c4e20c"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Order\\": ""
+                }
+            },
+            "time": "2013-11-25 11:19:26"
         },
         {
             "name": "channelgrabber/predis",
@@ -501,17 +549,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.3.1",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "acf11ecc6d19f4d92ed42a97a8380d44cdb42e34"
+                "reference": "5b15b4e2291bbdd10d29d96e1ff6710d21c3d9b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.3.1-bca064.zip",
-                "reference": "acf11ecc6d19f4d92ed42a97a8380d44cdb42e34",
-                "shasum": "84ff373139d4391b6a5fc330a4cbd20812de5e60"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.3.4-a9484e.zip",
+                "reference": "5b15b4e2291bbdd10d29d96e1ff6710d21c3d9b7",
+                "shasum": "472be9ef7a66fd5a8dab30d49c7777fd8aa4a031"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -529,7 +577,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-11-19 11:49:00"
+            "time": "2013-11-22 10:22:37"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -568,17 +616,17 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.1.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "6c2943dfce1d4482cb819ef2b5e03e3eee9c0dc9"
+                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.0-08ba7d.zip",
-                "reference": "6c2943dfce1d4482cb819ef2b5e03e3eee9c0dc9",
-                "shasum": "e2bad661d5fbf129cd0d07c5f52f95ccf3094fac"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.2-5ff566.zip",
+                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b",
+                "shasum": "cac6766b8d4b9b145bd239a3f4ff154d8dab9787"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
@@ -597,7 +645,7 @@
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2013-11-11 20:53:27"
+            "time": "2013-11-22 11:34:08"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -1064,16 +1112,16 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "dev-develop",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "7a69d0e044b447ad92399fc20c24793263aa72e9"
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/7a69d0e044b447ad92399fc20c24793263aa72e9",
-                "reference": "7a69d0e044b447ad92399fc20c24793263aa72e9",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1169,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-11-19 12:03:10"
+            "time": "2013-11-19 11:57:26"
         },
         {
             "name": "phpspec/php-diff",
@@ -2966,12 +3014,19 @@
 
     ],
     "aliases": [
-
+        {
+            "alias": "1.2.1",
+            "alias_normalized": "1.2.1.0",
+            "version": "dev-CGIV-874-Update-Stdlib-Dependancy",
+            "package": "channelgrabber/etag"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "phpspec/phpspec": 20,
-        "nocarrier/hal": 20
+        "channelgrabber/order": 20,
+        "channelgrabber/constants": 20,
+        "channelgrabber/etag": 20
     },
     "platform": [
 
