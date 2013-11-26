@@ -164,7 +164,7 @@ class StartupCommand implements StartupCommandInterface
             $this->getConsole()->writeErrorStatus('VM application root is not set');
             $vmPath = $this->getConsole()->ask(
                 'What is the absolute path of your application root on the vm',
-                '/var/www/' . $config->getAppName()
+                '/var/www/' . str_replace(" ", "-", $config->getAppName())
             );
         }
         $this->getConsole()->writeStatus('VM application root set to \'' . $vmPath . '\'');

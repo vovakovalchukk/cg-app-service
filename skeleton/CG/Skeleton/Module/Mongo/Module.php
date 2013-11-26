@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Module\Redis;
+namespace CG\Skeleton\Module\Mongo;
 
 use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\ConfigureInterface;
@@ -11,7 +11,6 @@ use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\StartupCommand as Chef;
 use CG\Skeleton\Chef\Node;
-use CG\Skeleton\DevelopmentEnvironment\Environment;
 
 class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
@@ -20,7 +19,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function getModuleName()
     {
-        return 'Redis';
+        return 'Mongo';
     }
 
     public function enable(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
@@ -28,18 +27,13 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $moduleConfig->setEnabled(true);
     }
 
-    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
+    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
-        $this->updateNode($arguments, $config, $moduleConfig, $environment);
+        $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
-
-        $this->updateComposer($moduleConfig, array(
-            'predis/predis:~0.8.3',
-            'channelgrabber/predis:~1.0.1'
-        ));
     }
 
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
@@ -50,10 +44,10 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configureModule(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
-        $this->configureRedisAdapters($arguments, $config, $moduleConfig, $reconfigure);
+        $this->configureMongoAdapters($arguments, $config, $moduleConfig, $reconfigure);
     }
 
-    public function configureRedisAdapters(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
+    public function configureMongoAdapters(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, $reconfigure = false)
     {
         if (!$moduleConfig->isEnabled()) {
             return;
@@ -62,20 +56,20 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($config->getInfrastructurePath() . '/tools/chef');
 
         ob_start();
-        passthru('knife solo data bag show redis local -F json 2>/dev/null');
-        $redisInstancesJson = json_decode(ob_get_clean(), true) ?: array();
+        passthru('knife solo data bag show mongo local -F json 2>/dev/null');
+        $mongoInstancesJson = json_decode(ob_get_clean(), true) ?: array();
 
-        $redisInstances = array();
-        if (isset($redisInstancesJson['instance'])) {
-            foreach (array_keys($redisInstancesJson['instance']) as $redisInstance) {
-                $redisInstances[$redisInstance] = $redisInstance;
+        $mongoInstances = array();
+        if (isset($mongoInstancesJson['instance'])) {
+            foreach (array_keys($mongoInstancesJson['instance']) as $mongoInstance) {
+                $mongoInstances[$mongoInstance] = $mongoInstance;
             }
         }
 
-        if (empty($redisInstances)) {
+        if (empty($mongoInstances)) {
             $moduleConfig->setEnabled(false);
             $this->getConsole()->writelnErr(
-                'No Redis Instances configured in redis data bag for local environment  - ' . $this->getModuleName() . ' Disabled'
+                'No Mongo Instances configured in mongo data bag for local environment  - ' . $this->getModuleName() . ' Disabled'
             );
             chdir($cwd);
             return;
@@ -83,8 +77,8 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         $configuredAdapters = array();
         while ($reconfigure || empty($configuredAdapters)) {
-            $this->getConsole()->writeln('Available Redis Adapters:');
-            foreach ($redisInstances as $instance) {
+            $this->getConsole()->writeln('Available Mongo Adapters:');
+            foreach ($mongoInstances as $instance) {
                 $this->getConsole()->writeln('   * ' . $instance);
             }
 
@@ -97,41 +91,42 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             $reconfigure = false;
         };
 
-        $moduleConfig->setRedisAdapters($configuredAdapters);
+        $moduleConfig->setMongoAdapters($configuredAdapters);
         chdir($cwd);
     }
 
-    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
+    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
-        $nodeFile = Chef::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
+        $nodeFile = Chef::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
 
-        $configKey = 'configure_sites|sites|' . $config->getAppName() . '|redis_client|';
+        $configKey = 'configure_sites|sites|' . $config->getAppName() . '|mongo_client|';
 
         if ($moduleConfig->isEnabled()) {
             $node->setKey($configKey . 'enabled', true);
+
             $adapters = array();
-            foreach ($moduleConfig->getRedisAdapters() as $adapter => $enabled) {
+            foreach ($moduleConfig->getMongoAdapters() as $adapter => $enabled) {
                 if ($enabled) {
                     $adapters[] = $adapter;
                 }
             }
             $node->setKey($configKey . 'adapters', $adapters);
+
             $node->setKey(
-                'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php',
-                'config/autoload/di.redis.global.php'
+                'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.mongo.global.php',
+                'config/autoload/di.mongo.global.php'
             );
         } else {
-            $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|redis_client');
-            $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php');
+            $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|mongo_client');
+            $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.mongo.global.php');
         }
 
         $node->save();
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $environment->getEnvironmentConfig()->getNode()
-            . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
         );
     }
 

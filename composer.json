@@ -23,13 +23,14 @@
         "zendframework/zend-db" : "2.2.*",
         "zendframework/zend-di" : "2.2.*",
         "channelgrabber/stdlib" : "~1.0.3",
-        "phpspec/phpspec" : "2.0.*@dev",
-        "phpspec/prophecy" : "~1.0",
-        "davedevelopment/phpmig" : "0.4",
-        "codeception/codeception" : "1.6.5",
         "nocarrier/hal" : "~0.9.3",
         "guzzle/guzzle" : "~3.7",
-        "channelgrabber/http" : "~1.1.2",
+        "channelgrabber/http" : "~1.1.2"
+    },
+    "require-dev": {
+        "codeception/codeception" : "1.6.5",
+        "phpspec/phpspec" : "2.0.*@dev",
+        "phpspec/prophecy" : "~1.0",
         "channelgrabber/codeception" : "1.0.*"
     },
     "scripts": {
