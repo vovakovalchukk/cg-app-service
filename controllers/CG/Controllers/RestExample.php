@@ -18,8 +18,8 @@ class RestExample
     public function __construct(Slim $app, Di $di, ServiceInterface $service)
     {
         $this->setSlim($app)
-            ->setDi($di)
-            ->setService($service);
+             ->setDi($di)
+             ->setService($service);
     }
 
     /**
@@ -38,9 +38,7 @@ class RestExample
     public function get()
     {
         try {
-            $params = \CG\Stdlib\flatten($this->getParams());
-            $this->getService()->validateInput($this->getDi(), $params);
-            return $this->getService()->fetchAsHal($params['status']);
+            return $this->getService()->fetchAsHal($this->getParams('status'));
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage());
         } catch (AlreadyExists $e) {
