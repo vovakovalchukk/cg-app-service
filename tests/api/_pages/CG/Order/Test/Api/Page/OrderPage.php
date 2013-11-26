@@ -11,7 +11,7 @@ class OrderPage extends RootPage
     const URL = "/order";
     const EMBEDDED_RESOURCE = "order";
     const PRIMARY_ID = "1411-10";
-    const SECONDARY_ID = "1411-20";
+    const SECONDARY_ID = "1412-20";
 
     public static function getUrl()
     {
@@ -33,11 +33,11 @@ class OrderPage extends RootPage
                 [
                     "id" => "1411-10",
                     "accountId" => 1411,
-                    "externalId" => 10,
+                    "externalId" => "10",
                     "channel" => "ebay",
                     "organisationUnitId" => 1,
                     "total" => 21.99,
-                    "status" => 1,
+                    "status" => "1",
                     "shippingPrice" => 10.99,
                     "shippingMethod" => "standard",
                     "currencyCode" => "GBP",
@@ -77,11 +77,11 @@ class OrderPage extends RootPage
                 [
                     "id" => "1412-20",
                     "accountId" => 1412,
-                    "externalId" => 20,
+                    "externalId" => "20",
                     "channel" => "ebay2",
                     "organisationUnitId" => 2,
                     "total" => 22.99,
-                    "status" => 2,
+                    "status" => "2",
                     "shippingPrice" => 20.99,
                     "shippingMethod" => "standard2",
                     "currencyCode" => "GBP",
@@ -121,11 +121,11 @@ class OrderPage extends RootPage
                 [
                     "id" => "1413-30",
                     "accountId" => 1413,
-                    "externalId" => 30,
+                    "externalId" => "30",
                     "channel" => "ebay3",
                     "organisationUnitId" => 3,
                     "total" => 23.99,
-                    "status" => 3,
+                    "status" => "3",
                     "shippingPrice" => 30.99,
                     "shippingMethod" => "standard3",
                     "currencyCode" => "GBP",
@@ -165,11 +165,11 @@ class OrderPage extends RootPage
                 [
                     "id" => "1414-40",
                     "accountId" => 1414,
-                    "externalId" => 40,
+                    "externalId" => "40",
                     "channel" => "ebay4",
                     "organisationUnitId" => 4,
                     "total" => 24.99,
-                    "status" => 4,
+                    "status" => "4",
                     "shippingPrice" => 40.99,
                     "shippingMethod" => "standard4",
                     "currencyCode" => "GBP",
@@ -209,11 +209,11 @@ class OrderPage extends RootPage
                 [
                     "id" => "1415-50",
                     "accountId" => 1415,
-                    "externalId" => 50,
+                    "externalId" => "50",
                     "channel" => "ebay5",
                     "organisationUnitId" => 5,
                     "total" => 25.99,
-                    "status" => 5,
+                    "status" => "5",
                     "shippingPrice" => 50.99,
                     "shippingMethod" => "standard5",
                     "currencyCode" => "GBP",
@@ -256,89 +256,48 @@ class OrderPage extends RootPage
     public static function getRequiredEntityFields()
     {
         return ["accountId",
+                "externalId",
                 "channel",
                 "organisationUnitId",
                 "total",
                 "status",
+                "totalDiscount",
                 "shippingPrice",
                 "shippingMethod",
-                "billingAddressFullName",
-                "billingAddress1",
-                "billingAddressCity",
-                "billingAddressCounty",
-                "billingAddressCountry",
-                "billingAddressCountryCode",
-                "billingAddressPostcode",
-                "billingEmailAddress",
-                "shippingAddressFullName",
-                "shippingAddress1",
-                "shippingAddressCity",
-                "shippingAddressCounty",
-                "shippingAddressCountry",
-                "shippingAddressCountryCode",
-                "shippingAddressPostcode",
-                "shippingEmailAddress",
-                "totalDiscount",
+                "currencyCode",
+                "purchaseDate"
         ];
     }
 
     public static function getInvalidEntityData()
     {
-        return ["accountId" => "ABC",
-                "channel" => [],
-                "organisationUnitId" => "ABC",
-                "total" => "ABC",
-                "status" => [],
-                "shippingPrice" => "ABC",
-                "shippingMethod" => [],
-                "billingAddressFullName" => [],
-                "billingAddress1" => [],
-                "billingAddressCity" => [],
-                "billingAddressCounty" => [],
-                "billingAddressCountry" => [],
-                "billingAddressCountryCode" => [],
-                "billingAddressPostcode" => [],
-                "billingEmailAddress" => [],
-                "shippingAddressFullName" => [],
-                "shippingAddress1" => [],
-                "shippingAddressCity" => [],
-                "shippingAddressCounty" => [],
-                "shippingAddressCountry" => [],
-                "shippingAddressCountryCode" => [],
-                "shippingAddressPostcode" => [],
-                "shippingEmailAddress" => [],
-                "totalDiscount" => "ABC",
-                "custom" => "ABC"
+        return ["accountId" => "abc",
+            "externalId" => [],
+            "channel" => [],
+            "organisationUnitId" => "abc",
+            "total" => "abc",
+            "status" => [],
+            "totalDiscount" => "abc",
+            "shippingPrice" => "abc",
+            "shippingMethod" => [],
+            "currencyCode" => "INVALIDCURRENCYCODE",
+            "purchaseDate" => []
         ];
     }
 
     public static function getInvalidEntityFields()
     {
         return ["accountId",
+                "externalId",
                 "channel",
                 "organisationUnitId",
                 "total",
                 "status",
+                "totalDiscount",
                 "shippingPrice",
                 "shippingMethod",
-                "billingAddressFullName",
-                "billingAddress1",
-                "billingAddressCity",
-                "billingAddressCounty",
-                "billingAddressCountry",
-                "billingAddressCountryCode",
-                "billingAddressPostcode",
-                "billingEmailAddress",
-                "shippingAddressFullName",
-                "shippingAddress1",
-                "shippingAddressCity",
-                "shippingAddressCounty",
-                "shippingAddressCountry",
-                "shippingAddressCountryCode",
-                "shippingAddressPostcode",
-                "shippingEmailAddress",
-                "totalDiscount",
-                "custom" => []
+                "currencyCode",
+                "purchaseDate"
         ];
     }
 
