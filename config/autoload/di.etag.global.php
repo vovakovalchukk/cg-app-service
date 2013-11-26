@@ -1,11 +1,16 @@
 <?php
+use Slim\Http\Headers as SlimHeaders;
+use CG\Slim\Stdlib\Http\Headers as CgHeaders;
 
 return array(
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'SlimRequestHeaders' => 'Slim\Http\Headers',
-                'SlimResponseHeaders' => 'Slim\Http\Headers',
+                'SlimRequestHeaders' => SlimHeaders::class,
+                'SlimResponseHeaders' => SlimHeaders::class,
+                
+                'RequestHeaders' => CgHeaders::class,
+                'ResponseHeaders' => CgHeaders::class
             ),
             'RequestHeaders' => array(
                 'parameters' => array(
@@ -20,4 +25,3 @@ return array(
         )
     )
 );
-
