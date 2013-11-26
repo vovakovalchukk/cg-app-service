@@ -1,6 +1,7 @@
 <?php
 namespace CG\Skeleton;
 
+use CG\Skeleton\Vagrant\NodeData;
 use SplObjectStorage;
 use CG\Skeleton\Console\Lists\Commands;
 use CG\Skeleton\Console;
@@ -16,12 +17,12 @@ class Application
     protected $shutdownCommands;
     protected $environment;
 
-    public function __construct(Console $console, Arguments $arguments, Config $config)
+    public function __construct(Console $console, Arguments $arguments, Config $config, NodeData $nodeData)
     {
         $this->setConsole($console)
              ->setArguments($arguments)
              ->setConfig($config)
-             ->setEnvironment($config);
+             ->setEnvironment($config, $nodeData);
         $this->startupCommands = new SplObjectStorage();
         $this->commands = new SplObjectStorage();
         $this->shutdownCommands = new SplObjectStorage();
@@ -38,9 +39,9 @@ class Application
         return $this->console;
     }
 
-    public function setEnvironment(Config $config)
+    public function setEnvironment(Config $config, NodeData $nodeData)
     {
-        $this->environment = EnvironmentFactory::build($config);
+        $this->environment = EnvironmentFactory::build($config, $nodeData);
         return $this;
     }
 
