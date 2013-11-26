@@ -2,6 +2,7 @@
 namespace CG\Skeleton\DevelopmentEnvironment;
 
 use CG\Skeleton\Config as SkeletonConfig;
+use CG\Skeleton\Vagrant\NodeData;
 
 class EnvironmentFactory
 {
@@ -9,10 +10,10 @@ class EnvironmentFactory
 
     protected static $environments = array('Local', 'Dual');
 
-    public static function build(SkeletonConfig $config)
+    public static function build(SkeletonConfig $config, NodeData $nodeData)
     {
         $environmentClass = static::ENVIRONMENT_NAMESPACE . $config->getEnvironment();
-        return new $environmentClass($config);
+        return new $environmentClass($config, $nodeData);
     }
 
     public static function getEnvironments()
