@@ -30,12 +30,12 @@ class Dual extends Environment {
     public function setupIp(Startup $console)
     {
         $ipAddress = $this->getEnvironmentConfig()->getIp();
-        $configuredHosts = $this->getHosts();
+        $nodeData = $this->getNodeData();
         $node = $this->getEnvironmentConfig()->getNode();
 
         while (!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             if (isset($node)) {
-                $ipAddress = $configuredHosts[$node]['ip'];
+                $ipAddress = $nodeData->getNode($node)->getVmIp();
                 break;
             }
             $console->writeErrorStatus('IP address is not set or is invalid');
@@ -44,7 +44,7 @@ class Dual extends Environment {
                 $this->environmentNodes,
                 $this->environmentNodes[1]
             );
-            $ipAddress = $configuredHosts[$chosenNode]['ip'];
+            $ipAddress = $nodeData->getNode($chosenNode)->getVmIp();
         }
 
         $console->writeStatus('IP address set to \'' . $ipAddress . '\'');

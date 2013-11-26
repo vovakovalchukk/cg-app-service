@@ -4,16 +4,30 @@ namespace CG\Skeleton\DevelopmentEnvironment;
 use CG\Skeleton\Config as SkeletonConfig;
 use CG\Skeleton\Chef\StartupCommand;
 use CG\Skeleton\Chef\Hosts;
+use CG\Skeleton\Vagrant\NodeData;
 
 abstract class Environment implements EnvironmentInterface {
 
     protected $skeletonConfig;
     protected $environmentConfig;
+    protected $nodeData;
 
-    public function __construct(SkeletonConfig $config)
+    public function __construct(SkeletonConfig $config, NodeData $nodeData)
     {
-        $this->setConfig($config);
-        $this->setEnvironmentConfig();
+        $this->setConfig($config)
+             ->setEnvironmentConfig()
+             ->setNodeData($nodeData);
+    }
+
+    public function getNodeData()
+    {
+        return $this->nodeData;
+    }
+
+    public function setNodeData($nodeData)
+    {
+        $this->nodeData = $nodeData;
+        return $this;
     }
 
     public function getEnvironmentConfig()
