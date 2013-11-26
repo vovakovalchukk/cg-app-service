@@ -41,6 +41,5 @@ $app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
 
 $di->instanceManager()->addSharedInstance($app, Slim::class);
-$di->instanceManager()->addSharedInstance($app->request()->headers, 'SlimRequestHeaders');
-$di->instanceManager()->addSharedInstance($app->response()->headers, 'SlimResponseHeaders');
+include_once('config/SlimHeaders.php');
 $app->run();
