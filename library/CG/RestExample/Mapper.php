@@ -1,14 +1,12 @@
 <?php
 namespace CG\RestExample;
 
-use CG\Slim\Mapper\ToHalTrait;
+use CG\Slim\Renderer\ResponseType\Hal;
 use Zend\Di\Di;
 
 class Mapper
 {
-    use ToHalTrait;
-
-    const URL = '/test';
+    const URL = '/rest';
 
     protected $di;
 
@@ -22,7 +20,7 @@ class Mapper
      */
     public function entityToHal(Entity $entity)
     {
-        return $this->toHal(static::URL, $entity->toArray());
+        return $this->getDi()->get(Hal::class,array('uri' => static::URL, 'data' => $entity->toArray()));
     }
 
     protected function getDi()
@@ -33,5 +31,6 @@ class Mapper
     protected function setDi(Di $di)
     {
         $this->di = $di;
+        return $this;
     }
 }
