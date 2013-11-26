@@ -89,6 +89,8 @@ class StartupCommand implements StartupCommandInterface
         $vagrantConfig->setVmRam($vmRam);
     }
 
+
+    // TODO remove me if i'm still not used
     protected function setVmIp(NodeData $nodeData, Node $node, SkeletonConfig $config, Config $vagrantConfig)
     {
         $vmIp = $vagrantConfig->getVmIp();

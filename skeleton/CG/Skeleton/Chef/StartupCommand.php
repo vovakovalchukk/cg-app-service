@@ -123,6 +123,18 @@ class StartupCommand implements StartupCommandInterface
     protected function setupIp(Config $config, Environment $environment)
     {
         $environment->setupIp($this->getConsole());
+
+        $this->getConsole()->writeStatus(
+            'Saving ip to /etc/hosts '
+            . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
+        );
+
+        $environmentConfig = $environment->getEnvironmentConfig();
+        exec(
+            'grep -q -e "' . $environmentConfig->getIp() . ' ' . $environmentConfig->getHostname() . '" /etc/hosts'
+            . ' || echo "' . $environmentConfig->getIp() . ' ' . $environmentConfig->getHostname() . '" | sudo tee -a /etc/hosts'
+        );
+        $this->getConsole()->writeStatus('IP saved to /etc/hosts');
     }
 
     protected function addRoleToNode(Node $node, $role)
