@@ -176,3 +176,20 @@ INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (2, '
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (3, '1411-10', 3, 'Note 3', '2013-10-10 03:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (4, '1411-10', 4, 'Note 4', '2013-10-10 04:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (5, '1411-10', 5, 'Note 5', '2013-10-10 05:00:00');
+
+CREATE TABLE IF NOT EXISTS `tracking` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `number` varchar(120) NOT NULL,
+                  `carrier` varchar(120) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `tracking` ADD CONSTRAINT `tracking_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (1, '1411-10', 1, '1231', 'carrier 1', '2013-10-10 01:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (2, '1411-10', 2, '1232', 'carrier 2', '2013-10-10 02:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (3, '1411-10', 3, '1233', 'carrier 3', '2013-10-10 03:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (4, '1411-10', 4, '1234', 'carrier 4', '2013-10-10 04:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (5, '1411-10', 5, '1235', 'carrier 5', '2013-10-10 05:00:00');

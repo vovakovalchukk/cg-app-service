@@ -15,6 +15,11 @@ use CG\Controllers\Order\Order;
 use CG\Controllers\Order\Note;
 use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
 
+//Tracking
+use CG\Controllers\Order\Tracking;
+use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
+use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -156,5 +161,37 @@ $routes = array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderNoteEntity',
         'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/order/:orderId/tracking' => array (
+        'controllers' => function($orderId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(TrackingCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'POST', 'OPTIONS'),
+        'name' => 'OrderTrackingCollection',
+        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/order/:orderId/tracking/:trackingId' => array (
+        'controllers' => function($orderId, $trackingId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Tracking::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $trackingId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderTrackingEntity',
+        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     )
 );

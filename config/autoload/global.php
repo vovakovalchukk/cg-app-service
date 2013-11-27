@@ -44,6 +44,17 @@ use CG\ETag\Storage\Predis as NotePredis;
 use CG\Order\Service\Note\Storage\ETag as NoteETagStorage;
 use Slim\Http\Headers as SlimHttpHeaders;
 
+//Tracking
+use CG\Order\Service\Tracking\Service as TrackingService;
+use CG\Order\Shared\Tracking\Repository as TrackingRepository;
+use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
+use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
+use CG\Controllers\Order\Tracking as TrackingController;
+use CG\Controllers\Order\Tracking\Collection as TrackingCollectionController;
+use CG\ETag\Storage\Predis as TrackingPredis;
+use CG\Order\Service\Tracking\Storage\ETag as TrackingETagStorage;
+
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -92,7 +103,9 @@ return array(
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
-                'NoteCollectionService' => NoteService::class
+                'NoteCollectionService' => NoteService::class,
+                'TrackingService' => TrackingService::class,
+                'TrackingCollectionService' => TrackingService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -245,6 +258,52 @@ return array(
                 )
             ),
             NoteDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            TrackingETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => TrackingRepository::class,
+                    'eTagStorage' => TrackingPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            TrackingPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Tracking_Shared_Entity'; }
+                )
+            ),
+            TrackingController::class => array(
+                'parameters' => array(
+                    'service' => 'TrackingService'
+                )
+            ),
+            TrackingCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'TrackingCollectionService'
+                )
+            ),
+            'TrackingService' => array(
+                'parameters' => array(
+                    'repository' => TrackingETagStorage::class
+                )
+            ),
+            'TrackingCollectionService' => array(
+                'parameters' => array(
+                    'repository' => TrackingRepository::class
+                )
+            ),
+            TrackingRepository::class => array(
+                'parameter' => array(
+                    'storage' => TrackingCacheStorage::class,
+                    'repository' => TrackingDbStorage::class
+                )
+            ),
+            TrackingDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
