@@ -33,6 +33,7 @@ use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
+use Zend\Config\Config;
 
 return array(
     'service_manager' => array(
