@@ -38,6 +38,10 @@ use CG\Controllers\Order\Order as OrderController;
 use CG\Controllers\Order\Order\Collection as OrderCollectionController;
 use CG\ETag\Storage\Predis as OrderPredis;
 use CG\Order\Service\Storage\ETag as OrderETagStorage;
+use CG\Controllers\Order\Note as NoteController;
+use CG\Controllers\Order\Note\Collection as NoteCollectionController;
+use CG\ETag\Storage\Predis as NotePredis;
+use CG\Order\Service\Note\Storage\ETag as NoteETagStorage;
 use Slim\Http\Headers as SlimHttpHeaders;
 
 return array(
@@ -87,10 +91,12 @@ return array(
                 'config' => Config::class,
                 'RequestHeaders' => Headers::class,
                 'ResponseHeaders' => Headers::class,
+                'SlimRequestHeaders' => SlimHttpHeaders::class,
+                'SlimResponseHeaders' => SlimHttpHeaders::class,
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
-                'SlimRequestHeaders' => SlimHttpHeaders::class,
-                'SlimResponseHeaders' => SlimHttpHeaders::class
+                'NoteService' => NoteService::class,
+                'NoteCollectionService' => NoteService::class
             ),
             'RequestHeaders' => array(
                 'parameters' => array(
@@ -173,7 +179,8 @@ return array(
             'OrderService' => array(
                 'parameters' => array(
                     'repository' => OrderETagStorage::class,
-                    'storage' => OrderElasticSearchStorage::class
+                    'storage' => OrderElasticSearchStorage::class,
+                    'noteService' => 'NoteService'
                 )
             ),
             'OrderCollectionService' => array(
@@ -212,8 +219,36 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            NoteService::class => array(
+            NoteETagStorage::class => array (
                 'parameter' => array(
+                    'entityStorage' => NoteRepository::class,
+                    'eTagStorage' => NotePredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            NotePredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Note_Shared_Entity'; }
+                )
+            ),
+            NoteController::class => array(
+                'parameters' => array(
+                    'service' => 'NoteService'
+                )
+            ),
+            NoteCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'NoteCollectionService'
+                )
+            ),
+            'NoteService' => array(
+                'parameters' => array(
+                    'repository' => NoteETagStorage::class
+                )
+            ),
+            'NoteCollectionService' => array(
+                'parameters' => array(
                     'repository' => NoteRepository::class
                 )
             ),

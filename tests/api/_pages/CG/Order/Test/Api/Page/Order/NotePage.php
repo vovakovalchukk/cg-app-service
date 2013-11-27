@@ -9,6 +9,8 @@ class NotePage extends OrderEntityPage
     use CollectionPageTrait;
     const URL = "/note";
     const EMBEDDED_RESOURCE = "note";
+    const PRIMARY_ID = "1";
+    const SECONDARY_ID = "2";
 
     public static function getUrl()
     {

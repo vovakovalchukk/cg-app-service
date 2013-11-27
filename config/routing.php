@@ -13,6 +13,7 @@ use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
 use CG\InputValidation\Order\Order\Entity as OrderEntityValidationRules;
 use CG\Controllers\Order\Note\Collection as NoteCollection;
 use CG\Controllers\Order\Order;
+use CG\Controllers\Order\Note;
 use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
 
 $routes = array(
@@ -143,4 +144,20 @@ $routes = array(
         'name' => 'OrderNoteCollection',
         'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
+    '/order/:orderId/note/:noteId' => array (
+        'controllers' => function($orderId, $noteId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Note::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $noteId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderNoteEntity',
+        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    )
 );
