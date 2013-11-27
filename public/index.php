@@ -35,7 +35,7 @@ foreach ($routes as $route => $request) {
     }
     call_user_func_array([$route, 'via'], $request['via']);
 }
-$app->any('.+', $unusedMethods);
+$app->any('.+', $newRelic, $unusedMethods);
 
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
