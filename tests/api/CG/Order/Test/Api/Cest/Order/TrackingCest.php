@@ -1,7 +1,7 @@
 <?php
 namespace CG\Order\Test\Api\Cest\Order;
 
-use CG\Order\Test\Api\Page\Order\NotePage;
+use CG\Order\Test\Api\Page\Order\TrackingPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
@@ -12,6 +12,6 @@ class TrackingCest
 
     protected function getPageClass()
     {
-        return NotePage::class;
+        return TrackingPage::class;
     }
 }
