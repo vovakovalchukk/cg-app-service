@@ -16,10 +16,10 @@ require_once 'config/routing.php';
 $di = $serviceManager->get('Di');
 $app = $serviceManager->get(Slim::class);
 
-//$newRelic = $di->get(NewRelic::class, compact($app));
+$newRelic = $di->get(NewRelic::class, compact($app));
 $options = $di->get(Options::class, compact($app));
 $unusedMethods = $di->get(UnusedMethods::class, compact($app));
-$app->any('.+', $unusedMethods);
+
 $validator = $di->get(Validator::class);
 foreach ($routes as $route => $request) {
     if (isset($request["validation"])) {
@@ -36,7 +36,7 @@ foreach ($routes as $route => $request) {
     }
     call_user_func_array([$route, 'via'], $request['via']);
 }
-//$app->any('.+', $newRelic, $unusedMethods);
+$app->any('.+', $newRelic, $unusedMethods);
 
 
 $app->add($validator);
