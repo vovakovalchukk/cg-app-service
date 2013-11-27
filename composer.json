@@ -35,24 +35,23 @@
         "zendframework/zend-config" : "2.2.*",
         "zendframework/zend-db" : "2.2.*",
         "zendframework/zend-di" : "2.2.*",
-        "channelgrabber/stdlib" : "2.0.*",
         "channelgrabber/cache" : "1.0.0",
-        "phpspec/phpspec" : "2.0.*@dev",
-        "phpspec/prophecy" : "~1.0",
-        "davedevelopment/phpmig" : "0.4",
+        "channelgrabber/http" : "~1.2.1",
+        "channelgrabber/slim" : "~1.3.6",
+        "channelgrabber/stdlib" : "~2.2.1",
+        "channelgrabber/validation" : "~1.1.2",
+        "channelgrabber/vnderror" : "~1.0.0",
         "codeception/codeception" : "1.6.5",
         "guzzle/guzzle" : "~3.7",
-        "channelgrabber/http" : "~1.2.1",
-        "channelgrabber/codeception" : "~1.1.3",
-        "channelgrabber/slim" : "~1.3.0",
-        "channelgrabber/predis" : "~1.0.1",
-        "channelgrabber/validation" : "~1.1.0",
-        "channelgrabber/vnderror" : "~1.0.0",
-        "zendframework/zend-validator" : "2.2.*",
-        "zendframework/zend-inputfilter" : "2.2.*",
-        "zendframework/zend-servicemanager" : "2.2.*",
-        "predis/predis": "~0.8.3",
-        "nocarrier/hal" : "~0.9.4"
+        "zendframework/zend-inputfilter" : "~2.2.5",
+        "zendframework/zend-servicemanager" : "~2.2.5",
+        "zendframework/zend-validator" : "~2.2.5",
+        "nocarrier/hal" : "~0.9.3"
+    },
+    "require-dev": {
+        "codeception/codeception" : "1.6.5",
+        "phpspec/phpspec" : "2.0.*@dev",
+        "phpspec/prophecy" : "~1.0"
     },
     "scripts": {
         "post-install-cmd" : [
