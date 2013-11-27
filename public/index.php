@@ -28,7 +28,7 @@ foreach ($routes as $route => $request) {
     }
     $route = $app->map(
         $route,
-        //$newRelic,
+        $newRelic,
         $options,
         $request["controllers"])->name($request["name"]);
     if (!is_array($request['via'])) {
@@ -37,7 +37,6 @@ foreach ($routes as $route => $request) {
     call_user_func_array([$route, 'via'], $request['via']);
 }
 $app->any('.+', $newRelic, $unusedMethods);
-
 
 $app->add($validator);
 $app->add($di->get(ContentTypes::class));
