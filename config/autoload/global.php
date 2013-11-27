@@ -89,24 +89,10 @@ return array(
                 'EventDbStorage' => EventDb::class,
                 'EventCacheRepo' => EventRepository::class,
                 'config' => Config::class,
-                'RequestHeaders' => Headers::class,
-                'ResponseHeaders' => Headers::class,
-                'SlimRequestHeaders' => SlimHttpHeaders::class,
-                'SlimResponseHeaders' => SlimHttpHeaders::class,
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
                 'NoteCollectionService' => NoteService::class
-            ),
-            'RequestHeaders' => array(
-                'parameters' => array(
-                    'slimHeaders' => 'SlimRequestHeaders'
-                )
-            ),
-            'ResponseHeaders' => array(
-                'parameters' => array(
-                    'slimHeaders' => 'SlimResponseHeaders'
-                )
             ),
             'ReadSql' => array(
                 'parameter' => array(
