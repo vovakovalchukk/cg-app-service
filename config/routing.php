@@ -1,6 +1,5 @@
 <?php
 use Slim\Slim;
-
 use CG\Controllers\Root;
 use CG\Controllers\App\Service\Collection as ServiceCollection;
 use CG\Controllers\App\Service as Service;
@@ -68,7 +67,6 @@ $routes = array(
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
-
                 $controller = $di->get(EventCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
@@ -84,7 +82,6 @@ $routes = array(
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
-
                 $controller = $di->get(Event::class, array());
                 $app->view()->set(
                     'RestResponse',
