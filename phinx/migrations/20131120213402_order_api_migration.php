@@ -86,6 +86,20 @@ class OrderApiMigration extends AbstractMigration
 
         $sql = "ALTER TABLE `tracking` ADD CONSTRAINT `tracking_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);";
         $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `alert` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `alert` text NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
+
+        $sql = "ALTER TABLE `alert` ADD CONSTRAINT `alert_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);";
+        $this->execute($sql);
     }
 
     /**

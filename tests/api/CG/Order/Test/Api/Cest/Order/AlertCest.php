@@ -1,17 +1,17 @@
 <?php
 namespace CG\Order\Test\Api\Cest\Order;
 
-use CG\Order\Test\Api\Page\Order\TrackingPage;
+use CG\Order\Test\Api\Page\Order\AlertPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
 
-class TrackingCest
+class AlertCest
 {
     use CollectionTrait;
 
     protected function getPageClass()
     {
-        return TrackingPage::class;
+        return AlertPage::class;
     }
 }

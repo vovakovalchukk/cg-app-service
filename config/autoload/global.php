@@ -54,6 +54,15 @@ use CG\Controllers\Order\Tracking\Collection as TrackingCollectionController;
 use CG\ETag\Storage\Predis as TrackingPredis;
 use CG\Order\Service\Tracking\Storage\ETag as TrackingETagStorage;
 
+//Alert
+use CG\Order\Service\Alert\Service as AlertService;
+use CG\Order\Shared\Alert\Repository as AlertRepository;
+use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
+use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
+use CG\Controllers\Order\Alert as AlertController;
+use CG\Controllers\Order\Alert\Collection as AlertCollectionController;
+use CG\ETag\Storage\Predis as AlertPredis;
+use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
 
 return array(
     'service_manager' => array(
@@ -105,7 +114,9 @@ return array(
                 'NoteService' => NoteService::class,
                 'NoteCollectionService' => NoteService::class,
                 'TrackingService' => TrackingService::class,
-                'TrackingCollectionService' => TrackingService::class
+                'TrackingCollectionService' => TrackingService::class,
+                'AlertService' => AlertService::class,
+                'AlertCollectionService' => AlertService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -304,6 +315,52 @@ return array(
                 )
             ),
             TrackingDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            AlertETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => AlertRepository::class,
+                    'eTagStorage' => AlertPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            AlertPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Alert_Shared_Entity'; }
+                )
+            ),
+            AlertController::class => array(
+                'parameters' => array(
+                    'service' => 'AlertService'
+                )
+            ),
+            AlertCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'AlertCollectionService'
+                )
+            ),
+            'AlertService' => array(
+                'parameters' => array(
+                    'repository' => AlertETagStorage::class
+                )
+            ),
+            'AlertCollectionService' => array(
+                'parameters' => array(
+                    'repository' => AlertRepository::class
+                )
+            ),
+            AlertRepository::class => array(
+                'parameter' => array(
+                    'storage' => AlertCacheStorage::class,
+                    'repository' => AlertDbStorage::class
+                )
+            ),
+            AlertDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',

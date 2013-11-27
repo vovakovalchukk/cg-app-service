@@ -20,8 +20,6 @@ class TrackingPage extends OrderEntityPage
     static public function notAllowedMethods()
     {
         return [
-                static::GET => static::GET,
-                static::POST => static::POST,
                 static::PUT => static::PUT,
                 static::DELETE => static::DELETE
         ];

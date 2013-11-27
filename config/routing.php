@@ -20,6 +20,11 @@ use CG\Controllers\Order\Tracking;
 use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
 use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
 
+//Alert
+use CG\Controllers\Order\Alert;
+use CG\Controllers\Order\Alert\Collection as AlertCollection;
+use CG\InputValidation\Order\Alert\Entity as AlertEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -193,5 +198,37 @@ $routes = array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderTrackingEntity',
         'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/order/:orderId/alert' => array (
+        'controllers' => function($orderId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(AlertCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'POST', 'OPTIONS'),
+        'name' => 'OrderAlertCollection',
+        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/order/:orderId/alert/:alertId' => array (
+        'controllers' => function($orderId, $alertId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Alert::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $alertId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderAlertEntity',
+        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     )
 );

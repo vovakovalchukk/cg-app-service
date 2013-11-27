@@ -193,3 +193,19 @@ INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timesta
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (3, '1411-10', 3, '1233', 'carrier 3', '2013-10-10 03:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (4, '1411-10', 4, '1234', 'carrier 4', '2013-10-10 04:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (5, '1411-10', 5, '1235', 'carrier 5', '2013-10-10 05:00:00');
+
+CREATE TABLE IF NOT EXISTS `alert` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `alert` varchar(255) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `alert` ADD CONSTRAINT `alert_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (1, '1411-10', 1, 'alert 1', '2013-10-10 01:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (2, '1411-10', 2, 'alert 2', '2013-10-10 02:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (3, '1411-10', 3, 'alert 3', '2013-10-10 03:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (4, '1411-10', 4, 'alert 4', '2013-10-10 04:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (5, '1411-10', 5, 'alert 5', '2013-10-10 05:00:00');
