@@ -29,6 +29,7 @@ use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
+use Zend\Config\Config;
 
 return array(
     'service_manager' => array(
