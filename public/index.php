@@ -41,6 +41,5 @@ $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
 
-$di->instanceManager()->addSharedInstance($app, Slim::class);
+include_once 'config/DiSharedInstances.php';
 $app->run();
-
