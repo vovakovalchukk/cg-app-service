@@ -1,10 +1,10 @@
 class_name: ApiGuy
 modules:
-    enabled: [REST, PhpBrowser, ApiHelper, Db]
+    enabled: [REST, PhpBrowser, ApiHelper]
     config:
         PhpBrowser:
-            url: 'http://localhost/myapp/'
+            url: 'http://slim-skeleton.channelgrabber.com.local/'
         REST:
-            url: 'http://localhost/myapp/'
+            url: 'http://slim-skeleton.channelgrabber.com.local/'
         ApiHelper:
-            url: 'http://localhost/myapp/'
+            url: 'http://slim-skeleton.channelgrabber.com.local/'

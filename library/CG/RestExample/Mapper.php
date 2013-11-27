@@ -6,7 +6,7 @@ use Zend\Di\Di;
 
 class Mapper
 {
-    const URL = '/rest';
+    const URL = '/test';
 
     protected $di;
 

@@ -393,6 +393,13 @@
                 "channelgrabber/cghttp": "*"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Http\\": ""
@@ -418,6 +425,13 @@
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
@@ -443,6 +457,13 @@
                 "zendframework/zend-db": "2.2.*"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Stdlib\\": ""
@@ -472,6 +493,13 @@
                 "zendframework/zend-validator": "~2.2.4"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Validation\\": ""
@@ -497,6 +525,13 @@
                 "php": ">=5.4.0"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
@@ -2551,6 +2586,13 @@
                 "shasum": "a2dae86e29d9bacdd301dc2cebd87f96ccb4a8eb"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Codeception\\": ""
