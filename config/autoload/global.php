@@ -22,6 +22,7 @@ use CG\App\Service\Event\Storage\Db as EventDb;
 use CG\App\Service\Event\Storage\Cache as EventCache;
 use CG\App\Service\Event\Repository as EventRepository;
 use Zend\EventManager\EventManager;
+use Zend\Config\Config;
 
 return array(
     'service_manager' => array(
@@ -67,6 +68,7 @@ return array(
                 'EventDbRepo' => EventRepository::class,
                 'EventDbStorage' => EventDb::class,
                 'EventCacheRepo' => EventRepository::class,
+                'config' => Config::class
              ),
             'ReadSql' => array(
                 'parameter' => array(
