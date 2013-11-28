@@ -9,6 +9,7 @@ use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
+use CG\Slim\Versioning\Middleware as Versioning;
 
 require_once 'application/bootstrap.php';
 require_once 'config/routing.php';
@@ -40,6 +41,7 @@ $app->any('.+', $newRelic, $unusedMethods);
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
+$app->add($di->get(Versioning::class));
 
 include_once 'config/DiSharedInstances.php';
 $app->run();
