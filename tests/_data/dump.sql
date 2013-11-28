@@ -209,3 +209,17 @@ INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (2,
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (3, '1411-10', 3, 'alert 3', '2013-10-10 03:00:00');
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (4, '1411-10', 4, 'alert 4', '2013-10-10 04:00:00');
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (5, '1411-10', 5, 'alert 5', '2013-10-10 05:00:00');
+
+CREATE TABLE IF NOT EXISTS `fee` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `name` varchar(255) NOT NULL,
+                  `amount` decimal(12,4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (1, '1411-11', 1.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (2, '1411-11', 2.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (3, '1411-11', 3.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (4, '1411-11', 4.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (5, '1411-11', 5.99, 'eBayFee');

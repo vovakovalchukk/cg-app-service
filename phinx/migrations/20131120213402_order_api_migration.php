@@ -91,6 +91,16 @@ class OrderApiMigration extends AbstractMigration
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `fee` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `name` varchar(255) NOT NULL,
+                  `amount` decimal(12,4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
     }
 
     /**
@@ -107,6 +117,8 @@ class OrderApiMigration extends AbstractMigration
         $sql = 'DROP TABLE IF EXISTS `tracking`';
         $this->execute($sql);
         $sql = 'DROP TABLE IF EXISTS `alert`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `fee`';
         $this->execute($sql);
     }
 }

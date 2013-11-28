@@ -9,6 +9,8 @@ class FeePage extends OrderItemEntityPage
     use CollectionPageTrait;
     const URL = "/fee";
     const EMBEDDED_RESOURCE = "fee";
+    const PRIMARY_ID = "1";
+    const SECONDARY_ID = "2";
 
     public static function getUrl()
     {
@@ -18,8 +20,6 @@ class FeePage extends OrderItemEntityPage
     static public function notAllowedMethods()
     {
         return [
-            static::GET => static::GET,
-            static::POST => static::POST,
             static::PUT => static::PUT,
             static::DELETE => static::DELETE
         ];
@@ -29,69 +29,55 @@ class FeePage extends OrderItemEntityPage
     {
 
         return [
-                ["orderItemId" => "1411-11",
-                 "fee" => [
-                            ["name" => "eBayFee",
-                            "amount" => "1.99"],
-                            ["name" => "PayPal Fee",
-                            "amount" => "12.99"]
-                          ]
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 1.99,
+                    "id" => 1
                 ],
-                ["orderItemId" => "1411-12",
-                "fee" => [
-                            ["name" => "eBayFee",
-                            "amount" => "2.99"],
-                            ["name" => "PayPal Fee",
-                            "amount" => "22.99"]
-                         ]
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 2.99,
+                    "id" => 2
                 ],
-                ["orderItemId" => "1411-13",
-                "fee" => [
-                            ["name" => "eBayFee",
-                            "amount" => "3.99"],
-                            ["name" => "PayPal Fee",
-                            "amount" => "32.99"]
-                         ]
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 3.99,
+                    "id" => 3
                 ],
-                ["orderItemId" => "1414-44",
-                "fee" => [
-                            ["name" => "eBayFee",
-                            "amount" => "4.99"],
-                            ["name" => "PayPal Fee",
-                            "amount" => "42.99"]
-                         ]
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 4.99,
+                    "id" => 4
                 ],
-                ["orderItemId" => "1414-45",
-                "fee" => [
-                            ["name" => "eBayFee",
-                            "amount" => "5.99"],
-                            ["name" => "PayPal Fee",
-                            "amount" => "52.99"]
-                         ]
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 5.99,
+                    "id" => 5
                 ]
-               ];
+        ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["orderItemId", "fee" => ["name", "amount"]];
+        return ["name", "amount"];
     }
 
     public static function getInvalidEntityData()
     {
         return [
-                "orderItemId" => [],
-                "fee" => [
-                            ["name" => [],
-                            "amount" => []
-                            ]
-                         ]
+                "name" => [],
+                "amount" => []
                ];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["orderItemId", "fee" => ["name", "amount"]];
+        return ["name", "amount"];
     }
 
     public static function getParentIdField()

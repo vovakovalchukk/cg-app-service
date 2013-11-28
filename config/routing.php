@@ -33,6 +33,11 @@ use CG\InputValidation\Order\Archive\Entity as ArchiveEntityValidationRules;
 use CG\Controllers\Order\Item;
 use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
 
+//Fee
+use CG\Controllers\Order\Item\Fee;
+use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
+use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -270,5 +275,37 @@ $routes = array(
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderItem/:orderItemId/fee' => array (
+        'controllers' => function($orderItemId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(FeeCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderItemId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'POST', 'OPTIONS'),
+        'name' => 'OrderItemFeeCollection',
+        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderItem/:orderItemId/fee/:feeId' => array (
+        'controllers' => function($orderItemId, $feeId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Fee::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderItemId, $feeId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderItemFeeEntity',
+        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );

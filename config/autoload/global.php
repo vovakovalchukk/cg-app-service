@@ -76,6 +76,16 @@ use CG\Controllers\Order\Item as ItemController;
 use CG\ETag\Storage\Predis as ItemPredis;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
+//Fee
+use CG\Order\Service\Item\Fee\Service as FeeService;
+use CG\Order\Shared\Item\Fee\Repository as FeeRepository;
+use CG\Order\Service\Item\Fee\Storage\Cache as FeeCacheStorage;
+use CG\Order\Service\Item\Fee\Storage\Db as FeeDbStorage;
+use CG\Controllers\Order\Item\Fee as FeeController;
+use CG\Controllers\Order\Item\Fee\Collection as FeeCollectionController;
+use CG\ETag\Storage\Predis as FeePredis;
+use CG\Order\Service\Item\Fee\Storage\ETag as FeeETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -128,7 +138,9 @@ return array(
                 'TrackingService' => TrackingService::class,
                 'TrackingCollectionService' => TrackingService::class,
                 'AlertService' => AlertService::class,
-                'AlertCollectionService' => AlertService::class
+                'AlertCollectionService' => AlertService::class,
+                'FeeService' => FeeService::class,
+                'FeeCollectionService' => FeeService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -410,6 +422,52 @@ return array(
                 )
             ),
             ItemDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            FeeETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => FeeRepository::class,
+                    'eTagStorage' => FeePredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            FeePredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Fee_Shared_Entity'; }
+                )
+            ),
+            FeeController::class => array(
+                'parameters' => array(
+                    'service' => 'FeeService'
+                )
+            ),
+            FeeCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'FeeCollectionService'
+                )
+            ),
+            'FeeService' => array(
+                'parameters' => array(
+                    'repository' => FeeETagStorage::class
+                )
+            ),
+            'FeeCollectionService' => array(
+                'parameters' => array(
+                    'repository' => FeeRepository::class
+                )
+            ),
+            FeeRepository::class => array(
+                'parameter' => array(
+                    'storage' => FeeCacheStorage::class,
+                    'repository' => FeeDbStorage::class
+                )
+            ),
+            FeeDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
