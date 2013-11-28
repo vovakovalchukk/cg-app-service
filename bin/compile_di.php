@@ -4,10 +4,10 @@ require_once 'config/di/components.php';
 
 $diDataDir = 'data/di/';
 
-
 $it = new DirectoryIterator($diDataDir);
 foreach ($it as $file) {
-    if (preg_match('/-definition.php$/', $file->getBasename(), $matches)) {
+    if ($file->isFile() && !$file->isLink()
+        && preg_match('/-definition.php$/', $file->getBasename(), $matches)) {
         unlink($file->getPathname());
     }
 }
