@@ -7,7 +7,7 @@ use CG\Http\Exception\Exception4xx\BadRequest;
 
 class Middleware extends SlimMiddleware
 {
-    const VERSION_HEADER = 'VERSION';
+    const VERSION_HEADER = 'Version';
 
     protected $route;
     protected $versions = array();
@@ -30,6 +30,7 @@ class Middleware extends SlimMiddleware
     public function __invoke()
     {
         $this->route = $this->getApplication()->router()->getCurrentRoute();
+        $this->parseRequest();
     }
 
     protected function getRoute()
@@ -39,26 +40,28 @@ class Middleware extends SlimMiddleware
 
     public function call()
     {
-        $this->parseRequest();
         $this->next->call();
     }
 
     protected function parseRequest()
     {
         $route = $this->getRoute();
-        if (!$route || !isset($this->versions[$route])) {
+        if (!$route || !isset($this->versions[$route->getName()])) {
             return;
         }
         $headers = $this->getApplication()->request()->headers;
 
-        $this->version = $this->versions[$route];
+        $this->version = $this->versions[$route->getName()];
         $this->requested =
             isset($headers[static::VERSION_HEADER])
                 ? $headers[static::VERSION_HEADER]
                 : $this->version->getMin();
 
         if (!$this->version->allowedVersion($this->requested)) {
-            throw new BadRequest();
+            throw new BadRequest(
+                'Unsupported Version Requested: ' . $this->requested
+                . ' [' . $this->version->getMin() . '-' . $this->version->getMax() . ']'
+            );
         }
     }
 }
