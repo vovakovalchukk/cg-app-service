@@ -2,12 +2,11 @@
 namespace CG\RestExample;
 
 use CG\Slim\Mapper\ToHalTrait;
-use Nocarrier\Hal;
 use Zend\Di\Di;
 
 class Mapper
 {
-    //use ToHalTrait;
+    use ToHalTrait;
 
     const URL = '/test';
 
@@ -23,7 +22,7 @@ class Mapper
      */
     public function entityToHal(Entity $entity)
     {
-        return $this->getDi()->get(\Nocarrier\Hal::class,array('uri' => static::URL, 'data' => $entity->toArray()));
+        return $this->toHal(static::URL, $entity->toArray());
     }
 
     protected function getDi()
