@@ -6,7 +6,7 @@ use CG\Codeception\ApiHelper as CGApiHelper;
 
 class ApiHelper extends CGApiHelper
 {
-    public static function appendFilters($url, $filters = array())
+    public function appendFilters($url, $filters = array())
     {
         if (empty($filters)) {
             return $url;
