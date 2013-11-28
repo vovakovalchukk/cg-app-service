@@ -86,6 +86,16 @@ use CG\Controllers\Order\Item\Fee\Collection as FeeCollectionController;
 use CG\ETag\Storage\Predis as FeePredis;
 use CG\Order\Service\Item\Fee\Storage\ETag as FeeETagStorage;
 
+//GiftWrap
+use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
+use CG\Order\Shared\Item\GiftWrap\Repository as GiftWrapRepository;
+use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
+use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
+use CG\Controllers\Order\Item\GiftWrap as GiftWrapController;
+use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollectionController;
+use CG\ETag\Storage\Predis as GiftWrapPredis;
+use CG\Order\Service\Item\GiftWrap\Storage\ETag as GiftWrapETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -140,7 +150,9 @@ return array(
                 'AlertService' => AlertService::class,
                 'AlertCollectionService' => AlertService::class,
                 'FeeService' => FeeService::class,
-                'FeeCollectionService' => FeeService::class
+                'FeeCollectionService' => FeeService::class,
+                'GiftWrapService' => GiftWrapService::class,
+                'GiftWrapCollectionService' => GiftWrapService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -468,6 +480,52 @@ return array(
                 )
             ),
             FeeDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            GiftWrapETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => GiftWrapRepository::class,
+                    'eTagStorage' => GiftWrapPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            GiftWrapPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_GiftWrap_Shared_Entity'; }
+                )
+            ),
+            GiftWrapController::class => array(
+                'parameters' => array(
+                    'service' => 'GiftWrapService'
+                )
+            ),
+            GiftWrapCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'GiftWrapCollectionService'
+                )
+            ),
+            'GiftWrapService' => array(
+                'parameters' => array(
+                    'repository' => GiftWrapETagStorage::class
+                )
+            ),
+            'GiftWrapCollectionService' => array(
+                'parameters' => array(
+                    'repository' => GiftWrapRepository::class
+                )
+            ),
+            GiftWrapRepository::class => array(
+                'parameter' => array(
+                    'storage' => GiftWrapCacheStorage::class,
+                    'repository' => GiftWrapDbStorage::class
+                )
+            ),
+            GiftWrapDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',

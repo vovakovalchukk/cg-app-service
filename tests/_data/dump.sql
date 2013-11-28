@@ -223,3 +223,20 @@ INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (2, '1411-11', 
 INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (3, '1411-11', 3.99, 'eBayFee');
 INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (4, '1411-11', 4.99, 'eBayFee');
 INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (5, '1411-11', 5.99, 'eBayFee');
+
+CREATE TABLE IF NOT EXISTS `giftWrap` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `giftWrapType` varchar(120) NOT NULL,
+                  `giftWrapMessage` varchar(120) NOT NULL,
+                  `giftWrapPrice` decimal(12, 4) NOT NULL,
+                  `giftWrapTaxPercentage` decimal(12, 4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (1, '1411-11', "Standard", 'Wrap Message 1', 1.99, 0.1);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (2, '1411-11', "Standard", 'Wrap Message 2', 2.99, 0.2);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (3, '1411-11', "Standard", 'Wrap Message 3', 3.99, 0.3);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (4, '1411-11', "Standard", 'Wrap Message 4', 4.99, 0.4);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (5, '1411-11', "Standard", 'Wrap Message 5', 5.99, 0.5);

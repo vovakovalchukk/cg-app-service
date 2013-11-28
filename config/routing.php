@@ -38,6 +38,11 @@ use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
 
+//GiftWrap
+use CG\Controllers\Order\Item\GiftWrap;
+use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
+use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -307,5 +312,37 @@ $routes = array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderItemFeeEntity',
         'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderItem/:orderItemId/giftWrap' => array (
+        'controllers' => function($orderItemId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(GiftWrapCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderItemId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'POST', 'OPTIONS'),
+        'name' => 'OrderItemGiftWrapCollection',
+        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderItem/:orderItemId/giftWrap/:giftWrapId' => array (
+        'controllers' => function($orderItemId, $feeId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(GiftWrap::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderItemId, $feeId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderItemGiftWrapEntity',
+        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );
