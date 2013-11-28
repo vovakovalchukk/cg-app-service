@@ -18,10 +18,10 @@ class OrderItemPage extends RootPage
 
     public static function notAllowedMethods(){
         return [
-                static::GET    => static::GET,
                 static::POST    => static::POST,
-                static::PUT    => static::PUT,
-                static::DELETE => static::DELETE
+            static::GET    => static::GET,
+            static::PUT    => static::PUT,
+            static::DELETE    => static::DELETE
         ];
     }
 
@@ -64,9 +64,9 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "yellow",
                                                  "size" => "30cm"]
                 ],
-                ["id" => "1414-44",
-                    "orderId" => "1414-40",
-                    "accountId" => 1414,
+                ["id" => "1411-44",
+                    "orderId" => "1411-10",
+                    "accountId" => 1411,
                     "itemName" => "Order Item-1",
                     "individualItemPrice" => 4.99,
                     "itemQuantity" => 40,
@@ -76,9 +76,9 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "green",
                                                  "size" => "40cm"]
                 ],
-                ["id" => "1414-45",
-                    "orderId" => "1414-40",
-                    "accountId" => 1414,
+                ["id" => "1411-45",
+                    "orderId" => "1411-10",
+                    "accountId" => 1411,
                     "itemName" => "Order Item-2",
                     "individualItemPrice" => 5.99,
                     "itemQuantity" => 50,
@@ -93,8 +93,7 @@ class OrderItemPage extends RootPage
 
     public static function getRequiredEntityFields()
     {
-        return ["orderId",
-                "accountId",
+        return ["accountId",
                 "itemName",
                 "individualItemPrice",
                 "itemQuantity",
@@ -107,8 +106,7 @@ class OrderItemPage extends RootPage
 
     public static function getInvalidEntityData()
     {
-        return ["orderId" => [],
-                "accountId" => "ABC",
+        return ["accountId" => "ABC",
                 "itemName" => [],
                 "individualItemPrice" => "ABC",
                 "itemQuantity" => "ABC",
@@ -121,8 +119,7 @@ class OrderItemPage extends RootPage
 
     public static function getInvalidEntityFields()
     {
-        return ["orderId",
-                "accountId",
+        return ["accountId",
                 "itemName",
                 "individualItemPrice",
                 "itemQuantity",

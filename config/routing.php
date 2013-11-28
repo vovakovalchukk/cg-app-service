@@ -29,6 +29,10 @@ use CG\InputValidation\Order\Alert\Entity as AlertEntityValidationRules;
 use CG\Controllers\Order\Archive;
 use CG\InputValidation\Order\Archive\Entity as ArchiveEntityValidationRules;
 
+//Item
+use CG\Controllers\Order\Item;
+use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -250,5 +254,21 @@ $routes = array(
         'via' => array('GET', 'PUT', 'OPTIONS'),
         'name' => 'OrderArchiveEntity',
         'validation' => array("dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false)
-    )
+    ),
+    '/orderItem/:orderItemId' => array (
+        'controllers' => function($orderItemId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Item::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderItemId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
+        'name' => 'OrderItemEntity',
+        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
 );

@@ -104,5 +104,9 @@ class OrderApiMigration extends AbstractMigration
         $this->execute($sql);
         $sql = 'DROP TABLE IF EXISTS `note`';
         $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `tracking`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `alert`';
+        $this->execute($sql);
     }
 }

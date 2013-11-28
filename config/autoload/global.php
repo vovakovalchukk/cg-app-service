@@ -67,6 +67,15 @@ use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
 //Archive
 use CG\Controllers\Order\Archive as ArchiveController;
 
+//Item
+use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Shared\Item\Repository as ItemRepository;
+use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
+use CG\Order\Service\Item\Storage\MongoDb as ItemMongoDbStorage;
+use CG\Controllers\Order\Item as ItemController;
+use CG\ETag\Storage\Predis as ItemPredis;
+use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -374,6 +383,37 @@ return array(
             ArchiveController::class => array(
                 'parameters' => array(
                     'service' => 'OrderCollectionService'
+                )
+            ),
+            ItemETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => ItemRepository::class,
+                    'eTagStorage' => ItemPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            ItemPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Item_Shared_Entity'; }
+                )
+            ),
+            ItemService::class => array(
+                'parameters' => array(
+                    'repository' => ItemETagStorage::class
+                )
+            ),
+            ItemRepository::class => array(
+                'parameter' => array(
+                    'storage' => ItemCacheStorage::class,
+                    'repository' => ItemMongoDbStorage::class
+                )
+            ),
+            ItemDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             'preferences' => array(
