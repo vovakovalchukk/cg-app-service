@@ -21,6 +21,7 @@ $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));
 $unusedMethods = $di->get(UnusedMethods::class, compact('app'));
 $validator = $di->get(Validator::class, compact('app', 'di'));
+$versioning = $di->get(Versioning::class);
 
 foreach ($routes as $route => $request) {
     $validator->setValidators($request);
@@ -30,6 +31,7 @@ foreach ($routes as $route => $request) {
         $newRelic,
         $validator,
         $options,
+        $versioning,
         $request["controllers"])->name($request["name"]);
     if (!is_array($request['via'])) {
         $request['via'] = [$request['via']];
@@ -41,7 +43,7 @@ $app->any('.+', $newRelic, $unusedMethods);
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(Renderer::class));
-$app->add($di->get(Versioning::class));
+$app->add($versioning);
 
 include_once 'config/DiSharedInstances.php';
 $app->run();
