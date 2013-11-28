@@ -12,6 +12,10 @@
         {
             "type" : "composer",
             "url"  : "http://packages.zendframework.com"
+        },
+        {
+            "type" : "git",
+            "url" : "git@bitbucket.org:channelgrabber/cgstdlib.git"
         }
     ],
     "autoload": {
@@ -22,7 +26,7 @@
         "zendframework/zend-servicemanager" : "2.2.*",
         "zendframework/zend-db" : "2.2.*",
         "zendframework/zend-di" : "2.2.*",
-        "channelgrabber/stdlib" : "~1.0.3",
+        "channelgrabber/stdlib" : "dev-CGIV-924-compile-di-fix",
         "nocarrier/hal" : "~0.9.3",
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.1.2"
