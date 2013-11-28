@@ -25,6 +25,7 @@ $versioning = $di->get(Versioning::class);
 
 foreach ($routes as $route => $request) {
     $validator->setValidators($request);
+    $versioning->setRouteVersion($request);
 
     $route = $app->map(
         $route,

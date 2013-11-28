@@ -7,10 +7,19 @@ use Slim\Slim;
 class Middleware extends SlimMiddleware
 {
     protected $route;
+    protected $versions = array();
 
     public function __construct(Slim $app)
     {
         $this->setApplication($app);
+    }
+
+    public function setRouteVersion(array $request)
+    {
+        if (!isset($request['version']) || !($request['version'] instanceof Version)) {
+            return;
+        }
+        $this->versions[$request['name']] = $request['version'];
     }
 
     public function __invoke()
