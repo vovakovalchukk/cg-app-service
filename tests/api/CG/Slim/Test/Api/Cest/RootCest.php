@@ -7,6 +7,7 @@ use ApiGuy;
 
 class RootCest
 {
+
     protected function getPageClass()
     {
         return RootPage::class;
@@ -17,14 +18,14 @@ class RootCest
      * @group custom
      * @group slim
      **/
-    public function checkWelcomePage(ApiGuy $I)
+    public function checkStatusFilter(ApiGuy $I)
     {
         $page = static::getPageClass();
 
-        $I->wantTo('see the Root page returns correct status code and the welcome message');
+        $I->wantTo('see the Root page returns correct status code');
         $I->prepareRequest();
         $I->sendGET($page::getUrl());
         $I->seeResponseCodeIs(HttpStatus::OK);
-        $I->seeResponseContains(RootPage::DEFAULT_PAGE_STRING);
+        $I->seeResponseContains("Welcome to your Slim Skeleton Application");
     }
 }
