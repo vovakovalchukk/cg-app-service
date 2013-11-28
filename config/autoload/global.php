@@ -64,6 +64,9 @@ use CG\Controllers\Order\Alert\Collection as AlertCollectionController;
 use CG\ETag\Storage\Predis as AlertPredis;
 use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
 
+//Archive
+use CG\Controllers\Order\Archive as ArchiveController;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -196,7 +199,8 @@ return array(
             'OrderCollectionService' => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
-                    'storage' => OrderElasticSearchStorage::class
+                    'storage' => OrderElasticSearchStorage::class,
+                    'noteService' => 'NoteService'
                 )
             ),
             OrderETagStorage::class => array (
@@ -365,6 +369,11 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql'
+                )
+            ),
+            ArchiveController::class => array(
+                'parameters' => array(
+                    'service' => 'OrderCollectionService'
                 )
             ),
             'preferences' => array(

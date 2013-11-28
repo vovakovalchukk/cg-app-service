@@ -18,10 +18,7 @@ class ArchivePage extends OrderEntityPage
     static public function notAllowedMethods()
     {
         return [
-                static::GET => static::GET,
-                static::POST => static::POST,
-                static::PUT => static::PUT,
-                static::DELETE => static::DELETE
+            static::POST => static::POST
         ];
     }
 
@@ -29,37 +26,40 @@ class ArchivePage extends OrderEntityPage
     {
         return [
                 [
-                 "timestamp" => "2013-10-10 01:00:00"
+                "orderId" => "1411-10",
+                "archived" => false
                 ],
                 [
-                 "timestamp" => "2013-10-10 02:00:00"
+                "orderId" => "1411-10",
+                "archived" => false
                 ],
                 [
-                 "timestamp" => "2013-10-10 03:00:00"
+                "orderId" => "1411-10",
+                "archived" => false
                 ],
                 [
-                 "timestamp" => "2013-10-10 04:00:00"
+                "orderId" => "1411-10",
+                "archived" => false
                 ],
                 [
-                 "timestamp" => "2013-10-10 05:00:00"
+                "orderId" => "1411-10",
+                "archived" => false
                 ],
                ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["timestamp"];
+        return [];
     }
 
     public static function getInvalidEntityData()
     {
-        return [
-                "timestamp" => []
-               ];
+        return [];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["timestamp"];
+        return [];
     }
 }

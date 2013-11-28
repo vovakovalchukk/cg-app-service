@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `note` (
                   PRIMARY KEY (`id`),
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `note` ADD CONSTRAINT `note_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (1, '1411-10', 1, 'Note 1', '2013-10-10 01:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (2, '1411-10', 2, 'Note 2', '2013-10-10 02:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (3, '1411-10', 3, 'Note 3', '2013-10-10 03:00:00');
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `tracking` (
                   PRIMARY KEY (`id`),
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `tracking` ADD CONSTRAINT `tracking_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (1, '1411-10', 1, '1231', 'carrier 1', '2013-10-10 01:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (2, '1411-10', 2, '1232', 'carrier 2', '2013-10-10 02:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (3, '1411-10', 3, '1233', 'carrier 3', '2013-10-10 03:00:00');
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `alert` (
                   PRIMARY KEY (`id`),
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `alert` ADD CONSTRAINT `alert_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (1, '1411-10', 1, 'alert 1', '2013-10-10 01:00:00');
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (2, '1411-10', 2, 'alert 2', '2013-10-10 02:00:00');
 INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (3, '1411-10', 3, 'alert 3', '2013-10-10 03:00:00');
