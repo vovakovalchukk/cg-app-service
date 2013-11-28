@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b33eb11ac7d289a3e68a2f99c9fbecd8",
+    "hash": "7c270a5a245057dbfc40a273e70819a8",
     "packages": [
         {
             "name": "channelgrabber/http",
@@ -12,6 +12,12 @@
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
                 "reference": "feabf2937d78cb9dc246c7807e09bfcc3a21f09c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.1.2-497c3e.zip",
+                "reference": "feabf2937d78cb9dc246c7807e09bfcc3a21f09c",
+                "shasum": "5d81374001bd06105faa0605eca25995f18fa740"
             },
             "replace": {
                 "channelgrabber/cghttp": "*"
@@ -26,14 +32,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-924-compile-di-fix",
+            "version": "1.0.41",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "00c555481e05e8a388067178c87ef843eaed66f4"
+                "reference": "a450d45a2e2629ef40b45293f8730254896b107e"
             },
-            "require": {
-                "zendframework/zend-db": "2.2.*"
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-1.0.41-0c9d05.zip",
+                "reference": "a450d45a2e2629ef40b45293f8730254896b107e",
+                "shasum": "685ea240b2a1f210f4940386eeff66d8a1e13dd2"
             },
             "type": "library",
             "autoload": {
@@ -44,7 +53,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2013-11-28 10:36:27"
+            "time": "2013-11-12 10:37:56"
         },
         {
             "name": "guzzle/guzzle",
@@ -1300,12 +1309,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20"
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
-                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
                 "shasum": ""
             },
             "require": {
@@ -1360,7 +1369,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-11-03 18:32:44"
+            "time": "2013-11-13 10:07:05"
         },
         {
             "name": "phpspec/prophecy",
@@ -2226,7 +2235,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
