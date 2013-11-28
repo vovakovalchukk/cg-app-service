@@ -4,37 +4,13 @@ require_once 'config/di/components.php';
 
 $diDataDir = 'data/di/';
 
-/*
+
 $it = new DirectoryIterator($diDataDir);
 foreach ($it as $file) {
     if (preg_match('/-definition.php$/', $file->getBasename(), $matches)) {
-        echo $file->getBasename() . "\n";
-        //unlink($file->getPathname());
-    }
-}
-
-exit;
-*/
-
-
-$it = new \RecursiveIteratorIterator(
-    new \RecursiveDirectoryIterator($diDataDir),
-    \RecursiveIteratorIterator::CHILD_FIRST
-);
-foreach ($it as $file) {
-    if (in_array($file->getBasename(), array('.', '..')) || $file->isLink()) {
-        continue;
-
-    } elseif ($file->isDir() && !(new \FilesystemIterator($file->getPathname()))->valid()) {
-        echo $file->getBasename() + "\n";
-        rmdir($file->getPathname());
-
-    } elseif ($file->isFile() && $file->getExtension() == 'php') { // chekc for symlink somewhere
-        echo $file->getBasename() + "\n";
         unlink($file->getPathname());
     }
 }
-
 
 foreach ($libraryComponents as $component) {
     $diCompiler = new Zend\Di\Definition\CompilerDefinition;
