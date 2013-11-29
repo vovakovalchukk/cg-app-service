@@ -281,7 +281,7 @@ db.item.insert({
     });
 db.item.insert({
         "id":"1411-45",
-        "orderId":"1411-10",
+        "orderId":"1412-20",
         "accountId":1411,
         "itemName":"Order Item-2",
         "individualItemPrice":5.99,
@@ -294,3 +294,19 @@ db.item.insert({
             "size":"50cm"
         }
     });
+
+db.item.insert({
+    "id":"1411-46",
+    "orderId":"1411-10",
+    "accountId":1411,
+    "itemName":"Order Item-6",
+    "individualItemPrice":6.99,
+    "itemQuantity":60,
+    "itemSku":"test-sku-6",
+    "itemTaxPercentage":0.6,
+    "individualItemDiscountPrice":0.699,
+    "itemVariationAttribute":{
+        "colour":"red",
+        "size":"60cm"
+    }
+});

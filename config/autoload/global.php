@@ -149,6 +149,8 @@ return array(
                 'TrackingCollectionService' => TrackingService::class,
                 'AlertService' => AlertService::class,
                 'AlertCollectionService' => AlertService::class,
+                'ItemService' => ItemService::class,
+                'ItemCollectionService' => ItemService::class,
                 'FeeService' => FeeService::class,
                 'FeeCollectionService' => FeeService::class,
                 'GiftWrapService' => GiftWrapService::class,
@@ -226,14 +228,20 @@ return array(
                 'parameters' => array(
                     'repository' => OrderETagStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteService'
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService'
                 )
             ),
             'OrderCollectionService' => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteService'
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService'
                 )
             ),
             OrderETagStorage::class => array (
@@ -422,9 +430,23 @@ return array(
                     'entityClass' => function() { return 'CG_Order_Item_Shared_Entity'; }
                 )
             ),
-            ItemService::class => array(
+            ItemController::class => array(
                 'parameters' => array(
-                    'repository' => ItemETagStorage::class
+                    'service' => 'ItemService'
+                )
+            ),
+            'ItemService' => array(
+                'parameters' => array(
+                    'repository' => ItemETagStorage::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
+                )
+            ),
+            'ItemCollectionService' => array(
+                'parameters' => array(
+                    'repository' => ItemRepository::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
                 )
             ),
             ItemRepository::class => array(

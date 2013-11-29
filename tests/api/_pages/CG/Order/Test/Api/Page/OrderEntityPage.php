@@ -27,10 +27,12 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
 
     public static function getEmbeddedResources()
     {
-        return ["orderItem[]" => OrderItemPage::class,
-                "note" => NotePage::class,
-                "tracking" => TrackingPage::class,
-                "alert" => AlertPage::class];
+        return [
+            "item[]" => OrderItemPage::class,
+            "note[]" => NotePage::class,
+            "tracking[]" => TrackingPage::class,
+            "alert[]" => AlertPage::class
+        ];
     }
 
     public static function getPrimaryTestEntity()
