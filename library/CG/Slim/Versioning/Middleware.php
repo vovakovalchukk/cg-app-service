@@ -55,6 +55,13 @@ class Middleware extends SlimMiddleware
         $this->versionResource();
     }
 
+    protected function getVersioniser($currentVersion)
+    {
+        return $this->getDi()->get(
+            __NAMESPACE__ . '\\' . $this->route->getName() . '\\Versioniser' . $currentVersion
+        );
+    }
+
     protected function parseRequest()
     {
         $route = $this->route;
@@ -91,9 +98,7 @@ class Middleware extends SlimMiddleware
 
         foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
             try {
-                $versioniser = $this->getDi()->get(
-                    __NAMESPACE__ . '\\' . $this->route->getName() . '\\Versioniser' . $currentVersion
-                );
+                $versioniser = $this->getVersioniser($currentVersion);
             } catch (DiException $exception) {
                 // No Versioniser - Move Along
                 continue;
