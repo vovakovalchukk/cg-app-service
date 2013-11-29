@@ -43,8 +43,8 @@ $app->any('.+', $newRelic, $unusedMethods);
 
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
-$app->add($di->get(Renderer::class));
 $app->add($versioning);
+$app->add($di->get(Renderer::class));
 
 include_once 'config/DiSharedInstances.php';
 $app->run();

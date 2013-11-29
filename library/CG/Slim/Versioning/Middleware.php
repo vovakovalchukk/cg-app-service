@@ -4,6 +4,7 @@ namespace CG\Slim\Versioning;
 use Slim\Middleware as SlimMiddleware;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\BadRequest;
+use CG\Slim\Renderer\ResponseType\Hal;
 
 class Middleware extends SlimMiddleware
 {
@@ -68,8 +69,15 @@ class Middleware extends SlimMiddleware
             return;
         }
 
+        $restResponse = $this->getApplication()->view()->get('RestResponse');
+        if (!is_object($restResponse) || !$restResponse instanceof Hal) {
+            return;
+        }
+
         foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
 
         }
+
+        $this->getApplication()->view()->set('RestResponse', $restResponse);
     }
 }
