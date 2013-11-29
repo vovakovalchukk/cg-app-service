@@ -59,7 +59,10 @@ class Middleware extends SlimMiddleware
     protected function getVersioniser($currentVersion)
     {
         return $this->getDi()->get(
-            __NAMESPACE__ . '\\' . $this->route->getName() . '\\Versioniser' . $currentVersion
+            implode(
+                '_',
+                ['Versioniser', $this->route->getName(), $currentVersion]
+            )
         );
     }
 
