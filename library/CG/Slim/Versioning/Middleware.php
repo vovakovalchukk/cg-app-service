@@ -3,7 +3,7 @@ namespace CG\Slim\Versioning;
 
 use Slim\Middleware as SlimMiddleware;
 use Zend\Di\Di;
-use Zend\Di\Exception\ExceptionInterface as DiException;
+use Zend\Di\Exception\ClassNotFoundException;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\BadRequest;
 use Nocarrier\Hal;
@@ -101,7 +101,7 @@ class Middleware extends SlimMiddleware
         for ($currentVersion = $this->requested; $currentVersion <= $version->getMax(); $currentVersion++) {
             try {
                 $versioniser = $this->getVersioniser($currentVersion);
-            } catch (DiException $exception) {
+            } catch (ClassNotFoundException $exception) {
                 // No Versioniser - Move Along
                 continue;
             }
@@ -134,7 +134,7 @@ class Middleware extends SlimMiddleware
         for ($currentVersion = $version->getMax(); $currentVersion >= $this->requested; $currentVersion--) {
             try {
                 $versioniser = $this->getVersioniser($currentVersion);
-            } catch (DiException $exception) {
+            } catch (ClassNotFoundException $exception) {
                 // No Versioniser - Move Along
                 continue;
             }
