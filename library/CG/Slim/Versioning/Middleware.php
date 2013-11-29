@@ -110,7 +110,7 @@ class Middleware extends SlimMiddleware
                 continue;
             }
 
-            $upgradedVersion = $versioniser->upgradeRequest($restRequest);
+            $upgradedVersion = $versioniser->upgradeRequest($this->route->getParams(), $restRequest);
             if (is_int($upgradedVersion) && $upgradedVersion > $currentVersion) {
                 $currentVersion = $upgradedVersion;
             }
@@ -143,7 +143,7 @@ class Middleware extends SlimMiddleware
                 continue;
             }
 
-            $downgradedVersion = $versioniser->downgradeResponse($restResponse, $this->requested);
+            $downgradedVersion = $versioniser->downgradeResponse($this->route->getParams(), $restResponse, $this->requested);
             if (is_int($downgradedVersion) && $downgradedVersion < $currentVersion) {
                 $currentVersion = $downgradedVersion;
             }
