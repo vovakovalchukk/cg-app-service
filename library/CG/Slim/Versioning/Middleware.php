@@ -53,7 +53,7 @@ class Middleware extends SlimMiddleware
     public function call()
     {
         $this->next->call();
-        $this->versionResource();
+        $this->versionResponse();
     }
 
     protected function getVersioniser($currentVersion)
@@ -116,7 +116,7 @@ class Middleware extends SlimMiddleware
         $environment['slim.input'] = $restRequest;
     }
 
-    protected function versionResource()
+    protected function versionResponse()
     {
         $version = $this->version;
         if (!($version instanceof Version)) {
