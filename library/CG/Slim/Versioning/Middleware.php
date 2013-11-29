@@ -92,10 +92,7 @@ class Middleware extends SlimMiddleware
         foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
             try {
                 $versioniser = $this->getDi()->get(
-                    implode(
-                        '_',
-                        ['Versioniser', $this->route->getName(), $currentVersion]
-                    )
+                    __NAMESPACE__ . '\\' . $this->route->getName() . '\\Versioniser' . $currentVersion
                 );
             } catch (DiException $exception) {
                 // No Versioniser - Move Along
