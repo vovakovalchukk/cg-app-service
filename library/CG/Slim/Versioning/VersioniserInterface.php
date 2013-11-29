@@ -1,7 +1,7 @@
 <?php
 namespace CG\Slim\Versioning;
 
-use CG\Slim\Renderer\ResponseType\Hal;
+use Nocarrier\Hal;
 
 interface VersioniserInterface
 {

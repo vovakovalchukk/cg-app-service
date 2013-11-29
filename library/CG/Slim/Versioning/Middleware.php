@@ -6,7 +6,7 @@ use Zend\Di\Di;
 use Zend\Di\Exception\ExceptionInterface as DiException;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\BadRequest;
-use CG\Slim\Renderer\ResponseType\Hal;
+use Nocarrier\Hal;
 
 class Middleware extends SlimMiddleware
 {
@@ -47,6 +47,7 @@ class Middleware extends SlimMiddleware
     {
         $this->route = $this->getApplication()->router()->getCurrentRoute();
         $this->parseRequest();
+        $this->versionRequest();
     }
 
     public function call()
@@ -84,6 +85,37 @@ class Middleware extends SlimMiddleware
         }
     }
 
+    protected function versionRequest()
+    {
+        $version = $this->version;
+        if (!($version instanceof Version)) {
+            return;
+        }
+
+        $environment = $this->getApplication()->environment();
+        if (!isset($environment['slim.input']) || !($environment['slim.input'] instanceof Hal)) {
+            return;
+        }
+        $restRequest = $environment['slim.input'];
+
+        foreach (range($this->requested, $version->getMax()) as $currentVersion) {
+            try {
+                $versioniser = $this->getVersioniser($currentVersion);
+            } catch (DiException $exception) {
+                // No Versioniser - Move Along
+                continue;
+            }
+
+            if (!($versioniser instanceof VersioniserInterface)) {
+                continue;
+            }
+
+            $versioniser->upgradeRequest($restRequest);
+        }
+
+        $environment['slim.input'] = $restRequest;
+    }
+
     protected function versionResource()
     {
         $version = $this->version;
@@ -96,7 +128,7 @@ class Middleware extends SlimMiddleware
             return;
         }
 
-        foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
+        foreach (range($version->getMax(), $this->requested, -1) as $currentVersion) {
             try {
                 $versioniser = $this->getVersioniser($currentVersion);
             } catch (DiException $exception) {
