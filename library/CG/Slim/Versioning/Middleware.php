@@ -2,6 +2,8 @@
 namespace CG\Slim\Versioning;
 
 use Slim\Middleware as SlimMiddleware;
+use Zend\Di\Di;
+use Zend\Di\Exception\ExceptionInterface as DiException;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\BadRequest;
 use CG\Slim\Renderer\ResponseType\Hal;
@@ -10,14 +12,27 @@ class Middleware extends SlimMiddleware
 {
     const VERSION_HEADER = 'Version';
 
+    protected $di;
     protected $route;
     protected $versions = array();
     protected $version;
     protected $requested;
 
-    public function __construct(Slim $app)
+    public function __construct(Di $di, Slim $app)
     {
+        $this->setDi($di);
         $this->setApplication($app);
+    }
+
+    public function setDi(Di $di)
+    {
+        $this->di = $di;
+        return $this;
+    }
+
+    public function getDi()
+    {
+        return $this->di;
     }
 
     public function setRouteVersion(array $request)
@@ -75,7 +90,23 @@ class Middleware extends SlimMiddleware
         }
 
         foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
+            try {
+                $versioniser = $this->getDi()->get(
+                    implode(
+                        '_',
+                        ['Versioniser', $this->route->getName(), $currentVersion]
+                    )
+                );
+            } catch (DiException $exception) {
+                // No Versioniser - Move Along
+                continue;
+            }
 
+            if (!($versioniser instanceof VersioniserInterface)) {
+                continue;
+            }
+
+            $versioniser->downgradeResponse($restResponse);
         }
 
         $this->getApplication()->view()->set('RestResponse', $restResponse);
