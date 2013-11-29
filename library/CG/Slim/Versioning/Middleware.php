@@ -33,19 +33,15 @@ class Middleware extends SlimMiddleware
         $this->parseRequest();
     }
 
-    protected function getRoute()
-    {
-        return $this->route;
-    }
-
     public function call()
     {
         $this->next->call();
+        $this->versionResource();
     }
 
     protected function parseRequest()
     {
-        $route = $this->getRoute();
+        $route = $this->route;
         if (!$route || !isset($this->versions[$route->getName()])) {
             return;
         }
@@ -62,6 +58,18 @@ class Middleware extends SlimMiddleware
                 'Unsupported Version Requested: ' . $this->requested
                 . ' [' . $this->version->getMin() . '-' . $this->version->getMax() . ']'
             );
+        }
+    }
+
+    protected function versionResource()
+    {
+        $version = $this->version;
+        if (!($version instanceof Version)) {
+            return;
+        }
+
+        foreach (range($this->requested, $version->getMax(), -1) as $currentVersion) {
+
         }
     }
 }
