@@ -6,5 +6,5 @@ use Nocarrier\Hal;
 interface VersioniserInterface
 {
     public function upgradeRequest(Hal $request);
-    public function downgradeResponse(Hal $response);
+    public function downgradeResponse(Hal $response, $requestedVersion);
 } 

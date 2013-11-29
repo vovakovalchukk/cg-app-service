@@ -98,7 +98,7 @@ class Middleware extends SlimMiddleware
         }
         $restRequest = $environment['slim.input'];
 
-        foreach (range($this->requested, $version->getMax()) as $currentVersion) {
+        for ($currentVersion = $this->requested; $currentVersion <= $version->getMax(); $currentVersion++) {
             try {
                 $versioniser = $this->getVersioniser($currentVersion);
             } catch (DiException $exception) {
@@ -110,7 +110,10 @@ class Middleware extends SlimMiddleware
                 continue;
             }
 
-            $versioniser->upgradeRequest($restRequest);
+            $upgradedVersion = $versioniser->upgradeRequest($restRequest);
+            if (is_int($upgradedVersion) && $upgradedVersion > $currentVersion) {
+                $currentVersion = $upgradedVersion;
+            }
         }
 
         $environment['slim.input'] = $restRequest;
@@ -128,7 +131,7 @@ class Middleware extends SlimMiddleware
             return;
         }
 
-        foreach (range($version->getMax(), $this->requested, -1) as $currentVersion) {
+        for ($currentVersion = $version->getMax(); $currentVersion >= $this->requested; $currentVersion--) {
             try {
                 $versioniser = $this->getVersioniser($currentVersion);
             } catch (DiException $exception) {
@@ -140,7 +143,10 @@ class Middleware extends SlimMiddleware
                 continue;
             }
 
-            $versioniser->downgradeResponse($restResponse);
+            $downgradedVersion = $versioniser->downgradeResponse($restResponse, $this->requested);
+            if (is_int($downgradedVersion) && $downgradedVersion < $currentVersion) {
+                $currentVersion = $downgradedVersion;
+            }
         }
 
         $this->getApplication()->view()->set('RestResponse', $restResponse);
