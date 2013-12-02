@@ -30,9 +30,9 @@ foreach ($routes as $route => $request) {
     $route = $app->map(
         $route,
         $newRelic,
+        $versioning,
         $validator,
         $options,
-        $versioning,
         $request["controllers"])->name($request["name"]);
     if (!is_array($request['via'])) {
         $request['via'] = [$request['via']];
