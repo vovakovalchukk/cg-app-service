@@ -41,19 +41,19 @@ class Middleware extends SlimMiddleware
     public function versionRoute()
     {
         $halResponse = $this->getDi()->get(HalResponse::Class);
+        $router = $this->getApplication()->router();
 
         $halData = $halResponse->getData();
-        foreach ($this->versions as $routeName => $version) {
-            $router = $this->getApplication()->router();
-            if (!$router->hasNamedRoute($routeName)) {
-                continue;
+        foreach ($router->getNamedRoutes() as $routeName => $route) {
+            $min = $max = null;
+            if (isset($this->versions[$routeName])) {
+                $min = $this->versions[$routeName]->getMin();
+                $max = $this->versions[$routeName]->getMax();
             }
 
-            $routePattern = $router->getNamedRoute($routeName)->getPattern();
-
-            $halData[$routePattern] = [
-                'min' => $version->getMin(),
-                'max' => $version->getMax()
+            $halData[$route->getPattern()] = [
+                'min' => $min,
+                'max' => $max
             ];
         }
         $halResponse->setData($halData);
