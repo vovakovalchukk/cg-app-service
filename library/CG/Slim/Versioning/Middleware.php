@@ -21,11 +21,10 @@ class Middleware extends SlimMiddleware
     protected $version;
     protected $requested;
 
-    public function __construct(Di $di, Slim $app, HalResponse $halResponse)
+    public function __construct(Di $di, Slim $app)
     {
         $this->setDi($di);
         $this->setApplication($app);
-        $this->setHalResponse($halResponse);
     }
 
     public function setDi(Di $di)
@@ -39,20 +38,9 @@ class Middleware extends SlimMiddleware
         return $this->di;
     }
 
-    public function setHalResponse(HalResponse $halResponse)
-    {
-        $this->halResponse = $halResponse;
-        return $this;
-    }
-
-    public function getHalResponse()
-    {
-        return $this->halResponse;
-    }
-
     public function versionRoute()
     {
-        $halResponse = $this->getHalResponse();
+        $halResponse = $this->getDi()->get(HalResponse::Class);
 
         $halData = $halResponse->getData();
         foreach ($this->versions as $routeName => $version) {
