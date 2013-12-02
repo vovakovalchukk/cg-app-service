@@ -45,7 +45,7 @@ class Middleware extends SlimMiddleware
 
         $halData = $halResponse->getData();
         foreach ($router->getNamedRoutes() as $routeName => $route) {
-            $min = $max = null;
+            $min = $max = 1;
             if (isset($this->versions[$routeName])) {
                 $min = $this->versions[$routeName]->getMin();
                 $max = $this->versions[$routeName]->getMax();
