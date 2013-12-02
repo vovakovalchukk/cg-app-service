@@ -67,7 +67,7 @@ class Middleware extends SlimMiddleware
     public function setRouteVersion(array $request)
     {
         if (!isset($request['version']) || !($request['version'] instanceof Version)) {
-            return;
+            $request['version'] = new Version(1, 1);
         }
         $this->versions[$request['name']] = $request['version'];
     }
