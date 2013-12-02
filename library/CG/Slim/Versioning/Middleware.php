@@ -70,7 +70,6 @@ class Middleware extends SlimMiddleware
         }
         $halResponse->setData($halData);
 
-
         $this->getApplication()->view()->set(
             'RestResponse',
             $halResponse
