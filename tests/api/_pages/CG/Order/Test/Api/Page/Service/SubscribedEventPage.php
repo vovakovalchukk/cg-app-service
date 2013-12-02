@@ -9,6 +9,8 @@ class SubscribedEventPage extends ServiceEntityPage
     use CollectionPageTrait;
     const URL = "/subscribedEvent";
     const EMBEDDED_RESOURCE = "subscribedEvent";
+    const PRIMARY_ID = "type1";
+    const SECONDARY_ID = "type2";
 
     public static function getUrl()
     {
@@ -30,27 +32,27 @@ class SubscribedEventPage extends ServiceEntityPage
                 [
                     "type" => "type1",
                     "instances" => "instance1",
-                    "endpoint" => "endpoint1"
+                    "endpoint" => "http://example1.com"
                 ],
                 [
                     "type" => "type2",
                     "instances" => "instance2",
-                    "endpoint" => "endpoint2"
+                    "endpoint" => "http://example2.com"
                 ],
                 [
                     "type" => "type3",
                     "instances" => "instance3",
-                    "endpoint" => "endpoint3"
+                    "endpoint" => "http://example3.com"
                 ],
                 [
                     "type" => "type4",
                     "instances" => "instance4",
-                    "endpoint" => "endpoint4"
+                    "endpoint" => "http://example4.com"
                 ],
                 [
                     "type" => "type5",
                     "instances" => "instance5",
-                    "endpoint" => "endpoint5"
+                    "endpoint" => "http://example5.com"
                 ]
                ];
     }
@@ -74,8 +76,8 @@ class SubscribedEventPage extends ServiceEntityPage
         return ["type", "instances", "endpoint"];
     }
 
-//    public static function getParentIdField()
-//    {
-//        return "orderItemId";
-//    }
+    public static function getParentIdField()
+    {
+        return "type";
+    }
 }

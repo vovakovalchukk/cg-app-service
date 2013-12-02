@@ -2,7 +2,7 @@
 namespace CG\Order\Test\Api\Page;
 
 use CG\Codeception\Cest\Rest\CollectionPageTrait;
-//use CG\Order\Test\Api\Page\Service\SubscribedEventPage;
+use CG\Order\Test\Api\Page\Service\SubscribedEventPage;
 
 class ServicePage extends RootPage
 {
@@ -84,11 +84,7 @@ class ServicePage extends RootPage
     public static function getEmbeddedResources()
     {
         return [
-            "subscribedEvents[]" => SubscribedEventPage::class;
+            "subscribedEvents[]" => SubscribedEventPage::class
+        ];
     }
-
-//    public static function getChildPageClass()
-//    {
-//        return OrderItemPage::class;
-//    }
 }
