@@ -7,21 +7,25 @@ use Zend\Di\Exception\ClassNotFoundException;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\BadRequest;
 use Nocarrier\Hal;
+use CG\Slim\Renderer\ResponseType\Hal as HalResponse;
 
 class Middleware extends SlimMiddleware
 {
+    const VERSION_ROUTE = '/version';
     const VERSION_HEADER = 'Version';
 
     protected $di;
+    protected $halResponse;
     protected $route;
     protected $versions = array();
     protected $version;
     protected $requested;
 
-    public function __construct(Di $di, Slim $app)
+    public function __construct(Di $di, Slim $app, HalResponse $halResponse)
     {
         $this->setDi($di);
         $this->setApplication($app);
+        $this->setHalResponse($halResponse);
     }
 
     public function setDi(Di $di)
@@ -33,6 +37,41 @@ class Middleware extends SlimMiddleware
     public function getDi()
     {
         return $this->di;
+    }
+
+    public function setHalResponse(HalResponse $halResponse)
+    {
+        $this->halResponse = $halResponse;
+        return $this;
+    }
+
+    public function getHalResponse()
+    {
+        return $this->halResponse;
+    }
+
+    public function versionRoute()
+    {
+        $halResponse = $this->getHalResponse();
+
+        $halData = $halResponse->getData();
+        foreach ($this->versions as $routeName => $version) {
+            $routePattern = $this->getApplication()->router()->getNamedRoute($routeName)->getPattern();
+
+            $halData[] = [
+                $routePattern => [
+                    'min' => $version->getMin(),
+                    'max' => $version->getMax()
+                ]
+            ];
+        }
+        $halResponse->setData($halData);
+
+
+        $this->getApplication()->view()->set(
+            'RestResponse',
+            $halResponse
+        );
     }
 
     public function setRouteVersion(array $request)

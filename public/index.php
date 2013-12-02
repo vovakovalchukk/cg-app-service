@@ -23,6 +23,7 @@ $unusedMethods = $di->get(UnusedMethods::class, compact('app'));
 $validator = $di->get(Validator::class, compact('app', 'di'));
 $versioning = $di->get(Versioning::class);
 
+$app->get(Versioning::VERSION_ROUTE, array($versioning, 'versionRoute'));
 foreach ($routes as $route => $request) {
     $validator->setValidators($request);
     $versioning->setRouteVersion($request);
