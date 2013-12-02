@@ -56,7 +56,12 @@ class Middleware extends SlimMiddleware
 
         $halData = $halResponse->getData();
         foreach ($this->versions as $routeName => $version) {
-            $routePattern = $this->getApplication()->router()->getNamedRoute($routeName)->getPattern();
+            $router = $this->getApplication()->router();
+            if (!$router->hasNamedRoute($routeName)) {
+                continue;
+            }
+
+            $routePattern = $router->getNamedRoute($routeName)->getPattern();
 
             $halData[$routePattern] = [
                 'min' => $version->getMin(),
