@@ -32,7 +32,7 @@ class UserChange
 
     public function put($orderId, Hal $hal)
     {
-        return $this->getService()->saveHal(array("orderId" => $orderId), $hal);
+        return $this->getService()->saveHal($hal, array("orderId" => $orderId));
     }
 
     public function delete($orderId)
