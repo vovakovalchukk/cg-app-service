@@ -310,3 +310,45 @@ db.item.insert({
         "size":"60cm"
     }
 });
+db.userChange.insert({
+    "_id" : "1411-10",
+    "orderId": "1411-10",
+    "changes": {
+        "shippingAddressCompanyName": "Wilki Ltd"
+    }
+});
+db.userChange.insert({
+    "_id" : "1412-20",
+    "orderId": "1412-20",
+    "changes": {
+        "totalDiscount": 0.1
+    }
+});
+db.userChange.insert({
+    "_id" : "1413-30",
+    "orderId": "1413-30",
+    "changes": {
+        "billingAddressCompanyName": "Wilki Ltd",
+            "billingAddressFullName": "Matthew King"
+    }
+});
+db.userChange.insert({
+    "_id" : "1414-40",
+    "orderId": "1414-40",
+    "changes": {
+        "totalDiscount": 0.1,
+            "shippingAddressCompanyName": "Wilki Ltd",
+            "shippingAddressFullName": "Matthew King"
+    }
+});
+db.userChange.insert({
+    "_id" : "1415-50",
+    "orderId": "1415-50",
+    "changes": {
+        "total": 23.99,
+            "shippingPrice": 13.99,
+            "totalDiscount": 0.1,
+            "billingAddressCompanyName": "Wilki Ltd",
+            "billingAddressFullName": "Matthew King"
+    }
+});

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "607c0344fdd556bb6e199e7785e73a75",
+    "hash": "5cd812a9ed5e41043db36a73d4aba81b",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -49,7 +49,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "0681842e8f32bbbd20cf08dc5117ad9278ca97a2"
+                "reference": "dea813be488230c0cf013020876aa0d1701d4d37"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -60,7 +60,7 @@
                     "CG": ""
                 }
             },
-            "time": "2013-11-20 11:14:40"
+            "time": "2013-11-27 09:35:54"
         },
         {
             "name": "channelgrabber/etag",
@@ -157,17 +157,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.4.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "d21836a50b269d58dee5f59cf4bd1674a4892ae4"
+                "reference": "0d5cb66b4d0dd6212383708d7e1fed6bd76fdedc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.4.0-81b46c.zip",
-                "reference": "d21836a50b269d58dee5f59cf4bd1674a4892ae4",
-                "shasum": "62a5f5f13b7ec65d6578dfce7c8b4e5ee6dbab78"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.1-0087b8.zip",
+                "reference": "0d5cb66b4d0dd6212383708d7e1fed6bd76fdedc",
+                "shasum": "07ab149d5c90b2718365d95e44aa3c49b54938e9"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -178,7 +178,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-11-26 14:11:41"
+            "time": "2013-12-02 08:38:29"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -217,36 +217,29 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b"
+                "reference": "3bc99ee0b9b5ec9d8d30dbf61f045269702a0f3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.2-5ff566.zip",
-                "reference": "43fa60c1a4da294c8b8b171f8ee62e503dfa5b0b",
-                "shasum": "cac6766b8d4b9b145bd239a3f4ff154d8dab9787"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.1.3-33abac.zip",
+                "reference": "3bc99ee0b9b5ec9d8d30dbf61f045269702a0f3a",
+                "shasum": "73878e71f0258eb0aeaf4c3a599957800e067cfe"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
                 "zendframework/zend-validator": "~2.2.4"
             },
             "type": "library",
-            "extra": {
-                "context-options": {
-                    "ssl": {
-                        "local_cert": "composer.pem"
-                    }
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2013-11-22 11:34:08"
+            "time": "2013-11-29 13:41:23"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -1733,17 +1726,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.9",
+            "version": "1.1.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "a7a52f455a0f4e1d587b52cb5bb17c1bd09992ff"
+                "reference": "ca8699375b25367a91bbb24f77e26c55404eebf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.9-16bc72.zip",
-                "reference": "a7a52f455a0f4e1d587b52cb5bb17c1bd09992ff",
-                "shasum": "97356721fb5b6465cd555d480a440f8d71f16fe8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.18-24692f.zip",
+                "reference": "ca8699375b25367a91bbb24f77e26c55404eebf3",
+                "shasum": "09b00fca7497c8c620c2aec14afc224e2e7d58af"
             },
             "type": "library",
             "autoload": {
@@ -1751,7 +1744,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2013-11-25 09:53:32"
+            "time": "2013-12-02 10:24:56"
         },
         {
             "name": "codeception/codeception",
@@ -1813,64 +1806,6 @@
                 "unit testing"
             ],
             "time": "2013-08-09 03:01:50"
-        },
-        {
-            "name": "davedevelopment/phpmig",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/davedevelopment/phpmig.git",
-                "reference": "37a9e11cd33e848545b50e670a2475d1bd1868b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/davedevelopment/phpmig/zipball/37a9e11cd33e848545b50e670a2475d1bd1868b0",
-                "reference": "37a9e11cd33e848545b50e670a2475d1bd1868b0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "pimple/pimple": "1.*",
-                "symfony/class-loader": "2.*",
-                "symfony/config": "2.*",
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "require-dev": {
-                "mockery/mockery": "*@dev",
-                "phpunit/phpunit": "3.*"
-            },
-            "bin": [
-                "bin/phpmig"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Phpmig": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dave Marshall",
-                    "email": "dave.marshall@atstsolutions.co.uk",
-                    "homepage": "http://davedevelopment.co.uk"
-                },
-                {
-                    "name": "David Nielsen",
-                    "email": "david@panmedia.co.nz"
-                }
-            ],
-            "description": "Simple migrations system for php",
-            "homepage": "http://github.com/davedevelopment/phpmig",
-            "keywords": [
-                "database migrations",
-                "migrations"
-            ],
-            "time": "2013-02-17 23:06:00"
         },
         {
             "name": "fabpot/goutte",
@@ -2623,52 +2558,6 @@
             "time": "2013-01-13 10:24:48"
         },
         {
-            "name": "pimple/pimple",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fabpot/Pimple.git",
-                "reference": "471c7d7c52ad6594e17b8ec33efdd1be592b5d83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Pimple/zipball/471c7d7c52ad6594e17b8ec33efdd1be592b5d83",
-                "reference": "471c7d7c52ad6594e17b8ec33efdd1be592b5d83",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Pimple": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
-            "homepage": "http://pimple.sensiolabs.org",
-            "keywords": [
-                "container",
-                "dependency injection"
-            ],
-            "time": "2013-09-19 04:53:08"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -2961,16 +2850,16 @@
         },
         {
             "name": "videlalvaro/php-amqplib",
-            "version": "v2.2.2",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/videlalvaro/php-amqplib.git",
-                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c"
+                "reference": "20d50074e6a2904737d23d93e36fd22ece46add2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/ffed6c575260d9ccf796e213f1383e3489b3256c",
-                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/20d50074e6a2904737d23d93e36fd22ece46add2",
+                "reference": "20d50074e6a2904737d23d93e36fd22ece46add2",
                 "shasum": ""
             },
             "require": {
@@ -3002,7 +2891,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2013-10-04 16:26:56"
+            "time": "2013-12-02 17:07:25"
         }
     ],
     "aliases": [

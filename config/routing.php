@@ -43,6 +43,10 @@ use CG\Controllers\Order\Item\GiftWrap;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
 use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
 
+//UserChange
+use CG\Controllers\Order\UserChange;
+use CG\InputValidation\Order\UserChange\Entity as UserChangeEntityValidationRules;
+
 $routes = array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -264,6 +268,22 @@ $routes = array(
         'via' => array('GET', 'PUT', 'OPTIONS'),
         'name' => 'OrderArchiveEntity',
         'validation' => array("dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/order/:orderId/userChange' => array (
+        'controllers' => function($orderId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(UserChange::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($orderId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderUserChangeEntity',
+        'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($serviceManager) {

@@ -12,8 +12,8 @@ class AlertPage extends OrderEntityPage
     const PRIMARY_ID = "1";
     const SECONDARY_ID = "2";
 
-
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return parent::getEntityUrl() . self::URL;
     }
 

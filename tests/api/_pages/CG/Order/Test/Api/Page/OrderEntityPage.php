@@ -5,6 +5,7 @@ use CG\Order\Test\Api\Page\OrderPage;
 use CG\Order\Test\Api\Page\Order\NotePage;
 use CG\Order\Test\Api\Page\Order\TrackingPage;
 use CG\Order\Test\Api\Page\Order\AlertPage;
+use CG\Order\Test\Api\Page\Order\UserChangePage;
 use CG\Order\Test\Api\Page\OrderItemPage;
 use CG\Codeception\Cest\Rest\EntityPageTrait;
 use CG\Codeception\Cest\Rest\EntityPageInterface;
@@ -31,7 +32,8 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
             "item[]" => OrderItemPage::class,
             "note[]" => NotePage::class,
             "tracking[]" => TrackingPage::class,
-            "alert[]" => AlertPage::class
+            "alert[]" => AlertPage::class,
+            "userChange" => UserChangePage::class
         ];
     }
 
