@@ -42,6 +42,7 @@ use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
 use CG\Controllers\Order\Item\GiftWrap;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
 use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
+use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 
 //UserChange
 use CG\Controllers\Order\UserChange;
@@ -333,7 +334,7 @@ $routes = array(
         'name' => 'OrderItemFeeEntity',
         'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
-    '/orderItem/:orderItemId/giftWrap' => array (
+    GiftWrapService::COLLECTION_ROUTE => array (
         'controllers' => function($orderItemId) use ($serviceManager) {
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
@@ -349,8 +350,8 @@ $routes = array(
         'name' => 'OrderItemGiftWrapCollection',
         'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
-    '/orderItem/:orderItemId/giftWrap/:giftWrapId' => array (
-        'controllers' => function($orderItemId, $feeId) use ($serviceManager) {
+    GiftWrapService::ENTITY_ROUTE => array (
+        'controllers' => function($orderItemId, $giftWrapId) use ($serviceManager) {
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
@@ -358,7 +359,7 @@ $routes = array(
                 $controller = $di->get(GiftWrap::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($orderItemId, $feeId, $app->request()->getBody())
+                    $controller->$method($orderItemId, $giftWrapId, $app->request()->getBody())
                 );
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
