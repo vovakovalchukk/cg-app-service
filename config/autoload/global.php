@@ -124,6 +124,7 @@ return array(
                 }
 
                 $im->addSharedInstance($di, 'Di');
+                $im->addSharedInstance($di, 'Zend\Di\Di');
                 $im->addSharedInstance($di->get('config', array('array' => $configuration)), 'config');
 
                 return $di;
