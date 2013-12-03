@@ -11,6 +11,8 @@
  * file.
  */
 
+use Zend\Config\Config;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -39,7 +41,8 @@ return array(
             'Zend\Di\Di' => true
         ),
         'aliases' => array(
-            'Di' => 'Zend\Di\Di'
+            'Di' => 'Zend\Di\Di',
+            'Config' => Config::class
         )
     ),
     'di' => array(
