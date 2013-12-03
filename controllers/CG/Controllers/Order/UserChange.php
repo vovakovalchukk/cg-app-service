@@ -32,13 +32,13 @@ class UserChange
 
     public function put($orderId, Hal $hal)
     {
-        return $this->getService()->saveHal($orderId, $hal);
+        return $this->getService()->saveHal(array("orderId" => $orderId), $hal);
     }
 
     public function delete($orderId)
     {
         try {
-            $this->getService()->remove($orderId);
+            $this->getService()->removeById($orderId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
