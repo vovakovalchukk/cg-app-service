@@ -41,14 +41,14 @@ return array(
             'Zend\Di\Di' => true
         ),
         'aliases' => array(
-            'Di' => 'Zend\Di\Di',
-            'Config' => Config::class
+            'Di' => 'Zend\Di\Di'
         )
     ),
     'di' => array(
         'instance' => array(
             'aliases' => array(
                 'Di' => 'Zend\Di\Di',
+                'config' => Config::class
              ),
             'CG\RestExample\Service' => array(
                 'parameter' => array(
