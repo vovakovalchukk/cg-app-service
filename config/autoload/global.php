@@ -40,7 +40,7 @@ return array(
             'Zend\Di\Di' => true
         ),
         'aliases' => array(
-            'Di' => 'Zend\Di\Di'
+            'Di' => 'Zend\Di\Di',
         )
     ),
     'di' => array(
