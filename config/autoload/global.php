@@ -40,13 +40,13 @@ return array(
             'Zend\Di\Di' => true
         ),
         'aliases' => array(
-            'Di' => 'Zend\Di\Di',
+            'Di' => 'Zend\Di\Di'
         )
     ),
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'Di' => 'Zend\Di\Di'
+                'Di' => 'Zend\Di\Di',
              ),
             'CG\RestExample\Service' => array(
                 'parameter' => array(
