@@ -4,7 +4,6 @@ namespace CG\Controllers\Order\Item;
 use CG\Http\StatusCode;
 use CG\Order\Service\Item\Fee\Service as FeeService;
 use CG\Slim\ControllerTrait;
-use Selenium\Exception;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -33,13 +32,13 @@ class Fee
 
     public function put($orderItemId, $feeId, Hal $hal)
     {
-        return $this->getService()->saveHal($orderItemId, $hal, $feeId);
+        return $this->getService()->saveHal($hal, array("orderItemId" => $orderItemId, "id" => $feeId));
     }
 
     public function delete($orderItemId, $feeId)
     {
         try {
-            $this->getService()->remove($feeId);
+            $this->getService()->removeById($feeId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

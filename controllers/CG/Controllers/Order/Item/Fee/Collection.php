@@ -17,8 +17,8 @@ class Collection
     public function __construct(Slim $app, FeeService $service, Di $di)
     {
         $this->setSlim($app)
-            ->setService($service)
-            ->setDi($di);
+             ->setService($service)
+             ->setDi($di);
     }
 
     public function get($orderItemId)
@@ -36,7 +36,7 @@ class Collection
 
     public function post($orderItemId, Hal $hal)
     {
-        $hal = $this->getService()->saveHal($orderItemId, $hal);
+        $hal = $this->getService()->saveHal($hal, array("orderItemId" => $orderItemId));
         $this->getSlim()->response()->setStatus(StatusCode::CREATED);
         return $hal;
     }
