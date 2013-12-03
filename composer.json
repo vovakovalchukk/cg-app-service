@@ -38,11 +38,7 @@
         "psr-0" : { "" : "library/" }
     },
     "require": {
-        "robmorgan/phinx": "*",
-        "slim/slim": "2.3.*",
-        "zendframework/zend-config" : "2.2.*",
-        "zendframework/zend-db" : "2.2.*",
-        "zendframework/zend-di" : "2.2.*",
+        "robmorgan/phinx": "v0.2.9",
         "channelgrabber/cache" : "1.0.0",
         "guzzle/guzzle" : "~3.7",
         "channelgrabber/http" : "~1.2.1",
@@ -56,6 +52,10 @@
         "nocarrier/hal" : "~0.9.4",
         "channelgrabber/constants" : "dev-master",
         "channelgrabber/etag" : "dev-CGIV-874-Update-Stdlib-Dependancy as 1.2.1",
+        "slim/slim": "2.3.*",
+        "zendframework/zend-config" : "~2.2.5",
+        "zendframework/zend-db" : "~2.2.5",
+        "zendframework/zend-di" : "~2.2.5",
         "zendframework/zend-inputfilter" : "~2.2.5",
         "zendframework/zend-servicemanager" : "~2.2.5",
         "zendframework/zend-validator" : "~2.2.5"
@@ -64,7 +64,7 @@
         "codeception/codeception" : "1.6.5",
         "phpspec/phpspec" : "2.0.*@dev",
         "phpspec/prophecy" : "~1.0",
-        "channelgrabber/codeception" : "1.1.9"
+        "channelgrabber/codeception" : "~1.1.17"
     },
     "scripts": {
         "post-install-cmd" : [
