@@ -41,14 +41,14 @@ return array(
             'Zend\Di\Di' => true
         ),
         'aliases' => array(
-            'Di' => 'Zend\Di\Di',
-            'Config' => Config::class
+            'Di' => 'Zend\Di\Di'
         )
     ),
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'Di' => 'Zend\Di\Di'
+                'Di' => 'Zend\Di\Di',
+                'Config' => Config::class
             ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
