@@ -33,5 +33,6 @@ class Mapper
     protected function setDi(Di $di)
     {
         $this->di = $di;
+        return $this;
     }
 }
