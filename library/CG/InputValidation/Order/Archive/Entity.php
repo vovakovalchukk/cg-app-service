@@ -3,7 +3,7 @@ namespace CG\InputValidation\Order\Archive;
 
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
-use Zend\Validator\InArray;
+use CG\Validation\Rules\BooleanValidator;
 
 class Entity implements RulesInterface
 {
@@ -39,8 +39,7 @@ class Entity implements RulesInterface
                 'allowEmpty' => true,
                 'continueIfEmpty' => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false", "1", "0", true, false, ""))
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'archived']])
                 )
             )
         );
