@@ -108,7 +108,7 @@ class OrderApiMigration extends AbstractMigration
                   `giftWrapType` varchar(120) NOT NULL,
                   `giftWrapMessage` varchar(120) NOT NULL,
                   `giftWrapPrice` decimal(12, 4) NOT NULL,
-                  `giftWrapTaxPercentage` decimal(12, 4) NOT NULL,
+                  `giftWrapTaxPercentage` decimal(6, 5) NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `orderItemId` (`orderItemId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
