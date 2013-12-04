@@ -36,7 +36,7 @@ class Collection
 
     public function post($orderId, Hal $hal)
     {
-        $hal = $this->getService()->saveHal($orderId, $hal);
+        $hal = $this->getService()->saveHal($hal, array("orderId" => $orderId));
         $this->getSlim()->response()->setStatus(StatusCode::CREATED);
         return $hal;
     }

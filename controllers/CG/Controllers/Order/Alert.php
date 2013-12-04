@@ -4,7 +4,6 @@ namespace CG\Controllers\Order;
 use CG\Http\StatusCode;
 use CG\Order\Service\Alert\Service as AlertService;
 use CG\Slim\ControllerTrait;
-use Selenium\Exception;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -33,13 +32,13 @@ class Alert
 
     public function put($orderId, $alertId, Hal $hal)
     {
-        return $this->getService()->saveHal($orderId, $hal, $alertId);
+        return $this->getService()->saveHal($hal, array("orderId" => $orderId, "id" => $alertId));
     }
 
     public function delete($orderId, $alertId)
     {
         try {
-            $this->getService()->remove($alertId);
+            $this->getService()->removeById($alertId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
