@@ -4,7 +4,6 @@ namespace CG\Controllers\Order;
 use CG\Http\StatusCode;
 use CG\Order\Service\Service as ServiceService;
 use CG\Slim\ControllerTrait;
-use Selenium\Exception;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -33,13 +32,13 @@ class Order
 
     public function put($id, Hal $hal)
     {
-        return $this->getService()->saveHal($id, $hal);
+        return $this->getService()->saveHal($hal, array("id" => $id));
     }
 
     public function delete($id)
     {
         try {
-            $this->getService()->remove($id);
+            $this->getService()->removeById($id);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
