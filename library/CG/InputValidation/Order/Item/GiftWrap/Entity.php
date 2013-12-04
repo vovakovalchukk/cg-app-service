@@ -58,14 +58,14 @@ class Entity implements RulesInterface
                 'name'       => 'giftWrapPrice',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'giftWrapPrice', 'min' => 1])
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'giftWrapPrice', 'min' => 0])
                 )
             ),
             'giftWrapTaxPercentage' => array(
                 'name'       => 'giftWrapTaxPercentage',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'giftWrapTaxPercentage', 'min' => 1])
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'giftWrapTaxPercentage', 'min' => 0])
                 )
             )
         );
