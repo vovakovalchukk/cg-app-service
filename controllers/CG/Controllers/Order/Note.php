@@ -4,7 +4,6 @@ namespace CG\Controllers\Order;
 use CG\Http\StatusCode;
 use CG\Order\Service\Note\Service as NoteService;
 use CG\Slim\ControllerTrait;
-use Selenium\Exception;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -33,13 +32,13 @@ class Note
 
     public function put($orderId, $noteId, Hal $hal)
     {
-        return $this->getService()->saveHal($orderId, $hal, $noteId);
+        return $this->getService()->saveHal($hal, array("orderId" => $orderId, "id" => $noteId));
     }
 
     public function delete($orderId, $noteId)
     {
         try {
-            $this->getService()->remove($noteId);
+            $this->getService()->removeById($noteId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
