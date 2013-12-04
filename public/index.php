@@ -1,7 +1,6 @@
 <?php
 chdir(dirname(__DIR__));
 
-use Slim\Slim;
 use CG\Slim\ContentTypes;
 use CG\Slim\NewRelic;
 use CG\Slim\Rest\Options;
@@ -13,9 +12,6 @@ use CG\Slim\Versioning\Middleware as Versioning;
 
 require_once 'application/bootstrap.php';
 require_once 'config/routing.php';
-
-$di = $serviceManager->get('Di');
-$app = $serviceManager->get(Slim::class);
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));
