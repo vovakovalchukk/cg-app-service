@@ -52,7 +52,9 @@ class Entity implements RulesInterface
                 'name'       => 'amount',
                 'required'   => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'amount'])
+                    $this->getDi()->newInstance(DecimalValidator::class,
+                        ['options' => ['name' => 'amount', 'min' => 0]]
+                    )
                 )
             )
         );
