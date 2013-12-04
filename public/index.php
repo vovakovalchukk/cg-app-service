@@ -1,6 +1,7 @@
 <?php
 chdir(dirname(__DIR__));
 
+use Slim\Slim;
 use CG\Slim\ContentTypes;
 use CG\Slim\NewRelic;
 use CG\Slim\Rest\Options;

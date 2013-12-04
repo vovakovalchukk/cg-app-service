@@ -1,9 +1,4 @@
 <?php
-use Slim\Slim;
-
-$di = $serviceManager->get('Di');
-$app = $serviceManager->get(Slim::class);
-
 $routes = array();
 $files = [
     'routes.php'
