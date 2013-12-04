@@ -49,7 +49,7 @@ return array(
         'instance' => array(
             'aliases' => array(
                 'Di' => 'Zend\Di\Di',
-                'Config' => Config::class
+                'config' => Config::class
              ),
             'CG\RestExample\Service' => array(
                 'parameter' => array(
