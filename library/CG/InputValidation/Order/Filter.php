@@ -330,7 +330,6 @@ class Filter implements RulesInterface
                 'name'       => 'status',
                 'required'   => false,
                 'validators' => array(
-                    /* List of statuses */
                 )
             ),
             'accountId' => array(
@@ -343,7 +342,6 @@ class Filter implements RulesInterface
                 'name'       => 'channel',
                 'required'   => false,
                 'validators' => array(
-                    /* List of channels */
                 )
             ),
             'includeArchived' => array(
@@ -398,7 +396,6 @@ class Filter implements RulesInterface
                 'name'       => 'orderBy',
                 'required'   => false,
                 'validators' => array(
-                    /* list of fields */
                 )
             ),
             'orderDirection' => array(
