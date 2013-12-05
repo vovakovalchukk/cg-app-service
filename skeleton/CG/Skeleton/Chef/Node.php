@@ -41,14 +41,26 @@ class Node
 
     public function setKey($key, $value)
     {
+//        if ($key == "configure_sites|sites|test-overwrite|modules") {
+//            var_dump($this->data);
+//        }
         $data =& $this->data;
         foreach (explode('|', $key) as $currentKey) {
+            if ($currentKey == "modules") {
+//                var_dump($data[$currentKey]);
+            }
+
             if (!isset($data[$currentKey])) {
                 $data[$currentKey] = array();
             }
             $data =& $data[$currentKey];
         }
-        $data = $value;
+
+        if (is_array($data)) {
+            $data = array_merge($data, $value);
+        } else {
+            $data = $value;
+        }
     }
 
     public function removeKey($key)
@@ -69,6 +81,7 @@ class Node
 
     public function save()
     {
+        //echo json_encode($this->data, JSON_PRETTY_PRINT);
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
     }
 }
