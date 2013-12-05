@@ -19,8 +19,7 @@ class OrderItemEntityPage extends OrderItemPage implements EntityPageInterface
     public static function notAllowedMethods()
     {
         return [
-                static::POST => static::POST,
-                static::DELETE => static::DELETE
+                static::POST => static::POST
         ];
     }
 

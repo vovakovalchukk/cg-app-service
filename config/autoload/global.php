@@ -44,6 +44,67 @@ use CG\ETag\Storage\Predis as NotePredis;
 use CG\Order\Service\Note\Storage\ETag as NoteETagStorage;
 use Slim\Http\Headers as SlimHttpHeaders;
 
+//Tracking
+use CG\Order\Service\Tracking\Service as TrackingService;
+use CG\Order\Shared\Tracking\Repository as TrackingRepository;
+use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
+use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
+use CG\Controllers\Order\Tracking as TrackingController;
+use CG\Controllers\Order\Tracking\Collection as TrackingCollectionController;
+use CG\ETag\Storage\Predis as TrackingPredis;
+use CG\Order\Service\Tracking\Storage\ETag as TrackingETagStorage;
+
+//Alert
+use CG\Order\Service\Alert\Service as AlertService;
+use CG\Order\Shared\Alert\Repository as AlertRepository;
+use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
+use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
+use CG\Controllers\Order\Alert as AlertController;
+use CG\Controllers\Order\Alert\Collection as AlertCollectionController;
+use CG\ETag\Storage\Predis as AlertPredis;
+use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
+
+//Archive
+use CG\Controllers\Order\Archive as ArchiveController;
+
+//Item
+use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Shared\Item\Repository as ItemRepository;
+use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
+use CG\Order\Service\Item\Storage\MongoDb as ItemMongoDbStorage;
+use CG\Controllers\Order\Item as ItemController;
+use CG\ETag\Storage\Predis as ItemPredis;
+use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
+
+//Fee
+use CG\Order\Service\Item\Fee\Service as FeeService;
+use CG\Order\Shared\Item\Fee\Repository as FeeRepository;
+use CG\Order\Service\Item\Fee\Storage\Cache as FeeCacheStorage;
+use CG\Order\Service\Item\Fee\Storage\Db as FeeDbStorage;
+use CG\Controllers\Order\Item\Fee as FeeController;
+use CG\Controllers\Order\Item\Fee\Collection as FeeCollectionController;
+use CG\ETag\Storage\Predis as FeePredis;
+use CG\Order\Service\Item\Fee\Storage\ETag as FeeETagStorage;
+
+//GiftWrap
+use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
+use CG\Order\Shared\Item\GiftWrap\Repository as GiftWrapRepository;
+use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
+use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
+use CG\Controllers\Order\Item\GiftWrap as GiftWrapController;
+use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollectionController;
+use CG\ETag\Storage\Predis as GiftWrapPredis;
+use CG\Order\Service\Item\GiftWrap\Storage\ETag as GiftWrapETagStorage;
+
+//UserChange
+use CG\Order\Service\UserChange\Service as UserChangeService;
+use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
+use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
+use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
+use CG\Controllers\Order\UserChange as UserChangeController;
+use CG\ETag\Storage\Predis as UserChangePredis;
+use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -93,7 +154,19 @@ return array(
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
-                'NoteCollectionService' => NoteService::class
+                'NoteCollectionService' => NoteService::class,
+                'TrackingService' => TrackingService::class,
+                'TrackingCollectionService' => TrackingService::class,
+                'AlertService' => AlertService::class,
+                'AlertCollectionService' => AlertService::class,
+                'ItemService' => ItemService::class,
+                'ItemCollectionService' => ItemService::class,
+                'FeeService' => FeeService::class,
+                'FeeCollectionService' => FeeService::class,
+                'GiftWrapService' => GiftWrapService::class,
+                'GiftWrapCollectionService' => GiftWrapService::class,
+                'UserChangeService' => UserChangeService::class,
+                'UserChangeCollectionService' => UserChangeService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -167,13 +240,22 @@ return array(
                 'parameters' => array(
                     'repository' => OrderETagStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteService'
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService',
+                    'userChangeService' => 'UserChangeCollectionService'
                 )
             ),
             'OrderCollectionService' => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
-                    'storage' => OrderElasticSearchStorage::class
+                    'storage' => OrderElasticSearchStorage::class,
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService',
+                    'userChangeService' => 'UserChangeCollectionService'
                 )
             ),
             OrderETagStorage::class => array (
@@ -246,6 +328,281 @@ return array(
                 )
             ),
             NoteDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            TrackingETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => TrackingRepository::class,
+                    'eTagStorage' => TrackingPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            TrackingPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Tracking_Shared_Entity'; }
+                )
+            ),
+            TrackingController::class => array(
+                'parameters' => array(
+                    'service' => 'TrackingService'
+                )
+            ),
+            TrackingCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'TrackingCollectionService'
+                )
+            ),
+            'TrackingService' => array(
+                'parameters' => array(
+                    'repository' => TrackingETagStorage::class
+                )
+            ),
+            'TrackingCollectionService' => array(
+                'parameters' => array(
+                    'repository' => TrackingRepository::class
+                )
+            ),
+            TrackingRepository::class => array(
+                'parameter' => array(
+                    'storage' => TrackingCacheStorage::class,
+                    'repository' => TrackingDbStorage::class
+                )
+            ),
+            TrackingDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            AlertETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => AlertRepository::class,
+                    'eTagStorage' => AlertPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            AlertPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Alert_Shared_Entity'; }
+                )
+            ),
+            AlertController::class => array(
+                'parameters' => array(
+                    'service' => 'AlertService'
+                )
+            ),
+            AlertCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'AlertCollectionService'
+                )
+            ),
+            'AlertService' => array(
+                'parameters' => array(
+                    'repository' => AlertETagStorage::class
+                )
+            ),
+            'AlertCollectionService' => array(
+                'parameters' => array(
+                    'repository' => AlertRepository::class
+                )
+            ),
+            AlertRepository::class => array(
+                'parameter' => array(
+                    'storage' => AlertCacheStorage::class,
+                    'repository' => AlertDbStorage::class
+                )
+            ),
+            AlertDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            ArchiveController::class => array(
+                'parameters' => array(
+                    'service' => 'OrderCollectionService'
+                )
+            ),
+            ItemETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => ItemRepository::class,
+                    'eTagStorage' => ItemPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            ItemPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Item_Shared_Entity'; }
+                )
+            ),
+            ItemController::class => array(
+                'parameters' => array(
+                    'service' => 'ItemService'
+                )
+            ),
+            'ItemService' => array(
+                'parameters' => array(
+                    'repository' => ItemETagStorage::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
+                )
+            ),
+            'ItemCollectionService' => array(
+                'parameters' => array(
+                    'repository' => ItemRepository::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
+                )
+            ),
+            ItemRepository::class => array(
+                'parameter' => array(
+                    'storage' => ItemCacheStorage::class,
+                    'repository' => ItemMongoDbStorage::class
+                )
+            ),
+            ItemDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            FeeETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => FeeRepository::class,
+                    'eTagStorage' => FeePredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            FeePredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_Fee_Shared_Entity'; }
+                )
+            ),
+            FeeController::class => array(
+                'parameters' => array(
+                    'service' => 'FeeService'
+                )
+            ),
+            FeeCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'FeeCollectionService'
+                )
+            ),
+            'FeeService' => array(
+                'parameters' => array(
+                    'repository' => FeeETagStorage::class
+                )
+            ),
+            'FeeCollectionService' => array(
+                'parameters' => array(
+                    'repository' => FeeRepository::class
+                )
+            ),
+            FeeRepository::class => array(
+                'parameter' => array(
+                    'storage' => FeeCacheStorage::class,
+                    'repository' => FeeDbStorage::class
+                )
+            ),
+            FeeDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            GiftWrapETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => GiftWrapRepository::class,
+                    'eTagStorage' => GiftWrapPredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            GiftWrapPredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_GiftWrap_Shared_Entity'; }
+                )
+            ),
+            GiftWrapController::class => array(
+                'parameters' => array(
+                    'service' => 'GiftWrapService'
+                )
+            ),
+            GiftWrapCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'GiftWrapCollectionService'
+                )
+            ),
+            'GiftWrapService' => array(
+                'parameters' => array(
+                    'repository' => GiftWrapETagStorage::class
+                )
+            ),
+            'GiftWrapCollectionService' => array(
+                'parameters' => array(
+                    'repository' => GiftWrapRepository::class
+                )
+            ),
+            GiftWrapRepository::class => array(
+                'parameter' => array(
+                    'storage' => GiftWrapCacheStorage::class,
+                    'repository' => GiftWrapDbStorage::class
+                )
+            ),
+            GiftWrapDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            UserChangeETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => UserChangeRepository::class,
+                    'eTagStorage' => UserChangePredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            UserChangePredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_UserChange_Shared_Entity'; }
+                )
+            ),
+            UserChangeController::class => array(
+                'parameters' => array(
+                    'service' => 'UserChangeService'
+                )
+            ),
+            'UserChangeService' => array(
+                'parameters' => array(
+                    'repository' => UserChangeETagStorage::class
+                )
+            ),
+            'UserChangeCollectionService' => array(
+                'parameters' => array(
+                    'repository' => UserChangeRepository::class
+                )
+            ),
+            UserChangeRepository::class => array(
+                'parameter' => array(
+                    'storage' => UserChangeCacheStorage::class,
+                    'repository' => UserChangeMongoDbStorage::class
+                )
+            ),
+            UserChangeMongoDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
