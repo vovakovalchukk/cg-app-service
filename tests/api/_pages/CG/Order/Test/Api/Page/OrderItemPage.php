@@ -8,7 +8,7 @@ class OrderItemPage extends RootPage
     use CollectionPageTrait;
 
     const URL = "/orderItem";
-    const EMBEDDED_RESOURCE = "orderItem";
+    const EMBEDDED_RESOURCE = "item";
     const PRIMARY_ID = "1411-11";
     const SECONDARY_ID = "1411-12";
 
@@ -18,10 +18,10 @@ class OrderItemPage extends RootPage
 
     public static function notAllowedMethods(){
         return [
-                static::GET    => static::GET,
                 static::POST    => static::POST,
-                static::PUT    => static::PUT,
-                static::DELETE => static::DELETE
+            static::GET    => static::GET,
+            static::PUT    => static::PUT,
+            static::DELETE    => static::DELETE
         ];
     }
 
@@ -64,9 +64,9 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "yellow",
                                                  "size" => "30cm"]
                 ],
-                ["id" => "1414-44",
-                    "orderId" => "1414-40",
-                    "accountId" => 1414,
+                ["id" => "1411-44",
+                    "orderId" => "1411-10",
+                    "accountId" => 1411,
                     "itemName" => "Order Item-1",
                     "individualItemPrice" => 4.99,
                     "itemQuantity" => 40,
@@ -76,9 +76,9 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "green",
                                                  "size" => "40cm"]
                 ],
-                ["id" => "1414-45",
-                    "orderId" => "1414-40",
-                    "accountId" => 1414,
+                ["id" => "1411-45",
+                    "orderId" => "1412-20",
+                    "accountId" => 1411,
                     "itemName" => "Order Item-2",
                     "individualItemPrice" => 5.99,
                     "itemQuantity" => 50,
@@ -88,27 +88,36 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "red",
                                                 "size" => "50cm"]
                 ],
+            ["id" => "1411-46",
+                "orderId" => "1411-10",
+                "accountId" => 1411,
+                "itemName" => "Order Item-6",
+                "individualItemPrice" => 6.99,
+                "itemQuantity" => 60,
+                "itemSku" => "test-sku-6",
+                "itemTaxPercentage" => 0.6,
+                "individualItemDiscountPrice" => 0.699,
+                "itemVariationAttribute" => ["colour" => "red",
+                    "size" => "60cm"]
+            ]
         ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["orderId",
-                "accountId",
+        return ["accountId",
                 "itemName",
                 "individualItemPrice",
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice",
-                "itemVariationAttribute" => []
+                "individualItemDiscountPrice"
         ];
     }
 
     public static function getInvalidEntityData()
     {
-        return ["orderId" => [],
-                "accountId" => "ABC",
+        return ["accountId" => "ABC",
                 "itemName" => [],
                 "individualItemPrice" => "ABC",
                 "itemQuantity" => "ABC",
@@ -121,15 +130,13 @@ class OrderItemPage extends RootPage
 
     public static function getInvalidEntityFields()
     {
-        return ["orderId",
-                "accountId",
+        return ["accountId",
                 "itemName",
                 "individualItemPrice",
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice",
-                "itemVariationAttribute" => []
+                "individualItemDiscountPrice"
         ];
     }
 
