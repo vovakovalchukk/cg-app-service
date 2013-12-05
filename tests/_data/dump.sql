@@ -170,12 +170,14 @@ CREATE TABLE IF NOT EXISTS `note` (
                   PRIMARY KEY (`id`),
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `note` ADD CONSTRAINT `note_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (1, '1411-10', 1, 'Note 1', '2013-10-10 01:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (2, '1411-10', 2, 'Note 2', '2013-10-10 02:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (3, '1411-10', 3, 'Note 3', '2013-10-10 03:00:00');
 INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (4, '1411-10', 4, 'Note 4', '2013-10-10 04:00:00');
-INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (5, '1411-10', 5, 'Note 5', '2013-10-10 05:00:00');
+INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (5, '1412-20', 5, 'Note 5', '2013-10-10 05:00:00');
+INSERT INTO `note` (`id`, `orderId`, `userId`, `note`, `timestamp`) VALUES (6, '1411-10', 6, 'Note 6', '2013-10-10 06:00:00');
+
 
 CREATE TABLE IF NOT EXISTS `tracking` (
                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -187,9 +189,61 @@ CREATE TABLE IF NOT EXISTS `tracking` (
                   PRIMARY KEY (`id`),
                   KEY `orderId` (`orderId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `tracking` ADD CONSTRAINT `tracking_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);
+
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (1, '1411-10', 1, '1231', 'carrier 1', '2013-10-10 01:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (2, '1411-10', 2, '1232', 'carrier 2', '2013-10-10 02:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (3, '1411-10', 3, '1233', 'carrier 3', '2013-10-10 03:00:00');
 INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (4, '1411-10', 4, '1234', 'carrier 4', '2013-10-10 04:00:00');
-INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (5, '1411-10', 5, '1235', 'carrier 5', '2013-10-10 05:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (5, '1412-20', 5, '1235', 'carrier 5', '2013-10-10 05:00:00');
+INSERT INTO `tracking` (`id`, `orderId`, `userId`, `number`, `carrier`, `timestamp`) VALUES (6, '1411-10', 6, '1236', 'carrier 6', '2013-10-10 06:00:00');
+
+
+CREATE TABLE IF NOT EXISTS `alert` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `alert` varchar(255) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (1, '1411-10', 1, 'alert 1', '2013-10-10 01:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (2, '1411-10', 2, 'alert 2', '2013-10-10 02:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (3, '1411-10', 3, 'alert 3', '2013-10-10 03:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (4, '1411-10', 4, 'alert 4', '2013-10-10 04:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (5, '1412-20', 5, 'alert 5', '2013-10-10 05:00:00');
+INSERT INTO `alert` (`id`, `orderId`, `userId`, `alert`, `timestamp`) VALUES (6, '1411-10', 6, 'alert 6', '2013-10-10 06:00:00');
+
+CREATE TABLE IF NOT EXISTS `fee` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `name` varchar(255) NOT NULL,
+                  `amount` decimal(12,4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (1, '1411-11', 1.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (2, '1411-11', 2.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (3, '1411-11', 3.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (4, '1411-11', 4.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (5, '1411-12', 5.99, 'eBayFee');
+INSERT INTO `fee` (`id`, `orderItemId`, `amount`, `name`) VALUES (6, '1411-11', 6.99, 'eBayFee');
+
+CREATE TABLE IF NOT EXISTS `giftWrap` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `giftWrapType` varchar(120) NOT NULL,
+                  `giftWrapMessage` varchar(120) NOT NULL,
+                  `giftWrapPrice` decimal(12, 4) NOT NULL,
+                  `giftWrapTaxPercentage` decimal(12, 4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (1, '1411-11', "Standard", 'Wrap Message 1', 1.99, 0.1);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (2, '1411-11', "Standard", 'Wrap Message 2', 2.99, 0.2);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (3, '1411-11', "Standard", 'Wrap Message 3', 3.99, 0.3);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (4, '1411-11', "Standard", 'Wrap Message 4', 4.99, 0.4);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (5, '1411-12', "Standard", 'Wrap Message 5', 5.99, 0.5);
+INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (6, '1411-11', "Standard", 'Wrap Message 6', 6.99, 0.6);

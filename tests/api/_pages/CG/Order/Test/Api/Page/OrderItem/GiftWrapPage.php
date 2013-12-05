@@ -9,6 +9,8 @@ class GiftWrapPage extends OrderItemEntityPage
     use CollectionPageTrait;
     const URL = "/giftWrap";
     const EMBEDDED_RESOURCE = "giftWrap";
+    const PRIMARY_ID = "1";
+    const SECONDARY_ID = "2";
 
     public static function getUrl()
     {
@@ -18,8 +20,6 @@ class GiftWrapPage extends OrderItemEntityPage
     static public function notAllowedMethods()
     {
         return [
-            static::GET => static::GET,
-            static::POST => static::POST,
             static::PUT => static::PUT,
             static::DELETE => static::DELETE
         ];
@@ -29,49 +29,59 @@ class GiftWrapPage extends OrderItemEntityPage
     {
 
         return [
-                ["orderItemId" => "1411-11",
+                ["id" => 1,
+                 "orderItemId" => "1411-11",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 1",
                  "giftWrapPrice" => 1.99,
                  "giftWrapTaxPercentage" => 0.1
                 ],
-                ["orderItemId" => "1411-12",
-                "giftWrapType" => "Standard",
-                "giftWrapMessage" => "Wrap Message 2",
-                "giftWrapPrice" => 2.99,
-                "giftWrapTaxPercentage" => 0.2
+                ["id" => 2,
+                 "orderItemId" => "1411-11",
+                 "giftWrapType" => "Standard",
+                 "giftWrapMessage" => "Wrap Message 2",
+                 "giftWrapPrice" => 2.99,
+                 "giftWrapTaxPercentage" => 0.2
                 ],
-                ["orderItemId" => "1411-13",
-                "giftWrapType" => "Standard",
-                "giftWrapMessage" => "Wrap Message 3",
-                "giftWrapPrice" => 3.99,
-                "giftWrapTaxPercentage" => 0.3
+                ["id" => 3,
+                 "orderItemId" => "1411-11",
+                 "giftWrapType" => "Standard",
+                 "giftWrapMessage" => "Wrap Message 3",
+                 "giftWrapPrice" => 3.99,
+                 "giftWrapTaxPercentage" => 0.3
                 ],
-                ["orderItemId" => "1414-44",
-                "giftWrapType" => "Standard",
-                "giftWrapMessage" => "Wrap Message 4",
-                "giftWrapPrice" => 4.99,
-                "giftWrapTaxPercentage" => 0.4
+                ["id" => 4,
+                 "orderItemId" => "1411-11",
+                 "giftWrapType" => "Standard",
+                 "giftWrapMessage" => "Wrap Message 4",
+                 "giftWrapPrice" => 4.99,
+                 "giftWrapTaxPercentage" => 0.4
                 ],
-                ["orderItemId" => "1414-45",
-                "giftWrapType" => "Standard",
-                "giftWrapMessage" => "Wrap Message 5",
-                "giftWrapPrice" => 5.99,
-                "giftWrapTaxPercentage" => 0.5
+                ["id" => 5,
+                 "orderItemId" => "1411-12",
+                 "giftWrapType" => "Standard",
+                 "giftWrapMessage" => "Wrap Message 5",
+                 "giftWrapPrice" => 5.99,
+                 "giftWrapTaxPercentage" => 0.5
                 ],
+                ["id" => 6,
+                    "orderItemId" => "1411-11",
+                    "giftWrapType" => "Standard",
+                    "giftWrapMessage" => "Wrap Message 6",
+                    "giftWrapPrice" => 6.99,
+                    "giftWrapTaxPercentage" => 0.6
+                ]
                ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
+        return ["giftWrapMessage"];
     }
 
     public static function getInvalidEntityData()
     {
         return [
-                "orderItemId" => [],
-                "giftWrapType" => [],
                 "giftWrapMessage" => [],
                 "giftWrapPrice" => "ABC",
                 "giftWrapTaxPercentage" => "ABC"
@@ -80,7 +90,7 @@ class GiftWrapPage extends OrderItemEntityPage
 
     public static function getInvalidEntityFields()
     {
-        return ["orderItemId", "giftWrapType", "giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
+        return ["giftWrapMessage", "giftWrapPrice", "giftWrapTaxPercentage"];
     }
 
     public static function getParentIdField()
