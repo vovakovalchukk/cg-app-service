@@ -14,10 +14,21 @@ class ArchiveEntityPage extends ArchivePage implements EntityPageInterface
         return ArchivePage::class;
     }
 
+    public static function getEntityUrl()
+    {
+        return parent::getUrl();
+    }
+
+    public static function getUrl()
+    {
+        return parent::getUrl();
+    }
+
     public static function notAllowedMethods()
     {
         return [
-                static::POST => static::POST
+                static::POST => static::POST,
+                static::DELETE => static::DELETE
         ];
     }
 }

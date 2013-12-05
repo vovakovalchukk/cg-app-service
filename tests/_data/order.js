@@ -219,3 +219,141 @@ db.order.insert({
     "archived": false,
     "custom": []
 });
+db.item.insert({
+        "id":"1411-11",
+        "_id":"1411-11",
+        "orderId":"1411-10",
+        "accountId":1411,
+        "itemName":"Order Item 1",
+        "individualItemPrice":1.99,
+        "itemQuantity":10,
+        "itemSku":"test-sku-1",
+        "itemTaxPercentage":0.1,
+        "individualItemDiscountPrice":0.199,
+        "itemVariationAttribute":{
+            "colour":"red",
+            "size":"10cm"
+        }
+    });
+db.item.insert({
+        "id":"1411-12",
+        "_id":"1411-12",
+        "orderId":"1411-10",
+        "accountId":1411,
+        "itemName":"Order Item 2",
+        "individualItemPrice":2.99,
+        "itemQuantity":20,
+        "itemSku":"test-sku-2",
+        "itemTaxPercentage":0.2,
+        "individualItemDiscountPrice":0.299,
+        "itemVariationAttribute":{
+            "colour":"blue",
+            "size":"20cm"
+        }
+    });
+db.item.insert({
+        "id":"1411-13",
+        "_id":"1411-13",
+        "orderId":"1411-10",
+        "accountId":1411,
+        "itemName":"Order Item 3",
+        "individualItemPrice":3.99,
+        "itemQuantity":30,
+        "itemSku":"test-sku-3",
+        "itemTaxPercentage":0.3,
+        "individualItemDiscountPrice":0.399,
+        "itemVariationAttribute":{
+            "colour":"yellow",
+            "size":"30cm"
+        }
+    });
+db.item.insert({
+        "id":"1411-44",
+        "_id":"1411-44",
+        "orderId":"1411-10",
+        "accountId":1411,
+        "itemName":"Order Item-1",
+        "individualItemPrice":4.99,
+        "itemQuantity":40,
+        "itemSku":"test-sku-4",
+        "itemTaxPercentage":0.4,
+        "individualItemDiscountPrice":0.499,
+        "itemVariationAttribute":{
+            "colour":"green",
+            "size":"40cm"
+        }
+    });
+db.item.insert({
+        "id":"1411-45",
+        "_id":"1411-45",
+        "orderId":"1411-10",
+        "accountId":1411,
+        "itemName":"Order Item-2",
+        "individualItemPrice":5.99,
+        "itemQuantity":50,
+        "itemSku":"test-sku-5",
+        "itemTaxPercentage":0.5,
+        "individualItemDiscountPrice":0.599,
+        "itemVariationAttribute":{
+            "colour":"red",
+            "size":"50cm"
+        }
+    });
+
+db.item.insert({
+    "id":"1411-46",
+    "orderId":"1411-10",
+    "accountId":1411,
+    "itemName":"Order Item-6",
+    "individualItemPrice":6.99,
+    "itemQuantity":60,
+    "itemSku":"test-sku-6",
+    "itemTaxPercentage":0.6,
+    "individualItemDiscountPrice":0.699,
+    "itemVariationAttribute":{
+        "colour":"red",
+        "size":"60cm"
+    }
+});
+db.userChange.insert({
+    "_id" : "1411-10",
+    "orderId": "1411-10",
+    "changes": {
+        "shippingAddressCompanyName": "Wilki Ltd"
+    }
+});
+db.userChange.insert({
+    "_id" : "1412-20",
+    "orderId": "1412-20",
+    "changes": {
+        "totalDiscount": 0.1
+    }
+});
+db.userChange.insert({
+    "_id" : "1413-30",
+    "orderId": "1413-30",
+    "changes": {
+        "billingAddressCompanyName": "Wilki Ltd",
+            "billingAddressFullName": "Matthew King"
+    }
+});
+db.userChange.insert({
+    "_id" : "1414-40",
+    "orderId": "1414-40",
+    "changes": {
+        "totalDiscount": 0.1,
+            "shippingAddressCompanyName": "Wilki Ltd",
+            "shippingAddressFullName": "Matthew King"
+    }
+});
+db.userChange.insert({
+    "_id" : "1415-50",
+    "orderId": "1415-50",
+    "changes": {
+        "total": 23.99,
+            "shippingPrice": 13.99,
+            "totalDiscount": 0.1,
+            "billingAddressCompanyName": "Wilki Ltd",
+            "billingAddressFullName": "Matthew King"
+    }
+});

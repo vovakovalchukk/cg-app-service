@@ -53,11 +53,17 @@ class NotePage extends OrderEntityPage
                  "timestamp" => "2013-10-10 04:00:00"
                 ],
                 ["id" => 5,
-                 "orderId" => "1411-10",
+                 "orderId" => "1412-20",
                  "userId" => 5,
                  "note" => "Note 5",
                  "timestamp" => "2013-10-10 05:00:00"
                 ],
+                ["id" => 6,
+                    "orderId" => "1411-10",
+                    "userId" => 6,
+                    "note" => "Note 6",
+                    "timestamp" => "2013-10-10 06:00:00"
+                ]
                ];
     }
 
