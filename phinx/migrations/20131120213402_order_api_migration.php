@@ -9,7 +9,6 @@ class OrderApiMigration extends AbstractMigration
      */
     public function up()
     {
-        $this->down();
         $sql = "CREATE TABLE IF NOT EXISTS `order` (
                       `id` varchar(120) NOT NULL,
                       `accountId` int(10) unsigned NOT NULL,
@@ -69,7 +68,49 @@ class OrderApiMigration extends AbstractMigration
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         $this->execute($sql);
 
-        $sql = "ALTER TABLE `note` ADD CONSTRAINT `note_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`);";
+        $sql = "CREATE TABLE IF NOT EXISTS `tracking` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `number` varchar(120) NOT NULL,
+                  `carrier` varchar(120) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `alert` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderId` varchar(120) NOT NULL,
+                  `userId` int(10) unsigned NOT NULL,
+                  `timestamp` datetime NOT NULL,
+                  `alert` text NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderId` (`orderId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `fee` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `name` varchar(255) NOT NULL,
+                  `amount` decimal(12,4) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+        $this->execute($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS `giftWrap` (
+                  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `orderItemId` varchar(120) NOT NULL,
+                  `giftWrapType` varchar(120) NOT NULL,
+                  `giftWrapMessage` varchar(120) NOT NULL,
+                  `giftWrapPrice` decimal(12, 4) NOT NULL,
+                  `giftWrapTaxPercentage` decimal(6, 5) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `orderItemId` (`orderItemId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         $this->execute($sql);
     }
 
@@ -83,6 +124,14 @@ class OrderApiMigration extends AbstractMigration
         $sql = 'DROP TABLE IF EXISTS `address`';
         $this->execute($sql);
         $sql = 'DROP TABLE IF EXISTS `note`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `tracking`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `alert`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `fee`';
+        $this->execute($sql);
+        $sql = 'DROP TABLE IF EXISTS `giftWrap`';
         $this->execute($sql);
     }
 }
