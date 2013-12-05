@@ -21,28 +21,30 @@ use CG\App\Service\Event\Service as EventService;
 use CG\App\Service\Event\Storage\Db as EventDb;
 use CG\App\Service\Event\Storage\Cache as EventCache;
 use CG\App\Service\Event\Repository as EventRepository;
+use Zend\Config\Config;
+use Zend\EventManager\EventManager;
+use CG\Slim\Stdlib\Http\Headers;
+use Slim\Http\Headers as SlimHttpHeaders;
+
+//Order
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
-use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
+use CG\Controllers\Order\Order as OrderController;
+use CG\Controllers\Order\Order\Collection as OrderCollectionController;
+use CG\Order\Service\Storage\ETag as OrderETagStorage;
+use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+
+//Note
 use CG\Order\Service\Note\Service as NoteService;
 use CG\Order\Shared\Note\Repository as NoteRepository;
 use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
-use Zend\Config\Config;
-use Zend\EventManager\EventManager;
-use CG\Slim\Stdlib\Http\Headers;
-use CG\Controllers\Order\Order as OrderController;
-use CG\Controllers\Order\Order\Collection as OrderCollectionController;
-use CG\ETag\Storage\Predis as OrderPredis;
-use CG\Order\Service\Storage\ETag as OrderETagStorage;
 use CG\Controllers\Order\Note as NoteController;
 use CG\Controllers\Order\Note\Collection as NoteCollectionController;
-use CG\ETag\Storage\Predis as NotePredis;
 use CG\Order\Service\Note\Storage\ETag as NoteETagStorage;
-use Slim\Http\Headers as SlimHttpHeaders;
 
 //Tracking
 use CG\Order\Service\Tracking\Service as TrackingService;
@@ -51,7 +53,6 @@ use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
 use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
 use CG\Controllers\Order\Tracking as TrackingController;
 use CG\Controllers\Order\Tracking\Collection as TrackingCollectionController;
-use CG\ETag\Storage\Predis as TrackingPredis;
 use CG\Order\Service\Tracking\Storage\ETag as TrackingETagStorage;
 
 //Alert
@@ -61,7 +62,6 @@ use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 use CG\Controllers\Order\Alert as AlertController;
 use CG\Controllers\Order\Alert\Collection as AlertCollectionController;
-use CG\ETag\Storage\Predis as AlertPredis;
 use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
 
 //Archive
@@ -73,7 +73,6 @@ use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\MongoDb as ItemMongoDbStorage;
 use CG\Controllers\Order\Item as ItemController;
-use CG\ETag\Storage\Predis as ItemPredis;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
 //Fee
@@ -83,7 +82,6 @@ use CG\Order\Service\Item\Fee\Storage\Cache as FeeCacheStorage;
 use CG\Order\Service\Item\Fee\Storage\Db as FeeDbStorage;
 use CG\Controllers\Order\Item\Fee as FeeController;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollectionController;
-use CG\ETag\Storage\Predis as FeePredis;
 use CG\Order\Service\Item\Fee\Storage\ETag as FeeETagStorage;
 
 //GiftWrap
@@ -93,7 +91,6 @@ use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
 use CG\Controllers\Order\Item\GiftWrap as GiftWrapController;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollectionController;
-use CG\ETag\Storage\Predis as GiftWrapPredis;
 use CG\Order\Service\Item\GiftWrap\Storage\ETag as GiftWrapETagStorage;
 
 //UserChange
@@ -102,7 +99,6 @@ use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
 use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Controllers\Order\UserChange as UserChangeController;
-use CG\ETag\Storage\Predis as UserChangePredis;
 use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
 
 return array(
@@ -261,14 +257,9 @@ return array(
             OrderETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => OrderRepository::class,
-                    'eTagStorage' => OrderPredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            OrderPredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Shared_Entity'
                 )
             ),
             OrderController::class => array(
@@ -291,14 +282,9 @@ return array(
             NoteETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => NoteRepository::class,
-                    'eTagStorage' => NotePredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            NotePredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Note_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Note_Shared_Entity'
                 )
             ),
             NoteController::class => array(
@@ -337,14 +323,9 @@ return array(
             TrackingETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => TrackingRepository::class,
-                    'eTagStorage' => TrackingPredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            TrackingPredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Tracking_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Tracking_Shared_Entity'
                 )
             ),
             TrackingController::class => array(
@@ -383,14 +364,9 @@ return array(
             AlertETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => AlertRepository::class,
-                    'eTagStorage' => AlertPredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            AlertPredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Alert_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Alert_Shared_Entity'
                 )
             ),
             AlertController::class => array(
@@ -434,14 +410,9 @@ return array(
             ItemETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => ItemRepository::class,
-                    'eTagStorage' => ItemPredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            ItemPredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Item_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Item_Shared_Entity'
                 )
             ),
             ItemController::class => array(
@@ -479,14 +450,9 @@ return array(
             FeeETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => FeeRepository::class,
-                    'eTagStorage' => FeePredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            FeePredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_Fee_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Fee_Shared_Entity'
                 )
             ),
             FeeController::class => array(
@@ -525,14 +491,9 @@ return array(
             GiftWrapETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => GiftWrapRepository::class,
-                    'eTagStorage' => GiftWrapPredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            GiftWrapPredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_GiftWrap_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_GiftWrap_Shared_Entity'
                 )
             ),
             GiftWrapController::class => array(
@@ -571,14 +532,9 @@ return array(
             UserChangeETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => UserChangeRepository::class,
-                    'eTagStorage' => UserChangePredis::class,
                     'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders'
-                )
-            ),
-            UserChangePredis::class => array (
-                'parameter' => array (
-                    'entityClass' => function() { return 'CG_Order_UserChange_Shared_Entity'; }
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_UserChange_Shared_Entity'
                 )
             ),
             UserChangeController::class => array(
@@ -617,6 +573,7 @@ return array(
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
+                'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
                 \MongoClient::class => "mongodb"
             )
         )
