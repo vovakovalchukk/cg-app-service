@@ -45,6 +45,10 @@ class ArchivePage extends OrderEntityPage
                 "orderId" => "1411-10",
                 "archived" => false
                 ],
+                [
+                "orderId" => "1412-20",
+                "archived" => false
+                ],
                ];
     }
 

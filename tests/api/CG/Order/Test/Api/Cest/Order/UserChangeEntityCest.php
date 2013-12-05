@@ -2,15 +2,15 @@
 namespace CG\Order\Test\Api\Cest\Order;
 
 use CG\Codeception\Cest\Rest\EntityTrait;
-use CG\Order\Test\Api\Page\Order\UserChangesEntityPage;
+use CG\Order\Test\Api\Page\Order\UserChangeEntityPage;
 use CG\Codeception\Cest\Rest\EntityETagTrait;
 
-class UserChangesEntityCest
+class UserChangeEntityCest
 {
     use EntityTrait, EntityETagTrait;
 
     protected function getPageClass()
     {
-        return UserChangesEntityPage::class;
+        return UserChangeEntityPage::class;
     }
 }

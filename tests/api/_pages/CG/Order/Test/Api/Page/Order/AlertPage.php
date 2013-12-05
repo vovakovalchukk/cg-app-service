@@ -12,8 +12,8 @@ class AlertPage extends OrderEntityPage
     const PRIMARY_ID = "1";
     const SECONDARY_ID = "2";
 
-
-    public static function getUrl(){
+    public static function getUrl()
+    {
         return parent::getEntityUrl() . self::URL;
     }
 
@@ -58,11 +58,18 @@ class AlertPage extends OrderEntityPage
                 ],
                 [
                  "id" => 5,
-                 "orderId" => "1411-10",
+                 "orderId" => "1412-20",
                  "userId" => 5,
                  "alert" => "alert 5",
                  "timestamp" => "2013-10-10 05:00:00"
                 ],
+                [
+                    "id" => 6,
+                    "orderId" => "1411-10",
+                    "userId" => 6,
+                    "alert" => "alert 6",
+                    "timestamp" => "2013-10-10 06:00:00"
+                ]
                ];
     }
 
