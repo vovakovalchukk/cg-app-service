@@ -58,12 +58,19 @@ class GiftWrapPage extends OrderItemEntityPage
                  "giftWrapTaxPercentage" => 0.4
                 ],
                 ["id" => 5,
-                 "orderItemId" => "1411-11",
+                 "orderItemId" => "1411-12",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 5",
                  "giftWrapPrice" => 5.99,
                  "giftWrapTaxPercentage" => 0.5
                 ],
+                ["id" => 6,
+                    "orderItemId" => "1411-11",
+                    "giftWrapType" => "Standard",
+                    "giftWrapMessage" => "Wrap Message 6",
+                    "giftWrapPrice" => 6.99,
+                    "giftWrapTaxPercentage" => 0.6
+                ]
                ];
     }
 

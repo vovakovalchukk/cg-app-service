@@ -54,11 +54,17 @@ class FeePage extends OrderItemEntityPage
                     "id" => 4
                 ],
                 [
-                    "orderItemId" => "1411-11",
+                    "orderItemId" => "1411-12",
                     "name" => "eBayFee",
                     "amount" => 5.99,
                     "id" => 5
-                ]
+                ],
+                [
+                    "orderItemId" => "1411-11",
+                    "name" => "eBayFee",
+                    "amount" => 6.99,
+                    "id" => 6
+                ],
         ];
     }
 

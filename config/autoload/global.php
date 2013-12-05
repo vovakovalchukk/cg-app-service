@@ -96,6 +96,15 @@ use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollectionControlle
 use CG\ETag\Storage\Predis as GiftWrapPredis;
 use CG\Order\Service\Item\GiftWrap\Storage\ETag as GiftWrapETagStorage;
 
+//UserChange
+use CG\Order\Service\UserChange\Service as UserChangeService;
+use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
+use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
+use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
+use CG\Controllers\Order\UserChange as UserChangeController;
+use CG\ETag\Storage\Predis as UserChangePredis;
+use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -150,10 +159,14 @@ return array(
                 'TrackingCollectionService' => TrackingService::class,
                 'AlertService' => AlertService::class,
                 'AlertCollectionService' => AlertService::class,
+                'ItemService' => ItemService::class,
+                'ItemCollectionService' => ItemService::class,
                 'FeeService' => FeeService::class,
                 'FeeCollectionService' => FeeService::class,
                 'GiftWrapService' => GiftWrapService::class,
-                'GiftWrapCollectionService' => GiftWrapService::class
+                'GiftWrapCollectionService' => GiftWrapService::class,
+                'UserChangeService' => UserChangeService::class,
+                'UserChangeCollectionService' => UserChangeService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -227,14 +240,22 @@ return array(
                 'parameters' => array(
                     'repository' => OrderETagStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteService'
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService',
+                    'userChangeService' => 'UserChangeCollectionService'
                 )
             ),
             'OrderCollectionService' => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteService'
+                    'noteService' => 'NoteCollectionService',
+                    'itemService' => 'ItemCollectionService',
+                    'alertService' => 'AlertCollectionService',
+                    'trackingService' => 'TrackingCollectionService',
+                    'userChangeService' => 'UserChangeCollectionService'
                 )
             ),
             OrderETagStorage::class => array (
@@ -423,9 +444,23 @@ return array(
                     'entityClass' => function() { return 'CG_Order_Item_Shared_Entity'; }
                 )
             ),
-            ItemService::class => array(
+            ItemController::class => array(
                 'parameters' => array(
-                    'repository' => ItemETagStorage::class
+                    'service' => 'ItemService'
+                )
+            ),
+            'ItemService' => array(
+                'parameters' => array(
+                    'repository' => ItemETagStorage::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
+                )
+            ),
+            'ItemCollectionService' => array(
+                'parameters' => array(
+                    'repository' => ItemRepository::class,
+                    'feeService' => 'FeeCollectionService',
+                    'giftWrapService' => 'GiftWrapCollectionService'
                 )
             ),
             ItemRepository::class => array(
@@ -527,6 +562,47 @@ return array(
                 )
             ),
             GiftWrapDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            UserChangeETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => UserChangeRepository::class,
+                    'eTagStorage' => UserChangePredis::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders'
+                )
+            ),
+            UserChangePredis::class => array (
+                'parameter' => array (
+                    'entityClass' => function() { return 'CG_Order_UserChange_Shared_Entity'; }
+                )
+            ),
+            UserChangeController::class => array(
+                'parameters' => array(
+                    'service' => 'UserChangeService'
+                )
+            ),
+            'UserChangeService' => array(
+                'parameters' => array(
+                    'repository' => UserChangeETagStorage::class
+                )
+            ),
+            'UserChangeCollectionService' => array(
+                'parameters' => array(
+                    'repository' => UserChangeRepository::class
+                )
+            ),
+            UserChangeRepository::class => array(
+                'parameter' => array(
+                    'storage' => UserChangeCacheStorage::class,
+                    'repository' => UserChangeMongoDbStorage::class
+                )
+            ),
+            UserChangeMongoDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',

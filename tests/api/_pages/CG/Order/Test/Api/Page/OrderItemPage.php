@@ -8,7 +8,7 @@ class OrderItemPage extends RootPage
     use CollectionPageTrait;
 
     const URL = "/orderItem";
-    const EMBEDDED_RESOURCE = "orderItem";
+    const EMBEDDED_RESOURCE = "item";
     const PRIMARY_ID = "1411-11";
     const SECONDARY_ID = "1411-12";
 
@@ -77,7 +77,7 @@ class OrderItemPage extends RootPage
                                                  "size" => "40cm"]
                 ],
                 ["id" => "1411-45",
-                    "orderId" => "1411-10",
+                    "orderId" => "1412-20",
                     "accountId" => 1411,
                     "itemName" => "Order Item-2",
                     "individualItemPrice" => 5.99,
@@ -88,6 +88,18 @@ class OrderItemPage extends RootPage
                     "itemVariationAttribute" => ["colour" => "red",
                                                 "size" => "50cm"]
                 ],
+            ["id" => "1411-46",
+                "orderId" => "1411-10",
+                "accountId" => 1411,
+                "itemName" => "Order Item-6",
+                "individualItemPrice" => 6.99,
+                "itemQuantity" => 60,
+                "itemSku" => "test-sku-6",
+                "itemTaxPercentage" => 0.6,
+                "individualItemDiscountPrice" => 0.699,
+                "itemVariationAttribute" => ["colour" => "red",
+                    "size" => "60cm"]
+            ]
         ];
     }
 
@@ -99,8 +111,7 @@ class OrderItemPage extends RootPage
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice",
-                "itemVariationAttribute" => []
+                "individualItemDiscountPrice"
         ];
     }
 
@@ -125,8 +136,7 @@ class OrderItemPage extends RootPage
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice",
-                "itemVariationAttribute" => []
+                "individualItemDiscountPrice"
         ];
     }
 

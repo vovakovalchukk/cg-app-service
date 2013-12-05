@@ -9,7 +9,6 @@ class OrderApiMigration extends AbstractMigration
      */
     public function up()
     {
-        $this->down();
         $sql = "CREATE TABLE IF NOT EXISTS `order` (
                       `id` varchar(120) NOT NULL,
                       `accountId` int(10) unsigned NOT NULL,
