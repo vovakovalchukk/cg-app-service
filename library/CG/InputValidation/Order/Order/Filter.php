@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
 use Zend\Validator\Between;
@@ -50,7 +51,7 @@ class Filter implements RulesInterface
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => array(
-                    /* array of ints? */
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "id"))
                 ),
             ),
             'timeFrom' => array(
@@ -71,7 +72,7 @@ class Filter implements RulesInterface
                 'name'       => 'organisationUnitId',
                 'required'   => false,
                 'validators' => array(
-                    /* array of ints? */
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
                 )
             ),
             'searchTerm' => array(
