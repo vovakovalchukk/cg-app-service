@@ -1,6 +1,7 @@
 <?php
 namespace CG\Skeleton\Module\Mongo;
 
+use CG\Skeleton\DevelopmentEnvironment\Environment;
 use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\ConfigureInterface;
 use CG\Skeleton\Module\EnableInterface;
@@ -27,7 +28,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $moduleConfig->setEnabled(true);
     }
 
-    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    public function applyConfiguration(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
     {
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
