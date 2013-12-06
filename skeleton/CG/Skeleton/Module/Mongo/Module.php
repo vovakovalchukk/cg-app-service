@@ -96,9 +96,9 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($cwd);
     }
 
-    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
+    protected function updateNode(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig, Environment $environment)
     {
-        $nodeFile = Chef::NODES . $config->getNode() . '.json';
+        $nodeFile = Chef::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
         $configKey = 'configure_sites|sites|' . $config->getAppName() . '|mongo_client|';
@@ -127,7 +127,8 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         exec(
             'git add ' . $nodeFile . ';'
-            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $config->getNode() . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
+            . ' git commit -m "' . $this->getGitTicketId() . ' (SKELETON) Updated node ' . $environment->getEnvironmentConfig()->getNode()
+            . ' with \'' . $this->getName() . '\' config" --only -- ' . $nodeFile
         );
     }
 
