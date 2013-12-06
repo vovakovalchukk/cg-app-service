@@ -74,7 +74,6 @@ class Node
 
     public function save()
     {
-        //echo json_encode($this->data, JSON_PRETTY_PRINT);
         file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
     }
 }
