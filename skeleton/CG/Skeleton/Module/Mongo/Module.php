@@ -33,7 +33,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $cwd = getcwd();
         chdir($config->getInfrastructurePath() . '/tools/chef');
         exec('git checkout ' . $config->getBranch() . ' 2>&1;');
-        $this->updateNode($arguments, $config, $moduleConfig);
+        $this->updateNode($arguments, $config, $moduleConfig, $environment);
         chdir($cwd);
     }
 
