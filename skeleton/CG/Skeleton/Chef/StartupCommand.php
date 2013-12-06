@@ -164,7 +164,6 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('configure_sites|sites|' . $siteName . '|configroot', 'config');
         $node->setKey('configure_sites|sites|' . $siteName . '|dataroot', 'data');
         $node->setKey('configure_sites|sites|' . $siteName . '|datadiroot', 'data/di');
-        $node->setKey('configure_sites|sites|' . $siteName . '|hostname', $config->getHostname());
         $node->setKey('configure_sites|sites|' . $siteName . '|enabled', true);
         $node->setKey('configure_sites|sites|' . $siteName . '|configautoloadroot', 'config/autoload');
         $node->setKey('configure_sites|sites|' . $siteName . '|certificateroot', 'data/certificates');
