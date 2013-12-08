@@ -1,6 +1,6 @@
 db=db.getSiblingDB("order");
 db.order.insert({
-    "id": "1415-50",
+    "_id": "1415-50",
     "accountId": 1415,
     "externalId": "50",
     "channel": "ebay5",
@@ -44,7 +44,7 @@ db.order.insert({
     "custom": []
 });
 db.order.insert({
-    "id": "1414-40",
+    "_id": "1414-40",
     "accountId": 1414,
     "externalId": "40",
     "channel": "ebay4",
@@ -88,7 +88,7 @@ db.order.insert({
     "custom": []
 });
 db.order.insert({
-    "id": "1413-30",
+    "_id": "1413-30",
     "accountId": 1413,
     "externalId": "30",
     "channel": "ebay3",
@@ -132,7 +132,7 @@ db.order.insert({
     "custom": []
 });
 db.order.insert({
-    "id": "1412-20",
+    "_id": "1412-20",
     "accountId": 1412,
     "externalId": "20",
     "channel": "ebay2",
@@ -176,7 +176,7 @@ db.order.insert({
     "custom": []
 });
 db.order.insert({
-    "id": "1411-10",
+    "_id": "1411-10",
     "accountId": 1411,
     "externalId": "10",
     "channel": "ebay",
@@ -220,7 +220,6 @@ db.order.insert({
     "custom": []
 });
 db.item.insert({
-        "id":"1411-11",
         "_id":"1411-11",
         "orderId":"1411-10",
         "accountId":1411,
@@ -236,7 +235,6 @@ db.item.insert({
         }
     });
 db.item.insert({
-        "id":"1411-12",
         "_id":"1411-12",
         "orderId":"1411-10",
         "accountId":1411,
@@ -252,7 +250,6 @@ db.item.insert({
         }
     });
 db.item.insert({
-        "id":"1411-13",
         "_id":"1411-13",
         "orderId":"1411-10",
         "accountId":1411,
@@ -268,7 +265,6 @@ db.item.insert({
         }
     });
 db.item.insert({
-        "id":"1411-44",
         "_id":"1411-44",
         "orderId":"1411-10",
         "accountId":1411,
@@ -284,9 +280,8 @@ db.item.insert({
         }
     });
 db.item.insert({
-        "id":"1411-45",
         "_id":"1411-45",
-        "orderId":"1411-10",
+        "orderId":"1412-20",
         "accountId":1411,
         "itemName":"Order Item-2",
         "individualItemPrice":5.99,
@@ -301,7 +296,7 @@ db.item.insert({
     });
 
 db.item.insert({
-    "id":"1411-46",
+    "_id":"1411-46",
     "orderId":"1411-10",
     "accountId":1411,
     "itemName":"Order Item-6",
