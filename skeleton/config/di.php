@@ -55,6 +55,12 @@ return array(
             ),
             'shared' => true
         ),
+        'CG\Skeleton\Composer\Composer' => array(
+            'parameters' => array(
+                'path' => 'composer.json'
+            ),
+            'shared' => true
+        ),
         'CG\Skeleton\Module\StartupCommand' => array(
             'injections' => $modules
         ),
