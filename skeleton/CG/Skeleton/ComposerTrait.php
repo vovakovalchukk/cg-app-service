@@ -22,7 +22,6 @@ trait ComposerTrait
                 foreach($requires as $require) {
                     $requiresToUpdate[] = explode(':', $require)[0];
                 }
-                var_dump(implode(' ', $requiresToUpdate));
                 exec('php composer.phar update ' . implode(' ', $requiresToUpdate));
             }
         }
