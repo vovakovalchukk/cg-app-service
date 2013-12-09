@@ -148,7 +148,11 @@ return array(
                 'FastReadSql' => Sql::class,
                 'WriteSql' => Sql::class,
                 'Di' => Di::class,
-<<<<<<< HEAD
+                'config' => Config::class,
+                'ServiceService' => ServiceService::class,
+                'ServiceCollectionService' => ServiceService::class,
+                'EventService' => EventService::class,
+                'EventCollectionService' => EventService::class,
                 'ServiceDbRepo' => ServiceRepository::class,
                 'ServiceDbStorage' => ServiceDb::class,
                 'ServiceCacheRepo' => ServiceRepository::class,
@@ -173,14 +177,6 @@ return array(
                 'UserChangeService' => UserChangeService::class,
                 'UserChangeCollectionService' => UserChangeService::class
             ),
-=======
-                'config' => Config::class,
-                'ServiceService' => ServiceService::class,
-                'ServiceCollectionService' => ServiceService::class,
-                'EventService' => EventService::class,
-                'EventCollectionService' => EventService::class
-             ),
->>>>>>> CGIV-722
             'ReadSql' => array(
                 'parameter' => array(
                     'adapter' => 'readAdapter'
@@ -279,7 +275,6 @@ return array(
                     'eventManager' => EventManager::class
                 )
             ),
-<<<<<<< HEAD
             'EventCacheRepo' => array(
                 'parameter' => array(
                     'storage' => EventCache::class,
@@ -625,8 +620,6 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-=======
->>>>>>> CGIV-722
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -635,12 +628,8 @@ return array(
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
-<<<<<<< HEAD
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
-                \MongoClient::class => "mongodb"
-=======
-                'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis'
->>>>>>> CGIV-722
+                \MongoClient::class => 'mongodb'
             )
         )
     )
