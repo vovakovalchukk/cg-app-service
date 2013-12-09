@@ -9,15 +9,15 @@ class CreateServiceEventTable extends Migration
      */
     public function up()
     {
-        $sql = 'CREATE TABLE IF NOT EXISTS service_event ('
+        $sql = 'CREATE TABLE IF NOT EXISTS serviceEvent ('
                 . ' `id` INT AUTO_INCREMENT,'
-                . ' `service_id` INT UNSIGNED,'
+                . ' `serviceId` INT UNSIGNED,'
                 . ' `type` VARCHAR(255),'
                 . ' `instances` INT UNSIGNED NOT NULL,'
                 . ' `endpoint` VARCHAR(255) NOT NULL,'
                 . ' PRIMARY KEY (`id`),'
-                . ' UNIQUE KEY `service_event_type` (`service_id`, `type`),'
-                . ' CONSTRAINT `service_event` FOREIGN KEY `service_event` (`service_id`)'
+                . ' UNIQUE KEY `serviceEventType` (`serviceId`, `type`),'
+                . ' CONSTRAINT `serviceEvent` FOREIGN KEY `serviceEvent` (`serviceId`)'
                     . ' REFERENCES service (`id`) ON UPDATE RESTRICT ON DELETE CASCADE'
             . ' ) ENGINE=INNODB';
 
@@ -29,7 +29,7 @@ class CreateServiceEventTable extends Migration
      */
     public function down()
     {
-        $sql = 'DROP TABLE IF EXISTS service_event';
+        $sql = 'DROP TABLE IF EXISTS serviceEvent';
 
         $this->getContainer()['db']->query($sql);
     }

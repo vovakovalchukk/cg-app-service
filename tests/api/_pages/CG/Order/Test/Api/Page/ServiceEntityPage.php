@@ -20,4 +20,11 @@ class ServiceEntityPage extends ServicePage implements EntityPageInterface
             static::POST => static::POST
         ];
     }
+
+    public static function getSecondaryTestEntity()
+    {
+        $entity = static::getTestCollection()[1];
+        $entity["type"] = "type22";
+        return $entity;
+    }
 }

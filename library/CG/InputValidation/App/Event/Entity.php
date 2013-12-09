@@ -49,6 +49,12 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                 )
+            ),
+            'serviceId' => array(
+                'name'       => 'serviceId',
+                'required'   => false,
+                'validators' => array(
+                )
             )
         );
     }

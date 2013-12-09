@@ -42,65 +42,37 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `service`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `service` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(25) NOT NULL,
   `endpoint` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `service`
---
+INSERT INTO `service` VALUES (1,'Type1','endpoint1');
+INSERT INTO `service` VALUES (2,'Type2','endpoint2');
+INSERT INTO `service` VALUES (3,'Type3','endpoint3');
+INSERT INTO `service` VALUES (4,'Type4','endpoint4');
+INSERT INTO `service` VALUES (5,'Type5','endpoint5');
 
-LOCK TABLES `service` WRITE;
-/*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'test','http://example.com');
-/*!40000 ALTER TABLE `service` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `service_event`
---
-
-DROP TABLE IF EXISTS `service_event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `service_event` (
+DROP TABLE IF EXISTS `serviceEvent`;
+CREATE TABLE `serviceEvent` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_id` int(10) unsigned DEFAULT NULL,
+  `serviceId` int(10) unsigned DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `instances` int(10) unsigned NOT NULL,
   `endpoint` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `service_event_type` (`service_id`,`type`),
-  CONSTRAINT `service_event` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  UNIQUE KEY `serviceEventType` (`serviceId`,`type`),
+  CONSTRAINT `serviceEvent` FOREIGN KEY (`serviceId`) REFERENCES `service` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `service_event`
---
+INSERT INTO `serviceEvent` VALUES (1,1,'type1',1,'http://example1.com');
+INSERT INTO `serviceEvent` VALUES (2,1,'type2',2,'http://example2.com');
+INSERT INTO `serviceEvent` VALUES (3,1,'type3',3,'http://example3.com');
+INSERT INTO `serviceEvent` VALUES (4,4,'type4',4,'http://example4.com');
+INSERT INTO `serviceEvent` VALUES (5,5,'type5',5,'http://example5.com');
 
-LOCK TABLES `service_event` WRITE;
-/*!40000 ALTER TABLE `service_event` DISABLE KEYS */;
-INSERT INTO `service_event` VALUES (1,1,'valid',1,'http://example.com');
-/*!40000 ALTER TABLE `service_event` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2013-09-17  9:47:54
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
     `id` varchar(120) NOT NULL,
@@ -247,3 +219,4 @@ INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, 
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (4, '1411-11', "Standard", 'Wrap Message 4', 4.99, 0.4);
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (5, '1411-12', "Standard", 'Wrap Message 5', 5.99, 0.5);
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (6, '1411-11', "Standard", 'Wrap Message 6', 6.99, 0.6);
+

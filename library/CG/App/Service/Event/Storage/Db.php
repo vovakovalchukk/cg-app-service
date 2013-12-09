@@ -1,7 +1,7 @@
 <?php
 namespace CG\App\Service\Event\Storage;
 
-use CG\App\Service\Event\Storage;
+use CG\App\Service\Event\StorageInterface;
 use CG\Stdlib\Storage\Db\Zend\Sql as SqlStorage;
 use Zend\Db\Sql\Sql;
 use CG\App\Service\Event\Mapper;
@@ -10,13 +10,12 @@ use CG\App\Service\Event\Entity;
 use CG\App\Service\Storage\Db as ServiceDb;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
+use Zend\Db\Sql\Exception\ExceptionInterface;
+use CG\Stdlib\Exception\Storage as StorageException;
 
-class Db implements Storage, EventManagerAwareInterface
+class Db implements StorageInterface, EventManagerAwareInterface
 {
     use SqlStorage;
-
-    const TABLE = 'service_event';
-    const TABLE_ALIAS = 'se';
 
     protected $readSql;
     protected $fastReadSql;
@@ -65,7 +64,7 @@ class Db implements Storage, EventManagerAwareInterface
     {
         return $this->writeSql;
     }
-    
+
     public function setEventManager(EventManagerInterface $eventManager)
     {
         $eventManager->setIdentifiers(array(
@@ -75,7 +74,7 @@ class Db implements Storage, EventManagerAwareInterface
         $this->eventManager = $eventManager;
         return $this;
     }
-    
+
     public function getEventManager()
     {
         return $this->eventManager;
@@ -84,10 +83,10 @@ class Db implements Storage, EventManagerAwareInterface
     protected  function getSelect()
     {
         return $this->getReadSql()
-            ->select(static::TABLE)
+            ->select("serviceEvent")
             ->columns(array(
                 'id',
-                'serviceId' => 'service_id',
+                'serviceId',
                 'type',
                 'instances',
                 'endpoint'
@@ -96,31 +95,23 @@ class Db implements Storage, EventManagerAwareInterface
 
     protected function getJoinSelect()
     {
-        return $this->getReadSql()->select(
-                array(
-                    static::TABLE_ALIAS => static::TABLE
-                )
-            )->join(
-                array(
-                    ServiceDb::TABLE_ALIAS => ServiceDb::TABLE
-                ),
-                static::TABLE_ALIAS . '.service_id = ' . ServiceDb::TABLE_ALIAS . '.id'
-            );
+        return $this->getReadSql()->select(array("se" => "serviceEvent"))
+                                  ->join(array("s" => "service"), "se.serviceId = s.id");
     }
 
     protected function getInsert()
     {
-        return $this->getWriteSql()->insert(static::TABLE);
+        return $this->getWriteSql()->insert("serviceEvent");
     }
 
     protected function getUpdate()
     {
-        return $this->getWriteSql()->update(static::TABLE);
+        return $this->getWriteSql()->update("serviceEvent");
     }
 
     protected function getDelete()
     {
-        return $this->getWriteSql()->delete(static::TABLE);
+        return $this->getWriteSql()->delete("serviceEvent");
     }
 
     public function setMapper(Mapper $mapper)
@@ -145,67 +136,39 @@ class Db implements Storage, EventManagerAwareInterface
         );
     }
 
-    public function fetchByIds(array $ids)
+    public function fetchCollectionByServiceId($limit, $page, $serviceId)
     {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__, compact('ids')),
-            $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'id' => $ids
-            )),
-            $this->getMapper(),
-            count($ids)
-        );
+        try {
+            $offset = ($page - 1) * $limit;
+
+            $select = $this->getSelect()->limit($limit)->offset($offset);
+            return $this->fetchPaginatedCollection(
+                new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'serviceId')),
+                $this->getReadSql(),
+                $select,
+                $this->getMapper()
+            );
+        } catch (ExceptionInterface $e) {
+            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
-    public function fetchCollectionByServiceIdAndType($serviceId, $type)
+    public function fetchCollectionByServiceIds(array $serviceIds)
     {
-        $entity = $this->fetchEntity(
-            $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'service_id' => $serviceId,
-                'type' => $type
-            )),
-            $this->getMapper()
-        );
-        $collection = new Collection(get_class($entity), __FUNCTION__, compact('serviceId', 'type'));
-        $collection->attach($entity);
-        return $collection;
+        try {
+            $query = array("serviceEvent.serviceId" => $serviceIds);
+            $select = $this->getSelect()->where($query);
+            return $this->fetchPaginatedCollection(
+                new Collection($this->getEntityClass(), __FUNCTION__, array(compact('serviceIds'))),
+                $this->getReadSql(),
+                $select,
+                $this->getMapper()
+            );
+        } catch (ExceptionInterface $e) {
+            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
-    public function fetchAll()
-    {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__),
-            $this->getReadSql(),
-            $this->getSelect(),
-            $this->getMapper()
-        );
-    }
-
-    public function fetchCollectionByServiceId($serviceId)
-    {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__, compact('serviceId')),
-            $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'service_id' => $serviceId
-            )),
-            $this->getMapper()
-        );
-    }
-
-    public function fetchCollectionByType($type)
-    {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__, compact('type')),
-            $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'type' => $type
-            )),
-            $this->getMapper()
-        );
-    }
 
     public function save($entity)
     {
@@ -223,7 +186,7 @@ class Db implements Storage, EventManagerAwareInterface
 
     protected function insertEntity($entity)
     {
-        $insert = $this->getInsert()->values($this->getMapper()->toArray($entity));
+        $insert = $this->getInsert()->values($entity->toArray());
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
 
         $entity->setId(
@@ -235,7 +198,7 @@ class Db implements Storage, EventManagerAwareInterface
     protected function updateEntity($entity)
     {
         $update = $this->getUpdate()->set(
-            $this->getMapper()->toArray($entity)
+            $entity->toArray()
         )->where(array(
             'id' => $entity->getId()
         ));
@@ -245,25 +208,9 @@ class Db implements Storage, EventManagerAwareInterface
 
     protected function updateRelatedEntities($entity)
     {
-        $select = $this->getJoinSelect()
-            ->join(
-                array(
-                    ServiceDb::TABLE_ALIAS . '_related' => ServiceDb::TABLE
-                ),
-                ServiceDb::TABLE_ALIAS . '.type = ' . ServiceDb::TABLE_ALIAS . '_related.type'
-                    . ' AND ' . ServiceDb::TABLE_ALIAS . '.id <> ' . ServiceDb::TABLE_ALIAS . '_related.id'
-            )->join(
-                array(
-                    static::TABLE_ALIAS . '_related' => static::TABLE
-                ),
-                ServiceDb::TABLE_ALIAS . '_related.id = ' . static::TABLE_ALIAS . '_related.service_id'
-                    . ' AND ' . static::TABLE_ALIAS . '.type = ' . static::TABLE_ALIAS . '_related.type',
-                array(
-                    'relatedId' => 'id'
-                )
-            )->where(array(
-                static::TABLE_ALIAS . '.id' => $entity->getId()
-            ));
+        $select = $this->getJoinSelect()->join(array('s_related' => 'service'), 's.type = s_related.type AND s.id <> s_related.id')
+            ->join(array('se_related' => 'serviceEvent'), 's_related.id = se_related.serviceId AND se.type = se_related.type',array('relatedId' => 'id'))
+            ->where(array('se.id' => $entity->getId()));
 
         $results = $this->getWriteSql()->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
@@ -278,11 +225,11 @@ class Db implements Storage, EventManagerAwareInterface
         $update = $this->getUpdate()->set(array(
             'instances' => $entity->getInstances()
         ))->where(array(
-            'id' => $ids
-        ));
+                'id' => $ids
+            ));
 
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
-        
+
         $entities = $this->fetchByIds($ids);
         $this->getEventManager()->trigger('entitiesChanged', $this, ['entities' => $entities]);
     }
@@ -296,5 +243,8 @@ class Db implements Storage, EventManagerAwareInterface
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
 
-
+    public function getEntityClass()
+    {
+        return Entity::class;
+    }
 }

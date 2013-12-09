@@ -2,7 +2,7 @@
 use Slim\Slim;
 use CG\Controllers\Root;
 use CG\Controllers\App\Service\Collection as ServiceCollection;
-use CG\Controllers\App\Service as Service;
+use CG\Controllers\App\Service;
 use CG\Controllers\App\Event\Collection as EventCollection;
 use CG\Controllers\App\Event;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
@@ -84,7 +84,6 @@ $routes = array(
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
-
                 $controller = $di->get(Service::class, array());
                 $app->view()->set(
                     'RestResponse',
@@ -107,18 +106,18 @@ $routes = array(
                 );
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
-        'name' => 'ServiceEventEntity',
+        'name' => 'ServiceEventCollection',
         'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
-    '/service/:id/event/:eventType' => array (
-        'controllers' => function($id, $eventType) use ($serviceManager) {
+    '/service/:id/event/:eventId' => array (
+        'controllers' => function($id, $eventId) use ($serviceManager) {
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(Event::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($id, $eventType, $app->request()->getBody())
+                    $controller->$method($id, $eventId, $app->request()->getBody())
                 );
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),

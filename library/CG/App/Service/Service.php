@@ -2,17 +2,21 @@
 namespace CG\App\Service;
 
 use CG\Stdlib\Exception\Runtime\NotFound;
-use Nocarrier\Hal;
 use CG\App\Service\Repository;
 use CG\App\Service\Mapper;
 use CG\App\Service\Entity;
 use CG\App\Service\Event\Service as EventService;
+use CG\Stdlib\ServiceTrait;
+use CG\App\Service\Event\Collection as EventCollection;
 
 class Service
 {
-    protected $repository;
-    protected $mapper;
+    use ServiceTrait;
+
     protected $eventService;
+
+    const DEFAULT_LIMIT = 10;
+    const DEFAULT_PAGE = 1;
 
     public function __construct(Repository $repository, Mapper $mapper, EventService $eventService)
     {
@@ -21,70 +25,43 @@ class Service
              ->setEventService($eventService);
     }
 
-    public function fetchAsHal($id)
+    public function fetchCollectionWithPaginationAsHal($limit, $page)
     {
-        $entity = $this->fetch($id);
-        return $this->getMapper()->toHal($entity);
+        $limit = $limit ?: static::DEFAULT_LIMIT;
+        $page = $page ?: static::DEFAULT_PAGE;
+
+        $collection = $this->getRepository()->fetchCollectionWithPagination($limit, $page);
+        $collection = $this->fetchCollectionEmbeds($collection, $collection->getIds());
+        return $this->getMapper()->collectionToHal($collection, "/service", $limit, $page, array());
     }
 
-    protected function fetch($id)
+    protected function fetchCollectionEmbeds(\SplObjectStorage $collection, array $serviceIds)
     {
-        $entity = $this->getRepository()->fetch($id);
         try {
-            foreach ($this->getEventService()->fetchCollectionByServiceId($id) as $event) {
-                $entity->addSubscribedEvent($event);
+            $events = $this->getEventService()->fetchCollectionByServiceIds($serviceIds);
+            foreach ($collection as $entity) {
+                $entity->setEvents($events->getByServiceId($entity->getId()));
             }
-        } catch (NotFound $exception) {
-            // If collection not found - assume empty collection
+        } catch (NotFound $e) {
+            //Ignore Not Found Errors
         }
-        return $entity;
-    }
-
-    public function fetchCollectionAsHal()
-    {
-        $collection = $this->fetchAll();
-        return $this->getMapper()->collectionToHal($collection, "/service");
-    }
-
-    protected function fetchAll()
-    {
-        $collection = $this->getRepository()->fetchAll();
-
-        $index = array();
-        foreach ($collection as $entity) {
-            $index[$entity->getId()] = $entity;
-        }
-
-        try {
-            foreach ($this->getEventService()->fetchAll() as $event) {
-                if (!isset($index[$event->getServiceId()])) {
-                    continue;
-                }
-                $index[$event->getServiceId()]->addSubscribedEvent($event);
-            }
-        } catch (NotFound $exception) {
-            // If collection not found - assume empty collection
-        }
-
         return $collection;
     }
 
-    public function saveHal(Hal $hal)
-    {
-        $entity = $this->getMapper()->fromHal($hal);
-        $this->save($entity);
-        return $entity;
-    }
-
-    protected function save(Entity $entity)
-    {
-        $this->getRepository()->save($entity);
-    }
-
-    public function remove($id)
+    public function fetchAsHal($id)
     {
         $entity = $this->fetch($id);
-        foreach ($entity->getSubscribedEvents() as $eventEntity) {
+        //Converting to Collection removes need for duplicate code throughout the codebase
+        $collection = new \SplObjectStorage();
+        $collection->attach($entity);
+        $collection = $this->fetchCollectionEmbeds($collection, array($id));
+        $collection->rewind();
+        return $this->getMapper()->toHal($collection->current());
+    }
+
+    public function remove(Entity $entity)
+    {
+        foreach ($entity->getEvents() as $eventEntity) {
             $this->getEventService()->remove($eventEntity);
         }
         $this->getRepository()->remove($entity);

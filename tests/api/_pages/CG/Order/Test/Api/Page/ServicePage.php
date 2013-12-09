@@ -84,7 +84,7 @@ class ServicePage extends RootPage
     public static function getEmbeddedResources()
     {
         return [
-            "subscribedEvent[]" => SubscribedEventPage::class
+            "event[]" => SubscribedEventPage::class
         ];
     }
 }
