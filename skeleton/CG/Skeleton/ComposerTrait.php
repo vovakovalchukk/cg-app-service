@@ -27,5 +27,23 @@ trait ComposerTrait
         }
     }
 
+    protected function doesRequireExist(String $require) {
+
+    }
+
+    protected function getComposerJson() {
+        $composerConfigJson = file_get_contents($fileName);
+        $composerConfig = json_decode($composerConfigJson);
+        if(isset($composerConfig->require)) {
+            $requireArray = (array)$composerConfig->require;
+            ksort($requireArray);
+            $composerConfig->require = (object)$requireArray;
+            $composerConfigJson = json_encode($composerConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            file_put_contents($fileName, $composerConfigJson);
+            exec('sed -i -e s/\'"_empty_"\'/\'""\'/ composer.json');
+            exec("git add {$fileName}");
+        }
+    }
+
     abstract public function getConsole();
 }
