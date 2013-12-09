@@ -18,7 +18,12 @@ trait ComposerTrait
             if ($beforeHash != $afterHash) {
                 $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
                                              . implode("\n\t* ",$requires) . Console::COLOR_GREEN);
-                exec('php composer.phar update predis/predis channelgrabber/predis');
+                $requiresToUpdate = array();
+                foreach($requires as $require) {
+                    $requiresToUpdate[] = explode(':', $require)[0];
+                }
+                var_dump(implode(' ', $requiresToUpdate));
+                exec('php composer.phar update ' . implode(' ', $requiresToUpdate));
             }
         }
     }
