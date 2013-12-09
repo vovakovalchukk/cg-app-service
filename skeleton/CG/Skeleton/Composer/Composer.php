@@ -42,42 +42,16 @@ class Composer
         return $this;
     }
 
-    public function updateComposer()
+    public function updateComposer($require = null)
     {
+        $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
+            . $require . Console::COLOR_GREEN);
 
-    }
-
-    public function setKey($key, $value)
-    {
-        $data =& $this->data;
-        foreach (explode('|', $key) as $currentKey) {
-            if (!isset($data[$currentKey])) {
-                $data[$currentKey] = array();
-            }
-            $data =& $data[$currentKey];
-        }
-
-        if (is_array($value)) {
-            $data = array_merge($data, $value);
+        if (isset($require)) {
+            exec('php composer.phar update ' . explode(':', $require)[0]);
         } else {
-            $data = $value;
+            exec('php composer.phar update');
         }
-    }
-
-    public function removeKey($key)
-    {
-        $data =& $this->data;
-        $keys = explode('|', $key);
-        $key = array_pop($keys);
-
-        foreach ($keys as $currentKey) {
-            if (!isset($data[$currentKey])) {
-                return;
-            }
-            $data =& $data[$currentKey];
-        }
-
-        unset($data[$key]);
     }
 
     public function save()
