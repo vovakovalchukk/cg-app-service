@@ -8,6 +8,7 @@ use Nocarrier\Hal as NocarrierHal;
 use CG\Slim\Mapper\CollectionToHalTrait;
 use CG\Slim\Renderer\ResponseType\Hal;
 use Zend\Di\Di;
+use CG\App\Service\Event\Mapper as EventMapper;
 
 class Mapper implements FromArrayInterface
 {
@@ -18,9 +19,10 @@ class Mapper implements FromArrayInterface
 
     const FIRST_PAGE = 1;
 
-    public function __construct(Di $di)
+    public function __construct(Di $di, EventMapper $eventMapper)
     {
-        $this->setDi($di);
+        $this->setDi($di)
+            ->setEventMapper($eventMapper);
     }
 
     public function fromHal(NocarrierHal $hal)
@@ -34,7 +36,7 @@ class Mapper implements FromArrayInterface
         return $this->getDi()->get(ServiceEntity::class, $service);
     }
 
-    public function toHal($entity)
+    public function toHal(ServiceEntity $entity)
     {
         $hal =  $this->getDi()->get(
             Hal::class, array(
@@ -42,7 +44,12 @@ class Mapper implements FromArrayInterface
                 'data' => $entity->toArray()
             )
         );
-        $hal->addLink("up", '/service');
+        foreach ($entity->getEvents() as $event) {
+            $hal->addResource(
+                $this->getEventMapper()->getEmbeddedResource(),
+                $this->getEventMapper()->toHal($event)
+            );
+        }
         return $hal;
     }
 
@@ -65,5 +72,16 @@ class Mapper implements FromArrayInterface
     public function getDi()
     {
         return $this->di;
+    }
+
+    public function setEventMapper(EventMapper $eventMapper)
+    {
+        $this->eventMapper = $eventMapper;
+        return $this;
+    }
+
+    public function getEventMapper()
+    {
+        return $this->eventMapper;
     }
 }

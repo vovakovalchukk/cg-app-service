@@ -25,7 +25,10 @@ class Collection
     public function get()
     {
         try {
-            return $this->getService()->fetchCollectionAsHal();
+            return $this->getService()->fetchCollectionWithPaginationAsHal(
+                $this->getParams('limit'),
+                $this->getParams('page')
+            );
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }

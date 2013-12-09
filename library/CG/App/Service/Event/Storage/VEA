@@ -1,0 +1,27 @@
+protected function updateRelatedEntities($entity)
+    {
+        $select = $this->getJoinSelect()->join(array('s_related' => 'service'), 's.type = s_related.type AND s.id != s_related.id')
+                                        ->join(array('se_related' => 'service_event'), 's_related.id = se_related.service_id AND se.type = se_related.type',array('relatedId' => 'id'))
+                                        ->where(array('se.id' => $entity->getId()));
+
+        $results = $this->getWriteSql()->prepareStatementForSqlObject($select)->execute();
+        if ($results->count() == 0) {
+            return;
+        }
+
+        $ids = array();
+        foreach ($results as $result) {
+            $ids[] = $result['relatedId'];
+        }
+
+        $update = $this->getUpdate()->set(array(
+            'instances' => $entity->getInstances()
+        ))->where(array(
+            'id' => $ids
+        ));
+
+        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+
+        $entities = $this->fetchByIds($ids);
+        $this->getEventManager()->trigger('entitiesChanged', $this, ['entities' => $entities]);
+    }

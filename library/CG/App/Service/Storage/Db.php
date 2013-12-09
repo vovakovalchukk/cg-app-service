@@ -1,19 +1,18 @@
 <?php
 namespace CG\App\Service\Storage;
 
-use CG\App\Service\Storage;
+use CG\App\Service\StorageInterface;
 use CG\Stdlib\Storage\Db\Zend\Sql as SqlStorage;
 use Zend\Db\Sql\Sql;
 use CG\App\Service\Mapper;
 use CG\App\Service\Collection;
 use CG\App\Service\Entity;
+use Zend\Db\Sql\Exception\ExceptionInterface;
+use CG\Stdlib\Exception\Storage as StorageException;
 
-class Db implements Storage
+class Db implements StorageInterface
 {
     use SqlStorage;
-
-    const TABLE = 'service';
-    const TABLE_ALIAS = 's';
 
     protected $readSql;
     protected $fastReadSql;
@@ -31,7 +30,7 @@ class Db implements Storage
     protected function getSelect()
     {
         return $this->getReadSql()
-            ->select(static::TABLE)
+            ->select("service")
             ->columns(array(
                 'id',
                 'type',
@@ -41,17 +40,17 @@ class Db implements Storage
 
     protected function getInsert()
     {
-        return $this->getWriteSql()->insert(static::TABLE);
+        return $this->getWriteSql()->insert("service");
     }
 
     protected function getUpdate()
     {
-        return $this->getWriteSql()->update(static::TABLE);
+        return $this->getWriteSql()->update("service");
     }
 
     protected function getDelete()
     {
-        return $this->getWriteSql()->delete(static::TABLE);
+        return $this->getWriteSql()->delete("service");
     }
 
     public function setMapper(Mapper $mapper)
@@ -75,27 +74,21 @@ class Db implements Storage
         );
     }
 
-    public function fetchByIds(array $ids)
+    public function fetchCollectionWithPagination($limit, $page)
     {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__, compact('ids')),
-            $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'id' => $ids
-            )),
-            $this->getMapper(),
-            count($ids)
-        );
-    }
+        try {
+            $offset = ($page - 1) * $limit;
+            $select = $this->getSelect()->where(array())->limit($limit)->offset($offset);
 
-    public function fetchAll()
-    {
-        return $this->fetchCollection(
-            new Collection(Entity::getClass(), __FUNCTION__),
-            $this->getReadSql(),
-            $this->getSelect(),
-            $this->getMapper()
-        );
+            return $this->fetchPaginatedCollection(
+                new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page')),
+                $this->getReadSql(),
+                $select,
+                $this->getMapper()
+            );
+        } catch (ExceptionInterface $e) {
+            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     public function save($entity)
@@ -167,5 +160,10 @@ class Db implements Storage
     public function getWriteSql()
     {
         return $this->writeSql;
+    }
+
+    public function getEntityClass()
+    {
+        return Entity::class;
     }
 }

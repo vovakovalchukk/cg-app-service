@@ -5,11 +5,14 @@ use Nocarrier\Hal;
 use CG\App\Service\Event\Repository;
 use CG\App\Service\Event\Mapper;
 use CG\App\Service\Event\Entity;
+use CG\Stdlib\ServiceTrait;
 
 class Service
 {
-    protected $repository;
-    protected $mapper;
+    use ServiceTrait;
+
+    const DEFAULT_LIMIT = 10;
+    const DEFAULT_PAGE = 1;
 
     public function __construct(Repository $repository, Mapper $mapper)
     {
@@ -17,56 +20,25 @@ class Service
             ->setMapper($mapper);
     }
 
-    public function fetchAsHal($id)
+    public function fetchCollectionByServiceIdAsHal($limit, $page, $serviceId)
     {
-        $entity = $this->fetch($id);
-        return $this->getMapper()->toHal($entity);
+        $limit = $limit ?: static::DEFAULT_LIMIT;
+        $page = $page ?: static::DEFAULT_PAGE;
+
+        $collection = $this->getRepository()->fetchCollectionByServiceId($limit, $page, $serviceId);
+        return $this->getMapper()->collectionToHal(
+            $collection,
+            "/service/" . $serviceId . "/event",
+            $limit,
+            $page,
+            array("serviceId" => $serviceId)
+        );
     }
 
-    protected function fetch($id)
+    public function fetchCollectionByServiceIds(array $serviceIds)
     {
-        return $this->getRepository()->fetch($id);
-    }
-
-    public function fetchCollectionByServiceIdAsHal($serviceId)
-    {
-        $collection = $this->fetchCollectionByServiceId($serviceId);
-        return $this->getMapper()->collectionToHal($collection, $this->getUrl($serviceId));
-    }
-
-    protected function fetchCollectionByServiceId($serviceId)
-    {
-        return $this->getRepository()->fetchCollectionByServiceId($serviceId);
-    }
-
-    public function fetchByServiceIdAndTypeAsHal($serviceId, $type)
-    {
-        $collection = $this->fetchByServiceIdAndType($serviceId, $type);
-        return $this->getMapper()->collectionToHal($collection, $this->getUrl($serviceId));
-    }
-
-    protected function getUrl($serviceId)
-    {
-        return "/service/" . $serviceId . "/event";
-    }
-
-    protected function fetchByServiceIdAndType($serviceId, $type)
-    {
-        $collection = $this->getRepository()->fetchCollectionByServiceIdAndType($serviceId, $type);
-        $collection->rewind();
-        return $collection->current();
-    }
-
-    public function saveHal(Hal $hal)
-    {
-        $entity = $this->getMapper()->fromHal($hal);
-        $this->save($entity);
-        return $entity;
-    }
-
-    protected function save(Entity $entity)
-    {
-        $this->getRepository()->save($entity);
+        $collection = $this->getRepository()->fetchCollectionByServiceIds($serviceIds);
+        return $collection;
     }
 
     public function remove(Entity $entity)

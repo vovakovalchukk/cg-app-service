@@ -3,20 +3,26 @@ namespace CG\App\Service;
 
 use CG\Stdlib\CachableInterface;
 use CG\Stdlib\CachableEntityTrait;
+use CG\App\Service\Event\Collection as EventCollection;
+use CG\App\Service\Event\Entity as EventEntity;
+use CG\ETag\ETagInterface;
+use CG\ETag\EntityTrait as ETagEntityTrait;
 
-class Entity implements CachableInterface
+class Entity implements CachableInterface, ETagInterface
 {
-    use CachableEntityTrait;
+    use CachableEntityTrait, ETagEntityTrait;
 
     protected $id;
     protected $type;
     protected $endpoint;
-    protected $subscribedEvents;
+    protected $events;
 
-    public function __construct($type, $endpoint)
+    public function __construct($type, $endpoint, $id = null)
     {
         $this->setType($type)
-             ->setEndpoint($endpoint);
+             ->setEndpoint($endpoint)
+             ->setId($id);
+        $this->events = new \SplObjectStorage();
     }
 
     public function setId($id)
@@ -52,6 +58,22 @@ class Entity implements CachableInterface
         return $this->endpoint;
     }
 
+    public function addEvent(EventEntity $entity)
+    {
+        $this->getEvents()->attach($entity);
+    }
+
+    public function setEvents(EventCollection $events)
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
     public function  toArray()
     {
         return array(
@@ -59,5 +81,10 @@ class Entity implements CachableInterface
             "endpoint" => $this->getEndpoint(),
             "type" => $this->getType()
         );
+    }
+
+    public function getETagDataArray()
+    {
+        return $this->toArray();
     }
 }

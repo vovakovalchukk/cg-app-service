@@ -3,10 +3,12 @@ namespace CG\App\Service\Event;
 
 use CG\Stdlib\CachableInterface;
 use CG\Stdlib\CachableEntityTrait;
+use CG\ETag\ETagInterface;
+use CG\ETag\EntityTrait as ETagEntityTrait;
 
-class Entity implements CachableInterface
+class Entity implements CachableInterface, ETagInterface
 {
-    use CachableEntityTrait;
+    use CachableEntityTrait, ETagEntityTrait;
 
     protected $id;
     protected $serviceId;
@@ -14,12 +16,13 @@ class Entity implements CachableInterface
     protected $instances;
     protected $endpoint;
 
-    public function __construct($serviceId, $type, $instances, $endpoint)
+    public function __construct($serviceId, $type, $instances, $endpoint, $id = null)
     {
         $this->setServiceId($serviceId)
              ->setType($type)
              ->setInstances($instances)
-             ->setEndpoint($endpoint);
+             ->setEndpoint($endpoint)
+             ->setId($id);
     }
 
     protected function getCacheTypeSeparator()
@@ -91,5 +94,10 @@ class Entity implements CachableInterface
             "instances" => $this->getInstances(),
             "endpoint" => $this->getEndpoint()
         );
+    }
+
+    public function getETagDataArray()
+    {
+        return $this->toArray();
     }
 }
