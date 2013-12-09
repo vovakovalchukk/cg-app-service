@@ -39,6 +39,7 @@ class Composer
             exec('php composer.phar update ' . explode(':', $require)[0]);
         }
 
+        $this->load();
         return $this;
     }
 
@@ -54,8 +55,22 @@ class Composer
         }
     }
 
+    public function removeRequire($require)
+    {
+        $composerConfig = $this->data;
+        if(!isset($composerConfig->require)) {
+            return;
+        }
+
+        $requireArray = $composerConfig->require;
+
+        print_r($requireArray);
+
+        return $this;
+    }
+
     public function save()
     {
-        file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT));
+        file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 }
