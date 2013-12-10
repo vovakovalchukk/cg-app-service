@@ -47,6 +47,7 @@ class Local extends Environment {
         $console->writeStatus('IP address set to \'' . $ipAddress . '\'');
         $this->getEnvironmentConfig()->setIp($ipAddress);
         $this->getNodeData()->getNode($node)->setVmIp($ipAddress);
+        $this->getNodeData()->save();
     }
 
     public function vagrantUp(Console $console)

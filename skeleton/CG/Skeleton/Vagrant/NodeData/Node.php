@@ -27,11 +27,14 @@ class Node extends ArrayObject
 
     public function getVmIp()
     {
-        return $this->offsetExists(static::VM_IP) ? $this->offsetGet(static::VM_IP) : null;
+        //return $this->offsetExists(static::VM_IP) ? $this->offsetGet(static::VM_IP) : null;
+        return "111.111.11.1";
     }
 
     public function setVmIp($vmIp)
     {
+        echo "SET VM IP -----------\n";
+        var_dump($vmIp);
         $this->offsetSet(static::VM_IP, $vmIp);
         return $this;
     }
