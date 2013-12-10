@@ -71,6 +71,7 @@ INSERT INTO `serviceEvent` VALUES (2,1,'type2',2,'http://example2.com');
 INSERT INTO `serviceEvent` VALUES (3,1,'type3',3,'http://example3.com');
 INSERT INTO `serviceEvent` VALUES (4,1,'type4',4,'http://example4.com');
 INSERT INTO `serviceEvent` VALUES (5,1,'type5',5,'http://example5.com');
+INSERT INTO `serviceEvent` VALUES (6,2,'type6',6,'http://example6.com');
 
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (

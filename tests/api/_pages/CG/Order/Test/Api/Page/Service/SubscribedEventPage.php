@@ -63,6 +63,13 @@ class SubscribedEventPage extends ServiceEntityPage
                     "type" => "type5",
                     "instances" => 5,
                     "endpoint" => "http://example5.com"
+                ],
+                [
+                    "id" => 6,
+                    "serviceId" => 2,
+                    "type" => "type6",
+                    "instances" => 6,
+                    "endpoint" => "http://example6.com"
                 ]
                ];
     }
