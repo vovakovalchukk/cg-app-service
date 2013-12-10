@@ -63,7 +63,7 @@ class Entity implements RulesInterface
                 'name'       => 'individualItemPrice',
                 'required'   => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemPrice']),
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemPrice', 'min' => 0]),
                 )
             ),
             'itemQuantity' => array(
@@ -86,14 +86,14 @@ class Entity implements RulesInterface
                 'name'       => 'itemTaxPercentage',
                 'required'   => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'itemTaxPercentage']),
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'itemTaxPercentage', 'min' => 0]),
                 )
             ),
             'individualItemDiscountPrice' => array(
                 'name'       => 'individualItemDiscountPrice',
                 'required'   => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemDiscountPrice']),
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemDiscountPrice', 'min' => 0]),
                 )
             ),
             'itemVariationAttribute' => array(

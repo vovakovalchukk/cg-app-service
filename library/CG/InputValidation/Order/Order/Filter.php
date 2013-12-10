@@ -7,7 +7,11 @@ use Zend\Di\Di;
 use Zend\Validator\Between;
 use Zend\Validator\Date;
 use Zend\Validator\InArray;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Constant\CountryCode;
+use CG\Validation\Rules\InArrayValidator;
+use CG\Validation\Rules\IsArrayValidator;
+use Zend\Validator\StringLength;
 
 class Filter implements RulesInterface
 {
@@ -79,78 +83,81 @@ class Filter implements RulesInterface
                 'name'       => 'searchTerm',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'status' => array(
                 'name'       => 'status',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'status'))
                 )
             ),
             'accountId' => array(
                 'name'       => 'accountId',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "accountId"))
                 )
             ),
             'channel' => array(
                 'name'       => 'channel',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'channel'))
                 )
             ),
             'includeArchived' => array(
                 'name'       => 'includeArchived',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiSameItem']])
                 )
             ),
             'country' => array(
                 'name'       => 'country',
                 'required'   => false,
                 'validators' => array(
-                    //$this->getDi()->newInstance(InArray::class)
-                    //              ->setHaystack(CountryCode::getCountryCodes())
-                    /* array of of haystacks? */
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'country')),
+                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'country',
+                        'haystack' => CountryCode::getCountryCodes()))
                 )
             ),
             'countryExclude' => array(
                 'name'       => 'countryExclude',
                 'required'   => false,
                 'validators' => array(
-                    //$this->getDi()->newInstance(InArray::class)
-                    //              ->setHaystack(CountryCode::getCountryCodes())
-                    /* array of haystacks? */
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'countryExclude')),
+                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'countryExclude',
+                        'haystack' => CountryCode::getCountryCodes()))
                 )
             ),
             'multiLineOrder' => array(
                 'name'       => 'multiLineOrder',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiLineOrder']])
                 )
             ),
             'multiSameItem' => array(
                 'name'       => 'multiSameItem',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                                  ->setHaystack(array(1, "true", 0, "false", "1", "0"))
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiSameItem']])
                 )
             ),
             'shippingMethod' => array(
                 'name'       => 'shippingMethod',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingMethod'))
                 )
             ),
             'orderBy' => array(
                 'name'       => 'orderBy',
                 'required'   => false,
                 'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'orderDirection' => array(
