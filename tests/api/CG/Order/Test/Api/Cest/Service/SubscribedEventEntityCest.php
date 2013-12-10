@@ -14,19 +14,4 @@ class SubscribedEventEntityCest
     {
         return SubscribedEventEntityPage::class;
     }
-
-    public function viewSecondaryEntity(ApiGuy $I)
-    {
-        $page = $this->getPageClass();
-        if (!isset($page::allowedMethods()[$page::GET])) {
-            $I->amGoingTo('skip viewing secondary entity as GET is not an allowed method');
-            return;
-        }
-
-        $I->wantTo('view the secondary entity');
-
-        $I->prepareRequest();
-        $I->sendGET($page::getSecondaryEntityUrl());
-        $I->seeJsonResponseFieldsEquals($page::getTestCollection()[1]);
-    }
 }
