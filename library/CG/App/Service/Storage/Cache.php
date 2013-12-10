@@ -10,15 +10,19 @@ use CG\Cache\Strategy\CollectionInterface as CollectionStrategyInterface;
 use CG\App\Service\StorageInterface;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Cache\CacheAbstract;
-use CG\Cache\GetEntityClassTrait;
 
 class Cache extends CacheAbstract implements StorageInterface, SaveCollectionInterface
 {
-    use StorageTrait, StorageCollectionTrait, GetEntityClassTrait;
+    use StorageTrait, StorageCollectionTrait;
 
     public function fetchCollectionWithPagination($limit, $page)
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page'));
         return $this->getCollectionStrategy()->get($collection);
+    }
+
+    public function getEntityClass()
+    {
+        return Entity::class;
     }
 }

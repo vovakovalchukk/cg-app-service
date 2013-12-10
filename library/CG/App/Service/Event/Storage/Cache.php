@@ -9,11 +9,10 @@ use CG\App\Service\Event\StorageInterface;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\App\Service\Event\Collection;
 use CG\Cache\CacheAbstract;
-use CG\Cache\GetEntityClassTrait;
 
 class Cache extends CacheAbstract implements StorageInterface, SaveCollectionInterface
 {
-    use StorageTrait, StorageCollectionTrait, GetEntityClassTrait;
+    use StorageTrait, StorageCollectionTrait;
 
     public function fetchCollectionByServiceId($limit, $page, $serviceId)
     {
@@ -25,5 +24,10 @@ class Cache extends CacheAbstract implements StorageInterface, SaveCollectionInt
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('serviceIds'));
         return $this->getCollectionStrategy()->get($collection);
+    }
+
+    public function getEntityClass()
+    {
+        return Entity::class;
     }
 }
