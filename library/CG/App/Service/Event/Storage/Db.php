@@ -140,8 +140,8 @@ class Db implements StorageInterface, EventManagerAwareInterface
     {
         try {
             $offset = ($page - 1) * $limit;
-
-            $select = $this->getSelect()->limit($limit)->offset($offset);
+            $query = array("serviceEvent.serviceId" => $serviceId);
+            $select = $this->getSelect()->where($query)->limit($limit)->offset($offset);
             return $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'serviceId')),
                 $this->getReadSql(),
