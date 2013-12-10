@@ -99,18 +99,7 @@ class Db implements StorageInterface
 
         $this->insertEntity($entity);
     }
-
-    protected function getSelect()
-    {
-        return $this->getReadSql()
-            ->select(static::TABLE)
-            ->columns(array(
-                'id',
-                'type',
-                'endpoint'
-            ));
-    }
-
+    
     public function remove($entity)
     {
         $delete = $this->getDelete()->where(array(
