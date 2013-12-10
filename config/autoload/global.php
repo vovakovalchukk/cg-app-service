@@ -114,12 +114,14 @@ return array(
             ),
             'ServiceService' => array(
                 'parameters' => array(
-                    'repository' => ServiceETagStorage::class
+                    'repository' => ServiceETagStorage::class,
+                    'eventService' => 'EventCollectionService'
                 )
             ),
             'ServiceCollectionService' => array(
                 'parameters' => array(
-                    'repository' => ServiceRepository::class
+                    'repository' => ServiceRepository::class,
+                    'eventService' => 'EventCollectionService'
                 )
             ),
             ServiceRepository::class => array(

@@ -2,7 +2,7 @@
 namespace CG\App\Service\Event;
 
 use Nocarrier\Hal;
-use CG\App\Service\Event\Repository;
+use CG\App\Service\Event\StorageInterface;
 use CG\App\Service\Event\Mapper;
 use CG\App\Service\Event\Entity;
 use CG\Stdlib\ServiceTrait;
@@ -14,7 +14,7 @@ class Service
     const DEFAULT_LIMIT = 10;
     const DEFAULT_PAGE = 1;
 
-    public function __construct(Repository $repository, Mapper $mapper)
+    public function __construct(StorageInterface $repository, Mapper $mapper)
     {
         $this->setRepository($repository)
             ->setMapper($mapper);
@@ -57,7 +57,7 @@ class Service
         return $this->mapper;
     }
 
-    public function setRepository(Repository $repository)
+    public function setRepository(StorageInterface $repository)
     {
         $this->repository = $repository;
         return $this;

@@ -53,7 +53,7 @@ class Mapper implements FromArrayInterface
         return $hal;
     }
 
-    public function getEmbeddedResource(ServiceEntity $service)
+    public function getEmbeddedResource()
     {
         return "service";
     }
