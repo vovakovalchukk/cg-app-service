@@ -2,7 +2,7 @@
 namespace CG\App\Service;
 
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\App\Service\Repository;
+use CG\App\Service\StorageInterface;
 use CG\App\Service\Mapper;
 use CG\App\Service\Entity;
 use CG\App\Service\Event\Service as EventService;
@@ -18,7 +18,7 @@ class Service
     const DEFAULT_LIMIT = 10;
     const DEFAULT_PAGE = 1;
 
-    public function __construct(Repository $repository, Mapper $mapper, EventService $eventService)
+    public function __construct(StorageInterface $repository, Mapper $mapper, EventService $eventService)
     {
         $this->setRepository($repository)
              ->setMapper($mapper)
@@ -89,7 +89,7 @@ class Service
         return $this->mapper;
     }
 
-    public function setRepository(Repository $repository)
+    public function setRepository(StorageInterface $repository)
     {
         $this->repository = $repository;
         return $this;

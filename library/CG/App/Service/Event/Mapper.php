@@ -45,7 +45,7 @@ class Mapper implements FromArrayInterface
         return $hal;
     }
 
-    public function getEmbeddedResource(EventEntity $event)
+    public function getEmbeddedResource()
     {
         return "event";
     }
