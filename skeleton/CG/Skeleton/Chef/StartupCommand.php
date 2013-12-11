@@ -149,7 +149,9 @@ class StartupCommand implements StartupCommandInterface
         $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
         $hosts = new Hosts($hostsFile, $environment->getName());
 
-        var_dump($hosts);
+        foreach($hosts->getData()['hosts'] as $host) {
+            var_dump($host);
+        }
 
         $hosts->save();
     }
