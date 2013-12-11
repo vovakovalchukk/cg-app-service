@@ -144,7 +144,7 @@ class StartupCommand implements StartupCommandInterface
         $this->setupHostsFile($config, $environment);
     }
 
-    protected function setupHostsFile(Config $config, Environtment $environment)
+    protected function setupHostsFile(Config $config, Environment $environment)
     {
         $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
         $hosts = new Hosts($hostsFile, $environment->getName());
