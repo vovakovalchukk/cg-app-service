@@ -56,7 +56,19 @@ class Local extends Environment {
 
     public function setupHostsFile(Startup $console)
     {
+        $console->writeStatus(
+            'Saving ip to /etc/hosts '
+            . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
+        );
 
+        $hostname = $this->getEnvironmentConfig()->getHostname($this->getConfig(), $this);
+        $hostEntry = $this->getEnvironmentConfig()->getIp() . ' ' . $hostname;
+        exec(
+            'grep -q ' . $hostname . ' /etc/hosts'
+            . ' && sudo sed -i \'/' . $hostname . '$/c\\' . $hostEntry . '\' /etc/hosts'
+            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
+        );
+        $console->writeStatus('IP saved to /etc/hosts');
     }
 
     public function vagrantUp(Console $console)

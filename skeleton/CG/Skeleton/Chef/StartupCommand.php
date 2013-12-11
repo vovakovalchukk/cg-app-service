@@ -125,36 +125,20 @@ class StartupCommand implements StartupCommandInterface
     protected function setupIp(Config $config, Environment $environment)
     {
         $environment->setupIp($this->getConsole());
-
-        $this->getConsole()->writeStatus(
-            'Saving ip to /etc/hosts '
-            . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
-        );
-
-        $environmentConfig = $environment->getEnvironmentConfig();
-        $hostname = $environmentConfig->getHostname($config, $environment);
-        $hostEntry = $environmentConfig->getIp() . ' ' . $hostname;
-        exec(
-            'grep -q ' . $hostname . ' /etc/hosts'
-            . ' && sudo sed -i \'/' . $hostname . '$/c\\' . $hostEntry . '\' /etc/hosts'
-            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
-        );
-        $this->getConsole()->writeStatus('IP saved to /etc/hosts');
-
-        $this->setupHostsFile($config, $environment);
+        $environment->setupHostsFile($this->getConsole());
     }
 
-    protected function setupHostsFile(Config $config, Environment $environment)
-    {
-        $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
-        $hosts = new Hosts($hostsFile, $environment->getName());
-
-        foreach($hosts->getData()['hosts'] as $host) {
-            var_dump($host);
-        }
-
-        $hosts->save();
-    }
+//    protected function setupHostsFile(Config $config, Environment $environment)
+//    {
+//        $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
+//        $hosts = new Hosts($hostsFile, $environment->getName());
+//
+//        foreach($hosts->getData()['hosts'] as $host) {
+//            var_dump($host);
+//        }
+//
+//        $hosts->save();
+//    }
 
     protected function addRoleToNode(Node $node, $role)
     {
