@@ -138,6 +138,18 @@ class StartupCommand implements StartupCommandInterface
             . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
         );
         $this->getConsole()->writeStatus('IP saved to /etc/hosts');
+
+        $this->setupHostsFile($config, $environment);
+    }
+
+    protected function setupHostsFile(Config $config, Environtment $environment)
+    {
+        $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
+        $hosts = new Hosts($hostsFile, $environment->getName());
+
+        var_dump($hosts);
+
+        $hosts->save();
     }
 
     protected function addRoleToNode(Node $node, $role)
