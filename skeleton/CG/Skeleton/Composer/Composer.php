@@ -1,16 +1,29 @@
 <?php
 namespace CG\Skeleton\Composer;
 
+use CG\Skeleton\Console;
+
 class Composer
 {
     protected $path;
     protected $data;
-    // TODO add console
+    protected $console;
 
-    public function __construct($path)
+    public function __construct(Console $console, $path)
     {
         $this->path = $path;
         $this->load();
+    }
+
+    public function setConsole(Console $console)
+    {
+        $this->console = $console;
+        return $this;
+    }
+
+    public function getConsole()
+    {
+        return $this->console;
     }
 
     protected function load()
