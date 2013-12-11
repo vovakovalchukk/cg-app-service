@@ -9,6 +9,7 @@ use CG\Skeleton\Chef\Role;
 use CG\Skeleton\Module\BaseConfig;
 use CG\Skeleton\Chef\Node;
 use CG\Skeleton\Config as SkeletonConfig;
+use CG\Skeleton\Chef\Hosts;
 
 class Dual extends Environment {
 
@@ -53,7 +54,25 @@ class Dual extends Environment {
 
     public function setupHostsFile(Startup $console)
     {
+        $console->writeStatus(
+            'Saving ip addresses to /etc/hosts '
+            . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
+        );
 
+        $hostsFile = Chef::HOSTS . strtolower($this->getName()) . '.json';
+        $hosts = new Hosts($hostsFile, $this->getName());
+
+        foreach($hosts->getData()['hosts'] as $host) {
+            $hostEntry = $host['ip'] . ' ' . $host['hostname'];
+            exec(
+                'grep -q ' . $host['hostname'] . ' /etc/hosts'
+                . ' && sudo sed -i \'/' . $host['hostname'] . '$/c\\' . $hostEntry . '\' /etc/hosts'
+                . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
+            );
+        }
+
+        $hosts->save();
+        $console->writeStatus('IP addresses saved to /etc/hosts');
     }
 
     public function vagrantUp(Console $console)
