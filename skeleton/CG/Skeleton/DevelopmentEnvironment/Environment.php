@@ -67,9 +67,10 @@ abstract class Environment implements EnvironmentInterface {
     {
         $hostEntry = $ip . ' ' . $hostname;
         exec(
-            'grep -q ' . $hostname . ' /etc/hosts'
+            'if grep -q "' . $hostEntry . '" /etc/hosts; then return; fi;'
+            . 'grep -q "' . $hostname . '" /etc/hosts'
             . ' && sudo sed -i \'/' . $hostname . '$/c\\' . $hostEntry . '\' /etc/hosts'
-            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
+            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts;'
         );
     }
 
