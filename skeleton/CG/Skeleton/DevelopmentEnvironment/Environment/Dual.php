@@ -59,19 +59,10 @@ class Dual extends Environment {
             . Startup::COLOR_PURPLE . '(You may be prompted for your password)' . Startup::COLOR_RESET
         );
 
-        $hostsFile = Chef::HOSTS . strtolower($this->getName()) . '.json';
-        $hosts = new Hosts($hostsFile, $this->getName());
-
-        foreach($hosts->getData()['hosts'] as $host) {
-            $hostEntry = $host['ip'] . ' ' . $host['hostname'];
-            exec(
-                'grep -q ' . $host['hostname'] . ' /etc/hosts'
-                . ' && sudo sed -i \'/' . $host['hostname'] . '$/c\\' . $hostEntry . '\' /etc/hosts'
-                . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
-            );
+        foreach($this->getHosts() as $host) {
+            $this->updateHostsFileEntry($host['ip'], $host['hostname']);
         }
 
-        $hosts->save();
         $console->writeStatus('IP addresses saved to /etc/hosts');
     }
 

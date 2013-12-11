@@ -63,4 +63,14 @@ abstract class Environment implements EnvironmentInterface {
         return $hosts->getData()['hosts'];
     }
 
+    protected function updateHostsFileEntry($ip, $hostname)
+    {
+        $hostEntry = $ip . ' ' . $hostname;
+        exec(
+            'grep -q ' . $hostname . ' /etc/hosts'
+            . ' && sudo sed -i \'/' . $hostname . '$/c\\' . $hostEntry . '\' /etc/hosts'
+            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
+        );
+    }
+
 }
