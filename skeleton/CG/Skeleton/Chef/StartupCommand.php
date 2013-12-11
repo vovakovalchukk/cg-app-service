@@ -131,9 +131,11 @@ class StartupCommand implements StartupCommandInterface
 
         $environmentConfig = $environment->getEnvironmentConfig();
         $hostname = $environmentConfig->getHostname($config, $environment);
+        $hostEntry = $environmentConfig->getIp() . ' ' . $hostname;
         exec(
-            'grep -q -e "' . $environmentConfig->getIp() . ' ' . $hostname . '" /etc/hosts'
-            . ' || echo "' . $environmentConfig->getIp() . ' ' . $hostname . '" | sudo tee -a /etc/hosts'
+            'grep -q ' . $hostname . ' /etc/hosts'
+            . ' && sudo sed -i \'/' . $hostname . '$/c\\' . $hostEntry . '\' /etc/hosts'
+            . ' || echo "' . $hostEntry . '" | sudo tee -a /etc/hosts'
         );
         $this->getConsole()->writeStatus('IP saved to /etc/hosts');
     }
