@@ -128,18 +128,6 @@ class StartupCommand implements StartupCommandInterface
         $environment->setupHostsFile($this->getConsole());
     }
 
-    protected function setupHostsFile(Config $config, Environment $environment)
-    {
-        $hostsFile = static::HOSTS . strtolower($environment->getName()) . '.json';
-        $hosts = new Hosts($hostsFile, $environment->getName());
-
-        foreach($hosts->getData()['hosts'] as $host) {
-            var_dump($host);
-        }
-
-        $hosts->save();
-    }
-
     protected function addRoleToNode(Node $node, $role)
     {
         $node->addToRunList('role[' . $role . ']');
