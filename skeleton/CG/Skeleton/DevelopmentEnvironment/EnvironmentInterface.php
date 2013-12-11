@@ -14,6 +14,7 @@ interface EnvironmentInterface
     public function getSuffix();
 
     public function setupIp(Startup $console);
+    public function setupHostsFile(Startup $console);
 
     public function setupNode(Startup $console);
 

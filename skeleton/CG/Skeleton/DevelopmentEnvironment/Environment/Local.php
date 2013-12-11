@@ -54,6 +54,11 @@ class Local extends Environment {
         chdir($cwd);
     }
 
+    public function setupHostsFile(Startup $console)
+    {
+
+    }
+
     public function vagrantUp(Console $console)
     {
         passthru('vagrant up ' . $this->getEnvironmentConfig()->getNode());
