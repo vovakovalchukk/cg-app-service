@@ -47,6 +47,7 @@ class StartupCommand implements StartupCommandInterface
         $this->setupIp($config, $environment);
         $this->setupHostname($config, $environment);
         $this->saveHosts($config, $environment);
+        $this->setupHostsFile($config, $environment);
     }
 
     protected function saveRole(Config $config)
@@ -125,6 +126,10 @@ class StartupCommand implements StartupCommandInterface
     protected function setupIp(Config $config, Environment $environment)
     {
         $environment->setupIp($this->getConsole());
+    }
+
+    protected function setupHostsFile(Config $config, Environment $environment)
+    {
         $environment->setupHostsFile($this->getConsole());
     }
 
