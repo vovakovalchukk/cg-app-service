@@ -42,7 +42,7 @@ class ChangeEnvironment implements CommandInterface
             $this->getConsole()->writeln('   * ' . $environmentName);
         }
 
-        $chosenEnvironment = $this->getConsole()->ask('Please specify a development environment');
+        $chosenEnvironment = ucwords(strtolower($this->getConsole()->ask('Please specify a development environment')));
         $this->getConsole()->clear();
 
         $config->setEnvironment($chosenEnvironment);
