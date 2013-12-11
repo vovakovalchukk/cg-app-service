@@ -40,16 +40,18 @@ class Composer
         $this->data = $jsonData;
     }
 
-    public function addRequire($require)
+    public function addRequire($require, $update = false)
     {
-        $beforeHash = hash_file('md5', 'composer.json');
-        exec('php composer.phar require --no-update ' . $require);
-        $afterHash = hash_file('md5', 'composer.json');
+        if ($update) {
+            $beforeHash = hash_file('md5', 'composer.json');
+            exec('php composer.phar require --no-update ' . $require);
+            $afterHash = hash_file('md5', 'composer.json');
 
-        if ($beforeHash != $afterHash) {
-            $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
-                . $require . Console::COLOR_GREEN);
-            exec('php composer.phar update ' . explode(':', $require)[0]);
+            if ($beforeHash != $afterHash) {
+                $this->updateComposer($require);
+            }
+        } else {
+            exec('php composer.phar require --no-update ' . $require);
         }
 
         $this->load();
