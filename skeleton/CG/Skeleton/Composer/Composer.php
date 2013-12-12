@@ -41,27 +41,35 @@ class Composer
         $this->data = $jsonData;
     }
 
-    public function addRequires($requires = array())
+    public function addRequires($requires = array(), $update = true)
     {
+        $requiresToUpdate = array();
         foreach ($requires as $require) {
-            $this->addRequire($require);
+            if ($this->addRequire($require, false)) {
+                $requiresToUpdate[] = $require;
+            }
+        }
+
+        if ($update) {
+            $this->updateComposer($requiresToUpdate);
         }
     }
 
-    public function addRequire($require, $update = false)
+    public function addRequire($require, $update = true)
     {
         $updateRequired = false;
-        if ($update) {
-            $beforeHash = hash_file('md5', 'composer.json');
-            passthru('php composer.phar require --no-update ' . $require);
-            $afterHash = hash_file('md5', 'composer.json');
 
-            if ($beforeHash != $afterHash) {
-                $updateRequired = true;
-                $this->updateComposer(array($require));
-            }
-        } else {
-            exec('php composer.phar require --no-update ' . $require);
+        $beforeHash = hash_file('md5', 'composer.json');
+        passthru('php composer.phar require --no-update ' . $require); // TODO change to exec
+        $afterHash = hash_file('md5', 'composer.json');
+
+        $hasComposerJsonChanged = $beforeHash != $afterHash;
+
+        if ($update && $hasComposerJsonChanged) {
+            $this->updateComposer(array($require));
+            $updateRequired = false;
+        } else if ($hasComposerJsonChanged) {
+            $updateRequired = true;
         }
 
         $this->load();
