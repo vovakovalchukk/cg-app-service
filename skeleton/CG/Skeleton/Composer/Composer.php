@@ -66,15 +66,11 @@ class Composer
         $newVersion = $this->requireExists($require) ?
             $this->getRequireVersion($require) != $requireExplode[1] : false;
 
-        echo $newVersion ? "newVersion: true\n" : "newVersion: false\n"; // TODO remove
-
         $skeletonCommittedLastRequire = $this->requireExists($require) ?
             $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
 
-        echo $skeletonCommittedLastRequire ? "skeletonCommitted: true\n" : "skeletonCommitted: false\n"; // TODO remove
-
         if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
-            $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?
+            $beforeHash = hash_file('md5', 'composer.json');
             exec('php composer.phar require --no-update ' . $require);
             $afterHash = hash_file('md5', 'composer.json');
             $hasComposerJsonChanged = ($beforeHash != $afterHash);
