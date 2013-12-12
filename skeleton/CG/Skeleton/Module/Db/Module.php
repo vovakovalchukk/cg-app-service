@@ -203,7 +203,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         chdir($cwd);
 
         $this->getComposer()->addRequires($moduleConfig, array(
-                'robmorgan/phinx:~0.0.0'
+                'robmorgan/phinx:*'
         ));
     }
 

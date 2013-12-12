@@ -64,8 +64,14 @@ class Composer
         $newVersion = $this->requireExists($require) ?
             $this->getRequireVersion($require) != $requireData[1] : false;
 
+        echo $newVersion ? "newVersion: true\n" : "newVersion: false\n";
+
         $skeletonCommittedLastRequire = $this->requireExists($require) ?
-            $this->getRequireVersion($require) == $moduleConfig->get($this->getPackageName($require)) : false;
+            $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireData[0]) : false;
+
+        //echo "module version in config: " . $moduleConfig->getComposerRequireVersion($requireData[0]) . "\n";
+
+        echo $skeletonCommittedLastRequire ? "skeletonCommitted: true\n" : "skeletonCommitted: false\n";
 
         if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
             $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?

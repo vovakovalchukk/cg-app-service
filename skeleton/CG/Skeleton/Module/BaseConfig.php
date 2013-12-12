@@ -23,9 +23,15 @@ class BaseConfig extends ZendConfig
         $this->offsetSet($formattedName, $version);
     }
 
+    public function getComposerRequireVersion($name)
+    {
+        $formattedName = str_replace("/", "-", $name);
+        return $this->get($formattedName);
+    }
+
     public function removeComposerRequire($name)
     {
         $formattedName = str_replace("/", "-", $name);
-        $this->offsetUnset($name);
+        $this->offsetUnset($formattedName);
     }
 }
