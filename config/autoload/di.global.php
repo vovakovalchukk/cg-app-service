@@ -10,7 +10,7 @@ return array(
     'di' => array(
         'definition' => array(
             'runtime' => array(
-                'enabled' => true
+                'enabled' => false
             ),
             'compiler' => $definitions
         )

@@ -10,8 +10,8 @@
             }
         },
         {
-            "type" : "composer",
-            "url"  : "http://packages.zendframework.com"
+            "type": "composer",
+            "url": "http://packages.zendframework.com"
         },
         {
             "type": "git",
@@ -23,37 +23,38 @@
         }
     ],
     "autoload": {
-        "psr-0" : { "" : "library/" }
+        "psr-0": {
+            "_empty_": "library/"
+        }
     },
     "require": {
-        "channelgrabber/http" : "~1.2.1",
-        "channelgrabber/slim" : "~1.5.1",
-        "channelgrabber/stdlib" : "~2.2.3",
-        "channelgrabber/validation" : "~1.1.5",
-        "channelgrabber/vnderror" : "~1.0.0",
-        "codeception/codeception" : "1.6.5",
-        "guzzle/guzzle" : "~3.7",
+        "channelgrabber/http": "~1.2.1",
+        "channelgrabber/slim": "~1.5.1",
+        "channelgrabber/stdlib": "~2.2.3",
+        "channelgrabber/validation": "~1.1.5",
+        "channelgrabber/vnderror": "~1.0.0",
+        "guzzle/guzzle": "~3.7",
         "nocarrier/hal": "~0.9.3",
         "robmorgan/phinx": "v0.2.8",
         "slim/slim": "2.3.*",
-        "zendframework/zend-config" : "~2.2.5",
-        "zendframework/zend-db" : "~2.2.5",
-        "zendframework/zend-di" : "~2.2.5",
-        "zendframework/zend-inputfilter" : "~2.2.5",
-        "zendframework/zend-servicemanager" : "~2.2.5",
-        "zendframework/zend-validator" : "~2.2.5"
+        "zendframework/zend-config": "~2.2.5",
+        "zendframework/zend-db": "~2.2.5",
+        "zendframework/zend-di": "~2.2.5",
+        "zendframework/zend-inputfilter": "~2.2.5",
+        "zendframework/zend-servicemanager": "~2.2.5",
+        "zendframework/zend-validator": "~2.2.5"
     },
     "require-dev": {
-        "codeception/codeception" : "1.6.5",
-        "phpspec/phpspec" : "2.0.*@dev",
-        "phpspec/prophecy" : "~1.0",
-        "channelgrabber/codeception" : "1.0.*"
+        "codeception/codeception": "1.6.5",
+        "phpspec/phpspec": "2.0.*@dev",
+        "phpspec/prophecy": "~1.0",
+        "channelgrabber/codeception": "1.0.*"
     },
     "scripts": {
-        "post-install-cmd" : [
+        "post-install-cmd": [
             "php bin/compile_di.php"
         ],
-        "post-update-cmd" : [
+        "post-update-cmd": [
             "php bin/compile_di.php"
         ]
     }
