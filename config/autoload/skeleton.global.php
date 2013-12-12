@@ -1,0 +1,1 @@
+/var/www/skeleton/shared/config/autoload/skeleton.global.php
