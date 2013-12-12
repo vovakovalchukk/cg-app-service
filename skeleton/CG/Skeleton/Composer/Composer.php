@@ -59,16 +59,18 @@ class Composer
     {
         $updateRequired = false;
 
-        $beforeHash = hash_file('md5', 'composer.json');
+        $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?
         exec('php composer.phar require --no-update ' . $require);
         $afterHash = hash_file('md5', 'composer.json');
 
-        $hasComposerJsonChanged = $beforeHash != $afterHash;
+        $hasComposerJsonChanged = ($beforeHash != $afterHash);
 
         if ($update && $hasComposerJsonChanged) {
+            echo "updating single require\n";
             $this->updateComposer(array($require));
             $updateRequired = false;
         } else if ($hasComposerJsonChanged) {
+            echo "composer has changed\n";
             $updateRequired = true;
         }
 
@@ -86,6 +88,7 @@ class Composer
             if (empty($requires)) {
                 return;
             }
+            print_r($requires);
             $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
             $packageNames = array();
             foreach ($requires as $require) {
@@ -121,6 +124,7 @@ class Composer
 
         var_dump($requireArray);
 
+        $this->save();
         return $this;
     }
 

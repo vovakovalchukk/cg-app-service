@@ -44,7 +44,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
             'channelgrabber/predis:~1.0.1'
         ));
 
-        $this->getComposer()->removeRequire('channelgrabber/predis:~1.0.1');
+        //$this->getComposer()->removeRequire('channelgrabber/predis:~1.0.1');
     }
 
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
