@@ -41,7 +41,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 //        ));
 
         if ($moduleConfig->isEnabled()) {
-            $this->getComposer()->addRequires(array(
+            $this->getComposer()->addRequires($moduleConfig, array(
                 'predis/predis:~0.8.3',
                 'channelgrabber/predis:~1.0.1'
             ));

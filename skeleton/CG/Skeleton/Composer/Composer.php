@@ -2,6 +2,7 @@
 namespace CG\Skeleton\Composer;
 
 use CG\Skeleton\Console;
+use CG\Skeleton\Module\BaseConfig;
 
 class Composer
 {
@@ -41,11 +42,11 @@ class Composer
         $this->data = $jsonData;
     }
 
-    public function addRequires($requires = array(), $update = true)
+    public function addRequires(BaseConfig $moduleConfig, $requires = array(), $update = true)
     {
         $requiresToUpdate = array();
         foreach ($requires as $require) {
-            if ($this->addRequire($require, false)) {
+            if ($this->addRequire($moduleConfig, $require, false)) {
                 $requiresToUpdate[] = $require;
             }
         }
@@ -55,7 +56,7 @@ class Composer
         }
     }
 
-    public function addRequire($require, $update = true)
+    public function addRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
         $updateRequired = false;
 
@@ -75,7 +76,9 @@ class Composer
         }
 
         $this->load();
-        //return $updateRequired;
+        $requireData = explode(':', $require);
+        $moduleConfig->setComposerRequire($requireData[0], $requireData[1]);
+        return $updateRequired;
 
 //        if (!$this->requireExists($require)) {
 //            // No entry exists. Add to composer.json

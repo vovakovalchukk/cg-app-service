@@ -202,7 +202,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $this->getComposer()->addRequires(array(
+        $this->getComposer()->addRequires($moduleConfig, array(
                 'robmorgan/phinx:*'
         ));
     }
