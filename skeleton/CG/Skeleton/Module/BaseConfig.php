@@ -16,4 +16,14 @@ class BaseConfig extends ZendConfig
     {
         $this->offsetSet(static::ENABLED, (boolean) $enabled);
     }
+
+    public function setComposerRequire($name, $version)
+    {
+        $this->offsetSet($name, $version);
+    }
+
+    public function removeComposerRequire($name)
+    {
+        $this->offsetUnset($name);
+    }
 }
