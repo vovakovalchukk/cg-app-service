@@ -35,10 +35,11 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $this->updateComposer($moduleConfig, array(
-            'predis/predis:~0.8.3',
-            'channelgrabber/predis:~1.0.1'
-        ));
+//        $this->updateComposer($moduleConfig, array(
+//            'predis/predis:~0.8.3',
+//            'channelgrabber/predis:~1.0.1'
+//        ));
+        $this->getComposer()->addRequire('predis/predis:~0.8.3', true);
     }
 
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)

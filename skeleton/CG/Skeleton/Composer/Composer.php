@@ -12,6 +12,7 @@ class Composer
     public function __construct(Console $console, $path)
     {
         $this->path = $path;
+        $this->console = $console;
         $this->load();
     }
 
@@ -44,12 +45,12 @@ class Composer
     {
         if ($update) {
             $beforeHash = hash_file('md5', 'composer.json');
-            exec('php composer.phar require --no-update ' . $require);
+            passthru('php composer.phar require --no-update ' . $require);
             $afterHash = hash_file('md5', 'composer.json');
 
-            if ($beforeHash != $afterHash) {
+            //if ($beforeHash != $afterHash) {
                 $this->updateComposer($require);
-            }
+            //}
         } else {
             exec('php composer.phar require --no-update ' . $require);
         }
@@ -63,11 +64,20 @@ class Composer
         $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
             . $require . Console::COLOR_GREEN);
 
+        $output = '';
+        $return = 0;
         if (isset($require)) {
-            exec('php composer.phar update ' . explode(':', $require)[0]);
+            exec('php composer.phar update ' . explode(':', $require)[0], $output, $return);
         } else {
-            exec('php composer.phar update');
+            exec('php composer.phar update', $output, $return);
         }
+
+        if ($return != 0) {
+            foreach($output as $line) {
+                echo $line . "\n";
+            }
+        }
+        return $this;
     }
 
     public function removeRequire($require)
