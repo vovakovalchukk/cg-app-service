@@ -8,6 +8,7 @@ class Composer
 {
     protected $path;
     protected $data;
+    protected $requireData;
     protected $console;
 
     public function __construct(Console $console, $path)
@@ -15,6 +16,7 @@ class Composer
         $this->path = $path;
         $this->console = $console;
         $this->load();
+        $this->requireData =& $this->data['require'];
     }
 
     public function setConsole(Console $console)
@@ -59,19 +61,17 @@ class Composer
     public function addRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
         $updateRequired = false;
-        $requireData = explode(':', $require);
+        $requireExplode = explode(':', $require);
 
         $newVersion = $this->requireExists($require) ?
-            $this->getRequireVersion($require) != $requireData[1] : false;
+            $this->getRequireVersion($require) != $requireExplode[1] : false;
 
-        echo $newVersion ? "newVersion: true\n" : "newVersion: false\n";
+        echo $newVersion ? "newVersion: true\n" : "newVersion: false\n"; // TODO remove
 
         $skeletonCommittedLastRequire = $this->requireExists($require) ?
-            $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireData[0]) : false;
+            $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
 
-        //echo "module version in config: " . $moduleConfig->getComposerRequireVersion($requireData[0]) . "\n";
-
-        echo $skeletonCommittedLastRequire ? "skeletonCommitted: true\n" : "skeletonCommitted: false\n";
+        echo $skeletonCommittedLastRequire ? "skeletonCommitted: true\n" : "skeletonCommitted: false\n"; // TODO remove
 
         if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
             $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?
@@ -87,10 +87,10 @@ class Composer
             }
 
             $this->load();
-            $moduleConfig->setComposerRequire($requireData[0], $requireData[1]);
             return $updateRequired;
         }
 
+        $moduleConfig->setComposerRequire($requireExplode[0], $requireExplode[1]);
         return false;
     }
 
@@ -123,21 +123,12 @@ class Composer
 
     public function removeRequire($require, $update = true)
     {
-        // TODO extract require array get
-        $composerConfig =& $this->data;
-        if(!isset($composerConfig['require'])) {
-            return;
-        }
-        $requireArray =& $composerConfig['require'];
-
-        var_dump($requireArray);
+        $requireData =& $this->requireData;
 
         echo $this->requireExists($require) ? "Require exists\n" : "require DOESN'T exist\n";
         if($this->requireExists($require)) {
-            unset($requireArray[$this->getPackageName($require)]);
+            unset($requireData[$this->getPackageName($require)]);
         }
-
-        var_dump($this->data);
 
         if ($update) {
             $this->updateComposer(array($require));
@@ -147,16 +138,12 @@ class Composer
         return $this;
     }
 
-    public function requireExists($require) {
-        // TODO extract require array get
-        $composerConfig = $this->data;
-        if(!isset($composerConfig['require'])) {
-            return;
-        }
-        $requireArray = $composerConfig['require'];
+    public function requireExists($require)
+    {
+        $requireData = $this->requireData;
 
         $packageName = $this->getPackageName($require);
-        foreach ($requireArray as $name => $version) {
+        foreach ($requireData as $name => $version) {
             if ($name == $packageName) {
                 return true;
             }
@@ -171,14 +158,7 @@ class Composer
 
     protected function getRequireVersion($require)
     {
-        // TODO extract require array get
-        $composerConfig =& $this->data;
-        if(!isset($composerConfig['require'])) {
-            return;
-        }
-        $requireArray = $composerConfig['require'];
-
-        return $requireArray[explode(':', $require)[0]];
+        return $this->requireData[$this->getPackageName($require)];
     }
 
     public function save()
