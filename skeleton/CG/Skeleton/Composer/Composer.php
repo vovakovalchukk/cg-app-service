@@ -75,7 +75,16 @@ class Composer
         }
 
         $this->load();
-        return $updateRequired;
+        //return $updateRequired;
+
+//        if (!$this->requireExists($require)) {
+//            // No entry exists. Add to composer.json
+//        } else if ($this->getRequireVersion($require) != explode(':', $require)[1]) {
+//            // if config.version == getRequireVersion()
+//            //    skeleton added last entry. update it :-)
+//        } else {
+//            // do nothing. version is the same.
+//        }
     }
 
     public function updateComposer($requires = null)
@@ -92,7 +101,7 @@ class Composer
             $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
             $packageNames = array();
             foreach ($requires as $require) {
-                $packageNames[] = explode(':', $require)[0];
+                $packageNames[] = $this->getPackageName($require);
             }
             exec('php composer.phar update ' . implode(' ', $packageNames), $output, $return);
         } else {
@@ -106,7 +115,7 @@ class Composer
         }
     }
 
-    public function removeRequire($require)
+    public function removeRequire($require, $update = true)
     {
         // TODO extract require array get
         $composerConfig =& $this->data;
@@ -119,10 +128,14 @@ class Composer
 
         echo $this->requireExists($require) ? "Require exists\n" : "require DOESN'T exist\n";
         if($this->requireExists($require)) {
-            unset($requireArray[explode(':', $require)[0]]);
+            unset($requireArray[$this->getPackageName($require)]);
         }
 
-        var_dump($requireArray);
+        var_dump($this->data);
+
+        if ($update) {
+            $this->updateComposer(array($require));
+        }
 
         $this->save();
         return $this;
@@ -136,7 +149,7 @@ class Composer
         }
         $requireArray =& $composerConfig['require'];
 
-        $packageName = explode(':', $require)[0];
+        $packageName = $this->getPackageName($require);
         echo "package: $packageName\n";
         foreach ($requireArray as $name => $version) {
             if ($name == $packageName) {
@@ -144,6 +157,23 @@ class Composer
             }
         }
         return false;
+    }
+
+    protected function getPackageName($require)
+    {
+        return explode(':', $require)[0];
+    }
+
+    protected function getRequireVersion($require)
+    {
+        // TODO extract require array get
+        $composerConfig =& $this->data;
+        if(!isset($composerConfig['require'])) {
+            return;
+        }
+        $requireArray = $composerConfig['require'];
+
+        return $requireArray[explode(':', $require)[0]];
     }
 
     public function save()
