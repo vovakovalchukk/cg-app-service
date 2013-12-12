@@ -41,33 +41,46 @@ class Composer
         $this->data = $jsonData;
     }
 
+    public function addRequires($requires = array())
+    {
+        foreach ($requires as $require) {
+            $this->addRequire($require);
+        }
+    }
+
     public function addRequire($require, $update = false)
     {
+        $updateRequired = false;
         if ($update) {
             $beforeHash = hash_file('md5', 'composer.json');
             passthru('php composer.phar require --no-update ' . $require);
             $afterHash = hash_file('md5', 'composer.json');
 
-            //if ($beforeHash != $afterHash) {
-                $this->updateComposer($require);
-            //}
+            if ($beforeHash != $afterHash) {
+                $updateRequired = true;
+                $this->updateComposer(array($require));
+            }
         } else {
             exec('php composer.phar require --no-update ' . $require);
         }
 
         $this->load();
-        return $this;
+        return $updateRequired;
     }
 
-    public function updateComposer($require = null)
+    public function updateComposer($requires = array())
     {
-        $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer...\n\t* "
-            . $require . Console::COLOR_GREEN);
+        $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
 
         $output = '';
         $return = 0;
         if (isset($require)) {
-            exec('php composer.phar update ' . explode(':', $require)[0], $output, $return);
+            $this->getConsole()->writeln(implode("\n\t* ",$requires));
+            $packageNames = array();
+            foreach ($requires as $require) {
+                $packageNames[] = explode(':', $require)[0];
+            }
+            exec('php composer.phar update ' . implode(' ', $packageNames), $output, $return);
         } else {
             exec('php composer.phar update', $output, $return);
         }
