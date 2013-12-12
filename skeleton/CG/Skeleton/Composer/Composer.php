@@ -105,16 +105,41 @@ class Composer
 
     public function removeRequire($require)
     {
-        $composerConfig = $this->data;
-        if(!isset($composerConfig->require)) {
+        // TODO extract require array get
+        $composerConfig =& $this->data;
+        if(!isset($composerConfig['require'])) {
             return;
         }
+        $requireArray =& $composerConfig['require'];
 
-        $requireArray = $composerConfig->require;
+        var_dump($requireArray);
 
-        print_r($requireArray);
+        echo $this->requireExists($require) ? "Require exists\n" : "require DOESN'T exist\n";
+        if($this->requireExists($require)) {
+            unset($requireArray[explode(':', $require)[0]]);
+        }
+
+        var_dump($requireArray);
 
         return $this;
+    }
+
+    public function requireExists($require) {
+        // TODO extract require array get
+        $composerConfig =& $this->data;
+        if(!isset($composerConfig['require'])) {
+            return;
+        }
+        $requireArray =& $composerConfig['require'];
+
+        $packageName = explode(':', $require)[0];
+        echo "package: $packageName\n";
+        foreach ($requireArray as $name => $version) {
+            if ($name == $packageName) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function save()
