@@ -60,7 +60,7 @@ class Composer
         $updateRequired = false;
 
         $beforeHash = hash_file('md5', 'composer.json');
-        passthru('php composer.phar require --no-update ' . $require); // TODO change to exec
+        exec('php composer.phar require --no-update ' . $require);
         $afterHash = hash_file('md5', 'composer.json');
 
         $hasComposerJsonChanged = $beforeHash != $afterHash;
@@ -76,14 +76,17 @@ class Composer
         return $updateRequired;
     }
 
-    public function updateComposer($requires = array())
+    public function updateComposer($requires = null)
     {
         $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
 
         $output = '';
         $return = 0;
-        if (isset($require)) {
-            $this->getConsole()->writeln(implode("\n\t* ",$requires));
+        if (!is_null($requires)) {
+            if (empty($requires)) {
+                return;
+            }
+            $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
             $packageNames = array();
             foreach ($requires as $require) {
                 $packageNames[] = explode(':', $require)[0];
@@ -98,7 +101,6 @@ class Composer
                 echo $line . "\n";
             }
         }
-        return $this;
     }
 
     public function removeRequire($require)
