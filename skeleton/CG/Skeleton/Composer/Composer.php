@@ -59,48 +59,45 @@ class Composer
     public function addRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
         $updateRequired = false;
+        $requireData = explode(':', $require);
 
-        $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?
-        exec('php composer.phar require --no-update ' . $require);
-        $afterHash = hash_file('md5', 'composer.json');
+        $newVersion = $this->requireExists($require) ?
+            $this->getRequireVersion($require) != $requireData[1] : false;
 
-        $hasComposerJsonChanged = ($beforeHash != $afterHash);
+        $skeletonCommittedLastRequire = $this->requireExists($require) ?
+            $this->getRequireVersion($require) == $moduleConfig->get($this->getPackageName($require)) : false;
 
-        if ($update && $hasComposerJsonChanged) {
-            echo "updating single require\n";
-            $this->updateComposer(array($require));
-            $updateRequired = false;
-        } else if ($hasComposerJsonChanged) {
-            echo "composer has changed\n";
-            $updateRequired = true;
+        if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
+            $beforeHash = hash_file('md5', 'composer.json'); // TODO remove hash check - check against loaded data?
+            exec('php composer.phar require --no-update ' . $require);
+            $afterHash = hash_file('md5', 'composer.json');
+            $hasComposerJsonChanged = ($beforeHash != $afterHash);
+
+            if ($update && $hasComposerJsonChanged) {
+                $this->updateComposer(array($require));
+                $updateRequired = false;
+            } else if ($hasComposerJsonChanged) {
+                $updateRequired = true;
+            }
+
+            $this->load();
+            $moduleConfig->setComposerRequire($requireData[0], $requireData[1]);
+            return $updateRequired;
         }
 
-        $this->load();
-        $requireData = explode(':', $require);
-        $moduleConfig->setComposerRequire($requireData[0], $requireData[1]);
-        return $updateRequired;
-
-//        if (!$this->requireExists($require)) {
-//            // No entry exists. Add to composer.json
-//        } else if ($this->getRequireVersion($require) != explode(':', $require)[1]) {
-//            // if config.version == getRequireVersion()
-//            //    skeleton added last entry. update it :-)
-//        } else {
-//            // do nothing. version is the same.
-//        }
+        return false;
     }
 
     public function updateComposer($requires = null)
     {
         $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
 
-        $output = '';
+        $output = array();
         $return = 0;
         if (!is_null($requires)) {
             if (empty($requires)) {
                 return;
             }
-            print_r($requires);
             $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
             $packageNames = array();
             foreach ($requires as $require) {
@@ -146,14 +143,13 @@ class Composer
 
     public function requireExists($require) {
         // TODO extract require array get
-        $composerConfig =& $this->data;
+        $composerConfig = $this->data;
         if(!isset($composerConfig['require'])) {
             return;
         }
-        $requireArray =& $composerConfig['require'];
+        $requireArray = $composerConfig['require'];
 
         $packageName = $this->getPackageName($require);
-        echo "package: $packageName\n";
         foreach ($requireArray as $name => $version) {
             if ($name == $packageName) {
                 return true;
