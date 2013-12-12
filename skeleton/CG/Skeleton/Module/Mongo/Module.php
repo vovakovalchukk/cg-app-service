@@ -14,7 +14,6 @@ use CG\Skeleton\Chef\Node;
 
 class Module extends AbstractModule implements EnableInterface, ConfigureInterface, DisableInterface
 {
-    use \CG\Skeleton\ComposerTrait;
     use \CG\Skeleton\GitTicketIdTrait;
 
     public function getModuleName()

@@ -117,11 +117,22 @@ class Composer
         }
     }
 
+    public function removeRequires(array $requires, $update = true)
+    {
+        foreach ($requires as $require) {
+            $this->removeRequire($require, false);
+        }
+
+        if ($update) {
+            $this->updateComposer($requires);
+        }
+    }
+
     public function removeRequire($require, $update = true)
     {
         $requireData =& $this->requireData;
 
-        echo $this->requireExists($require) ? "Require exists\n" : "require DOESN'T exist\n";
+        echo $this->requireExists($require) ? "Require exists\n" : "require DOESN'T exist\n"; // TODO remove
         if($this->requireExists($require)) {
             unset($requireData[$this->getPackageName($require)]);
         }
