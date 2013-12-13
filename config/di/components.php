@@ -33,4 +33,3 @@ $componentTypes = [
     'library' => $libraryComponents,
     'vendor' => $vendorComponents
 ];
-$components = ['di'];
