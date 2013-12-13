@@ -22,7 +22,7 @@ foreach ($componentTypes as $type => $components) {
         $diCompiler->compile();
         $componentArray = array_merge($componentArray, $diCompiler->toArrayDefinition()->toArray());
     }
-    }
+}
 
 file_put_contents(
     $diDataDir .'di-definition.php',
