@@ -207,7 +207,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         if ($moduleConfig->isEnabled()) {
             $this->getComposer()->addRequires($moduleConfig, $composerRequires);
         } else {
-            $this->getComposer()->removeRequires($composerRequires, false);
+            $this->getComposer()->removeRequires($moduleConfig, $composerRequires, false);
         }
     }
 
