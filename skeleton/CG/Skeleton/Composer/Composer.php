@@ -94,7 +94,7 @@ class Composer
     public function addRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
         $updateRequired = false;
-        $requireExplode = explode(':', $require);
+        $requireExplode = $this->explodeRequireString($require);
 
         $newVersion = $this->requireExists($require) ?
             $this->getRequireVersion($require) != $requireExplode[1] : false;
@@ -115,6 +115,7 @@ class Composer
                 $updateRequired = true;
             }
 
+            $moduleConfig->setComposerRequire($requireExplode[0], $requireExplode[1]);
             $this->load();
             return $updateRequired;
         }
