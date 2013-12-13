@@ -44,6 +44,39 @@ class Composer
         $this->data = $jsonData;
     }
 
+    public function save()
+    {
+        file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    }
+
+    public function updateComposer($requires = null)
+    {
+        $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
+
+        $output = array();
+        $return = 0;
+        if (!is_null($requires)) {
+            if (empty($requires)) {
+                return;
+            }
+            $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
+            $packageNames = array();
+            foreach ($requires as $require) {
+                $requireExplode = $this->explodeRequireString($require);
+                $packageNames[] = $requireExplode[0];
+            }
+            exec('php composer.phar update ' . implode(' ', $packageNames), $output, $return);
+        } else {
+            exec('php composer.phar update', $output, $return);
+        }
+
+        if ($return != 0) {
+            foreach($output as $line) {
+                echo $line . "\n";
+            }
+        }
+    }
+
     public function addRequires(BaseConfig $moduleConfig, $requires = array(), $update = true)
     {
         $requiresToUpdate = array();
@@ -90,32 +123,18 @@ class Composer
         return false;
     }
 
-    public function updateComposer($requires = null)
+    public function requireExists($require)
     {
-        $this->getConsole()->writeln(Console::COLOR_GREEN . ' + ' . "Updating composer..." . Console::COLOR_GREEN);
+        $requireExplode = $this->explodeRequireString($require);
+        $requireData = $this->requireData;
 
-        $output = array();
-        $return = 0;
-        if (!is_null($requires)) {
-            if (empty($requires)) {
-                return;
-            }
-            $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
-            $packageNames = array();
-            foreach ($requires as $require) {
-                $requireExplode = $this->explodeRequireString($require);
-                $packageNames[] = $requireExplode[0];
-            }
-            exec('php composer.phar update ' . implode(' ', $packageNames), $output, $return);
-        } else {
-            exec('php composer.phar update', $output, $return);
-        }
-
-        if ($return != 0) {
-            foreach($output as $line) {
-                echo $line . "\n";
+        $packageName = $requireExplode[0];
+        foreach ($requireData as $name => $version) {
+            if ($name == $packageName) {
+                return true;
             }
         }
+        return false;
     }
 
     public function removeRequires(BaseConfig $moduleConfig, array $requires, $update = true)
@@ -146,21 +165,6 @@ class Composer
         $moduleConfig->removeComposerRequire($requireExplode[0]);
         return $this;
     }
-    // TODO remove getpackagename ()
-
-    public function requireExists($require)
-    {
-        $requireExplode = $this->explodeRequireString($require);
-        $requireData = $this->requireData;
-
-        $packageName = $requireExplode[0];
-        foreach ($requireData as $name => $version) {
-            if ($name == $packageName) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     protected function explodeRequireString($require)
     {
@@ -171,10 +175,5 @@ class Composer
     {
         $requireExplode = $this->explodeRequireString($require);
         return $this->requireData[$requireExplode[0]];
-    }
-
-    public function save()
-    {
-        file_put_contents($this->path, json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 }
