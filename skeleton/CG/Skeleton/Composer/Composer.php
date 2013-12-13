@@ -64,10 +64,10 @@ class Composer
         $requireExplode = explode(':', $require);
 
         $newVersion = $this->requireExists($require) ?
-            $this->getRequireVersion($require) != $requireExplode[1] : false;
+            $this->getCurrentRequireVersion($require) != $requireExplode[1] : false;
 
         $skeletonCommittedLastRequire = $this->requireExists($require) ?
-            $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
+            $this->getCurrentRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
 
         if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
             $beforeHash = hash_file('md5', 'composer.json');
@@ -103,7 +103,8 @@ class Composer
             $this->getConsole()->writeln("\t* " . implode("\n\t* ",$requires));
             $packageNames = array();
             foreach ($requires as $require) {
-                $packageNames[] = $this->getPackageName($require);
+                $requireExplode = $this->explodeRequireString($require);
+                $packageNames[] = $requireExplode[0];
             }
             exec('php composer.phar update ' . implode(' ', $packageNames), $output, $return);
         } else {
@@ -149,9 +150,10 @@ class Composer
 
     public function requireExists($require)
     {
+        $requireExplode = $this->explodeRequireString($require);
         $requireData = $this->requireData;
 
-        $packageName = $this->getPackageName($require);
+        $packageName = $requireExplode[0];
         foreach ($requireData as $name => $version) {
             if ($name == $packageName) {
                 return true;
@@ -160,14 +162,9 @@ class Composer
         return false;
     }
 
-    protected function getPackageName($require)
+    protected function explodeRequireString($require)
     {
-        return explode(':', $require)[0];
-    }
-
-    protected function getRequireVersion($require)
-    {
-        return $this->requireData[$this->getPackageName($require)];
+        return explode(':', $require);
     }
 
     public function save()
