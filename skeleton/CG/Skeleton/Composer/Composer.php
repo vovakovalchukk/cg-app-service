@@ -64,10 +64,10 @@ class Composer
         $requireExplode = explode(':', $require);
 
         $newVersion = $this->requireExists($require) ?
-            $this->getCurrentRequireVersion($require) != $requireExplode[1] : false;
+            $this->getRequireVersion($require) != $requireExplode[1] : false;
 
         $skeletonCommittedLastRequire = $this->requireExists($require) ?
-            $this->getCurrentRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
+            $this->getRequireVersion($require) == $moduleConfig->getComposerRequireVersion($requireExplode[0]) : false;
 
         if (!$this->requireExists($require) || ($newVersion && $skeletonCommittedLastRequire)) {
             $beforeHash = hash_file('md5', 'composer.json');
@@ -165,6 +165,12 @@ class Composer
     protected function explodeRequireString($require)
     {
         return explode(':', $require);
+    }
+
+    protected function getRequireVersion($require)
+    {
+        $requireExplode = $this->explodeRequireString($require);
+        return $this->requireData[$requireExplode[0]];
     }
 
     public function save()
