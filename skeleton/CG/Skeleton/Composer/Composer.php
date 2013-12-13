@@ -13,11 +13,9 @@ class Composer
 
     public function __construct(Console $console, $path)
     {
-        $this->load();
-        echo "In constructor: ";
-        var_dump($this->getData()['require']);
         $this->setPath($path)
              ->setConsole($console)
+             ->load()
              ->setRequireData($this->getData()['require']);
     }
 
@@ -34,8 +32,6 @@ class Composer
 
     public function setData($data)
     {
-        echo "In set data: ";
-        var_dump($data);
         $this->data = $data;
         return $this;
     }
@@ -58,7 +54,6 @@ class Composer
 
     public function setRequireData(&$requireData)
     {
-        echo "SET REQUIRE DATA\n";
         $this->requireData =& $requireData;
         return $this;
     }
@@ -153,8 +148,6 @@ class Composer
         $requireExplode = $this->explodeRequireString($require);
         $requireData = $this->getRequireData();
 
-        var_dump($requireData);
-
         $packageName = $requireExplode[0];
         foreach ($requireData as $name => $version) {
             if ($name == $packageName) {
@@ -207,14 +200,15 @@ class Composer
     protected function load()
     {
         if (!is_file($this->getPath())) {
-            return;
+            return $this;
         }
 
         $jsonData = json_decode(file_get_contents($this->getPath()), true);
         if (!is_array($jsonData)) {
-            return;
+            return $this;
         }
 
         $this->setData($jsonData);
+        return $this;
     }
 }
