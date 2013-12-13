@@ -170,7 +170,7 @@ class Composer
 
     public function removeRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
-        $requireExplode = explode(':', $require);
+        $requireExplode = $this->explodeRequireString($require);
         $requireData =& $this->getRequireData();
 
         if($this->requireExists($require)) {
