@@ -124,11 +124,11 @@ class Dual extends Environment {
 
         while (!$node) {
             $console->writeErrorStatus('No node set');
-            $node = $console->askWithOptions(
+            $node = strtolower($console->askWithOptions(
                 'What node will this application go on',
                 $this->environmentNodes,
                 $this->environmentNodes[1]
-            );
+            ));
         }
         $console->writeStatus('Application configured for node \'' . $node . '\'');
         $this->getEnvironmentConfig()->setNode($node);
