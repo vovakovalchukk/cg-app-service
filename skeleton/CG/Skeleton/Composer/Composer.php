@@ -145,7 +145,7 @@ class Composer
         $moduleConfig->removeComposerRequire($requireExplode[0]);
         return $this;
     }
-
+    // TODO test remove from config method
     // TODO remove getpackagename ()
 
     public function requireExists($require)
