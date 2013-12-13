@@ -202,7 +202,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $this->updateNode($arguments, $config, $moduleConfig);
         chdir($cwd);
 
-        $composerRequires = array('robmorgan/phinx:*');
+        $composerRequires = array('channelgrabber/phinx:~0.2.9.2');
 
         if ($moduleConfig->isEnabled()) {
             $this->getComposer()->addRequires($moduleConfig, $composerRequires);
