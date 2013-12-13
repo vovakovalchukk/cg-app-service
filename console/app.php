@@ -1,14 +1,14 @@
 <?php
 chdir(dirname(__DIR__));
 
-use CG\Slim\Console;
+use Cilex\Application as Cilex;
+use CG\Slim\Cilex\GenericCommand;
 
 require_once 'application/bootstrap.php';
-$routes = require_once 'config/console/routing.php';
+$commands = require_once 'config/console/commands.php';
 
-$console = new Console();
-$console->mapRequest();
-foreach ($routes as $route => $request) {
-    $route = $app->get($console->routeToSlimRoute($route), $request["controllers"])->name($request["name"]);
+$app = $di->get(Cilex::class, array("name" => ""));
+foreach ($commands as $commandName => $command) {
+    $app->command($di->newInstance(GenericCommand::class, array("commandName" => $commandName, "command" => $command)));
 }
 $app->run();
