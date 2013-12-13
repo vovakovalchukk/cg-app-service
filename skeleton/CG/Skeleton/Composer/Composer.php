@@ -13,13 +13,13 @@ class Composer
 
     public function __construct(Console $console, $path)
     {
-        $this->path = $path;
-        $this->console = $console;
         $this->load();
-        $this->requireData =& $this->data['require'];
+        $this->setPath($path)
+             ->setConsole($console)
+             ->setRequireData($this->data['require']);
     }
 
-    public function setConsole(Console $console)
+    public function setConsole($console)
     {
         $this->console = $console;
         return $this;
@@ -30,18 +30,37 @@ class Composer
         return $this->console;
     }
 
-    protected function load()
+    public function setData($data)
     {
-        if (!is_file($this->path)) {
-            return;
-        }
+        $this->data = $data;
+        return $this;
+    }
 
-        $jsonData = json_decode(file_get_contents($this->path), true);
-        if (!is_array($jsonData)) {
-            return;
-        }
+    public function getData()
+    {
+        return $this->data;
+    }
 
-        $this->data = $jsonData;
+    public function setPath($path)
+    {
+        $this->path = $path;
+        return $this;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function setRequireData(&$requireData)
+    {
+        $this->requireData =& $requireData;
+        return $this;
+    }
+
+    public function &getRequireData()
+    {
+        return $this->requireData;
     }
 
     public function save()
@@ -127,7 +146,7 @@ class Composer
     public function requireExists($require)
     {
         $requireExplode = $this->explodeRequireString($require);
-        $requireData = $this->requireData;
+        $requireData = $this->getRequireData();
 
         $packageName = $requireExplode[0];
         foreach ($requireData as $name => $version) {
@@ -152,7 +171,7 @@ class Composer
     public function removeRequire(BaseConfig $moduleConfig, $require, $update = true)
     {
         $requireExplode = explode(':', $require);
-        $requireData =& $this->requireData;
+        $requireData =& $this->getRequireData();
 
         if($this->requireExists($require)) {
             unset($requireData[$requireExplode[0]]);
@@ -175,6 +194,20 @@ class Composer
     protected function getRequireVersion($require)
     {
         $requireExplode = $this->explodeRequireString($require);
-        return $this->requireData[$requireExplode[0]];
+        return $this->getRequireData()[$requireExplode[0]];
+    }
+
+    protected function load()
+    {
+        if (!is_file($this->path)) {
+            return;
+        }
+
+        $jsonData = json_decode(file_get_contents($this->path), true);
+        if (!is_array($jsonData)) {
+            return;
+        }
+
+        $this->setData($jsonData);
     }
 }
