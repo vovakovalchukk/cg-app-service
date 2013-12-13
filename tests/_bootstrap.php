@@ -1,21 +1,9 @@
 <?php
-// This is global bootstrap for autoloading 
-function getTestPagesPath()
-{
-    return __DIR__ . "/api/_pages/";
-}
-
-function getCustomModulesPath()
-{
-    return __DIR__ . "/../vendor/channelgrabber/codeception/CG/";
-}
-
-set_include_path(getTestPagesPath() . PATH_SEPARATOR . getCustomModulesPath() . PATH_SEPARATOR . get_include_path());
+// This is global bootstrap for autoloading
 
 spl_autoload_register(function ($className)
 {
-    $testPagesPath = getTestPagesPath();
-    $customModulesPath = getCustomModulesPath();
+    $includePaths = [__DIR__ . "/api/_pages/", __DIR__ . "/../vendor/channelgrabber/codeception/CG/"];
 
     $className = ltrim($className, '\\');
     $filename  = '';
@@ -28,15 +16,12 @@ spl_autoload_register(function ($className)
 
     $filename .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    $filePath = false;
-    if (file_exists($testPagesPath . $filename)) {
-        $filePath = $testPagesPath;
-    } else if (file_exists($customModulesPath . $filename)) {
-        $filePath = $customModulesPath;
+    foreach ($includePaths as $filePath) {
+        if (file_exists($filePath . $filename)) {
+            include_once $filePath . $filename;
+            return;
+        }
     }
 
-    if ($filePath == false) {
-        return false;
-    }
-    include_once $filename;
+    return false;
 }, true, true);
