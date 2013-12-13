@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7ee3d09885553fc23bc9666143408f39",
+    "hash": "7c270a5a245057dbfc40a273e70819a8",
     "packages": [
         {
             "name": "channelgrabber/http",
@@ -12,6 +12,12 @@
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
                 "reference": "feabf2937d78cb9dc246c7807e09bfcc3a21f09c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.1.2-497c3e.zip",
+                "reference": "feabf2937d78cb9dc246c7807e09bfcc3a21f09c",
+                "shasum": "5d81374001bd06105faa0605eca25995f18fa740"
             },
             "replace": {
                 "channelgrabber/cghttp": "*"
@@ -23,31 +29,6 @@
                 }
             },
             "time": "2013-09-25 07:52:49"
-        },
-        {
-            "name": "channelgrabber/predis",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "d4ad458b30dc2b52a01e7a30fa19b0b9f6dbe613"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.1-7df584.zip",
-                "reference": "d4ad458b30dc2b52a01e7a30fa19b0b9f6dbe613",
-                "shasum": "878e40d1d7e00601622bc0eea757d96196264c2f"
-            },
-            "require": {
-                "predis/predis": "v0.8.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "CG\\Predis\\": ""
-                }
-            },
-            "time": "2013-07-09 15:10:32"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -228,65 +209,18 @@
             "time": "2013-11-19 11:57:26"
         },
         {
-            "name": "predis/predis",
-            "version": "v0.8.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Predis": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete PHP client library for Redis",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2013-02-18 14:03:45"
-        },
-        {
             "name": "symfony/event-dispatcher",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e"
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
-                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/2d8ece3c610726a73d0c95c885134efea182610e",
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e",
                 "shasum": ""
             },
             "require": {
@@ -302,7 +236,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -326,7 +260,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-03 14:52:22"
+            "time": "2013-10-13 06:32:10"
         },
         {
             "name": "zendframework/zend-code",
@@ -1375,12 +1309,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "fada9de313a8f11869844f7d0881c7ceb49a8e7b"
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/fada9de313a8f11869844f7d0881c7ceb49a8e7b",
-                "reference": "fada9de313a8f11869844f7d0881c7ceb49a8e7b",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
                 "shasum": ""
             },
             "require": {
@@ -1435,7 +1369,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-12-09 08:32:24"
+            "time": "2013-11-13 10:07:05"
         },
         {
             "name": "phpspec/prophecy",
@@ -1899,17 +1833,17 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/BrowserKit",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "602ce025aee6cbc47e7c461202a7aaa5af6d87b8"
+                "reference": "7fc66ea3b9438080d79246cd8e5d88950c7fe4a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/602ce025aee6cbc47e7c461202a7aaa5af6d87b8",
-                "reference": "602ce025aee6cbc47e7c461202a7aaa5af6d87b8",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/7fc66ea3b9438080d79246cd8e5d88950c7fe4a4",
+                "reference": "7fc66ea3b9438080d79246cd8e5d88950c7fe4a4",
                 "shasum": ""
             },
             "require": {
@@ -1926,7 +1860,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -1950,21 +1884,21 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-23 21:17:02"
+            "time": "2013-09-26 12:37:59"
         },
         {
             "name": "symfony/console",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "3c1496ae96d24ccc6c340fcc25f71d7a1ab4c12c"
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/3c1496ae96d24ccc6c340fcc25f71d7a1ab4c12c",
-                "reference": "3c1496ae96d24ccc6c340fcc25f71d7a1ab4c12c",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/00848d3e13cf512e77c7498c2b3b0192f61f4b18",
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18",
                 "shasum": ""
             },
             "require": {
@@ -1979,7 +1913,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2003,21 +1937,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-27 09:10:40"
+            "time": "2013-11-13 21:27:40"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/CssSelector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "d7524797f1a6b20a8c7c31fbdd64f38fbfce1797"
+                "reference": "8df20c54ffa650df860a3e42dbcd1fbd25a24977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/d7524797f1a6b20a8c7c31fbdd64f38fbfce1797",
-                "reference": "d7524797f1a6b20a8c7c31fbdd64f38fbfce1797",
+                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/8df20c54ffa650df860a3e42dbcd1fbd25a24977",
+                "reference": "8df20c54ffa650df860a3e42dbcd1fbd25a24977",
                 "shasum": ""
             },
             "require": {
@@ -2026,7 +1960,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2054,21 +1988,21 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-11 18:40:07"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/DomCrawler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "809495cca56a45e0df92b8d68764cf7d454b88c5"
+                "reference": "4dc2c596b28884892da24729d9b32d01d89c1a59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/809495cca56a45e0df92b8d68764cf7d454b88c5",
-                "reference": "809495cca56a45e0df92b8d68764cf7d454b88c5",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/4dc2c596b28884892da24729d9b32d01d89c1a59",
+                "reference": "4dc2c596b28884892da24729d9b32d01d89c1a59",
                 "shasum": ""
             },
             "require": {
@@ -2083,7 +2017,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2107,21 +2041,21 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-03 14:52:22"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "72356bf0646b11af1bae666c28a639bd8ede459f"
+                "reference": "a175521f680b178e63c5d0ab87c6b046c0990c3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/72356bf0646b11af1bae666c28a639bd8ede459f",
-                "reference": "72356bf0646b11af1bae666c28a639bd8ede459f",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/a175521f680b178e63c5d0ab87c6b046c0990c3f",
+                "reference": "a175521f680b178e63c5d0ab87c6b046c0990c3f",
                 "shasum": ""
             },
             "require": {
@@ -2130,7 +2064,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2154,21 +2088,21 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-26 16:40:27"
+            "time": "2013-09-19 09:45:20"
         },
         {
             "name": "symfony/process",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "87738ff42e2467730ed74d941866e95513844b70"
+                "reference": "82898108f79040314a7b3ba430a72c32c7f61d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/87738ff42e2467730ed74d941866e95513844b70",
-                "reference": "87738ff42e2467730ed74d941866e95513844b70",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/82898108f79040314a7b3ba430a72c32c7f61d14",
+                "reference": "82898108f79040314a7b3ba430a72c32c7f61d14",
                 "shasum": ""
             },
             "require": {
@@ -2177,7 +2111,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2201,21 +2135,21 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-26 16:40:27"
+            "time": "2013-10-30 08:30:20"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.4.0",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5"
+                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5",
-                "reference": "1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/c1bda5b459d792cb253de12c65beba3040163b2b",
+                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b",
                 "shasum": ""
             },
             "require": {
@@ -2224,7 +2158,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2248,20 +2182,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-26 16:40:27"
+            "time": "2013-10-17 11:48:01"
         },
         {
             "name": "videlalvaro/php-amqplib",
-            "version": "v2.2.4",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/videlalvaro/php-amqplib.git",
-                "reference": "20d50074e6a2904737d23d93e36fd22ece46add2"
+                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/20d50074e6a2904737d23d93e36fd22ece46add2",
-                "reference": "20d50074e6a2904737d23d93e36fd22ece46add2",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/ffed6c575260d9ccf796e213f1383e3489b3256c",
+                "reference": "ffed6c575260d9ccf796e213f1383e3489b3256c",
                 "shasum": ""
             },
             "require": {
@@ -2293,7 +2227,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2013-12-02 17:07:25"
+            "time": "2013-10-04 16:26:56"
         }
     ],
     "aliases": [
