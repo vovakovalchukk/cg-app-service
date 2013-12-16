@@ -14,7 +14,7 @@ require_once 'bootstrap.php';
 
 echo 'Updating DI components' . PHP_EOL;
 
-$vendorExclusions = ['bin', 'composer'];
+$vendorExclusions = ['bin', 'composer', 'phpunit'];
 $projectExclusions = [];
 $vendorDir = 'vendor/';
 $currentComponents = require COMPONENTS_FILE;
@@ -78,7 +78,9 @@ exit(0);
 
 function getSrcDirParts($path, $vendor, $project)
 {
-    $srcDirOptions = ['', 'src', 'library', 'lib'];
+    $ucVendor = dashesToProperCase($vendor);
+    $ucProject = dashesToProperCase($project);
+    $srcDirOptions = ['', 'src/', 'library/', 'lib/'];
     if (file_exists($path . '/composer.json')) {
         $composerJson = json_decode(file_get_contents($path . '/composer.json'));
         if (isset($composerJson->autoload->{'psr-0'})) {
@@ -87,20 +89,28 @@ function getSrcDirParts($path, $vendor, $project)
                     $ret = ['srcDir' => $srcDirOption];
                     $namespace = array_search($srcDirOption, (array)$composerJson->autoload->{'psr-0'});
                     if ($namespace != '') {
-echo '*** '.$namespace.'***'.PHP_EOL;
-                        $ret['namespaceDir'] = preg_replace('|\\+|', '/', $namespace);
-echo '*** '.$ret['namespaceDir'].'***'.PHP_EOL;
+                        $ret['namespaceDir'] = trim(str_replace('\\', '/', $namespace), '/');
                     }
                     return $ret;
                 }
             }
 
-            $ucVendor = ucwords($vendor);
-            $ucProject = ucwords($project);
-            if (isset($composerJson->autoload->{'psr-0'}->$ucVendor)) {
-                return ['srcDir' => $composerJson->autoload->{'psr-0'}->$ucVendor];
+            $vendorProject = $ucVendor.'\\'.$ucProject;
+            if (isset($composerJson->autoload->{'psr-0'}->$vendorProject)) {
+                return [
+                    'srcDir' => $composerJson->autoload->{'psr-0'}->$vendorProject,
+                    'namespaceDir' => trim(str_replace('\\', '/', $vendorProject), '/')
+                    ];
+            } elseif (isset($composerJson->autoload->{'psr-0'}->$ucVendor)) {
+                return [
+                    'srcDir' => $composerJson->autoload->{'psr-0'}->$ucVendor,
+                    'namespaceDir' => $ucVendor
+                    ];
             } elseif (isset($composerJson->autoload->{'psr-0'}->$ucProject)) {
-                return ['srcDir' => $composerJson->autoload->{'psr-0'}->$ucProject];
+                return [
+                    'srcDir' => $composerJson->autoload->{'psr-0'}->$ucProject,
+                    'namespaceDir' => $ucProject
+                    ];
             }
         }
     }
@@ -114,28 +124,17 @@ echo '*** '.$ret['namespaceDir'].'***'.PHP_EOL;
             return ['srcDir' => $srcDirOption];
         }
     }
+    if (is_dir($path . '/' . $ucVendor) || is_dir($path . '/' . $ucProject)) {
+        return ['srcDir' => ''];
+    }
 
     return false;
 }
 
 function determineNamespaceDir($path, $vendor, $project)
 {
-if ($vendor == 'psr') {
-    echo __FUNCTION__."($path, $vendor, $project)\n";
-}
-    $vendor = ucwords($vendor);
-    $project = ucwords($project);
-    $vendorConversions = [
-        'Channelgrabber' => 'CG',
-        'Phpunit' => 'PHP'
-    ];
-    $projectConversions = [];
-    if (in_array($vendor, $vendorConversions)) {
-        $vendor = $vendorConversions[$vendor];
-    }
-    if (in_array($project, $projectConversions)) {
-        $project = $projectConversions[$project];
-    }
+    $vendor = convertVendorToNamespace($vendor);
+    $project = convertProjectToNamespace($vendor, $project);
 
     if (is_dir($path . '/' . $vendor . '/' . $project)) {
         return $vendor . '/' . $project;
@@ -146,6 +145,39 @@ if ($vendor == 'psr') {
     }
 
     return false;
+}
+
+function convertVendorToNamespace($vendor)
+{
+    $vendor = dashesToProperCase($vendor);
+    $vendorConversions = [
+        'Channelgrabber' => 'CG',
+        'Phpunit' => 'PHP',
+        'Zendframework' => 'Zend'
+    ];
+    if (in_array($vendor, $vendorConversions)) {
+        $vendor = $vendorConversions[$vendor];
+    }
+
+    return $vendor;
+}
+
+function convertProjectToNamespace($vendor, $project)
+{
+    $project = dashesToProperCase($project);
+
+    $projectConversions = [];
+    if (in_array($project, $projectConversions)) {
+        $project = $projectConversions[$project];
+    }
+
+    if ($vendor == 'Symfony') {
+        $project = 'Component/'.$project;
+    } elseif ($vendor == 'Zend') {
+        $project = preg_replace('/^Zend/', '', $project);
+    }
+
+    return $project;
 }
 
 function saveComponents($components)
@@ -161,4 +193,9 @@ function saveComponents($components)
     $output .= ');';
 
     file_put_contents(COMPONENTS_FILE, $output);
+}
+
+function dashesToProperCase($string)
+{
+    return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
 }
