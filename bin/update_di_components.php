@@ -6,33 +6,37 @@ define('WHITE', "\033[0m");
 define('COMPONENTS_FILE', 'config/di/vendor_components.php');
 
 if (!is_writable(COMPONENTS_FILE)) {
-    echo RED . 'Cannot update DI components as ' . COMPONENTS_FILE . ' is not read/writeable. Check the file permissions or try sudo-ing' . WHITE . PHP_EOL;
+    echo RED . 'Cannot update DI components as ' . COMPONENTS_FILE . ' is not writeable. Check the file permissions or try sudo-ing' . WHITE . PHP_EOL;
     exit(1);
 }
 
 require_once 'bootstrap.php';
 
-echo 'Updating DI components' . PHP_EOL;
+echo GREEN . 'Updating DI components' . WHITE . PHP_EOL;
 
 $vendorExclusions = ['bin', 'composer', 'phpunit'];
-$projectExclusions = [];
+$projectExclusions = [
+    'facebook' => [
+        'php-sdk'
+    ]
+];
 $vendorDir = 'vendor/';
 $currentComponents = require COMPONENTS_FILE;
 $newComponents = [];
 
 $vendors = new DirectoryIterator($vendorDir);
 foreach ($vendors as $vendor) {
-    if ($vendor->isDot() || !$vendor->isDir() || in_array($vendor->getFilename(), $vendorExclusions)) {
+    $vendorName = $vendor->getFilename();
+    if ($vendor->isDot() || !$vendor->isDir() || in_array($vendorName, $vendorExclusions)) {
         continue;
     }
-    $vendorName = $vendor->getFilename();
 
     $projects = new DirectoryIterator($vendor->getPathname());
     foreach ($projects as $project) {
-        if ($project->isDot() || !$project->isDir() || in_array($project->getFilename(), $projectExclusions)) {
+        $projectName = $project->getFilename();
+        if ($project->isDot() || !$project->isDir() || (isset($projectExclusions[$vendorName]) && in_array($projectName, $projectExclusions[$vendorName]))) {
             continue;
         }
-        $projectName = $project->getFilename();
 
         $componentNameParts[] = $projectName;
         $srcDirParts = getSrcDirParts($project->getPathname(), $vendorName, $projectName);
@@ -58,15 +62,27 @@ foreach ($vendors as $vendor) {
             }
         }
 
-        $componentNameParts = array_merge([$vendorName, $projectName], explode('/', $namespaceDir));
+        $componentNameParts = [$vendorName, $projectName];
+        if ($srcDir != '') {
+            $componentNameParts[] = trim($srcDir, '/');
+        }
+        $componentNameParts = array_merge($componentNameParts, explode('/', $namespaceDir));
         $componentName = implode('_', $componentNameParts);
         echo $componentName . '... ';
-        $newComponents[] = $componentName;
+        $newComponents[$componentName] = true;
 
         if (in_array($componentName, $currentComponents)) {
             echo 'exists' . PHP_EOL;
             continue;
         }
+
+        $compileSuccess = testCompile($componentName);
+        if (!$compileSuccess) {
+            $newComponents[$componentName] = false;
+            echo YELLOW . 'failed compilation test' . WHITE . PHP_EOL;
+            continue;
+        }
+
         echo GREEN . 'added' . WHITE . PHP_EOL;
     }
 }
@@ -124,8 +140,12 @@ function getSrcDirParts($path, $vendor, $project)
             return ['srcDir' => $srcDirOption];
         }
     }
-    if (is_dir($path . '/' . $ucVendor) || is_dir($path . '/' . $ucProject)) {
-        return ['srcDir' => ''];
+    $namespaceDir = determineNamespaceDir($path, $vendor, $project);
+    if ($namespaceDir) {
+        return [
+            'srcDir' => '',
+            'namespaceDir' => $namespaceDir
+            ];
     }
 
     return false;
@@ -155,7 +175,7 @@ function convertVendorToNamespace($vendor)
         'Phpunit' => 'PHP',
         'Zendframework' => 'Zend'
     ];
-    if (in_array($vendor, $vendorConversions)) {
+    if (isset($vendorConversions[$vendor])) {
         $vendor = $vendorConversions[$vendor];
     }
 
@@ -167,7 +187,7 @@ function convertProjectToNamespace($vendor, $project)
     $project = dashesToProperCase($project);
 
     $projectConversions = [];
-    if (in_array($project, $projectConversions)) {
+    if (isset($projectConversions[$project])) {
         $project = $projectConversions[$project];
     }
 
@@ -182,17 +202,26 @@ function convertProjectToNamespace($vendor, $project)
 
 function saveComponents($components)
 {
-    sort($components);
+    ksort($components);
     $output = '<?php' . PHP_EOL
         . '/*' . PHP_EOL . ' * This file is generated but should still be committed' . PHP_EOL
         . ' */' . PHP_EOL
         . 'return array(' . PHP_EOL;
-    foreach ($components as $component) {
+    foreach ($components as $component => $compiled) {
+        if (!$compiled) {
+            $output .= '//';
+        }
         $output .= '    \'' . $component . '\',' . PHP_EOL;
     }
     $output .= ');';
 
     file_put_contents(COMPONENTS_FILE, $output);
+}
+
+function testCompile($component)
+{
+    exec('/usr/bin/php ' . getcwd() . '/bin/test_compile_di_component.php vendor ' . $component . ' > /dev/null 2>&1', $output, $ret);
+    return ($ret === 0);
 }
 
 function dashesToProperCase($string)

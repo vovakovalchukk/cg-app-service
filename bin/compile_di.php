@@ -1,6 +1,11 @@
 <?php
+define('GREEN', "\033[32m");
+define('WHITE', "\033[0m");
+
 require_once 'bootstrap.php';
 require_once 'config/di/components.php';
+
+echo GREEN . 'Compiling DI definitions' . WHITE . PHP_EOL;
 
 $diDataDir = 'data/di/';
 
@@ -16,7 +21,7 @@ foreach ($componentTypes as $type => $components) {
     foreach ($components as $component) {
         $diCompiler = new Zend\Di\Definition\CompilerDefinition;
         $dir = dirname(__DIR__) . '/' . $type . '/' . str_replace('_', '/', $component);
-        echo "Compiling ".$dir."\n";
+        echo $dir.PHP_EOL;
         $diCompiler->addDirectory($dir);
         $diCompiler->setAllowReflectionExceptions();
         $diCompiler->compile();
@@ -28,3 +33,5 @@ file_put_contents(
     $diDataDir .'di-definition.php',
     '<?php return ' . var_export($componentArray, true) . ';'
 );
+
+echo 'DONE' . PHP_EOL;
