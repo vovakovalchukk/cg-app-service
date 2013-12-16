@@ -172,7 +172,6 @@ function convertVendorToNamespace($vendor)
     $vendor = dashesToProperCase($vendor);
     $vendorConversions = [
         'Channelgrabber' => 'CG',
-        'Phpunit' => 'PHP',
         'Zendframework' => 'Zend'
     ];
     if (isset($vendorConversions[$vendor])) {
