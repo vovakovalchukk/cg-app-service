@@ -19,7 +19,7 @@ return array(
             'Zend\Di\Di' => function($serviceManager) {
                 $configuration = $serviceManager->get('Config');
 
-                $definition = new Zend\Di\Definition\RuntimeDefinition(null, include 'vendor/composer/autoload_classmap.php');
+                $definition = new CG\Di\Definition\RuntimeDefinition(null, require 'vendor/composer/autoload_classmap.php');
                 $definitionList = new Zend\Di\DefinitionList([$definition]);
                 $im = new Zend\Di\InstanceManager();
                 $di = new Zend\Di\Di($definitionList, $im, new Zend\Di\Config(
