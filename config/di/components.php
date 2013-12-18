@@ -1,6 +1,5 @@
 <?php
 $frameworkComponents = require 'framework_components.php';
-$phpInternalComponents = require 'php_internal_components.php';
 
 $controllerComponents = array(
     'CG'
