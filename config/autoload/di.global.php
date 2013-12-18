@@ -1,10 +1,8 @@
 <?php
-$dataDiPath = dirname(dirname(__DIR__)) . '/data/di';
-
-$definitions = array();
-foreach (glob($dataDiPath . "/*-definition.php") as $filepath) {
-    $definitions[] = $filepath;
-}
+$definitions = array(
+    dirname(dirname(__DIR__)) . '/data/di/di-definition.php',
+    dirname(dirname(__DIR__)) . '/data/di/php_internal-definition.php'
+);
 
 return array(
     'di' => array(
