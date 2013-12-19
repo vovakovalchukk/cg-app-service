@@ -3,12 +3,9 @@
  * This file is generated but should still be committed
  */
 return array(
-    'alexandresalome_php-selenium_src_Selenium',
     'behat_mink-browserkit-driver_src_Behat_Mink_Driver',
     'behat_mink-goutte-driver_src_Behat_Mink_Driver',
-    'behat_mink-selenium-driver_src_Behat_Mink_Driver',
     'behat_mink-selenium2-driver_src_Behat_Mink_Driver',
-    'behat_mink-zombie-driver_src_Behat_Mink_Driver',
     'behat_mink_src_Behat_Mink',
     'channelgrabber_cache_CG_Cache',
 //    'channelgrabber_codeception_CG_Codeception',
@@ -22,7 +19,7 @@ return array(
     'channelgrabber_stdlib_CG_Stdlib',
     'channelgrabber_validation_CG_Validation',
     'channelgrabber_vnderror_CG_VndError',
-    'codeception_codeception_src_Codeception',
+//    'codeception_codeception_src_Codeception',
     'fabpot_goutte_Goutte',
     'guzzle_guzzle_src_Guzzle',
     'instaclick_php-webdriver_lib_WebDriver',
@@ -45,7 +42,6 @@ return array(
     'symfony_finder_Symfony_Component_Finder',
     'symfony_process_Symfony_Component_Process',
     'symfony_yaml_Symfony_Component_Yaml',
-    'videlalvaro_php-amqplib_PhpAmqpLib',
 //    'zendframework_zend-code_Zend_Code',
     'zendframework_zend-config_Zend_Config',
     'zendframework_zend-db_Zend_Db',
