@@ -113,10 +113,12 @@ return array(
     'service_manager' => array(
         'factories' => array(
             Di::Class => function($serviceManager) {
-                $configuration = $serviceManager->get('Config');
+                $configuration = $serviceManager->get('config');
 
+                $definition = new CG\Di\Definition\RuntimeDefinition(null, require 'vendor/composer/autoload_classmap.php');
+                $definitionList = new Zend\Di\DefinitionList([$definition]);
                 $im = new Zend\Di\InstanceManager();
-                $di = new Zend\Di\Di(null, $im, new Zend\Di\Config(
+                $di = new Zend\Di\Di($definitionList, $im, new Zend\Di\Config(
                     isset($configuration['di']) ? $configuration['di'] : array()
                 ));
 

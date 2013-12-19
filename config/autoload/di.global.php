@@ -1,10 +1,8 @@
 <?php
-require dirname(__DIR__) . '/di/components.php';
-
-$definitions = array();
-foreach ($components as $component) {
-    $definitions[] = dirname(dirname(__DIR__)) . '/data/di/' . $component . '-definition.php';
-}
+$definitions = array(
+    dirname(dirname(__DIR__)) . '/data/di/di-definition.php',
+    dirname(dirname(__DIR__)) . '/data/di/php_internal-definition.php'
+);
 
 return array(
     'di' => array(

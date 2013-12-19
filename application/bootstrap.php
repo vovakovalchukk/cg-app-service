@@ -1,4 +1,6 @@
 <?php
+use Slim\Slim;
+
 define('DS', DIRECTORY_SEPARATOR);
 
 //Autoloading
@@ -13,3 +15,6 @@ $components = array(
 foreach ($components as $component) {
     require_once __DIR__ . DS . $component . DS .'bootstrap.php';
 }
+
+$di = $serviceManager->get('Di');
+$app = $di->get(Slim::class);

@@ -12,10 +12,7 @@ use CG\Slim\VndError\VndError;
 use CG\Slim\Versioning\Middleware as Versioning;
 
 require_once 'application/bootstrap.php';
-require_once 'config/routing.php';
-
-$di = $serviceManager->get('Di');
-$app = $serviceManager->get(Slim::class);
+$routes = require_once 'config/routing.php';
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));
