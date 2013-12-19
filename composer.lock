@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "00120548263ad212e6969170db0b2204",
+    "hash": "9614b84f1aec723031e95051649335b8",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -113,10 +113,11 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "82ba220138dbb2c15df81170a5e34a028c5f139e"
+                "reference": "6e6c947a3d279924a93fd29e4751808a4880fc0b"
             },
             "require": {
-                "channelgrabber/constants": "dev-master"
+                "channelgrabber/constants": "dev-master",
+                "ext-mongo": ">=1.4.5"
             },
             "type": "library",
             "autoload": {
@@ -124,7 +125,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2013-12-19 10:46:06"
+            "time": "2013-12-19 14:44:40"
         },
         {
             "name": "channelgrabber/phinx",
