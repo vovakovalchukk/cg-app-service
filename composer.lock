@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6afe0730b1673733f98baedd5297823c",
+    "hash": "6e5f2a6fbd4ac254d827269c8de0763c",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -58,17 +58,17 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "b433fa5fe2d21b4664a83e36ffee4b7c84e53a91"
+                "reference": "4928a37a06aea8c3a9c44d39c73db5c75d951304"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.3.7-7baf4e.zip",
-                "reference": "b433fa5fe2d21b4664a83e36ffee4b7c84e53a91",
-                "shasum": "c95a3f913f5419b1c44ef4ae793d45297d64fe8e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.3.8-f21350.zip",
+                "reference": "4928a37a06aea8c3a9c44d39c73db5c75d951304",
+                "shasum": "5fa7dedd90939e8096c79ab118c6b96a699d9316"
             },
             "require": {
                 "channelgrabber/stdlib": ">=2.0.7, <2.4.0",
@@ -80,7 +80,7 @@
                     "CG\\ETag\\": ""
                 }
             },
-            "time": "2013-12-18 16:11:55"
+            "time": "2013-12-19 17:38:16"
         },
         {
             "name": "channelgrabber/http",
