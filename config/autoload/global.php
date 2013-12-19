@@ -17,7 +17,7 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'Zend\Di\Di' => function($serviceManager) {
-                $configuration = $serviceManager->get('Config');
+                $configuration = $serviceManager->get('config');
 
                 $definition = new CG\Di\Definition\RuntimeDefinition(null, require 'vendor/composer/autoload_classmap.php');
                 $definitionList = new Zend\Di\DefinitionList([$definition]);
