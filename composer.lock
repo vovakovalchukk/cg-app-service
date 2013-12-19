@@ -31,75 +31,18 @@
             "time": "2013-10-28 11:26:16"
         },
         {
-            "name": "channelgrabber/phinx",
-            "version": "v0.2.9.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-v0.2.9.2-dc3e7d.zip",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76",
-                "shasum": "b077b9f3f176559dd5f0c1ef418d304ea74df264"
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/class-loader": "2.*",
-                "symfony/config": "2.*",
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "replace": {
-                "robmorgan/phinx": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "bin/phinx"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Phinx": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Morgan",
-                    "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au"
-                }
-            ],
-            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-            "homepage": "http://phinx.org",
-            "keywords": [
-                "database",
-                "database migrations",
-                "db",
-                "migrations",
-                "phinx"
-            ],
-            "time": "2013-12-13 08:37:23"
-        },
-        {
             "name": "channelgrabber/slim",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "85f859545a250f3fca2265bcf1ea96613ea32871"
+                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.3-97cf4b.zip",
-                "reference": "85f859545a250f3fca2265bcf1ea96613ea32871",
-                "shasum": "3b96619028f369089adf0ba7dc777303faf4deff"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.4-6ffd08.zip",
+                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc",
+                "shasum": "b9c0730feb2f5859e63f39d8b8d5f55b4c42fd9d"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -110,7 +53,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-12-18 09:05:06"
+            "time": "2013-12-19 16:37:16"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -343,6 +286,61 @@
                 "xml"
             ],
             "time": "2013-11-19 11:57:26"
+        },
+        {
+            "name": "robmorgan/phinx",
+            "version": "v0.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robmorgan/phinx.git",
+                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6fe8fb428e96a567333fe6af4286c328ef8baada",
+                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/class-loader": "2.*",
+                "symfony/config": "2.*",
+                "symfony/console": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/phinx"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phinx": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Morgan",
+                    "email": "robbym@gmail.com",
+                    "homepage": "http://robmorgan.id.au"
+                }
+            ],
+            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
+            "homepage": "http://phinx.org",
+            "keywords": [
+                "database",
+                "database migrations",
+                "db",
+                "migrations",
+                "phinx"
+            ],
+            "time": "2013-08-25 10:17:27"
         },
         {
             "name": "slim/slim",
@@ -733,7 +731,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendCode/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendCode/tree/master"
             },
             "time": "2013-10-23 17:00:16"
         },
@@ -781,7 +779,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendConfig/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendConfig/tree/master"
             },
             "time": "2013-10-02 08:00:13"
         },
@@ -827,7 +825,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendDb/tree/master"
             },
             "time": "2013-10-20 06:00:13"
         },
@@ -872,7 +870,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendDi/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendDi/tree/master"
             },
             "time": "2013-08-28 16:00:10"
         },
@@ -916,7 +914,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.2.1"
             },
             "time": "2013-06-12 19:45:10"
         },
@@ -970,7 +968,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendFilter/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendFilter/tree/master"
             },
             "time": "2013-10-20 06:00:14"
         },
@@ -1019,7 +1017,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/master"
             },
             "time": "2013-10-23 19:00:04"
         },
@@ -1065,7 +1063,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/master"
             },
             "time": "2013-10-23 20:00:05"
         },
@@ -1112,7 +1110,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/master"
             },
             "time": "2013-10-20 06:00:20"
         },
@@ -1171,7 +1169,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendValidator/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendValidator/tree/master"
             },
             "time": "2013-10-20 06:00:22"
         }
@@ -1896,12 +1894,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "39624e966b8cfdfb5c6e7213e04328327699b7eb"
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/39624e966b8cfdfb5c6e7213e04328327699b7eb",
-                "reference": "39624e966b8cfdfb5c6e7213e04328327699b7eb",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
                 "shasum": ""
             },
             "require": {
@@ -1956,7 +1954,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-12-13 15:32:32"
+            "time": "2013-11-13 10:07:05"
         },
         {
             "name": "phpspec/prophecy",
