@@ -1,11 +1,12 @@
 <?php
 use CG\Controllers\RestExample;
+use CG\Controllers\Index;
 use CG\InputValidation\RestExample\Filter;
 
 return array(
     '/' => array (
-        'controllers' => function() use ($serviceManager) {
-                $controller = $serviceManager->get('Index');
+        'controllers' => function() use ($di) {
+                $controller = $di->get(Index::class);
                 $controller->index();
             },
         'via' => 'GET',
