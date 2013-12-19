@@ -1,5 +1,5 @@
 <?php
-namespace CG\Skeleton\Module\GearmanClient;
+namespace CG\Skeleton\Module\GearmanWorker;
 
 use CG\Skeleton\Module\AbstractModule;
 use CG\Skeleton\Module\ConfigureInterface;
@@ -19,7 +19,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function getModuleName()
     {
-        return 'GearmanClient';
+        return 'GearmanWorker';
     }
 
     public function enable(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
@@ -46,17 +46,17 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $nodeFile = Chef::NODES . $config->getNode() . '.json';
         $node = new Node($nodeFile);
 
-        $configKey = 'configure_sites|sites|' . $config->getAppName() . '|gearman_client|';
+        $configKey = 'configure_sites|sites|' . $config->getAppName() . '|gearman_worker|';
 
         if ($moduleConfig->isEnabled()) {
             $node->setKey($configKey . 'enabled', true);
             $node->setKey(
-                'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.gearman_client.global.php',
-                'config/autoload/di.gearman_client.global.php'
+                'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.gearman_worker.global.php',
+                'config/autoload/di.gearman_worker.global.php'
             );
         } else {
-            $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|gearman_client');
-            $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.gearman_client.global.php');
+            $node->removeKey('configure_sites|sites|' . $config->getAppName() . '|gearman_worker');
+            $node->removeKey('cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.gearman_worker.global.php');
         }
 
         $node->save();
