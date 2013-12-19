@@ -10,6 +10,7 @@ use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
 use CG\Slim\Versioning\Middleware as Versioning;
+use CG\Slim\HeadRequest\Middleware as HeadRequest;
 
 require_once 'application/bootstrap.php';
 $routes = require_once 'config/routing.php';
@@ -41,6 +42,7 @@ $app->any('.+', $newRelic, $unusedMethods);
 
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
+$app->add($di->get(HeadRequest::class));
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
 
