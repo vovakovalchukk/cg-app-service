@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9614b84f1aec723031e95051649335b8",
+    "hash": "1ca0b0e0af37ead91bc01f642c446710",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -211,17 +211,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "85f859545a250f3fca2265bcf1ea96613ea32871"
+                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.3-97cf4b.zip",
-                "reference": "85f859545a250f3fca2265bcf1ea96613ea32871",
-                "shasum": "3b96619028f369089adf0ba7dc777303faf4deff"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.4-6ffd08.zip",
+                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc",
+                "shasum": "b9c0730feb2f5859e63f39d8b8d5f55b4c42fd9d"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -232,7 +232,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-12-18 09:05:06"
+            "time": "2013-12-19 16:37:16"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -1718,17 +1718,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.0.24",
+            "version": "1.1.29",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "add4a633a5b2a6247e3d60a8f2b4d1481b438b7e"
+                "reference": "1f661e3d2b5c28daf8810063d353097d6c438600"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.0.24-11f077.zip",
-                "reference": "add4a633a5b2a6247e3d60a8f2b4d1481b438b7e",
-                "shasum": "a2dae86e29d9bacdd301dc2cebd87f96ccb4a8eb"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.29-f6bed4.zip",
+                "reference": "1f661e3d2b5c28daf8810063d353097d6c438600",
+                "shasum": "5d10c60708f0bdecc226b39eb32e3dbaa3871618"
             },
             "type": "library",
             "autoload": {
@@ -1736,7 +1736,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2013-11-12 10:37:22"
+            "time": "2013-12-12 16:09:36"
         },
         {
             "name": "codeception/codeception",
