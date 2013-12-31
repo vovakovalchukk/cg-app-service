@@ -10,7 +10,7 @@ return array(
     'channelgrabber_cache_CG_Cache',
 //    'channelgrabber_codeception_CG_Codeception',
     'channelgrabber_constants_CG',
-//    'channelgrabber_etag_CG_ETag',
+    'channelgrabber_etag_CG_ETag',
     'channelgrabber_http_CG_Http',
     'channelgrabber_order_CG_Order',
 //    'channelgrabber_phinx_src_Phinx',

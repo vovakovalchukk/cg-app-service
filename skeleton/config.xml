@@ -31,5 +31,11 @@
         <Redis>
             <enabled>1</enabled>
         </Redis>
+        <Mongo>
+            <enabled>1</enabled>
+            <Adapters>
+                <mongodb>1</mongodb>
+            </Adapters>
+        </Mongo>
     </Module>
 </zend-config>
