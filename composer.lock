@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "22d18b243b6a95aba88c18fbf0e60f08",
+    "hash": "8ceed0f1b8c7b427980c1e4d02d868dd",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -84,17 +84,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "b4e7e0d1f11b3b20c220ff93670ac79f5809c428"
+                "reference": "975ed377f999166ce94098c8394669fe9585507f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.1-f36d80.zip",
-                "reference": "b4e7e0d1f11b3b20c220ff93670ac79f5809c428",
-                "shasum": "ffe1b6312e4287761533af620b88cea5529020db"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.2-ef8351.zip",
+                "reference": "975ed377f999166ce94098c8394669fe9585507f",
+                "shasum": "12d664c1f06dd61dd6d78599e80585f82c6bec47"
             },
             "replace": {
                 "channelgrabber/cghttp": "*"
@@ -105,7 +105,7 @@
                     "CG\\Http\\": ""
                 }
             },
-            "time": "2013-10-28 11:26:16"
+            "time": "2014-01-02 11:02:27"
         },
         {
             "name": "channelgrabber/order",
@@ -211,17 +211,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.5.4",
+            "version": "1.5.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc"
+                "reference": "9f3c538a945241bed103ebbb92cf65d039cf114f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.4-6ffd08.zip",
-                "reference": "f6d983e768cd6e9837c34bff042e012de5c2ccbc",
-                "shasum": "b9c0730feb2f5859e63f39d8b8d5f55b4c42fd9d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.5.5-0cd6d9.zip",
+                "reference": "9f3c538a945241bed103ebbb92cf65d039cf114f",
+                "shasum": "79f58d8e7017344ec7de077beb224aac21ff141d"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -232,7 +232,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2013-12-19 16:37:16"
+            "time": "2014-01-02 12:28:15"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -1910,18 +1910,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "39624e966b8cfdfb5c6e7213e04328327699b7eb"
+                "reference": "408670415f422c7bfbfb54d9715ec6f33c4b986d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/39624e966b8cfdfb5c6e7213e04328327699b7eb",
-                "reference": "39624e966b8cfdfb5c6e7213e04328327699b7eb",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/408670415f422c7bfbfb54d9715ec6f33c4b986d",
+                "reference": "408670415f422c7bfbfb54d9715ec6f33c4b986d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "phpspec/php-diff": "~1.0.0",
-                "phpspec/prophecy": "~1.0.2",
+                "phpspec/prophecy": "~1.1",
                 "symfony/console": "~2.1",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/finder": "~2.1",
@@ -1970,20 +1970,20 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-12-13 15:32:32"
+            "time": "2014-01-01 21:52:53"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.0.4",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "79d9c8bd94801bffbf9b56964f6438762da6d8cd"
+                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/79d9c8bd94801bffbf9b56964f6438762da6d8cd",
-                "reference": "79d9c8bd94801bffbf9b56964f6438762da6d8cd",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/119b07de9c592a0286cd584d6e961903ba096d8a",
+                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a",
                 "shasum": ""
             },
             "require-dev": {
@@ -1992,7 +1992,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -2025,7 +2025,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2013-08-10 11:11:45"
+            "time": "2014-01-01 21:15:36"
         },
         {
             "name": "phpunit/php-code-coverage",

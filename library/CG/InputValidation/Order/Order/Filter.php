@@ -7,11 +7,13 @@ use Zend\Di\Di;
 use Zend\Validator\Between;
 use Zend\Validator\Date;
 use Zend\Validator\InArray;
+use Zend\Validator\Identical;
 use CG\Validation\Rules\BooleanValidator;
 use CG\Constant\CountryCode;
 use CG\Validation\Rules\InArrayValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use Zend\Validator\StringLength;
+use CG\Validation\ValidatorChain;
 
 class Filter implements RulesInterface
 {
@@ -39,8 +41,17 @@ class Filter implements RulesInterface
                 'name'       => 'limit',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
-                                  ->setMessages(array('notBetween' => 'limit should be at least %min%'))
+                    $this->getDi()->newInstance(
+                        ValidatorChain::Class,
+                        [
+                            'validators' => [
+                                $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
+                                    ->setMessages(array('notBetween' => 'limit should be at least %min%')),
+                                $this->getDi()->newInstance(Identical::Class, ['token' => 'all'])
+                                    ->setMessages([Identical::NOT_SAME => 'limit does not equal "%token%"'])
+                            ]
+                        ]
+                    )
                 )
             ),
             'page' => array(
