@@ -14,7 +14,7 @@ foreach ($it as $file) {
 
 foreach ($libraryComponents as $component) {
     $diCompiler = new Zend\Di\Definition\CompilerDefinition;
-    $dir = dirname(__DIR__) . '/library/' . str_replace('_', '/', $component);
+    $dir = dirname(__DIR__) . '/library/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
     echo "Compiling ".$dir."\n";
     $diCompiler->addDirectory($dir);
     $diCompiler->setAllowReflectionExceptions();
@@ -27,7 +27,7 @@ foreach ($libraryComponents as $component) {
 
 foreach ($vendorComponents as $component) {
     $diCompiler = new Zend\Di\Definition\CompilerDefinition;
-    $dir = dirname(__DIR__) . '/vendor/' . str_replace('_', '/', $component);
+    $dir = dirname(__DIR__) . '/vendor/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
     echo "Compiling ".$dir."\n";
     $diCompiler->addDirectory($dir);
     $diCompiler->setAllowReflectionExceptions(true);
