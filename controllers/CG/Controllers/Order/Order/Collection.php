@@ -41,7 +41,8 @@ class Collection
                     $this->getParams('timeFrom'),
                     $this->getParams('timeTo'),
                     $this->getParams('orderBy'),
-                    $this->getParams('orderDirection')
+                    $this->getParams('orderDirection'),
+                    $this->getParams('tags') ? $this->getParams('tags') : array()
             );
             return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
         } catch (NotFound $e) {
