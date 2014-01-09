@@ -33,7 +33,7 @@ return array(
     'slim_slim_Slim',
     'symfony_browser-kit_Symfony_Component_BrowserKit',
     'symfony_class-loader_Symfony_Component_ClassLoader',
-//    'symfony_config_Symfony_Component_Config',
+    'symfony_config_Symfony_Component_Config',
     'symfony_console_Symfony_Component_Console',
     'symfony_css-selector_Symfony_Component_CssSelector',
     'symfony_dom-crawler_Symfony_Component_DomCrawler',
@@ -50,6 +50,6 @@ return array(
     'zendframework_zend-filter_Zend_Filter',
     'zendframework_zend-inputfilter_Zend',
     'zendframework_zend-servicemanager_Zend',
-    'zendframework_zend-stdlib_Zend_Stdlib',
+//    'zendframework_zend-stdlib_Zend_Stdlib',
 //    'zendframework_zend-validator_Zend_Validator',
 );
