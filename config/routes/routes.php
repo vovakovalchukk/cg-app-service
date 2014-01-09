@@ -129,7 +129,9 @@ return array(
                 $di = $serviceManager->get('Di');
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
-
+                $mongoClient = $di->get(\MongoClient::class);
+                print_r($mongoClient);
+                exit;
                 $controller = $di->get(OrderCollection::class, array());
                 $app->view()->set(
                     'RestResponse',

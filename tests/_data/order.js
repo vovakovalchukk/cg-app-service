@@ -41,7 +41,8 @@ db.order.insert({
     "dispatchDate": "2013-10-10 10:50:10",
     "currencyCode": "GBP",
     "archived": false,
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1414-40",
@@ -85,7 +86,8 @@ db.order.insert({
     "dispatchDate": "2013-10-10 10:40:10",
     "currencyCode": "GBP",
     "archived": false,
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1413-30",
@@ -129,7 +131,8 @@ db.order.insert({
     "dispatchDate": "2013-10-10 10:30:10",
     "currencyCode": "GBP",
     "archived": false,
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1412-20",
@@ -173,7 +176,8 @@ db.order.insert({
     "dispatchDate": "2013-10-10 10:20:10",
     "currencyCode": "GBP",
     "archived": false,
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1411-10",
@@ -217,7 +221,8 @@ db.order.insert({
     "dispatchDate": "2013-10-10 10:00:10",
     "currencyCode": "GBP",
     "archived": false,
-    "custom": []
+    "custom": [],
+    "batch": 2
 });
 db.item.insert({
         "_id":"1411-11",

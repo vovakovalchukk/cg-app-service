@@ -72,7 +72,8 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:00:00",
                     "dispatchDate" => "2013-10-10 10:00:10",
                     "archived" => false,
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1412-20",
@@ -116,7 +117,8 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:20:00",
                     "dispatchDate" => "2013-10-10 10:20:10",
                     "archived" => false,
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1413-30",
@@ -160,7 +162,8 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:30:00",
                     "dispatchDate" => "2013-10-10 10:30:10",
                     "archived" => false,
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1414-40",
@@ -204,7 +207,8 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:40:00",
                     "dispatchDate" => "2013-10-10 10:40:10",
                     "archived" => false,
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1415-50",
@@ -248,7 +252,8 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:50:00",
                     "dispatchDate" => "2013-10-10 10:50:10",
                     "archived" => false,
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 2
                 ],
         ];
     }
@@ -265,7 +270,8 @@ class OrderPage extends RootPage
                 "shippingPrice",
                 "shippingMethod",
                 "currencyCode",
-                "purchaseDate"
+                "purchaseDate",
+                "batch"
         ];
     }
 
@@ -281,7 +287,8 @@ class OrderPage extends RootPage
             "shippingPrice" => "abc",
             "shippingMethod" => [],
             "currencyCode" => "INVALIDCURRENCYCODE",
-            "purchaseDate" => []
+            "purchaseDate" => [],
+            "batch" => []
         ];
     }
 
@@ -309,7 +316,8 @@ class OrderPage extends RootPage
                 "accountId" => [],
                 "channel" => [],
                 //"includeArchived",  Not working atm
-                "shippingMethod" => []
+                "shippingMethod" => [],
+                "batch" => []
         ];
     }
 
