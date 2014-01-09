@@ -20,7 +20,7 @@ $componentArray = [];
 foreach ($componentTypes as $type => $components) {
     foreach ($components as $component) {
         $diCompiler = new Zend\Di\Definition\CompilerDefinition;
-        $dir = dirname(__DIR__) . '/' . $type . '/' . str_replace('_', '/', $component);
+        $dir = dirname(__DIR__) . '/' . $type . '/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
         echo $dir.PHP_EOL;
         $diCompiler->addDirectory($dir);
         $diCompiler->setAllowReflectionExceptions();
