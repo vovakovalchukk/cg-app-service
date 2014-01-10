@@ -20,6 +20,7 @@ class OrderBatchPage extends RootPage
     public static function notAllowedMethods()
     {
         return [
+            static::POST    => static::POST,
             static::PUT    => static::PUT,
             static::DELETE => static::DELETE
         ];
@@ -28,12 +29,12 @@ class OrderBatchPage extends RootPage
     public static function getTestCollection()
     {
         return [
-            ["name" => "1", "organisationUnitId" => 1, "id" => "1-1", "active" => true],
-            ["name" => "2", "organisationUnitId" => 1, "id" => "1-2", "active" => true],
-            ["name" => "3", "organisationUnitId" => 1, "id" => "1-3", "active" => true],
-            ["name" => "4", "organisationUnitId" => 1, "id" => "1-4", "active" => true],
-            ["name" => "5", "organisationUnitId" => 1, "id" => "1-5", "active" => false],
-            ["name" => "1", "organisationUnitId" => 2, "id" => "2-1", "active" => true]
+            ["name" => "1", "organisationUnitId" => 1, "id" => "1-1", "active" => 1],
+            ["name" => "2", "organisationUnitId" => 1, "id" => "1-2", "active" => 1],
+            ["name" => "3", "organisationUnitId" => 1, "id" => "1-3", "active" => 1],
+            ["name" => "4", "organisationUnitId" => 1, "id" => "1-4", "active" => 1],
+            ["name" => "5", "organisationUnitId" => 1, "id" => "1-5", "active" => 0],
+            ["name" => "1", "organisationUnitId" => 2, "id" => "2-1", "active" => 1]
         ];
     }
 
@@ -41,7 +42,8 @@ class OrderBatchPage extends RootPage
     {
         return [
             "organisationUnitId",
-            "active"
+            "name",
+            "id"
         ];
     }
 
@@ -59,14 +61,15 @@ class OrderBatchPage extends RootPage
     {
         return [
             "organisationUnitId",
-            "active"
+            "name",
+            "id"
         ];
     }
 
     public static function getFilterFields()
     {
         return [
-            "active"
+            "active", "organisationUnitId" => []
         ];
     }
 }

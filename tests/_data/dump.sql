@@ -220,3 +220,18 @@ INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, 
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (4, '1411-11', "Standard", 'Wrap Message 4', 4.99, 0.4);
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (5, '1411-12', "Standard", 'Wrap Message 5', 5.99, 0.5);
 INSERT INTO `giftWrap` (`id`, `orderItemId`, `giftWrapType`, `giftWrapMessage`, `giftWrapPrice`, `giftWrapTaxPercentage`) VALUES (6, '1411-11', "Standard", 'Wrap Message 6', 6.99, 0.6);
+
+CREATE TABLE IF NOT EXISTS `batch` (
+                      `id` varchar(30) NOT NULL,
+                      `name` int(10) unsigned NOT NULL,
+                      `organisationUnitId` int(10) unsigned NOT NULL,
+                      `active` tinyint(1),
+                      PRIMARY KEY (`id`),
+                      KEY `organisationUnitId-name` (`organisationUnitId`, `name`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (1, 1, "1-1", true);
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (2, 1, "1-2", true);
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (3, 1, "1-3", true);
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (4, 1, "1-4", true);
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (5, 1, "1-5", false);
+INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (1, 2, "2-1", true);

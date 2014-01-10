@@ -109,6 +109,16 @@ use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Controllers\Order\UserChange as UserChangeController;
 use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
 
+//Batch
+use CG\Order\Service\Batch\Service as BatchService;
+use CG\Order\Shared\Batch\Repository as BatchRepository;
+use CG\Order\Service\Batch\Storage\Cache as BatchCacheStorage;
+use CG\Order\Service\Batch\Storage\Db as BatchDbStorage;
+use CG\Order\Shared\Batch\Mapper as BatchMapper;
+use CG\Controllers\Order\Batch as BatchController;
+use CG\Controllers\Order\Batch\Collection as BatchCollectionController;
+use CG\Order\Service\Batch\Storage\ETag as BatchETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -176,7 +186,9 @@ return array(
                 'GiftWrapService' => GiftWrapService::class,
                 'GiftWrapCollectionService' => GiftWrapService::class,
                 'UserChangeService' => UserChangeService::class,
-                'UserChangeCollectionService' => UserChangeService::class
+                'UserChangeCollectionService' => UserChangeService::class,
+                'BatchService' => BatchService::class,
+                'BatchCollectionService' => BatchService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -621,6 +633,48 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql'
+                )
+            ),
+            BatchETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => BatchRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Batch_Shared_Entity'
+                )
+            ),
+            BatchController::class => array(
+                'parameters' => array(
+                    'service' => 'BatchService'
+                )
+            ),
+            BatchCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'BatchCollectionService'
+                )
+            ),
+            'BatchService' => array(
+                'parameters' => array(
+                    'repository' => BatchETagStorage::class
+                )
+            ),
+            'BatchCollectionService' => array(
+                'parameters' => array(
+                    'repository' => BatchRepository::class
+                )
+            ),
+            BatchRepository::class => array(
+                'parameter' => array(
+                    'storage' => BatchCacheStorage::class,
+                    'repository' => BatchDbStorage::class
+                )
+            ),
+            BatchDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => BatchMapper::class
                 )
             ),
             'preferences' => array(

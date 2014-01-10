@@ -30,7 +30,6 @@ return array(
     'phpspec_prophecy_src_Prophecy',
     'predis_predis_lib_Predis',
     'psr_log_Psr_Log',
-//    'robmorgan_phinx_src_Phinx',
     'slim_slim_Slim',
     'symfony_browser-kit_Symfony_Component_BrowserKit',
     'symfony_class-loader_Symfony_Component_ClassLoader',

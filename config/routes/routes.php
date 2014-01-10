@@ -47,6 +47,13 @@ use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRul
 use CG\Controllers\Order\UserChange;
 use CG\InputValidation\Order\UserChange\Entity as UserChangeEntityValidationRules;
 
+//Fee
+use CG\Controllers\Order\Batch;
+use CG\Controllers\Order\Batch\Collection as BatchCollection;
+use CG\InputValidation\Order\Batch\Entity as BatchEntityValidationRules;
+use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
+
+
 return array(
     '/' => array (
         'controllers' => function() use ($serviceManager) {
@@ -362,5 +369,36 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderItemGiftWrapEntity',
         'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderBatch' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+                $controller = $di->get(BatchCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method()
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'OrderCollection',
+        'validation' => array("dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false)
+    ),
+    '/orderBatch/:batchId' => array (
+        'controllers' => function($batchId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Batch::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($batchId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderEntity',
+        'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );
