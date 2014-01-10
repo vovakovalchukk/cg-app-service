@@ -53,6 +53,12 @@ use CG\Controllers\Order\Batch\Collection as BatchCollection;
 use CG\InputValidation\Order\Batch\Entity as BatchEntityValidationRules;
 use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
 
+//UserPreference
+use CG\Controllers\UserPreference\UserPreference;
+use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollection;
+use CG\InputValidation\UserPreference\Entity as UserPreferenceEntityValidationRules;
+use CG\InputValidation\UserPreference\Filter as UserPreferenceFilterValidationRules;
+
 
 return array(
     '/' => array (
@@ -400,5 +406,36 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/userPreference' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+                $controller = $di->get(UserPreferenceCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method()
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'OrderCollection',
+        'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false)
+    ),
+    '/userPreference/:userId' => array (
+        'controllers' => function($userId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(UserPreference::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($userId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'OrderEntity',
+        'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );
