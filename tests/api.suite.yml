@@ -1,6 +1,6 @@
 class_name: ApiGuy
 modules:
-    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb, MongoDb]
+    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb]
     config:
         PhpBrowser:
             url: 'https://cg_app.channelgrabber.com.local'
