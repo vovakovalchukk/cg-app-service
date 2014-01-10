@@ -1,6 +1,6 @@
 class_name: ApiGuy
 modules:
-    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb]
+    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb, MongoDb]
     config:
         PhpBrowser:
             url: 'https://cg_app.channelgrabber.com.local'
@@ -24,6 +24,6 @@ modules:
             dsn: 'mongodb://127.0.0.1:27017/order'
             user: ''
             password: ''
-            dump: 'tests/_data/order.js'
+            dump: 'tests/_data/mongo.js'
             populate: true
             cleanup: true

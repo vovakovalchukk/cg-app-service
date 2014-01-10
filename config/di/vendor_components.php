@@ -17,6 +17,7 @@ return array(
     'channelgrabber_predis_CG_Predis',
 //    'channelgrabber_slim_CG_Slim',
     'channelgrabber_stdlib_CG_Stdlib',
+    'channelgrabber_userpreference_CG_UserPreference',
     'channelgrabber_validation_CG_Validation',
     'channelgrabber_vnderror_CG_VndError',
 //    'codeception_codeception_src_Codeception',

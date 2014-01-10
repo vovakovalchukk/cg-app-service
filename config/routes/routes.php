@@ -57,7 +57,6 @@ use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
 use CG\Controllers\UserPreference\UserPreference;
 use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollection;
 use CG\InputValidation\UserPreference\Entity as UserPreferenceEntityValidationRules;
-use CG\InputValidation\UserPreference\Filter as UserPreferenceFilterValidationRules;
 
 
 return array(
@@ -420,7 +419,7 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderCollection',
-        'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/userPreference/:userId' => array (
         'controllers' => function($userId) use ($serviceManager) {

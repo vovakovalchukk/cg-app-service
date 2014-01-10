@@ -1,4 +1,5 @@
 db=db.getSiblingDB("order");
+db.dropDatabase();
 db.order.insert({
     "_id": "1415-50",
     "accountId": 1415,
@@ -355,5 +356,61 @@ db.userChange.insert({
             "totalDiscount": 0.1,
             "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
+    }
+});
+db=db.getSiblingDB("userPreference");
+db.dropDatabase();
+db.preference.insert({
+    "_id":"1",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch"
+        ],
+        "other":1
+    }
+});
+db.preference.insert({
+    "_id":"2",
+    "preference":{
+        "orderTable":[
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "tags"
+        ],
+        "other":2
+    }
+});
+db.preference.insert({
+    "_id":"3",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "invoice"
+        ],
+        "other":3
+    }
+});
+db.preference.insert({
+    "_id":"4",
+    "preference":{
+        "other":4
+    }
+});
+db.preference.insert({
+    "_id":"5",
+    "preference":{
+        "orderTable":[
+            "checkbox",
+            "orderInformation",
+            "shippingService",
+            "buyerName"
+        ]
     }
 });

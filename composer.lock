@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8ceed0f1b8c7b427980c1e4d02d868dd",
+    "hash": "e91a41bcf7f4a923baad99f0b283f88d",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -236,17 +236,11 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.4.1",
+            "version": "dev-CGIV-1100",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "b0f404889e17c634b042cc31530397db53a1c616"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.4.1-91f19e.zip",
-                "reference": "b0f404889e17c634b042cc31530397db53a1c616",
-                "shasum": "5d217f7ed35e82d6ad55c8c7e959b5d2bc969c70"
+                "reference": "74b33fd5c3ba8d5a1af9cfa6f633a0b51e16c6e7"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -260,7 +254,27 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2013-12-18 08:49:19"
+            "time": "2014-01-10 11:27:46"
+        },
+        {
+            "name": "channelgrabber/userpreference",
+            "version": "dev-CGIV-1319",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
+                "reference": "7dc5d04ce0a904328c7900a5d543793f69132088"
+            },
+            "require": {
+                "channelgrabber/constants": "dev-master",
+                "ext-mongo": ">=1.4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\UserPreference\\": ""
+                }
+            },
+            "time": "2014-01-10 15:15:53"
         },
         {
             "name": "channelgrabber/validation",
@@ -2694,13 +2708,15 @@
         {
             "alias": "2.3.4",
             "alias_normalized": "2.3.4.0",
-            "version": "2.4.1.0",
+            "version": "dev-CGIV-1100",
             "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
+        "channelgrabber/userpreference": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
