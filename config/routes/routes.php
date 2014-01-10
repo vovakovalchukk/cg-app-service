@@ -47,7 +47,7 @@ use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRul
 use CG\Controllers\Order\UserChange;
 use CG\InputValidation\Order\UserChange\Entity as UserChangeEntityValidationRules;
 
-//Fee
+//Batch
 use CG\Controllers\Order\Batch;
 use CG\Controllers\Order\Batch\Collection as BatchCollection;
 use CG\InputValidation\Order\Batch\Entity as BatchEntityValidationRules;
