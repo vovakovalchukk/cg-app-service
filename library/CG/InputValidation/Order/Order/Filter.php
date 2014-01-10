@@ -179,8 +179,8 @@ class Filter implements RulesInterface
                                   ->setHaystack(array("ASC", "DESC"))
                 )
             ),
-            'tags' => array(
-                'name'       => 'tags',
+            'tag' => array(
+                'name'       => 'tag',
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'tags'))
