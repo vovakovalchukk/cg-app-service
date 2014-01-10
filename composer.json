@@ -35,10 +35,12 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "composer -o dump-autoload",
             "php bin/update_di_components.php",
             "php bin/compile_di.php"
         ],
         "post-update-cmd": [
+            "composer -o dump-autoload",
             "php bin/update_di_components.php",
             "php bin/compile_di.php"
         ]
