@@ -68,6 +68,7 @@ return array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\RestExample\ServiceInterface' => 'CG\RestExample\Service',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
+                'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
             )
         )
     )

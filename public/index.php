@@ -9,6 +9,7 @@ use CG\Slim\NewRelic;
 use CG\Slim\Rest\Options;
 use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
+use CG\Slim\SlimApp;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
 use CG\Slim\Versioning\Middleware as Versioning;
@@ -22,7 +23,7 @@ $app->hook('slim.before.dispatch', function() use ($app, $di) {
         return;
     }
     $app->slimApp = SlimApp::create($app);
-    $app->module = $di->get(LoggingModule::class, ['application' => $app]);
+    $app->module = $di->get(LoggingModule::class, ['application' => $app->slimApp]);
     $app->module->listenForLog();
     $app->logger = $di->get(Logger::class);
 });
