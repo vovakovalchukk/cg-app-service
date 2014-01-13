@@ -5,7 +5,7 @@ use CG\Codeception\Cest\Rest\EntityTrait;
 use CG\Order\Test\Api\Page\OrderBatchEntityPage;
 use CG\Codeception\Cest\Rest\EntityETagTrait;
 
-class OrderEntityCest
+class OrderBatchEntityCest
 {
     use EntityTrait, EntityETagTrait;
 

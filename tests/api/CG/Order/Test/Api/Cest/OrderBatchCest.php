@@ -4,7 +4,7 @@ namespace CG\Order\Test\Api\Cest;
 use CG\Order\Test\Api\Page\OrderBatchPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
 
-class OrderCest
+class OrderBatchCest
 {
     use CollectionTrait;
 
