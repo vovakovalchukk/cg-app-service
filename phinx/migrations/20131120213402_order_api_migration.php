@@ -28,6 +28,7 @@ class OrderApiMigration extends AbstractMigration
                       `dispatchDate` datetime NOT NULL,
                       `billingAddressId` int(10) unsigned DEFAULT NULL,
                       `shippingAddressId` int(10) unsigned DEFAULT NULL,
+                      `batch` int(10) unsigned DEFAULT NULL,
                       PRIMARY KEY (`id`),
                       KEY `billingAddressId` (`billingAddressId`),
                       KEY `shippingAddressId` (`shippingAddressId`)

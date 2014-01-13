@@ -304,6 +304,15 @@ class Entity implements RulesInterface
                 'validators' => array(
                 )
             ),
+            'batch' => array(
+                'name'       => 'batch',
+                'required'   => true,
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'batch']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
+                )
+            )
         );
     }
 }

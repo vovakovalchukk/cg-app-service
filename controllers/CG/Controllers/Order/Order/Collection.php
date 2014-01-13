@@ -38,6 +38,7 @@ class Collection
                     $this->getParams('includeArchived'),
                     $this->getParams('multiLineSameOrder'),
                     $this->getParams('multiSameItem'),
+                    $this->getParams('batch'),
                     $this->getParams('timeFrom'),
                     $this->getParams('timeTo'),
                     $this->getParams('orderBy'),

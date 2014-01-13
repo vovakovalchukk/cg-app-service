@@ -76,7 +76,8 @@ class OrderPage extends RootPage
                         "tag1",
                         "tag2"
                     ],
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1412-20",
@@ -124,7 +125,8 @@ class OrderPage extends RootPage
                         "tag2",
                         "tag3"
                     ],
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1413-30",
@@ -172,7 +174,8 @@ class OrderPage extends RootPage
                         "tag3",
                         "tag4"
                     ],
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1414-40",
@@ -220,7 +223,8 @@ class OrderPage extends RootPage
                         "tag4",
                         "tag5"
                     ],
-                    "custom" => []
+                    "custom" => [],
+                    "batch" => 1
                 ],
                 [
                     "id" => "1415-50",
@@ -268,8 +272,9 @@ class OrderPage extends RootPage
                         "tag5",
                         "tag1"
                     ],
-                    "custom" => []
-                ],
+                    "custom" => [],
+                    "batch" => 2
+                ]
         ];
     }
 
@@ -285,7 +290,8 @@ class OrderPage extends RootPage
                 "shippingPrice",
                 "shippingMethod",
                 "currencyCode",
-                "purchaseDate"
+                "purchaseDate",
+                "batch"
         ];
     }
 
@@ -301,7 +307,8 @@ class OrderPage extends RootPage
             "shippingPrice" => "abc",
             "shippingMethod" => [],
             "currencyCode" => "INVALIDCURRENCYCODE",
-            "purchaseDate" => []
+            "purchaseDate" => [],
+            "batch" => []
         ];
     }
 
@@ -329,7 +336,8 @@ class OrderPage extends RootPage
                 "accountId" => [],
                 "channel" => [],
                 //"includeArchived",  Not working atm
-                "shippingMethod" => []
+                "shippingMethod" => [],
+                "batch" => []
         ];
     }
 

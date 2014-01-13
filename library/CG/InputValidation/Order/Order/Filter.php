@@ -164,6 +164,13 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingMethod'))
                 )
             ),
+            'batch' => array(
+                'name'       => 'batch',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'batch'))
+                )
+            ),
             'orderBy' => array(
                 'name'       => 'orderBy',
                 'required'   => false,

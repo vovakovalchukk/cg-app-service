@@ -1,4 +1,5 @@
 db=db.getSiblingDB("order");
+db.dropDatabase();
 db.order.insert({
     "_id": "1415-50",
     "accountId": 1415,
@@ -45,7 +46,8 @@ db.order.insert({
         "tag5",
         "tag1"
     ],
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1414-40",
@@ -93,7 +95,8 @@ db.order.insert({
         "tag4",
         "tag5"
     ],
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1413-30",
@@ -141,7 +144,8 @@ db.order.insert({
         "tag3",
         "tag4"
     ],
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1412-20",
@@ -189,7 +193,8 @@ db.order.insert({
         "tag2",
         "tag3"
     ],
-    "custom": []
+    "custom": [],
+    "batch": 1
 });
 db.order.insert({
     "_id": "1411-10",
@@ -237,7 +242,8 @@ db.order.insert({
         "tag1",
         "tag2"
     ],
-    "custom": []
+    "custom": [],
+    "batch": 2
 });
 db.item.insert({
         "_id":"1411-11",
@@ -370,5 +376,61 @@ db.userChange.insert({
             "totalDiscount": 0.1,
             "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
+    }
+});
+db=db.getSiblingDB("userPreference");
+db.dropDatabase();
+db.preference.insert({
+    "_id":"1",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch"
+        ],
+        "other":1
+    }
+});
+db.preference.insert({
+    "_id":"2",
+    "preference":{
+        "orderTable":[
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "tags"
+        ],
+        "other":2
+    }
+});
+db.preference.insert({
+    "_id":"3",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "invoice"
+        ],
+        "other":3
+    }
+});
+db.preference.insert({
+    "_id":"4",
+    "preference":{
+        "other":4
+    }
+});
+db.preference.insert({
+    "_id":"5",
+    "preference":{
+        "orderTable":[
+            "checkbox",
+            "orderInformation",
+            "shippingService",
+            "buyerName"
+        ]
     }
 });

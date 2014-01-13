@@ -23,10 +23,6 @@
         },
         {
             "type": "git",
-            "url": "git@bitbucket.org:channelgrabber/cg-order.git"
-        },
-        {
-            "type": "git",
             "url": "git@bitbucket.org:channelgrabber/cgetag.git"
         },
         {
@@ -48,12 +44,13 @@
         "channelgrabber/constants": "dev-master",
         "channelgrabber/etag": "~1.4.0",
         "channelgrabber/http": "~1.2.1",
-        "channelgrabber/order": "dev-CGIV-1297-order-tags as 1.0.0",
+        "channelgrabber/order": "dev-CGIV-1297-order-tags as 1.0.3",
         "channelgrabber/phinx": "~0.2.9.1",
         "channelgrabber/phpunit": "dev-CGIV-1329-Di-Mock",
         "channelgrabber/predis": "~1.0.1",
         "channelgrabber/slim": "~1.6.0",
         "channelgrabber/stdlib": "~2.4.3",
+        "channelgrabber/userpreference" : "1.0.0",
         "channelgrabber/validation": "~1.1.5",
         "channelgrabber/vnderror": "~1.0.0",
         "guzzle/guzzle": "~3.7",
@@ -71,7 +68,7 @@
         "codeception/codeception": "~1.8.0",
         "phpspec/phpspec": "2.0.*@dev",
         "phpspec/prophecy": "~1.0",
-        "channelgrabber/codeception": "~1.1.32"
+        "channelgrabber/codeception": "~1.1.33"
     },
     "scripts": {
         "post-install-cmd": [

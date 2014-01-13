@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "80bc03ea78032ab689cf5924ed5500b9",
+    "hash": "27b6be1dd29762f4071e1eadea6f4dd9",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -113,9 +113,10 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "cb675683049b279b0de997c5c3fca3abd2b8a44d"
+                "reference": "4ac45efc8756f7b53a06732333bc6f132dee3484"
             },
             "require": {
+                "channelgrabber/cache": "~1.2.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/etag": "~1.4.0",
                 "channelgrabber/phpunit": "dev-CGIV-1329-Di-Mock",
@@ -133,7 +134,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-01-13 14:52:09"
+            "time": "2014-01-13 16:10:10"
         },
         {
             "name": "channelgrabber/phinx",
@@ -298,6 +299,32 @@
                 ]
             },
             "time": "2014-01-10 17:29:15"
+        },
+        {
+            "name": "channelgrabber/userpreference",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
+                "reference": "efb06fd35e215a066039391cb7a695b074b286d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-1.0.0-3b6ac3.zip",
+                "reference": "efb06fd35e215a066039391cb7a695b074b286d6",
+                "shasum": "50b39133e6b5163678c1fde7105ccbc304809728"
+            },
+            "require": {
+                "channelgrabber/constants": "dev-master",
+                "ext-mongo": ">=1.4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\UserPreference\\": ""
+                }
+            },
+            "time": "2014-01-10 17:49:40"
         },
         {
             "name": "channelgrabber/validation",
@@ -2937,8 +2964,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
+            "alias": "1.0.3",
+            "alias_normalized": "1.0.3.0",
             "version": "dev-CGIV-1297-order-tags",
             "package": "channelgrabber/order"
         }

@@ -109,6 +109,25 @@ use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Controllers\Order\UserChange as UserChangeController;
 use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
 
+//Batch
+use CG\Order\Service\Batch\Service as BatchService;
+use CG\Order\Shared\Batch\Repository as BatchRepository;
+use CG\Order\Service\Batch\Storage\Cache as BatchCacheStorage;
+use CG\Order\Service\Batch\Storage\Db as BatchDbStorage;
+use CG\Order\Shared\Batch\Mapper as BatchMapper;
+use CG\Controllers\Order\Batch as BatchController;
+use CG\Controllers\Order\Batch\Collection as BatchCollectionController;
+use CG\Order\Service\Batch\Storage\ETag as BatchETagStorage;
+
+//UserPreference
+use CG\UserPreference\Service\Service as UserPreferenceService;
+use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
+use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
+use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
+use CG\Controllers\UserPreference\UserPreference as UserPreferenceController;
+use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollectionController;
+use CG\UserPreference\Service\Storage\ETag as UserPreferenceETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -156,12 +175,11 @@ return array(
                 'EventService' => EventService::class,
                 'EventCollectionService' => EventService::class,
                 'ServiceDbRepo' => ServiceRepository::class,
-                'ServiceDbStorage' => ServiceDb::class,
+                'ServiceDbStorage' => ServiceDbStorage::class,
                 'ServiceCacheRepo' => ServiceRepository::class,
                 'EventDbRepo' => EventRepository::class,
-                'EventDbStorage' => EventDb::class,
+                'EventDbStorage' => EventDbStorage::class,
                 'EventCacheRepo' => EventRepository::class,
-                'config' => Config::class,
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
@@ -177,7 +195,11 @@ return array(
                 'GiftWrapService' => GiftWrapService::class,
                 'GiftWrapCollectionService' => GiftWrapService::class,
                 'UserChangeService' => UserChangeService::class,
-                'UserChangeCollectionService' => UserChangeService::class
+                'UserChangeCollectionService' => UserChangeService::class,
+                'BatchService' => BatchService::class,
+                'BatchCollectionService' => BatchService::class,
+                'UserPreferenceService' => UserPreferenceService::class,
+                'UserPreferenceCollectionService' => UserPreferenceService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -622,6 +644,82 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql'
+                )
+            ),
+            BatchETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => BatchRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Batch_Shared_Entity'
+                )
+            ),
+            BatchController::class => array(
+                'parameters' => array(
+                    'service' => 'BatchService'
+                )
+            ),
+            BatchCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'BatchCollectionService'
+                )
+            ),
+            'BatchService' => array(
+                'parameters' => array(
+                    'repository' => BatchETagStorage::class
+                )
+            ),
+            'BatchCollectionService' => array(
+                'parameters' => array(
+                    'repository' => BatchRepository::class
+                )
+            ),
+            BatchRepository::class => array(
+                'parameter' => array(
+                    'storage' => BatchCacheStorage::class,
+                    'repository' => BatchDbStorage::class
+                )
+            ),
+            BatchDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => BatchMapper::class
+                )
+            ),
+            UserPreferenceETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => UserPreferenceRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_UserPreference_Shared_Entity'
+                )
+            ),
+            UserPreferenceController::class => array(
+                'parameters' => array(
+                    'service' => 'UserPreferenceService'
+                )
+            ),
+            UserPreferenceCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'UserPreferenceCollectionService'
+                )
+            ),
+            'UserPreferenceService' => array(
+                'parameters' => array(
+                    'repository' => UserPreferenceETagStorage::class
+                )
+            ),
+            'UserPreferenceCollectionService' => array(
+                'parameters' => array(
+                    'repository' => UserPreferenceRepository::class
+                )
+            ),
+            UserPreferenceRepository::class => array(
+                'parameter' => array(
+                    'storage' => UserPreferenceCacheStorage::class,
+                    'repository' => UserPreferenceMongoDbStorage::class
                 )
             ),
             'preferences' => array(
