@@ -3,11 +3,16 @@ modules:
     enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb]
     config:
         PhpBrowser:
-            url: 'http://cg_app.channelgrabber.com.local'
+            url: 'https://cg_app.channelgrabber.com.local'
+            curl:
+                CURLOPT_SSL_VERIFYHOST: false
+                CURLOPT_SSL_VERIFYPEER: false
+                CURLOPT_CAINFO: 'data/certificates/cacert.pem'
+                CURLOPT_SSLCERT: 'data/certificates/cg_app_client.pem'
         REST:
-            url: 'http://cg_app.channelgrabber.com.local'
+            url: 'https://cg_app.channelgrabber.com.local'
         ApiHelper:
-            url: 'http://cg_app.channelgrabber.com.local'
+            url: 'https://cg_app.channelgrabber.com.local'
         Db:
             dsn: 'mysql:host=localhost;dbname=cg_app'
             user: 'root'

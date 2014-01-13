@@ -72,7 +72,7 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:00:00",
                     "dispatchDate" => "2013-10-10 10:00:10",
                     "archived" => false,
-                    "tags" => [
+                    "tag" => [
                         "tag1",
                         "tag2"
                     ],
@@ -120,7 +120,7 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:20:00",
                     "dispatchDate" => "2013-10-10 10:20:10",
                     "archived" => false,
-                    "tags" => [
+                    "tag" => [
                         "tag2",
                         "tag3"
                     ],
@@ -168,7 +168,7 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:30:00",
                     "dispatchDate" => "2013-10-10 10:30:10",
                     "archived" => false,
-                    "tags" => [
+                    "tag" => [
                         "tag3",
                         "tag4"
                     ],
@@ -216,7 +216,7 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:40:00",
                     "dispatchDate" => "2013-10-10 10:40:10",
                     "archived" => false,
-                    "tags" => [
+                    "tag" => [
                         "tag4",
                         "tag5"
                     ],
@@ -264,7 +264,7 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:50:00",
                     "dispatchDate" => "2013-10-10 10:50:10",
                     "archived" => false,
-                    "tags" => [
+                    "tag" => [
                         "tag5",
                         "tag1"
                     ],

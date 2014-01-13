@@ -633,6 +633,7 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
+                'CG\Cache\EventManagerInterface' => 'CG\App\Cache\EventManager',
                 \MongoClient::class => 'mongodb'
             )
         )
