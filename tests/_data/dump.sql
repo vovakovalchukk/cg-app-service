@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `address` (
     `addressCountryCode` varchar(2) NOT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 ALTER TABLE `order` ADD CONSTRAINT `order_shippingAddressId` FOREIGN KEY (`shippingAddressId`) REFERENCES `address` (`id`);
 ALTER TABLE `order` ADD CONSTRAINT `order_billingAddressId` FOREIGN KEY (`billingAddressId`) REFERENCES `address` (`id`);
 
@@ -133,6 +134,20 @@ INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUn
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 5', 'Full Name 5', 'address 1 - 5', 'address 2 - 5', 'address 3 - 5', 'City5', 'County5', 'France', 'Postcode5', 'emailaddress5@channelgrabber.com', '01942673435', 'FR');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 5', 'Full Name 5', 'shipping address 1 - 5', 'shipping address 2 - 5', 'shipping address 3 - 5', 'shipping City 5', 'Shipping County 5', 'France', 'shipPostcode5', 'shippingemail5@channelgrabber.com', '07415878965', 'FR');
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1415-50', '1415', '50', 'ebay5', '5', '25.99', '5', '50.99', 'standard5', 'GBP', '0.05', 'Hello, please leave at the door5', '2013-10-10 00:50:00', '2013-10-10 01:50:00', '2013-10-10 10:50:00', '2013-10-10 10:50:10', 9, 10, 2);
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id` VARCHAR (120) NOT NULL,
+  `organisationUnitId` int(10) unsigned NOT NULL,
+  `name` varchar (120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag1');
+INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag2');
+INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag3');
+INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag4');
+INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (2, 'tag5');
 
 CREATE TABLE IF NOT EXISTS `note` (
                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

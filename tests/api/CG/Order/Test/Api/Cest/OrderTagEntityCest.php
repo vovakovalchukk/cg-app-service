@@ -1,16 +1,17 @@
 <?php
 namespace CG\Order\Test\Api\Cest;
 
+
 use CG\Codeception\Cest\Rest\EntityTrait;
-use CG\Order\Test\Api\Page\OrderBatchEntityPage;
+use CG\Order\Test\Api\Page\OrderTagEntityPage;
 use CG\Codeception\Cest\Rest\EntityETagTrait;
 
-class OrderBatchEntityCest
+class OrderTagEntityCest
 {
     use EntityTrait, EntityETagTrait;
 
-    protected function getPageClass()
+    public function getPageClass()
     {
-        return OrderBatchEntityPage::class;
+        return OrderTagEntityPage::class;
     }
 }
