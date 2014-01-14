@@ -387,7 +387,7 @@ return array(
                 );
             },
         'via' => array('GET', 'OPTIONS'),
-        'name' => 'OrderCollection',
+        'name' => 'OrderBatchCollection',
         'validation' => array("dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false)
     ),
     '/orderBatch/:batchId' => array (
@@ -403,7 +403,7 @@ return array(
                 );
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-        'name' => 'OrderEntity',
+        'name' => 'OrderBatchEntity',
         'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/userPreference' => array (
@@ -418,7 +418,7 @@ return array(
                 );
             },
         'via' => array('GET', 'OPTIONS'),
-        'name' => 'OrderCollection',
+        'name' => 'UserPreferenceCollection',
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/userPreference/:userId' => array (
@@ -434,7 +434,7 @@ return array(
                 );
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-        'name' => 'OrderEntity',
+        'name' => 'UserPreferenceEntity',
         'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );
