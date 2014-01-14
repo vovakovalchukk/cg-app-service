@@ -47,7 +47,7 @@ db.order.insert({
         "tag1"
     ],
     "custom": [],
-    "batch": 1
+    "batch": 2
 });
 db.order.insert({
     "_id": "1414-40",
@@ -243,7 +243,7 @@ db.order.insert({
         "tag2"
     ],
     "custom": [],
-    "batch": 2
+    "batch": 1
 });
 db.item.insert({
         "_id":"1411-11",

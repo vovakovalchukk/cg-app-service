@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `address` (
     `addressCountryCode` varchar(2) NOT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+DROP TABLE IF EXISTS `orderTag`;
 CREATE TABLE IF NOT EXISTS `orderTag` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `orderId` varchar(120) NOT NULL,
