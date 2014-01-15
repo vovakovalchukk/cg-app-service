@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
 use Zend\Validator\Date;
@@ -311,6 +312,13 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'batch']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
                         ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
+                )
+            ),
+            'tag' => array (
+                'name' => 'tag',
+                'required' => false,
+                'validators' => array (
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'tag'])
                 )
             )
         );

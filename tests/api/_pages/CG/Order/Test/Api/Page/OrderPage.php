@@ -74,7 +74,8 @@ class OrderPage extends RootPage
                     "archived" => false,
                     "tag" => [
                         "tag1",
-                        "tag2"
+                        "tag2",
+                        "tag5"
                     ],
                     "custom" => [],
                     "batch" => 1
@@ -269,8 +270,6 @@ class OrderPage extends RootPage
                     "dispatchDate" => "2013-10-10 10:50:10",
                     "archived" => false,
                     "tag" => [
-                        "tag5",
-                        "tag1"
                     ],
                     "custom" => [],
                     "batch" => 2

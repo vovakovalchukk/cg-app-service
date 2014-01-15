@@ -43,8 +43,7 @@ db.order.insert({
     "currencyCode": "GBP",
     "archived": false,
     "tag" : [
-        "tag5",
-        "tag1"
+
     ],
     "custom": [],
     "batch": 2
@@ -240,7 +239,8 @@ db.order.insert({
     "archived": false,
     "tag" : [
         "tag1",
-        "tag2"
+        "tag2",
+        "tag5"
     ],
     "custom": [],
     "batch": 1
