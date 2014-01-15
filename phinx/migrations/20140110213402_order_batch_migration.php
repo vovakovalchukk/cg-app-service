@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class OrderApiMigration extends AbstractMigration
+class OrderBatchMigration extends AbstractMigration
 {
     /**
      * Migrate Up.
