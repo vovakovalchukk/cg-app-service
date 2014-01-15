@@ -453,8 +453,8 @@ class OrderPage extends RootPage
                 "shippingAddressPostcode",
                 "shippingEmailAddress",
                 "buyerMessage",
-                //"orderItem[].itemSku",
-                //"orderItem[].itemName"
+                "item[].itemSku",
+                "item[].itemName"
         ];
     }
 
