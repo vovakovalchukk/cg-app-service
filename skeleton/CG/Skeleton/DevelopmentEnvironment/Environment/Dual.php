@@ -157,7 +157,7 @@ class Dual extends Environment {
         $infrastructureNodeFile = Chef::NODES . 'infrastructure.json';
         $infrastructureNode = new Node($infrastructureNodeFile);
 
-        $databaseStorageKey = 'database_application|';
+        $databaseStorageKey = 'database_storage|';
         if ($moduleConfig->isEnabled()) {
             $infrastructureNode->setKey($databaseStorageKey . 'enabled', true);
             $infrastructureNode->setKey($databaseStorageKey . 'storage_choice', $moduleConfig->getStorageNode());

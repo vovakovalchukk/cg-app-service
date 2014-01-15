@@ -213,7 +213,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         $nodeFile = Chef::NODES . $environment->getEnvironmentConfig()->getNode() . '.json';
         $node = new Node($nodeFile);
 
-        $databaseApplicationKey = 'configure_sites|sites|' . $config->getAppName() . 'database_application|';
+        $databaseApplicationKey = 'configure_sites|sites|' . $config->getAppName() . '|database_application|';
         if ($moduleConfig->isEnabled()) {
 
             $node->setKey($databaseApplicationKey . 'enabled', true);
