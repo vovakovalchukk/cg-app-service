@@ -329,14 +329,15 @@ class OrderPage extends RootPage
 
     public static function getFilterFields()
     {
-        return ["id" => [],
-                "organisationUnitId" => [],
-                "status" => [],
-                "accountId" => [],
-                "channel" => [],
-                //"includeArchived",  Not working atm
-                "shippingMethod" => [],
-                "batch" => []
+        return [
+            "id" => [],
+            "organisationUnitId" => [],
+            "status" => [],
+            "accountId" => [],
+            "channel" => [],
+            //"includeArchived",  Not working atm
+            "shippingMethod" => [],
+            "batch" => []
         ];
     }
 
