@@ -11,11 +11,13 @@
  * file.
  */
 
+use Zend\Config\Config;
+
 return array(
     'service_manager' => array(
         'factories' => array(
             'Zend\Di\Di' => function($serviceManager) {
-                $configuration = $serviceManager->get('Config');
+                $configuration = $serviceManager->get('config');
 
                 $im = new Zend\Di\InstanceManager();
                 $di = new Zend\Di\Di(null, $im, new Zend\Di\Config(
@@ -45,7 +47,8 @@ return array(
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'Di' => 'Zend\Di\Di'
+                'Di' => 'Zend\Di\Di',
+                'config' => Config::class
             ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
