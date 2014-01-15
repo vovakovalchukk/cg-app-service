@@ -173,6 +173,8 @@ class StartupCommand implements StartupCommandInterface
 
     protected function configureFqdnOnNode(Node $node, Config $config, Environment $environment)
     {
-        $node->setKey('set_fqdn', $environment->getEnvironmentConfig()->getHostname($config, $environment));
+        $hostname = $environment->getEnvironmentConfig()->getHostname($config, $environment);
+        $fqdn = preg_replace('/[^a-z0-9-.]+/i', '-', $hostname);
+        $node->setKey('set_fqdn', $fqdn);
     }
 }
