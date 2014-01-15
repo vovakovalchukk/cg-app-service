@@ -26,14 +26,14 @@ class Collection
             $filterEntity = new FilterEntity(
                     $this->getParams('limit'),
                     $this->getParams('page'),
-                    $this->getParams('id') ? $this->getParams('id') : array(),
-                    $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array(),
-                    $this->getParams('status') ? $this->getParams('status') : array(),
-                    $this->getParams('accountId') ? $this->getParams('accountId') : array(),
-                    $this->getParams('channel') ? $this->getParams('channel') : array(),
-                    $this->getParams('country') ? $this->getParams('country') : array(),
-                    $this->getParams('countryExclude') ? $this->getParams('countryExclude') : array(),
-                    $this->getParams('shippingMethod') ? $this->getParams('shippingMethod') : array(),
+                    $this->getParams('id') ? $this->getParams('id') : [],
+                    $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : [],
+                    $this->getParams('status') ? $this->getParams('status') : [],
+                    $this->getParams('accountId') ? $this->getParams('accountId') : [],
+                    $this->getParams('channel') ? $this->getParams('channel') : [],
+                    $this->getParams('country') ? $this->getParams('country') : [],
+                    $this->getParams('countryExclude') ? $this->getParams('countryExclude') : [],
+                    $this->getParams('shippingMethod') ? $this->getParams('shippingMethod') : [],
                     $this->getParams('searchTerm'),
                     $this->getParams('includeArchived'),
                     $this->getParams('multiLineSameOrder'),
@@ -43,7 +43,7 @@ class Collection
                     $this->getParams('timeTo'),
                     $this->getParams('orderBy'),
                     $this->getParams('orderDirection'),
-                    $this->getParams('tag') ? $this->getParams('tag') : array()
+                    $this->getParams('tag') ? $this->getParams('tag') : []
             );
             return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
         } catch (NotFound $e) {
