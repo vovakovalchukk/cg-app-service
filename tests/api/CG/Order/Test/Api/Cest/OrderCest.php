@@ -111,4 +111,32 @@ class OrderCest
             }
         }
     }
+
+    /**
+     * @group filter
+     * @group get
+     * @group custom
+     */
+    public function checkIncludeArchivedFilter(ApiGuy $I)
+    {
+        $page = static::getPageClass();
+
+        $filterFieldArray = $page::getArchiveFilter();
+
+        $I->wantTo("check archive filter works for this collection");
+
+        $filterFieldValues = [true, false];
+
+        foreach ($filterFieldArray as $filterParameter => $filterField) {
+            foreach ($filterFieldValues as $filterFieldValue) {
+                $expectedResult = $page::getArchivedFilterExpected($filterFieldValue);
+
+                $url = $this->appendFilters($page::getUrl(), [$filterParameter => $filterFieldValue]);
+                $I->prepareRequest();
+                $I->sendGET($url);
+                $I->seeJsonFieldContainsArrayValues("_embedded.".$page::EMBEDDED_RESOURCE, $expectedResult);
+                $I->seeEmbeddedTypeIsOfSize($page::EMBEDDED_RESOURCE, count($expectedResult));
+            }
+        }
+    }
 }
