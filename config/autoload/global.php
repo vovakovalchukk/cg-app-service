@@ -731,6 +731,7 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
+                'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb'
             )
         )
