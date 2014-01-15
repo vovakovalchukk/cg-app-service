@@ -143,11 +143,11 @@ CREATE TABLE IF NOT EXISTS `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag1');
-INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag2');
-INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag3');
-INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (1, 'tag4');
-INSERT INTO `tag` (`organisationUnitId`, `name`) VALUES (2, 'tag5');
+INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag1', 1, 'tag1');
+INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag2', 1, 'tag2');
+INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag3', 1, 'tag3');
+INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag4', 1, 'tag4');
+INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('2-tag5', 2, 'tag5');
 
 CREATE TABLE IF NOT EXISTS `note` (
                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
