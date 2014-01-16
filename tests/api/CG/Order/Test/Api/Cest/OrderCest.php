@@ -109,6 +109,7 @@ class OrderCest
                 $I->seeResponseCodeIs(HttpStatus::OK);
 
                 $I->seeJsonFieldContainsArrayValues("_embedded.".$page::EMBEDDED_RESOURCE, $expectedResult);
+                $I->seeEmbeddedTypeIsOfSize($page::EMBEDDED_RESOURCE, count($expectedResult));
             }
         }
     }
