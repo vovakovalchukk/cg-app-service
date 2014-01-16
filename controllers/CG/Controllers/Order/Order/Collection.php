@@ -2,7 +2,7 @@
 namespace CG\Controllers\Order\Order;
 
 use CG\Order\Service\Service as OrderService;
-use CG\Order\Service\Filter\Entity as FilterEntity;
+use CG\Order\Service\Filter;
 use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
@@ -23,7 +23,7 @@ class Collection
     public function get()
     {
         try {
-            $filterEntity = new FilterEntity(
+            $filterEntity = new Filter(
                     $this->getParams('limit'),
                     $this->getParams('page'),
                     $this->getParams('id') ? $this->getParams('id') : [],
