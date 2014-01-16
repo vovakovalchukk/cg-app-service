@@ -22,7 +22,6 @@ class Collection
 
     public function get()
     {
-        try {
             $filterEntity = new Filter(
                     $this->getParams('limit'),
                     $this->getParams('page'),
@@ -46,8 +45,5 @@ class Collection
                     $this->getParams('tag') ? $this->getParams('tag') : []
             );
             return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
-        } catch (NotFound $e) {
-            throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
-        }
     }
 }
