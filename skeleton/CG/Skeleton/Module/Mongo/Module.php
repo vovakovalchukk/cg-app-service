@@ -106,12 +106,18 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
         if ($moduleConfig->isEnabled()) {
             $node->setKey($configKey . 'enabled', true);
 
+            $configuredAdapters = $moduleConfig->getMongoAdapters();
             $adapters = array();
-            foreach ($moduleConfig->getMongoAdapters() as $adapter => $enabled) {
-                if ($enabled) {
-                    $adapters[] = $adapter;
+            if (empty($configuredAdapters)) {
+                $adapters[] = "mongodb";
+            } else {
+                foreach ($configuredAdapters as $adapter => $enabled) {
+                    if ($enabled) {
+                        $adapters[] = $adapter;
+                    }
                 }
             }
+
             $node->setKey($configKey . 'adapters', $adapters, false);
 
             $node->setKey(

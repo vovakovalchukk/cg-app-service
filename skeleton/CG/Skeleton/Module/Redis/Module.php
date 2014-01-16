@@ -44,6 +44,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
     public function configure(Arguments $arguments, SkeletonConfig $config, BaseConfig $moduleConfig)
     {
+        echo "FUCK YOU\n";
         $this->validateConfig($moduleConfig);
         $this->configureModule($arguments, $config, $moduleConfig, true);
     }
@@ -71,7 +72,6 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                 $redisInstances[$redisInstance] = $redisInstance;
             }
         }
-
         if (empty($redisInstances)) {
             $moduleConfig->setEnabled(false);
             $this->getConsole()->writelnErr(
@@ -110,12 +110,19 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
 
         if ($moduleConfig->isEnabled()) {
             $node->setKey($configKey . 'enabled', true);
+
+            $configuredAdapters = $moduleConfig->getRedisAdapters();
             $adapters = array();
-            foreach ($moduleConfig->getRedisAdapters() as $adapter => $enabled) {
-                if ($enabled) {
-                    $adapters[] = $adapter;
+            if (empty($configuredAdapters)) {
+                $adapters[] = "unreliable";
+            } else {
+                foreach ($configuredAdapters as $adapter => $enabled) {
+                    if ($enabled) {
+                        $adapters[] = $adapter;
+                    }
                 }
             }
+
             $node->setKey($configKey . 'adapters', $adapters, false);
             $node->setKey(
                 'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.redis.global.php',
