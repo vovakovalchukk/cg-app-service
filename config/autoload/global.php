@@ -44,6 +44,7 @@ use CG\Controllers\Order\Order as OrderController;
 use CG\Controllers\Order\Order\Collection as OrderCollectionController;
 use CG\Order\Service\Storage\ETag as OrderETagStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+use CG\Order\Service\OrderSpecificTag\Storage\Db as OrderSpecificTagDb;
 
 //Note
 use CG\Order\Service\Note\Service as NoteService;
@@ -333,6 +334,13 @@ return array(
                     'alertService' => 'AlertCollectionService',
                     'trackingService' => 'TrackingCollectionService',
                     'userChangeService' => 'UserChangeCollectionService'
+                )
+            ),
+            OrderSpecificTagDb::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             OrderETagStorage::class => array (
@@ -732,6 +740,7 @@ return array(
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
                 'CG\Cache\EventManagerInterface' => 'CG\App\Cache\EventManager',
+                'CG\Order\Service\OrderSpecificTag\StorageInterface' => OrderSpecificTagDb::class,
                 'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb'
             )
