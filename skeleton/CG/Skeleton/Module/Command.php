@@ -58,7 +58,7 @@ class Command implements CommandInterface
 
     public function moduleList(Arguments $arguments, SkeletonConfig $config, Config $moduleConfig, Environment $environment)
     {
-        $moduleList = new Modules($this->getConsole(), $this->getModules(), $moduleConfig);
+        $moduleList = new Modules($this->getConsole(), $this->getModules(), $moduleConfig, $environment);
         return $moduleList->askAndRun($arguments, $config, $environment);
     }
 }

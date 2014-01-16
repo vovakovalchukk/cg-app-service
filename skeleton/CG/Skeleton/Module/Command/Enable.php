@@ -54,10 +54,10 @@ class Enable implements CommandInterface
     {
         $this->getEnableCommand()->enable($arguments, $config, $this->getModuleConfig());
         if ($this->getEnableCommand() instanceof ConfigureInterface) {
-            $this->getEnableCommand()->configure($arguments, $config, $this->getModuleConfig());
+            $this->getEnableCommand()->configure($arguments, $config, $this->getModuleConfig(), $environment);
         }
         if ($this->getEnableCommand() instanceof ApplyConfigurationInterface) {
-            $this->getEnableCommand()->applyConfiguration($arguments, $config, $this->getModuleConfig());
+            $this->getEnableCommand()->applyConfiguration($arguments, $config, $this->getModuleConfig(), $environment);
         }
     }
 }
