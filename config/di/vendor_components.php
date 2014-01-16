@@ -20,7 +20,7 @@ return array(
     'monolog_monolog_src_Monolog',
     'nocarrier_hal_src_Nocarrier',
     'phpspec_php-diff_lib_Diff',
-//    'phpspec_phpspec_src_PhpSpec',
+    'phpspec_phpspec_src_PhpSpec',
     'phpspec_prophecy_src_Prophecy',
     'psr_log_Psr_Log',
     'symfony_browser-kit_Symfony_Component_BrowserKit',
