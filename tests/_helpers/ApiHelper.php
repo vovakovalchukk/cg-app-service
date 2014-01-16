@@ -1,6 +1,7 @@
 <?php
 namespace Codeception\Module;
 use CG\Codeception\ApiHelper as CGApiHelper;
+use CG\Order\Test\Api\Page\RootPage;
 
 class ApiHelper extends CGApiHelper
 {
@@ -16,5 +17,10 @@ class ApiHelper extends CGApiHelper
             $parts
         );
         return preg_replace('/\[\d+\]/','[]', urldecode($parts['path'] . "?" . $parts['query']));
+    }
+
+    public function getRootPage()
+    {
+        return RootPage::class;
     }
 }
