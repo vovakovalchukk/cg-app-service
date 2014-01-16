@@ -2,11 +2,14 @@
 chdir(dirname(__DIR__));
 
 use Slim\Slim;
+use CG\Log\Logger;
 use CG\Slim\ContentTypes;
+use CG\Slim\Module\Logging as LoggingModule;
 use CG\Slim\NewRelic;
 use CG\Slim\Rest\Options;
 use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
+use CG\Slim\SlimApp;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
 use CG\Slim\Versioning\Middleware as Versioning;
@@ -14,6 +17,16 @@ use CG\Slim\HeadRequest\Middleware as HeadRequest;
 
 require_once 'application/bootstrap.php';
 $routes = require_once 'config/routing.php';
+
+$app->hook('slim.before.dispatch', function() use ($app, $di) {
+    if (isset($app->slimApp)) {
+        return;
+    }
+    $app->slimApp = SlimApp::create($app);
+    $app->module = $di->get(LoggingModule::class, ['application' => $app->slimApp]);
+    $app->module->listenForLog();
+    $app->logger = $di->get(Logger::class);
+});
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));

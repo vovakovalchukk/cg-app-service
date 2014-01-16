@@ -722,6 +722,11 @@ return array(
                     'repository' => UserPreferenceMongoDbStorage::class
                 )
             ),
+            'CG\Log\Shared\Storage\File' => array(
+                'parameters' => array(
+                    'filePath' => '/tmp/'.date('Y-m-d').'.log'
+                )
+             ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -731,7 +736,10 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
-                \MongoClient::class => 'mongodb'
+                'Predis\Client' => 'reliable_redis',
+                \MongoClient::class => 'mongodb',
+                'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
+                'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
             )
         )
     )
