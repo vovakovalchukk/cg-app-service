@@ -112,7 +112,7 @@ class Module extends AbstractModule implements EnableInterface, ConfigureInterfa
                     $adapters[] = $adapter;
                 }
             }
-            $node->setKey($configKey . 'adapters', $adapters);
+            $node->setKey($configKey . 'adapters', $adapters, false);
 
             $node->setKey(
                 'cg|capistrano|' . $config->getAppName() . '|symlinks|config/autoload/di.mongo.global.php',
