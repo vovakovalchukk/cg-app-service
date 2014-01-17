@@ -30,6 +30,9 @@
         </Db>
         <Redis>
             <enabled>1</enabled>
+            <Adapters>
+                <reliable>1</reliable>
+            </Adapters>
         </Redis>
         <Mongo>
             <enabled>1</enabled>
@@ -38,4 +41,11 @@
             </Adapters>
         </Mongo>
     </Module>
+    <Environment>
+        <Local>
+            <node>cg_app</node>
+            <IP>192.168.33.5</IP>
+            <hostname>cg_app.channelgrabber.com.local</hostname>
+        </Local>
+    </Environment>
 </zend-config>

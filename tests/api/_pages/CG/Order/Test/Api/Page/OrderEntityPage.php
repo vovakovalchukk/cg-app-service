@@ -57,4 +57,12 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
         unset($newEntityData['archived']);
         return $newEntityData;
     }
+
+    public static function getWrongParentCheckExcludedResources()
+    {
+        return [
+            "item[]" => OrderItemPage::class,
+            "userChange" => UserChangePage::class
+        ];
+    }
 }
