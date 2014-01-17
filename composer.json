@@ -34,10 +34,14 @@
         "channelgrabber/codeception" : "1.0.*"
     },
     "scripts": {
-        "post-install-cmd" : [
+        "post-install-cmd": [
+            "composer -o dump-autoload",
+            "php bin/update_di_components.php",
             "php bin/compile_di.php"
         ],
-        "post-update-cmd" : [
+        "post-update-cmd": [
+            "composer -o dump-autoload",
+            "php bin/update_di_components.php",
             "php bin/compile_di.php"
         ]
     }
