@@ -19,6 +19,16 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
         return OrderPage::class;
     }
 
+    public static function getDeletedTagUrl()
+    {
+        return '/orderTag/1-tag2';
+    }
+
+    public static function getUpdatedTagUrl()
+    {
+        return '/orderTag/1-tag6';
+    }
+
     public static function notAllowedMethods()
     {
         return [
