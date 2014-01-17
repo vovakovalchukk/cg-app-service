@@ -20,7 +20,7 @@ return array(
     'channelgrabber_redis_CG_Redis',
     'channelgrabber_slim_CG_Slim',
     'channelgrabber_stdlib_CG_Stdlib',
-//    'channelgrabber_userpreference_CG_UserPreference',
+    'channelgrabber_userpreference_CG_UserPreference',
     'channelgrabber_validation_CG_Validation',
     'channelgrabber_vnderror_CG_VndError',
     'channelgrabber_zf2-stdlib_CG_Zend_Stdlib',
