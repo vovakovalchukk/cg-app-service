@@ -1,6 +1,4 @@
 <?php
-chdir(dirname(__DIR__));
-
 use Slim\Slim;
 use CG\Log\Logger;
 use CG\Slim\ContentTypes;
@@ -15,8 +13,8 @@ use CG\Slim\VndError\VndError;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
 
-require_once 'application/bootstrap.php';
-$routes = require_once 'config/routing.php';
+require_once dirname(__DIR__).'/application/bootstrap.php';
+$routes = require_once dirname(__DIR__).'/config/routing.php';
 
 $app->hook('slim.before.dispatch', function() use ($app, $di) {
     if (isset($app->slimApp)) {
@@ -59,5 +57,5 @@ $app->add($di->get(HeadRequest::class));
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
 
-include_once 'config/DiSharedInstances.php';
+include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 $app->run();
