@@ -27,11 +27,19 @@ class OrderEntityCest
         $I->wantTo('check deleting the last order with a tag deletes the tag from the orderTag endpoint');
 
         $I->prepareRequest();
+        $I->sendGET($page::getPrimaryEntityUrl());
+        $I->seeResponseCodeIs(HttpStatus::OK);
+
+        $I->prepareRequest();
         $I->sendDELETE($page::getPrimaryEntityUrl());
         $I->seeResponseCodeIs(HttpStatus::NO_CONTENT);
 
         $I->prepareRequest();
         $I->sendGET($page::getDeletedTagUrl());
+        $I->seeResponseCodeIs(HttpStatus::OK);
+
+        $I->prepareRequest();
+        $I->sendGET($page::getSecondaryEntityUrl());
         $I->seeResponseCodeIs(HttpStatus::OK);
 
         $I->prepareRequest();
@@ -56,6 +64,10 @@ class OrderEntityCest
         $I->prepareRequest();
         $I->sendGET($page::getUpdatedTagUrl());
         $I->seeResponseCodeIs(HttpStatus::NOT_FOUND);
+
+        $I->prepareRequest();
+        $I->sendGET($page::getPrimaryEntityUrl());
+        $I->seeResponseCodeIs(HttpStatus::OK);
 
         $updatedEntity = $page::getPrimaryTestEntity();
 
