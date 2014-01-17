@@ -1,4 +1,6 @@
 <?php
+chdir(dirname(__DIR__));
+
 use Slim\Slim;
 
 define('DS', DIRECTORY_SEPARATOR);
