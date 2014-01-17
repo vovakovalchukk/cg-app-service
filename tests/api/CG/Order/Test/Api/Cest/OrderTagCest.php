@@ -6,7 +6,9 @@ use CG\Codeception\Cest\Rest\CollectionTrait;
 
 class OrderTagCest
 {
-    public function getPageClass()
+    use CollectionTrait;
+
+    protected function getPageClass()
     {
         return OrderTagPage::class;
     }
