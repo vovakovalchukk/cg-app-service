@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c7058c5789e48c224d0ce7174ea977c2",
+    "hash": "1e4e2c4340c3ecd4567b2a2d7217cbf6",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -124,63 +124,6 @@
             "time": "2014-01-13 16:40:35"
         },
         {
-            "name": "channelgrabber/phinx",
-            "version": "v0.2.9.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-v0.2.9.2-dc3e7d.zip",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76",
-                "shasum": "b077b9f3f176559dd5f0c1ef418d304ea74df264"
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/class-loader": "2.*",
-                "symfony/config": "2.*",
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "replace": {
-                "robmorgan/phinx": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "bin/phinx"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Phinx": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Morgan",
-                    "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au"
-                }
-            ],
-            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-            "homepage": "http://phinx.org",
-            "keywords": [
-                "database",
-                "database migrations",
-                "db",
-                "migrations",
-                "phinx"
-            ],
-            "time": "2013-12-13 08:37:23"
-        },
-        {
             "name": "channelgrabber/predis",
             "version": "1.0.1",
             "source": {
@@ -267,17 +210,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "6966e92b55675f7ed0c4787bd51fda62aefb30f5"
+                "reference": "cc6277dffd4af7a3f1fb9830b3e7b32ff468d754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.0-4a1ccb.zip",
-                "reference": "6966e92b55675f7ed0c4787bd51fda62aefb30f5",
-                "shasum": "bff1ad2d060c956a6024a5dd4c4e3dc9dddf9804"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.1-feeae8.zip",
+                "reference": "cc6277dffd4af7a3f1fb9830b3e7b32ff468d754",
+                "shasum": "5ad4eb73aacc92193a45aed6fab4cc7116418e2a"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -291,7 +234,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-01-13 15:49:37"
+            "time": "2014-01-17 12:06:53"
         },
         {
             "name": "channelgrabber/validation",
@@ -337,12 +280,50 @@
                 "php": ">=5.4.0"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
                 }
             },
             "time": "2013-11-04 13:10:03"
+        },
+        {
+            "name": "channelgrabber/zf2-stdlib",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgzf2stdlib.git",
+                "reference": "769aad210c002a979aee67ff50240cceae1f5d9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.5-2183ff.zip",
+                "reference": "769aad210c002a979aee67ff50240cceae1f5d9e",
+                "shasum": "134606b24e9f0ddb34ef87fd01263ce8d9eb35d1"
+            },
+            "require": {
+                "channelgrabber/cache": ">=1.1.0,<1.3.0",
+                "channelgrabber/stdlib": ">=2.0.7,<2.6.0",
+                "zendframework/zend-db": "~2.2",
+                "zendframework/zend-di": "~2.2",
+                "zendframework/zend-eventmanager": "~2.2",
+                "zendframework/zend-http": "~2.2",
+                "zendframework/zend-view": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Zend\\Stdlib\\": ""
+                }
+            },
+            "time": "2014-01-17 11:53:01"
         },
         {
             "name": "cilex/cilex",
@@ -751,6 +732,61 @@
                 "xml"
             ],
             "time": "2012-07-17 22:17:31"
+        },
+        {
+            "name": "robmorgan/phinx",
+            "version": "v0.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robmorgan/phinx.git",
+                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6fe8fb428e96a567333fe6af4286c328ef8baada",
+                "reference": "6fe8fb428e96a567333fe6af4286c328ef8baada",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/class-loader": "2.*",
+                "symfony/config": "2.*",
+                "symfony/console": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/phinx"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phinx": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Morgan",
+                    "email": "robbym@gmail.com",
+                    "homepage": "http://robmorgan.id.au"
+                }
+            ],
+            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
+            "homepage": "http://phinx.org",
+            "keywords": [
+                "database",
+                "database migrations",
+                "db",
+                "migrations",
+                "phinx"
+            ],
+            "time": "2013-08-25 10:17:27"
         },
         {
             "name": "slim/slim",
@@ -1235,7 +1271,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendCode/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendCode/tree/master"
             },
             "time": "2013-10-23 17:00:16"
         },
@@ -1283,7 +1319,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendConfig/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendConfig/tree/master"
             },
             "time": "2013-10-02 08:00:13"
         },
@@ -1329,7 +1365,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendDb/tree/master"
             },
             "time": "2013-10-20 06:00:13"
         },
@@ -1374,9 +1410,49 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendDi/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendDi/tree/master"
             },
             "time": "2013-08-28 16:00:10"
+        },
+        {
+            "name": "zendframework/zend-escaper",
+            "version": "2.2.5",
+            "target-dir": "Zend/Escaper",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendEscaper.git",
+                "reference": "5db67b32359d86326077209f1fefbbf1183911e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendEscaper/zipball/5db67b32359d86326077209f1fefbbf1183911e8",
+                "reference": "5db67b32359d86326077209f1fefbbf1183911e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Escaper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "keywords": [
+                "escaper",
+                "zf2"
+            ],
+            "time": "2013-05-01 21:53:03"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -1418,7 +1494,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.2.1"
             },
             "time": "2013-06-12 19:45:10"
         },
@@ -1472,9 +1548,54 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendFilter/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendFilter/tree/master"
             },
             "time": "2013-10-20 06:00:14"
+        },
+        {
+            "name": "zendframework/zend-http",
+            "version": "2.2.5",
+            "target-dir": "Zend/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendHttp.git",
+                "reference": "5b8745a7f857fbf3bd989b2ccaebd6778de7c25a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendHttp/zipball/5b8745a7f857fbf3bd989b2ccaebd6778de7c25a",
+                "reference": "5b8745a7f857fbf3bd989b2ccaebd6778de7c25a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-loader": "self.version",
+                "zendframework/zend-stdlib": "self.version",
+                "zendframework/zend-uri": "self.version",
+                "zendframework/zend-validator": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Http\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP) requests",
+            "keywords": [
+                "http",
+                "zf2"
+            ],
+            "time": "2013-10-23 15:00:05"
         },
         {
             "name": "zendframework/zend-inputfilter",
@@ -1521,9 +1642,49 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/master"
             },
             "time": "2013-10-23 19:00:04"
+        },
+        {
+            "name": "zendframework/zend-loader",
+            "version": "2.2.5",
+            "target-dir": "Zend/Loader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendLoader.git",
+                "reference": "9e3537a6012dc0b184f66f8668e6c33fd805f0eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendLoader/zipball/9e3537a6012dc0b184f66f8668e6c33fd805f0eb",
+                "reference": "9e3537a6012dc0b184f66f8668e6c33fd805f0eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Loader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "keywords": [
+                "loader",
+                "zf2"
+            ],
+            "time": "2013-10-20 06:00:17"
         },
         {
             "name": "zendframework/zend-servicemanager",
@@ -1567,7 +1728,7 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/master"
             },
             "time": "2013-10-23 20:00:05"
         },
@@ -1614,9 +1775,52 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/master"
             },
             "time": "2013-10-20 06:00:20"
+        },
+        {
+            "name": "zendframework/zend-uri",
+            "version": "2.2.5",
+            "target-dir": "Zend/Uri",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendUri.git",
+                "reference": "e2a4b038a0939d46e53bfa40cfc9f1791533ae84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendUri/zipball/e2a4b038a0939d46e53bfa40cfc9f1791533ae84",
+                "reference": "e2a4b038a0939d46e53bfa40cfc9f1791533ae84",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-escaper": "self.version",
+                "zendframework/zend-validator": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Uri\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "a component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
+            "keywords": [
+                "uri",
+                "zf2"
+            ],
+            "time": "2013-06-12 19:46:02"
         },
         {
             "name": "zendframework/zend-validator",
@@ -1673,9 +1877,57 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendValidator/tree/release-2.2.5"
+                "source": "https://github.com/zendframework/Component_ZendValidator/tree/master"
             },
             "time": "2013-10-20 06:00:22"
+        },
+        {
+            "name": "zendframework/zend-view",
+            "version": "2.2.5",
+            "target-dir": "Zend/View",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendView.git",
+                "reference": "17379c9a05f8c571f0ca761c48c1b13890462a4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendView/zipball/17379c9a05f8c571f0ca761c48c1b13890462a4f",
+                "reference": "17379c9a05f8c571f0ca761c48c1b13890462a4f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-eventmanager": "self.version",
+                "zendframework/zend-loader": "self.version",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-filter": "Zend\\Filter component",
+                "zendframework/zend-servicemanager": "2.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\View\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides a system of helpers, output filters, and variable escaping",
+            "keywords": [
+                "view",
+                "zf2"
+            ],
+            "time": "2013-10-20 06:00:23"
         }
     ],
     "packages-dev": [
@@ -1710,7 +1962,7 @@
                 {
                     "name": "Alexandre Salomé",
                     "email": "alexandre.salome@gmail.com",
-                    "homepage": "http://alexandre-salome.fr"
+                    "homepage": "http://alexandre-salome.fr/"
                 }
             ],
             "description": "PHP Library for Selenium",
@@ -2064,6 +2316,13 @@
                 "shasum": "a2dae86e29d9bacdd301dc2cebd87f96ccb4a8eb"
             },
             "type": "library",
+            "extra": {
+                "context-options": {
+                    "ssl": {
+                        "local_cert": "composer.pem"
+                    }
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG\\Codeception\\": ""
@@ -2466,16 +2725,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a"
+                "reference": "fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/119b07de9c592a0286cd584d6e961903ba096d8a",
-                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8",
+                "reference": "fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8",
                 "shasum": ""
             },
             "require-dev": {
@@ -2517,7 +2776,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2014-01-01 21:15:36"
+            "time": "2014-01-15 15:06:06"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2765,16 +3024,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.28",
+            "version": "3.7.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3b97c8492bcafbabe6b6fbd2ab35f2f04d932a8d"
+                "reference": "faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3b97c8492bcafbabe6b6fbd2ab35f2f04d932a8d",
-                "reference": "3b97c8492bcafbabe6b6fbd2ab35f2f04d932a8d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac",
+                "reference": "faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac",
                 "shasum": ""
             },
             "require": {
@@ -2835,7 +3094,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-17 07:27:40"
+            "time": "2014-01-15 06:46:38"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
