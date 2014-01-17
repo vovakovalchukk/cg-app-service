@@ -8,18 +8,6 @@
                     "local_cert": "composer.pem"
                 }
             }
-        },
-        {
-            "type": "composer",
-            "url": "http://packages.zendframework.com"
-        },
-        {
-            "type": "git",
-            "url": "git@bitbucket.org:channelgrabber/cg-validation.git"
-        },
-        {
-            "type": "git",
-            "url": "git@bitbucket.org:channelgrabber/cg-vnd-field-error.git"
         }
     ],
     "autoload": {
@@ -44,7 +32,8 @@
         "zendframework/zend-eventmanager": "~2.2.5",
         "zendframework/zend-inputfilter": "~2.2.5",
         "zendframework/zend-servicemanager": "~2.2.5",
-        "zendframework/zend-validator": "~2.2.5"
+        "zendframework/zend-validator": "~2.2.5",
+        "channelgrabber/zf2-stdlib" : "~1.1.5"
     },
     "require-dev": {
         "codeception/codeception": "1.6.5",
