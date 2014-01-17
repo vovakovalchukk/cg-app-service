@@ -15,6 +15,8 @@ use Zend\Db\Sql\Sql;
 use Zend\Di\Di;
 use Zend\EventManager\EventManager;
 use Zend\Config\Config;
+use CG\Cache\EventManagerInterface;
+use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
 
 //Service
 use CG\App\Service\Service as ServiceService;
@@ -740,6 +742,7 @@ return array(
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
                 'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
+                EventManagerInterface::class => CGEventManager::class
             )
         )
     )
