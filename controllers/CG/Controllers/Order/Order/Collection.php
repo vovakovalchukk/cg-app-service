@@ -22,28 +22,28 @@ class Collection
 
     public function get()
     {
-            $filterEntity = new Filter(
-                    $this->getParams('limit'),
-                    $this->getParams('page'),
-                    $this->getParams('id') ?: [],
-                    $this->getParams('organisationUnitId') ?: [],
-                    $this->getParams('status') ?: [],
-                    $this->getParams('accountId') ?: [],
-                    $this->getParams('channel') ?: [],
-                    $this->getParams('country') ?: [],
-                    $this->getParams('countryExclude') ?: [],
-                    $this->getParams('shippingMethod') ?: [],
-                    $this->getParams('searchTerm'),
-                    $this->getParams('includeArchived'),
-                    $this->getParams('multiLineSameOrder'),
-                    $this->getParams('multiSameItem'),
-                    $this->getParams('batch') ?: [],
-                    $this->getParams('timeFrom'),
-                    $this->getParams('timeTo'),
-                    $this->getParams('orderBy'),
-                    $this->getParams('orderDirection'),
-                    $this->getParams('tag') ? $this->getParams('tag') : []
-            );
-            return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
+        $filterEntity = new Filter(
+            $this->getParams('limit'),
+            $this->getParams('page'),
+            $this->getParams('id') ?: [],
+            $this->getParams('organisationUnitId') ?: [],
+            $this->getParams('status') ?: [],
+            $this->getParams('accountId') ?: [],
+            $this->getParams('channel') ?: [],
+            $this->getParams('country') ?: [],
+            $this->getParams('countryExclude') ?: [],
+            $this->getParams('shippingMethod') ?: [],
+            $this->getParams('searchTerm'),
+            $this->getParams('includeArchived'),
+            $this->getParams('multiLineSameOrder'),
+            $this->getParams('multiSameItem'),
+            $this->getParams('batch') ?: [],
+            $this->getParams('timeFrom'),
+            $this->getParams('timeTo'),
+            $this->getParams('orderBy'),
+            $this->getParams('orderDirection'),
+            $this->getParams('tag') ? $this->getParams('tag') : []
+        );
+        return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
     }
 }
