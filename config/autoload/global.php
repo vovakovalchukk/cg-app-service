@@ -46,6 +46,7 @@ use CG\Controllers\Order\Order as OrderController;
 use CG\Controllers\Order\Order\Collection as OrderCollectionController;
 use CG\Order\Service\Storage\ETag as OrderETagStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+use CG\Order\Service\OrderSpecificTag\Storage\Db as OrderSpecificTagDb;
 
 //Note
 use CG\Order\Service\Note\Service as NoteService;
@@ -136,7 +137,7 @@ return array(
             Di::Class => function($serviceManager) {
                 $configuration = $serviceManager->get('config');
 
-                $definition = new CG\Di\Definition\RuntimeDefinition(null, require '../vendor/composer/autoload_classmap.php');
+                $definition = new CG\Di\Definition\RuntimeDefinition(null, require dirname(dirname(__DIR__)) .  '/vendor/composer/autoload_classmap.php');
                 $definitionList = new Zend\Di\DefinitionList([$definition]);
                 $im = new Zend\Di\InstanceManager();
                 $di = new Zend\Di\Di($definitionList, $im, new Zend\Di\Config(
@@ -335,6 +336,13 @@ return array(
                     'alertService' => 'AlertCollectionService',
                     'trackingService' => 'TrackingCollectionService',
                     'userChangeService' => 'UserChangeCollectionService'
+                )
+            ),
+            OrderSpecificTagDb::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             OrderETagStorage::class => array (
@@ -738,6 +746,7 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
+                'CG\Order\Service\OrderSpecificTag\StorageInterface' => OrderSpecificTagDb::class,
                 'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
