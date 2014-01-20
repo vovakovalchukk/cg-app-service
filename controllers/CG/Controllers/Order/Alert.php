@@ -24,7 +24,7 @@ class Alert
     public function get($orderId, $alertId)
     {
         try {
-            return $this->getService()->fetchAsHal($alertId);
+            return $this->getService()->fetchAsHal($alertId, $orderId);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }

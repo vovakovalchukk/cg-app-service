@@ -24,7 +24,7 @@ class GiftWrap
     public function get($orderItemId, $giftWrapId)
     {
         try {
-            return $this->getService()->fetchAsHal($giftWrapId);
+            return $this->getService()->fetchAsHal($giftWrapId, $orderItemId);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }

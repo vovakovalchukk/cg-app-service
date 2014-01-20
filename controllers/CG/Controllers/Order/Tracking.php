@@ -24,7 +24,7 @@ class Tracking
     public function get($orderId, $trackingId)
     {
         try {
-            return $this->getService()->fetchAsHal($trackingId);
+            return $this->getService()->fetchAsHal($trackingId, $orderId);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }

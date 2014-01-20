@@ -24,7 +24,7 @@ class Fee
     public function get($orderItemId, $feeId)
     {
         try {
-            return $this->getService()->fetchAsHal($feeId);
+            return $this->getService()->fetchAsHal($feeId, $orderItemId);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }
