@@ -58,6 +58,12 @@ use CG\Controllers\UserPreference\UserPreference;
 use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollection;
 use CG\InputValidation\UserPreference\Entity as UserPreferenceEntityValidationRules;
 
+//Tag
+use CG\Controllers\Order\Tag;
+use CG\Controllers\Order\Tag\Collection as TagCollection;
+use CG\InputValidation\Order\Tag\Entity as TagEntityValidationRules;
+use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
+
 
 return array(
     '/' => array (
@@ -436,5 +442,37 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'UserPreferenceEntity',
         'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderTag' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(TagCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method()
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'TagCollection',
+        'validation' => array("dataRules" => null, "filterRules" => TagFilterValidationRules::class, "flatten" => false)
+    ),
+    '/orderTag/:tagId' => array (
+        'controllers' => function($tagId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Tag::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($tagId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'name' => 'TagEntity',
+        'validation' => array("dataRules" => TagEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
 );

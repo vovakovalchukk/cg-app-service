@@ -19,19 +19,19 @@ class Tag
             ->setDi($di);
     }
 
-    public function get($TagId)
+    public function get($tagId)
     {
-        return $this->getService()->fetchAsHal($TagId);
+        return $this->getService()->fetchAsHal($tagId);
     }
 
-    public function put($TagId, Hal $hal)
+    public function put($tagId, Hal $hal)
     {
-        return $this->getService()->saveHal($hal, array("id" => $TagId));
+        return $this->getService()->saveHal($hal, array("id" => $tagId));
     }
 
-    public function delete($TagId)
+    public function delete($tagId)
     {
-        $this->getService()->removeById($TagId);
+        $this->getService()->removeById($tagId);
         $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
     }
 }
