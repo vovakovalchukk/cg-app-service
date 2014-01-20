@@ -137,7 +137,7 @@ return array(
             Di::Class => function($serviceManager) {
                 $configuration = $serviceManager->get('config');
 
-                $definition = new CG\Di\Definition\RuntimeDefinition(null, require '../vendor/composer/autoload_classmap.php');
+                $definition = new CG\Di\Definition\RuntimeDefinition(null, require dirname(dirname(__DIR__)) .  '/vendor/composer/autoload_classmap.php');
                 $definitionList = new Zend\Di\DefinitionList([$definition]);
                 $im = new Zend\Di\InstanceManager();
                 $di = new Zend\Di\Di($definitionList, $im, new Zend\Di\Config(
@@ -746,7 +746,6 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
-                'CG\Cache\EventManagerInterface' => 'CG\App\Cache\EventManager',
                 'CG\Order\Service\OrderSpecificTag\StorageInterface' => OrderSpecificTagDb::class,
                 'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb',
