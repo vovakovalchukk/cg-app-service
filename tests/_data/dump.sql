@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `orderTag` (
     `id` varchar(120) NOT NULL,
     `orderId` varchar(120) NOT NULL,
     `orderTag` varchar(120) NOT NULL,
+    `organisationUnitId` int(10) unsigned NOT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -128,42 +129,28 @@ ALTER TABLE `order` ADD CONSTRAINT `order_billingAddressId` FOREIGN KEY (`billin
 
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 1', 'Full Name 1', 'address 1 - 1', 'address 2 - 1', 'address 3 - 1', 'City1', 'County1', 'UK', 'Postcode1', 'emailaddress1@channelgrabber.com', '01942673431', 'GB');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 1', 'Full Name 1', 'shipping address 1 - 1', 'shipping address 2 - 1', 'shipping address 3 - 1', 'shipping City 1', 'Shipping County 1', 'UK', 'shipPostcode1', 'shippingemail1@channelgrabber.com', '07415878961', 'GB');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1411-10-tag1','1411-10', 'tag1');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1411-10-tag2','1411-10', 'tag2');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1411-10-tag5','1411-10', 'tag5');
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1411-10-tag1','1411-10', 'tag1', 1);
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1411-10-tag2','1411-10', 'tag2', 1);
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1411-10-tag5','1411-10', 'tag5', 1);
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1411-10', '1411', '10', 'ebay', '1', '21.99', '1', '10.99', 'standard', 'GBP', '0', 'Hello, please leave at the door', '2013-10-10 00:00:00', '2013-10-10 01:00:00', '2013-10-10 10:00:00', '2013-10-10 10:00:10', 1, 2, 1);
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 2', 'Full Name 2', 'address 1 - 2', 'address 2 - 2', 'address 3 - 2', 'City2', 'County2', 'UK', 'Postcode2', 'emailaddress2@channelgrabber.com', '01942673432', 'GB');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 2', 'Full Name 2', 'shipping address 1 - 2', 'shipping address 2 - 2', 'shipping address 3 - 2', 'shipping City 2', 'Shipping County 2', 'UK', 'shipPostcode2', 'shippingemail2@channelgrabber.com', '07415878962', 'GB');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1412-20-tag2','1412-20', 'tag2');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1412-20-tag3','1412-20', 'tag3');
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1412-20-tag2','1412-20', 'tag2', 2);
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1412-20-tag3','1412-20', 'tag3', 2);
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1412-20', '1412', '20', 'ebay2', '2', '22.99', '2', '20.99', 'standard2', 'GBP', '0.02', 'Hello, please leave at the door2', '2013-10-10 00:20:00', '2013-10-10 01:20:00', '2013-10-10 10:20:00', '2013-10-10 10:20:10', 3, 4, 1);
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 3', 'Full Name 3', 'address 1 - 3', 'address 2 - 3', 'address 3 - 3', 'City3', 'County3', 'UK', 'Postcode3', 'emailaddress3@channelgrabber.com', '01942673433', 'GB');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 3', 'Full Name 3', 'shipping address 1 - 3', 'shipping address 2 - 3', 'shipping address 3 - 3', 'shipping City 3', 'Shipping County 3', 'UK', 'shipPostcode3', 'shippingemail3@channelgrabber.com', '07415878963', 'GB');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1413-30-tag3','1413-30', 'tag3');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1413-30-tag4','1413-30', 'tag4');
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1413-30-tag3','1413-30', 'tag3', 3);
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1413-30-tag4','1413-30', 'tag4', 3);
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1413-30', '1413', '30', 'ebay3', '3', '23.99', '3', '30.99', 'standard3', 'GBP', '0.03', 'Hello, please leave at the door3', '2013-10-10 00:30:00', '2013-10-10 01:30:00', '2013-10-10 10:30:00', '2013-10-10 10:30:10', 5, 6, 1);
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 4', 'Full Name 4', 'address 1 - 4', 'address 2 - 4', 'address 3 - 4', 'City4', 'County4', 'UK', 'Postcode4', 'emailaddress4@channelgrabber.com', '01942673434', 'GB');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 4', 'Full Name 4', 'shipping address 1 - 4', 'shipping address 2 - 4', 'shipping address 3 - 4', 'shipping City 4', 'Shipping County 4', 'UK', 'shipPostcode4', 'shippingemail4@channelgrabber.com', '07415878964', 'GB');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1414-40-tag4','1414-40', 'tag4');
-INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`) VALUES ('1414-40-tag5','1414-40', 'tag5');
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1414-40-tag4','1414-40', 'tag4', 4);
+INSERT INTO `orderTag` (`id`, `orderId`, `orderTag`, `organisationUnitId`) VALUES ('1414-40-tag5','1414-40', 'tag5', 4);
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1414-40', '1414', '40', 'ebay4', '4', '24.99', '4', '40.99', 'standard4', 'GBP', '0.04', 'Hello, please leave at the door4', '2013-10-10 00:40:00', '2013-10-10 01:40:00', '2013-10-10 10:40:00', '2013-10-10 10:40:10', 7, 8, 1);
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Company Name 5', 'Full Name 5', 'address 1 - 5', 'address 2 - 5', 'address 3 - 5', 'City5', 'County5', 'France', 'Postcode5', 'emailaddress5@channelgrabber.com', '01942673435', 'FR');
 INSERT INTO `address` (`addressCompanyName`, `addressFullName`, `address1`, `address2`, `address3`, `addressCity`, `addressCounty`, `addressCountry`, `addressPostcode`, `emailAddress`, `phoneNumber`, `addressCountryCode`) VALUES ('Shipping Company Name 5', 'Full Name 5', 'shipping address 1 - 5', 'shipping address 2 - 5', 'shipping address 3 - 5', 'shipping City 5', 'Shipping County 5', 'France', 'shipPostcode5', 'shippingemail5@channelgrabber.com', '07415878965', 'FR');
 INSERT INTO `order` (`id`, `accountId`, `externalId`, `channel`, `organisationUnitId`, `total`, `status`, `shippingPrice`, `shippingMethod`, `currencyCode`, `totalDiscount`, `buyerMessage`, `purchaseDate`, `paymentDate`, `printedDate`, `dispatchDate`, `billingAddressId`, `shippingAddressId`, `batch`) VALUES ('1415-50', '1415', '50', 'ebay5', '5', '25.99', '5', '50.99', 'standard5', 'GBP', '0.05', 'Hello, please leave at the door5', '2013-10-10 00:50:00', '2013-10-10 01:50:00', '2013-10-10 10:50:00', '2013-10-10 10:50:10', 9, 10, 2);
-
-DROP TABLE IF EXISTS `tag`;
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` VARCHAR (120) NOT NULL,
-  `organisationUnitId` int(10) unsigned NOT NULL,
-  `name` varchar (120) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag1', 1, 'tag1');
-INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag2', 1, 'tag2');
-INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag3', 1, 'tag3');
-INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('1-tag4', 1, 'tag4');
-INSERT INTO `tag` (`id`,`organisationUnitId`, `name`) VALUES ('2-tag5', 2, 'tag5');
 
 CREATE TABLE IF NOT EXISTS `note` (
                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
