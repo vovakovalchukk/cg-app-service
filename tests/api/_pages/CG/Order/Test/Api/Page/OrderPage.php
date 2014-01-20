@@ -72,6 +72,11 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:00:00",
                     "dispatchDate" => "2013-10-10 10:00:10",
                     "archived" => false,
+                    "tag" => [
+                        "tag1",
+                        "tag2",
+                        "tag5"
+                    ],
                     "custom" => [],
                     "batch" => 1
                 ],
@@ -117,6 +122,10 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:20:00",
                     "dispatchDate" => "2013-10-10 10:20:10",
                     "archived" => false,
+                    "tag" => [
+                        "tag2",
+                        "tag3"
+                    ],
                     "custom" => [],
                     "batch" => 1
                 ],
@@ -162,6 +171,10 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:30:00",
                     "dispatchDate" => "2013-10-10 10:30:10",
                     "archived" => false,
+                    "tag" => [
+                        "tag3",
+                        "tag4"
+                    ],
                     "custom" => [],
                     "batch" => 1
                 ],
@@ -207,6 +220,10 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:40:00",
                     "dispatchDate" => "2013-10-10 10:40:10",
                     "archived" => false,
+                    "tag" => [
+                        "tag4",
+                        "tag5"
+                    ],
                     "custom" => [],
                     "batch" => 1
                 ],
@@ -252,9 +269,11 @@ class OrderPage extends RootPage
                     "printedDate" => "2013-10-10 10:50:00",
                     "dispatchDate" => "2013-10-10 10:50:10",
                     "archived" => false,
+                    "tag" => [
+                    ],
                     "custom" => [],
                     "batch" => 2
-                ],
+                ]
         ];
     }
 
@@ -310,14 +329,15 @@ class OrderPage extends RootPage
 
     public static function getFilterFields()
     {
-        return ["id" => [],
-                "organisationUnitId" => [],
-                "status" => [],
-                "accountId" => [],
-                "channel" => [],
-                //"includeArchived",  Not working atm
-                "shippingMethod" => [],
-                "batch" => []
+        return [
+            "id" => [],
+            "organisationUnitId" => [],
+            "status" => [],
+            "accountId" => [],
+            "channel" => [],
+            //"includeArchived",  Not working atm
+            "shippingMethod" => [],
+            "batch" => []
         ];
     }
 
