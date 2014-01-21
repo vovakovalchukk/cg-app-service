@@ -20,9 +20,10 @@ class Collection
     public function get()
     {
         return $this->getService()->fetchPaginatedAllForOuAsHal(
-            $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array()
+            $this->getParams('limit'),
+            $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array(),
+            $this->getParams('tag') ? $this->getParams('tag') : array()
         );
     }
 } 

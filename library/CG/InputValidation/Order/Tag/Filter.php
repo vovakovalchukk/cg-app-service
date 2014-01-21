@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Order\Tag;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
 use Zend\Validator\Between;
@@ -54,6 +55,13 @@ class Filter implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
                         ->setMessages(array('notBetween' => 'page should be at least %min%'))
+                )
+            ),
+            'tag' => array(
+                'name' => 'tag',
+                'required' => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class)
                 )
             ),
             'organisationUnitId' => array(
