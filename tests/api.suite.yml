@@ -4,6 +4,11 @@ modules:
     config:
         PhpBrowser:
             url: 'https://cg_app.channelgrabber.com.local'
+            curl:
+                CURLOPT_SSL_VERIFYHOST: false
+                CURLOPT_SSL_VERIFYPEER: false
+                CURLOPT_CAINFO: 'data/certificates/cacert.pem'
+                CURLOPT_SSLCERT: 'data/certificates/cg_app_client.pem'
         REST:
             url: 'https://cg_app.channelgrabber.com.local'
         ApiHelper:
