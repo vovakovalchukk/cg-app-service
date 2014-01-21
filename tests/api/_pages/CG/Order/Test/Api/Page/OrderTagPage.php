@@ -9,8 +9,8 @@ class OrderTagPage extends RootPage
 
     const URL = "/orderTag";
     const EMBEDDED_RESOURCE = "orderTag";
-    const PRIMARY_ID = "1141-10-tag1";
-    const SECONDARY_ID = "1142-20-tag2";
+    const PRIMARY_ID = "1411-10-tag1";
+    const SECONDARY_ID = "1412-20-tag2";
 
     public static function getUrl()
     {
@@ -58,31 +58,7 @@ class OrderTagPage extends RootPage
                 "orderId" => "1412-20",
                 "organisationUnitId" => 2,
                 "tag" => "tag3"
-            ]/*,
-            [
-                "id" => "1413-30-tag3",
-                "orderId" => "1413-30",
-                "organisationUnitId" => 3,
-                "tag" => "tag3"
-            ],
-            [
-                "id" => "1413-30-tag4",
-                "orderId" => "1413-30",
-                "organisationUnitId" => 3,
-                "tag" => "tag4"
-            ],
-            [
-                "id" => "1414-40-tag4",
-                "orderId" => "1414-40",
-                "organisationUnitId" => 4,
-                "tag" => "tag4"
-            ],
-            [
-                "id" => "1414-40-tag5",
-                "orderId" => "1414-40",
-                "organisationUnitId" => 4,
-                "tag" => "tag5"
-            ]*/
+            ]
         ];
     }
 
