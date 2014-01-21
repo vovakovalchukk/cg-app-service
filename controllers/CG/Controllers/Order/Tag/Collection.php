@@ -19,7 +19,7 @@ class Collection
 
     public function get()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
+        return $this->getService()->fetchPaginatedAllForOuAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
             $this->getParams('organisationUnitId') ? $this->getParams('organisationUnitId') : array()

@@ -30,29 +30,58 @@ class OrderTagPage extends RootPage
     {
         return [
             [
-                "id" => "1-tag1",
+                "id" => "1411-10-tag1",
+                "orderId" => "1411-10",
                 "organisationUnitId" => 1,
-                "name" => "tag1"
+                "tag" => "tag1"
             ],
             [
-                "id" => "1-tag2",
+                "id" => "1411-10-tag2",
+                "orderId" => "1411-10",
                 "organisationUnitId" => 1,
-                "name" => "tag2"
+                "tag" => "tag2"
             ],
             [
-                "id" => "1-tag3",
+                "id" => "1411-10-tag5",
+                "orderId" => "1411-10",
                 "organisationUnitId" => 1,
-                "name" => "tag3"
+                "tag" => "tag3"
             ],
             [
-                "id" => "1-tag4",
-                "organisationUnitId" => 1,
-                "name" => "tag4"
-            ],
-            [
-                "id" => "2-tag4",
+                "id" => "1412-20-tag2",
+                "orderId" => "1412-20",
                 "organisationUnitId" => 2,
-                "name" => "tag5"
+                "tag" => "tag4"
+            ],
+            [
+                "id" => "1412-20-tag3",
+                "orderId" => "1412-20",
+                "organisationUnitId" => 2,
+                "tag" => "tag3"
+            ],
+            [
+                "id" => "1413-30-tag3",
+                "orderId" => "1413-30",
+                "organisationUnitId" => 3,
+                "tag" => "tag3"
+            ],
+            [
+                "id" => "1413-30-tag4",
+                "orderId" => "1413-30",
+                "organisationUnitId" => 3,
+                "tag" => "tag4"
+            ],
+            [
+                "id" => "1414-40-tag4",
+                "orderId" => "1414-40",
+                "organisationUnitId" => 4,
+                "tag" => "tag4"
+            ],
+            [
+                "id" => "1414-40-tag5",
+                "orderId" => "1414-40",
+                "organisationUnitId" => 4,
+                "tag" => "tag5"
             ]
         ];
     }
@@ -61,8 +90,9 @@ class OrderTagPage extends RootPage
     {
         return [
             "organisationUnitId",
-            "name",
-            "id"
+            "tag",
+            "id",
+            "orderId"
         ];
     }
 
@@ -71,13 +101,15 @@ class OrderTagPage extends RootPage
         return [
             "name" => [],
             "organisationUnitId" => [],
-            "id" => []
+            "id" => [],
+            "orderId" => []
         ];
     }
 
     public static function getInvalidEntityFields()
     {
         return [
+            "orderId",
             "organisationUnitId",
             "name",
             "id"
@@ -88,7 +120,7 @@ class OrderTagPage extends RootPage
     public static function getFilterFields()
     {
         return [
-            "name", "organisationUnitId" => []
+            "tag", "organisationUnitId" => []
         ];
     }
 }

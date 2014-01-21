@@ -40,8 +40,8 @@ use CG\App\Service\Event\Storage\ETag as EventETagStorage;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
-use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
-use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
+use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
+use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Controllers\Order\Order as OrderController;
 use CG\Controllers\Order\Order\Collection as OrderCollectionController;
 use CG\Order\Service\Storage\ETag as OrderETagStorage;
@@ -316,10 +316,15 @@ return array(
                     'repository' => 'EventDbRepo'
                 )
             ),
+            OrderPersistentStorage::class => array(
+                'parameter' => array(
+                    'tagService' => TagService::class
+                )
+            ),
             OrderRepository::class => array(
                 'parameter' => array(
                     'storage' => OrderCacheStorage::class,
-                    'repository' => OrderPeristentStorage::class
+                    'repository' => OrderPersistentStorage::class
                 )
             ),
             'OrderService' => array(
@@ -362,7 +367,7 @@ return array(
                     'service' => 'OrderCollectionService'
                 )
             ),
-            OrderPeristentDbStorage::class => array(
+            OrderPersistentDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
