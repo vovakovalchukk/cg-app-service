@@ -38,7 +38,7 @@ class Tracking
     public function delete($orderId, $trackingId)
     {
         try {
-            $this->getService()->removeById($trackingId);
+            $this->getService()->removeById($trackingId, $orderId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

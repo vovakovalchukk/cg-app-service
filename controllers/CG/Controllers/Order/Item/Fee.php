@@ -38,7 +38,7 @@ class Fee
     public function delete($orderItemId, $feeId)
     {
         try {
-            $this->getService()->removeById($feeId);
+            $this->getService()->removeById($feeId, $orderItemId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

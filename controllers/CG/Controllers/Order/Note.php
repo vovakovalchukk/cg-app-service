@@ -38,7 +38,7 @@ class Note
     public function delete($orderId, $noteId)
     {
         try {
-            $this->getService()->removeById($noteId);
+            $this->getService()->removeById($noteId, $orderId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

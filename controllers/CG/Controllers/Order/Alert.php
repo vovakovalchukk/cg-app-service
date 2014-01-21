@@ -38,7 +38,7 @@ class Alert
     public function delete($orderId, $alertId)
     {
         try {
-            $this->getService()->removeById($alertId);
+            $this->getService()->removeById($alertId, $orderId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

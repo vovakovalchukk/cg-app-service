@@ -38,7 +38,7 @@ class GiftWrap
     public function delete($orderItemId, $giftWrapId)
     {
         try {
-            $this->getService()->removeById($giftWrapId);
+            $this->getService()->removeById($giftWrapId, $orderItemId);
             $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
