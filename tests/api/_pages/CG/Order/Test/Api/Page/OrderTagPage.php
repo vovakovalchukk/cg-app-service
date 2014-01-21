@@ -9,8 +9,8 @@ class OrderTagPage extends RootPage
 
     const URL = "/orderTag";
     const EMBEDDED_RESOURCE = "orderTag";
-    const PRIMARY_ID = "1-Tag1";
-    const SECONDARY_ID = "2-Tag2";
+    const PRIMARY_ID = "1141-10-tag1";
+    const SECONDARY_ID = "1142-20-tag2";
 
     public static function getUrl()
     {
@@ -45,12 +45,12 @@ class OrderTagPage extends RootPage
                 "id" => "1411-10-tag5",
                 "orderId" => "1411-10",
                 "organisationUnitId" => 1,
-                "tag" => "tag3"
+                "tag" => "tag5"
             ],
             [
-                "id" => "1412-20-tag2",
-                "orderId" => "1412-20",
-                "organisationUnitId" => 2,
+                "id" => "1413-30-tag4",
+                "orderId" => "1413-30",
+                "organisationUnitId" => 3,
                 "tag" => "tag4"
             ],
             [
@@ -58,7 +58,7 @@ class OrderTagPage extends RootPage
                 "orderId" => "1412-20",
                 "organisationUnitId" => 2,
                 "tag" => "tag3"
-            ],
+            ]/*,
             [
                 "id" => "1413-30-tag3",
                 "orderId" => "1413-30",
@@ -82,7 +82,7 @@ class OrderTagPage extends RootPage
                 "orderId" => "1414-40",
                 "organisationUnitId" => 4,
                 "tag" => "tag5"
-            ]
+            ]*/
         ];
     }
 
@@ -120,7 +120,8 @@ class OrderTagPage extends RootPage
     public static function getFilterFields()
     {
         return [
-            "tag", "organisationUnitId" => []
+            "tag" => [],
+            "organisationUnitId" => []
         ];
     }
 }
