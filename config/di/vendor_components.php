@@ -62,7 +62,7 @@ return array(
     'zendframework_zend-inputfilter_Zend',
     'zendframework_zend-loader_Zend_Loader',
     'zendframework_zend-servicemanager_Zend',
-//    'zendframework_zend-stdlib_Zend_Stdlib',
+    'zendframework_zend-stdlib_Zend_Stdlib',
     'zendframework_zend-uri_Zend_Uri',
 //    'zendframework_zend-validator_Zend_Validator',
 //    'zendframework_zend-view_Zend_View',

@@ -428,6 +428,29 @@ class OrderPage extends RootPage
         return ["multiSameItem" => [true, false]];
     }
 
+    public static function getArchiveFilter()
+    {
+        return ["includeArchived" => "archived"];
+    }
+
+    public static function getArchivedFilterExpected($filterValue)
+    {
+        $testCollection = static::getTestCollection();
+
+        $archiveFilter = static::getArchiveFilter();
+
+        $expectedResult = [];
+        foreach ($archiveFilter as $filterField) {
+            foreach ($testCollection as $testEntity) {
+                if ($testEntity[$filterField] == $filterValue) {
+                    $expectedResult[] = $testEntity;
+                }
+            }
+        }
+
+        return $expectedResult;
+    }
+
     public static function getMultiSameItemFilterExpected($isTrue)
     {
         $testOrderItemCollection = OrderItemPage::getTestCollection();
@@ -473,8 +496,8 @@ class OrderPage extends RootPage
                 "shippingAddressPostcode",
                 "shippingEmailAddress",
                 "buyerMessage",
-                //"orderItem[].itemSku",
-                //"orderItem[].itemName"
+                "item[].itemSku",
+                "item[].itemName"
         ];
     }
 

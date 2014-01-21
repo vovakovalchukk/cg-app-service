@@ -14,7 +14,7 @@ class ArchiveEntityPage extends ArchivePage implements EntityPageInterface
         return ArchivePage::class;
     }
 
-    public static function getEntityUrl()
+    public static function getEntityUrl($id = self::PRIMARY_ID)
     {
         return parent::getUrl();
     }
