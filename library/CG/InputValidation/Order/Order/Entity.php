@@ -1,17 +1,19 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
-use CG\Validation\Rules\IsArrayValidator;
-use CG\Validation\RulesInterface;
-use Zend\Di\Di;
-use Zend\Validator\Date;
-use CG\Validation\Rules\IntegerValidator;
-use CG\Validation\Rules\DecimalValidator;
-use Zend\Validator\StringLength;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\InArray;
 use CG\Constant\CurrencyCode;
 use CG\Constant\CountryCode;
+use CG\Validation\RulesInterface;
+use CG\Validation\Rules\DecimalValidator;
+use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\ValidatorChain;
+use Zend\Di\Di;
+use Zend\Validator\Date;
+use Zend\Validator\GreaterThan;
+use Zend\Validator\Identical;
+use Zend\Validator\InArray;
+use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
@@ -43,7 +45,6 @@ class Entity implements RulesInterface
             ),
             'accountId' => array(
                 'name'       => 'accountId',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'accountId']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
@@ -52,21 +53,18 @@ class Entity implements RulesInterface
             ),
             'externalId' => array(
                 'name'       => 'externalId',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'channel' => array(
                 'name'       => 'note',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'organisationUnitId' => array(
                 'name'       => 'organisationUnitId',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
@@ -75,42 +73,36 @@ class Entity implements RulesInterface
             ),
             'total' => array(
                 'name'       => 'total',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'total']),
                 )
             ),
             'totalDiscount' => array(
                 'name'       => 'totalDiscount',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalDiscount']),
                 )
             ),
             'status' => array(
                 'name'       => 'status',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'shippingPrice' => array(
                 'name'       => 'shippingPrice',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'shippingPrice']),
                 )
             ),
             'shippingMethod' => array(
                 'name'       => 'shippingMethod',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'currencyCode' => array(
                 'name'       => 'currencyCode',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->get(InArray::class)
                          ->setHaystack(CurrencyCode::getCurrencyCodes())
@@ -125,7 +117,6 @@ class Entity implements RulesInterface
             ),
             'purchaseDate' => array(
                 'name'       => 'purchaseDate',
-                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
                 )
@@ -307,11 +298,16 @@ class Entity implements RulesInterface
             ),
             'batch' => array(
                 'name'       => 'batch',
-                'required'   => true,
+                'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'batch']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
+                    $this->getDi()->newInstance(
+                        ValidatorChain::class, [
+                            'validators' => [
+                                $this->getDi()->newInstance(IntegerValidator::class),
+                                $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                            ]
+                        ]
+                    )->setMessage([ValidatorChain::VALIDATION_CHAIN_FAIL => 'batch should be at least 1, or empty'])
                 )
             ),
             'tag' => array (
@@ -320,6 +316,26 @@ class Entity implements RulesInterface
                 'validators' => array (
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'tag'])
                 )
+            ),
+            'items' => array(
+                'name' => 'items',
+                'required' => false
+            ),
+            'notes' => array(
+                'name' => 'notes',
+                'required' => false
+            ),
+            'trackings' => array(
+                'name' => 'trackings',
+                'required' => false
+            ),
+            'alerts' => array(
+                'name' => 'alerts',
+                'required' => false
+            ),
+            'userChange' => array(
+                'name' => 'userChange',
+                'required' => false
             )
         );
     }
