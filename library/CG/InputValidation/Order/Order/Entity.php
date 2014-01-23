@@ -300,14 +300,9 @@ class Entity implements RulesInterface
                 'name'       => 'batch',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(
-                        ValidatorChain::class, [
-                            'validators' => [
                                 $this->getDi()->newInstance(IntegerValidator::class),
                                 $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                            ]
-                        ]
-                    )->setMessage([ValidatorChain::VALIDATION_CHAIN_FAIL => 'batch should be at least 1, or empty'])
+                                              ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
                 )
             ),
             'tag' => array (
