@@ -42,7 +42,9 @@ class Collection
             $this->getParams('timeTo'),
             $this->getParams('orderBy'),
             $this->getParams('orderDirection'),
-            $this->getParams('tag') ? $this->getParams('tag') : []
+            $this->getParams('tag') ? $this->getParams('tag') : [],
+            $this->getParams('paymentMethod') ? $this->getParams('paymentMethod') : [],
+            $this->getParams('paymentReference') ? $this->getParams('paymentReference') : []
         );
         return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
     }

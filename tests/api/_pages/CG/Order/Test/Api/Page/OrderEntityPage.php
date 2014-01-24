@@ -21,12 +21,12 @@ class OrderEntityPage extends OrderPage implements EntityPageInterface
 
     public static function getDeletedTagUrl()
     {
-        return '/orderTag/1-tag2';
+        return '/orderTag/1411-10-tag2';
     }
 
     public static function getUpdatedTagUrl()
     {
-        return '/orderTag/1-tag6';
+        return '/orderTag/1411-10-tag6';
     }
 
     public static function notAllowedMethods()

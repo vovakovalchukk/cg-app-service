@@ -78,7 +78,9 @@ class OrderPage extends RootPage
                         "tag5"
                     ],
                     "custom" => [],
-                    "batch" => 1
+                    "batch" => 1,
+                    "paymentMethod" => "paymentMethod1",
+                    "paymentReference" => "paymentReference1"
                 ],
                 [
                     "id" => "1412-20",
@@ -127,7 +129,9 @@ class OrderPage extends RootPage
                         "tag3"
                     ],
                     "custom" => [],
-                    "batch" => 1
+                    "batch" => 1,
+                    "paymentMethod" => "paymentMethod2",
+                    "paymentReference" => "paymentReference2"
                 ],
                 [
                     "id" => "1413-30",
@@ -176,7 +180,9 @@ class OrderPage extends RootPage
                         "tag4"
                     ],
                     "custom" => [],
-                    "batch" => 1
+                    "batch" => 1,
+                    "paymentMethod" => "paymentMethod3",
+                    "paymentReference" => "paymentReference3"
                 ],
                 [
                     "id" => "1414-40",
@@ -225,7 +231,9 @@ class OrderPage extends RootPage
                         "tag5"
                     ],
                     "custom" => [],
-                    "batch" => 1
+                    "batch" => 1,
+                    "paymentMethod" => "paymentMethod4",
+                    "paymentReference" => "paymentReference4"
                 ],
                 [
                     "id" => "1415-50",
@@ -272,7 +280,9 @@ class OrderPage extends RootPage
                     "tag" => [
                     ],
                     "custom" => [],
-                    "batch" => 2
+                    "batch" => 2,
+                    "paymentMethod" => "paymentMethod5",
+                    "paymentReference" => "paymentReference5"
                 ]
         ];
     }
