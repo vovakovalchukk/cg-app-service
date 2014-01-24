@@ -8,6 +8,7 @@ define('COMPONENTS_FILE', 'config/di/vendor_components.php');
 if (!is_writable(COMPONENTS_FILE)) {
 	if(!file_exists(COMPONENTS_FILE)){
 		$empty = "<?php ". PHP_EOL . "return array();";
+		file_put_contents(COMPONENTS_FILE, $empty);
 	} else {
     		echo RED . 'Cannot update DI components as ' . COMPONENTS_FILE . ' is not writeable. Check the file permissions or try sudo-ing' . WHITE . PHP_EOL;
     		exit(1);
