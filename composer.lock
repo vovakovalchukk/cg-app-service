@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "acba5f82332ca8e97f43c20b805e8521",
+    "hash": "5a8c54991fdbd8c078944a1c8d3da8ef",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -150,11 +150,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-1402-payment",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2e3e1c81afccab7f745c5d7e14234498098969fe"
+                "reference": "b7d2169ce50878553b0eabca2599c492e838afc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.4-4df74a.zip",
+                "reference": "b7d2169ce50878553b0eabca2599c492e838afc9",
+                "shasum": "f784034a25506f972bd8c2c69ea8bb0f2d8bae20"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -178,7 +184,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-01-24 09:51:52"
+            "time": "2014-01-24 15:19:29"
         },
         {
             "name": "channelgrabber/phinx",
@@ -3291,17 +3297,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.3.1",
-            "alias_normalized": "1.3.1.0",
-            "version": "dev-CGIV-1402-payment",
-            "package": "channelgrabber/order"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "channelgrabber/phpunit": 20,
         "phpspec/phpspec": 20
     },
