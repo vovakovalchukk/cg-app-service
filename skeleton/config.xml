@@ -27,12 +27,15 @@
                     <user>fast_read</user>
                 </fastReadAdapter>
             </DatabaseAdapters>
+            <channelgrabber-phinx>~0.2.9.2</channelgrabber-phinx>
         </Db>
         <Redis>
             <enabled>1</enabled>
             <Adapters>
                 <reliable>1</reliable>
             </Adapters>
+            <predis-predis>~0.8.3</predis-predis>
+            <channelgrabber-predis>~1.0.1</channelgrabber-predis>
         </Redis>
         <Mongo>
             <enabled>1</enabled>

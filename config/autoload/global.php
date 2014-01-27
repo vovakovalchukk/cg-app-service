@@ -40,13 +40,12 @@ use CG\App\Service\Event\Storage\ETag as EventETagStorage;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
-use CG\Order\Service\Storage\Persistent as OrderPeristentStorage;
-use CG\Order\Service\Storage\Persistent\Db as OrderPeristentDbStorage;
+use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
+use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Controllers\Order\Order as OrderController;
 use CG\Controllers\Order\Order\Collection as OrderCollectionController;
 use CG\Order\Service\Storage\ETag as OrderETagStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
-use CG\Order\Service\OrderSpecificTag\Storage\Db as OrderSpecificTagDb;
 
 //Note
 use CG\Order\Service\Note\Service as NoteService;
@@ -130,6 +129,13 @@ use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 use CG\Controllers\UserPreference\UserPreference as UserPreferenceController;
 use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollectionController;
 use CG\UserPreference\Service\Storage\ETag as UserPreferenceETagStorage;
+
+//Tag
+use CG\Order\Service\Tag\Service as TagService;
+use CG\Order\Shared\Tag\Repository as TagRepository;
+use CG\Order\Service\Tag\Storage\Cache as TagCacheStorage;
+use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
+use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 return array(
     'service_manager' => array(
@@ -310,10 +316,15 @@ return array(
                     'repository' => 'EventDbRepo'
                 )
             ),
+            OrderPersistentStorage::class => array(
+                'parameter' => array(
+                    'tagService' => TagService::class
+                )
+            ),
             OrderRepository::class => array(
                 'parameter' => array(
                     'storage' => OrderCacheStorage::class,
-                    'repository' => OrderPeristentStorage::class
+                    'repository' => OrderPersistentStorage::class
                 )
             ),
             'OrderService' => array(
@@ -338,13 +349,6 @@ return array(
                     'userChangeService' => 'UserChangeCollectionService'
                 )
             ),
-            OrderSpecificTagDb::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
             OrderETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => OrderRepository::class,
@@ -363,7 +367,7 @@ return array(
                     'service' => 'OrderCollectionService'
                 )
             ),
-            OrderPeristentDbStorage::class => array(
+            OrderPersistentDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
@@ -732,6 +736,25 @@ return array(
                     'repository' => UserPreferenceMongoDbStorage::class
                 )
             ),
+            TagDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => TagMapper::class
+                )
+            ),
+            TagRepository::class => array (
+                'parameter' => array(
+                    'storage' => TagCacheStorage::class,
+                    'repository' => TagDbStorage::class
+                )
+            ),
+            TagService::class => array(
+                'parameter' => array (
+                    'repository' => TagRepository::class
+                )
+            ),
             'CG\Log\Shared\Storage\File' => array(
                 'parameters' => array(
                     'filePath' => '/tmp/'.date('Y-m-d').'.log'
@@ -746,7 +769,6 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
-                'CG\Order\Service\OrderSpecificTag\StorageInterface' => OrderSpecificTagDb::class,
                 'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
