@@ -16,7 +16,7 @@ class OrderEntityCest
         return OrderEntityPage::class;
     }
 
-    public function checkDeletingLastOrderWithTagDeletesTag(ApiGuy $I)
+    protected function checkDeletingLastOrderWithTagDeletesTag(ApiGuy $I)
     {
         $page = $this->getPageClass();
         if (!isset($page::allowedMethods()[$page::DELETE])) {
@@ -51,7 +51,7 @@ class OrderEntityCest
         $I->seeResponseCodeIs(HttpStatus::NOT_FOUND);
     }
 
-    public function checkUpdatingOrderWithNewTagAddsTag(ApiGuy $I)
+    protected function checkUpdatingOrderWithNewTagAddsTag(ApiGuy $I)
     {
         $page = $this->getPageClass();
         if (!isset($page::allowedMethods()[$page::PUT])) {

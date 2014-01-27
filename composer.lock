@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "dae321e2c897f3331d4a388e70edb46e",
+    "hash": "395ceb27451bfbc7402d1ef85324ace9",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "76765f7dbe351ebd02fefea584f2703437fae6dd"
+                "reference": "84172f11e6280e75a609904ccb3d9bf22a546e21"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -54,7 +54,7 @@
                     "CG": ""
                 }
             },
-            "time": "2014-01-13 17:46:01"
+            "time": "2014-01-23 12:23:03"
         },
         {
             "name": "channelgrabber/etag",
@@ -150,17 +150,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0b069cb537c85662aac532b05d80641a977b04c7"
+                "reference": "b7d2169ce50878553b0eabca2599c492e838afc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.3-fe3f08.zip",
-                "reference": "0b069cb537c85662aac532b05d80641a977b04c7",
-                "shasum": "d77092e8c009cc7370b12a769dd7a6de978642ed"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.4-4df74a.zip",
+                "reference": "b7d2169ce50878553b0eabca2599c492e838afc9",
+                "shasum": "f784034a25506f972bd8c2c69ea8bb0f2d8bae20"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -184,7 +184,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-01-22 13:30:38"
+            "time": "2014-01-24 15:19:29"
         },
         {
             "name": "channelgrabber/phinx",
@@ -2267,17 +2267,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.37",
+            "version": "1.1.38",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "3498f0b8e67316ccec23ab116b0d2e30ae97a19b"
+                "reference": "9c0bb605cec9ebb400f3e0839b5d2009ef3727d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.37-1d9119.zip",
-                "reference": "3498f0b8e67316ccec23ab116b0d2e30ae97a19b",
-                "shasum": "db0ae021ba4ade45dd9e1a126f0c41f786d8d35f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.38-f50b90.zip",
+                "reference": "9c0bb605cec9ebb400f3e0839b5d2009ef3727d6",
+                "shasum": "28832d80d8ebbb1ff5d9abf9cc3eb9a1d10d0c1b"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -2290,7 +2290,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2014-01-21 12:34:08"
+            "time": "2014-01-27 08:42:50"
         },
         {
             "name": "codeception/codeception",
@@ -2610,12 +2610,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ebcd2691e16929614134cc146e8aad6d7782716b"
+                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ebcd2691e16929614134cc146e8aad6d7782716b",
-                "reference": "ebcd2691e16929614134cc146e8aad6d7782716b",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/12e8105924c08f7958c149bc1b60c4951ff82e30",
+                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30",
                 "shasum": ""
             },
             "require": {
@@ -2674,20 +2674,20 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-01-17 14:23:47"
+            "time": "2014-01-24 20:56:23"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8"
+                "reference": "976a65af02a2a0e17ce6c949f7b43437205628bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8",
-                "reference": "fc5ddee4879dfcee788d9cb4b92af9028bc3d7e8",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/976a65af02a2a0e17ce6c949f7b43437205628bb",
+                "reference": "976a65af02a2a0e17ce6c949f7b43437205628bb",
                 "shasum": ""
             },
             "require-dev": {
@@ -2729,7 +2729,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2014-01-15 15:06:06"
+            "time": "2014-01-24 11:03:43"
         },
         {
             "name": "phpunit/php-code-coverage",

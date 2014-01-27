@@ -312,6 +312,20 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'tag'])
                 )
             ),
+            'paymentMethod' => array(
+                'name'       => 'paymentMethod',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
+            'paymentReference' => array(
+                'name'       => 'paymentReference',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
             'items' => array(
                 'name' => 'items',
                 'required' => false
