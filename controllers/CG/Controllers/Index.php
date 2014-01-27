@@ -1,25 +1,22 @@
 <?php
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\Exception\ExceptionInterface;
+namespace CG\Controllers;
+
 use Slim\Slim;
 use Slim\View;
 use Zend\Db\Adapter\Adapter;
+use Zend\Di\Di;
 
-class Index implements ServiceLocatorAwareInterface
+class Index
 {
     protected $slim;
     protected $view;
-    protected $serviceLocator;
+    protected $di;
 
-    public function __construct(Slim $app, View $view, ServiceLocatorInterface $serviceLocator = null)
+    public function __construct(Slim $app, View $view, Di $di)
     {
         $this->setSlim($app)
-             ->setView($view);
-
-        if ($serviceLocator) {
-            $this->setServiceLocator($serviceLocator);
-        }
+            ->setView($view)
+            ->setDi($di);
     }
 
     public function index()
@@ -27,13 +24,13 @@ class Index implements ServiceLocatorAwareInterface
         $view = $this->getView();
         $view->set('framework', 'Slim');
 
-        $serviceLocator = $this->getServiceLocator();
+        $di = $this->getDi();
         try {
-            $dbAdapter = $serviceLocator->get('readDb');
+            $dbAdapter = $di->get('readDb');
             $view->set('db', $dbAdapter->getCurrentSchema());
             $view->set('tables', $dbAdapter->query('SHOW TABLES', Adapter::QUERY_MODE_EXECUTE));
         }
-        catch (ExceptionInterface $exception) {
+        catch (\Exception $exception) {
             // If no Db Adapter - Application created without database
         }
 
@@ -62,14 +59,14 @@ class Index implements ServiceLocatorAwareInterface
         return $this->view;
     }
 
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function getDi()
     {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
+        return $this->di;
     }
 
-    public function getServiceLocator()
+    public function setDi(Di $di)
     {
-        return $this->serviceLocator;
+        $this->di = $di;
+        return $this;
     }
 }
