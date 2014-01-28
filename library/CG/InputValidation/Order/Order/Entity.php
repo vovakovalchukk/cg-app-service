@@ -300,9 +300,9 @@ class Entity implements RulesInterface
                 'name'       => 'batch',
                 'required'   => false,
                 'validators' => array(
-                                $this->getDi()->newInstance(IntegerValidator::class),
-                                $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                                              ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'batch']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                                  ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
                 )
             ),
             'tag' => array (
@@ -325,26 +325,6 @@ class Entity implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
-            ),
-            'items' => array(
-                'name' => 'items',
-                'required' => false
-            ),
-            'notes' => array(
-                'name' => 'notes',
-                'required' => false
-            ),
-            'trackings' => array(
-                'name' => 'trackings',
-                'required' => false
-            ),
-            'alerts' => array(
-                'name' => 'alerts',
-                'required' => false
-            ),
-            'userChange' => array(
-                'name' => 'userChange',
-                'required' => false
             )
         );
     }
