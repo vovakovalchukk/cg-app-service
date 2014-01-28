@@ -7,11 +7,9 @@ use CG\Validation\RulesInterface;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
-use CG\Validation\ValidatorChain;
 use Zend\Di\Di;
 use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
-use Zend\Validator\Identical;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 
