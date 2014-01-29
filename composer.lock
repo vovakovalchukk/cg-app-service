@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "718a05005388b6b7cdaf666ce610c9b5",
+    "hash": "419665cd31c0c0bec6ddf619f29bb3bc",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "76765f7dbe351ebd02fefea584f2703437fae6dd"
+                "reference": "84172f11e6280e75a609904ccb3d9bf22a546e21"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -54,7 +54,7 @@
                     "CG": ""
                 }
             },
-            "time": "2014-01-13 17:46:01"
+            "time": "2014-01-23 12:23:03"
         },
         {
             "name": "channelgrabber/etag",
@@ -150,17 +150,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.3.5",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "52054a2e67a88decc75150e5fd8003d10a741ac8"
+                "reference": "1af29efe68352f5b75b6172ec6a81c9c3793c98b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.5-f7de04.zip",
-                "reference": "52054a2e67a88decc75150e5fd8003d10a741ac8",
-                "shasum": "776144fdbc4756fde854c50fc4ecc60f75909931"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.7-8449c1.zip",
+                "reference": "1af29efe68352f5b75b6172ec6a81c9c3793c98b",
+                "shasum": "8ef3c9aa09ad0e214fd82454ebca1ed2e9119595"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -184,7 +184,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-01-28 15:42:23"
+            "time": "2014-01-29 09:33:04"
         },
         {
             "name": "channelgrabber/phinx",
@@ -2297,8 +2297,14 @@
             "version": "1.8.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:channelgrabber/Codeception.git",
+                "url": "https://github.com/Codeception/Codeception.git",
                 "reference": "bac92379a97935c6ebc8b2f2f0ade7312b75f80c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/bac92379a97935c6ebc8b2f2f0ade7312b75f80c",
+                "reference": "bac92379a97935c6ebc8b2f2f0ade7312b75f80c",
+                "shasum": ""
             },
             "require": {
                 "behat/mink": "1.5.*",
@@ -2331,6 +2337,7 @@
                     "Codeception": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2345,9 +2352,9 @@
             "homepage": "http://codeception.com/",
             "keywords": [
                 "BDD",
+                "TDD",
                 "acceptance testing",
                 "functional testing",
-                "tdd",
                 "unit testing"
             ],
             "time": "2013-11-15 02:57:56"
@@ -2603,12 +2610,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ebcd2691e16929614134cc146e8aad6d7782716b"
+                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ebcd2691e16929614134cc146e8aad6d7782716b",
-                "reference": "ebcd2691e16929614134cc146e8aad6d7782716b",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/12e8105924c08f7958c149bc1b60c4951ff82e30",
+                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30",
                 "shasum": ""
             },
             "require": {
@@ -2667,7 +2674,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-01-17 14:23:47"
+            "time": "2014-01-24 20:56:23"
         },
         {
             "name": "phpspec/prophecy",
