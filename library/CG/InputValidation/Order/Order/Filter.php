@@ -192,6 +192,20 @@ class Filter implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'tags'))
                 )
+            ),
+            'paymentMethod' => array(
+                'name'       => 'paymentMethod',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'paymentMethod'))
+                )
+            ),
+            'paymentReference' => array(
+                'name'       => 'paymentReference',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'paymentReference'))
+                )
             )
         );
     }

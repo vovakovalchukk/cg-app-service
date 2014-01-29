@@ -98,7 +98,7 @@ class Entity implements RulesInterface
             ),
             'itemVariationAttribute' => array(
                 'name'       => 'itemVariationAttribute',
-                'required'   => true,
+                'required'   => false,
                 'validators' => array(
                 )
             )

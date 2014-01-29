@@ -29,6 +29,8 @@ class OrderApiMigration extends AbstractMigration
                       `billingAddressId` int(10) unsigned DEFAULT NULL,
                       `shippingAddressId` int(10) unsigned DEFAULT NULL,
                       `batch` int(10) unsigned DEFAULT NULL,
+                      `paymentMethod` varchar(120) DEFAULT NULL,
+                      `paymentReference` varchar(255) DEFAULT NULL,
                       PRIMARY KEY (`id`),
                       KEY `billingAddressId` (`billingAddressId`),
                       KEY `shippingAddressId` (`shippingAddressId`)

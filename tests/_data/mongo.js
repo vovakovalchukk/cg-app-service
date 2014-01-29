@@ -46,7 +46,9 @@ db.order.insert({
 
     ],
     "custom": [],
-    "batch": 2
+    "batch": 2,
+    "paymentMethod" : "paymentMethod5",
+    "paymentReference" : "paymentReference5"
 });
 db.order.insert({
     "_id": "1414-40",
@@ -95,7 +97,9 @@ db.order.insert({
         "tag5"
     ],
     "custom": [],
-    "batch": 1
+    "batch": 1,
+    "paymentMethod" : "paymentMethod4",
+    "paymentReference" : "paymentReference4"
 });
 db.order.insert({
     "_id": "1413-30",
@@ -144,7 +148,9 @@ db.order.insert({
         "tag4"
     ],
     "custom": [],
-    "batch": 1
+    "batch": 1,
+    "paymentMethod" : "paymentMethod3",
+    "paymentReference" : "paymentReference3"
 });
 db.order.insert({
     "_id": "1412-20",
@@ -193,7 +199,9 @@ db.order.insert({
         "tag3"
     ],
     "custom": [],
-    "batch": 1
+    "batch": 1,
+    "paymentMethod" : "paymentMethod2",
+    "paymentReference" : "paymentReference2"
 });
 db.order.insert({
     "_id": "1411-10",
@@ -243,7 +251,9 @@ db.order.insert({
         "tag5"
     ],
     "custom": [],
-    "batch": 1
+    "batch": 1,
+    "paymentMethod" : "paymentMethod1",
+    "paymentReference" : "paymentReference1"
 });
 db.item.insert({
         "_id":"1411-11",
