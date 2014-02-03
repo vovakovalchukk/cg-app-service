@@ -1,6 +1,10 @@
 Changelog
 =========
 
+29/01/2014 - [CGIV-1248](https://channelgrabber.atlassian.net/browse/CGIV-1248)
+------------------------
+Added PROJECT_ROOT const
+
 28/1/2014 - [CGIV-1442](https://channelgrabber.atlassian.net/browse/CGIV-1442)
 -----------------------
 Updated composer to fetch cg/order 1.3.5. improved validation
@@ -20,3 +24,4 @@ Added tags to orders and made them filterable
 26/11/2013 - [CGIV-917](https://channelgrabber.atlassian.net/browse/CGIV-917)
 ------------------------
 Added Shared Instances for Slim Headers and Di config for them.
+
