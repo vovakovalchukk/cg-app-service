@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "419665cd31c0c0bec6ddf619f29bb3bc",
+    "hash": "376bcdbb55d5fda31699bdaebd6cd25e",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -84,17 +84,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "04ff5dd37b9ef6c8a04950c8dd6e855fb6fb34b0"
+                "reference": "e64d03a5e57e5e2dba966a3b301e249c52839f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.5-cebe8b.zip",
-                "reference": "04ff5dd37b9ef6c8a04950c8dd6e855fb6fb34b0",
-                "shasum": "678ec45878c3cfb2249dfd628b73629885310fbe"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.6-935cde.zip",
+                "reference": "e64d03a5e57e5e2dba966a3b301e249c52839f51",
+                "shasum": "ce39157a4a7ef4df6672f259964da9d8c364256a"
             },
             "require": {
                 "channelgrabber/etag": "~1.4.2",
@@ -111,29 +111,29 @@
                     "CG\\Http\\": ""
                 }
             },
-            "time": "2014-01-21 10:36:23"
+            "time": "2014-01-31 15:22:25"
         },
         {
             "name": "channelgrabber/log",
-            "version": "1.3.4",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "18e8dd6bbabf8c22b6934c4a28e22caf5333d545"
+                "reference": "61da37732930ebffb79d8cc8152bad135f8e757f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.3.4-1fa9a3.zip",
-                "reference": "18e8dd6bbabf8c22b6934c4a28e22caf5333d545",
-                "shasum": "5a74d6765880b63bb751920779af0affebabd3fd"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.3.5-946066.zip",
+                "reference": "61da37732930ebffb79d8cc8152bad135f8e757f",
+                "shasum": "c314d0f63ae71b38ad6230cbb7f571b7602394a8"
             },
             "require": {
-                "channelgrabber/cache": ">=1.0.7,<1.3.0",
-                "channelgrabber/etag": ">=1.3.1,<1.5.0",
+                "channelgrabber/cache": ">=1.0.7",
+                "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/redis": "~0.1.0",
-                "channelgrabber/slim": ">=1.5.0,<1.7.0",
-                "channelgrabber/stdlib": ">=2.3.0,<2.6.0",
-                "channelgrabber/validation": "~1.1.0",
+                "channelgrabber/slim": ">=1.5.0",
+                "channelgrabber/stdlib": ">=2.3.0",
+                "channelgrabber/validation": ">=1.1.0",
                 "nocarrier/hal": "~0.9.4",
                 "zendframework/zend-di": "2.2.*"
             },
@@ -146,21 +146,21 @@
                     "CG": ""
                 }
             },
-            "time": "2014-01-13 16:40:35"
+            "time": "2014-01-29 14:42:47"
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1af29efe68352f5b75b6172ec6a81c9c3793c98b"
+                "reference": "a0cd35d290212eba048cc6b7d751371c24b578c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.7-8449c1.zip",
-                "reference": "1af29efe68352f5b75b6172ec6a81c9c3793c98b",
-                "shasum": "8ef3c9aa09ad0e214fd82454ebca1ed2e9119595"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.8-9166b9.zip",
+                "reference": "a0cd35d290212eba048cc6b7d751371c24b578c8",
+                "shasum": "b3b2f004457da0e998d0a34a6081bdd5eb00a595"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -169,7 +169,7 @@
                 "channelgrabber/http": "~1.2.3",
                 "channelgrabber/slim": "~1.6.0",
                 "channelgrabber/stdlib": ">=2.3.3,<2.6.0",
-                "ext-mongo": ">=1.4.5",
+                "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
                 "zendframework/zend-di": "~2.2.5"
@@ -184,7 +184,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-01-29 09:33:04"
+            "time": "2014-01-31 17:03:35"
         },
         {
             "name": "channelgrabber/phinx",
@@ -349,17 +349,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.1",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "cc6277dffd4af7a3f1fb9830b3e7b32ff468d754"
+                "reference": "56948ed76635a9ca0132b9aef4cd0e045eef3e9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.1-feeae8.zip",
-                "reference": "cc6277dffd4af7a3f1fb9830b3e7b32ff468d754",
-                "shasum": "5ad4eb73aacc92193a45aed6fab4cc7116418e2a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.3-87c2da.zip",
+                "reference": "56948ed76635a9ca0132b9aef4cd0e045eef3e9b",
+                "shasum": "7491dc5ef72d23511d53fb7005845ca606ac3857"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -373,7 +373,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-01-17 12:06:53"
+            "time": "2014-01-31 15:23:43"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -603,16 +603,16 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.7.4",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b170b028c6bb5799640e46c8803015b0f9a45ed9"
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b170b028c6bb5799640e46c8803015b0f9a45ed9",
-                "reference": "b170b028c6bb5799640e46c8803015b0f9a45ed9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
                 "shasum": ""
             },
             "require": {
@@ -650,19 +650,19 @@
                 "phpunit/phpunit": "3.7.*",
                 "psr/log": "1.0.*",
                 "symfony/class-loader": "*",
-                "zendframework/zend-cache": "2.0.*",
-                "zendframework/zend-log": "2.0.*"
+                "zendframework/zend-cache": "<2.3",
+                "zendframework/zend-log": "<2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.7-dev"
+                    "dev-master": "3.8-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "Guzzle\\Tests": "tests/",
-                    "Guzzle": "src/"
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -691,7 +691,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-10-02 20:47:00"
+            "time": "2014-01-28 22:29:15"
         },
         {
             "name": "nocarrier/hal",
@@ -2361,21 +2361,21 @@
         },
         {
             "name": "fabpot/goutte",
-            "version": "v1.0.3",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Goutte.git",
-                "reference": "75c9f23c4122caf4ea3e87a42a00b471366e707f"
+                "reference": "a30e84e28fbaf14909d2d007249c24cd0ecd425e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/75c9f23c4122caf4ea3e87a42a00b471366e707f",
-                "reference": "75c9f23c4122caf4ea3e87a42a00b471366e707f",
+                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/a30e84e28fbaf14909d2d007249c24cd0ecd425e",
+                "reference": "a30e84e28fbaf14909d2d007249c24cd0ecd425e",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "guzzle/http": ">=3.0.5,<3.8-dev",
+                "guzzle/http": "~3.1",
                 "php": ">=5.3.0",
                 "symfony/browser-kit": "~2.1",
                 "symfony/css-selector": "~2.1",
@@ -2384,8 +2384,8 @@
                 "symfony/process": "~2.1"
             },
             "require-dev": {
-                "guzzle/plugin-history": ">=3.0.5,<3.8-dev",
-                "guzzle/plugin-mock": ">=3.0.5,<3.8-dev"
+                "guzzle/plugin-history": "~3.1",
+                "guzzle/plugin-mock": "~3.1"
             },
             "type": "application",
             "extra": {
@@ -2413,7 +2413,7 @@
             "keywords": [
                 "scraper"
             ],
-            "time": "2013-08-16 06:03:22"
+            "time": "2014-01-31 18:02:50"
         },
         {
             "name": "facebook/webdriver",
@@ -2733,22 +2733,22 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "1.2.13",
+            "version": "1.2.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94"
+                "reference": "6ba4ed2895d538a039d5d5866edc4ec0424c7852"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ba4ed2895d538a039d5d5866edc4ec0424c7852",
+                "reference": "6ba4ed2895d538a039d5d5866edc4ec0424c7852",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "phpunit/php-file-iterator": ">=1.3.0@stable",
-                "phpunit/php-text-template": ">=1.1.1@stable",
+                "phpunit/php-text-template": ">=1.2.0@stable",
                 "phpunit/php-token-stream": ">=1.1.3@stable"
             },
             "require-dev": {
@@ -2790,7 +2790,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-09-10 08:14:32"
+            "time": "2014-02-03 07:44:47"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2839,16 +2839,16 @@
         },
         {
             "name": "phpunit/php-text-template",
-            "version": "1.1.4",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
-                "reference": "5180896f51c5b3648ac946b05f9ec02be78a0b23"
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5180896f51c5b3648ac946b05f9ec02be78a0b23",
-                "reference": "5180896f51c5b3648ac946b05f9ec02be78a0b23",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
                 "shasum": ""
             },
             "require": {
@@ -2879,7 +2879,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2012-10-31 18:15:28"
+            "time": "2014-01-30 17:20:04"
         },
         {
             "name": "phpunit/php-timer",
@@ -2977,16 +2977,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.29",
+            "version": "3.7.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac"
+                "reference": "2f33258fa5a0c330515b7deba2bc040fa5c3953b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac",
-                "reference": "faeb2d9f15dc83830d2db5e4c67acf1d68c9b5ac",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2f33258fa5a0c330515b7deba2bc040fa5c3953b",
+                "reference": "2f33258fa5a0c330515b7deba2bc040fa5c3953b",
                 "shasum": ""
             },
             "require": {
@@ -3047,7 +3047,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-01-15 06:46:38"
+            "time": "2014-01-31 08:54:33"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
