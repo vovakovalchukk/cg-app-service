@@ -56,7 +56,8 @@
     "scripts": {
         "post-install-cmd": [
             "php -d memory_limit=512M bin/update_di_components.php",
-            "php -d memory_limit=512M bin/compile_di.php"
+            "php -d memory_limit=512M bin/compile_di.php",
+	    "composer -o dump-autoload"
         ],
         "post-update-cmd": [
             "php -d memory_limit=512M bin/update_di_components.php",
