@@ -10,29 +10,31 @@
             }
         },
         {
-            "type" : "composer",
-            "url"  : "http://packages.zendframework.com"
+            "type": "composer",
+            "url": "http://packages.zendframework.com"
         }
     ],
     "autoload": {
-        "psr-0" : { "" : "library/" }
+        "psr-0": {
+            "": "library/"
+        }
     },
     "require": {
-        "zendframework/zend-config" : "2.2.*",
-        "zendframework/zend-servicemanager" : "2.2.*",
-        "zendframework/zend-db" : "2.2.*",
-        "zendframework/zend-di" : "2.2.*",
-        "channelgrabber/stdlib" : "~2.5.0",
-        "nocarrier/hal" : "~0.9.3",
-        "guzzle/guzzle" : "~3.7",
-        "channelgrabber/http" : "~1.1.2",
-        "channelgrabber/zf2-stdlib" : "~1.1.5"
+        "zendframework/zend-config": "2.2.*",
+        "zendframework/zend-servicemanager": "2.2.*",
+        "zendframework/zend-db": "2.2.*",
+        "zendframework/zend-di": "2.2.*",
+        "channelgrabber/stdlib": "~2.5.0",
+        "nocarrier/hal": "~0.9.3",
+        "guzzle/guzzle": "~3.7",
+        "channelgrabber/http": "~1.1.2",
+        "channelgrabber/zf2-stdlib": "~1.1.5"
     },
     "require-dev": {
-        "codeception/codeception" : "1.6.5",
-        "phpspec/phpspec" : "2.0.*@dev",
-        "phpspec/prophecy" : "~1.0",
-        "channelgrabber/codeception" : "1.0.*"
+        "codeception/codeception": "1.6.5",
+        "phpspec/phpspec": "2.0.*@dev",
+        "phpspec/prophecy": "~1.0",
+        "channelgrabber/codeception": "1.0.*"
     },
     "scripts": {
         "post-install-cmd": [
