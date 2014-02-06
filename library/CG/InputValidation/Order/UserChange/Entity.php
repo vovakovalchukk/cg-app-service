@@ -4,6 +4,8 @@ namespace CG\InputValidation\Order\UserChange;
 use CG\Validation\RulesInterface;
 use Zend\Di\Di;
 use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\Rules\IntegerValidator;
+use Zend\Validator\GreaterThan;
 
 class Entity implements RulesInterface
 {
@@ -31,6 +33,14 @@ class Entity implements RulesInterface
                 'name'       => 'orderId',
                 'required'   => false,
                 'validators' => array(
+                )
+            ),
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 )
             ),
             'changes' => array(

@@ -81,7 +81,8 @@ use CG\Controllers\Order\Archive as ArchiveController;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
-use CG\Order\Service\Item\Storage\MongoDb as ItemMongoDbStorage;
+use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
+use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Controllers\Order\Item as ItemController;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
@@ -532,10 +533,17 @@ return array(
             ItemRepository::class => array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
-                    'repository' => ItemMongoDbStorage::class
+                    'repository' => ItemPersistentStorage::class
                 )
             ),
             ItemDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            ItemPersistentDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',

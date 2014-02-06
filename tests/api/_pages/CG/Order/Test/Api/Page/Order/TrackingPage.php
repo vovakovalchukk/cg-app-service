@@ -34,6 +34,7 @@ class TrackingPage extends OrderEntityPage
                  "userId" => 1,
                  "number" => "1231",
                  "carrier" => "carrier 1",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 01:00:00"
                 ],
                 [
@@ -42,6 +43,7 @@ class TrackingPage extends OrderEntityPage
                  "userId" => 2,
                  "number" => "1232",
                  "carrier" => "carrier 2",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 02:00:00"
                 ],
                 [
@@ -50,6 +52,7 @@ class TrackingPage extends OrderEntityPage
                  "userId" => 3,
                  "number" => "1233",
                  "carrier" => "carrier 3",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 03:00:00"
                 ],
                 [
@@ -58,6 +61,7 @@ class TrackingPage extends OrderEntityPage
                  "userId" => 4,
                  "number" => "1234",
                  "carrier" => "carrier 4",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 04:00:00"
                 ],
                 [
@@ -66,6 +70,7 @@ class TrackingPage extends OrderEntityPage
                  "userId" => 5,
                  "number" => "1235",
                  "carrier" => "carrier 5",
+                 "organisationUnitId" => 2,
                  "timestamp" => "2013-10-10 05:00:00"
                 ],
                 [
@@ -74,6 +79,7 @@ class TrackingPage extends OrderEntityPage
                     "userId" => 6,
                     "number" => "1236",
                     "carrier" => "carrier 6",
+                    "organisationUnitId" => 1,
                     "timestamp" => "2013-10-10 06:00:00"
                 ],
                ];
@@ -81,7 +87,7 @@ class TrackingPage extends OrderEntityPage
 
     public static function getRequiredEntityFields()
     {
-        return ["userId", "number", "carrier", "timestamp"];
+        return ["userId", "number", "carrier", "timestamp", "organisationUnitId"];
     }
 
     public static function getInvalidEntityData()
@@ -90,13 +96,14 @@ class TrackingPage extends OrderEntityPage
                 "userId" => "ABC",
                 "number" => [],
                 "carrier" => [],
-                "timestamp" => []
+                "timestamp" => [],
+                "organisationUnitId" => []
                ];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["userId", "number", "carrier", "timestamp"];
+        return ["userId", "number", "carrier", "timestamp", "organisationUnitId"];
     }
 
     public static function getParentIdField()
