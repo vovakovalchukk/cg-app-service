@@ -6,6 +6,7 @@ use Zend\Di\Di;
 use Zend\Validator\StringLength;
 use Zend\Validator\GreaterThan;
 use CG\Validation\Rules\DecimalValidator;
+use CG\Validation\Rules\IntegerValidator;
 
 class Entity implements RulesInterface
 {
@@ -59,6 +60,14 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'giftWrapPrice', 'min' => 0])
+                )
+            ),
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 )
             ),
             'giftWrapTaxPercentage' => array(

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0d27ae98ae9050715dca2e1831b99379",
+    "hash": "64c14c5ac600e826d4c11273e4e9b7a9",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -150,17 +150,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.3.9",
+            "version": "dev-CGIV-1481",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a6fd5e7bf2ecc8029885b3c599521b04fc33d71b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.3.9-5dfbb0.zip",
-                "reference": "a6fd5e7bf2ecc8029885b3c599521b04fc33d71b",
-                "shasum": "fabbdc6b280e5f2a695116c82fe87d81a18ae8d7"
+                "reference": "d81647f3b6e38787eb9727949822a2e477d5437e"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -184,7 +178,26 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-02-03 13:15:54"
+            "time": "2014-02-06 11:36:56"
+        },
+        {
+            "name": "channelgrabber/permission",
+            "version": "dev-CGIV-1484-permission",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-permission.git",
+                "reference": "48a6528fd05bde1720cf649df4bd0278a75b01b3"
+            },
+            "require": {
+                "zendframework/zend-eventmanager": "2.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Permission\\": ""
+                }
+            },
+            "time": "2014-02-06 12:17:24"
         },
         {
             "name": "channelgrabber/phinx",
@@ -349,17 +362,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.4",
+            "version": "2.5.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "0531aa36e04bfeb6ac50b1b0f9696a7da6f90052"
+                "reference": "a7db99d7e3b0f26031b455c63cf19c2a2cc1ba6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.4-f5f598.zip",
-                "reference": "0531aa36e04bfeb6ac50b1b0f9696a7da6f90052",
-                "shasum": "787ca954583cff0075329234c9bfb5dde41bf318"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.6-8e3b4b.zip",
+                "reference": "a7db99d7e3b0f26031b455c63cf19c2a2cc1ba6d",
+                "shasum": "a47972a70b3a9719ef045e778ab1d25372507b7e"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -373,7 +386,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-02-03 11:52:15"
+            "time": "2014-02-05 12:11:58"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -2610,12 +2623,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30"
+                "reference": "785ceefa9c8bae7db41af3d1263850530526a389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/12e8105924c08f7958c149bc1b60c4951ff82e30",
-                "reference": "12e8105924c08f7958c149bc1b60c4951ff82e30",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/785ceefa9c8bae7db41af3d1263850530526a389",
+                "reference": "785ceefa9c8bae7db41af3d1263850530526a389",
                 "shasum": ""
             },
             "require": {
@@ -2674,7 +2687,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-01-24 20:56:23"
+            "time": "2014-02-03 20:18:27"
         },
         {
             "name": "phpspec/prophecy",
@@ -3302,6 +3315,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
+        "channelgrabber/permission": 20,
         "channelgrabber/phpunit": 20,
         "phpspec/phpspec": 20
     },

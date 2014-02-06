@@ -29,23 +29,27 @@ class UserChangePage extends OrderEntityPage
     {
         return [
             [
-                "changes" => ["shippingAddressCompanyName" => "Wilki Ltd"]
+                "changes" => ["shippingAddressCompanyName" => "Wilki Ltd"],
+                "organisationUnitId" => 1
             ],
             [
-                "changes" => ["totalDiscount" => 0.1]
+                "changes" => ["totalDiscount" => 0.1],
+                "organisationUnitId" => 1
             ],
             [
                 "changes" => [
                     "billingAddressCompanyName" => "Wilki Ltd",
                     "billingAddressFullName" => "Matthew King"
-                ]
+                ],
+                "organisationUnitId" => 1
             ],
             [
                 "changes" => [
                     "totalDiscount" => 0.1,
                     "shippingAddressCompanyName" => "Wilki Ltd",
                     "shippingAddressFullName" => "Matthew King"
-                ]
+                ],
+                "organisationUnitId" => 1
             ],
             [
                 "changes" => [
@@ -54,23 +58,24 @@ class UserChangePage extends OrderEntityPage
                     "totalDiscount" => 0.1,
                     "billingAddressCompanyName" => "Wilki Ltd",
                     "billingAddressFullName" => "Matthew King"
-                ]
+                ],
+                "organisationUnitId" => 1
             ]
         ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["changes"];
+        return ["changes", "organisationUnitId"];
     }
 
     public static function getInvalidEntityData()
     {
-        return ["changes" => "ABC"];
+        return ["changes" => "ABC", "organisationUnitId" => []];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["changes"];
+        return ["changes", "organisationUnitId"];
     }
 }

@@ -32,36 +32,42 @@ class NotePage extends OrderEntityPage
                  "orderId" => "1411-10",
                  "userId" => 1,
                  "note" => "Note 1",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 01:00:00"
                 ],
                 ["id" => 2,
                  "orderId" => "1411-10",
                  "userId" => 2,
                  "note" => "Note 2",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 02:00:00"
                 ],
                 ["id" => 3,
                  "orderId" => "1411-10",
                  "userId" => 3,
                  "note" => "Note 3",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 03:00:00"
                 ],
                 ["id" => 4,
                  "orderId" => "1411-10",
                  "userId" => 4,
                  "note" => "Note 4",
+                 "organisationUnitId" => 1,
                  "timestamp" => "2013-10-10 04:00:00"
                 ],
                 ["id" => 5,
                  "orderId" => "1412-20",
                  "userId" => 5,
                  "note" => "Note 5",
+                 "organisationUnitId" => 2,
                  "timestamp" => "2013-10-10 05:00:00"
                 ],
                 ["id" => 6,
                     "orderId" => "1411-10",
                     "userId" => 6,
                     "note" => "Note 6",
+                    "organisationUnitId" => 1,
                     "timestamp" => "2013-10-10 06:00:00"
                 ]
                ];
@@ -69,7 +75,7 @@ class NotePage extends OrderEntityPage
 
     public static function getRequiredEntityFields()
     {
-        return ["userId", "note", "timestamp"];
+        return ["userId", "note", "timestamp", "organisationUnitId"];
     }
 
     public static function getInvalidEntityData()
@@ -77,13 +83,14 @@ class NotePage extends OrderEntityPage
         return [
                 "userId" => "ABC",
                 "note" => [],
-                "timestamp" => []
+                "timestamp" => [],
+                "organisationUnitId" => []
                ];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["userId", "note", "timestamp"];
+        return ["userId", "note", "timestamp", "organisationUnitId"];
     }
 
     public static function getParentIdField()

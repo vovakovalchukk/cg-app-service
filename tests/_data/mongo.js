@@ -268,7 +268,8 @@ db.item.insert({
         "itemVariationAttribute":{
             "colour":"red",
             "size":"10cm"
-        }
+        },
+        "organisationUnitId": 1
     });
 db.item.insert({
         "_id":"1411-12",
@@ -283,7 +284,8 @@ db.item.insert({
         "itemVariationAttribute":{
             "colour":"blue",
             "size":"20cm"
-        }
+        },
+        "organisationUnitId": 1
     });
 db.item.insert({
         "_id":"1411-13",
@@ -298,7 +300,8 @@ db.item.insert({
         "itemVariationAttribute":{
             "colour":"yellow",
             "size":"30cm"
-        }
+        },
+        "organisationUnitId": 1
     });
 db.item.insert({
         "_id":"1411-44",
@@ -313,7 +316,8 @@ db.item.insert({
         "itemVariationAttribute":{
             "colour":"green",
             "size":"40cm"
-        }
+        },
+        "organisationUnitId": 1
     });
 db.item.insert({
         "_id":"1411-45",
@@ -328,7 +332,8 @@ db.item.insert({
         "itemVariationAttribute":{
             "colour":"red",
             "size":"50cm"
-        }
+        },
+    "organisationUnitId": 1
     });
 
 db.item.insert({
@@ -344,21 +349,24 @@ db.item.insert({
     "itemVariationAttribute":{
         "colour":"red",
         "size":"60cm"
-    }
+    },
+    "organisationUnitId": 1
 });
 db.userChange.insert({
     "_id" : "1411-10",
     "orderId": "1411-10",
     "changes": {
         "shippingAddressCompanyName": "Wilki Ltd"
-    }
+    },
+    "organisationUnitId": 1
 });
 db.userChange.insert({
     "_id" : "1412-20",
     "orderId": "1412-20",
     "changes": {
         "totalDiscount": 0.1
-    }
+    },
+    "organisationUnitId": 1
 });
 db.userChange.insert({
     "_id" : "1413-30",
@@ -366,7 +374,8 @@ db.userChange.insert({
     "changes": {
         "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
-    }
+    },
+    "organisationUnitId": 1
 });
 db.userChange.insert({
     "_id" : "1414-40",
@@ -375,7 +384,8 @@ db.userChange.insert({
         "totalDiscount": 0.1,
             "shippingAddressCompanyName": "Wilki Ltd",
             "shippingAddressFullName": "Matthew King"
-    }
+    },
+    "organisationUnitId": 1
 });
 db.userChange.insert({
     "_id" : "1415-50",
@@ -386,7 +396,8 @@ db.userChange.insert({
             "totalDiscount": 0.1,
             "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
-    }
+    },
+    "organisationUnitId": 1
 });
 db=db.getSiblingDB("userPreference");
 db.dropDatabase();

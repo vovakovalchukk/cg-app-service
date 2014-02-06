@@ -34,42 +34,48 @@ class GiftWrapPage extends OrderItemEntityPage
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 1",
                  "giftWrapPrice" => 1.99,
-                 "giftWrapTaxPercentage" => 0.1
+                 "giftWrapTaxPercentage" => 0.1,
+                 "organisationUnitId" => 1
                 ],
                 ["id" => 2,
                  "orderItemId" => "1411-11",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 2",
                  "giftWrapPrice" => 2.99,
-                 "giftWrapTaxPercentage" => 0.2
+                 "giftWrapTaxPercentage" => 0.2,
+                 "organisationUnitId" => 1
                 ],
                 ["id" => 3,
                  "orderItemId" => "1411-11",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 3",
                  "giftWrapPrice" => 3.99,
-                 "giftWrapTaxPercentage" => 0.3
+                 "giftWrapTaxPercentage" => 0.3,
+                 "organisationUnitId" => 1
                 ],
                 ["id" => 4,
                  "orderItemId" => "1411-11",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 4",
                  "giftWrapPrice" => 4.99,
-                 "giftWrapTaxPercentage" => 0.4
+                 "giftWrapTaxPercentage" => 0.4,
+                 "organisationUnitId" => 1
                 ],
                 ["id" => 5,
                  "orderItemId" => "1411-12",
                  "giftWrapType" => "Standard",
                  "giftWrapMessage" => "Wrap Message 5",
                  "giftWrapPrice" => 5.99,
-                 "giftWrapTaxPercentage" => 0.5
+                 "giftWrapTaxPercentage" => 0.5,
+                 "organisationUnitId" => 2
                 ],
                 ["id" => 6,
                     "orderItemId" => "1411-11",
                     "giftWrapType" => "Standard",
                     "giftWrapMessage" => "Wrap Message 6",
                     "giftWrapPrice" => 6.99,
-                    "giftWrapTaxPercentage" => 0.6
+                    "giftWrapTaxPercentage" => 0.6,
+                    "organisationUnitId" => 1
                 ]
                ];
     }
