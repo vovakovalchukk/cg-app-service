@@ -4,24 +4,11 @@ use Phinx\Migration\AbstractMigration;
 
 class OrderItemMigration extends AbstractMigration
 {
-    /**
-     * Migrate Up.
-     */
-    public function up()
+    public function change()
     {
-        $sql = "CREATE TABLE IF NOT EXISTS `item` (
-                    `id` varchar(120) NOT NULL,
-                    `orderId` varchar(120) NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-        $this->execute($sql);
-    }
-
-    /**
-     * Migrate Down.
-     */
-    public function down()
-    {
-        $sql = 'DROP TABLE IF EXISTS `item`';
-        $this->execute($sql);
+        $item = $this->table('item', ['id' => false, 'primary_key' => 'id']);
+        $item->addColumn('id', 'string')
+            ->addColumn('orderId', 'string')
+            ->create();
     }
 }
