@@ -255,3 +255,15 @@ INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (3, 1,
 INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (4, 1, "1-4", true);
 INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (5, 1, "1-5", false);
 INSERT INTO `batch` (`name`, `organisationUnitId`, `id`, `active`) VALUES (1, 2, "2-1", true);
+
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE IF NOT EXISTS `item` (
+  `id` varchar(120) NOT NULL,
+  `orderId` varchar(120) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-11', '1411-10');
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-12', '1411-10');
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-13', '1411-10');
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-44', '1411-10');
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-45', '1412-20');
+INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-46', '1411-10');

@@ -64,6 +64,14 @@ class Entity implements RulesInterface
                 'validators' => array(
                 )
             ),
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                )
+            ),
             'timestamp' => array(
                 'name'       => 'timestamp',
                 'required'   => true,

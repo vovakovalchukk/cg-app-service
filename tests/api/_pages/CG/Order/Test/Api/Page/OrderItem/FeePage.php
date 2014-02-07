@@ -33,57 +33,64 @@ class FeePage extends OrderItemEntityPage
                     "orderItemId" => "1411-11",
                     "name" => "eBayFee",
                     "amount" => 1.99,
-                    "id" => 1
+                    "id" => 1,
+                    "organisationUnitId" => 1
                 ],
                 [
                     "orderItemId" => "1411-11",
                     "name" => "eBayFee",
                     "amount" => 2.99,
-                    "id" => 2
+                    "id" => 2,
+                    "organisationUnitId" => 1
                 ],
                 [
                     "orderItemId" => "1411-11",
                     "name" => "eBayFee",
                     "amount" => 3.99,
-                    "id" => 3
+                    "id" => 3,
+                    "organisationUnitId" => 1
                 ],
                 [
                     "orderItemId" => "1411-11",
                     "name" => "eBayFee",
                     "amount" => 4.99,
-                    "id" => 4
+                    "id" => 4,
+                    "organisationUnitId" => 1
                 ],
                 [
                     "orderItemId" => "1411-12",
                     "name" => "eBayFee",
                     "amount" => 5.99,
-                    "id" => 5
+                    "id" => 5,
+                    "organisationUnitId" => 2
                 ],
                 [
                     "orderItemId" => "1411-11",
                     "name" => "eBayFee",
                     "amount" => 6.99,
-                    "id" => 6
+                    "id" => 6,
+                    "organisationUnitId" => 1
                 ],
         ];
     }
 
     public static function getRequiredEntityFields()
     {
-        return ["name", "amount"];
+        return ["name", "amount", "organisationUnitId"];
     }
 
     public static function getInvalidEntityData()
     {
         return [
                 "name" => [],
-                "amount" => []
+                "amount" => [],
+                "organisationUnitId" => []
                ];
     }
 
     public static function getInvalidEntityFields()
     {
-        return ["name", "amount"];
+        return ["name", "amount", "organisationUnitId"];
     }
 
     public static function getParentIdField()

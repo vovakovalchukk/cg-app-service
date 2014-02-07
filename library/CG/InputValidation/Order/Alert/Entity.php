@@ -51,6 +51,14 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'userId must be at least %min%'])
                 )
             ),
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                )
+            ),
             'alert' => array(
                 'name'       => 'alert',
                 'required'   => true,
