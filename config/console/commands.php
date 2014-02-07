@@ -1,7 +1,7 @@
 <?php
 $commands = array();
 $files = [
-    'example.php'
+    'downloadOrders.php'
 ];
 foreach ($files as $file) {
     $command = require_once __DIR__ . '/commands/' . $file;
