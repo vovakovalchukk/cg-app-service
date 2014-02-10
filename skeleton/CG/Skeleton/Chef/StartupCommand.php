@@ -147,7 +147,7 @@ class StartupCommand implements StartupCommandInterface
         $node->setKey('cg|capistrano|' . $siteName . '|shared_structure|config', 'config');
         $node->setKey('cg|capistrano|' . $siteName . '|shared_structure|config/autoload', 'config/autoload');
         $node->setKey('cg|capistrano|' . $siteName . '|symlinks|config/host.php', 'config/host.php');
-        $node->setKey('cg|capistrano|' . $siteName . '|symlinks|tests/api.suite.yml','tests/api.auite.yml');
+        $node->setKey('cg|capistrano|' . $siteName . '|symlinks|tests/api.suite.yml','tests/api.suite.yml');
     }
 
     protected function configureSiteOnNode(Node $node, Config $config)
