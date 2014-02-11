@@ -139,7 +139,7 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 //Cilex Command
-use CG\App\Command\OrderDownload as OrderDownloadCommand;
+use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 
 return array(

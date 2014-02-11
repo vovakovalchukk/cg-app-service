@@ -1,5 +1,5 @@
 <?php
-use CG\App\Command\OrderDownload;
+use CG\Channel\Command\OrderDownload;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
