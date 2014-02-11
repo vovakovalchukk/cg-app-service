@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cbff9f50e46570cfee3f059126be7ff3",
+    "hash": "ff09371db2a70124cf9c6c0386fec431",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -405,17 +405,11 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.6.2",
+            "version": "dev-CGIV-1541-DefaultArguments",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "dd897ab90a02ae4920a45fd8431558ca145608ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.6.2-e5baa2.zip",
-                "reference": "dd897ab90a02ae4920a45fd8431558ca145608ae",
-                "shasum": "f21e397d3ad35f3fbe2249ce3f45022056348812"
+                "reference": "27f4e9ccd61566e36d2a4b87bbcaf2634f4cc77c"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -436,7 +430,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-01-13 16:38:48"
+            "time": "2014-02-11 15:47:56"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3388,12 +3382,18 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.6.0",
+            "alias_normalized": "1.6.0.0",
+            "version": "dev-CGIV-1541-DefaultArguments",
+            "package": "channelgrabber/slim"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [

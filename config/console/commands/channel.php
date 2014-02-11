@@ -3,10 +3,10 @@ use CG\Channel\Command\OrderDownload;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
-    'downloadOrders:command' => array(
+    'channel:downloadOrders' => array(
         'command' => function (InputInterface $input) use ($di) {
             $channel = $input->getArgument('channel');
-            $getToTime = $input->getArgument('getToTime') ? $input->getArgument('getToTime') : 'now';
+            $getToTime = $input->getArgument('getToTime');
 
             $command = $di->get(OrderDownload::class);
             $command->downloadOrders($channel, $getToTime);
@@ -17,7 +17,8 @@ return array(
                 'required' => true
             ),
             'getToTime' => array(
-                'required' => false
+                'required' => false,
+                'default' => 'now'
             )
         ),
         'options' => array(
