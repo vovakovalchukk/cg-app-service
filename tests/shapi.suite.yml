@@ -14,8 +14,8 @@ modules:
         ApiHelper:
             url: 'https://cg_app.channelgrabber.com.local'
         Db:
-            dsn: 'mysql:host=localhost;dbname=cg_app'
-            user: 'root'
+            dsn: 'mysql:host=192.168.33.51;dbname=cg_app'
+            user: 'write'
             password: 'password'
             dump: 'tests/_data/dump.sql'
             populate: true
@@ -26,7 +26,7 @@ modules:
             port: '6379'
             database: '0'
         MongoDb:
-            dsn: 'mongodb://127.0.0.1:27017/order'
+            dsn: 'mongodb://192.168.33.51:27017/order'
             user: ''
             password: ''
             dump: 'tests/_data/mongo.js'
