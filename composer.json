@@ -12,10 +12,6 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
-        },
-        {
-            "type": "git",
-            "url": "git@bitbucket.org:channelgrabber/cg-channel.git"
         }
     ],
     "autoload": {
@@ -25,7 +21,7 @@
     },
     "require": {
         "channelgrabber/cache": "~1.2.0",
-        "channelgrabber/channel": "~1.0.0",
+        "channelgrabber/channel": "~1.0.1",
         "channelgrabber/constants": "dev-master",
         "channelgrabber/etag": "~1.4.0",
         "channelgrabber/http": "~1.2.3",
