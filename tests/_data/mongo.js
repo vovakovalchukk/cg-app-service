@@ -333,7 +333,7 @@ db.item.insert({
             "colour":"red",
             "size":"50cm"
         },
-    "organisationUnitId": 1
+    "organisationUnitId": 2
     });
 
 db.item.insert({
@@ -366,7 +366,7 @@ db.userChange.insert({
     "changes": {
         "totalDiscount": 0.1
     },
-    "organisationUnitId": 1
+    "organisationUnitId": 2
 });
 db.userChange.insert({
     "_id" : "1413-30",
@@ -375,7 +375,7 @@ db.userChange.insert({
         "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
     },
-    "organisationUnitId": 1
+    "organisationUnitId": 3
 });
 db.userChange.insert({
     "_id" : "1414-40",
@@ -385,7 +385,7 @@ db.userChange.insert({
             "shippingAddressCompanyName": "Wilki Ltd",
             "shippingAddressFullName": "Matthew King"
     },
-    "organisationUnitId": 1
+    "organisationUnitId": 4
 });
 db.userChange.insert({
     "_id" : "1415-50",
@@ -397,7 +397,7 @@ db.userChange.insert({
             "billingAddressCompanyName": "Wilki Ltd",
             "billingAddressFullName": "Matthew King"
     },
-    "organisationUnitId": 1
+    "organisationUnitId": 5
 });
 db=db.getSiblingDB("userPreference");
 db.dropDatabase();
