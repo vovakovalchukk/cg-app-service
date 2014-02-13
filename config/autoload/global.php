@@ -138,6 +138,10 @@ use CG\Order\Service\Tag\Storage\Cache as TagCacheStorage;
 use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
+//Cilex Command
+use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
+use CG\Account\Client\Storage\Api as AccountApiStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -768,6 +772,16 @@ return array(
                     'filePath' => '/tmp/'.date('Y-m-d').'.log'
                 )
              ),
+            OrderDownloadCommand::class => array(
+                'parameter' => array(
+                    'accountStorage' => AccountApiStorage::class
+                )
+            ),
+            AccountApiStorage::class => array(
+                'parameter' => array(
+                    'client' => 'account_guzzle'
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
