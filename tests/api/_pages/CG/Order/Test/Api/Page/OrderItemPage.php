@@ -38,7 +38,8 @@ class OrderItemPage extends RootPage
                 "itemTaxPercentage" => 0.1,
                 "individualItemDiscountPrice" => 0.199,
                 "itemVariationAttribute" => ["colour" => "red",
-                                             "size" => "10cm"]
+                                             "size" => "10cm"],
+                "organisationUnitId" => 1
                 ],
                 ["id" => "1411-12",
                     "orderId" => "1411-10",
@@ -50,7 +51,8 @@ class OrderItemPage extends RootPage
                     "itemTaxPercentage" => 0.20,
                     "individualItemDiscountPrice" => 0.299,
                     "itemVariationAttribute" => ["colour" => "blue",
-                                                 "size" => "20cm"]
+                                                 "size" => "20cm"],
+                    "organisationUnitId" => 1
                 ],
                 ["id" => "1411-13",
                     "orderId" => "1411-10",
@@ -62,7 +64,8 @@ class OrderItemPage extends RootPage
                     "itemTaxPercentage" => 0.3,
                     "individualItemDiscountPrice" => 0.399,
                     "itemVariationAttribute" => ["colour" => "yellow",
-                                                 "size" => "30cm"]
+                                                 "size" => "30cm"],
+                    "organisationUnitId" => 1
                 ],
                 ["id" => "1411-44",
                     "orderId" => "1411-10",
@@ -74,7 +77,8 @@ class OrderItemPage extends RootPage
                     "itemTaxPercentage" => 0.4,
                     "individualItemDiscountPrice" => 0.499,
                     "itemVariationAttribute" => ["colour" => "green",
-                                                 "size" => "40cm"]
+                                                 "size" => "40cm"],
+                    "organisationUnitId" => 1
                 ],
                 ["id" => "1411-45",
                     "orderId" => "1412-20",
@@ -86,7 +90,8 @@ class OrderItemPage extends RootPage
                     "itemTaxPercentage" => 0.5,
                     "individualItemDiscountPrice" => 0.599,
                     "itemVariationAttribute" => ["colour" => "red",
-                                                "size" => "50cm"]
+                                                "size" => "50cm"],
+                    "organisationUnitId" => 2
                 ],
             ["id" => "1411-46",
                 "orderId" => "1411-10",
@@ -98,7 +103,8 @@ class OrderItemPage extends RootPage
                 "itemTaxPercentage" => 0.6,
                 "individualItemDiscountPrice" => 0.699,
                 "itemVariationAttribute" => ["colour" => "red",
-                    "size" => "60cm"]
+                    "size" => "60cm"],
+                "organisationUnitId" => 1
             ]
         ];
     }
@@ -111,20 +117,23 @@ class OrderItemPage extends RootPage
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice"
+                "individualItemDiscountPrice",
+                "organisationUnitId"
         ];
     }
 
     public static function getInvalidEntityData()
     {
-        return ["accountId" => "ABC",
-                "itemName" => [],
-                "individualItemPrice" => "ABC",
-                "itemQuantity" => "ABC",
-                "itemSku" => [],
-                "itemTaxPercentage" => "ABC",
-                "individualItemDiscountPrice" => "ABC",
-                "itemVariationAttribute" => "ABC"
+        return [
+            "accountId" => "ABC",
+            "itemName" => [],
+            "individualItemPrice" => "ABC",
+            "itemQuantity" => "ABC",
+            "itemSku" => [],
+            "itemTaxPercentage" => "ABC",
+            "individualItemDiscountPrice" => "ABC",
+            "itemVariationAttribute" => "ABC",
+            "organisationUnitId" => "ABC"
         ];
     }
 
@@ -136,7 +145,8 @@ class OrderItemPage extends RootPage
                 "itemQuantity",
                 "itemSku",
                 "itemTaxPercentage",
-                "individualItemDiscountPrice"
+                "individualItemDiscountPrice",
+                "organisationUnitId"
         ];
     }
 
