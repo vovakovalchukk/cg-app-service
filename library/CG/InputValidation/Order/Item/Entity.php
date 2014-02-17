@@ -82,6 +82,14 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'validators' => array(
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                )
+            ),
             'itemTaxPercentage' => array(
                 'name'       => 'itemTaxPercentage',
                 'required'   => true,
