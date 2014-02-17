@@ -1,6 +1,11 @@
 <?php
+define('GREEN', "\033[32m");
+define('WHITE', "\033[0m");
+
 require_once 'bootstrap.php';
 require_once 'config/di/components.php';
+
+echo GREEN . 'Compiling DI definitions' . WHITE . PHP_EOL;
 
 $diDataDir = 'data/di/';
 
@@ -11,29 +16,22 @@ foreach ($it as $file) {
         unlink($file->getPathname());
     }
 }
-
-foreach ($libraryComponents as $component) {
-    $diCompiler = new Zend\Di\Definition\CompilerDefinition;
-    $dir = dirname(__DIR__) . '/library/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
-    echo "Compiling ".$dir."\n";
-    $diCompiler->addDirectory($dir);
-    $diCompiler->setAllowReflectionExceptions();
-    $diCompiler->compile();
-    file_put_contents(
-        $diDataDir . $component . '-definition.php',
-        '<?php return ' . var_export($diCompiler->toArrayDefinition()->toArray(), true) . ';'
-    );
+$componentArray = [];
+foreach ($componentTypes as $type => $components) {
+    foreach ($components as $component) {
+        $diCompiler = new CG\Zend\Stdlib\Di\Definition\RuntimeCompiler;
+        $dir = dirname(__DIR__) . '/' . $type . '/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
+        echo $dir.PHP_EOL;
+        $diCompiler->addDirectory($dir);
+        $diCompiler->setAllowReflectionExceptions();
+        $diCompiler->compile();
+        $componentArray = array_merge($componentArray, $diCompiler->toArrayDefinition()->toArray());
+    }
 }
 
-foreach ($vendorComponents as $component) {
-    $diCompiler = new Zend\Di\Definition\CompilerDefinition;
-    $dir = dirname(__DIR__) . '/vendor/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
-    echo "Compiling ".$dir."\n";
-    $diCompiler->addDirectory($dir);
-    $diCompiler->setAllowReflectionExceptions(true);
-    $diCompiler->compile();
-    file_put_contents(
-        $diDataDir . $component . '-definition.php',
-        '<?php return ' . var_export($diCompiler->toArrayDefinition()->toArray(), true) . ';'
-    );
-}
+file_put_contents(
+    $diDataDir .'di-definition.php',
+    '<?php return ' . var_export($componentArray, true) . ';'
+);
+
+echo 'DONE' . PHP_EOL;
