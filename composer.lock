@@ -3,21 +3,21 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "17cca6507ec56fb2afeac12d32beb015",
+    "hash": "108d16557a132295b479d72219b04c81",
     "packages": [
         {
             "name": "channelgrabber/account",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-account.git",
-                "reference": "970bd2775b46a64f9774af790932b8af54f9ad00"
+                "reference": "531550bc8aa7a60f1fc7b4725df7a9c75ad3df37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-account-1.0.1-3b2084.zip",
-                "reference": "970bd2775b46a64f9774af790932b8af54f9ad00",
-                "shasum": "92eb14cbc55a35988939e60fa52d239a90a01944"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-account-1.0.2-4f1a10.zip",
+                "reference": "531550bc8aa7a60f1fc7b4725df7a9c75ad3df37",
+                "shasum": "81cde6b33a714d888762cf9b16c8e773c093fe30"
             },
             "require": {
                 "channelgrabber/cache": ">=1.2.1, <1.3.0",
@@ -36,7 +36,7 @@
                     "CG\\Account\\": ""
                 }
             },
-            "time": "2014-02-13 15:33:58"
+            "time": "2014-02-19 11:04:44"
         },
         {
             "name": "channelgrabber/amazon",
@@ -276,17 +276,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.4.3",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2ed648986db8e897be44466f188e03567362234f"
+                "reference": "b2946d0485d4af56400dfaff1a4c74111c3d7d11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.4.3-3c4a73.zip",
-                "reference": "2ed648986db8e897be44466f188e03567362234f",
-                "shasum": "6707ab42758835639cc62c85232a349733e213a7"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.4.5-0bf39b.zip",
+                "reference": "b2946d0485d4af56400dfaff1a4c74111c3d7d11",
+                "shasum": "a2466ba736b76eaff5b07337b9c4610291100812"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -311,7 +311,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-02-18 15:25:23"
+            "time": "2014-02-19 11:33:26"
         },
         {
             "name": "channelgrabber/permission",
