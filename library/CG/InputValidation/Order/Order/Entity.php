@@ -13,6 +13,7 @@ use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 use CG\Validation\ValidatorChain;
+use Zend\Validator\Identical;
 
 class Entity implements RulesInterface
 {
