@@ -12,6 +12,7 @@ use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
+use CG\Validation\ValidatorChain;
 
 class Entity implements RulesInterface
 {
@@ -130,7 +131,16 @@ class Entity implements RulesInterface
                 'name'       => 'printedDate',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
+                    $this->getDi()->newInstance(
+                        ValidatorChain::class,
+                        [
+                            'validators' => [
+                                $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s"))),
+                                $this->getDi()->newInstance(Identical::Class, ['token' => '0000-00-00 00:00:00'])
+                                    ->setMessages([Identical::NOT_SAME => 'date does not equal "%token%"'])
+                            ]
+                        ]
+                    )
                 )
             ),
             'dispatchDate' => array(
