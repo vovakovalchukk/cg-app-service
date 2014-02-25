@@ -12,6 +12,9 @@
  */
 
 use Zend\Db\Sql\Sql;
+use CG\Cache\Client\Redis as CacheRedis;
+use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
+use CG\ETag\Storage\Predis as EtagRedis;
 use Zend\Di\Di;
 use Zend\EventManager\EventManager;
 use Zend\Config\Config;
@@ -228,6 +231,21 @@ return array(
             'WriteSql' => array(
                 'parameter' => array(
                     'adapter' => 'writeAdapter'
+                )
+            ),
+            CacheRedisPipeline::class => array(
+                'parameter' => array(
+                    'predis' => 'unreliable_redis'
+                )
+            ),
+            CacheRedis::class => array(
+                'parameter' => array(
+                    'predis' => 'unreliable_redis'
+                )
+            ),
+            EtagRedis::class => array(
+                'parameter' => array(
+                    'predisClient' => 'unreliable_redis'
                 )
             ),
             ServiceETagStorage::class => array (
@@ -791,7 +809,6 @@ return array(
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
-                'Predis\Client' => 'reliable_redis',
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
                 'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
