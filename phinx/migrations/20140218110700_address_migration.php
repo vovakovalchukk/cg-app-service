@@ -3,7 +3,7 @@ use Phinx\Migration\AbstractMigration;
 
 class AddressMigration extends AbstractMigration
 {
-    public function change()
+    public function up()
     {
         $orderTable = $this->table('order');
         $orderTable->dropForeignKey('billingAddressId');
@@ -15,11 +15,30 @@ class AddressMigration extends AbstractMigration
         $addressTable->changeColumn('id', 'integer', array('autoIncrement' => false));
         $addressTable->removeIndex('id');
         $addressTable->changeColumn('id', 'string', array('limit' => 40));
-        $this->execute('ALTER TABLE address ADD PRIMARY KEY(id(40))');
+        $this->execute('ALTER TABLE `address` ADD PRIMARY KEY(id(40))');
 
         $orderTable->changeColumn('billingAddressId', 'string', array('limit' => 40));
         $orderTable->changeColumn('shippingAddressId', 'string', array('limit' => 40));
-        $this->execute('ALTER TABLE `order` ADD CONSTRAINT `order_shippingAddressId` FOREIGN KEY (shippingAddressId) REFERENCES `address` (`id`)');
-        $this->execute('ALTER TABLE `order` ADD CONSTRAINT `order_billingAddressId` FOREIGN KEY (billingAddressId) REFERENCES `address` (`id`)');
+        $orderTable->addForeignKey('shippingAddressId', 'address', 'id');
+        $orderTable->addForeignKey('billingAddressId', 'address', 'id');
+    }
+
+    public function down()
+    {
+        $orderTable = $this->table('order');
+        $orderTable->dropForeignKey('shippingAddressId');
+        $orderTable->dropForeignKey('billingAddressId');
+        $orderTable->changeColumn('billingAddressId', 'integer', array('signed'=>false));
+        $orderTable->changeColumn('shippingAddressId', 'integer', array('signed'=>false));
+
+        $addressTable = $this->table('address');
+        $addressTable->changeColumn('id', 'integer', array('autoIncrement' => true));
+        $addressTable->addIndex('id');
+
+        $orderTable = $this->table('order');
+        $orderTable->addForeignKey('billingAddressId', 'address', 'id');
+        $orderTable->addForeignKey('shippingAddressId', 'address', 'id');
+        $orderTable->addIndex('billingAddressId');
+        $orderTable->addIndex('shippingAddressId');
     }
 }
