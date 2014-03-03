@@ -16,6 +16,12 @@ class TestData extends AbstractMigration
         $this->insertTestData('address', $this->getAddressData());
         $this->insertTestData('orderTag', $this->getOrderTagData());
         $this->insertTestData('note', $this->getNoteData());
+        $this->insertTestData('tracking', $this->getTrackingData());
+        $this->insertTestData('alert', $this->getAlertData());
+        $this->insertTestData('fee', $this->getFeeData());
+        $this->insertTestData('giftWrap', $this->getGiftWrapData());
+        $this->insertTestData('batch', $this->getBatchData());
+        $this->insertTestData('item', $this->getItemData());
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -28,6 +34,12 @@ class TestData extends AbstractMigration
         $this->execute('TRUNCATE table `address`');
         $this->execute('TRUNCATE table `orderTag`');
         $this->execute('TRUNCATE table `note`');
+        $this->execute('TRUNCATE table `tracking`');
+        $this->execute('TRUNCATE table `alert`');
+        $this->execute('TRUNCATE table `fee`');
+        $this->execute('TRUNCATE table `giftWrap`');
+        $this->execute('TRUNCATE table `batch`');
+        $this->execute('TRUNCATE table `item`');
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -118,6 +130,72 @@ class TestData extends AbstractMigration
             ['1411-10', 4, 'Note 4', '2013-10-10 04:00:00'],
             ['1412-20', 5, 'Note 5', '2013-10-10 05:00:00'],
             ['1411-10', 6, 'Note 6', '2013-10-10 06:00:00']
+        );
+    }
+
+    protected function getTrackingData() {
+        return array(
+            [1, '1411-10', 1, '1231', 'carrier 1', '2013-10-10 01:00:00'],
+            [2, '1411-10', 2, '1232', 'carrier 2', '2013-10-10 02:00:00'],
+            [3, '1411-10', 3, '1233', 'carrier 3', '2013-10-10 03:00:00'],
+            [4, '1411-10', 4, '1234', 'carrier 4', '2013-10-10 04:00:00'],
+            [5, '1412-20', 5, '1235', 'carrier 5', '2013-10-10 05:00:00'],
+            [6, '1411-10', 6, '1236', 'carrier 6', '2013-10-10 06:00:00']
+        );
+    }
+
+    protected function getAlertData() {
+        return array(
+            [1, '1411-10', 1, 'alert 1', '2013-10-10 01:00:00'],
+            [2, '1411-10', 2, 'alert 2', '2013-10-10 02:00:00'],
+            [3, '1411-10', 3, 'alert 3', '2013-10-10 03:00:00'],
+            [4, '1411-10', 4, 'alert 4', '2013-10-10 04:00:00'],
+            [5, '1412-20', 5, 'alert 5', '2013-10-10 05:00:00'],
+            [6, '1411-10', 6, 'alert 6', '2013-10-10 06:00:00']
+        );
+    }
+
+    protected function getFeeData() {
+        return array(
+            [1, '1411-11', 1.99, 'eBayFee'],
+            [2, '1411-11', 2.99, 'eBayFee'],
+            [3, '1411-11', 3.99, 'eBayFee'],
+            [4, '1411-11', 4.99, 'eBayFee'],
+            [5, '1411-12', 5.99, 'eBayFee'],
+            [6, '1411-11', 6.99, 'eBayFee']
+        );
+    }
+
+    protected function getGiftWrapData() {
+        return array(
+            [1, '1411-11', "Standard", 'Wrap Message 1', 1.99, 0.1],
+            [2, '1411-11', "Standard", 'Wrap Message 2', 2.99, 0.2],
+            [3, '1411-11', "Standard", 'Wrap Message 3', 3.99, 0.3],
+            [4, '1411-11', "Standard", 'Wrap Message 4', 4.99, 0.4],
+            [5, '1411-12', "Standard", 'Wrap Message 5', 5.99, 0.5],
+            [6, '1411-11', "Standard", 'Wrap Message 6', 6.99, 0.6]
+        );
+    }
+
+    protected function getBatchData() {
+        return array(
+            [1, 1, "1-1", true],
+            [2, 1, "1-2", true],
+            [3, 1, "1-3", true],
+            [4, 1, "1-4", true],
+            [5, 1, "1-5", false],
+            [1, 2, "2-1", true]
+        );
+    }
+
+    protected function getItemData() {
+        return array(
+            ['1411-11', '1411-10'],
+            ['1411-12', '1411-10'],
+            ['1411-13', '1411-10'],
+            ['1411-44', '1411-10'],
+            ['1411-45', '1412-20'],
+            ['1411-46', '1411-10']
         );
     }
 }
