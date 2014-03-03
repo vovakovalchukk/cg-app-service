@@ -10,8 +10,8 @@ class TestData extends AbstractMigration
     public function up()
     {
         $this->execute('SET FOREIGN_KEY_CHECKS=0');
-//        $this->insertTestData('service', $this->getServiceData());
-//        $this->insertTestData('serviceEvent', $this->getServiceEventData());
+        $this->insertTestData('service', $this->getServiceData());
+        $this->insertTestData('serviceEvent', $this->getServiceEventData());
         $this->insertTestData('order', $this->getOrderData());
         $this->insertTestData('address', $this->getAddressData());
         $this->insertTestData('orderTag', $this->getOrderTagData());
@@ -28,8 +28,8 @@ class TestData extends AbstractMigration
     public function down()
     {
         $this->execute('SET FOREIGN_KEY_CHECKS=0');
-//        $this->execute('TRUNCATE table `service`');
-//        $this->execute('TRUNCATE table `serviceEvent`');
+        $this->execute('TRUNCATE table `service`');
+        $this->execute('TRUNCATE table `serviceEvent`');
         $this->execute('TRUNCATE table `order`');
         $this->execute('TRUNCATE table `address`');
         $this->execute('TRUNCATE table `orderTag`');
@@ -43,7 +43,6 @@ class TestData extends AbstractMigration
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
     }
 
-    //TODO Table doesn't exist
     protected function getServiceData()
     {
         return array(
@@ -55,7 +54,6 @@ class TestData extends AbstractMigration
         );
     }
 
-    //TODO Table doesn't exist
     protected function getServiceEventData() {
         return array(
             [1,1,'type1',1,'http://example1.com'],
