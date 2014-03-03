@@ -7,17 +7,19 @@ class ServiceMigration extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('service');
-        $table->addColumn('type', 'string', array('limit' => 25))
+        $table = $this->table('service', array('id' => false, 'primary_key' => 'id'));
+        $table->addColumn('id', 'integer', array('signed' => false, 'autoIncrement' => true))
+            ->addColumn('type', 'string', array('limit' => 25))
             ->addColumn('endpoint', 'string', array('limit' => 255))
             ->create();
 
-        $otherTable = $this->table('serviceEvent');
-        $otherTable->addColumn('serviceId', 'integer', array('limit' => 10, 'signed' => false, 'null' => true))
+        $otherTable = $this->table('serviceEvent',  array('id' => false, 'primary_key' => 'id'));
+        $otherTable->addColumn('id', 'integer', array('signed' => false, 'autoIncrement' => true))
+            ->addColumn('serviceId', 'integer', array('signed' => false, 'null' => true))
             ->addColumn('type', 'string', array('limit' => 255, 'null' => true))
-            ->addColumn('instances', 'integer', array('limit' => 11, 'signed' => false))
+            ->addColumn('instances', 'integer', array('signed' => false))
             ->addColumn('endpoint', 'string', array('limit' => 255, 'null' => false))
+            ->addForeignKey('serviceId', 'service', 'id', array('delete' => ForeignKey::CASCADE))
             ->create();
-        $otherTable->addForeignKey('serviceId', 'service', 'id', array('delete' => ForeignKey::CASCADE));
     }
 }
