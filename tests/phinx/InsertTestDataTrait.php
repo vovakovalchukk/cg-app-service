@@ -1,5 +1,5 @@
 <?php
-// TODO see if we can include this from a library
+
 trait InsertTestDataTrait
 {
     protected function insertTestData($table, array $data)
