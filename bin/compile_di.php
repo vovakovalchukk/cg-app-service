@@ -19,7 +19,7 @@ foreach ($it as $file) {
 $componentArray = [];
 foreach ($componentTypes as $type => $components) {
     foreach ($components as $component) {
-        $diCompiler = new Zend\Di\Definition\CompilerDefinition;
+        $diCompiler = new CG\Zend\Stdlib\Di\Definition\RuntimeCompiler;
         $dir = dirname(__DIR__) . '/' . $type . '/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
         echo $dir.PHP_EOL;
         $diCompiler->addDirectory($dir);
