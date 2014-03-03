@@ -21,7 +21,7 @@ class TestData extends AbstractMigration
         $this->insertTestData('fee', $this->getFeeData());
         $this->insertTestData('giftWrap', $this->getGiftWrapData());
         $this->insertTestData('batch', $this->getBatchData());
-//        $this->insertTestData('item', $this->getItemData());
+        $this->insertTestData('item', $this->getItemData());
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
     }
 
