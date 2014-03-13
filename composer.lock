@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "83aebb0c291e476584b398d63d202950",
+    "hash": "3b3eb12012524b6b299443243a7caf58",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -389,11 +389,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-1788-PaginatedHalCollection",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "ebf72189f5b9a62110d1370db1176f4dfb94fb04"
+                "reference": "3cef7ab9324fabaee5192486c8ca2d4afe55342c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.7.2-294347.zip",
+                "reference": "3cef7ab9324fabaee5192486c8ca2d4afe55342c",
+                "shasum": "f3aed35f5d3267788c8c7c26bc44889d4d431ed0"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -414,7 +420,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-03-13 10:04:43"
+            "time": "2014-03-13 11:16:49"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3416,17 +3422,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.7.2",
-            "alias_normalized": "1.7.2.0",
-            "version": "dev-CGIV-1788-PaginatedHalCollection",
-            "package": "channelgrabber/slim"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
