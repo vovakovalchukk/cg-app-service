@@ -266,3 +266,27 @@ INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-13', '1411-10');
 INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-44', '1411-10');
 INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-45', '1412-20');
 INSERT INTO `item` (`id`, `orderId`) VALUES ('1411-46', '1411-10');
+
+CREATE TABLE `cancel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reason` varchar(255) NOT NULL,
+  `orderId` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `shippingAmount` decimal(12,4) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO cancel (`id`, `reason`, `orderId`, `type`, `shippingAmount`, `timestamp`) VALUES (1, 'No Payment Received', '1411-10', 'cancel', 10.99, '2014-10-10 00:00:00');
+
+CREATE TABLE `cancelItem` (
+  `cancelId` int(11) NOT NULL,
+  `orderItemId` varchar(255) NOT NULL,
+  `sku` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `amount` decimal(12,4) NOT NULL,
+  `unitPrice` decimal(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`) VALUES (1, '1411-11', 'test-sku-1', 10, 0.00, 1.99);
+INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`) VALUES (1, '1411-11', 'test-sku-1', 0, 19.91, 0.00);
