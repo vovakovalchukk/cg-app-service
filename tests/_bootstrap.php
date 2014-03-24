@@ -1,6 +1,6 @@
 <?php
 // This is global bootstrap for autoloading
-
+define('TEST_DIR', __DIR__);
 spl_autoload_register(function ($className)
 {
     $includePaths = [__DIR__ . "/api/_pages/", __DIR__ . "/../vendor/channelgrabber/codeception/CG/"];
