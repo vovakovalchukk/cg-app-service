@@ -2,7 +2,7 @@
 chdir(dirname(__DIR__));
 
 use Cilex\Application as Cilex;
-use CG\Slim\Cilex\GenericCommand;
+use CG\Cilex\GenericCommand;
 
 require_once 'application/bootstrap.php';
 $commands = require_once 'config/console/commands.php';
