@@ -12,8 +12,7 @@ use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
 use CG\InputValidation\Order\Order\Entity as OrderEntityValidationRules;
 use CG\Controllers\Order\Note\Collection as NoteCollection;
 use CG\Controllers\Order\Order;
-use CG\Controllers\Order\Note;
-use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
+
 
 //Tracking
 use CG\Controllers\Order\Tracking;
@@ -38,6 +37,11 @@ use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
 use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
+
+//Note
+use CG\Controllers\Order\Note;
+use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
+use CG\InputValidation\Order\Note\Filter as NoteFilterValidationRules;
 
 //GiftWrap
 use CG\Controllers\Order\Item\GiftWrap;
@@ -188,7 +192,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderNoteCollection',
-        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => NoteFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/note/:noteId' => array (
         'controllers' => function($orderId, $noteId) use ($serviceManager) {
