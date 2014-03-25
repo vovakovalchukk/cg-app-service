@@ -24,6 +24,7 @@ use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
 use CG\Controllers\Order\Alert;
 use CG\Controllers\Order\Alert\Collection as AlertCollection;
 use CG\InputValidation\Order\Alert\Entity as AlertEntityValidationRules;
+use CG\InputValidation\Order\Alert\Filter as AlertFilterValidationRules;
 
 //Archive
 use CG\Controllers\Order\Archive;
@@ -251,7 +252,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderAlertCollection',
-        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => AlertFilterValidationRules::Class, "flatten" => false)
     ),
     '/order/:orderId/alert/:alertId' => array (
         'controllers' => function($orderId, $alertId) use ($serviceManager) {
