@@ -18,6 +18,7 @@ use CG\Controllers\Order\Order;
 use CG\Controllers\Order\Tracking;
 use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
 use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
+use CG\InputValidation\Order\Tracking\Filter as TrackingFilterValidationRules;
 
 //Alert
 use CG\Controllers\Order\Alert;
@@ -224,7 +225,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderTrackingCollection',
-        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => TrackingFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/tracking/:trackingId' => array (
         'controllers' => function($orderId, $trackingId) use ($serviceManager) {
