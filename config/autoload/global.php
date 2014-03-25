@@ -145,6 +145,10 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 
+//Filter
+use CG\Order\Service\Filter\Service as FilterService;
+use CG\Order\Service\Filter\Storage\Cache as FilterCache;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -798,6 +802,12 @@ return array(
             AccountApiStorage::class => array(
                 'parameter' => array(
                     'client' => 'account_guzzle'
+                )
+            ),
+            FilterService::class => array(
+                'parameter' => array(
+                    'filterStorage' => FilterCache::class,
+                    'orderStorage' => OrderRepository::class
                 )
             ),
             'preferences' => array(

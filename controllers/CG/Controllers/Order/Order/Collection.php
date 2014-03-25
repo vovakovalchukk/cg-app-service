@@ -25,7 +25,7 @@ class Collection
         $filterEntity = new Filter(
             $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('id') ?: [],
+            $this->getParams('orderIds') ?: [],
             $this->getParams('organisationUnitId') ?: [],
             $this->getParams('status') ?: [],
             $this->getParams('accountId') ?: [],

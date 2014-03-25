@@ -64,6 +64,9 @@ use CG\Controllers\Order\Tag\Collection as TagCollection;
 use CG\InputValidation\Order\Tag\Entity as TagEntityValidationRules;
 use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
 
+//Filter
+use CG\Controllers\Order\Filter;
+use CG\Controllers\Order\Filter\Collection as FilterCollection;
 
 return array(
     '/' => array (
@@ -474,5 +477,37 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'TagEntity',
         'validation' => array("dataRules" => TagEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderFilter' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(FilterCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => array('POST', 'OPTIONS'),
+        'name' => 'FilterCollection',
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderFilter/:filterId' => array (
+        'controllers' => function($filterId) use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Filter::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($filterId)
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'FilterEntity',
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
 );
