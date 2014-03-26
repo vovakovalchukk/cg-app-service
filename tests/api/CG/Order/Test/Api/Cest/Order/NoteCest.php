@@ -22,6 +22,6 @@ class NoteCest
     
     public function checkSortCollection(ApiGuy $I)
     {
-    	$I->amGoingTo('skip viewing collection with sort as sorting alerts has not been implemented yet');
+    	$I->amGoingTo('skip viewing collection with sort as sorting notes has not been implemented yet');
     }
 }
