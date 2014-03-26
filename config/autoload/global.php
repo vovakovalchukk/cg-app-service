@@ -20,6 +20,8 @@ use Zend\EventManager\EventManager;
 use Zend\Config\Config;
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
+use CG\Cache\IncrementorInterface;
+use CG\Cache\Increment\Incrementor;
 
 //Service
 use CG\App\Service\Service as ServiceService;
@@ -148,6 +150,7 @@ use CG\Account\Client\Storage\Api as AccountApiStorage;
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
+use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
 
 return array(
     'service_manager' => array(
@@ -807,12 +810,24 @@ return array(
             FilterService::class => array(
                 'parameter' => array(
                     'filterStorage' => FilterCache::class,
-                    'orderStorage' => OrderRepository::class
+                    'orderService' => 'OrderService',
+                    'filterEntityStorage' => FilterEntityCache::class
+                )
+            ),
+            FilterCache::class => array(
+                'parameter' => array(
+                    'incrementor' => Incrementor::class
+                )
+            ),
+            Incrementor::class => array(
+                'parameter' => array(
+                    'key' => "OrderFilters"
                 )
             ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
+                'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\ClientPipelineInterface' => 'CG\Cache\Client\RedisPipeline',
                 'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
@@ -822,7 +837,8 @@ return array(
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
                 'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
-                EventManagerInterface::class => CGEventManager::class
+                EventManagerInterface::class => CGEventManager::class,
+                IncrementorInterface::class => Incrementor::class
             )
         )
     )
