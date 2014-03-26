@@ -62,7 +62,7 @@ class Filter implements RulesInterface
                                   ->setMessages(array('notBetween' => 'page should be at least %min%'))
                 )
             ),
-            'orderIds' => array(
+            'id' => array(
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => array(

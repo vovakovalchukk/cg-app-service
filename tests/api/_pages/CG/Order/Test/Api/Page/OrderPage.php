@@ -337,17 +337,10 @@ class OrderPage extends RootPage
         ];
     }
 
-    public static function getFilterMap()
-    {
-        return [
-            "orderIds" => "id"
-        ];
-    }
-
     public static function getFilterFields()
     {
         return [
-            "orderIds" => [],
+            "id" => [],
             "organisationUnitId" => [],
             "status" => [],
             "accountId" => [],
