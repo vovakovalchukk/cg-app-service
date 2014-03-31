@@ -4,11 +4,7 @@ namespace CG\InputValidation\Order\Tracking;
 use CG\Validation\Rules\ValidatorTrait;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
-use Zend\Validator\Between;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\NotEmpty;
 use Zend\Di\Di;
-use CG\Validation\Rules\ArrayOfIntegersValidator;
 
 class Filter implements RulesInterface {
 
