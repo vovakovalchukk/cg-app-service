@@ -37,7 +37,7 @@
         "zendframework/zend-inputfilter": "~2.2.5",
         "zendframework/zend-servicemanager": "~2.2.5",
         "zendframework/zend-validator": "~2.2.5",
-        "channelgrabber/zf2-stdlib" : "~1.1.5"
+        "channelgrabber/zf2-stdlib" : "~1.1.6"
     },
     "require-dev": {
         "codeception/codeception": "1.8.0",
@@ -49,12 +49,12 @@
         "post-install-cmd": [
             "composer -o dump-autoload",
             "php bin/update_di_components.php",
-            "php bin/compile_di.php"
+            "php -d memory_limit=512M bin/compile_di.php"
         ],
         "post-update-cmd": [
             "composer -o dump-autoload",
             "php bin/update_di_components.php",
-            "php bin/compile_di.php"
+            "php -d memory_limit=512M bin/compile_di.php"
         ]
     }
 }
