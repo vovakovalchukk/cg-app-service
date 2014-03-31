@@ -19,9 +19,4 @@ class AlertCest
     {	
     	$I->amGoingTo('skip viewing collection as getTestCollection() should be filtered by order_id first.');
     }
-    
- 	public function checkSortCollection(ApiGuy $I)
-    {      
-    	$I->amGoingTo('skip viewing collection with sort as sorting alerts has not been implemented yet');      
-    }
 }
