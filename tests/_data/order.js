@@ -46,6 +46,7 @@ db.order.insert({
 
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 2,
     "paymentMethod" : "paymentMethod5",
     "paymentReference" : "paymentReference5"
@@ -97,6 +98,7 @@ db.order.insert({
         "tag5"
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 1,
     "paymentMethod" : "paymentMethod4",
     "paymentReference" : "paymentReference4"
@@ -148,6 +150,7 @@ db.order.insert({
         "tag4"
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 1,
     "paymentMethod" : "paymentMethod3",
     "paymentReference" : "paymentReference3"
@@ -198,6 +201,7 @@ db.order.insert({
         "tag2",
         "tag3"
     ],
+    "cancellations" : [],
     "custom": [],
     "batch": 1,
     "paymentMethod" : "paymentMethod2",
@@ -249,6 +253,30 @@ db.order.insert({
         "tag1",
         "tag2",
         "tag5"
+    ],
+    "cancellations" : [
+        {
+            "type" : "cancel",
+            "timestamp" : "2014-10-10 00:00:00",
+            "reason" : "No Payment Received",
+            "shippingAmount" : 10.99,
+            "items" : [
+                {
+                    "orderItemId" : "1411-11",
+                    "sku" : "test-sku-1",
+                    "quantity" : 10,
+                    "amount" : 0,
+                    "unitPrice" : 1.99
+                },
+                {
+                    "orderItemId" : "1411-11",
+                    "sku" : "test-sku-1",
+                    "quantity" : 0,
+                    "amount" : 19.91,
+                    "unitPrice" : 0
+                }
+            ]
+        }
     ],
     "custom": [],
     "batch": 1,

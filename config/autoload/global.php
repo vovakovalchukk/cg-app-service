@@ -145,6 +145,9 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 
+//Cancel
+use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -798,6 +801,13 @@ return array(
             AccountApiStorage::class => array(
                 'parameter' => array(
                     'client' => 'account_guzzle'
+                )
+            ),
+            CancelDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             'preferences' => array(
