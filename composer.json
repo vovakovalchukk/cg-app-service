@@ -40,12 +40,12 @@
         "post-install-cmd": [
             "composer -o dump-autoload",
             "php bin/update_di_components.php",
-            "php -d memory_limit=512M  bin/compile_di.php"
+            "php -d memory_limit=512M bin/compile_di.php"
         ],
         "post-update-cmd": [
             "composer -o dump-autoload",
             "php bin/update_di_components.php",
-            "php -d memory_limit=512M  bin/compile_di.php"
+            "php -d memory_limit=512M bin/compile_di.php"
         ]
     }
 }
