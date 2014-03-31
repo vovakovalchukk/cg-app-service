@@ -2,7 +2,15 @@
 define('GREEN', "\033[32m");
 define('WHITE', "\033[0m");
 
-require_once 'config/di/components.php';
+$frameworkComponents = require dirname(__DIR__) . '/config/di/framework_components.php';
+$phpInternalComponents = require dirname(__DIR__) . '/config/di/php_internal_components.php';
+$vendorComponents = array_merge($frameworkComponents, require dirname(__DIR__) . '/config/di/vendor_components.php');
+
+$componentTypes = [
+    'module' => [],
+    'vendor' => $vendorComponents
+];
+
 require_once 'bootstrap.php';
 
 echo GREEN . 'Compiling DI definitions' . WHITE . PHP_EOL;
