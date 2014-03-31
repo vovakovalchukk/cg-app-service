@@ -2,12 +2,11 @@
 $frameworkComponents = require 'framework_components.php';
 $phpInternalComponents = require 'php_internal_components.php';
 
-$libraryComponents = array();
+$moduleComponents = [];
 
-$vendorComponents = array_merge($frameworkComponents, array(
-    'nocarrier_hal_src_Nocarrier',
-    'guzzle_guzzle_src_Guzzle',
-    'channelgrabber_stdlib_CG_Stdlib'
-));
+$vendorComponents = array_merge($frameworkComponents, require 'vendor_components.php');
 
-$components = array_merge($libraryComponents, $vendorComponents, $phpInternalComponents);
+$componentTypes = [
+    'module' => $moduleComponents,
+    'vendor' => $vendorComponents
+];

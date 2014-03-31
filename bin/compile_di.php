@@ -2,8 +2,8 @@
 define('GREEN', "\033[32m");
 define('WHITE', "\033[0m");
 
-require_once 'bootstrap.php';
 require_once 'config/di/components.php';
+require_once 'bootstrap.php';
 
 echo GREEN . 'Compiling DI definitions' . WHITE . PHP_EOL;
 
@@ -16,12 +16,21 @@ foreach ($it as $file) {
         unlink($file->getPathname());
     }
 }
+
 $componentArray = [];
+
+foreach ($phpInternalComponents as $class) {
+    $diCompiler = new CG\Zend\Stdlib\Di\Definition\RuntimeCompiler;
+    echo "Compiling inbuilt ".$class."\n";
+    $diCompiler->compileClass($class);
+    $componentArray = array_merge($componentArray, $diCompiler->toArrayDefinition()->toArray());
+}
+
 foreach ($componentTypes as $type => $components) {
     foreach ($components as $component) {
         $diCompiler = new CG\Zend\Stdlib\Di\Definition\RuntimeCompiler;
         $dir = dirname(__DIR__) . '/' . $type . '/' . stripslashes(preg_replace('|(?<!\\\\)_|', '/', $component));
-        echo $dir.PHP_EOL;
+        echo "Compiling ".$type." ".$dir."\n";
         $diCompiler->addDirectory($dir);
         $diCompiler->setAllowReflectionExceptions();
         $diCompiler->compile();
