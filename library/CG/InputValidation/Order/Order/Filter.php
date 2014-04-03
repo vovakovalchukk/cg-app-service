@@ -14,7 +14,6 @@ use CG\Validation\Rules\InArrayValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use Zend\Validator\StringLength;
 use CG\Validation\ValidatorChain;
-use CG\Validation\Rules\DecimalValidator;
 
 class Filter implements RulesInterface
 {
@@ -70,15 +69,15 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "id"))
                 ),
             ),
-            'purchaseDateFrom' => array(
-                'name'       => 'purchaseDateFrom',
+            'timeFrom' => array(
+                'name'       => 'timeFrom',
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
                 )
             ),
-            'purchaseDateTo' => array(
-                'name'       => 'purchaseDateTo',
+            'timeTo' => array(
+                'name'       => 'timeTo',
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
@@ -126,21 +125,21 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiSameItem']])
                 )
             ),
-            'shippingAddressCountry' => array(
-                'name'       => 'shippingAddressCountry',
+            'country' => array(
+                'name'       => 'country',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingAddressCountry')),
-                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'shippingAddressCountry',
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'country')),
+                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'country',
                         'haystack' => CountryCode::getCountryCodes()))
                 )
             ),
-            'shippingAddressCountryExclude' => array(
-                'name'       => 'shippingAddressCountryExclude',
+            'countryExclude' => array(
+                'name'       => 'countryExclude',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingAddressCountryExclude')),
-                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'shippingAddressCountryExclude',
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'countryExclude')),
+                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'countryExclude',
                         'haystack' => CountryCode::getCountryCodes()))
                 )
             ),
@@ -207,21 +206,7 @@ class Filter implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'paymentReference'))
                 )
-            ),
-            'totalFrom' => array(
-                'name'       => 'totalFrom',
-                'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, array('name' => 'totalFrom'))
-                )
-            ),
-            'totalTo' => array(
-                'name'       => 'totalTo',
-                'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, array('name' => 'totalTo'))
-                )
-            ),
+            )
         );
     }
 }
