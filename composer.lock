@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ab1268903442861b097a472082983c70",
+    "hash": "6a7069d17babee0afc7f0400a093f1bf",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -243,11 +243,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-1899-fix-orders",
+            "version": "dev-CGIV-1891-implement-filtering-logic",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "936f0a5bc600412eabf58e5996b1fdbb8692c3d5"
+                "reference": "14da15c3d8bb99c957aeed292a72287dcc9dfea3"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -272,7 +272,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-03-31 16:19:34"
+            "time": "2014-04-03 14:36:57"
         },
         {
             "name": "channelgrabber/permission",
@@ -551,17 +551,17 @@
         },
         {
             "name": "channelgrabber/zf2-stdlib",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgzf2stdlib.git",
-                "reference": "769aad210c002a979aee67ff50240cceae1f5d9e"
+                "reference": "2640ba4b63682a7c4be166462148d1653131e57c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.5-2183ff.zip",
-                "reference": "769aad210c002a979aee67ff50240cceae1f5d9e",
-                "shasum": "134606b24e9f0ddb34ef87fd01263ce8d9eb35d1"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.6-ad95d8.zip",
+                "reference": "2640ba4b63682a7c4be166462148d1653131e57c",
+                "shasum": "ff708acab9bd6daa680d52c20c740cf0f912b44a"
             },
             "require": {
                 "channelgrabber/cache": ">=1.1.0,<1.3.0",
@@ -578,7 +578,7 @@
                     "CG\\Zend\\Stdlib\\": ""
                 }
             },
-            "time": "2014-01-17 11:53:01"
+            "time": "2014-03-31 13:55:35"
         },
         {
             "name": "cilex/cilex",
@@ -2872,22 +2872,22 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "1.2.13",
+            "version": "1.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94"
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "phpunit/php-file-iterator": ">=1.3.0@stable",
-                "phpunit/php-text-template": ">=1.1.1@stable",
+                "phpunit/php-text-template": ">=1.2.0@stable",
                 "phpunit/php-token-stream": ">=1.1.3@stable"
             },
             "require-dev": {
@@ -2929,7 +2929,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-09-10 08:14:32"
+            "time": "2014-03-28 10:53:45"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2978,16 +2978,16 @@
         },
         {
             "name": "phpunit/php-text-template",
-            "version": "1.1.4",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
-                "reference": "5180896f51c5b3648ac946b05f9ec02be78a0b23"
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5180896f51c5b3648ac946b05f9ec02be78a0b23",
-                "reference": "5180896f51c5b3648ac946b05f9ec02be78a0b23",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
                 "shasum": ""
             },
             "require": {
@@ -3018,7 +3018,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2012-10-31 18:15:28"
+            "time": "2014-01-30 17:20:04"
         },
         {
             "name": "phpunit/php-timer",
@@ -3116,16 +3116,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.33",
+            "version": "3.7.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "619f9179d6d30be8fc7333b5eaba9132dbaa8142"
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/619f9179d6d30be8fc7333b5eaba9132dbaa8142",
-                "reference": "619f9179d6d30be8fc7333b5eaba9132dbaa8142",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
                 "shasum": ""
             },
             "require": {
@@ -3134,11 +3134,11 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpunit/php-code-coverage": "~1.2.1",
-                "phpunit/php-file-iterator": "~1.3.1",
-                "phpunit/php-text-template": "~1.1.1",
-                "phpunit/php-timer": "~1.0.4",
-                "phpunit/phpunit-mock-objects": "~1.2.0",
+                "phpunit/php-code-coverage": "~1.2",
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.1",
+                "phpunit/php-timer": "~1.0",
+                "phpunit/phpunit-mock-objects": "~1.2",
                 "symfony/yaml": "~2.0"
             },
             "require-dev": {
@@ -3186,7 +3186,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-03-26 11:35:32"
+            "time": "2014-03-28 11:04:36"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3443,9 +3443,9 @@
     ],
     "aliases": [
         {
-            "alias": "1.4.16",
-            "alias_normalized": "1.4.16.0",
-            "version": "dev-CGIV-1899-fix-orders",
+            "alias": "1.4.18",
+            "alias_normalized": "1.4.18.0",
+            "version": "dev-CGIV-1891-implement-filtering-logic",
             "package": "channelgrabber/order"
         }
     ],
