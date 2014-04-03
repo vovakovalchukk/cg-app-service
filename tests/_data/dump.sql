@@ -285,8 +285,9 @@ CREATE TABLE `cancelItem` (
   `sku` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
   `amount` decimal(12,4) NOT NULL,
+  `orderId` varchar(255) NOT NULL,
   `unitPrice` decimal(12,4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`) VALUES (1, '1411-11', 'test-sku-1', 10, 0.00, 1.99);
-INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`) VALUES (1, '1411-11', 'test-sku-1', 0, 19.91, 0.00);
+INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`, `orderId`) VALUES (1, '1411-11', 'test-sku-1', 10, 0.00, 1.99, '1411-10');
+INSERT INTO cancelItem (`cancelId`, `orderItemId`, `sku`, `quantity`, `amount`, `unitPrice`, `orderId`) VALUES (1, '1411-11', 'test-sku-1', 0, 19.91, 0.00, '1411-10');
