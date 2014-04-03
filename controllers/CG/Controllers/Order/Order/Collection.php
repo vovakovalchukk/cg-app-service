@@ -30,21 +30,23 @@ class Collection
             $this->getParams('status') ?: [],
             $this->getParams('accountId') ?: [],
             $this->getParams('channel') ?: [],
-            $this->getParams('country') ?: [],
-            $this->getParams('countryExclude') ?: [],
+            $this->getParams('shippingAddressCountry') ?: [],
+            $this->getParams('shippingAddressCountryExclude') ?: [],
             $this->getParams('shippingMethod') ?: [],
             $this->getParams('searchTerm'),
             $this->getParams('includeArchived'),
             $this->getParams('multiLineSameOrder'),
             $this->getParams('multiSameItem'),
             $this->getParams('batch') ?: [],
-            $this->getParams('timeFrom'),
-            $this->getParams('timeTo'),
+            $this->getParams('purchaseDateFrom'),
+            $this->getParams('purchaseDateTo'),
             $this->getParams('orderBy'),
             $this->getParams('orderDirection'),
             $this->getParams('tag') ? $this->getParams('tag') : [],
             $this->getParams('paymentMethod') ? $this->getParams('paymentMethod') : [],
-            $this->getParams('paymentReference') ? $this->getParams('paymentReference') : []
+            $this->getParams('paymentReference') ? $this->getParams('paymentReference') : [],
+            $this->getParams('totalFrom'),
+            $this->getParams('totalTo')
         );
         return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
     }
