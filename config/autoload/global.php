@@ -89,6 +89,7 @@ use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Controllers\Order\Item as ItemController;
+use CG\Controllers\Order\Item\Collection as ItemCollectionController;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
 //Fee
@@ -151,6 +152,9 @@ use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
+
+//Cancel
+use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 return array(
     'service_manager' => array(
@@ -545,6 +549,11 @@ return array(
                     'service' => 'ItemService'
                 )
             ),
+            ItemCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'ItemCollectionService'
+                )
+            ),
             'ItemService' => array(
                 'parameters' => array(
                     'repository' => ItemETagStorage::class,
@@ -563,13 +572,6 @@ return array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
                     'repository' => ItemPersistentStorage::class
-                )
-            ),
-            ItemDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
                 )
             ),
             ItemPersistentDbStorage::class => array(
@@ -822,6 +824,13 @@ return array(
             Incrementor::class => array(
                 'parameter' => array(
                     'key' => "OrderFilters"
+                )
+            ),
+            CancelDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             'preferences' => array(

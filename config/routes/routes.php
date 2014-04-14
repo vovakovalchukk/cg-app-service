@@ -31,7 +31,9 @@ use CG\InputValidation\Order\Archive\Entity as ArchiveEntityValidationRules;
 
 //Item
 use CG\Controllers\Order\Item;
+use CG\Controllers\Order\Item\Collection as ItemCollection;
 use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
+use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
 
 //Fee
 use CG\Controllers\Order\Item\Fee;
@@ -303,6 +305,21 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderUserChangeEntity',
         'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderItem' => array (
+        'controllers' => function() use ($serviceManager) {
+                $di = $serviceManager->get('Di');
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+                $controller = $di->get(ItemCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method()
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'OrderItemCollection',
+        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false)
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($serviceManager) {
