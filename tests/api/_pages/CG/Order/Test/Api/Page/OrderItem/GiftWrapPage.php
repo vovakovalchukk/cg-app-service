@@ -67,7 +67,7 @@ class GiftWrapPage extends OrderItemEntityPage
                  "giftWrapMessage" => "Wrap Message 5",
                  "giftWrapPrice" => 5.99,
                  "giftWrapTaxPercentage" => 0.5,
-                 "organisationUnitId" => 2
+                 "organisationUnitId" => 1
                 ],
                 ["id" => 6,
                     "orderItemId" => "1411-11",

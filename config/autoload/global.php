@@ -87,6 +87,7 @@ use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Controllers\Order\Item as ItemController;
+use CG\Controllers\Order\Item\Collection as ItemCollectionController;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
 //Fee
@@ -541,6 +542,11 @@ return array(
                     'service' => 'ItemService'
                 )
             ),
+            ItemCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'ItemCollectionService'
+                )
+            ),
             'ItemService' => array(
                 'parameters' => array(
                     'repository' => ItemETagStorage::class,
@@ -559,13 +565,6 @@ return array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
                     'repository' => ItemPersistentStorage::class
-                )
-            ),
-            ItemDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
                 )
             ),
             ItemPersistentDbStorage::class => array(
