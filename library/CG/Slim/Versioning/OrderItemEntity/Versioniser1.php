@@ -38,9 +38,9 @@ class Versioniser1 implements VersioniserInterface
 
         $data['externalId'] = null;
 
-        if (isset($params['id'])) {
+        if (isset($params['orderItemId'])) {
             try {
-                $entity = $this->getService()->fetch($params['id']);
+                $entity = $this->getService()->fetch($params['orderItemId']);
                 $data['externalId'] = $entity->getExternalId();
             } catch (NotFound $exception) {
                 // Entity not found so no information to copy
