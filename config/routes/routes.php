@@ -66,6 +66,8 @@ use CG\Controllers\Order\Tag\Collection as TagCollection;
 use CG\InputValidation\Order\Tag\Entity as TagEntityValidationRules;
 use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
 
+//Versioning
+use CG\Slim\Versioning\Version;
 
 return array(
     '/' => array (
@@ -316,7 +318,8 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderItemCollection',
-        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
+        'version' => new Version(1, 2),
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($serviceManager) {
@@ -332,7 +335,8 @@ return array(
             },
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
         'name' => 'OrderItemEntity',
-        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2),
     ),
     '/orderItem/:orderItemId/fee' => array (
         'controllers' => function($orderItemId) use ($serviceManager) {
