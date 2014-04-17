@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5516019cf0e3ec0332dcfb75a385a970",
+    "hash": "cd649018d5f2aa760b5df96f55802721",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -245,11 +245,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-1977-fix-filtering-of-orders",
+            "version": "1.5.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "adfab5abe389038ac0737ae5c394ddf5fffa88da"
+                "reference": "31ec29dffc4184c2f9bf6916ab5137983681cf01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.7-e97ed3.zip",
+                "reference": "31ec29dffc4184c2f9bf6916ab5137983681cf01",
+                "shasum": "ac61e3401fbe2e35f89a84d6ae19c292c9273ea7"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -274,7 +280,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-04-17 13:18:30"
+            "time": "2014-04-17 14:56:57"
         },
         {
             "name": "channelgrabber/permission",
@@ -445,11 +451,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-1977-fix-filtering-of-orders",
+            "version": "2.5.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "48921ddf3706190319c05e0e06d9c529761c20be"
+                "reference": "86e9e770e5bfed322cff03ed8079154d1facf782"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.17-deeac8.zip",
+                "reference": "86e9e770e5bfed322cff03ed8079154d1facf782",
+                "shasum": "87f9a3cfaded3d4cedae6f68440b844a8e1a1e18"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -466,7 +478,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-04-17 09:41:21"
+            "time": "2014-04-17 14:50:35"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -3505,24 +3517,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.5.5",
-            "alias_normalized": "1.5.5.0",
-            "version": "dev-CGIV-1977-fix-filtering-of-orders",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "2.5.16",
-            "alias_normalized": "2.5.16.0",
-            "version": "dev-CGIV-1977-fix-filtering-of-orders",
-            "package": "channelgrabber/stdlib"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
