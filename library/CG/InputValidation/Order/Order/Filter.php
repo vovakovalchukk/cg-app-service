@@ -10,6 +10,7 @@ use Zend\Validator\InArray;
 use Zend\Validator\Identical;
 use CG\Validation\Rules\BooleanValidator;
 use CG\Constant\CountryCode;
+use CG\Constant\CurrencyCode;
 use CG\Validation\Rules\InArrayValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use Zend\Validator\StringLength;
@@ -119,11 +120,11 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'channel'))
                 )
             ),
-            'includeArchived' => array(
-                'name'       => 'includeArchived',
+            'archived' => array(
+                'name'       => 'archived',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiSameItem']])
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'archived']])
                 )
             ),
             'shippingAddressCountry' => array(
@@ -220,6 +221,22 @@ class Filter implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(DecimalValidator::class, array('name' => 'totalTo'))
+                )
+            ),
+            'currencyCode' => array(
+                'name'       => 'currencyCode',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'currencyCode')),
+                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'currencyCode',
+                        'haystack' => CurrencyCode::getCurrencyCodes()))
+                )
+            ),
+            'buyerMessage' => array(
+                'name'       => 'buyerMessage',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'buyerMessage']])
                 )
             ),
         );

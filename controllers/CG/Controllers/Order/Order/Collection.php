@@ -22,32 +22,7 @@ class Collection
 
     public function get()
     {
-        $filterEntity = new Filter(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('organisationUnitId') ?: [],
-            $this->getParams('status') ?: [],
-            $this->getParams('accountId') ?: [],
-            $this->getParams('channel') ?: [],
-            $this->getParams('shippingAddressCountry') ?: [],
-            $this->getParams('shippingAddressCountryExclude') ?: [],
-            $this->getParams('shippingMethod') ?: [],
-            $this->getParams('searchTerm'),
-            $this->getParams('includeArchived'),
-            $this->getParams('multiLineSameOrder'),
-            $this->getParams('multiSameItem'),
-            $this->getParams('batch') ?: [],
-            $this->getParams('purchaseDateFrom'),
-            $this->getParams('purchaseDateTo'),
-            $this->getParams('orderBy'),
-            $this->getParams('orderDirection'),
-            $this->getParams('tag') ? $this->getParams('tag') : [],
-            $this->getParams('paymentMethod') ? $this->getParams('paymentMethod') : [],
-            $this->getParams('paymentReference') ? $this->getParams('paymentReference') : [],
-            $this->getParams('totalFrom'),
-            $this->getParams('totalTo')
-        );
+        $filterEntity = $this->getDi()->newInstance(Filter::class, $this->getParams());
         return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
     }
 }
