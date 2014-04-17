@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3a750d07d25d1f87ae99d5c1f7771342",
+    "hash": "205afa02080562d7f608bd205674f834",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -243,11 +243,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-1984-ExternalItemId",
+            "version": "1.5.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a36d4bb66dc35ab3271fa06cdc199f56c8b7f242"
+                "reference": "8b1e1207f5cf9c8014e20f858c35220de118054e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.6-63cf99.zip",
+                "reference": "8b1e1207f5cf9c8014e20f858c35220de118054e",
+                "shasum": "89c1fada1d286935b7466b0239c20cc2ec2f5b2e"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -272,7 +278,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-04-17 11:17:34"
+            "time": "2014-04-17 14:01:21"
         },
         {
             "name": "channelgrabber/permission",
@@ -3509,17 +3515,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.5.6",
-            "alias_normalized": "1.5.6.0",
-            "version": "dev-CGIV-1984-ExternalItemId",
-            "package": "channelgrabber/order"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
