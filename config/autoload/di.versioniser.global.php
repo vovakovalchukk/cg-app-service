@@ -16,7 +16,7 @@ return [
             ],
             'Versioniser_OrderItemEntity_1' => [
                 'parameter' => [
-                    'service' => 'ItemService'
+                    'service' => 'ItemCollectionService'
                 ],
             ],
         ],
