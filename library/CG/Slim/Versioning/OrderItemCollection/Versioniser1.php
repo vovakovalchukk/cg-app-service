@@ -30,7 +30,7 @@ class Versioniser1 implements VersioniserInterface
 
     public function upgradeRequest(array $params, Hal $request)
     {
-
+        return $this->getEntityVersioner()->upgradeRequest($params, $request);
     }
 
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
