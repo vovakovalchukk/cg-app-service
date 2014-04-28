@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "66fe612f99c74c740eb414b67d69e914",
+    "hash": "22bcd68c09b66a818901e959ebc82ee0",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -1339,11 +1339,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "dev-CGIV-2057-EscapeCommandLineArguments",
+            "version": "1.1.42",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "1bc713d842fc75c5a033254183e7fd080690c9bd"
+                "reference": "c0a0647985244541f4d94676453e93a714876938"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.42-0c33af.zip",
+                "reference": "c0a0647985244541f4d94676453e93a714876938",
+                "shasum": "96238d9b45587a9a47bba466e66cb0e573f36845"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -1356,7 +1362,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2014-04-25 13:47:38"
+            "time": "2014-04-28 07:34:27"
         },
         {
             "name": "codeception/codeception",
@@ -2575,17 +2581,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.42",
-            "alias_normalized": "1.1.42.0",
-            "version": "dev-CGIV-2057-EscapeCommandLineArguments",
-            "package": "channelgrabber/codeception"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phpspec/phpspec": 20,
-        "channelgrabber/codeception": 20
+        "phpspec/phpspec": 20
     },
     "platform": [
 
