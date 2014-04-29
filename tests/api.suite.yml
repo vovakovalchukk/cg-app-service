@@ -1,0 +1,34 @@
+class_name: ApiGuy
+modules:
+    enabled: [REST, PhpBrowser, ApiHelper, Db, Redis, MongoDb]
+    config:
+        PhpBrowser:
+            url: 'https://cg_app.channelgrabber.com.local'
+            curl:
+                CURLOPT_SSL_VERIFYHOST: false
+                CURLOPT_SSL_VERIFYPEER: false
+                CURLOPT_CAINFO: 'data/certificates/cacert.pem'
+                CURLOPT_SSLCERT: 'data/certificates/cg_app_client.pem'
+        REST:
+            url: 'https://cg_app.channelgrabber.com.local'
+        ApiHelper:
+            url: 'https://cg_app.channelgrabber.com.local'
+        Db:
+            dsn: 'mysql:host=192.168.33.51;dbname=cg_app'
+            user: 'write'
+            password: 'password'
+            dump: 'tests/_data/dump.sql'
+            populate: true
+            cleanup: true
+        Redis:
+            cleanup: true
+            host: '192.168.33.51'
+            port: '6379'
+            database: '0'
+        MongoDb:
+            dsn: 'mongodb://192.168.33.51:27017/order'
+            user: ''
+            password: ''
+            dump: 'tests/_data/mongo.js'
+            populate: true
+            cleanup: true
