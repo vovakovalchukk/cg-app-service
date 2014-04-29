@@ -20,6 +20,8 @@ use Zend\EventManager\EventManager;
 use Zend\Config\Config;
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
+use CG\Cache\IncrementorInterface;
+use CG\Cache\Increment\Incrementor;
 
 //Service
 use CG\App\Service\Service as ServiceService;
@@ -145,6 +147,11 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 //Cilex Command
 use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
+
+//Filter
+use CG\Order\Service\Filter\Service as FilterService;
+use CG\Order\Service\Filter\Storage\Cache as FilterCache;
+use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
@@ -802,6 +809,23 @@ return array(
                     'client' => 'account_guzzle'
                 )
             ),
+            FilterService::class => array(
+                'parameter' => array(
+                    'filterStorage' => FilterCache::class,
+                    'orderService' => 'OrderService',
+                    'filterEntityStorage' => FilterEntityCache::class
+                )
+            ),
+            FilterCache::class => array(
+                'parameter' => array(
+                    'incrementor' => Incrementor::class
+                )
+            ),
+            Incrementor::class => array(
+                'parameter' => array(
+                    'key' => "OrderFilters"
+                )
+            ),
             CancelDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
@@ -812,6 +836,7 @@ return array(
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
+                'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\ClientPipelineInterface' => 'CG\Cache\Client\RedisPipeline',
                 'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
@@ -821,7 +846,8 @@ return array(
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
                 'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
-                EventManagerInterface::class => CGEventManager::class
+                EventManagerInterface::class => CGEventManager::class,
+                IncrementorInterface::class => Incrementor::class
             )
         )
     )

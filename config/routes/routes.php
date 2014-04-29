@@ -66,11 +66,16 @@ use CG\Controllers\Order\Tag\Collection as TagCollection;
 use CG\InputValidation\Order\Tag\Entity as TagEntityValidationRules;
 use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
 
+//Filter
+use CG\Controllers\Order\Filter;
+use CG\Controllers\Order\Filter\Collection as FilterCollection;
+
+//Versioning
+use CG\Slim\Versioning\Version;
 
 return array(
     '/' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -84,8 +89,7 @@ return array(
         'name' => 'Root'
     ),
     '/service' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -100,8 +104,7 @@ return array(
         'validation' => array("dataRules" => ServiceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/service/:id' => array (
-        'controllers' => function($id) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($id) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(Service::class, array());
@@ -115,8 +118,7 @@ return array(
         'validation' => array("dataRules" => ServiceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/service/:id/event' => array (
-        'controllers' => function($id) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($id) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(EventCollection::class, array());
@@ -130,8 +132,7 @@ return array(
         'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/service/:id/event/:eventId' => array (
-        'controllers' => function($id, $eventId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($id, $eventId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(Event::class, array());
@@ -145,8 +146,7 @@ return array(
         'validation' => array("dataRules" => EventEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(OrderCollection::class, array());
@@ -160,8 +160,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -176,8 +175,7 @@ return array(
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/note' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -192,8 +190,7 @@ return array(
         'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/note/:noteId' => array (
-        'controllers' => function($orderId, $noteId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId, $noteId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -208,8 +205,7 @@ return array(
         'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/tracking' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -224,8 +220,7 @@ return array(
         'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/tracking/:trackingId' => array (
-        'controllers' => function($orderId, $trackingId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId, $trackingId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -240,8 +235,7 @@ return array(
         'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/alert' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -256,8 +250,7 @@ return array(
         'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/alert/:alertId' => array (
-        'controllers' => function($orderId, $alertId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId, $alertId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -272,8 +265,7 @@ return array(
         'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/archive' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -288,8 +280,7 @@ return array(
         'validation' => array("dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/order/:orderId/userChange' => array (
-        'controllers' => function($orderId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -304,8 +295,7 @@ return array(
         'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderItem' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(ItemCollection::class, array());
@@ -316,11 +306,11 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderItemCollection',
-        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
+        'version' => new Version(1, 2),
     ),
     '/orderItem/:orderItemId' => array (
-        'controllers' => function($orderItemId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderItemId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -332,11 +322,11 @@ return array(
             },
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
         'name' => 'OrderItemEntity',
-        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2),
     ),
     '/orderItem/:orderItemId/fee' => array (
-        'controllers' => function($orderItemId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderItemId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -351,8 +341,7 @@ return array(
         'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderItem/:orderItemId/fee/:feeId' => array (
-        'controllers' => function($orderItemId, $feeId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderItemId, $feeId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -367,8 +356,7 @@ return array(
         'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderItem/:orderItemId/giftWrap' => array (
-        'controllers' => function($orderItemId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderItemId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -383,8 +371,7 @@ return array(
         'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderItem/:orderItemId/giftWrap/:giftWrapId' => array (
-        'controllers' => function($orderItemId, $giftWrapId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($orderItemId, $giftWrapId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -399,8 +386,7 @@ return array(
         'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderBatch' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(BatchCollection::class, array());
@@ -414,8 +400,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false)
     ),
     '/orderBatch/:batchId' => array (
-        'controllers' => function($batchId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($batchId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -430,8 +415,7 @@ return array(
         'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/userPreference' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
                 $controller = $di->get(UserPreferenceCollection::class, array());
@@ -445,8 +429,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/userPreference/:userId' => array (
-        'controllers' => function($userId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($userId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -461,8 +444,7 @@ return array(
         'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
     ),
     '/orderTag' => array (
-        'controllers' => function() use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function() use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -477,8 +459,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => TagFilterValidationRules::class, "flatten" => false)
     ),
     '/orderTag/:tagId' => array (
-        'controllers' => function($tagId) use ($serviceManager) {
-                $di = $serviceManager->get('Di');
+        'controllers' => function($tagId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
@@ -491,5 +472,35 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'TagEntity',
         'validation' => array("dataRules" => TagEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderFilter' => array (
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(FilterCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => array('POST', 'OPTIONS'),
+        'name' => 'FilterCollection',
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
+    ),
+    '/orderFilter/:filterId' => array (
+        'controllers' => function($filterId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Filter::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($filterId)
+                );
+            },
+        'via' => array('GET', 'OPTIONS'),
+        'name' => 'FilterEntity',
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
 );
