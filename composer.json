@@ -35,7 +35,7 @@
         "channelgrabber/userpreference": "1.0.0",
         "channelgrabber/validation": "~1.1.5",
         "channelgrabber/vnderror": "~1.0.0",
-        "channelgrabber/zf2-stdlib": "~1.1.5",
+        "channelgrabber/zf2-stdlib": "~1.1.6",
         "guzzle/guzzle": "~3.7",
         "nocarrier/hal": "~0.9.4",
         "predis/predis": "~0.8.3",
@@ -53,17 +53,17 @@
         "codeception/codeception": "~1.8.0",
         "phpspec/phpspec": "2.0.*@dev",
         "phpspec/prophecy": "~1.0",
-        "channelgrabber/codeception": "~1.1.39"
+        "channelgrabber/codeception": "~1.1.42"
     },
     "scripts": {
         "post-install-cmd": [
             "composer -o dump-autoload",
-            "php -d memory_limit=512M bin/update_di_components.php",
+            "php bin/update_di_components.php",
             "php -d memory_limit=512M bin/compile_di.php"
         ],
         "post-update-cmd": [
             "composer -o dump-autoload",
-            "php -d memory_limit=512M bin/update_di_components.php",
+            "php bin/update_di_components.php",
             "php -d memory_limit=512M bin/compile_di.php"
         ]
     }
