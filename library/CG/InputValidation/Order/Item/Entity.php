@@ -37,6 +37,11 @@ class Entity implements RulesInterface
                 'validators' => array(
                 )
             ),
+            'externalId' => [
+                'name'       => 'externalId',
+                'required'   => false,
+                'validators' => []
+            ],
             'orderId' => array(
                 'name'       => 'orderId',
                 'required'   => false,

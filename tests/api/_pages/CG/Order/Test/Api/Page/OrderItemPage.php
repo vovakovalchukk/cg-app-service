@@ -19,7 +19,6 @@ class OrderItemPage extends RootPage
     public static function notAllowedMethods(){
         return [
                 static::POST    => static::POST,
-            static::GET    => static::GET,
             static::PUT    => static::PUT,
             static::DELETE    => static::DELETE
         ];
@@ -148,10 +147,5 @@ class OrderItemPage extends RootPage
                 "individualItemDiscountPrice",
                 "organisationUnitId"
         ];
-    }
-
-    public static function getParentIdField()
-    {
-        return "orderId";
     }
 }
