@@ -24,8 +24,12 @@ class Collection
     public function get()
     {
         try {
-            return $this->getService()->fetchInvoiceCollectionByOrganisationUnitWithHardCoded(
-                $this->getParams('organisationUnitId') ?: []
+            return $this->getService()->fetchCollectionByPaginationAsHal(
+                $this->getParams('limit'),
+                $this->getParams('page'),
+                $this->getParams('id') ?: [],
+                $this->getParams('organisationUnitId') ?: [],
+                $this->getParams('type') ?: []
             );
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
