@@ -153,6 +153,16 @@ use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
 
+//Template
+use CG\Template\Service as TemplateService;
+use CG\Template\Repository as TemplateRepository;
+use CG\Template\Storage\Cache as TemplateCacheStorage;
+use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
+use CG\Template\Mapper as TemplateMapper;
+use CG\Controllers\Template\Template as TemplateController;
+use CG\Controllers\Template\Template\Collection as TemplateCollectionController;
+use CG\Template\Storage\ETag as TemplateETagStorage;
+
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
@@ -228,6 +238,8 @@ return array(
                 'BatchCollectionService' => BatchService::class,
                 'UserPreferenceService' => UserPreferenceService::class,
                 'UserPreferenceCollectionService' => UserPreferenceService::class,
+                'TemplateService' => TemplateService::class,
+                'TemplateCollectionService' => TemplateService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -831,6 +843,40 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql'
+                )
+            ),
+            TemplateETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => TemplateRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Template_Shared_Entity'
+                )
+            ),
+            TemplateController::class => array(
+                'parameters' => array(
+                    'service' => 'TemplateService'
+                )
+            ),
+            TemplateCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'TemplateCollectionService'
+                )
+            ),
+            'TemplateService' => array(
+                'parameters' => array(
+                    'repository' => TemplateETagStorage::class
+                )
+            ),
+            'TemplateCollectionService' => array(
+                'parameters' => array(
+                    'repository' => TemplateRepository::class
+                )
+            ),
+            TemplateRepository::class => array(
+                'parameter' => array(
+                    'storage' => TemplateCacheStorage::class,
+                    'repository' => TemplateMongoDbStorage::class
                 )
             ),
             'preferences' => array(
