@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0e1c601cdd4ad81d0448a0fe6e37e830",
+    "hash": "0315a5569d1a15d67cc797b3dfd7e462",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -2454,11 +2454,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "dev-CGIV-2065-CollectionTraitBugfix",
+            "version": "1.1.43",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "38ba7bd8781cfe8cae085a046109ad6042f6b748"
+                "reference": "3025b354e8b64da677de1bb15102a804b208dac2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.43-7dad80.zip",
+                "reference": "3025b354e8b64da677de1bb15102a804b208dac2",
+                "shasum": "c38dd06c8d16867a53c356e1e55741d2f9e471c8"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -2471,7 +2477,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2014-04-29 11:22:03"
+            "time": "2014-04-29 14:50:47"
         },
         {
             "name": "channelgrabber/phpunit",
@@ -3511,18 +3517,12 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.43",
-            "alias_normalized": "1.1.43.0",
-            "version": "dev-CGIV-2065-CollectionTraitBugfix",
-            "package": "channelgrabber/codeception"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "phpspec/phpspec": 20,
-        "channelgrabber/codeception": 20
+        "phpspec/phpspec": 20
     },
     "platform": [
 
