@@ -499,7 +499,8 @@ db.template.insert({
             "text": "Random Text",
             "fontColour": "red"
         }
-    ]
+    ],
+    "name": "name1"
 });
 db.template.insert({
     "_id":"2",
@@ -514,7 +515,8 @@ db.template.insert({
             "fontFamily" : "CG\\Template\\FontFamily\\Helvetica",
             "fontColour": "blue"
         }
-    ]
+    ],
+    "name": "name2"
 });
 db.template.insert({
     "_id":"3",
@@ -529,7 +531,8 @@ db.template.insert({
             "fontFamily" : "CG\\Template\\FontFamily\\Symbol",
             "fontColour": "green"
         }
-    ]
+    ],
+    "name": "name3"
 });
 db.template.insert({
     "_id":"4",
@@ -541,7 +544,8 @@ db.template.insert({
         {
             "templateType": "OrderTable"
         }
-    ]
+    ],
+    "name": "name4"
 });
 db.template.insert({
     "_id":"5",
@@ -555,5 +559,6 @@ db.template.insert({
             "source" : "data://image/jpeg;base64,base64encodedImageData",
             "format" : "jpeg"
         }
-    ]
+    ],
+    "name": "name5"
 });

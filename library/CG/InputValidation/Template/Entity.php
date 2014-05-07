@@ -45,6 +45,13 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
+            'name' => array(
+                'name' => 'name',
+                'required' => true,
+                'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
             'organisationUnitId' => array(
                 'name' => 'organisationUnitId',
                 'required' => true,
