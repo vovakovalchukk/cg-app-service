@@ -23,7 +23,7 @@ class Order
 
     public function get($id)
     {
-        try {
+        try {;
             return $this->getService()->fetchAsHal($id);
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);

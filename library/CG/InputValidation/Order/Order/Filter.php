@@ -61,9 +61,22 @@ class Filter implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
-                                  ->setMessages(array('notBetween' => 'page should be at least %min%'))
+                        ->setMessages(array('notBetween' => 'page should be at least %min%'))
                 )
             ),
+            'orderFilter' => array(
+                'name'       => 'orderFilter',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
+
+        );
+    }
+}
+
+/*
             'id' => array(
                 'name'       => 'id',
                 'required'   => false,
@@ -242,3 +255,4 @@ class Filter implements RulesInterface
         );
     }
 }
+*/
