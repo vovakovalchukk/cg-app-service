@@ -9,6 +9,7 @@ use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Zend\Di\Di;
 use CG\Order\Service\Filter\Service as FilterService;
+use CG\Http\Exception\Exception4xx\PreconditionFailed as HttpPreconditionFailed;
 
 class Collection
 {
@@ -31,16 +32,12 @@ class Collection
         } else {
             try {
                 $filterEntity = $this->getFilterService()->fetch($this->getParams('orderFilter'));
-            } catch (\CG\Stdlib\Exception\Runtime\NotFound $e) {
-                throw new \Exception('orderFilter couldnt be found :(');
-
-                // todo attach previous exception
+            } catch (NotFound $e) {
+                throw new HttpPreconditionFailed("OrderFilter could not be found", HttpPreconditionFailed::HTTP_CODE, $e);
             }
         }
-//
-//        print_r($this->getParams('orderFilter'));
-//        print_r($filterEntity);
-//        exit;
+
+        $filterEntity->setLimit(2);
 
         return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
     }
