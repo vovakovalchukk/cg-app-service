@@ -27,19 +27,12 @@ class Collection
 
     public function get()
     {
-        if (! $this->getParams('orderFilter')) {
-            $filterEntity = $this->getDi()->newInstance(Filter::class);
-        } else {
-            try {
-                $filterEntity = $this->getFilterService()->fetch($this->getParams('orderFilter'));
-            } catch (NotFound $e) {
-                throw new HttpPreconditionFailed("OrderFilter could not be found", HttpPreconditionFailed::HTTP_CODE, $e);
-            }
+        if ($this->getParams('orderFilter')) {
+            return $this->getService()->fetchCollectionByFilterId($this->getParams('orderFilter'));
         }
-
-        $filterEntity->setLimit(2);
-
-        return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            $this->getDi()->newInstance(Filter::class, $this->getParams())
+        );
     }
 
     public function setFilterService(FilterService $filterService)
