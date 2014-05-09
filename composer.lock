@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "02db4fd2e8fabe24cb099f654ecf8880",
+    "hash": "8934d99c370c27f390762a8018704c94",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -470,17 +470,11 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.7.3",
+            "version": "dev-CGIV-1843-DependantValidators",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "0d8d22f52542c90d7aa442fcd8ea2942b5bc3ae9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.7.3-750c7e.zip",
-                "reference": "0d8d22f52542c90d7aa442fcd8ea2942b5bc3ae9",
-                "shasum": "607546a4d43dd9826654800445d57317fb291cd7"
+                "reference": "5c47029f7b0ea70932fe4fd339c7014c755e856d"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -495,13 +489,17 @@
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
+            "require-dev": {
+                "channelgrabber/phpunit": ">=1.0.0",
+                "phpunit/phpunit": "3.7.*"
+            },
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-04-04 12:43:30"
+            "time": "2014-05-09 15:54:34"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -645,7 +643,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "c640e6f9cf6f3e8614c20e9b4f9f2e626d77ab6b"
+                "reference": "f7e137be4c7ff070c885ebe63139dc83358db4bd"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
@@ -657,7 +655,7 @@
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2014-05-02 16:12:13"
+            "time": "2014-05-09 15:48:51"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -3971,6 +3969,12 @@
             "package": "channelgrabber/order"
         },
         {
+            "alias": "1.7.2",
+            "alias_normalized": "1.7.2.0",
+            "version": "dev-CGIV-1843-DependantValidators",
+            "package": "channelgrabber/slim"
+        },
+        {
             "alias": "1.2.1",
             "alias_normalized": "1.2.1.0",
             "version": "dev-CGIV-1843-DependantValidators",
@@ -3981,6 +3985,7 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/slim": 20,
         "channelgrabber/validation": 20,
         "phpspec/phpspec": 20
     },
