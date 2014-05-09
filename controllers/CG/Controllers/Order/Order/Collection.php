@@ -8,8 +8,6 @@ use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Zend\Di\Di;
-use CG\Order\Service\Filter\Service as FilterService;
-use CG\Http\Exception\Exception4xx\PreconditionFailed as HttpPreconditionFailed;
 
 class Collection
 {
