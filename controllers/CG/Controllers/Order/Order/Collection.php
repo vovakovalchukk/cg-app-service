@@ -15,11 +15,10 @@ class Collection
 
     protected $filterService;
 
-    public function __construct(Slim $app, OrderService $service, FilterService $filterService, Di $di)
+    public function __construct(Slim $app, OrderService $service, Di $di)
     {
         $this->setSlim($app)
              ->setService($service)
-             ->setFilterService($filterService)
              ->setDi($di);
     }
 
@@ -31,16 +30,5 @@ class Collection
         return $this->getService()->fetchCollectionByFilterAsHal(
             $this->getDi()->newInstance(Filter::class, $this->getParams())
         );
-    }
-
-    public function setFilterService(FilterService $filterService)
-    {
-        $this->filterService = $filterService;
-        return $this;
-    }
-
-    public function getFilterService()
-    {
-        return $this->filterService;
     }
 }

@@ -41,10 +41,13 @@ class Filter implements RulesInterface, ExclusionInterface
     public function getExclusions()
     {
         $ruleKeys = array_keys($this->getRules());
-        unset($ruleKeys['limit']);
-        unset($ruleKeys['page']);
         $excludeOthers = array_fill_keys($ruleKeys, true);
         $excludeFilter = array_fill_keys($ruleKeys, ['orderFilter' => true]);
+        unset($excludeOthers['limit']);
+        unset($excludeOthers['page']);
+        unset($excludeFilter['limit']);
+        unset($excludeFilter['page']);
+        unset($excludeFilter['orderFilter']);
         return array_merge($excludeFilter, ['orderFilter' => $excludeOthers]);
     }
 

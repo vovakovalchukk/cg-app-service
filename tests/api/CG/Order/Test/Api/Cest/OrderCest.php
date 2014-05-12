@@ -6,6 +6,7 @@ use CG\Order\Test\Api\Page\OrderItemPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
+use CG\Order\Test\Api\Page\FilterPage;
 
 class OrderCest
 {
@@ -14,6 +15,47 @@ class OrderCest
     protected function getPageClass()
     {
         return OrderPage::class;
+    }
+
+    /**
+     * @group get
+     * @group custom
+     * @group orderFilter
+     */
+    public function checkOrderFilterWorksCorrectly(ApiGuy $I)
+    {
+        $I->wantTo(
+            'check posting to /orderFilter and then filtering by orderFilter returns correct orders'
+        );
+        $page = $this->getPageClass();
+        $filterData = $page::getFilterData();
+        $I->prepareRequestForContent();
+        $I->sendPOST($page::FILTER_URL, $filterData);
+        $I->seeResponseCodeIs(HttpStatus::CREATED);
+        $filterId = $I->grabDataFromJsonResponse("id")->__value();
+
+        $url = $this->appendFilters($page::getUrl(), ["orderFilter" => $filterId]);
+        $I->prepareRequest();
+        $I->sendGET($url);
+        $I->seeResponseCodeIs(HttpStatus::OK);
+        $I->seeEmbeddedTypeIsOfSize($page::EMBEDDED_RESOURCE, 1);
+    }
+
+    /**
+     * @group get
+     * @group custom
+     * @group orderFilter
+     */
+    public function requestingMutuallyExclusiveFiltersReturns400(ApiGuy $I)
+    {
+        $page = $this->getPageClass();
+        $filters = $page::getMutuallyExclusiveFilters();
+        $url = $this->appendFilters($page::getUrl(), $filters);
+
+        $I->wantTo('check sending mutually exclusive filters throw a 400 Bad Request');
+        $I->prepareRequest();
+        $I->sendGET($url);
+        $I->seeResponseCodeIs(HttpStatus::BAD_REQUEST);
     }
 
     /**
