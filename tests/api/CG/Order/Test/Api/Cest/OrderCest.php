@@ -22,7 +22,7 @@ class OrderCest
      * @group custom
      * @group orderFilter
      */
-    public function checkOrderFilterWorksCorrectly(ApiGuy $I)
+    public function postingFilterAndFilteringOrdersByFilterIdReturnsExpectedResults(ApiGuy $I)
     {
         $I->wantTo(
             'check posting to /orderFilter and then filtering by orderFilter returns correct orders'
