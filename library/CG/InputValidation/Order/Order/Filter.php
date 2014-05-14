@@ -38,15 +38,17 @@ class Filter implements RulesInterface, ExclusionInterface
         $this->di = $di;
     }
 
+    // In this instance, we want "orderFilter" to be exclusive to
+    // everything else, except for "limit" and "page" so the
+    // returned array is generated programmatically.
     public function getExclusions()
     {
-        $ruleKeys = array_keys($this->getRules());
+        $rules = $this->getRules();
+        unset($rules['limit']);
+        unset($rules['page']);
+        $ruleKeys = array_keys($rules);
         $excludeOthers = array_fill_keys($ruleKeys, true);
         $excludeFilter = array_fill_keys($ruleKeys, ['orderFilter' => true]);
-        unset($excludeOthers['limit']);
-        unset($excludeOthers['page']);
-        unset($excludeFilter['limit']);
-        unset($excludeFilter['page']);
         unset($excludeFilter['orderFilter']);
         return array_merge($excludeFilter, ['orderFilter' => $excludeOthers]);
     }
