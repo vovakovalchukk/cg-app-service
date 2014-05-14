@@ -42,7 +42,8 @@ class TemplatePage extends RootPage
                         "text" => "Random Text",
                         "fontColour" => "red"
                     ]
-                ]
+                ],
+                "name" => "name1"
             ],
             [
                 "id" => "2",
@@ -57,7 +58,8 @@ class TemplatePage extends RootPage
                         "fontFamily" => "CG\\Template\\FontFamily\\Helvetica",
                         "fontColour" => "blue"
                     ]
-                ]
+                ],
+                "name" => "name2"
             ],
             [
                 "id" => "3",
@@ -72,7 +74,8 @@ class TemplatePage extends RootPage
                         "fontFamily" => "CG\\Template\\FontFamily\\Symbol",
                         "fontColour" => "green"
                     ]
-                ]
+                ],
+                "name" => "name3"
             ],
             [
                 "id" => "4",
@@ -84,7 +87,8 @@ class TemplatePage extends RootPage
                     [
                         "templateType" => "OrderTable"
                     ]
-                ]
+                ],
+                "name" => "name4"
             ],
             [
                 "id" => "5",
@@ -98,7 +102,8 @@ class TemplatePage extends RootPage
                         "source" => "data://image/jpeg;base64,base64encodedImageData",
                         "format" => "jpeg"
                     ]
-                ]
+                ],
+                "name" => "name5"
             ]
         ];
     }
@@ -110,7 +115,8 @@ class TemplatePage extends RootPage
             "organisationUnitId",
             "minWidth",
             "minHeight",
-            "elements"
+            "elements",
+            "name"
         ];
     }
 
@@ -122,7 +128,8 @@ class TemplatePage extends RootPage
             "organisationUnitId" => [],
             "elements" => "ABC",
             "minWidth" => [],
-            "minHeight" => []
+            "minHeight" => [],
+            "name" => []
         ];
     }
 
@@ -134,7 +141,8 @@ class TemplatePage extends RootPage
             "organisationUnitId",
             "minWidth",
             "minHeight",
-            "elements"
+            "elements",
+            "name"
         ];
     }
 

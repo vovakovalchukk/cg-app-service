@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8934d99c370c27f390762a8018704c94",
+    "hash": "5789cf5cc17a99950135955a4fd9b3df",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -309,7 +309,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "50aa161307b37ea01a31b1398628652b55e9685d"
+                "reference": "c8f4ec563cd222af85f22c477ba30d36c2a89823"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -334,7 +334,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-05-08 15:49:23"
+            "time": "2014-05-12 14:55:08"
         },
         {
             "name": "channelgrabber/permission",
@@ -474,7 +474,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "5c47029f7b0ea70932fe4fd339c7014c755e856d"
+                "reference": "2940adbaa49f30211698ac5c6bf4442c13d8c2a1"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -489,17 +489,13 @@
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
-            "require-dev": {
-                "channelgrabber/phpunit": ">=1.0.0",
-                "phpunit/phpunit": "3.7.*"
-            },
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-05-09 15:54:34"
+            "time": "2014-05-14 08:55:37"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -643,7 +639,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "f7e137be4c7ff070c885ebe63139dc83358db4bd"
+                "reference": "eda651f94def2483efa072199a440968e0074b10"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
@@ -655,7 +651,7 @@
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2014-05-09 15:48:51"
+            "time": "2014-05-14 08:54:26"
         },
         {
             "name": "channelgrabber/vnderror",
