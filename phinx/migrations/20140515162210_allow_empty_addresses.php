@@ -24,16 +24,7 @@ class AllowEmptyAddresses extends AbstractMigration
      */
     public function up()
     {
-        $address = $this->table('address');
-        foreach ($address->getColumns() as $column) {
-            if (!isset($this->columns[$column->getName()])) {
-                continue;
-            }
-
-            $column->setNull(true);
-            $address->changeColumn($column->getName(), $column);
-        }
-        $address->save();
+        $this->setNull(true);
     }
 
     /**
@@ -41,14 +32,19 @@ class AllowEmptyAddresses extends AbstractMigration
      */
     public function down()
     {
+        $this->setNull(false);
+    }
+
+    protected function setNull($null)
+    {
         $address = $this->table('address');
         foreach ($address->getColumns() as $column) {
             if (!isset($this->columns[$column->getName()])) {
                 continue;
             }
 
-            $column->setNull(false);
-            $address->changeColumn(null, $column);
+            $column->setNull($null);
+            $address->changeColumn($column->getName(), $column);
         }
         $address->save();
     }
