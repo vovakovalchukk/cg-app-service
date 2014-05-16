@@ -76,7 +76,7 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'itemQuantity']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
                                   ->setMessages(['notGreaterThanInclusive' => 'itemQuantity must be at least %min%'])
                 )
             ),
