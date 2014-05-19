@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "db47bdc767bc0a34524f17adf771166c",
+    "hash": "b52ce53918d3ea90c29fc716ff37806b",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -305,11 +305,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-2184-ExternalIdAsString",
+            "version": "1.5.16",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "237ea0d9148717582827834711eeb6c18e846b05"
+                "reference": "8b9126ab20c2c92e8882319364d3661e820c91df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.16-fab3f5.zip",
+                "reference": "8b9126ab20c2c92e8882319364d3661e820c91df",
+                "shasum": "57b02529a4019316e4c5861da4bb00909b6562f9"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -318,7 +324,7 @@
                 "channelgrabber/http": ">=1.2.3",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": ">=1.6.0,<2.0.0",
-                "channelgrabber/stdlib": "dev-CGIV-2184-MongoFieldTypes as 2.5.19",
+                "channelgrabber/stdlib": ">=2.5.19,<3.0.0",
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
@@ -334,7 +340,12 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-05-19 08:47:55"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-19 10:19:56"
         },
         {
             "name": "channelgrabber/permission",
@@ -505,11 +516,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-2184-MongoFieldTypes",
+            "version": "2.5.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "83b538068a25815ce87fb63ae0b1568c603e0fe5"
+                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.19-d81dac.zip",
+                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e",
+                "shasum": "3cc1c085523b1cdf12fa58cc2f01f8da539eb28e"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -526,7 +543,12 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-05-19 08:28:50"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-19 10:11:32"
         },
         {
             "name": "channelgrabber/template",
@@ -3969,24 +3991,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.5.16",
-            "alias_normalized": "1.5.16.0",
-            "version": "dev-CGIV-2184-ExternalIdAsString",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "2.5.19",
-            "alias_normalized": "2.5.19.0",
-            "version": "dev-CGIV-2184-MongoFieldTypes",
-            "package": "channelgrabber/stdlib"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
