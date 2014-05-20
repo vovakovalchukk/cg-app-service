@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7cf7b679c18819df5df39b022c900fcb",
+    "hash": "9ba4018fe7247fab36f58b39ada79113",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -340,11 +340,6 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-05-15 15:55:38"
         },
         {
@@ -547,23 +542,23 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "40b9722e5cf8ab9d4ca653e1f716ac1471944a50"
+                "reference": "d6945dc651a6de54f274b401f2f20f808b5d3533"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.0.2-1b416e.zip",
-                "reference": "40b9722e5cf8ab9d4ca653e1f716ac1471944a50",
-                "shasum": "27bfa6cdf80a5381ff7b23f62a4cd6b0738d302e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.0.4-2eb3eb.zip",
+                "reference": "d6945dc651a6de54f274b401f2f20f808b5d3533",
+                "shasum": "2bf4950a8faa06b5f32024de589c4739fd971d49"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/order": "~1.4",
-                "channelgrabber/user": "~1.10",
+                "channelgrabber/order": "~1.5.14",
+                "channelgrabber/user": "~1.13.9",
                 "ext-gd": "*",
                 "zendframework/zend-di": ">=2.2.5",
                 "zendframework/zend-i18n": ">=2.2.5",
@@ -580,12 +575,7 @@
                     "CG\\Template\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-05-07 12:37:49"
+            "time": "2014-05-16 07:35:40"
         },
         {
             "name": "channelgrabber/user",

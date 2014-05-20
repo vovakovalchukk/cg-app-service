@@ -145,7 +145,7 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 //Cilex Command
-use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
+use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 
 //Filter
