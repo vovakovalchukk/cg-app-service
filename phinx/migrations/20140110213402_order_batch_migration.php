@@ -25,7 +25,7 @@ class OrderBatchMigration extends AbstractMigration
      */
     public function down()
     {
-        $sql = 'TRUNCATE TABLE `order`';
+        $sql = 'DROP TABLE `order`';
         $this->execute($sql);
     }
 }
