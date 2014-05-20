@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5789cf5cc17a99950135955a4fd9b3df",
+    "hash": "ea59372e88bb429af6e2b667458b777f",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -499,17 +499,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.18",
+            "version": "2.5.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "3e1383103fb576d8bd01c353344469580a3dbd57"
+                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.18-6fe2d4.zip",
-                "reference": "3e1383103fb576d8bd01c353344469580a3dbd57",
-                "shasum": "2e99cf1f34d1751b6e697ecfbf703ee04d123533"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.19-d81dac.zip",
+                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e",
+                "shasum": "3cc1c085523b1cdf12fa58cc2f01f8da539eb28e"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -526,7 +526,12 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-05-02 16:15:11"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-19 10:11:32"
         },
         {
             "name": "channelgrabber/template",
@@ -561,6 +566,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Template\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-07 12:37:49"
