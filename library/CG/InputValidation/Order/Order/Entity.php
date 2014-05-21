@@ -103,6 +103,7 @@ class Entity implements RulesInterface
             ),
             'currencyCode' => array(
                 'name'       => 'currencyCode',
+                'required'   => false,
                 'validators' => array(
                     $this->getDi()->get(InArray::class)
                          ->setHaystack(CurrencyCode::getCurrencyCodes())
@@ -132,16 +133,7 @@ class Entity implements RulesInterface
                 'name'       => 'printedDate',
                 'required'   => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(
-                        ValidatorChain::class,
-                        [
-                            'validators' => [
-                                $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s"))),
-                                $this->getDi()->newInstance(Identical::Class, ['token' => '0000-00-00 00:00:00'])
-                                    ->setMessages([Identical::NOT_SAME => 'date does not equal "%token%"'])
-                            ]
-                        ]
-                    )
+                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
                 )
             ),
             'dispatchDate' => array(
@@ -333,6 +325,13 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
+            'cancellations'  => array(
+                'name'       => 'cancellations',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'cancellations'])
                 )
             )
         );

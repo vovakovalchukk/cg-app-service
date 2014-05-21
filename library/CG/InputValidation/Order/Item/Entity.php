@@ -37,6 +37,11 @@ class Entity implements RulesInterface
                 'validators' => array(
                 )
             ),
+            'externalId' => [
+                'name'       => 'externalId',
+                'required'   => false,
+                'validators' => []
+            ],
             'orderId' => array(
                 'name'       => 'orderId',
                 'required'   => false,
@@ -71,13 +76,13 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'itemQuantity']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
                                   ->setMessages(['notGreaterThanInclusive' => 'itemQuantity must be at least %min%'])
                 )
             ),
             'itemSku' => array(
                 'name'       => 'itemSku',
-                'required'   => true,
+                'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )

@@ -20,6 +20,8 @@ use Zend\EventManager\EventManager;
 use Zend\Config\Config;
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
+use CG\Cache\IncrementorInterface;
+use CG\Cache\Increment\Incrementor;
 
 //Service
 use CG\App\Service\Service as ServiceService;
@@ -87,6 +89,7 @@ use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Controllers\Order\Item as ItemController;
+use CG\Controllers\Order\Item\Collection as ItemCollectionController;
 use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
 //Fee
@@ -144,6 +147,24 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 //Cilex Command
 use CG\Channel\Command\OrderDownload as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
+
+//Filter
+use CG\Order\Service\Filter\Service as FilterService;
+use CG\Order\Service\Filter\Storage\Cache as FilterCache;
+use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
+
+//Template
+use CG\Template\Service as TemplateService;
+use CG\Template\Repository as TemplateRepository;
+use CG\Template\Storage\Cache as TemplateCacheStorage;
+use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
+use CG\Template\Mapper as TemplateMapper;
+use CG\Controllers\Template\Template as TemplateController;
+use CG\Controllers\Template\Template\Collection as TemplateCollectionController;
+use CG\Template\Storage\ETag as TemplateETagStorage;
+
+//Cancel
+use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 return array(
     'service_manager' => array(
@@ -217,6 +238,8 @@ return array(
                 'BatchCollectionService' => BatchService::class,
                 'UserPreferenceService' => UserPreferenceService::class,
                 'UserPreferenceCollectionService' => UserPreferenceService::class,
+                'TemplateService' => TemplateService::class,
+                'TemplateCollectionService' => TemplateService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -538,6 +561,11 @@ return array(
                     'service' => 'ItemService'
                 )
             ),
+            ItemCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'ItemCollectionService'
+                )
+            ),
             'ItemService' => array(
                 'parameters' => array(
                     'repository' => ItemETagStorage::class,
@@ -556,13 +584,6 @@ return array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
                     'repository' => ItemPersistentStorage::class
-                )
-            ),
-            ItemDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
                 )
             ),
             ItemPersistentDbStorage::class => array(
@@ -800,9 +821,68 @@ return array(
                     'client' => 'account_guzzle'
                 )
             ),
+            FilterService::class => array(
+                'parameter' => array(
+                    'filterStorage' => FilterCache::class,
+                    'orderService' => 'OrderService',
+                    'filterEntityStorage' => FilterEntityCache::class
+                )
+            ),
+            FilterCache::class => array(
+                'parameter' => array(
+                    'incrementor' => Incrementor::class
+                )
+            ),
+            Incrementor::class => array(
+                'parameter' => array(
+                    'key' => "OrderFilters"
+                )
+            ),
+            CancelDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                )
+            ),
+            TemplateETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => TemplateRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Order_Template_Shared_Entity'
+                )
+            ),
+            TemplateController::class => array(
+                'parameters' => array(
+                    'service' => 'TemplateService'
+                )
+            ),
+            TemplateCollectionController::class => array(
+                'parameters' => array(
+                    'service' => 'TemplateCollectionService'
+                )
+            ),
+            'TemplateService' => array(
+                'parameters' => array(
+                    'repository' => TemplateETagStorage::class
+                )
+            ),
+            'TemplateCollectionService' => array(
+                'parameters' => array(
+                    'repository' => TemplateRepository::class
+                )
+            ),
+            TemplateRepository::class => array(
+                'parameter' => array(
+                    'storage' => TemplateCacheStorage::class,
+                    'repository' => TemplateMongoDbStorage::class
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
+                'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\ClientPipelineInterface' => 'CG\Cache\Client\RedisPipeline',
                 'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
@@ -812,7 +892,8 @@ return array(
                 \MongoClient::class => 'mongodb',
                 'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
                 'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
-                EventManagerInterface::class => CGEventManager::class
+                EventManagerInterface::class => CGEventManager::class,
+                IncrementorInterface::class => Incrementor::class
             )
         )
     )

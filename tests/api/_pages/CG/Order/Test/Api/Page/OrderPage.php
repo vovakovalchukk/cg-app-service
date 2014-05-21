@@ -77,6 +77,30 @@ class OrderPage extends RootPage
                         "tag2",
                         "tag5"
                     ],
+                    "cancellations" => [
+                        [
+                            "type" => "cancel",
+                            "timestamp" => "2014-10-10 00:00:00",
+                            "reason" => "No Payment Received",
+                            "shippingAmount" => 10.99,
+                            "items" => [
+                                [
+                                    "orderItemId" => "1411-11",
+                                    "sku" => "test-sku-1",
+                                    "quantity" => 10,
+                                    "amount" => 0,
+                                    "unitPrice" => 1.99
+                                ],
+                                [
+                                    "orderItemId" => "1411-11",
+                                    "sku" => "test-sku-1",
+                                    "quantity" => 0,
+                                    "amount" => 19.91,
+                                    "unitPrice" => 0
+                                ]
+                            ]
+                        ]
+                    ],
                     "custom" => [],
                     "batch" => 1,
                     "paymentMethod" => "paymentMethod1",
@@ -128,6 +152,7 @@ class OrderPage extends RootPage
                         "tag2",
                         "tag3"
                     ],
+                    "cancellations" => [],
                     "custom" => [],
                     "batch" => 1,
                     "paymentMethod" => "paymentMethod2",
@@ -179,6 +204,7 @@ class OrderPage extends RootPage
                         "tag3",
                         "tag4"
                     ],
+                    "cancellations" => [],
                     "custom" => [],
                     "batch" => 1,
                     "paymentMethod" => "paymentMethod3",
@@ -230,6 +256,7 @@ class OrderPage extends RootPage
                         "tag4",
                         "tag5"
                     ],
+                    "cancellations" => [],
                     "custom" => [],
                     "batch" => 1,
                     "paymentMethod" => "paymentMethod4",
@@ -279,6 +306,7 @@ class OrderPage extends RootPage
                     "archived" => false,
                     "tag" => [
                     ],
+                    "cancellations" => [],
                     "custom" => [],
                     "batch" => 2,
                     "paymentMethod" => "paymentMethod5",

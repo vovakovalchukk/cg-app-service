@@ -1,1 +1,0 @@
-/var/www/cg_app/shared/config/autoload/di.cgcache.global.php

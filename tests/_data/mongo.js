@@ -46,6 +46,7 @@ db.order.insert({
 
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 2,
     "paymentMethod" : "paymentMethod5",
     "paymentReference" : "paymentReference5"
@@ -97,6 +98,7 @@ db.order.insert({
         "tag5"
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 1,
     "paymentMethod" : "paymentMethod4",
     "paymentReference" : "paymentReference4"
@@ -148,6 +150,7 @@ db.order.insert({
         "tag4"
     ],
     "custom": [],
+    "cancellations" : [],
     "batch": 1,
     "paymentMethod" : "paymentMethod3",
     "paymentReference" : "paymentReference3"
@@ -198,6 +201,7 @@ db.order.insert({
         "tag2",
         "tag3"
     ],
+    "cancellations" : [],
     "custom": [],
     "batch": 1,
     "paymentMethod" : "paymentMethod2",
@@ -249,6 +253,30 @@ db.order.insert({
         "tag1",
         "tag2",
         "tag5"
+    ],
+    "cancellations" : [
+        {
+            "type" : "cancel",
+            "timestamp" : "2014-10-10 00:00:00",
+            "reason" : "No Payment Received",
+            "shippingAmount" : 10.99,
+            "items" : [
+                {
+                    "orderItemId" : "1411-11",
+                    "sku" : "test-sku-1",
+                    "quantity" : 10,
+                    "amount" : 0,
+                    "unitPrice" : 1.99
+                },
+                {
+                    "orderItemId" : "1411-11",
+                    "sku" : "test-sku-1",
+                    "quantity" : 0,
+                    "amount" : 19.91,
+                    "unitPrice" : 0
+                }
+            ]
+        }
     ],
     "custom": [],
     "batch": 1,
@@ -454,4 +482,83 @@ db.preference.insert({
             "buyerName"
         ]
     }
+});
+db=db.getSiblingDB("template");
+db.dropDatabase();
+db.template.insert({
+    "_id":"1",
+    "type":"invoice",
+    "organisationUnitId":1,
+    "minHeight":100,
+    "minWidth":200,
+    "elements": [
+        {
+            "templateType": "Text",
+            "fontSize": 12,
+            "fontFamily": "CG\\Template\\FontFamily\\Courier",
+            "text": "Random Text",
+            "fontColour": "red"
+        }
+    ],
+    "name": "name1"
+});
+db.template.insert({
+    "_id":"2",
+    "type":"product",
+    "organisationUnitId":2,
+    "minHeight":200,
+    "minWidth":300,
+    "elements": [
+        {
+            "templateType": "SellerAddress",
+            "fontSize" : 14,
+            "fontFamily" : "CG\\Template\\FontFamily\\Helvetica",
+            "fontColour": "blue"
+        }
+    ],
+    "name": "name2"
+});
+db.template.insert({
+    "_id":"3",
+    "type":"ebay",
+    "organisationUnitId":3,
+    "minHeight":300,
+    "minWidth":400,
+    "elements": [
+        {
+            "templateType": "DeliveryAddress",
+            "fontSize" : 16,
+            "fontFamily" : "CG\\Template\\FontFamily\\Symbol",
+            "fontColour": "green"
+        }
+    ],
+    "name": "name3"
+});
+db.template.insert({
+    "_id":"4",
+    "type":"amazon",
+    "organisationUnitId":4,
+    "minHeight":400,
+    "minWidth":500,
+    "elements": [
+        {
+            "templateType": "OrderTable"
+        }
+    ],
+    "name": "name4"
+});
+db.template.insert({
+    "_id":"5",
+    "type":"invoice",
+    "organisationUnitId":5,
+    "minHeight":500,
+    "minWidth":600,
+    "elements": [
+        {
+            "templateType": "Image",
+            "source" : "data://image/jpeg;base64,base64encodedImageData",
+            "format" : "jpeg"
+        }
+    ],
+    "name": "name5"
 });
