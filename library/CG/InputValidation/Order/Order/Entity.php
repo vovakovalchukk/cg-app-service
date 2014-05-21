@@ -103,6 +103,7 @@ class Entity implements RulesInterface
             ),
             'currencyCode' => array(
                 'name'       => 'currencyCode',
+                'required'   => false,
                 'validators' => array(
                     $this->getDi()->get(InArray::class)
                          ->setHaystack(CurrencyCode::getCurrencyCodes())
