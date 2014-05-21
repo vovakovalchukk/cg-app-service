@@ -75,6 +75,12 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'minHeight'])
                 )
             ),
+            'paperPage' => array(
+                'name' => 'paperPage',
+                'required' => true,
+                'validators' => array(
+                )
+            ),
             'elements'  => array(
                 'name' => 'elements',
                 'required' => true,
