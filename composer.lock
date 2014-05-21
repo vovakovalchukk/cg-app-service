@@ -3,21 +3,21 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ea59372e88bb429af6e2b667458b777f",
+    "hash": "acd6d95631eedf37dd53294e643206a0",
     "packages": [
         {
             "name": "channelgrabber/account",
-            "version": "1.0.17",
+            "version": "1.0.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-account.git",
-                "reference": "600143bb6c44e59206c10fa0d29178bdfe126734"
+                "reference": "8f3de6f1ed708472931ebafd104015afbc1fb547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-account-1.0.17-040bc7.zip",
-                "reference": "600143bb6c44e59206c10fa0d29178bdfe126734",
-                "shasum": "8ba5bbdc2b46892603fe397ade642ab1acda39ef"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-account-1.0.18-258c0a.zip",
+                "reference": "8f3de6f1ed708472931ebafd104015afbc1fb547",
+                "shasum": "693cb13733f812aaac346686ea1dddb63899c8ba"
             },
             "require": {
                 "channelgrabber/cache": ">=1.2.1, <1.3.0",
@@ -41,7 +41,12 @@
                     "CG\\Account\\": ""
                 }
             },
-            "time": "2014-05-02 13:34:42"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-20 16:28:07"
         },
         {
             "name": "channelgrabber/cache",
@@ -535,23 +540,23 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "40b9722e5cf8ab9d4ca653e1f716ac1471944a50"
+                "reference": "f90716d6e389b9de4c1be059619f101ed8b7bf3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.0.2-1b416e.zip",
-                "reference": "40b9722e5cf8ab9d4ca653e1f716ac1471944a50",
-                "shasum": "27bfa6cdf80a5381ff7b23f62a4cd6b0738d302e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.1.0-d5580c.zip",
+                "reference": "f90716d6e389b9de4c1be059619f101ed8b7bf3e",
+                "shasum": "476638cf146ce28308cfaa68ee0d39052eb5e84f"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/order": "~1.4",
-                "channelgrabber/user": "~1.10",
+                "channelgrabber/order": "~1.5.14",
+                "channelgrabber/user": "~1.13.9",
                 "ext-gd": "*",
                 "zendframework/zend-di": ">=2.2.5",
                 "zendframework/zend-i18n": ">=2.2.5",
@@ -573,7 +578,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-07 12:37:49"
+            "time": "2014-05-21 07:18:58"
         },
         {
             "name": "channelgrabber/user",
@@ -649,7 +654,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "eda651f94def2483efa072199a440968e0074b10"
+                "reference": "b550bf3044c7881eb26bba4455aa49c6a2022d55"
             },
             "require": {
                 "zendframework/zend-inputfilter": "~2.2.4",
@@ -661,7 +666,7 @@
                     "CG\\Validation\\": ""
                 }
             },
-            "time": "2014-05-14 08:54:26"
+            "time": "2014-05-21 10:58:47"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -3969,8 +3974,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.5.13",
-            "alias_normalized": "1.5.13.0",
+            "alias": "1.5.17",
+            "alias_normalized": "1.5.17.0",
             "version": "dev-CGIV-1843-order-endpoint-orderfilter",
             "package": "channelgrabber/order"
         },
