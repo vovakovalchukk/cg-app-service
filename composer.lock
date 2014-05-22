@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "76e18dd29653243a4c8c7a1ee0797f13",
+    "hash": "ca25195d0fa802e209157bbb0fffe0c5",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -379,17 +379,11 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "v0.2.9.2",
+            "version": "dev-CGIV-1653",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-v0.2.9.2-dc3e7d.zip",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76",
-                "shasum": "b077b9f3f176559dd5f0c1ef418d304ea74df264"
+                "reference": "2c021d8f2d14d5bce22fe30906a44deb0f461fdf"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -402,7 +396,8 @@
                 "robmorgan/phinx": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "dev-phpcs-fixer"
             },
             "bin": [
                 "bin/phinx"
@@ -432,7 +427,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2013-12-13 08:37:23"
+            "time": "2014-03-12 11:31:58"
         },
         {
             "name": "channelgrabber/predis",
@@ -486,17 +481,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.7.3",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "0d8d22f52542c90d7aa442fcd8ea2942b5bc3ae9"
+                "reference": "2f34c0c634c75b4b41b4fdfb04e10d366f2c9592"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.7.3-750c7e.zip",
-                "reference": "0d8d22f52542c90d7aa442fcd8ea2942b5bc3ae9",
-                "shasum": "607546a4d43dd9826654800445d57317fb291cd7"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.7.4-45509c.zip",
+                "reference": "2f34c0c634c75b4b41b4fdfb04e10d366f2c9592",
+                "shasum": "fba3c05cb64874551543263cd7fd841827819d70"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -511,6 +506,10 @@
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
+            "require-dev": {
+                "channelgrabber/phpunit": ">=1.0.0",
+                "phpunit/phpunit": "3.7.*"
+            },
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -522,7 +521,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-04-04 12:43:30"
+            "time": "2014-05-21 15:20:21"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -2946,7 +2945,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "800e41c65864d6e3c8bc53351d75eba9a3cfc62f"
+                "reference": "bf8ef27bca216825acba04645ce1728a85be149b"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -2959,7 +2958,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "time": "2014-05-21 14:29:16"
+            "time": "2014-05-21 15:01:29"
         },
         {
             "name": "channelgrabber/phpunit",
@@ -4001,6 +4000,12 @@
     ],
     "aliases": [
         {
+            "alias": "0.2.9.1",
+            "alias_normalized": "0.2.9.1",
+            "version": "dev-CGIV-1653",
+            "package": "channelgrabber/phinx"
+        },
+        {
             "alias": "1.1.43",
             "alias_normalized": "1.1.43.0",
             "version": "dev-CGIV-2151",
@@ -4010,6 +4015,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/phinx": 20,
         "phpspec/phpspec": 20,
         "channelgrabber/codeception": 20
     },
