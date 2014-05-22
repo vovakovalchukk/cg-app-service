@@ -9,17 +9,17 @@ use Zend\Di\Di;
 
 class Filter implements RulesInterface {
 
-	use ValidatorTrait;
-	use PaginationTrait;
+    use ValidatorTrait;
+    use PaginationTrait;
 
-	public function __construct(Di $di)
-	{
-		$this->setDi($di);
-	}
+    public function __construct(Di $di)
+    {
+        $this->setDi($di);
+    }
 
-	public function getRules()
-	{
-		$rules = $this->getPaginationValidation();
-		return $rules;
-	}
+    public function getRules()
+    {
+        $rules = $this->getPaginationValidation();
+        return $rules;
+    }
 }
