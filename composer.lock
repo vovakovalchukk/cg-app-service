@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0b2beacf0e1d726acac8264949ce96f7",
+    "hash": "454dd2e5b06bf72636361b689941cca0",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -168,20 +168,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.6.7",
+            "version": "dev-CGIV-2038-TryCatchLogger",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "346cb3115a5f948d1d0783f484a965b5593f9a43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.6.7-c2b978.zip",
-                "reference": "346cb3115a5f948d1d0783f484a965b5593f9a43",
-                "shasum": "54140c85c60f988ebad8c79eca720b18e9c211d2"
+                "reference": "34322e73693003c8405ec2089b9003ae288c0799"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
+                "channelgrabber/log": "dev-CGIV-2038-RedisLogStorages as 1.4.0",
+                "channelgrabber/redis": "dev-CGIV-2038-PublishSupport as 0.1.1",
                 "channelgrabber/stdlib": ">=2.4.1,<2.6.0",
                 "cilex/cilex": "1.0.1",
                 "nocarrier/hal": "~0.9.4",
@@ -193,13 +189,17 @@
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
+            "require-dev": {
+                "channelgrabber/phpunit": ">=1.0.0",
+                "phpunit/phpunit": "3.7.*"
+            },
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-03-07 08:53:25"
+            "time": "2014-05-22 16:14:56"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3226,12 +3226,19 @@
             "alias_normalized": "0.1.1.0",
             "version": "dev-CGIV-2038-PublishSupport",
             "package": "channelgrabber/redis"
+        },
+        {
+            "alias": "1.7.5",
+            "alias_normalized": "1.7.5.0",
+            "version": "dev-CGIV-2038-TryCatchLogger",
+            "package": "channelgrabber/slim"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/log": 20,
         "channelgrabber/redis": 20,
+        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
