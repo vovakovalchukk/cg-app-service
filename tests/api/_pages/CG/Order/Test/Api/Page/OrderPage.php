@@ -9,6 +9,7 @@ class OrderPage extends RootPage
     use CollectionPageTrait;
 
     const URL = "/order";
+    const FILTER_URL = "/orderFilter";
     const EMBEDDED_RESOURCE = "order";
     const PRIMARY_ID = "1411-10";
     const SECONDARY_ID = "1412-20";
@@ -18,12 +19,34 @@ class OrderPage extends RootPage
         return self::URL;
     }
 
+    public static function getFilterUrl()
+    {
+        return self::FILTER_URL;
+    }
+
     public static function notAllowedMethods()
     {
         return [
                 static::POST    => static::POST,
                 static::PUT    => static::PUT,
                 static::DELETE => static::DELETE
+        ];
+    }
+
+    public static function getFilterData()
+    {
+        return [
+            "status" => ["1"],
+            "organisationUnitId" => [1],
+            "channel" => ["ebay"]
+        ];
+    }
+
+    public static function getMutuallyExclusiveFilters()
+    {
+        return [
+            "orderFilter" => "bad_filter",
+            "status" => ["new"]
         ];
     }
 

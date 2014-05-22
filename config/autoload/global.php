@@ -151,7 +151,7 @@ use CG\Account\Client\Storage\Api as AccountApiStorage;
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
-use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCache;
+use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCacheStorage;
 
 //Template
 use CG\Template\Service as TemplateService;
@@ -381,7 +381,8 @@ return array(
                     'itemService' => 'ItemCollectionService',
                     'alertService' => 'AlertCollectionService',
                     'trackingService' => 'TrackingCollectionService',
-                    'userChangeService' => 'UserChangeCollectionService'
+                    'userChangeService' => 'UserChangeCollectionService',
+                    'filterEntityStorage' => FilterEntityCacheStorage::class
                 )
             ),
             'OrderCollectionService' => array(
@@ -392,7 +393,8 @@ return array(
                     'itemService' => 'ItemCollectionService',
                     'alertService' => 'AlertCollectionService',
                     'trackingService' => 'TrackingCollectionService',
-                    'userChangeService' => 'UserChangeCollectionService'
+                    'userChangeService' => 'UserChangeCollectionService',
+                    'filterEntityStorage' => FilterEntityCacheStorage::class
                 )
             ),
             OrderETagStorage::class => array (
@@ -825,7 +827,7 @@ return array(
                 'parameter' => array(
                     'filterStorage' => FilterCache::class,
                     'orderService' => 'OrderService',
-                    'filterEntityStorage' => FilterEntityCache::class
+                    'filterEntityStorage' => FilterEntityCacheStorage::class
                 )
             ),
             FilterCache::class => array(

@@ -13,6 +13,8 @@ class Collection
 {
     use ControllerTrait;
 
+    protected $filterService;
+
     public function __construct(Slim $app, OrderService $service, Di $di)
     {
         $this->setSlim($app)
@@ -22,7 +24,11 @@ class Collection
 
     public function get()
     {
-        $filterEntity = $this->getDi()->newInstance(Filter::class, $this->getParams());
-        return $this->getService()->fetchCollectionByFilterAsHal($filterEntity);
+        if ($this->getParams('orderFilter')) {
+            return $this->getService()->fetchCollectionByFilterId($this->getParams('orderFilter'));
+        }
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            $this->getDi()->newInstance(Filter::class, $this->getParams())
+        );
     }
 }
