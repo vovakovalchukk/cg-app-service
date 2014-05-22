@@ -12,18 +12,19 @@ use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
 use CG\InputValidation\Order\Order\Entity as OrderEntityValidationRules;
 use CG\Controllers\Order\Note\Collection as NoteCollection;
 use CG\Controllers\Order\Order;
-use CG\Controllers\Order\Note;
-use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
+
 
 //Tracking
 use CG\Controllers\Order\Tracking;
 use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
 use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
+use CG\InputValidation\Order\Tracking\Filter as TrackingFilterValidationRules;
 
 //Alert
 use CG\Controllers\Order\Alert;
 use CG\Controllers\Order\Alert\Collection as AlertCollection;
 use CG\InputValidation\Order\Alert\Entity as AlertEntityValidationRules;
+use CG\InputValidation\Order\Alert\Filter as AlertFilterValidationRules;
 
 //Archive
 use CG\Controllers\Order\Archive;
@@ -39,6 +40,11 @@ use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
 use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
+
+//Note
+use CG\Controllers\Order\Note;
+use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
+use CG\InputValidation\Order\Note\Filter as NoteFilterValidationRules;
 
 //GiftWrap
 use CG\Controllers\Order\Item\GiftWrap;
@@ -193,7 +199,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderNoteCollection',
-        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => NoteFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/note/:noteId' => array (
         'controllers' => function($orderId, $noteId) use ($di) {
@@ -223,7 +229,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderTrackingCollection',
-        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => TrackingFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/tracking/:trackingId' => array (
         'controllers' => function($orderId, $trackingId) use ($di) {
@@ -253,7 +259,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderAlertCollection',
-        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => AlertFilterValidationRules::Class, "flatten" => false)
     ),
     '/order/:orderId/alert/:alertId' => array (
         'controllers' => function($orderId, $alertId) use ($di) {
