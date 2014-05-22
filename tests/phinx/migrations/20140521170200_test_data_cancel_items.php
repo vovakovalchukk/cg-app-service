@@ -34,6 +34,6 @@ class TestDataCancelItems extends AbstractMigration
         return array(
             [1, '1411-11', 'test-sku-1', 10, 0.00, 1.99, '1411-10'],
             [1, '1411-11', 'test-sku-1', 0, 19.91, 0.00, '1411-10']
-        )
+        );
     }
 }
