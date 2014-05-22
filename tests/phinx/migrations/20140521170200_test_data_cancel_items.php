@@ -4,7 +4,6 @@ use Phinx\Migration\TestMigration;
 
 class TestDataCancelItems extends TestMigration
 {
-    use InsertTestDataTrait;
 
     public function up()
     {
