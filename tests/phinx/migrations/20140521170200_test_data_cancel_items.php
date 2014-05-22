@@ -3,7 +3,7 @@
 use Phinx\Migration\AbstractMigration;
 require_once __DIR__.'/../InsertTestDataTrait.php';
 
-class TestData extends AbstractMigration
+class TestDataCancelItems extends AbstractMigration
 {
     use InsertTestDataTrait;
 
@@ -26,11 +26,11 @@ class TestData extends AbstractMigration
     protected function getCancelData()
     {
         return array(
-            [1, 'No Payment Received', '1411-10', 'cancel', 10.99, '2014-10-10 00:00:00')]
+            [1, 'No Payment Received', '1411-10', 'cancel', 10.99, '2014-10-10 00:00:00']
         );
     }
 
-    protected function getServiceEventData() {
+    protected function getCancelItemData() {
         return array(
             [1, '1411-11', 'test-sku-1', 10, 0.00, 1.99, '1411-10'],
             [1, '1411-11', 'test-sku-1', 0, 19.91, 0.00, '1411-10']
