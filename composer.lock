@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "78e36e46f24f80f727ef3ee51a0f9478",
+    "hash": "4e2eacded9054ef6f7de2411fa7c3028",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -226,17 +226,11 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.9",
+            "version": "dev-CGIV-2181-SetHeader",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "c32d9e608143dc28dca926084b6a58074cff23ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.9-5ae1c5.zip",
-                "reference": "c32d9e608143dc28dca926084b6a58074cff23ef",
-                "shasum": "c3be762e787659457a436ea64ca415f7cec23f35"
+                "reference": "e41a067daa07eb9db1411d6110712c6dfa6a55e4"
             },
             "require": {
                 "channelgrabber/etag": "~1.4.2",
@@ -253,7 +247,7 @@
                     "CG\\Http\\": ""
                 }
             },
-            "time": "2014-03-17 08:55:59"
+            "time": "2014-05-23 15:17:38"
         },
         {
             "name": "channelgrabber/log",
@@ -4003,6 +3997,12 @@
             "alias_normalized": "1.1.1.0",
             "version": "dev-CGIV-2181-PollingWindow",
             "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.2.8",
+            "alias_normalized": "1.2.8.0",
+            "version": "dev-CGIV-2181-SetHeader",
+            "package": "channelgrabber/http"
         }
     ],
     "minimum-stability": "stable",
@@ -4010,6 +4010,7 @@
         "channelgrabber/account": 20,
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/http": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
