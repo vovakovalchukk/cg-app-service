@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2b8da534d97dd604eae3a6684e2b3167",
+    "hash": "3c3926808af3f898deaef41f7fc8b7d9",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -95,11 +95,17 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "dev-CGIV-2038-RedisLogStorages",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "1497f9d9e857276b371a229574bce60441a696a4"
+                "reference": "2f8c035ccebcf50415e5599af3edb3a9fe7b31b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.0-78d411.zip",
+                "reference": "2f8c035ccebcf50415e5599af3edb3a9fe7b31b5",
+                "shasum": "7c38dced379fc2543e9a295ec5da90d83f892add"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.7",
@@ -121,7 +127,12 @@
                     "CG": ""
                 }
             },
-            "time": "2014-05-27 11:24:22"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-27 14:08:56"
         },
         {
             "name": "channelgrabber/predis",
@@ -180,15 +191,21 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-2038-TryCatchLogger",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "69cc4b90a3a3f3f06cf65cd21c82207198294751"
+                "reference": "112b99e5af37605ac373413341b1fce909c82acf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.0-85e53f.zip",
+                "reference": "112b99e5af37605ac373413341b1fce909c82acf",
+                "shasum": "d91c470ca5c019fad1008059b7d5a64d718170f8"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
-                "channelgrabber/log": "dev-CGIV-2038-RedisLogStorages as 1.4.0",
+                "channelgrabber/log": ">=1.4.0,<2.0.0",
                 "channelgrabber/stdlib": ">=2.4.1,<2.6.0",
                 "cilex/cilex": "1.0.1",
                 "nocarrier/hal": "~0.9.4",
@@ -205,17 +222,17 @@
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-2038-TryCatchLogger": "1.5.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-05-27 11:28:34"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-27 14:29:31"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3231,23 +3248,10 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.4.0",
-            "alias_normalized": "1.4.0.0",
-            "version": "dev-CGIV-2038-RedisLogStorages",
-            "package": "channelgrabber/log"
-        },
-        {
-            "alias": "1.7.5",
-            "alias_normalized": "1.7.5.0",
-            "version": "dev-CGIV-2038-TryCatchLogger",
-            "package": "channelgrabber/slim"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/log": 20,
-        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
