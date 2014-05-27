@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "76e18dd29653243a4c8c7a1ee0797f13",
+    "hash": "a50b59727856149ffaed6688c707c9d2",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -39,11 +39,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Account\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-20 16:28:07"
@@ -345,11 +340,6 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-05-21 14:53:01"
         },
         {
@@ -517,11 +507,6 @@
                     "CG\\Slim": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-04-04 12:43:30"
         },
         {
@@ -553,26 +538,21 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-05-19 10:11:32"
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.1.0",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "f90716d6e389b9de4c1be059619f101ed8b7bf3e"
+                "reference": "870a36591f855f59b7fee1e4f0771f3d6a3ac5c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.1.0-d5580c.zip",
-                "reference": "f90716d6e389b9de4c1be059619f101ed8b7bf3e",
-                "shasum": "476638cf146ce28308cfaa68ee0d39052eb5e84f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.1.3-efcec9.zip",
+                "reference": "870a36591f855f59b7fee1e4f0771f3d6a3ac5c3",
+                "shasum": "2581c2db340210d9a995ee95e1b3db70b5dd9057"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
@@ -595,12 +575,7 @@
                     "CG\\Template\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-05-21 07:18:58"
+            "time": "2014-05-27 14:01:44"
         },
         {
             "name": "channelgrabber/user",
@@ -692,11 +667,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Validation\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-21 14:51:36"
