@@ -809,11 +809,6 @@ return array(
                     'repository' => TagRepository::class
                 )
             ),
-            'CG\Log\Shared\Storage\File' => array(
-                'parameters' => array(
-                    'filePath' => '/tmp/'.date('Y-m-d').'.log'
-                )
-             ),
             OrderDownloadCommand::class => array(
                 'parameter' => array(
                     'accountStorage' => AccountApiStorage::class
@@ -898,8 +893,6 @@ return array(
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
                 \MongoClient::class => 'mongodb',
-                'CG\Log\Shared\StorageInterface' => 'CG\Log\Shared\Storage\File',
-                'CG\Stdlib\Log\LoggerInterface' => 'CG\Log\Logger',
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class
             )
