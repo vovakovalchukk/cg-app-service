@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5fe1faa4480189f86d3e5a66cbe2dddc",
+    "hash": "916574ae0d3046690c4d533c7edb2560",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -226,22 +226,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.8.0",
+            "version": "dev-CGIV-2283-VndLogTrait",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "112b99e5af37605ac373413341b1fce909c82acf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.0-85e53f.zip",
-                "reference": "112b99e5af37605ac373413341b1fce909c82acf",
-                "shasum": "d91c470ca5c019fad1008059b7d5a64d718170f8"
+                "reference": "b30f73f3ae65b000f95a44beb83165cc8ad601ed"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
                 "channelgrabber/log": ">=1.4.0,<2.0.0",
                 "channelgrabber/stdlib": ">=2.4.1,<2.6.0",
+                "channelgrabber/vnderror": "~1.0.0",
                 "cilex/cilex": "1.0.1",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=5.4.0",
@@ -262,12 +257,7 @@
                     "CG\\Slim": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-05-27 14:29:31"
+            "time": "2014-05-28 15:54:35"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3283,10 +3273,16 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.8.1",
+            "alias_normalized": "1.8.1.0",
+            "version": "dev-CGIV-2283-VndLogTrait",
+            "package": "channelgrabber/slim"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
