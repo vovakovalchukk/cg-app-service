@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a1a9802758f23a974f4ec17d1dd3fb65",
+    "hash": "3fec3df04b4ed8aefcc16162153300de",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -114,20 +114,25 @@
         },
         {
             "name": "channelgrabber/cilex",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "e762e74e00eb4c9b6d00406878c9081598f9d51e"
+                "reference": "71ec3cac395a4e9fbbd4d63aad678e7ca8863aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.0.2-9cb1eb.zip",
-                "reference": "e762e74e00eb4c9b6d00406878c9081598f9d51e",
-                "shasum": "65eba0764a166e56ac78df2424fbcc022d5c631e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.0.3-d7f216.zip",
+                "reference": "71ec3cac395a4e9fbbd4d63aad678e7ca8863aab",
+                "shasum": "b715f0eb2b8da5063ef88cd4ed3ce498661f96dd"
             },
             "require": {
-                "php": ">=5.4.0"
+                "channelgrabber/log": ">=1.4.0,<2.0.0",
+                "channelgrabber/stdlib": ">=2.4.1,<2.6.0",
+                "cilex/cilex": "1.0.1",
+                "php": ">=5.4.0",
+                "zendframework/zend-di": "~2.2.5",
+                "zendframework/zend-eventmanager": "~2.2.5"
             },
             "type": "library",
             "autoload": {
@@ -135,7 +140,12 @@
                     "CG\\Cilex": ""
                 }
             },
-            "time": "2014-03-10 09:26:35"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-28 13:38:46"
         },
         {
             "name": "channelgrabber/constants",
