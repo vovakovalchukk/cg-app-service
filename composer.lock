@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3c3926808af3f898deaef41f7fc8b7d9",
+    "hash": "b638a52e4c977c0f6f3e6a8ff92cf71f",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -35,6 +35,30 @@
                 }
             },
             "time": "2014-03-27 08:21:32"
+        },
+        {
+            "name": "channelgrabber/cilex",
+            "version": "dev-CGIV-2259-CilexLogging",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
+                "reference": "5584e4b825ef8ef7162b7ec2c8083321c4d67363"
+            },
+            "require": {
+                "channelgrabber/log": ">=1.4.0,<2.0.0",
+                "channelgrabber/stdlib": ">=2.4.1,<2.6.0",
+                "cilex/cilex": "1.0.1",
+                "php": ">=5.4.0",
+                "zendframework/zend-di": "~2.2.5",
+                "zendframework/zend-eventmanager": "~2.2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Cilex": ""
+                }
+            },
+            "time": "2014-05-28 11:10:05"
         },
         {
             "name": "channelgrabber/etag",
@@ -3248,10 +3272,16 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.0.3",
+            "alias_normalized": "1.0.3.0",
+            "version": "dev-CGIV-2259-CilexLogging",
+            "package": "channelgrabber/cilex"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cilex": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
