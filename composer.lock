@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "916574ae0d3046690c4d533c7edb2560",
+    "hash": "6d31373f7334722aa74d2b83420af924",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -226,11 +226,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-2283-VndLogTrait",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "ce3ef6398926bbce40e398cd4ef1fe87380043cc"
+                "reference": "41f2bc21a09ec9e92bb42a7994f8bf2dd726d830"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.1-5178ab.zip",
+                "reference": "41f2bc21a09ec9e92bb42a7994f8bf2dd726d830",
+                "shasum": "1244afa27fea037fce0c8a81e20345c32e3cd2af"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -257,7 +263,12 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-05-28 16:12:18"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-28 16:20:07"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3273,16 +3284,10 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.8.1",
-            "alias_normalized": "1.8.1.0",
-            "version": "dev-CGIV-2283-VndLogTrait",
-            "package": "channelgrabber/slim"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
