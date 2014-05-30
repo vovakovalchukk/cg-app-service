@@ -18,6 +18,7 @@ class Entity implements RulesInterface
         $this->setDi($di);
     }
 
+
     protected function getDi()
     {
         return $this->di;
@@ -59,20 +60,6 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                )
-            ),
-            'minWidth' => array(
-                'name' => 'minWidth',
-                'required' => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'minWidth'])
-                )
-            ),
-            'minHeight' => array(
-                'name' => 'minHeight',
-                'required' => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'minHeight'])
                 )
             ),
             'paperPage' => array(

@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "e80b4b33c7e7aecaf436b44f184a74d9",
+    "hash": "ecf99ad584c880418bff67adf281e2ae",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -299,17 +300,17 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "2f8c035ccebcf50415e5599af3edb3a9fe7b31b5"
+                "reference": "491a26fabedcd46217f05b228e6a7755e4a8b77c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.0-78d411.zip",
-                "reference": "2f8c035ccebcf50415e5599af3edb3a9fe7b31b5",
-                "shasum": "7c38dced379fc2543e9a295ec5da90d83f892add"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.1-4b5370.zip",
+                "reference": "491a26fabedcd46217f05b228e6a7755e4a8b77c",
+                "shasum": "17466f3874d4902d1ac81a8afce0c36465541364"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.7",
@@ -336,7 +337,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-27 14:08:56"
+            "time": "2014-05-29 14:09:11"
         },
         {
             "name": "channelgrabber/order",
@@ -562,17 +563,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.19",
+            "version": "2.5.20",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e"
+                "reference": "637bf5b05fb251ae309c4e9c676e6a6f42545ad7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.19-d81dac.zip",
-                "reference": "33841986cc889be77d5065e73ff510d4d4c3cf4e",
-                "shasum": "3cc1c085523b1cdf12fa58cc2f01f8da539eb28e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.20-8b807d.zip",
+                "reference": "637bf5b05fb251ae309c4e9c676e6a6f42545ad7",
+                "shasum": "df6fe40b79455790646080f6281522194c4cae18"
             },
             "require": {
                 "zendframework/zend-db": "2.2.*"
@@ -594,21 +595,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-19 10:11:32"
+            "time": "2014-05-29 14:05:09"
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.1.5",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "250d4ffa0a52e6294fa700f7ecd3960ee9fc4fa8"
+                "reference": "1c66d28ce3aa1d4834e0e85953bdb1526427511f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.1.5-06faee.zip",
-                "reference": "250d4ffa0a52e6294fa700f7ecd3960ee9fc4fa8",
-                "shasum": "14650d4be0f84a296e66c286c2cf5f4881762621"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.2-bfdb93.zip",
+                "reference": "1c66d28ce3aa1d4834e0e85953bdb1526427511f",
+                "shasum": "c0719ba6436407dabfeb21c5e11d418aa72ddaae"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
@@ -636,7 +637,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-28 13:30:44"
+            "time": "2014-05-30 07:37:47"
         },
         {
             "name": "channelgrabber/user",
@@ -3005,28 +3006,36 @@
         },
         {
             "name": "channelgrabber/phpunit",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-phpunit.git",
-                "reference": "c8a5bffd139b487b96fd945a1c12f962c896a0d3"
+                "reference": "9f91e615e06aaea6136586380b681d28d35bc1f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phpunit-1.0.0-8ac097.zip",
-                "reference": "c8a5bffd139b487b96fd945a1c12f962c896a0d3",
-                "shasum": "06a6b860352c4cf3f40a663036afb690ec5dcff6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phpunit-1.0.1-776a39.zip",
+                "reference": "9f91e615e06aaea6136586380b681d28d35bc1f7",
+                "shasum": "f7e3d79c10f3ad7616f1e732b3b497b26c5145e0"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*"
             },
+            "bin": [
+                "bin/watchphpunit"
+            ],
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "CG\\PhpUnit\\": ""
                 }
             },
-            "time": "2014-01-13 14:44:02"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-05-29 15:11:10"
         },
         {
             "name": "codeception/codeception",
