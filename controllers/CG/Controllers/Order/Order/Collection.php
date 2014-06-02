@@ -25,7 +25,13 @@ class Collection
     public function get()
     {
         if ($this->getParams('orderFilter')) {
-            return $this->getService()->fetchCollectionByFilterId($this->getParams('orderFilter'));
+            return $this->getService()->fetchCollectionByFilterId(
+                $this->getParams('orderFilter'),
+                $this->getParams('limit'),
+                $this->getParams('page'),
+                $this->getParams('orderBy'),
+                $this->getParams('orderDirection')
+            );
         }
         return $this->getService()->fetchCollectionByFilterAsHal(
             $this->getDi()->newInstance(Filter::class, $this->getParams())
