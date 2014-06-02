@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4a78877b0a551caba76b4f79710bd9f5",
+    "hash": "af243e82bd05ddcf1021a028ca69a86c",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -110,6 +110,11 @@
                     "CG\\Channel\\": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-04-25 10:51:37"
         },
         {
@@ -133,6 +138,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Cilex": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-03-10 09:26:35"
@@ -240,6 +250,11 @@
                     "CG\\Gearman\\": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-04-17 08:42:51"
         },
         {
@@ -269,6 +284,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Http\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-03-17 08:55:59"
@@ -304,6 +324,11 @@
             "autoload": {
                 "psr-0": {
                     "CG": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-01-29 14:42:47"
@@ -2941,17 +2966,11 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.43",
+            "version": "dev-CGIV-2248",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "3025b354e8b64da677de1bb15102a804b208dac2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.43-7dad80.zip",
-                "reference": "3025b354e8b64da677de1bb15102a804b208dac2",
-                "shasum": "c38dd06c8d16867a53c356e1e55741d2f9e471c8"
+                "reference": "53f93088675d90e58cdaef89ae118f48f6eca133"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -2964,12 +2983,7 @@
                     "CG\\Codeception\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-04-29 14:50:47"
+            "time": "2014-06-02 08:39:22"
         },
         {
             "name": "channelgrabber/phpunit",
@@ -4015,13 +4029,20 @@
             "alias_normalized": "0.3.2.2",
             "version": "dev-CGIV-1653",
             "package": "channelgrabber/phinx"
+        },
+        {
+            "alias": "1.1.43",
+            "alias_normalized": "1.1.43.0",
+            "version": "dev-CGIV-2248",
+            "package": "channelgrabber/codeception"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/phinx": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "channelgrabber/codeception": 20
     },
     "platform": [
 
