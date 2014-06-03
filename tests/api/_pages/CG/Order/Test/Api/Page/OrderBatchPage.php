@@ -37,6 +37,11 @@ class OrderBatchPage extends RootPage
             ["name" => "1", "organisationUnitId" => 2, "id" => "2-1", "active" => 1]
         ];
     }
+    
+    public static function getTestCollectionKeys() 
+    {
+    	return [0, 1, 2, 3, 4, 5];
+    }
 
     public static function getRequiredEntityFields()
     {

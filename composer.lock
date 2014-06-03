@@ -429,17 +429,17 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "v0.2.9.2",
+            "version": "0.3.2.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76"
+                "reference": "2c021d8f2d14d5bce22fe30906a44deb0f461fdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-v0.2.9.2-dc3e7d.zip",
-                "reference": "9d50f28303dab853c55376e92269ec9a49907f76",
-                "shasum": "b077b9f3f176559dd5f0c1ef418d304ea74df264"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.2.2-34d4f4.zip",
+                "reference": "2c021d8f2d14d5bce22fe30906a44deb0f461fdf",
+                "shasum": "451d0c470f5b282244875e266e9202ff5a019c4d"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -452,7 +452,8 @@
                 "robmorgan/phinx": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "dev-phpcs-fixer"
             },
             "bin": [
                 "bin/phinx"
@@ -577,6 +578,10 @@
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
+            },
+            "require-dev": {
+                "channelgrabber/phpunit": ">=1.0.0",
+                "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
             "autoload": {
@@ -3042,17 +3047,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.43",
+            "version": "1.1.44",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "3025b354e8b64da677de1bb15102a804b208dac2"
+                "reference": "813e1b9d36203b492538ea852977e3ea98e45646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.43-7dad80.zip",
-                "reference": "3025b354e8b64da677de1bb15102a804b208dac2",
-                "shasum": "c38dd06c8d16867a53c356e1e55741d2f9e471c8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.44-d2c966.zip",
+                "reference": "813e1b9d36203b492538ea852977e3ea98e45646",
+                "shasum": "f9d21f49523a6889b21ec355ac7be9d8897d3e8a"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -3070,7 +3075,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-04-29 14:50:47"
+            "time": "2014-06-03 12:36:25"
         },
         {
             "name": "channelgrabber/phpunit",

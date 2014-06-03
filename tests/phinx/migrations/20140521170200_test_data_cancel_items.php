@@ -1,11 +1,9 @@
 <?php
 
-use Phinx\Migration\AbstractMigration;
-require_once __DIR__.'/../InsertTestDataTrait.php';
+use Phinx\Migration\TestMigration;
 
-class TestDataCancelItems extends AbstractMigration
+class TestDataCancelItems extends TestMigration
 {
-    use InsertTestDataTrait;
 
     public function up()
     {
