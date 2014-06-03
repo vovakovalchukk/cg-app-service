@@ -522,8 +522,12 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'TemplateCollection',
-        'validation' => array("dataRules" => TemplateEntityValidationRules::class,
-            "filterRules" => TemplateFilterValidationRules::class, "flatten" => false)
+        'validation' => array(
+            "dataRules" => TemplateEntityValidationRules::class,
+            "filterRules" => TemplateFilterValidationRules::class,
+            "flatten" => false
+        ),
+        'version' => new Version(1, 2)
     ),
     '/template/:id' => array (
         'controllers' => function($templateId) use ($di) {
@@ -538,6 +542,7 @@ return array(
             },
         'via' => array('GET', 'DELETE', 'PUT', 'OPTIONS'),
         'name' => 'TemplateEntity',
-        'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2)
     ),
 );

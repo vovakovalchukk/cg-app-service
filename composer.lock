@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a057b56e0271b1072db61b14b790cee3",
+    "hash": "deb78a57567067f35c1c8d6914ef0d07",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -359,7 +359,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "11a316e41f9c959bfbb34d20e41b0d530659bfea"
+                "reference": "8cfe4032218a70ba883c9fb3e74ec7dc259470fb"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -384,7 +384,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-06-02 11:04:59"
+            "time": "2014-06-02 16:15:58"
         },
         {
             "name": "channelgrabber/permission",
@@ -540,11 +540,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-1843-DependantValidators",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "f54c8cd1bc0fed5c4e462a01102ac4d7d82f63dd"
+                "reference": "ea557f3fe36be57017b7ced1d617c4a4cbfb4f71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.2-562dee.zip",
+                "reference": "ea557f3fe36be57017b7ced1d617c4a4cbfb4f71",
+                "shasum": "9399a8e253484b97b335f4aaaec8069797569e7c"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -567,7 +573,12 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-06-02 15:04:57"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-02 16:29:03"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -607,17 +618,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.1.6",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "a7ff24e1f8401f85cc1c6b1e9102f157dd54c1e2"
+                "reference": "222adfebb87e3c3909dc5dcf585f04992b3b84c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.1.6-18eda9.zip",
-                "reference": "a7ff24e1f8401f85cc1c6b1e9102f157dd54c1e2",
-                "shasum": "9152020739322f0d587d09faa20dba364cdb12e2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.4-fc1e7e.zip",
+                "reference": "222adfebb87e3c3909dc5dcf585f04992b3b84c2",
+                "shasum": "3e1e69240e3cbec3e1b51a04f7ea17177b59aef3"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
@@ -645,7 +656,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-29 07:36:12"
+            "time": "2014-06-02 10:46:42"
         },
         {
             "name": "channelgrabber/user",
@@ -4102,19 +4113,12 @@
             "alias_normalized": "1.5.18.0",
             "version": "dev-CGIV-2324-FilterOrdering",
             "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.8.1",
-            "alias_normalized": "1.8.1.0",
-            "version": "dev-CGIV-1843-DependantValidators",
-            "package": "channelgrabber/slim"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
-        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
