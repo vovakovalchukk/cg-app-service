@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "45dc8a6b5eeddd18ff40997eb4c27b76",
+    "hash": "a8097f50f946a149877f45a482bdf0a8",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -522,11 +522,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-2336-VndValidationLogMessage",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "0a06a37687e4bad8b198a03a12331c2ea3d0751f"
+                "reference": "e4ca1c98eb80523f172889a522f786bd318a84c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.3-12575b.zip",
+                "reference": "e4ca1c98eb80523f172889a522f786bd318a84c4",
+                "shasum": "b373763723a16fbb7854423f09c4f626c378f35b"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -549,7 +555,12 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-06-04 08:41:55"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-04 09:54:29"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -4051,17 +4062,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.8.3",
-            "alias_normalized": "1.8.3.0",
-            "version": "dev-CGIV-2336-VndValidationLogMessage",
-            "package": "channelgrabber/slim"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
