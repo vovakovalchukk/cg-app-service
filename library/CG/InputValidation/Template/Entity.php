@@ -74,6 +74,12 @@ class Entity implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'elements'])
                 )
+            ),
+            'editable' => array(
+                'name' => 'editable',
+                'required' => false,
+                'validators' => array(
+                )
             )
         );
     }
