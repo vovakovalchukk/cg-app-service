@@ -1,12 +1,9 @@
 <?php
 
-use Phinx\Migration\AbstractMigration;
-require_once __DIR__.'/../InsertTestDataTrait.php';
+use Phinx\Migration\TestMigration;
 
-class TestData extends AbstractMigration
+class TestData extends TestMigration
 {
-    use InsertTestDataTrait;
-
     public function up()
     {
         $this->execute('SET FOREIGN_KEY_CHECKS=0');

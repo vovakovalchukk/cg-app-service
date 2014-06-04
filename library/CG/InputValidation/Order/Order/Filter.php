@@ -46,6 +46,8 @@ class Filter implements RulesInterface, ExclusionInterface
         $rules = $this->getRules();
         unset($rules['limit']);
         unset($rules['page']);
+        unset($rules['orderBy']);
+        unset($rules['orderDirection']);
         $ruleKeys = array_keys($rules);
         $excludeOthers = array_fill_keys($ruleKeys, true);
         $excludeFilter = array_fill_keys($ruleKeys, ['orderFilter' => true]);
