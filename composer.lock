@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "723b141fda7f16185ebc0b2690efcdf8",
+    "hash": "f6ae8c2d383715711ccd271b7f32699b",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -299,17 +299,17 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "1.4.2",
+            "version": "1.4.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "5c5c95338d74b823dd2603fece3a267f4b3db70d"
+                "reference": "781e2e0749062cfd98efcd3e3b2239d6bf1f3d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.2-d63cd6.zip",
-                "reference": "5c5c95338d74b823dd2603fece3a267f4b3db70d",
-                "shasum": "61d49de28b0eee945df7a2296ef25ed9fed91403"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.2.1-b385a5.zip",
+                "reference": "781e2e0749062cfd98efcd3e3b2239d6bf1f3d71",
+                "shasum": "6eb8c1a21089ca846c318428ca5c69b55be978cc"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.7",
@@ -319,8 +319,8 @@
                 "channelgrabber/stdlib": ">=2.3.0",
                 "channelgrabber/validation": ">=1.1.0",
                 "nocarrier/hal": "~0.9.4",
-                "zendframework/zend-di": "2.2.*",
-                "zendframework/zend-eventmanager": "2.2.*"
+                "zendframework/zend-di": ">=2.2,<3.0",
+                "zendframework/zend-eventmanager": ">=2.2,<3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*"
@@ -336,7 +336,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-30 14:48:16"
+            "time": "2014-06-05 10:49:37"
         },
         {
             "name": "channelgrabber/order",
@@ -553,20 +553,14 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.5.22",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "31cb9f665f549af6639d522b1fbf6447c2a0e833"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.22-bdb63d.zip",
-                "reference": "31cb9f665f549af6639d522b1fbf6447c2a0e833",
-                "shasum": "2756fe0e9fca635c3f0210760385b97d25484af0"
+                "reference": "7f5a560cf41873d37a56795e161d70aeb24d2be4"
             },
             "require": {
-                "zendframework/zend-db": "2.2.*"
+                "zendframework/zend-db": ">=2.2,<3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.0.*"
@@ -580,12 +574,7 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-06-05 10:01:42"
+            "time": "2014-06-05 14:09:53"
         },
         {
             "name": "channelgrabber/template",
@@ -4056,12 +4045,19 @@
             "alias_normalized": "1.8.3.0",
             "version": "dev-develop",
             "package": "channelgrabber/slim"
+        },
+        {
+            "alias": "2.5.22",
+            "alias_normalized": "2.5.22.0",
+            "version": "dev-develop",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/slim": 20,
+        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
