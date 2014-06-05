@@ -6,8 +6,6 @@ $frameworkComponents = require dirname(__DIR__) . '/config/di/framework_componen
 $phpInternalComponents = require dirname(__DIR__) . '/config/di/php_internal_components.php';
 $vendorComponents = array_merge($frameworkComponents, require dirname(__DIR__) . '/config/di/vendor_components.php');
 
-$vendorComponents = array();
-
 $componentTypes = [
     'controllers' => [
         'CG'

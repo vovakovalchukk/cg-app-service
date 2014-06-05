@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "c877e81e341a5a25b35c8e2f3c927a75",
+    "hash": "b18a65d2cb5c11eb6d5472130e24741a",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -263,17 +264,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.10",
+            "version": "1.2.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "4dce7c928529aecbe32e160c5b7a4780d58f392e"
+                "reference": "408a3dc5a6850231b8bdef48a0cce2a4146ed7e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.10-5a2d6c.zip",
-                "reference": "4dce7c928529aecbe32e160c5b7a4780d58f392e",
-                "shasum": "27b992c1ac8d7885fcbdc4233fab76889a95f219"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.11-73906e.zip",
+                "reference": "408a3dc5a6850231b8bdef48a0cce2a4146ed7e5",
+                "shasum": "6b01467bbb97079bf4c2951eedfd1b878901464c"
             },
             "require": {
                 "channelgrabber/etag": "~1.4.2",
@@ -295,7 +296,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-05-27 11:13:40"
+            "time": "2014-06-03 14:07:33"
         },
         {
             "name": "channelgrabber/log",
@@ -344,7 +345,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b690550994e13abde40e3bf945e10e3a1cb62003"
+                "reference": "b6ced7e7f85a127780d580e7672a6b36c1282f07"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -511,17 +512,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.8.2",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "ea557f3fe36be57017b7ced1d617c4a4cbfb4f71"
+                "reference": "e4ca1c98eb80523f172889a522f786bd318a84c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.2-562dee.zip",
-                "reference": "ea557f3fe36be57017b7ced1d617c4a4cbfb4f71",
-                "shasum": "9399a8e253484b97b335f4aaaec8069797569e7c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.3-12575b.zip",
+                "reference": "e4ca1c98eb80523f172889a522f786bd318a84c4",
+                "shasum": "b373763723a16fbb7854423f09c4f626c378f35b"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
@@ -538,10 +539,6 @@
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
             },
-            "require-dev": {
-                "channelgrabber/phpunit": ">=1.0.0",
-                "phpunit/phpunit": "3.7.*"
-            },
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -553,7 +550,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-02 16:29:03"
+            "time": "2014-06-04 09:54:29"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -593,17 +590,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "222adfebb87e3c3909dc5dcf585f04992b3b84c2"
+                "reference": "e9bf29927bc9b9e00d0caa13c43ddfce2fcb611d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.4-fc1e7e.zip",
-                "reference": "222adfebb87e3c3909dc5dcf585f04992b3b84c2",
-                "shasum": "3e1e69240e3cbec3e1b51a04f7ea17177b59aef3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.5-2d69b5.zip",
+                "reference": "e9bf29927bc9b9e00d0caa13c43ddfce2fcb611d",
+                "shasum": "efa0b8c2ac782b8b269be7fe243840add2fe8f3d"
             },
             "require": {
                 "channelgrabber/account": "~1.0",
@@ -631,7 +628,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-02 10:46:42"
+            "time": "2014-06-04 07:28:33"
         },
         {
             "name": "channelgrabber/user",
@@ -3257,16 +3254,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "65026b610f8c19e61d7242f600530677b0466aac"
+                "reference": "25b16e801979098cb2f120e697bfce454b18bf23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/65026b610f8c19e61d7242f600530677b0466aac",
-                "reference": "65026b610f8c19e61d7242f600530677b0466aac",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/25b16e801979098cb2f120e697bfce454b18bf23",
+                "reference": "25b16e801979098cb2f120e697bfce454b18bf23",
                 "shasum": ""
             },
             "require": {
@@ -3294,7 +3291,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -3321,7 +3318,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-04-24 13:29:03"
+            "time": "2014-06-04 16:30:04"
         },
         {
             "name": "phpspec/php-diff",
