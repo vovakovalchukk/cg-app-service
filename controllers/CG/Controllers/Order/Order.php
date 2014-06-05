@@ -36,7 +36,7 @@ class Order implements LoggerAwareInterface
 
     public function put($id, Hal $hal)
     {
-        $this->logDebug('Put method called on Order Controller');
+        $this->logDebug('Order <' . $id . '> was PUT');
         return $this->getService()->saveHal($hal, array("id" => $id));
     }
 
