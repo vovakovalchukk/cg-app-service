@@ -18,3 +18,5 @@ foreach ($components as $component) {
 
 $di = $serviceManager->get('Di');
 $app = $di->get(Slim::class);
+
+$di->get('CG\Log\FatalErrorHandler');
