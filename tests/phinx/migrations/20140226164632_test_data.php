@@ -7,8 +7,6 @@ class TestData extends TestMigration
     public function up()
     {
         $this->execute('SET FOREIGN_KEY_CHECKS=0');
-        $this->insertTestData('service', $this->getServiceData());
-        $this->insertTestData('serviceEvent', $this->getServiceEventData());
         $this->insertTestData('order', $this->getOrderData());
         $this->insertTestData('address', $this->getAddressData());
         $this->insertTestData('orderTag', $this->getOrderTagData());
@@ -38,28 +36,6 @@ class TestData extends TestMigration
         $this->execute('TRUNCATE table `batch`');
         $this->execute('TRUNCATE table `item`');
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
-    }
-
-    protected function getServiceData()
-    {
-        return array(
-            [1,'Type1','endpoint1'],
-            [2,'Type2','endpoint2'],
-            [3,'Type3','endpoint3'],
-            [4,'Type4','endpoint4'],
-            [5,'Type5','endpoint5']
-        );
-    }
-
-    protected function getServiceEventData() {
-        return array(
-            [1,1,'type1',1,'http://example1.com'],
-            [2,1,'type2',2,'http://example2.com'],
-            [3,1,'type3',3,'http://example3.com'],
-            [4,1,'type4',4,'http://example4.com'],
-            [5,1,'type5',5,'http://example5.com'],
-            [6,2,'type6',6,'http://example6.com']
-        );
     }
 
     protected function getOrderData()

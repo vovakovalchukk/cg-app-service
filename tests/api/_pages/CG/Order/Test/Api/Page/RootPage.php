@@ -5,7 +5,7 @@ use CG\Codeception\Cest\Rest\EndpointsPageInterface;
 use CG\Codeception\Cest\RestPage;
 use CG\Order\Test\Api\Page\UserPreferencePage;
 use CG\Order\Test\Api\Page\OrderPage;
-use CG\Order\Test\Api\Page\ServicePage;
+use CG\Order\Test\Api\Page\TemplatePage;
 
 class RootPage extends RestPage implements EndpointsPageInterface
 {
@@ -24,8 +24,8 @@ class RootPage extends RestPage implements EndpointsPageInterface
         return [
                 "self"      => array("href" => static::getUrl()),
                 "order"     => array("href" => OrderPage::getUrl()),
-                "service"     => array("href" => ServicePage::getUrl()),
                 "userPreference" => array("href" => UserPreferencePage::getUrl()),
+                "template" => array("href" => TemplatePage::getUrl()),
         ];
     }
 

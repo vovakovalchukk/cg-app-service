@@ -16,7 +16,6 @@ class Mapper
     public function getHal()
     {
         return $this->getDi()->get(Hal::class, array('uri' => '/'))
-                             ->addLink('service', '/service')
                              ->addLink('order', '/order')
                              ->addLink('userPreference', '/userPreference')
                              ->addLink('template', '/template');
