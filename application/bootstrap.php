@@ -1,4 +1,5 @@
 <?php
+use CG\Log\FatalErrorHandler;
 use Slim\Slim;
 define('PROJECT_ROOT', dirname(__DIR__));
 define('DS', DIRECTORY_SEPARATOR);
@@ -19,4 +20,4 @@ foreach ($components as $component) {
 $di = $serviceManager->get('Di');
 $app = $di->get(Slim::class);
 
-$di->get('CG\Log\FatalErrorHandler');
+$di->get(CG\Log\FatalErrorHandler::class);
