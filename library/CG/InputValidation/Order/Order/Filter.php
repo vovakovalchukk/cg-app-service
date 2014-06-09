@@ -84,17 +84,17 @@ class Filter implements RulesInterface, ExclusionInterface
                 )
             ),
             'orderFilter' => array(
-                'name' => 'id',
+                'name' => 'orderFilter',
                 'required' => false,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
-            'id' => array(
-                'name' => 'id',
+            'orderIds' => array(
+                'name' => 'orderIds',
                 'required' => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "id"))
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "orderIds"))
                 ),
             ),
             'purchaseDateFrom' => array(
