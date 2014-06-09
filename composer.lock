@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d477593e8fc6bd1fbf22559268e528af",
+    "hash": "ccdf80630d44cc1d368c55e7e1a85d0c",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -315,17 +315,17 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "1.4.2.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "781e2e0749062cfd98efcd3e3b2239d6bf1f3d71"
+                "reference": "eaebfe1ffc030d46bc7de80b9352d6d615134dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.2.1-b385a5.zip",
-                "reference": "781e2e0749062cfd98efcd3e3b2239d6bf1f3d71",
-                "shasum": "6eb8c1a21089ca846c318428ca5c69b55be978cc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-1.4.3-d4f415.zip",
+                "reference": "eaebfe1ffc030d46bc7de80b9352d6d615134dd5",
+                "shasum": "3fdc4eadabf39dba4706afbe3c9c2f83b9bed7a8"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.7",
@@ -352,7 +352,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-05 10:49:37"
+            "time": "2014-06-09 15:32:31"
         },
         {
             "name": "channelgrabber/order",
@@ -553,16 +553,22 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-2307-VndLogs",
+            "version": "1.8.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "4b2b711f5a50ae8b24e266e288a17d711c26e4ec"
+                "reference": "27c16c7534f31413cc8bd2ef45b70213c19bfbd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.4-d6a136.zip",
+                "reference": "27c16c7534f31413cc8bd2ef45b70213c19bfbd0",
+                "shasum": "111d6d167a85d63a16d48ea0ca9a032018b04767"
             },
             "require": {
                 "channelgrabber/http": "~1.2.1",
                 "channelgrabber/log": ">=1.4.0,<2.0.0",
-                "channelgrabber/stdlib": ">=2.5.22,<2.6.0",
+                "channelgrabber/stdlib": ">=2.5.23,<2.6.0",
                 "channelgrabber/vnderror": "~1.0.0",
                 "cilex/cilex": "1.0.1",
                 "nocarrier/hal": "~0.9.4",
@@ -580,15 +586,26 @@
                     "CG\\Slim": ""
                 }
             },
-            "time": "2014-06-09 13:34:42"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-09 15:43:23"
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-2307-VndLogs",
+            "version": "2.5.23",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "41e9e3b217d183efc856bd73f2e731f889496035"
+                "reference": "a787d53257a6d2aa1bbe2caa2acbeaa7fc102eb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.5.23-d7028e.zip",
+                "reference": "a787d53257a6d2aa1bbe2caa2acbeaa7fc102eb1",
+                "shasum": "f170495aba3a9cf9d93399e92536dce3d6a07871"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -605,7 +622,12 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-06-06 15:38:37"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-09 15:35:17"
         },
         {
             "name": "channelgrabber/template",
@@ -4100,24 +4122,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.8.3",
-            "alias_normalized": "1.8.3.0",
-            "version": "dev-CGIV-2307-VndLogs",
-            "package": "channelgrabber/slim"
-        },
-        {
-            "alias": "2.5.22",
-            "alias_normalized": "2.5.22.0",
-            "version": "dev-CGIV-2307-VndLogs",
-            "package": "channelgrabber/stdlib"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
-        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
