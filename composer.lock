@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9a673d28823c727b762ff6319a73a9da",
+    "hash": "def9c2728ceed0c5e64dad1d59a287c1",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -340,11 +340,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-2365-MongoTelephoneNumber",
+            "version": "1.5.23",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "97b9914c27af3c9254fa650d33747306363cebef"
+                "reference": "22c5148564201aaff31baa2e9c87399a276bfd94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.23-08b5b9.zip",
+                "reference": "22c5148564201aaff31baa2e9c87399a276bfd94",
+                "shasum": "026efba548715f746647e8373f777b22ed25d362"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -369,7 +375,12 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-06-09 10:36:06"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-09 10:55:20"
         },
         {
             "name": "channelgrabber/permission",
@@ -4051,17 +4062,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.5.23",
-            "alias_normalized": "1.5.23.0",
-            "version": "dev-CGIV-2365-MongoTelephoneNumber",
-            "package": "channelgrabber/order"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
