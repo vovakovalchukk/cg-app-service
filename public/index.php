@@ -14,7 +14,7 @@ use CG\Slim\HeadRequest\Middleware as HeadRequest;
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
 
-$di->newInstance(Cache::class);
+$di->newInstance(Cache::class, ["app" => $app]);
 $di->newInstance(LoggingModule::class)->register($app);
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
