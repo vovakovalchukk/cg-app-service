@@ -7,12 +7,14 @@ use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
+use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
 
+$di->newInstance(Cache::class, ["app" => $app]);
 $di->newInstance(LoggingModule::class)->register($app);
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
