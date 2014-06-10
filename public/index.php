@@ -7,22 +7,14 @@ use CG\Slim\Rest\UnusedMethods;
 use CG\Slim\Renderer;
 use CG\Slim\Validator;
 use CG\Slim\VndError\VndError;
+use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
-use Zend\EventManager\Event;
-use Zend\EventManager\GlobalEventManager;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
 
-$di->get(GlobalEventManager::class)->attach('CacheAttempt', function (Event $e) use ($app) {
-    if (!$app->response->headers->get('Cache-Key')) {
-        $params = $e->getParams();
-        $app->response->headers->set('Cache-Key', $params['key']);
-        $app->response->headers->set('Cache-Success', $params['success'] ? 'true' : 'false');
-    }
-});
-
+$di->newInstance(Cache::class);
 $di->newInstance(LoggingModule::class)->register($app);
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
