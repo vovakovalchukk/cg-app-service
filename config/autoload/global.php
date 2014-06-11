@@ -23,24 +23,6 @@ use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
 use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 
-//Service
-use CG\App\Service\Service as ServiceService;
-use CG\App\Service\Repository as ServiceRepository;
-use CG\App\Service\Storage\Cache as ServiceCacheStorage;
-use CG\App\Service\Storage\Db as ServiceDbStorage;
-use CG\Controllers\App\Service as ServiceController;
-use CG\Controllers\App\Service\Collection as ServiceCollectionController;
-use CG\App\Service\Storage\ETag as ServiceETagStorage;
-
-//Event
-use CG\App\Service\Event\Service as EventService;
-use CG\App\Service\Event\Repository as EventRepository;
-use CG\App\Service\Event\Storage\Cache as EventCacheStorage;
-use CG\App\Service\Event\Storage\Db as EventDbStorage;
-use CG\Controllers\App\Event as EventController;
-use CG\Controllers\App\Event\Collection as EventCollectionController;
-use CG\App\Service\Event\Storage\ETag as EventETagStorage;
-
 //Order
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
@@ -209,16 +191,6 @@ return array(
                 'WriteSql' => Sql::class,
                 'Di' => Di::class,
                 'config' => Config::class,
-                'ServiceService' => ServiceService::class,
-                'ServiceCollectionService' => ServiceService::class,
-                'EventService' => EventService::class,
-                'EventCollectionService' => EventService::class,
-                'ServiceDbRepo' => ServiceRepository::class,
-                'ServiceDbStorage' => ServiceDbStorage::class,
-                'ServiceCacheRepo' => ServiceRepository::class,
-                'EventDbRepo' => EventRepository::class,
-                'EventDbStorage' => EventDbStorage::class,
-                'EventCacheRepo' => EventRepository::class,
                 'OrderService' => OrderService::class,
                 'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
@@ -270,97 +242,6 @@ return array(
             EtagRedis::class => array(
                 'parameter' => array(
                     'predisClient' => 'unreliable_redis'
-                )
-            ),
-            ServiceETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => ServiceRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_App_Service_Shared_Entity'
-                )
-            ),
-            ServiceController::class => array(
-                'parameters' => array(
-                    'service' => 'ServiceService'
-                )
-            ),
-            ServiceCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'ServiceCollectionService'
-                )
-            ),
-            'ServiceService' => array(
-                'parameters' => array(
-                    'repository' => ServiceETagStorage::class,
-                    'eventService' => 'EventCollectionService'
-                )
-            ),
-            'ServiceCollectionService' => array(
-                'parameters' => array(
-                    'repository' => ServiceRepository::class,
-                    'eventService' => 'EventCollectionService'
-                )
-            ),
-            ServiceRepository::class => array(
-                'parameter' => array(
-                    'storage' => ServiceCacheStorage::class,
-                    'repository' => ServiceDbStorage::class
-                )
-            ),
-            ServiceDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
-            EventETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => EventRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_App_Event_Shared_Entity'
-                )
-            ),
-            EventController::class => array(
-                'parameters' => array(
-                    'service' => 'EventService'
-                )
-            ),
-            EventCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'EventCollectionService'
-                )
-            ),
-            'EventService' => array(
-                'parameters' => array(
-                    'repository' => EventETagStorage::class
-                )
-            ),
-            'EventCollectionService' => array(
-                'parameters' => array(
-                    'repository' => EventRepository::class
-                )
-            ),
-            EventRepository::class => array(
-                'parameter' => array(
-                    'storage' => EventCacheStorage::class,
-                    'repository' => EventDbStorage::class
-                )
-            ),
-            EventDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
-                    'eventManager' => EventManager::class
-                )
-            ),
-            'EventCacheRepo' => array(
-                'parameter' => array(
-                    'storage' => EventCache::class,
-                    'repository' => 'EventDbRepo'
                 )
             ),
             OrderPersistentStorage::class => array(
