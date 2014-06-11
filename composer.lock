@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4bb0233352b95a726dadd2d80c456a48",
+    "hash": "aa119e9ac63d0020486d4f266445a981",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -218,17 +218,11 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.4.2",
+            "version": "dev-CGIV-1411",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "b928fd667e7eb333fda1c6a1cbd05d4b95238833"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.4.2-f102fa.zip",
-                "reference": "b928fd667e7eb333fda1c6a1cbd05d4b95238833",
-                "shasum": "30d156deee48428c8c84858059b0267741c4bc15"
+                "reference": "f96e022a7e80fbe342f7ad09ee5c2ac752c3a7f4"
             },
             "require": {
                 "channelgrabber/stdlib": ">=2.0.7,<2.6.0",
@@ -240,12 +234,7 @@
                     "CG\\ETag\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-01-21 10:30:22"
+            "time": "2014-06-11 07:29:37"
         },
         {
             "name": "channelgrabber/gearman",
@@ -356,17 +345,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.5.25",
+            "version": "dev-CGIV-1411",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f568efbac2ca73902ce67e26de85a71c8cd1579f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.25-1edd01.zip",
-                "reference": "f568efbac2ca73902ce67e26de85a71c8cd1579f",
-                "shasum": "44004bb2035d86dfda3d5788f97775e827e9fe45"
+                "reference": "cd369bb3d65c80e74ec2e54b1eba3e2473544d77"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -391,12 +374,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-06-10 14:08:44"
+            "time": "2014-06-11 07:44:59"
         },
         {
             "name": "channelgrabber/permission",
@@ -4113,6 +4091,18 @@
     ],
     "aliases": [
         {
+            "alias": "1.4.2",
+            "alias_normalized": "1.4.2.0",
+            "version": "dev-CGIV-1411",
+            "package": "channelgrabber/etag"
+        },
+        {
+            "alias": "1.5.23",
+            "alias_normalized": "1.5.23.0",
+            "version": "dev-CGIV-1411",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "2.5.23",
             "alias_normalized": "2.5.23.0",
             "version": "dev-CGIV-2366-PreviousExceptions",
@@ -4122,6 +4112,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/etag": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
