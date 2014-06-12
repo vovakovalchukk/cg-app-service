@@ -19,7 +19,8 @@ class Mapper
                              ->addLink('service', '/service')
                              ->addLink('order', '/order')
                              ->addLink('userPreference', '/userPreference')
-                             ->addLink('template', '/template');
+                             ->addLink('template', '/template')
+                             ->addLink('settings', '/settings');
 
     }
 

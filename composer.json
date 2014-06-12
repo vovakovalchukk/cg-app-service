@@ -12,6 +12,10 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:channelgrabber/cg-settings.git"
         }
     ],
     "autoload": {
@@ -31,6 +35,7 @@
         "channelgrabber/order": "~1.5.26",
         "channelgrabber/phinx": "~0.3.2.2",
         "channelgrabber/predis": "~1.0.1",
+        "channelgrabber/settings": "dev-CGIV-2279-InvoiceEndpoint",
         "channelgrabber/slim": "~1.8.4",
         "channelgrabber/stdlib": "~2.5.25",
         "channelgrabber/template": "~1.2.5",
