@@ -9,10 +9,14 @@ use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Zend\Di\Di;
 use Nocarrier\Hal;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
+use CG\Constant\Log\Service\Api;
 
-class Order
+class Order implements LoggerAwareInterface
 {
     use ControllerTrait;
+    use LogTrait;
 
     public function __construct(Slim $app, ServiceService $service, Di $di)
     {
@@ -32,6 +36,7 @@ class Order
 
     public function put($id, Hal $hal)
     {
+        $this->logDebug('Order <' . $id . '> was PUT');
         return $this->getService()->saveHal($hal, array("id" => $id));
     }
 
