@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4ef567dd4540f26059ad4e1bd5d4b547",
+    "hash": "d989313914b3169a70a3138c35d8e43d",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -356,17 +355,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.5.26",
+            "version": "dev-CGIV-2431-AbstarctMethod",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b9f2fa0281a7d3642325f22202c055dea73bad45"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.26-a7013f.zip",
-                "reference": "b9f2fa0281a7d3642325f22202c055dea73bad45",
-                "shasum": "309bc9efb817ce42dd60f54f5e25e54be1ca547b"
+                "reference": "98454568b40ed1267077e4db63fd80c041f2ce82"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -391,12 +384,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-06-11 09:12:58"
+            "time": "2014-06-13 07:33:59"
         },
         {
             "name": "channelgrabber/permission",
@@ -489,7 +477,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-03-12 11:31:58"
+            "time": "2013-12-13 08:37:23"
         },
         {
             "name": "channelgrabber/predis",
@@ -512,11 +500,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Predis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-07-09 15:10:32"
@@ -542,11 +525,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Redis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-12-17 17:45:58"
@@ -744,11 +722,6 @@
                     "CG\\UserPreference\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-01-10 17:49:40"
         },
         {
@@ -803,11 +776,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -1143,9 +1111,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1233,8 +1199,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -2816,11 +2781,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -4123,11 +4083,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.5.29",
+            "alias_normalized": "1.5.29.0",
+            "version": "dev-CGIV-2431-AbstarctMethod",
+            "package": "channelgrabber/order"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
