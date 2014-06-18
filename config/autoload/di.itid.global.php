@@ -1,5 +1,7 @@
 <?php
 
+use CG\Log\ITIDService;
+
 return array(
     'di' => array(
         'instance' => array(
