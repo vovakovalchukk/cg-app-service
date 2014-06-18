@@ -11,6 +11,7 @@ use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
 use CG\Slim\Created\Created as Created;
+use CG\Slim\Usage\Usage;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -44,9 +45,11 @@ foreach ($routes as $route => $request) {
 $app->any('.+', $newRelic, $unusedMethods);
 
 $app->add($di->get(Created::class));
+$app->add($di->get(Usage::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
+
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
 
