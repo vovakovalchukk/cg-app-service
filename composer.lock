@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "746cc47c3421ce5d676aa69d1b48664e",
+    "hash": "56623c2b9ba4e3bad39238c597a73bd1",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -356,11 +356,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-2466-BatchFiltering",
+            "version": "1.5.32",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "dfca914ee26b39efcce418a01fc3c1e5473747ea"
+                "reference": "c39cb9564b7ab5b083826429066607f719dffef4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.32-d9ba88.zip",
+                "reference": "c39cb9564b7ab5b083826429066607f719dffef4",
+                "shasum": "4bb905a9fb36aa01677e5951e13cc0b19789482e"
             },
             "require": {
                 "channelgrabber/cache": ">=1.0.0,<1.3.0",
@@ -385,7 +391,12 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-06-18 09:23:35"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-19 07:19:48"
         },
         {
             "name": "channelgrabber/permission",
@@ -4084,17 +4095,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.5.32",
-            "alias_normalized": "1.5.32.0",
-            "version": "dev-CGIV-2466-BatchFiltering",
-            "package": "channelgrabber/order"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
