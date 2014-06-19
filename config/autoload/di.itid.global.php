@@ -1,11 +1,11 @@
 <?php
 
-use CG\Log\ITIDService;
+use CG\Log\ItidService;
 
 return array(
     'di' => array(
         'instance' => array(
-            ITIDService::class => array(
+            ItidService::class => array(
                 'shared' => true
             )
         )
