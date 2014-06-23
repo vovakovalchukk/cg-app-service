@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1227a4cd9b180e65f8abaf04f140a89e",
+    "hash": "cda5f9157d9743c54a55627c1280b147",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -544,23 +544,24 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.8.5",
+            "version": "1.8.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "0f87504d4a11bd9abace0b02b9690f7f725638e1"
+                "reference": "de9b865163dbd765d0ba885b4e674d6f28ad222f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.5-6211a0.zip",
-                "reference": "0f87504d4a11bd9abace0b02b9690f7f725638e1",
-                "shasum": "b95758e5ee572ca65f82a6e8c03bcafdc4214fca"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.7-fe5d18.zip",
+                "reference": "de9b865163dbd765d0ba885b4e674d6f28ad222f",
+                "shasum": "447c9c7bb195682247f575d53581833199dc9121"
             },
             "require": {
-                "channelgrabber/http": "~1.2.1",
+                "channelgrabber/etag": ">=1.4.3",
+                "channelgrabber/http": ">=1.2.1",
                 "channelgrabber/log": ">=1.4.0,<2.0.0",
                 "channelgrabber/stdlib": ">=2.5.23,<2.6.0",
-                "channelgrabber/vnderror": "~1.0.0",
+                "channelgrabber/vnderror": ">=1.0.0",
                 "cilex/cilex": "1.0.1",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=5.4.0",
@@ -582,7 +583,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-10 13:53:14"
+            "time": "2014-06-17 16:36:59"
         },
         {
             "name": "channelgrabber/stdlib",
