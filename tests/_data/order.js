@@ -1,5 +1,3 @@
-db=db.getSiblingDB("order");
-db.dropDatabase();
 db.order.insert({
     "_id": "1415-50",
     "accountId": 1415,

@@ -149,6 +149,16 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
+// Invoice Settings
+use CG\Controllers\Settings\Invoice as InvoiceSettingsController;
+use CG\Controllers\Settings\Invoice\Collection  as InvoiceSettingsCollectionController;
+use CG\Settings\Invoice\Repository as InvoiceSettingsRepository;
+use CG\Settings\Invoice\Service as InvoiceSettingsService;
+use CG\Settings\Invoice\Storage\Cache as InvoiceSettingsCacheStorage;
+use CG\Settings\Invoice\Storage\ETag as InvoiceSettingsETagStorage;
+use CG\Settings\Invoice\Storage\Persistent\Mongo as InvoiceSettingsMongoDbStorage;
+use CG\Settings\Invoice\StorageInterface as InvoiceSettingsStorageInterface;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -213,6 +223,9 @@ return array(
                 'UserPreferenceCollectionService' => UserPreferenceService::class,
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
+
+                'InvoiceSettingsService' => InvoiceSettingsService::class,
+                'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -763,6 +776,41 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
+
+            InvoiceSettingsETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => InvoiceSettingsRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => InvoiceSettingsEntity::class
+                )
+            ),
+            InvoiceSettingsController::class => array(
+                'parameters' => array(
+                    'service' => 'InvoiceSettingsService'
+                )
+            ),
+            InvoiceSettingsCollectionController::class => array(
+                'parameters' => array(
+                    'service' => InvoiceSettingsCollectionService::class
+                )
+            ),
+            'InvoiceSettingsService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsETagStorage::class
+                )
+            ),
+            'InvoiceSettingsCollectionService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsRepository::class
+                )
+            ),
+            InvoiceSettingsRepository::class => array(
+                'parameter' => array(
+                    'storage' => InvoiceSettingsCacheStorage::class,
+                    'repository' => InvoiceSettingsMongoDbStorage::class
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -775,7 +823,7 @@ return array(
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
                 \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
-                IncrementorInterface::class => Incrementor::class
+                IncrementorInterface::class => Incrementor::class,
             )
         )
     )
