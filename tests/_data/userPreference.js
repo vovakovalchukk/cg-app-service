@@ -1,3 +1,5 @@
+db=db.getSiblingDB("userPreference");
+db.dropDatabase();
 db.preference.insert({
     "_id":"1",
     "preference":{

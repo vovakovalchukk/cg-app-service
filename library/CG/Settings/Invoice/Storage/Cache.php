@@ -9,7 +9,7 @@ use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\FetchTrait;
 use CG\Cache\Storage\RemoveByFieldTrait;
 use CG\Cache\CacheAbstract;
-use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\PaginatedCollection as Collection;
 
 class Cache extends CacheAbstract implements StorageInterface
 {
@@ -17,7 +17,8 @@ class Cache extends CacheAbstract implements StorageInterface
 
     public function fetchCollectionByPagination($limit, $page)
     {
-        throw new NotFound('TODO');
+        $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page'));
+        return $this->getCollectionStrategy()->get($collection);
     }
 
     public function getEntityClass()

@@ -37,7 +37,7 @@ class Service implements LoggerAwareInterface
 
         return $this->getMapper()->collectionToHal(
             $collection,
-            "/template",
+            "/settings/invoice",
             $limit,
             $page
         );

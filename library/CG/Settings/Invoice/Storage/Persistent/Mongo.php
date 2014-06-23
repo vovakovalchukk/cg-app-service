@@ -26,18 +26,18 @@ class Mongo implements StorageInterface
     {
         try {
             $query = [];
-            $templates = $this->getMongoCollection()->find($query);
+            $settings = $this->getMongoCollection()->find($query);
             if ($limit != 'all') {
                 $offset = ($page - 1) * $limit;
-                $templates->limit($limit)->skip($offset);
+                $settings->limit($limit)->skip($offset);
             }
-            if (!$templates->count(true)) {
+            if (!$settings->count(true)) {
                 throw new NotFound();
             }
             $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page'));
-            $collection->setTotal($templates->count());
-            foreach ($templates as $template) {
-                $collection->attach($this->getMapper()->fromMongoArray($template));
+            $collection->setTotal($settings->count());
+            foreach ($settings as $setting) {
+                $collection->attach($this->getMapper()->fromMongoArray($setting));
             }
             return $collection;
         } catch (\MongoException $e) {

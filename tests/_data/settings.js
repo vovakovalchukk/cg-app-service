@@ -1,3 +1,5 @@
+db=db.getSiblingDB("settings");
+db.dropDatabase();
 db.invoice.insert({
     "_id": 1,
     "default": 2,

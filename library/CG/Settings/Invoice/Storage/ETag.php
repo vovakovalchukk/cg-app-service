@@ -11,9 +11,4 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 class ETag extends EntityRepository implements StorageInterface
 {
     use SaveTrait, FetchTrait, RemoveTrait;
-
-//    public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type)
-//    {
-//        return $this->getEntityStorage()->fetchCollectionByPaginationAsHal($limit, $page, $id, $organisationUnitId, $type);
-//    }
 }

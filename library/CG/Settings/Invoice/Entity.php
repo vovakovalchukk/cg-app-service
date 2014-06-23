@@ -1,19 +1,16 @@
 <?php
 namespace CG\Settings\Invoice;
 
-use CG\Template\PaperPage;
-use CG\Template\TagReplace\TagReplaceableInterface;
-use CG\Stdlib\CachableEntityTrait;
-use CG\Stdlib\CachableInterface;
+use \JsonSerializable;
 use CG\ETag\ETagInterface;
 use CG\ETag\EntityTrait as ETagEntityTrait;
 use CG\ETag\StoredETagInterface;
 use CG\ETag\StoredETagTrait as StoredETagEntityTrait;
 use CG\Permission\OwnershipInterface;
-use CG\Permission\OwnershipTrait;
-use \JsonSerializable;
-use Zend\EventManager\GlobalEventManager;
 use CG\Permission\Ownership;
+use CG\Stdlib\CachableEntityTrait;
+use CG\Stdlib\CachableInterface;
+use Zend\EventManager\GlobalEventManager;
 
 class Entity implements CachableInterface, ETagInterface, StoredETagInterface, OwnershipInterface, JsonSerializable
 {
@@ -30,20 +27,19 @@ class Entity implements CachableInterface, ETagInterface, StoredETagInterface, O
 
     public function setId($id)
     {
-       $this->id = $id;
+        $this->id = $id;
+        GlobalEventManager::trigger(Ownership::EVENT_OU_CHANGED_AFTER, Ownership::CONTEXT, ['entity' => $this]);
         return $this;
     }
 
     public function getOrganisationUnitId()
     {
-        return $this->id;
+        return $this->getId();
     }
 
     public function setOrganisationUnitId($organisationUnitId)
     {
-        $this->id = $organisationUnitId;
-        GlobalEventManager::trigger(Ownership::EVENT_OU_CHANGED_AFTER, Ownership::CONTEXT, array('entity' => $this));
-        return $this;
+        return $this->setId($organisationUnitId);
     }
 
     public function getDefault()

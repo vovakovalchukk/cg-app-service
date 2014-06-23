@@ -1,11 +1,11 @@
 <?php
 namespace CG\Settings\Invoice;
 
-use CG\Stdlib\Storage\MongoDb\MongoArrayTrait;
 use CG\Stdlib\Mapper\FromArrayInterface;
+use CG\Stdlib\Storage\MongoDb\MongoArrayTrait;
 use CG\Slim\Mapper\CollectionToHalTrait;
-use Nocarrier\Hal as NocarrierHal;
 use CG\Slim\Renderer\ResponseType\Hal;
+use Nocarrier\Hal as NocarrierHal;
 use Zend\Di\Di;
 
 class Mapper implements FromArrayInterface
@@ -23,8 +23,8 @@ class Mapper implements FromArrayInterface
 
     public function fromHal(NocarrierHal $hal)
     {
-        $template = $hal->getData();
-        return $this->fromArray($template);
+        $array = $hal->getData();
+        return $this->fromArray($array);
     }
 
     public function fromArray(array $invoiceSettings)
