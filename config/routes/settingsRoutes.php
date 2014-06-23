@@ -20,11 +20,8 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => array('GET', 'OPTIONS'),
-        'name' => 'Settings',
-        'validation' => [
-            // TODO
-        ],
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'Settings'
     ],
     '/settings/invoice' => [
         'controllers' => function() use ($di) {
@@ -54,7 +51,7 @@ return [
                 $controller->$method($invoiceId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'InvoiceSettings',
         'validation' => [
             "dataRules" => EntityValidation::class,
