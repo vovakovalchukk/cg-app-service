@@ -25,7 +25,7 @@ class FeePage extends OrderItemEntityPage
         ];
     }
 
-    public static function getTestCollection($parentId = null)
+    public static function getTestCollection()
     {
 
         return [
