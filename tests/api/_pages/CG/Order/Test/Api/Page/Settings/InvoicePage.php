@@ -11,6 +11,7 @@ class InvoicePage extends RootPage
     const URL = "/settings/invoice";
     const PRIMARY_ID = 1;
     const SECONDARY_ID = 2;
+    const EMBEDDED_RESOURCE = 'invoiceSettings';
 
     public static function getUrl()
     {
@@ -20,7 +21,7 @@ class InvoicePage extends RootPage
     public static function getResourceNames()
     {
         return [
-            'invoiceSettings'
+            static::EMBEDDED_RESOURCE
         ];
     }
 

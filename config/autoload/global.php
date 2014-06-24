@@ -152,12 +152,12 @@ use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 // Invoice Settings
 use CG\Controllers\Settings\Invoice as InvoiceSettingsController;
 use CG\Controllers\Settings\Invoice\Collection  as InvoiceSettingsCollectionController;
-use CG\Settings\Invoice\Repository as InvoiceSettingsRepository;
-use CG\Settings\Invoice\Service as InvoiceSettingsService;
-use CG\Settings\Invoice\Storage\Cache as InvoiceSettingsCacheStorage;
-use CG\Settings\Invoice\Storage\ETag as InvoiceSettingsETagStorage;
-use CG\Settings\Invoice\Storage\Persistent\Mongo as InvoiceSettingsMongoDbStorage;
-use CG\Settings\Invoice\StorageInterface as InvoiceSettingsStorageInterface;
+use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
+use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
+use CG\Settings\Invoice\Service\Storage\ETag as InvoiceSettingsETagStorage;
+use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
+use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
 
 return array(
     'service_manager' => array(
@@ -224,7 +224,7 @@ return array(
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
 
-                'InvoiceSettingsService' => InvoiceSettingsService::class,
+                'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
                 'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
             ),
             'ReadSql' => array(
@@ -787,7 +787,7 @@ return array(
             ),
             InvoiceSettingsController::class => array(
                 'parameters' => array(
-                    'service' => 'InvoiceSettingsService'
+                    'service' => 'InvoiceSettingsEntityService'
                 )
             ),
             InvoiceSettingsCollectionController::class => array(
@@ -795,7 +795,7 @@ return array(
                     'service' => InvoiceSettingsCollectionService::class
                 )
             ),
-            'InvoiceSettingsService' => array(
+            'InvoiceSettingsEntityService' => array(
                 'parameters' => array(
                     'repository' => InvoiceSettingsETagStorage::class
                 )

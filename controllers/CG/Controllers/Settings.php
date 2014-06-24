@@ -1,13 +1,10 @@
 <?php
 namespace CG\Controllers;
 
-use CG\Http\StatusCode;
 use CG\Slim\ControllerTrait;
-use Slim\Slim;
-use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use Zend\Di\Di;
 use CG\Slim\Renderer\ResponseType\Hal;
+use Slim\Slim;
+use Zend\Di\Di;
 
 class Settings
 {

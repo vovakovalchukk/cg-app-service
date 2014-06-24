@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "d868d252b09f19cb662532a3d06d8887",
+    "hash": "81be183728a6dd29c9d3c23bcfb3b230",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -539,6 +540,22 @@
                 }
             },
             "time": "2013-12-17 17:45:58"
+        },
+        {
+            "name": "channelgrabber/settings",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
+                "reference": "c31203db75faa2f7c7b948980256d1ef1910ac25"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Settings\\": ""
+                }
+            },
+            "time": "2014-06-11 14:53:27"
         },
         {
             "name": "channelgrabber/slim",
@@ -3017,17 +3034,17 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.45",
+            "version": "1.1.46",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "9bff9335d654865617590a74fe7ce3e6a8ad71ca"
+                "reference": "8a81cd84b982d8339692a6e71fd9fa3e23d38d38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.45-9794c3.zip",
-                "reference": "9bff9335d654865617590a74fe7ce3e6a8ad71ca",
-                "shasum": "6b298a9c1160f04efc326062ca0bf429dfde1fc9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.46-76fe2d.zip",
+                "reference": "8a81cd84b982d8339692a6e71fd9fa3e23d38d38",
+                "shasum": "41048746feae45bdff306c680515b27956a6fcdd"
             },
             "require": {
                 "channelgrabber/http": "1.2.*",
@@ -3045,7 +3062,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-03 12:36:25"
+            "time": "2014-06-24 11:05:16"
         },
         {
             "name": "channelgrabber/phpunit",
@@ -4094,11 +4111,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-develop",
+            "package": "channelgrabber/settings"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "phpspec/phpspec": 20
     },
     "platform": [

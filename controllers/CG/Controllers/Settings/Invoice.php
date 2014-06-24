@@ -3,7 +3,7 @@ namespace CG\Controllers\Settings;
 
 use CG\Http\StatusCode;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
-use CG\Settings\Invoice\Service;
+use CG\Settings\Invoice\Service\Service;
 use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;

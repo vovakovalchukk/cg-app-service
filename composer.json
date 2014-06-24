@@ -12,6 +12,10 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
+        },
+        {
+            "type": "vcs",
+            "url": "git@bitbucket.org:channelgrabber/cg-settings.git"
         }
     ],
     "autoload": {
@@ -31,6 +35,7 @@
         "channelgrabber/order": "~1.5.30",
         "channelgrabber/phinx": "~0.3.2.2",
         "channelgrabber/predis": "~1.0.1",
+        "channelgrabber/settings": "dev-develop as 1.0.0",
         "channelgrabber/slim": "~1.8.4",
         "channelgrabber/stdlib": "~2.5.25",
         "channelgrabber/template": "~1.2.5",
@@ -51,11 +56,11 @@
         "zendframework/zend-validator": "~2.2.5"
     },
     "require-dev": {
+        "channelgrabber/codeception": "~1.1.46",
         "channelgrabber/phpunit": "~1.0.0",
         "codeception/codeception": "~1.8.0",
         "phpspec/phpspec": "2.0.*@dev",
-        "phpspec/prophecy": "~1.0",
-        "channelgrabber/codeception": "~1.1.44"
+        "phpspec/prophecy": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [
