@@ -34,14 +34,14 @@ class UserChangePage extends OrderEntityPage
             ],
             [
                 "changes" => ["totalDiscount" => 0.1],
-                "organisationUnitId" => 1
+                "organisationUnitId" => 2
             ],
             [
                 "changes" => [
                     "billingAddressCompanyName" => "Wilki Ltd",
                     "billingAddressFullName" => "Matthew King"
                 ],
-                "organisationUnitId" => 1
+                "organisationUnitId" => 3
             ],
             [
                 "changes" => [
@@ -49,7 +49,7 @@ class UserChangePage extends OrderEntityPage
                     "shippingAddressCompanyName" => "Wilki Ltd",
                     "shippingAddressFullName" => "Matthew King"
                 ],
-                "organisationUnitId" => 1
+                "organisationUnitId" => 4
             ],
             [
                 "changes" => [
@@ -59,7 +59,7 @@ class UserChangePage extends OrderEntityPage
                     "billingAddressCompanyName" => "Wilki Ltd",
                     "billingAddressFullName" => "Matthew King"
                 ],
-                "organisationUnitId" => 1
+                "organisationUnitId" => 5
             ]
         ];
     }
