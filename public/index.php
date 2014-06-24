@@ -10,6 +10,7 @@ use CG\Slim\VndError\VndError;
 use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
+use CG\Slim\Created\Created as Created;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -42,6 +43,7 @@ foreach ($routes as $route => $request) {
 }
 $app->any('.+', $newRelic, $unusedMethods);
 
+$app->add($di->get(Created::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
