@@ -12,7 +12,13 @@
  */
 
 use Zend\Config\Config;
-use CG\Usage\Storage\Db as UsageDbStorage;
+
+//Usage
+use CG\Usage\Storage\Db as UsageDb;
+use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
+use CG\Usage\Storage\Redis as UsageRedis;
+use CG\Usage\Repository as UsageRepository;
+use CG\Usage\StorageInterface as UsageStorageInterface;
 
 return array(
     'service_manager' => array(
@@ -55,22 +61,35 @@ return array(
                 'Di' => 'Zend\Di\Di',
                 'config' => Config::class
              ),
-            'CG\RestExample\Service' => array(
-                'parameter' => array(
-                    'Repository' => 'CG\RestExample\Repository',
-                    "Mapper" => 'CG\RestExample\Mapper'
-                )
-            ),
-            UsageDbStorage::class => array(
-                'parameter' => array(
+            UsageDb::class=> [
+                'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql'
-                )
-            ),
+                ]
+            ],
+            UsageAggregateDb::class=> [
+                'parameter'=> [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageRepository::class => [
+                'parameter' => [
+                    'storage' => UsageRedis::class,
+                    'repository' => UsageDb::class
+                ]
+            ],
+            UsageRedis::class => [
+                'parameter' => [
+                    'client' => 'unreliable_redis',
+                    'aggregateStorage' => UsageAggregateDb::class
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
-                'CG\RestExample\ServiceInterface' => 'CG\RestExample\Service',
+                UsageStorageInterface::class => UsageRepository::class
             )
         )
     )
