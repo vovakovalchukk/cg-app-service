@@ -11,7 +11,6 @@ use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
 use CG\Slim\Created\Created as Created;
-use CG\Slim\Usage\Usage;
 use CG\Slim\Itid\ItidInjector;
 use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
