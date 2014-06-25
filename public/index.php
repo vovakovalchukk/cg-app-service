@@ -50,7 +50,7 @@ $app->add($di->get(Usage::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
-$app->app($di->get(ItidInjector::class));
+$app->add($di->get(ItidInjector::class));
 
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
