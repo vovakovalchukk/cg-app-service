@@ -33,7 +33,7 @@ use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
 use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
-use CG\InputValidation\Order\Item\Fee\Filter as FeeFilterValidationRules;
+use CG\Slim\InputValidation\PageLimit as FeeFilterValidationRules;
 
 //Note
 use CG\Controllers\Order\Note;
@@ -44,7 +44,7 @@ use CG\InputValidation\Order\Note\Filter as NoteFilterValidationRules;
 use CG\Controllers\Order\Item\GiftWrap;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
 use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
-use CG\InputValidation\Order\Item\GiftWrap\Filter as GiftWrapFilterValidationRules;
+use CG\Slim\InputValidation\PageLimit as GiftWrapFilterValidationRules;
 
 //UserChange
 use CG\Controllers\Order\UserChange;
@@ -60,7 +60,7 @@ use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
 use CG\Controllers\UserPreference\UserPreference;
 use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollection;
 use CG\InputValidation\UserPreference\Entity as UserPreferenceEntityValidationRules;
-use CG\InputValidation\UserPreference\Filter as UserPreferenceFilterValidationRules;
+use CG\Slim\InputValidation\PageLimit as UserPreferenceFilterValidationRules;
 
 //Tag
 use CG\Controllers\Order\Tag;
