@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class SessionsMigration extends AbstractMigration
+class RemoveOutOfDateSessionsMigration extends AbstractMigration
 {
    public function up()
     {
