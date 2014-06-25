@@ -19,4 +19,19 @@ class OrderBatchEntityPage extends OrderBatchPage implements EntityPageInterface
             static::POST => static::POST
         ];
     }
+
+    public static function getPrimaryUpdatedTestEntity()
+    {
+        $primary = static::getPrimaryTestEntity();
+        $secondary = static::getSecondaryTestEntity();
+        if(empty($primary) || empty($secondary) || !is_array($secondary) || !is_array($primary)){
+            return false;
+        }
+        foreach($secondary as $key => $value){
+            if ($key != 'id') {
+                $primary[$key] = $value;
+            }
+        }
+        return $primary;
+    }
 }

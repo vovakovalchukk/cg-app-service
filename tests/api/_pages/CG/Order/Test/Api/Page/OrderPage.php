@@ -391,12 +391,10 @@ class OrderPage extends RootPage
     public static function getFilterFields()
     {
         return [
-            "id" => [],
             "organisationUnitId" => [],
             "status" => [],
             "accountId" => [],
             "channel" => [],
-            //"includeArchived",  Not working atm
             "shippingMethod" => [],
             "batch" => []
         ];
@@ -410,7 +408,7 @@ class OrderPage extends RootPage
     public static function getCountryFilter()
     {
         $testEntity = static::getTestCollection()[0];
-        return ["country" => array($testEntity['shippingAddressCountryCode'])];
+        return ["shippingAddressCountry" => array($testEntity['shippingAddressCountryCode'])];
     }
 
     public static function getCountryFilterExpected()
@@ -420,7 +418,7 @@ class OrderPage extends RootPage
 
         $expectedResult = [];
         foreach ($testOrderCollection as $testOrder) {
-            if (in_array($testOrder["shippingAddressCountryCode"], $filter["country"])) {
+            if (in_array($testOrder["shippingAddressCountryCode"], $filter["shippingAddressCountry"])) {
                 $expectedResult[] = $testOrder;
             }
         }
@@ -431,7 +429,7 @@ class OrderPage extends RootPage
     public static function getCountryExcludeFilter()
     {
         $testEntity = static::getTestCollection()[4];
-        return ["countryExclude" => array($testEntity['shippingAddressCountryCode'])];
+        return ["shippingAddressCountryExclude" => array($testEntity['shippingAddressCountryCode'])];
     }
 
     public static function getCountryExcludeFilterExpected()
@@ -441,7 +439,7 @@ class OrderPage extends RootPage
 
         $expectedResult = [];
         foreach ($testOrderCollection as $testOrder) {
-            if (!in_array($testOrder["shippingAddressCountryCode"], $filter["countryExclude"])) {
+            if (!in_array($testOrder["shippingAddressCountryCode"], $filter["shippingAddressCountryExclude"])) {
                 $expectedResult[] = $testOrder;
             }
         }
@@ -491,7 +489,7 @@ class OrderPage extends RootPage
 
     public static function getArchiveFilter()
     {
-        return ["includeArchived" => "archived"];
+        return ["archived" => "archived"];
     }
 
     public static function getArchivedFilterExpected($filterValue)
