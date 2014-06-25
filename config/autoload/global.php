@@ -149,6 +149,13 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
+//Usage
+use CG\Usage\Storage\Db as UsageDb;
+use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
+use CG\Usage\Storage\Redis as UsageRedis;
+use CG\Usage\Repository as UsageRepository;
+use CG\Usage\StorageInterface as UsageStorageInterface;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -763,6 +770,32 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
+            UsageDb::class=> [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageAggregateDb::class=> [
+                'parameter'=> [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageRepository::class => [
+                'parameter' => [
+                    'storage' => UsageRedis::class,
+                    'repository' => UsageDb::class
+                ]
+            ],
+            UsageRedis::class => [
+                'parameter' => [
+                    'client' => 'unreliable_redis',
+                    'aggregateStorage' => UsageAggregateDb::class
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -775,8 +808,11 @@ return array(
                 'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
                 \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
-                IncrementorInterface::class => Incrementor::class
-            )
+                IncrementorInterface::class => Incrementor::class,
+                'Di' => 'Zend\Di\Di',
+                'config' => Config::class,
+                UsageStorageInterface::class => UsageRepository::class
+             )
         )
     )
 );
