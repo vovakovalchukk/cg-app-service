@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d617d60c4b4bfd33c7464f01aea4cc93",
+    "hash": "30b319b8277096d4dba91b1221ef9873",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -86,17 +86,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "06108e01495ef25444fa6ad094719872e5a8ffa6"
+                "reference": "f2fe09ec3b224ac31db718e40301bbe3d00c6187"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.2.3-cb80a3.zip",
-                "reference": "06108e01495ef25444fa6ad094719872e5a8ffa6",
-                "shasum": "c1ab4fa6b19deab46cc39e00bdaf5ffb56442b15"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.2.4-a4d3e8.zip",
+                "reference": "f2fe09ec3b224ac31db718e40301bbe3d00c6187",
+                "shasum": "88b957a31a0d4c8bc2242d4cc3f9db729197c60c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.23",
@@ -120,7 +120,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-13 10:00:07"
+            "time": "2014-06-25 13:41:34"
         },
         {
             "name": "channelgrabber/cilex",
@@ -148,11 +148,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Cilex": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-28 13:38:46"
@@ -490,7 +485,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-03-12 11:31:58"
+            "time": "2013-12-13 08:37:23"
         },
         {
             "name": "channelgrabber/predis",
@@ -513,11 +508,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Predis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-07-09 15:10:32"
@@ -543,11 +533,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Redis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-12-17 17:45:58"
@@ -748,11 +733,6 @@
                     "CG\\UserPreference\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-01-10 17:49:40"
         },
         {
@@ -807,11 +787,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -1147,9 +1122,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1237,8 +1210,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -2820,11 +2792,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3104,11 +3071,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\PhpUnit\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-29 15:11:10"
