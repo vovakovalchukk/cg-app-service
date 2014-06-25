@@ -12,6 +12,7 @@
  */
 
 use Zend\Config\Config;
+use CG\Usage\Storage\Db as UsageDbStorage;
 
 return array(
     'service_manager' => array(
@@ -58,6 +59,13 @@ return array(
                 'parameter' => array(
                     'Repository' => 'CG\RestExample\Repository',
                     "Mapper" => 'CG\RestExample\Mapper'
+                )
+            ),
+            UsageDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
                 )
             ),
             'preferences' => array(
