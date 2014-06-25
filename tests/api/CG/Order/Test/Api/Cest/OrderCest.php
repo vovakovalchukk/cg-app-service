@@ -4,13 +4,14 @@ namespace CG\Order\Test\Api\Cest;
 use CG\Order\Test\Api\Page\OrderPage;
 use CG\Order\Test\Api\Page\OrderItemPage;
 use CG\Codeception\Cest\Rest\CollectionTrait;
+use CG\Codeception\Cest\Rest\Collection\SortTrait;
 use CG\Http\StatusCode as HttpStatus;
 use ApiGuy;
 use CG\Order\Test\Api\Page\FilterPage;
 
 class OrderCest
 {
-    use CollectionTrait;
+    use CollectionTrait, SortTrait;
 
     protected function getPageClass()
     {

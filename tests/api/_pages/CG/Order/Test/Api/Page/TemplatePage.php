@@ -32,78 +32,93 @@ class TemplatePage extends RootPage
                 "id" => "1",
                 "type" => "invoice",
                 "organisationUnitId" => 1,
-                "minHeight" => 100,
-                "minWidth" => 200,
                 "elements" => [
                     [
-                        "templateType" => "Text",
+                        "type" => "Text",
                         "fontSize" => 12,
-                        "fontFamily" => "CG\\Template\\FontFamily\\Courier",
+                        "fontFamily" => "Courier",
                         "text" => "Random Text",
                         "fontColour" => "red"
                     ]
                 ],
-                "name" => "name1"
+                "name" => "name1",
+                "paperPage" => [
+                    "height" => 100,
+                    "width" => 400,
+                    "paperType" => 'class c'
+                ]
             ],
             [
                 "id" => "2",
                 "type" => "product",
                 "organisationUnitId" => 2,
-                "minHeight" => 200,
-                "minWidth" => 300,
                 "elements" => [
                     [
-                        "templateType" => "SellerAddress",
+                        "type" => "SellerAddress",
                         "fontSize" => 14,
-                        "fontFamily" => "CG\\Template\\FontFamily\\Helvetica",
+                        "fontFamily" => "Helvetica",
                         "fontColour" => "blue"
                     ]
                 ],
-                "name" => "name2"
+                "name" => "name2",
+                "paperPage" => [
+                    "height" => 200,
+                    "width" => 800,
+                    "paperType" => 'class c'
+                ]
             ],
             [
                 "id" => "3",
                 "type" => "ebay",
                 "organisationUnitId" => 3,
-                "minHeight" => 300,
-                "minWidth" => 400,
                 "elements" => [
                     [
-                        "templateType" => "DeliveryAddress",
+                        "type" => "DeliveryAddress",
                         "fontSize" => 16,
-                        "fontFamily" => "CG\\Template\\FontFamily\\Symbol",
+                        "fontFamily" => "Helvetica",
                         "fontColour" => "green"
                     ]
                 ],
-                "name" => "name3"
+                "name" => "name3",
+                "paperPage" => [
+                    "height" => 300,
+                    "width" => 1200,
+                    "paperType" => 'class c'
+                ]
             ],
             [
                 "id" => "4",
                 "type" => "amazon",
                 "organisationUnitId" => 4,
-                "minHeight" => 400,
-                "minWidth" => 500,
                 "elements" => [
                     [
-                        "templateType" => "OrderTable"
+                        "type" => "OrderTable"
                     ]
                 ],
-                "name" => "name4"
+                "name" => "name4",
+                "paperPage" => [
+                    "height" => 400,
+                    "width" => 1600,
+                    "paperType" => 'class c'
+                ]
             ],
             [
                 "id" => "5",
                 "type" => "invoice",
                 "organisationUnitId" => 5,
-                "minHeight" => 500,
-                "minWidth" => 600,
                 "elements" => [
                     [
-                        "templateType" => "Image",
+                        "type" => "Image",
                         "source" => "data://image/jpeg;base64,base64encodedImageData",
                         "format" => "jpeg"
                     ]
                 ],
-                "name" => "name5"
+                "name" => "name5",
+                "paperPage" => [
+                    "height" => 500,
+                    "width" => 2000,
+                    "paperType" => 'class c'
+                ]
             ]
         ];
     }
@@ -113,8 +128,6 @@ class TemplatePage extends RootPage
         return [
             "type",
             "organisationUnitId",
-            "minWidth",
-            "minHeight",
             "elements",
             "name"
         ];
@@ -127,8 +140,6 @@ class TemplatePage extends RootPage
             "type" => [],
             "organisationUnitId" => [],
             "elements" => "ABC",
-            "minWidth" => [],
-            "minHeight" => [],
             "name" => []
         ];
     }
@@ -139,8 +150,6 @@ class TemplatePage extends RootPage
             "id",
             "type",
             "organisationUnitId",
-            "minWidth",
-            "minHeight",
             "elements",
             "name"
         ];
