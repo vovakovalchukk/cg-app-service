@@ -490,77 +490,92 @@ db.template.insert({
     "_id":"1",
     "type":"invoice",
     "organisationUnitId":1,
-    "minHeight":100,
-    "minWidth":200,
     "elements": [
         {
-            "templateType": "Text",
+            "type": "Text",
             "fontSize": 12,
-            "fontFamily": "CG\\Template\\FontFamily\\Courier",
+            "fontFamily": "Courier",
             "text": "Random Text",
             "fontColour": "red"
         }
     ],
+    "paperPage" : {
+        "height" : 100,
+        "width" : 400,
+        "paperType" : 'class c'
+    },
     "name": "name1"
 });
 db.template.insert({
     "_id":"2",
     "type":"product",
     "organisationUnitId":2,
-    "minHeight":200,
-    "minWidth":300,
     "elements": [
         {
-            "templateType": "SellerAddress",
+            "type": "SellerAddress",
             "fontSize" : 14,
-            "fontFamily" : "CG\\Template\\FontFamily\\Helvetica",
+            "fontFamily" : "Helvetica",
             "fontColour": "blue"
         }
     ],
+    "paperPage" : {
+        "height" : 200,
+        "width" : 800,
+        "paperType" : 'class c'
+    },
     "name": "name2"
 });
 db.template.insert({
     "_id":"3",
     "type":"ebay",
     "organisationUnitId":3,
-    "minHeight":300,
-    "minWidth":400,
     "elements": [
         {
-            "templateType": "DeliveryAddress",
+            "type": "DeliveryAddress",
             "fontSize" : 16,
-            "fontFamily" : "CG\\Template\\FontFamily\\Symbol",
+            "fontFamily" : "Helvetica",
             "fontColour": "green"
         }
     ],
+    "paperPage" : {
+        "height" : 300,
+        "width" : 1200,
+        "paperType" : 'class c'
+    },
     "name": "name3"
 });
 db.template.insert({
     "_id":"4",
     "type":"amazon",
     "organisationUnitId":4,
-    "minHeight":400,
-    "minWidth":500,
     "elements": [
         {
-            "templateType": "OrderTable"
+            "type": "OrderTable"
         }
     ],
+    "paperPage" : {
+        "height" : 400,
+        "width" : 1600,
+        "paperType" : 'class c'
+    },
     "name": "name4"
 });
 db.template.insert({
     "_id":"5",
     "type":"invoice",
     "organisationUnitId":5,
-    "minHeight":500,
-    "minWidth":600,
     "elements": [
         {
-            "templateType": "Image",
+            "type": "Image",
             "source" : "data://image/jpeg;base64,base64encodedImageData",
             "format" : "jpeg"
 
         }
     ],
+    "paperPage" : {
+        "height" : 500,
+        "width" : 2000,
+        "paperType" : 'class c'
+    },
     "name": "name5"
 });
