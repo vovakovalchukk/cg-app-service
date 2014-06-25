@@ -20,6 +20,7 @@ $routes = require_once dirname(__DIR__).'/config/routing.php';
 
 $di->newInstance(Cache::class, ["app" => $app]);
 $di->newInstance(LoggingModule::class)->register($app);
+$app->add($di->get(ItidInjector::class));
 
 $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));
@@ -53,7 +54,6 @@ $app->add($di->get(UsageCount::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
-$app->add($di->get(ItidInjector::class));
 
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
