@@ -12,6 +12,7 @@ use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\HeadRequest\Middleware as HeadRequest;
 use CG\Slim\Created\Created as Created;
 use CG\Slim\Usage\Usage;
+use CG\Slim\Itid\ItidInjector;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -49,6 +50,7 @@ $app->add($di->get(Usage::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
+$app->app($di->get(ItidInjector::class));
 
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
