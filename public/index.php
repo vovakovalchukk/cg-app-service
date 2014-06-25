@@ -13,6 +13,8 @@ use CG\Slim\HeadRequest\Middleware as HeadRequest;
 use CG\Slim\Created\Created as Created;
 use CG\Slim\Usage\Usage;
 use CG\Slim\Itid\ItidInjector;
+use CG\Slim\Usage\Endpoint as UsageEndpoint;
+use CG\Slim\Usage\Count as UsageCount;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -25,6 +27,7 @@ $options = $di->get(Options::class, compact('app'));
 $unusedMethods = $di->get(UnusedMethods::class, compact('app'));
 $validator = $di->get(Validator::class, compact('app', 'di'));
 $versioning = $di->get(Versioning::class);
+
 
 $app->get(Versioning::VERSION_ROUTE, array($versioning, 'versionRoute'));
 foreach ($routes as $route => $request) {
@@ -46,7 +49,8 @@ foreach ($routes as $route => $request) {
 $app->any('.+', $newRelic, $unusedMethods);
 
 $app->add($di->get(Created::class));
-$app->add($di->get(Usage::class));
+$app->add($di->get(UsageEndpoint::class));
+$app->add($di->get(UsageCount::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
