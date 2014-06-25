@@ -10,7 +10,7 @@ class UsageMigration extends AbstractMigration
         $table->addColumn('statistic', 'string')
             ->addColumn('type', 'string')
             ->addColumn('timestamp', 'datetime')
-            ->addColumn('amount','float')
+            ->addColumn('amount', 'decimal', ['precision' => 12, 'scale' => 4])
             ->addColumn('organisationUnitId', 'integer')
             ->save();
     }
