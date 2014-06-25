@@ -54,7 +54,6 @@ $app->add($di->get(UsageCount::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(HeadRequest::class));
-
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
 
