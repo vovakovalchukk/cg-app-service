@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d617d60c4b4bfd33c7464f01aea4cc93",
+    "hash": "8c686107db5c426445819281da39773a",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -86,17 +86,11 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.2.3",
+            "version": "dev-CGIV-2532-GearmanConstruct",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "06108e01495ef25444fa6ad094719872e5a8ffa6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.2.3-cb80a3.zip",
-                "reference": "06108e01495ef25444fa6ad094719872e5a8ffa6",
-                "shasum": "c1ab4fa6b19deab46cc39e00bdaf5ffb56442b15"
+                "reference": "91c3af7e35af987702ebca1680ad9317d9331028"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.23",
@@ -115,12 +109,7 @@
                     "CG\\Channel\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-06-13 10:00:07"
+            "time": "2014-06-25 10:01:22"
         },
         {
             "name": "channelgrabber/cilex",
@@ -4127,10 +4116,16 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.2.1",
+            "alias_normalized": "1.2.1.0",
+            "version": "dev-CGIV-2532-GearmanConstruct",
+            "package": "channelgrabber/channel"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpspec/phpspec": 20
     },
