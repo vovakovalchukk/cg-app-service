@@ -4,25 +4,31 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "436faa8d1982b939a310bd3eb9eae640",
+    "hash": "5eef5f579d3fb56b6d914c55627da99b",
     "packages": [
         {
             "name": "channelgrabber/account",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.0.26",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-account.git",
-                "reference": "bbfa6db43b4ef47a426f7255f64d2cbc74b7e929"
+                "reference": "ae4e5c7a3f0e91cc8a204a884e1a0f65603901e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-account-1.0.26-3fc3f8.zip",
+                "reference": "ae4e5c7a3f0e91cc8a204a884e1a0f65603901e3",
+                "shasum": "e857cdab71a2fae03103276b12dab2cf3e30ed8f"
             },
             "require": {
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
-                "channelgrabber/channel": "dev-CGIV-2488-InvalidatePossibleCollections as 1.2.5",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
+                "channelgrabber/channel": ">=1.2.5,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/etag": ">=1.4.1, <1.5.0",
-                "channelgrabber/order": "dev-CGIV-2488-InvalidatePossibleCollections as 1.5.34",
+                "channelgrabber/order": ">=1.5.36,<2.0.0",
                 "channelgrabber/permission": ">=1.0.1, <2.0.0",
                 "channelgrabber/slim": ">=1.5.5,<2.0.0",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "ext-gearman": "~1.1.0",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
@@ -37,19 +43,30 @@
                     "CG\\Account\\": ""
                 }
             },
-            "time": "2014-06-26 10:47:31"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 14:15:12"
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "518f917433812a03c1548854166aa580a1e59ad1"
+                "reference": "6e35dcf3998ce16df90e7bde19f001784546a273"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-1.3.0-42f6f6.zip",
+                "reference": "6e35dcf3998ce16df90e7bde19f001784546a273",
+                "shasum": "643941bd5ca003c52d26e24a28d35636f4948e1b"
             },
             "require": {
                 "channelgrabber/predis": "1.0.1",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "predis/predis": "v0.8.3"
             },
             "require-dev": {
@@ -62,22 +79,33 @@
                     "CG\\Cache\\": ""
                 }
             },
-            "time": "2014-06-25 12:25:24"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 13:27:23"
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "000430db474de1eb515e5f804a87ec94acfed212"
+                "reference": "11a9af6324a98564b105aab260c1d2291d34f822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.2.5-49e910.zip",
+                "reference": "11a9af6324a98564b105aab260c1d2291d34f822",
+                "shasum": "c4d64973e8a3e00ee0d356b6486fbdfb5ce23c2d"
             },
             "require": {
-                "channelgrabber/account": "dev-CGIV-2488-InvalidatePossibleCollections as 1.0.24",
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
+                "channelgrabber/account": ">=1.0.26,<2.0.0",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/order": "dev-CGIV-2488-InvalidatePossibleCollections as 1.5.34",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/order": ">=1.5.36,<2.0.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "zendframework/zend-di": ">=2.2.5"
             },
             "require-dev": {
@@ -90,7 +118,12 @@
                     "CG\\Channel\\": ""
                 }
             },
-            "time": "2014-06-25 14:16:44"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 13:54:31"
         },
         {
             "name": "channelgrabber/cilex",
@@ -286,18 +319,24 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollectionsNewLib",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "7664ec6074cdbaa0624ee66704f2ca5de7f00b44"
+                "reference": "907116e3269e2bf6077ddb23fbb3a1426b50a19e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.1-0d63e0.zip",
+                "reference": "907116e3269e2bf6077ddb23fbb3a1426b50a19e",
+                "shasum": "71de8a99b5da462d5d4bd91883c0cd050bce68ca"
             },
             "require": {
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/redis": "~0.1.0",
                 "channelgrabber/slim": ">=1.5.0",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "channelgrabber/validation": ">=1.1.0",
                 "nocarrier/hal": "~0.9.4",
                 "zendframework/zend-di": ">=2.2,<3.0",
@@ -312,24 +351,35 @@
                     "CG": ""
                 }
             },
-            "time": "2014-06-26 10:25:35"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 14:08:56"
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.5.36",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "34f1447a40a831be868d678a8a9262cbe251e879"
+                "reference": "d0843b6688399a923e6b35c504ecc69ec252abcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.36-19514b.zip",
+                "reference": "d0843b6688399a923e6b35c504ecc69ec252abcb",
+                "shasum": "61ce4dcfe9610ec59aa76aad645ace58f7bd390b"
             },
             "require": {
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/http": ">=1.2.3",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": ">=1.6.0,<2.0.0",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
@@ -345,7 +395,12 @@
                     "CG\\Order\\": ""
                 }
             },
-            "time": "2014-06-26 09:54:55"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 13:43:53"
         },
         {
             "name": "channelgrabber/permission",
@@ -379,17 +434,17 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.3.2.2",
+            "version": "0.3.2.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "2c021d8f2d14d5bce22fe30906a44deb0f461fdf"
+                "reference": "4e21a978c3ddd4175a15b1cebd41c1dc93adc66a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.2.2-34d4f4.zip",
-                "reference": "2c021d8f2d14d5bce22fe30906a44deb0f461fdf",
-                "shasum": "451d0c470f5b282244875e266e9202ff5a019c4d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.2.3-914803.zip",
+                "reference": "4e21a978c3ddd4175a15b1cebd41c1dc93adc66a",
+                "shasum": "2fa9641c059ff1fcc556c0812ddc0faeed246217"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -438,7 +493,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-12-13 08:37:23"
+            "time": "2014-06-26 09:50:42"
         },
         {
             "name": "channelgrabber/predis",
@@ -536,14 +591,20 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "8515f46b895c9ee42ee528181d55c3d6a79ff8bc"
+                "reference": "0469f55c5d6318ae5733f7b41463251b25063191"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.0-ba4851.zip",
+                "reference": "0469f55c5d6318ae5733f7b41463251b25063191",
+                "shasum": "b85245bf86fb5b15d28b651de513c19f80775cf7"
             },
             "require": {
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.2.6",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "zendframework/zend-db": ">=2.2,<3.0"
             },
             "require-dev": {
@@ -559,23 +620,34 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-06-26 09:27:53"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 13:30:46"
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.2.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "48ee113d4fefd82bacec19b58a493ac62d13f9dc"
+                "reference": "88c435eb905a25c6a40794ad861095c99f0de189"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.11-fc7c0b.zip",
+                "reference": "88c435eb905a25c6a40794ad861095c99f0de189",
+                "shasum": "3c06a56da3ad7ed6fe3a5ee778a6e2f53d6e3728"
             },
             "require": {
-                "channelgrabber/account": "dev-CGIV-2488-InvalidatePossibleCollections as 1.0.24",
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
-                "channelgrabber/channel": "dev-CGIV-2488-InvalidatePossibleCollections as 1.2.5",
+                "channelgrabber/account": ">=1.0.26,<2.0.0",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
+                "channelgrabber/channel": ">=1.2.5,<2.0.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/order": "dev-CGIV-2488-InvalidatePossibleCollections as 1.5.34",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/order": ">=1.5.36,<2.0.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "channelgrabber/user": ">=1.13.9",
                 "ext-gd": "*",
                 "zendframework/zend-di": ">=2.2.5,<3.0",
@@ -593,7 +665,12 @@
                     "CG\\Template\\": ""
                 }
             },
-            "time": "2014-06-26 10:29:26"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 14:27:10"
         },
         {
             "name": "channelgrabber/usage",
@@ -681,17 +758,23 @@
         },
         {
             "name": "channelgrabber/userpreference",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
-                "reference": "6d4e7e30c0e3a20970e56b7ce0ef39ff601ee634"
+                "reference": "3815d2cd86dfece12ad4f98e60ff38ff097a4b44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-1.1.2-4f1ae6.zip",
+                "reference": "3815d2cd86dfece12ad4f98e60ff38ff097a4b44",
+                "shasum": "f8ad13ae3ccaa0433ac18de8ce378b363d611e04"
             },
             "require": {
-                "channelgrabber/cache": "dev-CGIV-2488-InvalidatePossibleCollections as 1.3.0",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/http": "~1.2.3",
-                "channelgrabber/stdlib": "dev-CGIV-2488-InvalidatePossibleCollections as 2.6.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "ext-mongo": ">=1.4.4"
             },
             "type": "library",
@@ -700,7 +783,12 @@
                     "CG\\UserPreference\\": ""
                 }
             },
-            "time": "2014-06-26 10:31:13"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-26 14:31:06"
         },
         {
             "name": "channelgrabber/validation",
@@ -3368,12 +3456,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d"
+                "reference": "a65fb9da78a988b5f26dce56ab58b5f44cc492de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
-                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/a65fb9da78a988b5f26dce56ab58b5f44cc492de",
+                "reference": "a65fb9da78a988b5f26dce56ab58b5f44cc492de",
                 "shasum": ""
             },
             "require": {
@@ -3433,7 +3521,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-03-19 14:23:26"
+            "time": "2014-06-26 14:25:58"
         },
         {
             "name": "phpspec/prophecy",
@@ -4061,66 +4149,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.0.24",
-            "alias_normalized": "1.0.24.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/account"
-        },
-        {
-            "alias": "1.3.0",
-            "alias_normalized": "1.3.0.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/cache"
-        },
-        {
-            "alias": "1.2.5",
-            "alias_normalized": "1.2.5.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "2.0.1",
-            "alias_normalized": "2.0.1.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollectionsNewLib",
-            "package": "channelgrabber/log"
-        },
-        {
-            "alias": "1.5.34",
-            "alias_normalized": "1.5.34.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.2.11",
-            "alias_normalized": "1.2.11.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/template"
-        },
-        {
-            "alias": "1.2.11",
-            "alias_normalized": "1.2.11.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/userpreference"
-        },
-        {
-            "alias": "2.6.0",
-            "alias_normalized": "2.6.0.0",
-            "version": "dev-CGIV-2488-InvalidatePossibleCollections",
-            "package": "channelgrabber/stdlib"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/account": 20,
-        "channelgrabber/cache": 20,
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/log": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/template": 20,
-        "channelgrabber/userpreference": 20,
-        "channelgrabber/stdlib": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
