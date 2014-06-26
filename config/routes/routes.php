@@ -33,6 +33,7 @@ use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
 use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
+use CG\Slim\InputValidation\PageLimit as FeeFilterValidationRules;
 
 //Note
 use CG\Controllers\Order\Note;
@@ -43,6 +44,7 @@ use CG\InputValidation\Order\Note\Filter as NoteFilterValidationRules;
 use CG\Controllers\Order\Item\GiftWrap;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
 use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
+use CG\Slim\InputValidation\PageLimit as GiftWrapFilterValidationRules;
 
 //UserChange
 use CG\Controllers\Order\UserChange;
@@ -58,6 +60,7 @@ use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
 use CG\Controllers\UserPreference\UserPreference;
 use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollection;
 use CG\InputValidation\UserPreference\Entity as UserPreferenceEntityValidationRules;
+use CG\Slim\InputValidation\PageLimit as UserPreferenceFilterValidationRules;
 
 //Tag
 use CG\Controllers\Order\Tag;
@@ -286,7 +289,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderItemFeeCollection',
-        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => FeeFilterValidationRules::class, "flatten" => false)
     ),
     '/orderItem/:orderItemId/fee/:feeId' => array (
         'controllers' => function($orderItemId, $feeId) use ($di) {
@@ -316,7 +319,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderItemGiftWrapCollection',
-        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => GiftWrapFilterValidationRules::class, "flatten" => false)
     ),
     '/orderItem/:orderItemId/giftWrap/:giftWrapId' => array (
         'controllers' => function($orderItemId, $giftWrapId) use ($di) {
@@ -374,7 +377,7 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'UserPreferenceCollection',
-        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false)
     ),
     '/userPreference/:userId' => array (
         'controllers' => function($userId) use ($di) {
