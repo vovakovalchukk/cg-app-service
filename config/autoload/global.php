@@ -149,13 +149,6 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
-//Usage
-use CG\Usage\Storage\Db as UsageDb;
-use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
-use CG\Usage\Storage\Redis as UsageRedis;
-use CG\Usage\Repository as UsageRepository;
-use CG\Usage\StorageInterface as UsageStorageInterface;
-
 return array(
     'service_manager' => array(
         'factories' => array(

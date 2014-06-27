@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9162a2032b4105d97fc5fb29ed226752",
+    "hash": "e7cf8333136110b581ed4668fea5707f",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -718,11 +718,17 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "dev-CGIV-2545-support-latest-cache-changes",
+            "version": "1.14.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "1a19d3929693addd0fbc3eaaa96d7a94ecabbdaa"
+                "reference": "a89db69dbb63efdebe238622b947ed8f40f4fa50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.14.4-1c36ab.zip",
+                "reference": "a89db69dbb63efdebe238622b947ed8f40f4fa50",
+                "shasum": "0c1f43214a26fef6a43bef0f0089ac50ba6fe1ec"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -754,7 +760,12 @@
                     "CG": ""
                 }
             },
-            "time": "2014-06-27 14:12:20"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-06-27 14:22:31"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -4162,17 +4173,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.14.3",
-            "alias_normalized": "1.14.3.0",
-            "version": "dev-CGIV-2545-support-latest-cache-changes",
-            "package": "channelgrabber/user"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/user": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
