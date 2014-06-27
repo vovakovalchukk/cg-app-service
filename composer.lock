@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b75e99e2456c3e149f9917a20341a74",
+    "hash": "1471f34aaf27daa6bfcf0eebde40db30",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -518,11 +518,6 @@
                     "CG\\Predis\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-07-09 15:10:32"
         },
         {
@@ -546,11 +541,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Redis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-12-17 17:45:58"
@@ -718,20 +708,20 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.14.3",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "90f75716af27259dd06182574d526366f4312440"
+                "reference": "85020887fb6d99cdb40e9a23aacf89ef74041728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.14.3-70814f.zip",
-                "reference": "90f75716af27259dd06182574d526366f4312440",
-                "shasum": "59d8bd904c5362d0bb6098cca07d037838ba999f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.15.0-4da076.zip",
+                "reference": "85020887fb6d99cdb40e9a23aacf89ef74041728",
+                "shasum": "44987e8ef46086a41ee868b3c67dd0e99fde9df8"
             },
             "require": {
-                "channelgrabber/cache": ">=1.0.8",
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/email": ">=1.0.1",
                 "channelgrabber/etag": ">=1.3.3",
@@ -740,8 +730,9 @@
                 "channelgrabber/log": ">=1.5.2",
                 "channelgrabber/permission": ">=1.0.1",
                 "channelgrabber/slim": ">=1.6.0,<2.0.0",
-                "channelgrabber/stdlib": ">=2.5.13,<3",
+                "channelgrabber/stdlib": ">=2.7.0,<3",
                 "channelgrabber/validation": ">=1.2.0",
+                "channelgrabber/zf2-stdlib": ">=1.1.7,<2.0.0",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.3",
                 "zendframework/zend-db": ">=2.2,<3.0",
@@ -764,7 +755,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-24 12:36:42"
+            "time": "2014-06-27 15:40:17"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -852,11 +843,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -1192,9 +1178,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1282,8 +1266,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -2865,11 +2848,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3149,11 +3127,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\PhpUnit\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-05-29 15:11:10"
