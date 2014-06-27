@@ -7,10 +7,12 @@ use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 use Nocarrier\Hal;
+use CG\Stdlib\Log\LogTrait;
+use CG\Stdlib\Log\LoggerAwareInterface;
 
-class Batch
+class Batch implements LoggerAwareInterface
 {
-    use ControllerTrait;
+    use ControllerTrait, LogTrait;
 
     public function __construct(Slim $app, BatchService $service, Di $di)
     {
