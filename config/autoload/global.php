@@ -13,13 +13,6 @@
 
 use Zend\Config\Config;
 
-//Usage
-use CG\Usage\Storage\Db as UsageDb;
-use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
-use CG\Usage\Storage\Redis as UsageRedis;
-use CG\Usage\Repository as UsageRepository;
-use CG\Usage\StorageInterface as UsageStorageInterface;
-
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -61,35 +54,8 @@ return array(
                 'Di' => 'Zend\Di\Di',
                 'config' => Config::class
              ),
-            UsageDb::class=> [
-                'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                ]
-            ],
-            UsageAggregateDb::class=> [
-                'parameter'=> [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                ]
-            ],
-            UsageRepository::class => [
-                'parameter' => [
-                    'storage' => UsageRedis::class,
-                    'repository' => UsageDb::class
-                ]
-            ],
-            UsageRedis::class => [
-                'parameter' => [
-                    'client' => 'unreliable_redis',
-                    'aggregateStorage' => UsageAggregateDb::class
-                ]
-            ],
             'preferences' => array(
-                'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
-                UsageStorageInterface::class => UsageRepository::class
+                'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
             )
         )
     )
