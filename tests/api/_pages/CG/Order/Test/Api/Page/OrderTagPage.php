@@ -10,7 +10,7 @@ class OrderTagPage extends RootPage
     const URL = "/orderTag";
     const EMBEDDED_RESOURCE = "orderTag";
     const PRIMARY_ID = "1411-10-tag1";
-    const SECONDARY_ID = "1412-20-tag2";
+    const SECONDARY_ID = "1411-10-tag2";
 
     public static function getUrl()
     {

@@ -159,6 +159,13 @@ use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
 
+//Usage
+use CG\Usage\Storage\Db as UsageDb;
+use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
+use CG\Usage\Storage\Redis as UsageRedis;
+use CG\Usage\Repository as UsageRepository;
+use CG\Usage\StorageInterface as UsageStorageInterface;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -776,7 +783,6 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
-
             InvoiceSettingsETagStorage::class => array (
                 'parameter' => array(
                     'entityStorage' => InvoiceSettingsRepository::class,
@@ -811,6 +817,32 @@ return array(
                     'repository' => InvoiceSettingsMongoDbStorage::class
                 )
             ),
+            UsageDb::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageAggregateDb::class => [
+                'parameter'=> [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageRepository::class => [
+                'parameter' => [
+                    'storage' => UsageRedis::class,
+                    'repository' => UsageDb::class
+                ]
+            ],
+            UsageRedis::class => [
+                'parameter' => [
+                    'client' => 'unreliable_redis',
+                    'aggregateStorage' => UsageAggregateDb::class
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -824,7 +856,10 @@ return array(
                 \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
-            )
+                'Di' => 'Zend\Di\Di',
+                'config' => Config::class,
+                UsageStorageInterface::class => UsageRepository::class
+             )
         )
     )
 );

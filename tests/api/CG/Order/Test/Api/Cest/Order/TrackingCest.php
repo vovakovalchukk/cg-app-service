@@ -14,9 +14,4 @@ class TrackingCest
     {
         return TrackingPage::class;
     }
-    
-    public function viewCollectionAll(ApiGuy $I)
-    {
-    	$I->amGoingTo('skip viewing collection as getTestCollection() should be filtered by order_id first.');
-    }
 }
