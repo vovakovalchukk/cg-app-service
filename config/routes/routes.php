@@ -489,5 +489,5 @@ return array(
         'name' => 'TemplateEntity',
         'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 2)
-    ),
+    )
 );
