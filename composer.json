@@ -12,6 +12,10 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:channelgrabber/cg-settings.git"
         }
     ],
     "autoload": {
@@ -38,6 +42,7 @@
         "channelgrabber/usage": "~1.0.0",
         "channelgrabber/user": "~1.15.0",
         "channelgrabber/userpreference": "~1.1.2",
+        "channelgrabber/settings": "~1.0.1",
         "channelgrabber/validation": "~1.2.2",
         "channelgrabber/vnderror": "~1.0.0",
         "channelgrabber/zf2-stdlib": "~1.1.6",
