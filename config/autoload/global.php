@@ -12,6 +12,7 @@
  */
 
 use Zend\Db\Sql\Sql;
+use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\Cache\Client\Redis as CacheRedis;
 use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
@@ -22,6 +23,8 @@ use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
 use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
+use CG\OrganisationUnit\Service as OrganisationUnitService;
+use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
 
 //Order
 use CG\Order\Service\Service as OrderService;
@@ -149,6 +152,13 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
+//Shipping
+use CG\Order\Shared\Shipping\Mapper as ShippingMapper;
+use CG\Order\Shared\Shipping\Repository as ShippingRepository;
+use CG\Order\Service\Shipping\Service as ShippingService;
+use CG\Order\Service\Shipping\Storage\Db as ShippingDbStorage;
+use CG\Order\Service\Shipping\Storage\Cache as ShippingCacheStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -189,6 +199,9 @@ return array(
                 'ReadSql' => Sql::class,
                 'FastReadSql' => Sql::class,
                 'WriteSql' => Sql::class,
+                'ReadCGSql' => CGSql::class,
+                'FastReadCGSql' => CGSql::class,
+                'WriteCGSql' => CGSql::class,
                 'Di' => Di::class,
                 'config' => Config::class,
                 'OrderService' => OrderService::class,
@@ -213,6 +226,8 @@ return array(
                 'UserPreferenceCollectionService' => UserPreferenceService::class,
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
+                'ShippingService' => ShippingService::class,
+                'ShippingCollectionService' => ShippingService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -225,6 +240,21 @@ return array(
                 )
             ),
             'WriteSql' => array(
+                'parameter' => array(
+                    'adapter' => 'writeAdapter'
+                )
+            ),
+            'ReadCGSql' => array(
+                'parameter' => array(
+                    'adapter' => 'readAdapter'
+                )
+            ),
+            'FastReadCGSql' => array(
+                'parameter' => array(
+                    'adapter' => 'fastReadAdapter'
+                )
+            ),
+            'WriteCGSql' => array(
                 'parameter' => array(
                     'adapter' => 'writeAdapter'
                 )
@@ -246,7 +276,8 @@ return array(
             ),
             OrderPersistentStorage::class => array(
                 'parameter' => array(
-                    'tagService' => TagService::class
+                    'tagService' => TagService::class,
+                    'shippingService' => ShippingService::class
                 )
             ),
             OrderRepository::class => array(
@@ -763,6 +794,40 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
+            ShippingService::class => [
+                'parameter' => [
+                    'repository' => ShippingRepository::class
+                ]
+            ],
+            ShippingRepository::class => [
+                'parameter' => [
+                    'repository' => ShippingCacheStorage::class,
+                    'storage' => ShippingDbStorage::class
+                ]
+            ],
+            ShippingMapper::class => [
+                'parameter' => [
+                    'organisationUnitService' => OrganisationUnitService::class
+                ]
+            ],
+            ShippingDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadCGSql',
+                    'fastReadSql' => 'FastReadCGSql',
+                    'writeSql' => 'WriteCGSql',
+                    'mapper' => ShippingMapper::class
+                ]
+            ],
+            OrganisationUnitService::class => [
+                'parameter' => [
+                    'repository' => OrganisationUnitApi::class
+                ]
+            ],
+            OrganisationUnitApi::class => [
+                'parameter' => [
+                    'client' => "directory_guzzle"
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
