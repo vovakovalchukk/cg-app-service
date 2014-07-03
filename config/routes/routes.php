@@ -78,6 +78,11 @@ use CG\Controllers\Template\Template\Collection as TemplateCollection;
 use CG\InputValidation\Template\Entity as TemplateEntityValidationRules;
 use CG\InputValidation\Template\Filter as TemplateFilterValidationRules;
 
+//ShippingMethod
+use CG\Controllers\Shipping\Method\Method as ShippingMethod;
+use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
+use CG\InputValidation\Shipping\Method\Filter as ShippingMethodFilterValidationRules;
+
 //Versioning
 use CG\Slim\Versioning\Version;
 
@@ -489,5 +494,36 @@ return array(
         'name' => 'TemplateEntity',
         'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 2)
-    )
+    ),
+    '/shippingMethod' => [
+        'controllers' => function() use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethodCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodCollection',
+        'validation' => [
+            "filterRules" => ShippingMethodFilterValidationRules::class,
+            "flatten" => false
+        ],
+    ],
+    '/shippingMethod/:id' => [
+        'controllers' => function($shippingMethodId) use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethod::class, []);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($shippingMethodId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodEntity',
+        'validation' => ["dataRules" => null, "filterRules" => null, "flatten" => false],
+    ]
 );

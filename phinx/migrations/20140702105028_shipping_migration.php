@@ -10,7 +10,7 @@ class ShippingMigration extends AbstractMigration
         $shippingMethodTable->addColumn('channel', 'string')
                            ->addColumn('method', 'string')
                            ->addIndex(['channel', 'method'], ['unique' => true])
-                           ->save();
+                           ->create();
 
         $shippingMethodExposureTable = $this->table('shippingMethodExposure', ['id' => false]);
         $shippingMethodExposureTable->addColumn('shippingMethodId', 'integer')
@@ -18,6 +18,6 @@ class ShippingMigration extends AbstractMigration
                                    ->addForeignKey('shippingMethodId', 'shippingMethod', 'id',
                                         ['delete' => 'NOACTION', 'update' => 'NOACTION'])
                                    ->addIndex(['shippingMethodId', 'organisationUnitId'], ['unique' => true])
-                                   ->save();
+                                   ->create();
     }
 }

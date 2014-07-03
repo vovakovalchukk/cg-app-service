@@ -801,8 +801,8 @@ return array(
             ],
             ShippingMethodRepository::class => [
                 'parameter' => [
-                    'repository' => ShippingMethodCacheStorage::class,
-                    'storage' => ShippingMethodDbStorage::class
+                    'storage' => ShippingMethodCacheStorage::class,
+                    'repository' => ShippingMethodDbStorage::class
                 ]
             ],
             ShippingMethodMapper::class => [
