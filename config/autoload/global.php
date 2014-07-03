@@ -153,11 +153,11 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 //Shipping
-use CG\Order\Shared\Shipping\Mapper as ShippingMapper;
-use CG\Order\Shared\Shipping\Repository as ShippingRepository;
-use CG\Order\Service\Shipping\Service as ShippingService;
-use CG\Order\Service\Shipping\Storage\Db as ShippingDbStorage;
-use CG\Order\Service\Shipping\Storage\Cache as ShippingCacheStorage;
+use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
+use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
+use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
+use CG\Order\Service\Shipping\Method\Storage\Db as ShippingMethodDbStorage;
+use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage;
 
 return array(
     'service_manager' => array(
@@ -226,8 +226,8 @@ return array(
                 'UserPreferenceCollectionService' => UserPreferenceService::class,
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
-                'ShippingService' => ShippingService::class,
-                'ShippingCollectionService' => ShippingService::class
+                'ShippingMethodService' => ShippingMethodService::class,
+                'ShippingCollectionService' => ShippingMethodService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -277,7 +277,7 @@ return array(
             OrderPersistentStorage::class => array(
                 'parameter' => array(
                     'tagService' => TagService::class,
-                    'shippingService' => ShippingService::class
+                    'shippingMethodService' => ShippingMethodService::class
                 )
             ),
             OrderRepository::class => array(
@@ -794,28 +794,28 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
-            ShippingService::class => [
+            ShippingMethodService::class => [
                 'parameter' => [
-                    'repository' => ShippingRepository::class
+                    'repository' => ShippingMethodRepository::class
                 ]
             ],
-            ShippingRepository::class => [
+            ShippingMethodRepository::class => [
                 'parameter' => [
-                    'repository' => ShippingCacheStorage::class,
-                    'storage' => ShippingDbStorage::class
+                    'repository' => ShippingMethodCacheStorage::class,
+                    'storage' => ShippingMethodDbStorage::class
                 ]
             ],
-            ShippingMapper::class => [
+            ShippingMethodMapper::class => [
                 'parameter' => [
                     'organisationUnitService' => OrganisationUnitService::class
                 ]
             ],
-            ShippingDbStorage::class => [
+            ShippingMethodDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadCGSql',
                     'fastReadSql' => 'FastReadCGSql',
                     'writeSql' => 'WriteCGSql',
-                    'mapper' => ShippingMapper::class
+                    'mapper' => ShippingMethodMapper::class
                 ]
             ],
             OrganisationUnitService::class => [
