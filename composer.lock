@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b77b70b24c8a3cb4687c3555078bf6b6",
+    "hash": "c58c7cfbe05b1e889641d9f39ea9410b",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -360,17 +360,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.5.39",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2ff610b4def0b0f6a8f990a47f246e91bf2799c8"
+                "reference": "7e415ce1fa4ea875b3e85d36fa8795c18e2f2755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.5.39-48c01d.zip",
-                "reference": "2ff610b4def0b0f6a8f990a47f246e91bf2799c8",
-                "shasum": "5e47c414860110d9b6ee5d814936549f687bb675"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.6.1-de6fa3.zip",
+                "reference": "7e415ce1fa4ea875b3e85d36fa8795c18e2f2755",
+                "shasum": "07a571761553912d556446bbf193b17c0c35f8ae"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -380,6 +380,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": ">=1.6.0,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
+                "channelgrabber/zf2-stdlib": ">=1.1.12",
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
@@ -400,7 +401,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-07-03 10:31:47"
+            "time": "2014-07-03 15:46:17"
         },
         {
             "name": "channelgrabber/permission",
