@@ -20,7 +20,7 @@ class TestDataShippingMethod extends TestMigration
         $this->execute('SET FOREIGN_KEY_CHECKS=1');
     }
 
-    protected function getShippingMethodData()
+    public function getShippingMethodData()
     {
         return [
             [1, 'ebay', 'firstclass'],
@@ -33,7 +33,7 @@ class TestDataShippingMethod extends TestMigration
         ];
     }
 
-    protected function getShippingMethodExposureData()
+    public function getShippingMethodExposureData()
     {
         return [
             [1,1],

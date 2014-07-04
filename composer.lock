@@ -4,7 +4,11 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "c58c7cfbe05b1e889641d9f39ea9410b",
+=======
+    "hash": "256c7f8e4446ed5082e8813cc1dd18f2",
+>>>>>>> 12ed096851445a6782185f8a72499b91cde9fed3
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -519,6 +523,11 @@
                     "CG\\Predis\\": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-07-09 15:10:32"
         },
         {
@@ -542,6 +551,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Redis\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-12-17 17:45:58"
@@ -877,6 +891,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"

@@ -579,3 +579,103 @@ db.template.insert({
     },
     "name": "name5"
 });
+
+// SETTINGS
+
+db=db.getSiblingDB("settings");
+db.dropDatabase();
+db.invoice.insert({
+    "_id": 1,
+    "default": 2,
+    "tradingCompanies": {
+        "1": 1
+    }
+});
+db.invoice.insert({
+    "_id": 2,
+    "default": 3,
+    "tradingCompanies": {
+        "5": 8,
+        "6": 7,
+        "8": 9
+    }
+});
+
+// USER PREFERENCE
+
+db=db.getSiblingDB("userPreference");
+db.dropDatabase();
+db.preference.insert({
+    "_id":"1",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch"
+        ],
+        "other":1
+    }
+});
+db.preference.insert({
+    "_id":"2",
+    "preference":{
+        "orderTable":[
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "tags"
+        ],
+        "other":2
+    }
+});
+db.preference.insert({
+    "_id":"3",
+    "preference":{
+        "orderTable":[
+            "tags",
+            "orderInformation",
+            "shippingService",
+            "dispatch",
+            "invoice"
+        ],
+        "other":3
+    }
+});
+db.preference.insert({
+    "_id":"4",
+    "preference":{
+        "other":4
+    }
+});
+db.preference.insert({
+    "_id":"5",
+    "preference":{
+        "orderTable":[
+            "checkbox",
+            "orderInformation",
+            "shippingService",
+            "buyerName"
+        ]
+    }
+});
+
+// SETTINGS
+db=db.getSiblingDB("settings");
+db.dropDatabase();
+db.invoice.insert({
+    "_id": 1,
+    "default": "2",
+    "tradingCompanies": {
+       "1": "1"
+    }
+});
+db.invoice.insert({
+    "_id": 2,
+    "default": "3",
+    "tradingCompanies": {
+        "5": "8",
+        "6": "7",
+        "8": "9"
+    }
+});

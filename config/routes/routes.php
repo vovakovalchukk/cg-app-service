@@ -1,5 +1,7 @@
 <?php
 use Slim\Slim;
+use CG\Slim\Versioning\Version;
+
 use CG\Controllers\Root;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
 use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;

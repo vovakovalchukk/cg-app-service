@@ -159,6 +159,23 @@ use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
 use CG\Order\Service\Shipping\Method\Storage\Db as ShippingMethodDbStorage;
 use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage;
 
+// Invoice Settings
+use CG\Controllers\Settings\Invoice as InvoiceSettingsController;
+use CG\Controllers\Settings\Invoice\Collection  as InvoiceSettingsCollectionController;
+use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
+use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
+use CG\Settings\Invoice\Service\Storage\ETag as InvoiceSettingsETagStorage;
+use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
+use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
+
+//Usage
+use CG\Usage\Storage\Db as UsageDb;
+use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
+use CG\Usage\Storage\Redis as UsageRedis;
+use CG\Usage\Repository as UsageRepository;
+use CG\Usage\StorageInterface as UsageStorageInterface;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -227,7 +244,9 @@ return array(
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
                 'ShippingMethodService' => ShippingMethodService::class,
-                'ShippingCollectionService' => ShippingMethodService::class
+                'ShippingCollectionService' => ShippingMethodService::class,
+                'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
+                'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -828,6 +847,66 @@ return array(
                     'client' => "directory_guzzle"
                 ]
             ],
+            InvoiceSettingsETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => InvoiceSettingsRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => InvoiceSettingsEntity::class
+                )
+            ),
+            InvoiceSettingsController::class => array(
+                'parameters' => array(
+                    'service' => 'InvoiceSettingsEntityService'
+                )
+            ),
+            InvoiceSettingsCollectionController::class => array(
+                'parameters' => array(
+                    'service' => InvoiceSettingsCollectionService::class
+                )
+            ),
+            'InvoiceSettingsEntityService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsETagStorage::class
+                )
+            ),
+            'InvoiceSettingsCollectionService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsRepository::class
+                )
+            ),
+            InvoiceSettingsRepository::class => array(
+                'parameter' => array(
+                    'storage' => InvoiceSettingsCacheStorage::class,
+                    'repository' => InvoiceSettingsMongoDbStorage::class
+                )
+            ),
+            UsageDb::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageAggregateDb::class => [
+                'parameter'=> [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageRepository::class => [
+                'parameter' => [
+                    'storage' => UsageRedis::class,
+                    'repository' => UsageDb::class
+                ]
+            ],
+            UsageRedis::class => [
+                'parameter' => [
+                    'client' => 'unreliable_redis',
+                    'aggregateStorage' => UsageAggregateDb::class
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -842,7 +921,8 @@ return array(
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
                 'Di' => 'Zend\Di\Di',
-                'config' => Config::class
+                'config' => Config::class,
+                UsageStorageInterface::class => UsageRepository::class
              )
         )
     )

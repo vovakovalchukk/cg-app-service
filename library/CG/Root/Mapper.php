@@ -19,8 +19,9 @@ class Mapper
                              ->addLink('order', '/order')
                              ->addLink('shippingMethod', '/shippingMethod')
                              ->addLink('userPreference', '/userPreference')
+                             ->addLink('settings', '/settings')
                              ->addLink('template', '/template')
-                             ->addLink('settings', '/settings');
+                             ->addLink('userPreference', '/userPreference');
 
     }
 
