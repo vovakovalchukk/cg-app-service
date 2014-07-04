@@ -85,9 +85,6 @@ use CG\Controllers\Shipping\Method\Method as ShippingMethod;
 use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
 use CG\InputValidation\Shipping\Method\Filter as ShippingMethodFilterValidationRules;
 
-//Versioning
-use CG\Slim\Versioning\Version;
-
 return array(
     '/' => array (
         'controllers' => function() use ($di) {
