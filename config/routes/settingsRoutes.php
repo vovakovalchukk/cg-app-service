@@ -63,8 +63,8 @@ return [
             "dataRules" => EntityValidation::class,
         ],
     ],
-    '/settings/shipping/:organisationUnitId/alias' => [
-        'controllers' => function($organisationUnitId) use ($di, $app) {
+    '/settings/shipping/alias' => [
+        'controllers' => function() use ($di, $app) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(AliasCollection::class);
@@ -80,14 +80,14 @@ return [
             'dataRules' => AliasEntityValidation::class
         ]
     ],
-    '/settings/shipping/:organisationUnitId/alias/:aliasId' => [
-        'controllers' => function($organisationUnitId, $aliasId) use ($di, $app) {
+    '/settings/shipping/alias/:aliasId' => [
+        'controllers' => function($aliasId) use ($di, $app) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(Alias::class);
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($organisationUnitId, $aliasId, $app->request()->getBody())
+                    $controller->$method($aliasId, $app->request()->getBody())
                 );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],

@@ -51,7 +51,7 @@ $app->add($di->get(Created::class));
 $app->add($di->get(UsageEndpoint::class));
 $app->add($di->get(UsageCount::class));
 $app->add($di->get(ContentTypes::class));
-//$app->add($di->get(VndError::class));
+$app->add($di->get(VndError::class));
 $app->add($di->get(UnusedMethods::class));
 $app->add($di->get(HeadRequest::class));
 $app->add($versioning);

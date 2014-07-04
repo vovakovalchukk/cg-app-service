@@ -173,8 +173,9 @@ use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterfa
 use CG\Controllers\Settings\Alias as AliasSettingsController;
 use CG\Controllers\Settings\Alias\Collection  as AliasSettingsCollectionController;
 use CG\Settings\Alias\Service as AliasSettingsService;
+use CG\Settings\Alias\Mapper as AliasSettingsMapper;
 use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Alias\Storage\Etag as AliasSettingsEtagStorage;
+use CG\Settings\Alias\Storage\ETag as AliasSettingsEtagStorage;
 use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
 use CG\Settings\Alias\Repository as AliasSettingsRepository;
 
@@ -942,7 +943,8 @@ return array(
             ),
             AliasSettingsMapper::class => array (
                 'parameters' => array (
-                    'shippingMethodService' => ShippingMethodService::class
+                    'shippingMethodService' => ShippingMethodService::class,
+                    'shippingMethodMapper' => ShippingMethodMapper::class
                 )
             ),
             AliasSettingsRepository::class => array(

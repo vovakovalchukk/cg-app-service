@@ -2,6 +2,8 @@
 namespace CG\InputValidation\Settings\Alias;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\IntegerValidator;
+use Zend\Validator\GreaterThan;
 use CG\Validation\RulesInterface;
 use Zend\Validator\StringLength;
 use Zend\Di\Di;
@@ -28,6 +30,15 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                ]
+            ],
+            'organisationUnitId' => [
+                'name'       => 'organisationUnitId',
+                'required'   => true,
+                'validators' => [
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
             'methodIds' => [
