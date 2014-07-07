@@ -820,8 +820,8 @@ return array(
             ],
             ShippingMethodRepository::class => [
                 'parameter' => [
-                    'repository' => ShippingMethodCacheStorage::class,
-                    'storage' => ShippingMethodDbStorage::class
+                    'storage' => ShippingMethodCacheStorage::class,
+                    'repository' => ShippingMethodDbStorage::class
                 ]
             ],
             ShippingMethodMapper::class => [
@@ -905,7 +905,6 @@ return array(
                 'parameter' => [
                     'client' => 'unreliable_redis',
                     'aggregateStorage' => UsageAggregateDb::class
-
                 ]
             ],
             'preferences' => array(

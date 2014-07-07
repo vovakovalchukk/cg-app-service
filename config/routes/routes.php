@@ -74,6 +74,20 @@ use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
 use CG\Controllers\Order\Filter;
 use CG\Controllers\Order\Filter\Collection as FilterCollection;
 
+//Template
+use CG\Controllers\Template\Template;
+use CG\Controllers\Template\Template\Collection as TemplateCollection;
+use CG\InputValidation\Template\Entity as TemplateEntityValidationRules;
+use CG\InputValidation\Template\Filter as TemplateFilterValidationRules;
+
+//ShippingMethod
+use CG\Controllers\Shipping\Method\Method as ShippingMethod;
+use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
+use CG\InputValidation\Shipping\Method\Filter as ShippingMethodFilterValidationRules;
+
+//Versioning
+use CG\Slim\Versioning\Version;
+
 return array(
     '/' => array (
         'controllers' => function() use ($di) {
@@ -447,4 +461,71 @@ return array(
         'name' => 'FilterEntity',
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
+    '/template' => array (
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(TemplateCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'POST', 'OPTIONS'),
+        'name' => 'TemplateCollection',
+        'validation' => array(
+            "dataRules" => TemplateEntityValidationRules::class,
+            "filterRules" => TemplateFilterValidationRules::class,
+            "flatten" => false
+        ),
+        'version' => new Version(1, 2)
+    ),
+    '/template/:id' => array (
+        'controllers' => function($templateId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Template::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($templateId, $app->request()->getBody())
+                );
+            },
+        'via' => array('GET', 'DELETE', 'PUT', 'OPTIONS'),
+        'name' => 'TemplateEntity',
+        'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2)
+    ),
+    '/shippingMethod' => [
+        'controllers' => function() use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethodCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodCollection',
+        'validation' => [
+            "filterRules" => ShippingMethodFilterValidationRules::class,
+            "flatten" => false
+        ],
+    ],
+    '/shippingMethod/:id' => [
+        'controllers' => function($shippingMethodId) use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethod::class, []);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($shippingMethodId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodEntity',
+        'validation' => ["dataRules" => null, "filterRules" => null, "flatten" => false],
+    ]
 );
