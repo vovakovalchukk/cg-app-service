@@ -186,6 +186,16 @@ use CG\Usage\Storage\Redis as UsageRedis;
 use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
+// Product
+use CG\Controllers\Product\Product as ProductController;
+use CG\Controllers\Product\Product\Collection as ProductCollectionController;
+use CG\Product\Service as ProductService;
+use CG\Product\Repository as ProductRepository;
+use CG\Product\Mapper as ProductMapper;
+use CG\Product\Storage\Db as ProductDbStorage;
+use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Product\Storage\ETag as ProductETagStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -258,7 +268,9 @@ return array(
                 'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
                 'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
                 'AliasSettingsService' => AliasSettingsService::class,
-                'AliasSettingsCollectionService' => AliasSettingsService::class
+                'AliasSettingsCollectionService' => AliasSettingsService::class,
+                'ProductService' => ProductService::class,
+                'ProductCollectionService' => ProductService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -967,6 +979,51 @@ return array(
                     'requestHeaders' => 'RequestHeaders',
                     'responseHeaders' => 'ResponseHeaders',
                     'entityClass' => 'CG_Settings_Alias_Entity'
+                )
+            ),
+            //split
+            ProductController::class => array (
+                'parameters' => array (
+                    'service' => 'ProductService'
+                )
+            ),
+            ProductCollectionController::class => array (
+                'parameters' => array (
+                    'service' => 'ProductCollectionService'
+                )
+            ),
+            'ProductService' => array(
+                'parameters' => array(
+                    'repository' => ProductETagStorage::class,
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            'ProductCollectionService' => array(
+                'parameters' => array(
+                    'repository' => ProductRepository::class,
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            ProductRepository::class => array(
+                'parameter' => array (
+                    'storage' => ProductCacheStorage::class,
+                    'repository' => ProductDbStorage::class
+                )
+            ),
+            ProductDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            ProductETagStorage::class => array(
+                'parameter' => array (
+                    'entityStorage' => ProductRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Product_Entity'
                 )
             ),
             'preferences' => array(
