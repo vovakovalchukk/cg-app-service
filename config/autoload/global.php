@@ -260,34 +260,19 @@ return array(
                 'AliasSettingsService' => AliasSettingsService::class,
                 'AliasSettingsCollectionService' => AliasSettingsService::class
             ),
-            'ReadSql' => array(
-                'parameter' => array(
-                    'adapter' => 'readAdapter'
-                )
-            ),
-            'FastReadSql' => array(
-                'parameter' => array(
-                    'adapter' => 'fastReadAdapter'
-                )
-            ),
-            'WriteSql' => array(
-                'parameter' => array(
-                    'adapter' => 'writeAdapter'
-                )
-            ),
             'ReadCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'readAdapter'
+                    'adapter' => 'Read'
                 )
             ),
             'FastReadCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'fastReadAdapter'
+                    'adapter' => 'FastRead'
                 )
             ),
             'WriteCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'writeAdapter'
+                    'adapter' => 'Write'
                 )
             ),
             CacheRedisPipeline::class => array(
