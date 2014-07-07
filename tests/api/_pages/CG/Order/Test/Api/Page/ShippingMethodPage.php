@@ -7,10 +7,10 @@ class ShippingMethodPage extends RootPage
 {
     use CollectionPageTrait;
 
-    const URL = "/shippingMethod";
-    const EMBEDDED_RESOURCE = "shippingMethod";
-    const PRIMARY_ID = "1";
-    const SECONDARY_ID = "2";
+    const URL = '/shippingMethod';
+    const EMBEDDED_RESOURCE = 'shippingMethod';
+    const PRIMARY_ID = '1';
+    const SECONDARY_ID = '2';
 
     public static function getUrl()
     {
@@ -30,46 +30,46 @@ class ShippingMethodPage extends RootPage
     {
         return [
             [
-                "id" => "1",
-                "channel" => 'ebay',
-                "method" => 'firstclass',
-                "organisationUnitId" => '1'
+                'id' => '1',
+                'channel' => 'ebay',
+                'method' => 'firstclass',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "2",
-                "channel" => 'amazon',
-                "method" => 'firstclass',
-                "organisationUnitId" => '1'
+                'id' => '2',
+                'channel' => 'amazon',
+                'method' => 'firstclass',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "3",
-                "channel" => 'ebay',
-                "method" => 'secondclass',
-                "organisationUnitId" => '1'
+                'id' => '3',
+                'channel' => 'ebay',
+                'method' => 'secondclass',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "4",
-                "channel" => 'amazon',
-                "method" => 'secondclass',
-                "organisationUnitId" => '1'
+                'id' => '4',
+                'channel' => 'amazon',
+                'method' => 'secondclass',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "5",
-                "channel" => 'webstore',
-                "method" => 'someclass',
-                "organisationUnitId" => '1'
+                'id' => '5',
+                'channel' => 'webstore',
+                'method' => 'someclass',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "6",
-                "channel" => 'amazon',
-                "method" => 'prime',
-                "organisationUnitId" => '1'
+                'id' => '6',
+                'channel' => 'amazon',
+                'method' => 'prime',
+                'organisationUnitId' => '1'
             ],
             [
-                "id" => "7",
-                "channel" => 'ebay',
-                "method" => 'nextyear',
-                "organisationUnitId" => '1'
+                'id' => '7',
+                'channel' => 'ebay',
+                'method' => 'nextyear',
+                'organisationUnitId' => '1'
             ]
         ];
     }
@@ -77,34 +77,34 @@ class ShippingMethodPage extends RootPage
     public static function getRequiredEntityFields()
     {
         return [
-            "channel",
-            "method"
+            'channel',
+            'method'
         ];
     }
 
     public static function getInvalidEntityData()
     {
         return [
-            "channel" => [],
-            "method" => []
+            'channel' => [],
+            'method' => []
         ];
     }
 
     public static function getInvalidEntityFields()
     {
         return [
-            "channel",
-            "method"
+            'channel',
+            'method'
         ];
     }
 
     public static function getFilterFields()
     {
         return [
-            "id" => [],
-            "channel" => [],
-            "method" => [],
-            "organisationUnitId" => []
+            'id' => [],
+            'channel' => [],
+            'method' => [],
+            'organisationUnitId' => []
         ];
     }
 }

@@ -52,6 +52,13 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "id"])
                 ]
             ],
+            'organisationUnitId' => array(
+                'name'       => 'organisationUnitId',
+                'required'   => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
+                )
+            ),
         ];
     }
 

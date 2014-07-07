@@ -24,7 +24,8 @@ class Collection
         return $this->getService()->fetchCollectionByPaginationAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('id') ?: []
+            $this->getParams('id') ?: [],
+            $this->getParams('organisationUnitId') ?: []
         );
     }
 }

@@ -856,7 +856,7 @@ return array(
             ],
             OrganisationUnitApi::class => [
                 'parameter' => [
-                    'client' => "directory_guzzle"
+                    'client' => 'directory_guzzle'
                 ]
             ],
             InvoiceSettingsETagStorage::class => array (
@@ -966,7 +966,7 @@ return array(
                     'entityStorage' => AliasSettingsRepository::class,
                     'requestHeaders' => 'RequestHeaders',
                     'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => "CG_Settings_Alias_Entity"
+                    'entityClass' => 'CG_Settings_Alias_Entity'
                 )
             ),
             'preferences' => array(

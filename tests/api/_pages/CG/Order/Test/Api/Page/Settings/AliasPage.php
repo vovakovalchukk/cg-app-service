@@ -98,7 +98,8 @@ class AliasPage extends RootPage
     public static function getFilterFields()
     {
         return [
-            "id" => []
+            "id" => [],
+            "organisationUnitId" => []
         ];
     }
 }

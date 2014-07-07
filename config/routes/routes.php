@@ -459,8 +459,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/template' => array (
-        'controllers' => function() use ($di) {
-                $app = $di->get(Slim::class);
+        'controllers' => function() use ($app, $di) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(TemplateCollection::class, array());
@@ -479,8 +478,7 @@ return array(
         'version' => new Version(1, 2)
     ),
     '/template/:id' => array (
-        'controllers' => function($templateId) use ($di) {
-                $app = $di->get(Slim::class);
+        'controllers' => function($templateId) use ($app, $di) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(Template::class, array());
