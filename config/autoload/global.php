@@ -169,6 +169,16 @@ use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
 
+// Alias Settings
+use CG\Controllers\Settings\Alias as AliasSettingsController;
+use CG\Controllers\Settings\Alias\Collection  as AliasSettingsCollectionController;
+use CG\Settings\Alias\Service as AliasSettingsService;
+use CG\Settings\Alias\Mapper as AliasSettingsMapper;
+use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
+use CG\Settings\Alias\Storage\ETag as AliasSettingsEtagStorage;
+use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
+use CG\Settings\Alias\Repository as AliasSettingsRepository;
+
 //Usage
 use CG\Usage\Storage\Db as UsageDb;
 use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
@@ -247,6 +257,8 @@ return array(
                 'ShippingCollectionService' => ShippingMethodService::class,
                 'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
                 'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
+                'AliasSettingsService' => AliasSettingsService::class,
+                'AliasSettingsCollectionService' => AliasSettingsService::class
             ),
             'ReadSql' => array(
                 'parameter' => array(
@@ -844,7 +856,7 @@ return array(
             ],
             OrganisationUnitApi::class => [
                 'parameter' => [
-                    'client' => "directory_guzzle"
+                    'client' => 'directory_guzzle'
                 ]
             ],
             InvoiceSettingsETagStorage::class => array (
@@ -907,6 +919,56 @@ return array(
                     'aggregateStorage' => UsageAggregateDb::class
                 ]
             ],
+            AliasSettingsController::class => array (
+                'parameters' => array (
+                    'service' => 'AliasSettingsService'
+                )
+            ),
+            AliasSettingsCollectionController::class => array (
+                'parameters' => array (
+                    'service' => 'AliasSettingsCollectionService'
+                )
+            ),
+            'AliasSettingsService' => array(
+                'parameters' => array(
+                    'repository' => AliasSettingsETagStorage::class,
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            'AliasSettingsCollectionService' => array(
+                'parameters' => array(
+                    'repository' => AliasSettingsRepository::class,
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            AliasSettingsMapper::class => array (
+                'parameters' => array (
+                    'shippingMethodService' => ShippingMethodService::class,
+                    'shippingMethodMapper' => ShippingMethodMapper::class
+                )
+            ),
+            AliasSettingsRepository::class => array(
+                'parameter' => array (
+                    'storage' => AliasSettingsCacheStorage::class,
+                    'repository' => AliasSettingsDbStorage::class
+                )
+            ),
+            AliasSettingsDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            AliasSettingsETagStorage::class => array(
+                'parameter' => array (
+                    'entityStorage' => AliasSettingsRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Settings_Alias_Entity'
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
