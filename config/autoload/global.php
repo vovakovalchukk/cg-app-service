@@ -981,7 +981,6 @@ return array(
                     'entityClass' => 'CG_Settings_Alias_Entity'
                 )
             ),
-            //split
             ProductController::class => array (
                 'parameters' => array (
                     'service' => 'ProductService'
