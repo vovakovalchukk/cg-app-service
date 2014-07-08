@@ -119,8 +119,6 @@ use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 use CG\Controllers\UserPreference\UserPreference as UserPreferenceController;
-use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollectionController;
-use CG\UserPreference\Service\Storage\ETag as UserPreferenceETagStorage;
 
 //Tag
 use CG\Order\Service\Tag\Service as TagService;
@@ -259,8 +257,6 @@ return array(
                 'UserChangeCollectionService' => UserChangeService::class,
                 'BatchService' => BatchService::class,
                 'BatchCollectionService' => BatchService::class,
-                'UserPreferenceService' => UserPreferenceService::class,
-                'UserPreferenceCollectionService' => UserPreferenceService::class,
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
                 'ShippingMethodService' => ShippingMethodService::class,
@@ -696,30 +692,12 @@ return array(
                     'mapper' => BatchMapper::class
                 )
             ),
-            UserPreferenceETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => UserPreferenceRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_UserPreference_Shared_Entity'
-                )
-            ),
             UserPreferenceController::class => array(
                 'parameters' => array(
-                    'service' => 'UserPreferenceService'
+                    'service' => UserPreferenceService::class
                 )
             ),
-            UserPreferenceCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'UserPreferenceCollectionService'
-                )
-            ),
-            'UserPreferenceService' => array(
-                'parameters' => array(
-                    'repository' => UserPreferenceETagStorage::class
-                )
-            ),
-            'UserPreferenceCollectionService' => array(
+            UserPreferenceService::class => array(
                 'parameters' => array(
                     'repository' => UserPreferenceRepository::class
                 )
