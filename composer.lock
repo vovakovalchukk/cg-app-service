@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "620513a72c815bc2911684d38935076f",
+    "hash": "2a9b0f374b540a6f40ed9fd89c67a5ee",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -520,6 +520,22 @@
                 }
             },
             "time": "2013-07-09 15:10:32"
+        },
+        {
+            "name": "channelgrabber/product",
+            "version": "dev-CGIV-2110-Product-Api",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-product.git",
+                "reference": "73ff6fb798ac4bbaff46cb869878f069329c9e05"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\Product\\": ""
+                }
+            },
+            "time": "2014-07-07 15:59:39"
         },
         {
             "name": "channelgrabber/redis",
@@ -4189,6 +4205,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
