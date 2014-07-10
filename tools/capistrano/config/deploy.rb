@@ -1,4 +1,5 @@
 set :application, ''
+set :version, 1
 set :deploy_to, "/var/www/#{fetch(:application)}"
 set :keep_releases, 5
 
