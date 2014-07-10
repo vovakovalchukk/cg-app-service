@@ -20,9 +20,9 @@ module Capistrano
             end
 
             def shared_path
-                version = version()
                 paths = ['shared']
 
+                version = version()
                 if version
                     paths.unshift('version', version)
                 end
