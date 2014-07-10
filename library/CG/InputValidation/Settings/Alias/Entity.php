@@ -43,7 +43,7 @@ class Entity implements RulesInterface
             ],
             'methodIds' => [
                 'name' => 'methodIds',
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "methodIds"])
                 ]
