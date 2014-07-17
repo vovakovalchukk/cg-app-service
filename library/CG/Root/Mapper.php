@@ -17,9 +17,12 @@ class Mapper
     {
         return $this->getDi()->get(Hal::class, array('uri' => '/'))
                              ->addLink('order', '/order')
+                             ->addLink('product', '/product')
+                             ->addLink('shippingMethod', '/shippingMethod')
                              ->addLink('userPreference', '/userPreference')
+                             ->addLink('settings', '/settings')
                              ->addLink('template', '/template')
-                             ->addLink('settings', '/settings');
+                             ->addLink('userPreference', '/userPreference');
 
     }
 

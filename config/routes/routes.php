@@ -1,5 +1,7 @@
 <?php
 use Slim\Slim;
+use CG\Slim\Versioning\Version;
+
 use CG\Controllers\Root;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
 use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
@@ -78,8 +80,10 @@ use CG\Controllers\Template\Template\Collection as TemplateCollection;
 use CG\InputValidation\Template\Entity as TemplateEntityValidationRules;
 use CG\InputValidation\Template\Filter as TemplateFilterValidationRules;
 
-//Versioning
-use CG\Slim\Versioning\Version;
+//ShippingMethod
+use CG\Controllers\Shipping\Method\Method as ShippingMethod;
+use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
+use CG\InputValidation\Shipping\Method\Filter as ShippingMethodFilterValidationRules;
 
 return array(
     '/' => array (
@@ -455,8 +459,7 @@ return array(
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
     '/template' => array (
-        'controllers' => function() use ($di) {
-                $app = $di->get(Slim::class);
+        'controllers' => function() use ($app, $di) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(TemplateCollection::class, array());
@@ -475,8 +478,7 @@ return array(
         'version' => new Version(1, 2)
     ),
     '/template/:id' => array (
-        'controllers' => function($templateId) use ($di) {
-                $app = $di->get(Slim::class);
+        'controllers' => function($templateId) use ($app, $di) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(Template::class, array());
@@ -489,5 +491,36 @@ return array(
         'name' => 'TemplateEntity',
         'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 2)
-    )
+    ),
+    '/shippingMethod' => [
+        'controllers' => function() use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethodCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodCollection',
+        'validation' => [
+            "filterRules" => ShippingMethodFilterValidationRules::class,
+            "flatten" => false
+        ],
+    ],
+    '/shippingMethod/:id' => [
+        'controllers' => function($shippingMethodId) use ($app, $di) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ShippingMethod::class, []);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($shippingMethodId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ShippingMethodEntity',
+        'validation' => ["dataRules" => null, "filterRules" => null, "flatten" => false],
+    ]
 );

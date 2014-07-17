@@ -2,7 +2,9 @@
 $routes = array();
 $files = [
     'routes.php',
-    'settings.php'
+    'templateRoutes.php',
+    'settingsRoutes.php',
+    'productRoutes.php'
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;

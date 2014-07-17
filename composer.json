@@ -27,18 +27,19 @@
         "channelgrabber/constants": "dev-master",
         "channelgrabber/etag": "~1.4.3",
         "channelgrabber/gearman": "~1.0.11",
-        "channelgrabber/http": "~1.2.12",
+        "channelgrabber/http": "~1.2.14",
         "channelgrabber/log": "~2.0.1",
-        "channelgrabber/order": "~1.5.38",
+        "channelgrabber/order": "~1.6.2",
         "channelgrabber/phinx": "~0.3.2.2",
         "channelgrabber/predis": "~1.0.1",
-        "channelgrabber/settings": "~1.0.1",
+        "channelgrabber/product": "~1.0.0",
+        "channelgrabber/settings": "~1.0.6",
         "channelgrabber/slim": "~1.8.13",
         "channelgrabber/stdlib": "~2.7.0",
         "channelgrabber/template": "~1.2.11",
         "channelgrabber/usage": "~1.0.0",
         "channelgrabber/user": "~1.15.0",
-        "channelgrabber/userpreference": "~1.1.2",
+        "channelgrabber/userpreference": "~1.2.0",
         "channelgrabber/validation": "~1.2.2",
         "channelgrabber/vnderror": "~1.0.0",
         "channelgrabber/zf2-stdlib": "~1.1.6",
@@ -55,11 +56,11 @@
         "zendframework/zend-validator": "~2.2.5"
     },
     "require-dev": {
+        "channelgrabber/codeception": "~1.1.47",
         "channelgrabber/phpunit": "~1.0.0",
         "codeception/codeception": "~1.8.0",
         "phpspec/phpspec": "2.0.*@dev",
-        "phpspec/prophecy": "~1.0",
-        "channelgrabber/codeception": "~1.1.47"
+        "phpspec/prophecy": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [

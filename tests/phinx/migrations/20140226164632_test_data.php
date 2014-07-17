@@ -23,8 +23,6 @@ class TestData extends TestMigration
     public function down()
     {
         $this->execute('SET FOREIGN_KEY_CHECKS=0');
-        $this->execute('TRUNCATE table `service`');
-        $this->execute('TRUNCATE table `serviceEvent`');
         $this->execute('TRUNCATE table `order`');
         $this->execute('TRUNCATE table `address`');
         $this->execute('TRUNCATE table `orderTag`');

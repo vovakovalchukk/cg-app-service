@@ -12,6 +12,7 @@
  */
 
 use Zend\Db\Sql\Sql;
+use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\Cache\Client\Redis as CacheRedis;
 use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
@@ -22,6 +23,8 @@ use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
 use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
+use CG\OrganisationUnit\Service as OrganisationUnitService;
+use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
 
 //Order
 use CG\Order\Service\Service as OrderService;
@@ -116,8 +119,6 @@ use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 use CG\Controllers\UserPreference\UserPreference as UserPreferenceController;
-use CG\Controllers\UserPreference\UserPreference\Collection as UserPreferenceCollectionController;
-use CG\UserPreference\Service\Storage\ETag as UserPreferenceETagStorage;
 
 //Tag
 use CG\Order\Service\Tag\Service as TagService;
@@ -148,6 +149,50 @@ use CG\Template\Storage\ETag as TemplateETagStorage;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
+
+//Shipping
+use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
+use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
+use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
+use CG\Order\Service\Shipping\Method\Storage\Db as ShippingMethodDbStorage;
+use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage;
+
+// Invoice Settings
+use CG\Controllers\Settings\Invoice as InvoiceSettingsController;
+use CG\Controllers\Settings\Invoice\Collection  as InvoiceSettingsCollectionController;
+use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
+use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
+use CG\Settings\Invoice\Service\Storage\ETag as InvoiceSettingsETagStorage;
+use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
+use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
+
+// Alias Settings
+use CG\Controllers\Settings\Alias as AliasSettingsController;
+use CG\Controllers\Settings\Alias\Collection  as AliasSettingsCollectionController;
+use CG\Settings\Alias\Service as AliasSettingsService;
+use CG\Settings\Alias\Mapper as AliasSettingsMapper;
+use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
+use CG\Settings\Alias\Storage\ETag as AliasSettingsEtagStorage;
+use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
+use CG\Settings\Alias\Repository as AliasSettingsRepository;
+
+//Usage
+use CG\Usage\Storage\Db as UsageDb;
+use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
+use CG\Usage\Storage\Redis as UsageRedis;
+use CG\Usage\Repository as UsageRepository;
+use CG\Usage\StorageInterface as UsageStorageInterface;
+
+// Product
+use CG\Controllers\Product\Product as ProductController;
+use CG\Controllers\Product\Product\Collection as ProductCollectionController;
+use CG\Product\Service as ProductService;
+use CG\Product\Repository as ProductRepository;
+use CG\Product\Mapper as ProductMapper;
+use CG\Product\Storage\Db as ProductDbStorage;
+use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Product\Storage\ETag as ProductETagStorage;
 
 return array(
     'service_manager' => array(
@@ -190,6 +235,9 @@ return array(
                 'ReadSql' => Sql::class,
                 'FastReadSql' => Sql::class,
                 'WriteSql' => Sql::class,
+                'ReadCGSql' => CGSql::class,
+                'FastReadCGSql' => CGSql::class,
+                'WriteCGSql' => CGSql::class,
                 'Di' => Di::class,
                 'config' => Config::class,
                 'app_config' => Config::class,
@@ -211,24 +259,30 @@ return array(
                 'UserChangeCollectionService' => UserChangeService::class,
                 'BatchService' => BatchService::class,
                 'BatchCollectionService' => BatchService::class,
-                'UserPreferenceService' => UserPreferenceService::class,
-                'UserPreferenceCollectionService' => UserPreferenceService::class,
                 'TemplateService' => TemplateService::class,
                 'TemplateCollectionService' => TemplateService::class,
+                'ShippingMethodService' => ShippingMethodService::class,
+                'ShippingCollectionService' => ShippingMethodService::class,
+                'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
+                'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
+                'AliasSettingsService' => AliasSettingsService::class,
+                'AliasSettingsCollectionService' => AliasSettingsService::class,
+                'ProductService' => ProductService::class,
+                'ProductCollectionService' => ProductService::class
             ),
-            'ReadSql' => array(
+            'ReadCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'readAdapter'
+                    'adapter' => 'Read'
                 )
             ),
-            'FastReadSql' => array(
+            'FastReadCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'fastReadAdapter'
+                    'adapter' => 'FastRead'
                 )
             ),
-            'WriteSql' => array(
+            'WriteCGSql' => array(
                 'parameter' => array(
-                    'adapter' => 'writeAdapter'
+                    'adapter' => 'Write'
                 )
             ),
             CacheRedisPipeline::class => array(
@@ -248,7 +302,8 @@ return array(
             ),
             OrderPersistentStorage::class => array(
                 'parameter' => array(
-                    'tagService' => TagService::class
+                    'tagService' => TagService::class,
+                    'shippingMethodService' => ShippingMethodService::class
                 )
             ),
             OrderRepository::class => array(
@@ -639,30 +694,12 @@ return array(
                     'mapper' => BatchMapper::class
                 )
             ),
-            UserPreferenceETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => UserPreferenceRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_UserPreference_Shared_Entity'
-                )
-            ),
             UserPreferenceController::class => array(
                 'parameters' => array(
-                    'service' => 'UserPreferenceService'
+                    'service' => UserPreferenceService::class
                 )
             ),
-            UserPreferenceCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'UserPreferenceCollectionService'
-                )
-            ),
-            'UserPreferenceService' => array(
-                'parameters' => array(
-                    'repository' => UserPreferenceETagStorage::class
-                )
-            ),
-            'UserPreferenceCollectionService' => array(
+            UserPreferenceService::class => array(
                 'parameters' => array(
                     'repository' => UserPreferenceRepository::class
                 )
@@ -765,6 +802,194 @@ return array(
                     'repository' => TemplateMongoDbStorage::class
                 )
             ),
+            ShippingMethodService::class => [
+                'parameter' => [
+                    'repository' => ShippingMethodRepository::class
+                ]
+            ],
+            ShippingMethodRepository::class => [
+                'parameter' => [
+                    'storage' => ShippingMethodCacheStorage::class,
+                    'repository' => ShippingMethodDbStorage::class
+                ]
+            ],
+            ShippingMethodMapper::class => [
+                'parameter' => [
+                    'organisationUnitService' => OrganisationUnitService::class
+                ]
+            ],
+            ShippingMethodDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadCGSql',
+                    'fastReadSql' => 'FastReadCGSql',
+                    'writeSql' => 'WriteCGSql',
+                    'mapper' => ShippingMethodMapper::class
+                ]
+            ],
+            OrganisationUnitService::class => [
+                'parameter' => [
+                    'repository' => OrganisationUnitApi::class
+                ]
+            ],
+            OrganisationUnitApi::class => [
+                'parameter' => [
+                    'client' => 'directory_guzzle'
+                ]
+            ],
+            InvoiceSettingsETagStorage::class => array (
+                'parameter' => array(
+                    'entityStorage' => InvoiceSettingsRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => InvoiceSettingsEntity::class
+                )
+            ),
+            InvoiceSettingsController::class => array(
+                'parameters' => array(
+                    'service' => 'InvoiceSettingsEntityService'
+                )
+            ),
+            InvoiceSettingsCollectionController::class => array(
+                'parameters' => array(
+                    'service' => InvoiceSettingsCollectionService::class
+                )
+            ),
+            'InvoiceSettingsEntityService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsETagStorage::class
+                )
+            ),
+            'InvoiceSettingsCollectionService' => array(
+                'parameters' => array(
+                    'repository' => InvoiceSettingsRepository::class
+                )
+            ),
+            InvoiceSettingsRepository::class => array(
+                'parameter' => array(
+                    'storage' => InvoiceSettingsCacheStorage::class,
+                    'repository' => InvoiceSettingsMongoDbStorage::class
+                )
+            ),
+            UsageDb::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageAggregateDb::class => [
+                'parameter'=> [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql'
+                ]
+            ],
+            UsageRepository::class => [
+                'parameter' => [
+                    'storage' => UsageRedis::class,
+                    'repository' => UsageDb::class
+                ]
+            ],
+            UsageRedis::class => [
+                'parameter' => [
+                    'client' => 'unreliable_redis',
+                    'aggregateStorage' => UsageAggregateDb::class
+                ]
+            ],
+            AliasSettingsController::class => array (
+                'parameters' => array (
+                    'service' => 'AliasSettingsService'
+                )
+            ),
+            AliasSettingsCollectionController::class => array (
+                'parameters' => array (
+                    'service' => 'AliasSettingsCollectionService'
+                )
+            ),
+            'AliasSettingsService' => array(
+                'parameters' => array(
+                    'repository' => AliasSettingsETagStorage::class,
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            'AliasSettingsCollectionService' => array(
+                'parameters' => array(
+                    'repository' => AliasSettingsRepository::class,
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            AliasSettingsMapper::class => array (
+                'parameters' => array (
+                    'shippingMethodService' => ShippingMethodService::class,
+                    'shippingMethodMapper' => ShippingMethodMapper::class
+                )
+            ),
+            AliasSettingsRepository::class => array(
+                'parameter' => array (
+                    'storage' => AliasSettingsCacheStorage::class,
+                    'repository' => AliasSettingsDbStorage::class
+                )
+            ),
+            AliasSettingsDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => AliasSettingsMapper::class
+                )
+            ),
+            AliasSettingsETagStorage::class => array(
+                'parameter' => array (
+                    'entityStorage' => AliasSettingsRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Settings_Alias_Entity'
+                )
+            ),
+            ProductController::class => array (
+                'parameters' => array (
+                    'service' => 'ProductService'
+                )
+            ),
+            ProductCollectionController::class => array (
+                'parameters' => array (
+                    'service' => 'ProductCollectionService'
+                )
+            ),
+            'ProductService' => array(
+                'parameters' => array(
+                    'repository' => ProductETagStorage::class,
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            'ProductCollectionService' => array(
+                'parameters' => array(
+                    'repository' => ProductRepository::class,
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            ProductRepository::class => array(
+                'parameter' => array (
+                    'storage' => ProductCacheStorage::class,
+                    'repository' => ProductDbStorage::class
+                )
+            ),
+            ProductDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ProductMapper::class
+                )
+            ),
+            ProductETagStorage::class => array(
+                'parameter' => array (
+                    'entityStorage' => ProductRepository::class,
+                    'requestHeaders' => 'RequestHeaders',
+                    'responseHeaders' => 'ResponseHeaders',
+                    'entityClass' => 'CG_Product_Entity'
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -779,7 +1004,8 @@ return array(
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
                 'Di' => 'Zend\Di\Di',
-                'config' => Config::class
+                'config' => Config::class,
+                UsageStorageInterface::class => UsageRepository::class
              )
         )
     )
