@@ -37,6 +37,7 @@ return array(
                 $im->addSharedInstance($di, 'Di');
                 $im->addSharedInstance($di, 'Zend\Di\Di');
                 $im->addSharedInstance($di->get('config', array('array' => $configuration)), 'config');
+                $im->addSharedInstance($di->get(Config::class, array('array' => $configuration)), 'app_config');
 
                 return $di;
             }
@@ -52,8 +53,9 @@ return array(
         'instance' => array(
             'aliases' => array(
                 'Di' => 'Zend\Di\Di',
-                'config' => Config::class
-             ),
+                'config' => Config::class,
+                'app_config' => Config::class
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
             )
