@@ -194,6 +194,10 @@ use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Product\Storage\ETag as ProductETagStorage;
 
+// Transaction
+use CG\Transaction\ClientInterface as TransactionClientInterface;
+use CG\Transaction\Client\Redis as TransactionRedisClient;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -1003,7 +1007,8 @@ return array(
                 IncrementorInterface::class => Incrementor::class,
                 'Di' => 'Zend\Di\Di',
                 'config' => Config::class,
-                UsageStorageInterface::class => UsageRepository::class
+                UsageStorageInterface::class => UsageRepository::class,
+                TransactionClientInterface::class => TransactionRedisClient::class
              )
         )
     )

@@ -12,6 +12,10 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:channelgrabber/cg-transaction.git"
         }
     ],
     "autoload": {
@@ -37,6 +41,7 @@
         "channelgrabber/slim": "~1.8.13",
         "channelgrabber/stdlib": "~2.7.0",
         "channelgrabber/template": "~1.2.11",
+        "channelgrabber/transaction": "dev-CGIV-2675-DontSerializeV2",
         "channelgrabber/usage": "~1.0.0",
         "channelgrabber/user": "~1.15.0",
         "channelgrabber/userpreference": "~1.2.0",
