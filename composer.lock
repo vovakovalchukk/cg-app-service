@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "260351bde0df87fd3e30c4d4a05438dd",
+    "hash": "69764d2e2b44fcfa127b6f47f3ae2f5d",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -3200,6 +3199,22 @@
             "time": "2014-07-11 08:19:34"
         },
         {
+            "name": "channelgrabber/xhprof",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-xhprof.git",
+                "reference": "1eee168772e4996df3d9d3934ff831c03c8b7e76"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CG\\XhProf\\": ""
+                }
+            },
+            "time": "2014-06-03 11:34:08"
+        },
+        {
             "name": "codeception/codeception",
             "version": "1.8.0",
             "source": {
@@ -4218,6 +4233,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/xhprof": 20,
         "phpspec/phpspec": 20
     },
     "platform": [

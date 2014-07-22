@@ -15,8 +15,16 @@ use CG\Slim\Itid\ItidInjector;
 use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
 
+
+
+
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
+
+use CG\XhProf\XhProf;
+$xhProf = XhProf::getInstance(__NAMESPACE__);
+$xhProf->setPort(59914);
+$xhProf->startProfiling();
 
 $di->newInstance(Cache::class, ["app" => $app]);
 $di->newInstance(LoggingModule::class)->register($app);
@@ -58,4 +66,8 @@ $app->add($versioning);
 $app->add($di->get(Renderer::class));
 
 include_once dirname(__DIR__).'/config/DiSharedInstances.php';
+
+
 $app->run();
+
+$xhProf->endProfiling();
