@@ -241,8 +241,6 @@ return array(
                 'Di' => Di::class,
                 'config' => Config::class,
                 'app_config' => Config::class,
-                'OrderService' => OrderService::class,
-                'OrderCollectionService' => OrderService::class,
                 'NoteService' => NoteService::class,
                 'NoteCollectionService' => NoteService::class,
                 'TrackingService' => TrackingService::class,
@@ -312,19 +310,7 @@ return array(
                     'repository' => OrderPersistentStorage::class
                 )
             ),
-            'OrderService' => array(
-                'parameters' => array(
-                    'repository' => OrderETagStorage::class,
-                    'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteCollectionService',
-                    'itemService' => 'ItemCollectionService',
-                    'alertService' => 'AlertCollectionService',
-                    'trackingService' => 'TrackingCollectionService',
-                    'userChangeService' => 'UserChangeCollectionService',
-                    'filterEntityStorage' => FilterEntityCacheStorage::class
-                )
-            ),
-            'OrderCollectionService' => array(
+            OrderService::class => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
@@ -342,11 +328,6 @@ return array(
                     'requestHeaders' => 'RequestHeaders',
                     'responseHeaders' => 'ResponseHeaders',
                     'entityClass' => 'CG_Order_Shared_Entity'
-                )
-            ),
-            OrderController::class => array(
-                'parameters' => array(
-                    'service' => 'OrderService'
                 )
             ),
             OrderCollectionController::class => array(
@@ -747,7 +728,7 @@ return array(
             FilterService::class => array(
                 'parameter' => array(
                     'filterStorage' => FilterCache::class,
-                    'orderService' => 'OrderService',
+                    'orderService' => OrderService::class,
                     'filterEntityStorage' => FilterEntityCacheStorage::class
                 )
             ),

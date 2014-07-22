@@ -8,6 +8,9 @@ use CG\InputValidation\Order\Order\Filter as OrderFilterValidationRules;
 use CG\InputValidation\Order\Order\Entity as OrderEntityValidationRules;
 use CG\Controllers\Order\Note\Collection as NoteCollection;
 use CG\Controllers\Order\Order;
+use CG\Order\Shared\Entity as OrderEntity;
+use CG\Order\Shared\Mapper as OrderMapper;
+use CG\Order\Service\Service as OrderService;
 
 //Tracking
 use CG\Controllers\Order\Tracking;
@@ -74,12 +77,6 @@ use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
 use CG\Controllers\Order\Filter;
 use CG\Controllers\Order\Filter\Collection as FilterCollection;
 
-//Template
-use CG\Controllers\Template\Template;
-use CG\Controllers\Template\Template\Collection as TemplateCollection;
-use CG\InputValidation\Template\Entity as TemplateEntityValidationRules;
-use CG\InputValidation\Template\Filter as TemplateFilterValidationRules;
-
 //ShippingMethod
 use CG\Controllers\Shipping\Method\Method as ShippingMethod;
 use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
@@ -127,7 +124,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
-        'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapper' => OrderMapper::class,
+            'entityClass' => OrderEntity::class,
+            'service' => OrderService::class
+        ]
     ),
     '/order/:orderId/note' => array (
         'controllers' => function($orderId) use ($di) {
@@ -457,40 +459,6 @@ return array(
         'via' => array('GET', 'OPTIONS'),
         'name' => 'FilterEntity',
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
-    ),
-    '/template' => array (
-        'controllers' => function() use ($app, $di) {
-                $method = $app->request()->getMethod();
-
-                $controller = $di->get(TemplateCollection::class, array());
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($app->request()->getBody())
-                );
-            },
-        'via' => array('GET', 'POST', 'OPTIONS'),
-        'name' => 'TemplateCollection',
-        'validation' => array(
-            "dataRules" => TemplateEntityValidationRules::class,
-            "filterRules" => TemplateFilterValidationRules::class,
-            "flatten" => false
-        ),
-        'version' => new Version(1, 2)
-    ),
-    '/template/:id' => array (
-        'controllers' => function($templateId) use ($app, $di) {
-                $method = $app->request()->getMethod();
-
-                $controller = $di->get(Template::class, array());
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($templateId, $app->request()->getBody())
-                );
-            },
-        'via' => array('GET', 'DELETE', 'PUT', 'OPTIONS'),
-        'name' => 'TemplateEntity',
-        'validation' => array("dataRules" => TemplateEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 2)
     ),
     '/shippingMethod' => [
         'controllers' => function() use ($app, $di) {
