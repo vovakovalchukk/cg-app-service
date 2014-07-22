@@ -14,6 +14,7 @@ use CG\Slim\Created\Created as Created;
 use CG\Slim\Itid\ItidInjector;
 use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
+use CG\Slim\Etag;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -26,18 +27,20 @@ $newRelic = $di->get(NewRelic::class, compact('app'));
 $options = $di->get(Options::class, compact('app'));
 $validator = $di->get(Validator::class, compact('app', 'di'));
 $versioning = $di->get(Versioning::class);
-
+$eTag = $di->get(Etag::class);
 
 $app->get(Versioning::VERSION_ROUTE, array($versioning, 'versionRoute'));
 foreach ($routes as $route => $request) {
     $validator->setValidators($request);
     $versioning->setRouteVersion($request);
+    $eTag->setEtagConfig($request);
 
     $route = $app->map(
         $route,
         $newRelic,
         $versioning,
         $validator,
+        $eTag,
         $options,
         $request["controllers"])->name($request["name"]);
     if (!is_array($request['via'])) {
@@ -56,6 +59,5 @@ $app->add($di->get(UnusedMethods::class));
 $app->add($di->get(HeadRequest::class));
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
-
 include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 $app->run();
