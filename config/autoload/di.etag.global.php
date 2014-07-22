@@ -1,27 +1,41 @@
 <?php
-use Slim\Http\Headers as SlimHeaders;
-use CG\Slim\Stdlib\Http\Headers as CgHeaders;
+use CG\Slim\Etag\Config\Entity;
 
 return array(
     'di' => array(
-        'instance' => array(
-            'aliases' => array(
-                'SlimRequestHeaders' => SlimHeaders::class,
-                'SlimResponseHeaders' => SlimHeaders::class,
-                
-                'RequestHeaders' => CgHeaders::class,
-                'ResponseHeaders' => CgHeaders::class
-            ),
-            'RequestHeaders' => array(
-                'parameters' => array(
-                    'slimHeaders' => 'SlimRequestHeaders'
-                )
-            ),
-            'ResponseHeaders' => array(
-                'parameters' => array(
-                    'slimHeaders' => 'SlimResponseHeaders'
-                )
-            )
-        )
+        'definition' => [
+            'class' => [
+                Entity::class => [
+                    'methods' => [
+                        '__construct' => [
+                            'entityClass' => [
+                                'type' => false
+                            ],
+                            'mapperClass' => [
+                                'type' => false
+                            ],
+                            'serviceClass' => [
+                                'type' => false
+                            ]
+                        ],
+                        'setEntityClass' => [
+                            'entityClass' => [
+                                'type' => false
+                            ]
+                        ],
+                        'setMapperClass' => [
+                            'mapperClass' => [
+                                'type' => false
+                            ]
+                        ],
+                        'setServiceClass' => [
+                            'serviceClass' => [
+                                'type' => false
+                            ]
+                        ],
+                    ]
+                ]
+            ]
+        ]
     )
 );
