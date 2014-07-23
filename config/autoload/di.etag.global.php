@@ -1,11 +1,11 @@
 <?php
-use CG\Slim\Etag\Config\Entity;
+use CG\Slim\Etag\Config;
 
 return array(
     'di' => array(
         'definition' => [
             'class' => [
-                Entity::class => [
+                Config::class => [
                     'methods' => [
                         '__construct' => [
                             'entityClass' => [
