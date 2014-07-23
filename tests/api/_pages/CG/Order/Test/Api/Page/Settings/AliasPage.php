@@ -72,8 +72,7 @@ class AliasPage extends RootPage
     {
         return [
             "name",
-            "organisationUnitId",
-            "methodIds"
+            "organisationUnitId"
         ];
     }
 

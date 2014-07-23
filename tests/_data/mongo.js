@@ -427,63 +427,6 @@ db.userChange.insert({
     },
     "organisationUnitId": 5
 });
-
-db=db.getSiblingDB("userPreference");
-db.dropDatabase();
-db.preference.insert({
-    "_id":"1",
-    "preference":{
-        "orderTable":[
-            "tags",
-            "orderInformation",
-            "shippingService",
-            "dispatch"
-        ],
-        "other":1
-    }
-});
-db.preference.insert({
-    "_id":"2",
-    "preference":{
-        "orderTable":[
-            "orderInformation",
-            "shippingService",
-            "dispatch",
-            "tags"
-        ],
-        "other":2
-    }
-});
-db.preference.insert({
-    "_id":"3",
-    "preference":{
-        "orderTable":[
-            "tags",
-            "orderInformation",
-            "shippingService",
-            "dispatch",
-            "invoice"
-        ],
-        "other":3
-    }
-});
-db.preference.insert({
-    "_id":"4",
-    "preference":{
-        "other":4
-    }
-});
-db.preference.insert({
-    "_id":"5",
-    "preference":{
-        "orderTable":[
-            "checkbox",
-            "orderInformation",
-            "shippingService",
-            "buyerName"
-        ]
-    }
-});
 db=db.getSiblingDB("template");
 db.dropDatabase();
 db.template.insert({
@@ -606,7 +549,7 @@ db.invoice.insert({
 db=db.getSiblingDB("userPreference");
 db.dropDatabase();
 db.preference.insert({
-    "_id":"1",
+    "_id":1,
     "preference":{
         "orderTable":[
             "tags",
@@ -618,7 +561,7 @@ db.preference.insert({
     }
 });
 db.preference.insert({
-    "_id":"2",
+    "_id":2,
     "preference":{
         "orderTable":[
             "orderInformation",
@@ -630,7 +573,7 @@ db.preference.insert({
     }
 });
 db.preference.insert({
-    "_id":"3",
+    "_id":3,
     "preference":{
         "orderTable":[
             "tags",
@@ -643,13 +586,13 @@ db.preference.insert({
     }
 });
 db.preference.insert({
-    "_id":"4",
+    "_id":4,
     "preference":{
         "other":4
     }
 });
 db.preference.insert({
-    "_id":"5",
+    "_id":5,
     "preference":{
         "orderTable":[
             "checkbox",

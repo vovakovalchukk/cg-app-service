@@ -1,12 +1,13 @@
 <?php
-use Slim\Slim;
-use CG\Slim\Versioning\Version;
-
-use CG\Controllers\Product\Product as ProductEntity;
+use CG\Controllers\Product\Product;
 use CG\Controllers\Product\Product\Collection as ProductCollection;
 
 use CG\InputValidation\Product\Entity as ProductEntityValidation;
 use CG\InputValidation\Product\Filter as ProductCollectionValidation;
+
+use CG\Product\Entity as ProductEntity;
+use CG\Product\Mapper as ProductMapper;
+use CG\Product\Service as ProductService;
 
 return [
     '/product' => [
@@ -30,7 +31,7 @@ return [
         'controllers' => function($productId) use ($di, $app) {
                 $method = $app->request()->getMethod();
 
-                $controller = $di->get(ProductEntity::class);
+                $controller = $di->get(Product::class);
                 $app->view()->set(
                     'RestResponse',
                     $controller->$method($productId, $app->request()->getBody())
@@ -40,6 +41,11 @@ return [
         'name' => 'ProductEntity',
         'validation' => [
             "dataRules" => ProductEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ProductMapper::class,
+            'entityClass' => ProductEntity::class,
+            'serviceClass' => ProductService::class
         ]
     ]
 ];

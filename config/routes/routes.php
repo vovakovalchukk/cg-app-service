@@ -17,12 +17,18 @@ use CG\Controllers\Order\Tracking;
 use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
 use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
 use CG\InputValidation\Order\Tracking\Filter as TrackingFilterValidationRules;
+use CG\Order\Shared\Tracking\Entity as TrackingEntity;
+use CG\Order\Shared\Tracking\Mapper as TrackingMapper;
+use CG\Order\Service\Tracking\Service as TrackingService;
 
 //Alert
 use CG\Controllers\Order\Alert;
 use CG\Controllers\Order\Alert\Collection as AlertCollection;
 use CG\InputValidation\Order\Alert\Entity as AlertEntityValidationRules;
 use CG\InputValidation\Order\Alert\Filter as AlertFilterValidationRules;
+use CG\Order\Shared\Alert\Entity as AlertEntity;
+use CG\Order\Shared\Alert\Mapper as AlertMapper;
+use CG\Order\Service\Alert\Service as AlertService;
 
 //Archive
 use CG\Controllers\Order\Archive;
@@ -33,33 +39,51 @@ use CG\Controllers\Order\Item;
 use CG\Controllers\Order\Item\Collection as ItemCollection;
 use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
 use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
+use CG\Order\Shared\Item\Entity as ItemEntity;
+use CG\Order\Shared\Item\Mapper as ItemMapper;
+use CG\Order\Service\Item\Service as ItemService;
 
 //Fee
 use CG\Controllers\Order\Item\Fee;
 use CG\Controllers\Order\Item\Fee\Collection as FeeCollection;
 use CG\InputValidation\Order\Item\Fee\Entity as FeeEntityValidationRules;
 use CG\Slim\InputValidation\PageLimit as FeeFilterValidationRules;
+use CG\Order\Shared\Item\Fee\Entity as FeeEntity;
+use CG\Order\Shared\Item\Fee\Mapper as FeeMapper;
+use CG\Order\Service\Item\Fee\Service as FeeService;
 
 //Note
 use CG\Controllers\Order\Note;
 use CG\InputValidation\Order\Note\Entity as NoteEntityValidationRules;
 use CG\InputValidation\Order\Note\Filter as NoteFilterValidationRules;
+use CG\Order\Shared\Note\Entity as NoteEntity;
+use CG\Order\Shared\Note\Mapper as NoteMapper;
+use CG\Order\Service\Note\Service as NoteService;
 
 //GiftWrap
 use CG\Controllers\Order\Item\GiftWrap;
 use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollection;
 use CG\InputValidation\Order\Item\GiftWrap\Entity as GiftWrapEntityValidationRules;
 use CG\Slim\InputValidation\PageLimit as GiftWrapFilterValidationRules;
+use CG\Order\Shared\Item\GiftWrap\Entity as GiftWrapEntity;
+use CG\Order\Shared\Item\GiftWrap\Mapper as GiftWrapMapper;
+use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 
 //UserChange
 use CG\Controllers\Order\UserChange;
 use CG\InputValidation\Order\UserChange\Entity as UserChangeEntityValidationRules;
+use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
+use CG\Order\Shared\UserChange\Mapper as UserChangeMapper;
+use CG\Order\Service\UserChange\Service as UserChangeService;
 
 //Batch
 use CG\Controllers\Order\Batch;
 use CG\Controllers\Order\Batch\Collection as BatchCollection;
 use CG\InputValidation\Order\Batch\Entity as BatchEntityValidationRules;
 use CG\InputValidation\Order\Batch\Filter as BatchFilterValidationRules;
+use CG\Order\Shared\Batch\Entity as BatchEntity;
+use CG\Order\Shared\Batch\Mapper as BatchMapper;
+use CG\Order\Service\Batch\Service as BatchService;
 
 //UserPreference
 use CG\Controllers\UserPreference\UserPreference;
@@ -72,6 +96,9 @@ use CG\Controllers\Order\Tag;
 use CG\Controllers\Order\Tag\Collection as TagCollection;
 use CG\InputValidation\Order\Tag\Entity as TagEntityValidationRules;
 use CG\InputValidation\Order\Tag\Filter as TagFilterValidationRules;
+use CG\Order\Shared\Tag\Entity as TagEntity;
+use CG\Order\Shared\Tag\Mapper as TagMapper;
+use CG\Order\Service\Tag\Service as TagService;
 
 //Filter
 use CG\Controllers\Order\Filter;
@@ -81,6 +108,9 @@ use CG\Controllers\Order\Filter\Collection as FilterCollection;
 use CG\Controllers\Shipping\Method\Method as ShippingMethod;
 use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
 use CG\InputValidation\Shipping\Method\Filter as ShippingMethodFilterValidationRules;
+use CG\Order\Shared\Shipping\Method\Entity as ShippingMethodEntity;
+use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
+use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
 
 return array(
     '/' => array (
@@ -126,9 +156,9 @@ return array(
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'eTag' => [
-            'mapper' => OrderMapper::class,
+            'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
-            'service' => OrderService::class
+            'serviceClass' => OrderService::class
         ]
     ),
     '/order/:orderId/note' => array (
@@ -159,7 +189,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderNoteEntity',
-        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => NoteMapper::class,
+            'entityClass' => NoteEntity::class,
+            'serviceClass' => NoteService::class
+        ]
     ),
     '/order/:orderId/tracking' => array (
         'controllers' => function($orderId) use ($di) {
@@ -189,7 +224,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderTrackingEntity',
-        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => TrackingMapper::class,
+            'entityClass' => TrackingEntity::class,
+            'serviceClass' => TrackingService::class
+        ]
     ),
     '/order/:orderId/alert' => array (
         'controllers' => function($orderId) use ($di) {
@@ -219,7 +259,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderAlertEntity',
-        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => AlertMapper::class,
+            'entityClass' => AlertEntity::class,
+            'serviceClass' => AlertService::class
+        ]
     ),
     '/order/:orderId/archive' => array (
         'controllers' => function($orderId) use ($di) {
@@ -249,7 +294,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderUserChangeEntity',
-        'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => UserChangeMapper::class,
+            'entityClass' => UserChangeEntity::class,
+            'serviceClass' => UserChangeService::class
+        ]
     ),
     '/orderItem' => array (
         'controllers' => function() use ($di) {
@@ -281,6 +331,11 @@ return array(
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 2),
+        'eTag' => [
+            'mapperClass' => ItemMapper::class,
+            'entityClass' => ItemEntity::class,
+            'serviceClass' => ItemService::class
+        ]
     ),
     '/orderItem/:orderItemId/fee' => array (
         'controllers' => function($orderItemId) use ($di) {
@@ -310,7 +365,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderItemFeeEntity',
-        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => FeeMapper::class,
+            'entityClass' => FeeEntity::class,
+            'serviceClass' => FeeService::class
+        ]
     ),
     '/orderItem/:orderItemId/giftWrap' => array (
         'controllers' => function($orderItemId) use ($di) {
@@ -340,7 +400,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderItemGiftWrapEntity',
-        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => GiftWrapMapper::class,
+            'entityClass' => GiftWrapEntity::class,
+            'serviceClass' => GiftWrapService::class
+        ]
     ),
     '/orderBatch' => array (
         'controllers' => function() use ($di) {
@@ -369,7 +434,12 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderBatchEntity',
-        'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'mapperClass' => BatchMapper::class,
+            'entityClass' => BatchEntity::class,
+            'serviceClass' => BatchService::class
+        ]
     ),
     '/userPreference' => array (
         'controllers' => function() use ($di) {
@@ -398,7 +468,10 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'UserPreferenceEntity',
-        'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => UserPreferenceEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'enabled' => false
+        ]
     ),
     '/orderTag' => array (
         'controllers' => function() use ($di) {
@@ -428,7 +501,10 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'TagEntity',
-        'validation' => array("dataRules" => TagEntityValidationRules::class, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => TagEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'enabled' => false
+        ]
     ),
     '/orderFilter' => array (
         'controllers' => function() use ($di) {
@@ -458,7 +534,10 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'FilterEntity',
-        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false),
+        'eTag' => [
+            'enabled' => false
+        ]
     ),
     '/shippingMethod' => [
         'controllers' => function() use ($app, $di) {
@@ -490,5 +569,8 @@ return array(
         'via' => ['GET', 'OPTIONS'],
         'name' => 'ShippingMethodEntity',
         'validation' => ["dataRules" => null, "filterRules" => null, "flatten" => false],
+        'eTag' => [
+            'enabled' => false
+        ]
     ]
 );

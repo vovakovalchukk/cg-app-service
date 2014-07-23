@@ -6,6 +6,10 @@ use CG\Controllers\Template\Template\Collection as TemplateCollection;
 use CG\InputValidation\Template\Entity as TemplateEntityValidationRules;
 use CG\InputValidation\Template\Filter as TemplateFilterValidationRules;
 
+use CG\Template\Entity as TemplateEntity;
+use CG\Template\Mapper as TemplateMapper;
+use CG\Template\Service as TemplateService;
+
 return [
     '/template' => [
         'controllers' => function() use ($di) {
@@ -45,6 +49,11 @@ return [
             "filterRules" => null,
             "flatten" => false
         ],
-        'version' => new Version(1, 2)
+        'version' => new Version(1, 2),
+        'eTag' => [
+            'mapperClass' => TemplateMapper::class,
+            'entityClass' => TemplateEntity::class,
+            'serviceClass' => TemplateService::class
+        ]
     ],
 ];
