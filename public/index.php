@@ -15,15 +15,12 @@ use CG\Slim\Itid\ItidInjector;
 use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
 
-
-
-
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
 
 use CG\XhProf\XhProf;
 $xhProf = XhProf::getInstance(__NAMESPACE__);
-$xhProf->setPort(59098);
+$xhProf->setPort(49586);
 $xhProf->startProfiling();
 
 $di->newInstance(Cache::class, ["app" => $app]);
