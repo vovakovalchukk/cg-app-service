@@ -18,11 +18,6 @@ use CG\Slim\Usage\Count as UsageCount;
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
 
-//use CG\XhProf\XhProf;
-//$xhProf = XhProf::getInstance(__NAMESPACE__);
-//$xhProf->setPort(49586);
-//$xhProf->startProfiling();
-
 $di->newInstance(Cache::class, ["app" => $app]);
 $di->newInstance(LoggingModule::class)->register($app);
 $app->add($di->get(ItidInjector::class));
@@ -66,5 +61,3 @@ include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 
 
 $app->run();
-//
-//$xhProf->endProfiling();

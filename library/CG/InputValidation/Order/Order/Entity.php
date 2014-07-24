@@ -14,14 +14,18 @@ use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 use CG\Validation\ValidatorChain;
 use Zend\Validator\Identical;
+use Zend\Validator\Callback;
+use CG\Order\Shared\Repository as OrderRepository;
 
 class Entity implements RulesInterface
 {
     protected $di;
+    protected $orderRepository;
 
-    public function __construct(Di $di)
+    public function __construct(Di $di, OrderRepository $orderRepository)
     {
-        $this->setDi($di);
+        $this->setDi($di)
+            ->setOrderRepository($orderRepository);
     }
 
     protected function getDi()
@@ -32,10 +36,12 @@ class Entity implements RulesInterface
     protected function setDi(Di $di)
     {
         $this->di = $di;
+        return $this;
     }
 
     public function getRules()
     {
+        $orderRepository = $this->getOrderRepository();
         return array(
             'id' => array(
                 'name'       => 'id',
@@ -333,7 +339,28 @@ class Entity implements RulesInterface
                 'validators' => array(
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'cancellations'])
                 )
+            ),
+            'archived' => array(
+                'name' => 'archived',
+                'required' => false,
+                'validators' => array(
+                    $this->getDi()->newInstance(Callback::class, ['options' => ['callback' => function($archivedValue, $orderDetails) use($orderRepository) {
+                        $storedOrder = $orderRepository->fetch($orderDetails['id']);
+                        return $storedOrder->getArchived() == $archivedValue;
+                    }]])->setMessage('Archived value cannot be modified')
+                )
             )
         );
+    }
+
+    protected function setOrderRepository($orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+        return $this;
+    }
+
+    protected function getOrderRepository()
+    {
+        return $this->orderRepository;
     }
 }
