@@ -12,10 +12,6 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
-        },
-        {
-            "type" : "git",
-            "url" : "git@bitbucket.org:channelgrabber/cg-xhprof.git"
         }
     ],
     "autoload": {
@@ -60,7 +56,6 @@
         "zendframework/zend-validator": "~2.2.5"
     },
     "require-dev": {
-        "channelgrabber/xhprof" : "dev-master",
         "channelgrabber/codeception": "~1.1.47",
         "channelgrabber/phpunit": "~1.0.0",
         "codeception/codeception": "~1.8.0",
