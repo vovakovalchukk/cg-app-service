@@ -264,7 +264,8 @@ return array(
             ),
             TrackingService::class => array(
                 'parameters' => array(
-                    'repository' => TrackingRepository::class
+                    'repository' => TrackingRepository::class,
+                    'accountStorage' => AccountApiStorage::class
                 )
             ),
             TrackingRepository::class => array(
