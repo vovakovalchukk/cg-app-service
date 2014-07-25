@@ -17,7 +17,6 @@ use CG\Cache\Client\Redis as CacheRedis;
 use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
 use Zend\Di\Di;
-use Zend\EventManager\EventManager;
 use Zend\Config\Config;
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
@@ -32,9 +31,6 @@ use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
-use CG\Controllers\Order\Order as OrderController;
-use CG\Controllers\Order\Order\Collection as OrderCollectionController;
-use CG\Order\Service\Storage\ETag as OrderETagStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 
 //Note
@@ -42,30 +38,18 @@ use CG\Order\Service\Note\Service as NoteService;
 use CG\Order\Shared\Note\Repository as NoteRepository;
 use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
-use CG\Controllers\Order\Note as NoteController;
-use CG\Controllers\Order\Note\Collection as NoteCollectionController;
-use CG\Order\Service\Note\Storage\ETag as NoteETagStorage;
 
 //Tracking
 use CG\Order\Service\Tracking\Service as TrackingService;
 use CG\Order\Shared\Tracking\Repository as TrackingRepository;
 use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
 use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
-use CG\Controllers\Order\Tracking as TrackingController;
-use CG\Controllers\Order\Tracking\Collection as TrackingCollectionController;
-use CG\Order\Service\Tracking\Storage\ETag as TrackingETagStorage;
 
 //Alert
 use CG\Order\Service\Alert\Service as AlertService;
 use CG\Order\Shared\Alert\Repository as AlertRepository;
 use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
-use CG\Controllers\Order\Alert as AlertController;
-use CG\Controllers\Order\Alert\Collection as AlertCollectionController;
-use CG\Order\Service\Alert\Storage\ETag as AlertETagStorage;
-
-//Archive
-use CG\Controllers\Order\Archive as ArchiveController;
 
 //Item
 use CG\Order\Service\Item\Service as ItemService;
@@ -73,35 +57,24 @@ use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
-use CG\Controllers\Order\Item as ItemController;
-use CG\Controllers\Order\Item\Collection as ItemCollectionController;
-use CG\Order\Service\Item\Storage\ETag as ItemETagStorage;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
 use CG\Order\Shared\Item\Fee\Repository as FeeRepository;
 use CG\Order\Service\Item\Fee\Storage\Cache as FeeCacheStorage;
 use CG\Order\Service\Item\Fee\Storage\Db as FeeDbStorage;
-use CG\Controllers\Order\Item\Fee as FeeController;
-use CG\Controllers\Order\Item\Fee\Collection as FeeCollectionController;
-use CG\Order\Service\Item\Fee\Storage\ETag as FeeETagStorage;
 
 //GiftWrap
 use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Shared\Item\GiftWrap\Repository as GiftWrapRepository;
 use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
-use CG\Controllers\Order\Item\GiftWrap as GiftWrapController;
-use CG\Controllers\Order\Item\GiftWrap\Collection as GiftWrapCollectionController;
-use CG\Order\Service\Item\GiftWrap\Storage\ETag as GiftWrapETagStorage;
 
 //UserChange
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
 use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
-use CG\Controllers\Order\UserChange as UserChangeController;
-use CG\Order\Service\UserChange\Storage\ETag as UserChangeETagStorage;
 
 //Batch
 use CG\Order\Service\Batch\Service as BatchService;
@@ -109,16 +82,12 @@ use CG\Order\Shared\Batch\Repository as BatchRepository;
 use CG\Order\Service\Batch\Storage\Cache as BatchCacheStorage;
 use CG\Order\Service\Batch\Storage\Db as BatchDbStorage;
 use CG\Order\Shared\Batch\Mapper as BatchMapper;
-use CG\Controllers\Order\Batch as BatchController;
-use CG\Controllers\Order\Batch\Collection as BatchCollectionController;
-use CG\Order\Service\Batch\Storage\ETag as BatchETagStorage;
 
 //UserPreference
 use CG\UserPreference\Service\Service as UserPreferenceService;
 use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
-use CG\Controllers\UserPreference\UserPreference as UserPreferenceController;
 
 //Tag
 use CG\Order\Service\Tag\Service as TagService;
@@ -142,10 +111,6 @@ use CG\Template\Service as TemplateService;
 use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
 use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
-use CG\Template\Mapper as TemplateMapper;
-use CG\Controllers\Template\Template as TemplateController;
-use CG\Controllers\Template\Template\Collection as TemplateCollectionController;
-use CG\Template\Storage\ETag as TemplateETagStorage;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
@@ -158,22 +123,15 @@ use CG\Order\Service\Shipping\Method\Storage\Db as ShippingMethodDbStorage;
 use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage;
 
 // Invoice Settings
-use CG\Controllers\Settings\Invoice as InvoiceSettingsController;
-use CG\Controllers\Settings\Invoice\Collection  as InvoiceSettingsCollectionController;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
-use CG\Settings\Invoice\Service\Storage\ETag as InvoiceSettingsETagStorage;
 use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
-use CG\Settings\Invoice\Shared\StorageInterface as InvoiceSettingsStorageInterface;
 
 // Alias Settings
-use CG\Controllers\Settings\Alias as AliasSettingsController;
-use CG\Controllers\Settings\Alias\Collection  as AliasSettingsCollectionController;
 use CG\Settings\Alias\Service as AliasSettingsService;
 use CG\Settings\Alias\Mapper as AliasSettingsMapper;
 use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Alias\Storage\ETag as AliasSettingsEtagStorage;
 use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
 use CG\Settings\Alias\Repository as AliasSettingsRepository;
 
@@ -185,14 +143,11 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
-use CG\Controllers\Product\Product as ProductController;
-use CG\Controllers\Product\Product\Collection as ProductCollectionController;
 use CG\Product\Service as ProductService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
-use CG\Product\Storage\ETag as ProductETagStorage;
 
 return array(
     'service_manager' => array(
@@ -232,43 +187,12 @@ return array(
     'di' => array(
         'instance' => array(
             'aliases' => array(
-                'ReadSql' => Sql::class,
-                'FastReadSql' => Sql::class,
-                'WriteSql' => Sql::class,
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
                 'Di' => Di::class,
                 'config' => Config::class,
-                'app_config' => Config::class,
-                'OrderService' => OrderService::class,
-                'OrderCollectionService' => OrderService::class,
-                'NoteService' => NoteService::class,
-                'NoteCollectionService' => NoteService::class,
-                'TrackingService' => TrackingService::class,
-                'TrackingCollectionService' => TrackingService::class,
-                'AlertService' => AlertService::class,
-                'AlertCollectionService' => AlertService::class,
-                'ItemService' => ItemService::class,
-                'ItemCollectionService' => ItemService::class,
-                'FeeService' => FeeService::class,
-                'FeeCollectionService' => FeeService::class,
-                'GiftWrapService' => GiftWrapService::class,
-                'GiftWrapCollectionService' => GiftWrapService::class,
-                'UserChangeService' => UserChangeService::class,
-                'UserChangeCollectionService' => UserChangeService::class,
-                'BatchService' => BatchService::class,
-                'BatchCollectionService' => BatchService::class,
-                'TemplateService' => TemplateService::class,
-                'TemplateCollectionService' => TemplateService::class,
-                'ShippingMethodService' => ShippingMethodService::class,
-                'ShippingCollectionService' => ShippingMethodService::class,
-                'InvoiceSettingsEntityService' => InvoiceSettingsService::class,
-                'InvoiceSettingsCollectionService' => InvoiceSettingsService::class,
-                'AliasSettingsService' => AliasSettingsService::class,
-                'AliasSettingsCollectionService' => AliasSettingsService::class,
-                'ProductService' => ProductService::class,
-                'ProductCollectionService' => ProductService::class
+                'app_config' => Config::class
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -300,58 +224,17 @@ return array(
                     'predisClient' => 'unreliable_redis'
                 )
             ),
-            OrderPersistentStorage::class => array(
-                'parameter' => array(
-                    'tagService' => TagService::class,
-                    'shippingMethodService' => ShippingMethodService::class
-                )
-            ),
             OrderRepository::class => array(
                 'parameter' => array(
                     'storage' => OrderCacheStorage::class,
                     'repository' => OrderPersistentStorage::class
                 )
             ),
-            'OrderService' => array(
-                'parameters' => array(
-                    'repository' => OrderETagStorage::class,
-                    'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteCollectionService',
-                    'itemService' => 'ItemCollectionService',
-                    'alertService' => 'AlertCollectionService',
-                    'trackingService' => 'TrackingCollectionService',
-                    'userChangeService' => 'UserChangeCollectionService',
-                    'filterEntityStorage' => FilterEntityCacheStorage::class
-                )
-            ),
-            'OrderCollectionService' => array(
+            OrderService::class => array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'noteService' => 'NoteCollectionService',
-                    'itemService' => 'ItemCollectionService',
-                    'alertService' => 'AlertCollectionService',
-                    'trackingService' => 'TrackingCollectionService',
-                    'userChangeService' => 'UserChangeCollectionService',
                     'filterEntityStorage' => FilterEntityCacheStorage::class
-                )
-            ),
-            OrderETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => OrderRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Shared_Entity'
-                )
-            ),
-            OrderController::class => array(
-                'parameters' => array(
-                    'service' => 'OrderService'
-                )
-            ),
-            OrderCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'OrderCollectionService'
                 )
             ),
             OrderPersistentDbStorage::class => array(
@@ -361,30 +244,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            NoteETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => NoteRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Note_Shared_Entity'
-                )
-            ),
-            NoteController::class => array(
-                'parameters' => array(
-                    'service' => 'NoteService'
-                )
-            ),
-            NoteCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'NoteCollectionService'
-                )
-            ),
-            'NoteService' => array(
-                'parameters' => array(
-                    'repository' => NoteETagStorage::class
-                )
-            ),
-            'NoteCollectionService' => array(
+            NoteService::class => array(
                 'parameters' => array(
                     'repository' => NoteRepository::class
                 )
@@ -402,30 +262,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            TrackingETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => TrackingRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Tracking_Shared_Entity'
-                )
-            ),
-            TrackingController::class => array(
-                'parameters' => array(
-                    'service' => 'TrackingService'
-                )
-            ),
-            TrackingCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'TrackingCollectionService'
-                )
-            ),
-            'TrackingService' => array(
-                'parameters' => array(
-                    'repository' => TrackingETagStorage::class
-                )
-            ),
-            'TrackingCollectionService' => array(
+            TrackingService::class => array(
                 'parameters' => array(
                     'repository' => TrackingRepository::class
                 )
@@ -443,30 +280,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            AlertETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => AlertRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Alert_Shared_Entity'
-                )
-            ),
-            AlertController::class => array(
-                'parameters' => array(
-                    'service' => 'AlertService'
-                )
-            ),
-            AlertCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'AlertCollectionService'
-                )
-            ),
-            'AlertService' => array(
-                'parameters' => array(
-                    'repository' => AlertETagStorage::class
-                )
-            ),
-            'AlertCollectionService' => array(
+            AlertService::class => array(
                 'parameters' => array(
                     'repository' => AlertRepository::class
                 )
@@ -484,41 +298,9 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            ArchiveController::class => array(
+            ItemService::class => array(
                 'parameters' => array(
-                    'service' => 'OrderCollectionService'
-                )
-            ),
-            ItemETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => ItemRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Item_Shared_Entity'
-                )
-            ),
-            ItemController::class => array(
-                'parameters' => array(
-                    'service' => 'ItemService'
-                )
-            ),
-            ItemCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'ItemCollectionService'
-                )
-            ),
-            'ItemService' => array(
-                'parameters' => array(
-                    'repository' => ItemETagStorage::class,
-                    'feeService' => 'FeeCollectionService',
-                    'giftWrapService' => 'GiftWrapCollectionService'
-                )
-            ),
-            'ItemCollectionService' => array(
-                'parameters' => array(
-                    'repository' => ItemRepository::class,
-                    'feeService' => 'FeeCollectionService',
-                    'giftWrapService' => 'GiftWrapCollectionService'
+                    'repository' => ItemRepository::class
                 )
             ),
             ItemRepository::class => array(
@@ -534,30 +316,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            FeeETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => FeeRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Fee_Shared_Entity'
-                )
-            ),
-            FeeController::class => array(
-                'parameters' => array(
-                    'service' => 'FeeService'
-                )
-            ),
-            FeeCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'FeeCollectionService'
-                )
-            ),
-            'FeeService' => array(
-                'parameters' => array(
-                    'repository' => FeeETagStorage::class
-                )
-            ),
-            'FeeCollectionService' => array(
+            FeeService::class => array(
                 'parameters' => array(
                     'repository' => FeeRepository::class
                 )
@@ -575,30 +334,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            GiftWrapETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => GiftWrapRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_GiftWrap_Shared_Entity'
-                )
-            ),
-            GiftWrapController::class => array(
-                'parameters' => array(
-                    'service' => 'GiftWrapService'
-                )
-            ),
-            GiftWrapCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'GiftWrapCollectionService'
-                )
-            ),
-            'GiftWrapService' => array(
-                'parameters' => array(
-                    'repository' => GiftWrapETagStorage::class
-                )
-            ),
-            'GiftWrapCollectionService' => array(
+            GiftWrapService::class => array(
                 'parameters' => array(
                     'repository' => GiftWrapRepository::class
                 )
@@ -616,25 +352,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            UserChangeETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => UserChangeRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_UserChange_Shared_Entity'
-                )
-            ),
-            UserChangeController::class => array(
-                'parameters' => array(
-                    'service' => 'UserChangeService'
-                )
-            ),
-            'UserChangeService' => array(
-                'parameters' => array(
-                    'repository' => UserChangeETagStorage::class
-                )
-            ),
-            'UserChangeCollectionService' => array(
+            UserChangeService::class => array(
                 'parameters' => array(
                     'repository' => UserChangeRepository::class
                 )
@@ -652,30 +370,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            BatchETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => BatchRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Batch_Shared_Entity'
-                )
-            ),
-            BatchController::class => array(
-                'parameters' => array(
-                    'service' => 'BatchService'
-                )
-            ),
-            BatchCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'BatchCollectionService'
-                )
-            ),
-            'BatchService' => array(
-                'parameters' => array(
-                    'repository' => BatchETagStorage::class
-                )
-            ),
-            'BatchCollectionService' => array(
+            BatchService::class => array(
                 'parameters' => array(
                     'repository' => BatchRepository::class
                 )
@@ -692,11 +387,6 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => BatchMapper::class
-                )
-            ),
-            UserPreferenceController::class => array(
-                'parameters' => array(
-                    'service' => UserPreferenceService::class
                 )
             ),
             UserPreferenceService::class => array(
@@ -747,7 +437,6 @@ return array(
             FilterService::class => array(
                 'parameter' => array(
                     'filterStorage' => FilterCache::class,
-                    'orderService' => 'OrderService',
                     'filterEntityStorage' => FilterEntityCacheStorage::class
                 )
             ),
@@ -768,30 +457,7 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            TemplateETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => TemplateRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Order_Template_Shared_Entity'
-                )
-            ),
-            TemplateController::class => array(
-                'parameters' => array(
-                    'service' => 'TemplateService'
-                )
-            ),
-            TemplateCollectionController::class => array(
-                'parameters' => array(
-                    'service' => 'TemplateCollectionService'
-                )
-            ),
-            'TemplateService' => array(
-                'parameters' => array(
-                    'repository' => TemplateETagStorage::class
-                )
-            ),
-            'TemplateCollectionService' => array(
+            TemplateService::class => array(
                 'parameters' => array(
                     'repository' => TemplateRepository::class
                 )
@@ -813,11 +479,6 @@ return array(
                     'repository' => ShippingMethodDbStorage::class
                 ]
             ],
-            ShippingMethodMapper::class => [
-                'parameter' => [
-                    'organisationUnitService' => OrganisationUnitService::class
-                ]
-            ],
             ShippingMethodDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadCGSql',
@@ -836,30 +497,7 @@ return array(
                     'client' => 'directory_guzzle'
                 ]
             ],
-            InvoiceSettingsETagStorage::class => array (
-                'parameter' => array(
-                    'entityStorage' => InvoiceSettingsRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => InvoiceSettingsEntity::class
-                )
-            ),
-            InvoiceSettingsController::class => array(
-                'parameters' => array(
-                    'service' => 'InvoiceSettingsEntityService'
-                )
-            ),
-            InvoiceSettingsCollectionController::class => array(
-                'parameters' => array(
-                    'service' => InvoiceSettingsCollectionService::class
-                )
-            ),
-            'InvoiceSettingsEntityService' => array(
-                'parameters' => array(
-                    'repository' => InvoiceSettingsETagStorage::class
-                )
-            ),
-            'InvoiceSettingsCollectionService' => array(
+            InvoiceSettingsService::class => array(
                 'parameters' => array(
                     'repository' => InvoiceSettingsRepository::class
                 )
@@ -896,23 +534,7 @@ return array(
                     'aggregateStorage' => UsageAggregateDb::class
                 ]
             ],
-            AliasSettingsController::class => array (
-                'parameters' => array (
-                    'service' => 'AliasSettingsService'
-                )
-            ),
-            AliasSettingsCollectionController::class => array (
-                'parameters' => array (
-                    'service' => 'AliasSettingsCollectionService'
-                )
-            ),
-            'AliasSettingsService' => array(
-                'parameters' => array(
-                    'repository' => AliasSettingsETagStorage::class,
-                    'mapper' => AliasSettingsMapper::class
-                )
-            ),
-            'AliasSettingsCollectionService' => array(
+            AliasSettingsService::class => array(
                 'parameters' => array(
                     'repository' => AliasSettingsRepository::class,
                     'mapper' => AliasSettingsMapper::class
@@ -920,7 +542,6 @@ return array(
             ),
             AliasSettingsMapper::class => array (
                 'parameters' => array (
-                    'shippingMethodService' => ShippingMethodService::class,
                     'shippingMethodMapper' => ShippingMethodMapper::class
                 )
             ),
@@ -938,31 +559,7 @@ return array(
                     'mapper' => AliasSettingsMapper::class
                 )
             ),
-            AliasSettingsETagStorage::class => array(
-                'parameter' => array (
-                    'entityStorage' => AliasSettingsRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Settings_Alias_Entity'
-                )
-            ),
-            ProductController::class => array (
-                'parameters' => array (
-                    'service' => 'ProductService'
-                )
-            ),
-            ProductCollectionController::class => array (
-                'parameters' => array (
-                    'service' => 'ProductCollectionService'
-                )
-            ),
-            'ProductService' => array(
-                'parameters' => array(
-                    'repository' => ProductETagStorage::class,
-                    'mapper' => ProductMapper::class
-                )
-            ),
-            'ProductCollectionService' => array(
+            ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class
@@ -980,14 +577,6 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => ProductMapper::class
-                )
-            ),
-            ProductETagStorage::class => array(
-                'parameter' => array (
-                    'entityStorage' => ProductRepository::class,
-                    'requestHeaders' => 'RequestHeaders',
-                    'responseHeaders' => 'ResponseHeaders',
-                    'entityClass' => 'CG_Product_Entity'
                 )
             ),
             'preferences' => array(
