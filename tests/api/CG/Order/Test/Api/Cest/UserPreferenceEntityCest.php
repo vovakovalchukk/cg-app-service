@@ -7,7 +7,7 @@ use CG\Codeception\Cest\Rest\EntityETagTrait;
 
 class UserPreferenceCest
 {
-    use EntityTrait, EntityETagTrait;
+    use EntityTrait;
 
     protected function getPageClass()
     {

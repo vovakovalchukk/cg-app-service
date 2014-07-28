@@ -25,18 +25,28 @@ class UserChangePage extends OrderEntityPage
         ];
     }
 
+    public static function getSecondaryTestEntity()
+    {
+        $entity = static::getTestCollection()[1];
+        unset($entity['orderId']);
+        return $entity;
+    }
+
     public static function getTestCollection()
     {
         return [
             [
+                "orderId" => "1411-10",
                 "changes" => ["shippingAddressCompanyName" => "Wilki Ltd"],
                 "organisationUnitId" => 1
             ],
             [
+                "orderId" => "1412-20",
                 "changes" => ["totalDiscount" => 0.1],
                 "organisationUnitId" => 2
             ],
             [
+                "orderId" => "1411-10",
                 "changes" => [
                     "billingAddressCompanyName" => "Wilki Ltd",
                     "billingAddressFullName" => "Matthew King"
@@ -44,6 +54,7 @@ class UserChangePage extends OrderEntityPage
                 "organisationUnitId" => 3
             ],
             [
+                "orderId" => "1411-10",
                 "changes" => [
                     "totalDiscount" => 0.1,
                     "shippingAddressCompanyName" => "Wilki Ltd",
@@ -52,6 +63,7 @@ class UserChangePage extends OrderEntityPage
                 "organisationUnitId" => 4
             ],
             [
+                "orderId" => "1411-10",
                 "changes" => [
                     "total" => 23.99,
                     "shippingPrice" => 13.99,

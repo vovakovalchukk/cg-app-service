@@ -14,6 +14,14 @@ use CG\Controllers\Settings\Alias\Collection as AliasCollection;
 use CG\InputValidation\Settings\Alias\Filter as AliasCollectionValidation;
 use CG\InputValidation\Settings\Alias\Entity as AliasEntityValidation;
 
+use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
+use CG\Settings\Invoice\Shared\Mapper as InvoiceMapper;
+use CG\Settings\Invoice\Service\Service as InvoiceService;
+
+use CG\Settings\Alias\Entity as AliasEntity;
+use CG\Settings\Alias\Mapper as AliasMapper;
+use CG\Settings\Alias\Service as AliasService;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -62,6 +70,11 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
+        'eTag' => [
+            'mapperClass' => InvoiceMapper::class,
+            'entityClass' => InvoiceEntity::class,
+            'serviceClass' => InvoiceService::class
+        ]
     ],
     '/settings/shipping/alias' => [
         'controllers' => function() use ($di, $app) {
@@ -95,5 +108,10 @@ return [
         'validation' => [
             "dataRules" => AliasEntityValidation::class,
         ],
+        'eTag' => [
+            'mapperClass' => AliasMapper::class,
+            'entityClass' => AliasEntity::class,
+            'serviceClass' => AliasService::class
+        ]
     ],
 ];

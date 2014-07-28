@@ -18,19 +18,9 @@ return [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_1',
                 ],
             ],
-            'Versioniser_OrderItemEntity_1' => [
-                'parameter' => [
-                    'service' => 'ItemCollectionService'
-                ],
-            ],
             'Versioniser_TemplateCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_TemplateEntity_1'
-                ],
-            ],
-            'Versioniser_TemplateEntity_1' => [
-                'parameter' => [
-                    'service' => 'TemplateService'
                 ],
             ],
         ],
