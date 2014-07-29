@@ -151,6 +151,7 @@ use CG\Product\Storage\Cache as ProductCacheStorage;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
+use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 
 return array(
@@ -584,6 +585,11 @@ return array(
                     'mapper' => ProductMapper::class
                 )
             ),
+            TransactionRedisClient::class => [
+                'parameter' => [
+                    'predis' => 'unreliable_redis',
+                ]
+            ],
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -600,6 +606,7 @@ return array(
                 'Di' => 'Zend\Di\Di',
                 'config' => Config::class,
                 UsageStorageInterface::class => UsageRepository::class,
+                LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class
              )
         )
