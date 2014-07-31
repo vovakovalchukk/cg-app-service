@@ -21,7 +21,7 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
+        return $this->getService()->fetchCollectionByPaginationAndFiltersAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
             $this->getParams('id') ?: [],
