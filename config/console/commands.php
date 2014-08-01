@@ -1,7 +1,8 @@
 <?php
 $commands = array();
 $files = [
-    'channel.php'
+    'channel.php',
+    'mongo.php'
 ];
 foreach ($files as $file) {
     $command = require_once __DIR__ . '/commands/' . $file;
