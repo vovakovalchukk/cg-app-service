@@ -160,6 +160,7 @@ use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
 use CG\Stock\Mapper as StockMapper;
+use CG\Stock\Location\Service as LocationService;
 use CG\Stock\Location\Repository as LocationRepository;
 use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
 use CG\Stock\Location\Storage\Db as LocationDbStorage;
@@ -604,7 +605,7 @@ return array(
             StockService::class => [
                 'parameter' => [
                     'repository' => StockRepository::class,
-                    'locationStorage' => LocationRepository::class
+                    'locationStorage' => LocationService::class
                 ]
             ],
             StockRepository::class => [
@@ -619,6 +620,11 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => StockMapper::class
+                ]
+            ],
+            LocationService::class => [
+                'parameter' => [
+                    'repository' => LocationRepository::class
                 ]
             ],
             LocationRepository::class => [
