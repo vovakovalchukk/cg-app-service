@@ -22,6 +22,8 @@ class StockMigration extends AbstractMigration
         $stockLocTable
             ->addColumn("stockId", 'integer')
             ->addColumn("locationId", 'integer')
+            ->addColumn("onHand", 'integer', ['default' => 0])
+            ->addColumn("allocated", 'integer', ['default' => 0])
             ->addForeignKey('stockId', 'stock', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->addForeignKey('locationId', 'location', 'id',

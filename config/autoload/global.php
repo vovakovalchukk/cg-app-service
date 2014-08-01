@@ -154,6 +154,17 @@ use CG\Transaction\ClientInterface as TransactionClientInterface;
 use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 
+// Stock
+use CG\Stock\Service as StockService;
+use CG\Stock\Repository as StockRepository;
+use CG\Stock\Storage\Cache as StockCacheStorage;
+use CG\Stock\Storage\Db as StockDbStorage;
+use CG\Stock\Mapper as StockMapper;
+use CG\Stock\Location\Repository as LocationRepository;
+use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
+use CG\Stock\Location\Storage\Db as LocationDbStorage;
+use CG\Stock\Location\Mapper as LocationMapper;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -588,6 +599,40 @@ return array(
             TransactionRedisClient::class => [
                 'parameter' => [
                     'predis' => 'unreliable_redis',
+                ]
+            ],
+            StockService::class => [
+                'parameter' => [
+                    'repository' => StockRepository::class,
+                    'locationStorage' => LocationRepository::class
+                ]
+            ],
+            StockRepository::class => [
+                'parameter' => [
+                    'storage' => StockCacheStorage::class,
+                    'repository' => StockDbStorage::class
+                ]
+            ],
+            StockDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => StockMapper::class
+                ]
+            ],
+            LocationRepository::class => [
+                'parameter' => [
+                    'storage' => LocationCacheStorage::class,
+                    'repository' => LocationDbStorage::class
+                ]
+            ],
+            LocationDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => LocationMapper::class
                 ]
             ],
             'preferences' => array(
