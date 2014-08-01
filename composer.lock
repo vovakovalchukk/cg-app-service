@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "673095ff8036627942500a68f44b246f",
+    "hash": "98f7eb7df2dc11309c5942c7ffd7b732",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -360,17 +360,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.7.6",
+            "version": "dev-CGIV-2143",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ee03d4c2a8a679a45e6b2e7e2a2e183ac7b32f11"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.7.6-9d3b8f.zip",
-                "reference": "ee03d4c2a8a679a45e6b2e7e2a2e183ac7b32f11",
-                "shasum": "a9c73fce67f9c20c36c3c9725d6686f3356f0b0e"
+                "reference": "acf4adf38dabc7f4b3180eb116aaa5f6c62aa370"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -400,12 +394,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-07-30 15:16:12"
+            "time": "2014-08-01 08:17:41"
         },
         {
             "name": "channelgrabber/permission",
@@ -4317,11 +4306,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.7.5",
+            "alias_normalized": "1.7.5.0",
+            "version": "dev-CGIV-2143",
+            "package": "channelgrabber/order"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
