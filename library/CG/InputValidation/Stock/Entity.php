@@ -35,7 +35,7 @@ class Entity implements RulesInterface
             ],
             'sku' => [
                 'name' => 'sku',
-                'required' => false,
+                'required' => true,
                 'validators' => [
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
