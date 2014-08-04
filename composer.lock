@@ -360,26 +360,27 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.7.5",
+            "version": "1.7.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "83c5dd1a6e3edb4589a0a692fd3d15f4e658b90a"
+                "reference": "ee03d4c2a8a679a45e6b2e7e2a2e183ac7b32f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.7.5-d28461.zip",
-                "reference": "83c5dd1a6e3edb4589a0a692fd3d15f4e658b90a",
-                "shasum": "90595d3d0425046c4803572511e827ceb04140c2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.7.6-9d3b8f.zip",
+                "reference": "ee03d4c2a8a679a45e6b2e7e2a2e183ac7b32f11",
+                "shasum": "a9c73fce67f9c20c36c3c9725d6686f3356f0b0e"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
-                "channelgrabber/cache": ">=1.3.0,<2.0.0",
+                "channelgrabber/cache": ">=1.3.2,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": ">=1.2.17",
                 "channelgrabber/permission": ">=1.0.0",
+                "channelgrabber/settings": ">=1.0.11,<2.0.0",
                 "channelgrabber/slim": ">=1.6.0,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "channelgrabber/user": ">=1.16.2,<2.0.0",
@@ -404,7 +405,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-07-29 08:10:24"
+            "time": "2014-07-30 15:16:12"
         },
         {
             "name": "channelgrabber/permission",
@@ -782,6 +783,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
                 "reference": "2058717dbfdfdf939988c08f088b6adca7e41459"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.0.2-c3b136.zip",
+                "reference": "2058717dbfdfdf939988c08f088b6adca7e41459",
+                "shasum": "9a335ba722d6fafbaaf1c703d602112f914e1cc0"
+            },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/log": ">=2.0.1"
@@ -794,6 +801,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Transaction\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-07-30 15:10:23"
