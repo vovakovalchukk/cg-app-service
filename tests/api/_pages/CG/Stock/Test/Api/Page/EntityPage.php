@@ -10,7 +10,7 @@ class EntityPage extends CollectionPage implements EntityPageInterface
 
     public static function getCollectionPage()
     {
-        return EntityPage::class;
+        return CollectionPage::class;
     }
 
     public static function notAllowedMethods()
