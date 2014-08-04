@@ -19,6 +19,13 @@ class Location
         DeleteTrait::delete as deleteTraitDelete;
     }
 
+    public function __construct(Slim $app, Service $service, Di $di)
+    {
+        $this->setSlim($app)
+            ->setService($service)
+            ->setDi($di);
+    }
+
     public function get($stockId, $locationId)
     {
         $id = Entity::convertStockAndLocationToId($stockId, $locationId);
@@ -35,13 +42,6 @@ class Location
     {
         $id = Entity::convertStockAndLocationToId($stockId, $locationId);
         return $this->deleteTraitDelete($id);
-    }
-
-    public function __construct(Slim $app, Service $service, Di $di)
-    {
-        $this->setSlim($app)
-            ->setService($service)
-            ->setDi($di);
     }
 }
  

@@ -713,12 +713,15 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "ff0d5cb787ab6a0b2e78ce32c9d332b51d630077"
+                "reference": "b9b37f371280743a51ec475c4158cb57766dfb23"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/etag": ">=1.4.3,<2.0.0",
+                "channelgrabber/http": ">=1.2.18,<2.0.0",
+                "channelgrabber/permission": ">=1.0.1,<2.0.0",
+                "channelgrabber/slim": ">=1.9.2,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.5,<3.0.0",
                 "nocarrier/hal": "~0.9.4"
             },
@@ -728,7 +731,7 @@
                     "CG\\Stock\\": "src"
                 }
             },
-            "time": "2014-08-01 16:39:12"
+            "time": "2014-08-04 09:12:51"
         },
         {
             "name": "channelgrabber/template",
@@ -783,12 +786,6 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
                 "reference": "2058717dbfdfdf939988c08f088b6adca7e41459"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.0.2-c3b136.zip",
-                "reference": "2058717dbfdfdf939988c08f088b6adca7e41459",
-                "shasum": "9a335ba722d6fafbaaf1c703d602112f914e1cc0"
-            },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/log": ">=2.0.1"
@@ -801,11 +798,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Transaction\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-07-30 15:10:23"
