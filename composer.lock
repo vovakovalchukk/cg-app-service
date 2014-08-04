@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e847cbbd120eff945feeec36a84f35c",
+    "hash": "e0a6a21f7ddd93a2b7852f53345c32a7",
     "packages": [
         {
             "name": "channelgrabber/account",
@@ -626,17 +626,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.9.2",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "af5d8cfb3b303bbf00f4d468916e5d4388f79448"
+                "reference": "efedfba326516e9ac20f13caaaaabedf22754179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.9.2-434ff5.zip",
-                "reference": "af5d8cfb3b303bbf00f4d468916e5d4388f79448",
-                "shasum": "70fb160a4078efc37f0273647971455c1a088a5c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.9.3-eb4675.zip",
+                "reference": "efedfba326516e9ac20f13caaaaabedf22754179",
+                "shasum": "034a01f280ea13c3a30bc4948b17e92f2416061e"
             },
             "require": {
                 "channelgrabber/etag": ">=1.4.3,<2.0.0",
@@ -667,7 +667,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-07-30 15:14:50"
+            "time": "2014-08-04 13:02:17"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -797,6 +797,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
                 "reference": "2058717dbfdfdf939988c08f088b6adca7e41459"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.0.2-c3b136.zip",
+                "reference": "2058717dbfdfdf939988c08f088b6adca7e41459",
+                "shasum": "9a335ba722d6fafbaaf1c703d602112f914e1cc0"
+            },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/log": ">=2.0.1"
@@ -809,6 +815,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Transaction\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-07-30 15:10:23"
