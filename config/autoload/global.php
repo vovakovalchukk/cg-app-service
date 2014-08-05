@@ -57,6 +57,7 @@ use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
+use CG\Order\Service\Item\Transaction\UpdateItemAndStock as UpdateItemAndStockTransaction;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
@@ -155,6 +156,7 @@ use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 
 // Stock
+use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
@@ -639,6 +641,17 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => LocationMapper::class
+                ]
+            ],
+            StockAdjustmentCalculator::class => [
+                'parameter' => [
+                    'accountClient' => AccountApiStorage::class,
+                    'itemClient' => ItemRepository::class
+                ]
+            ],
+            UpdateItemAndStockTransaction::class => [
+                'parameter' => [
+                    'itemStorage' => ItemRepository::class
                 ]
             ],
             'preferences' => array(
