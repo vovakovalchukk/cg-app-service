@@ -10,12 +10,19 @@ return [
             'aliases' => [
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
+                'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
+                'Versioniser_OrderItemEntity_2' => OrderItemEntity\Versioniser2::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
             ],
             'Versioniser_OrderItemCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_1',
+                ],
+            ],
+            'Versioniser_OrderItemCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderItemEntity_2',
                 ],
             ],
             'Versioniser_TemplateCollection_1' => [

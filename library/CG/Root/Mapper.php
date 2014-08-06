@@ -22,7 +22,8 @@ class Mapper
                              ->addLink('userPreference', '/userPreference')
                              ->addLink('settings', '/settings')
                              ->addLink('template', '/template')
-                             ->addLink('stock', '/stock');
+                             ->addLink('stock', '/stock')
+                             ->addLink('stockLocation', '/stockLocation');
 
     }
 

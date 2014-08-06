@@ -21,11 +21,16 @@ class Entity implements RulesInterface
         return [
             'id' => [
                 'name'       => 'id',
+                'required'   => false,
+                'validators' => []
+            ],
+            'locationId' => [
+                'name'       => 'locationId',
                 'required'   => true,
                 'validators' => [
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'id']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
+                        ->setMessages(['notGreaterThanInclusive' => 'locationId must be at least %min%'])
                 ]
             ],
             'stockId' => [
