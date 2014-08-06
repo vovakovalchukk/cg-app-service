@@ -314,7 +314,7 @@ return array(
         'via' => array('GET', 'OPTIONS'),
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($di) {
@@ -330,7 +330,7 @@ return array(
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
         'eTag' => [
             'mapperClass' => ItemMapper::class,
             'entityClass' => ItemEntity::class,
