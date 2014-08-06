@@ -580,7 +580,8 @@ return array(
             ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
-                    'mapper' => ProductMapper::class
+                    'mapper' => ProductMapper::class,
+                    'stockStorage' => StockService::class
                 )
             ),
             ProductRepository::class => array(
