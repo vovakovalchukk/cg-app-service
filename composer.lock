@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5fcd8dc6d404142fa069965fca48fb51",
+    "hash": "d06a3d25511718b7df3648a05f908be8",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -680,11 +680,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-2840-stock-location-client",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "f1546b8f1d6708bbd3626139d421abe8f0453a5f"
+                "reference": "c55a2ace008de16b06c3434612c0a17ddab58ce5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.0.3-6d4f87.zip",
+                "reference": "c55a2ace008de16b06c3434612c0a17ddab58ce5",
+                "shasum": "95fb88706bc60d82331046eb94e298845f1d84fb"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -712,7 +718,12 @@
                     "CG\\Stock\\Test\\": "tests"
                 }
             },
-            "time": "2014-08-06 09:02:16"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-06 09:48:26"
         },
         {
             "name": "channelgrabber/template",
@@ -4303,17 +4314,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-2840-stock-location-client",
-            "package": "channelgrabber/stock"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "phpspec/phpspec": 20
     },
     "platform": [
