@@ -27,15 +27,16 @@ class ItemPurchaseDateStatusMigration
         $items = $this->getItems();
         foreach ($items as $item) {
             $order = $this->getOrder($item->getOrderId());
-            if (!$item->getPurchaseDate() || !$item->getStatus()) {
+            if ($item->getPurchaseDate() && $item->getStatus()) {
+                continue;
+            }
+            $item = $this->migrateItemData($item, $order);
+            try {
+                $this->saveItem($item);
+            } catch (Conflict $e) {
+                $item = $this->getItemService()->fetch($item->getId());
                 $item = $this->migrateItemData($item, $order);
-                try {
-                    $this->saveItem($item);
-                } catch (Conflict $e) {
-                    $item = $this->getItemService()->fetch($item->getId());
-                    $item = $this->migrateItemData($item, $order);
-                    $this->saveItem($item);
-                }
+                $this->saveItem($item);
             }
         }
     }
