@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c263a95ebe2ddaa63edd3fb254eab73",
+    "hash": "9d0db3032d49d54a2fec4e9983e6d409",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -2012,12 +2012,12 @@
         },
         {
             "name": "zendframework/zend-db",
-            "version": "dev-CGIV-2868-Optimisation",
+            "version": "2.3.1.1",
             "target-dir": "Zend/Db",
             "source": {
                 "type": "git",
                 "url": "https://github.com/channelgrabber/Component_ZendDb.git",
-                "reference": "5b7ec7d9e45915fcd2c4fa2d15c70e7c445c0868"
+                "reference": "8cd1978c8f9d00c6d425e976f3a4b228c62a03e2"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -2035,8 +2035,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev",
-                    "dev-develop": "2.3-dev"
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
                 }
             },
             "autoload": {
@@ -4415,17 +4415,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "2.3.1.1",
-            "alias_normalized": "2.3.1.1",
-            "version": "dev-CGIV-2868-Optimisation",
-            "package": "zendframework/zend-db"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "zendframework/zend-db": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
