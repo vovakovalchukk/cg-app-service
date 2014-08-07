@@ -1,6 +1,10 @@
 {
     "repositories": [
         {
+            "type": "git",
+            "url": "https://github.com/channelgrabber/Component_ZendDb.git"
+        },
+        {
             "url": "https://composer.build.channelgrabber.com",
             "type": "composer",
             "options": {
@@ -49,7 +53,7 @@
         "predis/predis": "~0.8.3",
         "slim/slim": "2.3.*",
         "zendframework/zend-config": "~2.2.5",
-        "zendframework/zend-db": "~2.2.5",
+        "zendframework/zend-db": "dev-CGIV-2868-Optimisation as 2.3.1.1",
         "zendframework/zend-di": "~2.2.5",
         "zendframework/zend-eventmanager": "~2.2.5",
         "zendframework/zend-inputfilter": "~2.2.5",
