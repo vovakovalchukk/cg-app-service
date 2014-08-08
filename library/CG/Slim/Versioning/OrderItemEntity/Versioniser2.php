@@ -5,10 +5,14 @@ use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Order\Service\Item\Service;
+use CG\Order\Shared\Status;
 
 class Versioniser2 implements VersioniserInterface
 {
     protected $service;
+
+    const DEFAULT_STATUS = Status::UNKNOWN;
+    const DEFAULT_PURCHASE_DATE = '1970-01-01 00:00:00';
 
     public function __construct(Service $service)
     {
@@ -36,15 +40,14 @@ class Versioniser2 implements VersioniserInterface
             return;
         }
 
-        $data['purchaseDate'] = null;
-        $data['status'] = null;
+        $data['purchaseDate'] = static::DEFAULT_PURCHASE_DATE;
+        $data['status'] = static::DEFAULT_STATUS;
 
         if (isset($params['orderItemId'])) {
             try {
                 $entity = $this->getService()->fetch($params['orderItemId']);
-                $data['externalId'] = $entity->getExternalId();
-                $data['purchaseDate'] = $entity->getPurchaseDate();
-                $data['status'] = $entity->getStatus();
+                $data['purchaseDate'] = $entity->getPurchaseDate() ?: static::DEFAULT_PURCHASE_DATE;
+                $data['status'] = $entity->getStatus() ?: static::DEFAULT_STATUS;
             } catch (NotFound $exception) {
                 // Entity not found so no information to copy
             }
