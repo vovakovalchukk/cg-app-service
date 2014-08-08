@@ -7,6 +7,7 @@ use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
+use CG\Slim\Versioning\OrderItemEntity\Versioniser2;
 
 class ItemPurchaseDateStatusMigration
 {
@@ -15,6 +16,7 @@ class ItemPurchaseDateStatusMigration
 
     const FIRST_PAGE = 1;
     const ALL_LIMIT = 'all';
+
 
     public function __construct(OrderService $orderService, ItemService $itemService)
     {
@@ -27,7 +29,8 @@ class ItemPurchaseDateStatusMigration
         $items = $this->getItems();
         foreach ($items as $item) {
             $order = $this->getOrder($item->getOrderId());
-            if ($item->getPurchaseDate() && $item->getStatus()) {
+            if ($item->getPurchaseDate() && $item->getStatus() && $item->getStatus() != Versioniser2::DEFAULT_STATUS &&
+                $item->getPurchaseDate() != Versioniser2::DEFAULT_PURCHASE_DATE) {
                 continue;
             }
             $item = $this->migrateItemData($item, $order);
@@ -43,10 +46,10 @@ class ItemPurchaseDateStatusMigration
 
     protected function migrateItemData(ItemEntity $item, OrderEntity $order)
     {
-        if (!$item->getPurchaseDate()) {
+        if (!$item->getPurchaseDate() || $item->getPurchaseDate() == Versioniser2::DEFAULT_PURCHASE_DATE) {
             $item->setPurchaseDate($order->getPurchaseDate());
         }
-        if (!$item->getStatus()) {
+        if (!$item->getStatus() || $item->getStatus() == Versioniser2::DEFAULT_STATUS) {
             $item->setStatus($order->getStatus());
         }
         return $item;
