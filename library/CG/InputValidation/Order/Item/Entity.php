@@ -8,6 +8,7 @@ use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\DecimalValidator;
 use Zend\Validator\StringLength;
 use Zend\Validator\GreaterThan;
+use CG\Stdlib\DateTime as StdlibDateTime;
 
 class Entity implements RulesInterface
 {
@@ -114,7 +115,19 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => array(
                 )
-            )
+            ),
+            'status' => array(
+                'name'       => 'status',
+                'validators' => array(
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                )
+            ),
+            'purchaseDate' => array(
+                'name'       => 'purchaseDate',
+                'validators' => array(
+                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => StdlibDateTime::FORMAT)))
+                )
+            ),
         );
     }
 }

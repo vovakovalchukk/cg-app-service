@@ -21,7 +21,9 @@ class Mapper
                              ->addLink('shippingMethod', '/shippingMethod')
                              ->addLink('userPreference', '/userPreference')
                              ->addLink('settings', '/settings')
-                             ->addLink('template', '/template');
+                             ->addLink('template', '/template')
+                             ->addLink('stock', '/stock')
+                             ->addLink('stockLocation', '/stockLocation');
 
     }
 

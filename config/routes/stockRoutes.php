@@ -58,14 +58,14 @@ return [
             'serviceClass' => StockService::class
         ]
     ],
-    '/stock/:stockId/location' => [
-        'controllers' => function($stockId) use ($di, $app) {
+    '/stockLocation' => [
+        'controllers' => function() use ($di, $app) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(LocationCollection::class);
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($stockId, $app->request()->getBody())
+                    $controller->$method($app->request()->getBody())
                 );
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
@@ -75,14 +75,14 @@ return [
             'dataRules' => LocationEntityValidation::class
         ]
     ],
-    '/stock/:stockId/location/:locationId' => [
-        'controllers' => function($stockId, $locationId) use ($di, $app) {
+    '/stockLocation/:id' => [
+        'controllers' => function($id) use ($di, $app) {
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(Location::class);
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($stockId, $locationId, $app->request()->getBody())
+                    $controller->$method($id, $app->request()->getBody())
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
