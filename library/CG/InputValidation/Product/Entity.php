@@ -5,6 +5,7 @@ use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
+use CG\Validation\Rules\IsArrayValidator;
 use Zend\Di\Di;
 
 class Entity implements RulesInterface
@@ -45,6 +46,29 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                ]
+            ],
+            'parentProductId' => [
+                'name'       => 'parentProductId',
+                'required'   => true,
+                'validators' => [
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                ]
+            ],
+            'attributeNames'  => [
+                'name' => 'attributeNames',
+                'required' => false,
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeNames'])
+                ]
+            ],
+            'attributeValues'  => [
+                'name' => 'attributeValues',
+                'required' => false,
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeValues'])
                 ]
             ]
         ];

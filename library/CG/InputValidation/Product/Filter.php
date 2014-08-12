@@ -60,6 +60,20 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
             ],
+            'parentProductId' => [
+                'name'       => 'parentProductId',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "parentProductId"])
+                ]
+            ],
+            'id' => [
+                'name'       => 'id',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "id"])
+                ]
+            ],
         ];
     }
 
