@@ -1,6 +1,7 @@
 <?php
 namespace CG\Controllers\Product\Product;
 
+use CG\Product\Filter;
 use CG\Product\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
@@ -21,10 +22,8 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('organisationUnitId') ?: []
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            $this->getDi()->newInstance(Filter::class, $this->getParams())
         );
     }
 }
