@@ -26,7 +26,7 @@ class Versioniser1 implements VersioniserInterface
         $data['attributeNames'] = [];
         $data['attributeValues'] = [];
 
-        if (isset($params['id'])) {
+        if (isset($params['productId'])) {
             try {
                 $entity = $this->getService()->fetch($params['id']);
                 $data['parentProductId'] = $entity->getExternalId();
