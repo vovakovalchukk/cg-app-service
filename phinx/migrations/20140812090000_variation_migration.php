@@ -7,6 +7,7 @@ class VariationMigration extends AbstractMigration
     {
         $product = $this->table('product');
         $product->addColumn('parentProductId', 'integer')
+            ->addIndex('parentProductId')
             ->update();
 
         $productAttribute = $this->table('productAttribute', ['id' => true, 'primary_key' => 'id']);
@@ -14,6 +15,7 @@ class VariationMigration extends AbstractMigration
             ->addColumn('name', 'string')
             ->addForeignKey('productId', 'product', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
+            ->addIndex(['productId', 'name'])
             ->create();
 
         $productAttributeValue = $this->table('productAttributeValue', ['id' => false]);
@@ -24,6 +26,7 @@ class VariationMigration extends AbstractMigration
             ->addColumn('productId', 'integer')
             ->addForeignKey('productId', 'product', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
+            ->addIndex(['productId', 'productAttributeId'])
             ->create();
     }
 }
