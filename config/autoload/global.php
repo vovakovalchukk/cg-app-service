@@ -166,6 +166,13 @@ use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
 use CG\Stock\Location\Storage\Db as LocationDbStorage;
 use CG\Stock\Location\Mapper as LocationMapper;
 
+// Listing
+use CG\Listing\Service as ListingService;
+use CG\Listing\Repository as ListingRepository;
+use CG\Listing\Mapper as ListingMapper;
+use CG\Listing\Storage\Db as ListingDbStorage;
+use CG\Listing\Storage\Cache as ListingCacheStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -642,6 +649,27 @@ return array(
                     'mapper' => LocationMapper::class
                 ]
             ],
+            ListingService::class => array(
+                'parameters' => array(
+                    'repository' => ListingRepository::class,
+                    'mapper' => ListingMapper::class,
+                    'stockStorage' => StockService::class
+                )
+            ),
+            ListingRepository::class => array(
+                'parameter' => array (
+                    'storage' => ListingCacheStorage::class,
+                    'repository' => ListingDbStorage::class
+                )
+            ),
+            ListingDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ListingMapper::class
+                )
+            ),
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
