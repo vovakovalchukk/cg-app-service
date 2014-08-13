@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c8ccdfb58bacbb5ba1aaa0cf81acbd6",
+    "hash": "54e667f9a3762fa362768b491b27fe85",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -291,11 +291,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-2809-listing-endpoints",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "2a8cb974b7c7bc422bbdd68402877df18a5f2f5d"
+                "reference": "7eb9c372a853170455078de0a327d7ee4c7dffb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.0.0-e7965b.zip",
+                "reference": "7eb9c372a853170455078de0a327d7ee4c7dffb5",
+                "shasum": "754d96dbf45096c8ef502695c4278548c02fd3f4"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -313,7 +319,12 @@
                     "CG\\Listing\\": "src"
                 }
             },
-            "time": "2014-08-12 15:03:13"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-13 09:00:26"
         },
         {
             "name": "channelgrabber/log",
@@ -4442,17 +4453,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-2809-listing-endpoints",
-            "package": "channelgrabber/listing"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
