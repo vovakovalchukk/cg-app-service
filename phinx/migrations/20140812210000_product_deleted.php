@@ -7,6 +7,7 @@ class ProductDeleted extends AbstractMigration
     {
         $product = $this->table('product');
         $product->addColumn('deleted', 'boolean')
+            ->addIndex('deleted')
             ->update();
     }
 }
