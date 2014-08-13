@@ -6,6 +6,7 @@ use CG\Validation\RulesInterface;
 use CG\Validation\ValidatorChain;
 use Zend\Validator\Between;
 use Zend\Validator\Identical;
+use Zend\Validator\StringLength;
 use Zend\Di\Di;
 
 class Filter implements RulesInterface
@@ -20,7 +21,7 @@ class Filter implements RulesInterface
     public function getRules()
     {
         return [
-            'limit' => array(
+            'limit' => [
                 'name'       => 'limit',
                 'required'   => false,
                 'validators' => [
@@ -36,7 +37,7 @@ class Filter implements RulesInterface
                         ]
                     )
                 ]
-            ),
+            ],
             'page' => [
                 'name'       => 'page',
                 'required'   => false,
@@ -45,13 +46,20 @@ class Filter implements RulesInterface
                         ->setMessages(['notBetween' => 'page should be at least %min%'])
                 ]
             ],
-            'organisationUnitId' => array(
+            'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
-                )
-            ),
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "organisationUnitId"])
+                ]
+            ],
+            'searchTerm' => [
+                'name' => 'searchTerm',
+                'required' => false,
+                'validators' => [
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                ]
+            ],
         ];
     }
 

@@ -168,6 +168,13 @@ use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
 use CG\Stock\Location\Storage\Db as LocationDbStorage;
 use CG\Stock\Location\Mapper as LocationMapper;
 
+// Listing
+use CG\Listing\Service as ListingService;
+use CG\Listing\Repository as ListingRepository;
+use CG\Listing\Mapper as ListingMapper;
+use CG\Listing\Storage\Db as ListingDbStorage;
+use CG\Listing\Storage\Cache as ListingCacheStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -582,7 +589,8 @@ return array(
             ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
-                    'mapper' => ProductMapper::class
+                    'mapper' => ProductMapper::class,
+                    'stockStorage' => StockService::class
                 )
             ),
             ProductRepository::class => array(
@@ -652,6 +660,27 @@ return array(
             UpdateItemAndStockTransaction::class => [
                 'parameter' => [
                     'itemStorage' => ItemRepository::class
+                ]
+            ],
+            ListingService::class => [
+                'parameters' => [
+                    'repository' => ListingRepository::class,
+                    'mapper' => ListingMapper::class,
+                    'stockStorage' => StockService::class
+                ]
+            ],
+            ListingRepository::class => [
+                'parameter' => [
+                    'storage' => ListingCacheStorage::class,
+                    'repository' => ListingDbStorage::class
+                ]
+            ],
+            ListingDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ListingMapper::class
                 ]
             ],
             'preferences' => array(

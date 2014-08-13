@@ -5,7 +5,8 @@ $files = [
     'templateRoutes.php',
     'settingsRoutes.php',
     'productRoutes.php',
-    'stockRoutes.php'
+    'stockRoutes.php',
+    'listingRoutes.php',
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;

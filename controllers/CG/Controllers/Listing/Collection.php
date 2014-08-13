@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\Product\Product;
+namespace CG\Controllers\Listing;
 
-use CG\Product\Filter;
-use CG\Product\Service;
+use CG\Listing\Filter;
+use CG\Listing\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;

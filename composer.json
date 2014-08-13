@@ -1,6 +1,10 @@
 {
     "repositories": [
         {
+            "type": "git",
+            "url": "https://github.com/channelgrabber/Component_ZendDb.git"
+        },
+        {
             "url": "https://composer.build.channelgrabber.com",
             "type": "composer",
             "options": {
@@ -27,15 +31,16 @@
         "channelgrabber/etag": "~1.5.0",
         "channelgrabber/gearman": "~1.1.0",
         "channelgrabber/http": "~1.2.14",
+        "channelgrabber/listing": "~1.0.0",
         "channelgrabber/log": "~2.0.1",
         "channelgrabber/order": "dev-CGIV-2138-order-item-save-create-stock-updates as 1.8.0",
         "channelgrabber/phinx": "~0.3.2.2",
         "channelgrabber/predis": "~1.0.1",
-        "channelgrabber/product": "~1.0.1",
+        "channelgrabber/product": "~1.1.0",
         "channelgrabber/settings": "~1.0.11",
         "channelgrabber/slim": "~1.9.3",
         "channelgrabber/stdlib": "~2.7.0",
-        "channelgrabber/stock": "dev-CGIV-2138-order-item-save-create-stock-updates as 1.0.1",
+        "channelgrabber/stock": "dev-CGIV-2138-order-item-save-create-stock-updates as 1.0.6",
         "channelgrabber/template": "~1.2.20",
         "channelgrabber/transaction": "~1.0.2",
         "channelgrabber/usage": "~1.0.0",
@@ -48,13 +53,13 @@
         "nocarrier/hal": "~0.9.4",
         "predis/predis": "~0.8.3",
         "slim/slim": "2.3.*",
-        "zendframework/zend-config": "~2.2.5",
-        "zendframework/zend-db": "~2.2.5",
-        "zendframework/zend-di": "~2.2.5",
-        "zendframework/zend-eventmanager": "~2.2.5",
-        "zendframework/zend-inputfilter": "~2.2.5",
-        "zendframework/zend-servicemanager": "~2.2.5",
-        "zendframework/zend-validator": "~2.2.5"
+        "zendframework/zend-config": "2.3.*",
+        "zendframework/zend-db": "~2.3.1",
+        "zendframework/zend-di": "2.3.*",
+        "zendframework/zend-eventmanager": "2.3.*",
+        "zendframework/zend-inputfilter": "2.3.*",
+        "zendframework/zend-servicemanager": "2.3.*",
+        "zendframework/zend-validator": "2.3.*"
     },
     "require-dev": {
         "channelgrabber/codeception": "~1.1.47",
