@@ -52,9 +52,9 @@ class Entity implements RulesInterface
                 'name'       => 'parentProductId',
                 'required'   => true,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'parentProductId']),
                     $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                        ->setMessages(['notGreaterThanInclusive' => 'parentProductId must be at least %min%'])
                 ]
             ],
             'attributeNames'  => [
