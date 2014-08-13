@@ -77,7 +77,7 @@ class Filter implements RulesInterface
             ],
             'deleted' => [
                 'name'       => 'deleted',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
                 ]

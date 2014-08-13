@@ -74,7 +74,7 @@ class Entity implements RulesInterface
             ],
             'deleted' => array(
                 'name'       => 'deleted',
-                'required'   => false,
+                'required'   => true,
                 'validators' => array(
                     $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
                 )
