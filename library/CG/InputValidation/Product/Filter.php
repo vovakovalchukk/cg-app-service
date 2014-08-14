@@ -7,6 +7,7 @@ use CG\Validation\ValidatorChain;
 use Zend\Validator\Between;
 use Zend\Validator\Identical;
 use Zend\Validator\StringLength;
+use CG\Validation\Rules\BooleanValidator;
 use Zend\Di\Di;
 
 class Filter implements RulesInterface
@@ -60,6 +61,27 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
             ],
+            'parentProductId' => [
+                'name'       => 'parentProductId',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "parentProductId"])
+                ]
+            ],
+            'id' => [
+                'name'       => 'id',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "id"])
+                ]
+            ],
+            'deleted' => [
+                'name'       => 'deleted',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
+                ]
+            ]
         ];
     }
 
