@@ -173,6 +173,9 @@ use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
 
+use CG\Image\Service as ImageService;
+use CG\Image\Storage\Api as ImageApi;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -584,11 +587,23 @@ return array(
                     'mapper' => AliasSettingsMapper::class
                 )
             ),
+            ImageService::class => [
+                'parameter' => [
+                    'repository' => ImageApi::class
+                ]
+            ],
+            ImageApi::class => [
+                'parameter' => [
+                    'client' => 'image_guzzle'
+                ]
+            ],
             ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class,
-                    'stockStorage' => StockService::class
+                    'stockStorage' => StockService::class,
+                    'listingStorage' => ListingService::class,
+                    'imageStorage' => ImageService::class
                 )
             ),
             ProductRepository::class => array(

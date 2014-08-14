@@ -6,6 +6,7 @@ use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\Rules\BooleanValidator;
 use Zend\Di\Di;
 
 class Entity implements RulesInterface
@@ -70,7 +71,21 @@ class Entity implements RulesInterface
                 'validators' => [
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeValues'])
                 ]
-            ]
+            ],
+            'deleted' => [
+                'name'       => 'deleted',
+                'required'   => true,
+                'validators' => [
+                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
+                ]
+            ],
+            'imageIds'  => [
+                'name' => 'imageIds',
+                'required' => true,
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'imageIds'])
+                ]
+            ],
         ];
     }
 
