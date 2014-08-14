@@ -26,7 +26,7 @@ class Versioniser2 implements VersioniserInterface
         if (isset($params['productId'])) {
             try {
                 $entity = $this->getService()->fetch($params['productId']);
-                $data['deleted'] = (!is_null($entity->getDeleted())) ? $entity->getDeleted() : $data['deleted'];
+                $data['deleted'] = (!is_null($entity->getDeleted()) ? $entity->getDeleted() : $data['deleted']);
             } catch (NotFound $exception) {
                 // Entity not found so no information to copy
             }
