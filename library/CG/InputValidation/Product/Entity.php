@@ -72,13 +72,20 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeValues'])
                 ]
             ],
-            'deleted' => array(
+            'deleted' => [
                 'name'       => 'deleted',
                 'required'   => true,
-                'validators' => array(
+                'validators' => [
                     $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
-                )
-            ),
+                ]
+            ],
+            'imageIds'  => [
+                'name' => 'imageIds',
+                'required' => true,
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'imageIds'])
+                ]
+            ],
         ];
     }
 
