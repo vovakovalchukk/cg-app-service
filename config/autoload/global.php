@@ -173,6 +173,13 @@ use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
 
+// Unimported Listing
+use CG\Listing\Unimported\Service as UnimportedListingService;
+use CG\Listing\Unimported\Repository as UnimportedListingRepository;
+use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
+use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
+use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -668,6 +675,26 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => ListingMapper::class
+                )
+            ),
+            UnimportedListingService::class => array(
+                'parameters' => array(
+                    'repository' => UnimportedListingRepository::class,
+                    'mapper' => UnimportedListingMapper::class
+                )
+            ),
+            UnimportedListingRepository::class => array(
+                'parameter' => array (
+                    'storage' => UnimportedListingCacheStorage::class,
+                    'repository' => UnimportedListingDbStorage::class
+                )
+            ),
+            UnimportedListingDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => UnimportedListingMapper::class
                 )
             ),
             'preferences' => array(
