@@ -27,19 +27,4 @@ class TestDataUnimportedListing extends TestMigration
             [5, 2, 3, 'anExternalID5', 'anSKU5', 'aTitle5', 'www.gamerscripts.com', 3, '2015-08-14 14:00:00', 'theFuture', 10]
         ];
     }
-
-    /*
-| id                 | int(11)      | NO   | PRI | NULL    | auto_increment |
-| organisationUnitId | int(11)      | NO   | MUL | NULL    |                |
-| accountId          | int(11)      | NO   | MUL | NULL    |                |
-| externalId         | varchar(255) | NO   |     | NULL    |                |
-| sku                | varchar(255) | NO   |     | NULL    |                |
-| title              | varchar(255) | NO   |     | NULL    |                |
-| url                | varchar(255) | NO   |     | NULL    |                |
-| imageId            | int(11)      | NO   | MUL | NULL    |                |
-| createdDate        | datetime     | NO   |     | NULL    |                |
-| status             | varchar(255) | NO   |     | NULL    |                |
-| variationCount     | int(11)      | NO   |     | NULL    |                |
-
-     */
 }
