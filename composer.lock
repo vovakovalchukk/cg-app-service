@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "036fe130153c0400b4eed589e78fe427",
+    "hash": "71353ff169fea9b738750ebd8a5683ca",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -289,6 +289,43 @@
                 }
             },
             "time": "2014-07-28 09:19:09"
+        },
+        {
+            "name": "channelgrabber/image",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-image.git",
+                "reference": "6566d8d963582b28769d616e476dce2a804c2e2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.0.0-d7bfb6.zip",
+                "reference": "6566d8d963582b28769d616e476dce2a804c2e2f",
+                "shasum": "b9d5c0adf20d609fc818a13aca7c7d6f7a423e20"
+            },
+            "require": {
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
+                "channelgrabber/channel": ">=1.3.2,<2.0.0",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/etag": ">=1.4.3,<2.0.0",
+                "channelgrabber/http": ">=1.2.18,<2.0.0",
+                "channelgrabber/permission": ">=1.0.1,<2.0.0",
+                "channelgrabber/slim": ">=1.9.2,<2.0.0",
+                "channelgrabber/stdlib": ">=2.7.5,<3.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Image\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-14 08:12:53"
         },
         {
             "name": "channelgrabber/listing",

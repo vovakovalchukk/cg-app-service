@@ -180,6 +180,9 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 
+use CG\Image\Service as ImageService;
+use CG\Image\Storage\Api as ImageApi;
+
 return array(
     'service_manager' => array(
         'factories' => array(
@@ -677,10 +680,21 @@ return array(
                     'mapper' => ListingMapper::class
                 )
             ),
+            ImageService::class => [
+                'parameter' => [
+                    'repository' => ImageApi::class
+                ]
+            ],
+            ImageApi::class => [
+                'parameter' => [
+                    'client' => 'image_guzzle'
+                ]
+            ],
             UnimportedListingService::class => array(
                 'parameters' => array(
                     'repository' => UnimportedListingRepository::class,
-                    'mapper' => UnimportedListingMapper::class
+                    'mapper' => UnimportedListingMapper::class,
+                    'imageStorage' => ImageService::class
                 )
             ),
             UnimportedListingRepository::class => array(
@@ -697,6 +711,7 @@ return array(
                     'mapper' => UnimportedListingMapper::class
                 )
             ),
+
             'preferences' => array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
