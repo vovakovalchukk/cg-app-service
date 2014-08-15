@@ -17,6 +17,8 @@ use CG\Listing\Unimported\Entity as UnimportedListingEntity;
 use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Service as UnimportedListingService;
 
+use CG\Slim\Versioning\Version;
+
 return [
     '/listing' => [
         'controllers' => function() use ($di, $app) {
@@ -70,7 +72,8 @@ return [
         'validation' => [
             'filterRules' => UnimportedListingCollectionValidation::class,
             'dataRules' => UnimportedListingEntityValidation::class
-        ]
+        ],
+        "version" => new Version(1, 1)
     ],
     '/unimportedListing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -89,8 +92,9 @@ return [
         'eTag' => [
             'mapperClass' => UnimportedListingMapper::class,
             'entityClass' => UnimportedListingEntity::class,
-            'serviceClass' => UnimportedListingService::class
-        ]
+            'serviceClass' => UnimportedListingService::class,
+        ],
+        "version" => new Version(1, 1)
     ]
 ];
  

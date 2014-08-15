@@ -40,14 +40,14 @@ class Filter implements RulesInterface
                 'name'       => 'organisationUnitId',
                 'required'   => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "organisationUnitId"])
                 ]
             ],
             'accountId' => [
                 'name' => 'accountId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "accountId"])
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "accountId"])
                 ]
             ],
             'externalId' => [
@@ -82,7 +82,7 @@ class Filter implements RulesInterface
                 'name' => 'imageId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "imageId"])
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "imageId"])
                 ]
             ],
             'createdDate' => [
