@@ -703,30 +703,30 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => ListingMapper::class
-                )
-            ),
-            UnimportedListingService::class => array(
-                'parameters' => array(
+                ]
+            ],
+            UnimportedListingService::class => [
+                'parameters' => [
                     'repository' => UnimportedListingRepository::class,
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
-                )
-            ),
-            UnimportedListingRepository::class => array(
-                'parameter' => array (
+                ]
+            ],
+            UnimportedListingRepository::class => [
+                'parameter' => [
                     'storage' => UnimportedListingCacheStorage::class,
                     'repository' => UnimportedListingDbStorage::class
-                )
-            ),
-            UnimportedListingDbStorage::class => array(
-                'parameter' => array(
+                ]
+            ],
+            UnimportedListingDbStorage::class => [
+                'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => UnimportedListingMapper::class
-                )
-            ),
-            'preferences' => array(
+                ]
+            ],
+            'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
@@ -744,7 +744,7 @@ return array(
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class
-             )
+            ]
         )
     )
 );
