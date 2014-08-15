@@ -81,7 +81,7 @@ class Entity implements RulesInterface
             ],
             'imageIds'  => [
                 'name' => 'imageIds',
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'imageIds'])
                 ]
