@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "accd6d07f9b5cd02b87468aec9e67636",
+    "hash": "43ae7b4ad480e8fc01c8ab3f298168a7",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -572,26 +572,21 @@
                     "CG\\Predis\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-07-09 15:10:32"
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "3cc4c2a148d6a6c7f00f38e9ccb005077acc8131"
+                "reference": "6510a15b6f775924db2527e0a551ffdbe0d504cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.2.0-cadda7.zip",
-                "reference": "3cc4c2a148d6a6c7f00f38e9ccb005077acc8131",
-                "shasum": "91860e9a6bcb3888334959fa103f983c47183d57"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.2.1-12d917.zip",
+                "reference": "6510a15b6f775924db2527e0a551ffdbe0d504cb",
+                "shasum": "66fc7ca2ca2a9622af1da4ba4ac587b281c7c776"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -620,7 +615,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-08-14 16:04:11"
+            "time": "2014-08-15 11:18:34"
         },
         {
             "name": "channelgrabber/redis",
@@ -643,11 +638,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Redis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-12-17 17:45:58"
@@ -1072,11 +1062,6 @@
                     "CG\\VndError": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -1410,9 +1395,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1500,8 +1483,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -3172,11 +3154,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3666,7 +3643,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -3823,8 +3800,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
