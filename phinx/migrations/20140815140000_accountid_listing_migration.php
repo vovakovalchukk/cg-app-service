@@ -7,7 +7,6 @@ class AccountidListingMigration extends AbstractMigration
     {
         $listing = $this->table('listing');
         $listing->addColumn('accountId', 'integer')
-            ->addIndex('accountId')
             ->update();
     }
 }

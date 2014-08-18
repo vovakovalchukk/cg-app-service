@@ -37,6 +37,7 @@ class CollectionPage extends RootPage
                 'externalId' => '1',
                 'channel' => 'ebay',
                 'status' => Status::ACTIVE,
+                'accountId' => 1
             ],
             [
                 'id' => 2,
@@ -45,6 +46,7 @@ class CollectionPage extends RootPage
                 'externalId' => '2',
                 'channel' => 'ebay',
                 'status' => Status::ACTIVE,
+                'accountId' => 1
             ],
             [
                 'id' => 3,
@@ -53,6 +55,7 @@ class CollectionPage extends RootPage
                 'externalId' => '3',
                 'channel' => 'ebay',
                 'status' => Status::INACTIVE,
+                'accountId' => 1
             ],
             [
                 'id' => 4,
@@ -61,6 +64,7 @@ class CollectionPage extends RootPage
                 'externalId' => 'A',
                 'channel' => 'amazon',
                 'status' => Status::ACTIVE,
+                'accountId' => 1
             ],
             [
                 'id' => 5,
@@ -69,6 +73,7 @@ class CollectionPage extends RootPage
                 'externalId' => 'B',
                 'channel' => 'amazon',
                 'status' => Status::INACTIVE,
+                'accountId' => 1
             ],
             [
                 'id' => 6,
@@ -77,6 +82,7 @@ class CollectionPage extends RootPage
                 'externalId' => 'C',
                 'channel' => 'amazon',
                 'status' => Status::ACTIVE,
+                'accountId' => 1
             ]
         ];
     }
@@ -88,7 +94,8 @@ class CollectionPage extends RootPage
             'productId',
             'externalId',
             'channel',
-            'status'
+            'status',
+            'accountId'
         ];
     }
 
@@ -100,6 +107,7 @@ class CollectionPage extends RootPage
             'externalId' => [],
             'channel' => [],
             'status' => [],
+            'accountId' => []
         ];
     }
 
@@ -110,7 +118,8 @@ class CollectionPage extends RootPage
             'productId',
             'externalId',
             'channel',
-            'status'
+            'status',
+            'accountId'
         ];
     }
 
@@ -123,6 +132,7 @@ class CollectionPage extends RootPage
             'externalId' => [],
             'channel' => [],
             'status' => [],
+            'accountId' => []
         ];
     }
 }
