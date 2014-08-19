@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "94f92fee272afd8e36d0e9ec2f7e41e4",
+    "hash": "5852172ab3908662cd65c38c3b87e479",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -407,17 +407,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.8.2",
+            "version": "dev-CGIV-2534-MySQLJoinItem",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "731d54c1e8dfb082ae8e0028a572544e7a95ffdb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.8.2-d6b2ae.zip",
-                "reference": "731d54c1e8dfb082ae8e0028a572544e7a95ffdb",
-                "shasum": "6efb764624a9a4042a244f14b495efd839fceb60"
+                "reference": "35947e8e0ed3fc7836200313cd757a6ebfd3022a"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -449,12 +443,7 @@
                     "CG\\Order\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-08-14 15:50:32"
+            "time": "2014-08-19 15:17:37"
         },
         {
             "name": "channelgrabber/permission",
@@ -4502,11 +4491,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.8.3",
+            "alias_normalized": "1.8.3.0",
+            "version": "dev-CGIV-2534-MySQLJoinItem",
+            "package": "channelgrabber/order"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
