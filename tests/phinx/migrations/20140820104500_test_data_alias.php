@@ -24,12 +24,12 @@ class TestDataAlias extends TestMigration
     protected function getAliasData()
     {
         return [
-            [1, 'alias1', 1],
-            [2, 'alias2', 1],
-            [3, 'alias3', 1],
-            [4, 'alias4', 1],
-            [5, 'alias5', 1],
-            [6, 'alias6', 1],
+            [1, 'alias1', 1, 1, 'shippingService1'],
+            [2, 'alias2', 1, 2, 'shippingService2'],
+            [3, 'alias3', 1, 1, 'shippingService3'],
+            [4, 'alias4', 1, 2, 'shippingService4'],
+            [5, 'alias5', 1, 1, 'shippingService5'],
+            [6, 'alias6', 1, 2, 'shippingService6'],
         ];
     }
 
