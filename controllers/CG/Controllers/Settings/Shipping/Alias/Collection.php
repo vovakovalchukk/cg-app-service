@@ -1,7 +1,7 @@
 <?php
-namespace CG\Controllers\Settings\Alias;
+namespace CG\Controllers\Settings\Shipping\Alias;
 
-use CG\Settings\Alias\Service;
+use CG\Settings\Shipping\Alias\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;

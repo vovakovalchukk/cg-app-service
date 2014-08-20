@@ -130,11 +130,11 @@ use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 
 // Alias Settings
-use CG\Settings\Alias\Service as AliasSettingsService;
-use CG\Settings\Alias\Mapper as AliasSettingsMapper;
-use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
-use CG\Settings\Alias\Repository as AliasSettingsRepository;
+use CG\Settings\Shipping\Alias\Service as AliasSettingsService;
+use CG\Settings\Shipping\Alias\Mapper as AliasSettingsMapper;
+use CG\Settings\Shipping\Alias\Storage\Cache as AliasSettingsCacheStorage;
+use CG\Settings\Shipping\Alias\Storage\Db as AliasSettingsDbStorage;
+use CG\Settings\Shipping\Alias\Repository as AliasSettingsRepository;
 
 //Usage
 use CG\Usage\Storage\Db as UsageDb;

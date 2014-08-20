@@ -30,39 +30,51 @@ class AliasPage extends RootPage
     {
         return [
             [
-                "id" => "1",
+                "id" => 1,
                 "name" => "alias1",
                 "organisationUnitId" => 1,
+                "accountId" => 1,
+                "shippingService" => "shippingService1",
                 "methodIds" => [1, 2, 3],
             ],
             [
-                "id" => "2",
+                "id" => 2,
                 "name" => "alias2",
                 "organisationUnitId" => 1,
+                "accountId" => 2,
+                "shippingService" => "shippingService2",
                 "methodIds" => [1, 2]
             ],
             [
-                "id" => "3",
+                "id" => 3,
                 "name" => "alias3",
                 "organisationUnitId" => 1,
+                "accountId" => 1,
+                "shippingService" => "shippingService3",
                 "methodIds" => [4, 5, 6]
             ],
             [
-                "id" => "4",
+                "id" => 4,
                 "name" => "alias4",
                 "organisationUnitId" => 1,
+                "accountId" => 2,
+                "shippingService" => "shippingService4",
                 "methodIds" => [1, 7]
             ],
             [
-                "id" => "5",
+                "id" => 5,
                 "name" => "alias5",
                 "organisationUnitId" => 1,
+                "accountId" => 1,
+                "shippingService" => "shippingService5",
                 "methodIds" => [2, 3]
             ],
             [
-                "id" => "6",
+                "id" => 6,
                 "name" => "alias6",
                 "organisationUnitId" => 1,
+                "accountId" => 2,
+                "shippingService" => "shippingService6",
                 "methodIds" => [4, 5, 6]
             ]
         ];
@@ -72,16 +84,16 @@ class AliasPage extends RootPage
     {
         return [
             "name",
-            "organisationUnitId"
+            "organisationUnitId",
         ];
     }
 
     public static function getInvalidEntityData()
     {
         return [
+            "id" => "foo",
             "name" => [],
             "organisationUnitId" => "ABC",
-            "methodIds" => 1
         ];
     }
 
