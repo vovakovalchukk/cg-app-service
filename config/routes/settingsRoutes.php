@@ -22,6 +22,14 @@ use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
 use CG\Settings\Shipping\Alias\Service as AliasService;
 
+use CG\Settings\Clearbooks\Customer\Entity as ClearbooksCustomerEntity;
+use CG\Settings\Clearbooks\Customer\Mapper as ClearbooksCustomerMapper;
+use CG\Settings\Clearbooks\Customer\Service as ClearbooksCustomerService;
+use CG\Controllers\Settings\Clearbooks\Customer as ClearbooksCustomerController;
+use CG\Controllers\Settings\Clearbooks\Customer\Collection as ClearbooksCustomerCollection;
+use CG\InputValidation\Settings\Clearbooks\Customer\Filter as ClearbooksCustomerCollectionValidation;
+use CG\InputValidation\Settings\Clearbooks\Customer\Entity as ClearbooksCustomerEntityValidation;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -115,5 +123,45 @@ return [
             'serviceClass' => AliasService::class
         ],
         'version' => new Version(1, 2),
+    ],
+    '/settings/clearbooks/customer' => [
+        'controllers' => function() use ($di, $app) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ClearbooksCustomerCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'ClearbooksCustomerSettingsCollection',
+        'validation' => [
+            'filterRules' => ClearbooksCustomerCollectionValidation::class,
+            'dataRules' => ClearbooksCustomerEntityValidation::class
+        ],
+        'version' => new Version(1,1),
+    ],
+    '/settings/clearbooks/customer/:ClearbooksCustomerId' => [
+        'controllers' => function($ClearbooksCustomerId) use ($di, $app) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ClearbooksCustomerController::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($ClearbooksCustomerId, $app->request()->getBody())
+                );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'ClearbooksCustomerSettingsEntity',
+        'validation' => [
+            "dataRules" => ClearbooksCustomerEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ClearbooksCustomerMapper::class,
+            'entityClass' => ClearbooksCustomerEntity::class,
+            'serviceClass' => ClearbooksCustomerService::class
+        ],
+        'version' => new Version(1,1),
     ],
 ];
