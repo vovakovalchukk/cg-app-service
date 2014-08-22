@@ -22,6 +22,7 @@ use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
 use CG\Settings\Shipping\Alias\Service as AliasService;
 
+use CG\Controllers\Settings\Clearbooks;
 use CG\Settings\Clearbooks\Customer\Entity as ClearbooksCustomerEntity;
 use CG\Settings\Clearbooks\Customer\Mapper as ClearbooksCustomerMapper;
 use CG\Settings\Clearbooks\Customer\Service as ClearbooksCustomerService;
@@ -84,6 +85,18 @@ return [
             'serviceClass' => InvoiceService::class
         ]
     ],
+    '/settings/shipping' => [
+        'via' => ['GET'],
+        'controllers' => function() use ($di, $app) {
+                $method = $app->request()->getMethod();
+                $controller = $di->get(Settings\Shipping::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'name' => 'clearbooks'
+    ],
     '/settings/shipping/alias' => [
         'controllers' => function() use ($di, $app) {
                 $method = $app->request()->getMethod();
@@ -123,6 +136,18 @@ return [
             'serviceClass' => AliasService::class
         ],
         'version' => new Version(1, 2),
+    ],
+    '/settings/clearbooks' => [
+        'via' => ['GET'],
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(Clearbooks::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'name' => 'clearbooks'
     ],
     '/settings/clearbooks/customer' => [
         'controllers' => function() use ($di, $app) {
