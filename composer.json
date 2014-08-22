@@ -14,11 +14,6 @@
             "url": "http://packages.zendframework.com"
         }
     ],
-    "autoload": {
-        "psr-0": {
-            "": "library/"
-        }
-    },
     "require": {
         "zendframework/zend-config": "2.2.*",
         "zendframework/zend-servicemanager": "2.2.*",
@@ -28,7 +23,7 @@
         "nocarrier/hal": "~0.9.3",
         "guzzle/guzzle": "~3.7",
         "channelgrabber/http": "~1.2.0",
-        "channelgrabber/zf2-stdlib": "~1.1.6"
+        "channelgrabber/zf2-stdlib": "dev-CGIV-2973-DiOptimisation as 1.1.14"
     },
     "require-dev": {
         "codeception/codeception": "~1.8.0",
