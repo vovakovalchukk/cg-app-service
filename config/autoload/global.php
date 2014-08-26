@@ -65,7 +65,8 @@ return array(
                 'app_config' => Config::class
             ),
             'preferences' => array(
-                'Zend\Di\LocatorInterface' => 'Zend\Di\Di'
+                'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
+                'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
             )
         )
     )

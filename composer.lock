@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f10d90ff69b47a5f917dfc1d0d579fa5",
+    "hash": "494cf82c33dabd8048feac5f91efb1fe",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -363,17 +363,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.8.13",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "258e9e8dca8569b7ebcd5b37ea1c0622c9c414f2"
+                "reference": "91a39a2eddf66fe7c05afbeb645e5638e69f5346"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.8.13-ac83a7.zip",
-                "reference": "258e9e8dca8569b7ebcd5b37ea1c0622c9c414f2",
-                "shasum": "feb9855cd07734b06687b36d71e380dfc930eb3c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.9.1-a38ca0.zip",
+                "reference": "91a39a2eddf66fe7c05afbeb645e5638e69f5346",
+                "shasum": "f0f68e062cf5d3e1d7643237734614b1e1068c91"
             },
             "require": {
                 "channelgrabber/etag": ">=1.4.3,<2.0.0",
@@ -403,7 +403,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-30 07:32:07"
+            "time": "2014-07-25 11:06:49"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -3215,32 +3215,30 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "dev-master",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "6d982b28313c4775bd3f2e9facfb11fc5c564499"
+                "reference": "61712147412cb647b6cb68b19833a60bfda759a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/6d982b28313c4775bd3f2e9facfb11fc5c564499",
-                "reference": "6d982b28313c4775bd3f2e9facfb11fc5c564499",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/61712147412cb647b6cb68b19833a60bfda759a1",
+                "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.1",
                 "php": ">=5.3.3",
                 "phpspec/php-diff": "~1.0.0",
                 "phpspec/prophecy": "~1.1",
-                "sebastian/exporter": "~1.0",
                 "symfony/console": "~2.1",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/finder": "~2.1",
                 "symfony/yaml": "~2.1"
             },
             "require-dev": {
-                "behat/behat": "~3.0",
-                "bossa/phpspec2-expect": "~1.0",
+                "behat/behat": "~2.5",
+                "bossa/phpspec2-expect": "dev-master",
                 "symfony/filesystem": "~2.1"
             },
             "suggest": {
@@ -3252,7 +3250,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -3286,7 +3284,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-08-25 12:21:05"
+            "time": "2014-07-01 14:09:19"
         },
         {
             "name": "phpspec/prophecy",
