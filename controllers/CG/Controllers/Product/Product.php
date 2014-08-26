@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\Product;
 
-use CG\Product\Service;
+use CG\Product\Service\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;

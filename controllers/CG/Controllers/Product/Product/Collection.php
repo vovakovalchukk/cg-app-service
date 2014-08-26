@@ -2,7 +2,7 @@
 namespace CG\Controllers\Product\Product;
 
 use CG\Product\Filter;
-use CG\Product\Service;
+use CG\Product\Service\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
