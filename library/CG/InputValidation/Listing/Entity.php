@@ -63,6 +63,15 @@ class Entity implements RulesInterface
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
             ],
+            'accountId' => [
+                'name'       => 'accountId',
+                'required'   => true,
+                'validators' => [
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'accountId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                ]
+            ]
         ];
     }
 

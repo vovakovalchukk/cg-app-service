@@ -8,8 +8,8 @@ use CG\Controllers\Settings\Invoice\Collection as InvoiceCollection;
 use CG\InputValidation\Settings\Invoice\Filter as CollectionValidation;
 use CG\InputValidation\Settings\Invoice\Entity as EntityValidation;
 
-use CG\Controllers\Settings\Alias as Alias;
-use CG\Controllers\Settings\Alias\Collection as AliasCollection;
+use CG\Controllers\Settings\Shipping\Alias as Alias;
+use CG\Controllers\Settings\Shipping\Alias\Collection as AliasCollection;
 
 use CG\InputValidation\Settings\Alias\Filter as AliasCollectionValidation;
 use CG\InputValidation\Settings\Alias\Entity as AliasEntityValidation;
@@ -18,9 +18,9 @@ use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceMapper;
 use CG\Settings\Invoice\Service\Service as InvoiceService;
 
-use CG\Settings\Alias\Entity as AliasEntity;
-use CG\Settings\Alias\Mapper as AliasMapper;
-use CG\Settings\Alias\Service as AliasService;
+use CG\Settings\Shipping\Alias\Entity as AliasEntity;
+use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
+use CG\Settings\Shipping\Alias\Service as AliasService;
 
 return [
     '/settings' => [
@@ -91,7 +91,8 @@ return [
         'validation' => [
             'filterRules' => AliasCollectionValidation::class,
             'dataRules' => AliasEntityValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/shipping/alias/:aliasId' => [
         'controllers' => function($aliasId) use ($di, $app) {
@@ -104,7 +105,7 @@ return [
                 );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'AliasSettings',
+        'name' => 'AliasSettingsEntity',
         'validation' => [
             "dataRules" => AliasEntityValidation::class,
         ],
@@ -112,6 +113,7 @@ return [
             'mapperClass' => AliasMapper::class,
             'entityClass' => AliasEntity::class,
             'serviceClass' => AliasService::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
 ];

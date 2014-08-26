@@ -60,7 +60,7 @@ class Entity implements RulesInterface
             ),
             'itemName' => array(
                 'name'       => 'itemName',
-                'required'   => true,
+                'required'   => false,
                 'validators' => array(
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )

@@ -1,7 +1,7 @@
 <?php
-namespace CG\Controllers\Settings;
+namespace CG\Controllers\Settings\Shipping;
 
-use CG\Settings\Alias\Service;
+use CG\Settings\Shipping\Alias\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
