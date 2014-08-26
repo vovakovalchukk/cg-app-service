@@ -20,14 +20,15 @@
         }
     },
     "require": {
+        "channelgrabber/constants": "dev-master",
         "channelgrabber/cilex": "~1.0.3",
-        "channelgrabber/stdlib": "~2.5.28",
+        "channelgrabber/stdlib": "~2.7.0",
         "channelgrabber/http": "~1.2.12",
         "channelgrabber/log": "~1.5.2",
         "channelgrabber/slim": "~1.8.10",
         "channelgrabber/usage": "~1.0.0",
         "channelgrabber/user": "~1.14.3",
-        "channelgrabber/validation": "~1.1.5",
+        "channelgrabber/validation": "~1.2.0",
         "channelgrabber/vnderror": "~1.0.0",
         "guzzle/guzzle": "~3.7",
         "nocarrier/hal": "~0.9.3",
@@ -40,7 +41,7 @@
         "zendframework/zend-inputfilter": "~2.2.5",
         "zendframework/zend-servicemanager": "~2.2.5",
         "zendframework/zend-validator": "~2.2.5",
-        "channelgrabber/zf2-stdlib" : "~1.1.6"
+        "channelgrabber/zf2-stdlib" : "~1.1.14"
     },
     "require-dev": {
         "codeception/codeception": "1.8.0",
