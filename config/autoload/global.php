@@ -130,11 +130,11 @@ use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 
 // Alias Settings
-use CG\Settings\Alias\Service as AliasSettingsService;
-use CG\Settings\Alias\Mapper as AliasSettingsMapper;
-use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
-use CG\Settings\Alias\Repository as AliasSettingsRepository;
+use CG\Settings\Shipping\Alias\Service as AliasSettingsService;
+use CG\Settings\Shipping\Alias\Mapper as AliasSettingsMapper;
+use CG\Settings\Shipping\Alias\Storage\Cache as AliasSettingsCacheStorage;
+use CG\Settings\Shipping\Alias\Storage\Db as AliasSettingsDbStorage;
+use CG\Settings\Shipping\Alias\Repository as AliasSettingsRepository;
 
 //Usage
 use CG\Usage\Storage\Db as UsageDb;
@@ -174,6 +174,13 @@ use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
+
+// Unimported Listing
+use CG\Listing\Unimported\Service as UnimportedListingService;
+use CG\Listing\Unimported\Repository as UnimportedListingRepository;
+use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
+use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
+use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 
 use CG\Image\Service as ImageService;
 use CG\Image\Storage\Api as ImageApi;
@@ -698,7 +705,28 @@ return array(
                     'mapper' => ListingMapper::class
                 ]
             ],
-            'preferences' => array(
+            UnimportedListingService::class => [
+                'parameters' => [
+                    'repository' => UnimportedListingRepository::class,
+                    'mapper' => UnimportedListingMapper::class,
+                    'imageStorage' => ImageService::class
+                ]
+            ],
+            UnimportedListingRepository::class => [
+                'parameter' => [
+                    'storage' => UnimportedListingCacheStorage::class,
+                    'repository' => UnimportedListingDbStorage::class
+                ]
+            ],
+            UnimportedListingDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => UnimportedListingMapper::class
+                ]
+            ],
+            'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
@@ -716,7 +744,7 @@ return array(
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class
-             )
+            ]
         )
     )
 );

@@ -41,6 +41,22 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
+            "accountId" => [
+                'name'      => 'accountId',
+                'required'   => false,
+                'validators' => [
+                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
+                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                ]
+            ],
+            "shippingService" => [
+                'name'       => 'shippingService',
+                'required'   => true,
+                'validators' => [
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
+                ]
+            ],
             'methodIds' => [
                 'name' => 'methodIds',
                 'required' => false,
