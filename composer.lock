@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8cff90acbe289cafd5aa3fe79c0afdf6",
+    "hash": "5085182d85386b52ed95cbd019ca9924",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -723,11 +723,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-3062-RepositorySaveTrait",
+            "version": "2.7.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "732661d8aa1c130dacab7b0c52e06f41997adddb"
+                "reference": "285c133f184848eee9fd8a3db3403647b637c45f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.13-9325db.zip",
+                "reference": "285c133f184848eee9fd8a3db3403647b637c45f",
+                "shasum": "2195d1f9c69f0539c67085250a64967e069c5ec4"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -745,7 +751,12 @@
                     "CG/Stdlib/Utilities.php"
                 ]
             },
-            "time": "2014-08-28 10:16:11"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-28 10:41:38"
         },
         {
             "name": "channelgrabber/stock",
@@ -4487,12 +4498,6 @@
             "package": "channelgrabber/cache"
         },
         {
-            "alias": "2.7.13",
-            "alias_normalized": "2.7.13.0",
-            "version": "dev-CGIV-3062-RepositorySaveTrait",
-            "package": "channelgrabber/stdlib"
-        },
-        {
             "alias": "1.2.20",
             "alias_normalized": "1.2.20.0",
             "version": "dev-CGIV-2960-element-preset-sizes",
@@ -4503,7 +4508,6 @@
     "stability-flags": {
         "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/stdlib": 20,
         "channelgrabber/template": 20,
         "phpspec/phpspec": 20
     },
