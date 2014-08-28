@@ -24,6 +24,7 @@ use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
+use Slim\Slim;
 
 //Order
 use CG\Order\Service\Service as OrderService;
@@ -191,8 +192,6 @@ use CG\Location\Repository as LocationRepository;
 use CG\Location\Mapper as LocationMapper;
 use CG\Location\Storage\Db as LocationDbStorage;
 use CG\Location\Storage\Cache as LocationCacheStorage;
-
-
 
 return array(
     'service_manager' => array(

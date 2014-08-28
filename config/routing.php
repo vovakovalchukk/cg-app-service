@@ -1,5 +1,5 @@
 <?php
-$routes = array();
+$routes = [];
 $files = [
     'routes.php',
     'templateRoutes.php',

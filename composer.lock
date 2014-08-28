@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6bd0f6f0dfb48e4318d5c1872aaa842",
+    "hash": "332a1931586e15ef5f1fc9cc4af00143",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -376,6 +376,45 @@
             "time": "2014-08-20 11:03:26"
         },
         {
+            "name": "channelgrabber/location",
+            "version": "dev-CGIV-2988-ProductsCreateLocationWhenNewAccountIsAdded",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-location.git",
+                "reference": "35264d2a69774b6f22bd2a36ef51b972cdacb8c5"
+            },
+            "require": {
+                "channelgrabber/cache": ">=1.3.0,<2.0.0",
+                "channelgrabber/channel": ">=1.4.1,<2.0.0",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/etag": ">=1.4.3,<2.0.0",
+                "channelgrabber/gearman": ">=1.1.0,<2.0.0",
+                "channelgrabber/http": ">=1.2.18,<2.0.0",
+                "channelgrabber/order": ">=1.8.0,<2.0.0",
+                "channelgrabber/permission": ">=1.0.1,<2.0.0",
+                "channelgrabber/slim": ">=1.9.5,<2.0.0",
+                "channelgrabber/stdlib": ">=2.7.5,<3.0.0",
+                "channelgrabber/transaction": ">=1.1.1, <2.0.0",
+                "nocarrier/hal": "~0.9.4"
+            },
+            "require-dev": {
+                "channelgrabber/phpunit": ">=1.0.2",
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Location\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Location\\Test\\": "tests"
+                }
+            },
+            "time": "2014-08-28 09:09:50"
+        },
+        {
             "name": "channelgrabber/log",
             "version": "2.0.3",
             "source": {
@@ -655,17 +694,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.0.12",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "933d9f636f7259ecaa122f3d6be2581d2365705c"
+                "reference": "3bb76d91391d34960af656f4aa35761d2fb964f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.0.12-e894ea.zip",
-                "reference": "933d9f636f7259ecaa122f3d6be2581d2365705c",
-                "shasum": "d4ee00d4270191c6e632b3ca4b7b0e1af79e8437"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.1.2-0739c4.zip",
+                "reference": "3bb76d91391d34960af656f4aa35761d2fb964f7",
+                "shasum": "bed9a0dc2c298cb04ab432cbef22d88ed827e2c9"
             },
             "require": {
                 "channelgrabber/cache": ">=1.2.4",
@@ -676,8 +715,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "CG\\Settings\\": ""
+                "psr-4": {
+                    "CG\\Settings\\": "src"
                 }
             },
             "transport-options": {
@@ -685,7 +724,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-08-14 15:52:52"
+            "time": "2014-08-27 07:13:41"
         },
         {
             "name": "channelgrabber/slim",
@@ -4513,11 +4552,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-CGIV-2988-ProductsCreateLocationWhenNewAccountIsAdded",
+            "package": "channelgrabber/location"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/location": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,

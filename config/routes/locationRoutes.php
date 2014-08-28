@@ -1,13 +1,13 @@
 <?php
-use CG\Controllers\Location\Location;
-use CG\Controllers\Product\Product\Collection as ProductCollection;
+use CG\Controllers\Location\Entity as Location;
+use CG\Controllers\Location\Collection as LocationCollection;
 
-use CG\InputValidation\Product\Entity as ProductEntityValidation;
-use CG\InputValidation\Product\Filter as ProductCollectionValidation;
+use CG\InputValidation\Location\Entity as LocationEntityValidation;
+use CG\InputValidation\Location\Filter as LocationCollectionValidation;
 
-use CG\Product\Entity as ProductEntity;
-use CG\Product\Mapper as ProductMapper;
-use CG\Product\Service as ProductService;
+use CG\Location\Entity as LocationEntity;
+use CG\Location\Mapper as LocationMapper;
+use CG\Location\Service as LocationService;
 
 use CG\Slim\Versioning\Version;
 
