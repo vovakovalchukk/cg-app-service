@@ -52,7 +52,7 @@ class Entity implements RulesInterface
             ],
             "shippingService" => [
                 'name'       => 'shippingService',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
