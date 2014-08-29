@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8581fc8ae736a9f2d30403e07d8e31a0",
+    "hash": "0ef678b0a20b1e3171124d4ae5f849dc",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -821,11 +821,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-2960-element-preset-sizes",
+            "version": "1.2.24",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "1c4ce0013d79ffd083367590c38cd36e1be39e22"
+                "reference": "558e5c7ad9b519807c4e7d9c5f8b8f227dd760d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.24-f94fdb.zip",
+                "reference": "558e5c7ad9b519807c4e7d9c5f8b8f227dd760d1",
+                "shasum": "355dae77d76cd9e25ef95e0775363f40cc8a5709"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -851,7 +857,12 @@
                     "CG\\Template\\": ""
                 }
             },
-            "time": "2014-08-29 11:24:14"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-29 12:49:30"
         },
         {
             "name": "channelgrabber/transaction",
@@ -4502,17 +4513,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.2.20",
-            "alias_normalized": "1.2.20.0",
-            "version": "dev-CGIV-2960-element-preset-sizes",
-            "package": "channelgrabber/template"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/template": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
