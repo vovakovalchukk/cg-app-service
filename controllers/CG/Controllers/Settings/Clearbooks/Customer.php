@@ -1,7 +1,8 @@
 <?php
-namespace CG\Controllers\Product;
 
-use CG\Product\Service\Service;
+namespace CG\Controllers\Settings\Clearbooks;
+
+use CG\Settings\Clearbooks\Customer\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
@@ -9,7 +10,7 @@ use CG\Slim\Controller\Entity\DeleteTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 
-class Product
+class Customer
 {
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
 
@@ -20,4 +21,3 @@ class Product
             ->setDi($di);
     }
 }
- 
