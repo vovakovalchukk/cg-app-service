@@ -1,8 +1,7 @@
 <?php
-namespace CG\Controllers\Product\Product;
+namespace CG\Controllers\Settings\Shipping\Alias;
 
-use CG\Product\Filter;
-use CG\Product\Service\Service;
+use CG\Settings\Shipping\Alias\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
@@ -22,8 +21,11 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByFilterAsHal(
-            $this->getDi()->newInstance(Filter::class, $this->getParams())
+        return $this->getService()->fetchCollectionByPaginationAsHal(
+            $this->getParams('limit'),
+            $this->getParams('page'),
+            $this->getParams('id') ?: [],
+            $this->getParams('organisationUnitId') ?: []
         );
     }
 }

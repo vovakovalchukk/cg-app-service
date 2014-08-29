@@ -1,7 +1,7 @@
 <?php
-namespace CG\Controllers\Settings\Alias;
+namespace CG\Controllers\Settings\Clearbooks\Customer;
 
-use CG\Settings\Alias\Service;
+use CG\Settings\Clearbooks\Customer\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
@@ -24,9 +24,7 @@ class Collection
         return $this->getService()->fetchCollectionByPaginationAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('id') ?: [],
             $this->getParams('organisationUnitId') ?: []
         );
     }
 }
- 

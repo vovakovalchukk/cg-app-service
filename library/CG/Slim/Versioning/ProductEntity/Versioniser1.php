@@ -4,7 +4,7 @@ namespace CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Product\Service;
+use CG\Product\Service\Service;
 
 class Versioniser1 implements VersioniserInterface
 {

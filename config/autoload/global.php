@@ -18,6 +18,11 @@ use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
 use Zend\Di\Di;
 use Zend\Config\Config;
+use Zend\Di\Config as DiConfig;
+use Zend\Di\InstanceManager;
+use CG\Zend\Stdlib\Di\Definition\RuntimeDefinition;
+use CG\Zend\Stdlib\Di\DefinitionList;
+
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
 use CG\Cache\IncrementorInterface;
@@ -131,11 +136,11 @@ use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 
 // Alias Settings
-use CG\Settings\Alias\Service as AliasSettingsService;
-use CG\Settings\Alias\Mapper as AliasSettingsMapper;
-use CG\Settings\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Alias\Storage\Db as AliasSettingsDbStorage;
-use CG\Settings\Alias\Repository as AliasSettingsRepository;
+use CG\Settings\Shipping\Alias\Service as AliasSettingsService;
+use CG\Settings\Shipping\Alias\Mapper as AliasSettingsMapper;
+use CG\Settings\Shipping\Alias\Storage\Cache as AliasSettingsCacheStorage;
+use CG\Settings\Shipping\Alias\Storage\Db as AliasSettingsDbStorage;
+use CG\Settings\Shipping\Alias\Repository as AliasSettingsRepository;
 
 //Usage
 use CG\Usage\Storage\Db as UsageDb;
@@ -145,7 +150,7 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
-use CG\Product\Service as ProductService;
+use CG\Product\Service\Service as ProductService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
@@ -199,12 +204,16 @@ return array(
             Di::Class => function($serviceManager) {
                 $configuration = $serviceManager->get('config');
 
-                $definition = new CG\Di\Definition\RuntimeDefinition(null, require dirname(dirname(__DIR__)) .  '/vendor/composer/autoload_classmap.php');
-                $definitionList = new Zend\Di\DefinitionList([$definition]);
-                $im = new Zend\Di\InstanceManager();
-                $di = new Zend\Di\Di($definitionList, $im, new Zend\Di\Config(
-                    isset($configuration['di']) ? $configuration['di'] : array()
-                ));
+                $runtimeDefinition = new RuntimeDefinition(
+                    null,
+                    require dirname(dirname(__DIR__)) . '/vendor/composer/autoload_classmap.php'
+                );
+
+                $definitionList = new DefinitionList([$runtimeDefinition]);
+                $im = new InstanceManager();
+                $config = new DiConfig(isset($configuration['di']) ? $configuration['di'] : array());
+
+                $di = new Di($definitionList, $im, $config);
 
                 if (isset($configuration['db'], $configuration['db']['adapters'])) {
                     foreach (array_keys($configuration['db']['adapters']) as $adapter) {
