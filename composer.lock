@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4dfd97ff470c50b9d29fec21090f4d8a",
+    "hash": "2343b65542b92f4e749ca85939d976b5",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -150,6 +150,61 @@
                 }
             },
             "time": "2014-06-06 16:14:24"
+        },
+        {
+            "name": "channelgrabber/di",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-di.git",
+                "reference": "c1159256782e7f877a9e754798727fe718c21f05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-1.0.1-322fb4.zip",
+                "reference": "c1159256782e7f877a9e754798727fe718c21f05",
+                "shasum": "f3d6598057024b11102eb600c91d0e2a677c14eb"
+            },
+            "require": {
+                "composer-plugin-api": "1.0.0",
+                "zendframework/zend-di": ">=2.2,<3.0"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev"
+            },
+            "bin": [
+                "bin/di_test.php",
+                "bin/di_compile.php"
+            ],
+            "type": "composer-plugin",
+            "extra": {
+                "class": [
+                    "CG\\Di\\Installer\\Plugin"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "CG\\Di\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Di\\Test\\": "tests"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Nick Peirson",
+                    "email": "nickpeirson@gmail.com"
+                }
+            ],
+            "description": "Dependency injection wrappers and compilation",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-29 09:44:02"
         },
         {
             "name": "channelgrabber/email",
@@ -655,26 +710,28 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "3bb76d91391d34960af656f4aa35761d2fb964f7"
+                "reference": "2ee626cf56c5b20f56c302fe6c7e2a1f5ad955f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.1.2-0739c4.zip",
-                "reference": "3bb76d91391d34960af656f4aa35761d2fb964f7",
-                "shasum": "bed9a0dc2c298cb04ab432cbef22d88ed827e2c9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.1.3-737399.zip",
+                "reference": "2ee626cf56c5b20f56c302fe6c7e2a1f5ad955f5",
+                "shasum": "67cd9a66bf9ffa7dbc893e36f60aef0dec3a5b79"
             },
             "require": {
                 "channelgrabber/cache": ">=1.2.4",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/di": ">=1.0.1",
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/http": ">=1.2.3",
                 "channelgrabber/stdlib": ">=2.5.26",
                 "channelgrabber/template": ">=1.2.15"
             },
-            "type": "library",
+            "type": "di-definition",
             "autoload": {
                 "psr-4": {
                     "CG\\Settings\\": "src"
@@ -685,7 +742,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-08-27 07:13:41"
+            "time": "2014-09-01 09:42:12"
         },
         {
             "name": "channelgrabber/slim",
@@ -4144,45 +4201,44 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32"
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ad4e1e23ae01b483c16f600ff1bebec184588e32",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/f8d5d08c56de5cfd592b3340424a81733259a876",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
                 "classmap": [
-                    "PHP/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sb@sebastian-bergmann.de",
-                    "role": "lead"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Wrapper around PHP's tokenizer extension.",
@@ -4190,7 +4246,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-08-31 06:12:13"
         },
         {
             "name": "phpunit/phpunit",
