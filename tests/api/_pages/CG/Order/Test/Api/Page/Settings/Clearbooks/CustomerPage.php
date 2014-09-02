@@ -1,15 +1,15 @@
 <?php
-namespace CG\Order\Test\Api\Page\Settings;
+namespace CG\Order\Test\Api\Page\Settings\Clearbooks;
 
 use CG\Codeception\Cest\Rest\CollectionPageTrait;
 use CG\Order\Test\Api\Page\RootPage;
 
-class AliasPage extends RootPage
+class CustomerPage extends RootPage
 {
     use CollectionPageTrait;
 
-    const URL = "/settings/shipping/alias";
-    const EMBEDDED_RESOURCE = "alias";
+    const URL = "/settings/clearbooks/customer";
+    const EMBEDDED_RESOURCE = "customer";
     const PRIMARY_ID = "1";
     const SECONDARY_ID = "2";
 
@@ -31,51 +31,33 @@ class AliasPage extends RootPage
         return [
             [
                 "id" => 1,
-                "name" => "alias1",
+                "clearbooksCustomerId" => 1,
                 "organisationUnitId" => 1,
-                "accountId" => 1,
-                "shippingService" => "shippingService1",
-                "methodIds" => [1, 2, 3],
             ],
             [
                 "id" => 2,
-                "name" => "alias2",
+                "clearbooksCustomerId" => 2,
                 "organisationUnitId" => 1,
-                "accountId" => 2,
-                "shippingService" => "shippingService2",
-                "methodIds" => [1, 2]
             ],
             [
                 "id" => 3,
-                "name" => "alias3",
+                "clearbooksCustomerId" => 3,
                 "organisationUnitId" => 1,
-                "accountId" => 1,
-                "shippingService" => "shippingService3",
-                "methodIds" => [4, 5, 6]
             ],
             [
                 "id" => 4,
-                "name" => "alias4",
+                "clearbooksCustomerId" => 4,
                 "organisationUnitId" => 1,
-                "accountId" => 2,
-                "shippingService" => "shippingService4",
-                "methodIds" => [1, 7]
             ],
             [
                 "id" => 5,
-                "name" => "alias5",
+                "clearbooksCustomerId" => 5,
                 "organisationUnitId" => 1,
-                "accountId" => 1,
-                "shippingService" => "shippingService5",
-                "methodIds" => [2, 3]
             ],
             [
                 "id" => 6,
-                "name" => "alias6",
+                "clearbooksCustomerId" => 6,
                 "organisationUnitId" => 1,
-                "accountId" => 2,
-                "shippingService" => "shippingService6",
-                "methodIds" => [4, 5, 6]
             ]
         ];
     }
@@ -83,7 +65,7 @@ class AliasPage extends RootPage
     public static function getRequiredEntityFields()
     {
         return [
-            "name",
+            "clearbooksCustomerId",
             "organisationUnitId",
         ];
     }
@@ -92,7 +74,7 @@ class AliasPage extends RootPage
     {
         return [
             "id" => "foo",
-            "name" => [],
+            'clearbooksCustomerId' => 'ABC',
             "organisationUnitId" => "ABC",
         ];
     }
@@ -100,18 +82,15 @@ class AliasPage extends RootPage
     public static function getInvalidEntityFields()
     {
         return [
-            "name",
-            "organisationUnitId",
-            "methodIds"
+            'clearbooksCustomerId',
+            'organisationUnitId',
         ];
     }
 
     public static function getFilterFields()
     {
         return [
-            "id" => [],
             "organisationUnitId" => []
         ];
     }
 }
- 

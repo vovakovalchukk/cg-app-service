@@ -7,7 +7,7 @@ use CG\InputValidation\Product\Filter as ProductCollectionValidation;
 
 use CG\Product\Entity as ProductEntity;
 use CG\Product\Mapper as ProductMapper;
-use CG\Product\Service as ProductService;
+use CG\Product\Service\Service as ProductService;
 
 use CG\Slim\Versioning\Version;
 

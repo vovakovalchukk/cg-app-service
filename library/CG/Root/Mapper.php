@@ -23,7 +23,9 @@ class Mapper
                              ->addLink('settings', '/settings')
                              ->addLink('template', '/template')
                              ->addLink('stock', '/stock')
-                             ->addLink('stockLocation', '/stockLocation');
+                             ->addLink('stockLocation', '/stockLocation')
+                             ->addLink('listing', '/listing')
+                             ->addLink('unimportedListing', '/unimportedListing');
 
     }
 

@@ -1,7 +1,8 @@
 <?php
-namespace CG\Controllers\Settings\Alias;
+namespace CG\Controllers\Listing\Unimported;
 
-use CG\Settings\Alias\Service;
+use CG\Listing\Unimported\Filter;
+use CG\Listing\Unimported\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
@@ -21,11 +22,8 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('organisationUnitId') ?: []
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            $this->getDi()->newInstance(Filter::class, $this->getParams())
         );
     }
 }
