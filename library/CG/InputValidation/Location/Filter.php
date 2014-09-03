@@ -21,14 +21,14 @@ class Filter implements RulesInterface
                     'name'       => 'id',
                     'required'   => false,
                     'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), ['name' => 'id'])
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                     ]
                 ],
                 'organisationUnitId' => [
                     'name'       => 'organisationUnitId',
                     'required'   => false,
                     'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), ['name' => 'organisationUnitId'])
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                     ]
                 ]
             ]

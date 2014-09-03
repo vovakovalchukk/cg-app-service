@@ -22,7 +22,8 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     new IntegerValidator(['name' => 'organisationUnitId']),
-                    new GreaterThan(['options' => ['min' => 1, 'inclusive' => true]])
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ]
         ];
