@@ -65,7 +65,7 @@ class Entity implements RulesInterface
             ],
             'imageId' => [
                 'name'       => 'imageId',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [$this->getDi()->newInstance(IntegerValidator::class, ['name' => 'imageId'])]
             ],
             'createdDate' => [
