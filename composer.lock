@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb5209d159f24bd00ede439e429342cd",
+    "hash": "ceab85053865eeb438adc5c18da48efe",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -395,7 +395,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "9fb42c2d94e8646e685080a25157500b49f9bc9b"
+                "reference": "1337917135f7911a971bb8a9dc8d9f7b30d063bb"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -425,27 +425,26 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2014-09-04 15:46:19"
+            "time": "2014-09-05 08:49:08"
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "aa42ce62fb54e3180560ba81913ac8523d4639f8"
+                "reference": "5db2db219c0cf61ed2a5561a164b086504dc048d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.3-6b04f4.zip",
-                "reference": "aa42ce62fb54e3180560ba81913ac8523d4639f8",
-                "shasum": "9cd7aecd5e7d5ef5900144e7cd785ed89699ff4c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.4-a8b669.zip",
+                "reference": "5db2db219c0cf61ed2a5561a164b086504dc048d",
+                "shasum": "9fe03e444d4bd88c58880defebc135cd69624a80"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/redis": "~0.1.0",
-                "channelgrabber/slim": ">=1.5.0",
                 "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "channelgrabber/validation": ">=1.1.0",
                 "nocarrier/hal": "~0.9.4",
@@ -457,8 +456,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "CG": ""
+                "psr-4": {
+                    "CG\\Log\\": "src/"
                 }
             },
             "transport-options": {
@@ -466,7 +465,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-08-14 15:48:42"
+            "time": "2014-09-05 09:40:55"
         },
         {
             "name": "channelgrabber/order",
@@ -640,17 +639,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "15b92dbdd90d1234953994a04ab75386d76de8ac"
+                "reference": "0d2bdb1f8793757a28752d195088d24913ae5aa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.1-0ac503.zip",
-                "reference": "15b92dbdd90d1234953994a04ab75386d76de8ac",
-                "shasum": "626da4e106f727d43a2eb2277be6f9bdcfa4061a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.2-95d934.zip",
+                "reference": "0d2bdb1f8793757a28752d195088d24913ae5aa5",
+                "shasum": "f281b7dd056111d03486f239ea95ee620ed71989"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -680,7 +679,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-03 11:08:39"
+            "time": "2014-09-05 09:16:37"
         },
         {
             "name": "channelgrabber/redis",
