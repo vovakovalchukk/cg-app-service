@@ -640,7 +640,7 @@ return array(
             ),
             TransactionRedisClient::class => [
                 'parameter' => [
-                    'predis' => 'unreliable_redis',
+                    'predis' => 'reliable_redis',
                 ]
             ],
             StockService::class => [
