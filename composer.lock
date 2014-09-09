@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d609baa781397ee7e0e60f00f14e1a40",
+    "hash": "48c76ad3db55b7c241ce9e803fafd5b8",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -701,11 +701,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-3018-DeleteStockOnLastProductDelete",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "55b72f8fae01073f6f16cc49861556b7bb7c541c"
+                "reference": "9d15bd179b346ed92063b5cd87e9ea4083951bb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.4-336da4.zip",
+                "reference": "9d15bd179b346ed92063b5cd87e9ea4083951bb8",
+                "shasum": "123a8d4b43d83ec37ef3725ffe39eb7be541f8a1"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -730,7 +736,12 @@
                     "CG\\Product\\": "src"
                 }
             },
-            "time": "2014-09-09 09:38:44"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-09 15:29:48"
         },
         {
             "name": "channelgrabber/redis",
@@ -4632,17 +4643,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.3.2",
-            "alias_normalized": "1.3.2.0",
-            "version": "dev-CGIV-3018-DeleteStockOnLastProductDelete",
-            "package": "channelgrabber/product"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/product": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
