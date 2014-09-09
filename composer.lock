@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fc2218e94f5866647a696a19e5f5e72a",
+    "hash": "d609baa781397ee7e0e60f00f14e1a40",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -697,26 +697,15 @@
                     "CG\\Predis\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-07-09 15:10:32"
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.3.2",
+            "version": "dev-CGIV-3018-DeleteStockOnLastProductDelete",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "0d2bdb1f8793757a28752d195088d24913ae5aa5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.2-95d934.zip",
-                "reference": "0d2bdb1f8793757a28752d195088d24913ae5aa5",
-                "shasum": "f281b7dd056111d03486f239ea95ee620ed71989"
+                "reference": "55b72f8fae01073f6f16cc49861556b7bb7c541c"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -729,7 +718,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": ">=1.8.13",
                 "channelgrabber/stdlib": ">=2.7.9",
-                "channelgrabber/stock": ">=1.0.11",
+                "channelgrabber/stock": ">=1.1.0",
                 "channelgrabber/zf2-stdlib": ">=1.1.12",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
@@ -741,12 +730,7 @@
                     "CG\\Product\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-05 09:16:37"
+            "time": "2014-09-09 09:38:44"
         },
         {
             "name": "channelgrabber/redis",
@@ -897,22 +881,23 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.0.11",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "f7cc6150c7d572013a0b72e148c0f9dd2795ef61"
+                "reference": "93508576784512630da38ea4e80b4e3c8727fa12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.0.11-f1a361.zip",
-                "reference": "f7cc6150c7d572013a0b72e148c0f9dd2795ef61",
-                "shasum": "9b8582a9eadde003afd88a9aae140c7bf89656a0"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.1.0-09217e.zip",
+                "reference": "93508576784512630da38ea4e80b4e3c8727fa12",
+                "shasum": "9b59b4f2f6a7ea750c9cc9347c09f27731b6ba09"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
                 "channelgrabber/channel": ">=1.4.1,<2.0.0",
                 "channelgrabber/constants": "dev-master",
+                "channelgrabber/di": ">=1.0.2",
                 "channelgrabber/etag": ">=1.4.3,<2.0.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": ">=1.2.18,<2.0.0",
@@ -927,7 +912,7 @@
                 "channelgrabber/phpunit": ">=1.0.2",
                 "phpunit/phpunit": "~4.0.0"
             },
-            "type": "library",
+            "type": "di-definition",
             "autoload": {
                 "psr-4": {
                     "CG\\Stock\\": "src"
@@ -943,7 +928,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-08-21 10:58:14"
+            "time": "2014-09-09 07:34:07"
         },
         {
             "name": "channelgrabber/template",
@@ -1200,11 +1185,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -1541,9 +1521,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1631,8 +1609,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -3303,11 +3280,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3801,7 +3773,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -3958,8 +3930,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -4661,11 +4632,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.3.2",
+            "alias_normalized": "1.3.2.0",
+            "version": "dev-CGIV-3018-DeleteStockOnLastProductDelete",
+            "package": "channelgrabber/product"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
