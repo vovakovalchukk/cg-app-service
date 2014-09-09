@@ -106,6 +106,9 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
+use CG\Channel\Gearman\Generator\Order\Download as OrderDownloadGenerator;
+use CG\Channel\Command\Listing\Import as ImportListingCommand;
+use CG\Channel\ListingImportFactory;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -467,7 +470,14 @@ return array(
             ),
             OrderDownloadCommand::class => array(
                 'parameter' => array(
-                    'accountStorage' => AccountApiStorage::class
+                    'accountStorage' => AccountApiStorage::class,
+                    'jobGenerator' => OrderDownloadGenerator::class
+                )
+            ),
+            ImportListingCommand::class => array(
+                'parameter' => array(
+                    'accountStorage' => AccountApiStorage::class,
+                    'jobGenerator' => ListingImportFactory::class
                 )
             ),
             AccountApiStorage::class => array(
