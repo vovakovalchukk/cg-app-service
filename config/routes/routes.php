@@ -134,10 +134,10 @@ return array(
                 $controller = $di->get(OrderCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method()
+                    $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'OPTIONS'),
+        'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderCollection',
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
     ),
@@ -152,7 +152,7 @@ return array(
                     $controller->$method($orderId, $app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => array('GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'eTag' => [
