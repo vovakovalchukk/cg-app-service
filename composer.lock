@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48c76ad3db55b7c241ce9e803fafd5b8",
+    "hash": "f68456048b65a1bbcbf0bfcc9bf5d2a1",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -391,17 +391,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.0.6",
+            "version": "dev-CGIV-3001-HiddenFieldUnimportedListing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "955192052ab9d60dbdb61c7e15b100339ce62b2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.0.6-8c9adb.zip",
-                "reference": "955192052ab9d60dbdb61c7e15b100339ce62b2f",
-                "shasum": "c8b84f4b53d049d5556efb952a737affbebcdf95"
+                "reference": "35f2a2bebafe5a2f3711bbe3c8d45449babcf730"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -431,12 +425,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-04 13:17:53"
+            "time": "2014-09-09 17:30:54"
         },
         {
             "name": "channelgrabber/location",
@@ -695,6 +684,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Predis\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-07-09 15:10:32"
@@ -1198,6 +1192,11 @@
                     "CG\\VndError": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -1532,7 +1531,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1620,7 +1621,8 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com"
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -3291,6 +3293,11 @@
                 "pdf",
                 "zf2"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3784,7 +3791,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -3941,7 +3948,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -4643,11 +4651,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.1.1",
+            "alias_normalized": "1.1.1.0",
+            "version": "dev-CGIV-3001-HiddenFieldUnimportedListing",
+            "package": "channelgrabber/listing"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
