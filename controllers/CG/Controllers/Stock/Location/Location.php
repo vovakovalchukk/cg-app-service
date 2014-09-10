@@ -20,7 +20,6 @@ class Location implements LoggerAwareInterface
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
     use LogTrait;
 
-
     protected $listingStatusService;
     protected $stockService;
     protected $stockLocationMapper;
@@ -43,11 +42,10 @@ class Location implements LoggerAwareInterface
 
     public function put($id, Hal $hal)
     {
-        $stockLocation = $this->getStockLocationMapper()->fromHal($hal);
-        $stock = $this->getStockService()->fetch($stockLocation->getStockId());
-        
+//        $this->getParam('organisationUnitIds');
         $stockLocation = $this->getService()->saveHal($hal, ["id" => $id]);
-        $this->logDebugDump($stock , "Stock(put) on hand ===: ");
+        $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
+        $stock = $this->getStockService()->fetch($stockId);
         $this->getListingStatusService()->updateRelatedListings($stock);
         
         return $stockLocation;
