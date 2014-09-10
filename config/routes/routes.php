@@ -139,7 +139,8 @@ return array(
             },
         'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderCollection',
-        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false),
+        'entityRoute' => '/order/:orderId'
     ),
     '/order/:orderId' => array (
         'controllers' => function($orderId) use ($di) {
@@ -315,6 +316,7 @@ return array(
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
         'version' => new Version(1, 3),
+        'entityRoute' => '/orderItem/:orderItemId'
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($di) {

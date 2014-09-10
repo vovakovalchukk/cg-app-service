@@ -23,6 +23,15 @@ class Collection
 
     public function get()
     {
+        if($this->getParams('orderIds')) {
+            try {
+                return $this->getService()->fetchCollectionByOrderIdsAsHal(
+                    $this->getParams('orderIds') ?: []
+                );
+            } catch (NotFound $e) {
+                throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
+            }
+        }
         try {
             return $this->getService()->fetchCollectionByPaginationAsHal(
                 $this->getParams('limit'),
