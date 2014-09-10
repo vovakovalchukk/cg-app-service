@@ -308,10 +308,10 @@ return array(
                 $controller = $di->get(ItemCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method()
+                    $controller->$method($app->request->getBody())
                 );
             },
-        'via' => array('GET', 'OPTIONS'),
+        'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
         'version' => new Version(1, 3),
@@ -327,7 +327,7 @@ return array(
                     $controller->$method($orderItemId, $app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
+        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 3),

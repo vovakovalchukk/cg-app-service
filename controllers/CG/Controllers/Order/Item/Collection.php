@@ -3,6 +3,7 @@ namespace CG\Controllers\Order\Item;
 
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Slim\ControllerTrait;
+use CG\Slim\Controller\Collection\PatchTrait;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -11,6 +12,7 @@ use Zend\Di\Di;
 class Collection
 {
     use ControllerTrait;
+    use PatchTrait;
 
     public function __construct(Slim $app, ItemService $service, Di $di)
     {
