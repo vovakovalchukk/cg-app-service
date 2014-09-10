@@ -40,7 +40,7 @@ class Versioniser1 implements VersioniserInterface
     /**
      * @return VersioniserInterface
      */
-    public function getUnimportedListingVersioner()
+    protected function getUnimportedListingVersioner()
     {
         return $this->unimportedListingVersioner;
     }
