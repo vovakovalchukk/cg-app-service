@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f68456048b65a1bbcbf0bfcc9bf5d2a1",
+    "hash": "030ad072cb850e4823d39af38e890c3e",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -316,17 +316,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.25",
+            "version": "1.2.26",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "c330ea0fcff68187a07494b6673762f24171a676"
+                "reference": "79a83b4628dcb1664cfad703ad04269eb7d81e7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.25-14421a.zip",
-                "reference": "c330ea0fcff68187a07494b6673762f24171a676",
-                "shasum": "0a6216a6bebf43f47ad751bc61153fe0fca977f9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.26-9d008d.zip",
+                "reference": "79a83b4628dcb1664cfad703ad04269eb7d81e7f",
+                "shasum": "4650c85fa3efabb5acc14b2c6c812c70953aee73"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -349,7 +349,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-03 10:52:43"
+            "time": "2014-09-10 15:53:11"
         },
         {
             "name": "channelgrabber/image",
@@ -391,11 +391,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-3001-HiddenFieldUnimportedListing",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "35f2a2bebafe5a2f3711bbe3c8d45449babcf730"
+                "reference": "6683024d528d2f56f51eccdf7bc471069a023814"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.1-f93227.zip",
+                "reference": "6683024d528d2f56f51eccdf7bc471069a023814",
+                "shasum": "61ded08a6793adee63ea928f98779dc4c34b9dee"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -425,7 +431,12 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2014-09-09 17:30:54"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-10 15:47:35"
         },
         {
             "name": "channelgrabber/location",
@@ -686,26 +697,21 @@
                     "CG\\Predis\\": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-07-09 15:10:32"
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.3.4",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "9d15bd179b346ed92063b5cd87e9ea4083951bb8"
+                "reference": "968c93b3b722cb0810a060db8d1d1feef389dae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.4-336da4.zip",
-                "reference": "9d15bd179b346ed92063b5cd87e9ea4083951bb8",
-                "shasum": "123a8d4b43d83ec37ef3725ffe39eb7be541f8a1"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.5-e3ceef.zip",
+                "reference": "968c93b3b722cb0810a060db8d1d1feef389dae6",
+                "shasum": "b6a95914a93b11e810bf5e863711f59d616212cd"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -735,7 +741,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-09 15:29:48"
+            "time": "2014-09-10 15:56:40"
         },
         {
             "name": "channelgrabber/redis",
@@ -1139,17 +1145,17 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "9a616a27668f469e743a940136f4915491033691"
+                "reference": "e27a3c380481243946f4fe25b08c28e1d55301f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.3-875532.zip",
-                "reference": "9a616a27668f469e743a940136f4915491033691",
-                "shasum": "dddb69bebd05e789afd579f120af47450f14e672"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.4-f5a5f2.zip",
+                "reference": "e27a3c380481243946f4fe25b08c28e1d55301f6",
+                "shasum": "a99c353485ddcfd63040d672e18e6e96d070e7d8"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1167,7 +1173,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-05 15:35:14"
+            "time": "2014-09-10 15:49:46"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -1190,11 +1196,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -1531,9 +1532,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -1621,8 +1620,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -3293,11 +3291,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -3791,7 +3784,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -3948,8 +3941,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -4651,17 +4643,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.1",
-            "alias_normalized": "1.1.1.0",
-            "version": "dev-CGIV-3001-HiddenFieldUnimportedListing",
-            "package": "channelgrabber/listing"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
