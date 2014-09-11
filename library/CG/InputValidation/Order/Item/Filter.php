@@ -62,13 +62,13 @@ class Filter implements RulesInterface
                     $this->getDi()->newInstance(IsArrayValidator::class, array("name" => "id"))
                 ),
             ),
-            'orderIds' => array(
+            'orderIds' => [
                 'name'       => 'orderIds',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array("name" => "orderIds"))
-                ),
-            )
+                'validators' => [
+                    new IsArrayValidator(["name" => "orderIds"])
+                ],
+            ]
         );
     }
 }
