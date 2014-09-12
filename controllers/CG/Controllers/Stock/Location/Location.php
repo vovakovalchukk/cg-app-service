@@ -21,6 +21,8 @@ class Location implements LoggerAwareInterface
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
     use LogTrait;
 
+    const ALL_LIMIT = 'all';
+
     protected $listingStatusService;
     protected $organisationUnitService;
     protected $stockService;
@@ -28,7 +30,7 @@ class Location implements LoggerAwareInterface
 
     public function __construct(
         ListingStatusService $listingStatusService,
-        OrganisationUnitService $organisationUnitservice,
+        OrganisationUnitService $organisationUnitService,
         StockLocationMapper $stockLocationMapper,
         Slim $app,
         Service $service,
@@ -50,7 +52,7 @@ class Location implements LoggerAwareInterface
         $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
         $rootOUID = $stock->getOrganisationUnitId();
-        $relatedOrganisationUnits = $this->getOrganisationUnitService()->fetchFiltered($limit, $page, $rootOUID);
+        $relatedOrganisationUnits = $this->getOrganisationUnitService()->fetchFiltered(static::ALL_LIMIT, null, $rootOUID);
         $relatedOUIDs = [];
         foreach($relatedOrganisationUnits as $relatedOU) {
             $relatedOUIDs[] = $relatedOU->getId();
