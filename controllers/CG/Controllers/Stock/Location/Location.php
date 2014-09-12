@@ -59,7 +59,6 @@ class Location implements LoggerAwareInterface
         }
         $relatedOUIDs[] = $rootOUID;
         $this->getListingStatusService()->updateRelatedListings($stock, $relatedOUIDs);
-        
         return $stockLocation;
     }
 
@@ -69,7 +68,7 @@ class Location implements LoggerAwareInterface
         return $this;
     }
 
-    public function getOrganisationUnitService()
+    protected function getOrganisationUnitService()
     {
         return $this->organisationUnitService;
     }
