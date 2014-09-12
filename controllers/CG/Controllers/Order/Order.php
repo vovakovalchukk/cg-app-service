@@ -4,6 +4,7 @@ namespace CG\Controllers\Order;
 use CG\Http\StatusCode;
 use CG\Order\Service\Service as ServiceService;
 use CG\Slim\ControllerTrait;
+use CG\Slim\Controller\Entity\PatchTrait;
 use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -16,6 +17,7 @@ use CG\Constant\Log\Service\Api;
 class Order implements LoggerAwareInterface
 {
     use ControllerTrait;
+    use PatchTrait;
     use LogTrait;
 
     public function __construct(Slim $app, ServiceService $service, Di $di)
