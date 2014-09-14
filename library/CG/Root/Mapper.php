@@ -16,17 +16,17 @@ class Mapper
     public function getHal()
     {
         return $this->getDi()->get(Hal::class, array('uri' => '/'))
+                             ->addLink('listing', '/listing')
+                             ->addLink('location', '/location')
                              ->addLink('order', '/order')
                              ->addLink('product', '/product')
-                             ->addLink('shippingMethod', '/shippingMethod')
-                             ->addLink('userPreference', '/userPreference')
                              ->addLink('settings', '/settings')
-                             ->addLink('template', '/template')
+                             ->addLink('shippingMethod', '/shippingMethod')
                              ->addLink('stock', '/stock')
                              ->addLink('stockLocation', '/stockLocation')
-                             ->addLink('listing', '/listing')
-                             ->addLink('unimportedListing', '/unimportedListing');
-
+                             ->addLink('template', '/template')
+                             ->addLink('unimportedListing', '/unimportedListing')
+                             ->addLink('userPreference', '/userPreference');
     }
 
     public function setDi(Di $di)

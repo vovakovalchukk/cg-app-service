@@ -264,7 +264,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => array(
                     $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'buyerMessage']])
                 )
-            )
+            ),
+            'hasItems' => [
+                'name' => 'hasItems',
+                'required' => false,
+                'validators' => array(
+                    new BooleanValidator(['name' => 'hasItems'])
+                )
+            ]
         );
     }
 }

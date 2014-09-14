@@ -29,6 +29,7 @@ use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
+use Slim\Slim;
 
 // Account
 use CG\Account\Service\Service as AccountService;
@@ -180,11 +181,11 @@ use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
 use CG\Stock\Mapper as StockMapper;
-use CG\Stock\Location\Service as LocationService;
-use CG\Stock\Location\Repository as LocationRepository;
-use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
-use CG\Stock\Location\Storage\Db as LocationDbStorage;
-use CG\Stock\Location\Mapper as LocationMapper;
+use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Location\Repository as StockLocationRepository;
+use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
+use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
+use CG\Stock\Location\Mapper as StockLocationMapper;
 
 // Listing
 use CG\Listing\Service as ListingService;
@@ -202,6 +203,13 @@ use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 
 use CG\Image\Service as ImageService;
 use CG\Image\Storage\Api as ImageApi;
+
+// Location
+use CG\Location\Service as LocationService;
+use CG\Location\Repository as LocationRepository;
+use CG\Location\Mapper as LocationMapper;
+use CG\Location\Storage\Db as LocationDbStorage;
+use CG\Location\Storage\Cache as LocationCacheStorage;
 
 return array(
     'service_manager' => array(
@@ -683,7 +691,7 @@ return array(
             StockService::class => [
                 'parameter' => [
                     'repository' => StockRepository::class,
-                    'locationStorage' => LocationService::class
+                    'locationStorage' => StockLocationService::class
                 ]
             ],
             StockRepository::class => [
@@ -700,23 +708,23 @@ return array(
                     'mapper' => StockMapper::class
                 ]
             ],
-            LocationService::class => [
+            StockLocationService::class => [
                 'parameter' => [
-                    'repository' => LocationRepository::class
+                    'repository' => StockLocationRepository::class
                 ]
             ],
-            LocationRepository::class => [
+            StockLocationRepository::class => [
                 'parameter' => [
-                    'storage' => LocationCacheStorage::class,
-                    'repository' => LocationDbStorage::class
+                    'storage' => StockLocationCacheStorage::class,
+                    'repository' => StockLocationDbStorage::class
                 ]
             ],
-            LocationDbStorage::class => [
+            StockLocationDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => LocationMapper::class
+                    'mapper' => StockLocationMapper::class
                 ]
             ],
             StockAdjustmentCalculator::class => [
@@ -770,6 +778,26 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => UnimportedListingMapper::class
+                ]
+            ],
+            LocationService::class => [
+                'parameters' => [
+                    'repository' => LocationRepository::class,
+                    'mapper' => LocationMapper::class
+                ]
+            ],
+            LocationRepository::class => [
+                'parameter' => [
+                    'storage' => LocationCacheStorage::class,
+                    'repository' => LocationDbStorage::class
+                ]
+            ],
+            LocationDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => LocationMapper::class
                 ]
             ],
             'preferences' => [
