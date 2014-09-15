@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78bf5f298a6981ca343bc0e8dcf676dd",
+    "hash": "c95d32862774aab61517b46ccd9afc41",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -786,11 +786,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-CGIV-3172-saving-invoice-settings",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "95b80a939ffb5e2c35578a7d9485b19919e131e4"
+                "reference": "d815570186ba921f0219da9d52ebd5a71a902649"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.1.5-c72b25.zip",
+                "reference": "d815570186ba921f0219da9d52ebd5a71a902649",
+                "shasum": "5c0a043a0062dea7e54f8daf73fe94344b9a0d20"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0",
@@ -808,15 +814,26 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2014-09-11 15:06:04"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-12 15:48:09"
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-3172-psr4",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "63892f0c0e242b96ff9b397d2d9f0f4bdddeca16"
+                "reference": "e52fbe70f75a69db24e2f418d7d093cbee5938d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.10.1-814b1e.zip",
+                "reference": "e52fbe70f75a69db24e2f418d7d093cbee5938d0",
+                "shasum": "7d97c73a15a3de2169ef49658b3b8b36092d7a9c"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -831,6 +848,8 @@
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=5.4.0",
+                "php-jsonpatch/php-jsonpatch": "dev-master",
+                "php-jsonpointer/php-jsonpointer": "@dev",
                 "rhumsaa/vnderror": "1.0.0",
                 "slim/slim": "2.3.*",
                 "zendframework/zend-eventmanager": ">=2.2.5,<3.0"
@@ -844,7 +863,12 @@
                     "CG\\Slim\\": "src"
                 }
             },
-            "time": "2014-09-11 15:10:55"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-12 16:24:49"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -936,17 +960,23 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-3172-removed-library-restriction",
+            "version": "1.2.30",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "7c76649c3a9878661693514c3b811b35d0aa1bfb"
+                "reference": "03cfadd6b609ffc7871a79b6bdc0cecc868ca9c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.30-9f448e.zip",
+                "reference": "03cfadd6b609ffc7871a79b6bdc0cecc868ca9c8",
+                "shasum": "d09dc8d2be430c8fc95849d11217ac018e4c7367"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.1,<2.0.0",
                 "channelgrabber/channel": ">=1.6.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": ">=1.0.1",
+                "channelgrabber/di": ">=2.0.0",
                 "channelgrabber/order": ">=1.7.0,<2.0.0",
                 "channelgrabber/settings": ">=1.1.4,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
@@ -968,7 +998,12 @@
                     "CG\\Template\\": "src/"
                 }
             },
-            "time": "2014-09-11 15:34:37"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-12 15:49:30"
         },
         {
             "name": "channelgrabber/transaction",
@@ -1621,6 +1656,104 @@
             "time": "2014-06-13 10:59:16"
         },
         {
+            "name": "php-jsonpatch/php-jsonpatch",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raphaelstolt/php-jsonpatch.git",
+                "reference": "b20aed60f049c93f94a774455569bf8809d157c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/b20aed60f049c93f94a774455569bf8809d157c5",
+                "reference": "b20aed60f049c93f94a774455569bf8809d157c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "php-jsonpointer/php-jsonpointer": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Rs\\Json": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Stolt",
+                    "email": "raphael.stolt@gmail.com",
+                    "homepage": "http://raphaelstolt.blogspot.com/"
+                }
+            ],
+            "description": "Implementation of JSON Patch (http://tools.ietf.org/html/rfc6902)",
+            "homepage": "https://github.com/raphaelstolt/php-jsonpatch",
+            "keywords": [
+                "json",
+                "json modification",
+                "json patch"
+            ],
+            "time": "2013-10-28 16:11:14"
+        },
+        {
+            "name": "php-jsonpointer/php-jsonpointer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
+                "reference": "d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4",
+                "reference": "d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "seld/jsonlint": "1.1.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Rs\\Json": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Stolt",
+                    "email": "raphael.stolt@gmail.com",
+                    "homepage": "http://raphaelstolt.blogspot.com/"
+                }
+            ],
+            "description": "Implementation of JSON Pointer (http://tools.ietf.org/html/rfc6901)",
+            "homepage": "https://github.com/raphaelstolt/php-jsonpointer",
+            "keywords": [
+                "json",
+                "json pointer",
+                "json traversal"
+            ],
+            "time": "2013-10-28 16:00:39"
+        },
+        {
             "name": "pimple/pimple",
             "version": "v1.0.2",
             "source": {
@@ -1759,16 +1892,16 @@
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.3.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/jsonlint.git",
-                "reference": "a7bc2ec9520ad15382292591b617c43bdb1fec35"
+                "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/a7bc2ec9520ad15382292591b617c43bdb1fec35",
-                "reference": "a7bc2ec9520ad15382292591b617c43bdb1fec35",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
+                "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
                 "shasum": ""
             },
             "require": {
@@ -1779,8 +1912,8 @@
             ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Seld\\JsonLint\\": "src/Seld/JsonLint/"
+                "psr-0": {
+                    "Seld\\JsonLint": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1791,7 +1924,8 @@
                 {
                     "name": "Jordi Boggiano",
                     "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
+                    "homepage": "http://seld.be",
+                    "role": "Developer"
                 }
             ],
             "description": "JSON Linter",
@@ -1801,7 +1935,7 @@
                 "parser",
                 "validator"
             ],
-            "time": "2014-09-05 15:36:20"
+            "time": "2013-11-04 15:41:11"
         },
         {
             "name": "slim/slim",
@@ -4812,32 +4946,14 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.5",
-            "alias_normalized": "1.1.5.0",
-            "version": "dev-CGIV-3172-saving-invoice-settings",
-            "package": "channelgrabber/settings"
-        },
-        {
-            "alias": "1.9.7",
-            "alias_normalized": "1.9.7.0",
-            "version": "dev-CGIV-3172-psr4",
-            "package": "channelgrabber/slim"
-        },
-        {
-            "alias": "1.2.28",
-            "alias_normalized": "1.2.28.0",
-            "version": "dev-CGIV-3172-removed-library-restriction",
-            "package": "channelgrabber/template"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/settings": 20,
-        "channelgrabber/slim": 20,
-        "channelgrabber/template": 20,
         "composer/composer": 20,
+        "php-jsonpatch/php-jsonpatch": 20,
+        "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
