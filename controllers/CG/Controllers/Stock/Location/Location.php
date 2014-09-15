@@ -9,15 +9,14 @@ use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
 use CG\Slim\Controller\Entity\DeleteTrait;
+use CG\Validation\PaginationInterface;
 use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
 
-class Location
+class Location implements PaginationInterface
 {
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
-
-    const ALL_LIMIT = 'all';
 
     protected $listingStatusService;
     protected $stockService;
