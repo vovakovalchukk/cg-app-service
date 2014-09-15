@@ -45,8 +45,7 @@ class Location
         $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
         $rootOUID = $stock->getOrganisationUnitId();
-        
-        $this->getListingStatusService()->updateRelatedListings($stock, $relatedOUIDs);
+        $this->getListingStatusService()->updateRelatedListings($stock, $rootOUID);
         return $stockLocation;
     }
 
