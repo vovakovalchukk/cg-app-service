@@ -2,7 +2,6 @@
 namespace CG\Controllers\Stock\Location;
 
 use CG\Listing\ListingStatusService;
-use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service;
 use CG\Stock\Service as StockService;
@@ -21,13 +20,11 @@ class Location
     const ALL_LIMIT = 'all';
 
     protected $listingStatusService;
-    protected $organisationUnitService;
     protected $stockService;
     protected $stockLocationMapper;
 
     public function __construct(
         ListingStatusService $listingStatusService,
-        OrganisationUnitService $organisationUnitService,
         StockLocationMapper $stockLocationMapper,
         Slim $app,
         Service $service,
@@ -35,7 +32,6 @@ class Location
         StockService $stockService
     ) {
         $this->setListingStatusService($listingStatusService)
-            ->setOrganisationUnitService($organisationUnitService)
             ->setStockLocationMapper($stockLocationMapper)
             ->setSlim($app)
             ->setService($service)
@@ -49,25 +45,9 @@ class Location
         $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
         $rootOUID = $stock->getOrganisationUnitId();
-        $relatedOrganisationUnits = $this->getOrganisationUnitService()->fetchFiltered(static::ALL_LIMIT, null, $rootOUID);
-        $relatedOUIDs = [];
-        foreach($relatedOrganisationUnits as $relatedOU) {
-            $relatedOUIDs[] = $relatedOU->getId();
-        }
-        $relatedOUIDs[] = $rootOUID;
+        
         $this->getListingStatusService()->updateRelatedListings($stock, $relatedOUIDs);
         return $stockLocation;
-    }
-
-    protected function setOrganisationUnitService(OrganisationUnitService $organisationUnitService)
-    {
-        $this->organisationUnitService = $organisationUnitService;
-        return $this;
-    }
-
-    protected function getOrganisationUnitService()
-    {
-        return $this->organisationUnitService;
     }
 
     protected function setStockService($stockService)
