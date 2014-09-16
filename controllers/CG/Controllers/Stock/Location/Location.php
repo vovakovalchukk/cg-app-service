@@ -54,7 +54,7 @@ class Location implements PaginationInterface
         return $this;
     }
 
-    public function getStockService()
+    protected function getStockService()
     {
         return $this->stockService;
     }
@@ -65,7 +65,7 @@ class Location implements PaginationInterface
         return $this;
     }
 
-    public function getListingStatusService()
+    protected function getListingStatusService()
     {
         return $this->listingStatusService;
     }
@@ -76,7 +76,7 @@ class Location implements PaginationInterface
         return $this;
     }
 
-    public function getStockLocationMapper()
+    protected function getStockLocationMapper()
     {
         return $this->stockLocationMapper;
     }
