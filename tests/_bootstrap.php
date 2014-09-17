@@ -3,8 +3,19 @@
 define('TEST_DIR', __DIR__);
 spl_autoload_register(function ($className)
 {
-    $includePaths = [__DIR__ . "/api/_pages/", __DIR__ . "/../vendor/channelgrabber/codeception/CG/"];
+    if(strpos($className, "Codeception") !== false) {
+        $prefix = 'Codeception';
+        $baseDir = __DIR__."/../vendor/channelgrabber/codeception/src/";
+        $len = strlen($prefix);
+        $relativeClass = substr($className, $len);
+        $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+        if (file_exists($file)) {
+            include_once $file;
+            return;
+        }
+    }
 
+    $testPagesPath = __DIR__ . "/api/_pages/";
     $className = ltrim($className, '\\');
     $filename  = '';
     $namespace = '';
@@ -16,12 +27,11 @@ spl_autoload_register(function ($className)
 
     $filename .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    foreach ($includePaths as $filePath) {
-        if (file_exists($filePath . $filename)) {
-            include_once $filePath . $filename;
-            return;
-        }
+    if (file_exists($testPagesPath . $filename)) {
+        include_once $testPagesPath . $filename;
+        return;
     }
 
     return false;
 }, true, true);
+

@@ -6,23 +6,11 @@ use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
-use CG\Validation\ValidatorChain;
-use Zend\Validator\Between;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\Identical;
-use Zend\Validator\StringLength;
-use Zend\Di\Di;
+use CG\Validation\Rules\BooleanValidator;
 
 class Filter implements RulesInterface
 {
-    protected $di;
-
     use PaginationTrait;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
 
     public function getRules()
     {
@@ -33,90 +21,86 @@ class Filter implements RulesInterface
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "id"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                 ]
             ],
             'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'required'   => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "organisationUnitId"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
             'accountId' => [
                 'name' => 'accountId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "accountId"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                 ]
             ],
             'externalId' => [
                 'name' => 'externalId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "externalId"])
+                    new IsArrayValidator(["name" => "externalId"])
                 ]
             ],
             'sku' => [
                 'name' => 'sku',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "sku"])
+                    new IsArrayValidator(["name" => "sku"])
                 ]
             ],
             'title' => [
                 'name' => 'title',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "title"])
+                    new IsArrayValidator(["name" => "title"])
                 ]
             ],
             'url' => [
                 'name' => 'url',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "url"])
+                    new IsArrayValidator(["name" => "url"])
                 ]
             ],
             'imageId' => [
                 'name' => 'imageId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "imageId"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'imageId')
                 ]
             ],
             'createdDate' => [
                 'name' => 'createdDate',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "createdDate"])
+                    new IsArrayValidator(["name" => "createdDate"])
                 ]
             ],
             'status' => [
                 'name' => 'status',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "status"])
+                    new IsArrayValidator(["name" => "status"])
                 ]
             ],
             'variationCount' => [
                 'name' => 'variationCount',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ["name" => "variationCount"])
+                    new IsArrayValidator(["name" => "variationCount"])
+                ]
+            ],
+            'hidden' => [
+                'name' => 'hidden',
+                'required' => false,
+                'validators' => [
+                    new BooleanValidator(["name" => "hidden"])
                 ]
             ]
         ];
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }
