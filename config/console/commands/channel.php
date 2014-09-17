@@ -1,5 +1,6 @@
 <?php
 use CG\Channel\Command\Order\Download as OrderDownload;
+use CG\Channel\Command\Listing\Import as ListingImport;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
@@ -29,5 +30,16 @@ return array(
         'options' => array(
 
         )
-    )
+    ),
+    'channel:importListings' => [
+        'command' => function (InputInterface $input) use ($di) {
+            $command = $di->get(ListingImport::class);
+            $command->importListings();
+        },
+        'description' => 'Fetch all the sales account and use a factory to generate the Gearman Jobs for each to download listings',
+        'arguments' => [
+        ],
+        'options' => [
+        ]
+    ]
 );
