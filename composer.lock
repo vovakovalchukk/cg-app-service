@@ -4,15 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "95dfb1fea8aa362ac0c1d66e867a9790",
+    "hash": "7b516886529a14c9c351125b10411049",
     "packages": [
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-develop",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
                 "reference": "851ee762c9164ccf4cb5ea8fbad8105b112c80b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.5.1-d339a5.zip",
+                "reference": "851ee762c9164ccf4cb5ea8fbad8105b112c80b4",
+                "shasum": "9b3b2625a672390f9bdf3c59c37012d018d2212d"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.4",
@@ -39,6 +45,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Amazon\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-16 15:58:21"
@@ -5132,16 +5143,10 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.4.1",
-            "alias_normalized": "1.4.1.0",
-            "version": "dev-develop",
-            "package": "channelgrabber/amazon"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
