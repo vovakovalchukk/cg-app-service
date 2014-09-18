@@ -7,6 +7,7 @@ use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\Rules\BooleanValidator;
+use Zend\Validator\StringLength;
 
 class Filter implements RulesInterface
 {
@@ -100,7 +101,21 @@ class Filter implements RulesInterface
                 'validators' => [
                     new BooleanValidator(["name" => "hidden"])
                 ]
-            ]
+            ],
+            'channel' => [
+                'name' => 'channel',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "channel"])
+                ]
+            ],
+            'searchTerm' => array(
+                'name' => 'searchTerm',
+                'required' => false,
+                'validators' => array(
+                    new StringLength(['min' => 1])
+                )
+            ),
         ];
     }
 }

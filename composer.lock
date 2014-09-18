@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b516886529a14c9c351125b10411049",
+    "hash": "ed6225dd917ff00ee640d475f1eed35a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -502,17 +502,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.1.3",
+            "version": "dev-CGIV-3314-filter-by-channel-and-search",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "75acb5f0d765f8fde2258b90634c1e11c16d75ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.3-6bcf36.zip",
-                "reference": "75acb5f0d765f8fde2258b90634c1e11c16d75ed",
-                "shasum": "42aeb34bda079823de034106a4a73909ac5fe904"
+                "url": "/home/shoniqua/repos/cg-listing",
+                "reference": "aa8fbae358f142e9355415bc12e8137a7fb66e7d"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -541,12 +535,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-16 08:59:50"
+            "time": "2014-09-18 08:56:37"
         },
         {
             "name": "channelgrabber/location",
@@ -807,11 +796,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Predis\\": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-07-09 15:10:32"
@@ -1362,11 +1346,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -2034,9 +2013,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -2124,8 +2101,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -4002,11 +3978,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -4442,7 +4413,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -4599,8 +4570,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -5143,11 +5113,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.1.3",
+            "alias_normalized": "1.1.3.0",
+            "version": "dev-CGIV-3314-filter-by-channel-and-search",
+            "package": "channelgrabber/listing"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
