@@ -7,6 +7,8 @@ use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\Rules\BooleanValidator;
+use Zend\Validator\Date;
+use Zend\Validator\StringLength;
 
 class Filter implements RulesInterface
 {
@@ -73,11 +75,18 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'imageId')
                 ]
             ],
-            'createdDate' => [
-                'name' => 'createdDate',
+            'createdDateFrom' => [
+                'name' => 'createdDateFrom',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "createdDate"])
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'createdDateTo' => [
+                'name' => 'createdDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
                 ]
             ],
             'status' => [
@@ -100,7 +109,21 @@ class Filter implements RulesInterface
                 'validators' => [
                     new BooleanValidator(["name" => "hidden"])
                 ]
-            ]
+            ],
+            'channel' => [
+                'name' => 'channel',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "channel"])
+                ]
+            ],
+            'searchTerm' => array(
+                'name' => 'searchTerm',
+                'required' => false,
+                'validators' => array(
+                    new StringLength(['min' => 1])
+                )
+            ),
         ];
     }
 }

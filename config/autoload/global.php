@@ -120,6 +120,7 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
+use CG\Channel\Command\Service as AccountCommandService;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -510,17 +511,12 @@ return array(
                     'repository' => TagRepository::class
                 )
             ),
-            OrderDownloadCommand::class => array(
+            AccountCommandService::class => array(
                 'parameter' => array(
                     'accountStorage' => AccountApiStorage::class
                 )
             ),
             AccountApiStorage::class => array(
-                'parameter' => array(
-                    'client' => 'account_guzzle'
-                )
-            ),
-            PollingWindowApiStorage::class => array(
                 'parameter' => array(
                     'client' => 'account_guzzle'
                 )

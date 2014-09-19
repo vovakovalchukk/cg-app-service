@@ -77,7 +77,12 @@ class Entity implements RulesInterface
                 'name'       => 'hidden',
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'hidden'])]
-            ]
+            ],
+            'channel' => [
+                'name'       => 'channel',
+                'required'   => true,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }

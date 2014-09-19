@@ -51,7 +51,7 @@ class CollectionPage extends RootPage
                 'title' => 'aTitle2',
                 'url' => 'www.reddit.com',
                 'imageId' => 2,
-                'createdDate' => '2014-08-15 14:00:00',
+                'createdDate' => '2014-08-14 14:00:00',
                 'status' => 'lost',
                 'variationCount' => 1
             ],
@@ -77,7 +77,7 @@ class CollectionPage extends RootPage
                 'title' => 'aTitle4',
                 'url' => 'www.sky.com',
                 'imageId' => 1,
-                'createdDate' => '2014-08-14 14:00:00',
+                'createdDate' => '2014-08-17 14:00:00',
                 'status' => 'lost',
                 'variationCount' => 3
             ],
@@ -90,7 +90,7 @@ class CollectionPage extends RootPage
                 'title' => 'aTitle5',
                 'url' => 'www.gamerscripts.com',
                 'imageId' => 3,
-                'createdDate' => '2015-08-14 14:00:00',
+                'createdDate' => '2015-08-20 14:00:00',
                 'status' => 'theFuture',
                 'variationCount' => 10
             ]
@@ -156,9 +156,23 @@ class CollectionPage extends RootPage
             'title' => [],
             'url' => [],
             'imageId' => [],
-            'createdDate' => [],
             'status' => [],
             'variationCount' => []
         ];
+    }
+
+    public static function getRangeFilters()
+    {
+        return [["field" => "createdDate", "startFilter" => "createdDateFrom", "endFilter" => "createdDateTo"]];
+    }
+
+    public static function getSearchTermFilterFields()
+    {
+        return ["sku", "title"];
+    }
+
+    public static function getChildPageClass()
+    {
+        return EntityPage::class;
     }
 }
