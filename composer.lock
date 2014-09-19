@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd6d06f4161c3d798a37a3eafc6641dd",
+    "hash": "ac1f6d4d7ba9c1dfc5e18d017b8897c5",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -398,17 +398,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.1.3",
+            "version": "dev-CGIV-3024-change-status-on-stock-update",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "75acb5f0d765f8fde2258b90634c1e11c16d75ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.3-6bcf36.zip",
-                "reference": "75acb5f0d765f8fde2258b90634c1e11c16d75ed",
-                "shasum": "42aeb34bda079823de034106a4a73909ac5fe904"
+                "reference": "7d6e222c29705a544ccf56bb834040444f4fde94"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -419,6 +413,7 @@
                 "channelgrabber/image": ">=1.0.4,<2.0.0",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.5,<3.0.0",
+                "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4"
             },
             "require-dev": {
@@ -437,12 +432,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-16 08:59:50"
+            "time": "2014-09-19 14:01:03"
         },
         {
             "name": "channelgrabber/location",
@@ -880,17 +870,11 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.7.18",
+            "version": "dev-CGIV-3024-change-stock-listing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.18-ff9ce8.zip",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3",
-                "shasum": "7363cb3a921603620fc1e9933a065c2476f1fa11"
+                "reference": "81c7eabb67aad999f084a52309ef2740c63969a4"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -908,12 +892,7 @@
                     "src/Utilities.php"
                 ]
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-17 13:23:33"
+            "time": "2014-09-19 13:46:26"
         },
         {
             "name": "channelgrabber/stock",
@@ -5004,11 +4983,24 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.1.3",
+            "alias_normalized": "1.1.3.0",
+            "version": "dev-CGIV-3024-change-status-on-stock-update",
+            "package": "channelgrabber/listing"
+        },
+        {
+            "alias": "2.7.16",
+            "alias_normalized": "2.7.16.0",
+            "version": "dev-CGIV-3024-change-stock-listing",
+            "package": "channelgrabber/stdlib"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
