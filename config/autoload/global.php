@@ -31,6 +31,20 @@ use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
 use Slim\Slim;
 
+// Account
+use CG\Account\Service\Service as AccountService;
+use CG\Account\Shared\Repository as AccountRepository;
+use CG\Account\Client\Storage\Api as AccountApiStorage;
+use CG\Account\Service\Storage\Db as AccountPersistentStorage;
+use CG\Account\Shared\Mapper as AccountMapper;
+
+//Polling Window
+use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
+use CG\Account\Shared\PollingWindow\Repository as AccountPollingWindowRepository;
+use CG\Account\Service\PollingWindow\Storage\Cache as AccountPollingWindowCacheStorage;
+use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
+use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
+
 //Order
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
@@ -105,8 +119,8 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
+use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
-use CG\Account\Client\Storage\Api as AccountApiStorage;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -260,6 +274,30 @@ return array(
             'WriteCGSql' => array(
                 'parameter' => array(
                     'adapter' => 'Write'
+                )
+            ),
+            AccountService::class => array(
+                'parameters' => array(
+                    'repository' => AccountApiStorage::class,
+                )
+            ),
+            AccountPollingWindowService::class => array(
+                'parameter' => array(
+                    'repository' => AccountPollingWindowRepository::class
+                )
+            ),
+            AccountPollingWindowRepository::class => array(
+                'parameter' => array(
+                    'storage' => AccountPollingWindowCacheStorage::class,
+                    'repository' => AccountPollingWindowDbStorage::class
+                )
+            ),
+            AccountPollingWindowDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => AccountPollingWindowMapper::class
                 )
             ),
             CacheRedisPipeline::class => array(
