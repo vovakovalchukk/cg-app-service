@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3dc94303815cb52599dda8f4d1cc43e7",
+    "hash": "7eb335f37dd322291bb5368e87c7f322",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1046,17 +1046,11 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.7.18",
+            "version": "dev-CGIV-3024-change-stock-listing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.18-ff9ce8.zip",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3",
-                "shasum": "7363cb3a921603620fc1e9933a065c2476f1fa11"
+                "reference": "81c7eabb67aad999f084a52309ef2740c63969a4"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1074,12 +1068,7 @@
                     "src/Utilities.php"
                 ]
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-17 13:23:33"
+            "time": "2014-09-19 13:46:26"
         },
         {
             "name": "channelgrabber/stock",
@@ -5261,6 +5250,12 @@
             "alias_normalized": "1.1.3.0",
             "version": "dev-CGIV-3315-ActionToStatusMapping",
             "package": "channelgrabber/listing"
+        },
+        {
+            "alias": "2.7.16",
+            "alias_normalized": "2.7.16.0",
+            "version": "dev-CGIV-3024-change-stock-listing",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
@@ -5268,6 +5263,7 @@
         "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/listing": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

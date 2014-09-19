@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\Stock\Location;
 
-use CG\Listing\ListingStatusService;
+use CG\CGLib\Listing\Status\Service as ListingStatusService;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service;
 use CG\Stock\Service as StockService;
