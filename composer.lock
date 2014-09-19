@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2895523926e8393c9653edc9975d65a2",
+    "hash": "b9c50f1d97bfa683fad767182bd4509e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -502,11 +502,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-3314-filter-by-channel-and-search",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
-                "url": "/home/shoniqua/repos/cg-listing",
-                "reference": "e1d9d7e87a748f2fb8455c323f40b975e6747b0b"
+                "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
+                "reference": "2084c02483b6b46c3d919f9666b88050eff3ecf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.4-f43688.zip",
+                "reference": "2084c02483b6b46c3d919f9666b88050eff3ecf8",
+                "shasum": "abead7d713e04a543dbef7bc36465331a89c89e2"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -517,6 +523,7 @@
                 "channelgrabber/image": ">=1.0.4,<2.0.0",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/stdlib": ">=2.7.5,<3.0.0",
+                "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4"
             },
             "require-dev": {
@@ -535,7 +542,12 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2014-09-18 09:53:52"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-19 09:04:45"
         },
         {
             "name": "channelgrabber/location",
@@ -5113,17 +5125,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.3",
-            "alias_normalized": "1.1.3.0",
-            "version": "dev-CGIV-3314-filter-by-channel-and-search",
-            "package": "channelgrabber/listing"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
