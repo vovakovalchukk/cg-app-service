@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b9c50f1d97bfa683fad767182bd4509e",
+    "hash": "a918aacc06e88be75c619256d5369a20",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -210,24 +210,19 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "2.1.0",
+            "version": "dev-CGIV-3327-CachedDefinitions",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "53f87d2711cfb1163897972803cc1c2c0ca42309"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.1.0-aea745.zip",
-                "reference": "53f87d2711cfb1163897972803cc1c2c0ca42309",
-                "shasum": "ab5fe9944a0274909863418cbd53f574fdad4213"
+                "reference": "9ed7c4f6545f5904495b58022bfc54f6602ef56e"
             },
             "require": {
+                "channelgrabber/spork": "~0.2",
                 "channelgrabber/stdlib": ">=2.7.16",
                 "cilex/cilex": "~1.0.1",
                 "composer-plugin-api": "1.0.0",
                 "composer/composer": "1.0.*@dev",
-                "kriswallsmith/spork": "~0.2",
+                "zendframework/zend-cache": ">=2.2,<3.0",
                 "zendframework/zend-di": ">=2.2,<3.0"
             },
             "require-dev": {
@@ -259,12 +254,7 @@
                 }
             ],
             "description": "Dependency injection wrappers and compilation",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-16 09:44:39"
+            "time": "2014-09-20 11:52:06"
         },
         {
             "name": "channelgrabber/ebay",
@@ -1014,18 +1004,63 @@
             "time": "2014-09-12 16:24:49"
         },
         {
-            "name": "channelgrabber/stdlib",
-            "version": "2.7.17",
+            "name": "channelgrabber/spork",
+            "version": "v0.2",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "32510da82d4c2de9a9e9ae7da6a9be8f85eea331"
+                "url": "git@github.com:channelgrabber/spork.git",
+                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.17-15b839.zip",
-                "reference": "32510da82d4c2de9a9e9ae7da6a9be8f85eea331",
-                "shasum": "e3f8bab8e968f0e9dafb118cacf92993679c2c0e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-spork-v0.2-705a2e.zip",
+                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2",
+                "shasum": "7891c8f2f36d46cb736983382b5b02b48b87cbd5"
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-posix": "*",
+                "php": ">=5.3.0",
+                "symfony/event-dispatcher": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Spork": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asynchronous PHP",
+            "homepage": "https://github.com/kriswallsmith/spork",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2013-03-21 04:42:22"
+        },
+        {
+            "name": "channelgrabber/stdlib",
+            "version": "2.7.18",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
+                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.18-ff9ce8.zip",
+                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3",
+                "shasum": "7363cb3a921603620fc1e9933a065c2476f1fa11"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1036,11 +1071,11 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "CG\\Stdlib\\": ""
+                "psr-4": {
+                    "CG\\Stdlib\\": "src"
                 },
                 "files": [
-                    "CG/Stdlib/Utilities.php"
+                    "src/Utilities.php"
                 ]
             },
             "transport-options": {
@@ -1048,7 +1083,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-16 13:16:04"
+            "time": "2014-09-17 13:23:33"
         },
         {
             "name": "channelgrabber/stock",
@@ -1525,12 +1560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a"
+                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a",
-                "reference": "d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a",
+                "url": "https://api.github.com/repos/composer/composer/zipball/2cb64c8a7254b748617baeff4316654bcf6bb551",
+                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551",
                 "shasum": ""
             },
             "require": {
@@ -1585,7 +1620,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-09-10 15:11:05"
+            "time": "2014-09-18 15:58:10"
         },
         {
             "name": "fabpot/goutte",
@@ -1802,47 +1837,6 @@
                 "schema"
             ],
             "time": "2014-08-25 02:48:14"
-        },
-        {
-            "name": "kriswallsmith/spork",
-            "version": "v0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kriswallsmith/spork.git",
-                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/spork/zipball/34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2",
-                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pcntl": "*",
-                "ext-posix": "*",
-                "php": ">=5.3.0",
-                "symfony/event-dispatcher": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Spork": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kris Wallsmith",
-                    "email": "kris.wallsmith@gmail.com",
-                    "homepage": "http://kriswallsmith.net/"
-                }
-            ],
-            "description": "Asynchronous PHP",
-            "homepage": "https://github.com/kriswallsmith/spork",
-            "time": "2013-03-21 04:42:22"
         },
         {
             "name": "nocarrier/hal",
@@ -2774,6 +2768,64 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2014-08-31 03:22:04"
+        },
+        {
+            "name": "zendframework/zend-cache",
+            "version": "2.3.1",
+            "target-dir": "Zend/Cache",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendCache.git",
+                "reference": "a6fde5cfabff43a202e054c6c255d21c1b50480e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zend-cache-a6fde5cfabff43a202e054c6c255d21c1b50480e-zip-4af4c9.zip",
+                "reference": "2.3.1",
+                "shasum": "62189b8588e02bb68ad292e15ca29f4b2a28aa2e"
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-eventmanager": "self.version",
+                "zendframework/zend-servicemanager": "self.version",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "zendframework/zend-serializer": "self.version",
+                "zendframework/zend-session": "self.version"
+            },
+            "suggest": {
+                "ext-apc": "APC >= 3.1.6 to use the APC storage adapter",
+                "ext-dba": "DBA, to use the DBA storage adapter",
+                "ext-memcached": "Memcached >= 1.0.0 to use the Memcached storage adapter",
+                "ext-wincache": "WinCache, to use the WinCache storage adapter",
+                "zendframework/zend-serializer": "Zend\\Serializer component",
+                "zendframework/zend-session": "Zend\\Session component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Cache\\": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides a generic way to cache any data",
+            "keywords": [
+                "cache",
+                "zf2"
+            ],
+            "support": {
+                "source": "https://github.com/zendframework/Component_ZendCache/tree/release-2.3.1"
+            },
+            "time": "2014-04-15 15:29:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -4439,6 +4491,47 @@
             "time": "2013-10-04 15:03:51"
         },
         {
+            "name": "kriswallsmith/spork",
+            "version": "v0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/spork.git",
+                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/spork/zipball/34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2",
+                "reference": "34b518ebd0f4e9e76bf2ef586d9b35fa1acc51b2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-posix": "*",
+                "php": ">=5.3.0",
+                "symfony/event-dispatcher": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Spork": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asynchronous PHP",
+            "homepage": "https://github.com/kriswallsmith/spork",
+            "time": "2013-03-21 04:42:22"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.10.0",
             "source": {
@@ -5125,11 +5218,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "2.1.1",
+            "alias_normalized": "2.1.1.0",
+            "version": "dev-CGIV-3327-CachedDefinitions",
+            "package": "channelgrabber/di"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/di": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
