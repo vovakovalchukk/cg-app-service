@@ -15,21 +15,25 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "": "library/"
+        "psr-4": {
+            "CG\\": "library/CG/",
+            "CG\\Controllers\\": "controllers/CG/Controllers/"
         }
     },
     "require": {
-        "channelgrabber/constants": "dev-master",
         "channelgrabber/cilex": "~1.0.3",
-        "channelgrabber/stdlib": "~2.7.0",
+        "channelgrabber/constants": "dev-master",
+        "channelgrabber/di": "dev-CGIV-3327-CachedDefinitions as 2.1.1",
         "channelgrabber/http": "~1.2.12",
         "channelgrabber/log": "~1.5.2",
         "channelgrabber/slim": "~1.9.0",
+        "channelgrabber/stdlib": "~2.7.16",
         "channelgrabber/usage": "~1.0.0",
         "channelgrabber/user": "~1.14.3",
         "channelgrabber/validation": "~1.2.0",
         "channelgrabber/vnderror": "~1.0.0",
+        "channelgrabber/zf2-stdlib": "~1.1.14",
+        "composer/composer": "@dev",
         "guzzle/guzzle": "~3.7",
         "nocarrier/hal": "~0.9.3",
         "robmorgan/phinx": "v0.2.8",
@@ -40,25 +44,20 @@
         "zendframework/zend-eventmanager": "~2.2.5",
         "zendframework/zend-inputfilter": "~2.2.5",
         "zendframework/zend-servicemanager": "~2.2.5",
-        "zendframework/zend-validator": "~2.2.5",
-        "channelgrabber/zf2-stdlib" : "~1.1.14"
+        "zendframework/zend-validator": "~2.2.5"
     },
     "require-dev": {
+        "channelgrabber/codeception": "~1.1.47",
         "codeception/codeception": "1.8.0",
         "phpspec/phpspec": "2.0.*@dev",
-        "phpspec/prophecy": "~1.0",
-        "channelgrabber/codeception": "~1.1.47"
+        "phpspec/prophecy": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [
-            "composer -o dump-autoload",
-            "php bin/update_di_components.php",
-            "php -d memory_limit=512M bin/compile_di.php"
+            "composer -o dump-autoload"
         ],
         "post-update-cmd": [
-            "composer -o dump-autoload",
-            "php bin/update_di_components.php",
-            "php -d memory_limit=512M bin/compile_di.php"
+            "composer -o dump-autoload"
         ]
     }
 }

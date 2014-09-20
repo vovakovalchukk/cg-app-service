@@ -5,7 +5,6 @@ define('PROJECT_ROOT', dirname(__DIR__));
 define('DS', DIRECTORY_SEPARATOR);
 
 //Autoloading
-require_once __DIR__ . DS .'autoload.php';
 require_once dirname(__DIR__) . DS .'vendor' . DS .'autoload.php';
 
 //Application
