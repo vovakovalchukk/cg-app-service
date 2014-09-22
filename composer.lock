@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9eb7ada0512f462c314d43f44a2210c2",
+    "hash": "6c3fba4b773a8aedbfc9583b04696ea0",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -98,11 +98,17 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "dev-CGIV-3327-CachedDefinitions",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "9ed7c4f6545f5904495b58022bfc54f6602ef56e"
+                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.1.1-4a06ae.zip",
+                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b",
+                "shasum": "1aa4d1bd7ef63469911da771117039613fc7d319"
             },
             "require": {
                 "channelgrabber/spork": "~0.2",
@@ -142,7 +148,12 @@
                 }
             ],
             "description": "Dependency injection wrappers and compilation",
-            "time": "2014-09-20 11:52:06"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-22 13:32:50"
         },
         {
             "name": "channelgrabber/email",
@@ -852,12 +863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551"
+                "reference": "1fff2afa1faf38b781618faeb6b96c5643baefeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/2cb64c8a7254b748617baeff4316654bcf6bb551",
-                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551",
+                "url": "https://api.github.com/repos/composer/composer/zipball/1fff2afa1faf38b781618faeb6b96c5643baefeb",
+                "reference": "1fff2afa1faf38b781618faeb6b96c5643baefeb",
                 "shasum": ""
             },
             "require": {
@@ -912,7 +923,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-09-18 15:58:10"
+            "time": "2014-09-22 14:19:53"
         },
         {
             "name": "guzzle/guzzle",
@@ -4313,17 +4324,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "2.1.1",
-            "alias_normalized": "2.1.1.0",
-            "version": "dev-CGIV-3327-CachedDefinitions",
-            "package": "channelgrabber/di"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/di": 20,
         "composer/composer": 20,
         "phpspec/phpspec": 20
     },
