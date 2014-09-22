@@ -4,11 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "5fe0e8900d284763f8c5367a531cbad5",
-=======
-    "hash": "ac1f6d4d7ba9c1dfc5e18d017b8897c5",
->>>>>>> CGIV-3024-listing-status-change
+    "hash": "ab7880fc009c0dfcb12e86b8661c1e46",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -508,25 +504,17 @@
         },
         {
             "name": "channelgrabber/listing",
-<<<<<<< HEAD
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "2084c02483b6b46c3d919f9666b88050eff3ecf8"
+                "reference": "8eef271bf1f3cd720608cc3c3de6e92ecfeb829c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.4-f43688.zip",
-                "reference": "2084c02483b6b46c3d919f9666b88050eff3ecf8",
-                "shasum": "abead7d713e04a543dbef7bc36465331a89c89e2"
-=======
-            "version": "dev-CGIV-3024-change-status-on-stock-update",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "7d6e222c29705a544ccf56bb834040444f4fde94"
->>>>>>> CGIV-3024-listing-status-change
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.1.5-702647.zip",
+                "reference": "8eef271bf1f3cd720608cc3c3de6e92ecfeb829c",
+                "shasum": "00f7f43e3da2854113ceb24bfb706043ca059e27"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -556,16 +544,12 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-<<<<<<< HEAD
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-19 09:04:45"
-=======
-            "time": "2014-09-19 14:01:03"
->>>>>>> CGIV-3024-listing-status-change
+            "time": "2014-09-22 08:40:04"
         },
         {
             "name": "channelgrabber/location",
@@ -835,6 +819,11 @@
                     "CG\\Predis\\": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-07-09 15:10:32"
         },
         {
@@ -1040,25 +1029,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-<<<<<<< HEAD
-            "version": "2.7.18",
+            "version": "2.7.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3"
+                "reference": "20f17c9fc1eba91a3167c9b66fd43d398fd1f4ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.18-ff9ce8.zip",
-                "reference": "5481ad0cfd466592d8aef6e68b6b1b4ba03e6de3",
-                "shasum": "7363cb3a921603620fc1e9933a065c2476f1fa11"
-=======
-            "version": "dev-CGIV-3024-change-stock-listing",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "81c7eabb67aad999f084a52309ef2740c63969a4"
->>>>>>> CGIV-3024-listing-status-change
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.19-d4ca99.zip",
+                "reference": "20f17c9fc1eba91a3167c9b66fd43d398fd1f4ff",
+                "shasum": "6cbfb17d9f97e73d13cd9ea358e753348d6d20f5"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1076,16 +1057,12 @@
                     "src/Utilities.php"
                 ]
             },
-<<<<<<< HEAD
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-17 13:23:33"
-=======
-            "time": "2014-09-19 13:46:26"
->>>>>>> CGIV-3024-listing-status-change
+            "time": "2014-09-22 08:42:43"
         },
         {
             "name": "channelgrabber/stock",
@@ -1398,6 +1375,11 @@
                     "CG\\VndError": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -1563,12 +1545,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551"
+                "reference": "d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/2cb64c8a7254b748617baeff4316654bcf6bb551",
-                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551",
+                "url": "https://api.github.com/repos/composer/composer/zipball/d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a",
+                "reference": "d79f2b0fd33ee9b89f3d9f1969f43dc3d570a33a",
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1605,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-09-18 15:58:10"
+            "time": "2014-09-10 15:11:05"
         },
         {
             "name": "fabpot/goutte",
@@ -2063,7 +2045,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -2151,7 +2135,8 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com"
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -4126,6 +4111,11 @@
                 "pdf",
                 "zf2"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -5261,35 +5251,22 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-<<<<<<< HEAD
-    "aliases": [],
-=======
     "aliases": [
-        {
-            "alias": "1.1.3",
-            "alias_normalized": "1.1.3.0",
-            "version": "dev-CGIV-3024-change-status-on-stock-update",
-            "package": "channelgrabber/listing"
-        },
-        {
-            "alias": "2.7.16",
-            "alias_normalized": "2.7.16.0",
-            "version": "dev-CGIV-3024-change-stock-listing",
-            "package": "channelgrabber/stdlib"
-        }
+
     ],
->>>>>>> CGIV-3024-listing-status-change
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }
