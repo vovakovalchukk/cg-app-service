@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "674975095f852f258b7c19ceb7abd931",
+    "hash": "fd9e367087ad080022133f8042e4f234",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1016,11 +1016,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-3298-GetTraitSavedEtag",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "a27004ca8d225d39c2756e27f10ca0961d6ffb1d"
+                "reference": "c83f16eb5f32d45e162e58161d01a2a621c80272"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.10.2-4cca03.zip",
+                "reference": "c83f16eb5f32d45e162e58161d01a2a621c80272",
+                "shasum": "d0a3e142b689e21320935cb675ada7fe2be2ac3b"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1059,7 +1065,12 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-09-17 11:02:42"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-24 12:39:45"
         },
         {
             "name": "channelgrabber/spork",
@@ -5398,17 +5409,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.10.2",
-            "alias_normalized": "1.10.2.0",
-            "version": "dev-CGIV-3298-GetTraitSavedEtag",
-            "package": "channelgrabber/slim"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
