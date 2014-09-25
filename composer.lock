@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e63965f2f20a0eb17194c57a074dcc3",
+    "hash": "034df8baa2f1be332b6a71f5ee8b3418",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1016,11 +1016,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-3412-BadRegex",
+            "version": "1.10.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "ab0f4ebef425a620df216e982cdf04d74598011e"
+                "reference": "0e7fcb221ae086eec0619401be85df9fc43a4d29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.10.5-ea7e3a.zip",
+                "reference": "0e7fcb221ae086eec0619401be85df9fc43a4d29",
+                "shasum": "36cc763d6ac0627daf90af4f7e4667e245efe9b7"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1059,7 +1065,12 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-09-25 16:23:49"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-25 18:13:49"
         },
         {
             "name": "channelgrabber/spork",
@@ -1626,12 +1637,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "69afedb49c48239e4bb7219ec1bc2e1ee5b83595"
+                "reference": "31eadc6920cd1866bc061fb0087798c37e2b7d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/69afedb49c48239e4bb7219ec1bc2e1ee5b83595",
-                "reference": "69afedb49c48239e4bb7219ec1bc2e1ee5b83595",
+                "url": "https://api.github.com/repos/composer/composer/zipball/31eadc6920cd1866bc061fb0087798c37e2b7d14",
+                "reference": "31eadc6920cd1866bc061fb0087798c37e2b7d14",
                 "shasum": ""
             },
             "require": {
@@ -1686,7 +1697,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-09-24 18:19:25"
+            "time": "2014-09-25 17:49:51"
         },
         {
             "name": "fabpot/goutte",
@@ -5397,18 +5408,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.10.4",
-            "alias_normalized": "1.10.4.0",
-            "version": "dev-CGIV-3412-BadRegex",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
