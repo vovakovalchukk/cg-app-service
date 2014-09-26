@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c71019474d4afa3adf9ea504d353fbd6",
+    "hash": "d0659912ebb69b1e6647a47d21a066af",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1016,11 +1016,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-3455-InvalidParentEntities",
+            "version": "1.10.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "a31e0cc156e49c94f76080c24e827eee316974af"
+                "reference": "66ea9558dd2eae06931175065d0424471eaee693"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.10.6-d45d48.zip",
+                "reference": "66ea9558dd2eae06931175065d0424471eaee693",
+                "shasum": "8747a44ae32a65cf17cab63be55b0659d608d0b3"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1059,7 +1065,12 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-09-26 13:58:19"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-09-26 15:50:28"
         },
         {
             "name": "channelgrabber/spork",
@@ -5397,18 +5408,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.10.5",
-            "alias_normalized": "1.10.5.0",
-            "version": "dev-CGIV-3455-InvalidParentEntities",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
