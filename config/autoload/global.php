@@ -476,6 +476,11 @@ return array(
                     'client' => 'account_guzzle'
                 )
             ),
+            PollingWindowApiStorage::class => array(
+                'parameter' => array(
+                    'client' => 'account_guzzle'
+                )
+            ),
             FilterService::class => array(
                 'parameter' => array(
                     'filterStorage' => FilterCache::class,
