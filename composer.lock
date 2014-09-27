@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de1109cb9fa4cfe346146913afa96c6a",
+    "hash": "2f73ab9194f02e9f86efd76f1e0447b4",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -94,11 +94,11 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "a159a034ca5c0640b2db9dbc31aade39706cde09"
+                "reference": "4af2049a153f99d73281a95fe88f6b3e51e1a717"
             },
             "require": {
                 "channelgrabber/channel": ">=1.8.6",
@@ -125,7 +125,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2014-09-27 16:36:47"
+            "time": "2014-09-27 18:51:03"
         },
         {
             "name": "channelgrabber/channel",
@@ -308,17 +308,17 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "a71718ecf3060d097cac9f6d7059f1e561fdb0e0"
+                "reference": "0aa1eca4addae6a83cea434fe24565a48b657612"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.2.5-5d9800.zip",
-                "reference": "a71718ecf3060d097cac9f6d7059f1e561fdb0e0",
-                "shasum": "395d99db8a58c1916aab7ba8d8db5da0ca0247b7"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.2.6-acab03.zip",
+                "reference": "0aa1eca4addae6a83cea434fe24565a48b657612",
+                "shasum": "e5d829c15726a13f4ca18bca25bed3ae54554223"
             },
             "require": {
                 "channelgrabber/channel": ">=1.9.2",
@@ -359,7 +359,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-27 16:39:43"
+            "time": "2014-09-27 18:47:42"
         },
         {
             "name": "channelgrabber/email",
