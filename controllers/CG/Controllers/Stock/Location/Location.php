@@ -43,8 +43,7 @@ class Location implements PaginationInterface
         $stockLocation = $this->getService()->saveHal($hal, ["id" => $id]);
         $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
-        $rootOUID = $stock->getOrganisationUnitId();
-        $this->getListingStatusService()->updateRelatedListings($stock, $rootOUID);
+        $this->getListingStatusService()->updateRelatedListings($stock);
         return $stockLocation;
     }
 
