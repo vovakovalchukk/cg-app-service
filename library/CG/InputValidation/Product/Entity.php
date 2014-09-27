@@ -44,9 +44,8 @@ class Entity implements RulesInterface
             ],
             'name' => [
                 'name'       => 'name',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 ]
             ],
             'parentProductId' => [
