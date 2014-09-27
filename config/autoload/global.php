@@ -28,7 +28,7 @@ use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
 use Slim\Slim;
 
 // Account
-use CG\Account\Service\Service as AccountService;
+use CG\Account\Client\Service as AccountService;
 use CG\Account\Shared\Repository as AccountRepository;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Account\Service\Storage\Db as AccountPersistentStorage;
