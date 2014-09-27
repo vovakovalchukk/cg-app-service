@@ -40,8 +40,8 @@ class Entity implements RulesInterface
             ],
             'sku' => [
                 'name'       => 'sku',
-                'required'   => true,
-                'validators' => [new StringLength(['min' => 1])]
+                'required'   => false,
+                'validators' => []
             ],
             'title' => [
                 'name'       => 'title',
