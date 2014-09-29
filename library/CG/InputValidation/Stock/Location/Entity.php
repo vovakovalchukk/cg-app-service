@@ -47,8 +47,6 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'onHand']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'onHand must be at least %min%'])
                 ]
             ],
             'allocated' => [
@@ -56,8 +54,6 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'allocated']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'allocated must be at least %min%'])
                 ]
             ],
         ];
