@@ -134,12 +134,13 @@ return array(
                 $controller = $di->get(OrderCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method()
+                    $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'OPTIONS'),
+        'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderCollection',
-        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false),
+        'entityRoute' => '/order/:orderId'
     ),
     '/order/:orderId' => array (
         'controllers' => function($orderId) use ($di) {
@@ -152,7 +153,7 @@ return array(
                     $controller->$method($orderId, $app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => array('GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'eTag' => [
@@ -308,13 +309,14 @@ return array(
                 $controller = $di->get(ItemCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method()
+                    $controller->$method($app->request->getBody())
                 );
             },
-        'via' => array('GET', 'OPTIONS'),
+        'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
         'version' => new Version(1, 3),
+        'entityRoute' => '/orderItem/:orderItemId'
     ),
     '/orderItem/:orderItemId' => array (
         'controllers' => function($orderItemId) use ($di) {
@@ -327,7 +329,7 @@ return array(
                     $controller->$method($orderItemId, $app->request()->getBody())
                 );
             },
-        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE'),
+        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'version' => new Version(1, 3),

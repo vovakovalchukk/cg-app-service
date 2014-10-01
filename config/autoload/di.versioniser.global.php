@@ -1,4 +1,5 @@
 <?php
+use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -7,6 +8,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\AliasSettingsEntity;
 use CG\Slim\Versioning\AliasSettingsCollection;
+use CG\Slim\Versioning\UnimportedListingEntity;
+use CG\Slim\Versioning\UnimportedListingCollection;
 
 return [
     'di' => [
@@ -25,7 +28,11 @@ return [
                 'Versioniser_ProductCollection_3' => ProductCollection\Versioniser3::class,
                 'Versioniser_ProductEntity_3' => ProductEntity\Versioniser3::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
-                'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class
+                'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
+                'Versioniser_UnimportedListingEntity_1' => UnimportedListingEntity\Versioniser1::class,
+                'Versioniser_UnimportedListingCollection_1' => UnimportedListingCollection\Versioniser1::class,
+                'Versioniser_UnimportedListingEntity_2' => UnimportedListingEntity\Versioniser2::class,
+                'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class
             ],
             'Versioniser_OrderItemCollection_1' => [
                 'parameter' => [
@@ -60,6 +67,21 @@ return [
             'Versioniser_AliasSettingsCollection_1' => [
                 'parameter' => [
                     'aliasVersioniser1' => 'Versioniser_AliasSettingsEntity_1'
+                ],
+            ],
+            'Versioniser_UnimportedListingCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_UnimportedListingEntity_1'
+                ],
+            ],
+            'Versioniser_UnimportedListingEntity_2' => [
+                'parameter' => [
+                    'accountClient' => AccountApiStorage::class
+                ]
+            ],
+            'Versioniser_UnimportedListingCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_UnimportedListingEntity_2'
                 ],
             ],
         ],

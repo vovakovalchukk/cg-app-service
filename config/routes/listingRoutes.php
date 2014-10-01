@@ -73,7 +73,7 @@ return [
             'filterRules' => UnimportedListingCollectionValidation::class,
             'dataRules' => UnimportedListingEntityValidation::class
         ],
-        "version" => new Version(1, 1)
+        "version" => new Version(1, 3)
     ],
     '/unimportedListing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -94,7 +94,7 @@ return [
             'entityClass' => UnimportedListingEntity::class,
             'serviceClass' => UnimportedListingService::class,
         ],
-        "version" => new Version(1, 1)
+        "version" => new Version(1, 3)
     ]
 ];
  

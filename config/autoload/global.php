@@ -11,17 +11,13 @@
  * file.
  */
 
+use CG\ETag\Storage\Predis;
+use CG\ETag\StorageInterface;
 use Zend\Db\Sql\Sql;
 use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\Cache\Client\Redis as CacheRedis;
 use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
-use Zend\Di\Di;
-use Zend\Config\Config;
-use Zend\Di\Config as DiConfig;
-use Zend\Di\InstanceManager;
-use CG\Zend\Stdlib\Di\Definition\RuntimeDefinition;
-use CG\Zend\Stdlib\Di\DefinitionList;
 
 use CG\Cache\EventManagerInterface;
 use CG\Zend\Stdlib\Cache\EventManager as CGEventManager;
@@ -29,6 +25,21 @@ use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
+use Slim\Slim;
+
+// Account
+use CG\Account\Client\Service as AccountService;
+use CG\Account\Shared\Repository as AccountRepository;
+use CG\Account\Client\Storage\Api as AccountApiStorage;
+use CG\Account\Service\Storage\Db as AccountPersistentStorage;
+use CG\Account\Shared\Mapper as AccountMapper;
+
+//Polling Window
+use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
+use CG\Account\Shared\PollingWindow\Repository as AccountPollingWindowRepository;
+use CG\Account\Service\PollingWindow\Storage\Cache as AccountPollingWindowCacheStorage;
+use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
+use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 
 //Order
 use CG\Order\Service\Service as OrderService;
@@ -104,8 +115,8 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
-use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
+use CG\Channel\Command\Service as AccountCommandService;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -167,11 +178,11 @@ use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
 use CG\Stock\Mapper as StockMapper;
-use CG\Stock\Location\Service as LocationService;
-use CG\Stock\Location\Repository as LocationRepository;
-use CG\Stock\Location\Storage\Cache as LocationCacheStorage;
-use CG\Stock\Location\Storage\Db as LocationDbStorage;
-use CG\Stock\Location\Mapper as LocationMapper;
+use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Location\Repository as StockLocationRepository;
+use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
+use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
+use CG\Stock\Location\Mapper as StockLocationMapper;
 
 // Listing
 use CG\Listing\Service as ListingService;
@@ -190,54 +201,20 @@ use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 use CG\Image\Service as ImageService;
 use CG\Image\Storage\Api as ImageApi;
 
+// Location
+use CG\Location\Service as LocationService;
+use CG\Location\Repository as LocationRepository;
+use CG\Location\Mapper as LocationMapper;
+use CG\Location\Storage\Db as LocationDbStorage;
+use CG\Location\Storage\Cache as LocationCacheStorage;
+
 return array(
-    'service_manager' => array(
-        'factories' => array(
-            Di::Class => function($serviceManager) {
-                $configuration = $serviceManager->get('config');
-
-                $runtimeDefinition = new RuntimeDefinition(
-                    null,
-                    require dirname(dirname(__DIR__)) . '/vendor/composer/autoload_classmap.php'
-                );
-
-                $definitionList = new DefinitionList([$runtimeDefinition]);
-                $im = new InstanceManager();
-                $config = new DiConfig(isset($configuration['di']) ? $configuration['di'] : array());
-
-                $di = new Di($definitionList, $im, $config);
-
-                if (isset($configuration['db'], $configuration['db']['adapters'])) {
-                    foreach (array_keys($configuration['db']['adapters']) as $adapter) {
-                        $im->addAlias($adapter, 'Zend\Db\Adapter\Adapter');
-                        $im->addSharedInstance($serviceManager->get($adapter), $adapter);
-                    }
-                }
-
-                $im->addSharedInstance($di, 'Di');
-                $im->addSharedInstance($di, 'Zend\Di\Di');
-                $im->addSharedInstance($di->get('config', array('array' => $configuration)), 'config');
-                $im->addSharedInstance($di->get(Config::class, array('array' => $configuration)), 'app_config');
-
-                return $di;
-            }
-        ),
-        'shared' => array(
-            'Zend\Di\Di' => true
-        ),
-        'aliases' => array(
-            'Di' => 'Zend\Di\Di'
-        )
-    ),
     'di' => array(
         'instance' => array(
             'aliases' => array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
-                'Di' => Di::class,
-                'config' => Config::class,
-                'app_config' => Config::class
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -252,6 +229,30 @@ return array(
             'WriteCGSql' => array(
                 'parameter' => array(
                     'adapter' => 'Write'
+                )
+            ),
+            AccountService::class => array(
+                'parameters' => array(
+                    'repository' => AccountApiStorage::class,
+                )
+            ),
+            AccountPollingWindowService::class => array(
+                'parameter' => array(
+                    'repository' => AccountPollingWindowRepository::class
+                )
+            ),
+            AccountPollingWindowRepository::class => array(
+                'parameter' => array(
+                    'storage' => AccountPollingWindowCacheStorage::class,
+                    'repository' => AccountPollingWindowDbStorage::class
+                )
+            ),
+            AccountPollingWindowDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => AccountPollingWindowMapper::class
                 )
             ),
             CacheRedisPipeline::class => array(
@@ -465,7 +466,7 @@ return array(
                     'repository' => TagRepository::class
                 )
             ),
-            OrderDownloadCommand::class => array(
+            AccountCommandService::class => array(
                 'parameter' => array(
                     'accountStorage' => AccountApiStorage::class
                 )
@@ -646,7 +647,7 @@ return array(
             StockService::class => [
                 'parameter' => [
                     'repository' => StockRepository::class,
-                    'locationStorage' => LocationService::class
+                    'locationStorage' => StockLocationService::class
                 ]
             ],
             StockRepository::class => [
@@ -663,23 +664,23 @@ return array(
                     'mapper' => StockMapper::class
                 ]
             ],
-            LocationService::class => [
+            StockLocationService::class => [
                 'parameter' => [
-                    'repository' => LocationRepository::class
+                    'repository' => StockLocationRepository::class
                 ]
             ],
-            LocationRepository::class => [
+            StockLocationRepository::class => [
                 'parameter' => [
-                    'storage' => LocationCacheStorage::class,
-                    'repository' => LocationDbStorage::class
+                    'storage' => StockLocationCacheStorage::class,
+                    'repository' => StockLocationDbStorage::class
                 ]
             ],
-            LocationDbStorage::class => [
+            StockLocationDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => LocationMapper::class
+                    'mapper' => StockLocationMapper::class
                 ]
             ],
             StockAdjustmentCalculator::class => [
@@ -735,6 +736,26 @@ return array(
                     'mapper' => UnimportedListingMapper::class
                 ]
             ],
+            LocationService::class => [
+                'parameters' => [
+                    'repository' => LocationRepository::class,
+                    'mapper' => LocationMapper::class
+                ]
+            ],
+            LocationRepository::class => [
+                'parameter' => [
+                    'storage' => LocationCacheStorage::class,
+                    'repository' => LocationDbStorage::class
+                ]
+            ],
+            LocationDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => LocationMapper::class
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -744,12 +765,10 @@ return array(
                 'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
                 'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
                 'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
-                'CG\ETag\StorageInterface' => 'CG\ETag\Storage\Predis',
+                StorageInterface::class => Predis::class,
                 \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
-                'Di' => 'Zend\Di\Di',
-                'config' => Config::class,
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class
