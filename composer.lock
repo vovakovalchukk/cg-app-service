@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c249443e26e7ef8835af95424fad67e2",
+    "hash": "8080f50c5b62d03ffdf5744dbf6f562e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -698,17 +698,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.8.19",
+            "version": "dev-CGIV-3693-invoices-by-sku",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "77b6af503587f657974dc7fcfd872f9518511730"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.8.19-c0b5ae.zip",
-                "reference": "77b6af503587f657974dc7fcfd872f9518511730",
-                "shasum": "8e0eae64809e5507aa864a03b0d0153404ffd57f"
+                "url": "/home/shoniqua/repos/cg-order",
+                "reference": "371095350d4af91c89a68084a59c4da2f835d2bb"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -755,12 +749,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-30 14:47:23"
+            "time": "2014-10-06 15:43:21"
         },
         {
             "name": "channelgrabber/permission",
@@ -1491,11 +1480,6 @@
                     "CG\\VndError": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -1661,12 +1645,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "31eadc6920cd1866bc061fb0087798c37e2b7d14"
+                "reference": "b33da336ecb7f1c9b15a57285e5a9f09cf5f3dd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/31eadc6920cd1866bc061fb0087798c37e2b7d14",
-                "reference": "31eadc6920cd1866bc061fb0087798c37e2b7d14",
+                "url": "https://api.github.com/repos/composer/composer/zipball/b33da336ecb7f1c9b15a57285e5a9f09cf5f3dd2",
+                "reference": "b33da336ecb7f1c9b15a57285e5a9f09cf5f3dd2",
                 "shasum": ""
             },
             "require": {
@@ -1721,7 +1705,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-09-25 17:49:51"
+            "time": "2014-09-30 15:28:01"
         },
         {
             "name": "fabpot/goutte",
@@ -5437,11 +5421,17 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.8.19",
+            "alias_normalized": "1.8.19.0",
+            "version": "dev-CGIV-3693-invoices-by-sku",
+            "package": "channelgrabber/order"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
