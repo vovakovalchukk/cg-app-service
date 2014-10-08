@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8080f50c5b62d03ffdf5744dbf6f562e",
+    "hash": "ab0aebc89d3cea4aa5d6f2c76e8195f1",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -701,8 +701,8 @@
             "version": "dev-CGIV-3693-invoices-by-sku",
             "source": {
                 "type": "git",
-                "url": "/home/shoniqua/repos/cg-order",
-                "reference": "371095350d4af91c89a68084a59c4da2f835d2bb"
+                "url": "git@bitbucket.org:channelgrabber/cg-order.git",
+                "reference": "3291e3efdb05547835b520cfcffb98a00fceb5a9"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -749,7 +749,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-10-06 15:43:21"
+            "time": "2014-10-06 16:21:52"
         },
         {
             "name": "channelgrabber/permission",
