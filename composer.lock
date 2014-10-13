@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8898d1df9573eb06d164bf838b95433f",
+    "hash": "336553c84b6b2c91d71acb8ce798f536",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -698,11 +698,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-3749-error-status",
+            "version": "1.8.21",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "972917fd5dd42fd4e45339e33a27b4d48b61ab00"
+                "reference": "6812c4f3d74743cedddf9e018b3ee934b087bef3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.8.21-d55e3c.zip",
+                "reference": "6812c4f3d74743cedddf9e018b3ee934b087bef3",
+                "shasum": "bfe6fb338cdbfd1cb164149d5739aa9dac53d25d"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -749,7 +755,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-10-10 10:09:47"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-10-13 15:21:27"
         },
         {
             "name": "channelgrabber/permission",
@@ -866,6 +877,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\Predis\\": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-07-09 15:10:32"
@@ -5420,28 +5436,16 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.8.20",
-            "alias_normalized": "1.8.20.0",
-            "version": "dev-CGIV-3749-error-status",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }
