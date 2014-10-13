@@ -1,6 +1,7 @@
 <?php
 use CG\Channel\Command\Order\Download as OrderDownload;
 use CG\Channel\Command\Listing\Import as ListingImport;
+use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
@@ -41,5 +42,29 @@ return array(
         ],
         'options' => [
         ]
-    ]
+    ],
+    'channel:generateOrders' => [
+        'command' => function(InputInterface $input) use ($di) {
+            /**
+             * @var $command OrderGenerator
+             */
+            $command = $di->get(OrderGenerator::class);
+            $command->generateOrders(
+                $input->getArgument('accountId'),
+                $input->getArgument('numberOfOrders')
+            );
+        },
+        'description' => 'Generates orders for the selected account and saves them against the accounts OU',
+        'arguments' => [
+            'accountId' => [
+                'required' => true,
+                'description' => 'Account to generate orders for',
+            ],
+            'numberOfOrders' => [
+                'required' => false,
+                'description' => 'Number of orders to generate for account',
+                'default' => 100,
+            ],
+        ]
+    ],
 );
