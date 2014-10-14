@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9ed53e0f4a343666e5ee20a700f8e18a",
+    "hash": "5901f090f89fc06f2cc1dcf447af3c02",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -852,13 +852,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "cff110e65e70fe3f7ac4beff0bc9bce156fdfa2b"
+                "reference": "cac3467658151bdeead8ca241191d16c90f51227"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.3-998242.zip",
-                "reference": "cff110e65e70fe3f7ac4beff0bc9bce156fdfa2b",
-                "shasum": "1751ad9034eb2a0b1f003e86ad35bbdf9da4f502"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.3-d5cfef.zip",
+                "reference": "cac3467658151bdeead8ca241191d16c90f51227",
+                "shasum": "77d45724d54714488a59ec79ee419823520bbc72"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -877,7 +877,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-14 11:15:52"
+            "time": "2014-10-14 12:37:57"
         },
         {
             "name": "channelgrabber/product",
@@ -5429,9 +5429,7 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
@@ -5441,10 +5439,6 @@
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }
