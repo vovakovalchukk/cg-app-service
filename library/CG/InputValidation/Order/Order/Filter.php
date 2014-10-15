@@ -94,7 +94,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'orderIds',
                 'required' => false,
                 'validators' => array(
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "orderIds"))
+                    $this->getDi()->newInstance(IsArrayValidator::class, array("name" => "orderIds"))
                 ),
             ),
             'purchaseDateFrom' => array(
