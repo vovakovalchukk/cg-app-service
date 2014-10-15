@@ -282,7 +282,7 @@ return array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'filterEntityStorage' => FilterEntityCacheStorage::class
+                    'filterStorage' => FilterCache::class
                 )
             ),
             OrderPersistentDbStorage::class => array(
