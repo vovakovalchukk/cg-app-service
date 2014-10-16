@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e9bf5a9ddc78474a72ac005a6fcc6cbb",
+    "hash": "70eef5e981ed2c70cc14b0682164b2e5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -688,11 +688,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-3778-FetchOrders",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a2c20b45c9a55aae1a041707acee80a0cddf0bbf"
+                "reference": "683156a92fabae5027d9f8c109b209a4ddf28b94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.9.0-511e6b.zip",
+                "reference": "683156a92fabae5027d9f8c109b209a4ddf28b94",
+                "shasum": "0ae44b3de61f1bf46a6ccaa4667c22c255562b74"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -739,7 +745,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-10-15 15:01:21"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-10-16 11:08:48"
         },
         {
             "name": "channelgrabber/permission",
@@ -5419,17 +5430,11 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.8.23",
-            "alias_normalized": "1.8.23.0",
-            "version": "dev-CGIV-3778-FetchOrders",
-            "package": "channelgrabber/order"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
