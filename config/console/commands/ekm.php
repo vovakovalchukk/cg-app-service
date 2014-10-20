@@ -5,7 +5,7 @@ use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
-    'channel:downloadOrders' => array(
+    'ekm:downloadOrders' => array(
         'command' => function (InputInterface $input) use ($di) {
             $channel = 'ekm';
             $from = $input->getArgument('from');
