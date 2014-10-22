@@ -115,6 +115,8 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
+use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
+use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 
@@ -280,7 +282,7 @@ return array(
                 'parameters' => array(
                     'repository' => OrderRepository::class,
                     'storage' => OrderElasticSearchStorage::class,
-                    'filterEntityStorage' => FilterEntityCacheStorage::class
+                    'filterStorage' => FilterCache::class
                 )
             ),
             OrderPersistentDbStorage::class => array(
@@ -755,6 +757,14 @@ return array(
                     'writeSql' => 'WriteSql',
                     'mapper' => LocationMapper::class
                 ]
+            ],
+            OrderGeneratorCommand::class => [
+                'parameter' => [
+                    'factory' => SimpleOrderFactory::class,
+                    'accountStorage' => AccountApiStorage::class,
+                    'orderStorage' => OrderRepository::class,
+                    'orderItemStorage' => ItemRepository::class,
+                ],
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
