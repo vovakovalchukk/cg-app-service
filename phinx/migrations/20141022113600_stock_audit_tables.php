@@ -8,7 +8,7 @@ class StockAuditTables extends AbstractMigration
     {
         $stockAudit = $this->table('stockAudit');
         $stockAudit
-            ->addColumn('guid', 'string')
+            ->addColumn('stid', 'string')
             ->addColumn('action', 'string')
             ->addColumn('time', 'datetime')
             ->create();
