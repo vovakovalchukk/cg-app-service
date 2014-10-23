@@ -65,3 +65,4 @@ $app->add($versioning);
 $app->add($di->get(Renderer::class));
 include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 $app->run();
+fastcgi_finish_request();
