@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5746d6702802e223298de43261833cdf",
+    "hash": "7c08c7cc436887b35815e0d262516c6c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -101,7 +101,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "79371a571ec9d14820ef043d739512958dc9df61"
+                "reference": "b7cbb3dabd420c4b619fd06e9a222b93586ba0b5"
             },
             "require": {
                 "channelgrabber/channel": ">=1.8.6",
@@ -128,7 +128,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2014-10-24 13:39:50"
+            "time": "2014-10-24 16:31:34"
         },
         {
             "name": "channelgrabber/channel",
@@ -690,17 +690,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.9.2",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9377d67f7486f197fcb0462de95aadc314d23028"
+                "reference": "2908eb3eb6dcd4e86af70f2d9454c51217fd302f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.9.2-f842b3.zip",
-                "reference": "9377d67f7486f197fcb0462de95aadc314d23028",
-                "shasum": "edd22fc948e20d36bc4746c25cd850c8519abbac"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.9.3-f39976.zip",
+                "reference": "2908eb3eb6dcd4e86af70f2d9454c51217fd302f",
+                "shasum": "8c866c78cb9ffc7b1c2a1a88ababffc1e4e76fc1"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -752,7 +752,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-17 15:57:44"
+            "time": "2014-10-24 14:48:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1039,7 +1039,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "207b65bad56a70dfea3f6291baa7cf1e70295b5c"
+                "reference": "9491dded32cfa1dd21cef2d45e4d4abe8316ffe5"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1078,7 +1078,7 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-10-24 10:56:40"
+            "time": "2014-10-24 15:48:42"
         },
         {
             "name": "channelgrabber/spork",
