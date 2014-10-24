@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a67d1c3975061fa8ace65e5e6f1beea",
+    "hash": "232403dbfdb797bf8fcd42ae5e21dd5f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -86,17 +86,11 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.0.6",
+            "version": "dev-CGIV-3860-LocationProductStock",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "68096bfcdd183630d6dadfb9f8635e8e3250c0b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.0.6-515352.zip",
-                "reference": "68096bfcdd183630d6dadfb9f8635e8e3250c0b4",
-                "shasum": "1f1088a91fb4a43cebd33671f4fd2e06b5b5c4b0"
+                "reference": "79371a571ec9d14820ef043d739512958dc9df61"
             },
             "require": {
                 "channelgrabber/channel": ">=1.8.6",
@@ -123,12 +117,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-10-01 10:04:58"
+            "time": "2014-10-24 13:39:50"
         },
         {
             "name": "channelgrabber/channel",
@@ -1039,7 +1028,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "54c53741fa5dd27f89e7c403da5d35c20a6c0eee"
+                "reference": "207b65bad56a70dfea3f6291baa7cf1e70295b5c"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1078,7 +1067,7 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-10-24 10:29:16"
+            "time": "2014-10-24 10:56:40"
         },
         {
             "name": "channelgrabber/spork",
@@ -5426,6 +5415,12 @@
             "package": "channelgrabber/cache"
         },
         {
+            "alias": "1.0.6",
+            "alias_normalized": "1.0.6.0",
+            "version": "dev-CGIV-3860-LocationProductStock",
+            "package": "channelgrabber/cglib"
+        },
+        {
             "alias": "1.11.0",
             "alias_normalized": "1.11.0.0",
             "version": "dev-CGIV-3860-LocationStockProduct",
@@ -5435,6 +5430,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/cache": 20,
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/slim": 20,
         "composer/composer": 20,
