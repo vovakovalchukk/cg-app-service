@@ -16,7 +16,6 @@ use CG\ETag\StorageInterface;
 use Zend\Db\Sql\Sql;
 use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\Cache\Client\Redis as CacheRedis;
-use CG\Cache\Client\RedisPipeline as CacheRedisPipeline;
 use CG\ETag\Storage\Predis as EtagRedis;
 
 use CG\Cache\EventManagerInterface;
@@ -255,11 +254,6 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => AccountPollingWindowMapper::class
-                )
-            ),
-            CacheRedisPipeline::class => array(
-                'parameter' => array(
-                    'predis' => 'unreliable_redis'
                 )
             ),
             CacheRedis::class => array(
