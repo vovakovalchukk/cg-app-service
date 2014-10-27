@@ -184,6 +184,7 @@ use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
+use CG\Stock\Audit\Storage\Queue as StockAuditQueue;
 
 // Listing
 use CG\Listing\Service as ListingService;
@@ -759,6 +760,11 @@ return array(
                     'orderStorage' => OrderRepository::class,
                     'orderItemStorage' => ItemRepository::class,
                 ],
+            ],
+            StockAuditQueue::class => [
+                'parameters' => [
+                    'client' => 'reliable_redis'
+                ]
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',

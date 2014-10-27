@@ -439,17 +439,17 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "eab9c10e027484dfe83e89a27d2f148ff3d4c2da"
+                "reference": "85e3b2d46fa762b7266b4194d4eedf25bff3dc52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.6-fbbb58.zip",
-                "reference": "eab9c10e027484dfe83e89a27d2f148ff3d4c2da",
-                "shasum": "e98d78035fa3b824275fbe0629afb794827b87cc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.7-3ad6a5.zip",
+                "reference": "85e3b2d46fa762b7266b4194d4eedf25bff3dc52",
+                "shasum": "6edef87765bd205881eda53f5ffcc7971cd861d7"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -470,7 +470,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-23 07:24:36"
+            "time": "2014-10-27 12:20:56"
         },
         {
             "name": "channelgrabber/http",
@@ -1186,7 +1186,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "b10d115d45d26dcb4f3917aab1bc90ca06a0ca16"
+                "reference": "4780c7a51d4c5d1c06b5fed641d2f965160e464c"
             },
             "require": {
                 "channelgrabber/cache": ">=1.3.0,<2.0.0",
@@ -1220,7 +1220,7 @@
                     "CG\\Stock\\Test\\": "tests"
                 }
             },
-            "time": "2014-10-23 14:19:53"
+            "time": "2014-10-27 13:43:49"
         },
         {
             "name": "channelgrabber/template",
