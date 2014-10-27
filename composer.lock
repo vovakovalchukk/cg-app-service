@@ -1632,17 +1632,17 @@
         },
         {
             "name": "channelgrabber/zf2-stdlib",
-            "version": "1.1.15",
+            "version": "1.1.16",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgzf2stdlib.git",
-                "reference": "2f8ace353af12d367c8bab3174b90ede870a0420"
+                "reference": "540d9af1e08754c2c52ad8b6ee25adfb0f2b32f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.15-479c8c.zip",
-                "reference": "2f8ace353af12d367c8bab3174b90ede870a0420",
-                "shasum": "6d829c18eb2b30126b4db966f7b715834e53250d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.16-2cade8.zip",
+                "reference": "540d9af1e08754c2c52ad8b6ee25adfb0f2b32f8",
+                "shasum": "dc5be7e5a378d9b3a2636a01ff3e4e175f43d1f5"
             },
             "require": {
                 "channelgrabber/cache": ">=1.1.0,<2.0",
@@ -1667,7 +1667,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-03 12:19:14"
+            "time": "2014-10-08 15:46:40"
         },
         {
             "name": "cilex/cilex",
@@ -4527,6 +4527,11 @@
                 "pdf",
                 "zf2"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-03-10 15:02:10"
         }
     ],
