@@ -13,6 +13,7 @@ use CG\Validation\PaginationInterface;
 use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
+use CG\CGLib\Nginx\Cache\Invalidator;
 
 class Location implements PaginationInterface
 {
@@ -28,23 +29,27 @@ class Location implements PaginationInterface
         Slim $app,
         Service $service,
         Di $di,
-        StockService $stockService
+        StockService $stockService,
+        Invalidator $invalidator
     ) {
         $this->setListingStatusService($listingStatusService)
             ->setStockLocationMapper($stockLocationMapper)
             ->setSlim($app)
             ->setService($service)
             ->setStockService($stockService)
-            ->setDi($di);
+            ->setDi($di)
+            ->setInvalidator($invalidator);
     }
 
     public function put($id, Hal $hal)
     {
-        $stockLocation = $this->getService()->saveHal($hal, ["id" => $id]);
-        $stockId = $this->getStockLocationMapper()->fromHal($stockLocation)->getStockId();
+        $stockLocationHal = $this->getService()->saveHal($hal, ["id" => $id]);
+        $stockLocation = $this->getStockLocationMapper()->fromHal($stockLocationHal);
+        $stockId = $stockLocation->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
+        $this->getInvalidator()->queueCacheInvalidations($stockLocation, $stock);
         $this->getListingStatusService()->updateRelatedListings($stock);
-        return $stockLocation;
+        return $stockLocationHal;
     }
 
     protected function setStockService($stockService)
@@ -78,5 +83,22 @@ class Location implements PaginationInterface
     protected function getStockLocationMapper()
     {
         return $this->stockLocationMapper;
+    }
+
+    /**
+     * @return self
+     */
+    public function setInvalidator(Invalidator $invalidator)
+    {
+        $this->invalidator = $invalidator;
+        return $this;
+    }
+
+    /**
+     * @return Invalidator
+     */
+    protected function getInvalidator()
+    {
+        return $this->invalidator;
     }
 }
