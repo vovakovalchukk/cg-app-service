@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bab33b32d6bd7e1f47569cecd70a9007",
+    "hash": "8c58eab7da564d76cf23eff7d82701a8",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -377,17 +377,17 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "1.0.7.1",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "f74ee300dd9d8db7450196bbd0b025b6866bd345"
+                "reference": "e10e8d9f277b983d2dda291c57952106c1001986"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.0.7.1-2c7acb.zip",
-                "reference": "f74ee300dd9d8db7450196bbd0b025b6866bd345",
-                "shasum": "2e1c9f81cd3eb54842da5cc8fe71f055ec21cf88"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.0.8-ac06a6.zip",
+                "reference": "e10e8d9f277b983d2dda291c57952106c1001986",
+                "shasum": "2ebaa2c57501eb5d5573d0620a45cdb2a0b1c731"
             },
             "require": {
                 "channelgrabber/channel": ">=1.9.2",
@@ -430,7 +430,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-24 14:36:47"
+            "time": "2014-10-27 12:15:36"
         },
         {
             "name": "channelgrabber/email",
@@ -4527,11 +4527,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
