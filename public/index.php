@@ -16,7 +16,7 @@ use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
 use CG\Slim\Etag;
 use CG\Slim\Etag\ConfigFactory as EtagConfigFactory;
-use CG\Slim\Nginx\Cache\Invalidator as NginxInvalidator;
+use CG\Slim\Nginx\Cache\Middleware as NginxInvalidatorMiddleware;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -60,7 +60,7 @@ $app->any('.+', $newRelic);
 $app->add($di->get(Created::class));
 $app->add($di->get(UsageEndpoint::class));
 $app->add($di->get(UsageCount::class));
-$app->add($di->get(NginxInvalidator::class));
+$app->add($di->get(NginxInvalidatorMiddleware::class));
 $app->add($di->get(ContentTypes::class));
 $app->add($di->get(VndError::class));
 $app->add($di->get(UnusedMethods::class));
