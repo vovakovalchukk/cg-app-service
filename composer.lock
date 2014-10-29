@@ -59,17 +59,11 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "1.3.9",
+            "version": "1.3.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "53be96e60d408f1b619b303ffa0f8ac05957ce83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-1.3.9-3f34f6.zip",
-                "reference": "53be96e60d408f1b619b303ffa0f8ac05957ce83",
-                "shasum": "a5e7bd4df51c7be29f8ab9ab937d177ca57ba638"
+                "reference": "250596e71addf47ddb502428acad3e0776bfaf34"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -88,12 +82,7 @@
                     "CG\\Cache\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-10-29 12:51:35"
+            "time": "2014-10-29 14:47:56"
         },
         {
             "name": "channelgrabber/cglib",
