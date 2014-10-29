@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f203559d8bb647e101dce9cc69247c6",
+    "hash": "c233b6ed70e1707ffcbc8e1ae888bc83",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -65,10 +65,16 @@
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
                 "reference": "250596e71addf47ddb502428acad3e0776bfaf34"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-1.3.10-cb186b.zip",
+                "reference": "250596e71addf47ddb502428acad3e0776bfaf34",
+                "shasum": "df9085c46659ecbe0295fc51352ce49dc1d8c823"
+            },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
-                "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
+                "channelgrabber/stdlib": ">=2.7.0,<3.0.0",
                 "composer/composer": "@dev",
                 "predis/predis": "v0.8.3"
             },
@@ -80,6 +86,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Cache\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-10-29 14:47:56"
@@ -1162,17 +1173,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "d9ad09d934ac71a67eaa7482bad3fc75d02e6b9a"
+                "reference": "13ce84b8bdc811d63b26d2563bb4a0d9c429afcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.0-2502e0.zip",
-                "reference": "d9ad09d934ac71a67eaa7482bad3fc75d02e6b9a",
-                "shasum": "f4732468b3e51e85c82528fb0fff3192a626a0ce"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.1-29bf8e.zip",
+                "reference": "13ce84b8bdc811d63b26d2563bb4a0d9c429afcf",
+                "shasum": "3852fc60053d1b100a16ae456f1b45d33058afa5"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0",
@@ -1216,7 +1227,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-27 12:22:13"
+            "time": "2014-10-29 15:05:16"
         },
         {
             "name": "channelgrabber/spork",
@@ -1616,11 +1627,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -2286,9 +2292,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -2376,8 +2380,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -4525,11 +4528,6 @@
                 "pdf",
                 "zf2"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-03-10 15:02:10"
         }
     ],
@@ -5020,7 +5018,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -5181,8 +5179,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
