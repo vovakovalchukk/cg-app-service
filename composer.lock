@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17758f19875553556a5515b043ff4398",
+    "hash": "55ea1756b59b57fc78908c92fd27e8cd",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -59,17 +59,11 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "1.3.8",
+            "version": "1.3.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "e7babb93f45584f65b8a11e274d50f859e98064a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-1.3.8-522c1a.zip",
-                "reference": "e7babb93f45584f65b8a11e274d50f859e98064a",
-                "shasum": "4b3b94c5067e12bc22c91bf6951b9003f2b387e8"
+                "reference": "250596e71addf47ddb502428acad3e0776bfaf34"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -88,12 +82,7 @@
                     "CG\\Cache\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-10-24 13:28:46"
+            "time": "2014-10-29 14:47:56"
         },
         {
             "name": "channelgrabber/cglib",
