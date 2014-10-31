@@ -281,9 +281,9 @@ return array(
             ),
             OrderPersistentDbStorage::class => array(
                 'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
+                    'readSql' => 'ReadMysqli',
+                    'fastReadSql' => 'FastReadMysqli',
+                    'writeSql' => 'WriteMysqli'
                 )
             ),
             NoteService::class => array(
