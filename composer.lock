@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7411f4251fabf75d7502084ef394eca5",
+    "hash": "f1a15f0a8daba837189eccc6cdd05072",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -830,11 +830,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-3923-MySQLi",
+            "version": "dev-CGIV-4042-remove-mongo-from-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a2fe0aa651a966935c173ed8bb49d04ba5c69ee2"
+                "reference": "4a55f77170bf603d99f4753ceccc4edaa5d6764a"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -882,7 +882,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-05 10:00:43"
+            "time": "2014-11-06 16:14:03"
         },
         {
             "name": "channelgrabber/permission",
@@ -1689,6 +1689,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -5786,9 +5791,9 @@
     ],
     "aliases": [
         {
-            "alias": "1.9.5",
-            "alias_normalized": "1.9.5.0",
-            "version": "dev-CGIV-3923-MySQLi",
+            "alias": "1.9.6",
+            "alias_normalized": "1.9.6.0",
+            "version": "dev-CGIV-4042-remove-mongo-from-orders",
             "package": "channelgrabber/order"
         }
     ],
