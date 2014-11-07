@@ -118,6 +118,7 @@ use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
 use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
+use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -184,6 +185,7 @@ use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
+use CG\Stock\Audit\Storage\Queue as StockAuditQueue;
 
 // Listing
 use CG\Listing\Service as ListingService;
@@ -216,6 +218,7 @@ return array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
+                'EkmOrderDownloadCommand' => OrderDownloadCommand::class
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -759,6 +762,16 @@ return array(
                     'orderStorage' => OrderRepository::class,
                     'orderItemStorage' => ItemRepository::class,
                 ],
+            ],
+            'EkmOrderDownloadCommand' => [
+                'parameter' => [
+                    'factory' => EkmOrderUpdateGenerator::class
+                ]
+            ],
+            StockAuditQueue::class => [
+                'parameters' => [
+                    'client' => 'reliable_redis'
+                ]
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',

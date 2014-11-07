@@ -16,6 +16,7 @@ use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
 use CG\Slim\Etag;
 use CG\Slim\Etag\ConfigFactory as EtagConfigFactory;
+use CG\Stock\Audit\Middleware as StockAuditMiddleware;
 use CG\Slim\Nginx\Cache\Middleware as NginxInvalidatorMiddleware;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
@@ -67,6 +68,7 @@ $app->add($di->get(UnusedMethods::class));
 $app->add($di->get(HeadRequest::class));
 $app->add($versioning);
 $app->add($di->get(Renderer::class));
+$app->add($di->get(StockAuditMiddleware::class));
 include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 $app->run();
 fastcgi_finish_request();
