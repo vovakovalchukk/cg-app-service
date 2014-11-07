@@ -16,7 +16,7 @@ use CG\Slim\Usage\Endpoint as UsageEndpoint;
 use CG\Slim\Usage\Count as UsageCount;
 use CG\Slim\Etag;
 use CG\Slim\Etag\ConfigFactory as EtagConfigFactory;
-use CG\Slim\Nginx\Cache\Invalidator as NginxInvalidator;
+use CG\Slim\Nginx\Cache\Middleware as NginxInvalidator;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
