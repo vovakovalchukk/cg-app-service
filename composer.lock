@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0700faac4cc20f68b5cf1df2b73af8c0",
+    "hash": "a06cc92b03edc66a04b7db4e771cf02f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1647,17 +1647,11 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.5",
+            "version": "dev-CGIV-4068-ArrayOfIntegersGreaterThan",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "b924031879f3e382a7f36d0c2e2c85bbd4c2fcd7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.5-006bd0.zip",
-                "reference": "b924031879f3e382a7f36d0c2e2c85bbd4c2fcd7",
-                "shasum": "aab48d2ac1e1926ebe414ce45115fc261482c10d"
+                "reference": "27f4fb277001100cd87c2d4e0700b42414f7c209"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1670,12 +1664,7 @@
                     "CG\\Validation\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-16 09:21:43"
+            "time": "2014-11-10 16:13:35"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -1905,12 +1894,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387"
+                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/ffffab37a294f3383c812d0329623f0a4ba45387",
-                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387",
+                "url": "https://api.github.com/repos/composer/composer/zipball/a309e1d89ded6919935a842faeaed8e888fbfe37",
+                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37",
                 "shasum": ""
             },
             "require": {
@@ -1965,7 +1954,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-11-05 06:04:18"
+            "time": "2014-10-20 19:16:14"
         },
         {
             "name": "fabpot/goutte",
@@ -5899,12 +5888,19 @@
             "alias_normalized": "1.3.0.0",
             "version": "dev-CGIV-4068-LinkProductsToListings",
             "package": "channelgrabber/listing"
+        },
+        {
+            "alias": "1.2.5",
+            "alias_normalized": "1.2.5.0",
+            "version": "dev-CGIV-4068-ArrayOfIntegersGreaterThan",
+            "package": "channelgrabber/validation"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/listing": 20,
+        "channelgrabber/validation": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
