@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Listing;
 
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
