@@ -14,7 +14,9 @@ class MigrateListingProductIds extends AbstractMigration
 
     public function down()
     {
-        // Noop
-        // Impossible to migrate backwords without truncating mapping table
+        /**
+         * Noop
+         * Impossible to migrate backwords without truncating mapping table
+         */
     }
 }
