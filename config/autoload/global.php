@@ -617,7 +617,8 @@ return array(
             ],
             ProductService::class => array(
                 'parameters' => array(
-                    'repository' => ProductRepository::class,
+//                    'repository' => ProductRepository::class,
+                    'repository' => ProductDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                     'mapper' => ProductMapper::class,
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
@@ -645,7 +646,8 @@ return array(
             ],
             StockService::class => [
                 'parameter' => [
-                    'repository' => StockRepository::class,
+//                    'repository' => StockRepository::class,
+                    'repository' => StockDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                     'locationStorage' => StockLocationService::class
                 ]
             ],
@@ -665,7 +667,8 @@ return array(
             ],
             StockLocationService::class => [
                 'parameter' => [
-                    'repository' => StockLocationRepository::class
+//                    'repository' => StockLocationRepository::class
+                    'repository' => StockLocationDbStorage::class // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                 ]
             ],
             StockLocationRepository::class => [
@@ -695,7 +698,8 @@ return array(
             ],
             ListingService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
+//                    'repository' => ListingRepository::class,
+                    'repository' => ListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                     'mapper' => ListingMapper::class,
                     'stockStorage' => StockService::class
                 ]
@@ -716,7 +720,8 @@ return array(
             ],
             UnimportedListingService::class => [
                 'parameters' => [
-                    'repository' => UnimportedListingRepository::class,
+//                    'repository' => UnimportedListingRepository::class,
+                    'repository' => UnimportedListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
                 ]
@@ -737,7 +742,8 @@ return array(
             ],
             LocationService::class => [
                 'parameters' => [
-                    'repository' => LocationRepository::class,
+//                    'repository' => LocationRepository::class,
+                    'repository' => LocationDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
                     'mapper' => LocationMapper::class
                 ]
             ],
