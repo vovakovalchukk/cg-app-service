@@ -680,7 +680,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "801c3dfde25c1f22af09d4bd242609f3ae0ee25b"
+                "reference": "0efd4e0d8bea7853ab96740e75aa64e66b0404e8"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -710,7 +710,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2014-11-11 11:35:42"
+            "time": "2014-11-12 10:12:49"
         },
         {
             "name": "channelgrabber/location",
@@ -1074,7 +1074,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "1f49efca4be932a20bb90b3ccafe2bfd8ede081f"
+                "reference": "bd224a17e9ac678870024686adf431b419393138"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1083,7 +1083,7 @@
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/http": ">=1.2.14",
                 "channelgrabber/image": ">=1.1.2",
-                "channelgrabber/listing": ">=1.2.10",
+                "channelgrabber/listing": "dev-CGIV-4068-LinkProductsToListings as 1.3.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": ">=1.11.2",
                 "channelgrabber/stdlib": ">=2.7.17",
@@ -1102,7 +1102,7 @@
                     "CG\\Product\\": "src"
                 }
             },
-            "time": "2014-11-10 11:32:15"
+            "time": "2014-11-11 16:29:28"
         },
         {
             "name": "channelgrabber/redis",
