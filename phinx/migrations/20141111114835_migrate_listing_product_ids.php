@@ -7,7 +7,7 @@ class MigrateListingProductIds extends AbstractMigration
     public function up()
     {
         $this->execute(
-            'INSERT INTO productToListingMap ( listingId, productId ) ' .
+            'INSERT IGNORE INTO productToListingMap ( listingId, productId ) ' .
             'SELECT id, productId FROM listing'
         );
     }
