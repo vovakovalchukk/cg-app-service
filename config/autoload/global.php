@@ -41,6 +41,7 @@ use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 
 //Order
+use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -49,24 +50,28 @@ use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 
 //Note
+use CG\Order\Shared\Note\Entity as NoteEntity;
 use CG\Order\Service\Note\Service as NoteService;
 use CG\Order\Shared\Note\Repository as NoteRepository;
 use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
 
 //Tracking
+use CG\Order\Shared\Tracking\Entity as TrackingEntity;
 use CG\Order\Service\Tracking\Service as TrackingService;
 use CG\Order\Shared\Tracking\Repository as TrackingRepository;
 use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
 use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
 
 //Alert
+use CG\Order\Shared\Alert\Entity as AlertEntity;
 use CG\Order\Service\Alert\Service as AlertService;
 use CG\Order\Shared\Alert\Repository as AlertRepository;
 use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 
 //Item
+use CG\Order\Service\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
@@ -87,6 +92,7 @@ use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
 
 //UserChange
+use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
@@ -254,21 +260,61 @@ return array(
                             ]
                         ],
                         StockEntity::class => [
-                            [
-                                'entityClass' => StockLocationEntity::class
-                            ]
+                            ['entityClass' => StockLocationEntity::class]
                         ],
                         ProductEntity::class => [
                             [
                                 'entityClass' => StockEntity::class,
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
+                            ['entityClass' => ListingEntity::class],
+                            ['entityClass' => ImageEntity::class]
+                        ],
+
+                        ItemEntity::class => [
                             [
-                                'entityClass' => ListingEntity::class
-                            ],
-                            [
-                                'entityClass' => ImageEntity::class
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
                             ]
+                        ],
+                        NoteEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        AlertEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        TrackingEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        UserChangeEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        OrderEntity::class => [
+                            ['entityClass' => ItemEntity::class],
+                            ['entityClass' => NoteEntity::class],
+                            ['entityClass' => AlertEntity::class],
+                            ['entityClass' => TrackingEntity::class],
+                            [
+                                'entityClass' => UserChangeEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                            ],
                         ]
                     ]
                 ]
