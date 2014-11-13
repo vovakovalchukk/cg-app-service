@@ -49,7 +49,7 @@ class Entity implements RulesInterface
                 'name'       => 'name',
                 'required'   => true,
                 'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'name'])
+                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
                 )
             ),
             'active' => array(

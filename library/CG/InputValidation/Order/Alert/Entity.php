@@ -2,7 +2,6 @@
 namespace CG\InputValidation\Order\Alert;
 
 use CG\Validation\RulesInterface;
-use Zend\Di\Di;
 use Zend\Validator\Date;
 use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\StringLength;
@@ -10,23 +9,6 @@ use Zend\Validator\GreaterThan;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
-    }
-
     public function getRules()
     {
         return array(
@@ -45,33 +27,29 @@ class Entity implements RulesInterface
             'userId' => array(
                 'name'       => 'userId',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'userId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                'validators' => [
+                    new IntegerValidator(['name' => 'userId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'userId must be at least %min%'])
-                )
+                ]
             ),
             'organisationUnitId' => array(
                 'name'       => 'organisationUnitId',
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                'validators' => [
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                )
+                ]
             ),
             'alert' => array(
                 'name'       => 'alert',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'timestamp' => array(
                 'name'       => 'timestamp',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             )
         );
     }

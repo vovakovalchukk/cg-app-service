@@ -2,21 +2,14 @@
 namespace CG\InputValidation\Listing;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
-use Zend\Di\Di;
 
 class Filter implements RulesInterface
 {
     use PaginationTrait;
-
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
 
     public function getRules()
     {
@@ -27,63 +20,52 @@ class Filter implements RulesInterface
                     'name'       => 'id',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "id"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                     ]
                 ],
                 'organisationUnitId' => [
                     'name'       => 'organisationUnitId',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                     ]
                 ],
                 'productId' => [
                     'name'       => 'productId',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "productId"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'productId')
                     ]
                 ],
                 'externalId' => [
                     'name' => 'externalId',
                     'required' => false,
                     'validators' => [
-                        $this->getDi()->newInstance(IsArrayValidator::class)
+                        new IsArrayValidator(["name" => "externalId"])
                     ]
                 ],
                 'channel' => [
                     'name' => 'channel',
                     'required' => false,
                     'validators' => [
-                        $this->getDi()->newInstance(IsArrayValidator::class)
+                        new IsArrayValidator(["name" => "channel"])
                     ]
                 ],
                 'status' => [
                     'name' => 'status',
                     'required' => false,
                     'validators' => [
-                        $this->getDi()->newInstance(IsArrayValidator::class)
+                        new IsArrayValidator(["name" => "status"])
                     ]
                 ],
                 'accountId' => [
                     'name' => 'accountId',
                     'required' => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class)
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                     ]
                 ],
             ]
         );
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }

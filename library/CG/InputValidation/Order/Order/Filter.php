@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Order\Order;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
 use CG\Validation\ExclusionInterface;
 use Zend\Di\Di;
@@ -21,6 +22,8 @@ use CG\Validation\InputValidator;
 
 class Filter implements RulesInterface, ExclusionInterface
 {
+    use PaginationTrait;
+
     protected $di;
 
     public function __construct(Di $di)
@@ -57,221 +60,189 @@ class Filter implements RulesInterface, ExclusionInterface
 
     public function getRules()
     {
-        return array(
-            'limit' => array(
-                'name' => 'limit',
-                'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(
-                        ValidatorChain::Class,
-                        [
-                            'validators' => [
-                                $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
-                                    ->setMessages(array('notBetween' => 'limit should be at least %min%')),
-                                $this->getDi()->newInstance(Identical::Class, ['token' => 'all'])
-                                    ->setMessages([Identical::NOT_SAME => 'limit does not equal "%token%"'])
-                            ]
-                        ]
-                    )
-                )
-            ),
-            'page' => array(
-                'name' => 'page',
-                'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Between::class, array('options' => array('min' => 1)))
-                        ->setMessages(array('notBetween' => 'page should be at least %min%'))
-                )
-            ),
-            'orderFilter' => array(
+        return [
+            'limit' => $this->getLimitValidation(),
+            'page' => $this->getPageValidation(),
+            'orderFilter' => [
                 'name' => 'orderFilter',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
-            ),
-            'orderIds' => array(
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'orderIds' => [
                 'name' => 'orderIds',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array("name" => "orderIds"))
-                ),
-            ),
-            'purchaseDateFrom' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "orderIds"])
+                ]
+            ],
+            'purchaseDateFrom' => [
                 'name' => 'purchaseDateFrom',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
-            ),
-            'purchaseDateTo' => array(
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'purchaseDateTo' => [
                 'name' => 'purchaseDateTo',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
-            ),
-            'organisationUnitId' => array(
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'organisationUnitId' => [
                 'name' => 'organisationUnitId',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
-                )
-            ),
-            'searchTerm' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "organisationUnitId"])
+                ]
+            ],
+            'searchTerm' => [
                 'name' => 'searchTerm',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
-            ),
-            'status' => array(
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'status' => [
                 'name' => 'status',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'status'))
-                )
-            ),
-            'accountId' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "status"])
+                ]
+            ],
+            'accountId' => [
                 'name' => 'accountId',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "accountId"))
-                )
-            ),
-            'channel' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "accountId"])
+                ]
+            ],
+            'channel' => [
                 'name' => 'channel',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'channel'))
-                )
-            ),
-            'archived' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "channel"])
+                ]
+            ],
+            'archived' => [
                 'name' => 'archived',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'archived']])
-                )
-            ),
-            'shippingAddressCountry' => array(
+                'validators' => [
+                    new BooleanValidator(["name" => "archived"])
+                ]
+            ],
+            'shippingAddressCountry' => [
                 'name' => 'shippingAddressCountry',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingAddressCountry')),
-                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'shippingAddressCountry',
-                        'haystack' => CountryCode::getCountryCodes()))
-                )
-            ),
-            'shippingAddressCountryExclude' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'shippingAddressCountry']),
+                    $this->getDi()->newInstance(InArrayValidator::class, ['name' => 'shippingAddressCountry',
+                                                                               'haystack' => CountryCode::getCountryCodes()])
+                ]
+            ],
+            'shippingAddressCountryExclude' => [
                 'name' => 'shippingAddressCountryExclude',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingAddressCountryExclude')),
-                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'shippingAddressCountryExclude',
-                        'haystack' => CountryCode::getCountryCodes()))
-                )
-            ),
-            'multiLineOrder' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'shippingAddressCountryExclude']),
+                    $this->getDi()->newInstance(InArrayValidator::class, ['name' => 'shippingAddressCountryExclude',
+                                                                               'haystack' => CountryCode::getCountryCodes()])
+                ]
+            ],
+            'multiLineOrder' => [
                 'name' => 'multiLineOrder',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiLineOrder']])
-                )
-            ),
-            'multiSameItem' => array(
+                'validators' => [
+                    new BooleanValidator(["name" => "multiLineOrder"])
+                ]
+            ],
+            'multiSameItem' => [
                 'name' => 'multiSameItem',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'multiSameItem']])
-                )
-            ),
-            'shippingMethod' => array(
+                'validators' => [
+                    new BooleanValidator(["name" => "multiSameItem"])
+                ]
+            ],
+            'shippingMethod' => [
                 'name' => 'shippingMethod',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'shippingMethod'))
-                )
-            ),
-            'batch' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "shippingMethod"])
+                ]
+            ],
+            'batch' => [
                 'name' => 'batch',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'batch'))
-                )
-            ),
-            'orderBy' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "batch"])
+                ]
+            ],
+            'orderBy' => [
                 'name' => 'orderBy',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
-            ),
-            'orderDirection' => array(
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'orderDirection' => [
                 'name' => 'orderDirection',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                        ->setHaystack(array("ASC", "DESC"))
-                )
-            ),
-            'tag' => array(
+                'validators' => [
+                    (new InArray())->setHaystack(['ASC','DESC'])
+                ]
+            ],
+            'tag' => [
                 'name' => 'tag',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'tags'))
-                )
-            ),
-            'paymentMethod' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "tag"])
+                ]
+            ],
+            'paymentMethod' => [
                 'name' => 'paymentMethod',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'paymentMethod'))
-                )
-            ),
-            'paymentReference' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "paymentMethod"])
+                ]
+            ],
+            'paymentReference' => [
                 'name' => 'paymentReference',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'paymentReference'))
-                )
-            ),
-            'totalFrom' => array(
+                'validators' => [
+                    new IsArrayValidator(["name" => "paymentReference"])
+                ]
+            ],
+            'totalFrom' => [
                 'name' => 'totalFrom',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, array('name' => 'totalFrom'))
-                )
-            ),
-            'totalTo' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalFrom'])
+                ]
+            ],
+            'totalTo' => [
                 'name' => 'totalTo',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, array('name' => 'totalTo'))
-                )
-            ),
-            'currencyCode' => array(
+                'validators' => [
+                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalTo'])
+                ]
+            ],
+            'currencyCode' => [
                 'name' => 'currencyCode',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, array('name' => 'currencyCode')),
-                    $this->getDi()->newInstance(InArrayValidator::class, array('name' => 'currencyCode',
-                        'haystack' => CurrencyCode::getCurrencyCodes()))
-                )
-            ),
-            'buyerMessage' => array(
+                'validators' => [
+                    new IsArrayValidator(['name' => 'currencyCode', 'haystack' => CurrencyCode::getCurrencyCodes()])
+                ]
+            ],
+            'buyerMessage' => [
                 'name' => 'buyerMessage',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'buyerMessage']])
-                )
-            ),
+                'validators' => [
+                    new BooleanValidator(["name" => "buyerMessage"])
+                ]
+            ],
             'hasItems' => [
                 'name' => 'hasItems',
                 'required' => false,
-                'validators' => array(
+                'validators' => [
                     new BooleanValidator(['name' => 'hasItems'])
-                )
+                ]
             ]
-        );
+        ];
     }
 }

@@ -17,8 +17,7 @@ class Filter implements RulesInterface
     public function getRules()
     {
         return [
-            'limit' => $this->getLimitValidation(),
-            'page' => $this->getPageValidation(),
+            $this->getPaginationValidation(),
             'id' => [
                 'name'       => 'id',
                 'required'   => false,
