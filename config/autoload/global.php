@@ -162,6 +162,7 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
+use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
@@ -174,12 +175,14 @@ use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 
 // Stock
+use CG\Stock\Entity as StockEntity;
 use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
 use CG\Stock\Mapper as StockMapper;
+use CG\Stock\Location\Entity as StockLocationEntity;
 use CG\Stock\Location\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
@@ -188,6 +191,7 @@ use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Audit\Storage\Queue as StockAuditQueue;
 
 // Listing
+use CG\Listing\Entity as ListingEntity;
 use CG\Listing\Service as ListingService;
 use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
@@ -201,6 +205,8 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 
+// Image
+use CG\Image\Entity as ImageEntity;
 use CG\Image\Service as ImageService;
 use CG\Image\Storage\Api as ImageApi;
 
@@ -210,6 +216,9 @@ use CG\Location\Repository as LocationRepository;
 use CG\Location\Mapper as LocationMapper;
 use CG\Location\Storage\Db as LocationDbStorage;
 use CG\Location\Storage\Cache as LocationCacheStorage;
+
+// Caching
+use CG\Cache\InvalidationHandler;
 
 return array(
     'di' => array(
@@ -235,6 +244,35 @@ return array(
                     'adapter' => 'Write'
                 )
             ),
+            InvalidationHandler::class => [
+                'parameters' => [
+                    'relationships' => [
+                        StockLocationEntity::class => [
+                            [
+                                'entityClass' => StockEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY
+                            ]
+                        ],
+                        StockEntity::class => [
+                            [
+                                'entityClass' => StockLocationEntity::class
+                            ]
+                        ],
+                        ProductEntity::class => [
+                            [
+                                'entityClass' => StockEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                            ],
+                            [
+                                'entityClass' => ListingEntity::class
+                            ],
+                            [
+                                'entityClass' => ImageEntity::class
+                            ]
+                        ]
+                    ]
+                ]
+            ],
             AccountService::class => array(
                 'parameters' => array(
                     'repository' => AccountApiStorage::class,
@@ -617,8 +655,7 @@ return array(
             ],
             ProductService::class => array(
                 'parameters' => array(
-//                    'repository' => ProductRepository::class,
-                    'repository' => ProductDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class,
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
@@ -646,8 +683,7 @@ return array(
             ],
             StockService::class => [
                 'parameter' => [
-//                    'repository' => StockRepository::class,
-                    'repository' => StockDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => StockRepository::class,
                     'locationStorage' => StockLocationService::class
                 ]
             ],
@@ -667,8 +703,7 @@ return array(
             ],
             StockLocationService::class => [
                 'parameter' => [
-//                    'repository' => StockLocationRepository::class
-                    'repository' => StockLocationDbStorage::class // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => StockLocationRepository::class
                 ]
             ],
             StockLocationRepository::class => [
@@ -698,8 +733,7 @@ return array(
             ],
             ListingService::class => [
                 'parameters' => [
-//                    'repository' => ListingRepository::class,
-                    'repository' => ListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class,
                     'stockStorage' => StockService::class
                 ]
@@ -720,8 +754,7 @@ return array(
             ],
             UnimportedListingService::class => [
                 'parameters' => [
-//                    'repository' => UnimportedListingRepository::class,
-                    'repository' => UnimportedListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => UnimportedListingRepository::class,
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
                 ]
@@ -742,8 +775,7 @@ return array(
             ],
             LocationService::class => [
                 'parameters' => [
-//                    'repository' => LocationRepository::class,
-                    'repository' => LocationDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => LocationRepository::class,
                     'mapper' => LocationMapper::class
                 ]
             ],
