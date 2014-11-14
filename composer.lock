@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b520b972b08b041e7907821c2e144b8b",
+    "hash": "3614122dc28cdaa4ed8e9f54b7c96c4d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -102,11 +102,17 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-4085-cache-invalidate-embeds",
+            "version": "2.0.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "2fcb59a706b19b7a89cc147da4d3e263ab271a14"
+                "reference": "3ed4ce6d1cb61edb6207b5349662f706a1d6ce24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.0.2.1-0e9364.zip",
+                "reference": "3ed4ce6d1cb61edb6207b5349662f706a1d6ce24",
+                "shasum": "1c99e31d06154086a44d6f74333f760ea610a3b7"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -125,7 +131,12 @@
                     "CG\\Cache\\": "src"
                 }
             },
-            "time": "2014-11-13 15:53:57"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-14 11:05:27"
         },
         {
             "name": "channelgrabber/cglib",
@@ -5893,17 +5904,9 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.0.1",
-            "alias_normalized": "2.0.1.0",
-            "version": "dev-CGIV-4085-cache-invalidate-embeds",
-            "package": "channelgrabber/cache"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
