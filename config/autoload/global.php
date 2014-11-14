@@ -41,6 +41,7 @@ use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 
 //Order
+use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -49,24 +50,28 @@ use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 
 //Note
+use CG\Order\Shared\Note\Entity as NoteEntity;
 use CG\Order\Service\Note\Service as NoteService;
 use CG\Order\Shared\Note\Repository as NoteRepository;
 use CG\Order\Service\Note\Storage\Cache as NoteCacheStorage;
 use CG\Order\Service\Note\Storage\Db as NoteDbStorage;
 
 //Tracking
+use CG\Order\Shared\Tracking\Entity as TrackingEntity;
 use CG\Order\Service\Tracking\Service as TrackingService;
 use CG\Order\Shared\Tracking\Repository as TrackingRepository;
 use CG\Order\Service\Tracking\Storage\Cache as TrackingCacheStorage;
 use CG\Order\Service\Tracking\Storage\Db as TrackingDbStorage;
 
 //Alert
+use CG\Order\Shared\Alert\Entity as AlertEntity;
 use CG\Order\Service\Alert\Service as AlertService;
 use CG\Order\Shared\Alert\Repository as AlertRepository;
 use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 
 //Item
+use CG\Order\Service\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
@@ -87,6 +92,7 @@ use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
 
 //UserChange
+use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
@@ -162,6 +168,7 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
+use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
@@ -174,12 +181,14 @@ use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 
 // Stock
+use CG\Stock\Entity as StockEntity;
 use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
 use CG\Stock\Mapper as StockMapper;
+use CG\Stock\Location\Entity as StockLocationEntity;
 use CG\Stock\Location\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
@@ -188,6 +197,7 @@ use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Audit\Storage\Queue as StockAuditQueue;
 
 // Listing
+use CG\Listing\Entity as ListingEntity;
 use CG\Listing\Service as ListingService;
 use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
@@ -201,6 +211,8 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 
+// Image
+use CG\Image\Entity as ImageEntity;
 use CG\Image\Service as ImageService;
 use CG\Image\Storage\Api as ImageApi;
 
@@ -210,6 +222,9 @@ use CG\Location\Repository as LocationRepository;
 use CG\Location\Mapper as LocationMapper;
 use CG\Location\Storage\Db as LocationDbStorage;
 use CG\Location\Storage\Cache as LocationCacheStorage;
+
+// Caching
+use CG\Cache\InvalidationHandler;
 
 return array(
     'di' => array(
@@ -235,6 +250,75 @@ return array(
                     'adapter' => 'Write'
                 )
             ),
+            InvalidationHandler::class => [
+                'parameters' => [
+                    'relationships' => [
+                        StockLocationEntity::class => [
+                            [
+                                'entityClass' => StockEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY
+                            ]
+                        ],
+                        StockEntity::class => [
+                            ['entityClass' => StockLocationEntity::class]
+                        ],
+                        ProductEntity::class => [
+                            [
+                                'entityClass' => StockEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                            ],
+                            ['entityClass' => ListingEntity::class],
+                            ['entityClass' => ImageEntity::class]
+                        ],
+
+                        ItemEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        NoteEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        AlertEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        TrackingEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        UserChangeEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderId'
+                            ]
+                        ],
+                        OrderEntity::class => [
+                            ['entityClass' => ItemEntity::class],
+                            ['entityClass' => NoteEntity::class],
+                            ['entityClass' => AlertEntity::class],
+                            ['entityClass' => TrackingEntity::class],
+                            [
+                                'entityClass' => UserChangeEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                            ],
+                        ]
+                    ]
+                ]
+            ],
             AccountService::class => array(
                 'parameters' => array(
                     'repository' => AccountApiStorage::class,
@@ -617,8 +701,7 @@ return array(
             ],
             ProductService::class => array(
                 'parameters' => array(
-//                    'repository' => ProductRepository::class,
-                    'repository' => ProductDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class,
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
@@ -646,8 +729,7 @@ return array(
             ],
             StockService::class => [
                 'parameter' => [
-//                    'repository' => StockRepository::class,
-                    'repository' => StockDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => StockRepository::class,
                     'locationStorage' => StockLocationService::class
                 ]
             ],
@@ -667,8 +749,7 @@ return array(
             ],
             StockLocationService::class => [
                 'parameter' => [
-//                    'repository' => StockLocationRepository::class
-                    'repository' => StockLocationDbStorage::class // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => StockLocationRepository::class
                 ]
             ],
             StockLocationRepository::class => [
@@ -698,8 +779,7 @@ return array(
             ],
             ListingService::class => [
                 'parameters' => [
-//                    'repository' => ListingRepository::class,
-                    'repository' => ListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class,
                     'stockStorage' => StockService::class
                 ]
@@ -720,8 +800,7 @@ return array(
             ],
             UnimportedListingService::class => [
                 'parameters' => [
-//                    'repository' => UnimportedListingRepository::class,
-                    'repository' => UnimportedListingDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => UnimportedListingRepository::class,
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
                 ]
@@ -742,8 +821,7 @@ return array(
             ],
             LocationService::class => [
                 'parameters' => [
-//                    'repository' => LocationRepository::class,
-                    'repository' => LocationDbStorage::class, // TODO: QUICK FIX UNTIL CGIV-4085 IS OUT
+                    'repository' => LocationRepository::class,
                     'mapper' => LocationMapper::class
                 ]
             ],
