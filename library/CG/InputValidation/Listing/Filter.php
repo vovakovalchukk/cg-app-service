@@ -13,59 +13,58 @@ class Filter implements RulesInterface
 
     public function getRules()
     {
-        return array_merge(
-            $this->getPaginationValidation(),
-            [
-                'id' => [
-                    'name'       => 'id',
-                    'required'   => false,
-                    'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
-                    ]
-                ],
-                'organisationUnitId' => [
-                    'name'       => 'organisationUnitId',
-                    'required'   => false,
-                    'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
-                    ]
-                ],
-                'productId' => [
-                    'name'       => 'productId',
-                    'required'   => false,
-                    'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'productId')
-                    ]
-                ],
-                'externalId' => [
-                    'name' => 'externalId',
-                    'required' => false,
-                    'validators' => [
-                        new IsArrayValidator(["name" => "externalId"])
-                    ]
-                ],
-                'channel' => [
-                    'name' => 'channel',
-                    'required' => false,
-                    'validators' => [
-                        new IsArrayValidator(["name" => "channel"])
-                    ]
-                ],
-                'status' => [
-                    'name' => 'status',
-                    'required' => false,
-                    'validators' => [
-                        new IsArrayValidator(["name" => "status"])
-                    ]
-                ],
-                'accountId' => [
-                    'name' => 'accountId',
-                    'required' => false,
-                    'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
-                    ]
-                ],
-            ]
-        );
+        return [
+            'limit' => $this->getLimitValidation(),
+            'page' => $this->getPageValidation(),
+            'id' => [
+                'name'       => 'id',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                ]
+            ],
+            'organisationUnitId' => [
+                'name'       => 'organisationUnitId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                ]
+            ],
+            'productId' => [
+                'name'       => 'productId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'productId')
+                ]
+            ],
+            'externalId' => [
+                'name' => 'externalId',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "externalId"])
+                ]
+            ],
+            'channel' => [
+                'name' => 'channel',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "channel"])
+                ]
+            ],
+            'status' => [
+                'name' => 'status',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "status"])
+                ]
+            ],
+            'accountId' => [
+                'name' => 'accountId',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                ]
+            ],
+        ];
     }
 }
