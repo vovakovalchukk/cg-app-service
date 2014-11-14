@@ -218,7 +218,8 @@ return array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
-                'EkmOrderDownloadCommand' => OrderDownloadCommand::class
+                'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
+                'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -289,6 +290,17 @@ return array(
                     'writeSql' => 'WriteMysqli'
                 )
             ),
+            'LiveOrderPersistentDbStorage' => [
+                'parameter' => [
+                    'orderTableName' => OrderPersistentDbStorage::ORDER_TABLE_LIVE_NAME
+                ]
+            ],
+            OrderPersistentStorage::class => [
+                'parameter' => [
+                    'sqlClient' => OrderPersistentDbStorage::class,
+                    'liveSqlClient' => 'LiveOrderPersistentDbStorage',
+                ]
+            ],
             NoteService::class => array(
                 'parameters' => array(
                     'repository' => NoteRepository::class
