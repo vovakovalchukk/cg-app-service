@@ -39,8 +39,6 @@ class OrderAllTable extends AbstractMigration
     {
         if (file_exists(__DIR__ . static::CILEX_LOCATION)) {
             echo shell_exec('php ' . __DIR__ . static::CILEX_LOCATION . ' ' . static::CILEX_CMD);
-        } else {
-            echo "not found\n";
         }
     }
 }
