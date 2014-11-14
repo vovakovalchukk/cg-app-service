@@ -5,7 +5,6 @@ use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
 use CG\Validation\ExclusionInterface;
-use Zend\Di\Di;
 use Zend\Validator\Between;
 use Zend\Validator\Date;
 use Zend\Validator\InArray;
@@ -19,27 +18,11 @@ use Zend\Validator\StringLength;
 use CG\Validation\ValidatorChain;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\InputValidator;
+use CG\Validation\Rules\IntegerValidator;
 
 class Filter implements RulesInterface, ExclusionInterface
 {
     use PaginationTrait;
-
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
-    }
 
     // In this instance, we want "orderFilter" to be exclusive to
     // everything else, except for "limit" and "page" so the
@@ -93,7 +76,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'organisationUnitId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "organisationUnitId"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
             'searchTerm' => [
@@ -112,7 +95,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'accountId',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "accountId"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                 ]
             ],
             'channel' => [
@@ -133,18 +116,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'shippingAddressCountry',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'shippingAddressCountry']),
-                    $this->getDi()->newInstance(InArrayValidator::class, ['name' => 'shippingAddressCountry',
-                                                                               'haystack' => CountryCode::getCountryCodes()])
+                    new IsArrayValidator(['name' => 'shippingAddressCountry', 'haystack' => CountryCode::getCountryCodes()])
                 ]
             ],
             'shippingAddressCountryExclude' => [
                 'name' => 'shippingAddressCountryExclude',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'shippingAddressCountryExclude']),
-                    $this->getDi()->newInstance(InArrayValidator::class, ['name' => 'shippingAddressCountryExclude',
-                                                                               'haystack' => CountryCode::getCountryCodes()])
+                    new IsArrayValidator(['name' => 'shippingAddressCountryExclude', 'haystack' => CountryCode::getCountryCodes()])
                 ]
             ],
             'multiLineOrder' => [
@@ -211,16 +190,12 @@ class Filter implements RulesInterface, ExclusionInterface
             'totalFrom' => [
                 'name' => 'totalFrom',
                 'required' => false,
-                'validators' => [
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalFrom'])
-                ]
+                'validators' => [new DecimalValidator(['name' => 'totalFrom'])]
             ],
             'totalTo' => [
                 'name' => 'totalTo',
                 'required' => false,
-                'validators' => [
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalTo'])
-                ]
+                'validators' => [new DecimalValidator(['name' => 'totalTo'])]
             ],
             'currencyCode' => [
                 'name' => 'currencyCode',

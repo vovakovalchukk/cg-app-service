@@ -12,8 +12,7 @@ class Entity implements RulesInterface
             'orderId' => array(
                 'name'       => 'orderId',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'archived' => array(
                 'name'       => 'archived',

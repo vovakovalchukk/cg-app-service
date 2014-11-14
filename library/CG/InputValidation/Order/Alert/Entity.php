@@ -15,14 +15,12 @@ class Entity implements RulesInterface
             'id' => array(
                 'name'       => 'id',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'orderId' => array(
                 'name'       => 'orderId',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'userId' => array(
                 'name'       => 'userId',
