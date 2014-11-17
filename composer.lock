@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b2806dd12589a1031b7086ea25e604c",
+    "hash": "16a61380bfd4dd7a26c1aa409d17dd81",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -102,17 +102,17 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.0.1",
+            "version": "2.0.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "ff751eb110bdc7366ddea6dc7720e23ed1972f0e"
+                "reference": "3ed4ce6d1cb61edb6207b5349662f706a1d6ce24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.0.1-c710ae.zip",
-                "reference": "ff751eb110bdc7366ddea6dc7720e23ed1972f0e",
-                "shasum": "476877981582ec405442fdeb76f6fd230504712a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.0.2.1-0e9364.zip",
+                "reference": "3ed4ce6d1cb61edb6207b5349662f706a1d6ce24",
+                "shasum": "1c99e31d06154086a44d6f74333f760ea610a3b7"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -136,7 +136,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-04 13:25:56"
+            "time": "2014-11-14 11:05:27"
         },
         {
             "name": "channelgrabber/cglib",
@@ -848,7 +848,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "3f4a057e9e7a2bbbb5846802559e84fce2cb7806"
+                "reference": "fe1ed5ca6838c7423b9897cc70127516997d3e6e"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -897,7 +897,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-14 17:43:04"
+            "time": "2014-11-17 11:22:26"
         },
         {
             "name": "channelgrabber/permission",
