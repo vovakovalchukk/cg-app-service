@@ -9,54 +9,32 @@ use Zend\Validator\GreaterThan;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
-    }
-
     public function getRules()
     {
         return array(
             'id' => array(
                 'name'       => 'id',
                 'required'   => true,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'organisationUnitId' => array(
                 'name'       => 'organisationUnitId',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                'validators' => [
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                )
+                ]
             ),
             'tag' => array(
                 'name'       => 'tag',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'orderId' => array(
                 'name'      => 'orderId',
                 'required'  => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             )
         );
     }

@@ -7,17 +7,9 @@ use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\BooleanValidator;
-use Zend\Di\Di;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
     public function getRules()
     {
         return [
@@ -30,30 +22,27 @@ class Entity implements RulesInterface
                 'name'       => 'organisationUnitId',
                 'required'   => true,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
             'sku' => [
                 'name' => 'sku',
                 'required' => false,
-                'validators' => [
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                ]
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'name' => [
                 'name'       => 'name',
                 'required'   => false,
-                'validators' => [
-                ]
+                'validators' => []
             ],
             'parentProductId' => [
                 'name'       => 'parentProductId',
                 'required'   => true,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'parentProductId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
+                    new IntegerValidator(['name' => 'parentProductId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'parentProductId must be at least %min%'])
                 ]
             ],
@@ -61,41 +50,28 @@ class Entity implements RulesInterface
                 'name' => 'attributeNames',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeNames'])
+                    new IsArrayValidator(["name" => "attributeNames"])
                 ]
             ],
             'attributeValues'  => [
                 'name' => 'attributeValues',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'attributeValues'])
+                    new IsArrayValidator(["name" => "attributeValues"])
                 ]
             ],
             'deleted' => [
                 'name'       => 'deleted',
                 'required'   => false,
-                'validators' => [
-                    $this->getDi()->newInstance(BooleanValidator::class, ['options' => ['name' => 'deleted']])
-                ]
+                'validators' => [new BooleanValidator(['name' => 'deleted'])]
             ],
             'imageIds'  => [
                 'name' => 'imageIds',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'imageIds'])
+                    new IsArrayValidator(["name" => "imageIds"])
                 ]
             ],
         ];
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }
