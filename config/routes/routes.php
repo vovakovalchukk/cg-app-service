@@ -455,7 +455,10 @@ return array(
             },
         'via' => array('GET', 'OPTIONS'),
         'name' => 'UserPreferenceCollection',
-        'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false),
+        'eTag' => [
+            'enabled' => false
+        ]
     ),
     '/userPreference/:userId' => array (
         'controllers' => function($userId) use ($di) {
