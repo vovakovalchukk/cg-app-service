@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36ef6d493b1cf4337ac048b64ac424b1",
+    "hash": "33a7b2e4582ae4d7a1190d780bf89890",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -318,11 +318,17 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "dev-CGIV-3921-mysqli",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git",
-                "reference": "745ddbfd1bbc2948f1b69b667b9e270f10d80f29"
+                "reference": "60e189a14eddfed9763789ce107f232c5545d6d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.0-37d770.zip",
+                "reference": "60e189a14eddfed9763789ce107f232c5545d6d8",
+                "shasum": "d61b8ac9ddd28e3b8a6c010a2a0bcc576eef9ff4"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -339,7 +345,12 @@
                     "CG\\Db\\": "src"
                 }
             },
-            "time": "2014-11-07 15:50:47"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-17 12:33:35"
         },
         {
             "name": "channelgrabber/di",
@@ -844,18 +855,24 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-3923-MySQLi",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4cd0600233731ee9a7d05f64fb0ca3680c048a24"
+                "reference": "111f031d5193e504db56f3a5c2814ff7f2830e97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.10.0-0a04a6.zip",
+                "reference": "111f031d5193e504db56f3a5c2814ff7f2830e97",
+                "shasum": "8a24e20950a8f4af7b122666c711a3e65b8884cd"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/cglib": ">=1.0.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/db": "dev-CGIV-3921-mysqli as 1.0.0",
+                "channelgrabber/db": ">=1.0.0,<2.0.0",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -897,7 +914,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-17 11:35:29"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-17 12:41:06"
         },
         {
             "name": "channelgrabber/permission",
@@ -5920,19 +5942,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.9.7",
-            "alias_normalized": "1.9.7.0",
-            "version": "dev-CGIV-3923-MySQLi",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/db": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
