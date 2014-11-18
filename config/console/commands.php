@@ -6,7 +6,8 @@ $files = [
     'retry.php',
     'ekm.php',
     'stock.php',
-    'migrateMongoOrderDataToMysql.php'
+    'migrateMongoOrderDataToMysql.php',
+    'migrateMongoOrderItemDataToMysql.php'
 ];
 foreach ($files as $file) {
     $command = require_once __DIR__ . '/commands/' . $file;
