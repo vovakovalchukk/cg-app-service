@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dff624b8259f4ed2aba5a63cd501761a",
+    "hash": "273e9815d9ad07e1305b571ed4e3a3a7",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -855,17 +855,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "111f031d5193e504db56f3a5c2814ff7f2830e97"
+                "reference": "b0254c8ca879ec98394afd994803bbb03d95d3de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.10.0-0a04a6.zip",
-                "reference": "111f031d5193e504db56f3a5c2814ff7f2830e97",
-                "shasum": "8a24e20950a8f4af7b122666c711a3e65b8884cd"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.11.0-7c0c2d.zip",
+                "reference": "b0254c8ca879ec98394afd994803bbb03d95d3de",
+                "shasum": "5dd9b91d81fb7b497adbe6b1f65dade0c3366b88"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -919,7 +919,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-17 12:41:06"
+            "time": "2014-11-18 13:17:01"
         },
         {
             "name": "channelgrabber/permission",
@@ -1749,6 +1749,11 @@
                     "CG\\VndError": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -1954,12 +1959,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387"
+                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/ffffab37a294f3383c812d0329623f0a4ba45387",
-                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387",
+                "url": "https://api.github.com/repos/composer/composer/zipball/a309e1d89ded6919935a842faeaed8e888fbfe37",
+                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37",
                 "shasum": ""
             },
             "require": {
@@ -2014,7 +2019,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-11-05 06:04:18"
+            "time": "2014-10-20 19:16:14"
         },
         {
             "name": "fabpot/goutte",
