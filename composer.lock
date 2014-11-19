@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f67f41140dba18a090a8a3f71da9d44",
+    "hash": "d634705c6d4edbcd6bb65b5528c577f9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1265,17 +1265,11 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.11.2",
+            "version": "dev-CGIV-4151-Hidrator",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "56df4d8e79fa50735121afeacc79653c7bcde6f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.2-b005c2.zip",
-                "reference": "56df4d8e79fa50735121afeacc79653c7bcde6f5",
-                "shasum": "53ee70290e1cc0ecc98c5d18b0cc427d257e5b8c"
+                "reference": "fd81db2e16e8a19d804fc6a72f1a3d18c9546cfc"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1315,12 +1309,7 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-06 14:27:59"
+            "time": "2014-11-19 17:37:03"
         },
         {
             "name": "channelgrabber/spork",
@@ -5928,6 +5917,12 @@
             "package": "channelgrabber/order"
         },
         {
+            "alias": "1.11.2",
+            "alias_normalized": "1.11.2.0",
+            "version": "dev-CGIV-4151-Hidrator",
+            "package": "channelgrabber/slim"
+        },
+        {
             "alias": "2.7.28",
             "alias_normalized": "2.7.28.0",
             "version": "dev-CGIV-4151-Hidrator",
@@ -5938,6 +5933,7 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/slim": 20,
         "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
