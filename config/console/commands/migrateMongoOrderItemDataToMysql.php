@@ -1,39 +1,34 @@
 <?php
-use CG\Order\Service\Storage\Persistent as OrderStorage;
-use CG\Order\Shared\Collection as OrderCollection;
-use CG\Order\Shared\Mapper as OrderMapper;
+use CG\Order\Service\Item\Storage\Persistent as ItemStorage;
+use CG\Order\Shared\Item\Collection as ItemCollection;
+use CG\Order\Shared\Item\Mapper as ItemMapper;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
     'phinx:migrateMongoOrderItemDataToMysql' => array(
         'command' => function (InputInterface $input) use ($di) {
-
-            echo 'order item';
-
-            return;
-
             $mongoClient = $di->get('mongodb');
+            $itemMapper = $di->get(ItemMapper::class);
+            $itemCollection = new ItemCollection($itemMapper->getEntityClass(), __FUNCTION__);
+            $itemStorage = $di->get(ItemStorage::class);
 
-            $orderMapper = $di->get(OrderMapper::class);
-            $orderCollection = new OrderCollection($orderMapper->getEntityClass(), __FUNCTION__);
-            $orderStorage = $di->get(OrderStorage::class);
+            $response = $mongoClient->order->item->aggregate([]);
+            $items = $response['result'];
 
-            $aggregate = [];
-            $query = [];
-            $query['archived'] = true;
-            $aggregate['match'] = ['$match' => $query];
+            printf("Items: %d\n", count($items));
 
-            $response = $mongoClient->order->order->aggregate(array_values($aggregate));
-            $orders = $response['result'];
+            $chunksOfItems = array_chunk($items, 1000);
 
-            printf("Archived orders: %d\n", count($orders));
+            foreach ($chunksOfItems as $itemChunk) {
 
-            foreach($orders as $order) {
-                $order['id'] = $order['_id'];
-                $orderCollection->attach($orderMapper->fromArray($order));
+                $collection = clone $itemCollection;
+
+                foreach ($itemChunk as $item) {
+                    $item['id'] = $item['_id'];
+                    $collection->attach($itemMapper->fromArray($item));
+                }
+                $itemStorage->saveCollection($collection);
             }
-
-            $orderStorage->saveCollection($orderCollection);
         },
         'description' => 'Adds the mongo order data to mysql',
         'arguments' => [],

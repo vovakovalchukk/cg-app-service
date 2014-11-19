@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "273e9815d9ad07e1305b571ed4e3a3a7",
+    "hash": "29a89d4dc637f302a8a70b6d4941162b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -855,17 +855,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.11.0",
+            "version": "dev-CGIV-4041-remove-mongo-items",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b0254c8ca879ec98394afd994803bbb03d95d3de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.11.0-7c0c2d.zip",
-                "reference": "b0254c8ca879ec98394afd994803bbb03d95d3de",
-                "shasum": "5dd9b91d81fb7b497adbe6b1f65dade0c3366b88"
+                "reference": "78a2d0c7a0cb04170971e85a358dba9531a5325f"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -914,12 +908,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-18 13:17:01"
+            "time": "2014-11-19 11:42:47"
         },
         {
             "name": "channelgrabber/permission",
@@ -5947,10 +5936,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.12.0",
+            "alias_normalized": "1.12.0.0",
+            "version": "dev-CGIV-4041-remove-mongo-items",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

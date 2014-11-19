@@ -451,13 +451,13 @@ return array(
                     'repository' => ItemPersistentStorage::class
                 )
             ),
-            ItemPersistentDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
+            ItemPersistentDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadMysqli',
+                    'fastReadSql' => 'FastReadMysqli',
+                    'writeSql' => 'WriteMysqli'
+                ]
+            ],
             FeeService::class => array(
                 'parameters' => array(
                     'repository' => FeeRepository::class

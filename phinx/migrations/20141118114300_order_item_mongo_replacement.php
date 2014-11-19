@@ -13,6 +13,7 @@ class OrderItemMongoReplacement extends AbstractMigration
         $this->table(static::TABLE_NAME)
             ->addColumn('externalId', 'string')
             ->addColumn('accountId', 'integer')
+            ->addColumn('organisationUnitId', 'integer')
             ->addColumn('itemName', 'string')
             ->addColumn('itemSku', 'string')
             ->addColumn('individualItemPrice', 'decimal', ['precision' => 12, 'scale' => 4])
@@ -20,12 +21,12 @@ class OrderItemMongoReplacement extends AbstractMigration
             ->addColumn('itemTaxPercentage', 'decimal', ['precision' => 7, 'scale' => 4])
             ->addColumn('individualItemDiscountPrice', 'decimal', ['precision' => 12, 'scale' => 4])
             ->addColumn('itemVariationAttribute', 'string')
-            ->addColumn('organisationUnitId', 'integer')
             ->addColumn('purchaseDate', 'datetime')
             ->addColumn('status', 'string')
             ->update();
-        
-        $this->insertMongoData();
+
+        $this->insertMongoData()
+             ->addFullTextIndex();
     }
 
     public function down()
@@ -33,6 +34,7 @@ class OrderItemMongoReplacement extends AbstractMigration
         $this->table(static::TABLE_NAME)
             ->removeColumn('externalId')
             ->removeColumn('accountId')
+            ->removeColumn('organisationUnitId')
             ->removeColumn('itemName')
             ->removeColumn('itemSku')
             ->removeColumn('individualItemPrice')
@@ -40,7 +42,6 @@ class OrderItemMongoReplacement extends AbstractMigration
             ->removeColumn('itemTaxPercentage')
             ->removeColumn('individualItemDiscountPrice')
             ->removeColumn('itemVariationAttribute')
-            ->removeColumn('organisationUnitId')
             ->removeColumn('purchaseDate')
             ->removeColumn('status')
             ->update();
@@ -51,6 +52,14 @@ class OrderItemMongoReplacement extends AbstractMigration
         if (file_exists(__DIR__ . static::CILEX_LOCATION)) {
             echo shell_exec('php ' . __DIR__ . static::CILEX_LOCATION . ' ' . static::CILEX_CMD);
         }
+        return $this;
+    }
+
+    protected function addFullTextIndex()
+    {
+        $addFullTextIndex = 'ALTER TABLE ' . static::TABLE_NAME . ' ADD FULLTEXT searchQuery (itemSku, itemName)';
+        $this->execute($addFullTextIndex);
+        return $this;
     }
 }
 
