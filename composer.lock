@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a1637ad1df7f720f64bb772678a52961",
+    "hash": "4f67f41140dba18a090a8a3f71da9d44",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -855,11 +855,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-4151-Fast-Mapping",
+            "version": "dev-CGIV-4151-Hidrator",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9ee517b102dd90d8c921209b39295479a904ae23"
+                "reference": "e0c6b90e64d11bd63f002b7ed3f5a836c506bdb9"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -908,7 +908,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-19 15:39:50"
+            "time": "2014-11-19 17:23:50"
         },
         {
             "name": "channelgrabber/permission",
@@ -1376,17 +1376,11 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.7.28.2",
+            "version": "dev-CGIV-4151-Hidrator",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "30feed558b619e16a1b4fba68babd54b57113fbf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.28.2-46ea44.zip",
-                "reference": "30feed558b619e16a1b4fba68babd54b57113fbf",
-                "shasum": "cbc6cb8dfef770274f442b2d7e709448a61cb62b"
+                "reference": "03c21060e28933afb34471e126bc75b996c3c198"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1404,12 +1398,7 @@
                     "src/Utilities.php"
                 ]
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-10 11:35:21"
+            "time": "2014-11-19 17:26:47"
         },
         {
             "name": "channelgrabber/stock",
@@ -5935,14 +5924,21 @@
         {
             "alias": "1.10.0",
             "alias_normalized": "1.10.0.0",
-            "version": "dev-CGIV-4151-Fast-Mapping",
+            "version": "dev-CGIV-4151-Hidrator",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "2.7.28",
+            "alias_normalized": "2.7.28.0",
+            "version": "dev-CGIV-4151-Hidrator",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
