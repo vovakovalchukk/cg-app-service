@@ -1,5 +1,5 @@
 <?php
-use CG\Order\Service\Item\Storage\Persistent as ItemStorage;
+use CG\Order\Service\Item\Storage\Persistent\Db as ItemStorage;
 use CG\Order\Shared\Item\Collection as ItemCollection;
 use CG\Order\Shared\Item\Mapper as ItemMapper;
 use Symfony\Component\Console\Input\InputInterface;
