@@ -35,7 +35,7 @@ class Collection
                 $this->getParams('orderDirection')
             );
         }
-        return $this->getService()->fetchCollectionByFilterAsHal(
+        return $this->getService()->fetchCollectionByFilterAsStraightHal(
             $this->getDi()->newInstance(Filter::class, $this->getParams())
         );
     }

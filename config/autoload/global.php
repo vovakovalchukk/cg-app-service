@@ -361,7 +361,7 @@ return array(
             ),
             OrderService::class => array(
                 'parameters' => array(
-                    'repository' => OrderRepository::class,
+                    'repository' => OrderPersistentStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
                     'filterStorage' => FilterCache::class
                 )
@@ -375,7 +375,7 @@ return array(
             ),
             NoteService::class => array(
                 'parameters' => array(
-                    'repository' => NoteRepository::class
+                    'repository' => NoteDbStorage::class
                 )
             ),
             NoteRepository::class => array(
@@ -393,7 +393,7 @@ return array(
             ),
             TrackingService::class => array(
                 'parameters' => array(
-                    'repository' => TrackingRepository::class,
+                    'repository' => TrackingDbStorage::class,
                     'accountStorage' => AccountApiStorage::class
                 )
             ),
@@ -412,7 +412,7 @@ return array(
             ),
             AlertService::class => array(
                 'parameters' => array(
-                    'repository' => AlertRepository::class
+                    'repository' => AlertDbStorage::class
                 )
             ),
             AlertRepository::class => array(
@@ -430,7 +430,7 @@ return array(
             ),
             ItemService::class => array(
                 'parameters' => array(
-                    'repository' => ItemRepository::class
+                    'repository' => ItemPersistentDbStorage::class
                 )
             ),
             ItemRepository::class => array(
@@ -448,7 +448,7 @@ return array(
             ),
             FeeService::class => array(
                 'parameters' => array(
-                    'repository' => FeeRepository::class
+                    'repository' => FeeDbStorage::class
                 )
             ),
             FeeRepository::class => array(
@@ -466,7 +466,7 @@ return array(
             ),
             GiftWrapService::class => array(
                 'parameters' => array(
-                    'repository' => GiftWrapRepository::class
+                    'repository' => GiftWrapDbStorage::class
                 )
             ),
             GiftWrapRepository::class => array(
@@ -484,7 +484,7 @@ return array(
             ),
             UserChangeService::class => array(
                 'parameters' => array(
-                    'repository' => UserChangeRepository::class
+                    'repository' => UserChangeMongoDbStorage::class
                 )
             ),
             UserChangeRepository::class => array(
@@ -502,7 +502,7 @@ return array(
             ),
             BatchService::class => array(
                 'parameters' => array(
-                    'repository' => BatchRepository::class
+                    'repository' => BatchDbStorage::class
                 )
             ),
             BatchRepository::class => array(
@@ -521,7 +521,7 @@ return array(
             ),
             UserPreferenceService::class => array(
                 'parameters' => array(
-                    'repository' => UserPreferenceRepository::class
+                    'repository' => UserPreferenceMongoDbStorage::class
                 )
             ),
             UserPreferenceRepository::class => array(
@@ -546,7 +546,7 @@ return array(
             ),
             TagService::class => array(
                 'parameter' => array (
-                    'repository' => TagRepository::class
+                    'repository' => TagDbStorage::class
                 )
             ),
             AccountCommandService::class => array(
@@ -600,7 +600,7 @@ return array(
             ),
             ShippingMethodService::class => [
                 'parameter' => [
-                    'repository' => ShippingMethodRepository::class
+                    'repository' => ShippingMethodDbStorage::class
                 ]
             ],
             ShippingMethodRepository::class => [
@@ -666,7 +666,7 @@ return array(
             ],
             AliasSettingsService::class => array(
                 'parameters' => array(
-                    'repository' => AliasSettingsRepository::class,
+                    'repository' => AliasSettingsDbStorage::class,
                     'mapper' => AliasSettingsMapper::class
                 )
             ),
