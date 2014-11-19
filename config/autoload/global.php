@@ -75,7 +75,6 @@ use CG\Order\Service\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
-use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Order\Service\Item\Transaction\UpdateItemAndStock as UpdateItemAndStockTransaction;
 
@@ -448,7 +447,7 @@ return array(
             ItemRepository::class => array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
-                    'repository' => ItemPersistentStorage::class
+                    'repository' => ItemPersistentDbStorage::class
                 )
             ),
             ItemPersistentDbStorage::class => [
