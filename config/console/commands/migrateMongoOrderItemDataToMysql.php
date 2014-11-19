@@ -30,7 +30,7 @@ return array(
                 $itemStorage->saveCollection($collection);
             }
         },
-        'description' => 'Adds the mongo order data to mysql',
+        'description' => 'Adds the mongo order item data to mysql',
         'arguments' => [],
         'options' => []
     )
