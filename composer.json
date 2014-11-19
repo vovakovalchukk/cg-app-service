@@ -5,6 +5,10 @@
             "url": "https://github.com/channelgrabber/Component_ZendDb.git"
         },
         {
+            "type": "git",
+            "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git"
+        },
+        {
             "url": "https://composer.build.channelgrabber.com",
             "type": "composer",
             "options": {
@@ -31,6 +35,7 @@
         "channelgrabber/channel": "~1.11.5",
         "channelgrabber/cilex": "~1.0.3",
         "channelgrabber/constants": "dev-master",
+        "channelgrabber/db": "dev-CGIV-4041-correct-multi-insert-query as 1.0.1",
         "channelgrabber/di": "~2.1.1",
         "channelgrabber/ebay": "~1.4.6",
         "channelgrabber/ekm": "~1.0.13",
