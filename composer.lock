@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d634705c6d4edbcd6bb65b5528c577f9",
+    "hash": "a7fdd28193006def8551ccfa2add8237",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -318,17 +318,11 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.0",
+            "version": "dev-CGIV-4041-correct-multi-insert-query",
             "source": {
                 "type": "git",
                 "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git",
-                "reference": "60e189a14eddfed9763789ce107f232c5545d6d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.0-37d770.zip",
-                "reference": "60e189a14eddfed9763789ce107f232c5545d6d8",
-                "shasum": "d61b8ac9ddd28e3b8a6c010a2a0bcc576eef9ff4"
+                "reference": "cf674fa0cd2697ebd5ab17d4e2e73b60bae40c0d"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -345,12 +339,7 @@
                     "CG\\Db\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-17 12:33:35"
+            "time": "2014-11-19 12:27:57"
         },
         {
             "name": "channelgrabber/di",
@@ -859,7 +848,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e0c6b90e64d11bd63f002b7ed3f5a836c506bdb9"
+                "reference": "b63039ce9a331e5c80ff50b465d820b8b53068e9"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -908,7 +897,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-19 17:23:50"
+            "time": "2014-11-20 09:45:05"
         },
         {
             "name": "channelgrabber/permission",
@@ -5911,6 +5900,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.0.1",
+            "alias_normalized": "1.0.1.0",
+            "version": "dev-CGIV-4041-correct-multi-insert-query",
+            "package": "channelgrabber/db"
+        },
+        {
             "alias": "1.10.0",
             "alias_normalized": "1.10.0.0",
             "version": "dev-CGIV-4151-Hidrator",
@@ -5932,6 +5927,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/db": 20,
         "channelgrabber/order": 20,
         "channelgrabber/slim": 20,
         "channelgrabber/stdlib": 20,
