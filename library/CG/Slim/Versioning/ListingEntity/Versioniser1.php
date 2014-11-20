@@ -36,7 +36,7 @@ class Versioniser1 implements
             empty($data['productIds']) ||
             !is_array($data['productIds'])
         )  {
-            $this->logError('No productIds in response data', [], 'Versioniser::ListingEntity');
+            $this->logError('No productIds in response data for listing %s', [$data['id']], 'Versioniser::ListingEntity');
             return;
         }
         // No way to tell which one should be returned so return first
