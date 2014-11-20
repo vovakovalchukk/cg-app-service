@@ -23,7 +23,7 @@ class Versioniser1 implements VersioniserInterface
     {
         $resources = $response->getResources();
         if (!isset($resources['listing'])) {
-            return $resources;
+            return $response;
         }
 
         foreach ($resources['listing'] as $listing) {
