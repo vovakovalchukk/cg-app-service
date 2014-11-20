@@ -40,11 +40,7 @@ class Entity implements RulesInterface
             'parentProductId' => [
                 'name'       => 'parentProductId',
                 'required'   => true,
-                'validators' => [
-                    new IntegerValidator(['name' => 'parentProductId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'parentProductId must be at least %min%'])
-                ]
+                'validators' => []
             ],
             'attributeNames'  => [
                 'name' => 'attributeNames',
