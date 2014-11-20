@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7fdd28193006def8551ccfa2add8237",
+    "hash": "be14693ed6893ead6eec54b707fbb2d1",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2229,17 +2229,11 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "0.9.9",
+            "version": "dev-SkipStrippingAttributes",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blongden/hal.git",
-                "reference": "380e2bd836b347d28edd4245b2ad460b08f93825"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/380e2bd836b347d28edd4245b2ad460b08f93825",
-                "reference": "380e2bd836b347d28edd4245b2ad460b08f93825",
-                "shasum": ""
+                "url": "https://github.com/nickpeirson/hal.git",
+                "reference": "9670febcfc6465a82c653482a7deef5cb96129e9"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2253,7 +2247,6 @@
                     "Nocarrier": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2273,7 +2266,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2014-09-09 08:47:13"
+            "time": "2014-11-18 21:02:45"
         },
         {
             "name": "php-jsonpatch/php-jsonpatch",
@@ -5922,6 +5915,12 @@
             "alias_normalized": "2.7.28.0",
             "version": "dev-CGIV-4151-Hidrator",
             "package": "channelgrabber/stdlib"
+        },
+        {
+            "alias": "0.9.4",
+            "alias_normalized": "0.9.4.0",
+            "version": "dev-SkipStrippingAttributes",
+            "package": "nocarrier/hal"
         }
     ],
     "minimum-stability": "stable",
@@ -5932,6 +5931,7 @@
         "channelgrabber/slim": 20,
         "channelgrabber/stdlib": 20,
         "composer/composer": 20,
+        "nocarrier/hal": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20

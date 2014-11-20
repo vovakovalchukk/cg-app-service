@@ -20,6 +20,10 @@
         {
             "type": "composer",
             "url": "http://packages.zendframework.com"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/nickpeirson/hal.git"
         }
     ],
     "autoload": {
@@ -64,7 +68,7 @@
         "channelgrabber/zf2-stdlib": "~1.1.17",
         "composer/composer": "@dev",
         "guzzle/guzzle": "~3.7",
-        "nocarrier/hal": "~0.9.4",
+        "nocarrier/hal": "dev-SkipStrippingAttributes as 0.9.4",
         "php-jsonpatch/php-jsonpatch": "@dev",
         "php-jsonpointer/php-jsonpointer": "@dev",
         "predis/predis": "~0.8.3",
