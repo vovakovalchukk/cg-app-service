@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13198702b4236eccb842cf2bbd9cb5f1",
+    "hash": "69897dfa902f4b4582d82eff47e50204",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -318,11 +318,17 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "dev-CGIV-4041-correct-multi-insert-query",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git",
-                "reference": "cf674fa0cd2697ebd5ab17d4e2e73b60bae40c0d"
+                "reference": "669ff8935d721a57792355eff41eddd6c693edeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.1-735a65.zip",
+                "reference": "669ff8935d721a57792355eff41eddd6c693edeb",
+                "shasum": "b5b7ce7f31155713e4349eeffcc6996a01e21fbd"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -339,7 +345,12 @@
                     "CG\\Db\\": "src"
                 }
             },
-            "time": "2014-11-19 12:27:57"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-20 15:32:24"
         },
         {
             "name": "channelgrabber/di",
@@ -844,11 +855,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-4041-remove-mongo-items",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "00e5a95ed13ba3cdaa7289b0f09ee918cbd5ae19"
+                "reference": "ce6b9c95cfc6dc24829a8300cde0f448dd3a9b56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.12.0-fef125.zip",
+                "reference": "ce6b9c95cfc6dc24829a8300cde0f448dd3a9b56",
+                "shasum": "78a37942ecaaf748fd275efc2eb437257eca24a0"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -897,7 +914,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-20 09:50:30"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-20 15:34:07"
         },
         {
             "name": "channelgrabber/permission",
@@ -5925,25 +5947,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.0.1",
-            "alias_normalized": "1.0.1.0",
-            "version": "dev-CGIV-4041-correct-multi-insert-query",
-            "package": "channelgrabber/db"
-        },
-        {
-            "alias": "1.12.0",
-            "alias_normalized": "1.12.0.0",
-            "version": "dev-CGIV-4041-remove-mongo-items",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/db": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
