@@ -5,18 +5,11 @@ use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\PaginationTrait;
-use Zend\Di\Di;
+use CG\Validation\Rules\IntegerValidator;
 
 class Filter implements RulesInterface
 {
     use PaginationTrait;
-
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
 
     public function getRules()
     {
@@ -27,42 +20,31 @@ class Filter implements RulesInterface
                     'name'       => 'id',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "id"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                     ]
                 ],
                 'organisationUnitId' => [
                     'name'       => 'organisationUnitId',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "organisationUnitId"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                     ]
                 ],
                 'sku' => [
                     'name' => 'sku',
                     'required' => false,
                     'validators' => [
-                        $this->getDi()->newInstance(IsArrayValidator::class)
+                        new IsArrayValidator(["name" => "sku"])
                     ]
                 ],
                 'locationId' => [
                     'name'       => 'locationId',
                     'required'   => false,
                     'validators' => [
-                        $this->getDi()->newInstance(ArrayOfIntegersValidator::class, array("name" => "locationId"))
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'locationId')
                     ]
                 ],
             ]
         );
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }

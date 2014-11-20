@@ -11,18 +11,10 @@ use Zend\Validator\Identical;
 use Zend\Validator\StringLength;
 use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\PaginationTrait;
-use Zend\Di\Di;
 
 class Filter implements RulesInterface
 {
     use PaginationTrait;
-
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
 
     public function getRules()
     {
@@ -73,16 +65,5 @@ class Filter implements RulesInterface
                 ]
             ]
         );
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }

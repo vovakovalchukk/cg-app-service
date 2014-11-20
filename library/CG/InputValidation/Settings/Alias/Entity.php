@@ -6,17 +6,9 @@ use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\GreaterThan;
 use CG\Validation\RulesInterface;
 use Zend\Validator\StringLength;
-use Zend\Di\Di;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
     public function getRules()
     {
         return [
@@ -28,16 +20,14 @@ class Entity implements RulesInterface
             'name' => [
                 'name'       => 'name',
                 'required'   => true,
-                'validators' => [
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                ]
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'required'   => true,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
@@ -45,36 +35,23 @@ class Entity implements RulesInterface
                 'name'      => 'accountId',
                 'required'   => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
                 ]
             ],
             "shippingService" => [
                 'name'       => 'shippingService',
                 'required'   => false,
-                'validators' => [
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                ]
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'methodIds' => [
                 'name' => 'methodIds',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(ArrayOfIntegersValidator::class, ["name" => "methodIds"])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'methodIds')
                 ]
             ]
         ];
-    }
-
-    public function setDi($di)
-    {
-        $this->di = $di;
-        return $this;
-    }
-
-    public function getDi()
-    {
-        return $this->di;
     }
 }
