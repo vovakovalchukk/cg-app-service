@@ -65,6 +65,13 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                 ]
             ],
+            'statusExclude' => [
+                'name' => 'statusExclude',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "statusExclude"])
+                ]
+            ]
         ];
     }
 }

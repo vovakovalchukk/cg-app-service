@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69897dfa902f4b4582d82eff47e50204",
+    "hash": "1e0735782f0dafdf6c00a67e86bc2d12",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -318,17 +318,17 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git",
-                "reference": "669ff8935d721a57792355eff41eddd6c693edeb"
+                "reference": "43e89e742ddd9eedc34a925d2d373d8f3927fc2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.1-735a65.zip",
-                "reference": "669ff8935d721a57792355eff41eddd6c693edeb",
-                "shasum": "b5b7ce7f31155713e4349eeffcc6996a01e21fbd"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.2-6316b5.zip",
+                "reference": "43e89e742ddd9eedc34a925d2d373d8f3927fc2b",
+                "shasum": "43fa3a83518e587da58332cc8b09daaaf5f906a2"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -350,7 +350,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-20 15:32:24"
+            "time": "2014-11-20 16:39:48"
         },
         {
             "name": "channelgrabber/di",
@@ -855,24 +855,24 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.12.0",
+            "version": "1.12.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ce6b9c95cfc6dc24829a8300cde0f448dd3a9b56"
+                "reference": "d9211ddf19605ff6ae6b4e0145bbd2efa882bcc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.12.0-fef125.zip",
-                "reference": "ce6b9c95cfc6dc24829a8300cde0f448dd3a9b56",
-                "shasum": "78a37942ecaaf748fd275efc2eb437257eca24a0"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.12.2-46c6f4.zip",
+                "reference": "d9211ddf19605ff6ae6b4e0145bbd2efa882bcc0",
+                "shasum": "2cba5b73927908484ca558267220f21d5fde60af"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/cglib": ">=1.0.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/db": ">=1.0.0,<2.0.0",
+                "channelgrabber/db": ">=1.0.2,<2.0.0",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/etag": ">=1.4.3",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -900,8 +900,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.9.x-dev",
-                    "dev-CGIV-3923-MySQLi": "1.9.x-dev"
+                    "dev-develop": "1.12.x-dev"
                 }
             },
             "autoload": {
@@ -919,7 +918,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-20 15:34:07"
+            "time": "2014-11-20 16:45:07"
         },
         {
             "name": "channelgrabber/permission",
@@ -1747,11 +1746,6 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
