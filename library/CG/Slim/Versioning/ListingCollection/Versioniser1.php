@@ -23,22 +23,16 @@ class Versioniser1 implements VersioniserInterface
     {
         $resources = $response->getResources();
         if (!isset($resources['listing'])) {
-            return $this->getEntityVersioniser()->downgradeResponse(
-                $params,
-                $response,
-                $requestedVersion
-            );
+            return $resources;
         }
 
-        $currentVersion = null;
         foreach ($resources['listing'] as $listing) {
-            $currentVersion = $this->getEntityVersioniser()->downgradeResponse(
+            $this->getEntityVersioniser()->downgradeResponse(
                 $params,
                 $listing,
                 $requestedVersion
             );
         }
-        return $currentVersion;
     }
 
     /**

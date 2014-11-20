@@ -5,9 +5,15 @@ use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Product\Service\Service;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 
-class Versioniser1 implements VersioniserInterface
+class Versioniser1 implements
+    VersioniserInterface,
+    LoggerAwareInterface
 {
+    use LogTrait;
+
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
@@ -27,14 +33,15 @@ class Versioniser1 implements VersioniserInterface
     {
         $data = $response->getData();
         if (
-            isset($data['productIds']) &&
-            is_array($data['productIds']) &&
-            !empty($data['productIds'])
+            empty($data['productIds']) ||
+            !is_array($data['productIds'])
         )  {
-            // No way to tell which one should be returned so return first
-            $data['productId'] = $data['productIds'][0];
-            unset($data['productIds']);
+            $this->logError('No productIds in response data', [], 'Versioniser::ListingEntity');
+            return;
         }
+        // No way to tell which one should be returned so return first
+        $data['productId'] = $data['productIds'][0];
+        unset($data['productIds']);
         $response->setData($data);
     }
 }
