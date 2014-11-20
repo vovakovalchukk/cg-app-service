@@ -2,7 +2,6 @@
 namespace CG\InputValidation\Order\Item;
 
 use CG\Validation\RulesInterface;
-use Zend\Di\Di;
 use Zend\Validator\Date;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\DecimalValidator;
@@ -12,31 +11,13 @@ use CG\Stdlib\DateTime as StdlibDateTime;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
-    }
-
     public function getRules()
     {
-        return array(
+        return [
             'id' => array(
                 'name'       => 'id',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'externalId' => [
                 'name'       => 'externalId',
@@ -46,88 +27,72 @@ class Entity implements RulesInterface
             'orderId' => array(
                 'name'       => 'orderId',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'accountId' => array(
                 'name'       => 'accountId',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'userId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                                  ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
-                )
+                'validators' => [
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                ]
             ),
             'itemName' => array(
                 'name'       => 'itemName',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'individualItemPrice' => array(
                 'name'       => 'individualItemPrice',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemPrice', 'min' => 0]),
-                )
+                'validators' => [new DecimalValidator(['min' => 0, 'name' => 'individualItemPrice'])]
             ),
             'itemQuantity' => array(
                 'name'       => 'itemQuantity',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'itemQuantity']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 0, 'inclusive' => true]])
-                                  ->setMessages(['notGreaterThanInclusive' => 'itemQuantity must be at least %min%'])
-                )
+                'validators' => [
+                    new IntegerValidator(['name' => 'itemQuantity']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'itemQuantity must be at least %min%'])
+                ]
             ),
             'itemSku' => array(
                 'name'       => 'itemSku',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'organisationUnitId' => array(
                 'name'       => 'organisationUnitId',
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                'validators' => [
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                )
+                ]
             ),
             'itemTaxPercentage' => array(
                 'name'       => 'itemTaxPercentage',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'itemTaxPercentage', 'min' => 0]),
-                )
+                'validators' => [new DecimalValidator(['min' => 0, 'name' => 'itemTaxPercentage'])]
             ),
             'individualItemDiscountPrice' => array(
                 'name'       => 'individualItemDiscountPrice',
                 'required'   => true,
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'individualItemDiscountPrice', 'min' => 0]),
-                )
+                'validators' => [new DecimalValidator(['min' => 0, 'name' => 'individualItemDiscountPrice'])]
             ),
-            'itemVariationAttribute' => array(
+            'itemVariationAttribute' => [
                 'name'       => 'itemVariationAttribute',
                 'required'   => false,
-                'validators' => array(
-                )
-            ),
-            'status' => array(
+                'validators' => []
+            ],
+            'status' => [
                 'name'       => 'status',
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
-            ),
-            'purchaseDate' => array(
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'purchaseDate' => [
                 'name'       => 'purchaseDate',
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => StdlibDateTime::FORMAT)))
-                )
-            ),
-        );
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ]
+        ];
     }
 }

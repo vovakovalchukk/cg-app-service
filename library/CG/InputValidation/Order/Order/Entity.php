@@ -7,36 +7,20 @@ use CG\Validation\RulesInterface;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
-use Zend\Di\Di;
 use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
-use CG\Validation\ValidatorChain;
-use Zend\Validator\Identical;
 use Zend\Validator\Callback;
 use CG\Order\Shared\Repository as OrderRepository;
 
 class Entity implements RulesInterface
 {
-    protected $di;
     protected $orderRepository;
 
-    public function __construct(Di $di, OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository)
     {
-        $this->setDi($di)
-            ->setOrderRepository($orderRepository);
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
-        return $this;
+        $this->setOrderRepository($orderRepository);
     }
 
     public function getRules()
@@ -46,309 +30,246 @@ class Entity implements RulesInterface
             'id' => array(
                 'name'       => 'id',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'accountId' => array(
                 'name'       => 'accountId',
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'accountId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                                  ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
-                )
+                'validators' => [
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                ]
             ),
             'externalId' => array(
                 'name'       => 'externalId',
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'channel' => array(
                 'name'       => 'note',
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'organisationUnitId' => array(
                 'name'       => 'organisationUnitId',
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'organisationUnitId']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                'validators' => [
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                )
+                ]
             ),
             'total' => array(
                 'name'       => 'total',
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'total']),
-                )
+                'validators' => [new DecimalValidator(['name' => 'total'])]
             ),
             'totalDiscount' => array(
                 'name'       => 'totalDiscount',
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'totalDiscount']),
-                )
+                'validators' => [new DecimalValidator(['name' => 'totalDiscount'])]
             ),
             'status' => array(
                 'name'       => 'status',
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'shippingPrice' => array(
                 'name'       => 'shippingPrice',
-                'validators' => array(
-                    $this->getDi()->newInstance(DecimalValidator::class, ['name' => 'shippingPrice']),
-                )
+                'validators' => [new DecimalValidator(['name' => 'shippingPrice'])]
             ),
             'shippingMethod' => array(
                 'name'       => 'shippingMethod',
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'currencyCode' => array(
                 'name'       => 'currencyCode',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->get(InArray::class)
-                         ->setHaystack(CurrencyCode::getCurrencyCodes())
-                )
+                'validators' => [(new InArray())->setHaystack(CurrencyCode::getCurrencyCodes())]
             ),
             'buyerMessage' => array(
                 'name'       => 'buyerMessage',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'purchaseDate' => array(
                 'name'       => 'purchaseDate',
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
             'paymentDate' => array(
                 'name'       => 'paymentDate',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
             'printedDate' => array(
                 'name'       => 'printedDate',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
             'dispatchDate' => array(
                 'name'       => 'dispatchDate',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Date::class, array('options' => array('format' => "Y-m-d H:i:s")))
-                )
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
             'custom' => array(
                 'name'       => 'custom',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressCompanyName'  => array(
                 'name'       => 'billingAddressCompanyName',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressFullName'  => array(
                 'name'       => 'billingAddressFullName',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddress1'  => array(
                 'name'       => 'billingAddress1',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddress2'  => array(
                 'name'       => 'billingAddress2',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddress3'  => array(
                 'name'       => 'billingAddress3',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressCity'  => array(
                 'name'       => 'billingAddressCity',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressCounty'  => array(
                 'name'       => 'billingAddressCounty',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressCountry'  => array(
                 'name'       => 'billingAddressCountry',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressPostcode'  => array(
                 'name'       => 'billingAddressPostcode',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingAddressCountryCode'  => array(
                 'name'       => 'billingAddressCountryCode',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                        ->setHaystack(CountryCode::getCountryCodes())
-                )
+                'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
             ),
             'billingEmailAddress'  => array(
                 'name'       => 'billingEmailAddress',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'billingPhoneNumber'  => array(
                 'name'       => 'billingPhoneNumber',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressCompanyName'  => array(
                 'name'       => 'shippingAddressCompanyName',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressFullName'  => array(
                 'name'       => 'shippingAddressFullName',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddress1'  => array(
                 'name'       => 'shippingAddress1',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddress2'  => array(
                 'name'       => 'shippingAddress2',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddress3'  => array(
                 'name'       => 'shippingAddress3',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressCity'  => array(
                 'name'       => 'shippingAddressCity',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressCounty'  => array(
                 'name'       => 'shippingAddressCounty',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressCountry'  => array(
                 'name'       => 'shippingAddressCountry',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressPostcode'  => array(
                 'name'       => 'shippingAddressPostcode',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingAddressCountryCode'  => array(
                 'name'       => 'shippingAddressCountryCode',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(InArray::class)
-                                  ->setHaystack(CountryCode::getCountryCodes())
-                )
+                'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
             ),
             'shippingEmailAddress'  => array(
                 'name'       => 'shippingEmailAddress',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'shippingPhoneNumber'  => array(
                 'name'       => 'shippingPhoneNumber',
                 'required'   => false,
-                'validators' => array(
-                )
+                'validators' => []
             ),
             'batch' => array(
                 'name'       => 'batch',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'batch']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
-                                  ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
-                )
+                'validators' => [
+                    new IntegerValidator(['name' => 'batch']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'batch must be at least %min%'])
+                ]
             ),
             'tag' => array (
                 'name' => 'tag',
                 'required' => false,
-                'validators' => array (
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'tag'])
-                )
+                'validators' => [new IsArrayValidator(["name" => "tag"])]
             ),
             'paymentMethod' => array(
                 'name'       => 'paymentMethod',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'paymentReference' => array(
                 'name'       => 'paymentReference',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                )
+                'validators' => [new StringLength(['min' => 1])]
             ),
             'cancellations'  => array(
                 'name'       => 'cancellations',
                 'required'   => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'cancellations'])
-                )
+                'validators' => [new IsArrayValidator(["name" => "cancellations"])]
             ),
             'archived' => array(
                 'name' => 'archived',
                 'required' => false,
-                'validators' => array(
-                    $this->getDi()->newInstance(Callback::class, ['options' => ['callback' => function($archivedValue, $orderDetails) use($orderRepository) {
+                'validators' => [
+                    (new Callback())->setCallback(
+                        function($archivedValue, $orderDetails) use($orderRepository) {
                         $storedOrder = $orderRepository->fetch($orderDetails['id']);
                         return $storedOrder->getArchived() == $archivedValue;
-                    }]])->setMessage('Archived value cannot be modified')
-                )
+                    }
+                    )->setMessage('Archived value cannot be modified')
+                ]
             )
         );
     }
