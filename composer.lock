@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "527a502336784c152d25daebec3ca9d8",
+    "hash": "cd0b17f1cbea89b01c50a4387c46bf81",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1674,11 +1674,17 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "dev-CGIV-4068-ArrayOfIntegersGreaterThan",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "27f4fb277001100cd87c2d4e0700b42414f7c209"
+                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.6-75ca55.zip",
+                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f",
+                "shasum": "edd14fd5ff38092ab7784ebed3eaf96c3eab0b38"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1691,7 +1697,12 @@
                     "CG\\Validation\\": "src"
                 }
             },
-            "time": "2014-11-10 16:13:35"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-14 09:31:59"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -5921,12 +5932,6 @@
             "alias_normalized": "1.3.14.0",
             "version": "dev-CGIV-4068-LinkProductsToListings",
             "package": "channelgrabber/product"
-        },
-        {
-            "alias": "1.2.5",
-            "alias_normalized": "1.2.5.0",
-            "version": "dev-CGIV-4068-ArrayOfIntegersGreaterThan",
-            "package": "channelgrabber/validation"
         }
     ],
     "minimum-stability": "stable",
@@ -5934,7 +5939,6 @@
         "channelgrabber/constants": 20,
         "channelgrabber/listing": 20,
         "channelgrabber/product": 20,
-        "channelgrabber/validation": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
