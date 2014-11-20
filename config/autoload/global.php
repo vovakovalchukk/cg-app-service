@@ -75,7 +75,6 @@ use CG\Order\Service\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
-use CG\Order\Service\Item\Storage\Persistent as ItemPersistentStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Order\Service\Item\Transaction\UpdateItemAndStock as UpdateItemAndStockTransaction;
 
@@ -233,7 +232,8 @@ return array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
-                'EkmOrderDownloadCommand' => OrderDownloadCommand::class
+                'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
+                'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -373,6 +373,17 @@ return array(
                     'writeSql' => 'WriteMysqli'
                 )
             ),
+            'LiveOrderPersistentDbStorage' => [
+                'parameter' => [
+                    'orderTableName' => OrderPersistentDbStorage::ORDER_TABLE_LIVE_NAME
+                ]
+            ],
+            OrderPersistentStorage::class => [
+                'parameter' => [
+                    'sqlClient' => OrderPersistentDbStorage::class,
+                    'liveSqlClient' => 'LiveOrderPersistentDbStorage',
+                ]
+            ],
             NoteService::class => array(
                 'parameters' => array(
                     'repository' => NoteDbStorage::class
@@ -436,16 +447,16 @@ return array(
             ItemRepository::class => array(
                 'parameter' => array(
                     'storage' => ItemCacheStorage::class,
-                    'repository' => ItemPersistentStorage::class
+                    'repository' => ItemPersistentDbStorage::class
                 )
             ),
-            ItemPersistentDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
+            ItemPersistentDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadMysqli',
+                    'fastReadSql' => 'FastReadMysqli',
+                    'writeSql' => 'WriteMysqli'
+                ]
+            ],
             FeeService::class => array(
                 'parameters' => array(
                     'repository' => FeeDbStorage::class

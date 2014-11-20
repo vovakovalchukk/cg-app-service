@@ -28,8 +28,8 @@ class StockAuditTables extends AbstractMigration
 
     public function down()
     {
-        $this->table('stockAudit')->drop();
-        $this->table('stockAuditProductId')->drop();
         $this->table('stockAuditListingId')->drop();
+        $this->table('stockAuditProductId')->drop();
+        $this->table('stockAudit')->drop();
     }
 }
