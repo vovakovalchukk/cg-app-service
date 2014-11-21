@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be14693ed6893ead6eec54b707fbb2d1",
+    "hash": "ac152f9f266cf89c49b73e505bb5b977",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -848,7 +848,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "8518001ff191b9cf77b2b62209e4def808920828"
+                "reference": "2de9d4c480e49cb3dbe3c2c811013cf08001402e"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -897,7 +897,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-20 15:43:16"
+            "time": "2014-11-20 16:09:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1354,11 +1354,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-4151-Hidrator",
+            "version": "2.7.28.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "8f09562d0cee68ecde2c15cd9700bce6ee68491b"
+                "reference": "30feed558b619e16a1b4fba68babd54b57113fbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.7.28.2-46ea44.zip",
+                "reference": "30feed558b619e16a1b4fba68babd54b57113fbf",
+                "shasum": "cbc6cb8dfef770274f442b2d7e709448a61cb62b"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1376,7 +1382,12 @@
                     "src/Utilities.php"
                 ]
             },
-            "time": "2014-11-20 10:44:16"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-10 11:35:21"
         },
         {
             "name": "channelgrabber/stock",
@@ -5911,12 +5922,6 @@
             "package": "channelgrabber/slim"
         },
         {
-            "alias": "2.7.28",
-            "alias_normalized": "2.7.28.0",
-            "version": "dev-CGIV-4151-Hidrator",
-            "package": "channelgrabber/stdlib"
-        },
-        {
             "alias": "0.9.4",
             "alias_normalized": "0.9.4.0",
             "version": "dev-SkipStrippingAttributes",
@@ -5929,7 +5934,6 @@
         "channelgrabber/db": 20,
         "channelgrabber/order": 20,
         "channelgrabber/slim": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "nocarrier/hal": 20,
         "php-jsonpatch/php-jsonpatch": 20,

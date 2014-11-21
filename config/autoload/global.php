@@ -386,7 +386,7 @@ return array(
             ],
             NoteService::class => array(
                 'parameters' => array(
-                    'repository' => NoteDbStorage::class
+                    'repository' => NoteRepository::class
                 )
             ),
             NoteRepository::class => array(
@@ -404,7 +404,7 @@ return array(
             ),
             TrackingService::class => array(
                 'parameters' => array(
-                    'repository' => TrackingDbStorage::class,
+                    'repository' => TrackingRepository::class,
                     'accountStorage' => AccountApiStorage::class
                 )
             ),
@@ -423,7 +423,7 @@ return array(
             ),
             AlertService::class => array(
                 'parameters' => array(
-                    'repository' => AlertDbStorage::class
+                    'repository' => AlertRepository::class
                 )
             ),
             AlertRepository::class => array(
@@ -441,7 +441,7 @@ return array(
             ),
             ItemService::class => array(
                 'parameters' => array(
-                    'repository' => ItemPersistentDbStorage::class
+                    'repository' => ItemRepository::class
                 )
             ),
             ItemRepository::class => array(
@@ -459,7 +459,7 @@ return array(
             ],
             FeeService::class => array(
                 'parameters' => array(
-                    'repository' => FeeDbStorage::class
+                    'repository' => FeeRepository::class
                 )
             ),
             FeeRepository::class => array(
@@ -477,7 +477,7 @@ return array(
             ),
             GiftWrapService::class => array(
                 'parameters' => array(
-                    'repository' => GiftWrapDbStorage::class
+                    'repository' => GiftWrapRepository::class
                 )
             ),
             GiftWrapRepository::class => array(
@@ -495,7 +495,7 @@ return array(
             ),
             UserChangeService::class => array(
                 'parameters' => array(
-                    'repository' => UserChangeMongoDbStorage::class
+                    'repository' => UserChangeRepository::class
                 )
             ),
             UserChangeRepository::class => array(
@@ -513,7 +513,7 @@ return array(
             ),
             BatchService::class => array(
                 'parameters' => array(
-                    'repository' => BatchDbStorage::class
+                    'repository' => BatchRepository::class
                 )
             ),
             BatchRepository::class => array(
@@ -532,7 +532,7 @@ return array(
             ),
             UserPreferenceService::class => array(
                 'parameters' => array(
-                    'repository' => UserPreferenceMongoDbStorage::class
+                    'repository' => UserPreferenceRepository::class
                 )
             ),
             UserPreferenceRepository::class => array(
@@ -557,7 +557,7 @@ return array(
             ),
             TagService::class => array(
                 'parameter' => array (
-                    'repository' => TagDbStorage::class
+                    'repository' => TagRepository::class
                 )
             ),
             AccountCommandService::class => array(
@@ -611,7 +611,7 @@ return array(
             ),
             ShippingMethodService::class => [
                 'parameter' => [
-                    'repository' => ShippingMethodDbStorage::class
+                    'repository' => ShippingMethodRepository::class
                 ]
             ],
             ShippingMethodRepository::class => [
@@ -677,7 +677,7 @@ return array(
             ],
             AliasSettingsService::class => array(
                 'parameters' => array(
-                    'repository' => AliasSettingsDbStorage::class,
+                    'repository' => AliasSettingsRepository::class,
                     'mapper' => AliasSettingsMapper::class
                 )
             ),
