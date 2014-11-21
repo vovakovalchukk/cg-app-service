@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1e0735782f0dafdf6c00a67e86bc2d12",
+    "hash": "3baba9397b483d8505966d51eccc43fd",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -855,17 +855,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.12.2",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "d9211ddf19605ff6ae6b4e0145bbd2efa882bcc0"
+                "reference": "d2162b2e0022ecbeff1238422d8a6c63bcb0b51c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.12.2-46c6f4.zip",
-                "reference": "d9211ddf19605ff6ae6b4e0145bbd2efa882bcc0",
-                "shasum": "2cba5b73927908484ca558267220f21d5fde60af"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.0-9166fc.zip",
+                "reference": "d2162b2e0022ecbeff1238422d8a6c63bcb0b51c",
+                "shasum": "329829f04717c7ca2bd11e5171ac3fa54c8ce244"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -918,7 +918,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-20 16:45:07"
+            "time": "2014-11-21 11:47:47"
         },
         {
             "name": "channelgrabber/permission",
@@ -1275,17 +1275,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.11.2",
+            "version": "1.11.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "56df4d8e79fa50735121afeacc79653c7bcde6f5"
+                "reference": "c960c75ecb173fabcef9c31c1f7183c979c3ee64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.2-b005c2.zip",
-                "reference": "56df4d8e79fa50735121afeacc79653c7bcde6f5",
-                "shasum": "53ee70290e1cc0ecc98c5d18b0cc427d257e5b8c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.3-2826e8.zip",
+                "reference": "c960c75ecb173fabcef9c31c1f7183c979c3ee64",
+                "shasum": "4bd82ec03057019c018c788ea9f8bd7b9e0e16e6"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1330,7 +1330,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-06 14:27:59"
+            "time": "2014-11-21 11:49:05"
         },
         {
             "name": "channelgrabber/spork",
@@ -1953,12 +1953,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37"
+                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/a309e1d89ded6919935a842faeaed8e888fbfe37",
-                "reference": "a309e1d89ded6919935a842faeaed8e888fbfe37",
+                "url": "https://api.github.com/repos/composer/composer/zipball/ffffab37a294f3383c812d0329623f0a4ba45387",
+                "reference": "ffffab37a294f3383c812d0329623f0a4ba45387",
                 "shasum": ""
             },
             "require": {
@@ -2013,7 +2013,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-10-20 19:16:14"
+            "time": "2014-11-05 06:04:18"
         },
         {
             "name": "fabpot/goutte",
@@ -2272,17 +2272,11 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "0.9.9",
+            "version": "dev-SkipStrippingAttributes",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blongden/hal.git",
-                "reference": "380e2bd836b347d28edd4245b2ad460b08f93825"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/380e2bd836b347d28edd4245b2ad460b08f93825",
-                "reference": "380e2bd836b347d28edd4245b2ad460b08f93825",
-                "shasum": ""
+                "url": "https://github.com/nickpeirson/hal.git",
+                "reference": "9670febcfc6465a82c653482a7deef5cb96129e9"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2296,7 +2290,6 @@
                     "Nocarrier": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2316,7 +2309,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2014-09-09 08:47:13"
+            "time": "2014-11-18 21:02:45"
         },
         {
             "name": "php-jsonpatch/php-jsonpatch",
@@ -5941,11 +5934,19 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.9.9",
+            "alias_normalized": "0.9.9.0",
+            "version": "dev-SkipStrippingAttributes",
+            "package": "nocarrier/hal"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "composer/composer": 20,
+        "nocarrier/hal": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
