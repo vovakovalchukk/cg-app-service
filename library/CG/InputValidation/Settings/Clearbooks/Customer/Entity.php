@@ -1,10 +1,9 @@
 <?php
-namespace CG\InputValidation\Stock;
+namespace CG\InputValidation\Settings\Clearbooks\Customer;
 
 use CG\Validation\Rules\IntegerValidator;
-use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
-use Zend\Validator\StringLength;
+use CG\Validation\RulesInterface;
 
 class Entity implements RulesInterface
 {
@@ -25,10 +24,10 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
-            'sku' => [
-                'name' => 'sku',
-                'required' => true,
-                'validators' => [new StringLength(['min' => 1])]
+            "clearbooksCustomerId" => [
+                'name'      => 'clearbooksCustomerId',
+                'required'   => true,
+                'validators' => [new IntegerValidator(['name' => 'clearbooksCustomerId'])]
             ]
         ];
     }

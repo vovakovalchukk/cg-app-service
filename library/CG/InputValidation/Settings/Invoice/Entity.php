@@ -4,19 +4,11 @@ namespace CG\InputValidation\Settings\Invoice;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
-use Zend\Di\Di;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
-
     public function getRules()
     {
         return [
@@ -24,35 +16,23 @@ class Entity implements RulesInterface
                 'name' => 'id',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IntegerValidator::class, ['name' => 'id']),
-                    $this->getDi()->newInstance(GreaterThan::class, ['options' => ['min' => 1, 'inclusive' => true]])
+                    new IntegerValidator(['name' => 'id']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
                 ]
             ],
             'default' => [
                 'name' => 'default',
                 'required' => true,
-                'validators' => [
-                    $this->getDi()->newInstance(StringLength::class, ['options' => ['min' => 1]])
-                ]
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'tradingCompanies' => [
                 'name' => 'tradingCompanies',
                 'required' => false,
                 'validators' => [
-                    $this->getDi()->newInstance(IsArrayValidator::class, ['name' => 'tradingCompanies'])
+                    new IsArrayValidator(["name" => "tradingCompanies"])
                 ]
             ],
         ];
-    }
-
-    protected function getDi()
-    {
-        return $this->di;
-    }
-
-    protected function setDi(Di $di)
-    {
-        $this->di = $di;
     }
 }
