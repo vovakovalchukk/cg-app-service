@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb6a677de02f3578f02f05436f0669a8",
+    "hash": "f95e3ef2dce61e0982213392794775ab",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2272,11 +2272,11 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "dev-SkipStrippingAttributes",
+            "version": "0.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nickpeirson/hal.git",
-                "reference": "9670febcfc6465a82c653482a7deef5cb96129e9"
+                "reference": "09c831f94908a1dbeaf56bc70d49930c289aca17"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2309,7 +2309,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2014-11-18 21:02:45"
+            "time": "2014-09-09 08:47:13"
         },
         {
             "name": "php-jsonpatch/php-jsonpatch",
@@ -5934,19 +5934,11 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.9.9",
-            "alias_normalized": "0.9.9.0",
-            "version": "dev-SkipStrippingAttributes",
-            "package": "nocarrier/hal"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "composer/composer": 20,
-        "nocarrier/hal": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
