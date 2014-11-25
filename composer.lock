@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9e453fb21ff5e8e768be0dccd5cef7ca",
+    "hash": "6d200163118596ee8c0b19bcee7f1859",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -140,11 +140,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-4211-AuditOrders",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "5f069eadfcb81c55df0fba2e3369204723f83fa5"
+                "reference": "eeebe4c10b9bb53bd5208ccb50d8843e9f113aee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.3.2-19630e.zip",
+                "reference": "eeebe4c10b9bb53bd5208ccb50d8843e9f113aee",
+                "shasum": "cf2a95e191d001313feff7270d47808fdf6c0112"
             },
             "require": {
                 "channelgrabber/billing": ">=1.7.1",
@@ -183,7 +189,12 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2014-11-24 13:51:11"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-25 09:32:48"
         },
         {
             "name": "channelgrabber/channel",
@@ -846,11 +857,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-4211-AuditOrders",
+            "version": "1.13.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fb4cac5a8f800c494f54d7a5562b5b941dadbe61"
+                "reference": "e2a6e53106013a5d8b2a5b123a1b0e625f387975"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.6-5a8241.zip",
+                "reference": "e2a6e53106013a5d8b2a5b123a1b0e625f387975",
+                "shasum": "3caaf977faa9537f9ebf1e026671283fc1b94975"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -898,7 +915,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-11-24 13:46:36"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-11-25 09:33:59"
         },
         {
             "name": "channelgrabber/permission",
@@ -5921,25 +5943,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.3.2",
-            "alias_normalized": "1.3.2.0",
-            "version": "dev-CGIV-4211-AuditOrders",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.13.4",
-            "alias_normalized": "1.13.4.0",
-            "version": "dev-CGIV-4211-AuditOrders",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
