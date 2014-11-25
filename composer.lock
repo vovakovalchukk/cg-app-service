@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ec0cc9d41e3aeeb8ea68e8f3b15396c8",
+    "hash": "6a1daffff089bd7b02b622984e34a39a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -855,17 +855,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.13.4",
+            "version": "dev-CGIV-4220-print-by-sku-error",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "48654b4c1afd42b4a3155b94cf8eccd2317858d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.4-110c8e.zip",
-                "reference": "48654b4c1afd42b4a3155b94cf8eccd2317858d2",
-                "shasum": "1da3fd0893a855fce317fe63f3e6f0054f8465eb"
+                "reference": "ab430cbaa906a31c08b3a02ec1ea575f1d112a8c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -913,12 +907,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-24 14:14:45"
+            "time": "2014-11-25 10:48:54"
         },
         {
             "name": "channelgrabber/permission",
@@ -1746,6 +1735,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -5941,10 +5935,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.5",
+            "alias_normalized": "1.13.5.0",
+            "version": "dev-CGIV-4220-print-by-sku-error",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
