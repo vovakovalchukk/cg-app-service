@@ -1,5 +1,7 @@
 <?php
 use CG\Account\Client\Storage\Api as AccountApiStorage;
+use CG\Slim\Versioning\ListingCollection;
+use CG\Slim\Versioning\ListingEntity;
 use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -15,6 +17,8 @@ return [
     'di' => [
         'instance' => [
             'aliases' => [
+                'Versioniser_ListingCollection_1' => ListingCollection\Versioniser1::class,
+                'Versioniser_ListingEntity_1' => ListingEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -33,6 +37,11 @@ return [
                 'Versioniser_UnimportedListingCollection_1' => UnimportedListingCollection\Versioniser1::class,
                 'Versioniser_UnimportedListingEntity_2' => UnimportedListingEntity\Versioniser2::class,
                 'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class
+            ],
+            'Versioniser_ListingCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ListingEntity_1',
+                ],
             ],
             'Versioniser_OrderItemCollection_1' => [
                 'parameter' => [
