@@ -92,6 +92,13 @@ class Entity implements RulesInterface
             'purchaseDate' => [
                 'name'       => 'purchaseDate',
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
+            'url' => [
+                'name'       => 'url',
+                'required'   => false,
+                'validators' => [
+                    new StringLength(['min' => 1, 'max' => 2000])
+                ]
             ]
         ];
     }
