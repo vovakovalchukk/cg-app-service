@@ -1,47 +1,54 @@
 <?php
 namespace CG\Slim\Versioning\ListingCollection;
 
-use CG\Slim\Versioning\ListingEntity\Versioniser1 as ListingVersioniser1;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
+use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Product\Service\Service;
+use CG\Slim\Versioning\ListingEntity\Versioniser1 as EntityVersioniser;
 
 class Versioniser1 implements VersioniserInterface
 {
-    protected $listingVersioniser1;
-
-    public function __construct(ListingVersioniser1 $listingVersioniser1)
+    public function __construct(EntityVersioniser $entityVersioniser)
     {
-        $this->setListingVersioniser1($listingVersioniser1);
+        $this->setEntityVersioniser($entityVersioniser);
     }
 
     public function upgradeRequest(array $params, Hal $request)
     {
-        return $this->getListingVersioniser1()->upgradeRequest($params, $request);
+        return $this->getEntityVersioniser()->upgradeRequest($params, $request);
     }
 
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $resources = $response->getResources();
         if (!isset($resources['listing'])) {
-            return $this->getListingVersioniser1()->downgradeResponse($params, $response, $requestedVersion);
+            return $response;
         }
 
-        $currentVersion = null;
-        foreach ($resources['listing'] as $listingResponse) {
-            $currentVersion = $this->getListingVersioniser1()->downgradeResponse($params,
-                $listingResponse, $requestedVersion);
+        foreach ($resources['listing'] as $listing) {
+            $this->getEntityVersioniser()->downgradeResponse(
+                $params,
+                $listing,
+                $requestedVersion
+            );
         }
-        return $currentVersion;
     }
 
-    protected function getListingVersioniser1()
+    /**
+     * @return self
+     */
+    public function setEntityVersioniser(EntityVersioniser $entityVersioniser)
     {
-        return $this->listingVersioniser1;
-    }
-
-    protected function setListingVersioniser1(ListingVersioniser1 $listingVersioniser1)
-    {
-        $this->listingVersioniser1 = $listingVersioniser1;
+        $this->entityVersioniser = $entityVersioniser;
         return $this;
+    }
+
+    /**
+     * @return EntityVersioniser
+     */
+    protected function getEntityVersioniser()
+    {
+        return $this->entityVersioniser;
     }
 }

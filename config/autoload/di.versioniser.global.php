@@ -10,6 +10,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\AliasSettingsEntity;
 use CG\Slim\Versioning\AliasSettingsCollection;
+use CG\Slim\Versioning\ListingEntity;
+use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 
@@ -36,7 +38,14 @@ return [
                 'Versioniser_UnimportedListingEntity_1' => UnimportedListingEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingCollection_1' => UnimportedListingCollection\Versioniser1::class,
                 'Versioniser_UnimportedListingEntity_2' => UnimportedListingEntity\Versioniser2::class,
-                'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class
+                'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class,
+                'Versioniser_ListingEntity_1' => ListingEntity\Versioniser1::class,
+                'Versioniser_ListingCollection_1' => ListingCollection\Versioniser1::class,
+            ],
+            'Versioniser_ListingCollection_1' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_1',
+                ],
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
