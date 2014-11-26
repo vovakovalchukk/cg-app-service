@@ -5,7 +5,7 @@ use CG\Slim\Versioning\ListingEntity\Versioniser2 as ListingVersioniser2;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 
-class Versioniser1 implements VersioniserInterface
+class Versioniser2 implements VersioniserInterface
 {
     protected $listingVersioniser2;
 
