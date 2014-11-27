@@ -8,7 +8,7 @@ class ListingUrlField extends AbstractMigration
     public function change()
     {
         $this->table(static::TABLE_NAME)
-            ->addColumn('url', 'string', ['length' => '2000'])
+            ->addColumn('url', 'string', ['length' => '2000','null' => true])
             ->update();
     }
 }
