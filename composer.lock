@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dadac590a603d75687501a6e8aa43d5",
+    "hash": "4917f3743c2b9dd4941b909408327341",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -859,17 +859,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.13.8",
+            "version": "dev-CGIV-4243-Item-URL",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "39e5a24c41cd3bfd94fac125a4969ec919aac5cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.8-c7e931.zip",
-                "reference": "39e5a24c41cd3bfd94fac125a4969ec919aac5cc",
-                "shasum": "992b329d4f88645225ef42e07d25ff9aca33cfe9"
+                "reference": "4a2b4d581deccc5ce2850752cf3f41f5a482d7de"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -917,12 +911,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-26 11:37:47"
+            "time": "2014-11-27 14:25:36"
         },
         {
             "name": "channelgrabber/permission",
@@ -5946,21 +5935,23 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "1.13.9",
+            "alias_normalized": "1.13.9.0",
+            "version": "dev-CGIV-4243-Item-URL",
+            "package": "channelgrabber/order"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }
