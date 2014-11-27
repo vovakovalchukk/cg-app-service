@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2a904f5d3d0579b68bc379a211e82b29",
+    "hash": "0400046e8ce4977587d03ab1273fd10c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -712,17 +712,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.3.2",
+            "version": "dev-CGIV-4257-LimitListings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "676522d8a7929cbba91177231e47c63d1ac9ed1e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.3.2-a26ddf.zip",
-                "reference": "676522d8a7929cbba91177231e47c63d1ac9ed1e",
-                "shasum": "8b83a1e1ffb12e2c6804eb2e22c6da4fa092bab9"
+                "reference": "a0d4677316a8f684bf0a9f3686e73c3d716308b3"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -736,6 +730,8 @@
                 "channelgrabber/stdlib": ">=2.7.26,<3.0.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-eventmanager": "2.3.*"
             },
             "require-dev": {
@@ -754,12 +750,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-21 15:18:46"
+            "time": "2014-11-27 11:33:19"
         },
         {
             "name": "channelgrabber/location",
@@ -5943,16 +5934,28 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.3.3",
+            "alias_normalized": "1.3.3.0",
+            "version": "dev-CGIV-4257-LimitListings",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }
