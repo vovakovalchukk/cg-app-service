@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dadac590a603d75687501a6e8aa43d5",
+    "hash": "51253c696c594c38e12c0872c5fef0a6",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -859,17 +859,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.13.8",
+            "version": "1.13.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "39e5a24c41cd3bfd94fac125a4969ec919aac5cc"
+                "reference": "29d2580aea497610963662bf2f70ee861a0f5053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.8-c7e931.zip",
-                "reference": "39e5a24c41cd3bfd94fac125a4969ec919aac5cc",
-                "shasum": "992b329d4f88645225ef42e07d25ff9aca33cfe9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.9-c9bcd8.zip",
+                "reference": "29d2580aea497610963662bf2f70ee861a0f5053",
+                "shasum": "20808c675b1e291a8e1600b864aa99dd19b853df"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -922,7 +922,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-26 11:37:47"
+            "time": "2014-11-27 13:42:46"
         },
         {
             "name": "channelgrabber/permission",
@@ -5945,9 +5945,7 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
@@ -5957,10 +5955,6 @@
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }
