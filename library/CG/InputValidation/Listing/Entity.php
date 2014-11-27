@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Listing;
 
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\ArrayOfPositiveIntegersValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
@@ -25,13 +26,11 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
-            'productId' => [
-                'name'       => 'productId',
+            'productIds' => [
+                'name'       => 'productIds',
                 'required'   => true,
                 'validators' => [
-                    new IntegerValidator(['name' => 'productId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'productId must be at least %min%'])
+                    new ArrayOfPositiveIntegersValidator(new IntegerValidator(['productIds' => 'productId']))
                 ]
             ],
             'externalId' => [
