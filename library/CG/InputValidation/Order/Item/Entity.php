@@ -53,7 +53,7 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [
                     new IntegerValidator(['name' => 'itemQuantity']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                    (new GreaterThan(['min' => 0, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'itemQuantity must be at least %min%'])
                 ]
             ),
