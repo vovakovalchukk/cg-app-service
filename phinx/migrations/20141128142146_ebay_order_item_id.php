@@ -1,5 +1,6 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Db\Table\ForeignKey;
 
 class EbayOrderItemId extends AbstractMigration
 {
@@ -8,6 +9,11 @@ class EbayOrderItemId extends AbstractMigration
      */
     public function up()
     {
+        $this->table('itemVariationAttribute')->dropForeignKey('itemId')->update();
+        $this->table('itemVariationAttribute')
+            ->addForeignKey('itemId', 'item', 'id', ['update' => ForeignKey::CASCADE])
+            ->update();
+
         $sql = 'UPDATE `item` i'
             . ' JOIN `account`.`account` a ON i.`accountId` = a.`id`'
             . ' SET i.`id` = CONCAT_WS("-", i.`accountId`, i.`externalId`)'
@@ -27,5 +33,10 @@ class EbayOrderItemId extends AbstractMigration
             . ' WHERE a.`channel` = "ebay"';
 
         $this->execute($sql);
+
+        $this->table('itemVariationAttribute')->dropForeignKey('itemId')->update();
+        $this->table('itemVariationAttribute')
+            ->addForeignKey('itemId', 'item', 'id')
+            ->update();
     }
 }
