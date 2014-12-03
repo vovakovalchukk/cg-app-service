@@ -30,7 +30,10 @@ class Entity implements RulesInterface
             'name' => array(
                 'name'       => 'name',
                 'required'   => true,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => [
+                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                    ->setMessages(['notGreaterThanInclusive' => 'name must be at least %min%'])]
             ),
             'active' => array(
                 'name'       => 'active',
