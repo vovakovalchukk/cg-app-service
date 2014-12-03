@@ -36,7 +36,7 @@ return [
             'filterRules' => ListingCollectionValidation::class,
             'dataRules' => ListingEntityValidation::class
         ],
-        "version" => new Version(1, 2)
+        "version" => new Version(1, 3)
     ],
     '/listing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -58,7 +58,7 @@ return [
             'entityClass' => ListingEntity::class,
             'serviceClass' => ListingService::class
         ],
-        "version" => new Version(1, 2)
+        "version" => new Version(1, 3)
     ],
     '/unimportedListing' => [
         'controllers' => function() use ($di, $app) {

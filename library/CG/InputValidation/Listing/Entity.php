@@ -56,7 +56,14 @@ class Entity implements RulesInterface
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
                 ]
-            ]
+            ],
+            'url' => [
+                'name'       => 'url',
+                'required'   => false,
+                'validators' => [
+                    new StringLength(['min' => 1, 'max' => 2000])
+                ]
+            ],
         ];
     }
 }
