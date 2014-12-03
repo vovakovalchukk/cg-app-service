@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "15fbf6ac4427794693a0d4a2cd03c973",
+    "hash": "980759946a7af1862b0def3a52b7deb2",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -198,17 +198,11 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.13.2",
+            "version": "dev-CGIV-4241-ListingUrlEpic",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "50e518dd2e7751a933a20d77db929d0fe0eb8d98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.13.2-367dbf.zip",
-                "reference": "50e518dd2e7751a933a20d77db929d0fe0eb8d98",
-                "shasum": "ada9110787df36fc5c91071ec58c4c2f0e4702e9"
+                "reference": "a501c1598acd4be8993c83506e8ef8f54a88ab64"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -254,12 +248,7 @@
                     "CG\\Test\\": "tests/assets/"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-25 11:48:51"
+            "time": "2014-12-03 10:28:59"
         },
         {
             "name": "channelgrabber/cilex",
@@ -713,17 +702,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.3.3",
+            "version": "dev-CGIV-4241-ListingUrlEpic",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "02a577b6ffadc5b4da5c3fd9e9a2ac80008c1e57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.3.3-a2d623.zip",
-                "reference": "02a577b6ffadc5b4da5c3fd9e9a2ac80008c1e57",
-                "shasum": "fb01f4cecd9b07c90df4414dea6cc9874d167511"
+                "reference": "5bb0fbe2a3dc1d5b0b64eb30aa1e6826198a530e"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -757,12 +740,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-27 13:25:15"
+            "time": "2014-12-03 10:38:42"
         },
         {
             "name": "channelgrabber/location",
@@ -1751,6 +1729,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -5946,10 +5929,25 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.0",
+            "alias_normalized": "1.13.0.0",
+            "version": "dev-CGIV-4241-ListingUrlEpic",
+            "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.3.3",
+            "alias_normalized": "1.3.3.0",
+            "version": "dev-CGIV-4241-ListingUrlEpic",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
