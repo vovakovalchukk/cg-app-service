@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a22105eba2a51caf0db3964b7cf1c689",
+    "hash": "7b37be1f7aaabca73839f3a7ab5fa3ec",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -860,17 +860,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.13.9",
+            "version": "dev-CGIV-4334-remove-unneccessary-order-logs",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "29d2580aea497610963662bf2f70ee861a0f5053"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.13.9-c9bcd8.zip",
-                "reference": "29d2580aea497610963662bf2f70ee861a0f5053",
-                "shasum": "20808c675b1e291a8e1600b864aa99dd19b853df"
+                "reference": "7f2725f3b8e74e62ed15436308df6427489a84d7"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -918,12 +912,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-27 13:42:46"
+            "time": "2014-12-08 08:45:44"
         },
         {
             "name": "channelgrabber/permission",
@@ -1751,6 +1740,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -5946,10 +5940,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.12",
+            "alias_normalized": "1.13.12.0",
+            "version": "dev-CGIV-4334-remove-unneccessary-order-logs",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
