@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b7a308363508f4da94f9b4cdc58df0b8",
+    "hash": "f8db1a94e11ff6c3052dcd92e3f8e87b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -472,11 +472,17 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "dev-CGIV-4412-PollingBroken",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "ebe9117aae72c81af2f2127a6388bced0b7ddcfe"
+                "reference": "e2c75f131841a151fd2bbeb2307bd94d446e8e3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.1.3-72c1c7.zip",
+                "reference": "e2c75f131841a151fd2bbeb2307bd94d446e8e3c",
+                "shasum": "ee169e31356a9a011b8a9c64a1e0de2cb523a0e9"
             },
             "require": {
                 "channelgrabber/channel": ">=1.13.3",
@@ -514,7 +520,12 @@
                     "CG\\Ekm\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2014-12-11 09:45:15"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-12-11 10:57:13"
         },
         {
             "name": "channelgrabber/email",
@@ -5943,18 +5954,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.3",
-            "alias_normalized": "1.1.3.0",
-            "version": "dev-CGIV-4412-PollingBroken",
-            "package": "channelgrabber/ekm"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/ekm": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
