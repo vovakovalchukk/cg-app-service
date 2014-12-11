@@ -26,8 +26,22 @@ class Collection
 
     public function get()
     {
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            $this->getFilter()
+        );
+    }
+
+    protected function getCollection()
+    {
+        return $this->getService()->fetchCollectionByFilter(
+            $this->getFilter()
+        );
+    }
+
+    protected function getFilter()
+    {
         if ($this->getParams('orderFilter')) {
-            return $this->getService()->fetchCollectionByFilterId(
+            return $this->getService()->fetchFilterById(
                 $this->getParams('orderFilter'),
                 $this->getParams('limit'),
                 $this->getParams('page'),
@@ -35,8 +49,7 @@ class Collection
                 $this->getParams('orderDirection')
             );
         }
-        return $this->getService()->fetchCollectionByFilterAsHal(
-            $this->getDi()->newInstance(Filter::class, $this->getParams())
-        );
+
+        return $this->getDi()->newInstance(Filter::class, $this->getParams());
     }
 }
