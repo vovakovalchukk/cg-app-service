@@ -19,9 +19,11 @@ class Collection
 
     public function __construct(Slim $app, OrderService $service, Di $di)
     {
-        $this->setSlim($app)
-             ->setService($service)
-             ->setDi($di);
+        $this
+            ->setSlim($app)
+            ->setService($service)
+            ->setDi($di)
+            ->addAllowedPatchFilter('accountId');
     }
 
     public function get()
