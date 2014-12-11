@@ -42,4 +42,19 @@ class Collection
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    protected function getCollection()
+    {
+        if($this->getParams('orderIds')) {
+            return $this->getService()->fetchCollectionByOrderIds(
+                $this->getParams('orderIds') ?: []
+            );
+        }
+
+        return $this->getService()->fetchCollectionByPagination(
+            $this->getParams('limit'),
+            $this->getParams('page'),
+            $this->getParams('id') ?: []
+        );
+    }
 }
