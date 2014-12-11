@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f8db1a94e11ff6c3052dcd92e3f8e87b",
+    "hash": "878f9a836eb0a6dda8ca19ecbc4f9022",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -570,17 +570,11 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.5.2",
+            "version": "dev-CGIV-4422-Loggable",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "bc608cf1abaf36b52c881e57814f64b1c34020e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.2-b21a72.zip",
-                "reference": "bc608cf1abaf36b52c881e57814f64b1c34020e4",
-                "shasum": "8574679ce6074f973209054937b3b20f6b961a23"
+                "reference": "7f76994c50b17a784bc3cf63d457ac027d7874aa"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -593,12 +587,7 @@
                     "CG\\ETag\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-09-03 12:31:45"
+            "time": "2014-12-11 14:16:32"
         },
         {
             "name": "channelgrabber/gearman",
@@ -1280,22 +1269,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.11.7",
+            "version": "dev-CGIV-4422-Loggable",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "6a3aa02cddbde453a48e3684262d0943e36a9c26"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.11.7-be7a75.zip",
-                "reference": "6a3aa02cddbde453a48e3684262d0943e36a9c26",
-                "shasum": "dd62f7e199cdf46c20a0b312a97de10f75d4604d"
+                "reference": "b0eee03e6a4877cab08e167d7acf3edb3e5ac9ae"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/di": ">=2.1.0",
-                "channelgrabber/etag": ">=1.4.3,<2.0.0",
+                "channelgrabber/etag": "dev-CGIV-4422-Loggable as 1.5.3",
                 "channelgrabber/http": ">=1.2.27,<2.0.0",
                 "channelgrabber/log": ">=2.0.6,<3.0.0",
                 "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
@@ -1330,12 +1313,7 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-12-02 13:25:42"
+            "time": "2014-12-11 14:51:35"
         },
         {
             "name": "channelgrabber/spork",
@@ -5954,10 +5932,25 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.2",
+            "alias_normalized": "1.5.2.0",
+            "version": "dev-CGIV-4422-Loggable",
+            "package": "channelgrabber/etag"
+        },
+        {
+            "alias": "1.11.8",
+            "alias_normalized": "1.11.8.0",
+            "version": "dev-CGIV-4422-Loggable",
+            "package": "channelgrabber/slim"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/etag": 20,
+        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
