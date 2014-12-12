@@ -27,7 +27,7 @@ class Collection
     protected function getFilter()
     {
         return new Filter(
-            $this->getParams('limit') ?: 'all',
+            $this->getParams('limit') ?: 10,
             $this->getParams('page') ?: 1,
             $this->getParams('id') ?: [],
             $this->getParams('orderIds') ?: [],
