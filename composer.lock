@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c2417ccf5a499f83c0e41a640bb535a",
+    "hash": "9d8fb7481d2440d0d80e6aa6196544ef",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -860,11 +860,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-4357-UserChange-Bug",
+            "version": "1.15.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ae9e3d77d9d4c0713eda14df18940d366b4c57e5"
+                "reference": "afcecdb2ed34563e5d40812f87758f3bc427df01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.15.2-c9b0fc.zip",
+                "reference": "afcecdb2ed34563e5d40812f87758f3bc427df01",
+                "shasum": "9975eb1c75dbcc0b3939d2c777218d6907ffcde3"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -912,7 +918,12 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "time": "2014-12-15 11:17:45"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-12-17 10:46:44"
         },
         {
             "name": "channelgrabber/permission",
@@ -5943,18 +5954,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.14.1",
-            "alias_normalized": "1.14.1.0",
-            "version": "dev-CGIV-4357-UserChange-Bug",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
