@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fcfaccf5a440ae40deb1bbefbe9b9dee",
+    "hash": "c76f815a90a48c0f6507e0fb83af1f13",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -267,7 +267,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "3a860b16d5381fa01e4d7c428f32b02555155f8c"
+                "reference": "782d0c7474f59e6c43e62fe00df5998a2f7ac2e2"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -284,7 +284,7 @@
                     "CG\\Cilex\\": "src"
                 }
             },
-            "time": "2014-12-16 15:55:25"
+            "time": "2014-12-17 12:37:56"
         },
         {
             "name": "channelgrabber/constants",
@@ -595,10 +595,10 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "8b78a6b7f4428d6de80bb9d37f8463ebd1c49ed6"
+                "reference": "a61a4375ca951a29f87654f493d4e49e448efbc3"
             },
             "require": {
-                "channelgrabber/cilex": "dev-CGIV-4445-Newrelic as 1.0.8",
+                "channelgrabber/cilex": "dev-CGIV-4445-Newrelic as 1.1.0",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/log": ">=1.5.0",
                 "channelgrabber/stdlib": ">=2.7.22,<3.0.0",
@@ -612,7 +612,7 @@
                     "CG\\Gearman\\": "src"
                 }
             },
-            "time": "2014-12-16 15:18:22"
+            "time": "2014-12-17 12:48:26"
         },
         {
             "name": "channelgrabber/http",
@@ -5935,8 +5935,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.0.8",
-            "alias_normalized": "1.0.8.0",
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
             "version": "dev-CGIV-4445-Newrelic",
             "package": "channelgrabber/cilex"
         },
