@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "54bc8cdd83116ed0ddbd711604fd7b8a",
+    "hash": "f0e651c490c559a1d103121690a4c5db",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -263,11 +263,17 @@
         },
         {
             "name": "channelgrabber/cilex",
-            "version": "dev-CGIV-4445-Newrelic",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "782d0c7474f59e6c43e62fe00df5998a2f7ac2e2"
+                "reference": "822c26ab7960cd76e84523c9c7e501f54103d63d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0-65b6a9.zip",
+                "reference": "822c26ab7960cd76e84523c9c7e501f54103d63d",
+                "shasum": "1f230dc7bd94aebe8ead91baaf89308b9b050aa9"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -284,7 +290,12 @@
                     "CG\\Cilex\\": "src"
                 }
             },
-            "time": "2014-12-17 12:37:56"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-12-22 10:43:37"
         },
         {
             "name": "channelgrabber/constants",
@@ -591,14 +602,20 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "dev-CGIV-4445-Newrelic",
+            "version": "1.1.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "3bc9486eac1192ca208738fdefd74605087a8fca"
+                "reference": "bc72330b22d885cbc901212a0ca42f41faa94d4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.13-c0dfbf.zip",
+                "reference": "bc72330b22d885cbc901212a0ca42f41faa94d4f",
+                "shasum": "457a649c79ca468f26bd11f288038eef180616b4"
             },
             "require": {
-                "channelgrabber/cilex": "dev-CGIV-4445-Newrelic as 1.1.0",
+                "channelgrabber/cilex": ">=1.1.0,<2.0.0",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/log": ">=1.5.0",
                 "channelgrabber/stdlib": ">=2.7.22,<3.0.0",
@@ -612,7 +629,12 @@
                     "CG\\Gearman\\": "src"
                 }
             },
-            "time": "2014-12-19 15:37:18"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-12-22 10:54:10"
         },
         {
             "name": "channelgrabber/http",
@@ -1937,12 +1959,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "2131c8b48082a176565856d69c6273047c96a6dc"
+                "reference": "a422d67e2701860a44a4634f62f88b58b8636468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/2131c8b48082a176565856d69c6273047c96a6dc",
-                "reference": "2131c8b48082a176565856d69c6273047c96a6dc",
+                "url": "https://api.github.com/repos/composer/composer/zipball/a422d67e2701860a44a4634f62f88b58b8636468",
+                "reference": "a422d67e2701860a44a4634f62f88b58b8636468",
                 "shasum": ""
             },
             "require": {
@@ -1997,7 +2019,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-12-09 22:40:08"
+            "time": "2014-12-18 10:37:32"
         },
         {
             "name": "fabpot/goutte",
@@ -5933,25 +5955,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.0",
-            "alias_normalized": "1.1.0.0",
-            "version": "dev-CGIV-4445-Newrelic",
-            "package": "channelgrabber/cilex"
-        },
-        {
-            "alias": "1.1.13",
-            "alias_normalized": "1.1.13.0",
-            "version": "dev-CGIV-4445-Newrelic",
-            "package": "channelgrabber/gearman"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/gearman": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
