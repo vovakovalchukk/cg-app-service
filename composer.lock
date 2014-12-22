@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "74a4282acfe8b2b01ead8650e5999deb",
+    "hash": "026a217975dbb5418ccbd4931629323f",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -46,11 +46,17 @@
         },
         {
             "name": "channelgrabber/cilex",
-            "version": "dev-CGIV-4445-Newrelic",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "782d0c7474f59e6c43e62fe00df5998a2f7ac2e2"
+                "reference": "822c26ab7960cd76e84523c9c7e501f54103d63d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0-65b6a9.zip",
+                "reference": "822c26ab7960cd76e84523c9c7e501f54103d63d",
+                "shasum": "1f230dc7bd94aebe8ead91baaf89308b9b050aa9"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -67,7 +73,12 @@
                     "CG\\Cilex\\": "src"
                 }
             },
-            "time": "2014-12-17 12:37:56"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-12-22 10:43:37"
         },
         {
             "name": "channelgrabber/constants",
@@ -100,7 +111,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.1.1-4a06ae.zip",
                 "reference": "a324c33edf58452379edf5bc9bb4329753f8950b",
-                "shasum": "1aa4d1bd7ef63469911da771117039613fc7d319"
+                "shasum": "7d02b5ae51cfa6e7156145cfbf6ff8f5a2ebe14f"
             },
             "require": {
                 "channelgrabber/spork": "~0.2",
@@ -931,24 +942,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "c54d6f93e3c5838092363447498ecb366e1e60a2"
+                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/c54d6f93e3c5838092363447498ecb366e1e60a2",
-                "reference": "c54d6f93e3c5838092363447498ecb366e1e60a2",
+                "url": "https://api.github.com/repos/composer/composer/zipball/2cb64c8a7254b748617baeff4316654bcf6bb551",
+                "reference": "2cb64c8a7254b748617baeff4316654bcf6bb551",
                 "shasum": ""
             },
             "require": {
                 "justinrainbow/json-schema": "~1.1",
                 "php": ">=5.3.2",
-                "seld/jsonlint": "~1.0",
+                "seld/jsonlint": "1.*",
                 "symfony/console": "~2.3",
                 "symfony/finder": "~2.2",
                 "symfony/process": "~2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~3.7"
             },
             "suggest": {
                 "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
@@ -991,7 +1002,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-12-16 14:28:51"
+            "time": "2014-09-18 15:58:10"
         },
         {
             "name": "guzzle/guzzle",
@@ -4430,17 +4441,9 @@
             "time": "2014-12-02 20:19:20"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.0",
-            "alias_normalized": "1.1.0.0",
-            "version": "dev-CGIV-4445-Newrelic",
-            "package": "channelgrabber/cilex"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
