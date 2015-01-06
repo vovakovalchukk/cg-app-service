@@ -29,6 +29,13 @@ class Filter implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "orderIds"])
                 ],
+            ],
+            'accountId' => [
+                'name'       => 'accountId',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "accountId"])
+                ],
             ]
         ];
     }

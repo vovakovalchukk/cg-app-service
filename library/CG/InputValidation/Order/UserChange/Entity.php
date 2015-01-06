@@ -26,7 +26,7 @@ class Entity implements RulesInterface
             ),
             'changes' => array(
                 'name'       => 'changes',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     new IsArrayValidator(["name" => "changes"])
                 ]
