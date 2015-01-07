@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0e651c490c559a1d103121690a4c5db",
+    "hash": "a6180129ff7a822d03b4da3cb54a8fdd",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -862,17 +862,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.15.3",
+            "version": "dev-CGIV-4504-insert-ignore-addresses",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "8f80b3bef8d490548798b2ab54d6974d2d851cb5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.15.3-2cef8c.zip",
-                "reference": "8f80b3bef8d490548798b2ab54d6974d2d851cb5",
-                "shasum": "350719eea616286ae508f49ee9b0a9437108b1ac"
+                "reference": "42dceddc084c6744821445df38c9e7921ea46694"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -920,12 +914,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-12-18 08:26:02"
+            "time": "2015-01-07 10:39:28"
         },
         {
             "name": "channelgrabber/permission",
@@ -1753,6 +1742,11 @@
             "autoload": {
                 "psr-0": {
                     "CG\\VndError": ""
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2013-11-04 13:10:03"
@@ -5956,16 +5950,25 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.15.4",
+            "alias_normalized": "1.15.4.0",
+            "version": "dev-CGIV-4504-insert-ignore-addresses",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
