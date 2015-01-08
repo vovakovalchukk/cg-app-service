@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25ca59f1f940e826c39ff243ef720bc2",
+    "hash": "b831f388e7ac87a24473d3c81352b642",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -274,7 +274,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0.2-dc8d2a.zip",
                 "reference": "22b62f8a1ae0f7a3060a691db38eeead4c3bdccc",
-                "shasum": "aeee5f74c5a4f3b8543874fb87780e9f942cd0c9"
+                "shasum": "550338c14ec286d5cf1da491e547059340e606c6"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -323,14 +323,14 @@
             "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-db.git",
+                "url": "git@git.build.channelgrabber.com:channelgrabber/cgdb.git",
                 "reference": "93444142f0bccc659a03f622745bef367fce488d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.3-90f777.zip",
                 "reference": "93444142f0bccc659a03f622745bef367fce488d",
-                "shasum": "31d6b017655db37a7a56fe6d8a12078c6f788f82"
+                "shasum": "2041f80b0ca14ae84973ae7625d9922ce2d2dc33"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -484,7 +484,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.1.8-4bd601.zip",
                 "reference": "38911c0672fa51a2a7876f9c67979229251af7a3",
-                "shasum": "77bdbc6ede11710db5519c5dc471b0b6d0819e7e"
+                "shasum": "0b11ea9bac8b4893c4bb5fbb671e1865d513efe6"
             },
             "require": {
                 "channelgrabber/channel": ">=1.13.3",
@@ -716,17 +716,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.4.0",
+            "version": "dev-CGIV-4527-NullCheck",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "0a1c17a2d4447ac92b63d979754f7e2c39b2b488"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.4.0-d8ec25.zip",
-                "reference": "0a1c17a2d4447ac92b63d979754f7e2c39b2b488",
-                "shasum": "ece1739e8374302a98f3dcdf20b7786ba7f454ba"
+                "reference": "3a6e63977b2940d45aa5c9fb93ac60bd866776e5"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -760,12 +754,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-12-08 10:00:48"
+            "time": "2015-01-08 10:00:10"
         },
         {
             "name": "channelgrabber/location",
@@ -1788,11 +1777,6 @@
                     "CG\\VndError": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-04 13:10:03"
         },
         {
@@ -2545,9 +2529,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
@@ -2635,8 +2617,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -5345,7 +5326,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -5506,8 +5487,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -6050,16 +6030,25 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.4.1",
+            "alias_normalized": "1.4.1.0",
+            "version": "dev-CGIV-4527-NullCheck",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
