@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b831f388e7ac87a24473d3c81352b642",
+    "hash": "da6c7aef75dd5ecd376e6480a30e0a74",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -330,7 +330,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.3-90f777.zip",
                 "reference": "93444142f0bccc659a03f622745bef367fce488d",
-                "shasum": "2041f80b0ca14ae84973ae7625d9922ce2d2dc33"
+                "shasum": "31d6b017655db37a7a56fe6d8a12078c6f788f82"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -484,7 +484,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.1.8-4bd601.zip",
                 "reference": "38911c0672fa51a2a7876f9c67979229251af7a3",
-                "shasum": "0b11ea9bac8b4893c4bb5fbb671e1865d513efe6"
+                "shasum": "77bdbc6ede11710db5519c5dc471b0b6d0819e7e"
             },
             "require": {
                 "channelgrabber/channel": ">=1.13.3",
@@ -716,11 +716,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-4527-NullCheck",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "3a6e63977b2940d45aa5c9fb93ac60bd866776e5"
+                "reference": "8abc43827de4d4091dcdd3f626f27543814af77b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.4.1-62bfc9.zip",
+                "reference": "8abc43827de4d4091dcdd3f626f27543814af77b",
+                "shasum": "ea4a74aea7bbdddc99a1ae74ec51202273c16ed7"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -754,7 +760,12 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2015-01-08 10:00:10"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-01-08 10:44:34"
         },
         {
             "name": "channelgrabber/location",
@@ -5487,7 +5498,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -6030,18 +6042,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.4.1",
-            "alias_normalized": "1.4.1.0",
-            "version": "dev-CGIV-4527-NullCheck",
-            "package": "channelgrabber/listing"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
