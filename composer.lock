@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "570a947084d17481fb7a654d3dfa40a3",
+    "hash": "fecb2c0c02ed5d62cf422fbd4133741e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -140,17 +140,11 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.3.6",
+            "version": "dev-CGIV-4520-stock-management-changes-during-update-fix",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "4fccaa4a29bbd82f1e900281aae53d2f8ccbb53e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.3.6-f1a3b6.zip",
-                "reference": "4fccaa4a29bbd82f1e900281aae53d2f8ccbb53e",
-                "shasum": "b9186e681b91ec637258d67b986c8cc33a83290c"
+                "reference": "96f79ad81c8830cdd30f2433fef80c727fc3e213"
             },
             "require": {
                 "channelgrabber/billing": ">=1.7.1",
@@ -158,7 +152,7 @@
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": ">=1.0.5,<2.0.0",
-                "channelgrabber/listing": ">=1.3.0,<2.0.0",
+                "channelgrabber/listing": "dev-CGIV-4582-listing-patch-support as 1.5.0",
                 "channelgrabber/location": ">=1.1.1",
                 "channelgrabber/product": ">=1.3.14",
                 "channelgrabber/slim": ">=1.11.2",
@@ -189,12 +183,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-12-17 11:10:59"
+            "time": "2015-01-19 12:34:25"
         },
         {
             "name": "channelgrabber/channel",
@@ -720,7 +709,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "9b03dc2a3c71087d418a5c2b2b13172df2b4032d"
+                "reference": "11b0021688c20e4a06946724098bf4fe07f47397"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -754,7 +743,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2015-01-19 10:34:38"
+            "time": "2015-01-19 10:37:53"
         },
         {
             "name": "channelgrabber/location",
@@ -6033,6 +6022,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.4.0",
+            "alias_normalized": "1.4.0.0",
+            "version": "dev-CGIV-4520-stock-management-changes-during-update-fix",
+            "package": "channelgrabber/cglib"
+        },
+        {
             "alias": "1.4.4",
             "alias_normalized": "1.4.4.0",
             "version": "dev-CGIV-4582-listing-patch-support",
@@ -6041,6 +6036,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/listing": 20,
         "composer/composer": 20,
