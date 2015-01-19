@@ -197,7 +197,9 @@ use CG\Stock\Audit\Storage\Queue as StockAuditQueue;
 
 // Listing
 use CG\Listing\Entity as ListingEntity;
-use CG\Listing\Service as ListingService;
+use CG\Listing\Service as ListingDeprService;
+use CG\Listing\Client\Service as ListingClientService;
+use CG\Listing\Service\Service as ListingService;
 use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
@@ -806,6 +808,18 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
+                    'mapper' => ListingMapper::class
+                ]
+            ],
+            ListingClientService::class => [
+                'parameters' => [
+                    'repository' => ListingRepository::class,
+                    'mapper' => ListingMapper::class
+                ]
+            ],
+            ListingDeprService::class => [
+                'parameters' => [
+                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class
                 ]
             ],

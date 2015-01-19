@@ -6,7 +6,7 @@ use CG\InputValidation\Listing\Entity as ListingEntityValidation;
 use CG\InputValidation\Listing\Filter as ListingCollectionValidation;
 use CG\Listing\Entity as ListingEntity;
 use CG\Listing\Mapper as ListingMapper;
-use CG\Listing\Service as ListingService;
+use CG\Listing\Service\Service as ListingService;
 
 // Unimported Listing
 use CG\Controllers\Listing\Unimported\Entity as UnimportedListingEntityController;
@@ -30,12 +30,13 @@ return [
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'POST', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
         'name' => 'ListingCollection',
         'validation' => [
             'filterRules' => ListingCollectionValidation::class,
             'dataRules' => ListingEntityValidation::class
         ],
+        'entityRoute' => '/listing/:listingId',
         "version" => new Version(1, 3)
     ],
     '/listing/:listingId' => [
@@ -48,7 +49,7 @@ return [
                     $controller->$method($listingId, $app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         'name' => 'ListingEntity',
         'validation' => [
             "dataRules" => ListingEntityValidation::class,
