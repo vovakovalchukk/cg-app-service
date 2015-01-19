@@ -6,14 +6,16 @@ use CG\Listing\Mapper;
 use CG\Listing\ServiceAbstract;
 use CG\Listing\StorageInterface;
 use CG\Slim\Patch\ServiceTrait as PatchServiceTrait;
-use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stdlib\ServiceTrait;
+use Nocarrier\Hal;
 use Zend\EventManager\GlobalEventManager;
 
 class Service extends ServiceAbstract
 {
     use ServiceTrait;
     use PatchServiceTrait;
+
+    protected $globalEventManager;
 
     public function __construct(
         StorageInterface $repository,
@@ -45,6 +47,17 @@ class Service extends ServiceAbstract
         $listing = $this->fromHal($hal, $ids);
         GlobalEventManager::trigger('listing.update', __CLASS__, ['listing' => $listing]);
         return $this->save($listing);
+    }
+
+    protected function getGlobalEventManager()
+    {
+        return $this->globalEventManager;
+    }
+
+    protected function setGlobalEventManager(GlobalEventManager $globalEventManager)
+    {
+        $this->globalEventManager = $globalEventManager;
+        return $this;
     }
 
     /**
