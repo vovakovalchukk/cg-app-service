@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "570a947084d17481fb7a654d3dfa40a3",
+    "hash": "afe6834aec9051a19aecabc755692f35",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -716,11 +716,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-4582-listing-patch-support",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "9b03dc2a3c71087d418a5c2b2b13172df2b4032d"
+                "reference": "f7e3468de06b8743af230bafd6c64880c2a7534f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.5.0-b50591.zip",
+                "reference": "f7e3468de06b8743af230bafd6c64880c2a7534f",
+                "shasum": "44e4f8057e818ecd05910eb90e8a16db8ffc6f84"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -754,7 +760,12 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2015-01-19 10:34:38"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-01-20 09:26:04"
         },
         {
             "name": "channelgrabber/location",
@@ -6031,18 +6042,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.4.4",
-            "alias_normalized": "1.4.4.0",
-            "version": "dev-CGIV-4582-listing-patch-support",
-            "package": "channelgrabber/listing"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
