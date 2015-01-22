@@ -21,7 +21,6 @@ class Shipping implements LoggerAwareInterface
     public function get()
     {
         return $this->getDi()->get(Hal::class, ['uri' => '/settings/shipping/'])
-            ->addLink('alias', '/settings/shipping/alias')
-            ->addLink('pickList', '/settings/pickList');
+            ->addLink('alias', '/settings/shipping/alias');
     }
 }

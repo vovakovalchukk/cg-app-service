@@ -21,8 +21,8 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
                 ]
             ],
-            'sortBy' => [
-                'name'       => 'sortBy',
+            'sortField' => [
+                'name'       => 'sortField',
                 'required'   => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
