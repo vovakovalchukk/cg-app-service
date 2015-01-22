@@ -149,7 +149,7 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'POST', 'OPTIONS'],
+        'via' => ['GET', 'OPTIONS'],
         'name' => 'PickListSettingsCollection',
         'validation' => [
             'filterRules' => PickListCollectionValidation::class

@@ -14,16 +14,11 @@ class Entity implements RulesInterface
         return [
             'id' => [
                 'name'       => 'id',
-                'required'   => false,
-                'validators' => []
-            ],
-            'organisationUnitId' => [
-                'name'       => 'organisationUnitId',
                 'required'   => true,
                 'validators' => [
-                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    new IntegerValidator(['name' => 'id']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                        ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
                 ]
             ],
             'sortBy' => [

@@ -4,13 +4,12 @@ namespace CG\Controllers\Settings\PickList;
 use CG\Settings\PickList\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
-use CG\Slim\Controller\Collection\PostTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 
 class Collection
 {
-    use ControllerTrait, GetTrait, PostTrait;
+    use ControllerTrait, GetTrait;
 
     public function __construct(Slim $app, Service $service, Di $di)
     {
@@ -24,8 +23,7 @@ class Collection
         return $this->getService()->fetchCollectionByPaginationAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('organisationUnitId') ?: []
+            $this->getParams('id') ?: []
         );
     }
 }

@@ -11,8 +11,6 @@ class PickList extends AbstractMigration
             ->addColumn('sortDirection', 'string')
             ->addColumn('showPictures', 'boolean')
             ->addColumn('showSkuless', 'boolean')
-            ->addColumn('organisationUnitId', 'integer')
-            ->addIndex(['organisationUnitId'], ['unique' => true])
             ->create();
     }
 }
