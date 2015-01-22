@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f51ff5fff6542faa5ff304ee8b19998",
+    "hash": "b81c10504b862921231deffbfa61cb3d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -849,6 +849,37 @@
                 }
             },
             "time": "2015-01-14 11:12:00"
+        },
+        {
+            "name": "channelgrabber/middleware",
+            "version": "dev-QA",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-middleware.git",
+                "reference": "095f113c5b5457a68878110a31521fd0de239b3d"
+            },
+            "require": {
+                "channelgrabber/slim": "~1.12.0",
+                "composer/composer": "@dev",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev",
+                "slim/slim": "2.3.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.4.0"
+            },
+            "type": "di-definition",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Middleware\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Middleware\\Test\\": "tests/"
+                }
+            },
+            "time": "2015-01-14 11:36:41"
         },
         {
             "name": "channelgrabber/order",
@@ -6152,6 +6183,7 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/http": 20,
+        "channelgrabber/middleware": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
