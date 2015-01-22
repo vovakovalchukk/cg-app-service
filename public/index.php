@@ -54,7 +54,8 @@ $app->any('.+', $newRelic);
 $di->get(MiddlewareHandler::class)->register(
     $app,
     [
-        750 => $versioning
+        750 => $versioning,
+        850 => $di->get(StockAuditMiddleware::class)
     ]
 );
 
