@@ -7,8 +7,8 @@ class PickList extends AbstractMigration
     public function change()
     {
         $table = $this->table('pickList');
-        $table->addColumn('column', 'string')
-            ->addColumn('orderBy', 'string')
+        $table->addColumn('sortBy', 'string')
+            ->addColumn('sortDirection', 'string')
             ->addColumn('showPictures', 'boolean')
             ->addColumn('showSkuless', 'boolean')
             ->addColumn('organisationUnitId', 'integer')

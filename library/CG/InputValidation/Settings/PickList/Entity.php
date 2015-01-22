@@ -26,13 +26,13 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
-            'column' => [
-                'name'       => 'column',
+            'sortBy' => [
+                'name'       => 'sortBy',
                 'required'   => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'orderBy' => [
-                'name'       => 'orderBy',
+            'sortDirection' => [
+                'name'       => 'sortDirection',
                 'required'   => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
