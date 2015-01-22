@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "afe6834aec9051a19aecabc755692f35",
+    "hash": "35e10b74f522f57516bb9f27b13e1d94",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -274,7 +274,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0.2-dc8d2a.zip",
                 "reference": "22b62f8a1ae0f7a3060a691db38eeead4c3bdccc",
-                "shasum": "aeee5f74c5a4f3b8543874fb87780e9f942cd0c9"
+                "shasum": "550338c14ec286d5cf1da491e547059340e606c6"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -484,7 +484,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.1.8-4bd601.zip",
                 "reference": "38911c0672fa51a2a7876f9c67979229251af7a3",
-                "shasum": "77bdbc6ede11710db5519c5dc471b0b6d0819e7e"
+                "shasum": "0b11ea9bac8b4893c4bb5fbb671e1865d513efe6"
             },
             "require": {
                 "channelgrabber/channel": ">=1.13.3",
@@ -650,7 +650,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.27-f6c49e.zip",
                 "reference": "8117105655138ab77f8709428c48e5d328cc6906",
-                "shasum": "c1938d2ee428498efbe9a87d8744a1e02e488270"
+                "shasum": "9c1e6970269428b56d3ee3890a664b567a77c5b7"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -832,7 +832,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.9-d4ce05.zip",
                 "reference": "4695bca0d3784abfa408ae03e93987664a528527",
-                "shasum": "bdc0eda2265173cbd8d1d1b6193206af62c721e6"
+                "shasum": "14aa8361851e95ff324171f4b0aaa90f02fec844"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1245,17 +1245,11 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.3.0.1",
+            "version": "dev-CGIV-4624-PickList",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "9c1028b5ac31eb5108f63f838f23580f2f41b917"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.0.1-8dfd79.zip",
-                "reference": "9c1028b5ac31eb5108f63f838f23580f2f41b917",
-                "shasum": "10b5209f123e1f47b43b103ef1bbb57c249463a4"
+                "reference": "8a4f29267f0b164d6de1990383272ed26ab9520b"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1275,12 +1269,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2014-11-11 12:27:38"
+            "time": "2015-01-22 10:27:50"
         },
         {
             "name": "channelgrabber/slim",
@@ -1294,7 +1283,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.12.0-70d1e1.zip",
                 "reference": "3f0ee16ecb762c0861c65543962b29d88a526c90",
-                "shasum": "5b123138ef5e943fb24d161c02163b73ccb90676"
+                "shasum": "72a0c8f9d9076700980d3a77ab4edf81e537b8bf"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -5498,8 +5487,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -6042,10 +6030,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.3.0",
+            "alias_normalized": "1.3.0.0",
+            "version": "dev-CGIV-4624-PickList",
+            "package": "channelgrabber/settings"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
