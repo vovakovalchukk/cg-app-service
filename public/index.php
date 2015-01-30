@@ -1,23 +1,16 @@
 <?php
-use CG\Slim\ContentTypes;
 use CG\Slim\Module\Logging as LoggingModule;
 use CG\Slim\NewRelic;
 use CG\Slim\Rest\Options;
 use CG\Slim\Rest\UnusedMethods;
-use CG\Slim\Renderer;
 use CG\Slim\Validator;
-use CG\Slim\VndError\VndError;
 use CG\Slim\Cache;
 use CG\Slim\Versioning\Middleware as Versioning;
-use CG\Slim\HeadRequest\Middleware as HeadRequest;
-use CG\Slim\Created\Created as Created;
 use CG\Slim\Itid\ItidInjector;
-use CG\Slim\Usage\Endpoint as UsageEndpoint;
-use CG\Slim\Usage\Count as UsageCount;
 use CG\Slim\Etag;
 use CG\Slim\Etag\ConfigFactory as EtagConfigFactory;
 use CG\Stock\Audit\Middleware as StockAuditMiddleware;
-use CG\Slim\Nginx\Cache\Middleware as NginxInvalidatorMiddleware;
+use CG\Middleware\Handler as MiddlewareHandler;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
 $routes = require_once dirname(__DIR__).'/config/routing.php';
@@ -58,17 +51,14 @@ foreach ($routes as $route => $request) {
 }
 $app->any('.+', $newRelic);
 
-$app->add($di->get(Created::class));
-$app->add($di->get(UsageEndpoint::class));
-$app->add($di->get(UsageCount::class));
-$app->add($di->get(NginxInvalidatorMiddleware::class));
-$app->add($di->get(ContentTypes::class));
-$app->add($di->get(VndError::class));
-$app->add($di->get(UnusedMethods::class));
-$app->add($di->get(HeadRequest::class));
-$app->add($versioning);
-$app->add($di->get(Renderer::class));
-$app->add($di->get(StockAuditMiddleware::class));
+$di->get(MiddlewareHandler::class)->register(
+    $app,
+    [
+        750 => $versioning,
+        850 => $di->get(StockAuditMiddleware::class)
+    ]
+);
+
 include_once dirname(__DIR__).'/config/DiSharedInstances.php';
 $app->run();
 fastcgi_finish_request();
