@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9eed6314164efa613b9f37975bf76d57",
+    "hash": "536ef16881aa8b26371763df1a3b21ef",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -274,7 +274,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0.2-dc8d2a.zip",
                 "reference": "22b62f8a1ae0f7a3060a691db38eeead4c3bdccc",
-                "shasum": "aeee5f74c5a4f3b8543874fb87780e9f942cd0c9"
+                "shasum": "550338c14ec286d5cf1da491e547059340e606c6"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -905,17 +905,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.15.11",
+            "version": "dev-CGIV-4699-ProductRootOu",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f68319ecb7756b6c237bb4f84e4e0a9c83e2e6aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.15.11-d7e4a3.zip",
-                "reference": "f68319ecb7756b6c237bb4f84e4e0a9c83e2e6aa",
-                "shasum": "146e1e9f6748ffa6b7cbb1330b70d54e954b99f0"
+                "reference": "b7d10f2fec4136a3469d464626e6c9f6a7d0db99"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -964,12 +958,7 @@
                     "CG\\Order\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2015-01-28 08:40:49"
+            "time": "2015-02-02 11:43:21"
         },
         {
             "name": "channelgrabber/permission",
@@ -6193,10 +6182,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.15.12",
+            "alias_normalized": "1.15.12.0",
+            "version": "dev-CGIV-4699-ProductRootOu",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
