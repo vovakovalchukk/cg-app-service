@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b6aba91c451022db4a0c7b8d341bf7d",
+    "hash": "1b2bb0a893c5cc315c77a088892df5d1",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -766,6 +766,25 @@
                 }
             },
             "time": "2015-01-20 09:26:04"
+        },
+        {
+            "name": "channelgrabber/locale",
+            "version": "dev-CGIV-4728-EbayCountryCodes",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
+                "reference": "13411511b9cb404b9ec2a36eddf204a309e9a8fb"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Locale\\": "src/"
+                }
+            },
+            "time": "2015-02-09 15:07:01"
         },
         {
             "name": "channelgrabber/location",
@@ -6197,6 +6216,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/locale": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

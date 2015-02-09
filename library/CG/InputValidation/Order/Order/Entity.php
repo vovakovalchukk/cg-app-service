@@ -1,8 +1,8 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
-use CG\Constant\CurrencyCode;
-use CG\Constant\CountryCode;
+use CG\Locale\CurrencyCode;
+use CG\Locale\CountryCode;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
