@@ -36,7 +36,35 @@ class Filter implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "accountId"])
                 ],
-            ]
+            ],
+            'externalId' => [
+                'name'       => 'externalId',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "externalId"])
+                ],
+            ],
+            'itemSku' => [
+                'name'       => 'itemSku',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "itemSku"])
+                ],
+            ],
+            'status' => [
+                'name'       => 'status',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "status"])
+                ],
+            ],
+            'organisationUnitId' => [
+                'name' => 'organisationUnitId',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                ]
+            ],
         ];
     }
 }
