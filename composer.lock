@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2a3b48c5295870737fa36149ce78d9fc",
+    "hash": "63ba5a21d56130f2941f08116c7e9069",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -716,17 +716,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.5.0",
+            "version": "dev-CGIV-4799-PurgeFix",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "f7e3468de06b8743af230bafd6c64880c2a7534f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.5.0-b50591.zip",
-                "reference": "f7e3468de06b8743af230bafd6c64880c2a7534f",
-                "shasum": "44e4f8057e818ecd05910eb90e8a16db8ffc6f84"
+                "reference": "8d376e98a1a0838e6ebb98c1916f2f408c0f5934"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -736,7 +730,7 @@
                 "channelgrabber/http": ">=1.2.18,<2.0.0",
                 "channelgrabber/image": ">=1.1.2,<2.0.0",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
-                "channelgrabber/slim": ">=1.12.0, <2.0.0",
+                "channelgrabber/slim": ">=1.13.0, <2.0.0",
                 "channelgrabber/stdlib": ">=2.7.26,<3.0.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
@@ -760,12 +754,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2015-01-20 09:26:04"
+            "time": "2015-02-10 14:28:02"
         },
         {
             "name": "channelgrabber/location",
@@ -6240,10 +6229,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.2",
+            "alias_normalized": "1.5.2.0",
+            "version": "dev-CGIV-4799-PurgeFix",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
