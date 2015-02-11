@@ -31,7 +31,11 @@ class Collection
             $this->getParams('page') ?: 1,
             $this->getParams('id') ?: [],
             $this->getParams('orderIds') ?: [],
-            $this->getParams('accountId') ?: []
+            $this->getParams('accountId') ?: [],
+            $this->getParams('externalId') ?: [],
+            $this->getParams('itemSku') ?: [],
+            $this->getParams('status') ?: [],
+            $this->getParams('organisationUnitId') ?: []
         );
     }
 
