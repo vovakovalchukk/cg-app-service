@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "058ce3800c3435083a44528a51494f80",
+    "hash": "904d6fc3bb452bd5574678ca54a825e2",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -769,11 +769,17 @@
         },
         {
             "name": "channelgrabber/locale",
-            "version": "dev-CGIV-4728-EbayCountryCodes",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
-                "reference": "13411511b9cb404b9ec2a36eddf204a309e9a8fb"
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.0.1-2007be.zip",
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6",
+                "shasum": "419234494d89d9a3699a49aefe888e65c3072f96"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -784,7 +790,12 @@
                     "CG\\Locale\\": "src/"
                 }
             },
-            "time": "2015-02-09 15:07:01"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-13 13:45:49"
         },
         {
             "name": "channelgrabber/location",
@@ -6263,7 +6274,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/locale": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
