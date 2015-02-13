@@ -1,6 +1,6 @@
 namespace :deploy do
   before :publishing, 'hooks:deploy'
-  before :finishing, 'hooks:after_symlink'
+  after :finished, 'hooks:after_symlink'
 end
 
 namespace :hooks do
