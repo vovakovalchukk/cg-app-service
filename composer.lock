@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a7f40bccd3a682cf52bf7afd00d8796",
+    "hash": "904d6fc3bb452bd5574678ca54a825e2",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -768,6 +768,36 @@
             "time": "2015-02-11 10:30:05"
         },
         {
+            "name": "channelgrabber/locale",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.0.1-2007be.zip",
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6",
+                "shasum": "419234494d89d9a3699a49aefe888e65c3072f96"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Locale\\": "src/"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-13 13:45:49"
+        },
+        {
             "name": "channelgrabber/location",
             "version": "1.1.1",
             "source": {
@@ -1077,7 +1107,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.7-9aedf6.zip",
                 "reference": "14bf8b3cc0984d1e6b96166701dfe3897e52b1ee",
-                "shasum": "73405638346204bcc786b3179fe5c3a2eb014ffa"
+                "shasum": "2ab4fcb7984b7128088350fc789d4666a75b2f74"
             },
             "require": {
                 "jakoch/phantomjs-installer": "1.9.7",
@@ -1340,7 +1370,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.0.1-8dfd79.zip",
                 "reference": "9c1028b5ac31eb5108f63f838f23580f2f41b917",
-                "shasum": "815fb8ba3d0ac4c280494b2c013101e9bd8876ec"
+                "shasum": "10b5209f123e1f47b43b103ef1bbb57c249463a4"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1834,7 +1864,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.6-75ca55.zip",
                 "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f",
-                "shasum": "6235b73fddc292d5edd1d9a09f293012281afc3c"
+                "shasum": "edd14fd5ff38092ab7784ebed3eaf96c3eab0b38"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -2149,12 +2179,12 @@
             "version": "v1.0.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfPHP/Goutte.git",
+                "url": "https://github.com/fabpot/Goutte.git",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
                 "shasum": ""
             },
