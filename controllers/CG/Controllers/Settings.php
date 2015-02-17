@@ -19,7 +19,8 @@ class Settings
     public function get()
     {
         $hal = $this->getDi()->get(Hal::class, ['uri' => '/settings'])
-                             ->addLink('invoice', '/settings/invoice');
+                             ->addLink('invoice', '/settings/invoice')
+                             ->addLink('pickList', '/settings/pickList');
         return $hal;
     }
 }

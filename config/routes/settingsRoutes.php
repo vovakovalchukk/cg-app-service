@@ -22,6 +22,16 @@ use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
 use CG\Settings\Shipping\Alias\Service as AliasService;
 
+use CG\Controllers\Settings\PickList;
+use CG\Controllers\Settings\PickList\Collection as PickListCollection;
+
+use CG\InputValidation\Settings\PickList\Filter as PickListCollectionValidation;
+use CG\InputValidation\Settings\PickList\Entity as PickListEntityValidation;
+
+use CG\Settings\PickList\Entity as PickListEntity;
+use CG\Settings\PickList\Mapper as PickListMapper;
+use CG\Settings\PickList\Service as PickListService;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -127,5 +137,44 @@ return [
             'serviceClass' => AliasService::class
         ],
         'version' => new Version(1, 2),
+    ],
+    '/settings/pickList' => [
+        'controllers' => function() use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(PickListCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'PickListSettingsCollection',
+        'validation' => [
+            'filterRules' => PickListCollectionValidation::class
+        ]
+    ],
+    '/settings/pickList/:id' => [
+        'controllers' => function($pickListId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(PickList::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($pickListId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'PickListSettings',
+        'validation' => [
+            'dataRules' => PickListEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => PickListMapper::class,
+            'entityClass' => PickListEntity::class,
+            'serviceClass' => PickListService::class
+        ]
     ]
 ];

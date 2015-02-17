@@ -227,6 +227,13 @@ use CG\Location\Storage\Cache as LocationCacheStorage;
 // Caching
 use CG\Cache\InvalidationHandler;
 
+// PickList
+use CG\Settings\PickList\Service as PickListService;
+use CG\Settings\PickList\Repository as PickListRepository;
+use CG\Settings\PickList\Mapper as PickListMapper;
+use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
+use CG\Settings\PickList\Storage\Db as PickListDbStorage;
+
 return array(
     'di' => array(
         'instance' => array(
@@ -880,6 +887,26 @@ return array(
             StockAuditQueue::class => [
                 'parameters' => [
                     'client' => 'reliable_redis'
+                ]
+            ],
+            PickListDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => PickListMapper::class
+                ]
+            ],
+            PickListRepository::class => [
+                'parameter' => [
+                    'storage' => PickListCacheStorage::class,
+                    'repository' => PickListDbStorage::class
+                ]
+            ],
+            PickListService::class => [
+                'parameters' => [
+                    'repository' => PickListRepository::class,
+                    'mapper' => PickListMapper::class
                 ]
             ],
             'preferences' => [

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "904d6fc3bb452bd5574678ca54a825e2",
+    "hash": "858911c22ef0f4f6109ea633dd53bd16",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1360,17 +1360,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.3.0.1",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "9c1028b5ac31eb5108f63f838f23580f2f41b917"
+                "reference": "1373cbe4d17d04de0e3e5d5fab96216baf66a0e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.0.1-8dfd79.zip",
-                "reference": "9c1028b5ac31eb5108f63f838f23580f2f41b917",
-                "shasum": "10b5209f123e1f47b43b103ef1bbb57c249463a4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.1-8e44ca.zip",
+                "reference": "1373cbe4d17d04de0e3e5d5fab96216baf66a0e9",
+                "shasum": "2fa775bb3aaf427ea37f993d203ea32469eb10bf"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1380,6 +1380,7 @@
                 "channelgrabber/http": ">=1.2.26",
                 "channelgrabber/slim": ">=1.11.2",
                 "channelgrabber/stdlib": ">=2.7.18",
+                "channelgrabber/validation": ">=1.2.6",
                 "composer/composer": "@dev",
                 "php-jsonpatch/php-jsonpatch": "@dev",
                 "php-jsonpointer/php-jsonpointer": "@dev"
@@ -1395,7 +1396,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-11 12:27:38"
+            "time": "2015-02-17 13:36:43"
         },
         {
             "name": "channelgrabber/slim",
@@ -1854,17 +1855,17 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f"
+                "reference": "d29f78e04288efea047e68d439900e4cc07b4164"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.6-75ca55.zip",
-                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f",
-                "shasum": "edd14fd5ff38092ab7784ebed3eaf96c3eab0b38"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.7-0509ac.zip",
+                "reference": "d29f78e04288efea047e68d439900e4cc07b4164",
+                "shasum": "863bf4d7c2c6fb0ca825eafd1a37b152d70b8d13"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1882,7 +1883,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-14 09:31:59"
+            "time": "2015-02-17 13:39:48"
         },
         {
             "name": "channelgrabber/vnderror",
