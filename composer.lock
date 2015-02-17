@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f59f679fd4d64c4d0ca3c63bca54b900",
+    "hash": "2989b44ec6d077c97619ab13abb2811e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -305,7 +305,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "e5f047965a3b638071834c9d6eb9b51be4363eae"
+                "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -316,7 +316,7 @@
                     "CG": ""
                 }
             },
-            "time": "2015-02-05 09:07:51"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/db",
@@ -766,6 +766,36 @@
                 }
             },
             "time": "2015-02-11 10:30:05"
+        },
+        {
+            "name": "channelgrabber/locale",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.0.1-2007be.zip",
+                "reference": "22b855c0f1540aa3438259818166fc81002ce7f6",
+                "shasum": "419234494d89d9a3699a49aefe888e65c3072f96"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Locale\\": "src/"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-13 13:45:49"
         },
         {
             "name": "channelgrabber/location",
@@ -2061,12 +2091,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "07c644ac229a21df80180598d8bb9aaba232eecb"
+                "reference": "020e1c214385a986e330f93a29143d7cbd1a677e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/07c644ac229a21df80180598d8bb9aaba232eecb",
-                "reference": "07c644ac229a21df80180598d8bb9aaba232eecb",
+                "url": "https://api.github.com/repos/composer/composer/zipball/020e1c214385a986e330f93a29143d7cbd1a677e",
+                "reference": "020e1c214385a986e330f93a29143d7cbd1a677e",
                 "shasum": ""
             },
             "require": {
@@ -2121,7 +2151,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2015-02-03 12:51:10"
+            "time": "2015-02-10 12:20:43"
         },
         {
             "name": "fabpot/goutte",
