@@ -1,5 +1,5 @@
 set :stage, :qa
 
 role :app, [
-    "www-data@78.47.63.179"
+    "www-data@88.198.40.116"
 ]
