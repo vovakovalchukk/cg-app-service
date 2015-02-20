@@ -211,6 +211,7 @@ use CG\Listing\Unimported\Repository as UnimportedListingRepository;
 use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
+use CG\Listing\Unimported\Storage\Api as UnimportedListingApi;
 
 // Image
 use CG\Image\Entity as ImageEntity;
@@ -907,6 +908,11 @@ return array(
                 'parameters' => [
                     'repository' => PickListRepository::class,
                     'mapper' => PickListMapper::class
+                ]
+            ],
+            UnimportedListingApi::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle'
                 ]
             ],
             'preferences' => [

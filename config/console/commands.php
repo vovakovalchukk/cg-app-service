@@ -2,6 +2,7 @@
 $commands = array();
 $files = [
     'channel.php',
+    'listing.php',
     'mongo.php',
     'retry.php',
     'ekm.php',
