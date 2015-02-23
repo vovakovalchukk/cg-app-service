@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f2b3d30d56076e6c1cfea5467f5d4e8",
+    "hash": "5a92ac5f9e0f2883bcac2ab63e2407c2",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -716,17 +716,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-4928-DeleteFbaListings",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "8ca18a9f01a91b755958503adef0077f254fd517"
+                "reference": "049ad6017444705b5d74d6b8c1027f043bde3631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-4928-DeleteFbaListings-9a1726.zip",
-                "reference": "8ca18a9f01a91b755958503adef0077f254fd517",
-                "shasum": "5a8fe726c3fb1c72b5f990413408b53832459770"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.5.3-8b9140.zip",
+                "reference": "049ad6017444705b5d74d6b8c1027f043bde3631",
+                "shasum": "8da99307623b97e1839a6a40aef8981bdc25ecc9"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -765,7 +765,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-20 14:55:04"
+            "time": "2015-02-23 13:33:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -1401,17 +1401,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "e065775952b26f5e460e2c65629fbb5119f0b8a2"
+                "reference": "cb846e39b43026c166ff101d4fd1676858eb66c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.0-c6863d.zip",
-                "reference": "e065775952b26f5e460e2c65629fbb5119f0b8a2",
-                "shasum": "46b17ef66bbddb94c4c506b04fc66d99f68accae"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.1-61fcf2.zip",
+                "reference": "cb846e39b43026c166ff101d4fd1676858eb66c2",
+                "shasum": "63804652971a13c571605f8b6e582b0c99afa3a3"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1457,7 +1457,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-10 10:30:15"
+            "time": "2015-02-23 13:29:11"
         },
         {
             "name": "channelgrabber/spork",
@@ -1513,17 +1513,17 @@
         },
         {
             "name": "channelgrabber/stats",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stats.git",
-                "reference": "38f1297cc306b53feb0c42ac872d67f20e4dbfbc"
+                "reference": "58a676fbb35da488f26e7fb5aa5c156de49e25a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.0-6b5e64.zip",
-                "reference": "38f1297cc306b53feb0c42ac872d67f20e4dbfbc",
-                "shasum": "c0cb903c123dd6a308d36049fdc4d42c2c058e59"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.1-fedf8f.zip",
+                "reference": "58a676fbb35da488f26e7fb5aa5c156de49e25a2",
+                "shasum": "fa1a6b30d656cc37e56a881f78620e1c6394c68d"
             },
             "require": {
                 "liuggio/statsd-php-client": "~1.0.12"
@@ -1540,7 +1540,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-01-07 17:02:30"
+            "time": "2015-02-18 11:19:38"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -2186,9 +2186,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://composer.build.channelgrabber.com/dist/fabpot-goutte-794b196e76bdd37b5155cdecbad311f0a3b07625-zip-2d5a7a.zip",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
-                "shasum": ""
+                "shasum": "b36e6be945c9362f8a1b94341671199453b7a878"
             },
             "require": {
                 "ext-curl": "*",
@@ -2230,6 +2230,11 @@
             "keywords": [
                 "scraper"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-09 15:52:51"
         },
         {
@@ -2242,9 +2247,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/54991459675c1a2924122afbb0e5609ade581155",
+                "url": "https://composer.build.channelgrabber.com/dist/guzzle-guzzle-54991459675c1a2924122afbb0e5609ade581155-zip-3f5732.zip",
                 "reference": "54991459675c1a2924122afbb0e5609ade581155",
-                "shasum": ""
+                "shasum": "23d8172bc4b0beb911c647d06977a92add4eee82"
             },
             "require": {
                 "ext-curl": "*",
@@ -2322,6 +2327,11 @@
                 "rest",
                 "web service"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-08-11 04:32:36"
         },
         {
@@ -2375,9 +2385,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/87b54b460febed69726c781ab67462084e97a105",
+                "url": "https://composer.build.channelgrabber.com/dist/justinrainbow-json-schema-87b54b460febed69726c781ab67462084e97a105-zip-f54348.zip",
                 "reference": "87b54b460febed69726c781ab67462084e97a105",
-                "shasum": ""
+                "shasum": "0713e82dbe8c561e5a3c4398a3950e4c16f8da96"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2429,6 +2439,11 @@
                 "json",
                 "schema"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-08-25 02:48:14"
         },
         {
@@ -2865,9 +2880,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-browser-kit-2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04-zip-ca8c4d.zip",
                 "reference": "2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04",
-                "shasum": ""
+                "shasum": "1bcd1247c86c5901008ed1236b0502f723eeca41"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -2907,6 +2922,11 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-03 08:01:59"
         },
         {
@@ -2920,9 +2940,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/deac802f76910708ab50d039806cfd1866895b52",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-class-loader-deac802f76910708ab50d039806cfd1866895b52-zip-3453b7.zip",
                 "reference": "deac802f76910708ab50d039806cfd1866895b52",
-                "shasum": ""
+                "shasum": "ef9e6cdee636f2d07b5d4f78186471e4f3e8ab9e"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -2957,6 +2977,11 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-05 14:28:40"
         },
         {
@@ -2970,9 +2995,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/a9f781ba1221067d1f07c8cec0bc50f81b8d7408",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-config-a9f781ba1221067d1f07c8cec0bc50f81b8d7408-zip-a2a4ca.zip",
                 "reference": "a9f781ba1221067d1f07c8cec0bc50f81b8d7408",
-                "shasum": ""
+                "shasum": "bd0ffb0555c8aa4263963d90075db852d784f96c"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -3005,6 +3030,11 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-21 20:57:55"
         },
         {
@@ -3018,9 +3048,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/e44154bfe3e41e8267d7a3794cd9da9a51cfac34",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-console-e44154bfe3e41e8267d7a3794cd9da9a51cfac34-zip-78677b.zip",
                 "reference": "e44154bfe3e41e8267d7a3794cd9da9a51cfac34",
-                "shasum": ""
+                "shasum": "b644c697272a100b722f33e34c22ea06167dc0d0"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3062,6 +3092,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-25 04:39:26"
         },
         {
@@ -3075,9 +3110,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/3f80ecc614fec68d5b4a84a0703db3fdf5ce8584",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-css-selector-3f80ecc614fec68d5b4a84a0703db3fdf5ce8584-zip-8c7904.zip",
                 "reference": "3f80ecc614fec68d5b4a84a0703db3fdf5ce8584",
-                "shasum": ""
+                "shasum": "d02c6b247552cc5c3a0599dbf85cb9d0da1ead11"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3113,6 +3148,11 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-03 08:01:59"
         },
         {
@@ -3126,9 +3166,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DependencyInjection/zipball/42bbb43fab66292a1865dc9616c299904c3d4d14",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-dependency-injection-42bbb43fab66292a1865dc9616c299904c3d4d14-zip-e260de.zip",
                 "reference": "42bbb43fab66292a1865dc9616c299904c3d4d14",
-                "shasum": ""
+                "shasum": "fed62fa1c3262b80e5b57256506e2c1689f949c0"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3173,6 +3213,11 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-25 04:39:26"
         },
         {
@@ -3186,9 +3231,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/26a9eb302decd828990e1015afaa11b78b016073",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-dom-crawler-26a9eb302decd828990e1015afaa11b78b016073-zip-0a8884.zip",
                 "reference": "26a9eb302decd828990e1015afaa11b78b016073",
-                "shasum": ""
+                "shasum": "70b319e23d9ba6c93d0e1be889a03e644af3876a"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3226,6 +3271,11 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-03 08:01:59"
         },
         {
@@ -3239,9 +3289,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/f75989f3ab2743a82fe0b03ded2598a2b1546813",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-event-dispatcher-f75989f3ab2743a82fe0b03ded2598a2b1546813-zip-73358a.zip",
                 "reference": "f75989f3ab2743a82fe0b03ded2598a2b1546813",
-                "shasum": ""
+                "shasum": "441e820b2a287ec9369ec89a8d446e3ba30d6700"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3284,6 +3334,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-01 16:10:57"
         },
         {
@@ -3297,9 +3352,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/a1f566d1f92e142fa1593f4555d6d89e3044a9b7",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-filesystem-a1f566d1f92e142fa1593f4555d6d89e3044a9b7-zip-3a718a.zip",
                 "reference": "a1f566d1f92e142fa1593f4555d6d89e3044a9b7",
-                "shasum": ""
+                "shasum": "da50dd60d75d8402034f4568bc3e7fc0732bfc31"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3331,6 +3386,11 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-03 21:13:09"
         },
         {
@@ -3344,9 +3404,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/16513333bca64186c01609961a2bb1b95b5e1355",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-finder-16513333bca64186c01609961a2bb1b95b5e1355-zip-80b224.zip",
                 "reference": "16513333bca64186c01609961a2bb1b95b5e1355",
-                "shasum": ""
+                "shasum": "8a96b1f6210bd092f19ae1eed92f53aea98441ac"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3378,6 +3438,11 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-03 08:01:59"
         },
         {
@@ -3391,9 +3456,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/ecfc23e89d9967999fa5f60a1e9af7384396e9ae",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-process-ecfc23e89d9967999fa5f60a1e9af7384396e9ae-zip-6ffc7d.zip",
                 "reference": "ecfc23e89d9967999fa5f60a1e9af7384396e9ae",
-                "shasum": ""
+                "shasum": "d35589f4ef1a586a0a02094d95b76e811c6fe53a"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3425,6 +3490,11 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-25 04:39:26"
         },
         {
@@ -3438,9 +3508,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/60ed7751671113cf1ee7d7778e691642c2e9acd8",
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-yaml-60ed7751671113cf1ee7d7778e691642c2e9acd8-zip-bf5d1d.zip",
                 "reference": "60ed7751671113cf1ee7d7778e691642c2e9acd8",
-                "shasum": ""
+                "shasum": "0d2a7cb8319b8a379a7003b316a5ccee1880522b"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -3472,6 +3542,11 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-25 04:39:26"
         },
         {
@@ -3484,9 +3559,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4cf7464348e7f9893a93f7096a90b73722be99cf",
+                "url": "https://composer.build.channelgrabber.com/dist/twig-twig-4cf7464348e7f9893a93f7096a90b73722be99cf-zip-7185b7.zip",
                 "reference": "4cf7464348e7f9893a93f7096a90b73722be99cf",
-                "shasum": ""
+                "shasum": "6afe3bb97f7adacde92ff5d6e5b45d7ce9778ba5"
             },
             "require": {
                 "php": ">=5.2.4"
@@ -3529,6 +3604,11 @@
             "keywords": [
                 "templating"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-01-25 17:32:08"
         },
         {
@@ -3542,9 +3622,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-cache-03cf30de6aa60ff9fb1a9f473202559a18b9f2f5-zip-22bd94.zip",
-                "reference": "2.3.4",
-                "shasum": "7e67e24c34f4ba90e18b58e61c9aaf0616dd41ba"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-cache-03cf30de6aa60ff9fb1a9f473202559a18b9f2f5-zip-22bd94.zip",
+                "reference": "03cf30de6aa60ff9fb1a9f473202559a18b9f2f5",
+                "shasum": "03a2f5b33c67e9357490decc676331adfdd08ed3"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3576,6 +3656,7 @@
                     "Zend\\Cache\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3585,8 +3666,10 @@
                 "cache",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCache/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3601,9 +3684,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-code-a7f71bd4a1130ad9fb4ffa2f10fed7e01dd873fb-zip-c6270a.zip",
-                "reference": "2.3.4",
-                "shasum": "e4f19a34b05862a78a4c50fffd8bd486ebe27809"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-code-a7f71bd4a1130ad9fb4ffa2f10fed7e01dd873fb-zip-c6270a.zip",
+                "reference": "a7f71bd4a1130ad9fb4ffa2f10fed7e01dd873fb",
+                "shasum": "e541a47fa6624a105cb176cd277fe66d0c176114"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3629,6 +3712,7 @@
                     "Zend\\Code\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3638,8 +3722,10 @@
                 "code",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCode/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3654,9 +3740,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-config-c07bbcfd6c32e9eaf3de457cb880349f8c18885d-zip-ff4640.zip",
-                "reference": "2.3.4",
-                "shasum": "df7ed78cfba16b9cf1fdd7756a1b9fb563524d33"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-config-c07bbcfd6c32e9eaf3de457cb880349f8c18885d-zip-ff4640.zip",
+                "reference": "c07bbcfd6c32e9eaf3de457cb880349f8c18885d",
+                "shasum": "bd1e15aa754b195763b504b17debe9005a57bf2f"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3686,6 +3772,7 @@
                     "Zend\\Config\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3695,8 +3782,10 @@
                 "config",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendConfig/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3711,9 +3800,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-crypt-30c6269b838930f7550c3bfb5693901a13fa6da8-zip-ec5876.zip",
-                "reference": "2.3.4",
-                "shasum": "5ecff2932f3025477024344d40c12dab3685459f"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-crypt-30c6269b838930f7550c3bfb5693901a13fa6da8-zip-ec5876.zip",
+                "reference": "30c6269b838930f7550c3bfb5693901a13fa6da8",
+                "shasum": "6c327bf11989974fb282b99a45f3b6b47c30e6ee"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3736,17 +3825,19 @@
                     "Zend\\Crypt\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "crypt",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCrypt/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3761,9 +3852,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-db-ff929e25e00a6420be3489faf5db12966189aba5-zip-16d3da.zip",
-                "reference": "2.3.4",
-                "shasum": "e9f5e8acf964a7dedc4330bfb6438bc58e7a72ff"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-db-ff929e25e00a6420be3489faf5db12966189aba5-zip-16d3da.zip",
+                "reference": "ff929e25e00a6420be3489faf5db12966189aba5",
+                "shasum": "8d632b358cf46d4284bf891c3123346d9a3aea31"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3790,17 +3881,19 @@
                     "Zend\\Db\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "db",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3815,9 +3908,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-di-58d0d5edcbf56fb60815ea2c42b7916b3f5bc601-zip-822a6c.zip",
-                "reference": "2.3.4",
-                "shasum": "0faa6e97973c5ebccfbe725d825647d225b3e68b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-di-58d0d5edcbf56fb60815ea2c42b7916b3f5bc601-zip-822a6c.zip",
+                "reference": "58d0d5edcbf56fb60815ea2c42b7916b3f5bc601",
+                "shasum": "f7c4a194db93cf17d0e92fff2cc67f578b5100cd"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3842,17 +3935,19 @@
                     "Zend\\Di\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "di",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendDi/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3867,9 +3962,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-escaper-67c8f76ff6d899a5619a4ab27c3b46ed3ae743fc-zip-a49952.zip",
-                "reference": "2.3.4",
-                "shasum": "727c297a62abb6070e3998b23c84bcb26bdf3e4a"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-escaper-67c8f76ff6d899a5619a4ab27c3b46ed3ae743fc-zip-a49952.zip",
+                "reference": "67c8f76ff6d899a5619a4ab27c3b46ed3ae743fc",
+                "shasum": "51f4272bbae26720cf53099eadb99b47264d77d2"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3886,17 +3981,19 @@
                     "Zend\\Escaper\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "escaper",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendEscaper/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3911,9 +4008,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-eventmanager-5992c202f13292415501aed41beba76404197866-zip-9d070c.zip",
-                "reference": "2.3.4",
-                "shasum": "73462aa0439e3ff5add9d2d9d432ad3b993fe1f2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-eventmanager-5992c202f13292415501aed41beba76404197866-zip-9d070c.zip",
+                "reference": "5992c202f13292415501aed41beba76404197866",
+                "shasum": "696b2f6a32962e95ffbd2469c01bac24ff86b717"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3931,17 +4028,19 @@
                     "Zend\\EventManager\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "eventmanager",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -3956,9 +4055,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-filter-43206c8a7d847ebaff83c1c0b2f7dd8a318313eb-zip-e8bf9a.zip",
-                "reference": "2.3.4",
-                "shasum": "2a31d312b5d4ddfba6ed139b3546ab543dec58c2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-filter-43206c8a7d847ebaff83c1c0b2f7dd8a318313eb-zip-e8bf9a.zip",
+                "reference": "43206c8a7d847ebaff83c1c0b2f7dd8a318313eb",
+                "shasum": "60f805172e2ecc6b8276929cfb9a2c4b6a272543"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3987,6 +4086,7 @@
                     "Zend\\Filter\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3996,8 +4096,10 @@
                 "filter",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendFilter/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4012,9 +4114,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-form-5d19e7e73d5661a1cedc3013f634f1ede86e6e24-zip-667020.zip",
-                "reference": "2.3.4",
-                "shasum": "f9b766e2c660be4440f711ae96cbaedad1108a15"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-form-5d19e7e73d5661a1cedc3013f634f1ede86e6e24-zip-667020.zip",
+                "reference": "5d19e7e73d5661a1cedc3013f634f1ede86e6e24",
+                "shasum": "c046ba414969c942f90f4d4a934ce2f523f482ee"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4055,17 +4157,19 @@
                     "Zend\\Form\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "form",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendForm/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4080,9 +4184,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-http-1758f768120fdd173e22ed45230a8e49b6155766-zip-4463bc.zip",
-                "reference": "2.3.4",
-                "shasum": "46814be9b1f4a331b932f78eefd89789006c212a"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-http-1758f768120fdd173e22ed45230a8e49b6155766-zip-4463bc.zip",
+                "reference": "1758f768120fdd173e22ed45230a8e49b6155766",
+                "shasum": "bb8f1f878d2a9926781fb6ae13d20d53f5ea8203"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4103,6 +4207,7 @@
                     "Zend\\Http\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4112,8 +4217,10 @@
                 "http",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendHttp/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4128,9 +4235,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-i18n-0a78212878f5cf7d5ec0b554150717ddbe5755d6-zip-4dba0a.zip",
-                "reference": "2.3.4",
-                "shasum": "6a6a4b04f963e5fdbe8229ea34478efa2ea8315b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-i18n-0a78212878f5cf7d5ec0b554150717ddbe5755d6-zip-4dba0a.zip",
+                "reference": "0a78212878f5cf7d5ec0b554150717ddbe5755d6",
+                "shasum": "011acb092bbec21f701834fce3ebdd72dfa4d157"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4168,17 +4275,19 @@
                     "Zend\\I18n\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "i18n",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendI18n/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4193,9 +4302,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-inputfilter-84ccc51867baa74d031823a3a9ae6f0e25e852f8-zip-7f9f9d.zip",
-                "reference": "2.3.4",
-                "shasum": "5f4c3151de479076680ef8c2f0b75c6fbc1bb01b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-inputfilter-84ccc51867baa74d031823a3a9ae6f0e25e852f8-zip-7f9f9d.zip",
+                "reference": "84ccc51867baa74d031823a3a9ae6f0e25e852f8",
+                "shasum": "8649ff54fd9b1cb6f0f1ff772f3b168a4994411e"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4221,17 +4330,19 @@
                     "Zend\\InputFilter\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "inputfilter",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4246,9 +4357,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-json-24b072788f42a025e479901e0c6e5c0bf0dcd960-zip-e0f838.zip",
-                "reference": "2.3.4",
-                "shasum": "cd5c98d106de3da44f9c7dfef4d125864cb780d3"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-json-24b072788f42a025e479901e0c6e5c0bf0dcd960-zip-e0f838.zip",
+                "reference": "24b072788f42a025e479901e0c6e5c0bf0dcd960",
+                "shasum": "a0a8387ea5dee81ba0d65dce8957a9a7edd9b441"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4275,6 +4386,7 @@
                     "Zend\\Json\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4284,8 +4396,10 @@
                 "json",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendJson/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4300,9 +4414,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-loader-521ba8650f70d512f9790921153d39eedcabed43-zip-787e5d.zip",
-                "reference": "2.3.4",
-                "shasum": "7bf22167167cdc49df4da17e475ee3b9874ebdbc"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-loader-521ba8650f70d512f9790921153d39eedcabed43-zip-787e5d.zip",
+                "reference": "521ba8650f70d512f9790921153d39eedcabed43",
+                "shasum": "784b3a412820cb1f9fb2ebb92dd34a3083b2c2c8"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4319,17 +4433,19 @@
                     "Zend\\Loader\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "loader",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendLoader/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4344,9 +4460,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mail-f48c7041b53845c865ceaf3583a19af686ad40a2-zip-3b7cc8.zip",
-                "reference": "2.3.4",
-                "shasum": "430bf0f93221dc4f52f9352ff6a1f0999ed7106c"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mail-f48c7041b53845c865ceaf3583a19af686ad40a2-zip-3b7cc8.zip",
+                "reference": "f48c7041b53845c865ceaf3583a19af686ad40a2",
+                "shasum": "a2f50c2bb57847a81c0a8b0e4c66bf75d7c03af1"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4374,6 +4490,7 @@
                     "Zend\\Mail\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4383,8 +4500,10 @@
                 "mail",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMail/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4399,9 +4518,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-math-45e7544d499a11c97d8b8fec00597f646e105ffb-zip-039d5b.zip",
-                "reference": "2.3.4",
-                "shasum": "376ab6d587af4ff09cbf501a5becdf218db2cb69"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-math-45e7544d499a11c97d8b8fec00597f646e105ffb-zip-039d5b.zip",
+                "reference": "45e7544d499a11c97d8b8fec00597f646e105ffb",
+                "shasum": "d8532c32e2a5ed9de359fa4f2c840b135817125d"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4424,17 +4543,19 @@
                     "Zend\\Math\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "math",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMath/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4449,9 +4570,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-memory-45a40d6ab5d9b7750a043da867433f19682d2ab0-zip-caded0.zip",
-                "reference": "2.3.4",
-                "shasum": "ff9c0bbc7e9712cf0f8383ba53d622002eba853b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-memory-45a40d6ab5d9b7750a043da867433f19682d2ab0-zip-caded0.zip",
+                "reference": "45a40d6ab5d9b7750a043da867433f19682d2ab0",
+                "shasum": "a22a1c214bcecfa2d2db8c52c9cad93ba6ea42f5"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4474,17 +4595,19 @@
                     "Zend\\Memory\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "memory",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMemory/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4499,9 +4622,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mime-7df3af91e69003405283745e37902cb5b5b4df2f-zip-3af9ad.zip",
-                "reference": "2.3.4",
-                "shasum": "922c7e6f8812b631c7e8395397c28d1283952bb2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mime-7df3af91e69003405283745e37902cb5b5b4df2f-zip-3af9ad.zip",
+                "reference": "7df3af91e69003405283745e37902cb5b5b4df2f",
+                "shasum": "030b60b93a8484cda2f1851bc6fbf907ae81bee5"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4525,17 +4648,19 @@
                     "Zend\\Mime\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "mime",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMime/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4550,9 +4675,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-modulemanager-807ae66af7169fe71ca10056ef5aefeac23ed5a7-zip-07d785.zip",
-                "reference": "2.3.4",
-                "shasum": "85eba9e90e350c84c60d86262ffe33897bc3e3fb"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-modulemanager-807ae66af7169fe71ca10056ef5aefeac23ed5a7-zip-07d785.zip",
+                "reference": "807ae66af7169fe71ca10056ef5aefeac23ed5a7",
+                "shasum": "c883b5dd1d036548a18fef4e31893b1fb9cfa952"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4584,17 +4709,19 @@
                     "Zend\\ModuleManager\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "modulemanager",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendModuleManager/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4609,9 +4736,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mvc-d7a7d7edab0d06ea72f87f8021d1cddda488e5de-zip-157aeb.zip",
-                "reference": "2.3.4",
-                "shasum": "43c941175ad6a0bb7d170369713286a28f610eda"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mvc-d7a7d7edab0d06ea72f87f8021d1cddda488e5de-zip-157aeb.zip",
+                "reference": "d7a7d7edab0d06ea72f87f8021d1cddda488e5de",
+                "shasum": "d3fd6e6d89d94749f0c7fa82742d53db31751e42"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4672,17 +4799,19 @@
                     "Zend\\Mvc\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "mvc",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMvc/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4697,9 +4826,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-serializer-8cc08516ff69b275f22d2378cba0e0b482ba33a1-zip-fab8e5.zip",
-                "reference": "2.3.4",
-                "shasum": "d03b0936190b8739b08fac96146cbf838159fec2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-serializer-8cc08516ff69b275f22d2378cba0e0b482ba33a1-zip-fab8e5.zip",
+                "reference": "8cc08516ff69b275f22d2378cba0e0b482ba33a1",
+                "shasum": "e4f40b1d514c9d66724ceeea3ccdb67ce2d45b37"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4725,6 +4854,7 @@
                     "Zend\\Serializer\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4734,8 +4864,10 @@
                 "serializer",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendSerializer/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4750,9 +4882,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-servicemanager-148b1ce06fa0ac7fe58e3bd396df57f1ee0e9e82-zip-878606.zip",
-                "reference": "2.3.4",
-                "shasum": "b8dc7153681e109b5a60f13f01488b8c431a3feb"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-servicemanager-148b1ce06fa0ac7fe58e3bd396df57f1ee0e9e82-zip-878606.zip",
+                "reference": "148b1ce06fa0ac7fe58e3bd396df57f1ee0e9e82",
+                "shasum": "fda90f402207574ffff177ecca4ef9772e2242d8"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4776,17 +4908,19 @@
                     "Zend\\ServiceManager\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "servicemanager",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4801,9 +4935,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-stdlib-280e4ee6a8fea96b3de00a39174758b4002a7358-zip-4bf601.zip",
-                "reference": "2.3.4",
-                "shasum": "2d7c08172c55630d8815f64c7ef61bb542e74eca"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-stdlib-280e4ee6a8fea96b3de00a39174758b4002a7358-zip-4bf601.zip",
+                "reference": "280e4ee6a8fea96b3de00a39174758b4002a7358",
+                "shasum": "531244b167e3cef0520f13c8302fe96b4e67a4a0"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4832,17 +4966,19 @@
                     "Zend\\Stdlib\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "stdlib",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4857,9 +4993,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-uri-72c7e6b146b6d16e71c5529bfcdb45a7148adc33-zip-3ab9ab.zip",
-                "reference": "2.3.4",
-                "shasum": "1d5abf81647b2063c6c1d61b9033c4786322d47e"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-uri-72c7e6b146b6d16e71c5529bfcdb45a7148adc33-zip-3ab9ab.zip",
+                "reference": "72c7e6b146b6d16e71c5529bfcdb45a7148adc33",
+                "shasum": "f2a9db03da23013a40047ea36a185feae6e6aa03"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4878,6 +5014,7 @@
                     "Zend\\Uri\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4887,8 +5024,10 @@
                 "uri",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendUri/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4903,9 +5042,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-validator-f048d85d523c9bb2b16f0660412560efd9d257c1-zip-2c10e7.zip",
-                "reference": "2.3.4",
-                "shasum": "179ff7abbd710bfa6fa8cdb72a7709eb7c5d4b70"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-validator-f048d85d523c9bb2b16f0660412560efd9d257c1-zip-2c10e7.zip",
+                "reference": "f048d85d523c9bb2b16f0660412560efd9d257c1",
+                "shasum": "33eb8314cb5ba411708d5d74c3002f62dc1ee3c3"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -4942,6 +5081,7 @@
                     "Zend\\Validator\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4951,8 +5091,10 @@
                 "validator",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendValidator/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -4967,9 +5109,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-view-08c21ae55956307623729fb3557f531e841fcb55-zip-3b9365.zip",
-                "reference": "2.3.4",
-                "shasum": "0fc4f3a826aede1ef3b8d5574d933758c7188d5d"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-view-08c21ae55956307623729fb3557f531e841fcb55-zip-3b9365.zip",
+                "reference": "08c21ae55956307623729fb3557f531e841fcb55",
+                "shasum": "fe4c975b8d6f7968dd337684fbd9037e53f91377"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -5019,6 +5161,7 @@
                     "Zend\\View\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -5028,8 +5171,10 @@
                 "view",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendView/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
             "time": "2015-01-14 16:44:17"
         },
@@ -5447,9 +5592,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/f976e5de371104877ebc89bd8fecb0019ed9c119",
+                "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-f976e5de371104877ebc89bd8fecb0019ed9c119-zip-3f1f83.zip",
                 "reference": "f976e5de371104877ebc89bd8fecb0019ed9c119",
-                "shasum": ""
+                "shasum": "8b88cfa4218de45a6c953c34a7369d72cee3709c"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -5489,6 +5634,11 @@
                 "constructor",
                 "instantiate"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-13 12:58:55"
         },
         {
@@ -5590,9 +5740,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+                "url": "https://composer.build.channelgrabber.com/dist/monolog-monolog-1fbe8c2641f2b163addf49cc5e18f144bec6b19f-zip-01ebfb.zip",
                 "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "shasum": ""
+                "shasum": "2e9df3b768c960e003dc42645625208b244b3f61"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -5650,6 +5800,11 @@
                 "logging",
                 "psr-3"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-12-29 21:29:35"
         },
         {
@@ -5662,9 +5817,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "url": "https://composer.build.channelgrabber.com/dist/phpdocumentor-reflection-docblock-d68dbdc53dc358a816f00b300704702b2eaff7b8-zip-b8dbaa.zip",
                 "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": ""
+                "shasum": "c52f9abbac63b2e22cac1def97d5eeffd5de03aa"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5699,6 +5854,11 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-03 12:10:50"
         },
         {
@@ -5711,9 +5871,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "url": "https://composer.build.channelgrabber.com/dist/phpspec-php-diff-30e103d19519fe678ae64a60d77884ef3d71b28a-zip-b63c58.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": ""
+                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
             },
             "type": "library",
             "autoload": {
@@ -5733,6 +5893,11 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-01 13:02:21"
         },
         {
@@ -5745,9 +5910,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/61712147412cb647b6cb68b19833a60bfda759a1",
+                "url": "https://composer.build.channelgrabber.com/dist/phpspec-phpspec-61712147412cb647b6cb68b19833a60bfda759a1-zip-6bc9f9.zip",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": ""
+                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -5806,6 +5971,11 @@
                 "testing",
                 "tests"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-07-01 14:09:19"
         },
         {
@@ -5818,9 +5988,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9ca52329bcdd1500de24427542577ebf3fc2f1c9",
+                "url": "https://composer.build.channelgrabber.com/dist/phpspec-prophecy-9ca52329bcdd1500de24427542577ebf3fc2f1c9-zip-ba59b5.zip",
                 "reference": "9ca52329bcdd1500de24427542577ebf3fc2f1c9",
-                "shasum": ""
+                "shasum": "a5115f8dd9a8995f1d90862e55da0eb2c1d6e50f"
             },
             "require": {
                 "doctrine/instantiator": "~1.0,>=1.0.2",
@@ -5865,6 +6035,11 @@
                 "spy",
                 "stub"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-11-17 16:23:49"
         },
         {
@@ -5877,9 +6052,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-code-coverage-fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b-zip-1d3f6a.zip",
                 "reference": "fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
-                "shasum": ""
+                "shasum": "083339a8f32e95f8ecbc7b41ed7861eee9425aa9"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -5926,6 +6101,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-02 10:13:14"
         },
         {
@@ -6121,9 +6301,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38709dc22d519a3d1be46849868aa2ddf822bcf6",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-38709dc22d519a3d1be46849868aa2ddf822bcf6-zip-c37939.zip",
                 "reference": "38709dc22d519a3d1be46849868aa2ddf822bcf6",
-                "shasum": ""
+                "shasum": "01a3279a08c2913f928efbcc108da9ab3b51338a"
             },
             "require": {
                 "ext-ctype": "*",
@@ -6182,6 +6362,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-17 09:04:17"
         },
         {
@@ -6194,9 +6379,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5794e3c5c5ba0fb037b11d8151add2a07fa82875",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-mock-objects-5794e3c5c5ba0fb037b11d8151add2a07fa82875-zip-eb5a47.zip",
                 "reference": "5794e3c5c5ba0fb037b11d8151add2a07fa82875",
-                "shasum": ""
+                "shasum": "35fd659f32121fb6db6dde1f222245da602b3432"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -6231,6 +6416,11 @@
                 "mock",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-01-13 10:24:48"
         },
         {
@@ -6243,9 +6433,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://composer.build.channelgrabber.com/dist/psr-log-fe0936ee26643249e916849d48e3a51d5f5e278b-zip-e71523.zip",
                 "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
+                "shasum": "3635bde5339dfdef5c968cbad70d193cf39e2492"
             },
             "type": "library",
             "autoload": {
@@ -6269,21 +6459,18 @@
                 "psr",
                 "psr-3"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.5.3",
-            "alias_normalized": "1.5.3.0",
-            "version": "dev-CGIV-4928-DeleteFbaListings",
-            "package": "channelgrabber/listing"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
