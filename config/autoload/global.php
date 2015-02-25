@@ -235,6 +235,9 @@ use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
 use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 
+// Logging
+use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+
 return array(
     'di' => array(
         'instance' => array(
@@ -913,6 +916,11 @@ return array(
             UnimportedListingApi::class => [
                 'parameters' => [
                     'client' => 'cg_app_guzzle'
+                ]
+            ],
+            RedisChannel::class => [
+                'parameters' => [
+                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
                 ]
             ],
             'preferences' => [
