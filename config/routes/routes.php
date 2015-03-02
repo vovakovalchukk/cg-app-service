@@ -140,6 +140,7 @@ return array(
         'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderCollection',
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false),
+        'version' => new Version(1, 2),
         'entityRoute' => '/order/:orderId'
     ),
     '/order/:orderId' => array (
@@ -156,11 +157,12 @@ return array(
         'via' => array('GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
             'serviceClass' => OrderService::class
-        ]
+        ],
     ),
     '/order/:orderId/note' => array (
         'controllers' => function($orderId) use ($di) {
