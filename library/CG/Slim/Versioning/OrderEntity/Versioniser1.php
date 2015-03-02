@@ -40,15 +40,7 @@ class Versioniser1 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-
         unset($data['discountDescription']);
-
-//        echo get_class($response);
-//        echo "\n";
-
-        //print_r($data);
-        //exit;
-
         $response->setData($data);
     }
 }

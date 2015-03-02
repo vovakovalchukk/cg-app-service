@@ -6,13 +6,19 @@ class DiscountDescription extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('order');
+        $this->updateTable('order');
+        $this->updateTable('orderLive');
+    }
+
+    protected function updateTable($tableName)
+    {
+        $table = $this->table($tableName);
         $table->addColumn(
             'discountDescription',
             'string', [
-                'after' => 'totalDiscount',
-                'length' => 255,
-                'null' => true
-            ])->update();
+            'after' => 'totalDiscount',
+            'length' => 255,
+            'null' => true
+        ])->update();
     }
 }
