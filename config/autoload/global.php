@@ -235,9 +235,7 @@ use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
 use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 
-use Symfony\Component\Console\Output\OutputInterface as SymfonyOutputInterface;
 use Symfony\Component\Console\Output\Output as SymfonyOutput;
-
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
 return array(
@@ -922,8 +920,7 @@ return array(
             ],
             RemoveThenCorrectImportedProducts::class => [
                 'parameters' => [
-                    'sqlClient' => 'WriteCGSql',
-                    'output' => SymfonyOutput::class
+                    'sqlClient' => 'ReadCGSql'
                 ]
             ],
             'preferences' => [
