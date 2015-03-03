@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c62321a5d50b85090b9851f897207c9",
+    "hash": "53e3f1bbe6dfbccfac66270c0e29fd97",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1211,17 +1211,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.3.18",
+            "version": "dev-CGIV-4918-FailingToSaveImportListing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "29305fb737cf3c989b926ee3de7c777f619f95b3"
+                "reference": "71354a79a689756094ff00ba7aa57ed746e0f8c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.3.18-129448.zip",
-                "reference": "29305fb737cf3c989b926ee3de7c777f619f95b3",
-                "shasum": "288c28961b4170a98e2cffcc68e66097f16890be"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-4918-FailingToSaveImportListing-192380.zip",
+                "reference": "71354a79a689756094ff00ba7aa57ed746e0f8c7",
+                "shasum": "d30b22ebc34d390c8cccb3b378475653be7a9eac"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1254,7 +1254,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-01-08 14:06:06"
+            "time": "2015-03-03 11:50:45"
         },
         {
             "name": "channelgrabber/purge",
@@ -6479,10 +6479,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.3.18",
+            "alias_normalized": "1.3.18.0",
+            "version": "dev-CGIV-4918-FailingToSaveImportListing",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
