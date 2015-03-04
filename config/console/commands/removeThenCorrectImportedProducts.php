@@ -5,7 +5,7 @@ use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
 return [
     'removeThenCorrectImportedProducts' => [
-        'description' => "Inspect a workload from a queue and requeue it",
+        'description' => "Remove then re-import parent products that do not have any productAttributes",
         'options' => [],
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $removeThenCorrectImportListings = $di->get(RemoveThenCorrectImportedProducts::class, ['outputter' => $output]);
