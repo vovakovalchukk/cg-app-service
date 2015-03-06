@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1279ba190e2ba46f50db547dcc0bc699",
+    "hash": "24131106f9ecf67b1c008b26c01f64da",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1057,7 +1057,7 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "dev-CGIV-4998-multi-server-support",
+            "version": "0.3.2.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
@@ -1065,9 +1065,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-dev-CGIV-4998-multi-server-support-b01046.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.2.5-b01046.zip",
                 "reference": "9b3ca473efa4635c9556bd7a1f9437e8889095b1",
-                "shasum": "f0f10177b681d4955ebe6873ea7011533ef7e73b"
+                "shasum": "6cdcbbdc3d66a5b021443e851186268463b8bea7"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -1663,17 +1663,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.2.44",
+            "version": "1.2.45",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "bec2eb1939beac9643c2f51bde7e07b6fca1789a"
+                "reference": "0bf07671b75fbb311201e92a896e9545d79344dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.44-29f30f.zip",
-                "reference": "bec2eb1939beac9643c2f51bde7e07b6fca1789a",
-                "shasum": "576a87c78bd1bb7223f5fe8567eeabe67379f0db"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.2.45-af8b6d.zip",
+                "reference": "0bf07671b75fbb311201e92a896e9545d79344dc",
+                "shasum": "f0517653510680d2c58d1b166726517ccd8d0ae1"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1708,7 +1708,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-27 10:10:44"
+            "time": "2015-03-06 10:20:20"
         },
         {
             "name": "channelgrabber/transaction",
@@ -2139,24 +2139,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "833ce984264204e7d6576ab082660105c7d8f04c"
+                "reference": "26799f4244a14050ec015323af9fa83b0a66436d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/833ce984264204e7d6576ab082660105c7d8f04c",
-                "reference": "833ce984264204e7d6576ab082660105c7d8f04c",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-26799f4244a14050ec015323af9fa83b0a66436d-zip-b2cc17.zip",
+                "reference": "26799f4244a14050ec015323af9fa83b0a66436d",
+                "shasum": "9012032460c4602152258175911fe66312544f37"
             },
             "require": {
                 "justinrainbow/json-schema": "~1.3",
                 "php": ">=5.3.2",
                 "seld/jsonlint": "~1.0",
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.5",
                 "symfony/finder": "~2.2",
                 "symfony/process": "~2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.5"
             },
             "suggest": {
                 "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
@@ -2199,7 +2199,12 @@
                 "dependency",
                 "package"
             ],
-            "time": "2015-02-17 21:55:44"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-04 23:50:10"
         },
         {
             "name": "fabpot/goutte",
@@ -6493,18 +6498,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.3.2",
-            "alias_normalized": "0.3.2.0",
-            "version": "dev-CGIV-4998-multi-server-support",
-            "package": "channelgrabber/phinx"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/phinx": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
