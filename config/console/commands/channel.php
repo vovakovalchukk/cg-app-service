@@ -10,9 +10,10 @@ return array(
             $channel = $input->getArgument('channel');
             $from = $input->getArgument('from');
             $to = $input->getArgument('to');
+            $accountId = $input->getArgument('accountId');
 
             $command = $di->get(OrderDownload::class);
-            $command->downloadOrders($channel, $from, $to);
+            $command->downloadOrders($channel, $from, $to, $accountId);
         },
         'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get orders from the respective channel.',
         'arguments' => array(
