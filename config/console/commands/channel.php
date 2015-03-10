@@ -26,6 +26,9 @@ return array(
             'to' => array(
                 'required' => false,
                 'default' => null
+            ),
+            'accountId' => array(
+                'required' => false
             )
         ),
         'options' => array(
