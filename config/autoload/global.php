@@ -238,6 +238,9 @@ use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
+// Logging
+use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+
 return array(
     'di' => array(
         'instance' => array(
@@ -921,6 +924,11 @@ return array(
             RemoveThenCorrectImportedProducts::class => [
                 'parameters' => [
                     'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            RedisChannel::class => [
+                'parameters' => [
+                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
                 ]
             ],
             'preferences' => [
