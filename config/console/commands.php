@@ -8,7 +8,8 @@ $files = [
     'ekm.php',
     'stock.php',
     'migrateMongoOrderDataToMysql.php',
-    'migrateMongoOrderItemDataToMysql.php'
+    'migrateMongoOrderItemDataToMysql.php',
+    'removeThenCorrectImportedProducts.php'
 ];
 foreach ($files as $file) {
     $command = require_once __DIR__ . '/commands/' . $file;

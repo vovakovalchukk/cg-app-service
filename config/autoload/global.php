@@ -235,6 +235,9 @@ use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
 use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 
+use Symfony\Component\Console\Output\Output as SymfonyOutput;
+use CG\Product\Command\RemoveThenCorrectImportedProducts;
+
 return array(
     'di' => array(
         'instance' => array(
@@ -913,6 +916,11 @@ return array(
             UnimportedListingApi::class => [
                 'parameters' => [
                     'client' => 'cg_app_guzzle'
+                ]
+            ],
+            RemoveThenCorrectImportedProducts::class => [
+                'parameters' => [
+                    'sqlClient' => 'ReadCGSql'
                 ]
             ],
             'preferences' => [

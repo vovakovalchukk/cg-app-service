@@ -1,6 +1,5 @@
 <?php
 chdir(dirname(__DIR__));
-
 use Cilex\Application as Cilex;
 use CG\Cilex\GenericCommand;
 use CG\Cilex\ServiceProvider\Bootstrap;
