@@ -2,6 +2,8 @@
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\ListingEntity;
+use CG\Slim\Versioning\OrderCollection;
+use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -21,6 +23,8 @@ return [
                 'Versioniser_ListingEntity_1' => ListingEntity\Versioniser1::class,
                 'Versioniser_ListingCollection_2' => ListingCollection\Versioniser2::class,
                 'Versioniser_ListingEntity_2' => ListingEntity\Versioniser2::class,
+                'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
+                'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -50,6 +54,11 @@ return [
             'Versioniser_ListingCollection_2' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ListingEntity_2',
+                ],
+            ],
+            'Versioniser_OrderCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_1',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [
