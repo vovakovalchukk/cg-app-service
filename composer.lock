@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "059206bfe7174fa5e16fc6bc61fd1a72",
+    "hash": "0debbfc13dad8ba3f03fa80a46c81c21",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -61,17 +61,17 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "1.7.4",
+            "version": "1.7.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "30d6dd33bad459fc45bad1550a09d43543d9eede"
+                "reference": "de079465f0f17603a61ba167028b882b3455659f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.7.4-6291f7.zip",
-                "reference": "30d6dd33bad459fc45bad1550a09d43543d9eede",
-                "shasum": "02785441e8a124a9d72be489b66eb93b6d5b886b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.7.5-20b6c1.zip",
+                "reference": "de079465f0f17603a61ba167028b882b3455659f",
+                "shasum": "5e9e75fa6387bde79a26ccc1653858a9525ef180"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -79,13 +79,18 @@
                 "channelgrabber/di": ">=2.1.1",
                 "channelgrabber/etag": ">=1.5.1, <1.6.0",
                 "channelgrabber/http": ">=1.2.12",
+                "channelgrabber/log": ">=2.0.17,<3.0.0",
                 "channelgrabber/permission": ">=1.0.1",
-                "channelgrabber/stdlib": ">=2.7.21",
+                "channelgrabber/stdlib": ">=2.10.3,<3.0.0",
                 "channelgrabber/user": ">= 1.18.7",
                 "composer/composer": "@dev",
                 "php-jsonpatch/php-jsonpatch": "@dev",
                 "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2.5"
+            },
+            "require-dev": {
+                "channelgrabber/phpunit": "dev-develop",
+                "phpunit/phpunit": "4.2.*"
             },
             "type": "di-definition",
             "autoload": {
@@ -93,12 +98,17 @@
                     "CG\\Billing\\": "src"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Billing\\Test\\": "tests"
+                }
+            },
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-27 16:06:17"
+            "time": "2015-03-13 13:43:39"
         },
         {
             "name": "channelgrabber/cache",
@@ -1068,17 +1078,17 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.3.2.5",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "9b3ca473efa4635c9556bd7a1f9437e8889095b1"
+                "reference": "02dbf46b0e56fbeeb0a11f225c13692da313c2db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.2.5-b01046.zip",
-                "reference": "9b3ca473efa4635c9556bd7a1f9437e8889095b1",
-                "shasum": "6cdcbbdc3d66a5b021443e851186268463b8bea7"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.3-e2d096.zip",
+                "reference": "02dbf46b0e56fbeeb0a11f225c13692da313c2db",
+                "shasum": "f5a1b9bd4481c78b2c02635b81f157b537accdbd"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -1127,7 +1137,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-04 15:41:30"
+            "time": "2015-03-12 12:17:42"
         },
         {
             "name": "channelgrabber/php-phantomjs",
@@ -1723,17 +1733,17 @@
         },
         {
             "name": "channelgrabber/transaction",
-            "version": "dev-CGIV-5115-HighNetwork",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
-                "reference": "aa812a1d9c534958dfb936714fb099451d60eaea"
+                "reference": "038fa734f1ae241f2a74608d0597b8a2b564f39f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-dev-CGIV-5115-HighNetwork-9e30bb.zip",
-                "reference": "aa812a1d9c534958dfb936714fb099451d60eaea",
-                "shasum": "a3c88df4acadefec9242bba16e542e4352ccab67"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.1.4-f9d50c.zip",
+                "reference": "038fa734f1ae241f2a74608d0597b8a2b564f39f",
+                "shasum": "750566526a77dc14fe9de7ee78b0fea78ed8e51a"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1761,7 +1771,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-16 08:54:34"
+            "time": "2015-03-16 11:34:40"
         },
         {
             "name": "channelgrabber/usage",
@@ -6630,18 +6640,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.3",
-            "alias_normalized": "1.1.3.0",
-            "version": "dev-CGIV-5115-HighNetwork",
-            "package": "channelgrabber/transaction"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/transaction": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
