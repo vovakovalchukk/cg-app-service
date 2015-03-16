@@ -64,6 +64,11 @@ class Entity implements RulesInterface
                 'name'       => 'totalDiscount',
                 'validators' => [new DecimalValidator(['name' => 'totalDiscount'])]
             ),
+            'discountDescription' => array(
+                'name'       => 'discountDescription',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ),
             'status' => array(
                 'name'       => 'status',
                 'validators' => [new StringLength(['min' => 1])]
