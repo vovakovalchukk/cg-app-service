@@ -7,10 +7,10 @@ class UnimportedListingVariationSkusMigration extends AbstractMigration
     {
         $unimportedListingVariationSkusTable = $this->table(
             'unimportedListingVariationSkus',
-            ['id' => false, 'primary_key' => ['unimportedListingId', 'unimportedListingVariationSku']]
+            ['id' => false, 'primary_key' => ['unimportedListingId', 'variationSku']]
         );
         $unimportedListingVariationSkusTable->addColumn('unimportedListingId', 'integer')
-            ->addColumn('unimportedListingVariationSku', 'string')
+            ->addColumn('variationSku', 'string')
             ->create();
     }
 }
