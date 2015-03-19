@@ -9,10 +9,10 @@ class VariationMapping extends AbstractMigration
         $productAttribute
             ->addColumn('productAttributeId', 'integer')
             ->addColumn('name', 'string')
-            ->addColumn('accountId', 'integer')
+            ->addColumn('listingId', 'integer')
             ->addForeignKey('productAttributeId', 'productAttribute', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
-            ->addIndex(['productAttributeId', 'accountId'], ['unique' => true])
+            ->addIndex(['productAttributeId', 'listingId'], ['unique' => true])
             ->addIndex(['name'])
             ->create();
     }
