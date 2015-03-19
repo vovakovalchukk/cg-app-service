@@ -7,12 +7,12 @@ class VariationMapping extends AbstractMigration
     {
         $productAttribute = $this->table('productAttributeMapping');
         $productAttribute
-            ->addColumn('productId', 'integer')
+            ->addColumn('productAttributeId', 'integer')
             ->addColumn('name', 'string')
             ->addColumn('accountId', 'integer')
-            ->addForeignKey('productId', 'product', 'id',
+            ->addForeignKey('productAttributeId', 'productAttribute', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
-            ->addIndex(['productId', 'accountId'], ['unique' => true])
+            ->addIndex(['productAttributeId', 'accountId'], ['unique' => true])
             ->addIndex(['name'])
             ->create();
     }
