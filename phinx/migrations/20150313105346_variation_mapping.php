@@ -5,7 +5,7 @@ class VariationMapping extends AbstractMigration
 {
     public function change()
     {
-        $productAttribute = $this->table('variationMap');
+        $productAttribute = $this->table('variationAttributeMap');
         $productAttribute
             ->addColumn('productId', 'integer')
             ->addColumn('productAttributeId', 'integer')

@@ -9,15 +9,15 @@ use CG\Product\Entity as ProductEntity;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Service\Service as ProductService;
 
-use CG\Controllers\Product\VariationMap\VariationMap as VariationMap;
-use CG\Controllers\Product\VariationMap\VariationMap\Collection as VariationMapCollection;
+use CG\Controllers\Product\VariationAttributeMap\VariationAttributeMap as VariationAttributeMap;
+use CG\Controllers\Product\VariationAttributeMap\VariationAttributeMap\Collection as VariationAttributeMapCollection;
 
-use CG\InputValidation\Product\VariationMap\Entity as VariationMapEntityValidation;
-use CG\InputValidation\Product\VariationMap\Filter as VariationMapFilterValidation;
+use CG\InputValidation\Product\VariationAttributeMap\Entity as VariationAttributeMapEntityValidation;
+use CG\InputValidation\Product\VariationAttributeMap\Filter as VariationAttributeMapFilterValidation;
 
-use CG\Product\VariationMap\Mapper as VariationMapMapper;
-use CG\Product\VariationMap\Entity as VariationMapEntity;
-use CG\Product\VariationMap\Service as VariationMapService;
+use CG\Product\VariationAttributeMap\Mapper as VariationAttributeMapMapper;
+use CG\Product\VariationAttributeMap\Entity as VariationAttributeMapEntity;
+use CG\Product\VariationAttributeMap\Service as VariationAttributeMapService;
 
 
 use CG\Slim\Versioning\Version;
@@ -63,42 +63,42 @@ return [
         ],
         'version' => new Version(1, 4)
     ],
-    '/product/:productId/variationMap' => [
+    '/product/:productId/variationAttributeMap' => [
         'controllers' => function() use ($di, $app) {
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(VariationMapCollection::class);
+            $controller = $di->get(VariationAttributeMapCollection::class);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($app->request()->getBody())
             );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
-        'name' => 'VariationMapCollectionCollection',
+        'name' => 'VariationAttributeMapCollectionCollection',
         'validation' => [
-            'filterRules' => VariationMapFilterValidation::class,
-            'dataRules' => VariationMapEntityValidation::class
+            'filterRules' => VariationAttributeMapFilterValidation::class,
+            'dataRules' => VariationAttributeMapEntityValidation::class
         ]
     ],
-    '/product/:productId/variationMap/:variationMapId' => [
-        'controllers' => function($productId, $variationMapId) use ($di, $app) {
+    '/product/:productId/variationAttributeMap/:variationAttributeMapId' => [
+        'controllers' => function($productId, $variationAttributeMapId) use ($di, $app) {
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(VariationMap::class);
+            $controller = $di->get(VariationAttributeMap::class);
             $app->view()->set(
                 'RestResponse',
-                $controller->$method($productId, $variationMapId, $app->request()->getBody())
+                $controller->$method($productId, $variationAttributeMapId, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'VariationMapEntity',
+        'name' => 'VariationAttributeMapEntity',
         'validation' => [
-            'dataRules' => VariationMapEntityValidation::class
+            'dataRules' => VariationAttributeMapEntityValidation::class
         ],
         'eTag' => [
-            'mapperClass' => VariationMapMapper::class,
-            'entityClass' => VariationMapEntity::class,
-            'serviceClass' => VariationMapService::class
+            'mapperClass' => VariationAttributeMapMapper::class,
+            'entityClass' => VariationAttributeMapEntity::class,
+            'serviceClass' => VariationAttributeMapService::class
         ]
     ]
 ];
