@@ -241,10 +241,10 @@ use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
 use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
-// Product/VariationMap
-use CG\Product\VariationMap\Service as VariationMapService;
-use CG\Product\VariationMap\Mapper as VariationMapMapper;
-use CG\Product\VariationMap\Storage\Db as VariationMapDbStorage;
+// Product/VariationAttributeMap
+use CG\Product\VariationAttributeMap\Service as VariationAttributeMapService;
+use CG\Product\VariationAttributeMap\Mapper as VariationAttributeMapMapper;
+use CG\Product\VariationAttributeMap\Storage\Db as VariationAttributeMapDbStorage;
 
 return array(
     'di' => array(
@@ -936,18 +936,18 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
-            VariationMapService::class => [
+            VariationAttributeMapService::class => [
                 'parameters' => [
-                    'repository' => VariationMapDbStorage::class,
-                    'mapper' => VariationMapMapper::class
+                    'repository' => VariationAttributeMapDbStorage::class,
+                    'mapper' => VariationAttributeMapMapper::class
                 ]
             ],
-            VariationMapDbStorage::class => [
+            VariationAttributeMapDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => VariationMapMapper::class
+                    'mapper' => VariationAttributeMapMapper::class
                 ]
             ],
             'preferences' => [

@@ -3,7 +3,7 @@ use Phinx\Migration\AbstractMigration;
 
 class VariationMapping extends AbstractMigration
 {
-    const LISTING_ATTRIBUTE_MAPPING_TABLE = 'variationMap';
+    const LISTING_ATTRIBUTE_MAPPING_TABLE = 'variationAttributeMap';
     const PRODUCT_ATTRIBUTE_TABLE = 'productAttribute';
 
     public function up()

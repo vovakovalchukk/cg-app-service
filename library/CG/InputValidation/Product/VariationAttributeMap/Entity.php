@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\Product\VariationMap;
+namespace CG\InputValidation\Product\VariationAttributeMap;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;

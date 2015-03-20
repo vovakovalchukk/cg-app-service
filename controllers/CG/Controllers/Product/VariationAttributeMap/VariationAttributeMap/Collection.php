@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\Product\VariationMap\VariationMap;
+namespace CG\Controllers\Product\VariationAttributeMap\VariationAttributeMap;
 
-use CG\Product\VariationMap\Service;
-use CG\Product\VariationMap\Filter;
+use CG\Product\VariationAttributeMap\Service;
+use CG\Product\VariationAttributeMap\Filter;
 use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use CG\Http\StatusCode;
