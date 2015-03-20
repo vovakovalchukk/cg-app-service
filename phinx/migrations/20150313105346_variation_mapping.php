@@ -3,16 +3,19 @@ use Phinx\Migration\AbstractMigration;
 
 class VariationMapping extends AbstractMigration
 {
-    const LISTING_ATTRIBUTE_MAPPING_TABLE = 'listingAttributeMapping';
+    const LISTING_ATTRIBUTE_MAPPING_TABLE = 'variationMap';
     const PRODUCT_ATTRIBUTE_TABLE = 'productAttribute';
 
     public function up()
     {
         $this->table(static::LISTING_ATTRIBUTE_MAPPING_TABLE)
+            ->addColumn('productId', 'integer')
             ->addColumn('productAttributeId', 'integer')
             ->addColumn('listingId', 'integer')
             ->addColumn('name', 'string')
             ->addForeignKey('productAttributeId', 'productAttribute', 'id',
+                ['delete' => 'CASCADE', 'update' => 'NOACTION'])
+            ->addForeignKey('productId', 'product', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->addForeignKey('listingId', 'listing', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])

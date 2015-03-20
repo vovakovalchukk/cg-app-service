@@ -235,11 +235,16 @@ use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
 use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 
+// Logging
+use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+
 use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
-// Logging
-use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+// Product/VariationMap
+use CG\Product\VariationMap\Service as VariationMapService;
+use CG\Product\VariationMap\Mapper as VariationMapMapper;
+use CG\Product\VariationMap\Storage\Db as VariationMapDbStorage;
 
 return array(
     'di' => array(
@@ -921,14 +926,28 @@ return array(
                     'client' => 'cg_app_guzzle'
                 ]
             ],
+            RedisChannel::class => [
+                'parameters' => [
+                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
+                ]
+            ],
             RemoveThenCorrectImportedProducts::class => [
                 'parameters' => [
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
-            RedisChannel::class => [
+            VariationMapService::class => [
                 'parameters' => [
-                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
+                    'repository' => VariationMapDbStorage::class,
+                    'mapper' => VariationMapMapper::class
+                ]
+            ],
+            VariationMapDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => VariationMapMapper::class
                 ]
             ],
             'preferences' => [
