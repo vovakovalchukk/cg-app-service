@@ -13,7 +13,7 @@ use CG\Controllers\Product\VariationMap\VariationMap as VariationMap;
 use CG\Controllers\Product\VariationMap\VariationMap\Collection as VariationMapCollection;
 
 use CG\InputValidation\Product\VariationMap\Entity as VariationMapEntityValidation;
-use CG\InputValidation\Product\VariationMap\Filter as VariationMapCollectionValidation;
+use CG\InputValidation\Product\VariationMap\Filter as VariationMapFilterValidation;
 
 use CG\Product\VariationMap\Mapper as VariationMapMapper;
 use CG\Product\VariationMap\Entity as VariationMapEntity;
@@ -73,11 +73,11 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'VariationMapCollectionCollection',
         'validation' => [
-            'filterRules' => VariationMapEntityValidation::class,
-            'dataRules' => VariationMapCollectionValidation::class
+            'filterRules' => VariationMapFilterValidation::class,
+            'dataRules' => VariationMapEntityValidation::class
         ]
     ],
     '/product/:productId/variationMap/:variationMapId' => [

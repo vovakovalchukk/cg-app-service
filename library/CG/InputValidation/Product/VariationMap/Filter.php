@@ -26,11 +26,9 @@ class Filter implements RulesInterface
                 ],
                 'productId' => [
                     'name'       => 'productId',
-                    'required'   => true,
+                    'required'   => false,
                     'validators' => [
-                        new IntegerValidator(['name' => 'id']),
-                        (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                            ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
+                        new IntegerValidator(['name' => 'productId'])
                     ]
                 ],
                 'productAttributeName' => [

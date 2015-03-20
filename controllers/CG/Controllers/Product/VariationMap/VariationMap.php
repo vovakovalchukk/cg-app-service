@@ -1,8 +1,9 @@
 <?php
 namespace CG\Controllers\Product\VariationMap;
 
-use CG\Product\Service\Service;
+use CG\Product\VariationMap\Service;
 use CG\Slim\ControllerTrait;
+use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Http\StatusCode;
 use CG\Stdlib\Exception\Runtime\NotFound;
