@@ -74,7 +74,7 @@ return [
             );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
-        'name' => 'VariationAttributeMapCollectionCollection',
+        'name' => 'VariationAttributeMapCollection',
         'validation' => [
             'filterRules' => VariationAttributeMapFilterValidation::class,
             'dataRules' => VariationAttributeMapEntityValidation::class
