@@ -4,28 +4,28 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01bb66747d118292d5e79e992271e0be",
+    "hash": "5ab29d037783e04cd3e195e22cab52b2",
     "packages": [
         {
             "name": "channelgrabber/cache",
-            "version": "2.0.3",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "8a7a9a437d4f9a9ebbe5e17dd407dc696533481a"
+                "reference": "a5a617702e71f49239ec05618b74cd32f31d0f6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.0.3-6fb3d8.zip",
-                "reference": "8a7a9a437d4f9a9ebbe5e17dd407dc696533481a",
-                "shasum": "85713484c4e1a418191216d649aa0ada510c6f64"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.0.6-9c91ac.zip",
+                "reference": "a5a617702e71f49239ec05618b74cd32f31d0f6b",
+                "shasum": "b8084d23915c477ad05426111e4072255a7533dd"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
-                "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
+                "channelgrabber/stdlib": "^2.10.4",
                 "composer/composer": "@dev",
-                "predis/predis": "v0.8.3"
+                "predis/predis": "~0.8.3"
             },
             "require-dev": {
                 "phpspec/phpspec": "2.0.*@dev",
@@ -42,24 +42,79 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-28 09:10:45"
+            "time": "2015-03-19 09:28:50"
         },
         {
-            "name": "channelgrabber/cilex",
-            "version": "1.1.0.2",
+            "name": "channelgrabber/cg-predis",
+            "version": "v0.8.7",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "22b62f8a1ae0f7a3060a691db38eeead4c3bdccc"
+                "url": "git@github.com:channelgrabber/predis.git",
+                "reference": "8b9065c249bee6d4f2ad5a7137c126e5e99b534b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.0.2-dc8d2a.zip",
-                "reference": "22b62f8a1ae0f7a3060a691db38eeead4c3bdccc",
-                "shasum": "aeee5f74c5a4f3b8543874fb87780e9f942cd0c9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cg-predis-v0.8.7-424d97.zip",
+                "reference": "8b9065c249bee6d4f2ad5a7137c126e5e99b534b",
+                "shasum": "66b2d6949b306a0bb9d429eb8508a5e964ac1eb2"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-01 09:43:10"
+        },
+        {
+            "name": "channelgrabber/cilex",
+            "version": "dev-CGIV-5023-ArrayArguments",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
+                "reference": "b2c25535bc597d3f94a466c8c9532cc88d66c6b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-dev-CGIV-5023-ArrayArguments-248801.zip",
+                "reference": "b2c25535bc597d3f94a466c8c9532cc88d66c6b3",
+                "shasum": "da07065f1d55b221ce49cc64a1e81904068ac90f"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
+                "channelgrabber/http": ">=1.2.29, <2.0.0",
                 "channelgrabber/log": ">=1.5.0,<3.0.0",
                 "channelgrabber/stdlib": ">=2.4.1,<3.0.0",
                 "cilex/cilex": "1.0.1",
@@ -79,7 +134,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-12-22 15:49:46"
+            "time": "2015-03-23 14:52:18"
         },
         {
             "name": "channelgrabber/constants",
@@ -87,7 +142,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "64f6d87c61597541953e63ec523b66ab3ab117eb"
+                "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-constants-dev-master-1ee173.zip",
+                "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a",
+                "shasum": "829cfb41e8c6b36b6d952d01ba3fa44f8d4b47a6"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -98,7 +159,12 @@
                     "CG": ""
                 }
             },
-            "time": "2015-01-12 12:30:52"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/di",
@@ -202,22 +268,22 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "2462e03672a8d7ded9792b5764ebccd5d57541cb"
+                "reference": "3a719d40f2690d3c35ca8bcdcd615e5d3018b30e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.3-d0934b.zip",
-                "reference": "2462e03672a8d7ded9792b5764ebccd5d57541cb",
-                "shasum": "a34cc1a63ed5f6797a5ab0d5c7de55b43751edd4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.4-25e595.zip",
+                "reference": "3a719d40f2690d3c35ca8bcdcd615e5d3018b30e",
+                "shasum": "aaddea0c285896c2683481270cb06bf9c17597a4"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
-                "channelgrabber/stdlib": ">=2.0.7,<3.0.0",
-                "predis/predis": "v0.8.3"
+                "channelgrabber/stdlib": "^2.10.4",
+                "predis/predis": "~0.8.3"
             },
             "type": "di-definition",
             "autoload": {
@@ -230,30 +296,33 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-12-11 15:34:25"
+            "time": "2015-03-17 15:51:25"
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.1.14",
+            "version": "1.1.28",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "3235bd0f118ad898d3591679937af47fbb89194e"
+                "reference": "a4285e3175efc844fc86fc423c09f8bc858ea5a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.14-09d1b5.zip",
-                "reference": "3235bd0f118ad898d3591679937af47fbb89194e",
-                "shasum": "0ab8ffdb2206b21da34762ef9242b1b843c0352a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.28-69a5d3.zip",
+                "reference": "a4285e3175efc844fc86fc423c09f8bc858ea5a0",
+                "shasum": "8ec524183a32bc5c7b8133cbe6065f138717e767"
             },
             "require": {
                 "channelgrabber/cilex": ">=1.1.0,<2.0.0",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
-                "channelgrabber/log": ">=1.5.0",
-                "channelgrabber/stdlib": ">=2.7.22,<3.0.0",
+                "channelgrabber/log": ">=2.0.17,<3.0.0",
+                "channelgrabber/stats": ">=1.0.3, <2.0.0",
+                "channelgrabber/stdlib": ">=2.10.1,<3.0.0",
                 "composer/composer": "@dev",
                 "ext-gearman": "*",
-                "guzzle/guzzle": "~3.7"
+                "guzzle/guzzle": "~3.7",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev"
             },
             "type": "di-definition",
             "autoload": {
@@ -266,31 +335,39 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-01-05 16:14:11"
+            "time": "2015-03-17 10:56:57"
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.2.29",
+            "version": "dev-CGIV-5023-GuzzleFailoverClient",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "38193993ae6cc23a8ef63dc10bc96aa298919dec"
+                "reference": "c0003eccdbe5bd63e157af0400b9719691941dd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.2.29-ff877a.zip",
-                "reference": "38193993ae6cc23a8ef63dc10bc96aa298919dec",
-                "shasum": "9f3b8006c3cc48d428f04754c8725f7e4305c3ac"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-dev-CGIV-5023-GuzzleFailoverClient-50ced4.zip",
+                "reference": "c0003eccdbe5bd63e157af0400b9719691941dd1",
+                "shasum": "f5c8e987842fd408b0101fa8e63ccd6e2a43ce84"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
                 "channelgrabber/etag": ">=1.4.2,<2.0.0",
-                "channelgrabber/stdlib": ">=2.4.2,<3.0.0",
+                "channelgrabber/stdlib": ">=2.10.0,<3.0.0",
+                "composer/composer": "@dev",
+                "ext-memcached": "*",
                 "guzzle/guzzle": "~3.7",
-                "nocarrier/hal": "~0.9.4"
+                "nocarrier/hal": "~0.9.4",
+                "symfony/console": "~2.5"
             },
             "replace": {
                 "channelgrabber/cghttp": "*"
+            },
+            "require-dev": {
+                "channelgrabber/cache": ">=2.0.1,<3.0.0",
+                "channelgrabber/phpunit": ">=1.0.0",
+                "phpunit/phpunit": "~4.0.0"
             },
             "type": "di-definition",
             "autoload": {
@@ -298,35 +375,44 @@
                     "CG\\Http\\": "src"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Http\\Test\\": "tests/",
+                    "CG\\Http\\TestAsset\\": "tests/assets/"
+                }
+            },
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-05 13:10:34"
+            "time": "2015-03-23 12:30:41"
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.0.14",
+            "version": "2.0.21",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "9588a75c176df3fa976c855b7b02fdb9baa9618c"
+                "reference": "bb012146debe7c9f4fd88946bf426010d0f39b09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.14-c9fff2.zip",
-                "reference": "9588a75c176df3fa976c855b7b02fdb9baa9618c",
-                "shasum": "63b5e3f966ecadd5cb45725251819522b2b3f064"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.21-29cabf.zip",
+                "reference": "bb012146debe7c9f4fd88946bf426010d0f39b09",
+                "shasum": "a4e525031b12e85411cfeb6080bfa503c292a061"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/redis": "~0.1.0",
-                "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
+                "channelgrabber/stats": ">=1.0.0,<2.0.0",
+                "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/validation": ">=1.1.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2,<3.0",
                 "zendframework/zend-eventmanager": ">=2.2,<3.0"
             },
@@ -339,26 +425,31 @@
                     "CG\\Log\\": "src/"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Log\\Test\\": "tests/"
+                }
+            },
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-09 16:56:34"
+            "time": "2015-03-17 15:17:18"
         },
         {
             "name": "channelgrabber/middleware",
-            "version": "1.0.0.1",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-middleware.git",
-                "reference": "1e26fff57695b2610239bb6e44e9c0df6f1260db"
+                "reference": "b5cd83ca5de138aff84aab32737a213caa204b12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.0.0.1-f5f3fc.zip",
-                "reference": "1e26fff57695b2610239bb6e44e9c0df6f1260db",
-                "shasum": "3a35f781e79aa4dbc2a8cfe0b344e00fe725d81b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.0.1-ae112c.zip",
+                "reference": "b5cd83ca5de138aff84aab32737a213caa204b12",
+                "shasum": "903c4d53c9fc0573224d379def43cdf42b450379"
             },
             "require": {
                 "channelgrabber/slim": ">=1.12.0,<2.0.0",
@@ -386,7 +477,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-01-27 15:55:05"
+            "time": "2015-02-26 16:17:17"
         },
         {
             "name": "channelgrabber/permission",
@@ -421,23 +512,23 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.3",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "cac3467658151bdeead8ca241191d16c90f51227"
+                "reference": "f275d02ba443a8a398e55a3b39129d13b3185f6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.3-d5cfef.zip",
-                "reference": "cac3467658151bdeead8ca241191d16c90f51227",
-                "shasum": "e2c540d3d8fd886f1d4913816a601307d9eb56f2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.5-63bb9d.zip",
+                "reference": "f275d02ba443a8a398e55a3b39129d13b3185f6b",
+                "shasum": "c8d7b55598ea83f5c2196ab4d98db99d437dc1da"
             },
             "require": {
+                "channelgrabber/cg-predis": "~0.8.7",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
-                "channelgrabber/stdlib": ">=2.7.20",
-                "composer/composer": "@dev",
-                "predis/predis": "v0.8.3"
+                "channelgrabber/stdlib": "^2.10.4",
+                "composer/composer": "@dev"
             },
             "type": "di-definition",
             "autoload": {
@@ -450,21 +541,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-10-14 12:37:57"
+            "time": "2015-03-17 16:05:32"
         },
         {
             "name": "channelgrabber/purge",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purge.git",
-                "reference": "512302e0ff8426f33def84e350189596b4051263"
+                "reference": "044d757391c7e409557b222b4d810a8eb6d55225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-1.0.0-d81a91.zip",
-                "reference": "512302e0ff8426f33def84e350189596b4051263",
-                "shasum": "fb44430be9b6afe65b544b675dac15691365be08"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-1.0.2-551a31.zip",
+                "reference": "044d757391c7e409557b222b4d810a8eb6d55225",
+                "shasum": "8cfbff6a3f544c045c451cc7bf45c57f467fd250"
             },
             "require": {
                 "channelgrabber/gearman": ">=1.1.5,<2.0.0",
@@ -493,25 +584,25 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-10 10:17:13"
+            "time": "2015-02-26 16:35:41"
         },
         {
             "name": "channelgrabber/redis",
-            "version": "0.1.1",
+            "version": "0.1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis.git",
-                "reference": "b5d60044a657dc83c43d91872a83507d784e390f"
+                "reference": "6ab27c65f3f2cabe1b8173817ec9b5561dc4bc1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-0.1.1-e15731.zip",
-                "reference": "b5d60044a657dc83c43d91872a83507d784e390f",
-                "shasum": "cf002ef6f514a40439fe56b37d6e329ff2d43811"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-0.1.0.1-622d70.zip",
+                "reference": "6ab27c65f3f2cabe1b8173817ec9b5561dc4bc1e",
+                "shasum": "ce4ce34e16fbf1640fa6f22b89fb7d64b3412565"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
-                "predis/predis": "v0.8.3"
+                "predis/predis": "~0.8.3"
             },
             "type": "di-definition",
             "autoload": {
@@ -524,30 +615,30 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-03 11:34:25"
+            "time": "2015-03-11 13:32:40"
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.0",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "e065775952b26f5e460e2c65629fbb5119f0b8a2"
+                "reference": "b367603cbd43350863dda6f4563a78b18616e448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.0-c6863d.zip",
-                "reference": "e065775952b26f5e460e2c65629fbb5119f0b8a2",
-                "shasum": "46b17ef66bbddb94c4c506b04fc66d99f68accae"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.2-84d038.zip",
+                "reference": "b367603cbd43350863dda6f4563a78b18616e448",
+                "shasum": "b0f10144bb04059e511f31027bcd5a2f353c584f"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/di": ">=2.1.0",
-                "channelgrabber/etag": ">=1.5.3, <2.0.0",
+                "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": ">=1.2.29, <2.0.0",
                 "channelgrabber/log": ">=2.0.6,<3.0.0",
                 "channelgrabber/purge": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
+                "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "channelgrabber/usage": ">=1.0.5",
                 "channelgrabber/vnderror": ">=1.0.0",
@@ -584,7 +675,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-10 10:30:15"
+            "time": "2015-03-17 16:20:55"
         },
         {
             "name": "channelgrabber/spork",
@@ -639,18 +730,51 @@
             "time": "2014-09-16 11:12:42"
         },
         {
-            "name": "channelgrabber/stdlib",
-            "version": "2.9.0",
+            "name": "channelgrabber/stats",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "e4e5c7fb93522951f3571d3606f0d2765bed3e1c"
+                "url": "git@bitbucket.org:channelgrabber/cg-stats.git",
+                "reference": "42f063c9a9c84f1fb81a161c13e766be44bbe49f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.9.0-806db2.zip",
-                "reference": "e4e5c7fb93522951f3571d3606f0d2765bed3e1c",
-                "shasum": "c3cd1ecda7f6831af568f3d4783ca02df49667d9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.4-0954b1.zip",
+                "reference": "42f063c9a9c84f1fb81a161c13e766be44bbe49f",
+                "shasum": "cafb255999bb6755b1106e233700d44dd9cc15e3"
+            },
+            "require": {
+                "channelgrabber/stdlib": ">=2.10.1, <3.0.0",
+                "liuggio/statsd-php-client": "~1.0.12",
+                "zendframework/zend-eventmanager": ">=2.2,<3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Stats\\": "src/"
+                }
+            },
+            "description": "ChannelGrabber application stat logging",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-06 15:31:51"
+        },
+        {
+            "name": "channelgrabber/stdlib",
+            "version": "2.10.6",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
+                "reference": "848d728dcd9066289e89d7461b2d8247d98fbd59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.10.6-e6d433.zip",
+                "reference": "848d728dcd9066289e89d7461b2d8247d98fbd59",
+                "shasum": "93cdb1e4d482aac291585e94f9c4df08e6b08328"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -676,27 +800,29 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-10 09:00:07"
+            "time": "2015-03-23 13:15:09"
         },
         {
             "name": "channelgrabber/transaction",
-            "version": "1.1.3",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
-                "reference": "14ba50a24dc3ef1c3f48b414eccd7cb6b74deda2"
+                "reference": "d1e55f448c998948547388de7e79f7ac26bf61c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.1.3-bb8327.zip",
-                "reference": "14ba50a24dc3ef1c3f48b414eccd7cb6b74deda2",
-                "shasum": "0c805a066bf14f8bf216660e435a815e43303629"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.1.5-937cc3.zip",
+                "reference": "d1e55f448c998948547388de7e79f7ac26bf61c6",
+                "shasum": "f25617784b6fe205e3ada66b14f667c7bd7b315e"
             },
             "require": {
-                "channelgrabber/cache": ">=2.0.1,<3.0.0",
-                "channelgrabber/log": ">=2.0.6",
-                "channelgrabber/stdlib": ">=2.7.17,<3.0.0",
-                "composer/composer": "@dev"
+                "channelgrabber/cache": "^2.0.6",
+                "channelgrabber/log": "^2.0.21",
+                "channelgrabber/stdlib": "^2.10.4",
+                "composer/composer": "@dev",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev"
             },
             "require-dev": {
                 "channelgrabber/phpunit": "dev-develop",
@@ -718,28 +844,31 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-05 16:38:13"
+            "time": "2015-03-19 16:48:36"
         },
         {
             "name": "channelgrabber/usage",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-usage.git",
-                "reference": "2373433882187a93a0533565110e55bec31a4c58"
+                "reference": "19de837fc9487057e06afdcc8c157822f5a3a39d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-1.0.5-4db8ca.zip",
-                "reference": "2373433882187a93a0533565110e55bec31a4c58",
-                "shasum": "ca8f0099fa336b3ee4e9de6477cfc794a3695040"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-1.0.6-46f376.zip",
+                "reference": "19de837fc9487057e06afdcc8c157822f5a3a39d",
+                "shasum": "eb1bd61e8c775184e4b5ee02236f8fa630a0ab85"
             },
             "require": {
-                "channelgrabber/cache": ">=2.0.1,<3.0.0",
+                "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/di": ">=2.1.",
+                "channelgrabber/log": "^2.0.21",
                 "channelgrabber/permission": ">=1.0.1",
-                "channelgrabber/stdlib": ">=2.7.17",
+                "channelgrabber/stdlib": "^2.10.4",
                 "composer/composer": "@dev",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-db": ">=2.2.5",
                 "zendframework/zend-di": ">=2.2.5"
             },
@@ -754,36 +883,42 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-05 15:05:33"
+            "time": "2015-03-20 11:09:42"
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.14.3",
+            "version": "1.18.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "90f75716af27259dd06182574d526366f4312440"
+                "reference": "e2c576abb995ec0cb03514c38edf11c8913c85c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.14.3-70814f.zip",
-                "reference": "90f75716af27259dd06182574d526366f4312440",
-                "shasum": "039fb4d9ef1a38ffe23c4e5bcdd39d3e1bc8d09b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.18.13-b8875b.zip",
+                "reference": "e2c576abb995ec0cb03514c38edf11c8913c85c2",
+                "shasum": "8a1177a5c7ff31a2a6d5cf0a1b97c9f1fb536309"
             },
             "require": {
-                "channelgrabber/cache": ">=1.0.8",
+                "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
+                "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": ">=1.0.1",
-                "channelgrabber/etag": ">=1.3.3",
+                "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/gearman": ">=1.0.11",
-                "channelgrabber/http": "1.2.*",
-                "channelgrabber/log": ">=1.5.2",
+                "channelgrabber/http": ">=1.2.0,<2.0.0",
+                "channelgrabber/log": "^2.0.21",
                 "channelgrabber/permission": ">=1.0.1",
-                "channelgrabber/slim": ">=1.6.0,<2.0.0",
-                "channelgrabber/stdlib": ">=2.5.13,<3",
-                "channelgrabber/validation": ">=1.2.0",
+                "channelgrabber/slim": "^1.13.2",
+                "channelgrabber/stats": ">=1.0.1, <2.0.0",
+                "channelgrabber/stdlib": "^2.10.4",
+                "channelgrabber/validation": ">=1.2.5",
+                "channelgrabber/zf2-stdlib": ">=1.1.17,<2.0.0",
+                "composer/composer": "@dev",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.3",
+                "php-jsonpatch/php-jsonpatch": "@dev",
+                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-db": ">=2.2,<3.0",
                 "zendframework/zend-di": ">=2.2,<3.0",
                 "zendframework/zend-i18n": ">=2.2,<3.0",
@@ -793,10 +928,10 @@
                 "channelgrabber/phpunit": ">=1.0.0",
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "library",
+            "type": "di-definition",
             "autoload": {
-                "psr-0": {
-                    "CG": ""
+                "psr-4": {
+                    "CG\\": "src"
                 }
             },
             "transport-options": {
@@ -804,21 +939,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-06-24 12:36:42"
+            "time": "2015-03-20 09:49:57"
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f"
+                "reference": "d29f78e04288efea047e68d439900e4cc07b4164"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.6-75ca55.zip",
-                "reference": "d65d58baa2d23c5a8ec920b42bba95d5bdf4dc5f",
-                "shasum": "edd14fd5ff38092ab7784ebed3eaf96c3eab0b38"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.7-0509ac.zip",
+                "reference": "d29f78e04288efea047e68d439900e4cc07b4164",
+                "shasum": "863bf4d7c2c6fb0ca825eafd1a37b152d70b8d13"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -836,7 +971,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-14 09:31:59"
+            "time": "2015-02-17 13:39:48"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -872,17 +1007,17 @@
         },
         {
             "name": "channelgrabber/zf2-stdlib",
-            "version": "1.1.17",
+            "version": "1.1.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgzf2stdlib.git",
-                "reference": "b97c72de22ab8887d2ce5e01221f900c307b2627"
+                "reference": "fb9ecf87b3bf8418c68f8dedd2740ddcf1af140f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.17-a3c869.zip",
-                "reference": "b97c72de22ab8887d2ce5e01221f900c307b2627",
-                "shasum": "8b022ccbc4f4108668c8418bc05c369354630b0d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.1.18-829581.zip",
+                "reference": "fb9ecf87b3bf8418c68f8dedd2740ddcf1af140f",
+                "shasum": "72895cbb054ba3a37b8a28d98cc212900df0ed5f"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -908,7 +1043,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-05 15:12:46"
+            "time": "2015-02-27 08:32:18"
         },
         {
             "name": "cilex/cilex",
@@ -1034,24 +1169,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "825b4b9c63a29c586d005de8dbbcfdfeb86bbf6f"
+                "reference": "ab3622dff1db71024f327387408250208c139a0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/825b4b9c63a29c586d005de8dbbcfdfeb86bbf6f",
-                "reference": "825b4b9c63a29c586d005de8dbbcfdfeb86bbf6f",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-ab3622dff1db71024f327387408250208c139a0d-zip-ccf712.zip",
+                "reference": "ab3622dff1db71024f327387408250208c139a0d",
+                "shasum": "5cd56a5a3b79b0d443ab0a36eac8a9e4c0d2d811"
             },
             "require": {
                 "justinrainbow/json-schema": "~1.3",
                 "php": ">=5.3.2",
                 "seld/jsonlint": "~1.0",
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.5",
                 "symfony/finder": "~2.2",
                 "symfony/process": "~2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.5"
             },
             "suggest": {
                 "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
@@ -1094,21 +1229,26 @@
                 "dependency",
                 "package"
             ],
-            "time": "2015-01-20 16:39:06"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-23 11:56:30"
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.9.2",
+            "version": "v3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "54991459675c1a2924122afbb0e5609ade581155"
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/54991459675c1a2924122afbb0e5609ade581155",
-                "reference": "54991459675c1a2924122afbb0e5609ade581155",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/guzzle-guzzle-0645b70d953bc1c067bbc8d5bc53194706b628d9-zip-ed28d5.zip",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "shasum": "def1db73076f0261fb24891ce0291f42f433e379"
             },
             "require": {
                 "ext-curl": "*",
@@ -1148,6 +1288,9 @@
                 "zendframework/zend-cache": "2.*,<2.3",
                 "zendframework/zend-log": "2.*,<2.3"
             },
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1175,7 +1318,7 @@
                     "homepage": "https://github.com/guzzle/guzzle/contributors"
                 }
             ],
-            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
                 "client",
@@ -1186,7 +1329,12 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-08-11 04:32:36"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-18 18:23:50"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1253,6 +1401,60 @@
                 "schema"
             ],
             "time": "2014-08-25 02:48:14"
+        },
+        {
+            "name": "liuggio/statsd-php-client",
+            "version": "v1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuggio/statsd-php-client.git",
+                "reference": "30f67554d727124a0fc35f5072f0f479919b908a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/liuggio-statsd-php-client-30f67554d727124a0fc35f5072f0f479919b908a-zip-088f91.zip",
+                "reference": "30f67554d727124a0fc35f5072f0f479919b908a",
+                "shasum": "daa41bc12eb14c72b98ebad2b83a4af4e8897b2c"
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "monolog/monolog": ">=1.2.0"
+            },
+            "suggest": {
+                "monolog/monolog": "Monolog, in order to do generate statistic from log >=1.2.0)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Liuggio": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giulio De Donato",
+                    "email": "liuggio@gmail.com"
+                }
+            ],
+            "description": "Statsd (Object Oriented) client library for PHP",
+            "homepage": "https://github.com/liuggio/statsd-php-client/",
+            "keywords": [
+                "etsy",
+                "monitoring",
+                "php",
+                "statsd"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-13 17:11:56"
         },
         {
             "name": "nocarrier/hal",
@@ -1448,20 +1650,23 @@
         },
         {
             "name": "predis/predis",
-            "version": "v0.8.3",
+            "version": "v0.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113"
+                "reference": "4123fcd85d61354c6c9900db76c9597dbd129bf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "reference": "8c0498a893ec1bee5a98c602ad3a07855aa22113",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/predis-predis-4123fcd85d61354c6c9900db76c9597dbd129bf6-zip-27ebf2.zip",
+                "reference": "4123fcd85d61354c6c9900db76c9597dbd129bf6",
+                "shasum": "30439376395ea36286454d58f2577713c40e8737"
             },
             "require": {
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
             },
             "suggest": {
                 "ext-curl": "Allows access to Webdis when paired with phpiredis",
@@ -1491,7 +1696,12 @@
                 "predis",
                 "redis"
             ],
-            "time": "2013-02-18 14:03:45"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2014-08-01 09:43:10"
         },
         {
             "name": "rhumsaa/vnderror",
@@ -1685,24 +1895,25 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/ClassLoader",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52"
+                "reference": "56bf6fe551ca013471541d866f73a6cc70ece9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/deac802f76910708ab50d039806cfd1866895b52",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-class-loader-56bf6fe551ca013471541d866f73a6cc70ece9c5-zip-ba3721.zip",
+                "reference": "56bf6fe551ca013471541d866f73a6cc70ece9c5",
+                "shasum": "48c03aec2470fa34cec322705d740eb0863f5754"
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/finder": "~2.0,>=2.0.5"
+                "symfony/finder": "~2.0,>=2.0.5",
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1731,26 +1942,34 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:28:40"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-13 17:37:22"
         },
         {
             "name": "symfony/config",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Config.git",
-                "reference": "d94f222eff99a22ce313555b78642b4873418d56"
+                "reference": "7a47189c7667ca69bcaafd19ef8a8941db449a2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/d94f222eff99a22ce313555b78642b4873418d56",
-                "reference": "d94f222eff99a22ce313555b78642b4873418d56",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-config-7a47189c7667ca69bcaafd19ef8a8941db449a2c-zip-07f099.zip",
+                "reference": "7a47189c7667ca69bcaafd19ef8a8941db449a2c",
+                "shasum": "11d1379bde8eff6a7f0948ca0627c11e8238c2b5"
             },
             "require": {
                 "php": ">=5.3.3",
                 "symfony/filesystem": "~2.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1779,22 +1998,27 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 08:01:59"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         },
         {
             "name": "symfony/console",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "6ac6491ff60c0e5a941db3ccdc75a07adbb61476"
+                "reference": "53f86497ccd01677e22435cfb7262599450a90d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/6ac6491ff60c0e5a941db3ccdc75a07adbb61476",
-                "reference": "6ac6491ff60c0e5a941db3ccdc75a07adbb61476",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-console-53f86497ccd01677e22435cfb7262599450a90d1-zip-16203a.zip",
+                "reference": "53f86497ccd01677e22435cfb7262599450a90d1",
+                "shasum": "c67b5a561ffa74e5ff1b6754999408e5b938adcf"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1802,6 +2026,7 @@
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/event-dispatcher": "~2.1",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/process": "~2.1"
             },
             "suggest": {
@@ -1836,22 +2061,27 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 17:50:02"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-13 17:37:22"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "40ff70cadea3785d83cac1c8309514b36113064e"
+                "reference": "70f7c8478739ad21e3deef0d977b38c77f1fb284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/40ff70cadea3785d83cac1c8309514b36113064e",
-                "reference": "40ff70cadea3785d83cac1c8309514b36113064e",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-event-dispatcher-70f7c8478739ad21e3deef0d977b38c77f1fb284-zip-71606a.zip",
+                "reference": "70f7c8478739ad21e3deef0d977b38c77f1fb284",
+                "shasum": "d88a904a19e952fd3df5b04a1330fb71c2229d32"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1861,6 +2091,7 @@
                 "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/stopwatch": "~2.3"
             },
             "suggest": {
@@ -1894,25 +2125,33 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:28:40"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-13 17:37:22"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "a1f566d1f92e142fa1593f4555d6d89e3044a9b7"
+                "reference": "fdc5f151bc2db066b51870d5bea3773d915ced0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/a1f566d1f92e142fa1593f4555d6d89e3044a9b7",
-                "reference": "a1f566d1f92e142fa1593f4555d6d89e3044a9b7",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-filesystem-fdc5f151bc2db066b51870d5bea3773d915ced0b-zip-2591cf.zip",
+                "reference": "fdc5f151bc2db066b51870d5bea3773d915ced0b",
+                "shasum": "6892c7a480dfa7043cd03020dd9fddd5941169fe"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1941,25 +2180,33 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 21:13:09"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "16513333bca64186c01609961a2bb1b95b5e1355"
+                "reference": "bebc7479c566fa4f14b9bcef9e32e719eabec74e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/16513333bca64186c01609961a2bb1b95b5e1355",
-                "reference": "16513333bca64186c01609961a2bb1b95b5e1355",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-finder-bebc7479c566fa4f14b9bcef9e32e719eabec74e-zip-2c6910.zip",
+                "reference": "bebc7479c566fa4f14b9bcef9e32e719eabec74e",
+                "shasum": "9e13b23a14f2429b28fc3d1416c24830c479321e"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1988,25 +2235,33 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 08:01:59"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         },
         {
             "name": "symfony/process",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "319794f611bd8bdefbac72beb3f05e847f8ebc92"
+                "reference": "4d717f34f3d1d6ab30fbe79f7132960a27f4a0dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/319794f611bd8bdefbac72beb3f05e847f8ebc92",
-                "reference": "319794f611bd8bdefbac72beb3f05e847f8ebc92",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-process-4d717f34f3d1d6ab30fbe79f7132960a27f4a0dc-zip-24975d.zip",
+                "reference": "4d717f34f3d1d6ab30fbe79f7132960a27f4a0dc",
+                "shasum": "e67e56272fe0cd95d03196e40303705dbb735a30"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -2035,25 +2290,33 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 22:47:52"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "82462a90848a52c2533aa6b598b107d68076b018"
+                "reference": "0cd8e72071e46e15fc072270ae39ea1b66b10a9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/82462a90848a52c2533aa6b598b107d68076b018",
-                "reference": "82462a90848a52c2533aa6b598b107d68076b018",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-yaml-0cd8e72071e46e15fc072270ae39ea1b66b10a9d-zip-1fbca9.zip",
+                "reference": "0cd8e72071e46e15fc072270ae39ea1b66b10a9d",
+                "shasum": "cb8e3589a13058c4c8aa68bde8b32ed2e9ff0433"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -2082,22 +2345,27 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 15:33:07"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         },
         {
             "name": "zendframework/zend-cache",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Cache",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendCache.git",
-                "reference": "03cf30de6aa60ff9fb1a9f473202559a18b9f2f5"
+                "reference": "883fce9abb24096d96bfdfc14c4cd6e3a232e895"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-cache-03cf30de6aa60ff9fb1a9f473202559a18b9f2f5-zip-22bd94.zip",
-                "reference": "2.3.4",
-                "shasum": "7e67e24c34f4ba90e18b58e61c9aaf0616dd41ba"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-cache-883fce9abb24096d96bfdfc14c4cd6e3a232e895-zip-2e532c.zip",
+                "reference": "883fce9abb24096d96bfdfc14c4cd6e3a232e895",
+                "shasum": "e4aefbd08bf1b399e54fe964ea0e40b71acef073"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2129,6 +2397,7 @@
                     "Zend\\Cache\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2138,25 +2407,27 @@
                 "cache",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCache/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-code",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Code",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendCode.git",
-                "reference": "a7f71bd4a1130ad9fb4ffa2f10fed7e01dd873fb"
+                "reference": "a1c6c9773d0431f31c94d806c1c7d1964fa11639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-code-a7f71bd4a1130ad9fb4ffa2f10fed7e01dd873fb-zip-c6270a.zip",
-                "reference": "2.3.4",
-                "shasum": "e4f19a34b05862a78a4c50fffd8bd486ebe27809"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-code-a1c6c9773d0431f31c94d806c1c7d1964fa11639-zip-4ae78a.zip",
+                "reference": "a1c6c9773d0431f31c94d806c1c7d1964fa11639",
+                "shasum": "ef08fa5c72d48e4b6a888b7e5386ac20001ed942"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2182,6 +2453,7 @@
                     "Zend\\Code\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2191,25 +2463,27 @@
                 "code",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCode/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-config",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Config",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendConfig.git",
-                "reference": "c07bbcfd6c32e9eaf3de457cb880349f8c18885d"
+                "reference": "4fa48535dd4693eb1b103e7d260c548037d2b3c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-config-c07bbcfd6c32e9eaf3de457cb880349f8c18885d-zip-ff4640.zip",
-                "reference": "2.3.4",
-                "shasum": "df7ed78cfba16b9cf1fdd7756a1b9fb563524d33"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-config-4fa48535dd4693eb1b103e7d260c548037d2b3c3-zip-901fe6.zip",
+                "reference": "4fa48535dd4693eb1b103e7d260c548037d2b3c3",
+                "shasum": "bc3b31d51009d42322f44b40a0577a778c56a5db"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2239,6 +2513,7 @@
                     "Zend\\Config\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2248,25 +2523,27 @@
                 "config",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendConfig/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-crypt",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Crypt",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendCrypt.git",
-                "reference": "30c6269b838930f7550c3bfb5693901a13fa6da8"
+                "reference": "6e885dcc6177e266c19febe0b5e979b7a3e4e8b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-crypt-30c6269b838930f7550c3bfb5693901a13fa6da8-zip-ec5876.zip",
-                "reference": "2.3.4",
-                "shasum": "5ecff2932f3025477024344d40c12dab3685459f"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-crypt-6e885dcc6177e266c19febe0b5e979b7a3e4e8b1-zip-b20425.zip",
+                "reference": "6e885dcc6177e266c19febe0b5e979b7a3e4e8b1",
+                "shasum": "ef8324ff879f16f36a5451ea3bd4998525cc8981"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2289,34 +2566,36 @@
                     "Zend\\Crypt\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "crypt",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendCrypt/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-db",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Db",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendDb.git",
-                "reference": "ff929e25e00a6420be3489faf5db12966189aba5"
+                "reference": "e030110efe1a25792d0586996e66ad41ee90f0b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-db-ff929e25e00a6420be3489faf5db12966189aba5-zip-16d3da.zip",
-                "reference": "2.3.4",
-                "shasum": "e9f5e8acf964a7dedc4330bfb6438bc58e7a72ff"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-db-e030110efe1a25792d0586996e66ad41ee90f0b4-zip-3d54e7.zip",
+                "reference": "e030110efe1a25792d0586996e66ad41ee90f0b4",
+                "shasum": "77c2160c540315a77e39172116e24fb5faa11e56"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2343,34 +2622,36 @@
                     "Zend\\Db\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "db",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-di",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Di",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendDi.git",
-                "reference": "58d0d5edcbf56fb60815ea2c42b7916b3f5bc601"
+                "reference": "4f5186d41e73c419428fba4f58c95412867b3be0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-di-58d0d5edcbf56fb60815ea2c42b7916b3f5bc601-zip-822a6c.zip",
-                "reference": "2.3.4",
-                "shasum": "0faa6e97973c5ebccfbe725d825647d225b3e68b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-di-4f5186d41e73c419428fba4f58c95412867b3be0-zip-9c4adc.zip",
+                "reference": "4f5186d41e73c419428fba4f58c95412867b3be0",
+                "shasum": "37174f04fab8c749bf2f706f7c1892017736068b"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2395,34 +2676,36 @@
                     "Zend\\Di\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "di",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendDi/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-escaper",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Escaper",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendEscaper.git",
-                "reference": "67c8f76ff6d899a5619a4ab27c3b46ed3ae743fc"
+                "reference": "b3ca10e16ef875f836d46f08045349e39589766c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-escaper-67c8f76ff6d899a5619a4ab27c3b46ed3ae743fc-zip-a49952.zip",
-                "reference": "2.3.4",
-                "shasum": "727c297a62abb6070e3998b23c84bcb26bdf3e4a"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-escaper-b3ca10e16ef875f836d46f08045349e39589766c-zip-09848b.zip",
+                "reference": "b3ca10e16ef875f836d46f08045349e39589766c",
+                "shasum": "0f9b4b3aacaeda56c1a0914e7116ec13a1e79998"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -2439,34 +2722,36 @@
                     "Zend\\Escaper\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "escaper",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendEscaper/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/EventManager",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendEventManager.git",
-                "reference": "5992c202f13292415501aed41beba76404197866"
+                "reference": "2f42c89b7a4996d5d75b45ce98fbf3ad4fc28e00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-eventmanager-5992c202f13292415501aed41beba76404197866-zip-9d070c.zip",
-                "reference": "2.3.4",
-                "shasum": "73462aa0439e3ff5add9d2d9d432ad3b993fe1f2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-eventmanager-2f42c89b7a4996d5d75b45ce98fbf3ad4fc28e00-zip-519d2a.zip",
+                "reference": "2f42c89b7a4996d5d75b45ce98fbf3ad4fc28e00",
+                "shasum": "cd8e6413c88fc84f5d15ad9da6e3b97cb8b62de3"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2484,34 +2769,36 @@
                     "Zend\\EventManager\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "eventmanager",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendEventManager/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-filter",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Filter",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendFilter.git",
-                "reference": "43206c8a7d847ebaff83c1c0b2f7dd8a318313eb"
+                "reference": "46922470d3cfd311bbe4683056cd63974918333d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-filter-43206c8a7d847ebaff83c1c0b2f7dd8a318313eb-zip-e8bf9a.zip",
-                "reference": "2.3.4",
-                "shasum": "2a31d312b5d4ddfba6ed139b3546ab543dec58c2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-filter-46922470d3cfd311bbe4683056cd63974918333d-zip-ffccc0.zip",
+                "reference": "46922470d3cfd311bbe4683056cd63974918333d",
+                "shasum": "6153654ec3b8abdebd694c6c8355d1a5b8a7b31e"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2540,6 +2827,7 @@
                     "Zend\\Filter\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2549,25 +2837,27 @@
                 "filter",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendFilter/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-form",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Form",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendForm.git",
-                "reference": "5d19e7e73d5661a1cedc3013f634f1ede86e6e24"
+                "reference": "ef215c4af65340d5f1fe9a35d62cdc8c600cc5ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-form-5d19e7e73d5661a1cedc3013f634f1ede86e6e24-zip-667020.zip",
-                "reference": "2.3.4",
-                "shasum": "f9b766e2c660be4440f711ae96cbaedad1108a15"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-form-ef215c4af65340d5f1fe9a35d62cdc8c600cc5ff-zip-5e1068.zip",
+                "reference": "ef215c4af65340d5f1fe9a35d62cdc8c600cc5ff",
+                "shasum": "bf3478fe8ee5019c026b6f8cbfdd0800b79bc95a"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2608,34 +2898,36 @@
                     "Zend\\Form\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "form",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendForm/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-http",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Http",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendHttp.git",
-                "reference": "1758f768120fdd173e22ed45230a8e49b6155766"
+                "reference": "35f52485d4170ebcdac1f00cb24a1b0856214c2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-http-1758f768120fdd173e22ed45230a8e49b6155766-zip-4463bc.zip",
-                "reference": "2.3.4",
-                "shasum": "46814be9b1f4a331b932f78eefd89789006c212a"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-http-35f52485d4170ebcdac1f00cb24a1b0856214c2f-zip-dcbbb8.zip",
+                "reference": "35f52485d4170ebcdac1f00cb24a1b0856214c2f",
+                "shasum": "cad1ef70e57ee9c695db2784983e53aa33df119b"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2656,6 +2948,7 @@
                     "Zend\\Http\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2665,25 +2958,27 @@
                 "http",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendHttp/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-i18n",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/I18n",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendI18n.git",
-                "reference": "0a78212878f5cf7d5ec0b554150717ddbe5755d6"
+                "reference": "21acf472647cd9a1456734df9aabcd456d81fe88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-i18n-0a78212878f5cf7d5ec0b554150717ddbe5755d6-zip-4dba0a.zip",
-                "reference": "2.3.4",
-                "shasum": "6a6a4b04f963e5fdbe8229ea34478efa2ea8315b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-i18n-21acf472647cd9a1456734df9aabcd456d81fe88-zip-87f6c7.zip",
+                "reference": "21acf472647cd9a1456734df9aabcd456d81fe88",
+                "shasum": "c42c6a7c63c10a761a83475f89e5db05595c5754"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2721,34 +3016,36 @@
                     "Zend\\I18n\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "i18n",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendI18n/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/InputFilter",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendInputFilter.git",
-                "reference": "84ccc51867baa74d031823a3a9ae6f0e25e852f8"
+                "reference": "c1969977b77fef7b928a35e698aa5df49b354f10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-inputfilter-84ccc51867baa74d031823a3a9ae6f0e25e852f8-zip-7f9f9d.zip",
-                "reference": "2.3.4",
-                "shasum": "5f4c3151de479076680ef8c2f0b75c6fbc1bb01b"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-inputfilter-c1969977b77fef7b928a35e698aa5df49b354f10-zip-4fa0d1.zip",
+                "reference": "c1969977b77fef7b928a35e698aa5df49b354f10",
+                "shasum": "1fcf13690ea00c0dd6e1e5c7871cd73adf2af31e"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2774,34 +3071,36 @@
                     "Zend\\InputFilter\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "inputfilter",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendInputFilter/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-json",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Json",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendJson.git",
-                "reference": "24b072788f42a025e479901e0c6e5c0bf0dcd960"
+                "reference": "af8a9c422bdfcd6e0a8db9f030331e9cead2c3a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-json-24b072788f42a025e479901e0c6e5c0bf0dcd960-zip-e0f838.zip",
-                "reference": "2.3.4",
-                "shasum": "cd5c98d106de3da44f9c7dfef4d125864cb780d3"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-json-af8a9c422bdfcd6e0a8db9f030331e9cead2c3a1-zip-1300e4.zip",
+                "reference": "af8a9c422bdfcd6e0a8db9f030331e9cead2c3a1",
+                "shasum": "e1a14e3ac9e5e7bc0be5f1970623b1466fc6a168"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2828,6 +3127,7 @@
                     "Zend\\Json\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2837,25 +3137,27 @@
                 "json",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendJson/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-loader",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Loader",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendLoader.git",
-                "reference": "521ba8650f70d512f9790921153d39eedcabed43"
+                "reference": "fcca80907c35f0827f992b7a58adbbff4baf728e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-loader-521ba8650f70d512f9790921153d39eedcabed43-zip-787e5d.zip",
-                "reference": "2.3.4",
-                "shasum": "7bf22167167cdc49df4da17e475ee3b9874ebdbc"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-loader-fcca80907c35f0827f992b7a58adbbff4baf728e-zip-3142b8.zip",
+                "reference": "fcca80907c35f0827f992b7a58adbbff4baf728e",
+                "shasum": "dde7372f5887b243a6b579cb5463128bd3ae7006"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -2872,34 +3174,36 @@
                     "Zend\\Loader\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "loader",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendLoader/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-mail",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Mail",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendMail.git",
-                "reference": "f48c7041b53845c865ceaf3583a19af686ad40a2"
+                "reference": "c59df90b72db0d5c18fa2058b46f4d1b740b0e3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mail-f48c7041b53845c865ceaf3583a19af686ad40a2-zip-3b7cc8.zip",
-                "reference": "2.3.4",
-                "shasum": "430bf0f93221dc4f52f9352ff6a1f0999ed7106c"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mail-c59df90b72db0d5c18fa2058b46f4d1b740b0e3c-zip-8aa388.zip",
+                "reference": "c59df90b72db0d5c18fa2058b46f4d1b740b0e3c",
+                "shasum": "1e1a8e069a7f280a5431ed18d3f2a0f51432360e"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2927,6 +3231,7 @@
                     "Zend\\Mail\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2936,25 +3241,27 @@
                 "mail",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMail/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-math",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Math",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendMath.git",
-                "reference": "45e7544d499a11c97d8b8fec00597f646e105ffb"
+                "reference": "b54a187942d331244aa5b69bd32afa21428f9785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-math-45e7544d499a11c97d8b8fec00597f646e105ffb-zip-039d5b.zip",
-                "reference": "2.3.4",
-                "shasum": "376ab6d587af4ff09cbf501a5becdf218db2cb69"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-math-b54a187942d331244aa5b69bd32afa21428f9785-zip-7ed5f5.zip",
+                "reference": "b54a187942d331244aa5b69bd32afa21428f9785",
+                "shasum": "610e8029310e8764801be590683acc69e785ae30"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -2977,34 +3284,36 @@
                     "Zend\\Math\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "math",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMath/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-mime",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Mime",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendMime.git",
-                "reference": "7df3af91e69003405283745e37902cb5b5b4df2f"
+                "reference": "1c7429d9c721266d9b28eccf66c9e6ff405604a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mime-7df3af91e69003405283745e37902cb5b5b4df2f-zip-3af9ad.zip",
-                "reference": "2.3.4",
-                "shasum": "922c7e6f8812b631c7e8395397c28d1283952bb2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mime-1c7429d9c721266d9b28eccf66c9e6ff405604a3-zip-76bff8.zip",
+                "reference": "1c7429d9c721266d9b28eccf66c9e6ff405604a3",
+                "shasum": "a541f55991da7a52c1d708d67858e8f8680de039"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3028,34 +3337,36 @@
                     "Zend\\Mime\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "mime",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMime/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-mvc",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Mvc",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendMvc.git",
-                "reference": "d7a7d7edab0d06ea72f87f8021d1cddda488e5de"
+                "reference": "e332f9c85fc0a03072ae6918f0d5268f4837a9bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-mvc-d7a7d7edab0d06ea72f87f8021d1cddda488e5de-zip-157aeb.zip",
-                "reference": "2.3.4",
-                "shasum": "43c941175ad6a0bb7d170369713286a28f610eda"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mvc-e332f9c85fc0a03072ae6918f0d5268f4837a9bb-zip-ddbc7e.zip",
+                "reference": "e332f9c85fc0a03072ae6918f0d5268f4837a9bb",
+                "shasum": "462cad71193bceda4f4dd995f0f8115840f510b6"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3116,34 +3427,36 @@
                     "Zend\\Mvc\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "mvc",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendMvc/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-serializer",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Serializer",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendSerializer.git",
-                "reference": "8cc08516ff69b275f22d2378cba0e0b482ba33a1"
+                "reference": "aa9427270dbc459ef6532280788d111d3faf86a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-serializer-8cc08516ff69b275f22d2378cba0e0b482ba33a1-zip-fab8e5.zip",
-                "reference": "2.3.4",
-                "shasum": "d03b0936190b8739b08fac96146cbf838159fec2"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-serializer-aa9427270dbc459ef6532280788d111d3faf86a1-zip-ebac6d.zip",
+                "reference": "aa9427270dbc459ef6532280788d111d3faf86a1",
+                "shasum": "8e02bd63c82a0e365b867f15ae80092051a264eb"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3169,6 +3482,7 @@
                     "Zend\\Serializer\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3178,25 +3492,27 @@
                 "serializer",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendSerializer/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-servicemanager",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/ServiceManager",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendServiceManager.git",
-                "reference": "148b1ce06fa0ac7fe58e3bd396df57f1ee0e9e82"
+                "reference": "10c7dfcd3b0e5856a53663c0971159573ec37ffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-servicemanager-148b1ce06fa0ac7fe58e3bd396df57f1ee0e9e82-zip-878606.zip",
-                "reference": "2.3.4",
-                "shasum": "b8dc7153681e109b5a60f13f01488b8c431a3feb"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-servicemanager-10c7dfcd3b0e5856a53663c0971159573ec37ffa-zip-1bcfe8.zip",
+                "reference": "10c7dfcd3b0e5856a53663c0971159573ec37ffa",
+                "shasum": "34706518ec84f67c26e661224c0e1f265a995aed"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3220,34 +3536,36 @@
                     "Zend\\ServiceManager\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "servicemanager",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendServiceManager/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Stdlib",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendStdlib.git",
-                "reference": "280e4ee6a8fea96b3de00a39174758b4002a7358"
+                "reference": "3f6e2416183d4879a983680e1165f14164b262f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-stdlib-280e4ee6a8fea96b3de00a39174758b4002a7358-zip-4bf601.zip",
-                "reference": "2.3.4",
-                "shasum": "2d7c08172c55630d8815f64c7ef61bb542e74eca"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-stdlib-3f6e2416183d4879a983680e1165f14164b262f4-zip-facdac.zip",
+                "reference": "3f6e2416183d4879a983680e1165f14164b262f4",
+                "shasum": "eee3c7a3c4209e3fcb177ec401b62e914ca21b73"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3276,34 +3594,36 @@
                     "Zend\\Stdlib\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": " ",
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "stdlib",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendStdlib/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-uri",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Uri",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendUri.git",
-                "reference": "72c7e6b146b6d16e71c5529bfcdb45a7148adc33"
+                "reference": "6dd5ee4b2543c785aa4e06643aaddf9c46f69039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-uri-72c7e6b146b6d16e71c5529bfcdb45a7148adc33-zip-3ab9ab.zip",
-                "reference": "2.3.4",
-                "shasum": "1d5abf81647b2063c6c1d61b9033c4786322d47e"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-uri-6dd5ee4b2543c785aa4e06643aaddf9c46f69039-zip-a057cb.zip",
+                "reference": "6dd5ee4b2543c785aa4e06643aaddf9c46f69039",
+                "shasum": "f8cafe0cd24d2804ce1bcd601d1c8231fdaa7f37"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3322,6 +3642,7 @@
                     "Zend\\Uri\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3331,25 +3652,27 @@
                 "uri",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendUri/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/Validator",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendValidator.git",
-                "reference": "f048d85d523c9bb2b16f0660412560efd9d257c1"
+                "reference": "53ceee562ce689a6a610c7bb0bc8157c7ec63a45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-validator-f048d85d523c9bb2b16f0660412560efd9d257c1-zip-2c10e7.zip",
-                "reference": "2.3.4",
-                "shasum": "179ff7abbd710bfa6fa8cdb72a7709eb7c5d4b70"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-validator-53ceee562ce689a6a610c7bb0bc8157c7ec63a45-zip-c7a027.zip",
+                "reference": "53ceee562ce689a6a610c7bb0bc8157c7ec63a45",
+                "shasum": "180db3cd8936cd451e77fe842efeb54e88bc4cc5"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3386,6 +3709,7 @@
                     "Zend\\Validator\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3395,25 +3719,27 @@
                 "validator",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendValidator/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         },
         {
             "name": "zendframework/zend-view",
-            "version": "2.3.4",
+            "version": "2.3.7",
             "target-dir": "Zend/View",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendView.git",
-                "reference": "08c21ae55956307623729fb3557f531e841fcb55"
+                "reference": "5c25e2b05877836b08ea1b9d7a21c60348466c70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-view-08c21ae55956307623729fb3557f531e841fcb55-zip-3b9365.zip",
-                "reference": "2.3.4",
-                "shasum": "0fc4f3a826aede1ef3b8d5574d933758c7188d5d"
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-view-5c25e2b05877836b08ea1b9d7a21c60348466c70-zip-2c67d1.zip",
+                "reference": "5c25e2b05877836b08ea1b9d7a21c60348466c70",
+                "shasum": "ec932e53eb9594b4afe08bdce458d3f889612701"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -3463,6 +3789,7 @@
                     "Zend\\View\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3472,10 +3799,12 @@
                 "view",
                 "zf2"
             ],
-            "support": {
-                "source": "https://github.com/zendframework/Component_ZendView/tree/release-2.3.4"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
             },
-            "time": "2015-01-14 16:44:17"
+            "time": "2015-03-12 16:55:53"
         }
     ],
     "packages-dev": [
@@ -3700,21 +4029,21 @@
         },
         {
             "name": "channelgrabber/codeception",
-            "version": "1.1.48",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcodeception.git",
-                "reference": "02b7c5e2271cd28dc647ccb77a488fd0407905f3"
+                "reference": "5b19933b54edea6fccf76c47e50afbf0e6737d78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.1.48-856fa2.zip",
-                "reference": "02b7c5e2271cd28dc647ccb77a488fd0407905f3",
-                "shasum": "34912bc0778ca16812f8263554d9c32b77cb9112"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-codeception-1.2.1-8a633f.zip",
+                "reference": "5b19933b54edea6fccf76c47e50afbf0e6737d78",
+                "shasum": "4314949054741824edfe14c7e0b90abdca6ae8d4"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
-                "channelgrabber/http": "1.2.*",
+                "channelgrabber/http": ">=1.2.0,<2.0.0",
                 "codeception/codeception": "1.8.0",
                 "nocarrier/hal": "~0.9.3"
             },
@@ -3729,7 +4058,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-03 12:28:20"
+            "time": "2015-02-17 16:11:07"
         },
         {
             "name": "codeception/codeception",
@@ -3999,17 +4328,17 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.12.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/monolog-monolog-c31a2c4e8db5da8b46c74cf275d7f109c0f249ac-zip-f19d24.zip",
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
+                "shasum": "5e6de702a982cebcd5d89d81c653b66c1fda6a15"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -4025,6 +4354,7 @@
                 "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
+                "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
@@ -4041,7 +4371,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "1.13.x-dev"
                 }
             },
             "autoload": {
@@ -4067,31 +4397,36 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-29 21:29:35"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-09 09:58:04"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "38743b677965c48a637097b2746a281264ae2347"
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/38743b677965c48a637097b2746a281264ae2347",
-                "reference": "38743b677965c48a637097b2746a281264ae2347",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/phpdocumentor-reflection-docblock-d68dbdc53dc358a816f00b300704702b2eaff7b8-zip-b8dbaa.zip",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": "c52f9abbac63b2e22cac1def97d5eeffd5de03aa"
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*@stable"
+                "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "dflydev/markdown": "1.0.*",
-                "erusev/parsedown": "~0.7"
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
             },
             "type": "library",
             "extra": {
@@ -4116,7 +4451,12 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
-            "time": "2014-08-09 10:27:07"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-03 12:10:50"
         },
         {
             "name": "phpspec/php-diff",
@@ -4689,18 +5029,18 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/BrowserKit",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04"
+                "reference": "329bdc10bff1e365abb8a3388d60a65630daf705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04",
-                "reference": "2ecec44ed5047020c65dd6e4a4b2f3cf13ae3c04",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-browser-kit-329bdc10bff1e365abb8a3388d60a65630daf705-zip-8b458f.zip",
+                "reference": "329bdc10bff1e365abb8a3388d60a65630daf705",
+                "shasum": "a060a19c4c0c4d3d7305fd68e97ee867414cd9a5"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -4708,6 +5048,7 @@
             },
             "require-dev": {
                 "symfony/css-selector": "~2.0,>=2.0.5",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/process": "~2.0,>=2.0.5"
             },
             "suggest": {
@@ -4740,25 +5081,33 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 08:01:59"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-13 13:21:46"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/CssSelector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "3f80ecc614fec68d5b4a84a0703db3fdf5ce8584"
+                "reference": "86cf0aa16065ffc4545374e9479dd7878bf1d90f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/3f80ecc614fec68d5b4a84a0703db3fdf5ce8584",
-                "reference": "3f80ecc614fec68d5b4a84a0703db3fdf5ce8584",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-css-selector-86cf0aa16065ffc4545374e9479dd7878bf1d90f-zip-24a475.zip",
+                "reference": "86cf0aa16065ffc4545374e9479dd7878bf1d90f",
+                "shasum": "09065d2f5edee7c6d0087d9a9547d449520c103e"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -4791,28 +5140,34 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 08:01:59"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-02-24 11:52:21"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.6.3",
+            "version": "v2.6.5",
             "target-dir": "Symfony/Component/DomCrawler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "26a9eb302decd828990e1015afaa11b78b016073"
+                "reference": "896d1fb78832e8c4a4e4e8565ffdf668a53e518f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/26a9eb302decd828990e1015afaa11b78b016073",
-                "reference": "26a9eb302decd828990e1015afaa11b78b016073",
-                "shasum": ""
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-dom-crawler-896d1fb78832e8c4a4e4e8565ffdf668a53e518f-zip-336717.zip",
+                "reference": "896d1fb78832e8c4a4e4e8565ffdf668a53e518f",
+                "shasum": "9a53fc7094e9d2451a190c5b55b2775a738d711d"
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/css-selector": "~2.3"
+                "symfony/css-selector": "~2.3",
+                "symfony/phpunit-bridge": "~2.7"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -4844,13 +5199,33 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 08:01:59"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-12 10:28:44"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.1.2",
+            "alias_normalized": "1.1.2.0",
+            "version": "dev-CGIV-5023-ArrayArguments",
+            "package": "channelgrabber/cilex"
+        },
+        {
+            "alias": "1.3.5",
+            "alias_normalized": "1.3.5.0",
+            "version": "dev-CGIV-5023-GuzzleFailoverClient",
+            "package": "channelgrabber/http"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/http": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
