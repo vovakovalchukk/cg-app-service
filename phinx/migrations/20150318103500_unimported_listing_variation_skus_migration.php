@@ -6,12 +6,12 @@ class UnimportedListingVariationSkusMigration extends AbstractMigration
     public function up()
     {
         $unimportedListingVariationSkusTable = $this->table(
-            'unimportedListingVariationSkus',
-            ['id' => false, 'primary_key' => ['unimportedListingId', 'variationSku']]
+            'unimportedListingVariationSkus'
         );
         $unimportedListingVariationSkusTable
             ->addColumn('unimportedListingId', 'integer')
             ->addColumn('variationSku', 'string')
+            ->addIndex(['unimportedListingId', 'variationSku'], ['unique' => true])
             ->create();
     }
 
