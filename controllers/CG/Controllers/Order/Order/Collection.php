@@ -54,4 +54,10 @@ class Collection
 
         return $this->getDi()->newInstance(Filter::class, $this->getParams());
     }
+
+    protected function setPatchBatchSorting(array &$filterParams)
+    {
+        $filterParams['orderBy'] = 'purchaseDate';
+        $filterParams['orderDirection'] = 'DESC';
+    }
 }
