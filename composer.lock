@@ -206,6 +206,63 @@
             "time": "2015-03-11 13:39:45"
         },
         {
+            "name": "channelgrabber/cg-predis",
+            "version": "v0.8.7.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:channelgrabber/predis.git",
+                "reference": "17eac2c3d981344cb29318d93352f1c56e60b3fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cg-predis-v0.8.7.1-35073a.zip",
+                "reference": "17eac2c3d981344cb29318d93352f1c56e60b3fb",
+                "shasum": "a08e8625381c0c4b9ec3e042edaca10cdf86adb5"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "replace": {
+                "predis/predis": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-03-11 13:39:45"
+        },
+        {
             "name": "channelgrabber/cglib",
             "version": "1.4.4",
             "source": {
@@ -722,17 +779,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "ca4d6706c54b69322f43d53a091b7377dc196601"
+                "reference": "f930d62dc070981c299ba47812355ae7a2915539"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.3-3c23d7.zip",
-                "reference": "ca4d6706c54b69322f43d53a091b7377dc196601",
-                "shasum": "deba49c51f108414de6cf8c7ede57dc2b3b2f80d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.4-764e25.zip",
+                "reference": "f930d62dc070981c299ba47812355ae7a2915539",
+                "shasum": "921d48b765518761e910627512445330ba580726"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -766,7 +823,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-18 15:59:50"
+            "time": "2015-03-20 17:07:48"
         },
         {
             "name": "channelgrabber/image",
@@ -1646,17 +1703,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.10.4",
+            "version": "2.10.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "8aafa011a2cab8dd9ac04c044dc0b7c01588c8d7"
+                "reference": "848d728dcd9066289e89d7461b2d8247d98fbd59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.10.4-2fdd04.zip",
-                "reference": "8aafa011a2cab8dd9ac04c044dc0b7c01588c8d7",
-                "shasum": "13547fb62c05f9c253de865c31702a28738612c1"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.10.6-e6d433.zip",
+                "reference": "848d728dcd9066289e89d7461b2d8247d98fbd59",
+                "shasum": "93cdb1e4d482aac291585e94f9c4df08e6b08328"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1682,7 +1739,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-17 15:02:19"
+            "time": "2015-03-23 13:15:09"
         },
         {
             "name": "channelgrabber/stock",
@@ -2217,13 +2274,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "829199c0530ea131262c804924f921447c71d4e8"
+                "reference": "ab3622dff1db71024f327387408250208c139a0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-829199c0530ea131262c804924f921447c71d4e8-zip-425f22.zip",
-                "reference": "829199c0530ea131262c804924f921447c71d4e8",
-                "shasum": "7f1fbc02b3162b770dd695b6fe1d1bf5cd5d77bd"
+                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-ab3622dff1db71024f327387408250208c139a0d-zip-ccf712.zip",
+                "reference": "ab3622dff1db71024f327387408250208c139a0d",
+                "shasum": "5cd56a5a3b79b0d443ab0a36eac8a9e4c0d2d811"
             },
             "require": {
                 "justinrainbow/json-schema": "~1.3",
@@ -2282,7 +2339,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-16 13:11:02"
+            "time": "2015-03-23 11:56:30"
         },
         {
             "name": "fabpot/goutte",
