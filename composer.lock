@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c27c432e166cc57c8ad9ec24a3e88130",
+    "hash": "9acc49e681eedb762d2f5ca45b4c7600",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1501,17 +1501,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-5191-updateOrderOus-patching-too-many-orders",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "be6b03efb4b47a69548e8f41dd368afaf6bc3981"
+                "reference": "431c8faf1f5f142aa3662bf0d4f23f197ac79efc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-5191-updateOrderOus-patching-too-many-orders-292bce.zip",
-                "reference": "be6b03efb4b47a69548e8f41dd368afaf6bc3981",
-                "shasum": "4edb821ee99db4f9b09aa7d349f14dbdf4beb4c8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.3-6b5c06.zip",
+                "reference": "431c8faf1f5f142aa3662bf0d4f23f197ac79efc",
+                "shasum": "9d123685751d48b1b9b2eaf16369c6103e925586"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1557,7 +1557,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-25 09:47:19"
+            "time": "2015-03-25 11:21:28"
         },
         {
             "name": "channelgrabber/spork",
@@ -6529,18 +6529,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.13.3",
-            "alias_normalized": "1.13.3.0",
-            "version": "dev-CGIV-5191-updateOrderOus-patching-too-many-orders",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
