@@ -11,10 +11,9 @@ class VariationMappingPopulation extends AbstractMigration
         $this->table(static::LISTING_ATTRIBUTE_MAPPING_TABLE)
             ->removeColumn('name')
             ->addColumn('name', 'string')
-            // removed foreign key
-           // ->addForeignKey('listingId', 'listing', 'id',
-           //     ['delete' => 'CASCADE', 'update' => 'NOACTION'])
-            // remove name index
+            ->dropForeignKey('listingId')
+            ->addForeignKey('listingId', 'listing', 'id',
+                ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->update();
 
         $this->execute('SET FOREIGN_KEY_CHECKS=0');
@@ -22,9 +21,6 @@ class VariationMappingPopulation extends AbstractMigration
             ->removeIndex(['productId', 'name'])
             ->addIndex(['productId', 'name'], ['type' => 'unique'])
             ->update();
-
-//        $this->execute('ALTER TABLE ' . static::PRODUCT_ATTRIBUTE_TABLE . ' CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin');
-//        $this->execute('SET FOREIGN_KEY_CHECKS=1');
 
         $this->execute('INSERT IGNORE INTO variationAttributeMap (productId, productAttributeId, listingId, name)
                         SELECT p.id as productId, pa.id as productAttributeId, plm.listingId, pa.name
