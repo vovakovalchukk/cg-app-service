@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df25fe2ecddc979c7ca6be40ef21029c",
+    "hash": "88cc356850f70dfd7720c63699b50e8e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -923,7 +923,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-location-1.1.1-ae00f7.zip",
                 "reference": "6978652ff06f0a3ce1880ce5b6daab20b44ba174",
-                "shasum": "0ffe70bd3f68c13e914b09512ed58a367023fb55"
+                "shasum": "a65901d3ebe6d3e2ce04f553d8fdd38677dd16e7"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1370,17 +1370,17 @@
         },
         {
             "name": "channelgrabber/purge",
-            "version": "dev-CGIV-5218-golang-purge-handler",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purge.git",
-                "reference": "363b982cc8ccdb064c2b1f9439c7d08d8ce7742b"
+                "reference": "2eba02c357be926af410bf3ec9e481e1a7c70462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-dev-CGIV-5218-golang-purge-handler-3cca7c.zip",
-                "reference": "363b982cc8ccdb064c2b1f9439c7d08d8ce7742b",
-                "shasum": "172b0562032b3c72fe87533c90f6599d927103af"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-1.0.3-3167c8.zip",
+                "reference": "2eba02c357be926af410bf3ec9e481e1a7c70462",
+                "shasum": "d3d875aa8491c47cf7b52f5c2975da0250f25695"
             },
             "require": {
                 "channelgrabber/gearman": ">=1.1.5,<2.0.0",
@@ -1410,7 +1410,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-27 11:10:15"
+            "time": "2015-03-27 15:37:44"
         },
         {
             "name": "channelgrabber/redis",
@@ -1526,17 +1526,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-5218-golang-purge-handler",
+            "version": "1.13.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "5370558642f8ed4cbef22c23f90025a436429d1a"
+                "reference": "5940ac3c95339718a6f0b7a8412243c331fdffcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-5218-golang-purge-handler-0ed32b.zip",
-                "reference": "5370558642f8ed4cbef22c23f90025a436429d1a",
-                "shasum": "e67f826e6451a5542b48bc2ad88a996157ca5e64"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.5-83c877.zip",
+                "reference": "5940ac3c95339718a6f0b7a8412243c331fdffcc",
+                "shasum": "a66d9e2f16bd94bf78a63c92e03572a397c3bb58"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1544,7 +1544,7 @@
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": ">=1.2.29, <2.0.0",
                 "channelgrabber/log": ">=2.0.6,<3.0.0",
-                "channelgrabber/purge": "dev-CGIV-5218-golang-purge-handler as 1.1.0",
+                "channelgrabber/purge": ">=1.0.3,<2.0.0",
                 "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "channelgrabber/usage": ">=1.0.5",
@@ -1582,7 +1582,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-27 11:11:27"
+            "time": "2015-03-27 15:41:01"
         },
         {
             "name": "channelgrabber/spork",
@@ -1871,7 +1871,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-1.0.5-4db8ca.zip",
                 "reference": "2373433882187a93a0533565110e55bec31a4c58",
-                "shasum": "35366276ff4490d6fe844bd53c180fa06a54513c"
+                "shasum": "ca8f0099fa336b3ee4e9de6477cfc794a3695040"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -2596,9 +2596,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liuggio/statsd-php-client/zipball/a8c9ccd2a3af6cc49c7fc4f5f689d7b148ab19d7",
+                "url": "https://composer.build.channelgrabber.com/dist/liuggio-statsd-php-client-a8c9ccd2a3af6cc49c7fc4f5f689d7b148ab19d7-zip-4f77ba.zip",
                 "reference": "a8c9ccd2a3af6cc49c7fc4f5f689d7b148ab19d7",
-                "shasum": ""
+                "shasum": "1dcf8828c9ac0ce76358ea0ad00d141ff69c65fb"
             },
             "require": {
                 "php": ">=5.2"
@@ -2633,6 +2633,11 @@
                 "php",
                 "statsd"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-17 21:37:49"
         },
         {
@@ -6585,25 +6590,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.0",
-            "alias_normalized": "1.1.0.0",
-            "version": "dev-CGIV-5218-golang-purge-handler",
-            "package": "channelgrabber/purge"
-        },
-        {
-            "alias": "1.13.5",
-            "alias_normalized": "1.13.5.0",
-            "version": "dev-CGIV-5218-golang-purge-handler",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/purge": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
