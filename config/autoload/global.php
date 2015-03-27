@@ -857,9 +857,9 @@ return array(
             ],
             UnimportedListingDbStorage::class => [
                 'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'readSql' => 'ReadCGSql',
+                    'fastReadSql' => 'FastReadCGSql',
+                    'writeSql' => 'WriteCGSql',
                     'mapper' => UnimportedListingMapper::class
                 ]
             ],
