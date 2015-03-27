@@ -45,6 +45,8 @@ return [
                 'Versioniser_UnimportedListingEntity_1' => UnimportedListingEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class,
                 'Versioniser_UnimportedListingEntity_2' => UnimportedListingEntity\Versioniser2::class,
+                'Versioniser_UnimportedListingCollection_3' => UnimportedListingCollection\Versioniser3::class,
+                'Versioniser_UnimportedListingEntity_3' => UnimportedListingEntity\Versioniser3::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -114,6 +116,16 @@ return [
             'Versioniser_UnimportedListingCollection_2' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_UnimportedListingEntity_2'
+                ],
+            ],
+            'Versioniser_AliasSettingsCollection_3' => [
+                'parameter' => [
+                    'aliasVersioniser3' => 'Versioniser_AliasSettingsEntity_3'
+                ],
+            ],
+            'Versioniser_UnimportedListingCollection_3' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_UnimportedListingEntity_3'
                 ],
             ],
         ],

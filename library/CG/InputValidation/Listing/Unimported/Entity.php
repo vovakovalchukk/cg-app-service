@@ -3,6 +3,7 @@ namespace CG\InputValidation\Listing\Unimported;
 
 use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
@@ -83,6 +84,13 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'variationSkus'  => [
+                'name' => 'variationSkus',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "variationSkus"])
+                ]
+            ]
         ];
     }
 }
