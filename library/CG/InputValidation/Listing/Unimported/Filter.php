@@ -117,13 +117,20 @@ class Filter implements RulesInterface
                     new IsArrayValidator(["name" => "channel"])
                 ]
             ],
-            'searchTerm' => array(
+            'searchTerm' => [
                 'name' => 'searchTerm',
                 'required' => false,
-                'validators' => array(
+                'validators' => [
                     new StringLength(['min' => 1])
-                )
-            ),
+                ]
+            ],
+            'variationSkus' => [
+                'name' => 'variationSkus',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "variationSkus"])
+                ]
+            ],
         ];
     }
 }

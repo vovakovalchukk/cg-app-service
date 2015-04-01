@@ -235,11 +235,16 @@ use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Storage\Cache as PickListCacheStorage;
 use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 
+// Logging
+use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+
 use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
-// Logging
-use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
+// Product/VariationAttributeMap
+use CG\Product\VariationAttributeMap\Service as VariationAttributeMapService;
+use CG\Product\VariationAttributeMap\Mapper as VariationAttributeMapMapper;
+use CG\Product\VariationAttributeMap\Storage\Db as VariationAttributeMapDbStorage;
 
 return array(
     'di' => array(
@@ -852,9 +857,9 @@ return array(
             ],
             UnimportedListingDbStorage::class => [
                 'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'readSql' => 'ReadCGSql',
+                    'fastReadSql' => 'FastReadCGSql',
+                    'writeSql' => 'WriteCGSql',
                     'mapper' => UnimportedListingMapper::class
                 ]
             ],
@@ -921,14 +926,28 @@ return array(
                     'client' => 'cg_app_guzzle'
                 ]
             ],
+            RedisChannel::class => [
+                'parameters' => [
+                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
+                ]
+            ],
             RemoveThenCorrectImportedProducts::class => [
                 'parameters' => [
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
-            RedisChannel::class => [
+            VariationAttributeMapService::class => [
                 'parameters' => [
-                    'rootOrganisationUnitProvider' => OrganisationUnitService::class
+                    'repository' => VariationAttributeMapDbStorage::class,
+                    'mapper' => VariationAttributeMapMapper::class
+                ]
+            ],
+            VariationAttributeMapDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => VariationAttributeMapMapper::class
                 ]
             ],
             'preferences' => [
