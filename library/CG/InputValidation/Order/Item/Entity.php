@@ -5,6 +5,7 @@ use CG\Validation\RulesInterface;
 use Zend\Validator\Date;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\DecimalValidator;
+use CG\Validation\Rules\BooleanValidator;
 use Zend\Validator\StringLength;
 use Zend\Validator\GreaterThan;
 use CG\Stdlib\DateTime as StdlibDateTime;
@@ -99,6 +100,16 @@ class Entity implements RulesInterface
                 'validators' => [
                     new StringLength(['min' => 1, 'max' => 2000])
                 ]
+            ],
+            'isStockManaged' => [
+                'name'       => 'isStockManaged',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'isStockManaged'])]
+            ],
+            'isExternallyFulfilled' => [
+                'name'       => 'isExternallyFulfilled',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'isExternallyFulfilled'])]
             ]
         ];
     }
