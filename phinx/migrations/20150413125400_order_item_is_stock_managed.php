@@ -9,7 +9,6 @@ class OrderItemIsStockManaged extends AbstractMigration
     {
         $this->table(static::TABLE_NAME)
             ->addColumn('isStockManaged', 'boolean', ['default' => true])
-            ->addColumn('isExternallyFulfilled', 'boolean', ['default' => false])
             ->update();
     }
 }

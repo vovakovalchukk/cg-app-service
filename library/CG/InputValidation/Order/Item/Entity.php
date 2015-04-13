@@ -105,11 +105,6 @@ class Entity implements RulesInterface
                 'name'       => 'isStockManaged',
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'isStockManaged'])]
-            ],
-            'isExternallyFulfilled' => [
-                'name'       => 'isExternallyFulfilled',
-                'required'   => false,
-                'validators' => [new BooleanValidator(['name' => 'isExternallyFulfilled'])]
             ]
         ];
     }

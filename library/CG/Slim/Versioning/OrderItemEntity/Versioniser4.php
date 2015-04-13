@@ -13,9 +13,6 @@ class Versioniser4 implements VersioniserInterface
         if (!isset($data['isStockManaged'])) {
             $data['isStockManaged'] = Item::DEFAULT_IS_STOCK_MANAGED;
         }
-        if (!isset($data['isStockManaged'])) {
-            $data['isExternallyFulfilled'] = Item::DEFAULT_IS_EXTERNALLY_FULFILLED;
-        }
         $request->setData($data);
     }
 
@@ -23,7 +20,6 @@ class Versioniser4 implements VersioniserInterface
     {
         $data = $response->getData();
         unset($data['isStockManaged']);
-        unset($data['isExternallyFulfilled']);
         $response->setData($data);
     }
 }
