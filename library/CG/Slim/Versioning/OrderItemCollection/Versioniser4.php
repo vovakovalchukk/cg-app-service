@@ -5,7 +5,7 @@ use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 use CG\Slim\Versioning\OrderItemEntity\Versioniser4 as EntityVersioniser4;
 
-class Versioniser3 implements VersioniserInterface
+class Versioniser4 implements VersioniserInterface
 {
     protected $entityVersioner;
 
