@@ -1,5 +1,6 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use CG\Order\Shared\Entity as Order;
 
 class OrderFulfilmentChannel extends AbstractMigration
 {
@@ -7,7 +8,7 @@ class OrderFulfilmentChannel extends AbstractMigration
     {
         foreach(["order", "orderLive"] as $table) {
             $this->table($table)
-                ->addColumn('fulfilmentChannel', 'string', ['default' => 'Merchant'])
+                ->addColumn('fulfilmentChannel', 'string', ['default' => Order::DEFAULT_FULFILMENT_CHANNEL])
                 ->update();
         }
     }
