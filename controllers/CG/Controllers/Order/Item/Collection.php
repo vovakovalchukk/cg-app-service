@@ -21,7 +21,8 @@ class Collection
             ->setSlim($app)
             ->setService($service)
             ->setDi($di)
-            ->addAllowedPatchFilter('accountId');
+            ->addAllowedPatchFilter('accountId')
+            ->addAllowedPatchFilter('organisationUnitId');
     }
 
     protected function getFilter()
