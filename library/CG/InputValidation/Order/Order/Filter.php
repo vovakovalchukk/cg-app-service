@@ -217,6 +217,13 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new BooleanValidator(['name' => 'hasItems'])
                 ]
+            ],
+            'fulfilmentChannel' => [
+                'name' => 'fulfilmentChannel',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "fulfilmentChannel"])
+                ]
             ]
         ];
     }
