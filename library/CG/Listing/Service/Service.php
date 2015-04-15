@@ -1,19 +1,26 @@
 <?php
 namespace CG\Listing\Service;
 
+use CG\Account\Shared\Entity as AccountEntity;
 use CG\Listing\Filter;
 use CG\Listing\Mapper;
 use CG\Listing\ServiceAbstract;
 use CG\Listing\StorageInterface;
 use CG\Slim\Patch\ServiceTrait as PatchServiceTrait;
+use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\ServiceTrait;
 use Nocarrier\Hal;
 use Zend\EventManager\GlobalEventManager;
 
-class Service extends ServiceAbstract
+class Service extends ServiceAbstract implements LoggerAwareInterface
 {
+    use LogTrait;
     use ServiceTrait;
     use PatchServiceTrait;
+
+    const CHUNK_AMOUNT = 500;
 
     protected $globalEventManager;
 
@@ -49,6 +56,24 @@ class Service extends ServiceAbstract
         return $this->save($listing);
     }
 
+    public function removeAllListingsForAccount(AccountEntity $accountEntity)
+    {
+        $filter = (new Filter(static::CHUNK_AMOUNT, 1))->setAccountId([$accountEntity->getId()]);
+        $counter = 0;
+        try {
+            do {
+                $listings = $this->getRepository()->fetchCollectionByFilter($filter);
+                foreach($listings as $listing) {
+                    $this->getRepository()->remove($listing);
+                    $counter++;
+                }
+            } while (true);
+        } catch (NotFound $e) {
+            $this->logDebug('All listings (%s) have been removed for account %s', [$counter, $accountEntity->getId()]);
+            // Do nothing, all the listings will have been removed by this point
+        }
+    }
+
     protected function getGlobalEventManager()
     {
         return $this->globalEventManager;
@@ -66,5 +91,13 @@ class Service extends ServiceAbstract
     protected function getEventManager()
     {
         return $this->getGlobalEventManager();
+    }
+
+    /**
+     * @return StorageInterface
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 }
