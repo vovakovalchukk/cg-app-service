@@ -8,15 +8,12 @@ use CG\Listing\ServiceAbstract;
 use CG\Listing\StorageInterface;
 use CG\Slim\Patch\ServiceTrait as PatchServiceTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Stdlib\Log\LoggerAwareInterface;
-use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\ServiceTrait;
 use Nocarrier\Hal;
 use Zend\EventManager\GlobalEventManager;
 
-class Service extends ServiceAbstract implements LoggerAwareInterface
+class Service extends ServiceAbstract
 {
-    use LogTrait;
     use ServiceTrait;
     use PatchServiceTrait;
 
