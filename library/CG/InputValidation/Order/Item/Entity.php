@@ -101,10 +101,10 @@ class Entity implements RulesInterface
                     new StringLength(['min' => 1, 'max' => 2000])
                 ]
             ],
-            'isStockManaged' => [
-                'name'       => 'isStockManaged',
+            'stockManaged' => [
+                'name'       => 'stockManaged',
                 'required'   => false,
-                'validators' => [new BooleanValidator(['name' => 'isStockManaged'])]
+                'validators' => [new BooleanValidator(['name' => 'stockManaged'])]
             ]
         ];
     }
