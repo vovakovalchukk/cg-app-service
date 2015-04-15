@@ -1,7 +1,7 @@
 <?php
 namespace CG\Listing\Service;
 
-use CG\Account\Shared\Entity as AccountEntity;
+use CG\Account\Client\Entity as AccountEntity;
 use CG\Listing\Filter;
 use CG\Listing\Mapper;
 use CG\Listing\ServiceAbstract;
