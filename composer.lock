@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b589193d397180e6259cb7cab37e97a7",
+    "hash": "2b8e7851f9d2164fa6b91ad22aefd73d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1064,17 +1064,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
+            "version": "dev-CGIV-5353-amazon-fulfilment-mapping",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b003f48ecfdcc8663748c35a16ed590d1e19befb"
+                "reference": "c3ae751a208940bad0c36d8ea82c3563a3f40b6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5266-amazon-fba-aa52be.zip",
-                "reference": "b003f48ecfdcc8663748c35a16ed590d1e19befb",
-                "shasum": "e3521c3529c9222ebe9bc9135b2a97b2b0651e8a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5353-amazon-fulfilment-mapping-b09439.zip",
+                "reference": "c3ae751a208940bad0c36d8ea82c3563a3f40b6e",
+                "shasum": "b09814514e5b0770e6879800bb8c18c10cc14c43"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1129,7 +1129,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-14 14:37:26"
+            "time": "2015-04-15 11:15:36"
         },
         {
             "name": "channelgrabber/permission",
@@ -6606,7 +6606,7 @@
         {
             "alias": "1.18.2",
             "alias_normalized": "1.18.2.0",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
+            "version": "dev-CGIV-5353-amazon-fulfilment-mapping",
             "package": "channelgrabber/order"
         },
         {
