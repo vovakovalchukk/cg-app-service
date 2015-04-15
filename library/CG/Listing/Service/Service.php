@@ -69,8 +69,8 @@ class Service extends ServiceAbstract implements LoggerAwareInterface
                 }
             } while (true);
         } catch (NotFound $e) {
-            $this->logDebug('All listings (%s) have been removed for account %s', [$counter, $accountEntity->getId()]);
-            // Do nothing, all the listings will have been removed by this point
+            // Return the amount removed, all the listings should have been removed by this point
+            return $counter;
         }
     }
 
