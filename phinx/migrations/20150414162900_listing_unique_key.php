@@ -5,11 +5,13 @@ class ListingUniqueKey extends AbstractMigration
 {
     public function up()
     {
-        $this->execute("DELETE FROM productToListingMap WHERE listingId NOT IN (SELECT id FROM listing);");
-        $this->execute("SET foreign_key_checks = 0;");
-        $this->execute("ALTER IGNORE TABLE listing ADD UNIQUE INDEX accountIdExternalId (accountId, externalId);");
-        $this->execute("SET foreign_key_checks = 1;");
-        $this->execute("DELETE FROM productToListingMap WHERE listingId NOT IN (SELECT id FROM listing);");
+        $this->execute("START TRANSACTION;
+            DELETE FROM productToListingMap WHERE listingId NOT IN (SELECT id FROM listing);
+            SET foreign_key_checks = 0;
+            ALTER IGNORE TABLE listing ADD UNIQUE INDEX accountIdExternalId (accountId, externalId);
+            SET foreign_key_checks = 1;
+            COMMIT;"
+        );
     }
 
     public function down()
