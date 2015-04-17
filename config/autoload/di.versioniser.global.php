@@ -25,12 +25,16 @@ return [
                 'Versioniser_ListingEntity_2' => ListingEntity\Versioniser2::class,
                 'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
+                'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,
+                'Versioniser_OrderEntity_2' => OrderEntity\Versioniser2::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
                 'Versioniser_OrderItemEntity_2' => OrderItemEntity\Versioniser2::class,
                 'Versioniser_OrderItemCollection_3' => OrderItemCollection\Versioniser3::class,
                 'Versioniser_OrderItemEntity_3' => OrderItemEntity\Versioniser3::class,
+                'Versioniser_OrderItemCollection_4' => OrderItemCollection\Versioniser3::class,
+                'Versioniser_OrderItemEntity_4' => OrderItemEntity\Versioniser3::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
@@ -63,6 +67,11 @@ return [
                     'entityVersioner' => 'Versioniser_OrderEntity_1',
                 ],
             ],
+            'Versioniser_OrderCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_2',
+                ],
+            ],
             'Versioniser_OrderItemCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_1',
@@ -76,6 +85,11 @@ return [
             'Versioniser_OrderItemCollection_3' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_3',
+                ],
+            ],
+            'Versioniser_OrderItemCollection_4' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderItemEntity_4',
                 ],
             ],
             'Versioniser_TemplateCollection_1' => [
