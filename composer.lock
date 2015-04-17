@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad3b94e2df3d60a0734ad29efa0a0623",
+    "hash": "218c56a0cb1f7b39dc70c92593882eaf",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -701,17 +701,17 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.1.26.1",
+            "version": "dev-CGIV-5307-GearmanLazyLoader",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "77ac3a9add443b7712f70e5d7d69e4595b028fae"
+                "reference": "805e9bfcf4242fbe521613ea6a25d982f26e8ffc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.1.26.1-a9208f.zip",
-                "reference": "77ac3a9add443b7712f70e5d7d69e4595b028fae",
-                "shasum": "ace11ce6354881a4a7cf6420739ea5f78a682c51"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-dev-CGIV-5307-GearmanLazyLoader-aa5386.zip",
+                "reference": "805e9bfcf4242fbe521613ea6a25d982f26e8ffc",
+                "shasum": "4a96b383a6feeeb778d63e8006e14989f2460fe6"
             },
             "require": {
                 "channelgrabber/cilex": ">=1.1.0,<2.0.0",
@@ -736,7 +736,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-10 16:57:39"
+            "time": "2015-04-16 13:09:14"
         },
         {
             "name": "channelgrabber/http",
@@ -6609,10 +6609,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.2.4",
+            "alias_normalized": "1.2.4.0",
+            "version": "dev-CGIV-5307-GearmanLazyLoader",
+            "package": "channelgrabber/gearman"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/gearman": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
