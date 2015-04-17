@@ -4,21 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b38eeb36ccd61d8bab0109eb795cc26b",
+    "hash": "641c8fafdab20193baede7a83e478a19",
     "packages": [
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "8e6c33c857ab154fbc0954a8ad8d54d6ededa368"
+                "reference": "e0924fda43b09e72c2bf05005420cc3eaa78200b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-EPIC-CGIV-5266-amazon-fba-2e566c.zip",
-                "reference": "8e6c33c857ab154fbc0954a8ad8d54d6ededa368",
-                "shasum": "2c41774bc469f6ba571c3be21539715465f25bdd"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.14.0-a72283.zip",
+                "reference": "e0924fda43b09e72c2bf05005420cc3eaa78200b",
+                "shasum": "a1b9a9c4bc648de446fa3f2d7c1946c298ff175d"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -64,7 +64,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-15 13:42:00"
+            "time": "2015-04-17 10:12:49"
         },
         {
             "name": "channelgrabber/billing",
@@ -1065,17 +1065,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9a954a50b7798f030784b0e215ce6f8c23423182"
+                "reference": "7cc6932fccae8257a60833d7615e08bd6874b8dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5266-amazon-fba-c32b82.zip",
-                "reference": "9a954a50b7798f030784b0e215ce6f8c23423182",
-                "shasum": "afc1c6b5def15a56581dca68cb796764b786befb"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.18.2-b542a3.zip",
+                "reference": "7cc6932fccae8257a60833d7615e08bd6874b8dd",
+                "shasum": "87b6c963a2f9831ad90838206bbeb75283186603"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1130,7 +1130,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-15 13:41:34"
+            "time": "2015-04-17 10:18:37"
         },
         {
             "name": "channelgrabber/permission",
@@ -1719,17 +1719,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
+            "version": "1.4.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "c1c3029ddb1f7d5c26589de75df7ad3956ff8981"
+                "reference": "026380cf4e0eb6246f40adea4b7849ca75bd283b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-5266-amazon-fba-1cd0af.zip",
-                "reference": "c1c3029ddb1f7d5c26589de75df7ad3956ff8981",
-                "shasum": "fa0b283b559daa7ef65ac42ff3e5db723b402891"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.4.7-f46575.zip",
+                "reference": "026380cf4e0eb6246f40adea4b7849ca75bd283b",
+                "shasum": "324d19dcacc7ac5b35e0463c4912b157ede186ae"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1770,7 +1770,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-14 14:15:28"
+            "time": "2015-04-17 10:21:14"
         },
         {
             "name": "channelgrabber/template",
@@ -6609,32 +6609,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.13.6",
-            "alias_normalized": "1.13.6.0",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
-            "package": "channelgrabber/amazon"
-        },
-        {
-            "alias": "1.18.2",
-            "alias_normalized": "1.18.2.0",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.4.7",
-            "alias_normalized": "1.4.7.0",
-            "version": "dev-EPIC-CGIV-5266-amazon-fba",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
