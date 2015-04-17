@@ -26,12 +26,9 @@ return [
             $orderMapper = $di->get(OrderMapper::class);
             $orderService = $di->get(OrderService::class);
 
-
             $filter = new OrderFilter;
             $filter->setStatus([
-                OrderStatus::CANCELLING,
                 OrderStatus::DISPATCHING,
-                OrderStatus::REFUNDING
             ]);
 
             $orderCollection = $orderService->fetchCollectionByFilter($filter);
