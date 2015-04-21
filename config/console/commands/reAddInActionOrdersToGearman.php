@@ -27,6 +27,7 @@ return [
             $orderService = $di->get(OrderService::class);
 
             $filter = new OrderFilter;
+            $filter->setLimit('all');
             $filter->setStatus([
                 OrderStatus::DISPATCHING,
             ]);
@@ -38,7 +39,7 @@ return [
 
             foreach ($orderCollection->getRawData() as $orderData) {
                 $order = $orderMapper->fromArray($orderData);
-                $accountIdsArray[] = $order->getAccountId();
+                $accountIdArray[] = $order->getAccountId();
                 $orderArray[] = $order;
             };
 
