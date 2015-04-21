@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "42ba5bdbeff137a3d276b4f045305746",
+    "hash": "972c2d2022d6c2f9f6642b186c427df0",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1378,17 +1378,17 @@
         },
         {
             "name": "channelgrabber/purge",
-            "version": "1.0.3",
+            "version": "dev-CGIV-5271-BlockingPurges",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purge.git",
-                "reference": "2eba02c357be926af410bf3ec9e481e1a7c70462"
+                "reference": "28b0d6c726e81551bcdd4d53518fe646ebb858ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-1.0.3-3167c8.zip",
-                "reference": "2eba02c357be926af410bf3ec9e481e1a7c70462",
-                "shasum": "d3d875aa8491c47cf7b52f5c2975da0250f25695"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purge-dev-CGIV-5271-BlockingPurges-d9bf54.zip",
+                "reference": "28b0d6c726e81551bcdd4d53518fe646ebb858ea",
+                "shasum": "ab7d347e8e7a723219cf6cb940f7f6f53a9f23d5"
             },
             "require": {
                 "channelgrabber/gearman": ">=1.1.5,<2.0.0",
@@ -1418,7 +1418,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-27 15:37:44"
+            "time": "2015-04-13 08:40:37"
         },
         {
             "name": "channelgrabber/redis",
@@ -6722,6 +6722,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.0.4",
+            "alias_normalized": "1.0.4.0",
+            "version": "dev-CGIV-5271-BlockingPurges",
+            "package": "channelgrabber/purge"
+        },
+        {
             "alias": "1.13.8",
             "alias_normalized": "1.13.8.0",
             "version": "dev-CGIV-5404-ParentInvalidation",
@@ -6731,6 +6737,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/purge": 20,
         "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
