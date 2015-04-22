@@ -13,7 +13,7 @@ use CG\Validation\PaginationInterface;
 use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
-use CG\CGLib\Nginx\Cache\Invalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as Invalidator;
 
 class Location implements PaginationInterface
 {
@@ -47,7 +47,7 @@ class Location implements PaginationInterface
         $stockLocation = $this->getStockLocationMapper()->fromHal($stockLocationHal);
         $stockId = $stockLocation->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
-        $this->getInvalidator()->queueCacheInvalidations($stockLocation, $stock);
+        $this->getInvalidator()->invalidateProductsForStock($stockLocation, $stock);
         $this->getListingStatusService()->updateRelatedListings($stock);
         return $stockLocationHal;
     }
