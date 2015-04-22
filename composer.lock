@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ac9c61cfb56cce7ece91c027efdee81a",
+    "hash": "10183044181afd958a38bc3736c8c444",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1065,17 +1065,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.18.3",
+            "version": "1.18.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "179ceaaeb1daf4cba8c94a4325792715530cdc85"
+                "reference": "c9afb7afb5850234c88166b664d977dffa2320f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.18.3-e76b99.zip",
-                "reference": "179ceaaeb1daf4cba8c94a4325792715530cdc85",
-                "shasum": "125acc128836410ee27d0d8449a5e0cb1c453ede"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.18.4-9d6e1b.zip",
+                "reference": "c9afb7afb5850234c88166b664d977dffa2320f1",
+                "shasum": "fa76167cff9bf9aab994469e26c42d7ecba971ef"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1130,7 +1130,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-17 13:09:04"
+            "time": "2015-04-22 14:15:54"
         },
         {
             "name": "channelgrabber/permission",
@@ -6260,9 +6260,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-file-iterator-acd690379117b042d1c8af1fafd61bde001bf6bb-zip-831201.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/acd690379117b042d1c8af1fafd61bde001bf6bb",
                 "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb",
-                "shasum": "db16e515f388e0abda53dd36489f0935a90f8eee"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6293,11 +6293,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-10-10 15:34:57"
         },
         {
