@@ -275,6 +275,11 @@ class Entity implements RulesInterface
                     }
                     )->setMessage('Archived value cannot be modified')
                 ]
+            ),
+            'fulfilmentChannel' => array(
+                'name' => 'fulfilmentChannel',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
             )
         );
     }
