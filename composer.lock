@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0ca90b9f3b2cfa82ad15d0b1ce77017c",
+    "hash": "f901eb5320c95d420f619c47bf35ca8f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1679,17 +1679,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.10.11",
+            "version": "dev-CGIV-5412-allow-chaining",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "df769f1fa280bf56a407bfc2f517b0a1f42bdf56"
+                "reference": "47d630649902bbc46b680893b16f0018fc5845d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.10.11-4bd3bf.zip",
-                "reference": "df769f1fa280bf56a407bfc2f517b0a1f42bdf56",
-                "shasum": "65fa1415d37a9273e190c5bb4eed669526aea280"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-5412-allow-chaining-15a5d7.zip",
+                "reference": "47d630649902bbc46b680893b16f0018fc5845d7",
+                "shasum": "30f280ab8f98652f869ad0b8c695daf42f1249e7"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1715,7 +1715,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-22 09:00:26"
+            "time": "2015-04-23 09:31:38"
         },
         {
             "name": "channelgrabber/stock",
@@ -6627,6 +6627,12 @@
             "alias_normalized": "1.9.1.0",
             "version": "dev-CGIV-5412-add-logging",
             "package": "channelgrabber/ebay"
+        },
+        {
+            "alias": "2.10.12",
+            "alias_normalized": "2.10.12.0",
+            "version": "dev-CGIV-5412-allow-chaining",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
@@ -6635,6 +6641,7 @@
         "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ebay": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
