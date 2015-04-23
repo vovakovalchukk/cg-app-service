@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f901eb5320c95d420f619c47bf35ca8f",
+    "hash": "7eb2c2b8c4f31740c64b1e687296230c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -511,13 +511,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "e1426d5a921be0447033e24d0e455fd6bf0c1a99"
+                "reference": "0c952c6488048f6a62277719aedcf5c87a0b501a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-CGIV-5412-add-logging-3d90fe.zip",
-                "reference": "e1426d5a921be0447033e24d0e455fd6bf0c1a99",
-                "shasum": "f97f0598e0bdea42596a044169878e7d5fde9679"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-CGIV-5412-add-logging-35b514.zip",
+                "reference": "0c952c6488048f6a62277719aedcf5c87a0b501a",
+                "shasum": "671039cd70e34686855311149632893bcb363847"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -563,7 +563,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-22 15:41:01"
+            "time": "2015-04-23 09:55:11"
         },
         {
             "name": "channelgrabber/ekm",
@@ -669,17 +669,17 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.5.6",
+            "version": "dev-CGIV-5412-serialise-bug",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "cbb05648053e589c98de49bea8a1ef0cc541a993"
+                "reference": "8b2c260365153641d232be33a106148e56942cf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.6-5704ee.zip",
-                "reference": "cbb05648053e589c98de49bea8a1ef0cc541a993",
-                "shasum": "99225b9c0941aa3c1a19d5de32832b24bad74709"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-dev-CGIV-5412-serialise-bug-b9279e.zip",
+                "reference": "8b2c260365153641d232be33a106148e56942cf2",
+                "shasum": "7cf185854d1ebd208891567e54755418c6b8994b"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -697,7 +697,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-22 14:16:44"
+            "time": "2015-04-23 11:02:12"
         },
         {
             "name": "channelgrabber/gearman",
@@ -6629,6 +6629,12 @@
             "package": "channelgrabber/ebay"
         },
         {
+            "alias": "1.5.7",
+            "alias_normalized": "1.5.7.0",
+            "version": "dev-CGIV-5412-serialise-bug",
+            "package": "channelgrabber/etag"
+        },
+        {
             "alias": "2.10.12",
             "alias_normalized": "2.10.12.0",
             "version": "dev-CGIV-5412-allow-chaining",
@@ -6641,6 +6647,7 @@
         "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ebay": 20,
+        "channelgrabber/etag": 20,
         "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
