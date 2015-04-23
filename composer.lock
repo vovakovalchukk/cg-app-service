@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38c704de6d5fef12316abdabb1a6e84e",
+    "hash": "7d4d05e10a2d1a074ed41ee4855b4148",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -219,17 +219,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "8e674ea7b8fe91c41eb98c30a102f7e272060f8a"
+                "reference": "27516565e916cccadc4da2395fa831569c445174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.0-8be741.zip",
-                "reference": "8e674ea7b8fe91c41eb98c30a102f7e272060f8a",
-                "shasum": "407f63de97e13bc9930855a6793d1ec7160b40ff"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.1-127195.zip",
+                "reference": "27516565e916cccadc4da2395fa831569c445174",
+                "shasum": "3bbbb9ad36f588ad7e3be0d9cc413a3e1dbc3061"
             },
             "require": {
                 "channelgrabber/billing": ">=1.7.1",
@@ -273,7 +273,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-22 15:34:01"
+            "time": "2015-04-23 14:35:46"
         },
         {
             "name": "channelgrabber/channel",
@@ -669,17 +669,17 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.5.6",
+            "version": "1.5.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "cbb05648053e589c98de49bea8a1ef0cc541a993"
+                "reference": "a27305cebda9b7cace08936cda82222b16e0d59e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.6-5704ee.zip",
-                "reference": "cbb05648053e589c98de49bea8a1ef0cc541a993",
-                "shasum": "99225b9c0941aa3c1a19d5de32832b24bad74709"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.5.7-238f9f.zip",
+                "reference": "a27305cebda9b7cace08936cda82222b16e0d59e",
+                "shasum": "c2ecfbcc78737e56d4a4117b86dfddf2c11566fb"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -697,7 +697,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-22 14:16:44"
+            "time": "2015-04-23 13:51:00"
         },
         {
             "name": "channelgrabber/gearman",
