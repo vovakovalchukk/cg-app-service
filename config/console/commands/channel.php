@@ -4,38 +4,41 @@ use CG\Channel\Command\Listing\Import as ListingImport;
 use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 
-return array(
-    'channel:downloadOrders' => array(
+return [
+    'channel:downloadOrders' => [
         'command' => function (InputInterface $input) use ($di) {
             $channel = $input->getArgument('channel');
             $from = $input->getArgument('from');
             $to = $input->getArgument('to');
             $accountId = $input->getArgument('accountId');
+            $logFoundOrders = $input->getOption('logFoundOrders');
 
             $command = $di->get(OrderDownload::class);
-            $command->downloadOrders($channel, $from, $to, $accountId);
+            $command->downloadOrders($channel, $from, $to, $accountId, $logFoundOrders);
         },
         'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get orders from the respective channel.',
-        'arguments' => array(
-            'channel' => array(
+        'arguments' => [
+            'channel' => [
                 'required' => true
-            ),
-            'from' => array(
+            ],
+            'from' => [
                 'required' => false,
                 'default' => null
-            ),
-            'to' => array(
+            ],
+            'to' => [
                 'required' => false,
                 'default' => null
-            ),
-            'accountId' => array(
+            ],
+            'accountId' => [
                 'required' => false
-            )
-        ),
-        'options' => array(
-
-        )
-    ),
+            ]
+        ],
+        'options' => [
+            'logFoundOrders' => [
+                'description' => 'logs errors if orders are discovered',
+            ]
+        ]
+    ],
     'channel:importListings' => [
         'command' => function (InputInterface $input) use ($di) {
             $command = $di->get(ListingImport::class);
@@ -71,4 +74,4 @@ return array(
             ],
         ]
     ],
-);
+];
