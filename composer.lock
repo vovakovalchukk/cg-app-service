@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bcec47526acb22f8eace9d74c5d6ec77",
+    "hash": "20d231d2f082b3cd7e7046ce2da24192",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -836,17 +836,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.6.3",
+            "version": "dev-CGIV-5466-UnimportedListingOptimisations",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "deba4474e1fd03484e748a2c7a850903efe21889"
+                "reference": "4a186681e74d9a356deeefad0ef963dea26507d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.6.3-cf56c8.zip",
-                "reference": "deba4474e1fd03484e748a2c7a850903efe21889",
-                "shasum": "5dc53db1e500216bf35c7a0cbbfe87ba271e3af2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-5466-UnimportedListingOptimisations-6f4854.zip",
+                "reference": "4a186681e74d9a356deeefad0ef963dea26507d3",
+                "shasum": "ff01b6135cf01fff7476f573eb1a3c45113429a4"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -886,7 +886,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-24 07:27:58"
+            "time": "2015-04-24 15:05:38"
         },
         {
             "name": "channelgrabber/locale",
@@ -6614,10 +6614,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.4",
+            "alias_normalized": "1.6.4.0",
+            "version": "dev-CGIV-5466-UnimportedListingOptimisations",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
