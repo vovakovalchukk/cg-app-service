@@ -12,9 +12,10 @@ return [
             $to = $input->getArgument('to');
             $accountId = $input->getArgument('accountId');
             $logFoundOrders = $input->getOption('logFoundOrders');
+            $lowPriority = $input->getOption('lowPriority');
 
             $command = $di->get(OrderDownload::class);
-            $command->downloadOrders($channel, $from, $to, $accountId, $logFoundOrders);
+            $command->downloadOrders($channel, $from, $to, $accountId, $logFoundOrders, $lowPriority);
         },
         'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get orders from the respective channel.',
         'arguments' => [
@@ -36,6 +37,9 @@ return [
         'options' => [
             'logFoundOrders' => [
                 'description' => 'logs errors if orders are discovered',
+            ],
+            'lowPriority' => [
+                'description' => 'Queue generated jobs at low priority',
             ]
         ]
     ],
