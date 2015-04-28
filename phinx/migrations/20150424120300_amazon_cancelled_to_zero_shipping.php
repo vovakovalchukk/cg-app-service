@@ -8,5 +8,6 @@ class AmazonCancelledToZeroShipping extends AbstractMigration
     public function change()
     {
         $this->execute("UPDATE `order` SET shippingPrice=0 WHERE status='cancelled' && channel='amazon'");
+        $this->execute("UPDATE `orderLive` SET shippingPrice=0 WHERE status='cancelled' && channel='amazon'");
     }
 }
