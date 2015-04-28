@@ -23,15 +23,16 @@ class Versioniser4 implements VersioniserInterface
         }
 
         $data['taxRateId'] = null;
-        if (isset($params['productId'])) {
-            try {
-                $entity = $this->getService()->fetch($params['productId']);
-                $data['taxRateId'] = $entity->getTaxRateId();
-            } catch (NotFound $exception) {
-                // Entity not found so no information to copy
-            }
+        if (!isset($params['productId'])) {
+            $request->setData($data);
+            return;
         }
-
+        try {
+            $entity = $this->getService()->fetch($params['productId']);
+            $data['taxRateId'] = $entity->getTaxRateId();
+        } catch (NotFound $exception) {
+            // Entity not found so no information to copy
+        }
         $request->setData($data);
     }
 

@@ -68,6 +68,11 @@ class Entity implements RulesInterface
                     new IsArrayValidator(["name" => "imageIds"])
                 ]
             ],
+            'taxRateId' => [
+                'name' => 'taxRateId',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
