@@ -6,7 +6,7 @@ class ProductTaxRate extends AbstractMigration
     public function change()
     {
         $this->table('product')
-             ->addColumn('taxRateId', 'string')
+             ->addColumn('taxRateId', 'string', ['null' => true])
              ->update();
     }
 }
