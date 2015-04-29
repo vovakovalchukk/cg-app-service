@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "661bb6f09493d78d56d8641f61e97d29",
+    "hash": "4cfe1eabd992a17f78a5ee2676adbd24",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1065,17 +1065,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.18.6",
+            "version": "dev-CGIV-5506-MisallocatedStockLevels",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c3480a8a12c21cfe7430d8ac5bb3cc4e8a221f15"
+                "reference": "8e244ac06e8aec8f080830ce918aabdf7415b399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.18.6-8db3b1.zip",
-                "reference": "c3480a8a12c21cfe7430d8ac5bb3cc4e8a221f15",
-                "shasum": "3e6ea83c0760d0bccd9add417375e360d323b01d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5506-MisallocatedStockLevels-23a969.zip",
+                "reference": "8e244ac06e8aec8f080830ce918aabdf7415b399",
+                "shasum": "894eac4290234be1a206004251523341380dd6cd"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1130,7 +1130,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-29 09:58:52"
+            "time": "2015-04-29 15:02:39"
         },
         {
             "name": "channelgrabber/permission",
@@ -6720,10 +6720,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.18.6",
+            "alias_normalized": "1.18.6.0",
+            "version": "dev-CGIV-5506-MisallocatedStockLevels",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

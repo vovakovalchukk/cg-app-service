@@ -76,7 +76,7 @@ use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
-use CG\Order\Service\Item\Transaction\UpdateItemAndStock as UpdateItemAndStockTransaction;
+use CG\Order\Service\Item\Transaction\Factory\UpdateItemAndStock as UpdateItemAndStockTransactionFactory;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
@@ -804,7 +804,7 @@ return array(
                     'itemClient' => ItemRepository::class
                 ]
             ],
-            UpdateItemAndStockTransaction::class => [
+            UpdateItemAndStockTransactionFactory::class => [
                 'parameter' => [
                     'itemStorage' => ItemRepository::class
                 ]
