@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6bfe3bf80daf0216147431a541234f51",
+    "hash": "5df3587d572c06283ddfa22ed2cbfc8d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1534,17 +1534,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.9",
+            "version": "dev-CGIV-5431-localETag",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "96ff40103fdb79f7048ef576ad1782ac962624ee"
+                "reference": "c9bab22a03f8ca49e0214d48f62990e297c5f7e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.9-5c8e1f.zip",
-                "reference": "96ff40103fdb79f7048ef576ad1782ac962624ee",
-                "shasum": "31e17a0ba637e09b689b1c2f54f0bc9a94b45860"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-5431-localETag-a6215b.zip",
+                "reference": "c9bab22a03f8ca49e0214d48f62990e297c5f7e6",
+                "shasum": "1e85eb5d482b71dcd8a1d0481f67e445299eae48"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1590,7 +1590,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-24 08:06:39"
+            "time": "2015-04-29 08:51:38"
         },
         {
             "name": "channelgrabber/spork",
@@ -6260,9 +6260,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-file-iterator-acd690379117b042d1c8af1fafd61bde001bf6bb-zip-831201.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/acd690379117b042d1c8af1fafd61bde001bf6bb",
                 "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb",
-                "shasum": "db16e515f388e0abda53dd36489f0935a90f8eee"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6293,11 +6293,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-10-10 15:34:57"
         },
         {
@@ -6614,10 +6609,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.10",
+            "alias_normalized": "1.13.10.0",
+            "version": "dev-CGIV-5431-localETag",
+            "package": "channelgrabber/slim"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
