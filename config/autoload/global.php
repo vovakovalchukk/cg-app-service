@@ -35,8 +35,6 @@ use CG\Account\Shared\Mapper as AccountMapper;
 
 //Polling Window
 use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
-use CG\Account\Shared\PollingWindow\Repository as AccountPollingWindowRepository;
-use CG\Account\Service\PollingWindow\Storage\Cache as AccountPollingWindowCacheStorage;
 use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 
@@ -71,7 +69,7 @@ use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 
 //Item
-use CG\Order\Service\Item\Entity as ItemEntity;
+use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
@@ -347,12 +345,6 @@ return array(
             ),
             AccountPollingWindowService::class => array(
                 'parameter' => array(
-                    'repository' => AccountPollingWindowRepository::class
-                )
-            ),
-            AccountPollingWindowRepository::class => array(
-                'parameter' => array(
-                    'storage' => AccountPollingWindowCacheStorage::class,
                     'repository' => AccountPollingWindowDbStorage::class
                 )
             ),
