@@ -46,6 +46,7 @@ use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+use CG\Order\Client\Storage\Api as OrderApiStorage;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -879,9 +880,14 @@ return array(
                 'parameter' => [
                     'factory' => SimpleOrderFactory::class,
                     'accountStorage' => AccountApiStorage::class,
-                    'orderStorage' => OrderRepository::class,
-                    'orderItemStorage' => ItemRepository::class,
-                ],
+                    'orderStorage' => OrderApiStorage::class,
+                    'orderItemStorage' => ItemRepository::class
+                ]
+            ],
+            OrderApiStorage::class => [
+                'parameter' => [
+                    'client' => 'cg_app_guzzle'
+                ]
             ],
             'EkmOrderDownloadCommand' => [
                 'parameter' => [
