@@ -75,6 +75,7 @@ use CG\Order\Service\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
+use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
 use CG\Order\Service\Item\Transaction\UpdateItemAndStockFactory as UpdateItemAndStockTransactionFactory;
 
@@ -965,7 +966,8 @@ return array(
                 IncrementorInterface::class => Incrementor::class,
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
-                TransactionClientInterface::class => TransactionRedisClient::class
+                TransactionClientInterface::class => TransactionRedisClient::class,
+                ItemStorageInterface::class => ItemRepository::class
             ]
         )
     )
