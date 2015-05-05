@@ -35,8 +35,6 @@ use CG\Account\Shared\Mapper as AccountMapper;
 
 //Polling Window
 use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
-use CG\Account\Shared\PollingWindow\Repository as AccountPollingWindowRepository;
-use CG\Account\Service\PollingWindow\Storage\Cache as AccountPollingWindowCacheStorage;
 use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 
@@ -48,6 +46,7 @@ use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
+use CG\Order\Client\Storage\Api as OrderApiStorage;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -71,12 +70,13 @@ use CG\Order\Service\Alert\Storage\Cache as AlertCacheStorage;
 use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 
 //Item
-use CG\Order\Service\Item\Entity as ItemEntity;
+use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
+use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
-use CG\Order\Service\Item\Transaction\UpdateItemAndStock as UpdateItemAndStockTransaction;
+use CG\Order\Service\Item\Transaction\UpdateItemAndStockFactory as UpdateItemAndStockTransactionFactory;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
@@ -347,12 +347,6 @@ return array(
             ),
             AccountPollingWindowService::class => array(
                 'parameter' => array(
-                    'repository' => AccountPollingWindowRepository::class
-                )
-            ),
-            AccountPollingWindowRepository::class => array(
-                'parameter' => array(
-                    'storage' => AccountPollingWindowCacheStorage::class,
                     'repository' => AccountPollingWindowDbStorage::class
                 )
             ),
@@ -804,7 +798,7 @@ return array(
                     'itemClient' => ItemRepository::class
                 ]
             ],
-            UpdateItemAndStockTransaction::class => [
+            UpdateItemAndStockTransactionFactory::class => [
                 'parameter' => [
                     'itemStorage' => ItemRepository::class
                 ]
@@ -887,9 +881,14 @@ return array(
                 'parameter' => [
                     'factory' => SimpleOrderFactory::class,
                     'accountStorage' => AccountApiStorage::class,
-                    'orderStorage' => OrderRepository::class,
-                    'orderItemStorage' => ItemRepository::class,
-                ],
+                    'orderStorage' => OrderApiStorage::class,
+                    'orderItemStorage' => ItemRepository::class
+                ]
+            ],
+            OrderApiStorage::class => [
+                'parameter' => [
+                    'client' => 'cg_app_guzzle'
+                ]
             ],
             'EkmOrderDownloadCommand' => [
                 'parameter' => [
@@ -965,7 +964,8 @@ return array(
                 IncrementorInterface::class => Incrementor::class,
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
-                TransactionClientInterface::class => TransactionRedisClient::class
+                TransactionClientInterface::class => TransactionRedisClient::class,
+                ItemStorageInterface::class => ItemRepository::class
             ]
         )
     )
