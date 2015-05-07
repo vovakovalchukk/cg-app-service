@@ -62,6 +62,13 @@ class Filter implements RulesInterface
                     'validators' => [
                         new IsArrayValidator(['name' => 'sku'])
                     ]
+                ],
+                'variationLinks' => [
+                    'name'       => 'variationLinks',
+                    'required'   => false,
+                    'validators' => [
+                        new BooleanValidator(['name' => 'variationLinks'])
+                    ]
                 ]
             ]
         );
