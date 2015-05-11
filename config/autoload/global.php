@@ -173,6 +173,7 @@ use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Order\Client\Gearman\Workload\UpdateItemsTax as UpdateItemsTaxWorkload;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
@@ -725,13 +726,20 @@ return array(
                     'client' => 'image_guzzle'
                 ]
             ],
+            UpdateItemsTaxWorkload::class => [
+                'parameters' => [
+                    'organisationUnitId' => 0,
+                    'sku' => '',
+                ]
+            ],
             ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class,
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
-                    'imageStorage' => ImageService::class
+                    'imageStorage' => ImageService::class,
+                    'updateItemsTaxWorkload' => UpdateItemsTaxWorkload::class
                 )
             ),
             ProductRepository::class => array(
