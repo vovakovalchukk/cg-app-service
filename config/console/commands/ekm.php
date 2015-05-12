@@ -10,7 +10,7 @@ return array(
             $channel = 'ekm';
             $from = $input->getArgument('from');
             $to = $input->getArgument('to');
-            $lowPriority = $input->getOption('lowPriority');
+            $lowPriority = $input->getOption('low-priority');
 
             /**
              * @var OrderDownload $command
@@ -30,7 +30,7 @@ return array(
             )
         ),
         'options' => array(
-            'lowPriority' => [
+            'low-priority' => [
                 'description' => 'Will run gearman jobs as low priority',
             ]
         )
