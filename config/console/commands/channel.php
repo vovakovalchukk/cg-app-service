@@ -41,7 +41,8 @@ return [
             'lowPriority' => [
                 'description' => 'Queue generated jobs at low priority',
             ]
-        ]
+        ],
+        'modulus' => true
     ],
     'channel:importListings' => [
         'command' => function (InputInterface $input) use ($di) {

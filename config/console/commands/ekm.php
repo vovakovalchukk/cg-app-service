@@ -19,6 +19,7 @@ return array(
             $command->downloadOrders($channel, $from, $to, null, false, $lowPriority);
         },
         'description' => 'Fetch all ekm accounts and triggers order download jobs for the last 30days',
+        'modulus' => true,
         'arguments' => array(
             'from' => array(
                 'required' => false,
