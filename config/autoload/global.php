@@ -124,6 +124,7 @@ use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
+use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -955,6 +956,11 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => VariationAttributeMapMapper::class
+                ]
+            ],
+            UpdateAllItemsTaxCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
                 ]
             ],
             'preferences' => [

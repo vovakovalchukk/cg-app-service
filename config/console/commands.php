@@ -7,6 +7,7 @@ $files = [
     'retry.php',
     'ekm.php',
     'stock.php',
+    'order.php',
     'migrateMongoOrderDataToMysql.php',
     'migrateMongoOrderItemDataToMysql.php',
     'removeThenCorrectImportedProducts.php',

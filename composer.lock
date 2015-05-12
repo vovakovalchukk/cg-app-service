@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "42252fbac7c661dadb2158c5aef41376",
+    "hash": "91ac267f8c0bb0e7599f555b6b91812e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1073,17 +1073,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5331-VAT",
+            "version": "dev-CGIV-5591-vat-update-existing-items",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e8b15a03141c99b44a9a8c06b09a3a67b1db9756"
+                "reference": "525d3c8a4a9794dd3dc91722ddc0b6eb2f627315"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5331-VAT-ef906f.zip",
-                "reference": "e8b15a03141c99b44a9a8c06b09a3a67b1db9756",
-                "shasum": "6a742b3da2829ce41a92c09f387c34634567981d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5591-vat-update-existing-items-ddfdb1.zip",
+                "reference": "525d3c8a4a9794dd3dc91722ddc0b6eb2f627315",
+                "shasum": "8e3f82c1cdf33a8e9a257e4416027a71f1148d11"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1141,7 +1141,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-12 13:20:19"
+            "time": "2015-05-12 16:15:55"
         },
         {
             "name": "channelgrabber/permission",
@@ -6682,7 +6682,7 @@
         {
             "alias": "1.18.10",
             "alias_normalized": "1.18.10.0",
-            "version": "dev-EPIC-CGIV-5331-VAT",
+            "version": "dev-CGIV-5591-vat-update-existing-items",
             "package": "channelgrabber/order"
         },
         {
