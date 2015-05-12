@@ -173,7 +173,7 @@ use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
-use CG\Order\Client\Gearman\Workload\UpdateItemsTax as UpdateItemsTaxWorkload;
+use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
@@ -739,7 +739,7 @@ return array(
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
                     'imageStorage' => ImageService::class,
-                    'updateItemsTaxWorkload' => UpdateItemsTaxWorkload::class
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
                 )
             ),
             ProductRepository::class => array(
