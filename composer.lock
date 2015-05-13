@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9a4a1e98b621013223b3790d97f7fb8d",
+    "hash": "a1e905f58b221d16d7bf5193c2e29b7d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -567,17 +567,17 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "1.6.6",
+            "version": "dev-CGIV-5606-Strict",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "731025649ce632797748d0568a57a3232eb4a8ed"
+                "reference": "93077ec8289a829546c4ed52d5b5b42de4ff6cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.6.6-64daac.zip",
-                "reference": "731025649ce632797748d0568a57a3232eb4a8ed",
-                "shasum": "fd758ac946afe51660b978c238187f45bcd6198c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-5606-Strict-ad697d.zip",
+                "reference": "93077ec8289a829546c4ed52d5b5b42de4ff6cb0",
+                "shasum": "18a2b928b4b14d569299a542ef3c87d11a8fd00e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -624,7 +624,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-07 11:29:37"
+            "time": "2015-05-13 14:38:19"
         },
         {
             "name": "channelgrabber/email",
@@ -6827,6 +6827,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.6.6",
+            "alias_normalized": "1.6.6.0",
+            "version": "dev-CGIV-5606-Strict",
+            "package": "channelgrabber/ekm"
+        },
+        {
             "alias": "1.18.9",
             "alias_normalized": "1.18.9.0",
             "version": "dev-CGIV-5606-NoFatal",
@@ -6842,6 +6848,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ekm": 20,
         "channelgrabber/order": 20,
         "channelgrabber/transaction": 20,
         "composer/composer": 20,
