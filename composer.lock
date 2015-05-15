@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "91ac267f8c0bb0e7599f555b6b91812e",
+    "hash": "42252fbac7c661dadb2158c5aef41376",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1073,17 +1073,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-5591-vat-update-existing-items",
+            "version": "dev-EPIC-CGIV-5331-VAT",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "525d3c8a4a9794dd3dc91722ddc0b6eb2f627315"
+                "reference": "37d404781f4389601d4992eec89589e3e67c89fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5591-vat-update-existing-items-ddfdb1.zip",
-                "reference": "525d3c8a4a9794dd3dc91722ddc0b6eb2f627315",
-                "shasum": "8e3f82c1cdf33a8e9a257e4416027a71f1148d11"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5331-VAT-4dbe60.zip",
+                "reference": "37d404781f4389601d4992eec89589e3e67c89fb",
+                "shasum": "c1a82c997e72bf482caaa11582db7a1447e055d2"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1141,7 +1141,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-12 16:15:55"
+            "time": "2015-05-13 14:24:27"
         },
         {
             "name": "channelgrabber/permission",
@@ -1345,13 +1345,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "b7fe10eecab24705d788c88a793ccd2ec9cac3a7"
+                "reference": "7fd49f8c6b42fb9395be48c8f986c588f0bae886"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-5331-VAT-353792.zip",
-                "reference": "b7fe10eecab24705d788c88a793ccd2ec9cac3a7",
-                "shasum": "4efbdcd9435531a9c36718b41966051548d94b00"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-5331-VAT-96dd0d.zip",
+                "reference": "7fd49f8c6b42fb9395be48c8f986c588f0bae886",
+                "shasum": "1044ad3640e90b53abe96609326c2e5b99ce0daa"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1385,7 +1385,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-12 12:34:26"
+            "time": "2015-05-14 09:59:07"
         },
         {
             "name": "channelgrabber/purge",
@@ -2775,9 +2775,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/4defbc5c4f914564339462fc0a95382ce2720bb9",
+                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-4defbc5c4f914564339462fc0a95382ce2720bb9-zip-5ab920.zip",
                 "reference": "4defbc5c4f914564339462fc0a95382ce2720bb9",
-                "shasum": ""
+                "shasum": "fc8d3ef08ec8722524972bb91582d97159af3586"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2812,6 +2812,11 @@
                 "json modification",
                 "json patch"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-12-02 20:26:19"
         },
         {
@@ -2824,9 +2829,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/60037a6f306db93d83962bd8bcf39fade4c65f65",
+                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-60037a6f306db93d83962bd8bcf39fade4c65f65-zip-836529.zip",
                 "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
-                "shasum": ""
+                "shasum": "4169abc29babb4a7f6c2c708dac92c8627e95da2"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2861,6 +2866,11 @@
                 "json pointer",
                 "json traversal"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-12-02 19:43:33"
         },
         {
@@ -2963,9 +2973,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
+                "url": "https://composer.build.channelgrabber.com/dist/seld-jsonlint-7cd4c4965e17e6e4c07f26d566619a4c76f8c672-zip-ad0c5b.zip",
                 "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
-                "shasum": ""
+                "shasum": "78a78d12ee59b5c25554d327461a0397b36345a1"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2998,6 +3008,11 @@
                 "parser",
                 "validator"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-04 15:41:11"
         },
         {
@@ -6682,7 +6697,7 @@
         {
             "alias": "1.18.10",
             "alias_normalized": "1.18.10.0",
-            "version": "dev-CGIV-5591-vat-update-existing-items",
+            "version": "dev-EPIC-CGIV-5331-VAT",
             "package": "channelgrabber/order"
         },
         {
