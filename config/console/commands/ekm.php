@@ -10,11 +10,17 @@ return array(
             $channel = 'ekm';
             $from = $input->getArgument('from');
             $to = $input->getArgument('to');
+            $lowPriority = $input->getOption('lowPriority');
+            $highPriority = $input->getOption('highPriority');
 
+            /**
+             * @var OrderDownload $command
+             */
             $command = $di->get('EkmOrderDownloadCommand');
-            $command->downloadOrders($channel, $from, $to);
+            $command->downloadOrders($channel, $from, $to, null, false, $lowPriority, $highPriority);
         },
         'description' => 'Fetch all ekm accounts and triggers order download jobs for the last 30days',
+        'modulus' => true,
         'arguments' => array(
             'from' => array(
                 'required' => false,
@@ -26,7 +32,12 @@ return array(
             )
         ),
         'options' => array(
-
+            'lowPriority' => [
+                'description' => 'Queue generated jobs at low priority',
+            ],
+            'highPriority' => [
+                'description' => 'Queue generated jobs at high priority',
+            ]
         )
     )
 );

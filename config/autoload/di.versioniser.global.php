@@ -43,6 +43,8 @@ return [
                 'Versioniser_ProductEntity_2' => ProductEntity\Versioniser2::class,
                 'Versioniser_ProductCollection_3' => ProductCollection\Versioniser3::class,
                 'Versioniser_ProductEntity_3' => ProductEntity\Versioniser3::class,
+                'Versioniser_ProductCollection_4' => ProductCollection\Versioniser4::class,
+                'Versioniser_ProductEntity_4' => ProductEntity\Versioniser4::class,
                 'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingCollection_1' => UnimportedListingCollection\Versioniser1::class,
