@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3b91b679c900dd54fdc208a382ec3da3",
+    "hash": "6f64b6df51120c0ef83975872a5f196c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -277,17 +277,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-5573-ExtendableOrderDownloadGenerator",
+            "version": "1.16.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "93bbb451b1cb618ba9dafae9d5a5ee7892a19b30"
+                "reference": "12322f78d512f7147ec11fe28324bdf640e0a67e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-5573-ExtendableOrderDownloadGenerator-256797.zip",
-                "reference": "93bbb451b1cb618ba9dafae9d5a5ee7892a19b30",
-                "shasum": "2db6160d25f1ea067ac651ec6b01fd2d91c69c3a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.16.11-c8a021.zip",
+                "reference": "12322f78d512f7147ec11fe28324bdf640e0a67e",
+                "shasum": "a92209f7795a64202cbbc23d735b9fbb753d8f77"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -323,11 +323,6 @@
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "di-definition",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-5573-ExtendableOrderDownloadGenerator": "1.16.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Channel\\": "src/Channel",
@@ -346,7 +341,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-12 14:46:48"
+            "time": "2015-05-19 08:46:17"
         },
         {
             "name": "channelgrabber/cilex",
@@ -573,22 +568,22 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "dev-CGIV-5573-PollingPriority",
+            "version": "1.6.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "da115ba5237035f9bac212c4a6932ae68b5daed9"
+                "reference": "8fe81365c8ba061bf4a554e1ff3beabf90f6603f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-5573-PollingPriority-f731f1.zip",
-                "reference": "da115ba5237035f9bac212c4a6932ae68b5daed9",
-                "shasum": "b5b6cac582e5bc64093ccd1862a23c1a72fe905b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.6.9-045767.zip",
+                "reference": "8fe81365c8ba061bf4a554e1ff3beabf90f6603f",
+                "shasum": "9be0f43303e6bcdbfea4215062081669e83bbfa4"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": ">=1.4.0,<2.0.0",
-                "channelgrabber/channel": "dev-CGIV-5573-ExtendableOrderDownloadGenerator as 1.16.10",
+                "channelgrabber/channel": "^1.16.11",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/gearman": ">=1.1.5,<2.0.0",
@@ -630,7 +625,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-14 13:50:10"
+            "time": "2015-05-19 08:52:48"
         },
         {
             "name": "channelgrabber/email",
@@ -2726,9 +2721,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/4defbc5c4f914564339462fc0a95382ce2720bb9",
+                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-4defbc5c4f914564339462fc0a95382ce2720bb9-zip-5ab920.zip",
                 "reference": "4defbc5c4f914564339462fc0a95382ce2720bb9",
-                "shasum": ""
+                "shasum": "fc8d3ef08ec8722524972bb91582d97159af3586"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2763,6 +2758,11 @@
                 "json modification",
                 "json patch"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-12-02 20:26:19"
         },
         {
@@ -2775,9 +2775,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/60037a6f306db93d83962bd8bcf39fade4c65f65",
+                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-60037a6f306db93d83962bd8bcf39fade4c65f65-zip-836529.zip",
                 "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
-                "shasum": ""
+                "shasum": "4169abc29babb4a7f6c2c708dac92c8627e95da2"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2812,6 +2812,11 @@
                 "json pointer",
                 "json traversal"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-12-02 19:43:33"
         },
         {
@@ -2967,9 +2972,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
+                "url": "https://composer.build.channelgrabber.com/dist/seld-jsonlint-7cd4c4965e17e6e4c07f26d566619a4c76f8c672-zip-ad0c5b.zip",
                 "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
-                "shasum": ""
+                "shasum": "78a78d12ee59b5c25554d327461a0397b36345a1"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -3002,6 +3007,11 @@
                 "parser",
                 "validator"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-04 15:41:11"
         },
         {
@@ -3869,7 +3879,7 @@
             "target-dir": "Zend/Cache",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendCache.git",
+                "url": "https://github.com/zendframework/zend-cache.git",
                 "reference": "883fce9abb24096d96bfdfc14c4cd6e3a232e895"
             },
             "dist": {
@@ -3931,7 +3941,7 @@
             "target-dir": "Zend/Code",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendCode.git",
+                "url": "https://github.com/zendframework/zend-code.git",
                 "reference": "a1c6c9773d0431f31c94d806c1c7d1964fa11639"
             },
             "dist": {
@@ -3987,7 +3997,7 @@
             "target-dir": "Zend/Config",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendConfig.git",
+                "url": "https://github.com/zendframework/zend-config.git",
                 "reference": "4fa48535dd4693eb1b103e7d260c548037d2b3c3"
             },
             "dist": {
@@ -4047,7 +4057,7 @@
             "target-dir": "Zend/Crypt",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendCrypt.git",
+                "url": "https://github.com/zendframework/zend-crypt.git",
                 "reference": "6e885dcc6177e266c19febe0b5e979b7a3e4e8b1"
             },
             "dist": {
@@ -4099,7 +4109,7 @@
             "target-dir": "Zend/Db",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendDb.git",
+                "url": "https://github.com/zendframework/zend-db.git",
                 "reference": "e030110efe1a25792d0586996e66ad41ee90f0b4"
             },
             "dist": {
@@ -4155,7 +4165,7 @@
             "target-dir": "Zend/Di",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendDi.git",
+                "url": "https://github.com/zendframework/zend-di.git",
                 "reference": "4f5186d41e73c419428fba4f58c95412867b3be0"
             },
             "dist": {
@@ -4209,7 +4219,7 @@
             "target-dir": "Zend/Escaper",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendEscaper.git",
+                "url": "https://github.com/zendframework/zend-escaper.git",
                 "reference": "b3ca10e16ef875f836d46f08045349e39589766c"
             },
             "dist": {
@@ -4255,7 +4265,7 @@
             "target-dir": "Zend/EventManager",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendEventManager.git",
+                "url": "https://github.com/zendframework/zend-eventmanager.git",
                 "reference": "2f42c89b7a4996d5d75b45ce98fbf3ad4fc28e00"
             },
             "dist": {
@@ -4302,7 +4312,7 @@
             "target-dir": "Zend/Filter",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendFilter.git",
+                "url": "https://github.com/zendframework/zend-filter.git",
                 "reference": "46922470d3cfd311bbe4683056cd63974918333d"
             },
             "dist": {
@@ -4361,7 +4371,7 @@
             "target-dir": "Zend/Form",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendForm.git",
+                "url": "https://github.com/zendframework/zend-form.git",
                 "reference": "ef215c4af65340d5f1fe9a35d62cdc8c600cc5ff"
             },
             "dist": {
@@ -4431,7 +4441,7 @@
             "target-dir": "Zend/Http",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendHttp.git",
+                "url": "https://github.com/zendframework/zend-http.git",
                 "reference": "35f52485d4170ebcdac1f00cb24a1b0856214c2f"
             },
             "dist": {
@@ -4482,7 +4492,7 @@
             "target-dir": "Zend/I18n",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendI18n.git",
+                "url": "https://github.com/zendframework/zend-i18n.git",
                 "reference": "21acf472647cd9a1456734df9aabcd456d81fe88"
             },
             "dist": {
@@ -4549,7 +4559,7 @@
             "target-dir": "Zend/InputFilter",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendInputFilter.git",
+                "url": "https://github.com/zendframework/zend-inputfilter.git",
                 "reference": "c1969977b77fef7b928a35e698aa5df49b354f10"
             },
             "dist": {
@@ -4604,7 +4614,7 @@
             "target-dir": "Zend/Json",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendJson.git",
+                "url": "https://github.com/zendframework/zend-json.git",
                 "reference": "af8a9c422bdfcd6e0a8db9f030331e9cead2c3a1"
             },
             "dist": {
@@ -4661,7 +4671,7 @@
             "target-dir": "Zend/Loader",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendLoader.git",
+                "url": "https://github.com/zendframework/zend-loader.git",
                 "reference": "fcca80907c35f0827f992b7a58adbbff4baf728e"
             },
             "dist": {
@@ -4707,7 +4717,7 @@
             "target-dir": "Zend/Mail",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendMail.git",
+                "url": "https://github.com/zendframework/zend-mail.git",
                 "reference": "c59df90b72db0d5c18fa2058b46f4d1b740b0e3c"
             },
             "dist": {
@@ -4765,7 +4775,7 @@
             "target-dir": "Zend/Math",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendMath.git",
+                "url": "https://github.com/zendframework/zend-math.git",
                 "reference": "b54a187942d331244aa5b69bd32afa21428f9785"
             },
             "dist": {
@@ -4817,7 +4827,7 @@
             "target-dir": "Zend/Memory",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendMemory.git",
+                "url": "https://github.com/zendframework/zend-memory.git",
                 "reference": "7965bf2af530d9b21dd80259092bcd3dbfc1785c"
             },
             "dist": {
@@ -4869,7 +4879,7 @@
             "target-dir": "Zend/Mime",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendMime.git",
+                "url": "https://github.com/zendframework/zend-mime.git",
                 "reference": "1c7429d9c721266d9b28eccf66c9e6ff405604a3"
             },
             "dist": {
@@ -4922,7 +4932,7 @@
             "target-dir": "Zend/ModuleManager",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendModuleManager.git",
+                "url": "https://github.com/zendframework/zend-modulemanager.git",
                 "reference": "d8ac00e81b9af9e908458281a7ff741b37c2db5d"
             },
             "dist": {
@@ -4983,7 +4993,7 @@
             "target-dir": "Zend/Mvc",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendMvc.git",
+                "url": "https://github.com/zendframework/zend-mvc.git",
                 "reference": "e332f9c85fc0a03072ae6918f0d5268f4837a9bb"
             },
             "dist": {
@@ -5073,7 +5083,7 @@
             "target-dir": "Zend/Serializer",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendSerializer.git",
+                "url": "https://github.com/zendframework/zend-serializer.git",
                 "reference": "aa9427270dbc459ef6532280788d111d3faf86a1"
             },
             "dist": {
@@ -5129,7 +5139,7 @@
             "target-dir": "Zend/ServiceManager",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendServiceManager.git",
+                "url": "https://github.com/zendframework/zend-servicemanager.git",
                 "reference": "10c7dfcd3b0e5856a53663c0971159573ec37ffa"
             },
             "dist": {
@@ -5182,7 +5192,7 @@
             "target-dir": "Zend/Stdlib",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendStdlib.git",
+                "url": "https://github.com/zendframework/zend-stdlib.git",
                 "reference": "3f6e2416183d4879a983680e1165f14164b262f4"
             },
             "dist": {
@@ -5240,7 +5250,7 @@
             "target-dir": "Zend/Uri",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendUri.git",
+                "url": "https://github.com/zendframework/zend-uri.git",
                 "reference": "6dd5ee4b2543c785aa4e06643aaddf9c46f69039"
             },
             "dist": {
@@ -5289,7 +5299,7 @@
             "target-dir": "Zend/Validator",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendValidator.git",
+                "url": "https://github.com/zendframework/zend-validator.git",
                 "reference": "53ceee562ce689a6a610c7bb0bc8157c7ec63a45"
             },
             "dist": {
@@ -5356,7 +5366,7 @@
             "target-dir": "Zend/View",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/Component_ZendView.git",
+                "url": "https://github.com/zendframework/zend-view.git",
                 "reference": "5c25e2b05877836b08ea1b9d7a21c60348466c70"
             },
             "dist": {
@@ -6725,25 +6735,10 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.16.10",
-            "alias_normalized": "1.16.10.0",
-            "version": "dev-CGIV-5573-ExtendableOrderDownloadGenerator",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.6.8",
-            "alias_normalized": "1.6.8.0",
-            "version": "dev-CGIV-5573-PollingPriority",
-            "package": "channelgrabber/ekm"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/ekm": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
