@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba735090a03321706222c24093e24a34",
+    "hash": "dd3a1f53820c17b1cded6ce3c69bfe79",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1078,13 +1078,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "825c7fc510bead03fa2ea8c8312161282a71bbea"
+                "reference": "b9bc1f5a6a57127d825e4f32dea0649686ce6dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5584-GiftWrap-554013.zip",
-                "reference": "825c7fc510bead03fa2ea8c8312161282a71bbea",
-                "shasum": "f34b5bf157c58a52da9e92e39f3e3c2941e5f5ce"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5584-GiftWrap-64e494.zip",
+                "reference": "b9bc1f5a6a57127d825e4f32dea0649686ce6dc9",
+                "shasum": "78a5365f4f84cdc920fb7caf7372c5a807685287"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1142,7 +1142,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-12 12:44:09"
+            "time": "2015-05-20 13:35:38"
         },
         {
             "name": "channelgrabber/permission",
@@ -6794,8 +6794,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.18.10",
-            "alias_normalized": "1.18.10.0",
+            "alias": "1.18.12",
+            "alias_normalized": "1.18.12.0",
             "version": "dev-CGIV-5584-GiftWrap",
             "package": "channelgrabber/order"
         }
