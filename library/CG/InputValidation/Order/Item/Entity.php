@@ -105,6 +105,11 @@ class Entity implements RulesInterface
                 'name'       => 'stockManaged',
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'stockManaged'])]
+            ],
+            'calculatedTaxPercentage' => [
+                'name'       => 'calculatedTaxPercentage',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0, 'name' => 'calculatedTaxPercentage'])]
             ]
         ];
     }
