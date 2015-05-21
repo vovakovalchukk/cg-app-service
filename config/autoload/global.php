@@ -124,6 +124,7 @@ use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
+use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -173,6 +174,7 @@ use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
@@ -725,13 +727,20 @@ return array(
                     'client' => 'image_guzzle'
                 ]
             ],
+            UpdateItemsTaxWorkload::class => [
+                'parameters' => [
+                    'organisationUnitId' => 0,
+                    'sku' => '',
+                ]
+            ],
             ProductService::class => array(
                 'parameters' => array(
                     'repository' => ProductRepository::class,
                     'mapper' => ProductMapper::class,
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
-                    'imageStorage' => ImageService::class
+                    'imageStorage' => ImageService::class,
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
                 )
             ),
             ProductRepository::class => array(
@@ -947,6 +956,11 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => VariationAttributeMapMapper::class
+                ]
+            ],
+            UpdateAllItemsTaxCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
                 ]
             ],
             'preferences' => [
