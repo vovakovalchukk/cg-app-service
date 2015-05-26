@@ -60,6 +60,7 @@ return [
         },
         'via' => ['GET', 'OPTIONS'],
         'name' => 'InvoiceSettingsCollection',
+        'entityRoute' => '/settings/invoice/:id',
         'validation' => [
             'filterRules' => CollectionValidation::class
         ]
@@ -114,6 +115,7 @@ return [
             'filterRules' => AliasCollectionValidation::class,
             'dataRules' => AliasEntityValidation::class
         ],
+        'entityRoute' => '/settings/shipping/alias/:aliasId',
         'version' => new Version(1, 2),
     ],
     '/settings/shipping/alias/:aliasId' => [
@@ -151,6 +153,7 @@ return [
         },
         'via' => ['GET', 'OPTIONS'],
         'name' => 'PickListSettingsCollection',
+        'entityRoute' => '/settings/pickList/:id',
         'validation' => [
             'filterRules' => PickListCollectionValidation::class
         ]

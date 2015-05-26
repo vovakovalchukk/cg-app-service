@@ -72,6 +72,7 @@ return [
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'UnimportedListingCollection',
+        'entityRoute' => '/unimportedListing/:listingId',
         'validation' => [
             'filterRules' => UnimportedListingCollectionValidation::class,
             'dataRules' => UnimportedListingEntityValidation::class

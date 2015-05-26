@@ -24,6 +24,7 @@ return [
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'LocationCollection',
+        'entityRoute' => '/location/:locationId',
         'validation' => [
             'filterRules' => LocationCollectionValidation::class,
             'dataRules' => LocationEntityValidation::class

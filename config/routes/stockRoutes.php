@@ -32,6 +32,7 @@ return [
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'StockCollection',
+        'entityRoute' => '/stock/:stockId',
         'validation' => [
             'filterRules' => StockCollectionValidation::class,
             'dataRules' => StockEntityValidation::class
@@ -70,6 +71,7 @@ return [
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'StockLocationCollection',
+        'entityRoute' => '/stockLocation/:id',
         'validation' => [
             'filterRules' => LocationCollectionValidation::class,
             'dataRules' => LocationEntityValidation::class

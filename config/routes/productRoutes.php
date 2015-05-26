@@ -35,6 +35,7 @@ return [
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'ProductCollection',
+        'entityRoute' => '/product/:productId',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class,
             'dataRules' => ProductEntityValidation::class
@@ -75,6 +76,7 @@ return [
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'VariationAttributeMapCollection',
+        'entityRoute' => '/product/:productId/variationAttributeMap/:variationAttributeMapId',
         'validation' => [
             'filterRules' => VariationAttributeMapFilterValidation::class,
             'dataRules' => VariationAttributeMapEntityValidation::class

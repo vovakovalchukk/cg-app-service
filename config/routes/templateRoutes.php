@@ -24,6 +24,7 @@ return [
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'TemplateCollection',
+        'entityRoute' => '/template/:id',
         'validation' => [
             "dataRules" => TemplateEntityValidationRules::class,
             "filterRules" => TemplateFilterValidationRules::class,
