@@ -29,7 +29,7 @@ class Entity implements RulesInterface
             ),
             'giftWrapMessage' => array(
                 'name'       => 'giftWrapMessage',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ),
             'giftWrapPrice' => array(
