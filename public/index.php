@@ -30,6 +30,11 @@ $app->get(Versioning::VERSION_ROUTE, array($versioning, 'versionRoute'));
 foreach ($routes as $route => $request) {
     $validator->setValidators($request);
     $versioning->setRouteVersion($request);
+    
+    if(!isset($request["eTag"]) && isset($request["entityRoute"])) {
+        $request["eTag"] = $routes[$request["entityRoute"]]["eTag"];
+    }
+
     $eTagConfigFactory->attachEtagConfig($request);
 
     $route = $app->map(
