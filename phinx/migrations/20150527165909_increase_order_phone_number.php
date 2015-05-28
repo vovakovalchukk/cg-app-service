@@ -14,7 +14,7 @@ class IncreaseOrderPhoneNumber extends AbstractMigration
     {
         $this
             ->table(static::TABLE_NAME)
-            ->changeColumn(static::COLUMN_NAME, 'string', ['limit' => 40, 'null' => true])
+            ->changeColumn(static::COLUMN_NAME, 'string', ['limit' => 255, 'null' => true])
             ->update();
     }
 
