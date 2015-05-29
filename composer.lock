@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c5b916ba802cdb19dd4201f6d790a0a",
+    "hash": "f53482beae1dce1efc8ab25a3b7a850d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -842,17 +842,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.6.6",
+            "version": "1.6.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "41030cabcdbd241c31b4fe99666929f2bb656f69"
+                "reference": "70cc90d57717846ac741b46eea4368bb956de057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.6.6-9f461e.zip",
-                "reference": "41030cabcdbd241c31b4fe99666929f2bb656f69",
-                "shasum": "a68a31da4b8260813986f28adf72142375c7306b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.6.7-ca0693.zip",
+                "reference": "70cc90d57717846ac741b46eea4368bb956de057",
+                "shasum": "85f687d8843833b1d29a3c673186ed411e0a497e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -864,7 +864,7 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/slim": "^1.13.2",
-                "channelgrabber/stdlib": "^2.10.8",
+                "channelgrabber/stdlib": "^2.12.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
                 "php-jsonpatch/php-jsonpatch": "@dev",
@@ -892,7 +892,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-30 14:46:23"
+            "time": "2015-05-28 15:05:02"
         },
         {
             "name": "channelgrabber/locale",
