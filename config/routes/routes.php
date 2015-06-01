@@ -177,6 +177,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderNoteCollection',
+        'entityRoute' => '/order/:orderId/note/:noteId',
         'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => NoteFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/note/:noteId' => array (
@@ -211,6 +212,7 @@ return array(
                 );
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
+        'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
         'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => TrackingFilterValidationRules::class, "flatten" => false)
     ),
@@ -246,6 +248,7 @@ return array(
                 );
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
+        'entityRoute' => '/order/:orderId/alert/:alertId',
         'name' => 'OrderAlertCollection',
         'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => AlertFilterValidationRules::Class, "flatten" => false)
     ),
@@ -354,6 +357,7 @@ return array(
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
         'name' => 'OrderItemFeeCollection',
+        'entityRoute' => '/orderItem/:orderItemId/fee/:feeId',
         'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => FeeFilterValidationRules::class, "flatten" => false)
     ),
     '/orderItem/:orderItemId/fee/:feeId' => array (
@@ -388,6 +392,7 @@ return array(
                 );
             },
         'via' => array('GET', 'POST', 'OPTIONS'),
+        'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
         'name' => 'OrderItemGiftWrapCollection',
         'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => GiftWrapFilterValidationRules::class, "flatten" => false)
     ),
@@ -422,6 +427,7 @@ return array(
                 );
             },
         'via' => array('GET', 'OPTIONS'),
+        'entityRoute' => '/orderBatch/:batchId',
         'name' => 'OrderBatchCollection',
         'validation' => array("dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false)
     ),
@@ -456,6 +462,7 @@ return array(
                 );
             },
         'via' => array('GET', 'OPTIONS'),
+        'entityRoute' => '/userPreference/:userId',
         'name' => 'UserPreferenceCollection',
         'validation' => array("dataRules" => null, "filterRules" => UserPreferenceFilterValidationRules::class, "flatten" => false),
         'eTag' => [
@@ -492,6 +499,7 @@ return array(
                 );
             },
         'via' => array('GET', 'OPTIONS'),
+        'entityRoute' => '/orderTag/:tagId',
         'name' => 'TagCollection',
         'validation' => array("dataRules" => null, "filterRules" => TagFilterValidationRules::class, "flatten" => false)
     ),
@@ -525,6 +533,7 @@ return array(
                 );
             },
         'via' => array('POST', 'OPTIONS'),
+        'entityRoute' => '/orderFilter/:filterId',
         'name' => 'FilterCollection',
         'validation' => array("dataRules" => null, "filterRules" => null, "flatten" => false)
     ),
@@ -557,6 +566,7 @@ return array(
                 );
             },
         'via' => ['GET', 'OPTIONS'],
+        'entityRoute' => '/shippingMethod/:id',
         'name' => 'ShippingMethodCollection',
         'validation' => [
             "filterRules" => ShippingMethodFilterValidationRules::class,

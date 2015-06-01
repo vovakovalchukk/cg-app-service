@@ -125,6 +125,7 @@ use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
+use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -188,6 +189,7 @@ use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
+use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
 use CG\Stock\Location\Service as StockLocationService;
@@ -963,6 +965,12 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            CorrectStockOfItemsWithIncorrectStockManagedFlagCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql',
+                    'predisClient' => 'reliable_redis',
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -979,7 +987,8 @@ return array(
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class,
-                ItemStorageInterface::class => ItemRepository::class
+                ItemStorageInterface::class => ItemRepository::class,
+                StockStorage::class => StockService::class,
             ]
         )
     )
