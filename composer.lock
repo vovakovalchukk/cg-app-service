@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b4e1167a89e7f347a6bc1cf643d3095a",
+    "hash": "989a80b0b2969536df2b911ce7042655",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1697,19 +1697,20 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.1",
+            "version": "dev-CGIV-5703-sequential-number-service",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "07b84511154a8e322ad9ea3a05efa8a346d36ca2"
+                "reference": "ab5dbef52167f3ebfb7d58856c69dc1531d04b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.1-fa6e16.zip",
-                "reference": "07b84511154a8e322ad9ea3a05efa8a346d36ca2",
-                "shasum": "6974328d62ba482e25dc04eb4b1e16cb239e681b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-5703-sequential-number-service-e2e8d6.zip",
+                "reference": "ab5dbef52167f3ebfb7d58856c69dc1531d04b7a",
+                "shasum": "65ad55ad36c27b50ac4857a57d25825b684b394e"
             },
             "require": {
+                "predis/predis": "~0.8.3",
                 "zendframework/zend-db": ">=2.2,<3.0"
             },
             "conflict": {
@@ -1733,7 +1734,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-01 15:27:02"
+            "time": "2015-06-03 13:15:20"
         },
         {
             "name": "channelgrabber/stock",
@@ -2784,7 +2785,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-4defbc5c4f914564339462fc0a95382ce2720bb9-zip-5ab920.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e89763dd50986f749ec97e188f6f6ed9cc5240c5",
                 "reference": "4defbc5c4f914564339462fc0a95382ce2720bb9",
                 "shasum": "fc8d3ef08ec8722524972bb91582d97159af3586"
             },
@@ -2838,7 +2839,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-60037a6f306db93d83962bd8bcf39fade4c65f65-zip-836529.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/0f0c8da938b3e2630dc1cfbdc25fc66648eb2fa6",
                 "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
                 "shasum": "4169abc29babb4a7f6c2c708dac92c8627e95da2"
             },
@@ -6798,10 +6799,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.12.3",
+            "alias_normalized": "2.12.3.0",
+            "version": "dev-CGIV-5703-sequential-number-service",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
