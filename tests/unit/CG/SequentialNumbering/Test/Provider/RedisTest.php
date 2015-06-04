@@ -1,8 +1,8 @@
 <?php
-namespace CG\Stdlib\Test\SequentialNumber\Provider;
+namespace CG\SequentialNumbering\Test\Provider;
 
-use CG\Stdlib\SequentialNumber\Provider\Redis;
-use CG\Stdlib\SequentialNumber\LockException;
+use CG\SequentialNumbering\Provider\Redis;
+use CG\SequentialNumbering\LockException;
 use PHPUnit_Framework_TestCase;
 use Predis\Client as Predis;
 
