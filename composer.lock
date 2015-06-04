@@ -1515,18 +1515,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "c29970e08dc1a1fdb9a51bcbcd9f1b6c6bdf8669"
+                "reference": "08236e5a1cd0270a6872a13132b69d673c5366ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5703-sequential-number-service-1bf491.zip",
-                "reference": "c29970e08dc1a1fdb9a51bcbcd9f1b6c6bdf8669",
-                "shasum": "12cc0e1955bb34954c688b04ec2ddf81a614af4f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5703-sequential-number-service-ee8fa4.zip",
+                "reference": "08236e5a1cd0270a6872a13132b69d673c5366ff",
+                "shasum": "05979a09f4af74fe9a2709190e5e87fc31cbd6ba"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/stdlib": "^2.12.2",
                 "composer/composer": "@dev",
+                "kriswallsmith/spork": "~0.3",
                 "predis/predis": "~0.8.3"
             },
             "type": "di-definition",
@@ -1541,7 +1542,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-04 10:19:40"
+            "time": "2015-06-04 15:52:56"
         },
         {
             "name": "channelgrabber/settings",
