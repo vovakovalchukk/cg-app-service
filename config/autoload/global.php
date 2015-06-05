@@ -47,6 +47,8 @@ use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Client\Storage\Api as OrderApiStorage;
+use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
+use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -971,6 +973,11 @@ return array(
                     'predisClient' => 'reliable_redis',
                 ]
             ],
+            SequentialNumberingProviderRedis::class => [
+                'parameter' => [
+                    'predis' => 'reliable_redis',
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -989,6 +996,7 @@ return array(
                 TransactionClientInterface::class => TransactionRedisClient::class,
                 ItemStorageInterface::class => ItemRepository::class,
                 StockStorage::class => StockService::class,
+                SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
             ]
         )
     )

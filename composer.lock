@@ -1510,6 +1510,42 @@
             "time": "2014-11-10 16:41:55"
         },
         {
+            "name": "channelgrabber/sequential-numbering",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
+                "reference": "3fb41c15dccac2755c8e4d60fdebf9cb1182ea6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-EPIC-CGIV-5697-sequential-order-numbers-59a13c.zip",
+                "reference": "3fb41c15dccac2755c8e4d60fdebf9cb1182ea6d",
+                "shasum": "51c637496743bbfa2f05709895a7de5012ce2918"
+            },
+            "require": {
+                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/stats": "^1.0.6",
+                "channelgrabber/stdlib": "^2.12.2",
+                "composer/composer": "@dev",
+                "kriswallsmith/spork": "~0.3",
+                "predis/predis": "~0.8.3"
+            },
+            "type": "di-definition",
+            "autoload": {
+                "psr-4": {
+                    "CG\\SequentialNumbering\\": "src"
+                }
+            },
+            "description": "Provides sequential number generators",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-06-05 11:21:44"
+        },
+        {
             "name": "channelgrabber/settings",
             "version": "1.3.4",
             "source": {
@@ -6809,12 +6845,19 @@
             "alias_normalized": "1.18.25.0",
             "version": "dev-CGIV-5698-order-invoiceNumber-field",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "package": "channelgrabber/sequential-numbering"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/sequential-numbering": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
