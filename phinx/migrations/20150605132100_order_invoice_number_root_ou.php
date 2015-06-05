@@ -8,13 +8,13 @@ class OrderInvoiceNumberRootOu extends AbstractMigration
         $this->table('order')
             ->addColumn('invoiceNumber', 'integer', ['null' => true])
             ->addColumn('rootOrganisationUnitId', 'integer', ['null' => true])
-            ->addIndex(['invoiceNumber', 'rootOrganisationUnitId'], ['unique' => true])
+            ->addIndex(['rootOrganisationUnitId', 'invoiceNumber'], ['unique' => true])
             ->update();
 
         $this->table('orderLive')
             ->addColumn('invoiceNumber', 'integer', ['null' => true])
             ->addColumn('rootOrganisationUnitId', 'integer', ['null' => true])
-            ->addIndex(['invoiceNumber', 'rootOrganisationUnitId'], ['unique' => true])
+            ->addIndex(['rootOrganisationUnitId', 'invoiceNumber'], ['unique' => true])
             ->update();
     }
 }
