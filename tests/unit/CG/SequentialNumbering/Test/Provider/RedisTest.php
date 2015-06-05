@@ -5,6 +5,7 @@ use CG\SequentialNumbering\Provider\Redis;
 use CG\SequentialNumbering\LockException;
 use PHPUnit_Framework_TestCase;
 use Predis\Client as Predis;
+use Spork\ProcessManager;
 
 class RedisTest extends PHPUnit_Framework_TestCase
 {
@@ -30,6 +31,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testGetNextReturnsFirstNumber()
@@ -41,6 +43,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testGetNextThrowsExceptionIfLockNotReleased()
@@ -54,6 +57,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testMarkUsedSucceedsForCorrectNumber()
@@ -68,6 +72,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testMarkUsedThrowsExceptionForIncorrectNumber()
@@ -81,6 +86,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testGetNextReturnsSequentialNumbersWhenEachIsUsed()
@@ -96,6 +102,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testLockExceptionCanBeOvercomeWithMarkUsed()
@@ -117,6 +124,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testReleaseResetsNextNumber()
@@ -131,6 +139,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group integration
+     * @group onebyone
      * @backupGlobals disabled
      */
     public function testLockExceptionCanBeOvercomeWithRelease()
@@ -148,6 +157,175 @@ class RedisTest extends PHPUnit_Framework_TestCase
             $result = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
             $this->assertEquals(1, $result, 'Second attempt at first sequential number not 1');
         }
+    }
+
+    /**
+     * @group integration
+     * @group queued
+     * @backupGlobals disabled
+     */
+    public function testMultipleGetNextRequestsAreQueuedAndGetSequentialNumbers()
+    {
+        $di = static::$di;
+        $processManager = $di->get(ProcessManager::class);
+        $predis = $di->get('reliable_redis');
+        $sequenceName = static::SEQUENCE_NAME;
+        $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+        $this->assertEquals(1, $result1, 'First sequential number not 1');
+        // Need to call getNext() again but without blocking so we can then call markUsed() on the first one. Fork.
+        $fork1 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
+        $fork1->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(2, $result, 'Second sequential number not 2');
+        });
+        $fork2 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
+        $fork2->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(3, $result, 'Third sequential number not 3');
+        });
+        // Make the first child proc wait for a short time but less than the timeout
+        sleep(1);
+        $this->provider->markUsed($sequenceName, $result1);
+        $fork1->wait();
+        $fork2->wait();
+    }
+
+    /**
+     * @group integration
+     * @group queued
+     * @backupGlobals disabled
+     */
+    public function testMultipleGetNextRequestsWorkWithRelease()
+    {
+        $di = static::$di;
+        $processManager = $di->get(ProcessManager::class);
+        $predis = $di->get('reliable_redis');
+        $sequenceName = static::SEQUENCE_NAME;
+        $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+        $this->assertEquals(1, $result1, 'First sequential number not 1');
+        // Need to call getNext() again but without blocking so we can then call markUsed() on the first one. Fork.
+        $fork1 = $this->forkToGetNextAndRelease($processManager, $predis, $sequenceName);
+        $fork1->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(2, $result, 'Second sequential number not 2');
+        });
+        $fork2 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
+        $fork2->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(2, $result, 'Third request (after a release) for sequential number not 2');
+        });
+        // Make the first child proc wait for a short time but less than the timeout
+        sleep(1);
+        $this->provider->markUsed($sequenceName, $result1);
+        $fork1->wait();
+        $fork2->wait();
+    }
+
+    /**
+     * @group integration
+     * @group queued
+     * @backupGlobals disabled
+     */
+    public function testQueuedItemTimeoutWorks() 
+    {
+        $di = static::$di;
+        $processManager = $di->get(ProcessManager::class);
+        $predis = $di->get('reliable_redis');
+        $sequenceName = static::SEQUENCE_NAME;
+        $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+        $this->assertEquals(1, $result1, 'First sequential number not 1');
+        $fork1 = $this->forkToGetNextWithoutRelease($processManager, $predis, $sequenceName);
+        $fork1->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(2, $result, 'Second sequential number not 2');
+        });
+        $fork2 = $this->forkToGetNextCatchLock($processManager, $predis, $sequenceName);
+        $fork2->always(function($fork)
+        {
+            $result = $fork->getResult();
+            $this->assertEquals(3, $result, 'Third sequential number not 3');
+        });
+        // Make the first child proc wait for a short time but less than the timeout
+        sleep(1);
+        $this->provider->markUsed($sequenceName, $result1);
+        $fork1->wait();
+        $fork2->wait();
+    }
+
+    protected function forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName)
+    {
+        $fork = $processManager->fork(function() use ($sequenceName, $predis)
+        {
+            // Can't share a Redis connection with the parent as we'll get the "cant pub and sub on same channel" problem
+            // Not an issue outside of the tests because each PHP thread would only be requesting one number at a time
+            $predis->disconnect();
+            $predis->connect();
+            $result = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+            // Make the next proc wait
+            sleep(1);
+            $this->provider->markUsed($sequenceName, $result);
+            return $result;
+        });
+        return $fork;
+    }
+
+    protected function forkToGetNextAndRelease($processManager, $predis, $sequenceName)
+    {
+        $fork = $processManager->fork(function() use ($sequenceName, $predis)
+        {
+            // Can't share a Redis connection with the parent as we'll get the "cant pub and sub on same channel" problem
+            // Not an issue outside of the tests because each PHP thread would only be requesting one number at a time
+            $predis->disconnect();
+            $predis->connect();
+            $result = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+            // Make the next proc wait
+            sleep(1);
+            $this->provider->release($sequenceName, $result);
+            return $result;
+        });
+        return $fork;
+    }
+
+    protected function forkToGetNextWithoutRelease($processManager, $predis, $sequenceName)
+    {
+        $fork = $processManager->fork(function() use ($sequenceName, $predis)
+        {
+            // Can't share a Redis connection with the parent as we'll get the "cant pub and sub on same channel" problem
+            // Not an issue outside of the tests because each PHP thread would only be requesting one number at a time
+            $predis->disconnect();
+            $predis->connect();
+            $result = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+            // Deliberately NOT marking as used or releasing
+            return $result;
+        });
+        return $fork;
+    }
+
+    protected function forkToGetNextCatchLock($processManager, $predis, $sequenceName)
+    {
+        $fork = $processManager->fork(function() use ($sequenceName, $predis)
+        {
+            // Can't share a Redis connection with the parent as we'll get the "cant pub and sub on same channel" problem
+            // Not an issue outside of the tests because each PHP thread would only be requesting one number at a time
+            $predis->disconnect();
+            $predis->connect();
+            try {
+                 $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+                 // Shouldnt get here
+                 return 0;
+                 
+            } catch (LockException $e) {
+                $this->provider->markUsed($sequenceName, $e->getLockedNumber());
+                $result = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
+                return $result;
+            }
+        });
+        return $fork;
     }
 
     protected function resetForIntegrationTests($provider, $sequenceName)

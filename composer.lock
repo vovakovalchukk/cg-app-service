@@ -1515,16 +1515,17 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "08236e5a1cd0270a6872a13132b69d673c5366ff"
+                "reference": "5e8b1e6c58b868783b5e2eb0a3241a4d4db483f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5703-sequential-number-service-ee8fa4.zip",
-                "reference": "08236e5a1cd0270a6872a13132b69d673c5366ff",
-                "shasum": "05979a09f4af74fe9a2709190e5e87fc31cbd6ba"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5703-sequential-number-service-19d01d.zip",
+                "reference": "5e8b1e6c58b868783b5e2eb0a3241a4d4db483f8",
+                "shasum": "36f0b257f3911d36ac544b3ec0c992d28893a0fd"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.2",
                 "composer/composer": "@dev",
                 "kriswallsmith/spork": "~0.3",
@@ -1542,7 +1543,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-04 15:52:56"
+            "time": "2015-06-05 11:10:39"
         },
         {
             "name": "channelgrabber/settings",
@@ -2819,7 +2820,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/4757546b31b66934878a1750bc6abdaccb279dd8",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "reference": "4defbc5c4f914564339462fc0a95382ce2720bb9",
                 "shasum": "fc8d3ef08ec8722524972bb91582d97159af3586"
             },
@@ -2873,7 +2874,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/dc4fb16b30c4984bd53d51b2b53f2dda1962d13a",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
                 "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
                 "shasum": "4169abc29babb4a7f6c2c708dac92c8627e95da2"
             },
