@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0eb8eaf9e44522332c0da66eda7a2a89",
+    "hash": "948334b6295ad955f492f7d69c53235a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1079,17 +1079,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6d055bcb34883b0d4d3cfa1750575540fad7f3aa"
+                "reference": "016ba9999b624155a0cba21759a1ea52920e4912"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5697-sequential-order-numbers-6b8cc5.zip",
-                "reference": "6d055bcb34883b0d4d3cfa1750575540fad7f3aa",
-                "shasum": "eda52c551fcc964c94802f1147bffa552d4bc75d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-88889c.zip",
+                "reference": "016ba9999b624155a0cba21759a1ea52920e4912",
+                "shasum": "9622cbe21057ba177b66f2dce63ed1ea2c5c86bc"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1106,6 +1106,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
+                "channelgrabber/sequential-numbering": "dev-EPIC-CGIV-5697-sequential-order-numbers as 1.0.0",
                 "channelgrabber/settings": ">=1.2.4,<2.0.0",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
@@ -1148,7 +1149,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-05 13:44:17"
+            "time": "2015-06-08 11:18:26"
         },
         {
             "name": "channelgrabber/permission",
@@ -6843,7 +6844,7 @@
         {
             "alias": "1.18.25",
             "alias_normalized": "1.18.25.0",
-            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
             "package": "channelgrabber/order"
         },
         {

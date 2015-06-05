@@ -42,6 +42,7 @@ use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
+use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
@@ -997,6 +998,7 @@ return array(
                 ItemStorageInterface::class => ItemRepository::class,
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
+                OrderStorage::class => OrderRepository::class,
             ]
         )
     )
