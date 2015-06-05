@@ -112,7 +112,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result, 'First sequential number not 1');
         try {
             $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
-            $this->assertTrue(false, 'LockException should have been thrown');
+            $this->fail('LockException should have been thrown');
 
         } catch (LockException $e) {
             $this->assertEquals(1, $e->getLockedNumber(), 'Locked number referenced in exception not as expected');
@@ -170,8 +170,10 @@ class RedisTest extends PHPUnit_Framework_TestCase
         $processManager = $di->get(ProcessManager::class);
         $predis = $di->get('reliable_redis');
         $sequenceName = static::SEQUENCE_NAME;
+
         $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
         $this->assertEquals(1, $result1, 'First sequential number not 1');
+
         // Need to call getNext() again but without blocking so we can then call markUsed() on the first one. Fork.
         $fork1 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
         $fork1->always(function($fork)
@@ -179,12 +181,14 @@ class RedisTest extends PHPUnit_Framework_TestCase
             $result = $fork->getResult();
             $this->assertEquals(2, $result, 'Second sequential number not 2');
         });
+
         $fork2 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
         $fork2->always(function($fork)
         {
             $result = $fork->getResult();
             $this->assertEquals(3, $result, 'Third sequential number not 3');
         });
+
         // Make the first child proc wait for a short time but less than the timeout
         sleep(1);
         $this->provider->markUsed($sequenceName, $result1);
@@ -203,8 +207,10 @@ class RedisTest extends PHPUnit_Framework_TestCase
         $processManager = $di->get(ProcessManager::class);
         $predis = $di->get('reliable_redis');
         $sequenceName = static::SEQUENCE_NAME;
+
         $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
         $this->assertEquals(1, $result1, 'First sequential number not 1');
+
         // Need to call getNext() again but without blocking so we can then call markUsed() on the first one. Fork.
         $fork1 = $this->forkToGetNextAndRelease($processManager, $predis, $sequenceName);
         $fork1->always(function($fork)
@@ -212,12 +218,14 @@ class RedisTest extends PHPUnit_Framework_TestCase
             $result = $fork->getResult();
             $this->assertEquals(2, $result, 'Second sequential number not 2');
         });
+
         $fork2 = $this->forkToGetNextAndMarkUsed($processManager, $predis, $sequenceName);
         $fork2->always(function($fork)
         {
             $result = $fork->getResult();
             $this->assertEquals(2, $result, 'Third request (after a release) for sequential number not 2');
         });
+
         // Make the first child proc wait for a short time but less than the timeout
         sleep(1);
         $this->provider->markUsed($sequenceName, $result1);
@@ -236,20 +244,24 @@ class RedisTest extends PHPUnit_Framework_TestCase
         $processManager = $di->get(ProcessManager::class);
         $predis = $di->get('reliable_redis');
         $sequenceName = static::SEQUENCE_NAME;
+
         $result1 = $this->provider->getNext($sequenceName, static::TIMEOUT_MCS);
         $this->assertEquals(1, $result1, 'First sequential number not 1');
+
         $fork1 = $this->forkToGetNextWithoutRelease($processManager, $predis, $sequenceName);
         $fork1->always(function($fork)
         {
             $result = $fork->getResult();
             $this->assertEquals(2, $result, 'Second sequential number not 2');
         });
+
         $fork2 = $this->forkToGetNextCatchLock($processManager, $predis, $sequenceName);
         $fork2->always(function($fork)
         {
             $result = $fork->getResult();
             $this->assertEquals(3, $result, 'Third sequential number not 3');
         });
+
         // Make the first child proc wait for a short time but less than the timeout
         sleep(1);
         $this->provider->markUsed($sequenceName, $result1);
