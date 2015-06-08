@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "87ba597a44ba6436eb1652b7a81e06f7",
+    "hash": "52c1a87728bae6ee3b1db82c9dcc2333",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -571,22 +571,22 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "1.7.2",
+            "version": "dev-CGIV-5771-channelImportListings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "56169bb26f655ee2f11536dfaaf10d84c51e6a33"
+                "reference": "60909188de037092f08f5416a7ed9564dec4af15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.7.2-dfd189.zip",
-                "reference": "56169bb26f655ee2f11536dfaaf10d84c51e6a33",
-                "shasum": "0a4c7f60650524d181e9cb48256d93548384dc1c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-5771-channelImportListings-0e65b9.zip",
+                "reference": "60909188de037092f08f5416a7ed9564dec4af15",
+                "shasum": "b8593233427acec8b5939e96f78989bf6746ff6e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": ">=1.4.0,<2.0.0",
-                "channelgrabber/channel": "^1.16.12",
+                "channelgrabber/channel": "^1.16.16",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/gearman": "^1.2.4",
@@ -630,7 +630,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-28 15:02:43"
+            "time": "2015-06-08 16:44:04"
         },
         {
             "name": "channelgrabber/email",
@@ -6873,10 +6873,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.8.4",
+            "alias_normalized": "1.8.4.0",
+            "version": "dev-CGIV-5771-channelImportListings",
+            "package": "channelgrabber/ekm"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ekm": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
