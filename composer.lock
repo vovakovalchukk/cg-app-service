@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "693bff0c82c5bfb097365850254d2ecd",
+    "hash": "20454bd55ceabaf28d3399e73099ee5d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1079,17 +1079,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.18.24.1",
+            "version": "dev-CGIV-5783-fix-missing-stock-adjustments",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4c463f0556e55f928e482672abcd4e1b06589019"
+                "reference": "134dd1a4b038df219ccbf76308964fd6e4f3b8aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.18.24.1-4323af.zip",
-                "reference": "4c463f0556e55f928e482672abcd4e1b06589019",
-                "shasum": "3c8ec98f9c0c096b38988747d0bb8c1f195db574"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5783-fix-missing-stock-adjustments-f02d65.zip",
+                "reference": "134dd1a4b038df219ccbf76308964fd6e4f3b8aa",
+                "shasum": "3f0275e94a03295a0cdf3ea880085c4f100cdf90"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1148,7 +1148,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-05 10:00:50"
+            "time": "2015-06-09 13:11:10"
         },
         {
             "name": "channelgrabber/permission",
@@ -6803,10 +6803,18 @@
             "time": "2012-12-21 11:40:51"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.18.25",
+            "alias_normalized": "1.18.25.0",
+            "version": "dev-CGIV-5783-fix-missing-stock-adjustments",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
