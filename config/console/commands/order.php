@@ -4,7 +4,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
-use DateTime;
+use CG\Stdlib\DateTime as StdlibDateTime;
 
 return [
     'order:updateAllItemsTax' => [
@@ -54,11 +54,21 @@ return [
             ]
         ],
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
-            $start = new DateTime($input->getArgument('start'));
-            $end = new DateTime($input->getArgument('end'));
+            $start = new \DateTime($input->getArgument('start'));
+            $end = new \DateTime($input->getArgument('end'));
             $dryRun = $input->getOption('dry-run');
+            $startString = $start->format(StdlibDateTime::FORMAT);
+            $endString = $end->format(StdlibDateTime::FORMAT);
+            $dryRunString = ($dryRun ? '(dry run)' : '');
+            $output->writeln('<info>'.vsprintf(
+                ApplyMissingStockAdjustmentsForCancDispRefOrders::LOG_MSG_INVOKED,
+                [$startString, $endString, $dryRunString]
+            ).'</info>');
+
             $command = $di->get(ApplyMissingStockAdjustmentsForCancDispRefOrders::class);
             $command($start, $end, $dryRun);
+
+            $output->writeln('<info>Done. Check the logs for details, log code: ' . ApplyMissingStockAdjustmentsForCancDispRefOrders::LOG_CODE . '</info>');
         }
     ]
 ];
