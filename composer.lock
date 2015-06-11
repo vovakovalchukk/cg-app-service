@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8997b920322d9267c200393988068f23",
+    "hash": "10bd7414d20acad310ec439773379709",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -12,13 +12,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "29b49121bbf27855902cd39132f6e419a9eeb98e"
+                "reference": "78d37756fb3925450f9b40d68d87e43e9546e40e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-CGIV-5793-EnforceRemoveByField-56e15e.zip",
-                "reference": "29b49121bbf27855902cd39132f6e419a9eeb98e",
-                "shasum": "25c6ef81ba1b4965fda875fe562f01064e57b2a8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-CGIV-5793-EnforceRemoveByField-2493ba.zip",
+                "reference": "78d37756fb3925450f9b40d68d87e43e9546e40e",
+                "shasum": "c024377a64841625f906708496bf0c72e7915f3d"
             },
             "require": {
                 "channelgrabber/cache": "dev-CGIV-5793-EnforceRemoveByField as 2.1.0",
@@ -65,7 +65,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-10 12:49:55"
+            "time": "2015-06-11 09:13:11"
         },
         {
             "name": "channelgrabber/billing",
@@ -129,13 +129,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "2511903aa83eac1dc40a4cab34d8bb0a6fc8eab1"
+                "reference": "cf1ad4c0bdeb1b79adc17e88f923b621f77580f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-5793-EnforceRemoveByField-92bd43.zip",
-                "reference": "2511903aa83eac1dc40a4cab34d8bb0a6fc8eab1",
-                "shasum": "b7058033a97cdd042172dc4c79e89df019db0993"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-5793-EnforceRemoveByField-6e12f7.zip",
+                "reference": "cf1ad4c0bdeb1b79adc17e88f923b621f77580f7",
+                "shasum": "b89dbd7e26ab33667009620f766bd3d1450a3838"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -159,7 +159,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-10 11:22:21"
+            "time": "2015-06-11 09:08:18"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -282,13 +282,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "b3edfd7426fdbdc541bb2509b18d90abbbf8cf34"
+                "reference": "5814bda20b5572e24fd18315e13fddf5228e73aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-5793-EnforceRemoveByField-4be793.zip",
-                "reference": "b3edfd7426fdbdc541bb2509b18d90abbbf8cf34",
-                "shasum": "7f622875d1cd3c0f72d587659d5a1ea1461a3d4a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-5793-EnforceRemoveByField-9934fd.zip",
+                "reference": "5814bda20b5572e24fd18315e13fddf5228e73aa",
+                "shasum": "cd29d6d2776d6278ded39178f462447e3d719801"
             },
             "require": {
                 "channelgrabber/cache": "dev-CGIV-5793-EnforceRemoveByField as 2.1.0",
@@ -348,7 +348,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-10 11:42:48"
+            "time": "2015-06-11 09:14:40"
         },
         {
             "name": "channelgrabber/cilex",
@@ -581,13 +581,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "cb3c215623a40bcfbbf189c3991a596079d93c32"
+                "reference": "dd764ffa3a44aae0e60c8f672e71c5a6624b8725"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-5793-EnforceRemoveByField-7feea6.zip",
-                "reference": "cb3c215623a40bcfbbf189c3991a596079d93c32",
-                "shasum": "549157ee07b68e1134b73f9284c499742a992ca4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-5793-EnforceRemoveByField-a85ad0.zip",
+                "reference": "dd764ffa3a44aae0e60c8f672e71c5a6624b8725",
+                "shasum": "96d98e636ee1c8b2c3177afe47b26b7d5c184fae"
             },
             "require": {
                 "channelgrabber/cache": "dev-CGIV-5793-EnforceRemoveByField as 2.1.0",
@@ -636,7 +636,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-10 13:25:18"
+            "time": "2015-06-11 09:19:11"
         },
         {
             "name": "channelgrabber/email",
@@ -1089,13 +1089,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4ca8d745e23e014bb050b7a9b752934a3172f1a8"
+                "reference": "271e505f1c622b81e4e44e1138e14e2dbf1f4b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5793-EnforceRemoveByField-3a30d5.zip",
-                "reference": "4ca8d745e23e014bb050b7a9b752934a3172f1a8",
-                "shasum": "06827321d145fcc29d498cfc06aad077b4b979cb"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5793-EnforceRemoveByField-c70aec.zip",
+                "reference": "271e505f1c622b81e4e44e1138e14e2dbf1f4b2a",
+                "shasum": "4890507f0d3d7abffafd41b9858f05345c33717d"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1154,7 +1154,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-10 12:31:06"
+            "time": "2015-06-11 09:21:19"
         },
         {
             "name": "channelgrabber/permission",
@@ -2795,7 +2795,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e89763dd50986f749ec97e188f6f6ed9cc5240c5",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "reference": "4defbc5c4f914564339462fc0a95382ce2720bb9",
                 "shasum": "fc8d3ef08ec8722524972bb91582d97159af3586"
             },
@@ -2849,7 +2849,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/0f0c8da938b3e2630dc1cfbdc25fc66648eb2fa6",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
                 "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
                 "shasum": "4169abc29babb4a7f6c2c708dac92c8627e95da2"
             },
