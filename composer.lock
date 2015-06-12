@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "948334b6295ad955f492f7d69c53235a",
+    "hash": "013b9fea7cba5decba172752ed223f7b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1083,13 +1083,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "016ba9999b624155a0cba21759a1ea52920e4912"
+                "reference": "5f75fcd0f241255cb4c95aba4c38617529af39e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-88889c.zip",
-                "reference": "016ba9999b624155a0cba21759a1ea52920e4912",
-                "shasum": "9622cbe21057ba177b66f2dce63ed1ea2c5c86bc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-a811fb.zip",
+                "reference": "5f75fcd0f241255cb4c95aba4c38617529af39e3",
+                "shasum": "238265d8836ae34f3e49a198787b6d747622cf61"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1106,7 +1106,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
-                "channelgrabber/sequential-numbering": "dev-EPIC-CGIV-5697-sequential-order-numbers as 1.0.0",
+                "channelgrabber/sequential-numbering": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId as 1.0.0",
                 "channelgrabber/settings": ">=1.2.4,<2.0.0",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
@@ -1149,7 +1149,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-08 11:18:26"
+            "time": "2015-06-12 14:52:11"
         },
         {
             "name": "channelgrabber/permission",
@@ -1348,6 +1348,65 @@
             "time": "2015-03-17 16:05:32"
         },
         {
+            "name": "channelgrabber/predis-async",
+            "version": "v0.2.3.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:channelgrabber/predis-async.git",
+                "reference": "a9b30c991b9137d1f4e499d69e95f65acddc5e5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-v0.2.3.1-8631a9.zip",
+                "reference": "a9b30c991b9137d1f4e499d69e95f65acddc5e5f",
+                "shasum": "54361c9b087af0d45895e32201e988b8bcad813d"
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "predis/predis": "0.8.*",
+                "react/event-loop": "0.3.*"
+            },
+            "replace": {
+                "predis/predis-async": "*"
+            },
+            "suggest": {
+                "ext-phpiredis": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis\\Async": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                },
+                {
+                    "name": "ChannelGrabber",
+                    "email": "dev@channelgrabber.com"
+                }
+            ],
+            "description": "Asynchronous version of Predis",
+            "homepage": "http://github.com/channelgrabber/predis-async",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-06-11 15:33:15"
+        },
+        {
             "name": "channelgrabber/product",
             "version": "1.4.5",
             "source": {
@@ -1512,24 +1571,24 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "3fb41c15dccac2755c8e4d60fdebf9cb1182ea6d"
+                "reference": "38ecc07e4c0e7a40d0b261e059cf124f8e4a6d59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-EPIC-CGIV-5697-sequential-order-numbers-59a13c.zip",
-                "reference": "3fb41c15dccac2755c8e4d60fdebf9cb1182ea6d",
-                "shasum": "51c637496743bbfa2f05709895a7de5012ce2918"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-59f8bb.zip",
+                "reference": "38ecc07e4c0e7a40d0b261e059cf124f8e4a6d59",
+                "shasum": "cd9d5eec94ea98c8ca31045ef3882c199b054322"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/predis-async": "~0.2.3.1",
                 "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.2",
                 "composer/composer": "@dev",
-                "kriswallsmith/spork": "~0.3",
                 "predis/predis": "~0.8.3"
             },
             "type": "di-definition",
@@ -1544,7 +1603,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-05 11:21:44"
+            "time": "2015-06-11 16:12:42"
         },
         {
             "name": "channelgrabber/settings",
@@ -2969,6 +3028,54 @@
                 "dependency injection"
             ],
             "time": "2013-03-08 08:21:40"
+        },
+        {
+            "name": "react/event-loop",
+            "version": "v0.3.4",
+            "target-dir": "React/EventLoop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/event-loop.git",
+                "reference": "235cddfa999a392e7d63dc9bef2e042492608d9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/react-event-loop-235cddfa999a392e7d63dc9bef2e042492608d9f-zip-bf72e7.zip",
+                "reference": "235cddfa999a392e7d63dc9bef2e042492608d9f",
+                "shasum": "3a2b7fdfed0ffd6d813faa9826d0500fbba106d8"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-libev": "*",
+                "ext-libevent": ">=0.0.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "React\\EventLoop": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Event loop abstraction layer that libraries can use for evented I/O.",
+            "keywords": [
+                "event-loop"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2013-07-21 02:23:09"
         },
         {
             "name": "rhumsaa/vnderror",
@@ -6850,7 +6957,7 @@
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
+            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
             "package": "channelgrabber/sequential-numbering"
         }
     ],
