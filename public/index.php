@@ -9,7 +9,6 @@ use CG\Slim\Versioning\Middleware as Versioning;
 use CG\Slim\Itid\ItidInjector;
 use CG\Slim\Etag;
 use CG\Slim\Etag\ConfigFactory as EtagConfigFactory;
-use CG\Stock\Audit\Middleware as StockAuditMiddleware;
 use CG\Middleware\Handler as MiddlewareHandler;
 
 require_once dirname(__DIR__).'/application/bootstrap.php';
