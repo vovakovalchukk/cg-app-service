@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "013b9fea7cba5decba172752ed223f7b",
+    "hash": "04d6189e56481d109b9d570febd7cab5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1571,17 +1571,17 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "version": "dev-CGIV-5699-ComponentPredisAsync",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "38ecc07e4c0e7a40d0b261e059cf124f8e4a6d59"
+                "reference": "850574b7f30e4f7cf0739627416aeceeb071cfd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-59f8bb.zip",
-                "reference": "38ecc07e4c0e7a40d0b261e059cf124f8e4a6d59",
-                "shasum": "cd9d5eec94ea98c8ca31045ef3882c199b054322"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5699-ComponentPredisAsync-7429d3.zip",
+                "reference": "850574b7f30e4f7cf0739627416aeceeb071cfd5",
+                "shasum": "c11d4041285713eb698fcfbdfba32c9351f1a1d9"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -1603,7 +1603,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-11 16:12:42"
+            "time": "2015-06-17 09:47:49"
         },
         {
             "name": "channelgrabber/settings",
@@ -6955,9 +6955,9 @@
             "package": "channelgrabber/order"
         },
         {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "alias": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "alias_normalized": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "version": "dev-CGIV-5699-ComponentPredisAsync",
             "package": "channelgrabber/sequential-numbering"
         }
     ],

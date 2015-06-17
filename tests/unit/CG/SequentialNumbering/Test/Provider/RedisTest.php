@@ -1,21 +1,34 @@
 <?php
 namespace CG\SequentialNumbering\Test\Provider;
 
-use CG\SequentialNumbering\Provider\Redis;
 use CG\SequentialNumbering\LockException;
+use CG\SequentialNumbering\Provider\Redis;
 use PHPUnit_Framework_TestCase;
 use Spork\ProcessManager;
+use Zend\Di\Di;
 
+/**
+ * @backupGlobals disabled
+ */
 class RedisTest extends PHPUnit_Framework_TestCase
 {
     const SEQUENCE_NAME = 'IntegrationTest';
     const TIMEOUT = 3;
 
+    /**
+     * @var Di $di
+     */
     protected static $di;
+    /**
+     * @var Redis $provider
+     */
     protected $provider;
 
     public static function setUpBeforeClass()
     {
+        /**
+         * @var Di $di
+         */
         require_once 'application/bootstrap.php';
         static::$di = $di;
     }
@@ -31,7 +44,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testGetNextReturnsFirstNumber()
     {
@@ -43,7 +55,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testGetNextThrowsExceptionIfLockNotReleased()
     {
@@ -57,7 +68,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testMarkUsedSucceedsForCorrectNumber()
     {
@@ -72,7 +82,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testMarkUsedThrowsExceptionForIncorrectNumber()
     {
@@ -86,7 +95,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testGetNextReturnsSequentialNumbersWhenEachIsUsed()
     {
@@ -102,7 +110,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testLockExceptionCanBeOvercomeWithMarkUsed()
     {
@@ -124,7 +131,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testReleaseResetsNextNumber()
     {
@@ -139,7 +145,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group onebyone
-     * @backupGlobals disabled
      */
     public function testLockExceptionCanBeOvercomeWithRelease()
     {
@@ -161,7 +166,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group queued
-     * @backupGlobals disabled
      */
     public function testMultipleGetNextRequestsAreQueuedAndGetSequentialNumbers()
     {
@@ -198,7 +202,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group queued
-     * @backupGlobals disabled
      */
     public function testMultipleGetNextRequestsWorkWithRelease()
     {
@@ -235,7 +238,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
     /**
      * @group integration
      * @group queued
-     * @backupGlobals disabled
      */
     public function testQueuedItemTimeoutWorks() 
     {
@@ -339,7 +341,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
         return $fork;
     }
 
-    protected function resetForIntegrationTests($provider, $sequenceName)
+    protected function resetForIntegrationTests(Redis $provider, $sequenceName)
     {
         $di = static::$di;
         $predis = $di->get('reliable_redis');
