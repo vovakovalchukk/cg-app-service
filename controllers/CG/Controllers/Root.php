@@ -22,7 +22,7 @@ class Root
         return $this->getMapper()->getHal();
     }
 
-    public function setMapper($mapper)
+    public function setMapper(Mapper $mapper)
     {
         $this->mapper = $mapper;
         return $this;
