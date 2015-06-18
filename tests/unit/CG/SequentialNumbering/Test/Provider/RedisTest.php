@@ -12,26 +12,17 @@ use Zend\Di\Di;
  */
 class RedisTest extends PHPUnit_Framework_TestCase
 {
-    const SEQUENCE_NAME = 'IntegrationTest';
-    const TIMEOUT = 3;
+    use RedisTestTrait {
+        setUpBeforeClass as setupPredis;
+    }
 
-    /**
-     * @var Di $di
-     */
-    protected static $di;
+    const SEQUENCE_NAME = 'IntegrationTest';
+    const TIMEOUT = 1;
+
     /**
      * @var Redis $provider
      */
     protected $provider;
-
-    public static function setUpBeforeClass()
-    {
-        /**
-         * @var Di $di
-         */
-        require_once 'application/bootstrap.php';
-        static::$di = $di;
-    }
 
     public function setUp()
     {
@@ -343,8 +334,7 @@ class RedisTest extends PHPUnit_Framework_TestCase
 
     protected function resetForIntegrationTests(Redis $provider, $sequenceName)
     {
-        $di = static::$di;
-        $predis = $di->get('reliable_redis');
+        $predis = static::$predis;
         $numberKey = $provider->generateNumberKey($sequenceName);
         $lockKey = $provider->generateLockKey($sequenceName);
         $queueKey = $provider->generateQueueKey($sequenceName);

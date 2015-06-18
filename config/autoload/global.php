@@ -1002,7 +1002,7 @@ return array(
 ),
             SequentialNumberingProviderRedis::class => [
                 'parameter' => [
-                    'predisAsync' => 'Predis\\Async\\Client',
+                    'predisAsync' => 'reliable_redis_async',
                 ]
             ],
             'preferences' => [
