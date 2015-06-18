@@ -980,26 +980,6 @@ return array(
                     'sqlClient' => 'ReadCGSql',
                 ]
             ],
-// TEMP: needs adding to di.redis.local.php via Chef
-'Predis\\Async\\Client' => array(
-    'parameters' => array(
-        'parameters' => array(
-            'scheme' => 'tcp',
-            'host' => '192.168.33.51',
-            'port' => '6380',
-            'isPersistent' => true,
-            'failureExceptions' => [
-                'maxmemory',
-            ],
-        ),
-        'options' => array(
-            'connections' => array(
-                'tcp' => 'CG\Predis\Connection\PhpiredisConnection',
-                'unix' => 'CG\Predis\Connection\PhpiredisStreamConnection'
-            )
-        )
-    )
-),
             SequentialNumberingProviderRedis::class => [
                 'parameter' => [
                     'predisAsync' => 'reliable_redis_async',
