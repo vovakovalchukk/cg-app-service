@@ -42,6 +42,7 @@ use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Shared\Repository as OrderRepository;
+use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
@@ -126,6 +127,7 @@ use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
+use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 
@@ -973,9 +975,34 @@ return array(
                     'predisClient' => 'reliable_redis',
                 ]
             ],
+            ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql',
+                ]
+            ],
+// TEMP: needs adding to di.redis.local.php via Chef
+'Predis\\Async\\Client' => array(
+    'parameters' => array(
+        'parameters' => array(
+            'scheme' => 'tcp',
+            'host' => '192.168.33.51',
+            'port' => '6380',
+            'isPersistent' => true,
+            'failureExceptions' => [
+                'maxmemory',
+            ],
+        ),
+        'options' => array(
+            'connections' => array(
+                'tcp' => 'CG\Predis\Connection\PhpiredisConnection',
+                'unix' => 'CG\Predis\Connection\PhpiredisStreamConnection'
+            )
+        )
+    )
+),
             SequentialNumberingProviderRedis::class => [
                 'parameter' => [
-                    'predis' => 'reliable_redis',
+                    'predisAsync' => 'reliable_redis_async',
                 ]
             ],
             'preferences' => [
@@ -997,6 +1024,7 @@ return array(
                 ItemStorageInterface::class => ItemRepository::class,
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
+                OrderStorage::class => OrderRepository::class,
             ]
         )
     )
