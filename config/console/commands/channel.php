@@ -1,5 +1,6 @@
 <?php
 use CG\Channel\Command\Order\Download as OrderDownload;
+use CG\Channel\Command\Message\Download as MessageDownload;
 use CG\Channel\Command\Listing\Import as ListingImport;
 use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
@@ -85,5 +86,51 @@ return [
                 'default' => 100,
             ],
         ]
+    ],
+    'channel:downloadMessages' => [
+        'command' => function (InputInterface $input) use ($di) {
+                $channel = $input->getArgument('channel');
+                $from = $input->getArgument('from');
+                $to = $input->getArgument('to');
+                $accountId = $input->getArgument('accountId');
+                $logFoundOrders = $input->getOption('logFoundOrders');
+                $lowPriority = $input->getOption('lowPriority');
+                $highPriority = $input->getOption('highPriority');
+
+                /**
+                 * @var OrderDownload $command
+                 */
+                $command = $di->get(MessageDownload::class);
+                $command->downloadOrders($channel, $from, $to, $accountId, $logFoundOrders, $lowPriority, $highPriority);
+            },
+        'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get messages from the respective channel.',
+        'arguments' => [
+            'channel' => [
+                'required' => true
+            ],
+            'from' => [
+                'required' => false,
+                'default' => null
+            ],
+            'to' => [
+                'required' => false,
+                'default' => null
+            ],
+            'accountId' => [
+                'required' => false
+            ]
+        ],
+        'options' => [
+            'logFoundOrders' => [
+                'description' => 'logs errors if orders are discovered',
+            ],
+            'lowPriority' => [
+                'description' => 'Queue generated jobs at low priority',
+            ],
+            'highPriority' => [
+                'description' => 'Queue generated jobs at high priority',
+            ]
+        ],
+        'modulus' => true
     ],
 ];
