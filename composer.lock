@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1b15a218adde91603da986204b098a9",
+    "hash": "a85579742855707efb1cab4df59931a8",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1085,17 +1085,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "06960ee32c8ce3a5319f5fa85fbd3eda9de28963"
+                "reference": "c2c1424e682bc3a4db0d64d10ecd2543cd6e4e5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId-3e92f3.zip",
-                "reference": "06960ee32c8ce3a5319f5fa85fbd3eda9de28963",
-                "shasum": "f2fd973b65cfedc9c6d713df734a5fb0c7f62101"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5697-sequential-order-numbers-5b9edf.zip",
+                "reference": "c2c1424e682bc3a4db0d64d10ecd2543cd6e4e5c",
+                "shasum": "81123676951e41219f6e4484d33de86dafdb6e2a"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1112,7 +1112,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
-                "channelgrabber/sequential-numbering": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId as 1.0.0",
+                "channelgrabber/sequential-numbering": "dev-EPIC-CGIV-5697-sequential-order-numbers as 1.0.0",
                 "channelgrabber/settings": ">=1.2.4,<2.0.0",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
@@ -1156,7 +1156,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-18 10:07:51"
+            "time": "2015-06-18 17:27:03"
         },
         {
             "name": "channelgrabber/permission",
@@ -1356,7 +1356,7 @@
         },
         {
             "name": "channelgrabber/predis-async",
-            "version": "dev-CGIV-5699-CloneCreateNewConnection",
+            "version": "v0.2.3.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/predis-async.git",
@@ -1364,9 +1364,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-dev-CGIV-5699-CloneCreateNewConnection-60bf12.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-v0.2.3.2-60bf12.zip",
                 "reference": "27dbf1a362ff1e1ecb84cb42718ae9dadd97579d",
-                "shasum": "2e03122f6068818ba7793b4ef775738c0c0bb915"
+                "shasum": "15eab37ac5c78f81f49e1262ec6ca517823a88d9"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -1578,21 +1578,21 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "dev-CGIV-5699-ComponentPredisAsync",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "b377f90a56f717599ab8f4ba039c42a92c88dcdc"
+                "reference": "4ccc9cf9d90f4757721bf7ddcd9e4b579a833691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5699-ComponentPredisAsync-e1cfc3.zip",
-                "reference": "b377f90a56f717599ab8f4ba039c42a92c88dcdc",
-                "shasum": "c8ce6c2afeb01f7613f1b7d84b41f6c94477ea78"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-EPIC-CGIV-5697-sequential-order-numbers-8797e8.zip",
+                "reference": "4ccc9cf9d90f4757721bf7ddcd9e4b579a833691",
+                "shasum": "672a954f91395b4dd472632e83ab05580df7069d"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
-                "channelgrabber/predis-async": "dev-CGIV-5699-CloneCreateNewConnection as 0.2.3.2",
+                "channelgrabber/predis-async": "^0.2.3.2",
                 "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.2",
                 "composer/composer": "@dev",
@@ -1610,7 +1610,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-18 16:43:17"
+            "time": "2015-06-18 17:16:11"
         },
         {
             "name": "channelgrabber/settings",
@@ -6958,19 +6958,13 @@
         {
             "alias": "1.18.28",
             "alias_normalized": "1.18.28.0",
-            "version": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "package": "channelgrabber/order"
         },
         {
-            "alias": "0.2.3.2",
-            "alias_normalized": "0.2.3.2",
-            "version": "dev-CGIV-5699-CloneCreateNewConnection",
-            "package": "channelgrabber/predis-async"
-        },
-        {
-            "alias": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
-            "alias_normalized": "dev-CGIV-5699-order-set-invoiceNumber-and-rootOuId",
-            "version": "dev-CGIV-5699-ComponentPredisAsync",
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "package": "channelgrabber/sequential-numbering"
         }
     ],
@@ -6978,7 +6972,6 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
-        "channelgrabber/predis-async": 20,
         "channelgrabber/sequential-numbering": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
