@@ -68,7 +68,6 @@ class GetNextAndLockTest extends PHPUnit_Framework_TestCase
 
     protected function testSequence($expected)
     {
-        $eventLoop = static::$predisAsync->getEventLoop();
         $getNextAndLock = static::$getNextAndLock;
         try {
             $next = $getNextAndLock(static::$predisAsync);

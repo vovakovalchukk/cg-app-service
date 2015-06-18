@@ -100,7 +100,6 @@ class WaitInQueueTest extends PHPUnit_Framework_TestCase
      */
     public function testWait()
     {
-        $eventLoop = static::$predisAsync->getEventLoop();
         $waitInQueue = static::$waitInQueue;
         try {
             $waitInQueue(static::$predisAsync);
