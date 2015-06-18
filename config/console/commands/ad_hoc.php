@@ -19,7 +19,6 @@ return [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
 
             $gearmanClient = $di->get(GearmanClient::class);
-            $gearmanClient->addServer('192.168.33.51', 4730); // TODO shouldn't have to do this...
 
             $accountService = $di->get(AccountService::class);
             $orderMapper = $di->get(OrderMapper::class);
@@ -68,7 +67,7 @@ return [
 
                         $order = $orderMapper->fromArray($orderRawData);
 
-                        $workload = new SetInvoiceIdWorkload($order);
+                        $workload = new SetInvoiceIdWorkload($order->getId());
                         $gearmanClient->doBackground(
                             SetInvoiceIdWorkerFunction::FUNCTION_NAME,
                             serialize($workload),
