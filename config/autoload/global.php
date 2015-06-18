@@ -127,6 +127,7 @@ use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
+use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 
@@ -972,6 +973,11 @@ return array(
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql',
                     'predisClient' => 'reliable_redis',
+                ]
+            ],
+            ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql',
                 ]
             ],
 // TEMP: needs adding to di.redis.local.php via Chef
