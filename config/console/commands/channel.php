@@ -93,7 +93,6 @@ return [
                 $from = $input->getArgument('from');
                 $to = $input->getArgument('to');
                 $accountId = $input->getArgument('accountId');
-                $logFoundOrders = $input->getOption('logFoundOrders');
                 $lowPriority = $input->getOption('lowPriority');
                 $highPriority = $input->getOption('highPriority');
 
@@ -101,7 +100,7 @@ return [
                  * @var OrderDownload $command
                  */
                 $command = $di->get(MessageDownload::class);
-                $command->downloadOrders($channel, $from, $to, $accountId, $logFoundOrders, $lowPriority, $highPriority);
+                $command->downloadMessages($channel, $from, $to, $accountId, $lowPriority, $highPriority);
             },
         'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get messages from the respective channel.',
         'arguments' => [
@@ -121,16 +120,12 @@ return [
             ]
         ],
         'options' => [
-            'logFoundOrders' => [
-                'description' => 'logs errors if orders are discovered',
-            ],
             'lowPriority' => [
                 'description' => 'Queue generated jobs at low priority',
             ],
             'highPriority' => [
                 'description' => 'Queue generated jobs at high priority',
             ]
-        ],
-        'modulus' => true
+        ]
     ],
 ];
