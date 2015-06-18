@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e2be30cef2b4e3731a269d64e1d5bb2f",
+    "hash": "b2edf2320268715b1899f6185c9cf490",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1079,17 +1079,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-5726-retro-fix-invoiceNumber",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1597bf658dc1c38e876dc23b749dbc0afc54b50b"
+                "reference": "9f2b12c0aa8fa8b17448f57638d7faeb40c19833"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5726-retro-fix-invoiceNumber-e8991e.zip",
-                "reference": "1597bf658dc1c38e876dc23b749dbc0afc54b50b",
-                "shasum": "65eb538c0185d31fb7b7c785e4b8a977473bc5be"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5697-sequential-order-numbers-13e80d.zip",
+                "reference": "9f2b12c0aa8fa8b17448f57638d7faeb40c19833",
+                "shasum": "a2433d109d6a7f6f2a59805199faa7fbd8e12fab"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1150,7 +1150,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-18 18:27:34"
+            "time": "2015-06-18 18:33:19"
         },
         {
             "name": "channelgrabber/permission",
@@ -6952,7 +6952,7 @@
         {
             "alias": "1.18.25",
             "alias_normalized": "1.18.25.0",
-            "version": "dev-CGIV-5726-retro-fix-invoiceNumber",
+            "version": "dev-EPIC-CGIV-5697-sequential-order-numbers",
             "package": "channelgrabber/order"
         },
         {
