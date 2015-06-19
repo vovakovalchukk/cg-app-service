@@ -24,7 +24,7 @@ return [
             /**
              * @var OU $ou
              */
-            foreach ($ouService->fetchRootOus('all', 1) as $ou) {
+            foreach ($ouService->fetchFiltered('all', 1) as $ou) {
                 $workload = new Workload($ou->getId());
                 $gearmanClient->doBackground(
                     WorkerFunction::FUNCTION_NAME,
