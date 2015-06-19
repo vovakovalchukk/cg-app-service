@@ -1,4 +1,5 @@
 <?php
+use CG\Gearman\Client as GearmanClient;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
 use CG\OrganisationUnit\Entity as OU;
