@@ -4,9 +4,9 @@ namespace CG\SequentialNumbering\Test\Provider;
 use CG\SequentialNumbering\LockException;
 use CG\SequentialNumbering\Provider\Redis;
 use PHPUnit_Framework_TestCase;
-use Spork\ProcessManager;
-use Zend\Di\Di;
 use Spork\Fork;
+use Spork\ProcessManager;
+use UnexpectedValueException;
 
 /**
  * @backupGlobals disabled
@@ -167,8 +167,8 @@ class RedisTest extends PHPUnit_Framework_TestCase
         $this->provider->release($sequenceName, $result);
         try {
             $this->provider->markUsed($sequenceName, $result);
-        } catch (LockException $e) {
-            $this->assertEquals(1, $e->getLockedNumber(), 'Locked number referenced in exception not as expected');
+        } catch (UnexpectedValueException $e) {
+            $this->assertEquals(1, $result, 'Locked number referenced in exception not as expected');
             $this->provider->markPreviouslyUsed($sequenceName, $result);
         }
     }
