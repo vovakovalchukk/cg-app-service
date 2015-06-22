@@ -159,29 +159,6 @@ class RedisTest extends PHPUnit_Framework_TestCase
      * @group integration
      * @group onebyone
      */
-    public function testForceMarkUsed()
-    {
-        $sequenceName = static::SEQUENCE_NAME;
-        $result = $this->provider->getNext($sequenceName, static::TIMEOUT);
-        $this->assertEquals(1, $result, 'First sequential number not 1');
-
-        $this->provider->release($sequenceName, $result);
-
-        try {
-            $this->provider->markUsed($sequenceName, $result);
-        } catch (UnexpectedValueException $e) {
-            $this->assertEquals(1, $result, 'Locked number referenced in exception not as expected');
-//            $this->provider->markPreviouslyUsed($sequenceName, $result);
-        }
-
-        $numberKey = $this->provider->generateNumberKey($sequenceName);
-        $this->assertEquals($result, static::$predis->get($numberKey), 'Should still have the last sequence number');
-    }
-
-    /**
-     * @group integration
-     * @group onebyone
-     */
     public function testForceMarkUsedAfterCleanup()
     {
         $sequenceName = static::SEQUENCE_NAME;
