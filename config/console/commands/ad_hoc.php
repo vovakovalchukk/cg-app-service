@@ -6,6 +6,7 @@ use CG\OrganisationUnit\Entity as OU;
 use CG\OrganisationUnit\Service as OUService;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use CG\Zend\Stdlib\Db\Sql\Sql as SqlClient;
 
 return [
     'ad-hoc:retrofitInvoiceNumbers' => [
@@ -13,23 +14,23 @@ return [
         'arguments' => [],
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             /**
-             * @var OUService $ouService
-             */
-            $ouService = $di->get(OUService::class);
-            /**
              * @var GearmanClient $gearmanClient
              */
             $gearmanClient = $di->get(GearmanClient::class);
 
-            /**
-             * @var OU $ou
-             */
-            foreach ($ouService->fetchFiltered('all', 1) as $ou) {
-                $workload = new Workload($ou->getId());
+            $sqlClient = $di->get('ReadCGSql');
+            $query = 'SELECT organisationUnitId, COUNT(*) AS orderCount
+                FROM `order`
+                GROUP BY organisationUnitId
+                ORDER BY orderCount DESC';
+            $results = $sqlClient->getAdapter()->query($query)->execute();
+            foreach ($results as $row) {
+                $ouId = $row['organisationUnitId'];
+                $workload = new Workload($ouId);
                 $gearmanClient->doBackground(
                     WorkerFunction::FUNCTION_NAME,
                     serialize($workload),
-                    WorkerFunction::FUNCTION_NAME . '-' . $ou->getId()
+                    WorkerFunction::FUNCTION_NAME . '-' . $ouId
                 );
             }
         },
