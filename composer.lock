@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba1858894278a72a407fee6ebd3f38f8",
+    "hash": "25d56434fdeaf7364d5926459b245509",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1085,17 +1085,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.0",
+            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "339c0c46e2de9f535151e38769e7953cd53336fc"
+                "reference": "ff9f4e4cdd5e823a716d07b552637d03c88e014d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.0-ae80ad.zip",
-                "reference": "339c0c46e2de9f535151e38769e7953cd53336fc",
-                "shasum": "ec400ad6a4d1f329dbe0e98c01f4d4f66b8129dc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5831-invoice-number-process-overlap-improvements-9cfd63.zip",
+                "reference": "ff9f4e4cdd5e823a716d07b552637d03c88e014d",
+                "shasum": "ffd9d3d6e5caa0517c00d3e2467ca2e8b3fb683d"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1156,7 +1156,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-22 10:54:06"
+            "time": "2015-06-22 13:40:02"
         },
         {
             "name": "channelgrabber/permission",
@@ -1578,17 +1578,17 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "1.0.0",
+            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "0e1707c74ae8f915f869270f186f1fd4f31c0e5a"
+                "reference": "5c4bb6351a7c71d265b8f160fb42be36671361a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.0.0-e08ab1.zip",
-                "reference": "0e1707c74ae8f915f869270f186f1fd4f31c0e5a",
-                "shasum": "e285fde9831eb94043175db7c90a235627f31ba1"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5831-invoice-number-process-overlap-improvements-610fc4.zip",
+                "reference": "5c4bb6351a7c71d265b8f160fb42be36671361a8",
+                "shasum": "610e53e9c27949f4d039eaa7eb764b2c19a7dd42"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -1610,7 +1610,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-22 10:45:38"
+            "time": "2015-06-22 13:42:51"
         },
         {
             "name": "channelgrabber/settings",
@@ -7256,10 +7256,25 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.1",
+            "alias_normalized": "1.19.1.0",
+            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.0.0.1",
+            "alias_normalized": "1.0.0.1",
+            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
+            "package": "channelgrabber/sequential-numbering"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
+        "channelgrabber/sequential-numbering": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
