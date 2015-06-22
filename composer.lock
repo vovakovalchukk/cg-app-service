@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25d56434fdeaf7364d5926459b245509",
+    "hash": "3df8005eb21ba9892274d942c32c28bf",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1085,17 +1085,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
+            "version": "1.19.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ff9f4e4cdd5e823a716d07b552637d03c88e014d"
+                "reference": "3f40f0deb38cef1db352cd08456673da01979505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5831-invoice-number-process-overlap-improvements-9cfd63.zip",
-                "reference": "ff9f4e4cdd5e823a716d07b552637d03c88e014d",
-                "shasum": "ffd9d3d6e5caa0517c00d3e2467ca2e8b3fb683d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.1-5106d7.zip",
+                "reference": "3f40f0deb38cef1db352cd08456673da01979505",
+                "shasum": "e9ff2b69c24b62214aaa7b12c3dc91595a0fcbb6"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1156,7 +1156,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-22 13:40:02"
+            "time": "2015-06-22 14:28:26"
         },
         {
             "name": "channelgrabber/permission",
@@ -1578,7 +1578,7 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
+            "version": "1.0.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
@@ -1586,9 +1586,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-dev-CGIV-5831-invoice-number-process-overlap-improvements-610fc4.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.0.0.1-610fc4.zip",
                 "reference": "5c4bb6351a7c71d265b8f160fb42be36671361a8",
-                "shasum": "610e53e9c27949f4d039eaa7eb764b2c19a7dd42"
+                "shasum": "0238b8c66e52122d5ec2086fd61b6079e7b9d9b3"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -7256,25 +7256,10 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.19.1",
-            "alias_normalized": "1.19.1.0",
-            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.0.0.1",
-            "alias_normalized": "1.0.0.1",
-            "version": "dev-CGIV-5831-invoice-number-process-overlap-improvements",
-            "package": "channelgrabber/sequential-numbering"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/sequential-numbering": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
