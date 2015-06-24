@@ -254,8 +254,43 @@ use CG\Product\VariationAttributeMap\Service as VariationAttributeMapService;
 use CG\Product\VariationAttributeMap\Mapper as VariationAttributeMapMapper;
 use CG\Product\VariationAttributeMap\Storage\Db as VariationAttributeMapDbStorage;
 
+// Phantom JS
+use JonnyW\PhantomJs\Client as PhantomJSClient;
+
+// EKM
+use CG\Ekm\Product\TaxRate\Mapper as EkmTaxRateMapper;
+use CG\Ekm\Product\TaxRate\Repository as EkmTaxRateRepository;
+use CG\Ekm\Product\TaxRate\Service as EkmTaxRateService;
+use CG\Ekm\Product\TaxRate\Storage\Cache as EkmTaxRateCache;
+use CG\Ekm\Product\TaxRate\Storage\Db as EkmTaxRateDb;
+use CG\Ekm\Product\TaxRate\StorageInterface as EkmTaxRateStorage;
+
 return array(
     'di' => array(
+        'definition' => [
+            'class' => [
+                PhantomJSClient::class => [
+                    'instantiator' => 'JonnyW\PhantomJs\Client::getInstance',
+                    'methods' => [
+                        'addOption' => [
+                            'option' => [
+                                'required' => true
+                            ]
+                        ],
+                        'setPhantomJs' => [
+                            'path' => [
+                                'required' => true
+                            ]
+                        ],
+                        'setPhantomLoader' => [
+                            'path' => [
+                                'required' => true
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
         'instance' => array(
             'aliases' => array(
                 'ReadCGSql' => CGSql::class,
@@ -977,7 +1012,49 @@ return array(
             ],
             ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand::class => [
                 'parameter' => [
-                    'sqlClient' => 'ReadCGSql',
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            PhantomJSClient::class => [
+                'instantiator' => 'JonnyW\PhantomJs\Client::getInstance',
+                'injections' => [
+                    'addOption' => [
+                        ['option' => '--cookies-file=/tmp/cookie-jar/' . uniqid('', true)],
+                        ['option' => '--local-storage-path=/var/www/cg_app/current/vendor/channelgrabber/php-phantomjs/bin/']
+                    ],
+                    'setPhantomJs' => [
+                        ['path' => '/usr/bin/phantomjs']
+                    ],
+                    'setPhantomLoader' => [
+                        ['path' => '/var/www/cg_app/current/vendor/channelgrabber/php-phantomjs/bin/phantomloader']
+                    ]
+                ]
+            ],
+
+            EkmTaxRateCache::class => [
+                'parameter' => [
+                    'mapper' => EkmTaxRateMapper::class
+                ]
+            ],
+            EkmTaxRateDb::class => array(
+                'parameters' => array(
+                    'readSql' => 'ekmReadSql',
+                    'fastReadSql' => 'ekmFastReadSql',
+                    'writeSql' => 'ekmWriteSql',
+                    'mapper' => EkmTaxRateMapper::class
+                )
+            ),
+            EkmTaxRateRepository::class => [
+                'parameters' => [
+                    'storage' => EkmTaxRateCache::class,
+                    'repository' => EkmTaxRateDb::class,
+                ]
+            ],
+            EkmTaxRateService::class => [
+                'parameters' => [
+                    'cryptor' => 'ekm_cryptor',
+                    'repository' => EkmTaxRateRepository::class,
+                    'phantomJs' => PhantomJSClient::class
                 ]
             ],
             SequentialNumberingProviderRedis::class => [
