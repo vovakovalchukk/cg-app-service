@@ -280,7 +280,25 @@ class Entity implements RulesInterface
                 'name' => 'fulfilmentChannel',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
-            )
+            ),
+            'invoiceNumber' => [
+                'name'       => 'invoiceNumber',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'invoiceNumber']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'invoiceNumber must be at least %min%'])
+                ]
+            ],
+            'rootOrganisationUnitId' => [
+                'name'       => 'rootOrganisationUnitId',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'rootOrganisationUnitId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'rootOrganisationUnitId must be at least %min%'])
+                ]
+            ],
         );
     }
 

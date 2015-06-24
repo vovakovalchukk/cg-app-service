@@ -1,5 +1,6 @@
 <?php
 $files = [
+    'ad_hoc.php',
     'failoverClient.php',
     'channel.php',
     'listing.php',
