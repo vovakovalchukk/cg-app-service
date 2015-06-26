@@ -36,7 +36,7 @@ SQL;
         foreach ($this->getAffectedTables() as $table => $column) {
             $sql .= sprintf($updateTemplate, $table, $column, $newId, $column, $originalId);
         }
-        return $sql . "COMMIT;";
+        return $sql . " COMMIT;";
     }
 
     protected function getAffectedTables()
