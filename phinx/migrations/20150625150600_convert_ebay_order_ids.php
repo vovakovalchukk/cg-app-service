@@ -7,14 +7,10 @@ class ConvertEbayOrderIds extends AbstractMigration
     {
         $orderIds = $this->fetchAll($this->getEbayOrderIdQuery());
 
-        $this->execute("START TRANSACTION;");
-
         foreach ($orderIds as $orderId) {
             $newId = $orderId["accountId"] . "-" . $orderId["ebayOrderId"];
             $this->execute($this->getUpdate($newId, $orderId["originalId"]));
         }
-
-        $this->execute("COMMIT;");
     }
 
     public function down()
@@ -35,12 +31,12 @@ SQL;
 
     protected function getUpdate($newId, $originalId)
     {
-        $sql = "";
+        $sql = "START TRANSACTION;";
         $updateTemplate = $this->getUpdateOrderIdQuery();
         foreach ($this->getAffectedTables() as $table => $column) {
             $sql .= sprintf($updateTemplate, $table, $column, $newId, $column, $originalId);
         }
-        return $sql;
+        return $sql . "COMMIT;";
     }
 
     protected function getAffectedTables()
