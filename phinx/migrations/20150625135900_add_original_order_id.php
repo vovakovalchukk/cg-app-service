@@ -8,9 +8,11 @@ class AddOriginalOrderId extends AbstractMigration
         $this->execute("START TRANSACTION;");
         $this->table('order')
             ->addColumn("originalId", "string", ["limit" => 120])
+            ->addIndex(["originalId"], ['unique' => true])
             ->update();
         $this->table('orderLive')
             ->addColumn("originalId", "string", ["limit" => 120])
+            ->addIndex(["originalId"], ['unique' => true])
             ->update();
 
         $this->execute("UPDATE `order` SET originalId = id");
