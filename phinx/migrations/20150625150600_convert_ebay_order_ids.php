@@ -11,9 +11,6 @@ class ConvertEbayOrderIds extends AbstractMigration
             $newId = $orderId["accountId"] . "-" . $orderId["ebayOrderId"];
             $this->execute($this->getUpdate($newId, $orderId["originalId"]));
         }
-
-        $this->table("order")->removeIndex(["originalId"]);
-        $this->table("orderLive")->removeIndex(["originalId"]);
     }
 
     public function down()
