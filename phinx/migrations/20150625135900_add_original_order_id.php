@@ -5,15 +5,11 @@ class AddOriginalOrderId extends AbstractMigration
 {
     public function up()
     {
-        $this->getAdapter()->beginTransaction();
-
         foreach ($this->getTables() as $table) {
             $this->table($table)->addColumn('originalId', 'string', ['limit' => 120])->update();
             $this->execute(sprintf('UPDATE `%s` SET `originalId` = `id`', $table));
             $this->table($table)->addIndex(['originalId'], ['unique' => true])->update();
         }
-
-        $this->getAdapter()->commitTransaction();
     }
 
     public function down()

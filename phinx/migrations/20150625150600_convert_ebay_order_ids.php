@@ -5,22 +5,18 @@ class ConvertEbayOrderIds extends AbstractMigration
 {
     public function up()
     {
-        $this->getAdapter()->beginTransaction();
         $this->execute($this->getOrdersUpdateSql('CONCAT_WS("-", o.accountId, e.ebayOrderId)'));
         foreach ($this->getAffectedTables() as $table => $column) {
             $this->execute($this->getAffectedTableUpdateSql($table, $column, 'originalId', 'id'));
         }
-        $this->getAdapter()->commitTransaction();
     }
 
     public function down()
     {
-        $this->getAdapter()->beginTransaction();
         foreach ($this->getAffectedTables() as $table => $column) {
             $this->execute($this->getAffectedTableUpdateSql($table, $column, 'id', 'originalId'));
         }
         $this->execute($this->getOrdersUpdateSql('o.originalId'));
-        $this->getAdapter()->commitTransaction();
     }
 
     protected function getOrdersUpdateSql($id)
