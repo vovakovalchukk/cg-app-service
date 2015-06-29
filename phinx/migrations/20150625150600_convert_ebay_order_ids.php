@@ -5,62 +5,47 @@ class ConvertEbayOrderIds extends AbstractMigration
 {
     public function up()
     {
-        $orderIds = $this->fetchAll($this->getEbayOrderIdQuery());
-
-        foreach ($orderIds as $orderId) {
-            $newId = $orderId["accountId"] . "-" . $orderId["ebayOrderId"];
-            $this->execute($this->getUpdate($newId, $orderId["originalId"]));
+        $this->getAdapter()->beginTransaction();
+        $this->execute($this->getOrdersUpdateSql('CONCAT_WS("-", o.accountId, e.ebayOrderId)'));
+        foreach ($this->getAffectedTables() as $table => $column) {
+            $this->execute($this->getAffectedTableUpdateSql($table, $column, 'originalId', 'id'));
         }
+        $this->getAdapter()->commitTransaction();
     }
 
     public function down()
     {
-        // TODO
-        // Use originalId in cg_app.order table to revert the change
-    }
-
-    protected function getEbayOrderIdQuery()
-    {
-        return <<<SQL
-SELECT orderAdditional.id AS originalId, orderAdditional.ebayOrderId, `order`.accountId
-FROM cg_app.`order`
-RIGHT JOIN ebay.orderAdditional
-ON `order`.id=orderAdditional.id;
-SQL;
-    }
-
-    protected function getUpdate($newId, $originalId)
-    {
-        $sql = "START TRANSACTION;";
-        $updateTemplate = $this->getUpdateOrderIdQuery();
+        $this->getAdapter()->beginTransaction();
         foreach ($this->getAffectedTables() as $table => $column) {
-            $sql .= sprintf($updateTemplate, $table, $column, $newId, $column, $originalId);
+            $this->execute($this->getAffectedTableUpdateSql($table, $column, 'id', 'originalId'));
         }
-        return $sql . " COMMIT;";
+        $this->execute($this->getOrdersUpdateSql('o.originalId'));
+        $this->getAdapter()->commitTransaction();
+    }
+
+    protected function getOrdersUpdateSql($id)
+    {
+        $sql = 'UPDATE cg_app.`order` o JOIN ebay.orderAdditional e ON o.id = e.id SET o.id = %1$s, e.id = %1$s';
+        return sprintf($sql, $id);
     }
 
     protected function getAffectedTables()
     {
         return [
-            "ebay.orderAdditional" => "id",
-            "cg_app.`order`" => "id",
-            "cg_app.orderLive" => "id",
-            "cg_app.item" => "orderId",
-            "cg_app.orderTag" => "orderId",
-            "cg_app.note" => "orderId",
-            "cg_app.tracking" => "orderId",
-            "cg_app.alert" => "orderId",
-            "cg_app.cancel" => "orderId",
-            "cg_app.cancelItem" => "orderId",
+            'cg_app.orderLive' => 'id',
+            'cg_app.item' => 'orderId',
+            'cg_app.orderTag' => 'orderId',
+            'cg_app.note' => 'orderId',
+            'cg_app.tracking' => 'orderId',
+            'cg_app.alert' => 'orderId',
+            'cg_app.cancel' => 'orderId',
+            'cg_app.cancelItem' => 'orderId',
         ];
     }
 
-    protected function getUpdateOrderIdQuery()
+    protected function getAffectedTableUpdateSql($table, $column, $join, $value)
     {
-        return <<<SQL
-UPDATE %s
-SET %s="%s"
-WHERE %s="%s";
-SQL;
+        $sql = 'UPDATE cg_app.`order` o JOIN %1$s t ON o.%3$s = t.%2$s SET t.%2$s = o.%4$s';
+        return sprintf($sql, $table, $column, $join, $value);
     }
 }
