@@ -22,6 +22,9 @@ class StockAdjustmentLogTable extends AbstractMigration
             ->addColumn('quantity', 'integer', ['null' => true])
             ->addColumn('applied', 'boolean', ['null' => true, 'default' => false])
             ->addIndex(['organisationUnitId', 'sku'])
+            ->addIndex(['sku'])
+            ->addIndex(['stid'])
+            ->addIndex(['accountId'])
             ->create();
     }
 }
