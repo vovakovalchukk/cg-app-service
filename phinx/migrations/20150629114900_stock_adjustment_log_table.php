@@ -24,7 +24,16 @@ class StockAdjustmentLogTable extends AbstractMigration
             ->addIndex(['organisationUnitId', 'sku'])
             ->addIndex(['sku'])
             ->addIndex(['stid'])
-            ->addIndex(['accountId'])
+            ->addIndex(['itid'])
+            ->addIndex(['date', 'time'])
+            ->addIndex(['organisationUnitId', 'date'])
+            ->addIndex(['accountId', 'date'])
+            ->addIndex(['accountId', 'sku'])
+            ->addIndex(['listingId'])
+            ->addIndex(['productId'])
+            ->addIndex(['quantity', 'organisationUnitId', 'sku'])
+            ->addIndex(['type', 'operator'])
+            ->addIndex(['action'])
             ->create();
     }
 }
