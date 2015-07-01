@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b94794388dbecac15276ed81232c6828",
+    "hash": "c6c05c1bcd0ed85bc5766d8dc255b015",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1085,17 +1085,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.4",
+            "version": "dev-CGIV-5890-prevent-stale-channel-updates",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "363e9ae552008d41a4ac1f88814d3ce370df40ef"
+                "reference": "f623974beb971abff879da3baf602ef5d25c97b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.4-106d20.zip",
-                "reference": "363e9ae552008d41a4ac1f88814d3ce370df40ef",
-                "shasum": "f5de61cb1d2f09f8382e694fb6e5249836a25c07"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5890-prevent-stale-channel-updates-a1dc51.zip",
+                "reference": "f623974beb971abff879da3baf602ef5d25c97b3",
+                "shasum": "65532de9b8c35573fbf3bbc6c39b5852c685471c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1156,7 +1156,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-25 09:42:57"
+            "time": "2015-07-02 09:12:46"
         },
         {
             "name": "channelgrabber/permission",
@@ -7256,10 +7256,18 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.5",
+            "alias_normalized": "1.19.5.0",
+            "version": "dev-CGIV-5890-prevent-stale-channel-updates",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
