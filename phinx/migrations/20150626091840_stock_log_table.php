@@ -6,6 +6,7 @@ class StockLogTable extends AbstractMigration
     public function change()
     {
         $this->table('stockLog')
+            ->addColumn('id', 'string', ['null' => true])
             ->addColumn('date', 'date', ['null' => true])
             ->addColumn('time', 'time', ['null' => true])
             ->addColumn('itid', 'string', ['null' => true])
@@ -15,6 +16,7 @@ class StockLogTable extends AbstractMigration
             ->addColumn('locationId', 'integer', ['null' => true, 'signed' => false])
             ->addColumn('allocatedQty', 'integer', ['null' => true])
             ->addColumn('onHandQty', 'integer', ['null' => true])
+            ->addIndex(['id'])
             ->addIndex(['organisationUnitId', 'sku'])
             ->addIndex(['date', 'time'])
             ->addIndex(['itid'])
