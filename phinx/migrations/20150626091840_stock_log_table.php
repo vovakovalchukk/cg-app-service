@@ -5,7 +5,7 @@ class StockLogTable extends AbstractMigration
 {
     public function change()
     {
-        $this->table('stockLog')
+        $this->table('stockLog', ['id' => false])
             ->addColumn('id', 'string', ['null' => true])
             ->addColumn('date', 'date', ['null' => true])
             ->addColumn('time', 'time', ['null' => true])
