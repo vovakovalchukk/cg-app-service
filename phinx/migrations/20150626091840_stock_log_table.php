@@ -22,5 +22,11 @@ class StockLogTable extends AbstractMigration
             ->addIndex(['locationId'])
             ->addIndex(['sku'])
             ->create();
+
+        $this->table('stockLogToAdjustmentLogMap', ['id' => false, 'primary_key' => ['stockLogId', 'stockAdjustmentLogId']])
+            ->addColumn('stockLogId', 'integer')
+            ->addColumn('stockAdjustmentLogId', 'integer')
+            ->addIndex(['stockLogId', 'stockAdjustmentLogId'])
+            ->create();
     }
 }
