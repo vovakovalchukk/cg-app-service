@@ -825,7 +825,8 @@ return array(
             ],
             StockLocationService::class => [
                 'parameter' => [
-                    'repository' => StockLocationRepository::class
+                    'repository' => StockLocationRepository::class,
+                    'stockStorage' => StockRepository::class
                 ]
             ],
             StockLocationRepository::class => [
