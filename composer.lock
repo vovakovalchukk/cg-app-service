@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "558440e928da65a768a39dc157e564ee",
+    "hash": "3911b9aa108715faa554ecefa88675d2",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1615,24 +1615,24 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.3.4",
+            "version": "dev-CGIV-5886-InvoiceEmailer",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "e44d24494955f2124380cffd20849102a7cc2204"
+                "reference": "b34dd0562b857992d5b5ac779173957373ba142c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.4-7ba279.zip",
-                "reference": "e44d24494955f2124380cffd20849102a7cc2204",
-                "shasum": "250ae369b90f780a654fc546bfc60406692540c9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-5886-InvoiceEmailer-c1a7ea.zip",
+                "reference": "b34dd0562b857992d5b5ac779173957373ba142c",
+                "shasum": "e95a55442f05bbfe58dab09c27582c69d2ec342a"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/etag": "^1.5.4",
-                "channelgrabber/http": ">=1.2.26",
+                "channelgrabber/http": "^1.3.14",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.0",
@@ -1652,7 +1652,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-28 15:10:45"
+            "time": "2015-07-02 09:35:45"
         },
         {
             "name": "channelgrabber/slim",
@@ -2893,7 +2893,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-7933990bcfea21bb3f093bc3df9ae621540b40ca-zip-e72ac3.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "reference": "7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "shasum": "5d8c37272322234bc03029520515c470ce7832c0"
             },
@@ -2950,7 +2950,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e-zip-ccf2bc.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
                 "reference": "fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
                 "shasum": "2515588a8d2d786e41d8e2c8b489250056848ebd"
             },
@@ -7274,6 +7274,12 @@
             "alias_normalized": "1.19.5.0",
             "version": "dev-CGIV-5886-EmailInvoice",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.3.6",
+            "alias_normalized": "1.3.6.0",
+            "version": "dev-CGIV-5886-InvoiceEmailer",
+            "package": "channelgrabber/settings"
         }
     ],
     "minimum-stability": "stable",
@@ -7281,6 +7287,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/email": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
