@@ -7,6 +7,7 @@ class AddStatusToStockLog extends AbstractMigration
     {
         $this->table("stockAdjustmentLog")
             ->addColumn("itemStatus", ["null" => true])
+            ->addIndex(["itemStatus"])
             ->update();
     }
 
