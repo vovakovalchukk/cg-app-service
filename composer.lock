@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3911b9aa108715faa554ecefa88675d2",
+    "hash": "8aecc1783e0639722bfefbcd1c547c63",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1088,13 +1088,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6318609250c4ee23239a9b0da2d93f3ddfbd1658"
+                "reference": "d518c6b0366ff872c3c38e69439a3533d98f3bb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5886-EmailInvoice-38f85f.zip",
-                "reference": "6318609250c4ee23239a9b0da2d93f3ddfbd1658",
-                "shasum": "5f8c9c84859995102d37657c9e3999648b18fd66"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5886-EmailInvoice-710fca.zip",
+                "reference": "d518c6b0366ff872c3c38e69439a3533d98f3bb3",
+                "shasum": "bbfb58cfeb47721f67d5f60760e7c577d46f3139"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1113,7 +1113,7 @@
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": ">=1.2.4,<2.0.0",
+                "channelgrabber/settings": "dev-CGIV-5886-InvoiceEmailer as 1.3.6",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.0",
@@ -1157,7 +1157,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-02 08:50:40"
+            "time": "2015-07-02 12:02:33"
         },
         {
             "name": "channelgrabber/permission",
