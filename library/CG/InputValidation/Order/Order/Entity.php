@@ -105,6 +105,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
+            'emailDate' => array(
+                'name'       => 'emailDate',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ),
             'dispatchDate' => array(
                 'name'       => 'dispatchDate',
                 'required'   => false,
