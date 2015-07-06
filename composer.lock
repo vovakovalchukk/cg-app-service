@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ddbeb57e96081f94c7c5a30d9504a6c",
+    "hash": "30409b7b50797258b2c399532602f216",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1086,17 +1086,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.6",
+            "version": "1.19.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fbb22bba180ef4992445a7c8ae60246c41d3e73c"
+                "reference": "445b64463d279335647605fcc9ca70ecda744356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.6-494836.zip",
-                "reference": "fbb22bba180ef4992445a7c8ae60246c41d3e73c",
-                "shasum": "cbf087d1d154e124860586fb62496d45e9c2331d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.7-4d2844.zip",
+                "reference": "445b64463d279335647605fcc9ca70ecda744356",
+                "shasum": "c4de0d583e401e8e4dd31981d812b3ed68687d75"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1157,7 +1157,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-02 13:36:14"
+            "time": "2015-07-02 22:20:19"
         },
         {
             "name": "channelgrabber/permission",
@@ -2895,7 +2895,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "reference": "7933990bcfea21bb3f093bc3df9ae621540b40ca",
-                "shasum": ""
+                "shasum": "5d8c37272322234bc03029520515c470ce7832c0"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2933,6 +2933,11 @@
                 "json modification",
                 "json patch"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-05 08:56:54"
         },
         {
