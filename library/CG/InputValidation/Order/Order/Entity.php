@@ -304,6 +304,11 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'rootOrganisationUnitId must be at least %min%'])
                 ]
             ],
+            'lastUpdateFromChannel' => array(
+                'name'       => 'lastUpdateFromChannel',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ),
         );
     }
 
