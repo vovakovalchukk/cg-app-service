@@ -7,7 +7,7 @@ use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
 
-class Versioniser4 implements VersioniserInterface
+class Versioniser5 implements VersioniserInterface
 {
     /**
      * @var Service $service

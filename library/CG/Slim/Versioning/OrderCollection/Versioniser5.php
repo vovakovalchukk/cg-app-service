@@ -1,11 +1,11 @@
 <?php
 namespace CG\Slim\Versioning\OrderCollection;
 
-use CG\Slim\Versioning\OrderEntity\Versioniser4 as EntityVersioniser4;
+use CG\Slim\Versioning\OrderEntity\Versioniser5 as EntityVersioniser4;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 
-class Versioniser4 implements VersioniserInterface
+class Versioniser5 implements VersioniserInterface
 {
     /**
      * @var EntityVersioniser4 $entityVersioner
