@@ -94,9 +94,9 @@ return [
                     'entityVersioner' => 'Versioniser_OrderEntity_4',
                 ],
             ],
-            'Versioniser_OrderCollection_4' => [
+            'Versioniser_OrderCollection_5' => [
                 'parameter' => [
-                    'entityVersioner' => 'Versioniser_OrderEntity_4',
+                    'entityVersioner' => 'Versioniser_OrderEntity_5',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [
