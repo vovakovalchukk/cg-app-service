@@ -27,8 +27,8 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'email' => array(
-                'name'       => 'emailDate',
+            'autoEmail' => array(
+                'name'       => 'autoEmail',
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),

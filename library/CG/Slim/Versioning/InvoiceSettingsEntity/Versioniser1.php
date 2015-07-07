@@ -31,7 +31,7 @@ class Versioniser1 implements VersioniserInterface
              * @var InvoiceSetting $invoiceSetting
              */
             $invoiceSetting = $this->invoiceSettingsService->fetch($data['id']);
-            $data['email'] = $invoiceSetting->getEmail();
+            $data['autoEmail'] = $invoiceSetting->getAutoEmail();
             $request->setData($data);
         } catch (NotFound $exception) {
             // New setting so there won't be a previously set email
@@ -41,7 +41,7 @@ class Versioniser1 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['email']);
+        unset($data['autoEmail']);
         $response->setData($data);
     }
 
