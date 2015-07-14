@@ -79,7 +79,7 @@ return [
                     foreach ($orderItems as $item) {
                         $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
                     }
-                    $cancelValue = new CancelValue(OrderStatus::REFUNDING ? CancelValue::REFUND_TYPE : CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
+                    $cancelValue = new CancelValue($order->getStatus() == OrderStatus::REFUNDING ? CancelValue::REFUND_TYPE : CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
                     $cancelGenerator->generateJob($account, $order, $cancelValue);
                 }
                 $output->writeLn('Created job for ' . $order->getStatus() . ' <info>' . $order->getId() . '</info>');
