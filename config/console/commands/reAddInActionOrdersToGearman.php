@@ -20,6 +20,8 @@ use CG\Order\Shared\Cancel\Value as CancelValue;
 use CG\Order\Shared\Cancel\Item as CancelItem;
 use CG\Stdlib\DateTime as CGDateTime;
 
+use CG\Stdlib\Exception\Runtime\NotFound;
+
 return [
     'reAddInActionOrdersToGearman' => [
         'description' => 'Add in progress Orders to gearman queues',
@@ -67,21 +69,17 @@ return [
                 }
                 if ($order->getStatus() == OrderStatus::DISPATCHING) {
                     $dispatchGenerator->generateJob($account, $order);
-                } elseif ($order->getStatus() == OrderStatus::CANCELLING) {
+                } elseif ($order->getStatus() == OrderStatus::CANCELLING || $order->getStatus() == OrderStatus::REFUNDING) {
                     $items = [];
-                    $orderItems = $orderItemService->fetchCollectionByOrderIds([$order->getId()]);
+                    try {
+                        $orderItems = $orderItemService->fetchCollectionByOrderIds([$order->getId()]);
+                    } catch (NotFound $e) {
+                        continue;
+                    }
                     foreach ($orderItems as $item) {
                         $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
                     }
-                    $cancelValue = new CancelValue(CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
-                    $cancelGenerator->generateJob($account, $order, $cancelValue);
-                } elseif ($order->getStatus() == OrderStatus::REFUNDING) {
-                    $items = [];
-                    $orderItems = $orderItemService->fetchCollectionByOrderIds([$order->getId()]);
-                    foreach ($orderItems as $item) {
-                        $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
-                    }
-                    $cancelValue = new CancelValue(CancelValue::REFUND_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
+                    $cancelValue = new CancelValue(OrderStatus::REFUNDING ? CancelValue::REFUND_TYPE : CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
                     $cancelGenerator->generateJob($account, $order, $cancelValue);
                 }
                 $output->writeLn('Created job for ' . $order->getStatus() . ' <info>' . $order->getId() . '</info>');
