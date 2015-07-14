@@ -58,6 +58,10 @@ return [
 
             foreach ($orderArray as $order) {
                 $account = $accountCollection->getById($order->getAccountId());
+                if (!$account) {
+                    $output->writeLn('No account found for <info>' . $order->getAccountId() . '</info>');
+                    continue;
+                }
                 if ($order->getStatus() == OrderStatus::DISPATCHING) {
                     $dispatchGenerator->generateJob($account, $order);
                 } elseif ($order->getStatus() == OrderStatus::CANCELLING) {
@@ -67,8 +71,7 @@ return [
                     }
                     $cancelValue = new CancelValue(CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
                     $cancelGenerator->generateJob($account, $order, $cancelValue);
-                }
-                elseif ($order->getStatus() == OrderStatus::REFUNDING) {
+                } elseif ($order->getStatus() == OrderStatus::REFUNDING) {
                     $items = [];
                     foreach ($order->getItems() as $item) {
                         $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
