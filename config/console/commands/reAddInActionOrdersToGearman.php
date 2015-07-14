@@ -7,7 +7,7 @@ use CG\Channel\Gearman\Workload\Order\Dispatch as DispatchWorkload;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
 
-use CG\Order\Service\Service as OrderService;
+use CG\Order\Client\Service as OrderService;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\Mapper as OrderMapper;
