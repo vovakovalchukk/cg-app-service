@@ -7,7 +7,8 @@ use CG\Channel\Gearman\Workload\Order\Dispatch as DispatchWorkload;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
 
-use CG\Order\Client\Service as OrderService;
+use CG\Order\Service\Service as OrderService;
+use CG\Order\Service\Item\Service as OrderItemService;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\Mapper as OrderMapper;
@@ -31,6 +32,7 @@ return [
             $cancelGenerator = $di->get(CancelGenerator::class);
             $orderMapper = $di->get(OrderMapper::class);
             $orderService = $di->get(OrderService::class);
+            $orderItemService = $di->get(OrderItemService::class);
 
             $filter = new OrderFilter;
             $filter->setLimit('all');
@@ -45,8 +47,10 @@ return [
             $accountIdArray = [];
             $orderArray = [];
 
-            foreach ($orderCollection as $order) {
-                $accountIdArray[$order->getAccountId()] = $order->getAccountId();
+            foreach ($orderCollection->getRawData() as $orderData) {
+                $order = $orderMapper->fromArray($orderData);
+                $accountIdArray[] = $order->getAccountId();
+                $orderArray[] = $order;
             }
 
             $accountFilter = new AccountFilter;
@@ -55,7 +59,7 @@ return [
 
             $accountCollection = $accountService->fetchByFilter($accountFilter);
 
-            foreach ($orderCollection as $order) {
+            foreach ($orderArray as $order) {
                 $account = $accountCollection->getById($order->getAccountId());
                 if (!$account) {
                     $output->writeLn('No account found for <info>' . $order->getAccountId() . '</info>');
@@ -65,14 +69,16 @@ return [
                     $dispatchGenerator->generateJob($account, $order);
                 } elseif ($order->getStatus() == OrderStatus::CANCELLING) {
                     $items = [];
-                    foreach ($order->getItems() as $item) {
+                    $orderItems = $orderItemService->fetchCollectionByOrderIds([$order->getId()]);
+                    foreach ($orderItems as $item) {
                         $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
                     }
                     $cancelValue = new CancelValue(CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
                     $cancelGenerator->generateJob($account, $order, $cancelValue);
                 } elseif ($order->getStatus() == OrderStatus::REFUNDING) {
                     $items = [];
-                    foreach ($order->getItems() as $item) {
+                    $orderItems = $orderItemService->fetchCollectionByOrderIds([$order->getId()]);
+                    foreach ($orderItems as $item) {
                         $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
                     }
                     $cancelValue = new CancelValue(CancelValue::REFUND_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());

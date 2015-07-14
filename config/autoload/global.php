@@ -41,7 +41,6 @@ use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
-use CG\Order\Client\Service as OrderClientService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -1061,11 +1060,6 @@ return array(
             SequentialNumberingProviderRedis::class => [
                 'parameter' => [
                     'predisAsync' => 'reliable_redis_async',
-                ]
-            ],
-            OrderClientService::class => [
-                'parameter' => [
-                    'storage' => OrderApiStorage::class
                 ]
             ],
             'preferences' => [
