@@ -52,7 +52,8 @@ return [
             }
 
             $accountFilter = new AccountFilter;
-            $accountFilter->setId($accountIdArray);
+            $accountFilter->setId($accountIdArray)
+                ->setLimit('all');
 
             $accountCollection = $accountService->fetchByFilter($accountFilter);
 
