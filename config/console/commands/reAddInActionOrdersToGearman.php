@@ -45,10 +45,8 @@ return [
             $accountIdArray = [];
             $orderArray = [];
 
-            foreach ($orderCollection->getRawData() as $orderData) {
-                $order = $orderMapper->fromArray($orderData);
-                $accountIdArray[] = $order->getAccountId();
-                $orderArray[] = $order;
+            foreach ($orderCollection as $order) {
+                $accountIdArray[$order->getAccountId()] = $order->getAccountId();
             }
 
             $accountFilter = new AccountFilter;
@@ -57,7 +55,7 @@ return [
 
             $accountCollection = $accountService->fetchByFilter($accountFilter);
 
-            foreach ($orderArray as $order) {
+            foreach ($orderCollection as $order) {
                 $account = $accountCollection->getById($order->getAccountId());
                 if (!$account) {
                     $output->writeLn('No account found for <info>' . $order->getAccountId() . '</info>');
