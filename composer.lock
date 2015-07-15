@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e1e014e1f6777a53ea99db8f298e7309",
+    "hash": "aee6e76b41a5f709bb6abc03da7171b3",
     "packages": [
         {
             "name": "channelgrabber/cache",
@@ -443,17 +443,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.6",
+            "version": "dev-CGIV-5949-LogReduction",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "579e25a8dcbdc51c45e19a600b30e4293a0a894f"
+                "reference": "25b44f1ae1eda7d62c5561baf22890c5d1e6ee3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.6-078ab8.zip",
-                "reference": "579e25a8dcbdc51c45e19a600b30e4293a0a894f",
-                "shasum": "1dcaecf2ba6472bd646383d762fdbde070f192df"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-5949-LogReduction-46e52c.zip",
+                "reference": "25b44f1ae1eda7d62c5561baf22890c5d1e6ee3f",
+                "shasum": "773c39b67166f339c6c29ac32a49ae9ebdf39631"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -484,7 +484,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-08 15:32:42"
+            "time": "2015-07-15 08:31:53"
         },
         {
             "name": "channelgrabber/validation",
@@ -2927,11 +2927,18 @@
             "alias_normalized": "1.3.15.0",
             "version": "dev-CGIV-5949-LogReduction",
             "package": "channelgrabber/http"
+        },
+        {
+            "alias": "2.12.7",
+            "alias_normalized": "2.12.7.0",
+            "version": "dev-CGIV-5949-LogReduction",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/http": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20
     },
     "prefer-stable": false,
