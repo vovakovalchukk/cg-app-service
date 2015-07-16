@@ -63,7 +63,8 @@ return [
         'entityRoute' => '/settings/invoice/:id',
         'validation' => [
             'filterRules' => CollectionValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/invoice/:id' => [
         'controllers' => function($invoiceId) use ($di) {
@@ -81,6 +82,7 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => InvoiceMapper::class,
             'entityClass' => InvoiceEntity::class,
