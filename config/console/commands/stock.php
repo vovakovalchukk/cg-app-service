@@ -9,7 +9,7 @@ return [
     'stock:processAudit' => [
         'command' => function (InputInterface $input) use ($di) {
             $setSize = $input->getArgument('setSize');
-            $command = $di->get("StockAuditCommand");
+            $command = $di->get(ProcessAudit::class);
             $command(StockWorker::FUNCTION_NAME, $setSize);
         },
         'description' => 'Generate processStockAudit jobs',
@@ -26,7 +26,7 @@ return [
     'stock:processAdjustmentAudit' => [
         'command' => function (InputInterface $input) use ($di) {
             $setSize = $input->getArgument('setSize');
-            $command = $di->get("AdjustmentAuditCommand");
+            $command = $di->get(ProcessAudit::class);
             $command(AdjustmentWorker::FUNCTION_NAME, $setSize);
         },
         'description' => 'Generate processStockAdjustmentAudit jobs',
