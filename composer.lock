@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3aee2d30ce18e265e8fd0da637d8b48c",
+    "hash": "194049744c67e76060b42e49249d7977",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1086,17 +1086,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.16.1",
+            "version": "dev-CGIV-5816-SeparateQueues",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f5c73cefb5cbde13757ddea7f7e6fabf931be6b1"
+                "reference": "9aae9c27cc9aed77d4e3559d604b4de59e9c1200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.16.1-c77960.zip",
-                "reference": "f5c73cefb5cbde13757ddea7f7e6fabf931be6b1",
-                "shasum": "b367c8f87ed1ae600bfeb8783c14edd79e908965"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-5816-SeparateQueues-fe3c66.zip",
+                "reference": "9aae9c27cc9aed77d4e3559d604b4de59e9c1200",
+                "shasum": "ba7e6dbcd05070b9d77b3e80ffb153584c486e57"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1119,7 +1119,7 @@
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "^1.4.9",
+                "channelgrabber/stock": "dev-CGIV-5816-SeparateQueues as 1.5.0",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.2.53",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
@@ -1160,7 +1160,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 08:42:05"
+            "time": "2015-07-20 09:42:12"
         },
         {
             "name": "channelgrabber/permission",
@@ -1853,13 +1853,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "fe56dc6b0a3d150b2a2f0e7c38ce34f2ee4bc490"
+                "reference": "4322f95045159a944c8a3f293e84689ad150345c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-5816-SeparateQueues-0c7c35.zip",
-                "reference": "fe56dc6b0a3d150b2a2f0e7c38ce34f2ee4bc490",
-                "shasum": "cf11790a721f57eb0da722bd586b1562168e30f9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-5816-SeparateQueues-410730.zip",
+                "reference": "4322f95045159a944c8a3f293e84689ad150345c",
+                "shasum": "2a0170f4c3565af73215e7d16f105f9300385604"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1900,7 +1900,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-17 12:56:51"
+            "time": "2015-07-17 15:27:23"
         },
         {
             "name": "channelgrabber/tax",
@@ -7262,8 +7262,14 @@
     ],
     "aliases": [
         {
-            "alias": "1.4.16",
-            "alias_normalized": "1.4.16.0",
+            "alias": "1.19.17",
+            "alias_normalized": "1.19.17.0",
+            "version": "dev-CGIV-5816-SeparateQueues",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.5.0",
+            "alias_normalized": "1.5.0.0",
             "version": "dev-CGIV-5816-SeparateQueues",
             "package": "channelgrabber/stock"
         }
@@ -7271,6 +7277,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
