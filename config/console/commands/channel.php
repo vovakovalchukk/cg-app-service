@@ -95,10 +95,6 @@ return [
                 $accountId = $input->getArgument('accountId');
                 $lowPriority = $input->getOption('lowPriority');
                 $highPriority = $input->getOption('highPriority');
-
-                /**
-                 * @var OrderDownload $command
-                 */
                 $command = $di->get(MessageDownload::class);
                 $command->downloadMessages($channel, $from, $to, $accountId, $lowPriority, $highPriority);
             },
