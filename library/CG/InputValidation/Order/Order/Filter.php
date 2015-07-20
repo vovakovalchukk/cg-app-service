@@ -224,7 +224,21 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "fulfilmentChannel"])
                 ]
-            ]
+            ],
+            'invoiceNumber' => [
+                'name' => 'invoiceNumber',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'invoiceNumber')
+                ]
+            ],
+            'rootOrganisationUnitId' => [
+                'name' => 'rootOrganisationUnitId',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'rootOrganisationUnitId')
+                ]
+            ],
         ];
     }
 }

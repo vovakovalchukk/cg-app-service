@@ -14,6 +14,8 @@ use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
+use CG\Slim\Versioning\InvoiceSettingsCollection;
+use CG\Slim\Versioning\InvoiceSettingsEntity;
 
 return [
     'di' => [
@@ -27,6 +29,12 @@ return [
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,
                 'Versioniser_OrderEntity_2' => OrderEntity\Versioniser2::class,
+                'Versioniser_OrderCollection_3' => OrderCollection\Versioniser3::class,
+                'Versioniser_OrderEntity_3' => OrderEntity\Versioniser3::class,
+                'Versioniser_OrderCollection_4' => OrderCollection\Versioniser4::class,
+                'Versioniser_OrderEntity_4' => OrderEntity\Versioniser4::class,
+                'Versioniser_OrderCollection_5' => OrderCollection\Versioniser5::class,
+                'Versioniser_OrderEntity_5' => OrderEntity\Versioniser5::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -53,6 +61,8 @@ return [
                 'Versioniser_UnimportedListingEntity_2' => UnimportedListingEntity\Versioniser2::class,
                 'Versioniser_UnimportedListingCollection_3' => UnimportedListingCollection\Versioniser3::class,
                 'Versioniser_UnimportedListingEntity_3' => UnimportedListingEntity\Versioniser3::class,
+                'Versioniser_InvoiceSettingsCollection_1' => InvoiceSettingsCollection\Versioniser1::class,
+                'Versioniser_InvoiceSettings_1' => InvoiceSettingsEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -72,6 +82,21 @@ return [
             'Versioniser_OrderCollection_2' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderEntity_2',
+                ],
+            ],
+            'Versioniser_OrderCollection_3' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_3',
+                ],
+            ],
+            'Versioniser_OrderCollection_4' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_4',
+                ],
+            ],
+            'Versioniser_OrderCollection_5' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_5',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [
@@ -142,6 +167,11 @@ return [
             'Versioniser_UnimportedListingCollection_3' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_UnimportedListingEntity_3'
+                ],
+            ],
+            'Versioniser_InvoiceSettingsCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_InvoiceSettings_1'
                 ],
             ],
         ],

@@ -1,8 +1,10 @@
 <?php
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
+use CG\Stdlib\DateTime as StdlibDateTime;
 
 return [
     'order:updateAllItemsTax' => [
@@ -34,6 +36,39 @@ return [
             $dryRun = $input->getOption('dry-run');
             $command = $di->get(CorrectStockOfItemsWithIncorrectStockManagedFlag::class);
             $command($start, $dryRun);
+        }
+    ],
+    'order:applyMissingStockAdjustmentsForCancDispRefOrders' => [
+        'description' => "Identify Orders in a given period that seemingly did not apply stock adjustments when they were cancelled, dispatched or refunded and apply those adjustments",
+        'options' => [
+            'dry-run' => [
+                'description' => 'Dry run - will gather the data but not actually alter the Stock'
+            ]
+        ],
+        'arguments' => [
+            'start' => [
+                'required' => true
+            ],
+            'end' => [
+                'required' => true
+            ]
+        ],
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $start = new \DateTime($input->getArgument('start'));
+            $end = new \DateTime($input->getArgument('end'));
+            $dryRun = $input->getOption('dry-run');
+            $startString = $start->format(StdlibDateTime::FORMAT);
+            $endString = $end->format(StdlibDateTime::FORMAT);
+            $dryRunString = ($dryRun ? '(dry run)' : '');
+            $output->writeln('<info>'.vsprintf(
+                ApplyMissingStockAdjustmentsForCancDispRefOrders::LOG_MSG_INVOKED,
+                [$startString, $endString, $dryRunString]
+            ).'</info>');
+
+            $command = $di->get(ApplyMissingStockAdjustmentsForCancDispRefOrders::class);
+            $command($start, $end, $dryRun);
+
+            $output->writeln('<info>Done. Check the logs for details, log code: ' . ApplyMissingStockAdjustmentsForCancDispRefOrders::LOG_CODE . '</info>');
         }
     ]
 ];
