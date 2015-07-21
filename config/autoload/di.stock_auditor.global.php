@@ -2,6 +2,7 @@
 
 use CG\Stock\Auditor;
 use CG\Stock\Audit\Queue;
+use CG\Stock\Command\ProcessAudit as ProcessStockAuditCommand;
 
 return [
     'di' => [
@@ -29,6 +30,11 @@ return [
                     'queueName' => 'StockAdjustmentAudit'
                 ]
             ],
+            ProcessStockAuditCommand::class => [
+                'parameters' => [
+                    'predisClient' => 'reliable_redis',
+                ]
+            ]
         ]
     ]
 ];
