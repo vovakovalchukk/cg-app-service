@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "39c2824e2fd89c8931dd172f6f65ef63",
+    "hash": "0a133d950e36ce983956cf22dee955fe",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -220,17 +220,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
+            "version": "1.6.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "d8baf6bb64fc1ded2dbbd1c1c4dcbb2f0de5d80e"
+                "reference": "89da28a63a89f2261ead622210c82850c45b3ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-4783-ImproveStockAuditLogs-52fa40.zip",
-                "reference": "d8baf6bb64fc1ded2dbbd1c1c4dcbb2f0de5d80e",
-                "shasum": "1d18e65288a3337e5dc148ae4d1db2d7b65ba436"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.9-bccebf.zip",
+                "reference": "89da28a63a89f2261ead622210c82850c45b3ece",
+                "shasum": "b6f2848198e646aab2cbc5ad77404a2ae0a76f86"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -242,7 +242,7 @@
                 "channelgrabber/location": ">=1.1.1",
                 "channelgrabber/product": ">=1.3.22",
                 "channelgrabber/slim": ">=1.13.0,<2.0.0",
-                "channelgrabber/stock": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs as 1.5.0",
+                "channelgrabber/stock": "^1.5.0",
                 "channelgrabber/user": ">=1.18.7",
                 "channelgrabber/zf2-email-template": "~1.0.7",
                 "composer/composer": "@dev",
@@ -274,7 +274,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-21 07:25:22"
+            "time": "2015-07-21 13:52:13"
         },
         {
             "name": "channelgrabber/channel",
@@ -1086,17 +1086,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
+            "version": "1.19.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f5c73cefb5cbde13757ddea7f7e6fabf931be6b1"
+                "reference": "7c6d3e9329e22fba25c2682d13a08646878f5473"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-4783-ImproveStockAuditLogs-c77960.zip",
-                "reference": "f5c73cefb5cbde13757ddea7f7e6fabf931be6b1",
-                "shasum": "169987ef0a0a9a31477ecce8116be6a667d01422"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.17-54af2c.zip",
+                "reference": "7c6d3e9329e22fba25c2682d13a08646878f5473",
+                "shasum": "8641e590441799f006296f476630e21db3a75b49"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1119,7 +1119,7 @@
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "^1.4.9",
+                "channelgrabber/stock": "^1.5.0",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.2.53",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
@@ -1160,7 +1160,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 08:42:05"
+            "time": "2015-07-21 13:58:36"
         },
         {
             "name": "channelgrabber/permission",
@@ -1849,17 +1849,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "cc3e3c1ae306222f68ef909d7582764597e961ee"
+                "reference": "22d7d3ff75b2cedd76c6b6fc88ed011600eb34bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-4783-ImproveStockAuditLogs-3f61e8.zip",
-                "reference": "cc3e3c1ae306222f68ef909d7582764597e961ee",
-                "shasum": "360960453bf601a11c995d0002fbde00740e0cf6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.0-1e7b52.zip",
+                "reference": "22d7d3ff75b2cedd76c6b6fc88ed011600eb34bd",
+                "shasum": "0a5538f25043fc0e1f312b9bbd95f5f0312cfcec"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1900,7 +1900,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-21 13:24:47"
+            "time": "2015-07-21 13:47:54"
         },
         {
             "name": "channelgrabber/tax",
@@ -7260,32 +7260,10 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.9",
-            "alias_normalized": "1.6.9.0",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.19.17",
-            "alias_normalized": "1.19.17.0",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.5.0",
-            "alias_normalized": "1.5.0.0",
-            "version": "dev-EPIC-CGIV-4783-ImproveStockAuditLogs",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
