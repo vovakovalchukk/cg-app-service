@@ -282,13 +282,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "c13939ea9085936e240bf55fb9fed3a01841faac"
+                "reference": "96580bec7a5e8eef37cc3e14f17e87f300da35be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-4580-message-center-9875e1.zip",
-                "reference": "c13939ea9085936e240bf55fb9fed3a01841faac",
-                "shasum": "de9c3e53c0934a4308314a3a9b8df940425813cc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-4580-message-center-af3844.zip",
+                "reference": "96580bec7a5e8eef37cc3e14f17e87f300da35be",
+                "shasum": "b4f0798b94a018843c1dcfd14c4953ae8d0c5141"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -349,7 +349,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 13:06:36"
+            "time": "2015-07-20 15:16:30"
         },
         {
             "name": "channelgrabber/cilex",
@@ -516,17 +516,17 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.9.17.6",
+            "version": "1.9.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "8277d27d888e5b8ee194af2b4c60503faa978702"
+                "reference": "1c6f8d015bdd1f273db6cdab58e6f43b7e3b458f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.9.17.6-809aaa.zip",
-                "reference": "8277d27d888e5b8ee194af2b4c60503faa978702",
-                "shasum": "d49e8f137b93f030637cc7b6f3af84ea9adc2eaf"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.9.18-1c4591.zip",
+                "reference": "1c6f8d015bdd1f273db6cdab58e6f43b7e3b458f",
+                "shasum": "09b3350fa72ba8d1045c7f404f7305b3f3c8de93"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -574,25 +574,25 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-14 12:10:00"
+            "time": "2015-07-21 13:49:31"
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "1.8.10",
+            "version": "1.8.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "693d4527d561244636cc91e231ff58195c34fc5d"
+                "reference": "1cebccf9f6c99491ab867996e0817b36ebff21d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.8.10-b02267.zip",
-                "reference": "693d4527d561244636cc91e231ff58195c34fc5d",
-                "shasum": "030fb1fe73b089424c13a5c18102876e95aa9894"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.8.11-f161ae.zip",
+                "reference": "1cebccf9f6c99491ab867996e0817b36ebff21d1",
+                "shasum": "44312714b9069180235ef48e054002fb26fc89a9"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": ">=1.4.0,<2.0.0",
+                "channelgrabber/cglib": "^1.6.8",
                 "channelgrabber/channel": "^1.16.16",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
@@ -637,7 +637,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-19 20:29:45"
+            "time": "2015-07-21 13:48:50"
         },
         {
             "name": "channelgrabber/email",
@@ -2446,16 +2446,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "417516098edb9b3c9d433c9b6527b0f1492362f4"
+                "reference": "c6cc6dd6070871f4b198ed39f76dd8047c116b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-417516098edb9b3c9d433c9b6527b0f1492362f4-zip-39a815.zip",
-                "reference": "417516098edb9b3c9d433c9b6527b0f1492362f4",
-                "shasum": "68e2eb1789cbbbbaf142969d5cd23a6c944a6ef9"
+                "url": "https://composer.build.channelgrabber.com/dist/composer-composer-c6cc6dd6070871f4b198ed39f76dd8047c116b02-zip-19973a.zip",
+                "reference": "c6cc6dd6070871f4b198ed39f76dd8047c116b02",
+                "shasum": "60cea3da322f8e12e320f0ad4a3529115c375c5a"
             },
             "require": {
-                "justinrainbow/json-schema": "~1.4",
+                "composer/spdx-licenses": "~1.0",
+                "justinrainbow/json-schema": "^1.4.4",
                 "php": ">=5.3.2",
                 "seld/cli-prompt": "~1.0",
                 "seld/jsonlint": "~1.0",
@@ -2514,7 +2515,72 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 09:51:31"
+            "time": "2015-07-21 13:46:38"
+        },
+        {
+            "name": "composer/spdx-licenses",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/spdx-licenses.git",
+                "reference": "2f17228c1b98283b779698cefa917f7f4fd0b0d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/composer-spdx-licenses-2f17228c1b98283b779698cefa917f7f4fd0b0d4-zip-622cad.zip",
+                "reference": "2f17228c1b98283b779698cefa917f7f4fd0b0d4",
+                "shasum": "86ca645f2345c15c08d7103cf885dd51af7759c3"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Spdx\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com"
+                },
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "SPDX licenses list and validation library.",
+            "keywords": [
+                "license",
+                "spdx",
+                "validator"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-07-17 06:17:03"
         },
         {
             "name": "fabpot/goutte",
