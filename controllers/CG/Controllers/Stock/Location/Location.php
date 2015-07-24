@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\Stock\Location;
 
-use CG\CGLib\Listing\Status\Service as ListingStatusService;
+use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service;
 use CG\Stock\Service as StockService;
@@ -19,12 +19,12 @@ class Location implements PaginationInterface
 {
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
 
-    protected $listingStatusService;
+    protected $updateRelatedListingsForStock;
     protected $stockService;
     protected $stockLocationMapper;
 
     public function __construct(
-        ListingStatusService $listingStatusService,
+        UpdateRelatedListingsForStock $updateRelatedListingsForStock,
         StockLocationMapper $stockLocationMapper,
         Slim $app,
         Service $service,
@@ -32,7 +32,7 @@ class Location implements PaginationInterface
         StockService $stockService,
         Invalidator $invalidator
     ) {
-        $this->setListingStatusService($listingStatusService)
+        $this->setUpdateRelatedListingsForStock($updateRelatedListingsForStock)
             ->setStockLocationMapper($stockLocationMapper)
             ->setSlim($app)
             ->setService($service)
@@ -44,11 +44,15 @@ class Location implements PaginationInterface
     public function put($id, Hal $hal)
     {
         $stockLocationHal = $this->getService()->saveHal($hal, ["id" => $id]);
-        $stockLocation = $this->getStockLocationMapper()->fromHal($stockLocationHal);
-        $stockId = $stockLocation->getStockId();
-        $stock = $this->getStockService()->fetch($stockId);
-        $this->getInvalidator()->invalidateProductsForStock($stockLocation, $stock);
-        $this->getListingStatusService()->updateRelatedListings($stock);
+        try {
+            $stockLocation = $this->getStockLocationMapper()->fromHal($stockLocationHal);
+            $stockId = $stockLocation->getStockId();
+            $stock = $this->getStockService()->fetch($stockId);
+            $this->getInvalidator()->invalidateProductsForStock($stockLocation, $stock);
+            $this->getUpdateRelatedListingsForStock()->generateJob($stock);
+        } catch (\Exception $e) {
+            // No-op. Save succeeded, everything else is superfluous
+        }
         return $stockLocationHal;
     }
 
@@ -63,15 +67,15 @@ class Location implements PaginationInterface
         return $this->stockService;
     }
 
-    protected function setListingStatusService($listingStatusService)
+    protected function setUpdateRelatedListingsForStock($updateRelatedListingsForStock)
     {
-        $this->listingStatusService = $listingStatusService;
+        $this->updateRelatedListingsForStock = $updateRelatedListingsForStock;
         return $this;
     }
 
-    protected function getListingStatusService()
+    protected function getUpdateRelatedListingsForStock()
     {
-        return $this->listingStatusService;
+        return $this->updateRelatedListingsForStock;
     }
 
     protected function setStockLocationMapper($stockLocationMapper)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e8ad0ae2aa34319e2af1a8516c39917e",
+    "hash": "549f2124424c72f3fe5212d510030a1c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -220,17 +220,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.6.9",
+            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "89da28a63a89f2261ead622210c82850c45b3ece"
+                "reference": "6988ae1782b646a1c5735033877dee823e2c21e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.9-bccebf.zip",
-                "reference": "89da28a63a89f2261ead622210c82850c45b3ece",
-                "shasum": "b6f2848198e646aab2cbc5ad77404a2ae0a76f86"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6015-handle-post-stock-adjustment-failures-b06a23.zip",
+                "reference": "6988ae1782b646a1c5735033877dee823e2c21e1",
+                "shasum": "36105c63bf85e8fc129574ab78d98828592febc2"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -274,7 +274,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-21 13:52:13"
+            "time": "2015-07-24 13:37:23"
         },
         {
             "name": "channelgrabber/channel",
@@ -1850,17 +1850,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.5.1",
+            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "73a3c13d73ead309ba8512b947e51eaa2465ac07"
+                "reference": "b11608597bf31a1a34600489c47b0f179ca96168"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.1-79d4f7.zip",
-                "reference": "73a3c13d73ead309ba8512b947e51eaa2465ac07",
-                "shasum": "932c28206b07db5f6da056541fe8a9a071f7541c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6015-handle-post-stock-adjustment-failures-c347f9.zip",
+                "reference": "b11608597bf31a1a34600489c47b0f179ca96168",
+                "shasum": "d2b6428d643e12aaa0e9bbea722a266395ecf84f"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1901,7 +1901,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-21 15:56:12"
+            "time": "2015-07-24 13:47:09"
         },
         {
             "name": "channelgrabber/tax",
@@ -2968,7 +2968,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/7933990bcfea21bb3f093bc3df9ae621540b40ca",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/b1d0dbe9b59826511196793673ff54d59d2c0336",
                 "reference": "7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "shasum": ""
             },
@@ -3020,7 +3020,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/064f65b05d1381d4999113f442af93949cc7c29a",
                 "reference": "fc3999d9ab5bf8f59dc829742c6dab6ccd2e1b6e",
                 "shasum": "2515588a8d2d786e41d8e2c8b489250056848ebd"
             },
@@ -7351,10 +7351,25 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.10",
+            "alias_normalized": "1.6.10.0",
+            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
+            "package": "channelgrabber/cglib"
+        },
+        {
+            "alias": "1.5.2",
+            "alias_normalized": "1.5.2.0",
+            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
