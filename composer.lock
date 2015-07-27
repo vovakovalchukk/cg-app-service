@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "549f2124424c72f3fe5212d510030a1c",
+    "hash": "02cb5e76eadbb1895750d2bc80964e2a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -220,17 +220,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
+            "version": "1.6.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "6988ae1782b646a1c5735033877dee823e2c21e1"
+                "reference": "0c556348d96f3b0dbc4b90f72d514257fdbb6f50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6015-handle-post-stock-adjustment-failures-b06a23.zip",
-                "reference": "6988ae1782b646a1c5735033877dee823e2c21e1",
-                "shasum": "36105c63bf85e8fc129574ab78d98828592febc2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.10-959de1.zip",
+                "reference": "0c556348d96f3b0dbc4b90f72d514257fdbb6f50",
+                "shasum": "3ecd52bc1c4da1e0b6c538f5302f72425817ed0d"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -274,7 +274,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-24 13:37:23"
+            "time": "2015-07-27 08:20:43"
         },
         {
             "name": "channelgrabber/channel",
@@ -1850,17 +1850,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "b11608597bf31a1a34600489c47b0f179ca96168"
+                "reference": "4e7c1556f192ed67d3a107e207f5e8d94c268173"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6015-handle-post-stock-adjustment-failures-c347f9.zip",
-                "reference": "b11608597bf31a1a34600489c47b0f179ca96168",
-                "shasum": "d2b6428d643e12aaa0e9bbea722a266395ecf84f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.2-21c1f2.zip",
+                "reference": "4e7c1556f192ed67d3a107e207f5e8d94c268173",
+                "shasum": "480e3de499bd0cf6cd1515856e1597bf472aa85c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1901,7 +1901,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-24 13:47:09"
+            "time": "2015-07-27 08:21:29"
         },
         {
             "name": "channelgrabber/tax",
@@ -7351,25 +7351,10 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.10",
-            "alias_normalized": "1.6.10.0",
-            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.5.2",
-            "alias_normalized": "1.5.2.0",
-            "version": "dev-CGIV-6015-handle-post-stock-adjustment-failures",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
