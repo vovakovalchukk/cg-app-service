@@ -59,7 +59,7 @@ return [
     ],
     'stock:zeroNegativeStockForDuplicatedAdjustments' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
-            $dryRun = $input->getOption('dry-run');
+            $dryRun = !$input->getOption('wet-run');
             $command = $di->get(ZeroNegativeStockForDuplicatedAdjustments::class, ['output' => $output]);
             $command($dryRun);
         },
@@ -67,8 +67,8 @@ return [
         'arguments' => [
         ],
         'options' => [
-            'dry-run' => [
-                'description' => 'Dry run - will gather the data but not actually alter the Stock'
+            'wet-run' => [
+                'description' => 'Wet run, i.e. do the stock changes - without this it defaults to a dry run'
             ]
         ],
     ]
