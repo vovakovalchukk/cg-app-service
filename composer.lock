@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02cb5e76eadbb1895750d2bc80964e2a",
+    "hash": "38e388c9afe686cd98bae3f03857dff9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1850,17 +1850,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.5.2",
+            "version": "dev-CGIV-6020-fix-stock-for-duplicated-adjustments",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "4e7c1556f192ed67d3a107e207f5e8d94c268173"
+                "reference": "6b0eada2033bc1633456505262bc2088e91d2aa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.2-21c1f2.zip",
-                "reference": "4e7c1556f192ed67d3a107e207f5e8d94c268173",
-                "shasum": "480e3de499bd0cf6cd1515856e1597bf472aa85c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6020-fix-stock-for-duplicated-adjustments-d40792.zip",
+                "reference": "6b0eada2033bc1633456505262bc2088e91d2aa4",
+                "shasum": "301cca3fc040a002c625df6920fc1e993880bfee"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1901,7 +1901,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-27 08:21:29"
+            "time": "2015-07-27 14:00:01"
         },
         {
             "name": "channelgrabber/tax",
@@ -7351,10 +7351,18 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.3",
+            "alias_normalized": "1.5.3.0",
+            "version": "dev-CGIV-6020-fix-stock-for-duplicated-adjustments",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
