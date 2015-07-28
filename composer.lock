@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32d7ae52fcfe03c7e17a655470e70cfd",
+    "hash": "d4a0993a870637965fb8cf84f82e2c60",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1851,17 +1851,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.5.3",
+            "version": "dev-CGIV-6029-StockAdjustmentLogNullValues",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "aabb6fb8a2b7945de07bb9f7347972dc0c23c800"
+                "reference": "9a85d3b2ec904f9a6dd8daa474d2ce2817d74038"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.3-7e95c1.zip",
-                "reference": "aabb6fb8a2b7945de07bb9f7347972dc0c23c800",
-                "shasum": "3e20d4a2c6bc9d914a202f70fa4479e6dc857692"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6029-StockAdjustmentLogNullValues-7e42bf.zip",
+                "reference": "9a85d3b2ec904f9a6dd8daa474d2ce2817d74038",
+                "shasum": "db78ed2bd24f821021c4e2f81984c9a5bc11b8f7"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1902,7 +1902,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-27 14:22:13"
+            "time": "2015-07-28 09:33:13"
         },
         {
             "name": "channelgrabber/tax",
@@ -7332,10 +7332,18 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.4",
+            "alias_normalized": "1.5.4.0",
+            "version": "dev-CGIV-6029-StockAdjustmentLogNullValues",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
