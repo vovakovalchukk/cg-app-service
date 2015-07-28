@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bd56818a142bdbef46e31f22f010c90a",
+    "hash": "4366790cdc441a70a33500264bfc7d2f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1087,17 +1087,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.17",
+            "version": "dev-CGIV-6040-InvoiceOnDispatch",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7c6d3e9329e22fba25c2682d13a08646878f5473"
+                "reference": "5012dbfcd66b714c59a6269f11f81b07e4dcc543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.17-54af2c.zip",
-                "reference": "7c6d3e9329e22fba25c2682d13a08646878f5473",
-                "shasum": "8641e590441799f006296f476630e21db3a75b49"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6040-InvoiceOnDispatch-1b0011.zip",
+                "reference": "5012dbfcd66b714c59a6269f11f81b07e4dcc543",
+                "shasum": "50e2dbe9552eda36886e08013c5fab0f570e01c2"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1161,7 +1161,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-21 13:58:36"
+            "time": "2015-07-28 15:17:50"
         },
         {
             "name": "channelgrabber/permission",
@@ -7331,10 +7331,18 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.18",
+            "alias_normalized": "1.19.18.0",
+            "version": "dev-CGIV-6040-InvoiceOnDispatch",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
