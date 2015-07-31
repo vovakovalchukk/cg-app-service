@@ -130,7 +130,7 @@ use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
-use CG\Stock\Command\ZeroNegativeStockForDuplicatedAdjustments as ZeroNegativeStockForDuplicatedAdjustmentsCommand;
+use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1058,7 +1058,7 @@ return array(
                     'predisAsync' => 'reliable_redis_async',
                 ]
             ],
-            ZeroNegativeStockForDuplicatedAdjustmentsCommand::class => [
+            ZeroNegativeStockCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]
