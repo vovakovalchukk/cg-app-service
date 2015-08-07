@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9693cedb7e4897c25e18834998db2048",
+    "hash": "0b5feaa8d3110b95072291561be5c045",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1421,17 +1421,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-6080-CacheBuster",
+            "version": "1.4.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "3f2e151ab2655400fb399bcb182ddadbdba76318"
+                "reference": "74415b4f8757659b98569c88d878964c96231a16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-6080-CacheBuster-c13ae7.zip",
-                "reference": "3f2e151ab2655400fb399bcb182ddadbdba76318",
-                "shasum": "cc312636ac965880fbfa9e5c850f15eef5062fd0"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.4.9-4131e5.zip",
+                "reference": "74415b4f8757659b98569c88d878964c96231a16",
+                "shasum": "d2dd33e356b4dd84545cf9f33a28da88056709fd"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1465,7 +1465,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-06 13:44:52"
+            "time": "2015-08-07 11:15:25"
         },
         {
             "name": "channelgrabber/purge",
@@ -7337,18 +7337,10 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.4.9",
-            "alias_normalized": "1.4.9.0",
-            "version": "dev-CGIV-6080-CacheBuster",
-            "package": "channelgrabber/product"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
