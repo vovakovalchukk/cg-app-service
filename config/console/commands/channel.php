@@ -4,6 +4,8 @@ use CG\Channel\Command\Message\Download as MessageDownload;
 use CG\Channel\Command\Listing\Import as ListingImport;
 use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
+use CG\Gearman\Client as GearmanClient;
+use CG\Gearman\WrapperWorkload as GearmanPriority;
 
 return [
     'channel:downloadOrders' => [
@@ -54,6 +56,17 @@ return [
     ],
     'channel:importListings' => [
         'command' => function (InputInterface $input) use ($di) {
+            /** @var GearmanClient $gearman */
+            $gearman = $di->get(GearmanClient::class);
+            if ($input->getOption('lowPriority')) {
+                $gearman->setPriority(GearmanPriority::LOW_PRIORITY);
+            } else if ($input->getOption('highPriority')) {
+                $gearman->setPriority(GearmanPriority::HIGH_PRIORITY);
+            } else {
+                $gearman->setPriority(GearmanPriority::NORMAL_PRIORITY);
+            }
+
+            /** @var ListingImport $command */
             $command = $di->get(ListingImport::class);
             $command->importListings();
         },
@@ -61,6 +74,12 @@ return [
         'arguments' => [
         ],
         'options' => [
+            'lowPriority' => [
+                'description' => 'Queue generated jobs at low priority',
+            ],
+            'highPriority' => [
+                'description' => 'Queue generated jobs at high priority',
+            ],
         ]
     ],
     'channel:generateOrders' => [
