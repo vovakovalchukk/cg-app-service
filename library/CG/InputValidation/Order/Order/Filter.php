@@ -239,6 +239,13 @@ class Filter implements RulesInterface, ExclusionInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'rootOrganisationUnitId')
                 ]
             ],
+            'externalId' => [
+                'name' => 'externalId',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "externalId"])
+                ]
+            ],
         ];
     }
 }
