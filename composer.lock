@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4dac422636451635a1161d1397a42a1",
+    "hash": "c9af8c5d91579c6dedf1528ececd59ca",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1087,17 +1087,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6009-public-api-orders-endpoint",
+            "version": "dev-EPIC-CGIV-6001-public-api",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "18231dfc4d503a8bd8c85d4efd0816c3a3b29f9c"
+                "reference": "d05108e7aee497dcc9a47d1f19ee15a0300c3f14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6009-public-api-orders-endpoint-b47055.zip",
-                "reference": "18231dfc4d503a8bd8c85d4efd0816c3a3b29f9c",
-                "shasum": "e656f8b04b5cb001b5a53e9b014c090307fa7971"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-6001-public-api-463af2.zip",
+                "reference": "d05108e7aee497dcc9a47d1f19ee15a0300c3f14",
+                "shasum": "adf080982d2c04a04ce161faa9bc51888e0c0f21"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1161,7 +1161,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-12 14:35:23"
+            "time": "2015-08-14 13:10:21"
         },
         {
             "name": "channelgrabber/permission",
@@ -7361,7 +7361,7 @@
         {
             "alias": "1.19.19",
             "alias_normalized": "1.19.19.0",
-            "version": "dev-CGIV-6009-public-api-orders-endpoint",
+            "version": "dev-EPIC-CGIV-6001-public-api",
             "package": "channelgrabber/order"
         }
     ],
