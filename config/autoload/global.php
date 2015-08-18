@@ -265,6 +265,12 @@ use CG\Ekm\Product\TaxRate\Storage\Cache as EkmTaxRateCache;
 use CG\Ekm\Product\TaxRate\Storage\Db as EkmTaxRateDb;
 use CG\Ekm\Product\TaxRate\StorageInterface as EkmTaxRateStorage;
 
+// Api Settings
+use CG\Settings\Api\StorageInterface as ApiSettingsStorage;
+use CG\Settings\Api\Repository as ApiSettingsRepository;
+use CG\Settings\Api\Storage\Cache as ApiSettingsCacheStorage;
+use CG\Settings\Api\Storage\Db as ApiSettingsDbStorage;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1063,6 +1069,19 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            ApiSettingsRepository::class => [
+                'parameters' => [
+                    'repository' => ApiSettingsDbStorage::class,
+                    'storage' => ApiSettingsCacheStorage::class,
+                ],
+            ],
+            ApiSettingsDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1083,6 +1102,7 @@ return array(
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
                 OrderStorage::class => OrderRepository::class,
+                ApiSettingsStorage::class => ApiSettingsRepository::class,
             ]
         )
     )

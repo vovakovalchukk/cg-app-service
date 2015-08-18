@@ -211,14 +211,14 @@ return [
         ]
     ],
     '/settings/api/:id' => [
-        'controllers' => function($pickListId) use ($di) {
+        'controllers' => function($ouId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
                 $controller = $di->get(Api::class);
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($pickListId, $app->request()->getBody())
+                    $controller->$method($ouId, $app->request()->getBody())
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
