@@ -182,6 +182,13 @@ use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 
+// ProductDetail
+use CG\Product\Detail\Mapper as ProductDetailMapper;
+use CG\Product\Detail\Repository as ProductDetailRepository;
+use CG\Product\Detail\Storage\Cache as ProductDetailCacheStorage;
+use CG\Product\Detail\Storage\Db as ProductDetailDbStorage;
+use CG\Product\Detail\StorageInterface as ProductDetailStorage;
+
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
 use CG\Transaction\LockInterface as LockClientInterface;
@@ -798,6 +805,20 @@ return array(
                     'mapper' => ProductMapper::class
                 )
             ),
+            ProductDetailRepository::class => [
+                'parameter' => [
+                    'storage' => ProductDetailCacheStorage::class,
+                    'repository' => ProductDetailDbStorage::class
+                ]
+            ],
+            ProductDetailDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ProductDetailMapper::class
+                ]
+            ],
             TransactionRedisClient::class => [
                 'parameter' => [
                     'predis' => 'reliable_redis',
@@ -1083,6 +1104,7 @@ return array(
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
                 OrderStorage::class => OrderRepository::class,
+                ProductDetailStorage::class => ProductDetailRepository::class,
             ]
         )
     )
