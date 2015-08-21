@@ -1,15 +1,15 @@
 <?php
 namespace CG\Controllers\Order;
 
-use CG\Http\StatusCode;
-use CG\Order\Service\Item\Service as ItemService;
-use CG\Slim\ControllerTrait;
-use CG\Slim\Controller\Entity\PatchTrait;
-use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
+use CG\Http\StatusCode;
+use CG\Order\Service\Item\InvalidationService as ItemService;
+use CG\Slim\Controller\Entity\PatchTrait;
+use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use Zend\Di\Di;
 use Nocarrier\Hal;
+use Slim\Slim;
+use Zend\Di\Di;
 
 class Item
 {
