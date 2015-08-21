@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b86b3ef044ab9e0c2f0ebea36c0ecd33",
+    "hash": "75d3ad18beb6ba0cef1cf582ef192df5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -220,17 +220,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-6135-OrderItemsNginxInvalidation",
+            "version": "1.6.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "d7209812f4e17c45eb6cd25427aba5ce75663445"
+                "reference": "7483505be31aafcbc4af078ecf7db27a1dcb2f34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6135-OrderItemsNginxInvalidation-a8a0b7.zip",
-                "reference": "d7209812f4e17c45eb6cd25427aba5ce75663445",
-                "shasum": "e334398a2b6dda7115fb31cca396f52d286ace52"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.6.13-c6634e.zip",
+                "reference": "7483505be31aafcbc4af078ecf7db27a1dcb2f34",
+                "shasum": "b162ce936da86a6f66838516b8efac32f3e3ff9e"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -275,7 +275,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:41:18"
+            "time": "2015-08-21 14:17:20"
         },
         {
             "name": "channelgrabber/channel",
@@ -7333,17 +7333,9 @@
             "time": "2015-01-24 09:48:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.13",
-            "alias_normalized": "1.6.13.0",
-            "version": "dev-CGIV-6135-OrderItemsNginxInvalidation",
-            "package": "channelgrabber/cglib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
