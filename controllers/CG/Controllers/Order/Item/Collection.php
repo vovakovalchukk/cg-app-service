@@ -1,13 +1,13 @@
 <?php
 namespace CG\Controllers\Order\Item;
 
-use CG\Order\Service\Item\Service as ItemService;
-use CG\Order\Shared\Item\Filter;
-use CG\Slim\ControllerTrait;
-use CG\Slim\Controller\Collection\PatchTrait;
-use Slim\Slim;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
+use CG\Order\Service\Item\InvalidationService as ItemService;
+use CG\Order\Shared\Item\Filter;
+use CG\Slim\Controller\Collection\PatchTrait;
+use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use Slim\Slim;
 use Zend\Di\Di;
 
 class Collection
