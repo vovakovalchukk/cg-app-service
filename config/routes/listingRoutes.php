@@ -37,7 +37,7 @@ return [
             'dataRules' => ListingEntityValidation::class
         ],
         'entityRoute' => '/listing/:listingId',
-        "version" => new Version(1, 3)
+        "version" => new Version(1, 4)
     ],
     '/listing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -59,7 +59,7 @@ return [
             'entityClass' => ListingEntity::class,
             'serviceClass' => ListingService::class
         ],
-        "version" => new Version(1, 3)
+        "version" => new Version(1, 4)
     ],
     '/unimportedListing' => [
         'controllers' => function() use ($di, $app) {
@@ -77,7 +77,7 @@ return [
             'filterRules' => UnimportedListingCollectionValidation::class,
             'dataRules' => UnimportedListingEntityValidation::class
         ],
-        "version" => new Version(1, 4)
+        "version" => new Version(1, 5)
     ],
     '/unimportedListing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -98,6 +98,6 @@ return [
             'entityClass' => UnimportedListingEntity::class,
             'serviceClass' => UnimportedListingService::class,
         ],
-        "version" => new Version(1, 4)
+        "version" => new Version(1, 5)
     ]
 ];

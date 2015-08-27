@@ -64,6 +64,11 @@ class Entity implements RulesInterface
                     new StringLength(['min' => 1, 'max' => 2000])
                 ]
             ],
+            'marketplace' => [
+                'name'       => 'marketplace',
+                'required'   => false,
+                'validators' => []
+            ],
         ];
     }
 }
