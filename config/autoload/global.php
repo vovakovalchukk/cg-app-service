@@ -120,6 +120,12 @@ use CG\Order\Service\Tag\Storage\Cache as TagCacheStorage;
 use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
+// Label
+use CG\Order\Service\Label\Service as LabelService;
+use CG\Order\Shared\Label\Repository as LabelRepository;
+use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
+use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
+
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
@@ -625,6 +631,17 @@ return array(
                     'repository' => TagDbStorage::class
                 )
             ),
+            LabelRepository::class => [
+                'parameter' => [
+                    'storage' => LabelCacheStorage::class,
+                    'repository' => LabelMongoDbStorage::class
+                ]
+            ],
+            LabelService::class => [
+                'parameter' => [
+                    'repository' => LabelRepository::class
+                ]
+            ],
             AccountCommandService::class => array(
                 'parameter' => array(
                     'accountStorage' => AccountApiStorage::class

@@ -104,6 +104,15 @@ use CG\Order\Service\Tag\Service as TagService;
 use CG\Controllers\Order\Filter;
 use CG\Controllers\Order\Filter\Collection as FilterCollection;
 
+// Label
+use CG\Controllers\Order\Label as LabelController;
+use CG\Controllers\Order\Label\Collection as LabelCollectionController;
+use CG\InputValidation\Order\Label\Entity as LabelEntityValidationRules;
+use CG\InputValidation\Order\Label\Filter as LabelFilterValidationRules;
+use CG\Order\Shared\Label\Entity as LabelEntity;
+use CG\Order\Shared\Label\Mapper as LabelMapper;
+use CG\Order\Service\Label\Service as LabelService;
+
 //ShippingMethod
 use CG\Controllers\Shipping\Method\Method as ShippingMethod;
 use CG\Controllers\Shipping\Method\Method\Collection as ShippingMethodCollection;
@@ -555,6 +564,42 @@ return array(
             'enabled' => false
         ]
     ),
+    '/orderLabel' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(LabelCollectionController::class, []);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'entityRoute' => '/orderLabel/:labelId',
+        'name' => 'LabelCollection',
+        'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => LabelFilterValidationRules::class, "flatten" => false]
+    ],
+    '/orderLabel/:labelId' => [
+        'controllers' => function($labelId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(LabelController::class, []);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($labelId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'LabelEntity',
+        'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'eTag' => [
+            'mapperClass' => LabelMapper::class,
+            'entityClass' => LabelEntity::class,
+            'serviceClass' => LabelService::class
+        ]
+    ],
     '/shippingMethod' => [
         'controllers' => function() use ($app, $di) {
                 $method = $app->request()->getMethod();

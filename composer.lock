@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6eb070cdc47de999f0d80c3fe02f72f8",
+    "hash": "7cf3c19de81f4df30513bc0417c64bef",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1088,17 +1088,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.19",
+            "version": "dev-CGIV-6130-orderLabel-endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "47548ebd181b803900016028f990a8c27c2e1715"
+                "reference": "0097159fc8dc0a5a30b3f0cba11c1cc913be6cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.19-13754f.zip",
-                "reference": "47548ebd181b803900016028f990a8c27c2e1715",
-                "shasum": "caa7c7223b86fd31c635754c9a05a53251087f23"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6130-orderLabel-endpoint-26e21c.zip",
+                "reference": "0097159fc8dc0a5a30b3f0cba11c1cc913be6cee",
+                "shasum": "0e5fdfd2664ac69f96f923bf854b6bd82d9fde39"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1162,7 +1162,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-26 12:54:58"
+            "time": "2015-08-28 16:09:22"
         },
         {
             "name": "channelgrabber/permission",
@@ -7360,6 +7360,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.19.22",
+            "alias_normalized": "1.19.22.0",
+            "version": "dev-CGIV-6130-orderLabel-endpoint",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "1.5.0",
             "alias_normalized": "1.5.0.0",
             "version": "dev-EPIC-CGIV-5992-dataplug",
@@ -7369,6 +7375,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
