@@ -309,6 +309,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ),
+            'externalUsername' => [
+                'name' => 'externalUsername',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         );
     }
 
