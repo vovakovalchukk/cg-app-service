@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "071108fd870e9361c60ad8a4621b584e",
+    "hash": "d4937420740e12f605df9782a169fd09",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1088,17 +1088,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-6001-public-api",
+            "version": "1.19.21",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ddced18424387b9017add707ba82089284e56489"
+                "reference": "630163e9699c567949208e5d2e966ebf2c20f009"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-6001-public-api-bb24ce.zip",
-                "reference": "ddced18424387b9017add707ba82089284e56489",
-                "shasum": "1b12b39a95fa09b92305b02a2eb40195318366df"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.21-0dc5ff.zip",
+                "reference": "630163e9699c567949208e5d2e966ebf2c20f009",
+                "shasum": "603205d67c16e24139cfcb2e1cedcab48f7ed12d"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1162,7 +1162,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 10:29:34"
+            "time": "2015-08-28 14:51:19"
         },
         {
             "name": "channelgrabber/permission",
@@ -2970,7 +2970,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/b1d0dbe9b59826511196793673ff54d59d2c0336",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
                 "reference": "7933990bcfea21bb3f093bc3df9ae621540b40ca",
                 "shasum": "5d8c37272322234bc03029520515c470ce7832c0"
             },
@@ -7340,12 +7340,6 @@
     ],
     "aliases": [
         {
-            "alias": "1.19.19",
-            "alias_normalized": "1.19.19.0",
-            "version": "dev-EPIC-CGIV-6001-public-api",
-            "package": "channelgrabber/order"
-        },
-        {
             "alias": "1.3.7",
             "alias_normalized": "1.3.7.0",
             "version": "dev-EPIC-CGIV-6034-PublicApiR2",
@@ -7355,7 +7349,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
