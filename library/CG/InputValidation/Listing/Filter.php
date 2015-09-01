@@ -71,7 +71,14 @@ class Filter implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "statusExclude"])
                 ]
-            ]
+            ],
+            'marketplace' => [
+                'name' => 'marketplace',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'marketplace'])
+                ]
+            ],
         ];
     }
 }

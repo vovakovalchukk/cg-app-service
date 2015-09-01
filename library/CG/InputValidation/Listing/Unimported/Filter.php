@@ -131,6 +131,13 @@ class Filter implements RulesInterface
                     new IsArrayValidator(["name" => "variationSkus"])
                 ]
             ],
+            'marketplace' => [
+                'name' => 'marketplace',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'marketplace'])
+                ]
+            ],
         ];
     }
 }
