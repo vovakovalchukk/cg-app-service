@@ -271,6 +271,9 @@ use CG\Settings\Api\Repository as ApiSettingsRepository;
 use CG\Settings\Api\Storage\Cache as ApiSettingsCacheStorage;
 use CG\Settings\Api\Storage\Db as ApiSettingsDbStorage;
 
+// Notifications
+use CG\Notification\Queue as NotificationQueue;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1080,6 +1083,11 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
+                ],
+            ],
+            NotificationQueue::class => [
+                'parameters' => [
+                    'predis' => 'reliable_redis',
                 ],
             ],
             'preferences' => [
