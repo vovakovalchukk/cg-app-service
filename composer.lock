@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "832f9b8e2ae6f56813f6ef6e990f821a",
+    "hash": "90a50469786987448bee7a33755a5069",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1143,17 +1143,17 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "dev-CGIV-6189-Notifications",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "77ebff3e9bea1519db6bcd2fe567e503839d0a51"
+                "reference": "7019c932a452eb7d8124fa08db1f049fe24135a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-6189-Notifications-36e6c2.zip",
-                "reference": "77ebff3e9bea1519db6bcd2fe567e503839d0a51",
-                "shasum": "52f692b88847eee4e43881e08ef906881b39c4d9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-EPIC-CGIV-6034-PublicApiR2-83a553.zip",
+                "reference": "7019c932a452eb7d8124fa08db1f049fe24135a3",
+                "shasum": "3cade7a1bca5b607d50d9374827442f12368ebc4"
             },
             "require": {
                 "channelgrabber/billing": "^1.8.0",
@@ -1193,27 +1193,27 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-09 12:49:56"
+            "time": "2015-09-10 13:14:22"
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6189-Notifications",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ca4a7683609e34d4a70650abe2120c59ad2ff904"
+                "reference": "b53d718fa77b20d86fe8503f7b07e481299171a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6189-Notifications-c72d64.zip",
-                "reference": "ca4a7683609e34d4a70650abe2120c59ad2ff904",
-                "shasum": "4900911d1edc92c7c0a39de8b67f737bcd36b9c4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-6034-PublicApiR2-48a8fa.zip",
+                "reference": "b53d718fa77b20d86fe8503f7b07e481299171a6",
+                "shasum": "57fa79484fd46284db976d0b36236c8c864f1548"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": ">=1.0.0,<2.0.0",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.4",
+                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": ">=1.0.6",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -1223,7 +1223,7 @@
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/locale": "^1.0.5",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/notification": "dev-CGIV-6189-Notifications as 1.0.0",
+                "channelgrabber/notification": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
@@ -1273,7 +1273,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-08 15:11:33"
+            "time": "2015-09-10 13:28:49"
         },
         {
             "name": "channelgrabber/permission",
@@ -1966,21 +1966,21 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6189-Notifications",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "8c3041bcd9cf9d3ec6022ea74a0f5cc667ac969e"
+                "reference": "4de5dc4680ff5984b44059891d9c3df25f4bbd17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6189-Notifications-974933.zip",
-                "reference": "8c3041bcd9cf9d3ec6022ea74a0f5cc667ac969e",
-                "shasum": "57122ae43b2be501c7a37d3fa8ca85a8e9195104"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-6034-PublicApiR2-33e13f.zip",
+                "reference": "4de5dc4680ff5984b44059891d9c3df25f4bbd17",
+                "shasum": "c64df61e06591fc6c6900eb42e222600e0389644"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.4",
+                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": "^1.0.8",
@@ -1988,14 +1988,13 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/notification": "dev-CGIV-6189-Notifications as 1.0.0",
+                "channelgrabber/notification": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.0.0",
                 "channelgrabber/order": "^1.18.2",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/settings": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.3.7",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.9",
-                "channelgrabber/stock": "dev-CGIV-6189-Notifications as dev-EPIC-CGIV-6034-PublicApiR2",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
@@ -2010,7 +2009,7 @@
             "extra": {
                 "branch-alias": {
                     "dev-develop": "1.x-dev",
-                    "dev-CGIV-6189-Notifications": "1.5.9-dev"
+                    "dev-EPIC-CGIV-6034-PublicApiR2": "1.5.9-dev"
                 }
             },
             "autoload": {
@@ -2028,7 +2027,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-07 11:35:19"
+            "time": "2015-09-10 13:49:45"
         },
         {
             "name": "channelgrabber/tax",
@@ -7911,21 +7910,21 @@
     ],
     "aliases": [
         {
-            "alias": "1.17.4",
-            "alias_normalized": "1.17.4.0",
+            "alias": "1.17.6",
+            "alias_normalized": "1.17.6.0",
             "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "package": "channelgrabber/channel"
         },
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-6189-Notifications",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "package": "channelgrabber/notification"
         },
         {
             "alias": "1.19.22",
             "alias_normalized": "1.19.22.0",
-            "version": "dev-CGIV-6189-Notifications",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "package": "channelgrabber/order"
         },
         {
@@ -7935,9 +7934,9 @@
             "package": "channelgrabber/settings"
         },
         {
-            "alias": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "alias_normalized": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "version": "dev-CGIV-6189-Notifications",
+            "alias": "1.5.9",
+            "alias_normalized": "1.5.9.0",
+            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
             "package": "channelgrabber/stock"
         }
     ],
