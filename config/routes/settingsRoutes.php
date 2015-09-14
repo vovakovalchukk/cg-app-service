@@ -32,6 +32,16 @@ use CG\Settings\PickList\Entity as PickListEntity;
 use CG\Settings\PickList\Mapper as PickListMapper;
 use CG\Settings\PickList\Service as PickListService;
 
+use CG\Controllers\Settings\Api;
+use CG\Controllers\Settings\Api\Collection as ApiCollection;
+
+use CG\InputValidation\Settings\Api\Filter as ApiCollectionValidation;
+use CG\InputValidation\Settings\Api\Entity as ApiEntityValidation;
+
+use CG\Settings\Api\Entity as ApiEntity;
+use CG\Settings\Api\Mapper as ApiMapper;
+use CG\Settings\Api\Service as ApiService;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -180,6 +190,46 @@ return [
             'mapperClass' => PickListMapper::class,
             'entityClass' => PickListEntity::class,
             'serviceClass' => PickListService::class
+        ]
+    ],
+    '/settings/api' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ApiCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ApiSettingsCollection',
+        'entityRoute' => '/settings/api/:id',
+        'validation' => [
+            'filterRules' => ApiCollectionValidation::class
+        ]
+    ],
+    '/settings/api/:id' => [
+        'controllers' => function($ouId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Api::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($ouId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'ApiSettings',
+        'validation' => [
+            'dataRules' => ApiEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => ApiMapper::class,
+            'entityClass' => ApiEntity::class,
+            'serviceClass' => ApiService::class
         ]
     ]
 ];
