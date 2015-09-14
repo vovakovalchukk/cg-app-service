@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "90a50469786987448bee7a33755a5069",
+    "hash": "b791a5bd84af42f4c213584acfa026bb",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -285,17 +285,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
+            "version": "1.17.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "698ccd0ab805f17d9d39eedb1f86a57cc2a430cc"
+                "reference": "7c7b431c0b4fe43b1d9ca2e3ec2d6c207138d7f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-6034-PublicApiR2-f9ecaa.zip",
-                "reference": "698ccd0ab805f17d9d39eedb1f86a57cc2a430cc",
-                "shasum": "136a3283f69ccf220596d9034a299ba525ce92be"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.7-9fc0cd.zip",
+                "reference": "7c7b431c0b4fe43b1d9ca2e3ec2d6c207138d7f7",
+                "shasum": "5e5ea43cddd7d44908b208925505111eaa10ac46"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -310,12 +310,13 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.18.1",
                 "channelgrabber/permission": ">=1.0.1, <2.0.0",
+                "channelgrabber/predis": "^1.0.6",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/scraper": ">=1.0.0,<2.0.0",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stats": ">=1.0.1,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.0",
-                "channelgrabber/stock": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.5.9",
+                "channelgrabber/stock": "^1.5.9",
                 "composer/composer": "@dev",
                 "ext-gearman": "~1.1.0",
                 "guzzle/guzzle": "~3.7",
@@ -356,7 +357,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-04 12:20:31"
+            "time": "2015-09-14 09:51:54"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1143,27 +1144,26 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "7019c932a452eb7d8124fa08db1f049fe24135a3"
+                "reference": "8b1e251d3e20875d1e2f46073e01d36e95d755b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-EPIC-CGIV-6034-PublicApiR2-83a553.zip",
-                "reference": "7019c932a452eb7d8124fa08db1f049fe24135a3",
-                "shasum": "3cade7a1bca5b607d50d9374827442f12368ebc4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.0.0-462fa2.zip",
+                "reference": "8b1e251d3e20875d1e2f46073e01d36e95d755b6",
+                "shasum": "1f04c5f586da307f2eb97feb1806942347d1c91b"
             },
             "require": {
                 "channelgrabber/billing": "^1.8.0",
                 "channelgrabber/cg-predis": "^0.8.7.1",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.4",
+                "channelgrabber/channel": "^1.17.4",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/gearman": "^1.2.0",
-                "channelgrabber/settings": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.3.7",
+                "channelgrabber/settings": "^1.3.7",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.5.9",
                 "channelgrabber/user": "^1.19.0",
                 "composer/composer": "@dev",
                 "ext-http": "^1.7.6",
@@ -1193,27 +1193,27 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-10 13:14:22"
+            "time": "2015-09-14 10:04:49"
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
+            "version": "1.19.22",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b53d718fa77b20d86fe8503f7b07e481299171a6"
+                "reference": "df2390aa0cb428593afa7181f33897a4dd13073d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-6034-PublicApiR2-48a8fa.zip",
-                "reference": "b53d718fa77b20d86fe8503f7b07e481299171a6",
-                "shasum": "57fa79484fd46284db976d0b36236c8c864f1548"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.22-424bb2.zip",
+                "reference": "df2390aa0cb428593afa7181f33897a4dd13073d",
+                "shasum": "6a1baee5d3bd406bf50c966e75f498e4dc5635c0"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": ">=1.0.0,<2.0.0",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.6",
+                "channelgrabber/channel": "^1.17.7",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": ">=1.0.6",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -1223,16 +1223,16 @@
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/locale": "^1.0.5",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/notification": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.0.0",
+                "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.3.7",
+                "channelgrabber/settings": "^1.3.7",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.5.9",
+                "channelgrabber/stock": "^1.5.9",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.2.53",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
@@ -1273,7 +1273,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-10 13:28:49"
+            "time": "2015-09-14 10:19:49"
         },
         {
             "name": "channelgrabber/permission",
@@ -1441,17 +1441,17 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "f275d02ba443a8a398e55a3b39129d13b3185f6b"
+                "reference": "2cf4fbc5cb4855d586adf8eefb875968a2a118ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.5-63bb9d.zip",
-                "reference": "f275d02ba443a8a398e55a3b39129d13b3185f6b",
-                "shasum": "c8d7b55598ea83f5c2196ab4d98db99d437dc1da"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.6-acffcb.zip",
+                "reference": "2cf4fbc5cb4855d586adf8eefb875968a2a118ba",
+                "shasum": "ff0f96c380d7bb68cddb75dd883bed18009124ae"
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
@@ -1470,7 +1470,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-17 16:05:32"
+            "time": "2015-09-08 12:57:46"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -1732,17 +1732,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "94f7f01e68619c97753fd17952033930f29ffd5d"
+                "reference": "672c5ec82a5766c7f9529cbd9c9f7c75c79e0a08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-EPIC-CGIV-6034-PublicApiR2-7e734e.zip",
-                "reference": "94f7f01e68619c97753fd17952033930f29ffd5d",
-                "shasum": "2a2237f3901109cd58f9dc62c9b953a554b3e8da"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.7-15bfc8.zip",
+                "reference": "672c5ec82a5766c7f9529cbd9c9f7c75c79e0a08",
+                "shasum": "b93e1b5728febd56db53d882a3e0d561e6046026"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1769,7 +1769,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-19 10:24:40"
+            "time": "2015-09-14 09:35:20"
         },
         {
             "name": "channelgrabber/slim",
@@ -1966,21 +1966,20 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
+            "version": "1.5.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "4de5dc4680ff5984b44059891d9c3df25f4bbd17"
+                "reference": "4c71572d45a67f5ee54943b8146f34b64c662d6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-6034-PublicApiR2-33e13f.zip",
-                "reference": "4de5dc4680ff5984b44059891d9c3df25f4bbd17",
-                "shasum": "c64df61e06591fc6c6900eb42e222600e0389644"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.9-b83106.zip",
+                "reference": "4c71572d45a67f5ee54943b8146f34b64c662d6e",
+                "shasum": "9a353b80d811bf3da9f426d8b7c7dcf9b6791ccc"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.17.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": "^1.0.8",
@@ -1988,11 +1987,10 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/notification": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.0.0",
+                "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/order": "^1.18.2",
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/redis": ">=0.1.1",
-                "channelgrabber/settings": "dev-EPIC-CGIV-6034-PublicApiR2 as 1.3.7",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.9",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
@@ -2008,8 +2006,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev",
-                    "dev-EPIC-CGIV-6034-PublicApiR2": "1.5.9-dev"
+                    "dev-develop": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2027,7 +2024,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-10 13:49:45"
+            "time": "2015-09-14 10:13:59"
         },
         {
             "name": "channelgrabber/tax",
@@ -4091,7 +4088,7 @@
             "version": "v2.7.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Console.git",
+                "url": "git@github.com:symfony/Console.git",
                 "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
             },
             "dist": {
@@ -7908,46 +7905,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.17.6",
-            "alias_normalized": "1.17.6.0",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "package": "channelgrabber/notification"
-        },
-        {
-            "alias": "1.19.22",
-            "alias_normalized": "1.19.22.0",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.3.7",
-            "alias_normalized": "1.3.7.0",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "package": "channelgrabber/settings"
-        },
-        {
-            "alias": "1.5.9",
-            "alias_normalized": "1.5.9.0",
-            "version": "dev-EPIC-CGIV-6034-PublicApiR2",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/notification": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/settings": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
