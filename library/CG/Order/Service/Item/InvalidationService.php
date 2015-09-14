@@ -3,6 +3,7 @@ namespace CG\Order\Service\Item;
 
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Nginx\Cache\Invalidator\OrderItems as Invalidator;
+use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\Order\Service\Item\Fee\Service as FeeService;
 use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Service\Item\Service as ItemService;
@@ -38,6 +39,7 @@ class InvalidationService extends ItemService
         OUService $ouService,
         StockAuditor $stockAuditor,
         AccountService $accountService,
+        Notifier $notifier,
         Invalidator $invalidator
     ) {
         parent::__construct(
@@ -53,7 +55,8 @@ class InvalidationService extends ItemService
             $eventManager,
             $ouService,
             $stockAuditor,
-            $accountService
+            $accountService,
+            $notifier
         );
         $this->setInvalidator($invalidator);
     }
