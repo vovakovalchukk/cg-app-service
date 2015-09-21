@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d61e187bc2dd32becf933f8857204a27",
+    "hash": "ed34350c91d5306a93bf814c83b9f425",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -285,17 +285,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.17.8",
+            "version": "1.17.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "363274e97c40c6ff3b49577af873b0d82e0ffe22"
+                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.8-65a528.zip",
-                "reference": "363274e97c40c6ff3b49577af873b0d82e0ffe22",
-                "shasum": "bb5f151aac131574a58c10ae76443016c9182255"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.9-29dfb2.zip",
+                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd",
+                "shasum": "22aa81b2408d87674aac90895bec33d115d2fbac"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -357,7 +357,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-15 10:02:45"
+            "time": "2015-09-18 09:07:57"
         },
         {
             "name": "channelgrabber/cilex",
@@ -2374,13 +2374,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-woocommerce.git",
-                "reference": "e32c97b64c25f134a3c72fa5a862af4753a88883"
+                "reference": "15eaa36606923b08ead1096e301306250e03f434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-dev-CGIV-6249-Imports-8922e5.zip",
-                "reference": "e32c97b64c25f134a3c72fa5a862af4753a88883",
-                "shasum": "ad6657480084fc792a6f316c195d3fe16473f67a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-dev-CGIV-6249-Imports-5ef06e.zip",
+                "reference": "15eaa36606923b08ead1096e301306250e03f434",
+                "shasum": "94e7f6a7f18185c607456a91e05a95e9edb59855"
             },
             "require": {
                 "channelgrabber/channel": "^1.17.8",
@@ -2416,7 +2416,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-21 11:31:38"
+            "time": "2015-09-21 13:22:43"
         },
         {
             "name": "channelgrabber/zf2-email-template",
@@ -8032,9 +8032,9 @@
         "channelgrabber/constants": 20,
         "channelgrabber/woocommerce": 20,
         "composer/composer": 20,
-        "phpish/link_header": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
+        "phpish/link_header": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
