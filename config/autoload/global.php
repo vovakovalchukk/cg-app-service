@@ -274,7 +274,6 @@ use CG\Settings\Api\Storage\Db as ApiSettingsDbStorage;
 // Notifications
 use CG\Notification\Queue as NotificationQueue;
 
-
 // WooCommerce
 use CG\WooCommerce\ListingImport as WooCommerceListingImport;
 
