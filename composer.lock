@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6106f990aebcb03baf0f8310f6331eeb",
+    "hash": "20c48479612ab5b5ffe8787c9e18c721",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2370,7 +2370,7 @@
         },
         {
             "name": "channelgrabber/woocommerce",
-            "version": "0.2.0",
+            "version": "dev-EPIC-CGIV-6175-WooCommerce",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-woocommerce.git",
@@ -2378,9 +2378,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-0.2.0-30c1ba.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-dev-EPIC-CGIV-6175-WooCommerce-30c1ba.zip",
                 "reference": "3ddbfb84d91cb48ff2e57b8982453e0ac216e755",
-                "shasum": "9ca1437ab37eed6c02334ee678e2064d7c8ef4be"
+                "shasum": "60758b6dc1c1dc5bb0af6f123c657813b12542f1"
             },
             "require": {
                 "channelgrabber/channel": "^1.17.8",
@@ -8019,10 +8019,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-EPIC-CGIV-6175-WooCommerce",
+            "package": "channelgrabber/woocommerce"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/woocommerce": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
