@@ -27,15 +27,11 @@ class Db extends DbAbstract implements StorageInterface
     {
         $this->logDebugDump($filter, 'Filter sent to product storage:', [], 'productStorageFilter');
         try {
-            $select = $this->getSelect();
-            if ($filter->getLimit() != 'all') {
-                $offset = ($filter->getPage() - 1) * $filter->getLimit();
-                $select->limit($filter->getLimit())
-                    ->offset($offset);
-            }
             $ids = $this->fetchEntitiesIds($filter);
             $resultsCount = count($ids);
             $idInIds = new In('product.id', $ids);
+            // Do NOT apply the filter limit to this query as we get multiple rows back per Product
+            $select = $this->getSelect();
             $select->where($idInIds);
             $select->order('product.id ASC');
             $productCollection = $this->fetchCollectionWithJoinQuery(
@@ -63,6 +59,12 @@ class Db extends DbAbstract implements StorageInterface
                 Select::JOIN_LEFT
             );
             $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
+        }
+
+        if ($filter->getLimit() != 'all') {
+            $offset = ($filter->getPage() - 1) * $filter->getLimit();
+            $select->limit($filter->getLimit())
+                ->offset($offset);
         }
 
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
