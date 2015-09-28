@@ -90,7 +90,12 @@ class Entity implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "variationSkus"])
                 ]
-            ]
+            ],
+            'marketplace' => [
+                'name'       => 'marketplace',
+                'required'   => false,
+                'validators' => []
+            ],
         ];
     }
 }
