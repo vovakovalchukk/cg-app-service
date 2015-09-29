@@ -27,7 +27,7 @@ trait InvalidationTrait
     {
         $stockId = $stockLocation->getStockId();
         $stock = $this->getStockService()->fetch($stockId);
-        $this->getInvalidator()->invalidateProductsForStock($stockLocation, $stock);
+        $this->getInvalidator()->invalidateProductsForStockLocation($stockLocation, $stock);
         return $stock;
     }
 
