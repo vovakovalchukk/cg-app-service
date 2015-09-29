@@ -19,7 +19,7 @@ class Collection
     use ControllerTrait;
     use GetTrait;
     use PostTrait {
-        post as postTrait;
+        post as protected postTrait;
     }
     use InvalidationTrait;
 

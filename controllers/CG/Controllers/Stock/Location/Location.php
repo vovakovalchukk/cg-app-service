@@ -21,7 +21,7 @@ class Location implements PaginationInterface
     use ControllerTrait;
     use GetTrait;
     use PutTrait {
-        put as putTrait;
+        put as protected putTrait;
     }
     use DeleteTrait;
     use InvalidationTrait;
