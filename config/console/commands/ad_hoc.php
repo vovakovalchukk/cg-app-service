@@ -49,7 +49,7 @@ return [
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
                 $query = <<<EOF
-SELECT calc.itemSku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff
+SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId
 INNER JOIN (
@@ -62,7 +62,7 @@ INNER JOIN (
 	INNER JOIN account.account ON item.accountId = account.id
 	WHERE item.stockManaged = 1
 	GROUP BY itemSku, item.organisationUnitId
-) as calc ON calc.itemSku = s.sku AND s.organisationUnitId = calc.organisationUnitId
+) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
 WHERE calculatedAllocated > allocated
 ORDER BY organisationUnitId, itemSku
 EOF;
