@@ -39,11 +39,11 @@ return [
         },
     ],
     'ad-hoc:correctAllocatedStock' => [
-        'description' => 'Correct any discrepancies with allocated stock',
+        'description' => 'Correct any discrepancies with allocated stock, by default will display proposed changes and not apply',
         'arguments' => [],
         'options' => [
-            StockAdjustmentCommand::OPTION_DRY_RUN => [
-                'description' => 'Show proposed updates but do not apply',
+            'fix' => [
+                'description' => 'Apply updates to stock',
             ],
         ],
         'command' =>
@@ -74,7 +74,13 @@ EOF;
                 /** @var ResultInterface $adjustments */
                 $adjustments = $adapter->query($query)->execute();
 
-                $command($input, $output, StockAdjustment::TYPE_ALLOCATED, iterator_to_array($adjustments));
+                $command(
+                    $input,
+                    $output,
+                    StockAdjustment::TYPE_ALLOCATED,
+                    iterator_to_array($adjustments),
+                    $input->getOption('fix')
+                );
             }
     ],
 ];
