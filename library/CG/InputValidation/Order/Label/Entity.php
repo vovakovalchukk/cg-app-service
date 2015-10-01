@@ -44,7 +44,7 @@ class Entity implements RulesInterface
             ],
             'label' => [
                 'name'       => 'label',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
             'externalId' => [

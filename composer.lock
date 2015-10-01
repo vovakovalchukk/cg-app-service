@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3dce439953ad2589dc82986f3a9b66e7",
-    "content-hash": "13055a45d4d01f6b53686f25bb920859",
+    "hash": "684704948175701ee51a82f165467b73",
+    "content-hash": "62875a1a9217f95a20a75fc4eca33445",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1198,17 +1198,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
+            "version": "dev-CGIV-6283-dataplug-handle-timeouts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "03a8769264dae5a2ca3fb7eb737c2d663d00bef0"
+                "reference": "6ae6d02f10e740d51efe0a07473d027e62639acc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5992-dataplug-0cff72.zip",
-                "reference": "03a8769264dae5a2ca3fb7eb737c2d663d00bef0",
-                "shasum": "165de98daa5b8a8f119c45f32be776bd830cc307"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6283-dataplug-handle-timeouts-abeaa7.zip",
+                "reference": "6ae6d02f10e740d51efe0a07473d027e62639acc",
+                "shasum": "d0cd62b363a6bfd5beaf460c7faab8f65f40b3f0"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1274,7 +1274,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-30 13:07:38"
+            "time": "2015-10-01 15:46:45"
         },
         {
             "name": "channelgrabber/permission",
@@ -8047,7 +8047,7 @@
         {
             "alias": "1.19.22",
             "alias_normalized": "1.19.22.0",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
+            "version": "dev-CGIV-6283-dataplug-handle-timeouts",
             "package": "channelgrabber/order"
         },
         {
