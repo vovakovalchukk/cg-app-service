@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d5bacbb24bddc36379a5161b14a5f6a9",
+    "hash": "554651b38355bd1d23015cc6ab5a6a96",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -226,17 +226,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-6275-StockInvalidation",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "ec0f891f8c0d7d314e1960be3d636a9ef9187c35"
+                "reference": "ebad91bcf984acff31352062d2bdcf7ea95c0b7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6275-StockInvalidation-12aa5d.zip",
-                "reference": "ec0f891f8c0d7d314e1960be3d636a9ef9187c35",
-                "shasum": "beac1500444a939b3c37d3c81f8224c353b521b5"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.7.0-98de48.zip",
+                "reference": "ebad91bcf984acff31352062d2bdcf7ea95c0b7c",
+                "shasum": "7994031781e3072b76665753de771826724fdd6b"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -281,7 +281,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-29 10:57:05"
+            "time": "2015-10-02 12:52:24"
         },
         {
             "name": "channelgrabber/channel",
@@ -8022,17 +8022,9 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.7.0",
-            "alias_normalized": "1.7.0.0",
-            "version": "dev-CGIV-6275-StockInvalidation",
-            "package": "channelgrabber/cglib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
