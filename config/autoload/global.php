@@ -194,6 +194,7 @@ use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
 use CG\Stock\Storage\Cache as StockCacheStorage;
 use CG\Stock\Storage\Db as StockDbStorage;
+use CG\Stock\Storage\Api as StockApiStorage;
 use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
@@ -201,7 +202,9 @@ use CG\Stock\Location\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
+use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
+use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 
 // Listing
 use CG\Listing\Entity as ListingEntity;
@@ -310,6 +313,8 @@ return array(
                 'WriteCGSql' => CGSql::class,
                 'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
+                'StockApiService' => StockService::class,
+                'StockLocationApiService' => StockLocationService::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -1096,6 +1101,34 @@ return array(
             WooCommerceListingImport::class => [
                 'parameters' => [
                     'enabled' => false,
+                ],
+            ],
+            StockApiStorage::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle',
+                ],
+            ],
+            StockLocationApiStorage::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle',
+                ],
+            ],
+            'StockApiService' => [
+                'parameters' => [
+                    'repository' => StockApiStorage::class,
+                    'locationStorage' => StockLocationApiStorage::class,
+                ],
+            ],
+            'StockLocationApiService' => [
+                'parameters' => [
+                    'repository' => StockLocationApiStorage::class,
+                    'stockStorage' => StockApiStorage::class,
+                ],
+            ],
+            StockAdjustmentCommand::class => [
+                'parameters' => [
+                    'stockService' => 'StockApiService',
+                    'stockLocationService' => 'StockLocationApiService',
                 ],
             ],
             'preferences' => [
