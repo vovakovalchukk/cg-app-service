@@ -147,6 +147,7 @@ use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 //Shipping
+use CG\Order\Shared\Shipping\Method\Entity as ShippingMethod;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
@@ -397,7 +398,10 @@ return array(
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
                         ]
-                    ]
+                    ],
+                    'debugCachable' => [
+                        ShippingMethod::class,
+                    ],
                 ]
             ],
             AccountService::class => array(

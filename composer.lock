@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "554651b38355bd1d23015cc6ab5a6a96",
+    "hash": "30f1b7aeace899120c31f07e9b503ab7",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -131,17 +131,17 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.1.0",
+            "version": "dev-CGIV-6300-AllowDebugLogging",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "48bde339e74114c7776bb7e5913c582dc9441206"
+                "reference": "a59774f26df3c2daa5fc9cd7caa120c6481ce833"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.1.0-133d63.zip",
-                "reference": "48bde339e74114c7776bb7e5913c582dc9441206",
-                "shasum": "cd9fb1632df3948eb0cc85445aac35d4c6d07a6e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-6300-AllowDebugLogging-ca0c56.zip",
+                "reference": "a59774f26df3c2daa5fc9cd7caa120c6481ce833",
+                "shasum": "cbb785b1d55d76cf3767e0a0738e414781ed1e3c"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -165,7 +165,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-06-18 07:39:20"
+            "time": "2015-10-02 14:35:31"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -8022,9 +8022,17 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.1.1",
+            "alias_normalized": "2.1.1.0",
+            "version": "dev-CGIV-6300-AllowDebugLogging",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
