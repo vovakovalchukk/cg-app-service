@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "727587d63cc3892795f89449dc7ee46c",
+    "hash": "51e92168b76bdc8793071c19f76c4143",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1197,17 +1197,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.22.1",
+            "version": "dev-CGIV-6309-FilterByExternalUsername",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7c0bd1b886896371672b29e8d75464591b9768ed"
+                "reference": "e3326f41bcccd169c45755611cc355ae1fa08c92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.22.1-ef4c1b.zip",
-                "reference": "7c0bd1b886896371672b29e8d75464591b9768ed",
-                "shasum": "654244a2ecf3f74b4925cec6089ebde7900ba002"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6309-FilterByExternalUsername-1cb77d.zip",
+                "reference": "e3326f41bcccd169c45755611cc355ae1fa08c92",
+                "shasum": "71c34f64af38b04cc2d2a5ed9d55581f566a38e2"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1273,7 +1273,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-14 10:59:46"
+            "time": "2015-10-05 13:23:23"
         },
         {
             "name": "channelgrabber/permission",
@@ -8022,10 +8022,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.23",
+            "alias_normalized": "1.19.23.0",
+            "version": "dev-CGIV-6309-FilterByExternalUsername",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
