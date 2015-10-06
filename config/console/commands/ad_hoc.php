@@ -103,7 +103,7 @@ INNER JOIN (
 			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
 			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
 		)) as calculatedAllocated,
-        SUM(`status` = 'unknown') as unknownOrders
+        SUM(IF(`status` = 'unknown', itemQuantity, 0)) as unknownOrders
 	FROM item
 	INNER JOIN account.account ON item.accountId = account.id
 	WHERE item.stockManaged = 1
