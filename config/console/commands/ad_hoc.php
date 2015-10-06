@@ -64,7 +64,7 @@ INNER JOIN (
 	GROUP BY itemSku, item.organisationUnitId
 ) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
 WHERE calculatedAllocated > allocated
-ORDER BY organisationUnitId, itemSku
+ORDER BY organisationUnitId, sku
 EOF;
 
                 /** @var StockAdjustmentCommand $command */
@@ -110,7 +110,7 @@ INNER JOIN (
 	GROUP BY itemSku, item.organisationUnitId
 ) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
 WHERE calculatedAllocated < allocated
-ORDER BY organisationUnitId, itemSku
+ORDER BY organisationUnitId, sku
 EOF;
 
                 /** @var StockAdjustmentCommand $command */
