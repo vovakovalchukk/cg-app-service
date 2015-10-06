@@ -94,7 +94,7 @@ EOF;
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
                 $query = <<<EOF
-SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff
+SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId
 INNER JOIN (
@@ -102,7 +102,8 @@ INNER JOIN (
 		IF(item.purchaseDate > account.cgCreationDate,
 			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
 			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
-		)) as calculatedAllocated
+		)) as calculatedAllocated,
+        SUM(`status` = 'unknown') as unknownOrders
 	FROM item
 	INNER JOIN account.account ON item.accountId = account.id
 	WHERE item.stockManaged = 1
