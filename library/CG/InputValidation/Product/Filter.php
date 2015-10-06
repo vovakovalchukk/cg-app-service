@@ -69,7 +69,14 @@ class Filter implements RulesInterface
                     'validators' => [
                         new BooleanValidator(['name' => 'embedVariationsAsLinks'])
                     ]
-                ]
+                ],
+                'replaceVariationWithParents' => [
+                    'name'       => 'replaceVariationWithParents',
+                    'required'   => false,
+                    'validators' => [
+                        new BooleanValidator(['name' => 'replaceVariationWithParents'])
+                    ]
+                ],
             ]
         );
     }
