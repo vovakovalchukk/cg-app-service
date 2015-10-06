@@ -125,7 +125,8 @@ EOF;
                     $output,
                     StockAdjustment::TYPE_ALLOCATED,
                     iterator_to_array($adjustments),
-                    $input->getOption('fix')
+                    $input->getOption('fix'),
+                    ['Unknown Orders']
                 );
             }
     ],
