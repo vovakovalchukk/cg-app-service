@@ -123,7 +123,7 @@ EOF;
                 $command(
                     $input,
                     $output,
-                    StockAdjustment::TYPE_ALLOCATED,
+                    [StockAdjustment::TYPE_ALLOCATED, StockAdjustment::TYPE_ONHAND],
                     iterator_to_array($adjustments),
                     $input->getOption('fix'),
                     ['Unknown Orders']
