@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2817af8af7e6076a9e5f4e804a019c6f",
+    "hash": "4d0ed66a6707f165942acac8b19b68fd",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1976,13 +1976,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "5b6829de86eab2eac38b015fea780a7cdb796218"
+                "reference": "8e1b1ae7600ab342ca6a62264c359033849d2139"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6323-AdjustmentCommandColumns-f46fa8.zip",
-                "reference": "5b6829de86eab2eac38b015fea780a7cdb796218",
-                "shasum": "73b710072732ae4664f27ec755744314f2201877"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6323-AdjustmentCommandColumns-5535b6.zip",
+                "reference": "8e1b1ae7600ab342ca6a62264c359033849d2139",
+                "shasum": "bee3f3a52d693c1eb4f3acb2c89d0a81d204bcb1"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2030,7 +2030,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-06 14:09:49"
+            "time": "2015-10-07 09:04:20"
         },
         {
             "name": "channelgrabber/tax",
@@ -4616,17 +4616,17 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "7253c2041652353e71560bbd300d6256d170ddaf"
+                "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/symfony-http-foundation-7253c2041652353e71560bbd300d6256d170ddaf-zip-de5039.zip",
-                "reference": "7253c2041652353e71560bbd300d6256d170ddaf",
-                "shasum": "c7fa8eb459bbf53d49494189d9db959e9f88ef4a"
+                "url": "https://composer.build.channelgrabber.com/dist/symfony-http-foundation-e1509119f164a0d0a940d7d924d693a7a28a5470-zip-2ddfbe.zip",
+                "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470",
+                "shasum": "9ff5482a6e166acd795af1d3d9c90a056dc0c413"
             },
             "require": {
                 "php": ">=5.3.9"
@@ -4670,7 +4670,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-27 06:45:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/process",
@@ -8024,8 +8024,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.5.11",
-            "alias_normalized": "1.5.11.0",
+            "alias": "1.5.12",
+            "alias_normalized": "1.5.12.0",
             "version": "dev-CGIV-6323-AdjustmentCommandColumns",
             "package": "channelgrabber/stock"
         }
