@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d0ed66a6707f165942acac8b19b68fd",
+    "hash": "ce1b9381d09ee306b1676c1d38ccdcb0",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1533,17 +1533,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.4.11",
+            "version": "dev-CGIV-6316-PaginationTotal",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "db847d3014e6a1da33e67fd1b29fd9340ecf4913"
+                "reference": "7d4b57bf464b1a1fe4e8e4d5db0fee9d60cba6d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.4.11-9128f6.zip",
-                "reference": "db847d3014e6a1da33e67fd1b29fd9340ecf4913",
-                "shasum": "e6bd0c6fdd412c32f3b9f798d3123fcace1a7e13"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-6316-PaginationTotal-dc2c62.zip",
+                "reference": "7d4b57bf464b1a1fe4e8e4d5db0fee9d60cba6d7",
+                "shasum": "45a97b5930aba8c9eb87e2bb5be3e3cdbb0e9e7a"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1583,7 +1583,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-14 12:47:32"
+            "time": "2015-10-06 12:05:39"
         },
         {
             "name": "channelgrabber/purge",
@@ -8024,6 +8024,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.4.12",
+            "alias_normalized": "1.4.12.0",
+            "version": "dev-CGIV-6316-PaginationTotal",
+            "package": "channelgrabber/product"
+        },
+        {
             "alias": "1.5.12",
             "alias_normalized": "1.5.12.0",
             "version": "dev-CGIV-6323-AdjustmentCommandColumns",
@@ -8033,6 +8039,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
