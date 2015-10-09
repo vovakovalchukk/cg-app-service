@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2d3636c8151d2a2937f55359a715e8d1",
+    "hash": "551ef1142e474367e4372796ef88b24d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -907,17 +907,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-6342-UnimportedListingMarketplace",
+            "version": "1.6.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "428266b0fc8e90ed5cf8d8f591b8f1c3b899f2dd"
+                "reference": "8800210b294851ac0df78c74be26f82c0150d0a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6342-UnimportedListingMarketplace-d62349.zip",
-                "reference": "428266b0fc8e90ed5cf8d8f591b8f1c3b899f2dd",
-                "shasum": "834084d7427271a2aa01993cc08ab6756e2b2306"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.6.13-0bd2a9.zip",
+                "reference": "8800210b294851ac0df78c74be26f82c0150d0a0",
+                "shasum": "4c5f9203e75215b8bb7c276dc12a894bd1ed11a4"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -957,7 +957,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-08 15:30:23"
+            "time": "2015-10-09 10:48:28"
         },
         {
             "name": "channelgrabber/locale",
@@ -8022,18 +8022,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.13",
-            "alias_normalized": "1.6.13.0",
-            "version": "dev-CGIV-6342-UnimportedListingMarketplace",
-            "package": "channelgrabber/listing"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
