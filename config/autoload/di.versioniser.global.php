@@ -69,6 +69,8 @@ return [
                 'Versioniser_UnimportedListingEntity_4' => UnimportedListingEntity\Versioniser4::class,
                 'Versioniser_InvoiceSettingsCollection_1' => InvoiceSettingsCollection\Versioniser1::class,
                 'Versioniser_InvoiceSettings_1' => InvoiceSettingsEntity\Versioniser1::class,
+                'Versioniser_InvoiceSettingsCollection_2' => InvoiceSettingsCollection\Versioniser2::class,
+                'Versioniser_InvoiceSettings_2' => InvoiceSettingsEntity\Versioniser2::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -183,6 +185,11 @@ return [
             'Versioniser_InvoiceSettingsCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_InvoiceSettings_1'
+                ],
+            ],
+            'Versioniser_InvoiceSettingsCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_InvoiceSettings_2'
                 ],
             ],
         ],
