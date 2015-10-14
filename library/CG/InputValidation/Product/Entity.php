@@ -80,7 +80,7 @@ class Entity implements RulesInterface
             ],
             'stockLevel' => [
                 'name'       => 'stockLevel',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
             ],
         ];
