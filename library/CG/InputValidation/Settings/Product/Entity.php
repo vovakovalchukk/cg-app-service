@@ -20,15 +20,15 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
                 ]
             ],
-            'stockMode' => [
-                'name' => 'stockMode',
+            'defaultStockMode' => [
+                'name' => 'defaultStockMode',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'stockLevel' => [
-                'name'       => 'stockLevel',
+            'defaultStockLevel' => [
+                'name'       => 'defaultStockLevel',
                 'required'   => false,
-                'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
+                'validators' => [new IntegerValidator(['name' => 'defaultStockLevel'])]
             ],
         ];
     }
