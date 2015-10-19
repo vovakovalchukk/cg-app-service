@@ -17,6 +17,10 @@ use CG\Listing\Unimported\Entity as UnimportedListingEntity;
 use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Service as UnimportedListingService;
 
+// Unimported Listing Marketplace
+use CG\Controllers\Listing\Unimported\Marketplace as UnimportedListingMarketplaceController;
+use CG\InputValidation\Listing\Unimported\Marketplace as UnimportedListingMarketplaceValidation;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -99,5 +103,21 @@ return [
             'serviceClass' => UnimportedListingService::class,
         ],
         "version" => new Version(1, 5)
-    ]
+    ],
+    '/unimportedListingMarketplace' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(UnimportedListingMarketplaceController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'UnimportedListingMarketplace',
+        'validation' => [
+            'filterRules' => UnimportedListingMarketplaceValidation::class,
+        ],
+        'version' => new Version(1, 1)
+    ],
 ];

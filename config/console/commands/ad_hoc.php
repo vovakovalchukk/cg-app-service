@@ -64,7 +64,7 @@ INNER JOIN (
 	GROUP BY itemSku, item.organisationUnitId
 ) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
 WHERE calculatedAllocated > allocated
-ORDER BY organisationUnitId, itemSku
+ORDER BY organisationUnitId, sku
 EOF;
 
                 /** @var StockAdjustmentCommand $command */
@@ -80,6 +80,53 @@ EOF;
                     StockAdjustment::TYPE_ALLOCATED,
                     iterator_to_array($adjustments),
                     $input->getOption('fix')
+                );
+            }
+    ],
+    'ad-hoc:correctOverAllocatedStock' => [
+        'description' => 'Correct any discrepancies with allocated stock where we have over allocated, by default will display proposed changes and not apply',
+        'arguments' => [],
+        'options' => [
+            'fix' => [
+                'description' => 'Apply updates to stock',
+            ],
+        ],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di) {
+                $query = <<<EOF
+SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
+FROM stock AS s
+INNER JOIN stockLocation AS sl ON s.id = sl.stockId
+INNER JOIN (
+	SELECT itemSku, item.organisationUnitId, SUM(
+		IF(item.purchaseDate > account.cgCreationDate,
+			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
+			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
+		)) as calculatedAllocated,
+        SUM(IF(`status` = 'unknown', itemQuantity, 0)) as unknownOrders
+	FROM item
+	INNER JOIN account.account ON item.accountId = account.id
+	WHERE item.stockManaged = 1
+	GROUP BY itemSku, item.organisationUnitId
+) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
+WHERE calculatedAllocated < allocated
+ORDER BY organisationUnitId, sku
+EOF;
+
+                /** @var StockAdjustmentCommand $command */
+                $command = $di->get(StockAdjustmentCommand::class);
+                /** @var Adapter $adapter */
+                $adapter = $di->get('cg_appReadSql')->getAdapter();
+                /** @var ResultInterface $adjustments */
+                $adjustments = $adapter->query($query)->execute();
+
+                $command(
+                    $input,
+                    $output,
+                    [StockAdjustment::TYPE_ALLOCATED, StockAdjustment::TYPE_ONHAND],
+                    iterator_to_array($adjustments),
+                    $input->getOption('fix'),
+                    ['Unknown Orders']
                 );
             }
     ],
