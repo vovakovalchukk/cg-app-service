@@ -29,6 +29,7 @@ class Mapper
                              ->addLink('stockLocation', '/stockLocation')
                              ->addLink('template', '/template')
                              ->addLink('unimportedListing', '/unimportedListing')
+                             ->addLink('unimportedListingMarketplace', '/unimportedListingMarketplace')
                              ->addLink('userPreference', '/userPreference');
     }
 

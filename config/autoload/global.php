@@ -153,6 +153,7 @@ use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 //Shipping
+use CG\Order\Shared\Shipping\Method\Entity as ShippingMethod;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
@@ -236,6 +237,12 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 use CG\Listing\Unimported\Storage\Api as UnimportedListingApi;
+
+// Unimported Listing Marketplace
+use CG\Listing\Unimported\Marketplace\StorageInterface as UnimportedListingMarketplaceStorage;
+use CG\Listing\Unimported\Marketplace\Repository as UnimportedListingMarketplaceRepository;
+use CG\Listing\Unimported\Marketplace\Storage\Cache as UnimportedListingMarketplaceCacheStorage;
+use CG\Listing\Unimported\Marketplace\Storage\Db as UnimportedListingMarketplaceDbStorage;
 
 // Image
 use CG\Image\Entity as ImageEntity;
@@ -410,7 +417,10 @@ return array(
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
                         ]
-                    ]
+                    ],
+                    'debugCachable' => [
+                        ShippingMethod::class,
+                    ],
                 ]
             ],
             AccountService::class => array(
@@ -1169,6 +1179,18 @@ return array(
                     'stockLocationService' => 'StockLocationApiService',
                 ],
             ],
+            UnimportedListingMarketplaceRepository::class => [
+                'parameters' => [
+                    'storage' => UnimportedListingMarketplaceCacheStorage::class,
+                    'repository' => UnimportedListingMarketplaceDbStorage::class,
+                ],
+            ],
+            UnimportedListingMarketplaceDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1191,6 +1213,7 @@ return array(
                 OrderStorage::class => OrderRepository::class,
                 ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
+                UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
             ]
         )
     )
