@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7963be86b7ffddae2270168a7496596",
-    "content-hash": "b1e54a64b4a4fa7bba6698c806117e48",
+    "hash": "396fb790da5761170a29b9849256968a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1538,13 +1537,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "bf3da7a6f33ce54684226eb485614b6a8191e897"
+                "reference": "a6bfe842094a1f96cd3dcb300e721887f63d7044"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-5992-dataplug-804f1d.zip",
-                "reference": "bf3da7a6f33ce54684226eb485614b6a8191e897",
-                "shasum": "2a5f06d6ce4d7cfbee32fddad878b848452f21b3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-5992-dataplug-5115dc.zip",
+                "reference": "a6bfe842094a1f96cd3dcb300e721887f63d7044",
+                "shasum": "f1ef7025e7ce62f82170b96d4f64ed9a1d547f67"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1569,6 +1568,11 @@
                 "zendframework/zend-di": ">=2.2.5"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Product\\": "src"
@@ -1579,7 +1583,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-24 11:07:02"
+            "time": "2015-10-19 15:12:39"
         },
         {
             "name": "channelgrabber/purge",
