@@ -6,17 +6,16 @@ use CG\Product\Entity as ProductEntity;
 use CG\Product\Filter;
 use CG\Product\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Stdlib\Exception\Storage;
-use CG\Stdlib\Storage\Db\DbAbstract;
+use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\ArrayFiltersToWhereTrait;
+use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
 use CG\Zend\Stdlib\Db\Sql\InsertIgnore as InsertIgnore;
-use CG\Stdlib\Exception\Storage as StorageException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Select as ZendSelect;
-use Zend\Db\Sql\Predicate\NotIn;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\In;
+use Zend\Db\Sql\Predicate\NotIn;
+use Zend\Db\Sql\Select;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -27,8 +26,8 @@ class Db extends DbAbstract implements StorageInterface
     {
         $this->logDebugDump($filter, 'Filter sent to product storage:', [], 'productStorageFilter');
         try {
+            $total = $this->fetchEntityCount($filter);
             $ids = $this->fetchEntitiesIds($filter);
-            $resultsCount = count($ids);
             $idInIds = new In('product.id', $ids);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
             $select = $this->getSelect();
@@ -38,16 +37,16 @@ class Db extends DbAbstract implements StorageInterface
                 new ProductCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $select
             );
-            $productCollection->setTotal($resultsCount);
+            $productCollection->setTotal($total);
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
-    protected function fetchEntitiesIds(Filter $filter)
+    protected function createSelectFromFilter(Filter $filter)
     {
-        $select = $this->getReadSql()->select('product')->columns(['id']);
+        $select = $this->getReadSql()->select('product')->columns(['id' => 'id']);
         $query = $this->buildFilterQuery($filter);
         $select->where($query);
 
@@ -55,11 +54,34 @@ class Db extends DbAbstract implements StorageInterface
             $select->join(
                 ['variation' => 'product'],
                 'variation.parentProductId = product.id',
-                ['parentProductId' => 'parentProductId'],
+                [],
                 Select::JOIN_LEFT
             );
             $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
         }
+
+        if ($filter->getReplaceVariationWithParent()) {
+            $select->columns(
+                ['id' => new Expression('DISTINCT IF(product.parentProductId > 0, product.parentProductId, product.id)')]
+            );
+        }
+
+        return $select;
+    }
+
+    protected function fetchEntityCount(Filter $filter)
+    {
+        $select = $this->createSelectFromFilter($filter);
+        $columns = $select->getRawState(Select::COLUMNS);
+        $select->columns(['count' => new Expression('COUNT(?)', [$columns['id']])]);
+
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        return $results->current()['count'];
+    }
+
+    protected function fetchEntitiesIds(Filter $filter)
+    {
+        $select = $this->createSelectFromFilter($filter);
 
         if ($filter->getLimit() != 'all') {
             $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -71,19 +93,10 @@ class Db extends DbAbstract implements StorageInterface
         if($results->count() == 0) {
             throw new NotFound();
         }
-
-        $ids = [];
-        foreach($results as $result) {
-            if (isset($result['parentProductId'])) {
-                $ids[] = $result['parentProductId'];
-            }
-            $ids[] = $result['id'];
-        }
-        $ids = array_unique($ids);
-        return $ids;
+        return array_column(iterator_to_array($results), 'id');
     }
 
-    protected function fetchCollectionWithJoinQuery(ProductCollection $collection, ZendSelect $select)
+    protected function fetchCollectionWithJoinQuery(ProductCollection $collection, Select $select)
     {
         $rows = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if ($rows->count() == 0) {
