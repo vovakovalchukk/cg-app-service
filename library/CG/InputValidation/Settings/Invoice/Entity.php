@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Settings\Invoice;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
@@ -27,11 +28,16 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'autoEmail' => array(
+            'autoEmail' => [
                 'name'       => 'autoEmail',
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
-            ),
+            ],
+            'productImages' => [
+                'name'       => 'autoEmail',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'active'])]
+            ],
             'tradingCompanies' => [
                 'name' => 'tradingCompanies',
                 'required' => false,
