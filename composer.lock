@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a4d8115cb85dedc0f657e1b432157742",
+    "hash": "2f00525aa67600d0720535bb64ebf166",
+    "content-hash": "ecec025c53562ef69c3e7445d76a63d7",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -399,17 +400,17 @@
         },
         {
             "name": "channelgrabber/communication",
-            "version": "1.0.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-communication.git",
-                "reference": "c232289bd95ee2cb079953e63b29c7b12c5800f6"
+                "reference": "2edeb98c589f952cc6a45723b0de3250408493e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-communication-1.0.0.1-6dbd7f.zip",
-                "reference": "c232289bd95ee2cb079953e63b29c7b12c5800f6",
-                "shasum": "cb4a2ed82f849505e7e0edd7288209357cfcb36c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-communication-1.0.2-0826db.zip",
+                "reference": "2edeb98c589f952cc6a45723b0de3250408493e3",
+                "shasum": "93e841d96fd0815fe804a85627c1c007541e3742"
             },
             "require": {
                 "channelgrabber/channel": "^1.16.20",
@@ -445,7 +446,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-10 08:47:20"
+            "time": "2015-10-12 15:39:19"
         },
         {
             "name": "channelgrabber/constants",
@@ -479,17 +480,17 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.6",
+            "version": "dev-CGIV-6410-OrderSelectOptimisation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-db.git",
-                "reference": "94e92ec67aa9fa55c2e4b1cd96f91b5df75ed826"
+                "reference": "1fe6c240baa7bdf96f5a08a5e2dba2c428aa171a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.6-a7f20b.zip",
-                "reference": "94e92ec67aa9fa55c2e4b1cd96f91b5df75ed826",
-                "shasum": "375895312d4dca48e72cb749cb28a788b2e48544"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-dev-CGIV-6410-OrderSelectOptimisation-f1a032.zip",
+                "reference": "1fe6c240baa7bdf96f5a08a5e2dba2c428aa171a",
+                "shasum": "14a16d6461452d744d61e527dfa2d48f078f00cb"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -511,7 +512,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-05-28 14:49:10"
+            "time": "2015-10-26 09:07:15"
         },
         {
             "name": "channelgrabber/di",
@@ -1197,25 +1198,26 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.23",
+            "version": "dev-CGIV-6410-OrderSelectOptimisation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0cbd7d0c05df55890c4ec9ab2e1e07d9e003673e"
+                "reference": "f636406dcef5977e3ee9597a386e5ca9c94c667e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.23-e68e9c.zip",
-                "reference": "0cbd7d0c05df55890c4ec9ab2e1e07d9e003673e",
-                "shasum": "271a3591e3677457d79084e52057c8ae43cd8faa"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6410-OrderSelectOptimisation-7b2734.zip",
+                "reference": "f636406dcef5977e3ee9597a386e5ca9c94c667e",
+                "shasum": "4068cc80dfe80b040e2ff20797c07bcc6bd8f92b"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": ">=1.0.0,<2.0.0",
                 "channelgrabber/channel": "^1.17.7",
+                "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/db": ">=1.0.6",
+                "channelgrabber/db": "dev-CGIV-6410-OrderSelectOptimisation as 1.0.7",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
                 "channelgrabber/email": "^1.0.7",
                 "channelgrabber/etag": "^1.6.0",
@@ -1273,7 +1275,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-06 07:47:40"
+            "time": "2015-10-26 09:30:17"
         },
         {
             "name": "channelgrabber/permission",
@@ -8022,10 +8024,25 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.7",
+            "alias_normalized": "1.0.7.0",
+            "version": "dev-CGIV-6410-OrderSelectOptimisation",
+            "package": "channelgrabber/db"
+        },
+        {
+            "alias": "1.19.26",
+            "alias_normalized": "1.19.26.0",
+            "version": "dev-CGIV-6410-OrderSelectOptimisation",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/db": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
