@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5e8fe1b7a3255ef6285d505590820a8d",
-    "content-hash": "53650b41b38c42d8bf51b323e0c554fe",
+    "hash": "44bfa2ec62d2898382e242ac01ed4a5c",
+    "content-hash": "bc6f14dc2cc31dbe40ee8bac6a87f663",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -227,28 +227,29 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.7.0",
+            "version": "dev-CGIV-6440-ActionDecider",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "ebad91bcf984acff31352062d2bdcf7ea95c0b7c"
+                "reference": "21fff65b7062a2cdbf21ccb025a9003c5425fdb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.7.0-98de48.zip",
-                "reference": "ebad91bcf984acff31352062d2bdcf7ea95c0b7c",
-                "shasum": "7994031781e3072b76665753de771826724fdd6b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6440-ActionDecider-9bf9f2.zip",
+                "reference": "21fff65b7062a2cdbf21ccb025a9003c5425fdb8",
+                "shasum": "6dcbd325d640bf36ba834b5451b62be030b81b13"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
-                "channelgrabber/channel": "^1.16.10",
+                "channelgrabber/channel": "dev-EPIC-CGIV-6243-StockLevels as 1.18.1",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": "~1.0.6",
                 "channelgrabber/listing": "^1.6.11",
                 "channelgrabber/location": ">=1.1.1",
                 "channelgrabber/order": "^1.19.0",
-                "channelgrabber/product": ">=1.3.22",
+                "channelgrabber/product": "dev-EPIC-CGIV-6243-StockLevels as 1.4.13",
+                "channelgrabber/settings": "dev-EPIC-CGIV-6243-StockLevels as 1.3.9",
                 "channelgrabber/slim": ">=1.13.0,<2.0.0",
                 "channelgrabber/stock": "^1.5.0",
                 "channelgrabber/user": ">=1.18.7",
@@ -264,7 +265,8 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.1.6-dev"
+                    "dev-develop": "1.7.x-dev",
+                    "dev-CGIV-6440-ActionDecider": "1.7.1-dev"
                 }
             },
             "autoload": {
@@ -282,21 +284,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-02 12:52:24"
+            "time": "2015-10-28 10:53:56"
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.17.9",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd"
+                "reference": "d12bc23c88b262c5bcd10832badce93ba6d102cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.9-29dfb2.zip",
-                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd",
-                "shasum": "22aa81b2408d87674aac90895bec33d115d2fbac"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-6243-StockLevels-1fefaf.zip",
+                "reference": "d12bc23c88b262c5bcd10832badce93ba6d102cc",
+                "shasum": "db8166b39e6553347c3792bb6a9e210f227bc8fa"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -358,7 +360,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-18 09:07:57"
+            "time": "2015-10-16 08:21:14"
         },
         {
             "name": "channelgrabber/cilex",
@@ -8026,6 +8028,18 @@
     ],
     "aliases": [
         {
+            "alias": "1.7.1",
+            "alias_normalized": "1.7.1.0",
+            "version": "dev-CGIV-6440-ActionDecider",
+            "package": "channelgrabber/cglib"
+        },
+        {
+            "alias": "1.18.1",
+            "alias_normalized": "1.18.1.0",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "package": "channelgrabber/channel"
+        },
+        {
             "alias": "1.4.13",
             "alias_normalized": "1.4.13.0",
             "version": "dev-EPIC-CGIV-6243-StockLevels",
@@ -8040,6 +8054,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/product": 20,
         "channelgrabber/settings": 20,
