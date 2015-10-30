@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e3cb2c15e207308bdcebce7a57a19c2",
-    "content-hash": "dd19a82b516f558c602bd214e5dc23c8",
+    "hash": "bc0dcec5a28cacecf58c48d82dd0267a",
+    "content-hash": "836c080d813f61ca4758453e55001ea5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -286,17 +286,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.17.9",
+            "version": "1.17.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd"
+                "reference": "1c7f32b8dca7f03e5abac43ab5b2b605f9ab649b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.9-29dfb2.zip",
-                "reference": "46e643bd641af4aaf9cc85e0e77bcd6d118eaecd",
-                "shasum": "22aa81b2408d87674aac90895bec33d115d2fbac"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.17.13-41163a.zip",
+                "reference": "1c7f32b8dca7f03e5abac43ab5b2b605f9ab649b",
+                "shasum": "4391181fe250b981fd15b90db8af985ecdb47a2d"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -358,7 +358,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-18 09:07:57"
+            "time": "2015-10-16 07:45:32"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1198,17 +1198,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.26",
+            "version": "dev-CGIV-6445-ShippingCacheKeys",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c5ef5dc6e0ad75d817920c657a0f47ec8c47f5fd"
+                "reference": "53660a519378deba01107d2a26079ec72c631bcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.26-589f4e.zip",
-                "reference": "c5ef5dc6e0ad75d817920c657a0f47ec8c47f5fd",
-                "shasum": "b95e2f21ac9a246111ebf13a888ba82fe641fc4d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6445-ShippingCacheKeys-d089e9.zip",
+                "reference": "53660a519378deba01107d2a26079ec72c631bcc",
+                "shasum": "bf82eacda139f2e010423a5d38ac51cbbcc95f83"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1230,7 +1230,7 @@
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "^1.3.7",
+                "channelgrabber/settings": "dev-CGIV-6445-ShippingCacheKeys as 1.3.9",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
@@ -1275,7 +1275,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-27 10:51:10"
+            "time": "2015-10-29 10:45:01"
         },
         {
             "name": "channelgrabber/permission",
@@ -1740,17 +1740,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.3.8",
+            "version": "dev-CGIV-6445-ShippingCacheKeys",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "3308d6db58dd3f49a77761bc1a76ce2ee116e6b0"
+                "reference": "6b41c92eaeccae6b4e69982b4b8b467fde118698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.8-294fc6.zip",
-                "reference": "3308d6db58dd3f49a77761bc1a76ce2ee116e6b0",
-                "shasum": "e09b3691421c5b20846ae746be46f5a1ec548b97"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-6445-ShippingCacheKeys-0dcf01.zip",
+                "reference": "6b41c92eaeccae6b4e69982b4b8b467fde118698",
+                "shasum": "1b8fe4b2fd6cead91c4732ac61afa317fcd8f10a"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1777,7 +1777,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-16 14:12:56"
+            "time": "2015-10-29 10:43:21"
         },
         {
             "name": "channelgrabber/slim",
@@ -1933,13 +1933,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "4c08b5f9a1be2e0704c4ab7b538747c4e2926afd"
+                "reference": "614abb1aa9ddf2efe62d21bf5026f49e4781eead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6439-StockLogFractionalTimes-6b897c.zip",
-                "reference": "4c08b5f9a1be2e0704c4ab7b538747c4e2926afd",
-                "shasum": "f752591304dccf4d02e4d07aca6d9f729283c832"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6439-StockLogFractionalTimes-43a54c.zip",
+                "reference": "614abb1aa9ddf2efe62d21bf5026f49e4781eead",
+                "shasum": "3e26820e3773c7c39a0ff0903fe378c6c71465cd"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1970,7 +1970,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-27 16:42:05"
+            "time": "2015-10-28 09:04:40"
         },
         {
             "name": "channelgrabber/stock",
@@ -1978,13 +1978,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e7ac2d5546d1d9f238698fa8a72a6b22dbbfc3e8"
+                "reference": "7b4e67d3378702014915310398519e1fb034476d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6439-StockLogFractionalTimes-66f390.zip",
-                "reference": "e7ac2d5546d1d9f238698fa8a72a6b22dbbfc3e8",
-                "shasum": "4beabdaf7ef6f4e05e81b6337fdc4ce18c8b3181"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6439-StockLogFractionalTimes-8da3dc.zip",
+                "reference": "7b4e67d3378702014915310398519e1fb034476d",
+                "shasum": "b3d4d40bcac0325da63b6b72b9f5915ad682437c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2032,7 +2032,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-27 16:49:57"
+            "time": "2015-10-28 09:10:21"
         },
         {
             "name": "channelgrabber/tax",
@@ -6889,6 +6889,72 @@
             "time": "2013-11-15 02:57:56"
         },
         {
+            "name": "composer/semver",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/semver.git",
+                "reference": "d0e1ccc6d44ab318b758d709e19176037da6b1ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/composer-semver-d0e1ccc6d44ab318b758d709e19176037da6b1ba-zip-4ead97.zip",
+                "reference": "d0e1ccc6d44ab318b758d709e19176037da6b1ba",
+                "shasum": "46071a964b51f459c3b75b8eafa9635b8059567c"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Semver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com"
+                },
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Semver library that offers utilities, version constraint parsing and validation.",
+            "keywords": [
+                "semantic",
+                "semver",
+                "validation",
+                "versioning"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-09-21 09:42:36"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -8026,6 +8092,18 @@
     ],
     "aliases": [
         {
+            "alias": "1.19.27",
+            "alias_normalized": "1.19.27.0",
+            "version": "dev-CGIV-6445-ShippingCacheKeys",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.3.9",
+            "alias_normalized": "1.3.9.0",
+            "version": "dev-CGIV-6445-ShippingCacheKeys",
+            "package": "channelgrabber/settings"
+        },
+        {
             "alias": "2.12.13",
             "alias_normalized": "2.12.13.0",
             "version": "dev-CGIV-6439-StockLogFractionalTimes",
@@ -8041,6 +8119,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
+        "channelgrabber/settings": 20,
         "channelgrabber/stdlib": 20,
         "channelgrabber/stock": 20,
         "composer/composer": 20,
