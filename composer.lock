@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a79baba756a316525f30ea05b513d5a",
-    "content-hash": "414c6a76648a154848d8d3c4778014fc",
+    "hash": "82541a5fb40da76aef4c540e653e565f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1974,17 +1973,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6478-EnforceDateTime",
+            "version": "1.5.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "3319211c6f304b2067e433390d45091438489f7f"
+                "reference": "34e029b0f936af8c5e1c0b4a9493041873897aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6478-EnforceDateTime-8c1ead.zip",
-                "reference": "3319211c6f304b2067e433390d45091438489f7f",
-                "shasum": "c9e2cb79a143797b67788cabffcdc9a6e52280f3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.14-cbb17f.zip",
+                "reference": "34e029b0f936af8c5e1c0b4a9493041873897aad",
+                "shasum": "b0d78289cecdefc68d5b71e8148ac09225c92625"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2032,7 +2031,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-05 10:42:11"
+            "time": "2015-11-05 11:56:04"
         },
         {
             "name": "channelgrabber/tax",
@@ -8090,18 +8089,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.5.14",
-            "alias_normalized": "1.5.14.0",
-            "version": "dev-CGIV-6478-EnforceDateTime",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
