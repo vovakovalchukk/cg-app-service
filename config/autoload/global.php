@@ -419,7 +419,6 @@ return array(
                         ]
                     ],
                     'debugCachable' => [
-                        ShippingMethod::class,
                     ],
                 ]
             ],
