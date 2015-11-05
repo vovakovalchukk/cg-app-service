@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93f5d00544539f39383b7107d277de08",
-    "content-hash": "22e619b2da1d19d8ceba50ddd5c789ef",
+    "hash": "4a79baba756a316525f30ea05b513d5a",
+    "content-hash": "414c6a76648a154848d8d3c4778014fc",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1974,17 +1974,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.5.13",
+            "version": "dev-CGIV-6478-EnforceDateTime",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "a9842ec5114040ec6c39b0e8db8ffc7713384de3"
+                "reference": "3319211c6f304b2067e433390d45091438489f7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.13-a4c873.zip",
-                "reference": "a9842ec5114040ec6c39b0e8db8ffc7713384de3",
-                "shasum": "524e9205db86d79e2f0fa521a47af62cc09b28b0"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6478-EnforceDateTime-8c1ead.zip",
+                "reference": "3319211c6f304b2067e433390d45091438489f7f",
+                "shasum": "c9e2cb79a143797b67788cabffcdc9a6e52280f3"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2032,7 +2032,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-02 15:44:32"
+            "time": "2015-11-05 10:42:11"
         },
         {
             "name": "channelgrabber/tax",
@@ -8090,10 +8090,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.14",
+            "alias_normalized": "1.5.14.0",
+            "version": "dev-CGIV-6478-EnforceDateTime",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
