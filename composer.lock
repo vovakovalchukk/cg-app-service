@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b271d22b8f533225384c73aff8bfef0b",
-    "content-hash": "9d00ad17d9159b63df57729ca2f69ca5",
+    "hash": "78cf8ae3d961726e299954bb4b222a50",
+    "content-hash": "b1296c36337e346608d10f49ee6d6339",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -812,17 +812,17 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.16",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "2d51a676f83238ba8ad4a34a3ba796451f7a92e0"
+                "reference": "efe6458236ab1602b1396630f0d791d1089f7377"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.16-6f493a.zip",
-                "reference": "2d51a676f83238ba8ad4a34a3ba796451f7a92e0",
-                "shasum": "685dfbf3d1afeebdcae36f7c18b4c9b69fa58ad3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-dev-CGIV-6477-fix-stock-duplication-5b7557.zip",
+                "reference": "efe6458236ab1602b1396630f0d791d1089f7377",
+                "shasum": "256406f6a3e19c5157b6ccfbe0f7cee820370a54"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -862,7 +862,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-26 13:00:21"
+            "time": "2015-11-05 16:07:01"
         },
         {
             "name": "channelgrabber/image",
@@ -1384,7 +1384,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.7-9aedf6.zip",
                 "reference": "14bf8b3cc0984d1e6b96166701dfe3897e52b1ee",
-                "shasum": "2ab4fcb7984b7128088350fc789d4666a75b2f74"
+                "shasum": "73405638346204bcc786b3179fe5c3a2eb014ffa"
             },
             "require": {
                 "jakoch/phantomjs-installer": "1.9.7",
@@ -1974,17 +1974,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.5.14",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "34e029b0f936af8c5e1c0b4a9493041873897aad"
+                "reference": "fd997b2046469e13d4581cd19fe7c989c6d4f1af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.5.14-cbb17f.zip",
-                "reference": "34e029b0f936af8c5e1c0b4a9493041873897aad",
-                "shasum": "b0d78289cecdefc68d5b71e8148ac09225c92625"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6477-fix-stock-duplication-07de64.zip",
+                "reference": "fd997b2046469e13d4581cd19fe7c989c6d4f1af",
+                "shasum": "249277f4bc5b401da7105e48eb6fdd68dc421a43"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1993,7 +1993,7 @@
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
-                "channelgrabber/http": "^1.3.14",
+                "channelgrabber/http": "dev-CGIV-6477-fix-stock-duplication as 1.3.19",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/order": "^1.18.2",
@@ -2032,7 +2032,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-05 11:56:04"
+            "time": "2015-11-05 16:26:08"
         },
         {
             "name": "channelgrabber/tax",
@@ -2824,9 +2824,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://composer.build.channelgrabber.com/dist/fabpot-goutte-794b196e76bdd37b5155cdecbad311f0a3b07625-zip-2d5a7a.zip",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
-                "shasum": ""
+                "shasum": "b36e6be945c9362f8a1b94341671199453b7a878"
             },
             "require": {
                 "ext-curl": "*",
@@ -2868,6 +2868,11 @@
             "keywords": [
                 "scraper"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-09 15:52:51"
         },
         {
@@ -6889,72 +6894,6 @@
             "time": "2013-11-15 02:57:56"
         },
         {
-            "name": "composer/semver",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/semver.git",
-                "reference": "d0e1ccc6d44ab318b758d709e19176037da6b1ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/composer-semver-d0e1ccc6d44ab318b758d709e19176037da6b1ba-zip-4ead97.zip",
-                "reference": "d0e1ccc6d44ab318b758d709e19176037da6b1ba",
-                "shasum": "46071a964b51f459c3b75b8eafa9635b8059567c"
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5",
-                "phpunit/phpunit-mock-objects": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\Semver\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Bast",
-                    "email": "rob.bast@gmail.com"
-                },
-                {
-                    "name": "Nils Adermann",
-                    "email": "naderman@naderman.de",
-                    "homepage": "http://www.naderman.de"
-                },
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Semver library that offers utilities, version constraint parsing and validation.",
-            "keywords": [
-                "semantic",
-                "semver",
-                "validation",
-                "versioning"
-            ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2015-09-21 09:42:36"
-        },
-        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -7429,9 +7368,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-code-coverage-fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b-zip-1d3f6a.zip",
                 "reference": "fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
-                "shasum": ""
+                "shasum": "083339a8f32e95f8ecbc7b41ed7861eee9425aa9"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -7478,6 +7417,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-02 10:13:14"
         },
         {
@@ -7684,9 +7628,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38709dc22d519a3d1be46849868aa2ddf822bcf6",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-38709dc22d519a3d1be46849868aa2ddf822bcf6-zip-c37939.zip",
                 "reference": "38709dc22d519a3d1be46849868aa2ddf822bcf6",
-                "shasum": ""
+                "shasum": "01a3279a08c2913f928efbcc108da9ab3b51338a"
             },
             "require": {
                 "ext-ctype": "*",
@@ -7745,6 +7689,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-17 09:04:17"
         },
         {
@@ -7757,9 +7706,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5794e3c5c5ba0fb037b11d8151add2a07fa82875",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-mock-objects-5794e3c5c5ba0fb037b11d8151add2a07fa82875-zip-eb5a47.zip",
                 "reference": "5794e3c5c5ba0fb037b11d8151add2a07fa82875",
-                "shasum": ""
+                "shasum": "35fd659f32121fb6db6dde1f222245da602b3432"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -7794,6 +7743,11 @@
                 "mock",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-01-13 10:24:48"
         },
         {
@@ -7806,9 +7760,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://composer.build.channelgrabber.com/dist/psr-log-fe0936ee26643249e916849d48e3a51d5f5e278b-zip-e71523.zip",
                 "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
+                "shasum": "3635bde5339dfdef5c968cbad70d193cf39e2492"
             },
             "type": "library",
             "autoload": {
@@ -7832,6 +7786,11 @@
                 "psr",
                 "psr-3"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2012-12-21 11:40:51"
         },
         {
@@ -8090,10 +8049,25 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.3.19",
+            "alias_normalized": "1.3.19.0",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
+            "package": "channelgrabber/http"
+        },
+        {
+            "alias": "1.5.15",
+            "alias_normalized": "1.5.15.0",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/http": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
