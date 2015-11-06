@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78cf8ae3d961726e299954bb4b222a50",
-    "content-hash": "b1296c36337e346608d10f49ee6d6339",
+    "hash": "07f22bc406d61232aa3eeac0a37c810b",
+    "content-hash": "eb2f549d4e850c5126c593fe75857eb5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1929,17 +1929,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.13",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "159dd41a26eefaf8e8779df935bb5c50be1de30b"
+                "reference": "14698c3271fe2b1097bb40b1054b92435868bb38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.13-f82e35.zip",
-                "reference": "159dd41a26eefaf8e8779df935bb5c50be1de30b",
-                "shasum": "3bae35b72f4b0ac0c86537cdfa0a5a17ca3c773a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6477-fix-stock-duplication-8aad99.zip",
+                "reference": "14698c3271fe2b1097bb40b1054b92435868bb38",
+                "shasum": "8696ac0e6459a0d0688bc14d30fd88317eda5500"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1970,7 +1970,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-02 15:37:07"
+            "time": "2015-11-06 09:34:09"
         },
         {
             "name": "channelgrabber/stock",
@@ -1978,13 +1978,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "fd997b2046469e13d4581cd19fe7c989c6d4f1af"
+                "reference": "7992abbb502a7940c264bd5a0fa90bb337bb4213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6477-fix-stock-duplication-07de64.zip",
-                "reference": "fd997b2046469e13d4581cd19fe7c989c6d4f1af",
-                "shasum": "249277f4bc5b401da7105e48eb6fdd68dc421a43"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6477-fix-stock-duplication-7d8853.zip",
+                "reference": "7992abbb502a7940c264bd5a0fa90bb337bb4213",
+                "shasum": "52618b3d56b7a37d2ec1d4b58a996a02f319c7ff"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2000,7 +2000,7 @@
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/slim": "^1.13.2",
-                "channelgrabber/stdlib": "^2.12.13",
+                "channelgrabber/stdlib": "dev-CGIV-6477-fix-stock-duplication as 2.12.13",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
@@ -2032,7 +2032,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-05 16:26:08"
+            "time": "2015-11-06 10:05:02"
         },
         {
             "name": "channelgrabber/tax",
@@ -8057,6 +8057,12 @@
             "package": "channelgrabber/http"
         },
         {
+            "alias": "2.12.13",
+            "alias_normalized": "2.12.13.0",
+            "version": "dev-CGIV-6477-fix-stock-duplication",
+            "package": "channelgrabber/stdlib"
+        },
+        {
             "alias": "1.5.15",
             "alias_normalized": "1.5.15.0",
             "version": "dev-CGIV-6477-fix-stock-duplication",
@@ -8067,6 +8073,7 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/http": 20,
+        "channelgrabber/stdlib": 20,
         "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
