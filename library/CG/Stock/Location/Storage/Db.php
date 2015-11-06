@@ -5,6 +5,7 @@ use CG\Stock\Location\Collection as LocationCollection;
 use CG\Stock\Location\Entity as LocationEntity;
 use CG\Stock\Location\StorageInterface;
 use CG\Stdlib\CollectionInterface;
+use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -82,26 +83,39 @@ class Db extends DbAbstract implements StorageInterface
         );
     }
 
-    protected function saveEntity($entity)
+    public function save($entity, array $adjustmentIds = [])
     {
+        $attempts = 5;
         try {
-            $this->fetch($entity->getId());
-            $this->updateEntity($entity);
-        } catch (NotFound $ex) {
-            $this->insertEntity($entity);
+            $this->startTransactionAndHandleDeadlock([$this, 'saveEntityWithAdjustments'], [$entity, $adjustmentIds], $attempts);
+        } catch (Deadlock $e) {
+            $this->logError('Deadlock handling failed, attempted %s times to save entity of type %s', [$attempts, get_class($entity)], 'MySQL Deadlock');
+            throw $e;
         }
         return $entity;
     }
 
-    protected function insertEntity($entity)
+    protected function saveEntityWithAdjustments($entity, array $adjustmentIds)
+    {
+        try {
+            $this->fetch($entity->getId());
+            $this->updateEntityWithAdjustments($entity, $adjustmentIds);
+        } catch (NotFound $ex) {
+            $this->insertEntityWithAdjustments($entity, $adjustmentIds);
+        }
+        return $entity;
+    }
+
+    protected function insertEntityWithAdjustments($entity, array $adjustmentIds)
     {
         $insert = $this->getInsert()->values($this->toDbArray($entity));
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        $this->insertAdjustmentIds($adjustmentIds);
 
         $entity->setNewlyInserted(true);
     }
 
-    protected function updateEntity($entity)
+    protected function updateEntityWithAdjustments($entity, array $adjustmentIds)
     {
         $update = $this->getUpdate()->set($this->toDbArray($entity))
             ->where(array(
@@ -109,6 +123,22 @@ class Db extends DbAbstract implements StorageInterface
                 'stockId' => $entity->getStockId(),
             ));
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+        $this->insertAdjustmentIds($adjustmentIds);
+    }
+
+    protected function insertAdjustmentIds(array $adjustmentIds)
+    {
+        if (empty($adjustmentIds)) {
+            return;
+        }
+        foreach ($adjustmentIds as $adjustmentId) {
+            $insert = $this->getWriteSql()->insert('stockTransaction');
+            $insert->values([
+                'id' => $adjustmentId,
+                'appliedDate' => (new StdlibDateTime())->stdFormat(),
+            ]);
+            $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        }
     }
 
     public function saveCollection(CollectionInterface $collection)

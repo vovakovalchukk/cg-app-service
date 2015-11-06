@@ -2,14 +2,13 @@
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
-class ApiSettings extends AbstractMigration
+class StockTransaction extends AbstractMigration
 {
     public function change()
     {
-        $this->table('api', ['id' => false, 'primary_key' => ['id']])
-            ->addColumn('id', 'integer', ['signed' => false])
-            ->addColumn('orderNotificationUrl', 'text', ['limit' => MysqlAdapter::TEXT_LONG, 'null' => true])
-            ->addColumn('stockNotificationUrl', 'text', ['limit' => MysqlAdapter::TEXT_LONG, 'null' => true])
+        $this->table('stockTransaction', ['id' => false, 'primary_key' => ['id']])
+            ->addColumn('id', 'string')
+            ->addColumn('appliedDate', 'datetime')
             ->create();
     }
 }

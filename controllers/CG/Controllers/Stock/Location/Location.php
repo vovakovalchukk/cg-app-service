@@ -51,8 +51,8 @@ class Location implements PaginationInterface
 
     public function put($id, Hal $hal)
     {
-        $adjustmentHeader = $this->getApp()->request->headers(AdjustmentService::ADJUSTMENT_HEADER, '');
-        $adjustmentIds = explode(',', $adjustmentHeader);
+        $adjustmentHeader = $this->slim->request->headers(AdjustmentService::ADJUSTMENT_HEADER, null);
+        $adjustmentIds = ($adjustmentHeader != null ? explode(',', $adjustmentHeader) : []);
         try {
             $stockLocationHal = $this->getService()->saveHal($hal, ["id" => $id], $adjustmentIds);
         } catch (PermissionException $e) {

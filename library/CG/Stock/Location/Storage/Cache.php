@@ -15,7 +15,10 @@ use CG\Cache\Strategy\EntityInterface as EntityStrategy;
 
 class Cache extends CacheAbstract implements StorageInterface
 {
-    use CollectionTrait, SaveTrait, RemoveTrait, RemoveByFieldTrait, FetchTrait;
+    use CollectionTrait, RemoveTrait, RemoveByFieldTrait, FetchTrait;
+    use SaveTrait {
+        save as traitSave;
+    }
 
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
@@ -32,5 +35,10 @@ class Cache extends CacheAbstract implements StorageInterface
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'stockId', 'locationId'));
         return $this->fetchCollection($collection);
+    }
+
+    public function save($entity, array $adjustmentIds = [])
+    {
+        return $this->traitSave($entity);
     }
 }
