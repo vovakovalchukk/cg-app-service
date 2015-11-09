@@ -147,7 +147,7 @@ ORDER BY o.`id`, i.`id`
 EOF;
 
                 /** @var Redis $redis */
-                $redis = $di->get('unreliable_redis');
+                $redis = $di->get('reliable_redis');
                 /** @var Adapter $cgApp */
                 $cgApp = $di->get('cg_appReadSql')->getAdapter();
                 /** @var ResultInterface $orderItems */
