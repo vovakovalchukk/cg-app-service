@@ -183,6 +183,7 @@ use CG\Usage\StorageInterface as UsageStorageInterface;
 // Product
 use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
+use CG\Product\Client\Service as ProductClientService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
@@ -834,6 +835,16 @@ return array(
                     'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
                 )
             ),
+            ProductClientService::class => [
+                'parameters' => array(
+                    'repository' => ProductRepository::class,
+                    'mapper' => ProductMapper::class,
+                    'stockStorage' => StockService::class,
+                    'listingStorage' => ListingService::class,
+                    'imageStorage' => ImageService::class,
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
+                )
+            ],
             ProductRepository::class => array(
                 'parameter' => array (
                     'storage' => ProductCacheStorage::class,
