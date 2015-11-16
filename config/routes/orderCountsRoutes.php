@@ -30,7 +30,7 @@ return [
             'dataRules' => OrderCountsEntityValidation::class
         ]
     ],
-    '/location/:locationId' => [
+    '/orderCounts/:OUId' => [
         'controllers' => function($locationId) use ($di, $app) {
                 $method = $app->request()->getMethod();
 
