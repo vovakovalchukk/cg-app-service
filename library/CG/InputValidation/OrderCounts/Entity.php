@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\Order\Order;
+namespace CG\InputValidation\OrderCounts;
 
 use CG\Locale\CurrencyCode;
 use CG\Locale\CountryCode;
