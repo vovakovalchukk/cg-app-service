@@ -181,6 +181,7 @@ use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 
 // Transaction
@@ -207,6 +208,13 @@ use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 
+
+// Order Counts
+use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
+use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
+use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
+use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
+
 // Listing
 use CG\Listing\Entity as ListingEntity;
 use CG\Listing\Service as ListingDeprService;
@@ -216,6 +224,7 @@ use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
+use CG\Listing\StorageInterface as ListingStorage;
 
 // Unimported Listing
 use CG\Listing\Unimported\Service as UnimportedListingService;
@@ -880,6 +889,13 @@ return array(
                     'itemStorage' => ItemRepository::class
                 ]
             ],
+
+            OrdersCountRedisStorage::class => [
+                'parameter' => [
+                    'client' => "reliable_redis",
+                    'mapper' => OrderCountsMapper::class
+                ]
+            ],
             ListingService::class => [
                 'parameters' => [
                     'repository' => ListingRepository::class,
@@ -1174,6 +1190,9 @@ return array(
                 OrderStorage::class => OrderRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
+                ProductStorage::class => ProductRepository::class,
+                ListingStorage::class => ListingRepository::class,
+                OrderCountsStorage::class => OrderCountsRedisStorage::class,
             ]
         )
     )

@@ -9,7 +9,6 @@ use CG\Order\Shared\OrderCounts\Entity as OrderCountsEntity;
 use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
 use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
 
-use CG\Slim\Versioning\Version;
 
 return [
     '/orderCounts' => [
