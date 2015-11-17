@@ -1,8 +1,12 @@
 <?php
-namespace CG\Controllers\Order;
+namespace CG\Controllers\OrderCounts;
 
 use CG\Http\StatusCode;
-use CG\Order\Service\Service as ServiceService;
+
+
+use CG\Order\Shared\OrderCounts\Service as ServiceService;
+
+
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\PatchTrait;
 use Slim\Slim;

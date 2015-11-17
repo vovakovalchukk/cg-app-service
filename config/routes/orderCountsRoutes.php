@@ -5,9 +5,9 @@ use CG\Controllers\OrderCounts\Collection as OrderCountsCollection;
 use CG\InputValidation\OrderCounts\Entity as OrderCountsEntityValidation;
 use CG\InputValidation\OrderCounts\Filter as OrderCountsCollectionValidation;
 
-use CG\Location\Entity as LocationEntity;
-use CG\Location\Mapper as LocationMapper;
-use CG\Location\Service as LocationService;
+use CG\Order\Shared\OrderCounts\Entity as OrderCountsEntity;
+use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
+use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
 
 use CG\Slim\Versioning\Version;
 
@@ -46,9 +46,9 @@ return [
             "dataRules" => OrderCountsEntityValidation::class,
         ],
         'eTag' => [
-            'mapperClass' => LocationMapper::class,
-            'entityClass' => LocationEntity::class,
-            'serviceClass' => LocationService::class
+            'mapperClass' => OrderCountsMapper::class,
+            'entityClass' => OrderCountsEntity::class,
+            'serviceClass' => OrderCountsService::class
         ]
     ]
 ];

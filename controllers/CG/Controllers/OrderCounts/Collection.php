@@ -1,8 +1,12 @@
 <?php
-namespace CG\Controllers\Order\Order;
+namespace CG\Controllers\OrderCounts;
 
-use CG\Order\Service\Service as OrderService;
-use CG\Order\Service\Filter;
+
+use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
+use CG\Order\Shared\OrderCounts\Filter;
+
+
+
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\PatchTrait;
 use Slim\Slim;
@@ -17,7 +21,7 @@ class Collection
 
     protected $filterService;
 
-    public function __construct(Slim $app, OrderService $service, Di $di)
+    public function __construct(Slim $app, OrderCountsService $service, Di $di)
     {
         $this
             ->setSlim($app)
