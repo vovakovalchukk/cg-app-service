@@ -12,20 +12,20 @@ use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 use Zend\Validator\Callback;
-use CG\Order\Shared\Repository as OrderRepository;
+use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 
 class Entity implements RulesInterface
 {
     protected $orderRepository;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderCountsRepository $orderCountsRepository)
     {
-        $this->setOrderRepository($orderRepository);
+        $this->setOrderCountsRepository($orderCountsRepository);
     }
 
     public function getRules()
     {
-        $orderRepository = $this->getOrderRepository();
+        $orderCountsRepository = $this->getOrderCountsRepository();
         return array(
             'id' => array(
                 'name'       => 'id',
@@ -274,8 +274,8 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [
                     (new Callback())->setCallback(
-                        function($archivedValue, $orderDetails) use($orderRepository) {
-                        $storedOrder = $orderRepository->fetch($orderDetails['id']);
+                        function($archivedValue, $orderDetails) use($orderCountsRepository) {
+                        $storedOrder = $orderCountsRepository->fetch($orderDetails['id']);
                         return $storedOrder->getArchived() == $archivedValue;
                     }
                     )->setMessage('Archived value cannot be modified')
@@ -317,14 +317,14 @@ class Entity implements RulesInterface
         );
     }
 
-    protected function setOrderRepository($orderRepository)
+    protected function setOrderCountsRepository($orderCountsRepository)
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderCountsRepository = $orderCountsRepository;
         return $this;
     }
 
-    protected function getOrderRepository()
+    protected function getOrderCountsRepository()
     {
-        return $this->orderRepository;
+        return $this->orderCountsRepository;
     }
 }
