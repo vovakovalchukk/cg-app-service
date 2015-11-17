@@ -5,7 +5,7 @@ class UnimportedlistingAccountidExternalidMarketplaceKey extends AbstractMigrati
 {
     public function change()
     {
-        $this->table('accountId')
+        $this->table('unimportedListing')
             ->removeIndex('accountId')
             ->addIndex(['accountId', 'externalId', 'marketplace'])
             ->update();
