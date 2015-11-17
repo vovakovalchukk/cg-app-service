@@ -12,6 +12,7 @@ use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 use Zend\Validator\Callback;
+
 use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 
 class Entity implements RulesInterface
@@ -23,6 +24,8 @@ class Entity implements RulesInterface
         $this->setOrderCountsRepository($orderCountsRepository);
     }
 
+
+    ///WHAT FIELDS ARE ALLOWED TO BE SENT
     public function getRules()
     {
         $orderCountsRepository = $this->getOrderCountsRepository();

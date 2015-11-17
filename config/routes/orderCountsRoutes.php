@@ -12,7 +12,7 @@ use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
 use CG\Slim\Versioning\Version;
 
 return [
-    '/location' => [
+    '/orderCounts' => [
         'controllers' => function() use ($di, $app) {
                 $method = $app->request()->getMethod();
 
