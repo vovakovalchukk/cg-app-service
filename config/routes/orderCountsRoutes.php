@@ -22,7 +22,7 @@ return [
                 );
             },
         'via' => ['GET', 'POST', 'OPTIONS'],
-        'name' => 'OrderCollection',
+        'name' => 'OrderCountsCollection',
         'entityRoute' => '/orderCounts/:OUId',
         'validation' => [
             'filterRules' => OrderCountsCollectionValidation::class,
@@ -40,7 +40,7 @@ return [
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'OrderEntity',
+        'name' => 'OrderCountsEntity',
         'validation' => [
             "dataRules" => OrderCountsEntityValidation::class,
         ],
