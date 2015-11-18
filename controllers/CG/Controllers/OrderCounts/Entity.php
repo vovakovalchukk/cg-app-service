@@ -1,5 +1,6 @@
 <?php
 namespace CG\Controllers\OrderCounts;
+          
 
 use CG\Http\StatusCode;
 
@@ -18,7 +19,7 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Constant\Log\Service\Api;
 
-class OrderCounts implements LoggerAwareInterface
+class Entity implements LoggerAwareInterface
 {
     use ControllerTrait;
     use PatchTrait;

@@ -30,13 +30,12 @@ return [
         ]
     ],
     '/orderCounts/:OUId' => [
-        'controllers' => function($locationId) use ($di, $app) {
+        'controllers' => function($OUId) use ($di, $app) {
                 $method = $app->request()->getMethod();
-
                 $controller = $di->get(OrderCounts::class);
                 $app->view()->set(
                     'RestResponse',
-                    $controller->$method($locationId, $app->request()->getBody())
+                    $controller->$method($OUId, $app->request()->getBody())
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
