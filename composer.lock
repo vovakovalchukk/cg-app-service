@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6960559bf3ab5b0e730751d9129a20",
-    "content-hash": "1127ae51d25739e6c705ff721677e90a",
+    "hash": "1b22695c8291b1d992ed370983e53f05",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -227,17 +226,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-6523-EbayRelistClosedListing",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "2fd7e90785a429792dac52f120ff42a667ecf499"
+                "reference": "cf909fa8ac4c269a0d2a93d9d94e15dbfe4c0ae5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6523-EbayRelistClosedListing-9d7766.zip",
-                "reference": "2fd7e90785a429792dac52f120ff42a667ecf499",
-                "shasum": "22c4bd4c2449a8b72765c50415be5cc9e751949e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-6243-StockLevels-72122b.zip",
+                "reference": "cf909fa8ac4c269a0d2a93d9d94e15dbfe4c0ae5",
+                "shasum": "ff069c254c074b75ff59b5d359e28ef1f7c14f2a"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -265,8 +264,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.1.6-dev",
-                    "dev-CGIV-6523-EbayRelistClosedListing": "1.8.3-dev"
+                    "dev-develop": "1.1.6-dev"
                 }
             },
             "autoload": {
@@ -284,7 +282,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-18 08:40:32"
+            "time": "2015-11-18 09:14:34"
         },
         {
             "name": "channelgrabber/channel",
@@ -579,17 +577,17 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-CGIV-6523-EbayRelistClosedListing",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "35b22896a864f4bc3af1ab2d4dbd84b1dd7ff444"
+                "reference": "7d4f44d35b299ce63403cec454ce735355687512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-CGIV-6523-EbayRelistClosedListing-d90da8.zip",
-                "reference": "35b22896a864f4bc3af1ab2d4dbd84b1dd7ff444",
-                "shasum": "3778ce4667ace888c340e1c9797313c2348c7868"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-EPIC-CGIV-6243-StockLevels-8ce371.zip",
+                "reference": "7d4f44d35b299ce63403cec454ce735355687512",
+                "shasum": "5439bee42dd41f75f1a7eaf1db29aefd331799cd"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -624,11 +622,6 @@
                 "phpunit/phpunit": "~4.6.6"
             },
             "type": "di-definition",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-6523-EbayRelistClosedListing": "1.9.30-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Ebay\\": "src/"
@@ -644,7 +637,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-17 14:09:12"
+            "time": "2015-11-18 09:18:14"
         },
         {
             "name": "channelgrabber/ekm",
@@ -784,17 +777,17 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.2.14",
+            "version": "1.2.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "4e3134924be07552663b3874d60727607efb0391"
+                "reference": "1cb952c23b1829e4da2e8a613ae135fc327ca870"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.14-db6fa7.zip",
-                "reference": "4e3134924be07552663b3874d60727607efb0391",
-                "shasum": "0fbbc1a42968e5911132f1e153b1fcdc8ae924bc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.17-cf1ec5.zip",
+                "reference": "1cb952c23b1829e4da2e8a613ae135fc327ca870",
+                "shasum": "e57d7c2c309a5e5986bf6ade8d35c842dbb14afc"
             },
             "require": {
                 "channelgrabber/cilex": ">=1.1.0,<2.0.0",
@@ -819,7 +812,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 08:23:19"
+            "time": "2015-11-12 11:10:05"
         },
         {
             "name": "channelgrabber/http",
@@ -2383,17 +2376,17 @@
         },
         {
             "name": "channelgrabber/woocommerce",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-woocommerce.git",
-                "reference": "02fc01f1d84aec8766e25d362a4a7eb2bea0f96a"
+                "reference": "7afec70b51391ee905681d4b458300cdd14c8549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-1.0.0-df16e2.zip",
-                "reference": "02fc01f1d84aec8766e25d362a4a7eb2bea0f96a",
-                "shasum": "6766bc38d2e630575eb9d62f236cd5f1bc0705e3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-1.0.1-d21c7c.zip",
+                "reference": "7afec70b51391ee905681d4b458300cdd14c8549",
+                "shasum": "e5f1d392ec43c95b200476052b817d4783ede0a6"
             },
             "require": {
                 "channelgrabber/channel": "^1.17.8",
@@ -2432,7 +2425,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-29 07:37:29"
+            "time": "2015-10-06 10:10:50"
         },
         {
             "name": "channelgrabber/zf2-email-template",
@@ -8037,9 +8030,9 @@
     ],
     "aliases": [
         {
-            "alias": "dev-EPIC-CGIV-6243-StockLevels",
-            "alias_normalized": "dev-EPIC-CGIV-6243-StockLevels",
-            "version": "dev-CGIV-6523-EbayRelistClosedListing",
+            "alias": "1.8.3",
+            "alias_normalized": "1.8.3.0",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
             "package": "channelgrabber/cglib"
         },
         {
@@ -8049,9 +8042,9 @@
             "package": "channelgrabber/channel"
         },
         {
-            "alias": "dev-EPIC-CGIV-6243-StockLevels",
-            "alias_normalized": "dev-EPIC-CGIV-6243-StockLevels",
-            "version": "dev-CGIV-6523-EbayRelistClosedListing",
+            "alias": "1.9.31",
+            "alias_normalized": "1.9.31.0",
+            "version": "dev-EPIC-CGIV-6243-StockLevels",
             "package": "channelgrabber/ebay"
         },
         {
