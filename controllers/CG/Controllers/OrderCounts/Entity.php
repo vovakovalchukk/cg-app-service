@@ -39,7 +39,7 @@ class Entity implements LoggerAwareInterface
 
     public function put($id, Hal $hal)
     {
-        $this->logDebug('Order <' . $id . '> was PUT');
+        $this->logDebug('Organisation Unit <' . $id . '> was PUT');
         return $this->getService()->saveHal($hal, array("id" => $id));
     }
 
