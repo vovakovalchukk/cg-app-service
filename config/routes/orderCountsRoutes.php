@@ -14,7 +14,6 @@ return [
     '/orderCounts' => [
         'controllers' => function() use ($di, $app) {
                 $method = $app->request()->getMethod();
-
                 $controller = $di->get(OrderCountsCollection::class);
                 $app->view()->set(
                     'RestResponse',
