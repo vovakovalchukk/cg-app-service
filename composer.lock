@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b22695c8291b1d992ed370983e53f05",
+    "hash": "de5b1ca46a76e0d70f90d41d4d6de22e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -777,17 +777,17 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.2.17",
+            "version": "1.2.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "1cb952c23b1829e4da2e8a613ae135fc327ca870"
+                "reference": "4e3134924be07552663b3874d60727607efb0391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.17-cf1ec5.zip",
-                "reference": "1cb952c23b1829e4da2e8a613ae135fc327ca870",
-                "shasum": "e57d7c2c309a5e5986bf6ade8d35c842dbb14afc"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.14-db6fa7.zip",
+                "reference": "4e3134924be07552663b3874d60727607efb0391",
+                "shasum": "0fbbc1a42968e5911132f1e153b1fcdc8ae924bc"
             },
             "require": {
                 "channelgrabber/cilex": ">=1.1.0,<2.0.0",
@@ -812,26 +812,27 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-12 11:10:05"
+            "time": "2015-07-16 08:23:19"
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.19",
+            "version": "1.3.21.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "c648aab30132e95b5fc74f08978c682dcff25aef"
+                "reference": "7fb226923a8a3966ee5532a89ec0996a10ac2baa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.19-5abf5c.zip",
-                "reference": "c648aab30132e95b5fc74f08978c682dcff25aef",
-                "shasum": "7bc8875fdff9bfaca22c2bf80e0b38c51a12b053"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.21.3-b66f6c.zip",
+                "reference": "7fb226923a8a3966ee5532a89ec0996a10ac2baa",
+                "shasum": "25ccd321f16577d2daf3e32aa1bd0096683ef3f8"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/log": "^2.0.21",
+                "channelgrabber/stats": ">=1.0.6",
                 "channelgrabber/stdlib": ">=2.10.0,<3.0.0",
                 "composer/composer": "@dev",
                 "ext-memcached": "*",
@@ -866,7 +867,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-10 08:47:19"
+            "time": "2015-11-17 21:54:23"
         },
         {
             "name": "channelgrabber/image",
@@ -2376,17 +2377,17 @@
         },
         {
             "name": "channelgrabber/woocommerce",
-            "version": "1.0.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-woocommerce.git",
-                "reference": "7afec70b51391ee905681d4b458300cdd14c8549"
+                "reference": "02fc01f1d84aec8766e25d362a4a7eb2bea0f96a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-1.0.1-d21c7c.zip",
-                "reference": "7afec70b51391ee905681d4b458300cdd14c8549",
-                "shasum": "e5f1d392ec43c95b200476052b817d4783ede0a6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-1.0.0-df16e2.zip",
+                "reference": "02fc01f1d84aec8766e25d362a4a7eb2bea0f96a",
+                "shasum": "6766bc38d2e630575eb9d62f236cd5f1bc0705e3"
             },
             "require": {
                 "channelgrabber/channel": "^1.17.8",
@@ -2425,7 +2426,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-06 10:10:50"
+            "time": "2015-09-29 07:37:29"
         },
         {
             "name": "channelgrabber/zf2-email-template",
