@@ -29,6 +29,11 @@ class Entity implements RulesInterface
     public function getRules()
     {
         return array(
+            'Id' => array(
+                'name'       => 'Id',
+                'required'   => false,
+                'validators' => []
+            ),
             'OUId' => array(
                 'name'       => 'OUId',
                 'required'   => false,
