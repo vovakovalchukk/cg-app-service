@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb2f8a12ae9a38cdb80e7cf64a35ed53",
+    "hash": "ef5f90bcd619400c2f40dc2ba9028c43",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -226,29 +226,29 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "version": "1.8.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "671978e4d43f60bf5b1f264aa649b66e74bb07d4"
+                "reference": "f4efd3ff76de2eccbca3b55b5b9e3baf00fc70f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-6243-StockLevels-fe0289.zip",
-                "reference": "671978e4d43f60bf5b1f264aa649b66e74bb07d4",
-                "shasum": "94c067e35cfd6b9b89a97dcee001a5dbef287f9e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.8.4-7f176d.zip",
+                "reference": "f4efd3ff76de2eccbca3b55b5b9e3baf00fc70f2",
+                "shasum": "1405ff6ba2ecefbb51ccfc54681d3c695c63a4f5"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6243-StockLevels as 1.18.4",
+                "channelgrabber/channel": "^1.18.4",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/email": "~1.0.6",
                 "channelgrabber/listing": "^1.6.11",
                 "channelgrabber/location": ">=1.1.1",
                 "channelgrabber/order": "^1.19.0",
-                "channelgrabber/product": "dev-EPIC-CGIV-6243-StockLevels as 1.4.14",
-                "channelgrabber/settings": "dev-EPIC-CGIV-6243-StockLevels as 1.3.10",
+                "channelgrabber/product": "^1.4.14",
+                "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/slim": ">=1.13.0,<2.0.0",
                 "channelgrabber/stock": "^1.6.0",
                 "channelgrabber/user": ">=1.18.7",
@@ -264,7 +264,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.1.6-dev"
+                    "dev-develop": "1.8.4-dev"
                 }
             },
             "autoload": {
@@ -282,21 +282,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-19 09:18:09"
+            "time": "2015-11-19 13:27:28"
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "version": "1.18.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "9ec0c55f4607abe8e5c3ba502fac936b068b60f8"
+                "reference": "689a0eeb99801bac4ed0f4409cdac47c6e7532de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-6243-StockLevels-83c77b.zip",
-                "reference": "9ec0c55f4607abe8e5c3ba502fac936b068b60f8",
-                "shasum": "d7536c07d9d72974fe5e500e0beeb2538620e2f4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.18.4-195fec.zip",
+                "reference": "689a0eeb99801bac4ed0f4409cdac47c6e7532de",
+                "shasum": "9d752385149533aceb8fbd9fdc872d99a982d0d2"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -361,7 +361,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-19 09:08:07"
+            "time": "2015-11-19 13:10:51"
         },
         {
             "name": "channelgrabber/cilex",
@@ -578,22 +578,22 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "version": "1.9.33",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "bdc00f7bd50ee1e81ed0b0001c39e5ca0f4c70a8"
+                "reference": "739bb33b47716c660ddaf7cf060c07c0b80d454d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-EPIC-CGIV-6243-StockLevels-242cc2.zip",
-                "reference": "bdc00f7bd50ee1e81ed0b0001c39e5ca0f4c70a8",
-                "shasum": "e91f905a7672977b0313b6278299b7050cd61ec6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.9.33-a8fc8f.zip",
+                "reference": "739bb33b47716c660ddaf7cf060c07c0b80d454d",
+                "shasum": "79d89f4983ea1104452c4cdb77f42200078b040a"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/cglib": "dev-EPIC-CGIV-6243-StockLevels as 1.8.4",
-                "channelgrabber/channel": "dev-EPIC-CGIV-6243-StockLevels as 1.18.4",
+                "channelgrabber/cglib": "^1.8.4",
+                "channelgrabber/channel": "^1.18.4",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
@@ -603,8 +603,8 @@
                 "channelgrabber/locale": "^1.0.5",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.19.20",
-                "channelgrabber/product": "dev-EPIC-CGIV-6243-StockLevels as 1.4.14",
-                "channelgrabber/settings": "dev-EPIC-CGIV-6243-StockLevels as 1.3.10",
+                "channelgrabber/product": "^1.4.14",
+                "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.0",
                 "channelgrabber/stock": ">=1.3.4",
@@ -638,7 +638,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-19 09:44:30"
+            "time": "2015-11-19 13:36:44"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1541,17 +1541,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "version": "1.4.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f551d125ad130e5137f5d75f091b30d909a74501"
+                "reference": "a79286ebbb8822a6c20c3b0b5584fa2bce1a5d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-6243-StockLevels-353a5f.zip",
-                "reference": "f551d125ad130e5137f5d75f091b30d909a74501",
-                "shasum": "f4865d0d099e3241027032e658c44885147c6df2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.4.14-180f7d.zip",
+                "reference": "a79286ebbb8822a6c20c3b0b5584fa2bce1a5d0c",
+                "shasum": "b0ab47d7af9735417edbd71a86423736d7495f41"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1591,7 +1591,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-19 09:12:16"
+            "time": "2015-11-19 13:13:40"
         },
         {
             "name": "channelgrabber/purge",
@@ -1746,17 +1746,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
+            "version": "1.3.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "83ce563b4c2c8079e71d5d0ab2f569a11fc97b31"
+                "reference": "2e3c3ec7ad540d7a1f707e545590c5331378820e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-EPIC-CGIV-6243-StockLevels-d2252f.zip",
-                "reference": "83ce563b4c2c8079e71d5d0ab2f569a11fc97b31",
-                "shasum": "c5965b4da35d37dacaeea0628f22671387511a4e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.10-9b3f44.zip",
+                "reference": "2e3c3ec7ad540d7a1f707e545590c5331378820e",
+                "shasum": "f3b4f303b068c4b3ba98697cfcd78000334d503c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1783,7 +1783,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-02 15:55:16"
+            "time": "2015-11-19 13:15:41"
         },
         {
             "name": "channelgrabber/slim",
@@ -8030,46 +8030,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.8.4",
-            "alias_normalized": "1.8.4.0",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.18.4",
-            "alias_normalized": "1.18.4.0",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.9.33",
-            "alias_normalized": "1.9.33.0",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
-            "package": "channelgrabber/ebay"
-        },
-        {
-            "alias": "1.4.14",
-            "alias_normalized": "1.4.14.0",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
-            "package": "channelgrabber/product"
-        },
-        {
-            "alias": "1.3.10",
-            "alias_normalized": "1.3.10.0",
-            "version": "dev-EPIC-CGIV-6243-StockLevels",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/ebay": 20,
-        "channelgrabber/product": 20,
-        "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
