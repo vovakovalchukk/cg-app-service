@@ -1,4 +1,5 @@
 <?php
+use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Gearman\Client as GearmanClient;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
@@ -181,6 +182,18 @@ EOF;
                     $output->writeln('');
                     $output->writeln(date('d/m/Y H:i:s', $lastRun) . ' - ' . date('d/m/Y H:i:s', $now));
                 }
+            }
+    ],
+    'ad-hoc:ensureProductsAndListingsAssociatedWithRootOu' => [
+        'description' => 'Find any Products, Listings or UnimportedListings associated with a Trading Company and correct them to point at their root OrganisationUnit instead.',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $output->writeln('Starting ensureProductsAndListingsAssociatedWithRootOu command');
+                $command = $di->get(EnsureProductsAndListingsAssociatedWithRootOu::class);
+                $ouCount = $command();
+                $output->writeln('Finished, ' . $ouCount . ' OUs corrected. See logs for details.');
             }
     ],
 ];
