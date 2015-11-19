@@ -3,10 +3,12 @@ namespace CG\Controllers\Stock\Location;
 
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as Invalidator;
+use CG\Permission\Exception as PermissionException;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
 use CG\Slim\ControllerTrait;
+use CG\Stock\Adjustment\Service as AdjustmentService;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service;
 use CG\Stock\Service as StockService;
@@ -20,9 +22,6 @@ class Location implements PaginationInterface
 {
     use ControllerTrait;
     use GetTrait;
-    use PutTrait {
-        put as protected putTrait;
-    }
     use DeleteTrait;
     use InvalidationTrait;
 
@@ -52,7 +51,13 @@ class Location implements PaginationInterface
 
     public function put($id, Hal $hal)
     {
-        $stockLocationHal = $this->putTrait($id, $hal);
+        $adjustmentHeader = $this->slim->request->headers(AdjustmentService::ADJUSTMENT_HEADER, null);
+        $adjustmentIds = ($adjustmentHeader != null ? explode(',', $adjustmentHeader) : []);
+        try {
+            $stockLocationHal = $this->getService()->saveHal($hal, ["id" => $id], $adjustmentIds);
+        } catch (PermissionException $e) {
+            throw new HttpNotFound('Entity Not Found', $e->getCode(), $e);
+        }
         try {
             $stock = $this->invalidateStockLocationHal($stockLocationHal);
             $this->getUpdateRelatedListingsForStock()->generateJob($stock);

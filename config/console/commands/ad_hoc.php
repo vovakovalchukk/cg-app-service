@@ -1,9 +1,12 @@
 <?php
+use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Gearman\Client as GearmanClient;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
+use Predis\Client as Redis;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
@@ -128,6 +131,69 @@ EOF;
                     $input->getOption('fix'),
                     ['Unknown Orders']
                 );
+            }
+    ],
+    'ad-hoc:validateOrderItemStatus' => [
+        'description' => 'Reports any new order items that do not match their orders status since the command last run',
+        'arguments' => [],
+        'options' => [],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di) {
+                $query = <<<EOF
+SELECT o.`id` as `orderId`, i.`id` as `orderItemId`, o.`channel`, o.`status` as `orderStatus`, i.`status` as `itemStatus`
+FROM `order` o
+JOIN item i ON o.id = i.`orderId`
+WHERE o.`status` != i.`status`
+ORDER BY o.`id`, i.`id`
+EOF;
+
+                /** @var Redis $redis */
+                $redis = $di->get('reliable_redis');
+                /** @var Adapter $cgApp */
+                $cgApp = $di->get('cg_appReadSql')->getAdapter();
+                /** @var ResultInterface $orderItems */
+                $orderItems = $cgApp->query($query)->execute();
+
+                $now = time();
+                $lastRun = (int) $redis->getset('ValidateOrderItemStatus:LastRun', (string) $now);
+
+                $count = 0;
+                $table = (new Table($output))
+                    ->setHeaders(['OrderId', 'OrderItemId', 'Channel', 'OrderStatus', 'OrderItemStatus']);
+
+                foreach ($orderItems as $orderItem) {
+                    if (!$redis->sadd('ValidateOrderItemStatus:OrderItemId', $orderItem['orderItemId'])) {
+                        continue;
+                    }
+
+                    $count++;
+                    $table->addRow($orderItem);
+                }
+
+                if ($count == 0) {
+                    return;
+                }
+
+                $output->writeln('The following order items have a different status to their order:');
+                $output->writeln('');
+                $table->render();
+
+                if ($lastRun) {
+                    $output->writeln('');
+                    $output->writeln(date('d/m/Y H:i:s', $lastRun) . ' - ' . date('d/m/Y H:i:s', $now));
+                }
+            }
+    ],
+    'ad-hoc:ensureProductsAndListingsAssociatedWithRootOu' => [
+        'description' => 'Find any Products, Listings or UnimportedListings associated with a Trading Company and correct them to point at their root OrganisationUnit instead.',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $output->writeln('Starting ensureProductsAndListingsAssociatedWithRootOu command');
+                $command = $di->get(EnsureProductsAndListingsAssociatedWithRootOu::class);
+                $ouCount = $command();
+                $output->writeln('Finished, ' . $ouCount . ' OUs corrected. See logs for details.');
             }
     ],
 ];
