@@ -137,6 +137,7 @@ use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as 
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
+use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -188,6 +189,7 @@ use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
+use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 
 // ProductDetail
@@ -230,6 +232,7 @@ use CG\Listing\Repository as ListingRepository;
 use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
+use CG\Listing\StorageInterface as ListingStorage;
 
 // Unimported Listing
 use CG\Listing\Unimported\Service as UnimportedListingService;
@@ -238,6 +241,7 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 use CG\Listing\Unimported\Storage\Api as UnimportedListingApi;
+use CG\Listing\Unimported\StorageInterface as UnimportedListingStorage;
 
 // Unimported Listing Marketplace
 use CG\Listing\Unimported\Marketplace\StorageInterface as UnimportedListingMarketplaceStorage;
@@ -1201,6 +1205,11 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                 ],
             ],
+            EnsureProductsAndListingsAssociatedWithRootOuCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1224,6 +1233,9 @@ return array(
                 ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
+                ProductStorage::class => ProductRepository::class,
+                ListingStorage::class => ListingRepository::class,
+                UnimportedListingStorage::class => UnimportedListingRepository::class,
             ]
         )
     )
