@@ -890,9 +890,9 @@ return array(
                 ]
             ],
 
-            OrdersCountRedisStorage::class => [
+            OrderCountsRedisStorage::class => [
                 'parameter' => [
-                    'client' => "reliable_redis",
+                    'client' => "unreliable_redis",
                     'mapper' => OrderCountsMapper::class
                 ]
             ],
