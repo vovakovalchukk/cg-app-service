@@ -8,6 +8,9 @@ class OrderRootOu extends AbstractMigration
      */
     public function up()
     {
+        if (!$this->hasTable('account.account')) {
+            return;
+        }
         $sql = 'SELECT o.id, ou.id as rootOrganisationUnitId'
             . ' FROM `%1$s` o'
             . ' JOIN ('

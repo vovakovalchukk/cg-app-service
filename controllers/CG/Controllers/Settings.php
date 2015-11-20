@@ -23,7 +23,8 @@ class Settings
             ->addLink('invoice', '/settings/invoice')
             ->addLink('shipping', '/settings/shipping')
             ->addLink('pickList', '/settings/pickList')
-            ->addLink('api', '/settings/api');
+            ->addLink('api', '/settings/api')
+            ->addLink('product', '/settings/product');
         return $hal;
     }
 }

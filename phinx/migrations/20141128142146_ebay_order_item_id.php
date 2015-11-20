@@ -13,7 +13,9 @@ class EbayOrderItemId extends AbstractMigration
         $this->table('itemVariationAttribute')
             ->addForeignKey('itemId', 'item', 'id', ['update' => ForeignKey::CASCADE])
             ->update();
-
+        if (!$this->hasTable('account.account')) {
+            return;
+        }
         $sql = 'UPDATE `item` i'
             . ' JOIN `account`.`account` a ON i.`accountId` = a.`id`'
             . ' SET i.`id` = CONCAT_WS("-", i.`accountId`, i.`externalId`)'
