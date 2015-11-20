@@ -291,6 +291,12 @@ use CG\Notification\Queue as NotificationQueue;
 // WooCommerce
 use CG\WooCommerce\ListingImport as WooCommerceListingImport;
 
+// Product Settings
+use CG\Settings\Product\StorageInterface as ProductSettingsStorage;
+use CG\Settings\Product\Repository as ProductettingsRepository;
+use CG\Settings\Product\Storage\Cache as ProductSettingsCacheStorage;
+use CG\Settings\Product\Storage\Db as ProductSettingsDbStorage;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1156,6 +1162,19 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                 ],
             ],
+            ProductettingsRepository::class => [
+                'parameters' => [
+                    'storage' => ProductSettingsCacheStorage::class,
+                    'repository' => ProductSettingsDbStorage::class,
+                ],
+            ],
+            ProductSettingsDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
             EnsureProductsAndListingsAssociatedWithRootOuCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
@@ -1183,6 +1202,7 @@ return array(
                 OrderStorage::class => OrderRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
+                ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
                 ListingStorage::class => ListingRepository::class,
                 UnimportedListingStorage::class => UnimportedListingRepository::class,
