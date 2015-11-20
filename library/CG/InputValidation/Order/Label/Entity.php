@@ -47,6 +47,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'image' => [
+                'name'       => 'image',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
             'externalId' => [
                 'name'       => 'externalId',
                 'required'   => false,
