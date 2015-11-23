@@ -1,13 +1,8 @@
 <?php
 namespace CG\Controllers\OrderCounts;
-          
 
 use CG\Http\StatusCode;
-
-
 use CG\Order\Shared\OrderCounts\Service as ServiceService;
-
-
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\PatchTrait;
 use Slim\Slim;
@@ -28,8 +23,8 @@ class Entity implements LoggerAwareInterface
     public function __construct(Slim $app, ServiceService $service, Di $di)
     {
         $this->setSlim($app)
-             ->setService($service)
-             ->setDi($di);
+            ->setService($service)
+            ->setDi($di);
     }
 
     public function get($id)
