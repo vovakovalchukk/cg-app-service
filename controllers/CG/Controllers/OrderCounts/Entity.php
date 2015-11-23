@@ -14,7 +14,7 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Constant\Log\Service\Api;
 
-class Entity implements LoggerAwareInterface
+class OrderCounts implements LoggerAwareInterface
 {
     use ControllerTrait;
     use PatchTrait;
