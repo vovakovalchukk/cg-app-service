@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1b4b8f20165f69c025e5f31c53b48ab",
-    "content-hash": "60429b8ca06ba0bee6702de2c3931e62",
+    "hash": "d1c868420c81c17eb2ca7f8f4e22b525",
+    "content-hash": "4d6ba4f5c776049ac9b38fa3263bcc00",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1206,17 +1206,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6527-courier-booking-labels-on-invoices",
+            "version": "dev-EPIC-CGIV-5992-dataplug",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a4426687862c3e947e18aed0a1d1157df153cacf"
+                "reference": "000283f98f2874be89ef4d7efddd18ce958e3dde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6527-courier-booking-labels-on-invoices-b5f4ad.zip",
-                "reference": "a4426687862c3e947e18aed0a1d1157df153cacf",
-                "shasum": "7e4fe484166848a420d890f4fd3f1c6570a511cd"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5992-dataplug-fb5d21.zip",
+                "reference": "000283f98f2874be89ef4d7efddd18ce958e3dde",
+                "shasum": "26a095525bec5b22f1b1918e0293c706a5c7d6f7"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1264,7 +1264,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-CGIV-6527-courier-booking-labels-on-invoices": "1.19.x-dev"
+                    "dev-EPIC-CGIV-5992-dataplug": "1.19.x-dev"
                 }
             },
             "autoload": {
@@ -1283,7 +1283,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-20 09:54:01"
+            "time": "2015-11-23 17:04:54"
         },
         {
             "name": "channelgrabber/permission",
@@ -1392,7 +1392,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.7-9aedf6.zip",
                 "reference": "14bf8b3cc0984d1e6b96166701dfe3897e52b1ee",
-                "shasum": "2ab4fcb7984b7128088350fc789d4666a75b2f74"
+                "shasum": "73405638346204bcc786b3179fe5c3a2eb014ffa"
             },
             "require": {
                 "jakoch/phantomjs-installer": "1.9.7",
@@ -2090,17 +2090,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-6527-courier-booking-labels-on-invoices",
+            "version": "dev-EPIC-CGIV-5992-dataplug",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "8ae28cc2acdd53ec4ac927a795d4d95dd13e357e"
+                "reference": "64ab9ddd4c8fc89ee30f34227bfa81bb9e79996b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-CGIV-6527-courier-booking-labels-on-invoices-427484.zip",
-                "reference": "8ae28cc2acdd53ec4ac927a795d4d95dd13e357e",
-                "shasum": "ae25434170e928f786760c138c6f70c2c9189624"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-EPIC-CGIV-5992-dataplug-11f66d.zip",
+                "reference": "64ab9ddd4c8fc89ee30f34227bfa81bb9e79996b",
+                "shasum": "ede3b502bdd1f4dbb2ded675b4c6971e81056cf2"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2108,7 +2108,7 @@
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "dev-CGIV-6527-courier-booking-labels-on-invoices as 1.19.30",
+                "channelgrabber/order": "dev-EPIC-CGIV-5992-dataplug as 1.19.30",
                 "channelgrabber/product": "^1.2.0",
                 "channelgrabber/settings": "^1.3.8",
                 "channelgrabber/stdlib": "^2.10.4",
@@ -2130,7 +2130,7 @@
             "type": "di-definition",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.4.x-dev"
+                    "dev-EPIC-CGIV-5992-dataplug": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -2149,7 +2149,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-23 12:11:06"
+            "time": "2015-11-23 17:06:33"
         },
         {
             "name": "channelgrabber/transaction",
@@ -2839,9 +2839,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://composer.build.channelgrabber.com/dist/fabpot-goutte-794b196e76bdd37b5155cdecbad311f0a3b07625-zip-2d5a7a.zip",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
-                "shasum": ""
+                "shasum": "b36e6be945c9362f8a1b94341671199453b7a878"
             },
             "require": {
                 "ext-curl": "*",
@@ -2883,6 +2883,11 @@
             "keywords": [
                 "scraper"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-09 15:52:51"
         },
         {
@@ -7378,9 +7383,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-code-coverage-fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b-zip-1d3f6a.zip",
                 "reference": "fe2466802556d3fe4e4d1d58ffd3ccfd0a19be0b",
-                "shasum": ""
+                "shasum": "083339a8f32e95f8ecbc7b41ed7861eee9425aa9"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -7427,6 +7432,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-02 10:13:14"
         },
         {
@@ -7633,9 +7643,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38709dc22d519a3d1be46849868aa2ddf822bcf6",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-38709dc22d519a3d1be46849868aa2ddf822bcf6-zip-c37939.zip",
                 "reference": "38709dc22d519a3d1be46849868aa2ddf822bcf6",
-                "shasum": ""
+                "shasum": "01a3279a08c2913f928efbcc108da9ab3b51338a"
             },
             "require": {
                 "ext-ctype": "*",
@@ -7694,6 +7704,11 @@
                 "testing",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-17 09:04:17"
         },
         {
@@ -7706,9 +7721,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5794e3c5c5ba0fb037b11d8151add2a07fa82875",
+                "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-mock-objects-5794e3c5c5ba0fb037b11d8151add2a07fa82875-zip-eb5a47.zip",
                 "reference": "5794e3c5c5ba0fb037b11d8151add2a07fa82875",
-                "shasum": ""
+                "shasum": "35fd659f32121fb6db6dde1f222245da602b3432"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -7743,6 +7758,11 @@
                 "mock",
                 "xunit"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-01-13 10:24:48"
         },
         {
@@ -7755,9 +7775,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://composer.build.channelgrabber.com/dist/psr-log-fe0936ee26643249e916849d48e3a51d5f5e278b-zip-e71523.zip",
                 "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
+                "shasum": "3635bde5339dfdef5c968cbad70d193cf39e2492"
             },
             "type": "library",
             "autoload": {
@@ -7781,6 +7801,11 @@
                 "psr",
                 "psr-3"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2012-12-21 11:40:51"
         },
         {
@@ -8041,9 +8066,9 @@
     ],
     "aliases": [
         {
-            "alias": "dev-EPIC-CGIV-5992-dataplug",
-            "alias_normalized": "dev-EPIC-CGIV-5992-dataplug",
-            "version": "dev-CGIV-6527-courier-booking-labels-on-invoices",
+            "alias": "1.19.30",
+            "alias_normalized": "1.19.30.0",
+            "version": "dev-EPIC-CGIV-5992-dataplug",
             "package": "channelgrabber/order"
         },
         {
@@ -8055,7 +8080,7 @@
         {
             "alias": "1.4.2",
             "alias_normalized": "1.4.2.0",
-            "version": "dev-CGIV-6527-courier-booking-labels-on-invoices",
+            "version": "dev-EPIC-CGIV-5992-dataplug",
             "package": "channelgrabber/template"
         }
     ],
