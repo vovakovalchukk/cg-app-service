@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b3c5027bed7da1a071514f760262244b",
-    "content-hash": "abbc9683e685579b5d82ddd955dd96c6",
+    "hash": "6ab6cef4f5167c49caffbaff1b4b0b8f",
+    "content-hash": "e8d61a10ab1d5a3ecea16df8c701842b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2090,17 +2090,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.3.3",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "640d6f5d3ff8bc5033b81554de02dd5200865615"
+                "reference": "dafa8e10740f56e84747c673879b6765a91ef648"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.3.3-c831e0.zip",
-                "reference": "640d6f5d3ff8bc5033b81554de02dd5200865615",
-                "shasum": "a0e283cc9344fc3fc449424d17d5b402c90db365"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.1-0fccf1.zip",
+                "reference": "dafa8e10740f56e84747c673879b6765a91ef648",
+                "shasum": "8e4f05a311e5984a8d7c12c8b7995b4037683d63"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2109,11 +2109,13 @@
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.19.8",
-                "channelgrabber/settings": ">=1.1.4,<2.0.0",
+                "channelgrabber/product": "^1.2.0",
+                "channelgrabber/settings": "^1.3.8",
                 "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/user": "^1.20.0",
                 "composer/composer": "@dev",
                 "ext-gd": "*",
+                "guzzle/guzzle": "~3.7",
                 "php-jsonpatch/php-jsonpatch": "@dev",
                 "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2.5,<3.0",
@@ -2126,6 +2128,11 @@
                 "phpunit/phpunit": "~3.7.28"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.4.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Template\\": "src"
@@ -2142,7 +2149,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-09-08 14:20:10"
+            "time": "2015-11-23 09:44:47"
         },
         {
             "name": "channelgrabber/transaction",
@@ -2384,13 +2391,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-woocommerce.git",
-                "reference": "801775e2d0385b83d5e3b19dfe7ab60a7e693017"
+                "reference": "675d7f5ff84d5e083594a7db9456e44196b9a81c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-dev-CGIV-6500-RenameChannelGearmanJobs-e5af07.zip",
-                "reference": "801775e2d0385b83d5e3b19dfe7ab60a7e693017",
-                "shasum": "c5ec119503ebb4ff7d98d26937104d0ed534663d"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-dev-CGIV-6500-RenameChannelGearmanJobs-c44912.zip",
+                "reference": "675d7f5ff84d5e083594a7db9456e44196b9a81c",
+                "shasum": "b3f646fda5d85b309497ec6826cdb218c5f942a1"
             },
             "require": {
                 "channelgrabber/channel": "dev-CGIV-6500-RenameChannelGearmanJobs as 1.18.3",
@@ -2429,7 +2436,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-18 16:30:31"
+            "time": "2015-11-20 16:43:04"
         },
         {
             "name": "channelgrabber/zf2-email-template",
@@ -3506,7 +3513,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-e57b7e02224d0266d5f7de970964b5302501125b-zip-b2b315.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -3563,7 +3570,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-064f65b05d1381d4999113f442af93949cc7c29a-zip-a7425b.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/064f65b05d1381d4999113f442af93949cc7c29a",
                 "reference": "064f65b05d1381d4999113f442af93949cc7c29a",
                 "shasum": "1982d83a6b5c301565c6af5e5acfe9f11e43776b"
             },
