@@ -2089,17 +2089,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.3.4",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "2faecb70ba2fdfee92ae05d73d9729c03683c2c7"
+                "reference": "dafa8e10740f56e84747c673879b6765a91ef648"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.3.4-8a447c.zip",
-                "reference": "2faecb70ba2fdfee92ae05d73d9729c03683c2c7",
-                "shasum": "18500a979b4abb9ef36a2b671d10a064285bee16"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.1-0fccf1.zip",
+                "reference": "dafa8e10740f56e84747c673879b6765a91ef648",
+                "shasum": "8e4f05a311e5984a8d7c12c8b7995b4037683d63"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2108,11 +2108,13 @@
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.19.8",
-                "channelgrabber/settings": ">=1.1.4,<2.0.0",
+                "channelgrabber/product": "^1.2.0",
+                "channelgrabber/settings": "^1.3.8",
                 "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/user": "^1.20.0",
                 "composer/composer": "@dev",
                 "ext-gd": "*",
+                "guzzle/guzzle": "~3.7",
                 "php-jsonpatch/php-jsonpatch": "@dev",
                 "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2.5,<3.0",
@@ -2125,6 +2127,11 @@
                 "phpunit/phpunit": "~3.7.28"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.4.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Template\\": "src"
@@ -2141,7 +2148,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-14 10:35:25"
+            "time": "2015-11-23 09:44:47"
         },
         {
             "name": "channelgrabber/transaction",
