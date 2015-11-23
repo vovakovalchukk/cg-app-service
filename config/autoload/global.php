@@ -131,6 +131,7 @@ use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as 
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
+use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -233,6 +234,7 @@ use CG\Listing\Unimported\Mapper as UnimportedListingMapper;
 use CG\Listing\Unimported\Storage\Db as UnimportedListingDbStorage;
 use CG\Listing\Unimported\Storage\Cache as UnimportedListingCacheStorage;
 use CG\Listing\Unimported\Storage\Api as UnimportedListingApi;
+use CG\Listing\Unimported\StorageInterface as UnimportedListingStorage;
 
 // Unimported Listing Marketplace
 use CG\Listing\Unimported\Marketplace\StorageInterface as UnimportedListingMarketplaceStorage;
@@ -295,6 +297,12 @@ use CG\Notification\Queue as NotificationQueue;
 
 // WooCommerce
 use CG\WooCommerce\ListingImport as WooCommerceListingImport;
+
+// Product Settings
+use CG\Settings\Product\StorageInterface as ProductSettingsStorage;
+use CG\Settings\Product\Repository as ProductettingsRepository;
+use CG\Settings\Product\Storage\Cache as ProductSettingsCacheStorage;
+use CG\Settings\Product\Storage\Db as ProductSettingsDbStorage;
 
 return array(
     'di' => array(
@@ -1168,6 +1176,24 @@ return array(
                     'fastReadSql' => 'FastReadSql',
                 ],
             ],
+            ProductettingsRepository::class => [
+                'parameters' => [
+                    'storage' => ProductSettingsCacheStorage::class,
+                    'repository' => ProductSettingsDbStorage::class,
+                ],
+            ],
+            ProductSettingsDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
+            EnsureProductsAndListingsAssociatedWithRootOuCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1190,9 +1216,11 @@ return array(
                 OrderStorage::class => OrderRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
+                OrderCountsStorage::class => OrderCountsRedisStorage::class,
+                ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
                 ListingStorage::class => ListingRepository::class,
-                OrderCountsStorage::class => OrderCountsRedisStorage::class,
+                UnimportedListingStorage::class => UnimportedListingRepository::class,
             ]
         )
     )
