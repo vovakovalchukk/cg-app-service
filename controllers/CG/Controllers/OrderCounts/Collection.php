@@ -15,8 +15,6 @@ class Collection
     use ControllerTrait;
     use PatchTrait;
 
-    protected $filterService;
-
     public function __construct(Slim $app, OrderCountsService $service, Di $di)
     {
         $this
