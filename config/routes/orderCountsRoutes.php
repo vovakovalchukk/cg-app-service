@@ -1,14 +1,11 @@
 <?php
 use CG\Controllers\OrderCounts\Entity as OrderCounts;
 use CG\Controllers\OrderCounts\Collection as OrderCountsCollection;
-
 use CG\InputValidation\OrderCounts\Entity as OrderCountsEntityValidation;
 use CG\InputValidation\OrderCounts\Filter as OrderCountsCollectionValidation;
-
 use CG\Order\Shared\OrderCounts\Entity as OrderCountsEntity;
 use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
 use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
-
 
 return [
     '/orderCounts' => [

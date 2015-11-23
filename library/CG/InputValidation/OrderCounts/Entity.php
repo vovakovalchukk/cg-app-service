@@ -27,12 +27,12 @@ class Entity implements RulesInterface
     public function getRules()
     {
         return array(
-                'batches' => array(
+            'batches' => array(
                 'name'       => 'batches',
                 'required'   => false,
                 'validators' => []
             ),
-               'status' => array(
+            'status' => array(
                 'name'       => 'status',
                 'required'   => false,
                 'validators' => []
