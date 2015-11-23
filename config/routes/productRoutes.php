@@ -43,7 +43,7 @@ return [
             'filterRules' => ProductCollectionValidation::class,
             'dataRules' => ProductEntityValidation::class
         ],
-        'version' => new Version(1, 5)
+        'version' => new Version(1, 6)
     ],
     '/product/:productId' => [
         'controllers' => function($productId) use ($di, $app) {
@@ -65,7 +65,7 @@ return [
             'entityClass' => ProductEntity::class,
             'serviceClass' => ProductService::class
         ],
-        'version' => new Version(1, 5)
+        'version' => new Version(1, 6)
     ],
     '/product/:productId/variationAttributeMap' => [
         'controllers' => function() use ($di, $app) {
@@ -148,4 +148,3 @@ return [
         'version' => new Version(1, 1)
     ],
 ];
- 

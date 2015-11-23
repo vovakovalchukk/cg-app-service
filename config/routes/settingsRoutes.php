@@ -42,6 +42,16 @@ use CG\Settings\Api\Entity as ApiEntity;
 use CG\Settings\Api\Mapper as ApiMapper;
 use CG\Settings\Api\Service as ApiService;
 
+use CG\Controllers\Settings\Product;
+use CG\Controllers\Settings\Product\Collection as ProductCollection;
+
+use CG\InputValidation\Settings\Product\Filter as ProductCollectionValidation;
+use CG\InputValidation\Settings\Product\Entity as ProductEntityValidation;
+
+use CG\Settings\Product\Entity as ProductEntity;
+use CG\Settings\Product\Mapper as ProductMapper;
+use CG\Settings\Product\Service as ProductService;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -231,5 +241,45 @@ return [
             'entityClass' => ApiEntity::class,
             'serviceClass' => ApiService::class
         ]
-    ]
+    ],
+    '/settings/product' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(ProductCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ApiSettingsCollection',
+        'entityRoute' => '/settings/api/:id',
+        'validation' => [
+            'filterRules' => ProductCollectionValidation::class
+        ]
+    ],
+    '/settings/product/:id' => [
+        'controllers' => function($ouId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Product::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($ouId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'ApiSettings',
+        'validation' => [
+            'dataRules' => ProductEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => ProductMapper::class,
+            'entityClass' => ProductEntity::class,
+            'serviceClass' => ProductService::class
+        ]
+    ],
 ];
