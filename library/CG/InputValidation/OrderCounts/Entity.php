@@ -24,12 +24,9 @@ class Entity implements RulesInterface
         $this->setOrderCountsRepository($orderCountsRepository);
     }
 
-
-    ///WHAT FIELDS ARE ALLOWED TO BE SENT
     public function getRules()
     {
         return array(
-
                 'batches' => array(
                 'name'       => 'batches',
                 'required'   => false,
