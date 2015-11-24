@@ -1,5 +1,5 @@
 <?php
-use CG\Controllers\OrderCounts\Entity as OrderCounts;
+use CG\Controllers\OrderCounts\OrderCounts as OrderCounts;
 use CG\Controllers\OrderCounts\Collection as OrderCountsCollection;
 use CG\InputValidation\OrderCounts\Entity as OrderCountsEntityValidation;
 use CG\InputValidation\OrderCounts\Filter as OrderCountsCollectionValidation;

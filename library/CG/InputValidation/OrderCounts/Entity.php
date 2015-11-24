@@ -17,6 +17,8 @@ use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 
 class Entity implements RulesInterface
 {
+    protected $orderCountsRepository;
+
     public function __construct(OrderCountsRepository $orderCountsRepository)
     {
         $this->setOrderCountsRepository($orderCountsRepository);
@@ -66,5 +68,16 @@ class Entity implements RulesInterface
                 'validators' => []
             )
         );         
+    }
+
+    protected function setOrderCountsRepository($orderCountsRepository)
+    {
+        $this->orderCountsRepository = $orderCountsRepository;
+        return $this;
+    }
+
+    protected function getOrderCountsRepository()
+    {
+        return $this->orderCountsRepository;
     }
 }
