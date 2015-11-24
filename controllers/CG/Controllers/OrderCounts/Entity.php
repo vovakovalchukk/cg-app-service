@@ -13,34 +13,23 @@ use Nocarrier\Hal;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Constant\Log\Service\Api;
+use CG\Slim\Controller\Entity\GetTrait;
+use CG\Slim\Controller\Entity\PutTrait;
+use CG\Slim\Controller\Entity\DeleteTrait;
 
 class OrderCounts implements LoggerAwareInterface
 {
     use ControllerTrait;
     use PatchTrait;
     use LogTrait;
+    use GetTrait;
+    use PutTrait;
+    use DeleteTrait;
 
     public function __construct(Slim $app, ServiceService $service, Di $di)
     {
         $this->setSlim($app)
             ->setService($service)
             ->setDi($di);
-    }
-
-    public function get($id)
-    {
-        return $this->getService()->fetchAsHal($id);
-    }
-
-    public function put($id, Hal $hal)
-    {
-        $this->logDebug('Organisation Unit <' . $id . '> was PUT');
-        return $this->getService()->saveHal($hal, array("id" => $id));
-    }
-
-    public function delete($id)
-    {
-        $this->getService()->removeById($id);
-        $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
     }
 }
