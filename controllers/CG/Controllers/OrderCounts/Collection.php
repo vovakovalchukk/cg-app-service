@@ -2,11 +2,6 @@
 namespace CG\Controllers\OrderCounts;
 
 use CG\Order\Shared\OrderCounts\Service as OrderCountsService;
-
-
-
-
-
 use CG\Order\Shared\OrderCounts\Filter;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\PatchTrait;
