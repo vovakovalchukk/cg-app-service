@@ -214,6 +214,7 @@ use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
 use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
+use CG\Order\Shared\OrderCounts\Storage\Api as OrderCountsApiStorage;
 use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
 
 // Listing
@@ -902,6 +903,11 @@ return array(
                 'parameter' => [
                     'client' => "unreliable_redis",
                     'mapper' => OrderCountsMapper::class
+                ]
+            ],
+            OrderCountsApiStorage::class => [
+                'parameter' => [
+                    'client' => "cg_app_guzzle",
                 ]
             ],
             ListingService::class => [
