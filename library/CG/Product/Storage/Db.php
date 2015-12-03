@@ -24,7 +24,6 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetchCollectionByFilter(Filter $filter)
     {
-        $this->logDebugDump($filter, 'Filter sent to product storage:', [], 'productStorageFilter');
         try {
             $total = $this->fetchEntityCount($filter);
             $ids = $this->fetchEntitiesIds($filter);
