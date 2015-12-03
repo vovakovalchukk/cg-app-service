@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d4b13adf0ae076463d3b62bf6d369dd",
-    "content-hash": "a40ffcae5bcdec9432b6c791f4c4c7ab",
+    "hash": "cb7f572e6f4a2c25e1363f724de89b8e",
+    "content-hash": "05c8dbd0124d255f9ac9324d187966b0",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1206,17 +1206,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
+            "version": "1.19.30",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "bfb6feb5df3e35c1a1bc620ea260ed0a9ca2b123"
+                "reference": "0cd0c6d5cf723d8f122b76067301c34986b1abae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-5992-dataplug-eb5ace.zip",
-                "reference": "bfb6feb5df3e35c1a1bc620ea260ed0a9ca2b123",
-                "shasum": "6aea61a82951bc8a74ca7f0266942fdb1ea19fea"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.30-7a7d8e.zip",
+                "reference": "0cd0c6d5cf723d8f122b76067301c34986b1abae",
+                "shasum": "49a8c70f94d6a53c5c86e699e9e1be350b70293c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1262,11 +1262,6 @@
                 "phpunit/phpunit": "4.6.*"
             },
             "type": "di-definition",
-            "extra": {
-                "branch-alias": {
-                    "dev-EPIC-CGIV-5992-dataplug": "1.19.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -1283,7 +1278,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-30 13:48:37"
+            "time": "2015-12-03 09:55:20"
         },
         {
             "name": "channelgrabber/permission",
@@ -1543,17 +1538,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "bbdfe9640198d5caa1b94fd1a77aceefa621e5d2"
+                "reference": "8e130d79276ddd79a849bb6bdf2dfe8b13772618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-5992-dataplug-0556ed.zip",
-                "reference": "bbdfe9640198d5caa1b94fd1a77aceefa621e5d2",
-                "shasum": "47a4148a07d1b09a71cebfef63deec5f83d6b4b7"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.0-4957d7.zip",
+                "reference": "8e130d79276ddd79a849bb6bdf2dfe8b13772618",
+                "shasum": "372051b2ec2d6b6aab9c593ef56a3a2e0f142675"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1593,7 +1588,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-20 16:20:50"
+            "time": "2015-12-03 10:02:41"
         },
         {
             "name": "channelgrabber/purge",
@@ -2090,17 +2085,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
+            "version": "1.4.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "64ab9ddd4c8fc89ee30f34227bfa81bb9e79996b"
+                "reference": "d2805105010500863b61476a29a47d75bbbd5597"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-EPIC-CGIV-5992-dataplug-11f66d.zip",
-                "reference": "64ab9ddd4c8fc89ee30f34227bfa81bb9e79996b",
-                "shasum": "ede3b502bdd1f4dbb2ded675b4c6971e81056cf2"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.2.1-f39662.zip",
+                "reference": "d2805105010500863b61476a29a47d75bbbd5597",
+                "shasum": "9a64b9c888fef19c024766464134469c21d4a084"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2108,7 +2103,7 @@
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "dev-EPIC-CGIV-5992-dataplug as 1.19.30",
+                "channelgrabber/order": "^1.19.30",
                 "channelgrabber/product": "^1.2.0",
                 "channelgrabber/settings": "^1.3.8",
                 "channelgrabber/stdlib": "^2.10.4",
@@ -2128,11 +2123,6 @@
                 "phpunit/phpunit": "~3.7.28"
             },
             "type": "di-definition",
-            "extra": {
-                "branch-alias": {
-                    "dev-EPIC-CGIV-5992-dataplug": "1.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Template\\": "src"
@@ -2149,7 +2139,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-23 17:06:33"
+            "time": "2015-12-03 11:21:31"
         },
         {
             "name": "channelgrabber/transaction",
@@ -8064,32 +8054,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.19.30",
-            "alias_normalized": "1.19.30.0",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.5.0",
-            "alias_normalized": "1.5.0.0",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
-            "package": "channelgrabber/product"
-        },
-        {
-            "alias": "1.4.2",
-            "alias_normalized": "1.4.2.0",
-            "version": "dev-EPIC-CGIV-5992-dataplug",
-            "package": "channelgrabber/template"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/product": 20,
-        "channelgrabber/template": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
