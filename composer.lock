@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb7f572e6f4a2c25e1363f724de89b8e",
-    "content-hash": "05c8dbd0124d255f9ac9324d187966b0",
+    "hash": "e3291d881a281abc5699567b67a69d03",
+    "content-hash": "8c4b0dd2eccd2455306e3357cb0d47a5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1206,17 +1206,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.19.30",
+            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0cd0c6d5cf723d8f122b76067301c34986b1abae"
+                "reference": "d048107b19ab5a59053a7ea855e6e577d56bb500"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.30-7a7d8e.zip",
-                "reference": "0cd0c6d5cf723d8f122b76067301c34986b1abae",
-                "shasum": "49a8c70f94d6a53c5c86e699e9e1be350b70293c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6559-orders-should-allow-cancelled-to-new-507bb8.zip",
+                "reference": "d048107b19ab5a59053a7ea855e6e577d56bb500",
+                "shasum": "ec04c743a9c84d3f5e569a9c79458b08109db571"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1278,7 +1278,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-03 09:55:20"
+            "time": "2015-12-04 15:05:09"
         },
         {
             "name": "channelgrabber/permission",
@@ -8054,10 +8054,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.31",
+            "alias_normalized": "1.19.31.0",
+            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
