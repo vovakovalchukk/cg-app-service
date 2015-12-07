@@ -120,6 +120,12 @@ use CG\Order\Service\Tag\Storage\Cache as TagCacheStorage;
 use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
+// Label
+use CG\Order\Service\Label\Service as LabelService;
+use CG\Order\Shared\Label\Repository as LabelRepository;
+use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
+use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
+
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
@@ -178,12 +184,20 @@ use CG\Usage\StorageInterface as UsageStorageInterface;
 // Product
 use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
+use CG\Product\Client\Service as ProductClientService;
 use CG\Product\Repository as ProductRepository;
 use CG\Product\Mapper as ProductMapper;
 use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
+
+// ProductDetail
+use CG\Product\Detail\Mapper as ProductDetailMapper;
+use CG\Product\Detail\Repository as ProductDetailRepository;
+use CG\Product\Detail\Storage\Cache as ProductDetailCacheStorage;
+use CG\Product\Detail\Storage\Db as ProductDetailDbStorage;
+use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
@@ -662,6 +676,17 @@ return array(
                     'repository' => TagDbStorage::class
                 )
             ),
+            LabelRepository::class => [
+                'parameter' => [
+                    'storage' => LabelCacheStorage::class,
+                    'repository' => LabelMongoDbStorage::class
+                ]
+            ],
+            LabelService::class => [
+                'parameter' => [
+                    'repository' => LabelRepository::class
+                ]
+            ],
             AccountCommandService::class => array(
                 'parameter' => array(
                     'accountStorage' => AccountApiStorage::class
@@ -828,6 +853,16 @@ return array(
                     'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
                 )
             ),
+            ProductClientService::class => [
+                'parameters' => array(
+                    'repository' => ProductRepository::class,
+                    'mapper' => ProductMapper::class,
+                    'stockStorage' => StockService::class,
+                    'listingStorage' => ListingService::class,
+                    'imageStorage' => ImageService::class,
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
+                )
+            ],
             ProductRepository::class => array(
                 'parameter' => array (
                     'storage' => ProductCacheStorage::class,
@@ -842,6 +877,20 @@ return array(
                     'mapper' => ProductMapper::class
                 )
             ),
+            ProductDetailRepository::class => [
+                'parameter' => [
+                    'storage' => ProductDetailCacheStorage::class,
+                    'repository' => ProductDetailDbStorage::class
+                ]
+            ],
+            ProductDetailDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ProductDetailMapper::class
+                ]
+            ],
             TransactionRedisClient::class => [
                 'parameter' => [
                     'predis' => 'reliable_redis',
@@ -1220,6 +1269,7 @@ return array(
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
                 OrderStorage::class => OrderRepository::class,
+                ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
                 OrderCountsStorage::class => OrderCountsRedisStorage::class,
