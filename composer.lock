@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb7f572e6f4a2c25e1363f724de89b8e",
-    "content-hash": "05c8dbd0124d255f9ac9324d187966b0",
+    "hash": "5b3ffc79a5735bb08298bb028e483955",
+    "content-hash": "dd6fc9bfb9b36021e2bb7103471fc053",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1932,17 +1932,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.14",
+            "version": "dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "fb4209151bec47596f919e5403c2c9f54bc78352"
+                "reference": "3257665ffa1d67b47ce711c9d72f133e3849598e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.14-d59d2e.zip",
-                "reference": "fb4209151bec47596f919e5403c2c9f54bc78352",
-                "shasum": "4c76bb713f6e5c2cf37e1f93b9c9b118822d938e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object-6ce7ea.zip",
+                "reference": "3257665ffa1d67b47ce711c9d72f133e3849598e",
+                "shasum": "36c13319e31ed3cd13f87b600afb7f1e6a0d5411"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1973,21 +1973,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-10 08:51:08"
+            "time": "2015-12-07 15:23:23"
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "04f6d2f7d7003ddd1541c21f27d035e2131c302f"
+                "reference": "107e91ce878d9c9c7f5d403b9748cfd5c7f12493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.0-a36f2c.zip",
-                "reference": "04f6d2f7d7003ddd1541c21f27d035e2131c302f",
-                "shasum": "7ad4614e28472539de044b841c131aa787fe8102"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.1-be9f3b.zip",
+                "reference": "107e91ce878d9c9c7f5d403b9748cfd5c7f12493",
+                "shasum": "896677bec60501a99151d754ac3ea5d3adcaf731"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2035,7 +2035,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-10 08:55:18"
+            "time": "2015-11-20 15:13:08"
         },
         {
             "name": "channelgrabber/tax",
@@ -8054,10 +8054,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.12.17",
+            "alias_normalized": "2.12.17.0",
+            "version": "dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
