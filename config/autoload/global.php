@@ -555,17 +555,6 @@ return array(
                     'writeSql' => 'WriteSql'
                 )
             ),
-            ItemService::class => array(
-                'parameters' => array(
-                    'repository' => ItemPersistentDbStorage::class
-                )
-            ),
-            ItemRepository::class => array(
-                'parameter' => array(
-                    'storage' => ItemCacheStorage::class,
-                    'repository' => ItemPersistentDbStorage::class
-                )
-            ),
             ItemPersistentDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadMysqli',
@@ -938,13 +927,7 @@ return array(
             ],
             StockAdjustmentCalculator::class => [
                 'parameter' => [
-                    'accountClient' => AccountApiStorage::class,
-                    'itemClient' => ItemRepository::class
-                ]
-            ],
-            UpdateItemAndStockTransactionFactory::class => [
-                'parameter' => [
-                    'itemStorage' => ItemRepository::class
+                    'accountClient' => AccountApiStorage::class
                 ]
             ],
 
@@ -1038,7 +1021,6 @@ return array(
                     'factory' => SimpleOrderFactory::class,
                     'accountStorage' => AccountApiStorage::class,
                     'orderStorage' => OrderApiStorage::class,
-                    'orderItemStorage' => ItemRepository::class
                 ]
             ],
             OrderApiStorage::class => [
@@ -1265,7 +1247,8 @@ return array(
                 UsageStorageInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class,
-                ItemStorageInterface::class => ItemRepository::class,
+                /* Cache disabled for order items as not compatable with collection hydration strategy */
+                ItemStorageInterface::class => ItemPersistentDbStorage::class,
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
                 OrderStorage::class => OrderRepository::class,
