@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5b3ffc79a5735bb08298bb028e483955",
-    "content-hash": "dd6fc9bfb9b36021e2bb7103471fc053",
+    "hash": "d1961618f9ef35234bec8f98a4bb239d",
+    "content-hash": "b45aee1acf22828fa864fda1b18ecb5a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1937,17 +1937,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object",
+            "version": "2.12.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "3257665ffa1d67b47ce711c9d72f133e3849598e"
+                "reference": "10c8f88285b6542d811b93bcd8fb88b51a0da0de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object-6ce7ea.zip",
-                "reference": "3257665ffa1d67b47ce711c9d72f133e3849598e",
-                "shasum": "36c13319e31ed3cd13f87b600afb7f1e6a0d5411"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.17-abbe09.zip",
+                "reference": "10c8f88285b6542d811b93bcd8fb88b51a0da0de",
+                "shasum": "f9d7f645a1c32b6f305f472b56d7ffbf0641e75a"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1978,7 +1978,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-03 10:30:10"
+            "time": "2015-12-08 15:23:47"
         },
         {
             "name": "channelgrabber/stock",
@@ -8059,18 +8059,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.12.17",
-            "alias_normalized": "2.12.17.0",
-            "version": "dev-CGIV-6589-updateRelatedListingsForStock-no-stock-object",
-            "package": "channelgrabber/stdlib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
