@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43a6dccc2770c8960d242ea4b26be1be",
-    "content-hash": "b006ee6ca38e67737abfdc4e5e6ca854",
+    "hash": "406409d9cbf13c335ce8837c3762c1ca",
+    "content-hash": "d1533a780f349433be480c04b92bf700",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1206,17 +1206,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6454-MissingWooCommerceItems",
+            "version": "1.19.31",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1c4990b0c79d6704bd315eb615dcc98ee5455841"
+                "reference": "d2fe637738d9b2df60b65c0ca076b4b5af742d64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6454-MissingWooCommerceItems-815290.zip",
-                "reference": "1c4990b0c79d6704bd315eb615dcc98ee5455841",
-                "shasum": "c139b68d091dbc1b7f0a2d13908da2b56f04c8c9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.31-5d3453.zip",
+                "reference": "d2fe637738d9b2df60b65c0ca076b4b5af742d64",
+                "shasum": "c4c48f83380fbe1a8d03d2ee13b3fa45a34ad066"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1242,7 +1242,7 @@
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "dev-CGIV-6454-MissingWooCommerceItems as 1.6.2",
+                "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.2.53",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
@@ -1262,6 +1262,11 @@
                 "phpunit/phpunit": "4.6.*"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -1278,7 +1283,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-04 08:49:54"
+            "time": "2015-12-08 08:54:23"
         },
         {
             "name": "channelgrabber/permission",
@@ -1977,17 +1982,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6454-MissingWooCommerceItems",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "fa60a8daf7a7771bc2bc60c4be004707e7ebd79e"
+                "reference": "7fea2fc42be59a880f3bf777db8510b56eddc941"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6454-MissingWooCommerceItems-fe679b.zip",
-                "reference": "fa60a8daf7a7771bc2bc60c4be004707e7ebd79e",
-                "shasum": "1d8463ce6298cc4037b7635e66b3b96c95586a0c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.2-323bcf.zip",
+                "reference": "7fea2fc42be59a880f3bf777db8510b56eddc941",
+                "shasum": "e809a07edef0d731654e896d2f8cc89caedcb84e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2035,7 +2040,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-04 10:55:14"
+            "time": "2015-12-08 08:44:25"
         },
         {
             "name": "channelgrabber/tax",
@@ -8029,25 +8034,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.19.31",
-            "alias_normalized": "1.19.31.0",
-            "version": "dev-CGIV-6454-MissingWooCommerceItems",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.6.2",
-            "alias_normalized": "1.6.2.0",
-            "version": "dev-CGIV-6454-MissingWooCommerceItems",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
