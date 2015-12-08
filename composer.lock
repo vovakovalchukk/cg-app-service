@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ae5e1fd4d2eda5f3c397dfd0aa5c8421",
-    "content-hash": "3a2af29cf019a0eb77dddeb3426ea4de",
+    "hash": "be01c73c7128f1f9c4fb32a3b56edc8c",
+    "content-hash": "edf0c27f8db58bc3ebb0eb6d876dd66d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1206,17 +1206,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
+            "version": "1.19.32",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b12c60fc97ceab7df66d11dfd4a1f5103364614d"
+                "reference": "49ec4f597f42744d6ab22da7d63f0fde54473b71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6559-orders-should-allow-cancelled-to-new-6f6b2c.zip",
-                "reference": "b12c60fc97ceab7df66d11dfd4a1f5103364614d",
-                "shasum": "fcdc472ca7842b0a5086f8cd679ea241b42f9eda"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.19.32-84b993.zip",
+                "reference": "49ec4f597f42744d6ab22da7d63f0fde54473b71",
+                "shasum": "d79e41a89d639703d0f94b5407c39363cefb3b6b"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1283,7 +1283,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-08 09:25:18"
+            "time": "2015-12-08 15:06:08"
         },
         {
             "name": "channelgrabber/permission",
@@ -1982,17 +1982,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "ad684cac147b5a26671fe45779e42d4f3fe16ab3"
+                "reference": "a92cfc4762a3811a1704b61bbd1b141e31957155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6559-orders-should-allow-cancelled-to-new-c89829.zip",
-                "reference": "ad684cac147b5a26671fe45779e42d4f3fe16ab3",
-                "shasum": "4995f78236bab2652400dcf8599c54324519a1f0"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.3-ae908c.zip",
+                "reference": "a92cfc4762a3811a1704b61bbd1b141e31957155",
+                "shasum": "0acee1e765d893bf911d7b72efc8f95bf95b9832"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2040,7 +2040,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-08 09:25:50"
+            "time": "2015-12-08 15:07:41"
         },
         {
             "name": "channelgrabber/tax",
@@ -8059,25 +8059,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.19.31",
-            "alias_normalized": "1.19.31.0",
-            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.6.2",
-            "alias_normalized": "1.6.2.0",
-            "version": "dev-CGIV-6559-orders-should-allow-cancelled-to-new",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
