@@ -1210,13 +1210,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7afe721a1aacb7be298e300ce15c441211add57e"
+                "reference": "b12c60fc97ceab7df66d11dfd4a1f5103364614d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6559-orders-should-allow-cancelled-to-new-95ae98.zip",
-                "reference": "7afe721a1aacb7be298e300ce15c441211add57e",
-                "shasum": "b4d233e4c7f8a8e1da63fb3ae9189a091e18eb41"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6559-orders-should-allow-cancelled-to-new-6f6b2c.zip",
+                "reference": "b12c60fc97ceab7df66d11dfd4a1f5103364614d",
+                "shasum": "fcdc472ca7842b0a5086f8cd679ea241b42f9eda"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1242,7 +1242,7 @@
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "^1.5.9",
+                "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.2.53",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
@@ -1262,6 +1262,11 @@
                 "phpunit/phpunit": "4.6.*"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -1278,7 +1283,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-07 11:52:32"
+            "time": "2015-12-08 09:25:18"
         },
         {
             "name": "channelgrabber/permission",
@@ -1932,17 +1937,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.14",
+            "version": "2.12.16",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "fb4209151bec47596f919e5403c2c9f54bc78352"
+                "reference": "4c1774cb1b1161a1281d709bf0ef8bdf2c9bcff1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.14-d59d2e.zip",
-                "reference": "fb4209151bec47596f919e5403c2c9f54bc78352",
-                "shasum": "4c76bb713f6e5c2cf37e1f93b9c9b118822d938e"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.16-74f634.zip",
+                "reference": "4c1774cb1b1161a1281d709bf0ef8bdf2c9bcff1",
+                "shasum": "31cb0d828cf86a1b1486b4999f54b3619122295d"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -1973,7 +1978,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-10 08:51:08"
+            "time": "2015-12-03 10:30:10"
         },
         {
             "name": "channelgrabber/stock",
@@ -1981,13 +1986,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "ce87c4ec35d439eca68e10e7397274889fd85fed"
+                "reference": "ad684cac147b5a26671fe45779e42d4f3fe16ab3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6559-orders-should-allow-cancelled-to-new-584487.zip",
-                "reference": "ce87c4ec35d439eca68e10e7397274889fd85fed",
-                "shasum": "301c4e62303b88859c77c69842462c127f448e5a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6559-orders-should-allow-cancelled-to-new-c89829.zip",
+                "reference": "ad684cac147b5a26671fe45779e42d4f3fe16ab3",
+                "shasum": "4995f78236bab2652400dcf8599c54324519a1f0"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2035,7 +2040,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-07 12:18:13"
+            "time": "2015-12-08 09:25:50"
         },
         {
             "name": "channelgrabber/tax",

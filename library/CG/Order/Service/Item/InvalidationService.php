@@ -19,6 +19,7 @@ use CG\Stock\Location\AdjustmentDecider as StockLocationDecider;
 use CG\Stock\Service as StockService;
 use Exception;
 use Zend\EventManager\GlobalEventManager;
+use GearmanClient;
 
 class InvalidationService extends ItemService
 {
@@ -40,6 +41,7 @@ class InvalidationService extends ItemService
         StockAuditor $stockAuditor,
         AccountService $accountService,
         Notifier $notifier,
+        GearmanClient $gearmanClient,
         Invalidator $invalidator
     ) {
         parent::__construct(
@@ -56,7 +58,8 @@ class InvalidationService extends ItemService
             $ouService,
             $stockAuditor,
             $accountService,
-            $notifier
+            $notifier,
+            $gearmanClient
         );
         $this->setInvalidator($invalidator);
     }
