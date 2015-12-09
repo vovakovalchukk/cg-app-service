@@ -44,6 +44,13 @@ class Filter implements RulesInterface
                     new IsArrayValidator(["name" => "status"])
                 ],
             ],
+            'shippingAccountId' => [
+                'name' => 'shippingAccountId',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'shippingAccountId')
+                ]
+            ],
         ];
     }
 }

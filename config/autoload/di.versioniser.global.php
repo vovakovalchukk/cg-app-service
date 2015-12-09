@@ -6,6 +6,8 @@ use CG\Slim\Versioning\OrderCollection;
 use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
+use CG\Slim\Versioning\OrderLabelCollection;
+use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\ProductCollection;
@@ -47,6 +49,8 @@ return [
                 'Versioniser_OrderItemEntity_3' => OrderItemEntity\Versioniser3::class,
                 'Versioniser_OrderItemCollection_4' => OrderItemCollection\Versioniser3::class,
                 'Versioniser_OrderItemEntity_4' => OrderItemEntity\Versioniser3::class,
+                'Versioniser_OrderLabelCollection_1' => OrderLabelCollection\Versioniser1::class,
+                'Versioniser_OrderLabelEntity_1' => OrderLabelEntity\Versioniser1::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
@@ -132,6 +136,11 @@ return [
             'Versioniser_OrderItemCollection_4' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_4',
+                ],
+            ],
+            'Versioniser_OrderLabelCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderLabelEntity_1',
                 ],
             ],
             'Versioniser_TemplateCollection_1' => [
