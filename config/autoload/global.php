@@ -138,6 +138,7 @@ use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
+use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1227,6 +1228,11 @@ return array(
                 ],
             ],
             EnsureProductsAndListingsAssociatedWithRootOuCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            CorrectPendingListingsStatusFromSiblingListingsCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]
