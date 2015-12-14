@@ -29,7 +29,8 @@ class Collection
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
                 $this->getParams('orderId') ?: [],
-                $this->getParams('status') ?: []
+                $this->getParams('status') ?: [],
+                $this->getParams('shippingAccountId') ?: []
             )
         );
     }
