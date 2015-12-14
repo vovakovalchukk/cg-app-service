@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "46a808b5762ce277295789cb22d58e4e",
-    "content-hash": "1d117fba502b7ac86d4e0e63aef439ec",
+    "hash": "21f8608d0014daa070f9cc66801fa692",
+    "content-hash": "2daeae78901da681a5076f2f7b957dc5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1211,13 +1211,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c58904b220cdca0c9ff483fb11b0a2f9be056c37"
+                "reference": "97523793e34d0739830008b9c068bd01ee256726"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6341-show-number-orders-per-filter-f7febb.zip",
-                "reference": "c58904b220cdca0c9ff483fb11b0a2f9be056c37",
-                "shasum": "9be582bf04e9b4f10727fb57eab6c8164db03543"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6341-show-number-orders-per-filter-eb8d7d.zip",
+                "reference": "97523793e34d0739830008b9c068bd01ee256726",
+                "shasum": "8fae0e0ee7d9f3e9093e25a676743a2de027136c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1243,9 +1243,9 @@
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.7",
-                "channelgrabber/stock": "^1.5.9",
+                "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
-                "channelgrabber/template": "^1.2.53",
+                "channelgrabber/template": "^1.4.3",
                 "channelgrabber/transaction": ">=1.1.3,<2.0.0",
                 "channelgrabber/user": "^1.19.4",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
@@ -1263,6 +1263,11 @@
                 "phpunit/phpunit": "4.6.*"
             },
             "type": "di-definition",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -1279,7 +1284,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-09 10:10:37"
+            "time": "2015-12-10 11:53:29"
         },
         {
             "name": "channelgrabber/permission",
@@ -2086,17 +2091,17 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.4.2.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "d2805105010500863b61476a29a47d75bbbd5597"
+                "reference": "7649c9ac530eb681ef3a3508b37d988a77ba56a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.2.1-f39662.zip",
-                "reference": "d2805105010500863b61476a29a47d75bbbd5597",
-                "shasum": "9a64b9c888fef19c024766464134469c21d4a084"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.3-5053fc.zip",
+                "reference": "7649c9ac530eb681ef3a3508b37d988a77ba56a9",
+                "shasum": "acd55d80c3b01421c5648e8a098ada34c7db8237"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2140,7 +2145,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-03 11:21:31"
+            "time": "2015-12-09 08:42:24"
         },
         {
             "name": "channelgrabber/transaction",
