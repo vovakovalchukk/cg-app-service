@@ -139,6 +139,7 @@ use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as 
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
+use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1213,6 +1214,11 @@ return array(
                 ]
             ],
             CorrectPendingListingsStatusFromSiblingListingsCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            AddSkusToListingsCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]
