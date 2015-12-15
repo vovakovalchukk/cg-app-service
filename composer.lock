@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17d33e4d2cdb36824debe1c958b063a2",
-    "content-hash": "4e5e0e6865ecc376fe991c5a54902b1c",
+    "hash": "7a41ee723550b0966522402650e0ee25",
+    "content-hash": "bdfa9ecbcdb4f61e5aa8be02aa01276b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -916,17 +916,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.7.1",
+            "version": "dev-CGIV-6608-add-skus-to-listings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "664f1c6ff7c0a088500c4c7f37c5431e11fb46e5"
+                "reference": "69af5f7d951b1be3394bc2226ebaa25fe30b43c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.7.1-f0e2c0.zip",
-                "reference": "664f1c6ff7c0a088500c4c7f37c5431e11fb46e5",
-                "shasum": "34d6664d007f0e9201430bdc8151294f8756de2a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6608-add-skus-to-listings-061316.zip",
+                "reference": "69af5f7d951b1be3394bc2226ebaa25fe30b43c3",
+                "shasum": "9edd7e7c644d2ea6ef4798ee998e1f455a2d6399"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -967,7 +967,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-09 09:15:14"
+            "time": "2015-12-15 10:43:22"
         },
         {
             "name": "channelgrabber/locale",
@@ -8060,10 +8060,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.9.0",
+            "alias_normalized": "1.9.0.0",
+            "version": "dev-CGIV-6608-add-skus-to-listings",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

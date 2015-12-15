@@ -73,10 +73,12 @@ class Db extends DbAbstract implements StorageInterface
 
         foreach ($results as $listingData) {
             if ($listing = $collection->getById($listingData['id'])) {
-                $listing->appendProductId($listingData['productId']);
+                $listing->appendProductId($listingData['productId'])
+                    ->appendProductSku($listingData['productId'], $listingData['productSku']);
                 continue;
             }
             $listingData['productIds'] = [$listingData['productId']];
+            $listingData['productSkus'] = [$listingData['productId'] => $listingData['productSku']];
             $collection->attach($arrayMapper->fromArray($listingData));
         }
 
@@ -138,27 +140,23 @@ class Db extends DbAbstract implements StorageInterface
         if (isset($listing['productId'])) {
             foreach ($results as $listingData) {
                 $listing['productIds'][] = $listingData['productId'];
+                $listing['productSkus'][$listingData['productId']] = $listingData['productSku'];
             }
         }
-        unset($listing['productId']);
+        unset($listing['productId'], $listing['productSku']);
         return $this->getMapper()->fromArray($listing);
-    }
-
-    protected function fetchProductIdsForListing($listingId)
-    {
-        $select = $this->getMapSelect()->where(['listingId' => $listingId]);
-        return $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
     }
 
     protected function insertEntity($entity)
     {
         $listingArr = $entity->toArray();
         $productIds = $listingArr['productIds'];
-        unset($listingArr['productIds']);
+        $productSkus = $listingArr['productSkus'];
+        unset($listingArr['productIds'], $listingArr['productSkus']);
         $insert = $this->getInsert()->values($listingArr);
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
-        $this->insertProductIds($id, $productIds);
+        $this->insertProductMap($id, $productIds, $productSkus);
 
         $entity->setId($id);
         $entity->setNewlyInserted(true);
@@ -169,9 +167,10 @@ class Db extends DbAbstract implements StorageInterface
         $listingArr = $entity->toArray();
         $listingId = $entity->getId();
         $productIds = $listingArr['productIds'];
-        $this->deleteProductIds($listingId);
-        $this->insertProductIds($listingId, $productIds);
-        unset($listingArr['productIds']);
+        $productSkus = $listingArr['productSkus'];
+        $this->deleteProductMap($listingId);
+        $this->insertProductMap($listingId, $productIds, $productSkus);
+        unset($listingArr['productIds'], $listingArr['productSkus']);
         $update = $this->getUpdate()->set($listingArr)
             ->where(array('id' => $listingId));
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
@@ -179,26 +178,33 @@ class Db extends DbAbstract implements StorageInterface
 
     public function remove($entity)
     {
-        $this->deleteProductIds($entity->getId());
+        $this->deleteProductMap($entity->getId());
         parent::remove($entity);
     }
 
-    protected function insertProductIds($listingId, array $productIds)
+    protected function insertProductMap($listingId, array $productIds, array $productSkus)
     {
-        if (count($productIds) == 0) {
+        if (empty($productIds) && empty($productSkus)) {
             return;
         }
-        $insert = new InsertIgnore('productToListingMap');
         foreach ($productIds as $productId) {
+            if (isset($productSkus[$productId])) {
+                continue;
+            }
+            $productSkus[$productId] = '';
+        }
+        $insert = new InsertIgnore('productToListingMap');
+        foreach ($productSkus as $productId => $productSku) {
             $insert->values([
                 'listingId' => $listingId,
-                'productId' => $productId
+                'productId' => $productId,
+                'productSku' => $productSku,
             ]);
             $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         }
     }
 
-    protected function deleteProductIds($listingId)
+    protected function deleteProductMap($listingId)
     {
         $delete = $this->getMapDelete();
         $delete->where(['listingId' => $listingId]);
@@ -211,7 +217,7 @@ class Db extends DbAbstract implements StorageInterface
             ->join(
                 'productToListingMap',
                 'listing.id=productToListingMap.listingId',
-                $columns ? ['productId' => 'productId'] : [],
+                $columns ? ['productId' => 'productId', 'productSku' => 'productSku'] : [],
                 Select::JOIN_LEFT
             );
     }
@@ -239,7 +245,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function getMapInsert()
     {
         return $this->getWriteSql()->insert('productToListingMap')
-            ->columns(['listingId', 'productId']);
+            ->columns(['listingId', 'productId', 'productSku']);
     }
 
     protected function getMapDelete()
