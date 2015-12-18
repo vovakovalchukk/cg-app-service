@@ -1,4 +1,5 @@
 <?php
+use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 use CG\Listing\Command\DeleteUnimportedListings as DeleteUnimportedListingsCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,6 +35,17 @@ return [
                 'required' => true
             ]
         ],
+        'options' => []
+    ],
+    'listing:addSkusToListings' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $output->writeln('Starting addSkusToListings command');
+            $command = $di->get(AddSkusToListingsCommand::class);
+            $affected = $command();
+            $output->writeln('Done, ' . $affected . ' Listings were affected, see the logs for details');
+        },
+        'description' => 'Adds missing SKUs on to Listings from their Products',
+        'arguments' => [],
         'options' => []
     ],
 ];

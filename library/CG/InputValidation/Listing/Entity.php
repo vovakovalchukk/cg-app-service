@@ -3,6 +3,7 @@ namespace CG\InputValidation\Listing;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\ArrayOfPositiveIntegersValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
@@ -68,6 +69,13 @@ class Entity implements RulesInterface
                 'name'       => 'marketplace',
                 'required'   => false,
                 'validators' => []
+            ],
+            'productSkus' => [
+                'name'       => 'productSkus',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'productSkus'])
+                ]
             ],
         ];
     }
