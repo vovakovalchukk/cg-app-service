@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7746c6e27bbc1d43f277b80119c09818",
-    "content-hash": "d23add24097e4cf7d328ec3af1857aaf",
+    "hash": "9f482372a324737ba59f499c75db203b",
+    "content-hash": "68e501b96fc23a95a3d31f841bbcb1f1",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -227,17 +227,17 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-6341-show-orders-per-filter",
+            "version": "1.8.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "8a14d0939545d76b7b9ec597761ca2711e1f9465"
+                "reference": "de56a8bde1dccbcf3306ff8a9754faa575d796df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-6341-show-orders-per-filter-6ac474.zip",
-                "reference": "8a14d0939545d76b7b9ec597761ca2711e1f9465",
-                "shasum": "41656ea9a7e0758b3572099d86abca749a3f9f45"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.8.11-33ecc8.zip",
+                "reference": "de56a8bde1dccbcf3306ff8a9754faa575d796df",
+                "shasum": "e711322078d25184b46d11934faa0a2177a164b7"
             },
             "require": {
                 "channelgrabber/billing": ">=1.8.2, <2.0.0",
@@ -283,7 +283,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-09 10:00:25"
+            "time": "2016-01-04 09:31:38"
         },
         {
             "name": "channelgrabber/channel",
@@ -1207,22 +1207,22 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6341-show-number-orders-per-filter",
+            "version": "1.20.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6dc62d3ec22ae0d906fc56f2831c9e01dfb8677f"
+                "reference": "b8e37a64e6f86b4068c8fe4bc616f82bab108404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6341-show-number-orders-per-filter-26e60d.zip",
-                "reference": "6dc62d3ec22ae0d906fc56f2831c9e01dfb8677f",
-                "shasum": "0d59d483229a8c86534404a5ed009d044958413a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.20.2-48268d.zip",
+                "reference": "b8e37a64e6f86b4068c8fe4bc616f82bab108404",
+                "shasum": "fe2ccb25da8cdd1b0a238051a2bad6b82930f876"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "dev-CGIV-6341-show-orders-per-filter as 1.8.10",
+                "channelgrabber/cglib": "^1.8.11",
                 "channelgrabber/channel": "^1.17.7",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
@@ -1284,7 +1284,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-21 10:23:28"
+            "time": "2016-01-04 10:03:12"
         },
         {
             "name": "channelgrabber/permission",
@@ -1452,17 +1452,17 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "dev-CGIV-6341-show-number-of-orders-per-filter",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "45b625b3ff409c01686e0e9f1c29f389f7ffdaea"
+                "reference": "0942a0cd7bca627d309cc117cba5bce7e24c8ead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-6341-show-number-of-orders-per-filter-d654db.zip",
-                "reference": "45b625b3ff409c01686e0e9f1c29f389f7ffdaea",
-                "shasum": "db88e6837e85e3f6e434f0efc2260233727d5d8a"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.10-1cbdfb.zip",
+                "reference": "0942a0cd7bca627d309cc117cba5bce7e24c8ead",
+                "shasum": "396a5decf855e7a395b26cf3a361454ab93da3c8"
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
@@ -1481,7 +1481,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-18 15:09:20"
+            "time": "2016-01-04 09:46:11"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -8060,32 +8060,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.8.10",
-            "alias_normalized": "1.8.10.0",
-            "version": "dev-CGIV-6341-show-orders-per-filter",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.19.31",
-            "alias_normalized": "1.19.31.0",
-            "version": "dev-CGIV-6341-show-number-orders-per-filter",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.0.9",
-            "alias_normalized": "1.0.9.0",
-            "version": "dev-CGIV-6341-show-number-of-orders-per-filter",
-            "package": "channelgrabber/predis"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/predis": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
