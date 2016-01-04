@@ -140,6 +140,7 @@ use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
+use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1239,6 +1240,11 @@ return array(
                 ]
             ],
             AddSkusToListingsCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            DeleteAlreadyImportedUnimportedListingsCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]

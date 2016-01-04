@@ -2,6 +2,7 @@
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 use CG\Listing\Command\DeleteUnimportedListings as DeleteUnimportedListingsCommand;
+use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -21,6 +22,18 @@ return [
         ],
         'options' => []
     ),
+    'listing:deleteAlreadyImportedUnimportedListings' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $output->writeln('Starting deleteAlreadyImportedUnimportedListings command');
+            $command = $di->get(DeleteAlreadyImportedUnimportedListingsCommand::class);
+            $affected = $command();
+            $output->writeln('Done, ' . $affected . ' UnimportedListings were deleted');
+        },
+        'description' => 'Delete any unimported listing that have a matching listing, i.e. they\'ve already been imported',
+        'arguments' => [
+        ],
+        'options' => []
+    ],
     'listing:correctPendingListingsStatusFromSiblingListings' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $output->writeln('Starting correctPendingListingsStatusFromSiblingListings command');
