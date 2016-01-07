@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f9d1bcb66b8f568cfb7685f40661bc4",
-    "content-hash": "a542dfff1653f4ed1122a899c67cc4af",
+    "hash": "22ae41c79d08f997c677f38e66af3beb",
+    "content-hash": "336cc93fb586ceec580ed33f0264bd83",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -485,17 +485,17 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.7",
+            "version": "dev-CGIV-6596-variations-with-no-stock-attached",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-db.git",
-                "reference": "a0aef908dc672bd13b5fc588b3073fd4a20f7d08"
+                "reference": "45798e605e1009639203b5bc800d5ab534cd7a35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.7-75ebcb.zip",
-                "reference": "a0aef908dc672bd13b5fc588b3073fd4a20f7d08",
-                "shasum": "96b5c830b6a216e19cf36822c0211bb632fdb46b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-dev-CGIV-6596-variations-with-no-stock-attached-3f07ab.zip",
+                "reference": "45798e605e1009639203b5bc800d5ab534cd7a35",
+                "shasum": "d6b262e5e45508d0559b51c5c5ad98c7ae79b83e"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -517,7 +517,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-27 10:42:29"
+            "time": "2016-01-07 16:10:29"
         },
         {
             "name": "channelgrabber/di",
@@ -8060,10 +8060,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.8",
+            "alias_normalized": "1.0.8.0",
+            "version": "dev-CGIV-6596-variations-with-no-stock-attached",
+            "package": "channelgrabber/db"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/db": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
