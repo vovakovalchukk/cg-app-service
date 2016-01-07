@@ -32,11 +32,15 @@ use CG\Account\Shared\Repository as AccountRepository;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Account\Service\Storage\Db as AccountPersistentStorage;
 use CG\Account\Shared\Mapper as AccountMapper;
+use CG\Channel\ShippingChannelsProviderInterface as ChannelShippingChannelsProviderInterface;
+use CG\Dataplug\Carriers as DataplugCarriers;
 
 //Polling Window
 use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
 use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
+use CG\Account\Shared\PollingWindow\StorageInterface as AccountPollingWindowStorage;
+use CG\Account\Client\PollingWindow\Storage\Api as AccountPollingWindowApiStorage;
 
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
@@ -130,7 +134,6 @@ use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
 use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
-use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
@@ -689,7 +692,7 @@ return array(
                     'client' => 'account_guzzle'
                 )
             ),
-            PollingWindowApiStorage::class => array(
+            AccountPollingWindowApiStorage::class => array(
                 'parameter' => array(
                     'client' => 'account_guzzle'
                 )
@@ -1278,6 +1281,8 @@ return array(
                 ProductStorage::class => ProductRepository::class,
                 ListingStorage::class => ListingRepository::class,
                 UnimportedListingStorage::class => UnimportedListingRepository::class,
+                AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
+                ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
             ]
         )
     )
