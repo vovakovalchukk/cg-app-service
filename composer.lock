@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9a01dca8e734f0a6067b621167211f8c",
-    "content-hash": "8c0f30eac400a55280f8c4bbf5f0ab17",
+    "hash": "36164e8ecbdc438430d489b7e8c700f5",
+    "content-hash": "56273a37f72fae03bc9b3224e88f1b23",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1590,17 +1590,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.5.0",
+            "version": "1.5.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "8e130d79276ddd79a849bb6bdf2dfe8b13772618"
+                "reference": "31f2eafd70fc215ecfe321e7ff502fb5f3dba0af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.0-4957d7.zip",
-                "reference": "8e130d79276ddd79a849bb6bdf2dfe8b13772618",
-                "shasum": "372051b2ec2d6b6aab9c593ef56a3a2e0f142675"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.1.1-d0fa5e.zip",
+                "reference": "31f2eafd70fc215ecfe321e7ff502fb5f3dba0af",
+                "shasum": "4804b6a3ecb8f67184606c0eeef30ef6df4b9317"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1610,7 +1610,7 @@
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": ">=1.1.3,<2.0.0",
-                "channelgrabber/listing": ">=1.2.10",
+                "channelgrabber/listing": "^1.8.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
@@ -1620,8 +1620,6 @@
                 "composer/composer": "@dev",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.4",
-                "php-jsonpatch/php-jsonpatch": "dev-master",
-                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2.5"
             },
             "type": "di-definition",
@@ -1640,7 +1638,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-12-03 10:02:41"
+            "time": "2016-01-07 16:15:45"
         },
         {
             "name": "channelgrabber/purge",
@@ -1836,17 +1834,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.16",
+            "version": "dev-CGIV-6549-nginx-cache-purging-issues",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "9e9fb610e689fbb4f6ed5a60228cf1eabce12b27"
+                "reference": "eea112693b0a9c906fc08bebe1e262505b93a901"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.16-24abf5.zip",
-                "reference": "9e9fb610e689fbb4f6ed5a60228cf1eabce12b27",
-                "shasum": "f1eba86ef9d5f90fe9dd9692eacc8cc20cfdddd4"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-6549-nginx-cache-purging-issues-496404.zip",
+                "reference": "eea112693b0a9c906fc08bebe1e262505b93a901",
+                "shasum": "ee79137d836b96f3cd04995d167b18b52d749458"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1866,8 +1864,7 @@
                 "league/oauth2-server": "~4.1.3",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=5.4.0",
-                "php-jsonpatch/php-jsonpatch": "dev-master",
-                "php-jsonpointer/php-jsonpointer": "@dev",
+                "php-jsonpatch/php-jsonpatch": "~1.2.3",
                 "rhumsaa/vnderror": "1.0.0",
                 "slim/slim": "2.3.*",
                 "zendframework/zend-eventmanager": ">=2.2.5,<3.0"
@@ -1895,7 +1892,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-11-06 14:32:04"
+            "time": "2016-01-08 15:25:57"
         },
         {
             "name": "channelgrabber/spork",
@@ -8105,10 +8102,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.17",
+            "alias_normalized": "1.13.17.0",
+            "version": "dev-CGIV-6549-nginx-cache-purging-issues",
+            "package": "channelgrabber/slim"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
