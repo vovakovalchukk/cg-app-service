@@ -77,6 +77,11 @@ class Filter implements RulesInterface
                         new BooleanValidator(['name' => 'replaceVariationWithParent'])
                     ]
                 ],
+                'cgCreationDate' => [
+                    'name'       => 'cgCreationDate',
+                    'required'   => false,
+                    'validators' => [new StringLength(['min' => 1])]
+                ],
             ]
         );
     }
