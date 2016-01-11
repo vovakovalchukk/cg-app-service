@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "826b0b0ed7691100319622364b454fd9",
-    "content-hash": "3abd920f7e90d867efa4f93bc1d88862",
+    "hash": "76f9ae91e7df2c87d792ebf155291f63",
+    "content-hash": "abf8345fb7459f404c0bfdcdd1425eb9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2028,17 +2028,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.6.5",
+            "version": "dev-CGIV-6646-stock-log-endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "dda2eb0214c57029078920506c754d6138e8ff66"
+                "reference": "a5030f84823512960584f6389a7b5d661cc3c7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.5-76f8a5.zip",
-                "reference": "dda2eb0214c57029078920506c754d6138e8ff66",
-                "shasum": "65a0ffe30c5441a3dd218c6604634430445c22b6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6646-stock-log-endpoint-94c5c2.zip",
+                "reference": "a5030f84823512960584f6389a7b5d661cc3c7ef",
+                "shasum": "94171011d63079e7d3dc161b3445066f3e915065"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2084,7 +2084,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-08 16:36:42"
+            "time": "2016-01-11 17:15:27"
         },
         {
             "name": "channelgrabber/tax",
@@ -8104,10 +8104,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.6",
+            "alias_normalized": "1.6.6.0",
+            "version": "dev-CGIV-6646-stock-log-endpoint",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

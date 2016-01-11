@@ -1,23 +1,25 @@
 <?php
+// Stock
 use CG\Controllers\Stock\Stock;
 use CG\Controllers\Stock\Stock\Collection as StockCollection;
-
 use CG\InputValidation\Stock\Entity as StockEntityValidation;
 use CG\InputValidation\Stock\Filter as StockCollectionValidation;
-
 use CG\Stock\Entity as StockEntity;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Service as StockService;
 
+// StockLocation
 use CG\Controllers\Stock\Location\Location;
 use CG\Controllers\Stock\Location\Location\Collection as StockLocationCollection;
-
 use CG\InputValidation\Stock\Location\Entity as LocationEntityValidation;
 use CG\InputValidation\Stock\Location\Filter as LocationCollectionValidation;
-
 use CG\Stock\Location\Entity as StockLocationEntity;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service as StockLocationService;
+
+// StockLog
+use CG\Controllers\Stock\Log\Collection as StockLogCollection;
+use CG\InputValidation\Stock\Log\Filter as StockLogFilterValidation;
 
 return [
     '/stock' => [
@@ -97,6 +99,25 @@ return [
             'entityClass' => StockLocationEntity::class,
             'serviceClass' => StockLocationService::class
         ]
-    ]
+    ],
+    '/stockLog' => [
+        'controllers' => function() use ($di, $app) {
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(StockLogCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'StockLogCollection',
+        //'entityRoute' => '/stockLog/:stockId',
+        'validation' => [
+            'filterRules' => StockLogFilterValidation::class,
+            //'dataRules' => StockLogEntityValidation::class
+        ]
+    ],
+    // Deliberately left out /stockLog/:id for now
 ];
  

@@ -233,6 +233,12 @@ use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Creator as StockCreator;
 
+// StockLog
+use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
+use CG\Stock\Audit\Combined\Repository as StockLogRepository;
+use CG\Stock\Audit\Combined\Storage\Cache as StockLogCacheStorage;
+use CG\Stock\Audit\Combined\Storage\Db as StockLogDbStorage;
+use CG\Stock\Audit\Combined\StorageInterface as StockLogStorage;
 
 // Order Counts
 use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
@@ -946,6 +952,20 @@ return array(
                     'stockStorage' => StockRepository::class,
                 ]
             ],
+            StockLogRepository::class => [
+                'parameter' => [
+                    'storage' => StockLogCacheStorage::class,
+                    'repository' => StockLogDbStorage::class
+                ]
+            ],
+            StockLogDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => StockLogMapper::class
+                ]
+            ],
 
             OrderCountsRedisStorage::class => [
                 'parameter' => [
@@ -1301,6 +1321,7 @@ return array(
                 StockLocationStorage::class => StockLocationRepository::class,
                 LocationStorage::class => LocationRepository::class,
                 OrderClientStorage::class => OrderApiStorage::class,
+                StockLogStorage::class => StockLogRepository::class,
             ]
         )
     )
