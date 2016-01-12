@@ -55,13 +55,13 @@ class Db extends DbAbstract implements StorageInterface
         }
         if (!empty($filter->getDateTimeFrom())) {
             list($date, $time) = explode(' ', $filter->getDateTimeFrom());
-            $query[] = 'date >= ' . $date;
-            $query[] = 'time >= ' . $time;
+            $query[] = 'date >= \'' . $date . '\'';
+            $query[] = 'time >= \'' . $time . '\'';
         }
         if (!empty($filter->getDateTimeTo())) {
             list($date, $time) = explode(' ', $filter->getDateTimeTo());
-            $query[] = 'date <= ' . $date;
-            $query[] = 'time <= ' . $time;
+            $query[] = 'date <= \'' . $date . '\'';
+            $query[] = 'time <= \'' . $time . '\'';
         }
         return $query;
     }
