@@ -52,6 +52,7 @@ use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Client\Storage\Api as OrderApiStorage;
+use CG\Order\Client\StorageInterface as OrderClientStorage;
 use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
 
@@ -144,6 +145,7 @@ use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProd
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
+use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -226,8 +228,10 @@ use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
 use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
+use CG\Stock\Location\StorageInterface as StockLocationStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
+use CG\Stock\Creator as StockCreator;
 
 
 // Order Counts
@@ -274,6 +278,7 @@ use CG\Location\Repository as LocationRepository;
 use CG\Location\Mapper as LocationMapper;
 use CG\Location\Storage\Db as LocationDbStorage;
 use CG\Location\Storage\Cache as LocationCacheStorage;
+use CG\Location\StorageInterface as LocationStorage;
 
 // Caching
 use CG\Cache\InvalidationHandler;
@@ -936,6 +941,11 @@ return array(
                     'accountClient' => AccountApiStorage::class
                 ]
             ],
+            StockCreator::class => [
+                'parameter' => [
+                    'stockStorage' => StockRepository::class,
+                ]
+            ],
 
             OrderCountsRedisStorage::class => [
                 'parameter' => [
@@ -1252,6 +1262,11 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            CreateMissingStockCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1283,6 +1298,9 @@ return array(
                 UnimportedListingStorage::class => UnimportedListingRepository::class,
                 AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
                 ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
+                StockLocationStorage::class => StockLocationRepository::class,
+                LocationStorage::class => LocationRepository::class,
+                OrderClientStorage::class => OrderApiStorage::class,
             ]
         )
     )
