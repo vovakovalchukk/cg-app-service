@@ -54,14 +54,10 @@ class Db extends DbAbstract implements StorageInterface
             $query['itemStatus'] = $filter->getItemStatus();
         }
         if (!empty($filter->getDateTimeFrom())) {
-            list($date, $time) = explode(' ', $filter->getDateTimeFrom());
-            $query[] = 'date >= \'' . $date . '\'';
-            $query[] = 'time >= \'' . $time . '\'';
+            $query[] = 'dateTime >= \'' . $filter->getDateTimeFrom() . '\'';
         }
         if (!empty($filter->getDateTimeTo())) {
-            list($date, $time) = explode(' ', $filter->getDateTimeTo());
-            $query[] = 'date <= \'' . $date . '\'';
-            $query[] = 'time <= \'' . $time . '\'';
+            $query[] = 'dateTime <= \'' . $filter->getDateTimeTo() . '\'';
         }
         return $query;
     }
@@ -113,7 +109,7 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockLog');
         $select->columns([
             // Columns common to both tables
-            'id', 'date', 'time', 'itid', 'organisationUnitId', 'sku',
+            'id', 'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
             // Columns only present on stockAdjustmentLog
             'stid' => new Expression('null'), 'action' => new Expression("'Stock Log'"), 'accountId' => new Expression('null'), 
             'stockManagement' => new Expression('null'), 
@@ -133,7 +129,7 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockAdjustmentLog');
         $select->columns([
             // Columns common to both tables
-            'id', 'date', 'time', 'itid', 'organisationUnitId', 'sku',
+            'id', 'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
             // Columns only present on stockAdjustmentLog
             'stid', 'action', 'accountId', 'stockManagement',
             'listingId', 'productId', 'itemStatus', 'listingStatus',
