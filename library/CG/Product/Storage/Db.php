@@ -138,7 +138,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         $searchQuery = [];
         $searchFields = ['`product`.sku', '`product`.name', '`variation`.sku'];
-        $likeSearchTerm  = "%" . $searchTerm . "%";
+        $likeSearchTerm  = "%" . \CG\Stdlib\escapeLikeValue($searchTerm) . "%";
 
         foreach ($searchFields as $field) {
             $searchQuery[] = $field . ' LIKE ?';
