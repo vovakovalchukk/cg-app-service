@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36164e8ecbdc438430d489b7e8c700f5",
-    "content-hash": "56273a37f72fae03bc9b3224e88f1b23",
+    "hash": "dbfdbc8afa6c3ff55ba6abd02017cd85",
+    "content-hash": "a11b8f4e4b3b3b18cfb4067a751ba776",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1834,17 +1834,17 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-6549-nginx-cache-purging-issues",
+            "version": "1.13.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "eea112693b0a9c906fc08bebe1e262505b93a901"
+                "reference": "90395c053d72640c6544786d95d697cc8db02b33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-6549-nginx-cache-purging-issues-496404.zip",
-                "reference": "eea112693b0a9c906fc08bebe1e262505b93a901",
-                "shasum": "ee79137d836b96f3cd04995d167b18b52d749458"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.17-5a2768.zip",
+                "reference": "90395c053d72640c6544786d95d697cc8db02b33",
+                "shasum": "6e7adcb0ba42a927bb7098b9bb5bc6d309e860ef"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1892,7 +1892,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-08 15:25:57"
+            "time": "2016-01-13 10:56:41"
         },
         {
             "name": "channelgrabber/spork",
@@ -8102,18 +8102,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.13.17",
-            "alias_normalized": "1.13.17.0",
-            "version": "dev-CGIV-6549-nginx-cache-purging-issues",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
