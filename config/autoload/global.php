@@ -1321,7 +1321,8 @@ return array(
                 StockLocationStorage::class => StockLocationRepository::class,
                 LocationStorage::class => LocationRepository::class,
                 OrderClientStorage::class => OrderApiStorage::class,
-                StockLogStorage::class => StockLogRepository::class,
+                // Not using Cache storage for now as no easy way to invalidate it when either table changes
+                StockLogStorage::class => StockLogDbStorage::class,
             ]
         )
     )
