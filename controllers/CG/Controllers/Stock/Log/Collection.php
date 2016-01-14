@@ -30,7 +30,12 @@ class Collection
                 $this->getParams('sku') ?: [],
                 $this->getParams('itemStatus') ?: [],
                 $this->getParams('dateTimeFrom') ?: null,
-                $this->getParams('dateTimeTo') ?: null
+                $this->getParams('dateTimeTo') ?: null,
+                $this->getParams('dateTimePeriod') ?: null,
+                $this->getParams('type') ?: [],
+                $this->getParams('searchTerm') ?: null,
+                $this->getParams('sortBy') ?: null,
+                $this->getParams('sortDirection') ?: null
             )
         );
     }

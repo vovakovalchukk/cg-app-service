@@ -5,6 +5,7 @@ use CG\Stock\Audit\Combined\Collection;
 use CG\Stock\Audit\Combined\Entity as StockLog;
 use CG\Stock\Audit\Combined\Filter as Filter;
 use CG\Stock\Audit\Combined\StorageInterface;
+use CG\Stock\Audit\Combined\Type;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Exception\ExceptionInterface;
@@ -18,6 +19,9 @@ class Db extends DbAbstract implements StorageInterface
 
     protected $sortByMap = [
         'dateTime' => 'getSortByDateTime'
+    ];
+    protected $searchFields = [
+        'id', 'itid', 'action', 'accountName', 'orderExternalId', 'stid',
     ];
 
     public function fetchCollectionByFilter(Filter $filter)
@@ -59,7 +63,27 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getDateTimeTo())) {
             $query[] = 'dateTime <= \'' . $filter->getDateTimeTo() . '\'';
         }
+        if (count($filter->getType()) == 1) {
+            $query['type'] = $filter->getType();
+        }
+        if (!empty($filter->getSearchTerm())) {
+            $query = array_merge($query, $this->getSearchTermQuery($filter->getSearchTerm()));
+        }
         return $query;
+    }
+
+    protected function getSearchTermQuery($searchTerm)
+    {
+        $searchFields = [];
+        $searchTerm  = "%" . $searchTerm . "%";
+
+        foreach ($this->searchFields as $field) {
+            $searchFields[] = $field . ' LIKE ?';
+        }
+
+        return [
+            "(" . implode(' OR ', $searchFields) . ")" => array_fill(0, count($searchFields), $searchTerm)
+        ];
     }
 
     protected function applySorting(Select $select, Filter $filter)
@@ -109,7 +133,8 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockLog');
         $select->columns([
             // Columns common to both tables
-            'id', 'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
+            'type' => new Expression("'" . Type::LOG . "'"), 'id', 'date', 'time',
+            'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
             // Columns only present on stockAdjustmentLog
             'stid' => new Expression('null'), 'action' => new Expression("'Stock Log'"), 'accountId' => new Expression('null'), 
             'stockManagement' => new Expression('null'), 
@@ -129,7 +154,7 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockAdjustmentLog');
         $select->columns([
             // Columns common to both tables
-            'id', 'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
+            'type' => new Expression("'" . Type::ADJUSTMENT . "'"), 'id', 'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId', 'sku',
             // Columns only present on stockAdjustmentLog
             'stid', 'action', 'accountId', 'stockManagement',
             'listingId', 'productId', 'itemStatus', 'listingStatus',

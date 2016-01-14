@@ -55,6 +55,18 @@ class Filter implements RulesInterface
                         new DateValidator(['format' => StdlibDateTime::FORMAT])
                     ]
                 ],
+                'type' => [
+                    'name'       => 'type',
+                    'required'   => false,
+                    'validators' => [
+                        new IsArrayValidator(["name" => "type"])
+                    ]
+                ],
+                'searchTerm' => [
+                    'name' => 'searchTerm',
+                    'required' => false,
+                    'validators' => [new StringLength(['min' => 1])]
+                ],
                 'sortBy' => [
                     'name' => 'sortBy',
                     'required' => false,

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76f9ae91e7df2c87d792ebf155291f63",
-    "content-hash": "abf8345fb7459f404c0bfdcdd1425eb9",
+    "hash": "781d371c5e9bb4522b9c438d7d8860d8",
+    "content-hash": "658e4aa453d1ea8632e3ee512e4e4732",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2026,17 +2026,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6646-stock-log-endpoint",
+            "version": "dev-CGIV-6645-stock-logs-ui",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "a5030f84823512960584f6389a7b5d661cc3c7ef"
+                "reference": "fdf9f7d3b0302f66df1c785461badebc33665aff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6646-stock-log-endpoint-94c5c2.zip",
-                "reference": "a5030f84823512960584f6389a7b5d661cc3c7ef",
-                "shasum": "94171011d63079e7d3dc161b3445066f3e915065"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6645-stock-logs-ui-6b8a2c.zip",
+                "reference": "fdf9f7d3b0302f66df1c785461badebc33665aff",
+                "shasum": "1fcbfa01457b2369f5c349c62d9a54489d1ab596"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2082,7 +2082,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-11 17:15:27"
+            "time": "2016-01-14 12:17:52"
         },
         {
             "name": "channelgrabber/tax",
@@ -8106,7 +8106,7 @@
         {
             "alias": "1.6.6",
             "alias_normalized": "1.6.6.0",
-            "version": "dev-CGIV-6646-stock-log-endpoint",
+            "version": "dev-CGIV-6645-stock-logs-ui",
             "package": "channelgrabber/stock"
         }
     ],
