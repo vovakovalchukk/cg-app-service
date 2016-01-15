@@ -145,7 +145,8 @@ class Db extends DbAbstract implements StorageInterface
             // Columns only present on stockLog
             'stockId', 'locationId', 'allocatedQty', 'onHandQty',
             // Columns from joined tables
-            'accountName' => new Expression('null'), 'orderId' => new Expression('null'), 'orderExternalId' => new Expression('null'), 
+            'accountName' => new Expression('null'), 'orderId' => new Expression('null'), 
+            'orderExternalId' => new Expression('null'), 'listingUrl' => new Expression('null'),
         ]);
         return $select;
     }
@@ -181,6 +182,12 @@ class Db extends DbAbstract implements StorageInterface
             'order',
             'order.id = item.orderId OR (order.id = stockAdjustmentLog.stid AND order.organisationUnitId = stockAdjustmentLog.organisationUnitId)',
             ['orderId' => 'id', 'orderExternalId' => 'externalId'],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            'listing',
+            'listing.id = stockAdjustmentLog.listingId',
+            ['listingUrl' => 'url'],
             Select::JOIN_LEFT
         );
         return $select;
