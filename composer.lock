@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "51e0cf42a6b17606ef5b40099254cd5e",
-    "content-hash": "71d03a43c19331b8fbd099b061cc277d",
+    "hash": "cd7544a81a2dbdd47c696684abd89938",
+    "content-hash": "880a171dd99e01f5f25401eba69093a3",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1981,17 +1981,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-6658-SlashSku",
+            "version": "2.12.20",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "e63ec7284d921751086c6748c2a969dfb64ac8da"
+                "reference": "5eae7ed9dac6e24f736035443ee38d023307797b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6658-SlashSku-995bda.zip",
-                "reference": "e63ec7284d921751086c6748c2a969dfb64ac8da",
-                "shasum": "16e8b5f3cbf4d7f32d34d41e70c3ced8afcb7e35"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.20-458d2b.zip",
+                "reference": "5eae7ed9dac6e24f736035443ee38d023307797b",
+                "shasum": "25484ed60d38b7dc2e688221a7893dae2aac7c57"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -2022,7 +2022,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-13 15:14:00"
+            "time": "2016-01-15 10:06:30"
         },
         {
             "name": "channelgrabber/stock",
@@ -8077,18 +8077,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.12.20",
-            "alias_normalized": "2.12.20.0",
-            "version": "dev-CGIV-6658-SlashSku",
-            "package": "channelgrabber/stdlib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
