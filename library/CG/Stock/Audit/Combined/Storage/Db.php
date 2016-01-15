@@ -8,6 +8,7 @@ use CG\Stock\Audit\Combined\StorageInterface;
 use CG\Stock\Audit\Combined\Type;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
+use CG\Stdlib;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
@@ -75,7 +76,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSearchTermQuery($searchTerm)
     {
         $searchFields = [];
-        $searchTerm  = "%" . $searchTerm . "%";
+        $searchTerm  = "%" . Stdlib\escapeLikeValue($searchTerm) . "%";
 
         foreach ($this->searchFields as $field) {
             $searchFields[] = $field . ' LIKE ?';
@@ -178,7 +179,7 @@ class Db extends DbAbstract implements StorageInterface
         );
         $select->join(
             'order',
-            'order.id = item.orderId',
+            'order.id = item.orderId OR (order.id = stockAdjustmentLog.stid AND order.organisationUnitId = stockAdjustmentLog.organisationUnitId)',
             ['orderId' => 'id', 'orderExternalId' => 'externalId'],
             Select::JOIN_LEFT
         );
