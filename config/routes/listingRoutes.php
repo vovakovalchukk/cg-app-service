@@ -41,7 +41,7 @@ return [
             'dataRules' => ListingEntityValidation::class
         ],
         'entityRoute' => '/listing/:listingId',
-        "version" => new Version(1, 4)
+        "version" => new Version(1, 5)
     ],
     '/listing/:listingId' => [
         'controllers' => function($listingId) use ($di, $app) {
@@ -63,7 +63,7 @@ return [
             'entityClass' => ListingEntity::class,
             'serviceClass' => ListingService::class
         ],
-        "version" => new Version(1, 4)
+        "version" => new Version(1, 5)
     ],
     '/unimportedListing' => [
         'controllers' => function() use ($di, $app) {

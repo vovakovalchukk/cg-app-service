@@ -32,11 +32,15 @@ use CG\Account\Shared\Repository as AccountRepository;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Account\Service\Storage\Db as AccountPersistentStorage;
 use CG\Account\Shared\Mapper as AccountMapper;
+use CG\Channel\ShippingChannelsProviderInterface as ChannelShippingChannelsProviderInterface;
+use CG\Dataplug\Carriers as DataplugCarriers;
 
 //Polling Window
 use CG\Account\Service\PollingWindow\Service as AccountPollingWindowService;
 use CG\Account\Service\PollingWindow\Storage\Db as AccountPollingWindowDbStorage;
 use CG\Account\Shared\PollingWindow\Mapper as AccountPollingWindowMapper;
+use CG\Account\Shared\PollingWindow\StorageInterface as AccountPollingWindowStorage;
+use CG\Account\Client\PollingWindow\Storage\Api as AccountPollingWindowApiStorage;
 
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
@@ -48,6 +52,7 @@ use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
 use CG\Order\Service\Storage\Persistent\Db as OrderPersistentDbStorage;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Client\Storage\Api as OrderApiStorage;
+use CG\Order\Client\StorageInterface as OrderClientStorage;
 use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
 
@@ -130,7 +135,6 @@ use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
 use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
-use CG\Account\Client\PollingWindow\Storage\Api as PollingWindowApiStorage;
 use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
@@ -139,6 +143,9 @@ use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as 
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
+use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
+use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
+use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -221,8 +228,24 @@ use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
 use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
+use CG\Stock\Location\StorageInterface as StockLocationStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
+use CG\Stock\Creator as StockCreator;
+
+// StockLog
+use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
+use CG\Stock\Audit\Combined\Repository as StockLogRepository;
+use CG\Stock\Audit\Combined\Storage\Cache as StockLogCacheStorage;
+use CG\Stock\Audit\Combined\Storage\Db as StockLogDbStorage;
+use CG\Stock\Audit\Combined\StorageInterface as StockLogStorage;
+
+// Order Counts
+use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
+use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
+use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
+use CG\Order\Shared\OrderCounts\Storage\Api as OrderCountsApiStorage;
+use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
 
 // Listing
 use CG\Listing\Entity as ListingEntity;
@@ -261,6 +284,7 @@ use CG\Location\Repository as LocationRepository;
 use CG\Location\Mapper as LocationMapper;
 use CG\Location\Storage\Db as LocationDbStorage;
 use CG\Location\Storage\Cache as LocationCacheStorage;
+use CG\Location\StorageInterface as LocationStorage;
 
 // Caching
 use CG\Cache\InvalidationHandler;
@@ -679,7 +703,7 @@ return array(
                     'client' => 'account_guzzle'
                 )
             ),
-            PollingWindowApiStorage::class => array(
+            AccountPollingWindowApiStorage::class => array(
                 'parameter' => array(
                     'client' => 'account_guzzle'
                 )
@@ -921,6 +945,37 @@ return array(
             StockAdjustmentCalculator::class => [
                 'parameter' => [
                     'accountClient' => AccountApiStorage::class
+                ]
+            ],
+            StockCreator::class => [
+                'parameter' => [
+                    'stockStorage' => StockRepository::class,
+                ]
+            ],
+            StockLogRepository::class => [
+                'parameter' => [
+                    'storage' => StockLogCacheStorage::class,
+                    'repository' => StockLogDbStorage::class
+                ]
+            ],
+            StockLogDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => StockLogMapper::class
+                ]
+            ],
+
+            OrderCountsRedisStorage::class => [
+                'parameter' => [
+                    'client' => "unreliable_redis",
+                    'mapper' => OrderCountsMapper::class
+                ]
+            ],
+            OrderCountsApiStorage::class => [
+                'parameter' => [
+                    'client' => "cg_app_guzzle",
                 ]
             ],
             ListingService::class => [
@@ -1217,6 +1272,21 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            AddSkusToListingsCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            DeleteAlreadyImportedUnimportedListingsCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            CreateMissingStockCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1241,10 +1311,18 @@ return array(
                 ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
+                OrderCountsStorage::class => OrderCountsRedisStorage::class,
                 ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
                 ListingStorage::class => ListingRepository::class,
                 UnimportedListingStorage::class => UnimportedListingRepository::class,
+                AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
+                ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
+                StockLocationStorage::class => StockLocationRepository::class,
+                LocationStorage::class => LocationRepository::class,
+                OrderClientStorage::class => OrderApiStorage::class,
+                // Not using Cache storage for now as no easy way to invalidate it when either table changes
+                StockLogStorage::class => StockLogDbStorage::class,
             ]
         )
     )
