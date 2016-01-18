@@ -3,7 +3,7 @@ namespace CG\Stock\Command;
 
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stock\Creator as StockCreator;
+use CG\Stock\Locking\Creator as StockCreator;
 use CG\Zend\Stdlib\Db\Sql\Sql as SqlClient;
 
 class CreateMissingStock implements LoggerAwareInterface
