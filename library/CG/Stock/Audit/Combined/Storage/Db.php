@@ -22,14 +22,19 @@ class Db extends DbAbstract implements StorageInterface
         'dateTime' => 'getSortByDateTime'
     ];
     protected $searchFields = [
-        'id', 'itid', 'action', 'accountName', 'orderExternalId', 'stid',
+        'stockLog' => [
+            'stockLog.id', 'stockLog.itid',
+        ],
+        'stockAdjustmentLog' => [
+            'stockAdjustmentLog.id', 'stockAdjustmentLog.itid', 'stockAdjustmentLog.action',
+            'account.account.displayName', 'itemOrder.externalId', 'orderDirect.externalId', 'stockAdjustmentLog.stid',
+        ]
     ];
 
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
-            $query = $this->buildFilterQuery($filter);
-            $select = $this->getSelect()->where($query);
+            $select = $this->getFilteredSelect($filter);
 
             $this->applySorting($select, $filter)
                 ->applyPagination($select, $filter);
@@ -46,39 +51,71 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    protected function buildFilterQuery(Filter $filter)
+    protected function getFilteredSelect(Filter $filter)
+    {
+        if (count($filter->getType()) == 1) {
+            if ($filter->getType()[0] == Type::ADJUSTMENT) {
+                $stockAdjustmentSelect = $this->getStockAdjustmentLogSelect();
+                $stockAdjustmentSelect->where($this->buildFilterQuery($filter, 'stockAdjustmentLog'));
+                return $stockAdjustmentSelect;
+            }
+            $stockLogSelect = $this->getStockLogSelect();
+            $stockLogSelect->where($this->buildFilterQuery($filter, 'stockLog'));
+            return $stockLogSelect;
+        }
+
+        $stockLogSelect = $this->getStockLogSelect();
+        $stockAdjustmentSelect = $this->getStockAdjustmentLogSelect();
+        $stockLogSelect->where($this->buildFilterQuery($filter, 'stockLog'));
+        $stockAdjustmentSelect->where($this->buildFilterQuery($filter, 'stockAdjustmentLog'));
+        return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect);
+    }
+
+    protected function buildFilterQuery(Filter $filter, $tableName)
     {
         $query = [];
         if (!empty($filter->getOrganisationUnitId())) {
-            $query['organisationUnitId'] = $filter->getOrganisationUnitId();
+            $query[$tableName.'.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         if (!empty($filter->getSku())) {
-            $query['sku'] = $filter->getSku();
+            $query[$tableName.'.sku'] = $filter->getSku();
         }
         if (!empty($filter->getItemStatus())) {
-            $query['itemStatus'] = $filter->getItemStatus();
+            $query = array_merge($query, $this->getItemStatusQuery($filter->getItemStatus(), $tableName));
         }
         if (!empty($filter->getDateTimeFrom())) {
-            $query[] = 'dateTime >= \'' . $filter->getDateTimeFrom() . '\'';
+            list($date, $time) = explode(' ', $filter->getDateTimeFrom());
+            $query[] = sprintf(
+                '((%1$s.date >= \'%2$s\' AND %1$s.time >= \'%3$s\') OR %1$s.date > \'%2$s\')', $tableName, $date, $time
+            );
         }
         if (!empty($filter->getDateTimeTo())) {
-            $query[] = 'dateTime <= \'' . $filter->getDateTimeTo() . '\'';
-        }
-        if (count($filter->getType()) == 1) {
-            $query['type'] = $filter->getType();
+            list($date, $time) = explode(' ', $filter->getDateTimeTo());
+            $query[] = sprintf(
+                '((%1$s.date <= \'%2$s\' AND %1$s.time <= \'%3$s\') OR %1$s.date < \'%2$s\')', $tableName, $date, $time
+            );
         }
         if (!empty($filter->getSearchTerm())) {
-            $query = array_merge($query, $this->getSearchTermQuery($filter->getSearchTerm()));
+            $query = array_merge($query, $this->getSearchTermQuery($filter->getSearchTerm(), $tableName));
         }
         return $query;
     }
 
-    protected function getSearchTermQuery($searchTerm)
+    protected function getItemStatusQuery(array $itemStatus, $tableName)
+    {
+        // Item statuses only accessible via stockAdjustmentLog
+        if ($tableName == 'stockLog') {
+            return [$tableName.'.id' => -1];
+        }
+        return [$tableName.'.itemStatus' => $itemStatus];
+    }
+
+    protected function getSearchTermQuery($searchTerm, $tableName)
     {
         $searchFields = [];
         $searchTerm  = "%" . Stdlib\escapeLikeValue($searchTerm) . "%";
 
-        foreach ($this->searchFields as $field) {
+        foreach ($this->searchFields[$tableName] as $field) {
             $searchFields[] = $field . ' LIKE ?';
         }
 
@@ -121,11 +158,9 @@ class Db extends DbAbstract implements StorageInterface
         return $this;
     }
 
-    protected function getSelect()
+    protected function getCombinedSelect(Select $stockLogSelect, Select $stockAdjustmentSelect)
     {
-        $stockLogSelect = $this->getStockLogSelect();
-        $stockLogSelect->combine($this->getStockAdjustmentLogSelect());
-
+        $stockLogSelect->combine($stockAdjustmentSelect);
         return $this->getReadSql()->select(['sl' => $stockLogSelect]);
     }
 
@@ -145,8 +180,8 @@ class Db extends DbAbstract implements StorageInterface
             // Columns only present on stockLog
             'stockId', 'locationId', 'allocatedQty', 'onHandQty',
             // Columns from joined tables
-            'accountName' => new Expression('null'), 'orderId' => new Expression('null'), 
-            'orderExternalId' => new Expression('null'), 'listingUrl' => new Expression('null'),
+            'orderId' => new Expression('null'), 'orderExternalId' => new Expression('null'),
+            'accountName' => new Expression('null'), 'listingUrl' => new Expression('null'),
         ]);
         return $select;
     }
@@ -164,8 +199,9 @@ class Db extends DbAbstract implements StorageInterface
             // Columns only present on stockLog
             'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
             'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
+           // Columns from joined tables
+            'orderId' => new Expression('IFNULL(itemOrder.id, orderDirect.id)'), 'orderExternalId' => new Expression('IFNULL(itemOrder.externalId, orderDirect.externalId)'),
         ]);
-        // Columns from joined tables
         $select->join(
             new TableIdentifier('account', 'account'),
             'account.account.id = stockAdjustmentLog.accountId',
@@ -179,9 +215,15 @@ class Db extends DbAbstract implements StorageInterface
             Select::JOIN_LEFT
         );
         $select->join(
-            'order',
-            'order.id = item.orderId OR (order.id = stockAdjustmentLog.stid AND order.organisationUnitId = stockAdjustmentLog.organisationUnitId)',
-            ['orderId' => 'id', 'orderExternalId' => 'externalId'],
+            ['itemOrder' => 'order'],
+            'itemOrder.id = item.orderId',
+            [],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            ['orderDirect' => 'order'],
+            'orderDirect.id = stockAdjustmentLog.stid AND orderDirect.organisationUnitId = stockAdjustmentLog.organisationUnitId',
+            [],
             Select::JOIN_LEFT
         );
         $select->join(
