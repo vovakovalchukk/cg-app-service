@@ -199,8 +199,7 @@ use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
-use CG\Product\Locking\Mapper as ProductLockingMapper;
-
+use CG\Product\Locking\Entity as LockingProduct;
 
 // ProductDetail
 use CG\Product\Detail\Mapper as ProductDetailMapper;
@@ -234,7 +233,7 @@ use CG\Stock\Location\StorageInterface as StockLocationStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Locking\Creator as StockCreator;
-use CG\Stock\Locking\Mapper as StockLockingMapper;
+use CG\Stock\Locking\Entity as LockingStock;
 
 // StockLog
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
@@ -1294,6 +1293,16 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            ProductMapper::class => [
+                'parameters' => [
+                    'entityClass' => function() { return LockingProduct::class; },
+                ],
+            ],
+            StockMapper::class => [
+                'parameters' => [
+                    'entityClass' => function() { return LockingStock::class; },
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1331,8 +1340,6 @@ return array(
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
-                ProductMapper::class => ProductLockingMapper::class,
-                StockMapper::class => StockLockingMapper::class,
             ]
         )
     )
