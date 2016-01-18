@@ -85,15 +85,11 @@ class Db extends DbAbstract implements StorageInterface
         }
         if (!empty($filter->getDateTimeFrom())) {
             list($date, $time) = explode(' ', $filter->getDateTimeFrom());
-            $query[] = sprintf(
-                '((%1$s.date >= \'%2$s\' AND %1$s.time >= \'%3$s\') OR %1$s.date > \'%2$s\')', $tableName, $date, $time
-            );
+            $query['(('.$tableName.'.date >= ? AND '.$tableName.'.time >= ?) OR '.$tableName.'.date > ?)'] = [$date, $time, $date];
         }
         if (!empty($filter->getDateTimeTo())) {
             list($date, $time) = explode(' ', $filter->getDateTimeTo());
-            $query[] = sprintf(
-                '((%1$s.date <= \'%2$s\' AND %1$s.time <= \'%3$s\') OR %1$s.date < \'%2$s\')', $tableName, $date, $time
-            );
+            $query['(('.$tableName.'.date <= ? AND '.$tableName.'.time <= ?) OR '.$tableName.'.date < ?)'] = [$date, $time, $date];
         }
         if (!empty($filter->getSearchTerm())) {
             $query = array_merge($query, $this->getSearchTermQuery($filter->getSearchTerm(), $tableName));
