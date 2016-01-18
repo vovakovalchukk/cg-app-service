@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eeadc73e488babfa7349a5ee0c7e069d",
-    "content-hash": "0f68dc21d78e72ad512a86cc7c12a146",
+    "hash": "4c12b7605ad763a7de436309ae833ee1",
+    "content-hash": "77575ba20b989ee46ecf7c3313f3f83e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2026,17 +2026,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6645-stock-logs-ui",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "70ce5bafe7bc5ed03bae4071fe34a9035e0eba29"
+                "reference": "fdcd093b7292a3cf10990b80b142a6441093dbcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6645-stock-logs-ui-5b6bc8.zip",
-                "reference": "70ce5bafe7bc5ed03bae4071fe34a9035e0eba29",
-                "shasum": "5a788166db18a8df542b4c8b430a3b04d925ac9b"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.6.6-062a24.zip",
+                "reference": "fdcd093b7292a3cf10990b80b142a6441093dbcc",
+                "shasum": "0f5182b345ba599e72615275813edb6658068c66"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2082,7 +2082,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-15 14:17:59"
+            "time": "2016-01-18 09:19:57"
         },
         {
             "name": "channelgrabber/tax",
@@ -8102,14 +8102,7 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.6",
-            "alias_normalized": "1.6.6.0",
-            "version": "dev-CGIV-6645-stock-logs-ui",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
