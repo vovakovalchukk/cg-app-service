@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "213e0ed871d11675b59b9ef82a864113",
-    "content-hash": "32d5b4a03cda9d921d065091ef4905d1",
+    "hash": "6122fb1a391468e047ff9c3a7d484c20",
+    "content-hash": "a9c18db03d74490fc90f66fbe318a749",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -287,17 +287,17 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "038501250d172f786855c848dc2d244ccc6dd0b9"
+                "reference": "357c1bea1a6b78b40633d8956a290a007e652a94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6654-Locking-fdaa27.zip",
-                "reference": "038501250d172f786855c848dc2d244ccc6dd0b9",
-                "shasum": "e867a428c33f26ec123e4e38ee4de414a65e7458"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.21.0-84999a.zip",
+                "reference": "357c1bea1a6b78b40633d8956a290a007e652a94",
+                "shasum": "67f75e36ac1d91e7bcb86f8ce2961d8b081191ec"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -311,19 +311,19 @@
                 "channelgrabber/image": ">=1.1.2,<2.0.0",
                 "channelgrabber/listing": "^1.9.0",
                 "channelgrabber/location": ">=1.1.1,<2.0.0",
-                "channelgrabber/locking": "dev-CGIV-6654-Locking as 1.0.0",
+                "channelgrabber/locking": "^1.0.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.18.1",
                 "channelgrabber/permission": ">=1.0.1, <2.0.0",
                 "channelgrabber/predis": "^1.0.7",
-                "channelgrabber/product": "dev-CGIV-6654-Locking as 1.5.3",
-                "channelgrabber/product-locking": "dev-CGIV-6654-Locking as 1.0.0",
+                "channelgrabber/product": "^1.5.3",
+                "channelgrabber/product-locking": "^1.0.0",
                 "channelgrabber/scraper": ">=1.0.0,<2.0.0",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stats": ">=1.0.1,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.0",
-                "channelgrabber/stock": "dev-CGIV-6654-Locking as 1.7.0",
-                "channelgrabber/stock-locking": "dev-CGIV-6654-Locking as 1.0.0",
+                "channelgrabber/stock": "^1.7.0",
+                "channelgrabber/stock-locking": "^1.0.0",
                 "channelgrabber/user": "^1.20.2",
                 "channelgrabber/zf2-email-template": "^1.0.12",
                 "composer/composer": "@dev",
@@ -364,7 +364,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-18 08:46:56"
+            "time": "2016-01-19 16:09:35"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1117,17 +1117,17 @@
         },
         {
             "name": "channelgrabber/locking",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locking.git",
-                "reference": "395a2583e3d40799992236bdbc0713465c4ee755"
+                "reference": "18dcc5ccfd35bad37b8457c3c0f823623cc248bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locking-dev-CGIV-6654-Locking-946b03.zip",
-                "reference": "395a2583e3d40799992236bdbc0713465c4ee755",
-                "shasum": "709e30a278d7288aea0a4a79a31f094d5f328e18"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locking-1.0.0-f73914.zip",
+                "reference": "18dcc5ccfd35bad37b8457c3c0f823623cc248bf",
+                "shasum": "68901ec80ff2879940bf926eac3bd928d4919a9d"
             },
             "require": {
                 "channelgrabber/stats": "^1.0.6",
@@ -1153,7 +1153,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-19 09:29:11"
+            "time": "2016-01-19 15:05:08"
         },
         {
             "name": "channelgrabber/log",
@@ -1638,17 +1638,17 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "bf9f50b44eecca2138fb2ffeb5e9d40d08dd3a30"
+                "reference": "015c65543670bfcafce1b7bf2014abd48e36f4fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-6654-Locking-4acefb.zip",
-                "reference": "bf9f50b44eecca2138fb2ffeb5e9d40d08dd3a30",
-                "shasum": "e42c9853aa86498d463f99e0f7a196a295288452"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.3-3986c8.zip",
+                "reference": "015c65543670bfcafce1b7bf2014abd48e36f4fc",
+                "shasum": "855404c15298e983e6c9272811e4c2f9f0459f9e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1686,26 +1686,26 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-18 15:12:48"
+            "time": "2016-01-19 15:26:21"
         },
         {
             "name": "channelgrabber/product-locking",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product-locking.git",
-                "reference": "cd0dda81a38c397dd93281c8c156a00da2cdab04"
+                "reference": "ec2bb6b462db79d45529bf5851e4cb5de9c4a9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-locking-dev-CGIV-6654-Locking-6b215e.zip",
-                "reference": "cd0dda81a38c397dd93281c8c156a00da2cdab04",
-                "shasum": "f75f9e0e85dafc2c9c697eaf4fd08e75b445a818"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-locking-1.0.0-231162.zip",
+                "reference": "ec2bb6b462db79d45529bf5851e4cb5de9c4a9cf",
+                "shasum": "006cfbf5b9fb72876bed87602607f6f391942eb8"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/locking": "dev-CGIV-6654-Locking as 1.0.0",
-                "channelgrabber/product": "dev-CGIV-6654-Locking as 1.5.3",
+                "channelgrabber/locking": "^1.0.0",
+                "channelgrabber/product": "^1.5.3",
                 "composer/composer": "@dev"
             },
             "require-dev": {
@@ -1727,7 +1727,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-19 09:39:04"
+            "time": "2016-01-19 15:39:48"
         },
         {
             "name": "channelgrabber/purge",
@@ -1806,20 +1806,20 @@
         },
         {
             "name": "channelgrabber/redis-locking",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis-locking.git",
-                "reference": "abdfeac88c071f72e6d16a886a41911285850db1"
+                "reference": "6f46c49376f1a27e63d5f1b6b832acf2c04a218b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-dev-CGIV-6654-Locking-24a3f3.zip",
-                "reference": "abdfeac88c071f72e6d16a886a41911285850db1",
-                "shasum": "ff4da71f3f55a05380bfbb5c7476a547a3639536"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-1.0.0-2e6e76.zip",
+                "reference": "6f46c49376f1a27e63d5f1b6b832acf2c04a218b",
+                "shasum": "1f16dc79516d87e4068cefec44754a4b692a4c6d"
             },
             "require": {
-                "channelgrabber/locking": "dev-CGIV-6654-Locking as 1.0.0",
+                "channelgrabber/locking": "^1.0.0",
                 "predis/predis": "~0.8.3"
             },
             "require-dev": {
@@ -1841,7 +1841,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-18 12:44:34"
+            "time": "2016-01-19 15:18:35"
         },
         {
             "name": "channelgrabber/scraper",
@@ -2154,17 +2154,17 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "ad598fcf34d590c357cc5660db8eaca52f337d53"
+                "reference": "4ce8b927cca0e56a44a7626186999f6b3ac793f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6654-Locking-81baec.zip",
-                "reference": "ad598fcf34d590c357cc5660db8eaca52f337d53",
-                "shasum": "4df43f90f31e84c2ba3c7d9ca2b352810e7a61b9"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.7.0-2534d5.zip",
+                "reference": "4ce8b927cca0e56a44a7626186999f6b3ac793f8",
+                "shasum": "e15a75bc65f9c3c560bd5826d4d275a06d351b61"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2210,26 +2210,26 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-18 15:28:57"
+            "time": "2016-01-19 15:48:19"
         },
         {
             "name": "channelgrabber/stock-locking",
-            "version": "dev-CGIV-6654-Locking",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "aa286873b11d835e893758cddf39b18b73d5e10b"
+                "reference": "f9620fbbbd02e6965603965ab2bc0020901de250"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-CGIV-6654-Locking-4ca198.zip",
-                "reference": "aa286873b11d835e893758cddf39b18b73d5e10b",
-                "shasum": "24ce21b31f1e3562281e997b07a451ab727fa6b1"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-1.0.0-b95129.zip",
+                "reference": "f9620fbbbd02e6965603965ab2bc0020901de250",
+                "shasum": "2eb65d631499136248f7d32ffd5295609597ea2b"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/locking": "dev-CGIV-6654-Locking as 1.0.0",
-                "channelgrabber/stock": "dev-CGIV-6654-Locking as 1.7.0",
+                "channelgrabber/locking": "^1.0.0",
+                "channelgrabber/stock": "^1.7.0",
                 "composer/composer": "@dev"
             },
             "require-dev": {
@@ -2251,7 +2251,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-19 09:43:03"
+            "time": "2016-01-19 15:56:08"
         },
         {
             "name": "channelgrabber/tax",
@@ -3720,7 +3720,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8246,60 +8246,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.21.0",
-            "alias_normalized": "1.21.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/locking"
-        },
-        {
-            "alias": "1.5.3",
-            "alias_normalized": "1.5.3.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/product"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/product-locking"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/redis-locking"
-        },
-        {
-            "alias": "1.7.0",
-            "alias_normalized": "1.7.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/stock"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-6654-Locking",
-            "package": "channelgrabber/stock-locking"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/locking": 20,
-        "channelgrabber/product": 20,
-        "channelgrabber/product-locking": 20,
-        "channelgrabber/redis-locking": 20,
-        "channelgrabber/stock": 20,
-        "channelgrabber/stock-locking": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
