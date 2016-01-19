@@ -77,6 +77,15 @@ class Entity implements RulesInterface
                     new IsArrayValidator(['name' => 'productSkus'])
                 ]
             ],
+            'replacedById' => [
+                'name'       => 'replacedById',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'replacedById']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'replacedById must be at least %min%'])
+                ]
+            ],
         ];
     }
 }

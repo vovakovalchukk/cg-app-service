@@ -31,6 +31,8 @@ return [
                 'Versioniser_ListingEntity_3' => ListingEntity\Versioniser3::class,
                 'Versioniser_ListingCollection_4' => ListingCollection\Versioniser4::class,
                 'Versioniser_ListingEntity_4' => ListingEntity\Versioniser4::class,
+                'Versioniser_ListingCollection_5' => ListingCollection\Versioniser5::class,
+                'Versioniser_ListingEntity_5' => ListingEntity\Versioniser5::class,
                 'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,

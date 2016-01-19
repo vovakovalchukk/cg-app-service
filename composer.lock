@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c12b7605ad763a7de436309ae833ee1",
-    "content-hash": "77575ba20b989ee46ecf7c3313f3f83e",
+    "hash": "d9622c6fe106c6800a7b82137b904f07",
+    "content-hash": "37019416a35c5e286ec861b0b54aff90",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -962,17 +962,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.9.3",
+            "version": "dev-CGIV-6674-replace-relisted-listings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "c168e41e96d8320d1995dd74b3edb15c6a41c912"
+                "reference": "27abdba41cdf3ab1f54a7de281c5d878da0a820b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.9.3-d503ce.zip",
-                "reference": "c168e41e96d8320d1995dd74b3edb15c6a41c912",
-                "shasum": "e49ca4344343996c45c9c63ba9b1d51d183ef52f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6674-replace-relisted-listings-8934d9.zip",
+                "reference": "27abdba41cdf3ab1f54a7de281c5d878da0a820b",
+                "shasum": "141ed813a5a66252881eb9e7d4dd6a99d10b8f33"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -988,8 +988,6 @@
                 "channelgrabber/user": "^1.20.2",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
-                "php-jsonpatch/php-jsonpatch": "@dev",
-                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-eventmanager": "~2.3"
             },
             "require-dev": {
@@ -1013,7 +1011,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-07 13:24:06"
+            "time": "2016-01-19 15:20:23"
         },
         {
             "name": "channelgrabber/locale",
@@ -8102,10 +8100,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.9.4",
+            "alias_normalized": "1.9.4.0",
+            "version": "dev-CGIV-6674-replace-relisted-listings",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
