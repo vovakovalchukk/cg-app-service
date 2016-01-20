@@ -16,6 +16,7 @@ use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\Like;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -184,7 +185,7 @@ class Db extends DbAbstract implements StorageInterface
         $productAttributeValueInsert = $this->getWriteSql()->insert('productAttributeValue');
         foreach($entity->getAttributeValues() as $attributeName => $attributeValue) {
             $select = $this->getWriteSql()->select('productAttribute')->where([
-                'productAttribute.name' => $attributeName,
+                new Like('productAttribute.name', \CG\Stdlib\escapeLikeValue($attributeName)),
                 'productAttribute.productId' => $entity->getParentProductId()
             ]);
             $rows = $this->getWriteSql()->prepareStatementForSqlObject($select)->execute();
