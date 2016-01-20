@@ -29,7 +29,7 @@ class Entity implements RulesInterface
             ],
             'productIds' => [
                 'name'       => 'productIds',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     new ArrayOfPositiveIntegersValidator(new IntegerValidator(['productIds' => 'productId']))
                 ]
