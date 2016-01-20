@@ -199,6 +199,7 @@ use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
+use CG\Product\Locking\Entity as LockingProduct;
 
 // ProductDetail
 use CG\Product\Detail\Mapper as ProductDetailMapper;
@@ -231,7 +232,8 @@ use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
 use CG\Stock\Location\StorageInterface as StockLocationStorage;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
-use CG\Stock\Creator as StockCreator;
+use CG\Stock\Locking\Creator as StockCreator;
+use CG\Stock\Locking\Entity as LockingStock;
 
 // StockLog
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
@@ -335,6 +337,10 @@ use CG\Settings\Product\StorageInterface as ProductSettingsStorage;
 use CG\Settings\Product\Repository as ProductettingsRepository;
 use CG\Settings\Product\Storage\Cache as ProductSettingsCacheStorage;
 use CG\Settings\Product\Storage\Db as ProductSettingsDbStorage;
+
+// Locking
+use CG\Locking\StorageInterface as LockingStorage;
+use CG\Redis\Locking\Storage as LockingRedisStorage;
 
 return array(
     'di' => array(
@@ -1287,6 +1293,16 @@ return array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            ProductMapper::class => [
+                'parameters' => [
+                    'entityClass' => function() { return LockingProduct::class; },
+                ],
+            ],
+            StockMapper::class => [
+                'parameters' => [
+                    'entityClass' => function() { return LockingStock::class; },
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1323,6 +1339,7 @@ return array(
                 OrderClientStorage::class => OrderApiStorage::class,
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
+                LockingStorage::class => LockingRedisStorage::class,
             ]
         )
     )
