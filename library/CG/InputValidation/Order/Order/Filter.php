@@ -253,6 +253,11 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(["name" => "externalUsername"])
                 ]
             ],
+            'id' => [
+                'name' => 'id',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
