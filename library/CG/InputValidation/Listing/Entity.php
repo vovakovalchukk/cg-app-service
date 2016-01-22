@@ -29,7 +29,7 @@ class Entity implements RulesInterface
             ],
             'productIds' => [
                 'name'       => 'productIds',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     new ArrayOfPositiveIntegersValidator(new IntegerValidator(['productIds' => 'productId']))
                 ]
@@ -75,6 +75,15 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [
                     new IsArrayValidator(['name' => 'productSkus'])
+                ]
+            ],
+            'replacedById' => [
+                'name'       => 'replacedById',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'replacedById']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'replacedById must be at least %min%'])
                 ]
             ],
         ];

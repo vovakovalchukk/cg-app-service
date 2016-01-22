@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a64c32f3dee3aa8a61d54c176da7b17",
-    "content-hash": "e7e2ea904ce51c7fb3da58cab0230cae",
+    "hash": "0f6a52473f120b876402e52ac3bc99db",
+    "content-hash": "991dadef31a88d8c617bcce868caa86b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -970,17 +970,17 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.9.3",
+            "version": "1.9.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "c168e41e96d8320d1995dd74b3edb15c6a41c912"
+                "reference": "bcc59869f4e2ff102d08de333af57ec53714429a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.9.3-d503ce.zip",
-                "reference": "c168e41e96d8320d1995dd74b3edb15c6a41c912",
-                "shasum": "e49ca4344343996c45c9c63ba9b1d51d183ef52f"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.9.4-2d0611.zip",
+                "reference": "bcc59869f4e2ff102d08de333af57ec53714429a",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -996,8 +996,6 @@
                 "channelgrabber/user": "^1.20.2",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
-                "php-jsonpatch/php-jsonpatch": "@dev",
-                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-eventmanager": "~2.3"
             },
             "require-dev": {
@@ -1021,7 +1019,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-07 13:24:06"
+            "time": "2016-01-21 08:52:39"
         },
         {
             "name": "channelgrabber/locale",
@@ -1311,7 +1309,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6280-ShippingMethodIds-b45412.zip",
                 "reference": "910687da0311a2aa30e1b44a9caad30e6da60ca3",
-                "shasum": "4489059ce4f049c74b63280a17d1a59756328369"
+                "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
