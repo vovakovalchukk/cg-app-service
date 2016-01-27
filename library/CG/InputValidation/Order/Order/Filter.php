@@ -258,6 +258,11 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'convertToOrderIds' => [
+                'name' => 'convertToOrderIds',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'convertToOrderIds'])]
+            ],
         ];
     }
 }

@@ -151,6 +151,7 @@ use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCacheStorage;
+use CG\Order\Service\Filter\Entity\StorageInterface as FilterEntityStorage;
 
 //Template
 use CG\Template\Service as TemplateService;
@@ -1340,6 +1341,7 @@ return array(
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
+                FilterEntityStorage::class => FilterEntityCacheStorage::class,
             ]
         )
     )
