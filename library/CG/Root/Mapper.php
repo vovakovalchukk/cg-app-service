@@ -32,7 +32,8 @@ class Mapper
                              ->addLink('unimportedListing', '/unimportedListing')
                              ->addLink('unimportedListingMarketplace', '/unimportedListingMarketplace')
                              ->addLink('userPreference', '/userPreference')
-                             ->addLink('orderCounts', '/orderCounts');        
+                             ->addLink('orderCounts', '/orderCounts')
+                             ->addLink('tracking', '/tracking');
     }
 
     public function setDi(Di $di)
