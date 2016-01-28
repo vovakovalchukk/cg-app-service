@@ -13,13 +13,15 @@ use CG\Order\Shared\Mapper as OrderMapper;
 use CG\Order\Service\Service as OrderService;
 
 //Tracking
-use CG\Controllers\Order\Tracking;
-use CG\Controllers\Order\Tracking\Collection as TrackingCollection;
-use CG\InputValidation\Order\Tracking\Entity as TrackingEntityValidationRules;
-use CG\InputValidation\Order\Tracking\Filter as TrackingFilterValidationRules;
+use CG\Controllers\Order\Tracking as OrderTracking;
+use CG\Controllers\Order\Tracking\Collection as OrderTrackingCollection;
+use CG\InputValidation\Order\Tracking\Entity as OrderTrackingEntityValidationRules;
+use CG\InputValidation\Order\Tracking\Filter as OrderTrackingFilterValidationRules;
 use CG\Order\Shared\Tracking\Entity as TrackingEntity;
 use CG\Order\Shared\Tracking\Mapper as TrackingMapper;
 use CG\Order\Service\Tracking\Service as TrackingService;
+use CG\Controllers\Tracking\Collection as TrackingCollection;
+use CG\InputValidation\Tracking\Filter as TrackingFilterValidationRules;
 
 //Alert
 use CG\Controllers\Order\Alert;
@@ -214,7 +216,7 @@ return array(
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
-                $controller = $di->get(TrackingCollection::class, array());
+                $controller = $di->get(OrderTrackingCollection::class, array());
                 $app->view()->set(
                     'RestResponse',
                     $controller->$method($orderId, $app->request()->getBody())
@@ -223,14 +225,14 @@ return array(
         'via' => array('GET', 'POST', 'OPTIONS'),
         'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
-        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => TrackingFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => OrderTrackingFilterValidationRules::class, "flatten" => false)
     ),
     '/order/:orderId/tracking/:trackingId' => array (
         'controllers' => function($orderId, $trackingId) use ($di) {
                 $app = $di->get(Slim::class);
                 $method = $app->request()->getMethod();
 
-                $controller = $di->get(Tracking::class, array());
+                $controller = $di->get(OrderTracking::class, array());
                 $app->view()->set(
                     'RestResponse',
                     $controller->$method($orderId, $trackingId, $app->request()->getBody())
@@ -238,7 +240,7 @@ return array(
             },
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderTrackingEntity',
-        'validation' => array("dataRules" => TrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,
@@ -636,5 +638,22 @@ return array(
         'eTag' => [
             'enabled' => false
         ]
-    ]
+    ],
+    '/tracking' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(TrackingCollection::class, array());
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'TrackingCollection',
+        'validation' => [
+            "filterRules" => TrackingFilterValidationRules::class,
+        ]
+    ],
 );
