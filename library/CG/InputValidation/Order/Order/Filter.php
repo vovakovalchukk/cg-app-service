@@ -163,7 +163,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'orderDirection',
                 'required' => false,
                 'validators' => [
-                    (new InArray())->setHaystack(['ASC','DESC'])
+                    (new InArray())->setHaystack(['ASC','DESC','asc','desc'])
                 ]
             ],
             'tag' => [
