@@ -7,6 +7,11 @@ class OrderTrackingNumberIndex extends AbstractMigration
 
     public function change()
     {
-        $this->table(static::TABLE)->addIndex('number')->update();
+        $this
+            ->table(static::TABLE)
+            ->addIndex('userId')
+            ->addIndex('number')
+            ->addIndex(['carrier', 'number'])
+            ->update();
     }
 }
