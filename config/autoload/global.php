@@ -674,7 +674,7 @@ return array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'writeSql' => 'WriteCGSql',
                     'mapper' => TagMapper::class
                 )
             ),
