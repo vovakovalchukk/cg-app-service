@@ -224,7 +224,8 @@ use CG\Stock\Storage\Api as StockApiStorage;
 use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
-use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Location\Service as StockLocationBaseService;
+use CG\Stock\Location\Service\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
@@ -1340,6 +1341,7 @@ return array(
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
+                StockLocationBaseService::class => StockLocationService::class,
             ]
         )
     )
