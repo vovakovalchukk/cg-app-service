@@ -25,7 +25,7 @@ class Service extends BaseService implements StatsAwareInterface
     const LOG_CODE_OVERSELL = 'Stock oversell alert';
     const LOG_MSG_OVERSELL = '"%s" for ou %d has oversold at location %s';
 
-    const STATS_OVERSELL = 'stats.counters.stock.oversell.ou-%d';
+    const STATS_OVERSELL = 'stock.oversell.ou-%d';
 
     /** @var OrganisationUnitService $organisationUnitService */
     protected $organisationUnitService;
