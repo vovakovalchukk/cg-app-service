@@ -151,6 +151,7 @@ use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCacheStorage;
+use CG\Order\Service\Filter\Entity\StorageInterface as FilterEntityStorage;
 
 //Template
 use CG\Template\Service as TemplateService;
@@ -674,7 +675,7 @@ return array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'writeSql' => 'WriteCGSql',
                     'mapper' => TagMapper::class
                 )
             ),
@@ -1342,6 +1343,7 @@ return array(
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 StockLocationBaseService::class => StockLocationService::class,
+                FilterEntityStorage::class => FilterEntityCacheStorage::class,
             ]
         )
     )
