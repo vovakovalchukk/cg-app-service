@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dbc855ebb6a96770f97697bf9fe71b36",
-    "content-hash": "31c9dc5f636f3b8626c3aba9793c05a8",
+    "hash": "acd3c130945341b000eda51354cc8cb7",
+    "content-hash": "1018810c4e68e95283a3465383cf34c8",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.20.6",
+            "version": "dev-CGIV-6712-OrderItemOutdated",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "597df125c905a1fcaed45b7e9294a82327de6229"
+                "reference": "43437f95dd3ff1d0bd9fd4bb557cd45b161929a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.20.6-bdc88b.zip",
-                "reference": "597df125c905a1fcaed45b7e9294a82327de6229",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6712-OrderItemOutdated-5ce05c.zip",
+                "reference": "43437f95dd3ff1d0bd9fd4bb557cd45b161929a0",
                 "shasum": null
             },
             "require": {
@@ -1374,7 +1374,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-28 13:35:15"
+            "time": "2016-02-01 09:26:53"
         },
         {
             "name": "channelgrabber/permission",
@@ -3716,7 +3716,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8242,10 +8242,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.20.7",
+            "alias_normalized": "1.20.7.0",
+            "version": "dev-CGIV-6712-OrderItemOutdated",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
