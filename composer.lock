@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2cc0b9e5b6650821b7696a4f3ef67531",
-    "content-hash": "a9249b7eee77146b730e22756f8fa15b",
+    "hash": "17f034ab325d8bc80c71dd3a83b5e6e1",
+    "content-hash": "ba4fa1cbb65bfbf97de4d8d7ac4d20dc",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -287,16 +287,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-6680-StatOversell",
+            "version": "1.21.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "e258f169cf40f653d8026e89537347b7475b3ce1"
+                "reference": "2908d2e693b7ce22d0b6f3551066b5cb0fc4890c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6680-StatOversell-fb5b0c.zip",
-                "reference": "e258f169cf40f653d8026e89537347b7475b3ce1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.21.3-ae82a1.zip",
+                "reference": "2908d2e693b7ce22d0b6f3551066b5cb0fc4890c",
                 "shasum": null
             },
             "require": {
@@ -364,7 +364,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-29 12:44:39"
+            "time": "2016-02-01 15:56:15"
         },
         {
             "name": "channelgrabber/cilex",
@@ -3716,7 +3716,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8242,17 +8242,9 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.21.3",
-            "alias_normalized": "1.21.3.0",
-            "version": "dev-CGIV-6680-StatOversell",
-            "package": "channelgrabber/channel"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
