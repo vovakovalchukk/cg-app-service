@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "acd3c130945341b000eda51354cc8cb7",
-    "content-hash": "1018810c4e68e95283a3465383cf34c8",
+    "hash": "c9337c2cce159be8f1e49cec5e6a4a59",
+    "content-hash": "f2eb52b00d64bbc0ff5e5e25f1d07aa7",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1303,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "43437f95dd3ff1d0bd9fd4bb557cd45b161929a0"
+                "reference": "3795762cb809a674e2b359ed4da267ccc227faba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6712-OrderItemOutdated-5ce05c.zip",
-                "reference": "43437f95dd3ff1d0bd9fd4bb557cd45b161929a0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6712-OrderItemOutdated-ee72b4.zip",
+                "reference": "3795762cb809a674e2b359ed4da267ccc227faba",
                 "shasum": null
             },
             "require": {
@@ -1334,7 +1334,7 @@
                 "channelgrabber/settings": "^1.3.9",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": "^2.12.7",
+                "channelgrabber/stdlib": "dev-CGIV-6712-OrderItemOutdated as 2.12.22",
                 "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.4.3",
@@ -1374,7 +1374,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-01 09:26:53"
+            "time": "2016-02-01 09:55:10"
         },
         {
             "name": "channelgrabber/permission",
@@ -2105,17 +2105,17 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.20",
+            "version": "dev-CGIV-6712-OrderItemOutdated",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "5eae7ed9dac6e24f736035443ee38d023307797b"
+                "reference": "dcdbebbc95123679cafc2576d4553a5947ba5bae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.20-458d2b.zip",
-                "reference": "5eae7ed9dac6e24f736035443ee38d023307797b",
-                "shasum": "25484ed60d38b7dc2e688221a7893dae2aac7c57"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6712-OrderItemOutdated-4ead45.zip",
+                "reference": "dcdbebbc95123679cafc2576d4553a5947ba5bae",
+                "shasum": null
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -2146,7 +2146,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-15 10:06:30"
+            "time": "2016-02-01 09:48:15"
         },
         {
             "name": "channelgrabber/stock",
@@ -8248,12 +8248,19 @@
             "alias_normalized": "1.20.7.0",
             "version": "dev-CGIV-6712-OrderItemOutdated",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "2.12.22",
+            "alias_normalized": "2.12.22.0",
+            "version": "dev-CGIV-6712-OrderItemOutdated",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
