@@ -163,7 +163,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'orderDirection',
                 'required' => false,
                 'validators' => [
-                    (new InArray())->setHaystack(['ASC','DESC'])
+                    (new InArray())->setHaystack(['ASC','DESC','asc','desc'])
                 ]
             ],
             'tag' => [
@@ -252,6 +252,16 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "externalUsername"])
                 ]
+            ],
+            'id' => [
+                'name' => 'id',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'convertToOrderIds' => [
+                'name' => 'convertToOrderIds',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'convertToOrderIds'])]
             ],
         ];
     }

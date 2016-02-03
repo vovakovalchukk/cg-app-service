@@ -24,7 +24,8 @@ class Collection
             ->setService($service)
             ->setDi($di)
             ->addAllowedPatchFilter('accountId')
-            ->addAllowedPatchFilter('organisationUnitId');
+            ->addAllowedPatchFilter('organisationUnitId')
+            ->addAllowedPatchFilter('orderFilter'); 
     }
 
     public function get()

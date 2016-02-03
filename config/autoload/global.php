@@ -151,6 +151,7 @@ use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Order\Service\Filter\Service as FilterService;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Filter\Entity\Storage\Cache as FilterEntityCacheStorage;
+use CG\Order\Service\Filter\Entity\StorageInterface as FilterEntityStorage;
 
 //Template
 use CG\Template\Service as TemplateService;
@@ -224,7 +225,8 @@ use CG\Stock\Storage\Api as StockApiStorage;
 use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
-use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Location\Service as StockLocationBaseService;
+use CG\Stock\Location\Service\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
@@ -673,7 +675,7 @@ return array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'writeSql' => 'WriteCGSql',
                     'mapper' => TagMapper::class
                 )
             ),
@@ -1340,6 +1342,8 @@ return array(
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
+                StockLocationBaseService::class => StockLocationService::class,
+                FilterEntityStorage::class => FilterEntityCacheStorage::class,
             ]
         )
     )
