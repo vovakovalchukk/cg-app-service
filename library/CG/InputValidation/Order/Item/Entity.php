@@ -110,6 +110,11 @@ class Entity implements RulesInterface
                 'name'       => 'calculatedTaxPercentage',
                 'required'   => false,
                 'validators' => [new DecimalValidator(['min' => 0, 'name' => 'calculatedTaxPercentage'])]
+            ],
+            'lastUpdateFromChannel' => [
+                'name'       => 'lastUpdateFromChannel',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ]
         ];
     }
