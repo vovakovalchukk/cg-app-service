@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69ecdaad9192603279cedef57612e261",
-    "content-hash": "18e42f88c75ff337b6c6c7f869f4477a",
+    "hash": "3ee4d7803b114e10943fb934b7de0c81",
+    "content-hash": "65fec6ce5a85732940197e0bc540dab4",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6698-order-counts-out-of-sync",
+            "version": "1.21.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b8ff27475fc777ca7d48bdf0a27cc4dd58f3931b"
+                "reference": "5e02d9467f29771ba49ab53e3f98e6724a5283d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6698-order-counts-out-of-sync-2e84a7.zip",
-                "reference": "b8ff27475fc777ca7d48bdf0a27cc4dd58f3931b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.2.1-6e5b2d.zip",
+                "reference": "5e02d9467f29771ba49ab53e3f98e6724a5283d4",
                 "shasum": null
             },
             "require": {
@@ -1328,7 +1328,7 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
-                "channelgrabber/predis": "dev-CGIV-6698-order-counts-out-of-sync as 1.0.11",
+                "channelgrabber/predis": "^1.0.11",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
@@ -1375,7 +1375,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-03 11:40:20"
+            "time": "2016-02-04 09:54:05"
         },
         {
             "name": "channelgrabber/permission",
@@ -1543,16 +1543,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "dev-CGIV-6698-order-counts-out-of-sync",
+            "version": "1.0.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "ec354474cab43d7a28bc5d9d56d10788fbda8d90"
+                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-6698-order-counts-out-of-sync-5d65d9.zip",
-                "reference": "ec354474cab43d7a28bc5d9d56d10788fbda8d90",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.11-99df4a.zip",
+                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff",
                 "shasum": null
             },
             "require": {
@@ -1572,7 +1572,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-02 16:15:20"
+            "time": "2016-02-04 09:48:09"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -8268,25 +8268,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.21.1",
-            "alias_normalized": "1.21.1.0",
-            "version": "dev-CGIV-6698-order-counts-out-of-sync",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.0.11",
-            "alias_normalized": "1.0.11.0",
-            "version": "dev-CGIV-6698-order-counts-out-of-sync",
-            "package": "channelgrabber/predis"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/predis": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
