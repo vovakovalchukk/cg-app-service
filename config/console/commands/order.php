@@ -4,6 +4,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
+use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Stdlib\DateTime as StdlibDateTime;
 
 return [
@@ -70,5 +71,21 @@ return [
 
             $output->writeln('<info>Done. Check the logs for details, log code: ' . ApplyMissingStockAdjustmentsForCancDispRefOrders::LOG_CODE . '</info>');
         }
-    ]
+    ],
+    'order:reSyncOrderCounts' => [
+        'description' => "Correct the order counts for all OrganisationUnits in the system",
+        'options' => [],
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            if ($output->getVerbosity() > OutputInterface::VERBOSITY_QUIET) {
+                $output->writeln('Starting re-sync of order counts');
+            }
+            
+            $command = $di->get(ReSyncOrderCounts::class);
+            $affected = $command();
+
+            if ($output->getVerbosity() > OutputInterface::VERBOSITY_QUIET) {
+                $output->writeln('Done, ' . $affected . ' OUs affected');
+            }
+        }
+    ],
 ];

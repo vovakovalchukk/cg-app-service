@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4295a8df2a5c74bc73c2524d5e4f68e8",
-    "content-hash": "deaf4fdbdfaac0ac5c681e7e79e332b5",
+    "hash": "980da9c9119bc21314c906f08bcc9dae",
+    "content-hash": "e1cfb3c5c91ca3880624a001bd6d9583",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1303,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1fe7a96e70bc1b467f8c5a6c54f034ff883c4df4"
+                "reference": "fa0214bf6a8a7d753f573b8465167e2a97720758"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6735-CleanUpDeadTransactions-9ba3cc.zip",
-                "reference": "1fe7a96e70bc1b467f8c5a6c54f034ff883c4df4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6735-CleanUpDeadTransactions-73ffc0.zip",
+                "reference": "fa0214bf6a8a7d753f573b8465167e2a97720758",
                 "shasum": null
             },
             "require": {
@@ -1328,13 +1328,14 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
+                "channelgrabber/predis": "^1.0.11",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.3.9",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": "^2.12.7",
+                "channelgrabber/stdlib": "^2.12.23",
                 "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.4.3",
@@ -1374,7 +1375,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-03 12:46:17"
+            "time": "2016-02-04 11:59:45"
         },
         {
             "name": "channelgrabber/permission",
@@ -1542,17 +1543,17 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.10",
+            "version": "1.0.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "0942a0cd7bca627d309cc117cba5bce7e24c8ead"
+                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.10-1cbdfb.zip",
-                "reference": "0942a0cd7bca627d309cc117cba5bce7e24c8ead",
-                "shasum": "396a5decf855e7a395b26cf3a361454ab93da3c8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.11-99df4a.zip",
+                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
@@ -1571,7 +1572,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-01-04 09:46:11"
+            "time": "2016-02-04 09:48:09"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -2105,16 +2106,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.22",
+            "version": "2.12.23",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "d2a31fae6c7453cbd5a348260b289199a1a428c6"
+                "reference": "25e09e120b56a568e16dd00589d8091b65c09f7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.22-d55ebd.zip",
-                "reference": "d2a31fae6c7453cbd5a348260b289199a1a428c6",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.23-c9f12b.zip",
+                "reference": "25e09e120b56a568e16dd00589d8091b65c09f7c",
                 "shasum": null
             },
             "require": {
@@ -2146,7 +2147,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-01 13:37:36"
+            "time": "2016-02-03 20:38:41"
         },
         {
             "name": "channelgrabber/stock",
@@ -8242,8 +8243,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.21.1",
-            "alias_normalized": "1.21.1.0",
+            "alias": "1.21.3",
+            "alias_normalized": "1.21.3.0",
             "version": "dev-CGIV-6735-CleanUpDeadTransactions",
             "package": "channelgrabber/order"
         },
