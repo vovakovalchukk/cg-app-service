@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d93ff018ec638478ff7f57a614e8fb1",
-    "content-hash": "e1cfb3c5c91ca3880624a001bd6d9583",
+    "hash": "23bdecfd30b668dc3a8a076a11694ce3",
+    "content-hash": "e575e15f74a03f3790578d695090014c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6735-CleanUpDeadTransactions",
+            "version": "1.21.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fa0214bf6a8a7d753f573b8465167e2a97720758"
+                "reference": "f5f421c71d0cf9efbca41c565c3673d6ea5c1d81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6735-CleanUpDeadTransactions-73ffc0.zip",
-                "reference": "fa0214bf6a8a7d753f573b8465167e2a97720758",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.3-19306f.zip",
+                "reference": "f5f421c71d0cf9efbca41c565c3673d6ea5c1d81",
                 "shasum": null
             },
             "require": {
@@ -1339,7 +1339,7 @@
                 "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.4.3",
-                "channelgrabber/transaction": "dev-CGIV-6735-CleanUpDeadTransactions as 1.2.1",
+                "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.19.4",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "composer/composer": "@dev",
@@ -1375,7 +1375,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-04 11:59:45"
+            "time": "2016-02-05 13:40:35"
         },
         {
             "name": "channelgrabber/permission",
@@ -2356,16 +2356,16 @@
         },
         {
             "name": "channelgrabber/transaction",
-            "version": "dev-CGIV-6735-CleanUpDeadTransactions",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-transaction.git",
-                "reference": "1a64d83f5e5cdd2f2218a95aca6672b4dfc1c466"
+                "reference": "d8e8d7bed8664e959a4138ac2db30ad66f0266ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-dev-CGIV-6735-CleanUpDeadTransactions-a2429d.zip",
-                "reference": "1a64d83f5e5cdd2f2218a95aca6672b4dfc1c466",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.2.1-a88fc1.zip",
+                "reference": "d8e8d7bed8664e959a4138ac2db30ad66f0266ad",
                 "shasum": null
             },
             "require": {
@@ -2394,7 +2394,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-05 12:30:11"
+            "time": "2016-02-05 13:27:34"
         },
         {
             "name": "channelgrabber/usage",
@@ -8241,25 +8241,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.21.3",
-            "alias_normalized": "1.21.3.0",
-            "version": "dev-CGIV-6735-CleanUpDeadTransactions",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.2.1",
-            "alias_normalized": "1.2.1.0",
-            "version": "dev-CGIV-6735-CleanUpDeadTransactions",
-            "package": "channelgrabber/transaction"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/transaction": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
