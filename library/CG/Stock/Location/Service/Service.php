@@ -85,10 +85,10 @@ class Service extends BaseService implements StatsAwareInterface
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
         if (
-            $this->accountService->isStockManagementEnabled($organisationUnitIds)
-            && !$this->isStockFixed($stock->getSku(), $organisationUnitIds)
-            && $current->getAvailable() >= 0
+            $current->getAvailable() >= 0
             && $entity->getAvailable() < 0
+            && $this->accountService->isStockManagementEnabled($organisationUnitIds)
+            && !$this->isStockFixed($stock->getSku(), $organisationUnitIds)
         ) {
             $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $entity->getId()], static::LOG_CODE_OVERSELL);
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
