@@ -211,6 +211,13 @@ class Filter implements RulesInterface, ExclusionInterface
                     new BooleanValidator(["name" => "buyerMessage"])
                 ]
             ],
+            'giftMessage' => [
+                'name' => 'giftMessage',
+                'required' => false,
+                'validators' => [
+                    new BooleanValidator(["name" => "giftMessage"])
+                ]
+            ],
             'hasItems' => [
                 'name' => 'hasItems',
                 'required' => false,
