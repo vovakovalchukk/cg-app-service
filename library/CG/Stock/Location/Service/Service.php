@@ -1,17 +1,20 @@
 <?php
 namespace CG\Stock\Location\Service;
 
+use CG\Account\Client\Service as AccountService;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
+use CG\OrganisationUnit\Service as OrganisationUnitService;
+use CG\Product\Filter as ProductFilter;
+use CG\Product\Service\Service as ProductService;
+use CG\Product\StockMode;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
+use CG\Stock\Entity as Stock;
+use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Mapper as LocationMapper;
 use CG\Stock\Location\Service as BaseService;
-use CG\Stock\Location\Entity as StockLocation;
-use CG\Stock\Entity as Stock;
-use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Account\Client\Service as AccountService;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
 
@@ -31,6 +34,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $organisationUnitService;
     /** @var AccountService $accountService */
     protected $accountService;
+    /** @var ProductService $productService */
+    protected $productService;
 
     public function __construct(
         LocationStorage $repository,
@@ -39,10 +44,14 @@ class Service extends BaseService implements StatsAwareInterface
         StockStorage $stockStorage,
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
-        AccountService $accountService
+        AccountService $accountService,
+        ProductService $productService
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
-        $this->setOrganisationUnitService($organisationUnitService)->setAccountService($accountService);
+        $this
+            ->setOrganisationUnitService($organisationUnitService)
+            ->setAccountService($accountService)
+            ->setProductService($productService);
     }
 
 
@@ -76,14 +85,30 @@ class Service extends BaseService implements StatsAwareInterface
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
         if (
-            $this->accountService->isStockManagementEnabled($organisationUnitIds)
-            && $current->getAvailable() >= 0
+            $current->getAvailable() >= 0
             && $entity->getAvailable() < 0
+            && $this->accountService->isStockManagementEnabled($organisationUnitIds)
+            && !$this->isStockFixed($stock->getSku(), $organisationUnitIds)
         ) {
             $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $entity->getId()], static::LOG_CODE_OVERSELL);
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
         }
         return $this;
+    }
+
+    protected function isStockFixed($sku, array $organisationUnitIds)
+    {
+        try {
+            $this->productService->fetchCollectionByFilter(
+                (new ProductFilter(1))
+                    ->setSku([$sku])
+                    ->setOrganisationUnitId($organisationUnitIds)
+                    ->setStockMode([StockMode::LIST_FIXED])
+            );
+            return true;
+        } catch (NotFound $exception) {
+            return false;
+        }
     }
 
     /**
@@ -101,6 +126,15 @@ class Service extends BaseService implements StatsAwareInterface
     protected function setAccountService(AccountService $accountService)
     {
         $this->accountService = $accountService;
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    protected function setProductService(ProductService $productService)
+    {
+        $this->productService = $productService;
         return $this;
     }
 } 

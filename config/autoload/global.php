@@ -225,8 +225,7 @@ use CG\Stock\Storage\Api as StockApiStorage;
 use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
-use CG\Stock\Location\Service as StockLocationBaseService;
-use CG\Stock\Location\Service\Service as StockLocationService;
+use CG\Stock\Location\Service as StockLocationService;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
 use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
@@ -236,6 +235,9 @@ use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Locking\Creator as StockCreator;
 use CG\Stock\Locking\Entity as LockingStock;
+use CG\Stock\Location\Service\Service as StockLocationServiceService;
+use CG\Controllers\Stock\Location\Location as StockLocationController;
+use CG\Controllers\Stock\Location\Location\Collection as StockLocationCollectionController;
 
 // StockLog
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
@@ -1305,6 +1307,16 @@ return array(
                     'entityClass' => function() { return LockingStock::class; },
                 ],
             ],
+            StockLocationController::class => [
+                'parameters' => [
+                    'service' => StockLocationServiceService::class,
+                ],
+            ],
+            StockLocationCollectionController::class => [
+                'parameters' => [
+                    'service' => StockLocationServiceService::class,
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1342,7 +1354,6 @@ return array(
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
-                StockLocationBaseService::class => StockLocationService::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
             ]
         )

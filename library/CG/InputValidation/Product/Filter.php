@@ -82,6 +82,13 @@ class Filter implements RulesInterface
                     'required'   => false,
                     'validators' => [new StringLength(['min' => 1])]
                 ],
+                'stockMode' => [
+                    'name'       => 'stockMode',
+                    'required'   => false,
+                    'validators' => [
+                        new IsArrayValidator(['name' => 'stockMode'])
+                    ]
+                ],
             ]
         );
     }
