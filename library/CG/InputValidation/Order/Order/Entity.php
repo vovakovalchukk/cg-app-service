@@ -240,6 +240,68 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
+
+            'fulfilmentAddressCompanyName'  => array(
+                'name'       => 'fulfilmentAddressCompanyName',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressFullName'  => array(
+                'name'       => 'fulfilmentAddressFullName',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddress1'  => array(
+                'name'       => 'fulfilmentAddress1',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddress2'  => array(
+                'name'       => 'fulfilmentAddress2',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddress3'  => array(
+                'name'       => 'fulfilmentAddress3',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressCity'  => array(
+                'name'       => 'fulfilmentAddressCity',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressCounty'  => array(
+                'name'       => 'fulfilmentAddressCounty',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressCountry'  => array(
+                'name'       => 'fulfilmentAddressCountry',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressPostcode'  => array(
+                'name'       => 'fulfilmentAddressPostcode',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentAddressCountryCode'  => array(
+                'name'       => 'fulfilmentAddressCountryCode',
+                'required'   => false,
+                'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
+            ),
+            'fulfilmentEmailAddress'  => array(
+                'name'       => 'fulfilmentEmailAddress',
+                'required'   => false,
+                'validators' => []
+            ),
+            'fulfilmentPhoneNumber'  => array(
+                'name'       => 'fulfilmentPhoneNumber',
+                'required'   => false,
+                'validators' => []
+            ),
+
             'batch' => array(
                 'name'       => 'batch',
                 'required'   => false,
