@@ -14,7 +14,7 @@ class OrderItemCgCreationDate extends AbstractMigration
      */
     public function up()
     {
-        $this->onlineSchemaChange(static::TABLE, 'ADD COLUMN `cgCreationDate` DATETIME');
+        $this->onlineSchemaChange(static::TABLE, 'ADD COLUMN cgCreationDate DATETIME');
     }
 
     /**
@@ -22,7 +22,7 @@ class OrderItemCgCreationDate extends AbstractMigration
      */
     public function down()
     {
-        $this->onlineSchemaChange(static::TABLE, 'REMOVE COLUMN `cgCreationDate`');
+        $this->onlineSchemaChange(static::TABLE, 'REMOVE COLUMN cgCreationDate');
     }
 
     protected function onlineSchemaChange($table, $alter)
@@ -50,11 +50,11 @@ class OrderItemCgCreationDate extends AbstractMigration
         $command = 'pt-online-schema-change';
         $arguments = [
             '--execute',
-            '--alter ' . $alter,
-            implode(',', $dsn),
+            '--alter ' . escapeshellarg($alter),
+            escapeshellarg(implode(',', $dsn)),
         ];
 
-        passthru($command . implode(' ', array_map('escapeshellarg', $arguments)), $return);
+        passthru($command . ' ' . implode(' ', $arguments), $return);
         if ($return !== 0) {
             throw new RuntimeException('Failed to update ' . $table);
         }
