@@ -51,6 +51,7 @@ class OrderItemCgCreationDate extends AbstractMigration
         $arguments = [
             '--execute',
             '--alter ' . escapeshellarg($alter),
+            '--alter-foreign-keys-method ' . escapeshellarg('auto'),
             escapeshellarg(implode(',', $dsn)),
         ];
 
