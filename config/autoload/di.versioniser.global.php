@@ -45,6 +45,8 @@ return [
                 'Versioniser_OrderEntity_5' => OrderEntity\Versioniser5::class,
                 'Versioniser_OrderCollection_6' => OrderCollection\Versioniser6::class,
                 'Versioniser_OrderEntity_6' => OrderEntity\Versioniser6::class,
+                'Versioniser_OrderCollection_7' => OrderCollection\Versioniser7::class,
+                'Versioniser_OrderEntity_7' => OrderEntity\Versioniser7::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -126,6 +128,11 @@ return [
             'Versioniser_OrderCollection_6' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderEntity_6',
+                ],
+            ],
+            'Versioniser_OrderCollection_7' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_7',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [
