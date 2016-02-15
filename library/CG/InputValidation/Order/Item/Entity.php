@@ -115,7 +115,12 @@ class Entity implements RulesInterface
                 'name'       => 'lastUpdateFromChannel',
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
-            ]
+            ],
+            'cgCreationDate' => [
+                'name'       => 'cgCreationDate',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
         ];
     }
 }
