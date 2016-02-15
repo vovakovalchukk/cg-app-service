@@ -66,6 +66,20 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
+            'cgCreationDateFrom' => [
+                'name' => 'cgCreationDateFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'cgCreationDateTo' => [
+                'name' => 'cgCreationDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
             'purchaseDateFrom' => [
                 'name' => 'purchaseDateFrom',
                 'required' => false,
