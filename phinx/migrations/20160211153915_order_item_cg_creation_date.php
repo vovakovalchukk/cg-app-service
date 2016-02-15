@@ -22,29 +22,33 @@ class OrderItemCgCreationDate extends AbstractMigration
      */
     public function down()
     {
-        $this->onlineSchemaChange(static::TABLE, 'REMOVE COLUMN cgCreationDate');
+        $this->onlineSchemaChange(static::TABLE, 'DROP COLUMN cgCreationDate');
     }
 
     protected function onlineSchemaChange($table, $alter)
     {
         $options = $this->adapter->getOptions();
+        $config = require dirname(dirname(__DIR__)) . '/config/storage.local.php';
+        if (!isset($config[$options['name']])) {
+            throw new InvalidArgumentException('Root access is not configured for database ' . $options['name']);
+        }
 
         $dsn = [
-            'h=' . addcslashes($options['host'], ','),
-            'u=' . addcslashes($options['user'], ','),
-            'p=' . addcslashes($options['pass'], ','),
-            'D=' . addcslashes($options['name'], ','),
+            'h=' . addcslashes($config[$options['name']]['hostname'], ','),
+            'u=' . addcslashes($config[$options['name']]['username'], ','),
+            'p=' . addcslashes($config[$options['name']]['password'], ','),
+            'D=' . addcslashes($config[$options['name']]['database'], ','),
             't=' . addcslashes($table, ','),
         ];
 
-        if (isset($options['port'])) {
-            $dsn[] = 'P=' . addcslashes($options['port'], ',');
+        if (isset($config[$options['name']]['port'])) {
+            $dsn[] = 'P=' . addcslashes($config[$options['name']]['port'], ',');
         }
-        if (isset($options['unix_socket'])) {
-            $dns[] = 'S=' . addcslashes($options['unix_socket'], ',');
+        if (isset($config[$options['name']]['unix_socket'])) {
+            $dns[] = 'S=' . addcslashes($config[$options['name']]['unix_socket'], ',');
         }
-        if (isset($options['charset'])) {
-            $dns[] = 'A=' . addcslashes($options['charset'], ',');
+        if (isset($config[$options['name']]['charset'])) {
+            $dns[] = 'A=' . addcslashes($config[$options['name']]['charset'], ',');
         }
 
         $command = 'pt-online-schema-change';
