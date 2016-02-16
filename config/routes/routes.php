@@ -331,7 +331,7 @@ return array(
         'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
-        'version' => new Version(1, 7),
+        'version' => new Version(1, 8),
         'entityRoute' => '/orderItem/:orderItemId'
     ),
     '/orderItem/:orderItemId' => array (
@@ -348,7 +348,7 @@ return array(
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 7),
+        'version' => new Version(1, 8),
         'eTag' => [
             'mapperClass' => ItemMapper::class,
             'entityClass' => ItemEntity::class,

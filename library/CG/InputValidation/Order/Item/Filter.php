@@ -6,6 +6,7 @@ use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
+use Zend\Validator\Date;
 
 class Filter implements RulesInterface
 {
@@ -63,6 +64,48 @@ class Filter implements RulesInterface
                 'required' => false,
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                ]
+            ],
+            'cgCreationDateFrom' => [
+                'name' => 'cgCreationDateFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'cgCreationDateTo' => [
+                'name' => 'cgCreationDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'purchaseDateFrom' => [
+                'name' => 'purchaseDateFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'purchaseDateTo' => [
+                'name' => 'purchaseDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'lastUpdateFromChannelFrom' => [
+                'name' => 'lastUpdateFromChannelFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'lastUpdateFromChannelTo' => [
+                'name' => 'lastUpdateFromChannelTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
                 ]
             ],
         ];
