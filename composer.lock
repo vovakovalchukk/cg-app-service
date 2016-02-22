@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5e218c58707ab88e3decdc15cc09587",
-    "content-hash": "f15f2e12addfa9000d01d85d59fa3bf5",
+    "hash": "89381caa12d56de887a627c41b67d6d9",
+    "content-hash": "b3a9ff5e633015669c100ceae032f065",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1957,29 +1957,31 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.18",
+            "version": "dev-CGIV-6651-HandleDuplicateStockTransactions",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "0182dce4c668aa568864f54efc61898c24cbd388"
+                "reference": "ef45701fe2bc8ecfbf71c2cec85c423445aea684"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.18-8c3c93.zip",
-                "reference": "0182dce4c668aa568864f54efc61898c24cbd388",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-6651-HandleDuplicateStockTransactions-520018.zip",
+                "reference": "ef45701fe2bc8ecfbf71c2cec85c423445aea684",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
+                "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": ">=2.1.0",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": "^1.3.16",
                 "channelgrabber/log": ">=2.0.6,<3.0.0",
                 "channelgrabber/permission": "^1.0.1",
                 "channelgrabber/purge": ">=1.0.3,<2.0.0",
-                "channelgrabber/stdlib": "^2.12.10",
+                "channelgrabber/stdlib": "dev-CGIV-6651-HandleDuplicateStockTransactions as 2.12.24",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "channelgrabber/usage": ">=1.0.5",
+                "channelgrabber/usage-check": "^1.0.0",
                 "channelgrabber/validation": "^1.2.11",
                 "channelgrabber/vnderror": ">=1.0.0",
                 "cilex/cilex": "1.0.1",
@@ -2015,7 +2017,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-01 13:33:01"
+            "time": "2016-02-22 11:08:12"
         },
         {
             "name": "channelgrabber/spork",
@@ -2104,16 +2106,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.23",
+            "version": "dev-CGIV-6651-HandleDuplicateStockTransactions",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "25e09e120b56a568e16dd00589d8091b65c09f7c"
+                "reference": "a22b32b8849f0b935fe2cd0c1b4e5c9c89bd07cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.23-c9f12b.zip",
-                "reference": "25e09e120b56a568e16dd00589d8091b65c09f7c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6651-HandleDuplicateStockTransactions-3b0516.zip",
+                "reference": "a22b32b8849f0b935fe2cd0c1b4e5c9c89bd07cc",
                 "shasum": null
             },
             "require": {
@@ -2145,7 +2147,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-03 20:38:41"
+            "time": "2016-02-22 10:52:22"
         },
         {
             "name": "channelgrabber/stock",
@@ -2159,7 +2161,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.7.0-2534d5.zip",
                 "reference": "4ce8b927cca0e56a44a7626186999f6b3ac793f8",
-                "shasum": "e15a75bc65f9c3c560bd5826d4d275a06d351b61"
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2432,6 +2434,41 @@
                 }
             },
             "time": "2015-05-28 15:13:29"
+        },
+        {
+            "name": "channelgrabber/usage-check",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-usage-check.git",
+                "reference": "85134ab5b7048c07da1570df629b0206ea915207"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-check-1.0.0-1062ad.zip",
+                "reference": "85134ab5b7048c07da1570df629b0206ea915207",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/billing": ">=1.1.3",
+                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/stdlib": ">=2.7.0",
+                "channelgrabber/usage": ">=1.0.2",
+                "composer/composer": "@dev"
+            },
+            "type": "di-definition",
+            "autoload": {
+                "psr-4": {
+                    "CG\\UsageCheck\\": "src"
+                }
+            },
+            "description": "Check usage against limits",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2016-02-05 08:50:13"
         },
         {
             "name": "channelgrabber/user",
@@ -3713,7 +3750,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8239,10 +8276,25 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.20",
+            "alias_normalized": "1.13.20.0",
+            "version": "dev-CGIV-6651-HandleDuplicateStockTransactions",
+            "package": "channelgrabber/slim"
+        },
+        {
+            "alias": "2.12.24",
+            "alias_normalized": "2.12.24.0",
+            "version": "dev-CGIV-6651-HandleDuplicateStockTransactions",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/slim": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

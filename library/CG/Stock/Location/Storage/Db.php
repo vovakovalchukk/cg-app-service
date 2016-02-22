@@ -11,6 +11,7 @@ use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use CG\Stdlib\Exception\Runtime\PreconditionFailed;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -133,17 +134,21 @@ class Db extends DbAbstract implements StorageInterface
             return;
         }
 
-        try {
-            foreach ($adjustmentIds as $adjustmentId) {
+        foreach ($adjustmentIds as $adjustmentId) {
+            try {
                 $insert = $this->getWriteSql()->insert('stockTransaction');
                 $insert->values([
                         'id' => $adjustmentId,
                         'appliedDate' => (new StdlibDateTime())->stdFormat(),
                     ]);
                 $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+            } catch (Conflict $conflict) {
+                throw new PreconditionFailed(
+                    sprintf('Adjustment Id %s has previously been applied - preventing stock location update', $adjustmentId),
+                    0,
+                    $conflict
+                );
             }
-        } catch (Conflict $conflict) {
-            // Throw new pre-condition failure
         }
     }
 
