@@ -1,6 +1,7 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stock\Location\Collection as LocationCollection;
 use CG\Stock\Location\Entity as LocationEntity;
 use CG\Stock\Location\StorageInterface;
@@ -131,13 +132,18 @@ class Db extends DbAbstract implements StorageInterface
         if (empty($adjustmentIds)) {
             return;
         }
-        foreach ($adjustmentIds as $adjustmentId) {
-            $insert = $this->getWriteSql()->insert('stockTransaction');
-            $insert->values([
-                'id' => $adjustmentId,
-                'appliedDate' => (new StdlibDateTime())->stdFormat(),
-            ]);
-            $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+
+        try {
+            foreach ($adjustmentIds as $adjustmentId) {
+                $insert = $this->getWriteSql()->insert('stockTransaction');
+                $insert->values([
+                        'id' => $adjustmentId,
+                        'appliedDate' => (new StdlibDateTime())->stdFormat(),
+                    ]);
+                $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+            }
+        } catch (Conflict $conflict) {
+            // Throw new pre-condition failure
         }
     }
 
