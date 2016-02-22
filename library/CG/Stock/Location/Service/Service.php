@@ -64,7 +64,7 @@ class Service extends BaseService implements StatsAwareInterface
             /** @var Stock $stock */
             $stock = $this->stockStorage->fetch($entity->getStockId());
         } catch (NotFound $exception) {
-            return parent::save($entity);
+            return parent::save($entity, $adjustmentIds);
         }
 
         try {
@@ -75,7 +75,7 @@ class Service extends BaseService implements StatsAwareInterface
             // Saving new entity - nothing to do
         }
 
-        return parent::save($entity);
+        return parent::save($entity, $adjustmentIds);
     }
 
     /**
