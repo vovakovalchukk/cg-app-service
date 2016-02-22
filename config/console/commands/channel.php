@@ -1,12 +1,21 @@
 <?php
-use CG\Channel\Command\Order\Download as OrderDownload;
-use CG\Channel\Command\Message\Download as MessageDownload;
+use CG\Account\Client\Entity as Account;
+use CG\Account\Client\Filter as AccountFilter;
+use CG\Account\Client\Service as AccountService;
+use CG\CGLib\Gearman\WorkerFunction\PushAllStockForAccount;
+use CG\CGLib\Gearman\Workload\PushAllStockForAccount as PushAllStockForAccountWorkload;
 use CG\Channel\Command\Listing\Import as ListingImport;
+use CG\Channel\Command\Message\Download as MessageDownload;
+use CG\Channel\Command\Order\Download as OrderDownload;
 use CG\Channel\Command\Order\Generator as OrderGenerator;
-use Symfony\Component\Console\Input\InputInterface;
 use CG\Gearman\Client as GearmanClient;
 use CG\Gearman\WrapperWorkload as GearmanPriority;
+use CG\Stdlib\Exception\Runtime\NotFound;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Zend\Di\Di;
 
+/** @var Di $di */
 return [
     'channel:downloadOrders' => [
         'command' => function (InputInterface $input) use ($di) {
@@ -142,5 +151,57 @@ return [
                 'description' => 'Queue generated jobs at high priority',
             ]
         ]
+    ],
+    'channel:pushStock' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use($di) {
+                /** @var AccountService $accountService */
+                $accountService = $di->get(AccountService::class);
+                /** @var GearmanClient $gearmanClient */
+                $gearmanClient = $di->get(GearmanClient::class);
+
+                $filter = (new AccountFilter('all', 1))
+                    ->setActive(true)
+                    ->setDeleted(false)
+                    ->setStockManagement(true)
+                    ->setChannel($input->getOption('channel'))
+                    ->setId($input->getArgument('accountId'));
+
+                try {
+                    $accounts = $accountService->fetchByFilter($filter);
+                    $output->writeln(sprintf('Generating jobs to push stock for %d accounts', $accounts->count()));
+
+                    /** @var Account $account */
+                    foreach ($accounts as $account) {
+                        $output->writeln(sprintf('Generating jobs for account %d', $account->getId()));
+                        $gearmanClient->doBackground(
+                            PushAllStockForAccount::FUNCTION_NAME,
+                            serialize(new PushAllStockForAccountWorkload($account)),
+                            PushAllStockForAccount::FUNCTION_NAME . '' . $account->getId()
+                        );
+                    }
+
+                    $output->writeln('Jobs generated');
+                } catch (NotFound $exception) {
+                    $output->writeln('No accounts match passed parameters');
+                }
+        },
+        'description' => 'Push all stock for the selected account',
+        'arguments' => [
+            'accountId' => [
+                'description' => 'List of account ids to push stock for, default is all',
+                'required' => false,
+                'array' => true,
+                'default' => [],
+            ],
+        ],
+        'options' => [
+            'channel' => [
+                'description' => 'Restrict accounts to the specified channels',
+                'value' => true,
+                'required' => true,
+                'array' => true,
+                'default' => [],
+            ],
+        ],
     ],
 ];
