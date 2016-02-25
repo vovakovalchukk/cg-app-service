@@ -14,7 +14,7 @@ class OrderItemCgCreationDate extends AbstractMigration
      */
     public function up()
     {
-        $this->onlineSchemaChange(static::TABLE, 'DROP KEY `searchQuery`, ADD `itemOu` (`itemSku`,`itemName`)');
+        $this->onlineSchemaChange(static::TABLE, 'DROP KEY `searchQuery`, ADD KEY `itemOu` (`itemSku`,`organisationUnitId`)');
     }
 
     /**
