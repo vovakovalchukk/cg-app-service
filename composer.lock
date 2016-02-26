@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c82be6762674b31617fcc7f733b424a",
-    "content-hash": "d97d8899318e67a3240f3bf1125ef6b8",
+    "hash": "a07c6631eee078d06ba621217cce1856",
+    "content-hash": "89a58833c9323aab238d905115f105c9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.21.8",
+            "version": "1.21.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "404f777393568a827e0b958ffb752d06ee026f7a"
+                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.8-8fd7bc.zip",
-                "reference": "404f777393568a827e0b958ffb752d06ee026f7a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.11-66d53f.zip",
+                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e",
                 "shasum": null
             },
             "require": {
@@ -1325,17 +1325,18 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/locale": "^1.0.5",
+                "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
-                "channelgrabber/predis": "^1.0.11",
+                "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.3.9",
                 "channelgrabber/slim": ">=1.13.6,<2.0.0",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": "^2.12.23",
+                "channelgrabber/stdlib": "^2.12.25",
                 "channelgrabber/stock": "^1.6.2",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/template": "^1.4.3",
@@ -1375,7 +1376,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-18 15:55:40"
+            "time": "2016-02-26 15:34:32"
         },
         {
             "name": "channelgrabber/permission",
@@ -1543,16 +1544,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff"
+                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.11-99df4a.zip",
-                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.12-9c2fab.zip",
+                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5",
                 "shasum": null
             },
             "require": {
@@ -1572,7 +1573,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-04 09:48:09"
+            "time": "2016-02-26 15:28:43"
         },
         {
             "name": "channelgrabber/predis-async",

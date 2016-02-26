@@ -37,6 +37,8 @@ class Collection
             $this->getParams('itemSku') ?: [],
             $this->getParams('status') ?: [],
             $this->getParams('organisationUnitId') ?: [],
+            $this->getParams('cgCreationDateFrom'),
+            $this->getParams('cgCreationDateTo'),
             $this->getParams('purchaseDateFrom'),
             $this->getParams('purchaseDateTo'),
             $this->getParams('lastUpdateFromChannelFrom'),
