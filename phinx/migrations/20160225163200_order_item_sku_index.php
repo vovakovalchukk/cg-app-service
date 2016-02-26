@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 /**
  * @property MysqlAdapter $adapter
  */
-class OrderItemCgCreationDate extends AbstractMigration
+class OrderItemSkuIndex extends AbstractMigration
 {
     const TABLE = 'item';
 
