@@ -346,6 +346,12 @@ use CG\Settings\Product\Storage\Db as ProductSettingsDbStorage;
 use CG\Locking\StorageInterface as LockingStorage;
 use CG\Redis\Locking\Storage as LockingRedisStorage;
 
+// Customer Order Counts
+use CG\Order\Shared\CustomerCounts\StorageInterface as CustomerCountStorage;
+use CG\Order\Shared\CustomerCounts\Repository as CustomerCountRepository;
+use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
+use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1317,6 +1323,17 @@ return array(
                     'service' => StockLocationServiceService::class,
                 ],
             ],
+            CustomerCountRepository::class => [
+                'parameters' => [
+                    'storage' => CustomerCountCacheStorage::class,
+                    'repository' => CustomerCountOrderLookupStorage::class,
+                ],
+            ],
+            CustomerCountCacheStorage::class => [
+                'parameters' => [
+                    'client' => 'reliable_redis',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1355,6 +1372,7 @@ return array(
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
+                CustomerCountStorage::class => CustomerCountRepository::class,
             ]
         )
     )

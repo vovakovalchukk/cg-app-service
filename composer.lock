@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2b35f5f715d7ed1dd8dae779b3b1695e",
-    "content-hash": "d0a0cacb6e808551fdd6ea6ebbf04979",
+    "hash": "59241b2a953f83124361e56a7fd3e391",
+    "content-hash": "fac501100862df61fb7f36f8cda6f1ab",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.21.10.1",
+            "version": "dev-CGIV-6779-MessengeCenterSpeed",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "357766d200f8704f8f23a287ae3913dbac094b0c"
+                "reference": "822f25feefe734650686a9aa6d9fb2cb417d448f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.10.1-601251.zip",
-                "reference": "357766d200f8704f8f23a287ae3913dbac094b0c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6779-MessengeCenterSpeed-f999e1.zip",
+                "reference": "822f25feefe734650686a9aa6d9fb2cb417d448f",
                 "shasum": null
             },
             "require": {
@@ -1328,7 +1328,7 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
-                "channelgrabber/predis": "^1.0.11",
+                "channelgrabber/predis": "dev-CGIV-6779-MessengeCenterSpeed as 1.0.12",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
@@ -1375,7 +1375,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-25 14:30:47"
+            "time": "2016-02-26 11:09:14"
         },
         {
             "name": "channelgrabber/permission",
@@ -1543,16 +1543,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.11",
+            "version": "dev-CGIV-6779-MessengeCenterSpeed",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff"
+                "reference": "bb7992c90453338e1419e82c4b9be5e546551989"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.11-99df4a.zip",
-                "reference": "93f5fe22f17b0e74910a4ce10f34fe0cab3ebeff",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-6779-MessengeCenterSpeed-93feea.zip",
+                "reference": "bb7992c90453338e1419e82c4b9be5e546551989",
                 "shasum": null
             },
             "require": {
@@ -1572,7 +1572,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-04 09:48:09"
+            "time": "2016-02-26 11:01:53"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -8239,10 +8239,25 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.21.11",
+            "alias_normalized": "1.21.11.0",
+            "version": "dev-CGIV-6779-MessengeCenterSpeed",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.0.12",
+            "alias_normalized": "1.0.12.0",
+            "version": "dev-CGIV-6779-MessengeCenterSpeed",
+            "package": "channelgrabber/predis"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
+        "channelgrabber/predis": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
