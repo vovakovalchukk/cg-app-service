@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "59241b2a953f83124361e56a7fd3e391",
+    "hash": "2dccb2a98904ee56b1ed5653552ab420",
     "content-hash": "fac501100862df61fb7f36f8cda6f1ab",
     "packages": [
         {
@@ -1303,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "822f25feefe734650686a9aa6d9fb2cb417d448f"
+                "reference": "9599f64695dc496e4a409e3d6e3370e48e88f640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6779-MessengeCenterSpeed-f999e1.zip",
-                "reference": "822f25feefe734650686a9aa6d9fb2cb417d448f",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6779-MessengeCenterSpeed-4711c7.zip",
+                "reference": "9599f64695dc496e4a409e3d6e3370e48e88f640",
                 "shasum": null
             },
             "require": {
@@ -1325,6 +1325,7 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/locale": "^1.0.5",
+                "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
@@ -1375,7 +1376,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-26 11:09:14"
+            "time": "2016-02-26 12:51:50"
         },
         {
             "name": "channelgrabber/permission",
