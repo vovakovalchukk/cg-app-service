@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2dccb2a98904ee56b1ed5653552ab420",
-    "content-hash": "fac501100862df61fb7f36f8cda6f1ab",
+    "hash": "0612b93ec8726ab44c5f61c4791cc493",
+    "content-hash": "eb7e3866cd546683e2cb462a0a37dcc5",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6779-MessengeCenterSpeed",
+            "version": "1.21.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "246fc1fcd4f11aa96f68d16fc19ef85029209a88"
+                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6779-MessengeCenterSpeed-06ec46.zip",
-                "reference": "246fc1fcd4f11aa96f68d16fc19ef85029209a88",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.11-66d53f.zip",
+                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e",
                 "shasum": null
             },
             "require": {
@@ -1329,7 +1329,7 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
-                "channelgrabber/predis": "dev-CGIV-6779-MessengeCenterSpeed as 1.0.12",
+                "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.4.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
@@ -1376,7 +1376,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-26 14:50:50"
+            "time": "2016-02-26 15:34:32"
         },
         {
             "name": "channelgrabber/permission",
@@ -1544,16 +1544,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "dev-CGIV-6779-MessengeCenterSpeed",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "bb7992c90453338e1419e82c4b9be5e546551989"
+                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-6779-MessengeCenterSpeed-93feea.zip",
-                "reference": "bb7992c90453338e1419e82c4b9be5e546551989",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.12-9c2fab.zip",
+                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5",
                 "shasum": null
             },
             "require": {
@@ -1573,7 +1573,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-26 11:01:53"
+            "time": "2016-02-26 15:28:43"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -2160,7 +2160,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.7.0-2534d5.zip",
                 "reference": "4ce8b927cca0e56a44a7626186999f6b3ac793f8",
-                "shasum": null
+                "shasum": "e15a75bc65f9c3c560bd5826d4d275a06d351b61"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3714,7 +3714,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8240,25 +8240,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.21.11",
-            "alias_normalized": "1.21.11.0",
-            "version": "dev-CGIV-6779-MessengeCenterSpeed",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.0.12",
-            "alias_normalized": "1.0.12.0",
-            "version": "dev-CGIV-6779-MessengeCenterSpeed",
-            "package": "channelgrabber/predis"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/predis": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
