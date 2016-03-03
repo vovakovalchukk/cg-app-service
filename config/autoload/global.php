@@ -140,6 +140,7 @@ use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
+use CG\Order\Shared\Command\ReSyncOrderCounts as ReSyncOrderCountsCommand;
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProductsAndListingsAssociatedWithRootOuCommand;
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
@@ -982,10 +983,14 @@ return array(
                     'mapper' => StockLogMapper::class
                 ]
             ],
-
+            ReSyncOrderCountsCommand::class => [
+                'parameter' => [
+                    'predisClient' => 'reliable_redis',
+                ],
+            ],
             OrderCountsRedisStorage::class => [
                 'parameter' => [
-                    'client' => "unreliable_redis",
+                    'client' => 'reliable_redis',
                     'mapper' => OrderCountsMapper::class
                 ]
             ],
