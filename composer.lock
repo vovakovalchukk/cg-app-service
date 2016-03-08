@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "faaa6ad114119dba8ec290754732bb6a",
-    "content-hash": "46ab9b9c60dd43317cd08b16450f5e23",
+    "hash": "26756643fa569d94547da4959798595b",
+    "content-hash": "6d4896586fd378c247c6e678edcfa605",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1299,16 +1299,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.21.11",
+            "version": "dev-CGIV-6792-emailed-invoice-vat-missing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e"
+                "reference": "c3c7866d76819adc0f4ae5c627c1b7042572437d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.21.11-66d53f.zip",
-                "reference": "149e96fd7ac7cb2fa7a603283c3491b89b72d42e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6792-emailed-invoice-vat-missing-0786a2.zip",
+                "reference": "c3c7866d76819adc0f4ae5c627c1b7042572437d",
                 "shasum": null
             },
             "require": {
@@ -1376,7 +1376,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-26 15:34:32"
+            "time": "2016-03-08 14:57:28"
         },
         {
             "name": "channelgrabber/permission",
@@ -8282,10 +8282,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.21.13",
+            "alias_normalized": "1.21.13.0",
+            "version": "dev-CGIV-6792-emailed-invoice-vat-missing",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
