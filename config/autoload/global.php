@@ -1359,7 +1359,8 @@ return array(
                 ItemStorageInterface::class => ItemPersistentDbStorage::class,
                 StockStorage::class => StockService::class,
                 SequentialNumberingProviderInterface::class => SequentialNumberingProviderRedis::class,
-                OrderStorage::class => OrderRepository::class,
+                // We are NOT currently using the Cache storage for Orders, go straight to persistance
+                OrderStorage::class => OrderPersistentStorage::class,
                 ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
