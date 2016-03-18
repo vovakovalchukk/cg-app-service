@@ -215,6 +215,7 @@ SELECT DISTINCT  o.`id` as `orderId`
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
 WHERE o.`status` != i.`status`
+AND (o.lastUpdateFromChannel <= DATE_SUB(NOW(), INTERVAL 6 HOUR) OR o.lastUpdateFromChannel IS NULL)
 ORDER BY o.`purchaseDate`
 EOF;
 
