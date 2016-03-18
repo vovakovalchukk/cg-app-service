@@ -1,11 +1,20 @@
 <?php
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
+use CG\Db\Mysqli;
 use CG\Gearman\Client as GearmanClient;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
+use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
+use CG\Order\Client\StorageInterface as OrderStorage;
+use CG\Order\Service\Filter as OrderFilter;
+use CG\Order\Shared\Collection as Orders;
+use CG\Order\Shared\Entity as Order;
+use CG\Order\Shared\Item\Entity as OrderItem;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use Predis\Client as Redis;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -185,6 +194,63 @@ EOF;
                 if ($lastRun && !$fetchAll) {
                     $output->writeln(date('d/m/Y H:i:s', $lastRun) . ' - ' . date('d/m/Y H:i:s', $now));
                 }
+            }
+    ],
+    'ad-hoc:updateOrderItemStatus' => [
+        'description' => 'Update all order items where their status does not match their order status',
+        'arguments' => [],
+        'options' => [],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di) {
+                $query = <<<EOF
+SELECT DISTINCT  o.`id` as `orderId`
+FROM `order` o
+JOIN item i ON o.id = i.`orderId`
+WHERE o.`status` != i.`status`
+ORDER BY o.`purchaseDate`
+EOF;
+
+                /** @var Mysqli $cgApp */
+                $cgApp = $di->get('cg_appReadMysqli');
+                /** @var OrderStorage $orderStorage */
+                $orderStorage = $di->get($di->instanceManager()->getTypePreferences(OrderStorage::class)[0]);
+                /** @var OrderItemStorage $orderItemStorage */
+                $orderItemStorage = $di->get($di->instanceManager()->getTypePreferences(OrderItemStorage::class)[0]);
+
+                $orderIds = $cgApp->fetchColumn('orderId', $query);
+                if (empty($orderIds)) {
+                    $output->writeln('<fg=red>No Orders found with items in a different status</>');
+                }
+
+                $filter = (new OrderFilter(500, 1))->setOrderIds($orderIds);
+                $progress = new ProgressBar($output, count($orderIds));
+                $progress->start();
+
+                try {
+                    do {
+                        /** @var Orders $orders */
+                        $orders = $orderStorage->fetchCollectionByFilter($filter);
+
+                        /** @var Order $order */
+                        foreach ($orders as $order) {
+                            /** @var OrderItem $orderItem */
+                            foreach ($order->getItems() as $orderItem) {
+                                if ($order->getStatus() == $orderItem->getStatus()) {
+                                    continue;
+                                }
+
+                                $orderItemStorage->save(
+                                    $orderItem->setStatus($order->getStatus())
+                                );
+                            }
+                            $progress->advance();
+                        }
+                    } while ($filter->setPage($filter->getPage() + 1));
+                } catch (NotFound $exception) {
+                    // No more orders to update
+                }
+
+                $output->writeln('');
             }
     ],
     'ad-hoc:ensureProductsAndListingsAssociatedWithRootOu' => [
