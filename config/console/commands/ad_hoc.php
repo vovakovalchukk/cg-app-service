@@ -250,32 +250,29 @@ EOF;
                 $progress->setOverwrite($overwrite);
                 $progress->start();
 
-                $filter = (new OrderFilter(500, 1))->setOrderIds($orderIds);
-                try {
-                    do {
-                        /** @var Orders $orders */
-                        $orders = $orderStorage->fetchCollectionByFilter($filter);
 
-                        /** @var Order $order */
-                        foreach ($orders as $order) {
-                            /** @var OrderItem $orderItem */
-                            foreach ($order->getItems() as $orderItem) {
-                                if ($order->getStatus() == $orderItem->getStatus()) {
-                                    continue;
-                                }
+                foreach (array_chunk($orderIds, 100) as $batchOrderIds) {
+                    $filter = (new OrderFilter('all', 1))->setOrderIds($batchOrderIds);
+                    /** @var Orders $orders */
+                    $orders = $orderStorage->fetchCollectionByFilter($filter);
 
-                                $progress->setMessage(sprintf('Updating %s [%s => %s]', $orderItem->getId(), $orderItem->getStatus(), $order->getStatus()));
-                                if ($input->getOption('fix')) {
-                                    $orderItemStorage->save(
-                                        $orderItem->setStatus($order->getStatus())
-                                    );
-                                }
+                    /** @var Order $order */
+                    foreach ($orders as $order) {
+                        /** @var OrderItem $orderItem */
+                        foreach ($order->getItems() as $orderItem) {
+                            if ($order->getStatus() == $orderItem->getStatus()) {
+                                continue;
                             }
-                            $progress->advance();
+
+                            $progress->setMessage(sprintf('Updating %s [%s => %s]', $orderItem->getId(), $orderItem->getStatus(), $order->getStatus()));
+                            if ($input->getOption('fix')) {
+                                $orderItemStorage->save(
+                                    $orderItem->setStatus($order->getStatus())
+                                );
+                            }
                         }
-                    } while ($filter->setPage($filter->getPage() + 1));
-                } catch (NotFound $exception) {
-                    // No more orders to update
+                        $progress->advance();
+                    }
                 }
 
                 $output->writeln('');
