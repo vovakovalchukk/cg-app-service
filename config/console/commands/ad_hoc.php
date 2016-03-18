@@ -136,7 +136,11 @@ EOF;
     'ad-hoc:validateOrderItemStatus' => [
         'description' => 'Reports any new order items that do not match their orders status since the command last run',
         'arguments' => [],
-        'options' => [],
+        'options' => [
+            'all' => [
+                'description' => 'Get all orders, even if we have previously reported on it',
+            ],
+        ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
                 $query = <<<EOF
@@ -156,13 +160,14 @@ EOF;
 
                 $now = time();
                 $lastRun = (int) $redis->getset('ValidateOrderItemStatus:LastRun', (string) $now);
+                $fetchAll = $input->getOption('all');
 
                 $count = 0;
                 $table = (new Table($output))
                     ->setHeaders(['OrderId', 'OrderItemId', 'Channel', 'OrderStatus', 'OrderItemStatus']);
 
                 foreach ($orderItems as $orderItem) {
-                    if (!$redis->sadd('ValidateOrderItemStatus:OrderItemId', $orderItem['orderItemId'])) {
+                    if (!$redis->sadd('ValidateOrderItemStatus:OrderItemId', $orderItem['orderItemId']) && !$fetchAll ) {
                         continue;
                     }
 
@@ -175,11 +180,9 @@ EOF;
                 }
 
                 $output->writeln('The following order items have a different status to their order:');
-                $output->writeln('');
                 $table->render();
 
-                if ($lastRun) {
-                    $output->writeln('');
+                if ($lastRun && !$fetchAll) {
                     $output->writeln(date('d/m/Y H:i:s', $lastRun) . ' - ' . date('d/m/Y H:i:s', $now));
                 }
             }
