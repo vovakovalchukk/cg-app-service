@@ -21,6 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Di\Di;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /** @var Di $di */
 return [
@@ -206,6 +207,9 @@ EOF;
         ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
+                $output->getFormatter()->setStyle('b', new OutputFormatterStyle(null, null, ['bold']));
+                $output->getFormatter()->setStyle('empty', new OutputFormatterStyle('red', null, ['bold']));
+
                 $query = <<<EOF
 SELECT DISTINCT  o.`id` as `orderId`
 FROM `order` o
@@ -221,9 +225,15 @@ EOF;
                 /** @var OrderItemStorage $orderItemStorage */
                 $orderItemStorage = $di->get($di->instanceManager()->getTypePreferences(OrderItemStorage::class)[0]);
 
+                if (!$input->getOption('fix')) {
+                    $output->writeln('<b>Performing dry run, no order items will be updated. Please specify --fix to apply changes.</b>');
+                    $output->writeln('');
+                }
+
                 $orderIds = $cgApp->fetchColumn('orderId', $query);
                 if (empty($orderIds)) {
-                    $output->writeln('<fg=red>No Orders found with items in a different status</>');
+                    $output->writeln('<empty>No Orders found with items in a different status</empty>');
+                    return;
                 }
 
                 $format = ' %current%/%max% [%bar%] %percent:3s%%';
@@ -267,6 +277,7 @@ EOF;
                     // No more orders to update
                 }
 
+                $output->writeln('');
                 $output->writeln('');
             }
     ],
