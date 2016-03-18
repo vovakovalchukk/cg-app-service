@@ -197,9 +197,13 @@ EOF;
             }
     ],
     'ad-hoc:updateOrderItemStatus' => [
-        'description' => 'Update all order items where their status does not match their order status',
+        'description' => 'Update all order items where their status does not match their order status, by default will just output current status',
         'arguments' => [],
-        'options' => [],
+        'options' => [
+            'fix' => [
+                'description' => 'Update item statuses',
+            ],
+        ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
                 $query = <<<EOF
@@ -222,10 +226,20 @@ EOF;
                     $output->writeln('<fg=red>No Orders found with items in a different status</>');
                 }
 
-                $filter = (new OrderFilter(500, 1))->setOrderIds($orderIds);
+                $format = ' %current%/%max% [%bar%] %percent:3s%%';
+                $overwrite = true;
+                if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                    $format = ' %message%' . "\n" . $format;
+                    $overwrite = false;
+                }
+
                 $progress = new ProgressBar($output, count($orderIds));
+                $progress->setMessage('');
+                $progress->setFormat($format);
+                $progress->setOverwrite($overwrite);
                 $progress->start();
 
+                $filter = (new OrderFilter(500, 1))->setOrderIds($orderIds);
                 try {
                     do {
                         /** @var Orders $orders */
@@ -239,9 +253,12 @@ EOF;
                                     continue;
                                 }
 
-                                $orderItemStorage->save(
-                                    $orderItem->setStatus($order->getStatus())
-                                );
+                                $progress->setMessage(sprintf('Updating %s [%s => %s]', $orderItem->getId(), $orderItem->getStatus(), $order->getStatus()));
+                                if ($input->getOption('fix')) {
+                                    $orderItemStorage->save(
+                                        $orderItem->setStatus($order->getStatus())
+                                    );
+                                }
                             }
                             $progress->advance();
                         }
