@@ -14,10 +14,16 @@ use CG\Zend\Stdlib\Db\Sql\InsertIgnore as InsertIgnore;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\In;
+use Zend\Db\Sql\Predicate\Like;
 use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Predicate\Like;
+use Zend\Db\Sql\Sql;
 
+/**
+ * @method Sql getFastReadSql
+ * @method Sql getReadSql
+ * @method Sql getWriteSql
+ */
 class Db extends DbAbstract implements StorageInterface
 {
     use ArrayFiltersToWhereTrait;
@@ -158,6 +164,9 @@ class Db extends DbAbstract implements StorageInterface
         return $products->getById($id);
     }
 
+    /**
+     * @param ProductEntity $entity
+     */
     protected function insertEntity($entity)
     {
         $entityArray = $entity->toArray();
@@ -204,6 +213,9 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
+    /**
+     * @param ProductEntity $entity
+     */
     protected function updateEntity($entity)
     {
         $entityArray = $entity->toArray();
