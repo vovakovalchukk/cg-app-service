@@ -16,6 +16,7 @@ use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\Like;
 use Zend\Db\Sql\Predicate\NotIn;
+use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 
@@ -52,24 +53,49 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function createSelectFromFilter(Filter $filter)
     {
-        $select = $this->getReadSql()->select('product')->columns(['id' => 'id']);
-        $query = $this->buildFilterQuery($filter);
-        $select->where($query);
+        $select = $this->getReadSql()
+            ->select('product')
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->columns(['id' => 'id'])
+            ->where($this->buildFilterQuery($filter));
 
-        if ($filter->getSearchTerm()) {
+        $types = array_flip($filter->getType());
+        $typeQuery = new Predicate(null, Predicate::OP_OR);
+        $searchTerm = $filter->getSearchTerm();
+
+        if (isset($types[Filter::TYPE_SIMPLE]) || isset($types[Filter::TYPE_PARENT]) || $searchTerm) {
             $select->join(
                 ['variation' => 'product'],
                 'variation.parentProductId = product.id',
                 [],
                 Select::JOIN_LEFT
             );
-            $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
+
+            if (isset($types[Filter::TYPE_SIMPLE])) {
+                $typeQuery->isNull('variation.id');
+            }
+
+            if (isset($types[Filter::TYPE_PARENT])) {
+                $typeQuery->isNotNull('variation.id');
+            }
+
+            if ($searchTerm) {
+                $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
+            }
+        }
+
+        if (isset($types[Filter::TYPE_VARIATION])) {
+            $typeQuery->notEqualTo('product.parentProductId', 0);
         }
 
         if ($filter->getReplaceVariationWithParent()) {
             $select->columns(
-                ['id' => new Expression('DISTINCT IF(product.parentProductId > 0, product.parentProductId, product.id)')]
+                ['id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
             );
+        }
+
+        if ($typeQuery->count() > 0) {
+            $select->where($typeQuery);
         }
 
         return $select;
@@ -78,8 +104,19 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntityCount(Filter $filter)
     {
         $select = $this->createSelectFromFilter($filter);
+        $quantifier = $select->getRawState(Select::QUANTIFIER);
         $columns = $select->getRawState(Select::COLUMNS);
-        $select->columns(['count' => new Expression('COUNT(?)', [$columns['id']])]);
+
+        $select
+            ->reset(Select::QUANTIFIER)
+            ->columns(
+                [
+                    'count' => new Expression(
+                        sprintf('COUNT(%s ?)', $quantifier == Select::QUANTIFIER_DISTINCT ? Select::QUANTIFIER_DISTINCT : ''),
+                        [$columns['id']]
+                    ),
+                ]
+            );
 
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         return $results->current()['count'];

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c7465a279cd4573510242e13c33da2c4",
-    "content-hash": "e9aee37eaefd851dcdc8488904c63ffa",
+    "hash": "6a7b3a892d20c23d0e541ad23cc7fcb0",
+    "content-hash": "355a3b54a074a46d449b5b736e40b426",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1636,16 +1636,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.5.5",
+            "version": "dev-CGIV-6883-VariationSkuLookup",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "eed3fec14803f0487d81d4824ff1538a01cab4aa"
+                "reference": "f93c337059194ac57772c23c4d5534e8ffbdcefe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.5-a95d50.zip",
-                "reference": "eed3fec14803f0487d81d4824ff1538a01cab4aa",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-6883-VariationSkuLookup-a76aad.zip",
+                "reference": "f93c337059194ac57772c23c4d5534e8ffbdcefe",
                 "shasum": null
             },
             "require": {
@@ -1684,7 +1684,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-10 10:47:10"
+            "time": "2016-03-21 11:59:54"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2167,7 +2167,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.7.0-2534d5.zip",
                 "reference": "4ce8b927cca0e56a44a7626186999f6b3ac793f8",
-                "shasum": "e15a75bc65f9c3c560bd5826d4d275a06d351b61"
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3756,7 +3756,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -8282,10 +8282,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.6",
+            "alias_normalized": "1.5.6.0",
+            "version": "dev-CGIV-6883-VariationSkuLookup",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
