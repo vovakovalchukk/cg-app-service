@@ -93,7 +93,7 @@ class Filter implements RulesInterface
                     'name'       => 'type',
                     'required'   => false,
                     'validators' => [
-                        new IsArrayValidator(['type' => 'stockMode'])
+                        new IsArrayValidator(['name' => 'type'])
                     ]
                 ],
             ]
