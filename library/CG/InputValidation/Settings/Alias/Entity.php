@@ -51,7 +51,12 @@ class Entity implements RulesInterface
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'methodIds')
                 ]
-            ]
+            ],
+            "options" => [
+                'name'       => 'options',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
