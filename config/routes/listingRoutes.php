@@ -8,6 +8,15 @@ use CG\Listing\Entity as ListingEntity;
 use CG\Listing\Mapper as ListingMapper;
 use CG\Listing\Service\Service as ListingService;
 
+// Listing Status History
+use CG\Controllers\Listing\StatusHistory\Collection as ListingStatusHistoryCollectionController;
+use CG\Controllers\Listing\StatusHistory\Entity as ListingStatusHistoryEntityController;
+use CG\InputValidation\Listing\StatusHistory\Filter as ListingStatusHistoryCollectionValidation;
+use CG\InputValidation\Listing\StatusHistory\Entity as ListingStatusHistoryEntityValidation;
+use CG\Listing\StatusHistory\Mapper as ListingStatusHistoryMapper;
+use CG\Listing\StatusHistory\Entity as ListingStatusHistoryEntity;
+use CG\Listing\StatusHistory\Service\Service as ListingStatusHistoryService;
+
 // Unimported Listing
 use CG\Controllers\Listing\Unimported\Entity as UnimportedListingEntityController;
 use CG\Controllers\Listing\Unimported\Collection as UnimportedListingCollectionController;
@@ -22,7 +31,13 @@ use CG\Controllers\Listing\Unimported\Marketplace as UnimportedListingMarketplac
 use CG\InputValidation\Listing\Unimported\Marketplace as UnimportedListingMarketplaceValidation;
 
 use CG\Slim\Versioning\Version;
+use Slim\Slim;
+use Zend\Di\Di;
 
+/**
+ * @var Slim $app
+ * @var Di $di
+ */
 return [
     '/listing' => [
         'controllers' => function() use ($di, $app) {
@@ -64,6 +79,45 @@ return [
             'serviceClass' => ListingService::class
         ],
         "version" => new Version(1, 6)
+    ],
+    ListingStatusHistoryMapper::URI => [
+        'controllers' => function() use ($di, $app) {
+                $method = $app->request()->getMethod();
+                $controller = $di->get(ListingStatusHistoryCollectionController::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'ListingStatusHistoryCollection',
+        'entityRoute' => ListingStatusHistoryMapper::URI . '/:statusHistoryId',
+        'validation' => [
+            'filterRules' => ListingStatusHistoryCollectionValidation::class,
+            'dataRules' => ListingStatusHistoryEntityValidation::class,
+        ],
+        'version' => new Version(1, 1),
+    ],
+    ListingStatusHistoryMapper::URI . '/:statusHistoryId' => [
+        'controllers' => function($statusHistoryId) use ($di, $app) {
+                $method = $app->request()->getMethod();
+                $controller = $di->get(ListingStatusHistoryEntityController::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($statusHistoryId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'ListingStatusHistoryEntity',
+        'validation' => [
+            'dataRules' => ListingStatusHistoryEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ListingStatusHistoryMapper::class,
+            'entityClass' => ListingStatusHistoryEntity::class,
+            'serviceClass' => ListingStatusHistoryService::class,
+        ],
+        'version' => new Version(1, 1),
     ],
     '/unimportedListing' => [
         'controllers' => function() use ($di, $app) {
