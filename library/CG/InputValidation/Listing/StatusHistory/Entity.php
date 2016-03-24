@@ -23,7 +23,7 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [
                     new IntegerValidator(['name' => 'listingId']),
-                    (new GreaterThan(['min' => 1]))->setMessages([GreaterThan::NOT_GREATER_INCLUSIVE => 'listingId must be at least %min%']),
+                    (new GreaterThan(['min' => 0]))->setMessages([GreaterThan::NOT_GREATER_INCLUSIVE => 'listingId must be at least %min%']),
                 ],
             ],
             'timestamp' => [
