@@ -2,9 +2,13 @@
 namespace CG\Listing\Service;
 
 use CG\Account\Client\Entity as AccountEntity;
+use CG\Listing\Collection;
+use CG\Listing\Entity;
 use CG\Listing\Filter;
 use CG\Listing\Mapper;
 use CG\Listing\ServiceAbstract;
+use CG\Listing\StatusHistory\Filter as StatusHistoryFilter;
+use CG\Listing\StatusHistory\Service as StatusHistoryService;
 use CG\Listing\StorageInterface;
 use CG\Slim\Patch\ServiceTrait as PatchServiceTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -14,21 +18,42 @@ use Zend\EventManager\GlobalEventManager;
 
 class Service extends ServiceAbstract
 {
-    use ServiceTrait;
+    use ServiceTrait {
+        fetch as fetchTrait;
+    }
     use PatchServiceTrait;
 
     const CHUNK_AMOUNT = 500;
 
     protected $globalEventManager;
+    /** @var StatusHistoryService $statusHistoryService */
+    protected $statusHistoryService;
 
     public function __construct(
         StorageInterface $repository,
         Mapper $mapper,
-        GlobalEventManager $globalEventManager
+        GlobalEventManager $globalEventManager,
+        StatusHistoryService $statusHistoryService
     ) {
-        $this->setRepository($repository)
+        $this
+            ->setRepository($repository)
             ->setMapper($mapper)
-            ->setGlobalEventManager($globalEventManager);
+            ->setGlobalEventManager($globalEventManager)
+            ->setStatusHistoryService($statusHistoryService);
+    }
+
+    public function fetch($id)
+    {
+        /** @var Entity $entity */
+        $entity = $this->fetchTrait($id);
+        try {
+            $filter = (new StatusHistoryFilter('all'))->setListingId([$entity->getId()])->setLatest(true);
+            $statusHistory = $this->statusHistoryService->fetchCollectionByFilter($filter);
+            $entity->setStatusHistory($statusHistory);
+        } catch (NotFound $exception) {
+            // No status history found for listing
+        }
+        return $entity;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -44,6 +69,28 @@ class Service extends ServiceAbstract
         return $this->getMapper()->collectionToHal(
             $collection, "/listing", $filter->getLimit(), $filter->getPage(), $filter->toArray()
         );
+    }
+
+    public function fetchCollectionByFilter(Filter $filter)
+    {
+        /** @var Collection $collection */
+        $collection = parent::fetchCollectionByFilter($filter);
+
+        try {
+            $filter = (new StatusHistoryFilter('all'))->setListingId($collection->getIds())->setLatest(true);
+            $statusHistory = $this->statusHistoryService->fetchCollectionByFilter($filter);
+        } catch (NotFound $exception) {
+            // No status history found for listings
+        }
+
+        /** @var Entity $entity */
+        foreach ($collection as $entity) {
+            if (isset($statusHistory)) {
+                $entity->setStatusHistory($statusHistory->getByListingId($entity->getId()));
+            }
+        }
+
+        return $collection;
     }
 
     public function saveHal(Hal $hal, array $ids)
@@ -96,5 +143,14 @@ class Service extends ServiceAbstract
     public function getRepository()
     {
         return $this->repository;
+    }
+
+    /**
+     * @return self
+     */
+    protected function setStatusHistoryService(StatusHistoryService $statusHistoryService)
+    {
+        $this->statusHistoryService = $statusHistoryService;
+        return $this;
     }
 }
