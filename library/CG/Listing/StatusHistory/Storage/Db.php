@@ -72,7 +72,7 @@ class Db extends DbAbstract implements StorageInterface
                 ->offset(($filter->getPage() - 1) * $limit);
         }
 
-        return $select;
+        return $select->order(sprintf('%s.id DESC', static::TABLE_NAME));
     }
 
     /**
