@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25fae231da6df40bbe66026130381bbd",
-    "content-hash": "d974884086375d0bd62b8d0e05037c90",
+    "hash": "aa96b94da38e169564b01ebf2622bac2",
+    "content-hash": "ac7d5b4dbef3ba6ba4dca2f6df9a9b41",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -575,47 +575,27 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b"
+                "reference": "60e5fff088458542976cde2493d9db1096c112d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.1.1-4a06ae.zip",
-                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b",
-                "shasum": "1aa4d1bd7ef63469911da771117039613fc7d319"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.0-1fb30f.zip",
+                "reference": "60e5fff088458542976cde2493d9db1096c112d4",
+                "shasum": null
             },
             "require": {
-                "channelgrabber/spork": "~0.2",
-                "channelgrabber/stdlib": ">=2.7.16",
-                "cilex/cilex": "~1.0.1",
-                "composer-plugin-api": "1.0.0",
-                "composer/composer": "1.0.*@dev",
-                "zendframework/zend-cache": ">=2.2,<3.0",
-                "zendframework/zend-di": ">=2.2,<3.0"
+                "zendframework/zend-cache": "^2.2",
+                "zendframework/zend-code": "^2.2",
+                "zendframework/zend-di": "^2.2"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~3.7.28"
-            },
-            "bin": [
-                "bin/di.php"
-            ],
-            "type": "composer-plugin",
-            "extra": {
-                "class": [
-                    "CG\\Di\\Installer\\Plugin"
-                ]
-            },
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Di\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "CG\\Di\\Test\\": "tests"
                 }
             },
             "authors": [
@@ -630,7 +610,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-22 13:32:50"
+            "time": "2016-03-30 13:39:22"
         },
         {
             "name": "channelgrabber/ebay",
@@ -974,18 +954,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "178e2858a668fcb40a5c3e6abf46621959c35350"
+                "reference": "52ed232c5ab5cc2aad09c413b4bfa44ee9c859b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6740-ListingStatus-29b71a.zip",
-                "reference": "178e2858a668fcb40a5c3e6abf46621959c35350",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6740-ListingStatus-7832c8.zip",
+                "reference": "52ed232c5ab5cc2aad09c413b4bfa44ee9c859b6",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": ">=2.1.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.1.7",
@@ -1003,7 +983,7 @@
                 "channelgrabber/phpunit": ">=1.0.0",
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Listing\\": "src"
@@ -1019,7 +999,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-29 13:52:35"
+            "time": "2016-03-31 08:49:27"
         },
         {
             "name": "channelgrabber/locale",
