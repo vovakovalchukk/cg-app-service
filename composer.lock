@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "915e9cc04b47955303ab73d00f551add",
-    "content-hash": "bf310e3ca62801862e76d4e62a379c72",
+    "hash": "691b6172e293b0c80eaf053c5dd1c16d",
+    "content-hash": "d13b8bddd1d53dcba30f912b8bf76bcb",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -132,30 +132,30 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.1.1.1",
+            "version": "dev-CGIV-6901-CacheForcedInvalidation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "3c31fdd3ead91c0fb532c1145757ed0e707d948e"
+                "reference": "34284b5735252fc32b28e30e4b6751d894c67204"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.1.1.1-5238b9.zip",
-                "reference": "3c31fdd3ead91c0fb532c1145757ed0e707d948e",
-                "shasum": "a7d038b93f2a14809807a5559ce0d0ff026ff46c"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-6901-CacheForcedInvalidation-1ae8d8.zip",
+                "reference": "34284b5735252fc32b28e30e4b6751d894c67204",
+                "shasum": null
             },
             "require": {
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/stdlib": "^2.10.4",
                 "composer/composer": "@dev",
-                "predis/predis": "~0.8.3"
+                "predis/predis": "~0.8.5"
             },
             "require-dev": {
                 "phpspec/phpspec": "2.0.*@dev",
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Cache\\": "src"
@@ -166,7 +166,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-10-05 11:15:11"
+            "time": "2016-04-01 12:02:26"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -575,47 +575,27 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b"
+                "reference": "60e5fff088458542976cde2493d9db1096c112d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.1.1-4a06ae.zip",
-                "reference": "a324c33edf58452379edf5bc9bb4329753f8950b",
-                "shasum": "1aa4d1bd7ef63469911da771117039613fc7d319"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.0-1fb30f.zip",
+                "reference": "60e5fff088458542976cde2493d9db1096c112d4",
+                "shasum": null
             },
             "require": {
-                "channelgrabber/spork": "~0.2",
-                "channelgrabber/stdlib": ">=2.7.16",
-                "cilex/cilex": "~1.0.1",
-                "composer-plugin-api": "1.0.0",
-                "composer/composer": "1.0.*@dev",
-                "zendframework/zend-cache": ">=2.2,<3.0",
-                "zendframework/zend-di": ">=2.2,<3.0"
+                "zendframework/zend-cache": "^2.2",
+                "zendframework/zend-code": "^2.2",
+                "zendframework/zend-di": "^2.2"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~3.7.28"
-            },
-            "bin": [
-                "bin/di.php"
-            ],
-            "type": "composer-plugin",
-            "extra": {
-                "class": [
-                    "CG\\Di\\Installer\\Plugin"
-                ]
-            },
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Di\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "CG\\Di\\Test\\": "tests"
                 }
             },
             "authors": [
@@ -630,7 +610,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-09-22 13:32:50"
+            "time": "2016-03-30 13:39:22"
         },
         {
             "name": "channelgrabber/ebay",
@@ -3756,7 +3736,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/af859db135b9f7b1c281d634e01b93a3e9fe5ab3",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/23e4f0d8e66d3784e9a1d0db812b105fb9890f76",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -3813,7 +3793,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/064f65b05d1381d4999113f442af93949cc7c29a",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/72cb977c4c19d12786107320ed9bab3ce24045cd",
                 "reference": "064f65b05d1381d4999113f442af93949cc7c29a",
                 "shasum": "1982d83a6b5c301565c6af5e5acfe9f11e43776b"
             },
@@ -8282,9 +8262,17 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.2.0",
+            "alias_normalized": "2.2.0.0",
+            "version": "dev-CGIV-6901-CacheForcedInvalidation",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
