@@ -390,6 +390,9 @@ return array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
+                'amazonReadCGSql' => CGSql::class,
+                'amazonFastReadCGSql' => CGSql::class,
+                'amazonWriteCGSql' => CGSql::class,
                 'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
@@ -534,7 +537,9 @@ return array(
                     'orderTableName' => OrderPersistentDbStorage::ORDER_TABLE_LIVE_NAME
                 ]
             ],
-            OrderPersistentStorage::class => [
+            OrderPersistentStorage::class => ['ReadCGSql' => CGSql::class,
+                'FastReadCGSql' => CGSql::class,
+                'WriteCGSql' => CGSql::class,
                 'parameter' => [
                     'sqlClient' => OrderPersistentDbStorage::class,
                     'liveSqlClient' => 'LiveOrderPersistentDbStorage',
@@ -1353,9 +1358,24 @@ return array(
             ],
             AmazonCarrierDbStorage::class => [
                 'parameters' => [
-                    'readSql' => 'amazonReadSql',
-                    'fastReadSql' => 'amazonFastReadSql',
-                    'writeSql' => 'amazonWriteSql',
+                    'readSql' => 'amazonReadCGSql',
+                    'fastReadSql' => 'amazonFastReadCGSql',
+                    'writeSql' => 'amazonWriteCGSql',
+                ],
+            ],
+            'amazonReadCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonRead',
+                ],
+            ],
+            'amazonFastReadCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonFastRead',
+                ],
+            ],
+            'amazonWriteCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonWrite',
                 ],
             ],
             'preferences' => [

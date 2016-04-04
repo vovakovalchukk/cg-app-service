@@ -8,7 +8,8 @@ $files = [
     'stockRoutes.php',
     'listingRoutes.php',
     'locationRoutes.php',
-    'orderCountsRoutes.php'
+    'orderCountsRoutes.php',
+    'courier.php',
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;
