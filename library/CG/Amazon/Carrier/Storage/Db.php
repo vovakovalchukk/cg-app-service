@@ -43,6 +43,11 @@ class Db extends DbAbstract implements StorageInterface
     public function fetchCollectionByFilter(Filter $filter)
     {
         $select = $this->getSelect()->where($this->filterToParams($filter));
+        if (($limit = $filter->getLimit()) !== 'all') {
+            $offset = ($limit * ($filter->getPage() - 1));
+            $select->limit($limit)->offset($offset);
+        }
+
         return $this->fetchPaginatedCollection(
             new Collection(Entity::class, __FUNCTION__, $filter->toArray()),
             $this->getReadSql(),
