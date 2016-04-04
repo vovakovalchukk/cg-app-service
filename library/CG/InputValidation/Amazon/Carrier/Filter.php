@@ -19,6 +19,11 @@ class Filter implements RulesInterface
                 'required' => false,
                 'validators' => [new IsArrayValidator(['name' => 'id'])],
             ],
+            'region' => [
+                'name' => 'region',
+                'required' => false,
+                'validators' => [new IsArrayValidator(['name' => 'region'])],
+            ],
             'carrier' => [
                 'name' => 'carrier',
                 'required' => false,

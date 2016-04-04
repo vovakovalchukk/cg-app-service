@@ -30,6 +30,7 @@ class Collection
                 $this->getParams('limit') ?: static::DEFAULT_LIMIT,
                 $this->getParams('page') ?: static::DEFAULT_PAGE,
                 $this->getParams('id') ?: [],
+                $this->getParams('region') ?: [],
                 $this->getParams('carrier') ?: [],
                 $this->getParams('service') ?: [],
                 $this->getParams('currencyCode') ?: [],

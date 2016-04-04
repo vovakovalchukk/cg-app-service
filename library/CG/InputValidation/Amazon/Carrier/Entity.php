@@ -16,6 +16,11 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])],
             ],
+            'region' => [
+                'name' => 'region',
+                'required' => true,
+                'validators' => [new StringLength(['min' => 1])],
+            ],
             'carrier' => [
                 'name' => 'carrier',
                 'required' => true,

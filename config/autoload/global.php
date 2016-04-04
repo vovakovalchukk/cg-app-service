@@ -358,6 +358,7 @@ use CG\Amazon\Carrier\StorageInterface as AmazonCarrierStorage;
 use CG\Amazon\Carrier\Storage\Cache as AmazonCarrierCacheStorage;
 use CG\Amazon\Carrier\Storage\Db as AmazonCarrierDbStorage;
 use CG\Amazon\Carrier\Repository as AmazonCarrierRepository;
+use CG\Amazon\Carrier\Service as AmazonCarrierService;
 
 return array(
     'di' => array(
@@ -1376,6 +1377,11 @@ return array(
             'amazonWriteCGSql' => [
                 'parameters' => [
                     'adapter' => 'amazonWrite',
+                ],
+            ],
+            AmazonCarrierService::class => [
+                'parameters' => [
+                    'cryptor' => 'amazon_cryptor',
                 ],
             ],
             'preferences' => [

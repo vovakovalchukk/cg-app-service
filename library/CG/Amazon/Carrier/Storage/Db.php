@@ -62,6 +62,9 @@ class Db extends DbAbstract implements StorageInterface
         if (count($filter->getId())) {
             $params['id'] = $filter->getId();
         }
+        if (count($filter->getRegion())) {
+            $params['region'] = $filter->getRegion();
+        }
         if (count($filter->getCarrier())) {
             $params['carrier'] = $filter->getCarrier();
         }
