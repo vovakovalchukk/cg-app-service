@@ -353,6 +353,12 @@ use CG\Order\Shared\CustomerCounts\Repository as CustomerCountRepository;
 use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
 use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
 
+// Amazon Logistics
+use CG\Amazon\Carrier\StorageInterface as AmazonCarrierStorage;
+use CG\Amazon\Carrier\Storage\Cache as AmazonCarrierCacheStorage;
+use CG\Amazon\Carrier\Storage\Db as AmazonCarrierDbStorage;
+use CG\Amazon\Carrier\Repository as AmazonCarrierRepository;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1339,6 +1345,19 @@ return array(
                     'client' => 'reliable_redis',
                 ],
             ],
+            AmazonCarrierRepository::class => [
+                'parameters' => [
+                    'storage' => AmazonCarrierCacheStorage::class,
+                    'repository' => AmazonCarrierDbStorage::class,
+                ],
+            ],
+            AmazonCarrierDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'amazonReadSql',
+                    'fastReadSql' => 'amazonFastReadSql',
+                    'writeSql' => 'amazonWriteSql',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1379,6 +1398,7 @@ return array(
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
+                AmazonCarrierStorage::class => AmazonCarrierRepository::class,
             ]
         )
     )
