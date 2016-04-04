@@ -13,7 +13,7 @@ class AmazonCourier extends AbstractMigration
             ->addColumn('carrier', 'string', ['null' => false])
             ->addColumn('service', 'string', ['null' => false])
             ->addColumn('currencyCode', 'string', ['null' => false, 'length' => 3])
-            ->addColumn('rate', 'decimal', ['null' => false])
+            ->addColumn('rate', 'decimal', ['null' => false, 'precision' => 12, 'scale' => 4])
             ->addColumn('deliveryExperience', 'string', ['null' => false])
             ->addColumn('carrierWillPickUp', 'boolean', ['null' => false])
             ->addIndex(['carrier', 'service'])
