@@ -1,11 +1,11 @@
 <?php
-namespace CG\Amazon\Carrier\Storage;
+namespace CG\Amazon\ShippingService\Storage;
 
-use CG\Amazon\Carrier\Collection;
-use CG\Amazon\Carrier\Entity;
-use CG\Amazon\Carrier\Filter;
-use CG\Amazon\Carrier\Mapper;
-use CG\Amazon\Carrier\StorageInterface;
+use CG\Amazon\ShippingService\Collection;
+use CG\Amazon\ShippingService\Entity;
+use CG\Amazon\ShippingService\Filter;
+use CG\Amazon\ShippingService\Mapper;
+use CG\Amazon\ShippingService\StorageInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Zend\Stdlib\Db\Sql\Replace;
 use CG\Zend\Stdlib\Db\Sql\Sql;
@@ -20,7 +20,7 @@ use Zend\Db\Sql\Select;
  */
 class Db extends DbAbstract implements StorageInterface
 {
-    const TABLE = 'courier';
+    const TABLE = 'shippingService';
 
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {

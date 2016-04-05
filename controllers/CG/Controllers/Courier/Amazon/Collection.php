@@ -1,8 +1,8 @@
 <?php
 namespace CG\Controllers\Courier\Amazon;
 
-use CG\Amazon\Carrier\Filter;
-use CG\Amazon\Carrier\Service\Service;
+use CG\Amazon\ShippingService\Filter;
+use CG\Amazon\ShippingService\Service\Service;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\ControllerTrait;
 use Slim\Slim;

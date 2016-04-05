@@ -1,11 +1,11 @@
 <?php
 namespace CG\Controllers\Courier\Amazon;
 
-use CG\Amazon\Carrier\Service\Service;
-use CG\Slim\ControllerTrait;
+use CG\Amazon\ShippingService\Service\Service;
+use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
-use CG\Slim\Controller\Entity\DeleteTrait;
+use CG\Slim\ControllerTrait;
 use Slim\Slim;
 
 class Entity

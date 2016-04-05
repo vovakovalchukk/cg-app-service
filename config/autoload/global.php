@@ -354,11 +354,11 @@ use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
 use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
 
 // Amazon Logistics
-use CG\Amazon\Carrier\StorageInterface as AmazonCarrierStorage;
-use CG\Amazon\Carrier\Storage\Cache as AmazonCarrierCacheStorage;
-use CG\Amazon\Carrier\Storage\Db as AmazonCarrierDbStorage;
-use CG\Amazon\Carrier\Repository as AmazonCarrierRepository;
-use CG\Amazon\Carrier\Service as AmazonCarrierService;
+use CG\Amazon\ShippingService\StorageInterface as AmazonShippingServiceStorage;
+use CG\Amazon\ShippingService\Storage\Cache as AmazonShippingServiceCacheStorage;
+use CG\Amazon\ShippingService\Storage\Db as AmazonShippingServiceDbStorage;
+use CG\Amazon\ShippingService\Repository as AmazonShippingServiceRepository;
+use CG\Amazon\ShippingService\Service as AmazonShippingServiceService;
 
 return array(
     'di' => array(
@@ -1351,13 +1351,13 @@ return array(
                     'client' => 'reliable_redis',
                 ],
             ],
-            AmazonCarrierRepository::class => [
+            AmazonShippingServiceRepository::class => [
                 'parameters' => [
-                    'storage' => AmazonCarrierCacheStorage::class,
-                    'repository' => AmazonCarrierDbStorage::class,
+                    'storage' => AmazonShippingServiceCacheStorage::class,
+                    'repository' => AmazonShippingServiceDbStorage::class,
                 ],
             ],
-            AmazonCarrierDbStorage::class => [
+            AmazonShippingServiceDbStorage::class => [
                 'parameters' => [
                     'readSql' => 'amazonReadCGSql',
                     'fastReadSql' => 'amazonFastReadCGSql',
@@ -1379,7 +1379,7 @@ return array(
                     'adapter' => 'amazonWrite',
                 ],
             ],
-            AmazonCarrierService::class => [
+            AmazonShippingServiceService::class => [
                 'parameters' => [
                     'cryptor' => 'amazon_cryptor',
                 ],
@@ -1424,7 +1424,7 @@ return array(
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
-                AmazonCarrierStorage::class => AmazonCarrierRepository::class,
+                AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
             ]
         )
     )

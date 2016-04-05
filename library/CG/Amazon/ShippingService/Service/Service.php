@@ -1,10 +1,10 @@
 <?php
-namespace CG\Amazon\Carrier\Service;
+namespace CG\Amazon\ShippingService\Service;
 
-use CG\Amazon\Carrier\Filter;
-use CG\Amazon\Carrier\Mapper;
-use CG\Amazon\Carrier\Service as BaseService;
-use CG\Amazon\Carrier\Storage\Api;
+use CG\Amazon\ShippingService\Filter;
+use CG\Amazon\ShippingService\Mapper;
+use CG\Amazon\ShippingService\Service as BaseService;
+use CG\Amazon\ShippingService\Storage\Api;
 use CG\Stdlib\ServiceTrait;
 
 class Service

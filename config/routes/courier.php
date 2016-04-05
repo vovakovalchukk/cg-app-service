@@ -1,8 +1,8 @@
 <?php
-use CG\Amazon\Carrier\Entity as AmazonEntity;
-use CG\Amazon\Carrier\Mapper as AmazonMapper;
-use CG\Amazon\Carrier\Service\Service as AmazonService;
-use CG\Amazon\Carrier\Storage\Api as Amazon;
+use CG\Amazon\ShippingService\Entity as AmazonEntity;
+use CG\Amazon\ShippingService\Mapper as AmazonMapper;
+use CG\Amazon\ShippingService\Service\Service as AmazonService;
+use CG\Amazon\ShippingService\Storage\Api as Amazon;
 use CG\Controllers\Courier\Amazon\Collection as AmazonCollectionController;
 use CG\Controllers\Courier\Amazon\Entity as AmazonEntityController;
 use CG\Controllers\Root;

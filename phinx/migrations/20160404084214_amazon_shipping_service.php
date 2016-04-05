@@ -1,9 +1,9 @@
 <?php
 use Phinx\Migration\AbstractMigration;
 
-class AmazonCourier extends AbstractMigration
+class AmazonShippingService extends AbstractMigration
 {
-    const TABLE = 'amazon.courier';
+    const TABLE = 'amazon.shippingService';
 
     public function change()
     {

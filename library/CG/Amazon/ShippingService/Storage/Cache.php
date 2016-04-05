@@ -1,10 +1,10 @@
 <?php
-namespace CG\Amazon\Carrier\Storage;
+namespace CG\Amazon\ShippingService\Storage;
 
-use CG\Amazon\Carrier\Collection;
-use CG\Amazon\Carrier\Filter;
-use CG\Amazon\Carrier\Mapper;
-use CG\Amazon\Carrier\StorageInterface;
+use CG\Amazon\ShippingService\Collection;
+use CG\Amazon\ShippingService\Filter;
+use CG\Amazon\ShippingService\Mapper;
+use CG\Amazon\ShippingService\StorageInterface;
 use CG\Cache\CacheAbstract;
 use CG\Cache\Storage\CollectionTrait;
 use CG\Cache\Storage\FetchTrait;
