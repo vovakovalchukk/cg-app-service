@@ -126,7 +126,7 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 // Label
-use CG\Order\Service\Label\Service as LabelService;
+use CG\Order\Shared\Label\StorageInterface as LabelStorage;
 use CG\Order\Shared\Label\Repository as LabelRepository;
 use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
 use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
@@ -715,11 +715,6 @@ return array(
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
                     'repository' => LabelMongoDbStorage::class
-                ]
-            ],
-            LabelService::class => [
-                'parameter' => [
-                    'repository' => LabelRepository::class
                 ]
             ],
             AccountCommandService::class => array(
@@ -1425,6 +1420,7 @@ return array(
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
+                LabelStorage::class => LabelRepository::class,
             ]
         )
     )
