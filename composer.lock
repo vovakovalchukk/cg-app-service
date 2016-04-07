@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f6486de3b39d391a255b65fdb8a97fb",
-    "content-hash": "e72a948cd417f464c1129974f27591ec",
+    "hash": "2c02b2f72bcab21ac38e0a28ef9cacb2",
+    "content-hash": "b5b27f25f38002ccbf741284463cacf9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.22.0",
+            "version": "dev-CGIV-6915-OrderLabelService",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7734a87094caaf29815a5c6d1dbed2f864d94987"
+                "reference": "b36d079f676f3b3e9b9dda00f3e1c9d8e1a432ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.22.0-540914.zip",
-                "reference": "7734a87094caaf29815a5c6d1dbed2f864d94987",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6915-OrderLabelService-71b751.zip",
+                "reference": "b36d079f676f3b3e9b9dda00f3e1c9d8e1a432ed",
                 "shasum": null
             },
             "require": {
@@ -1351,7 +1351,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-18 12:18:05"
+            "time": "2016-04-07 08:49:18"
         },
         {
             "name": "channelgrabber/permission",
@@ -3731,7 +3731,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-e57b7e02224d0266d5f7de970964b5302501125b-zip-b2b315.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/23e4f0d8e66d3784e9a1d0db812b105fb9890f76",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -3788,7 +3788,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-064f65b05d1381d4999113f442af93949cc7c29a-zip-a7425b.zip",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/72cb977c4c19d12786107320ed9bab3ce24045cd",
                 "reference": "064f65b05d1381d4999113f442af93949cc7c29a",
                 "shasum": "1982d83a6b5c301565c6af5e5acfe9f11e43776b"
             },
@@ -8321,6 +8321,12 @@
             "package": "channelgrabber/amazon"
         },
         {
+            "alias": "1.23.0",
+            "alias_normalized": "1.23.0.0",
+            "version": "dev-CGIV-6915-OrderLabelService",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "2.12.27",
             "alias_normalized": "2.12.27.0",
             "version": "dev-CGIV-6787-AmazonLogitics",
@@ -8331,6 +8337,7 @@
     "stability-flags": {
         "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
