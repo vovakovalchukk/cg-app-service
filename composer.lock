@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4334bf673b76b8f307d73fa41d36f164",
-    "content-hash": "8cbaec930008bf1493f2faa0225cc3b6",
+    "hash": "f77495fe6d46be27d124937e3a3a66ae",
+    "content-hash": "c57b7d2f15e6c49e74ec9e91a447d76e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -137,16 +137,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.2.0.1",
+            "version": "dev-CGIV-6908-PersistentInvalidationMapCache",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "bbe8e2125c853a641763204dc8c2b6f584ec11da"
+                "reference": "64a972985cb77c04f6b81a67875a268f6fa43b38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.0.1-120b2c.zip",
-                "reference": "bbe8e2125c853a641763204dc8c2b6f584ec11da",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-6908-PersistentInvalidationMapCache-fdf40e.zip",
+                "reference": "64a972985cb77c04f6b81a67875a268f6fa43b38",
                 "shasum": null
             },
             "require": {
@@ -171,7 +171,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-02 14:05:10"
+            "time": "2016-04-07 12:14:43"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -8318,9 +8318,17 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.2.0.2",
+            "alias_normalized": "2.2.0.2",
+            "version": "dev-CGIV-6908-PersistentInvalidationMapCache",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
