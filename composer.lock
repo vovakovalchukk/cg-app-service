@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c02b2f72bcab21ac38e0a28ef9cacb2",
-    "content-hash": "b5b27f25f38002ccbf741284463cacf9",
+    "hash": "2ab3ac3b18b20f5a240241da27222415",
+    "content-hash": "7eb9798237207f49674d60bc39927ca6",
     "packages": [
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-CGIV-6787-AmazonLogitics",
+            "version": "1.17.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "1ce161613cafb031236c96d75b5e1159bef7d88b"
+                "reference": "819a84d73e86a19ef1705204a077e47a62bd18a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-CGIV-6787-AmazonLogitics-90461b.zip",
-                "reference": "1ce161613cafb031236c96d75b5e1159bef7d88b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.17.7-e171b8.zip",
+                "reference": "819a84d73e86a19ef1705204a077e47a62bd18a4",
                 "shasum": null
             },
             "require": {
@@ -35,12 +35,12 @@
                 "channelgrabber/listing": "^1.9.0",
                 "channelgrabber/locale": "^1.0.5",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.21.1",
+                "channelgrabber/order": "^1.22.1",
                 "channelgrabber/product": "^1.5.0",
                 "channelgrabber/scraper": ">=1.0.2,<2.0.0",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/stats": "^1.0.0",
-                "channelgrabber/stdlib": "dev-CGIV-6787-AmazonLogitics as 2.12.27",
+                "channelgrabber/stdlib": "^2.12.27",
                 "channelgrabber/stock": ">=1.3.4",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "composer/composer": "@dev",
@@ -55,6 +55,11 @@
                 "phpunit/phpunit": "~4.6.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-6914-AmazonLogistics-PngPdf": "1.17.7-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Amazon\\": "src"
@@ -71,7 +76,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-06 14:29:24"
+            "time": "2016-04-07 14:01:27"
         },
         {
             "name": "channelgrabber/billing",
@@ -1278,12 +1283,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b36d079f676f3b3e9b9dda00f3e1c9d8e1a432ed"
+                "reference": "da80f31bfb51b0ccd546f9dcc41265fb2c0a0a3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6915-OrderLabelService-71b751.zip",
-                "reference": "b36d079f676f3b3e9b9dda00f3e1c9d8e1a432ed",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6915-OrderLabelService-f339e5.zip",
+                "reference": "da80f31bfb51b0ccd546f9dcc41265fb2c0a0a3b",
                 "shasum": null
             },
             "require": {
@@ -1294,7 +1299,7 @@
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": "^1.0.9",
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.7",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -1329,7 +1334,7 @@
                 "channelgrabber/phpunit": "~1.0.1",
                 "phpunit/phpunit": "4.6.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-develop": "1.x-dev"
@@ -1351,7 +1356,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-07 08:49:18"
+            "time": "2016-04-08 07:45:59"
         },
         {
             "name": "channelgrabber/permission",
@@ -2087,16 +2092,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-6787-AmazonLogitics",
+            "version": "2.12.27",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "bda30204fea5f62cdf44d1e1da23dfc0f97b2b73"
+                "reference": "c7b2e8d0c9cbb37836663b5e38b667699583c454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-6787-AmazonLogitics-124091.zip",
-                "reference": "bda30204fea5f62cdf44d1e1da23dfc0f97b2b73",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.27-5e9f9b.zip",
+                "reference": "c7b2e8d0c9cbb37836663b5e38b667699583c454",
                 "shasum": null
             },
             "require": {
@@ -2128,7 +2133,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-06 08:03:53"
+            "time": "2016-04-07 13:43:19"
         },
         {
             "name": "channelgrabber/stock",
@@ -8315,30 +8320,16 @@
     ],
     "aliases": [
         {
-            "alias": "1.17.7",
-            "alias_normalized": "1.17.7.0",
-            "version": "dev-CGIV-6787-AmazonLogitics",
-            "package": "channelgrabber/amazon"
-        },
-        {
             "alias": "1.23.0",
             "alias_normalized": "1.23.0.0",
             "version": "dev-CGIV-6915-OrderLabelService",
             "package": "channelgrabber/order"
-        },
-        {
-            "alias": "2.12.27",
-            "alias_normalized": "2.12.27.0",
-            "version": "dev-CGIV-6787-AmazonLogitics",
-            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
