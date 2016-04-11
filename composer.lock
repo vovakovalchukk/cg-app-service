@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d75d0aa110460fa888db78ac0526924e",
-    "content-hash": "8dd60d0cec2b68d0b29da253850b4fc1",
+    "hash": "29e4cbf7dc587b767cc0c44d7410a073",
+    "content-hash": "f15aea153095aa80f33f9eea4810cc39",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -137,30 +137,30 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.1.2",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "21cb20a0bb3861d0ed0bc81b0cccd5d23eb1a51f"
+                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.1.2-8c2a2f.zip",
-                "reference": "21cb20a0bb3861d0ed0bc81b0cccd5d23eb1a51f",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.1-62c1b4.zip",
+                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/stdlib": "^2.10.4",
                 "composer/composer": "@dev",
-                "predis/predis": "~0.8.3"
+                "predis/predis": "~0.8.5"
             },
             "require-dev": {
                 "phpspec/phpspec": "2.0.*@dev",
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Cache\\": "src"
@@ -171,7 +171,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-08 14:15:40"
+            "time": "2016-04-08 14:18:28"
         },
         {
             "name": "channelgrabber/cg-predis",
