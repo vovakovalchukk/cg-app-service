@@ -47,6 +47,13 @@ class Entity implements RulesInterface
                     new StringLength(['min' => 1]),
                 ],
             ],
+            'code' => [
+                'name' => 'code',
+                'required' => true,
+                'validators' => [
+                    new IntegerValidator(['name' => 'code']),
+                ],
+            ],
         ];
     }
 } 

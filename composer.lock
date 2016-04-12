@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7d8a46275a2abb9b7c04c45568dacf3e",
-    "content-hash": "71865770b854ab0ab323fae435b576e5",
+    "hash": "02d1f0654eb7f9c18301017c95b9913b",
+    "content-hash": "f7bfb67f6e5b59356e56a298f9594527",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -950,16 +950,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-6740-ListingStatus",
+            "version": "dev-CGIV-6744-RelistErroredListings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "72928b0c649a81c629f2cb27a5711016a55531c4"
+                "reference": "dce3a98afdd945df4f176de1f85aa6428b9b5323"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6740-ListingStatus-4d3f11.zip",
-                "reference": "72928b0c649a81c629f2cb27a5711016a55531c4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6744-RelistErroredListings-22a8a4.zip",
+                "reference": "dce3a98afdd945df4f176de1f85aa6428b9b5323",
                 "shasum": null
             },
             "require": {
@@ -999,7 +999,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-11 10:32:52"
+            "time": "2016-04-12 12:26:44"
         },
         {
             "name": "channelgrabber/locale",
@@ -8322,7 +8322,7 @@
         {
             "alias": "1.9.7",
             "alias_normalized": "1.9.7.0",
-            "version": "dev-CGIV-6740-ListingStatus",
+            "version": "dev-CGIV-6744-RelistErroredListings",
             "package": "channelgrabber/listing"
         }
     ],

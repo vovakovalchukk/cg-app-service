@@ -96,7 +96,7 @@ return [
             'filterRules' => ListingStatusHistoryCollectionValidation::class,
             'dataRules' => ListingStatusHistoryEntityValidation::class,
         ],
-        'version' => new Version(1, 1),
+        'version' => new Version(1, 2),
     ],
     ListingStatusHistoryMapper::URI . '/:statusHistoryId' => [
         'controllers' => function($statusHistoryId) use ($di, $app) {
@@ -117,7 +117,7 @@ return [
             'entityClass' => ListingStatusHistoryEntity::class,
             'serviceClass' => ListingStatusHistoryService::class,
         ],
-        'version' => new Version(1, 1),
+        'version' => new Version(1, 2),
     ],
     '/unimportedListing' => [
         'controllers' => function() use ($di, $app) {
