@@ -60,7 +60,7 @@ class Db extends DbAbstract implements StorageInterface
                 ->columns(['id' => new Expression('MAX(?)', ['id'], [Expression::TYPE_IDENTIFIER])])
                 ->group('listingId');
 
-            $select = $this->getSelect()
+            $select = $this->getSelect(false)
                 ->join(
                     ['max' => $max],
                     sprintf('%s.id = max.id', static::TABLE_NAME),
