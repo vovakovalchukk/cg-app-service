@@ -98,7 +98,7 @@ class Db extends DbAbstract implements StorageInterface
             ->join(
                 static::TABLE_NAME_CODE,
                 sprintf('%s.id = %s.listingStatusHistoryId', static::TABLE_NAME, static::TABLE_NAME_CODE),
-                ['code' => new Expression('GROUP_CONCAT(? SEPARATOR ?)', ['code', static::SEPERATOR], [Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE])],
+                ['code' => new Expression('GROUP_CONCAT(? SEPARATOR \'?\')', ['code', static::SEPERATOR], [Expression::TYPE_IDENTIFIER, Expression::TYPE_LITERAL])],
                 Select::JOIN_LEFT
             )
             ->group(sprintf('%s.id', static::TABLE_NAME));
