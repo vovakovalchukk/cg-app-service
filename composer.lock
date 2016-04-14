@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02d1f0654eb7f9c18301017c95b9913b",
+    "hash": "c0ae99dbfc9c3dcf989c4a08fe7883f8",
     "content-hash": "f7bfb67f6e5b59356e56a298f9594527",
     "packages": [
         {
@@ -954,12 +954,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "dce3a98afdd945df4f176de1f85aa6428b9b5323"
+                "reference": "3a8620f60c8dcf7f5dd055b591d5dc1ec906125d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6744-RelistErroredListings-22a8a4.zip",
-                "reference": "dce3a98afdd945df4f176de1f85aa6428b9b5323",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6744-RelistErroredListings-3388a9.zip",
+                "reference": "3a8620f60c8dcf7f5dd055b591d5dc1ec906125d",
                 "shasum": null
             },
             "require": {
@@ -984,6 +984,11 @@
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-6744-RelistErroredListings": "1.9.7-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Listing\\": "src"
@@ -999,7 +1004,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-12 12:26:44"
+            "time": "2016-04-13 15:03:28"
         },
         {
             "name": "channelgrabber/locale",

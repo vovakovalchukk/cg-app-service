@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Listing\StatusHistory;
 
 use CG\Stdlib\DateTime;
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\Date;
@@ -51,7 +52,7 @@ class Entity implements RulesInterface
                 'name' => 'code',
                 'required' => true,
                 'validators' => [
-                    new IntegerValidator(['name' => 'code']),
+                    new ArrayOfIntegersValidator(new IntegerValidator(['name' => 'code'])),
                 ],
             ],
         ];
