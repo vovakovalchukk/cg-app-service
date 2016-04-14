@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c0ae99dbfc9c3dcf989c4a08fe7883f8",
-    "content-hash": "f7bfb67f6e5b59356e56a298f9594527",
+    "hash": "b0412bcc09ac15a914d712ae49c263be",
+    "content-hash": "c6b4654705926ae9f53ec2bedf53bfe7",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1284,16 +1284,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "96540bacd1ceac1b0120b29b73b474e934919d8c"
+                "reference": "f80d4756269bc7af3d1c6222db96a6995af9926b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.22.1-a24708.zip",
-                "reference": "96540bacd1ceac1b0120b29b73b474e934919d8c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.0-bd3dab.zip",
+                "reference": "f80d4756269bc7af3d1c6222db96a6995af9926b",
                 "shasum": null
             },
             "require": {
@@ -1304,7 +1304,7 @@
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": "^1.0.9",
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.7",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -1339,7 +1339,7 @@
                 "channelgrabber/phpunit": "~1.0.1",
                 "phpunit/phpunit": "4.6.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-develop": "1.x-dev"
@@ -1361,7 +1361,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-07 13:48:35"
+            "time": "2016-04-14 09:32:35"
         },
         {
             "name": "channelgrabber/permission",
