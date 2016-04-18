@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee75cad6a59f03454e09fb3dd786a925",
-    "content-hash": "9c46c3f83943574f699badf54929f7b7",
+    "hash": "33ccac2b509ddf3740aff98e2f799904",
+    "content-hash": "ce234ced341fc6f8830c63c7f036c0c0",
     "packages": [
         {
             "name": "channelgrabber/amazon",
-            "version": "1.17.7",
+            "version": "1.17.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "819a84d73e86a19ef1705204a077e47a62bd18a4"
+                "reference": "f083fee38e34a3c79e48347f2132313bb0bb606b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.17.7-e171b8.zip",
-                "reference": "819a84d73e86a19ef1705204a077e47a62bd18a4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.17.9-3cbdde.zip",
+                "reference": "f083fee38e34a3c79e48347f2132313bb0bb606b",
                 "shasum": null
             },
             "require": {
@@ -55,11 +55,6 @@
                 "phpunit/phpunit": "~4.6.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-6914-AmazonLogistics-PngPdf": "1.17.7-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Amazon\\": "src"
@@ -76,7 +71,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-07 14:01:27"
+            "time": "2016-04-15 11:50:06"
         },
         {
             "name": "channelgrabber/billing",
@@ -291,16 +286,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.22.2",
+            "version": "dev-CGIV-6939-ApiOrderDispatch",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "b92631b62905330461e394dd39ed82b0d49096fb"
+                "reference": "bd809b4715ff7be7920a5f2a5cc67fae076a0d13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.22.2-e29e77.zip",
-                "reference": "b92631b62905330461e394dd39ed82b0d49096fb",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6939-ApiOrderDispatch-08e424.zip",
+                "reference": "bd809b4715ff7be7920a5f2a5cc67fae076a0d13",
                 "shasum": null
             },
             "require": {
@@ -336,6 +331,11 @@
                 "nocarrier/hal": "~0.9.4",
                 "zendframework/zend-di": ">=2.2.5,<3.0"
             },
+            "conflict": {
+                "channelgrabber/amazon": "<1.17.9",
+                "channelgrabber/dataplug": "<1.2.5",
+                "channelgrabber/netdespatch": "<1.0.5"
+            },
             "replace": {
                 "channelgrabber/account": "*"
             },
@@ -368,7 +368,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-01 14:26:08"
+            "time": "2016-04-18 10:08:06"
         },
         {
             "name": "channelgrabber/cilex",
@@ -490,22 +490,22 @@
         },
         {
             "name": "channelgrabber/dataplug",
-            "version": "1.2.2",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-dataplug.git",
-                "reference": "56e84abbc3997e2034a19d6d19d3e435eaadaa31"
+                "reference": "31640f38ba8ed4cbbd82a0b0f0b3cd8d96b11242"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-dataplug-1.2.2-16c72e.zip",
-                "reference": "56e84abbc3997e2034a19d6d19d3e435eaadaa31",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-dataplug-1.2.5-a11f41.zip",
+                "reference": "31640f38ba8ed4cbbd82a0b0f0b3cd8d96b11242",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/channel": "^1.21.8",
+                "channelgrabber/channel": "^1.22.2",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": ">=2.1.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/gearman": "^1.2.0",
                 "channelgrabber/order": "^1.21.5",
                 "channelgrabber/product": "^1.5.0",
@@ -537,7 +537,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-22 16:07:32"
+            "time": "2016-04-15 11:53:26"
         },
         {
             "name": "channelgrabber/db",
@@ -8318,9 +8318,17 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.23.1",
+            "alias_normalized": "1.23.1.0",
+            "version": "dev-CGIV-6939-ApiOrderDispatch",
+            "package": "channelgrabber/channel"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
