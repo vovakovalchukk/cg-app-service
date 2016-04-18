@@ -265,6 +265,12 @@ use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
 use CG\Listing\StorageInterface as ListingStorage;
 
+// Listing Status History
+use CG\Listing\StatusHistory\StorageInterface as ListingStatusHistoryStorage;
+use CG\Listing\StatusHistory\Repository as ListingStatusHistoryRepository;
+use CG\Listing\StatusHistory\Storage\Cache as ListingStatusHistoryCacheStorage;
+use CG\Listing\StatusHistory\Storage\Db as ListingStatusHistoryDbStorage;
+
 // Unimported Listing
 use CG\Listing\Unimported\Service as UnimportedListingService;
 use CG\Listing\Unimported\Repository as UnimportedListingRepository;
@@ -1379,6 +1385,19 @@ return array(
                     'cryptor' => 'amazon_cryptor',
                 ],
             ],
+            ListingStatusHistoryRepository::class => [
+                'parameters' => [
+                    'storage' => ListingStatusHistoryCacheStorage::class,
+                    'repository' => ListingStatusHistoryDbStorage::class,
+                ],
+            ],
+            ListingStatusHistoryDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1421,6 +1440,7 @@ return array(
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelRepository::class,
+                ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
             ]
         )
     )
