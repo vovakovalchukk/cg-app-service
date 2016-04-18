@@ -7,6 +7,7 @@ use CG\Listing\Entity;
 use CG\Listing\Filter;
 use CG\Listing\Mapper;
 use CG\Listing\ServiceAbstract;
+use CG\Listing\StatusChecker;
 use CG\Listing\StatusHistory\Filter as StatusHistoryFilter;
 use CG\Listing\StatusHistory\Service as StatusHistoryService;
 use CG\Listing\StorageInterface;
@@ -33,11 +34,11 @@ class Service extends ServiceAbstract
         StorageInterface $repository,
         Mapper $mapper,
         GlobalEventManager $globalEventManager,
+        StatusChecker $statusChecker,
         StatusHistoryService $statusHistoryService
     ) {
+        parent::__construct($repository, $mapper, $statusChecker);
         $this
-            ->setRepository($repository)
-            ->setMapper($mapper)
             ->setGlobalEventManager($globalEventManager)
             ->setStatusHistoryService($statusHistoryService);
     }
