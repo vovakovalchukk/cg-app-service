@@ -139,14 +139,6 @@ class Service extends ServiceAbstract
     }
 
     /**
-     * @return StorageInterface
-     */
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
-    /**
      * @return self
      */
     protected function setStatusHistoryService(StatusHistoryService $statusHistoryService)
