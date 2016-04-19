@@ -1,6 +1,7 @@
 <?php
 namespace CG\Controllers\Settings\Shipping\Alias;
 
+use CG\Settings\Shipping\Alias\Filter;
 use CG\Settings\Shipping\Alias\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
@@ -21,11 +22,15 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('organisationUnitId') ?: []
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            new Filter(
+                $this->getParams('limit'),
+                $this->getParams('page'),
+                $this->getParams('id') ?: [],
+                $this->getParams('organisationUnitId') ?: [],
+                $this->getParams('accountId') ?: [],
+                $this->getParams('shippingService') ?: []
+            )
         );
     }
 }

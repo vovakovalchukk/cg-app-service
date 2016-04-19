@@ -1903,18 +1903,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "0b8033a862052908f3d243be74da5d7831459643"
+                "reference": "ca420fb1e5d6a6337a691804f36348cc4b6f5474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-6889-shipping-alias-service-options-8efc89.zip",
-                "reference": "0b8033a862052908f3d243be74da5d7831459643",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-6889-shipping-alias-service-options-a83a13.zip",
+                "reference": "ca420fb1e5d6a6337a691804f36348cc4b6f5474",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": ">=2.1.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/log": "^2.0.21",
@@ -1923,7 +1923,7 @@
                 "channelgrabber/validation": ">=1.2.6",
                 "composer/composer": "@dev"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Settings\\": "src"
@@ -1934,7 +1934,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-23 13:33:49"
+            "time": "2016-04-19 14:07:03"
         },
         {
             "name": "channelgrabber/slim",
