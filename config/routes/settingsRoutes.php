@@ -232,7 +232,7 @@ return [
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'ApiSettings',
+        'name' => 'ApiSettingsEntity',
         'validation' => [
             'dataRules' => ApiEntityValidation::class
         ],
@@ -254,7 +254,7 @@ return [
                 );
             },
         'via' => ['GET', 'OPTIONS'],
-        'name' => 'ApiSettingsCollection',
+        'name' => 'ProductSettingsCollection',
         'entityRoute' => '/settings/api/:id',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
@@ -272,7 +272,7 @@ return [
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'ApiSettings',
+        'name' => 'ProductSettingsEntity',
         'validation' => [
             'dataRules' => ProductEntityValidation::class
         ],

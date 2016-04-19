@@ -126,7 +126,7 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 // Label
-use CG\Order\Service\Label\Service as LabelService;
+use CG\Order\Shared\Label\StorageInterface as LabelStorage;
 use CG\Order\Shared\Label\Repository as LabelRepository;
 use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
 use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
@@ -265,6 +265,12 @@ use CG\Listing\Storage\Db as ListingDbStorage;
 use CG\Listing\Storage\Cache as ListingCacheStorage;
 use CG\Listing\StorageInterface as ListingStorage;
 
+// Listing Status History
+use CG\Listing\StatusHistory\StorageInterface as ListingStatusHistoryStorage;
+use CG\Listing\StatusHistory\Repository as ListingStatusHistoryRepository;
+use CG\Listing\StatusHistory\Storage\Cache as ListingStatusHistoryCacheStorage;
+use CG\Listing\StatusHistory\Storage\Db as ListingStatusHistoryDbStorage;
+
 // Unimported Listing
 use CG\Listing\Unimported\Service as UnimportedListingService;
 use CG\Listing\Unimported\Repository as UnimportedListingRepository;
@@ -353,6 +359,13 @@ use CG\Order\Shared\CustomerCounts\Repository as CustomerCountRepository;
 use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
 use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
 
+// Amazon Logistics
+use CG\Amazon\ShippingService\StorageInterface as AmazonShippingServiceStorage;
+use CG\Amazon\ShippingService\Storage\Cache as AmazonShippingServiceCacheStorage;
+use CG\Amazon\ShippingService\Storage\Db as AmazonShippingServiceDbStorage;
+use CG\Amazon\ShippingService\Repository as AmazonShippingServiceRepository;
+use CG\Amazon\ShippingService\Service as AmazonShippingServiceService;
+
 return array(
     'di' => array(
         'definition' => [
@@ -384,6 +397,9 @@ return array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
+                'amazonReadCGSql' => CGSql::class,
+                'amazonFastReadCGSql' => CGSql::class,
+                'amazonWriteCGSql' => CGSql::class,
                 'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
@@ -528,7 +544,9 @@ return array(
                     'orderTableName' => OrderPersistentDbStorage::ORDER_TABLE_LIVE_NAME
                 ]
             ],
-            OrderPersistentStorage::class => [
+            OrderPersistentStorage::class => ['ReadCGSql' => CGSql::class,
+                'FastReadCGSql' => CGSql::class,
+                'WriteCGSql' => CGSql::class,
                 'parameter' => [
                     'sqlClient' => OrderPersistentDbStorage::class,
                     'liveSqlClient' => 'LiveOrderPersistentDbStorage',
@@ -703,11 +721,6 @@ return array(
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
                     'repository' => LabelMongoDbStorage::class
-                ]
-            ],
-            LabelService::class => [
-                'parameter' => [
-                    'repository' => LabelRepository::class
                 ]
             ],
             AccountCommandService::class => array(
@@ -1339,6 +1352,52 @@ return array(
                     'client' => 'reliable_redis',
                 ],
             ],
+            AmazonShippingServiceRepository::class => [
+                'parameters' => [
+                    'storage' => AmazonShippingServiceCacheStorage::class,
+                    'repository' => AmazonShippingServiceDbStorage::class,
+                ],
+            ],
+            AmazonShippingServiceDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'amazonReadCGSql',
+                    'fastReadSql' => 'amazonFastReadCGSql',
+                    'writeSql' => 'amazonWriteCGSql',
+                ],
+            ],
+            'amazonReadCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonRead',
+                ],
+            ],
+            'amazonFastReadCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonFastRead',
+                ],
+            ],
+            'amazonWriteCGSql' => [
+                'parameters' => [
+                    'adapter' => 'amazonWrite',
+                ],
+            ],
+            AmazonShippingServiceService::class => [
+                'parameters' => [
+                    'cryptor' => 'amazon_cryptor',
+                ],
+            ],
+            ListingStatusHistoryRepository::class => [
+                'parameters' => [
+                    'storage' => ListingStatusHistoryCacheStorage::class,
+                    'repository' => ListingStatusHistoryDbStorage::class,
+                ],
+            ],
+            ListingStatusHistoryDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1379,6 +1438,9 @@ return array(
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
+                AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
+                LabelStorage::class => LabelRepository::class,
+                ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
             ]
         )
     )

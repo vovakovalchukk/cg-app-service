@@ -1,23 +1,25 @@
 <?php
 use CG\Account\Client\Storage\Api as AccountApiStorage;
+use CG\Slim\Versioning\AliasSettingsCollection;
+use CG\Slim\Versioning\AliasSettingsEntity;
+use CG\Slim\Versioning\InvoiceSettingsCollection;
+use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\ListingEntity;
+use CG\Slim\Versioning\ListingStatusHistoryCollection;
+use CG\Slim\Versioning\ListingStatusHistoryEntity;
 use CG\Slim\Versioning\OrderCollection;
 use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
-use CG\Slim\Versioning\TemplateCollection;
-use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
-use CG\Slim\Versioning\AliasSettingsCollection;
-use CG\Slim\Versioning\AliasSettingsEntity;
+use CG\Slim\Versioning\TemplateCollection;
+use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
-use CG\Slim\Versioning\InvoiceSettingsCollection;
-use CG\Slim\Versioning\InvoiceSettingsEntity;
 
 return [
     'di' => [
@@ -93,6 +95,8 @@ return [
                 'Versioniser_InvoiceSettings_1' => InvoiceSettingsEntity\Versioniser1::class,
                 'Versioniser_InvoiceSettingsCollection_2' => InvoiceSettingsCollection\Versioniser2::class,
                 'Versioniser_InvoiceSettings_2' => InvoiceSettingsEntity\Versioniser2::class,
+                'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
+                'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
