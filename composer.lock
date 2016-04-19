@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "702cfae76ece88a2f6e2e9608ce52f97",
-    "content-hash": "3659a367f1b2168f0fceb0fa6a0050fd",
+    "hash": "95bb05cc64f2355e8cf34527a3a836d5",
+    "content-hash": "771e71236dadef7780c968c98ab218a3",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -286,23 +286,23 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-6939-ApiOrderDispatch",
+            "version": "1.23.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "bd809b4715ff7be7920a5f2a5cc67fae076a0d13"
+                "reference": "72bf0caa241a7662a77b359e5583531fddc4ea2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6939-ApiOrderDispatch-08e424.zip",
-                "reference": "bd809b4715ff7be7920a5f2a5cc67fae076a0d13",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.23.1-bc0368.zip",
+                "reference": "72bf0caa241a7662a77b359e5583531fddc4ea2a",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": ">=2.1.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/gearman": "^1.2.19",
@@ -344,7 +344,7 @@
                 "channelgrabber/phpunit": ">=1.0.0",
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-develop": "1.x-dev"
@@ -368,7 +368,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-18 10:08:06"
+            "time": "2016-04-19 09:25:01"
         },
         {
             "name": "channelgrabber/cilex",
@@ -8318,17 +8318,9 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.1",
-            "alias_normalized": "1.23.1.0",
-            "version": "dev-CGIV-6939-ApiOrderDispatch",
-            "package": "channelgrabber/channel"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
