@@ -53,7 +53,12 @@ class Entity implements RulesInterface
                 'name'       => 'timestamp',
                 'required'   => true,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
-            )
+            ),
+            'status' => [
+                'name'       => 'status',
+                'required'   => true,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         );
     }
 }

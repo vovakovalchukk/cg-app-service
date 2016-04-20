@@ -33,7 +33,8 @@ class Collection
                 $this->getParams('accountId') ?: [],
                 $this->getParams('userId') ?: [],
                 $this->getParams('carrier') ?: [],
-                $this->getParams('number') ?: []
+                $this->getParams('number') ?: [],
+                $this->getParams('status') ?: []
             )
         );
     }

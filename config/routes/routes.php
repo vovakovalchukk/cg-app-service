@@ -225,7 +225,8 @@ return array(
         'via' => array('GET', 'POST', 'OPTIONS'),
         'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
-        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => OrderTrackingFilterValidationRules::class, "flatten" => false)
+        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => OrderTrackingFilterValidationRules::class, "flatten" => false),
+        'version' => new Version(1, 2),
     ),
     '/order/:orderId/tracking/:trackingId' => array (
         'controllers' => function($orderId, $trackingId) use ($di) {
@@ -241,6 +242,7 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderTrackingEntity',
         'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,
@@ -654,6 +656,7 @@ return array(
         'name' => 'TrackingCollection',
         'validation' => [
             "filterRules" => TrackingFilterValidationRules::class,
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
 );

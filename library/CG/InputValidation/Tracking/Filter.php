@@ -67,6 +67,13 @@ class Filter implements RulesInterface {
                     new IsArrayValidator(['name' => 'number'])
                 ]
             ),
+            'status' => [
+                'name'       => 'status',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'status'])
+                ]
+            ],
         ];
     }
 }

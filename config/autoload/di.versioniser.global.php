@@ -18,6 +18,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
+use CG\Slim\Versioning\TrackingCollection;
+use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
 
@@ -95,6 +97,9 @@ return [
                 'Versioniser_InvoiceSettings_2' => InvoiceSettingsEntity\Versioniser2::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
+                'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
+                'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
+                'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
