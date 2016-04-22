@@ -946,7 +946,7 @@ return array(
             ],
             TransactionRedisClient::class => [
                 'parameter' => [
-                    'predis' => 'reliable_redis',
+                    'predis' => 'reliable_redis', 
                 ]
             ],
             StockService::class => [
