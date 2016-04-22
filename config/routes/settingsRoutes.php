@@ -138,7 +138,7 @@ return [
             'dataRules' => AliasEntityValidation::class
         ],
         'entityRoute' => '/settings/shipping/alias/:aliasId',
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
     '/settings/shipping/alias/:aliasId' => [
         'controllers' => function($aliasId) use ($di, $app) {
@@ -160,7 +160,7 @@ return [
             'entityClass' => AliasEntity::class,
             'serviceClass' => AliasService::class
         ],
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
     '/settings/pickList' => [
         'controllers' => function() use ($di) {
@@ -232,7 +232,7 @@ return [
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'ApiSettings',
+        'name' => 'ApiSettingsEntity',
         'validation' => [
             'dataRules' => ApiEntityValidation::class
         ],
@@ -254,7 +254,7 @@ return [
                 );
             },
         'via' => ['GET', 'OPTIONS'],
-        'name' => 'ApiSettingsCollection',
+        'name' => 'ProductSettingsCollection',
         'entityRoute' => '/settings/api/:id',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
@@ -272,7 +272,7 @@ return [
                 );
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'ApiSettings',
+        'name' => 'ProductSettingsEntity',
         'validation' => [
             'dataRules' => ProductEntityValidation::class
         ],

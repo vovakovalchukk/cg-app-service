@@ -3,6 +3,7 @@ namespace CG\InputValidation\Settings\Alias;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\ValidatorChain;
 use Zend\Validator\Between;
@@ -25,13 +26,27 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                 ]
             ],
-            'organisationUnitId' => array(
+            'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'required'   => false,
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
-            ),
+            ],
+            'accountId' => [
+                'name'       => 'accountId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                ]
+            ],
+            'shippingService' => [
+                'name'       => 'shippingService',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "shippingService"])
+                ]
+            ],
         ];
     }
 }
