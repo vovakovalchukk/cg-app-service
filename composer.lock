@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "307ec881e910c69d287f1cf8233ab2c0",
-    "content-hash": "277a8e40ebfcdd45849590794713d719",
+    "hash": "d7a6242c5a0317bd18b4398458a2d4f9",
+    "content-hash": "ea96ab5252b4c93e672d7ff12c8810af",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1184,29 +1184,27 @@
         },
         {
             "name": "channelgrabber/middleware",
-            "version": "1.0.2",
+            "version": "dev-CGIV-6948-ApiUpdateNonApiOrders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-middleware.git",
-                "reference": "e4cfbb4829663eea117938ca73991a56d38869c2"
+                "reference": "b528ce0c7f0eae37540e52668b540bbe06113177"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.0.2-d16fa6.zip",
-                "reference": "e4cfbb4829663eea117938ca73991a56d38869c2",
-                "shasum": "8890cc19fa78f841ddfee4d8cdbd3c121264a107"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-dev-CGIV-6948-ApiUpdateNonApiOrders-2a7a44.zip",
+                "reference": "b528ce0c7f0eae37540e52668b540bbe06113177",
+                "shasum": null
             },
             "require": {
-                "channelgrabber/slim": ">=1.12.0,<2.0.0",
-                "composer/composer": "@dev",
-                "php-jsonpatch/php-jsonpatch": "@dev",
-                "php-jsonpointer/php-jsonpointer": "@dev",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/slim": "dev-CGIV-6948-ApiUpdateNonApiOrders as 1.13.21",
                 "slim/slim": "2.3.*"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=4.4.0"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Middleware\\": "src"
@@ -1222,7 +1220,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-26 12:53:08"
+            "time": "2016-04-22 07:54:22"
         },
         {
             "name": "channelgrabber/notification",
@@ -1938,16 +1936,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.20",
+            "version": "dev-CGIV-6948-ApiUpdateNonApiOrders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "fd86e3dcd316b43c034767a910fc862fcafe4aae"
+                "reference": "4a1d3fbcaa5db71a5258ca9aeec0c7da3d03257c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.20-f44af9.zip",
-                "reference": "fd86e3dcd316b43c034767a910fc862fcafe4aae",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-6948-ApiUpdateNonApiOrders-38ee97.zip",
+                "reference": "4a1d3fbcaa5db71a5258ca9aeec0c7da3d03257c",
                 "shasum": null
             },
             "require": {
@@ -2003,7 +2001,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-29 09:08:35"
+            "time": "2016-04-22 11:41:44"
         },
         {
             "name": "channelgrabber/spork",
@@ -3736,7 +3734,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/e57b7e02224d0266d5f7de970964b5302501125b",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpatch/zipball/cc43b856ed3e1726f5f1fab7f5a6fc0cdbce0ef4",
                 "reference": "e57b7e02224d0266d5f7de970964b5302501125b",
                 "shasum": "691f4c32e8522bbb20fb4baec578d0eab498b683"
             },
@@ -3793,7 +3791,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/064f65b05d1381d4999113f442af93949cc7c29a",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/86abfb29af042a1c1dabc439089b3a5945ac3e34",
                 "reference": "064f65b05d1381d4999113f442af93949cc7c29a",
                 "shasum": "1982d83a6b5c301565c6af5e5acfe9f11e43776b"
             },
@@ -8318,10 +8316,25 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.3",
+            "alias_normalized": "1.0.3.0",
+            "version": "dev-CGIV-6948-ApiUpdateNonApiOrders",
+            "package": "channelgrabber/middleware"
+        },
+        {
+            "alias": "1.13.21",
+            "alias_normalized": "1.13.21.0",
+            "version": "dev-CGIV-6948-ApiUpdateNonApiOrders",
+            "package": "channelgrabber/slim"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/middleware": 20,
+        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
