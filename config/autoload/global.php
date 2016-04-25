@@ -366,22 +366,7 @@ use CG\Amazon\ShippingService\Storage\Db as AmazonShippingServiceDbStorage;
 use CG\Amazon\ShippingService\Repository as AmazonShippingServiceRepository;
 use CG\Amazon\ShippingService\Service as AmazonShippingServiceService;
 
-//  Billing
-use CG\Billing\Subscription\StorageInterface as SubscriptionStorageInterface;
-use CG\Billing\Subscription\Storage\Api as SubscriptionStorage;
-use CG\Billing\Discount\StorageInterface as DiscountStorageInterface;
-use CG\Billing\Discount\Storage\Api as DiscountStorage;
-use CG\Billing\SubscriptionDiscount\StorageInterface as SubscriptionDiscountStorageInterface;
-use CG\Billing\SubscriptionDiscount\Storage\Api as SubscriptionDiscountStorage;
-use CG\Billing\Package\StorageInterface as PackageStorageInterface;
-use CG\Billing\Package\Storage\Api as PackageStorage;
-use CG\Billing\Licence\StorageInterface as LicenceStorageInterface;
-use CG\Billing\Licence\Storage\Api as LicenceStorage;
-use CG\Billing\BillingWindow\StorageInterface as BillingWindowStorageInterface;
-use CG\Billing\BillingWindow\Storage\Api as BillingWindowStorage;
-use CG\Billing\Transaction\StorageInterface as TransactionStorageInterface;
-use CG\Billing\Transaction\Storage\Api as TransactionStorage;
-
+use CG\Account\Command\Sales\Disable as SalesAccountDisable;
 
 return array(
     'di' => array(
@@ -1402,41 +1387,6 @@ return array(
                     'cryptor' => 'amazon_cryptor',
                 ],
             ],
-            SubscriptionStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            PackageStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            LicenceStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            DiscountStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            SubscriptionDiscountStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            BillingWindowStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
-            TransactionStorage::class => [
-                'parameters' => [
-                    'client' => 'billing_guzzle',
-                ],
-            ],
             ListingStatusHistoryRepository::class => [
                 'parameters' => [
                     'storage' => ListingStatusHistoryCacheStorage::class,
@@ -1448,6 +1398,12 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
+                ],
+            ],
+            SalesAccountDisable::class => [
+                'parameters' => [
+                    'service' => AccountService::class,
+                    'readSql' => 'ReadSql',
                 ],
             ],
             'preferences' => [
@@ -1492,13 +1448,6 @@ return array(
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelRepository::class,
-                SubscriptionStorageInterface::class => SubscriptionStorage::class,
-                PackageStorageInterface::class => PackageStorage::class,
-                LicenceStorageInterface::class => LicenceStorage::class,
-                DiscountStorageInterface::class => DiscountStorage::class,
-                SubscriptionDiscountStorageInterface::class => SubscriptionDiscountStorage::class,
-                BillingWindowStorageInterface::class => BillingWindowStorage::class,
-                TransactionStorageInterface::class => TransactionStorage::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
             ]
         )

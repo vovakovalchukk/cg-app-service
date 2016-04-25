@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4295e937e264bda70500023a1eb7206a",
-    "content-hash": "46e23941a5914f1891cfa970079de496",
+    "hash": "17a0899fd3fda7c6686ef3c61bbfec7d",
+    "content-hash": "21be18920d6507a51562021af90b6d3f",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -75,16 +75,16 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "dev-CGIV-6668-Disable-sales-accounts-for-old-users",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "84eae6283d8ac2332cab37fec83461b1992d3c75"
+                "reference": "567e9b2f0b2513af8290d72212949abca452aab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-dev-CGIV-6668-Disable-sales-accounts-for-old-users-3a3779.zip",
-                "reference": "84eae6283d8ac2332cab37fec83461b1992d3c75",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.10.0-f7d59c.zip",
+                "reference": "567e9b2f0b2513af8290d72212949abca452aab6",
                 "shasum": null
             },
             "require": {
@@ -126,7 +126,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-22 14:34:27"
+            "time": "2016-03-29 07:55:11"
         },
         {
             "name": "channelgrabber/cache",
@@ -288,16 +288,15 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "52a69432cee2535fe7470f2355c9386cb93c4211"
+                "reference": "f3c95137039cedd336009222eac18b1ac4aa5674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6668-Disable-sales-accounts-for-old-users-0499b0.zip",
-                "reference": "52a69432cee2535fe7470f2355c9386cb93c4211",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6668-Disable-sales-accounts-for-old-users-c8d3c2.zip",
+                "reference": "f3c95137039cedd336009222eac18b1ac4aa5674",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/billing": "dev-CGIV-6668-Disable-sales-accounts-for-old-users as 1.10.1",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/constants": "dev-master",
@@ -367,7 +366,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-22 15:01:41"
+            "time": "2016-04-25 12:47:28"
         },
         {
             "name": "channelgrabber/cilex",
@@ -8348,18 +8347,11 @@
             "alias_normalized": "1.23.2.0",
             "version": "dev-CGIV-6668-Disable-sales-accounts-for-old-users",
             "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.10.1-dev",
-            "alias_normalized": "1.10.1.0-dev",
-            "version": "dev-CGIV-6668-Disable-sales-accounts-for-old-users",
-            "package": "channelgrabber/billing"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/channel": 20,
-        "channelgrabber/billing": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
