@@ -83,6 +83,8 @@ return [
                 'Versioniser_ProductEntity_6' => ProductEntity\Versioniser6::class,
                 'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
+                'Versioniser_AliasSettingsCollection_2' => AliasSettingsCollection\Versioniser2::class,
+                'Versioniser_AliasSettingsEntity_2' => AliasSettingsEntity\Versioniser2::class,
                 'Versioniser_UnimportedListingCollection_1' => UnimportedListingCollection\Versioniser1::class,
                 'Versioniser_UnimportedListingEntity_1' => UnimportedListingEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingCollection_2' => UnimportedListingCollection\Versioniser2::class,
@@ -209,6 +211,11 @@ return [
             'Versioniser_AliasSettingsCollection_1' => [
                 'parameter' => [
                     'aliasVersioniser1' => 'Versioniser_AliasSettingsEntity_1'
+                ],
+            ],
+            'Versioniser_AliasSettingsCollection_2' => [
+                'parameter' => [
+                    'aliasVersioniser2' => 'Versioniser_AliasSettingsEntity_2'
                 ],
             ],
             'Versioniser_UnimportedListingCollection_1' => [

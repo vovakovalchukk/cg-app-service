@@ -138,7 +138,7 @@ return [
             'dataRules' => AliasEntityValidation::class
         ],
         'entityRoute' => '/settings/shipping/alias/:aliasId',
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
     '/settings/shipping/alias/:aliasId' => [
         'controllers' => function($aliasId) use ($di, $app) {
@@ -160,7 +160,7 @@ return [
             'entityClass' => AliasEntity::class,
             'serviceClass' => AliasService::class
         ],
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
     '/settings/pickList' => [
         'controllers' => function() use ($di) {
