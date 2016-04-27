@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "84492ef767fec7e276d3dc436a9aa905",
-    "content-hash": "bfe5cf46b53086a24b101eb576ebd176",
+    "hash": "dae1fdc3f9776568271a74c862de1be3",
+    "content-hash": "4efa1428c87ed54336a56a2b0599e9ff",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -286,16 +286,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-6668-Disable-sales-accounts-for-old-users",
+            "version": "1.24.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "464efea3e3bef166c44a3eddec3c7565a48fa9b5"
+                "reference": "caab8c5f85136ee27600f94e1f02a9ae8d011eab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-6668-Disable-sales-accounts-for-old-users-e67e21.zip",
-                "reference": "464efea3e3bef166c44a3eddec3c7565a48fa9b5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.24.1-87eda8.zip",
+                "reference": "caab8c5f85136ee27600f94e1f02a9ae8d011eab",
                 "shasum": null
             },
             "require": {
@@ -368,7 +368,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-27 10:37:03"
+            "time": "2016-04-27 11:50:49"
         },
         {
             "name": "channelgrabber/cilex",
@@ -8341,17 +8341,9 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.2",
-            "alias_normalized": "1.23.2.0",
-            "version": "dev-CGIV-6668-Disable-sales-accounts-for-old-users",
-            "package": "channelgrabber/channel"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
