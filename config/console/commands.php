@@ -12,7 +12,8 @@ $files = [
     'migrateMongoOrderDataToMysql.php',
     'migrateMongoOrderItemDataToMysql.php',
     'removeThenCorrectImportedProducts.php',
-    'reAddInActionOrdersToGearman.php'
+    'reAddInActionOrdersToGearman.php',
+    'account.php',
 ];
 
 $commands = array();

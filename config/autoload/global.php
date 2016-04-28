@@ -366,6 +366,8 @@ use CG\Amazon\ShippingService\Storage\Db as AmazonShippingServiceDbStorage;
 use CG\Amazon\ShippingService\Repository as AmazonShippingServiceRepository;
 use CG\Amazon\ShippingService\Service as AmazonShippingServiceService;
 
+use CG\Account\Command\Sales\Disable as SalesAccountDisable;
+
 return array(
     'di' => array(
         'definition' => [
@@ -929,7 +931,7 @@ return array(
             ],
             TransactionRedisClient::class => [
                 'parameter' => [
-                    'predis' => 'reliable_redis',
+                    'predis' => 'reliable_redis', 
                 ]
             ],
             StockService::class => [
@@ -1396,6 +1398,12 @@ return array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
+                ],
+            ],
+            SalesAccountDisable::class => [
+                'parameters' => [
+                    'service' => AccountService::class,
+                    'readSql' => 'ReadSql',
                 ],
             ],
             'preferences' => [
