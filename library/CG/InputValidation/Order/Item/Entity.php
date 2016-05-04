@@ -4,6 +4,7 @@ namespace CG\InputValidation\Order\Item;
 use CG\Validation\RulesInterface;
 use Zend\Validator\Date;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\BooleanValidator;
 use Zend\Validator\StringLength;
@@ -120,6 +121,11 @@ class Entity implements RulesInterface
                 'name'       => 'cgCreationDate',
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
+            'imageIds' => [
+                'name'       => 'imageIds',
+                'required'   => false,
+                'validators' => [new IsArrayValidator(['name' => 'imageIds'])]
             ],
         ];
     }

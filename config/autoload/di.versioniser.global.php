@@ -65,6 +65,8 @@ return [
                 'Versioniser_OrderItemEntity_6' => OrderItemEntity\Versioniser6::class,
                 'Versioniser_OrderItemCollection_7' => OrderItemCollection\Versioniser7::class,
                 'Versioniser_OrderItemEntity_7' => OrderItemEntity\Versioniser7::class,
+                'Versioniser_OrderItemCollection_8' => OrderItemCollection\Versioniser8::class,
+                'Versioniser_OrderItemEntity_8' => OrderItemEntity\Versioniser8::class,
                 'Versioniser_OrderLabelCollection_1' => OrderLabelCollection\Versioniser1::class,
                 'Versioniser_OrderLabelEntity_1' => OrderLabelEntity\Versioniser1::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
