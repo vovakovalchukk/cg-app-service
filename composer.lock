@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1ea82e055e027a59ed6288aa1ca9b3ea",
-    "content-hash": "b54b816abdd1854e4a6aba501ec1314e",
+    "hash": "e31795afddd6e41ba3c35c73fcb008a7",
+    "content-hash": "9bf67267837dd04bfb128c4f74c23fd9",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1612,16 +1612,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.5.6",
+            "version": "dev-CGIV-7015-product-filtering-by-blank-sku-problem",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "91fd48fd7528257a698676abecf507e10c3411f9"
+                "reference": "314bd144f08b0ad24b9019e429b22c6cd15aaebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.6-bd004e.zip",
-                "reference": "91fd48fd7528257a698676abecf507e10c3411f9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7015-product-filtering-by-blank-sku-problem-d93176.zip",
+                "reference": "314bd144f08b0ad24b9019e429b22c6cd15aaebb",
                 "shasum": null
             },
             "require": {
@@ -1660,7 +1660,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-22 11:42:01"
+            "time": "2016-05-05 12:53:44"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -8314,10 +8314,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.7",
+            "alias_normalized": "1.5.7.0",
+            "version": "dev-CGIV-7015-product-filtering-by-blank-sku-problem",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
