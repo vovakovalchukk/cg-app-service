@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e31795afddd6e41ba3c35c73fcb008a7",
-    "content-hash": "9bf67267837dd04bfb128c4f74c23fd9",
+    "hash": "bffe9bfd65a6dd478520f6960b35c20d",
+    "content-hash": "5a213e97d006e0db9a6a3b3931eaac4a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1612,7 +1612,7 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-7015-product-filtering-by-blank-sku-problem",
+            "version": "dev-CGIV-7014-product-filtering-by-blank-sku-problem",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
@@ -1620,7 +1620,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7015-product-filtering-by-blank-sku-problem-d93176.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7014-product-filtering-by-blank-sku-problem-d93176.zip",
                 "reference": "314bd144f08b0ad24b9019e429b22c6cd15aaebb",
                 "shasum": null
             },
@@ -1934,16 +1934,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.22",
+            "version": "dev-CGIV-7014-product-filtering-by-blank-sku-problem",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "2a0c13f7df9424a836be480d07f8e07f63eb5bac"
+                "reference": "fdcde25ef9773a6e1cb68918ca33b33a62c6c6ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.22-d95fe6.zip",
-                "reference": "2a0c13f7df9424a836be480d07f8e07f63eb5bac",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-7014-product-filtering-by-blank-sku-problem-f4d0c7.zip",
+                "reference": "fdcde25ef9773a6e1cb68918ca33b33a62c6c6ae",
                 "shasum": null
             },
             "require": {
@@ -1999,7 +1999,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-29 09:54:24"
+            "time": "2016-05-05 14:12:50"
         },
         {
             "name": "channelgrabber/spork",
@@ -8318,14 +8318,21 @@
         {
             "alias": "1.5.7",
             "alias_normalized": "1.5.7.0",
-            "version": "dev-CGIV-7015-product-filtering-by-blank-sku-problem",
+            "version": "dev-CGIV-7014-product-filtering-by-blank-sku-problem",
             "package": "channelgrabber/product"
+        },
+        {
+            "alias": "1.13.23",
+            "alias_normalized": "1.13.23.0",
+            "version": "dev-CGIV-7014-product-filtering-by-blank-sku-problem",
+            "package": "channelgrabber/slim"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/product": 20,
+        "channelgrabber/slim": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
