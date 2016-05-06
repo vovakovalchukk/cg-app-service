@@ -139,6 +139,7 @@ use CG\Channel\Command\Service as AccountCommandService;
 use CG\Ekm\Gearman\Generator\OrderDownload as EkmOrderUpdateGenerator;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders as ApplyMissingStockAdjustmentsForCancDispRefOrdersCommand;
 use CG\Order\Shared\Command\UpdateAllItemsTax as UpdateAllItemsTaxCommand;
+use CG\Order\Shared\Command\UpdateAllItemsImages as UpdateAllItemsImagesCommand;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag as CorrectStockOfItemsWithIncorrectStockManagedFlagCommand;
 use CG\Order\Shared\Command\ReSyncOrderCounts as ReSyncOrderCountsCommand;
 use CG\Stock\Command\ZeroNegativeStock as ZeroNegativeStockCommand;
@@ -1158,6 +1159,11 @@ return array(
                 ]
             ],
             UpdateAllItemsTaxCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            UpdateAllItemsImagesCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]

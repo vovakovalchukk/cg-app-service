@@ -3,6 +3,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
+use CG\Order\Shared\Command\UpdateAllItemsImages;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
 use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Stdlib\DateTime as StdlibDateTime;
@@ -14,6 +15,17 @@ return [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $command = $di->get(UpdateAllItemsTax::class);
             $command();
+        }
+    ],
+    'order:updateAllItemsImages' => [
+        'description' => "Update the imageIds on all Order Items across all OUs",
+        'options' => [],
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di)
+        {
+            $output->writeln('updateAllItemsImages started');
+            $command = $di->get(UpdateAllItemsImages::class);
+            $command();
+            $output->writeln('Done. Check the logs for details, log code: ' . UpdateAllItemsImages::LOG_CODE . '</info>');
         }
     ],
     'order:correctStockOfItemsWithIncorrectStockManagedFlag' => [
