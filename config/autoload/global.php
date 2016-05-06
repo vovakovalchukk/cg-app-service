@@ -201,6 +201,7 @@ use CG\Product\Storage\Db as ProductDbStorage;
 use CG\Product\Storage\Cache as ProductCacheStorage;
 use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
+use CG\Order\Client\Gearman\Workload\UpdateItemsImagesFactory as UpdateItemsImagesWorkloadFactory;
 use CG\Product\Locking\Entity as LockingProduct;
 
 // ProductDetail
@@ -888,7 +889,8 @@ return array(
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
                     'imageStorage' => ImageService::class,
-                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class,
+                    'updateItemsImagesWorkloadFactory' => UpdateItemsImagesWorkloadFactory::class,
                 )
             ),
             ProductClientService::class => [
@@ -898,7 +900,8 @@ return array(
                     'stockStorage' => StockService::class,
                     'listingStorage' => ListingService::class,
                     'imageStorage' => ImageService::class,
-                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class
+                    'updateItemsTaxWorkloadFactory' => UpdateItemsTaxWorkloadFactory::class,
+                    'updateItemsImagesWorkloadFactory' => UpdateItemsImagesWorkloadFactory::class,
                 )
             ],
             ProductRepository::class => array(

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0b2194df49726576c0f5d256d508282",
-    "content-hash": "fc19c156ad054f33fe041de4f220d429",
+    "hash": "a1d36794f486a3ba6efccc6c9f726340",
+    "content-hash": "079ae845aec35f427a7c377cb5130761",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1279,12 +1279,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2056e0c2e1a929dcc716341286ab03a81c090e6c"
+                "reference": "be457cdba8e8759469ce30c060b6d9be77c7314a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7005-orders-table-product-image-column-1ddde4.zip",
-                "reference": "2056e0c2e1a929dcc716341286ab03a81c090e6c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7005-orders-table-product-image-column-a221e4.zip",
+                "reference": "be457cdba8e8759469ce30c060b6d9be77c7314a",
                 "shasum": null
             },
             "require": {
@@ -1307,7 +1307,7 @@
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
-                "channelgrabber/product": "^1.4.0",
+                "channelgrabber/product": "dev-CGIV-7005-orders-table-product-image-column as 1.6.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.3.9",
@@ -1353,7 +1353,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-05-05 08:49:11"
+            "time": "2016-05-06 08:14:21"
         },
         {
             "name": "channelgrabber/permission",
@@ -1613,16 +1613,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.5.6",
+            "version": "dev-CGIV-7005-orders-table-product-image-column",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "91fd48fd7528257a698676abecf507e10c3411f9"
+                "reference": "0675663269b75411f5e85c5b75bd2ea18b4bd351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.5.6-bd004e.zip",
-                "reference": "91fd48fd7528257a698676abecf507e10c3411f9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7005-orders-table-product-image-column-471bd6.zip",
+                "reference": "0675663269b75411f5e85c5b75bd2ea18b4bd351",
                 "shasum": null
             },
             "require": {
@@ -1638,7 +1638,7 @@
                 "channelgrabber/notification": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": "^1.13.2",
-                "channelgrabber/stdlib": "^2.12.6",
+                "channelgrabber/stdlib": "^2.12.24",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "composer/composer": "@dev",
                 "guzzle/guzzle": "~3.7",
@@ -1661,7 +1661,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-22 11:42:01"
+            "time": "2016-05-06 09:27:50"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -8327,6 +8327,12 @@
             "alias_normalized": "1.23.3.0",
             "version": "dev-CGIV-7005-orders-table-product-image-column",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.6.0",
+            "alias_normalized": "1.6.0.0",
+            "version": "dev-CGIV-7005-orders-table-product-image-column",
+            "package": "channelgrabber/product"
         }
     ],
     "minimum-stability": "stable",
@@ -8334,6 +8340,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/image": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
