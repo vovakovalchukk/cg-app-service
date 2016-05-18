@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "94fd20be5050a7acbea32efae9fde952",
-    "content-hash": "26b3ac6a6695554f0c097284d88b7abb",
+    "hash": "81a7152551ae497bdbe9d7b1a227489c",
+    "content-hash": "3e7bdae90c4edf2e6f7f3deca0fd8e2d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1613,16 +1613,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.6.0",
+            "version": "dev-CGIV-7001-ProductEditableWeightDimensions",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "621a7a76ea3f9e201b5fb2956751dda713a9b25d"
+                "reference": "9cc9f74672b4d4f7e8696af99a13bb64f53cb64d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.6.0-01b800.zip",
-                "reference": "621a7a76ea3f9e201b5fb2956751dda713a9b25d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7001-ProductEditableWeightDimensions-b325c7.zip",
+                "reference": "9cc9f74672b4d4f7e8696af99a13bb64f53cb64d",
                 "shasum": null
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "composer/composer": "@dev",
                 "guzzle/guzzle": "~3.7",
-                "nocarrier/hal": "~0.9.4",
+                "nocarrier/hal": "~0.9.7",
                 "zendframework/zend-di": ">=2.2.5"
             },
             "type": "di-definition",
@@ -1661,7 +1661,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-05-11 11:00:36"
+            "time": "2016-05-18 11:34:30"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -4124,6 +4124,7 @@
                 "rest",
                 "xml"
             ],
+            "abandoned": "ramsey/vnderror",
             "time": "2012-07-17 22:17:31"
         },
         {
@@ -7068,11 +7069,6 @@
                     "CG\\Codeception\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-17 16:11:07"
         },
         {
@@ -7103,11 +7099,6 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17 16:21:12"
@@ -7231,11 +7222,6 @@
                 "constructor",
                 "instantiate"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-14 21:17:01"
         },
         {
@@ -7401,11 +7387,6 @@
                 "logging",
                 "psr-3"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-08-31 09:17:37"
         },
         {
@@ -7455,11 +7436,6 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-03 12:10:50"
         },
         {
@@ -7494,11 +7470,6 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-01 13:02:21"
         },
         {
@@ -7572,11 +7543,6 @@
                 "testing",
                 "tests"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-07-01 14:09:19"
         },
         {
@@ -7637,11 +7603,6 @@
                 "spy",
                 "stub"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-08-13 10:07:40"
         },
         {
@@ -7750,11 +7711,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 13:08:43"
         },
         {
@@ -7796,11 +7752,6 @@
             "keywords": [
                 "template"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 13:50:34"
         },
         {
@@ -7842,11 +7793,6 @@
             "keywords": [
                 "timer"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 08:01:12"
         },
         {
@@ -8121,11 +8067,6 @@
                 "compare",
                 "equality"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-07-26 15:48:44"
         },
         {
@@ -8178,11 +8119,6 @@
             "keywords": [
                 "diff"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-22 15:13:53"
         },
         {
@@ -8249,11 +8185,6 @@
                 "export",
                 "exporter"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 07:55:53"
         },
         {
@@ -8307,18 +8238,21 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.1",
+            "alias_normalized": "1.6.1.0",
+            "version": "dev-CGIV-7001-ProductEditableWeightDimensions",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
