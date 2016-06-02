@@ -52,6 +52,14 @@ use CG\Settings\Product\Entity as ProductEntity;
 use CG\Settings\Product\Mapper as ProductMapper;
 use CG\Settings\Product\Service as ProductService;
 
+use CG\Controllers\Settings\SetupProgress;
+use CG\Controllers\Settings\SetupProgress\Collection as SetupProgressCollection;
+use CG\InputValidation\Settings\SetupProgress\Filter as SetupProgressCollectionValidation;
+use CG\InputValidation\Settings\SetupProgress\Entity as SetupProgressEntityValidation;
+use CG\Settings\SetupProgress\Entity as SetupProgressEntity;
+use CG\Settings\SetupProgress\Mapper as SetupProgressMapper;
+use CG\Settings\SetupProgress\RestService as SetupProgressService;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -255,7 +263,7 @@ return [
             },
         'via' => ['GET', 'OPTIONS'],
         'name' => 'ProductSettingsCollection',
-        'entityRoute' => '/settings/api/:id',
+        'entityRoute' => '/settings/product/:id',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
         ]
@@ -280,6 +288,46 @@ return [
             'mapperClass' => ProductMapper::class,
             'entityClass' => ProductEntity::class,
             'serviceClass' => ProductService::class
+        ]
+    ],
+    '/settings/setupProgress' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(SetupProgressCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'SetupProgressSettingsCollection',
+        'entityRoute' => '/settings/setupProgress/:id',
+        'validation' => [
+            'filterRules' => SetupProgressCollectionValidation::class
+        ]
+    ],
+    '/settings/setupProgress/:id' => [
+        'controllers' => function($ouId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(SetupProgress::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($ouId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'SetupProgressSettingsEntity',
+        'validation' => [
+            'dataRules' => SetupProgressEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => SetupProgressMapper::class,
+            'entityClass' => SetupProgressEntity::class,
+            'serviceClass' => SetupProgressService::class
         ]
     ],
 ];
