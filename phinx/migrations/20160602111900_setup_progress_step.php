@@ -10,7 +10,7 @@ class SetupProgressStep extends AbstractMigration
             ->addColumn('name', 'string')
             ->addColumn('status', 'string')
             ->addColumn('modified', 'datetime')
-            ->addIndex('organisationUnitId')
+            ->addIndex(['organisationUnitId', 'name'], ['unique' => true])
             ->create();
     }
 }
