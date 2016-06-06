@@ -370,6 +370,13 @@ use CG\Amazon\ShippingService\Service as AmazonShippingServiceService;
 
 use CG\Account\Command\Sales\Disable as SalesAccountDisable;
 
+// SetupProgress Settings
+use CG\Settings\SetupProgress\Mapper as SetupProgressSettingsMapper;
+use CG\Settings\SetupProgress\Repository as SetupProgressSettingsRepository;
+use CG\Settings\SetupProgress\Storage\Cache as SetupProgressSettingsCacheStorage;
+use CG\Settings\SetupProgress\Storage\Db as SetupProgressSettingsDbStorage;
+use CG\Settings\SetupProgress\StorageInterface as SetupProgressSettingsStorage;
+
 return array(
     'di' => array(
         'definition' => [
@@ -1415,6 +1422,20 @@ return array(
                     'readSql' => 'ReadSql',
                 ],
             ],
+            SetupProgressSettingsRepository::class => [
+                'parameters' => [
+                    'storage' => SetupProgressSettingsCacheStorage::class,
+                    'repository' => SetupProgressSettingsDbStorage::class,
+                ],
+            ],
+            SetupProgressSettingsDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => SetupProgressSettingsMapper::class,
+                ],
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1458,6 +1479,7 @@ return array(
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelRepository::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
+                SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
             ]
         )
     )
