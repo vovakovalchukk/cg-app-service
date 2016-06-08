@@ -38,6 +38,7 @@ class Db extends DbAbstract implements StorageInterface
             $idInIds = new In('product.id', $ids);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
             $select = $this->getSelect();
+            $select->join('productTaxRate', 'productTaxRate.productId = product.id', ['taxRateCode', 'ouVatCode'], Select::JOIN_LEFT);
             $select->where($idInIds);
             $select->order('product.id ASC');
             $productCollection = $this->fetchCollectionWithJoinQuery(
