@@ -198,6 +198,7 @@ class Db extends DbAbstract implements StorageInterface
     public function fetch($id)
     {
         $select = $this->getSelect()->where(['product.id' => $id]);
+        $select->join('productTaxRate', 'productTaxRate.productId = product.id', ['taxRateCode', 'ouVatCode'], Select::JOIN_LEFT);
         $products = $this->fetchCollectionWithJoinQuery(new ProductCollection($this->getEntityClass(), __FUNCTION__), $select);
         return $products->getById($id);
     }
