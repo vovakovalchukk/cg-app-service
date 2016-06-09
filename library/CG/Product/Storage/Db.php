@@ -38,7 +38,6 @@ class Db extends DbAbstract implements StorageInterface
             $idInIds = new In('product.id', $ids);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
             $select = $this->getSelect();
-            $select->join('productTaxRate', 'productTaxRate.productId = product.id', ['taxRateCode', 'ouVatCode'], Select::JOIN_LEFT);
             $select->where($idInIds);
             $select->order('product.id ASC');
             $productCollection = $this->fetchCollectionWithJoinQuery(
@@ -198,7 +197,6 @@ class Db extends DbAbstract implements StorageInterface
     public function fetch($id)
     {
         $select = $this->getSelect()->where(['product.id' => $id]);
-        $select->join('productTaxRate', 'productTaxRate.productId = product.id', ['taxRateCode', 'ouVatCode'], Select::JOIN_LEFT);
         $products = $this->fetchCollectionWithJoinQuery(new ProductCollection($this->getEntityClass(), __FUNCTION__), $select);
         return $products->getById($id);
     }
@@ -209,7 +207,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function insertEntity($entity)
     {
         $entityArray = $entity->toArray();
-        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds']);
+        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds'], $entityArray['taxRateIds']);
 
         $insert = $this->getInsert()->values($entityArray);
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
@@ -220,6 +218,8 @@ class Db extends DbAbstract implements StorageInterface
 
         $this->saveAttributeRelation($entity);
         $this->saveImageRelation($entity);
+        $this->saveTaxRates($entity);
+
         return $entity;
     }
 
@@ -258,7 +258,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function updateEntity($entity)
     {
         $entityArray = $entity->toArray();
-        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds']);
+        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds'], $entityArray['taxRateIds']);
 
         $update = $this->getUpdate()->set($entityArray)
             ->where(array('id' => $entity->getId()));
@@ -267,6 +267,7 @@ class Db extends DbAbstract implements StorageInterface
         $this->removeAttributeRelation($entity);
         $this->saveAttributeRelation($entity);
         $this->saveImageRelation($entity);
+        $this->saveTaxRates($entity);
 
         return $entity;
     }
@@ -308,6 +309,25 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
+    protected function saveTaxRates(ProductEntity $entity)
+    {
+        $delete = $this->getWriteSql()->delete('productTaxRate');
+        $query = [
+            'productId' => $entity->getId(),
+        ];
+        $delete->where($query);
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+        $productTaxRateInsert = $this->getWriteSql()->insert('productTaxRate');
+        foreach ($entity->getTaxRateIds() as $ouVatCode => $taxRateCode) {
+            $productTaxRateInsert->values([
+                'ouVatCode' => $ouVatCode,
+                'taxRateCode' => $taxRateCode,
+                'productId' => $entity->getId()
+            ]);
+            $this->getWriteSql()->prepareStatementForSqlObject($productTaxRateInsert)->execute();
+        }
+    }
+
     /**
      * @return Select
      */
@@ -339,6 +359,11 @@ class Db extends DbAbstract implements StorageInterface
                 'productAttributeValue',
                 'productAttributeValue.productId = product.id AND productAttributeValue.productAttributeId = parentProductAttribute.id',
                 ['attributeValue' => 'value'],
+                Select::JOIN_LEFT
+            )->join(
+                'productTaxRate',
+                'productTaxRate.productId = product.id',
+                ['taxRateCode', 'ouVatCode'],
                 Select::JOIN_LEFT
             );
     }
