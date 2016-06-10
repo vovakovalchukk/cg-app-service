@@ -116,7 +116,7 @@ return [
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'POST', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
         'name' => 'ProductDetailCollection',
         'entityRoute' => '/productDetail/:productDetailId',
         'validation' => [
@@ -135,7 +135,7 @@ return [
                     $controller->$method($productDetailId, $app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         'name' => 'ProductDetailEntity',
         'validation' => [
             "dataRules" => ProductDetailEntityValidation::class,
