@@ -311,13 +311,16 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function saveTaxRates(ProductEntity $entity)
     {
-        $delete = $this->getWriteSql()->delete('productTaxRate');
+        $productTaxRateDelete = $this->getWriteSql()->delete('productTaxRate');
         $query = [
             'productId' => $entity->getId(),
         ];
-        $delete->where($query);
-        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+        $productTaxRateDelete->where($query);
+
         $productTaxRateInsert = $this->getWriteSql()->insert('productTaxRate');
+
+        $this->beginTransaction();
+        $this->getWriteSql()->prepareStatementForSqlObject($productTaxRateDelete)->execute();
         foreach ($entity->getTaxRateIds() as $ouVatCode => $taxRateCode) {
             $productTaxRateInsert->values([
                 'ouVatCode' => $ouVatCode,
@@ -326,6 +329,7 @@ class Db extends DbAbstract implements StorageInterface
             ]);
             $this->getWriteSql()->prepareStatementForSqlObject($productTaxRateInsert)->execute();
         }
+        $this->commitTransaction();
     }
 
     /**
