@@ -321,10 +321,10 @@ class Db extends DbAbstract implements StorageInterface
 
         $this->beginTransaction();
         $this->getWriteSql()->prepareStatementForSqlObject($productTaxRateDelete)->execute();
-        foreach ($entity->getTaxRateIds() as $ouVatCode => $taxRateCode) {
+        foreach ($entity->getTaxRateIds() as $VATCountryCode => $taxRateId) {
             $productTaxRateInsert->values([
-                'ouVatCode' => $ouVatCode,
-                'taxRateCode' => $taxRateCode,
+                'VATCountryCode' => $VATCountryCode,
+                'taxRateId' => $taxRateId,
                 'productId' => $entity->getId()
             ]);
             $this->getWriteSql()->prepareStatementForSqlObject($productTaxRateInsert)->execute();
@@ -367,7 +367,7 @@ class Db extends DbAbstract implements StorageInterface
             )->join(
                 'productTaxRate',
                 'productTaxRate.productId = product.id',
-                ['taxRateCode', 'ouVatCode'],
+                ['taxRateId', 'VATCountryCode'],
                 Select::JOIN_LEFT
             );
     }
