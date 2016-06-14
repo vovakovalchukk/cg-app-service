@@ -14,14 +14,14 @@ class MultipleTaxRatesPerOu extends AbstractMigration
         $this
             ->table(static::TABLE_NEW, ['id' => false])
             ->addColumn('productId', 'integer')
-            ->addColumn('taxRateId', 'string')
             ->addColumn('VATCountryCode', 'string')
-            ->addIndex(['productId', 'taxRateId'], ['unique' => true])
+            ->addColumn('taxRateId', 'string')
+            ->addIndex(['productId', 'VATCountryCode'], ['unique' => true])
             ->create();
 
         $sqlQuery = "
-            INSERT INTO %s (`productId`, `taxRateId`, `VATCountryCode`)
-            SELECT `id`, `taxRateId`, 'GB'
+            INSERT INTO %s (`productId`, `VATCountryCode`, `taxRateId`)
+            SELECT `id`, 'GB', `taxRateId`
             FROM %s
             WHERE `taxRateId` != null OR `taxRateId` != ''
             ";
@@ -48,6 +48,7 @@ class MultipleTaxRatesPerOu extends AbstractMigration
             UPDATE %s p
             INNER JOIN %s ptr ON p.id = ptr.productId
             SET p.taxRateId = ptr.taxRateId
+            WHERE ptr.VATCountryCode = 'GB'
             ";
 
         $this->execute(sprintf($sqlQuery, static::TABLE_MODIFY, static::TABLE_NEW));
