@@ -12,20 +12,21 @@ class MultipleTaxRatesPerOu extends AbstractMigration
     public function up()
     {
         $this
-            ->table(static::TABLE_NEW)
-            ->addColumn('taxRateCode', 'string')
+            ->table(static::TABLE_NEW, ['id' => false])
             ->addColumn('productId', 'integer')
-            ->addColumn('ouVatCode', 'string')
+            ->addColumn('taxRateId', 'string')
+            ->addColumn('VATCountryCode', 'string')
+            ->addIndex(['productId', 'taxRateId'], ['unique' => true])
             ->create();
 
         $sqlQuery = "
-            INSERT INTO %s (`taxRateCode`, `productId`, `ouVatCode`)
-            SELECT `taxRateId`, `id`, 'GB'
+            INSERT INTO %s (`productId`, `taxRateId`, `VATCountryCode`)
+            SELECT `id`, `taxRateId`, 'GB'
             FROM %s
+            WHERE `taxRateId` != null OR `taxRateId` != ''
             ";
 
-        $this
-            ->execute(sprintf($sqlQuery, static::TABLE_NEW, static::TABLE_MODIFY));
+        $this->execute(sprintf($sqlQuery, static::TABLE_NEW, static::TABLE_MODIFY));
 
         $this
             ->table(static::TABLE_MODIFY)
@@ -34,14 +35,22 @@ class MultipleTaxRatesPerOu extends AbstractMigration
     }
 
     /**
-     * Migrate Down. vendor/bin/phinx migrate -t 20160606112329
+     * Migrate Down.
      */
     public function down()
     {
         $this
             ->table(static::TABLE_MODIFY)
             ->addColumn('taxRateId', 'string')
-            ->create();
+            ->update();
+
+        $sqlQuery = "
+            UPDATE %s p
+            INNER JOIN %s ptr ON p.id = ptr.productId
+            SET p.taxRateId = ptr.taxRateId
+            ";
+
+        $this->execute(sprintf($sqlQuery, static::TABLE_MODIFY, static::TABLE_NEW));
 
         $this->dropTable(static::TABLE_NEW);
     }
