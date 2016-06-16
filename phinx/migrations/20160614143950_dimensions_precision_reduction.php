@@ -12,9 +12,9 @@ class DimensionsPrecisionReduction extends AbstractMigration
     {
         $this
             ->table(static::TABLE_MODIFY)
-            ->changeColumn('width', 'decimal', ['precision' => 12, 'scale' => 3])
-            ->changeColumn('height', 'decimal', ['precision' => 12, 'scale' => 3])
-            ->changeColumn('length', 'decimal', ['precision' => 12, 'scale' => 3])
+            ->changeColumn('width', 'decimal', ['precision' => 12, 'scale' => 3, 'null' => true])
+            ->changeColumn('height', 'decimal', ['precision' => 12, 'scale' => 3, 'null' => true])
+            ->changeColumn('length', 'decimal', ['precision' => 12, 'scale' => 3, 'null' => true])
             ->update();
 
     }
@@ -26,9 +26,9 @@ class DimensionsPrecisionReduction extends AbstractMigration
     {
         $this
             ->table(static::TABLE_MODIFY)
-            ->changeColumn('width', 'decimal', ['precision' => 12, 'scale' => 6])
-            ->changeColumn('height', 'decimal', ['precision' => 12, 'scale' => 6])
-            ->changeColumn('length', 'decimal', ['precision' => 12, 'scale' => 6])
+            ->changeColumn('width', 'decimal', ['precision' => 12, 'scale' => 6, 'null' => true])
+            ->changeColumn('height', 'decimal', ['precision' => 12, 'scale' => 6, 'null' => true])
+            ->changeColumn('length', 'decimal', ['precision' => 12, 'scale' => 6, 'null' => true])
             ->update();
     }
 }
