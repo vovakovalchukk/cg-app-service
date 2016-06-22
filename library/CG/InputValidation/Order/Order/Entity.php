@@ -87,11 +87,6 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [(new InArray())->setHaystack(CurrencyCode::getCurrencyCodes())]
             ),
-            'archived' => [
-                'name'       => 'archived',
-                'required'   => true,
-                'validators' => [new BooleanValidator(['name' => 'archived'])],
-            ],
             'buyerMessage' => array(
                 'name'       => 'buyerMessage',
                 'required'   => false,
@@ -337,18 +332,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IsArrayValidator(["name" => "cancellations"])]
             ),
-            'archived' => array(
-                'name' => 'archived',
-                'required' => false,
-                'validators' => [
-                    (new Callback())->setCallback(
-                        function($archivedValue, $orderDetails) use($orderRepository) {
-                        $storedOrder = $orderRepository->fetch($orderDetails['id']);
-                        return $storedOrder->getArchived() == $archivedValue;
-                    }
-                    )->setMessage('Archived value cannot be modified')
-                ]
-            ),
+            'archived' => [
+                'name'       => 'archived',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'archived'])],
+            ],
             'fulfilmentChannel' => array(
                 'name' => 'fulfilmentChannel',
                 'required' => false,
