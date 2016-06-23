@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c78b91c83f04af7c0814f276fe522f5c",
-    "content-hash": "f65eeb8ee8fd44687669325464ff4f15",
+    "hash": "a9cdf344242c6da1c3349a937bffab63",
+    "content-hash": "c516665aeb73de56c7bb7910aa56d289",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1275,16 +1275,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7136-OrderArchiveFlag",
+            "version": "1.23.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fcccd863bbdec03de2b483ea357812829b817fc2"
+                "reference": "a485a25ceaee7622a7510a7437e32b9d8d98f314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7136-OrderArchiveFlag-0be42b.zip",
-                "reference": "fcccd863bbdec03de2b483ea357812829b817fc2",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.7-61e0db.zip",
+                "reference": "a485a25ceaee7622a7510a7437e32b9d8d98f314",
                 "shasum": null
             },
             "require": {
@@ -1353,7 +1353,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-22 10:19:58"
+            "time": "2016-06-23 10:37:50"
         },
         {
             "name": "channelgrabber/permission",
@@ -4122,7 +4122,6 @@
                 "rest",
                 "xml"
             ],
-            "abandoned": "ramsey/vnderror",
             "time": "2012-07-17 22:17:31"
         },
         {
@@ -7067,6 +7066,11 @@
                     "CG\\Codeception\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-17 16:11:07"
         },
         {
@@ -7097,6 +7101,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17 16:21:12"
@@ -7220,6 +7229,11 @@
                 "constructor",
                 "instantiate"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-14 21:17:01"
         },
         {
@@ -7385,6 +7399,11 @@
                 "logging",
                 "psr-3"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-08-31 09:17:37"
         },
         {
@@ -7434,6 +7453,11 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-03 12:10:50"
         },
         {
@@ -7468,6 +7492,11 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-01 13:02:21"
         },
         {
@@ -7541,6 +7570,11 @@
                 "testing",
                 "tests"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-07-01 14:09:19"
         },
         {
@@ -7601,6 +7635,11 @@
                 "spy",
                 "stub"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-08-13 10:07:40"
         },
         {
@@ -7709,6 +7748,11 @@
                 "filesystem",
                 "iterator"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21 13:08:43"
         },
         {
@@ -7750,6 +7794,11 @@
             "keywords": [
                 "template"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21 13:50:34"
         },
         {
@@ -7791,6 +7840,11 @@
             "keywords": [
                 "timer"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21 08:01:12"
         },
         {
@@ -8065,6 +8119,11 @@
                 "compare",
                 "equality"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-07-26 15:48:44"
         },
         {
@@ -8117,6 +8176,11 @@
             "keywords": [
                 "diff"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-22 15:13:53"
         },
         {
@@ -8183,6 +8247,11 @@
                 "export",
                 "exporter"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21 07:55:53"
         },
         {
@@ -8236,21 +8305,18 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.7",
-            "alias_normalized": "1.23.7.0",
-            "version": "dev-CGIV-7136-OrderArchiveFlag",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
