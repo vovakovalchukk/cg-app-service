@@ -1,18 +1,19 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
-use CG\Locale\CurrencyCode;
 use CG\Locale\CountryCode;
-use CG\Validation\RulesInterface;
+use CG\Locale\CurrencyCode;
+use CG\Order\Shared\Repository as OrderRepository;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\RulesInterface;
+use Zend\Validator\Callback;
 use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
-use Zend\Validator\Callback;
-use CG\Order\Shared\Repository as OrderRepository;
 
 class Entity implements RulesInterface
 {
@@ -331,18 +332,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IsArrayValidator(["name" => "cancellations"])]
             ),
-            'archived' => array(
-                'name' => 'archived',
-                'required' => false,
-                'validators' => [
-                    (new Callback())->setCallback(
-                        function($archivedValue, $orderDetails) use($orderRepository) {
-                        $storedOrder = $orderRepository->fetch($orderDetails['id']);
-                        return $storedOrder->getArchived() == $archivedValue;
-                    }
-                    )->setMessage('Archived value cannot be modified')
-                ]
-            ),
+            'archived' => [
+                'name'       => 'archived',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'archived'])],
+            ],
             'fulfilmentChannel' => array(
                 'name' => 'fulfilmentChannel',
                 'required' => false,
