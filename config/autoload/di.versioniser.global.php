@@ -51,8 +51,8 @@ return [
                 'Versioniser_OrderEntity_6' => OrderEntity\Versioniser6::class,
                 'Versioniser_OrderCollection_7' => OrderCollection\Versioniser7::class,
                 'Versioniser_OrderEntity_7' => OrderEntity\Versioniser7::class,
-                'Versioniser_OrderCollection_8' => OrderCollection\Versioniser8::class,
-                'Versioniser_OrderEntity_8' => OrderEntity\Versioniser8::class,
+                'Versioniser_OrderCollection_9' => OrderCollection\Versioniser9::class,
+                'Versioniser_OrderEntity_9' => OrderEntity\Versioniser9::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -154,9 +154,9 @@ return [
                     'entityVersioner' => 'Versioniser_OrderEntity_7',
                 ],
             ],
-            'Versioniser_OrderCollection_8' => [
+            'Versioniser_OrderCollection_9' => [
                 'parameter' => [
-                    'entityVersioner' => 'Versioniser_OrderEntity_8',
+                    'entityVersioner' => 'Versioniser_OrderEntity_9',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [
