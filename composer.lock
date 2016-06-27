@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a9cdf344242c6da1c3349a937bffab63",
-    "content-hash": "c516665aeb73de56c7bb7910aa56d289",
+    "hash": "105400f9f29877e770c965e6f568212b",
+    "content-hash": "e914854c91b295ea8dbc3592132b3a43",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1932,6 +1932,53 @@
                 }
             },
             "time": "2016-06-06 08:35:17"
+        },
+        {
+            "name": "channelgrabber/shopify",
+            "version": "dev-CGIV-7056-ShopifyUnimportedListings",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-shopify.git",
+                "reference": "7fb8159b5cdfbc82faf69f23d5bdd346b1990b5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-CGIV-7056-ShopifyUnimportedListings-5a69fd.zip",
+                "reference": "7fb8159b5cdfbc82faf69f23d5bdd346b1990b5c",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/channel": "^1.24.2",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/gearman": "^1.2.20",
+                "channelgrabber/order": "^1.23.0",
+                "channelgrabber/stdlib": "^2.12.24",
+                "channelgrabber/zf2-stdlib": "^1.1.7",
+                "guzzlehttp/guzzle": ">=4.1,<6.0",
+                "zendframework/zend-di": "~2.3"
+            },
+            "require-dev": {
+                "channelgrabber/phpunit": "^1.0.0",
+                "phpunit/phpunit": "~4.6.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Shopify\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Shopify\\Test\\": "tests/",
+                    "CG\\Shopify\\TestAsset\\": "tests/assets"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2016-06-27 13:23:10"
         },
         {
             "name": "channelgrabber/slim",
@@ -4122,6 +4169,7 @@
                 "rest",
                 "xml"
             ],
+            "abandoned": "ramsey/vnderror",
             "time": "2012-07-17 22:17:31"
         },
         {
@@ -7066,11 +7114,6 @@
                     "CG\\Codeception\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-17 16:11:07"
         },
         {
@@ -7101,11 +7144,6 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17 16:21:12"
@@ -7229,11 +7267,6 @@
                 "constructor",
                 "instantiate"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-14 21:17:01"
         },
         {
@@ -7399,11 +7432,6 @@
                 "logging",
                 "psr-3"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-08-31 09:17:37"
         },
         {
@@ -7453,11 +7481,6 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-03 12:10:50"
         },
         {
@@ -7492,11 +7515,6 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-01 13:02:21"
         },
         {
@@ -7570,11 +7588,6 @@
                 "testing",
                 "tests"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-07-01 14:09:19"
         },
         {
@@ -7635,11 +7648,6 @@
                 "spy",
                 "stub"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-08-13 10:07:40"
         },
         {
@@ -7748,11 +7756,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 13:08:43"
         },
         {
@@ -7794,11 +7797,6 @@
             "keywords": [
                 "template"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 13:50:34"
         },
         {
@@ -7840,11 +7838,6 @@
             "keywords": [
                 "timer"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 08:01:12"
         },
         {
@@ -8119,11 +8112,6 @@
                 "compare",
                 "equality"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-07-26 15:48:44"
         },
         {
@@ -8176,11 +8164,6 @@
             "keywords": [
                 "diff"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-22 15:13:53"
         },
         {
@@ -8247,11 +8230,6 @@
                 "export",
                 "exporter"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 07:55:53"
         },
         {
@@ -8305,18 +8283,21 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-CGIV-7056-ShopifyUnimportedListings",
+            "package": "channelgrabber/shopify"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/shopify": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
