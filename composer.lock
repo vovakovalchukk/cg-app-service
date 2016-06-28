@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c90c0d2220cc5666d07aa323538202b2",
-    "content-hash": "5894c7d83bd169e74d2efcc41d0b39db",
+    "hash": "354cf6356543ae1f578737f1dd01b5da",
+    "content-hash": "946448af44f127b79607337977e4e8c3",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1275,16 +1275,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-6455-eu-vat-rates",
+            "version": "1.23.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "87a5eef18e4b9d352113ce1da2c16973db50a139"
+                "reference": "73f7f5499fc59efe0cbb594c8e338c149532adb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6455-eu-vat-rates-51a0d0.zip",
-                "reference": "87a5eef18e4b9d352113ce1da2c16973db50a139",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.8-2f817f.zip",
+                "reference": "73f7f5499fc59efe0cbb594c8e338c149532adb9",
                 "shasum": null
             },
             "require": {
@@ -1315,10 +1315,10 @@
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.25",
                 "channelgrabber/stock": "^1.6.2",
-                "channelgrabber/tax": "dev-CGIV-6455-eu-vat-rates as 1.0.2",
+                "channelgrabber/tax": "^1.0.2",
                 "channelgrabber/template": "^1.4.3",
                 "channelgrabber/transaction": "^1.2.1",
-                "channelgrabber/user": "dev-CGIV-6455-eu-vat-rates as 1.21.4",
+                "channelgrabber/user": "^1.22.0",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "composer/composer": "@dev",
                 "ext-mongo": ">=1.4.4",
@@ -1353,7 +1353,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-24 13:35:59"
+            "time": "2016-06-28 08:14:59"
         },
         {
             "name": "channelgrabber/permission",
@@ -2239,16 +2239,16 @@
         },
         {
             "name": "channelgrabber/tax",
-            "version": "dev-CGIV-6455-eu-vat-rates",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-tax.git",
-                "reference": "41204b132baf4f62e2e122527ab5dcafe97ec3c9"
+                "reference": "c5e35754f25f08015fca9146f1d7b28065abac70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-tax-dev-CGIV-6455-eu-vat-rates-a23a1a.zip",
-                "reference": "41204b132baf4f62e2e122527ab5dcafe97ec3c9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-tax-1.0.2-6fed75.zip",
+                "reference": "c5e35754f25f08015fca9146f1d7b28065abac70",
                 "shasum": null
             },
             "require": {
@@ -2280,7 +2280,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-24 11:16:10"
+            "time": "2016-06-28 08:12:20"
         },
         {
             "name": "channelgrabber/template",
@@ -2458,16 +2458,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "dev-CGIV-6455-eu-vat-rates",
+            "version": "1.22.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "b04421b70b70ea6085e3ba19b9caaf72761d0e21"
+                "reference": "72b17e20039ceafae3517d35c9991584b11fcda2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-dev-CGIV-6455-eu-vat-rates-cccc34.zip",
-                "reference": "b04421b70b70ea6085e3ba19b9caaf72761d0e21",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.22.0-62b42d.zip",
+                "reference": "72b17e20039ceafae3517d35c9991584b11fcda2",
                 "shasum": null
             },
             "require": {
@@ -2510,7 +2510,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-24 11:46:56"
+            "time": "2016-06-28 08:06:27"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -8243,32 +8243,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.8",
-            "alias_normalized": "1.23.8.0",
-            "version": "dev-CGIV-6455-eu-vat-rates",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.0.2",
-            "alias_normalized": "1.0.2.0",
-            "version": "dev-CGIV-6455-eu-vat-rates",
-            "package": "channelgrabber/tax"
-        },
-        {
-            "alias": "1.21.4",
-            "alias_normalized": "1.21.4.0",
-            "version": "dev-CGIV-6455-eu-vat-rates",
-            "package": "channelgrabber/user"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/tax": 20,
-        "channelgrabber/user": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
