@@ -351,6 +351,11 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'invoiceNumber must be at least %min%'])
                 ]
             ],
+            'vatNumber' => array(
+                'name' => 'vatNumber',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ),
             'rootOrganisationUnitId' => [
                 'name'       => 'rootOrganisationUnitId',
                 'required'   => false,
