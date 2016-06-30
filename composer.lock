@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "34e7a1bedf844a095848b6c6e37f38b9",
-    "content-hash": "e914854c91b295ea8dbc3592132b3a43",
+    "hash": "c02c4cd5a242fd5478556c9d058fe36b",
+    "content-hash": "a4dcde7694e9e1478192f623f302d855",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -286,16 +286,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.24.4",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "7d165891c9b54c6c527f213052ca98e36d03236f"
+                "reference": "022b1b49248bd62f62f3f2abeb88d6971ecc422e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.24.4-287f0e.zip",
-                "reference": "7d165891c9b54c6c527f213052ca98e36d03236f",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-7049-ShopifyIntegration-0b5bd0.zip",
+                "reference": "022b1b49248bd62f62f3f2abeb88d6971ecc422e",
                 "shasum": null
             },
             "require": {
@@ -311,7 +311,7 @@
                 "channelgrabber/listing": "^1.9.6",
                 "channelgrabber/location": ">=1.1.1,<2.0.0",
                 "channelgrabber/locking": "^1.1.0",
-                "channelgrabber/log": "^2.0.21",
+                "channelgrabber/log": "dev-EPIC-CGIV-7049-ShopifyIntegration as 2.0.27",
                 "channelgrabber/order": "^1.18.1",
                 "channelgrabber/permission": ">=1.0.1, <2.0.0",
                 "channelgrabber/predis": "^1.0.7",
@@ -368,7 +368,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-20 08:31:44"
+            "time": "2016-06-30 11:07:13"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1133,17 +1133,17 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.0.25",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "ccb94380433239243505c9bab3f7d71681f0983e"
+                "reference": "6d481cc2c317dfc52e67c5edbca7451f4fab4fb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.0.25-ff3ec3.zip",
-                "reference": "ccb94380433239243505c9bab3f7d71681f0983e",
-                "shasum": "1944b3bb970c05dd9892ea362a40a01fdf11c6b6"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-dev-EPIC-CGIV-7049-ShopifyIntegration-262ba0.zip",
+                "reference": "6d481cc2c317dfc52e67c5edbca7451f4fab4fb4",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
@@ -1154,8 +1154,6 @@
                 "channelgrabber/validation": ">=1.1.0",
                 "composer/composer": "@dev",
                 "nocarrier/hal": "~0.9.4",
-                "php-jsonpatch/php-jsonpatch": "@dev",
-                "php-jsonpointer/php-jsonpointer": "@dev",
                 "zendframework/zend-di": ">=2.2,<3.0",
                 "zendframework/zend-eventmanager": ">=2.2,<3.0"
             },
@@ -1178,7 +1176,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-16 08:27:05"
+            "time": "2016-06-23 12:46:23"
         },
         {
             "name": "channelgrabber/middleware",
@@ -1935,24 +1933,25 @@
         },
         {
             "name": "channelgrabber/shopify",
-            "version": "dev-CGIV-7056-ShopifyUnimportedListings",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-shopify.git",
-                "reference": "3b105bdd673604ed8621a6b28f75a943cd53e2fc"
+                "reference": "635270b6c9edebc6ed6dd4ed235691a7104a0101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-CGIV-7056-ShopifyUnimportedListings-4a26f8.zip",
-                "reference": "3b105bdd673604ed8621a6b28f75a943cd53e2fc",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-EPIC-CGIV-7049-ShopifyIntegration-0871cd.zip",
+                "reference": "635270b6c9edebc6ed6dd4ed235691a7104a0101",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/channel": "^1.24.2",
+                "channelgrabber/channel": "dev-EPIC-CGIV-7049-ShopifyIntegration as 1.24.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/gearman": "^1.2.20",
+                "channelgrabber/log": "dev-EPIC-CGIV-7049-ShopifyIntegration as 2.0.27-dev",
                 "channelgrabber/order": "^1.23.0",
-                "channelgrabber/stdlib": "^2.12.24",
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-7049-ShopifyIntegration as 2.12.33",
                 "channelgrabber/zf2-stdlib": "^1.1.7",
                 "guzzlehttp/guzzle": ">=4.1,<6.0",
                 "zendframework/zend-di": "~2.3"
@@ -1978,7 +1977,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-29 13:11:36"
+            "time": "2016-06-30 11:21:12"
         },
         {
             "name": "channelgrabber/slim",
@@ -2136,16 +2135,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.27",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "c7b2e8d0c9cbb37836663b5e38b667699583c454"
+                "reference": "f1001d5ab801b3823158e92327ec990418d73aa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.27-5e9f9b.zip",
-                "reference": "c7b2e8d0c9cbb37836663b5e38b667699583c454",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-EPIC-CGIV-7049-ShopifyIntegration-3a0108.zip",
+                "reference": "f1001d5ab801b3823158e92327ec990418d73aa7",
                 "shasum": null
             },
             "require": {
@@ -2158,13 +2157,17 @@
                 "channelgrabber/phpunit": "~1.0.1",
                 "phpunit/phpunit": "4.0.*"
             },
+            "suggest": {
+                "ext-imagick": "Allows for testing of pdf functions"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Stdlib\\": "src"
                 },
                 "files": [
-                    "src/Utilities.php"
+                    "src/Utilities.php",
+                    "src/polyfill_70.php"
                 ]
             },
             "autoload-dev": {
@@ -2177,7 +2180,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-07 13:43:19"
+            "time": "2016-06-30 11:04:32"
         },
         {
             "name": "channelgrabber/stock",
@@ -8288,16 +8291,37 @@
     ],
     "aliases": [
         {
+            "alias": "1.24.6",
+            "alias_normalized": "1.24.6.0",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "2.0.27",
+            "alias_normalized": "2.0.27.0",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "package": "channelgrabber/log"
+        },
+        {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-7056-ShopifyUnimportedListings",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
             "package": "channelgrabber/shopify"
+        },
+        {
+            "alias": "2.12.33",
+            "alias_normalized": "2.12.33.0",
+            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/log": 20,
         "channelgrabber/shopify": 20,
+        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
