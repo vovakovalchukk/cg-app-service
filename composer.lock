@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "953f43261b946e08b175b553d7203cd5",
-    "content-hash": "d4b39c0a7065ebba0720cf08ad3af6bf",
+    "hash": "d6cfb034b48fdbbfa2e6a0a25c4ba614",
+    "content-hash": "09f4d2cc867ce2a5d8a2131241065375",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -286,16 +286,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "bb3c45cf39ba59ba4f8eaaff20bfd97d15b783d0"
+                "reference": "aedacd6a39e100664744657caca51d2683cb7994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-7049-ShopifyIntegration-ce6a9a.zip",
-                "reference": "bb3c45cf39ba59ba4f8eaaff20bfd97d15b783d0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-7058-ShopifyProductImport-bf8ac5.zip",
+                "reference": "aedacd6a39e100664744657caca51d2683cb7994",
                 "shasum": null
             },
             "require": {
@@ -368,7 +368,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-04 07:51:27"
+            "time": "2016-07-05 08:44:32"
         },
         {
             "name": "channelgrabber/cilex",
@@ -948,16 +948,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.9.8.2",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "0e71e8813836339bddb63405ef0c844960170511"
+                "reference": "019cc2e22f2ab7645b20a2c62bc26f72e8f4a11c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.9.8.2-d5edb7.zip",
-                "reference": "0e71e8813836339bddb63405ef0c844960170511",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-7058-ShopifyProductImport-fe904f.zip",
+                "reference": "019cc2e22f2ab7645b20a2c62bc26f72e8f4a11c",
                 "shasum": null
             },
             "require": {
@@ -997,7 +997,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-19 08:04:14"
+            "time": "2016-07-05 08:51:07"
         },
         {
             "name": "channelgrabber/locale",
@@ -1942,20 +1942,20 @@
         },
         {
             "name": "channelgrabber/shopify",
-            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-shopify.git",
-                "reference": "c847c5c0bf62cc834a20536ce2a8c7a046009692"
+                "reference": "ce7d89e84eeea5b599ef60b322073690f784ad04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-EPIC-CGIV-7049-ShopifyIntegration-6e4aea.zip",
-                "reference": "c847c5c0bf62cc834a20536ce2a8c7a046009692",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-CGIV-7058-ShopifyProductImport-662c47.zip",
+                "reference": "ce7d89e84eeea5b599ef60b322073690f784ad04",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/channel": "dev-EPIC-CGIV-7049-ShopifyIntegration as 1.24.6",
+                "channelgrabber/channel": "dev-CGIV-7058-ShopifyProductImport as 1.24.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/gearman": "^1.2.20",
                 "channelgrabber/log": "dev-EPIC-CGIV-7049-ShopifyIntegration as 2.0.27-dev",
@@ -1986,7 +1986,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-04 08:02:10"
+            "time": "2016-07-05 09:28:00"
         },
         {
             "name": "channelgrabber/slim",
@@ -8303,8 +8303,14 @@
         {
             "alias": "1.24.6",
             "alias_normalized": "1.24.6.0",
-            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
             "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.10.0",
+            "alias_normalized": "1.10.0.0",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
+            "package": "channelgrabber/listing"
         },
         {
             "alias": "2.0.27",
@@ -8315,7 +8321,7 @@
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-EPIC-CGIV-7049-ShopifyIntegration",
+            "version": "dev-CGIV-7058-ShopifyProductImport",
             "package": "channelgrabber/shopify"
         },
         {
@@ -8329,6 +8335,7 @@
     "stability-flags": {
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "channelgrabber/log": 20,
         "channelgrabber/shopify": 20,
         "channelgrabber/stdlib": 20,

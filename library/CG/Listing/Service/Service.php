@@ -2,6 +2,7 @@
 namespace CG\Listing\Service;
 
 use CG\Account\Client\Entity as AccountEntity;
+use CG\Channel\ChannelActions;
 use CG\Listing\Collection;
 use CG\Listing\Entity;
 use CG\Listing\Filter;
@@ -29,18 +30,22 @@ class Service extends ServiceAbstract
     protected $globalEventManager;
     /** @var StatusHistoryService $statusHistoryService */
     protected $statusHistoryService;
+    /** @var ChannelActions $channelActions */
+    protected $channelActions;
 
     public function __construct(
         StorageInterface $repository,
         Mapper $mapper,
         GlobalEventManager $globalEventManager,
         StatusChecker $statusChecker,
-        StatusHistoryService $statusHistoryService
+        StatusHistoryService $statusHistoryService,
+        ChannelActions $channelActions
     ) {
         parent::__construct($repository, $mapper, $statusChecker);
         $this
             ->setGlobalEventManager($globalEventManager)
-            ->setStatusHistoryService($statusHistoryService);
+            ->setStatusHistoryService($statusHistoryService)
+            ->setChannelActions($channelActions);
     }
 
     public function fetch($id)
@@ -101,6 +106,12 @@ class Service extends ServiceAbstract
         return $this->save($listing);
     }
 
+    public function remove($entity)
+    {
+        parent::remove($entity);
+        $this->channelActions->listingDeleted($entity);
+    }
+
     public function removeAllListingsForAccount(AccountEntity $accountEntity)
     {
         $filter = (new Filter(static::CHUNK_AMOUNT, 1))->setAccountId([$accountEntity->getId()]);
@@ -109,7 +120,7 @@ class Service extends ServiceAbstract
             do {
                 $listings = $this->getRepository()->fetchCollectionByFilter($filter);
                 foreach($listings as $listing) {
-                    $this->getRepository()->remove($listing);
+                    $this->remove($listing);
                     $counter++;
                 }
             } while (true);
@@ -144,6 +155,15 @@ class Service extends ServiceAbstract
     protected function setStatusHistoryService(StatusHistoryService $statusHistoryService)
     {
         $this->statusHistoryService = $statusHistoryService;
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    protected function setChannelActions(ChannelActions $channelActions)
+    {
+        $this->channelActions = $channelActions;
         return $this;
     }
 }
