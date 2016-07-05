@@ -10,9 +10,12 @@ use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
+use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
+use CG\Template\Mapper as TemplateMapper;
+use CG\Template\Service as TemplateService;
 use Predis\Client as Redis;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
@@ -289,6 +292,46 @@ EOF;
                 $command = $di->get(EnsureProductsAndListingsAssociatedWithRootOu::class);
                 $ouCount = $command();
                 $output->writeln('Finished, ' . $ouCount . ' OUs corrected. See logs for details.');
+            }
+    ],
+
+    'ad-hoc:preserveStyleLInvoiceTemplate' => [
+        'description' => 'For any OUs that have their invoice mapping explicitly set as the now deprecated Stlye L template copy it over to their custom templates so it is not lost',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $output->writeln('Starting preserveStyleLInvoiceTemplate command');
+
+                $mongo = $di->get('mongodb');
+                $mongoCollection = $mongo->settings->invoice;
+                $results = $mongoCollection->find(["default" => new \MongoRegex('/^default-styleL_OU.+/')]);
+                if (!$results->count(true)) {
+                    $output->writeln('No results found');
+                    return;
+                }
+                $ouIds = [];
+                foreach ($results as $result) {
+                    $ouIds[] = $result['_id'];
+                }
+                $settingsService = $di->get(InvoiceSettingsService::class);
+                $templateService = $di->get(TemplateService::class);
+                $templateMapper = $di->get(TemplateMapper::class);
+                $template = $templateService->fetch('default-styleL_OU0');
+                $template->setId(null)
+                    ->setStoredETag(null)
+                    ->setName('DUPLICATE - Default Style L');
+                foreach ($ouIds as $ouId) {
+                    $ouTemplate = clone $template;
+                    $ouTemplate->setOrganisationUnitId($ouId);
+                    $savedOuTemplate = $templateMapper->fromHal($templateService->save($ouTemplate));
+                    $output->writeln('  Duplicated template for OU ' . $ouId . ', ID: ' . $savedOuTemplate->getId());
+                    $settings = $settingsService->fetch($ouId);
+                    $settings->setDefault($savedOuTemplate->getId());
+                    $settingsService->save($settings);
+                }
+
+                $output->writeln('Finished, ' . count($ouIds) . ' OUs have had templates created.');
             }
     ],
 ];
