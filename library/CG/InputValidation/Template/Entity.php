@@ -23,6 +23,11 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ),
+            'typeId' => array(
+                'name' => 'typeId',
+                'required' => true,
+                'validators' => [new StringLength(['min' => 1])]
+            ),
             'name' => array(
                 'name' => 'name',
                 'required' => true,
