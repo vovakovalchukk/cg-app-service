@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "18b0a528be37f15d0f271033c40a5454",
-    "content-hash": "e6b843deffd8af1731cc1821f504a102",
+    "hash": "af6b8b2fec99cef18755caf46cf700b4",
+    "content-hash": "d033c7449d74c3678ce95ba53ece59bf",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.23.8",
+            "version": "dev-CGIV-7110-courier-manifesting-for-all-providers",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "73f7f5499fc59efe0cbb594c8e338c149532adb9"
+                "reference": "a15b9d84cd0704fd82175f56cdd3de9ffd7642e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.8-2f817f.zip",
-                "reference": "73f7f5499fc59efe0cbb594c8e338c149532adb9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7110-courier-manifesting-for-all-providers-863a70.zip",
+                "reference": "a15b9d84cd0704fd82175f56cdd3de9ffd7642e6",
                 "shasum": null
             },
             "require": {
@@ -1352,7 +1352,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-28 08:14:59"
+            "time": "2016-07-07 07:55:05"
         },
         {
             "name": "channelgrabber/permission",
@@ -8255,10 +8255,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.23.9",
+            "alias_normalized": "1.23.9.0",
+            "version": "dev-CGIV-7110-courier-manifesting-for-all-providers",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,

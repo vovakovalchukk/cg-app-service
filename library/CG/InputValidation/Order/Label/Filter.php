@@ -1,11 +1,13 @@
 <?php
 namespace CG\InputValidation\Order\Label;
 
+use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
+use Zend\Validator\Date;
 
 class Filter implements RulesInterface
 {
@@ -51,6 +53,17 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'shippingAccountId')
                 ]
             ],
+            'createdFrom' => [
+                'name'       => 'createdFrom',
+                'required'   => false,
+                'validators' => [new Date(['format' => StdlibDateTime::FORMAT])]
+            ],
+            'createdTo' => [
+                'name'       => 'createdTo',
+                'required'   => false,
+                'validators' => [new Date(['format' => StdlibDateTime::FORMAT])]
+            ],
+
         ];
     }
 }
