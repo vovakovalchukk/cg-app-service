@@ -61,10 +61,15 @@ class Entity implements RulesInterface
                 'name'       => 'shippingAccountId',
                 'required'   => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'organisationUnitId']),
+                    new IntegerValidator(['name' => 'shippingAccountId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'shippingAccountId must be at least %min%'])
                 ]
+            ],
+            'shippingServiceCode' => [
+                'name'       => 'shippingServiceCode',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
             ],
         ];
     }

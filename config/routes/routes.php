@@ -582,7 +582,7 @@ return array(
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderLabel/:labelId',
         'name' => 'OrderLabelCollection',
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => LabelFilterValidationRules::class, "flatten" => false]
     ],
     '/orderLabel/:labelId' => [
@@ -598,7 +598,7 @@ return array(
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderLabelEntity',
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => LabelMapper::class,

@@ -63,7 +63,13 @@ class Filter implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => StdlibDateTime::FORMAT])]
             ],
-
+            'shippingServiceCode' => [
+                'name' => 'shippingServiceCode',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "shippingServiceCode"])
+                ]
+            ],
         ];
     }
 }
