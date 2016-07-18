@@ -50,7 +50,7 @@ class Entity implements RulesInterface
             ],
             'code' => [
                 'name' => 'code',
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(['name' => 'code'])),
                 ],
