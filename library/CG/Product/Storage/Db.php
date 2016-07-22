@@ -166,9 +166,6 @@ class Db extends DbAbstract implements StorageInterface
         if (!is_null($filter->getCgCreationDate())) {
             $query['product.cgCreationDate'] = $filter->getCgCreationDate();
         }
-        if (!empty($filter->getStockMode())) {
-            $query['product.stockMode'] = $filter->getStockMode();
-        }
 
         if(!empty($filter->getSku())) {
             // Must do SKU check as (LIKE OR LIKE) instead of IN() otherwise
