@@ -28,10 +28,18 @@ class Versioniser8 implements VersioniserInterface
     {
         $data = $response->getData();
         try {
+            $sku = $data['sku'];
+
+            $variation = $response->getFirstResource('variation');
+            if ($variation) {
+                // Parent Product - Use first variation sku
+                $sku = $variation->getData()['sku'];
+            }
+
             /** @var Stock $stock */
-            $stock = $this->stockService->fetchBySku($data['sku'], $data['organisationUnitId']);
+            $stock = $this->stockService->fetchBySku($sku, $data['organisationUnitId']);
             $data['stockMode'] = $stock->getStockMode();
-            $data['stockLevel'] = $stock->getStockLevel();
+            $data['stockLevel'] = ($variation ? null : $stock->getStockLevel());
         } catch (NotFound $exception) {
             // No matching stock means no stock mode
             $data['stockMode'] = $data['stockLevel'] = null;
