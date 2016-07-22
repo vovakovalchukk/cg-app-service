@@ -2,15 +2,12 @@
 namespace CG\InputValidation\Product;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
-use CG\Validation\RulesInterface;
-use CG\Validation\ValidatorChain;
-use Zend\Validator\Between;
-use Zend\Validator\Identical;
-use Zend\Validator\StringLength;
-use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\PaginationTrait;
+use CG\Validation\RulesInterface;
+use Zend\Validator\StringLength;
 
 class Filter implements RulesInterface
 {
@@ -81,13 +78,6 @@ class Filter implements RulesInterface
                     'name'       => 'cgCreationDate',
                     'required'   => false,
                     'validators' => [new StringLength(['min' => 1])]
-                ],
-                'stockMode' => [
-                    'name'       => 'stockMode',
-                    'required'   => false,
-                    'validators' => [
-                        new IsArrayValidator(['name' => 'stockMode'])
-                    ]
                 ],
                 'type' => [
                     'name'       => 'type',

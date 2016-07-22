@@ -6,6 +6,7 @@ use CG\Controllers\Stock\InvalidationTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
+use CG\Stock\Filter;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Service;
 use Exception;
@@ -13,6 +14,9 @@ use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
 
+/**
+ * @method Service getService
+ */
 class Collection
 {
     use ControllerTrait;
@@ -48,13 +52,16 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAndFiltersAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('organisationUnitId') ?: [],
-            $this->getParams('sku') ?: [],
-            $this->getParams('locationId') ?: []
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            new Filter(
+                $this->getParams('limit'),
+                $this->getParams('page'),
+                $this->getParams('id') ?: [],
+                $this->getParams('organisationUnitId') ?: [],
+                $this->getParams('sku') ?: [],
+                $this->getParams('locationId') ?: [],
+                $this->getParams('stockMode') ?: []
+            )
         );
     }
 

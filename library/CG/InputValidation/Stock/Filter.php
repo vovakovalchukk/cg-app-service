@@ -2,10 +2,10 @@
 namespace CG\InputValidation\Stock;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
-use CG\Validation\Rules\IsArrayValidator;
-use CG\Validation\RulesInterface;
-use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\Rules\PaginationTrait;
+use CG\Validation\RulesInterface;
 
 class Filter implements RulesInterface
 {
@@ -42,6 +42,13 @@ class Filter implements RulesInterface
                     'required'   => false,
                     'validators' => [
                         new ArrayOfIntegersValidator(new IntegerValidator(), 'locationId')
+                    ]
+                ],
+                'stockMode' => [
+                    'name'       => 'stockMode',
+                    'required'   => false,
+                    'validators' => [
+                        new IsArrayValidator(['name' => 'stockMode'])
                     ]
                 ],
             ]
