@@ -1,16 +1,15 @@
 <?php
 namespace CG\Slim\Versioning\ProductCollection;
 
-use CG\Slim\Versioning\ProductEntity\Versioniser6 as EntityVersioniser;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 
 class Versioniser6 implements VersioniserInterface
 {
-    /** @var EntityVersioniser $entityVersioner */
+    /** @var VersioniserInterface $entityVersioner */
     protected $entityVersioner;
 
-    public function __construct(EntityVersioniser $entityVersioner)
+    public function __construct(VersioniserInterface $entityVersioner)
     {
         $this->setEntityVersioner($entityVersioner);
     }
@@ -37,7 +36,7 @@ class Versioniser6 implements VersioniserInterface
     /**
      * @return self
      */
-    public function setEntityVersioner(EntityVersioniser $entityVersioner)
+    public function setEntityVersioner(VersioniserInterface $entityVersioner)
     {
         $this->entityVersioner = $entityVersioner;
         return $this;
