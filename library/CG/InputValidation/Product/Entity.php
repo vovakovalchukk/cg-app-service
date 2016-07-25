@@ -1,12 +1,12 @@
 <?php
 namespace CG\InputValidation\Product;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
-use CG\Validation\Rules\IsArrayValidator;
-use CG\Validation\Rules\BooleanValidator;
 
 class Entity implements RulesInterface
 {
@@ -72,16 +72,6 @@ class Entity implements RulesInterface
                 'name' => 'taxRateIds',
                 'required' => false,
                 'validators' => [new IsArrayValidator(['name' => 'taxRateIds'])]
-            ],
-            'stockMode' => [
-                'name' => 'stockMode',
-                'required' => false,
-                'validators' => [new StringLength(['min' => 1])]
-            ],
-            'stockLevel' => [
-                'name'       => 'stockLevel',
-                'required'   => false,
-                'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
             ],
             'cgCreationDate' => [
                 'name'       => 'cgCreationDate',

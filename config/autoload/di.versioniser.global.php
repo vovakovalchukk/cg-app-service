@@ -16,6 +16,8 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\StockCollection;
+use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -112,6 +114,8 @@ return [
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
+                'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
+                'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -276,6 +280,11 @@ return [
             'Versioniser_InvoiceSettingsCollection_2' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_InvoiceSettings_2'
+                ],
+            ],
+            'Versioniser_StockCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_StockEntity_1',
                 ],
             ],
         ],

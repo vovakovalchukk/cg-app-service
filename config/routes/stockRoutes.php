@@ -21,6 +21,8 @@ use CG\Stock\Location\Service as StockLocationService;
 use CG\Controllers\Stock\Log\Collection as StockLogCollection;
 use CG\InputValidation\Stock\Log\Filter as StockLogFilterValidation;
 
+use CG\Slim\Versioning\Version;
+
 return [
     '/stock' => [
         'controllers' => function() use ($di, $app) {
@@ -38,7 +40,8 @@ return [
         'validation' => [
             'filterRules' => StockCollectionValidation::class,
             'dataRules' => StockEntityValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2)
     ],
     '/stock/:stockId' => [
         'controllers' => function($stockId) use ($di, $app) {
@@ -59,7 +62,8 @@ return [
             'mapperClass' => StockMapper::class,
             'entityClass' => StockEntity::class,
             'serviceClass' => StockService::class
-        ]
+        ],
+        'version' => new Version(1, 2)
     ],
     '/stockLocation' => [
         'controllers' => function() use ($di, $app) {
@@ -120,4 +124,3 @@ return [
     ],
     // Deliberately left out /stockLog/:id for now
 ];
- 

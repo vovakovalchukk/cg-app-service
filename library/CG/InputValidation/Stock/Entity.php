@@ -29,7 +29,17 @@ class Entity implements RulesInterface
                 'name' => 'sku',
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
-            ]
+            ],
+            'stockMode' => [
+                'name' => 'stockMode',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'stockLevel' => [
+                'name'       => 'stockLevel',
+                'required'   => false,
+                'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
+            ],
         ];
     }
 }
