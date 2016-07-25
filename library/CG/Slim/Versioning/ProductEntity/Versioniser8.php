@@ -39,6 +39,7 @@ class Versioniser8 implements VersioniserInterface
                 // Parent Product - Use first variation sku
                 $sku = $variation->getData()['sku'];
             } else if ($variationLink) {
+                // $variationLink = /product/{id}
                 $productId = substr($variationLink, 9);
                 $sku = $this->productService->fetch($productId)->getSku();
             }
