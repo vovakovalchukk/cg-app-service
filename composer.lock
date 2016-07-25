@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2298c5af6b51d7ac011e0fc0b069b525",
-    "content-hash": "7e7e5622482e45c288ee6f287a2e22a5",
+    "hash": "44f2d78f520f07239c83a9fc5de54010",
+    "content-hash": "a6c9f92d2fa6bc18e5e9c6f77fb84ad4",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-7108-integrate-courier-adapters",
+            "version": "1.23.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9a455b4392056f1a1a7b3fa15b1409a676e14122"
+                "reference": "c636b695c751f69b34fe04121189afe59e74a114"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-7108-integrate-courier-adapters-5700d8.zip",
-                "reference": "9a455b4392056f1a1a7b3fa15b1409a676e14122",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.11-c08444.zip",
+                "reference": "c636b695c751f69b34fe04121189afe59e74a114",
                 "shasum": null
             },
             "require": {
@@ -1352,7 +1352,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-19 09:53:41"
+            "time": "2016-07-26 07:50:49"
         },
         {
             "name": "channelgrabber/permission",
@@ -8303,18 +8303,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.9",
-            "alias_normalized": "1.23.9.0",
-            "version": "dev-EPIC-CGIV-7108-integrate-courier-adapters",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
