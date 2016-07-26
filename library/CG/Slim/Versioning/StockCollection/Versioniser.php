@@ -27,8 +27,8 @@ class Versioniser implements VersioniserInterface
         }
 
         $currentVersion = null;
-        foreach ($resources['stock'] as $product) {
-            $currentVersion = $this->entityVersioner->downgradeResponse($params, $product, $requestedVersion);
+        foreach ($resources['stock'] as $stock) {
+            $currentVersion = $this->entityVersioner->downgradeResponse($params, $stock, $requestedVersion);
         }
         return $currentVersion;
     }
