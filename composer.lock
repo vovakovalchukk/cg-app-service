@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d9ff66d2586a534e2b1a2e4d929447ae",
-    "content-hash": "dc8470862b7630416628a8ff4c65257f",
+    "hash": "a79db3a813cfb574dfe691c5eff80a29",
+    "content-hash": "1b8a6c30be50005cb3c73bcbab68a5e1",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -226,16 +226,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.10.1",
+            "version": "dev-CGIV-7266-MoveStockModeToStockEntity",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "1e8fddedb13050ac4b94795c6294e9f06c1d1429"
+                "reference": "c2887df459b4716bff3e37ca5141d4e655526389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.10.1-e55f40.zip",
-                "reference": "1e8fddedb13050ac4b94795c6294e9f06c1d1429",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-7266-MoveStockModeToStockEntity-55d94e.zip",
+                "reference": "c2887df459b4716bff3e37ca5141d4e655526389",
                 "shasum": null
             },
             "require": {
@@ -284,7 +284,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-06-20 08:32:31"
+            "time": "2016-07-26 10:26:57"
         },
         {
             "name": "channelgrabber/channel",
@@ -2199,12 +2199,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "dd804169318fb13e72b46a9ab8d956033526f83b"
+                "reference": "1b3e42a990e4d31971db299f0239740f03bd31d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-7266-MoveStockModeToStockEntity-fc274a.zip",
-                "reference": "dd804169318fb13e72b46a9ab8d956033526f83b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-7266-MoveStockModeToStockEntity-749abf.zip",
+                "reference": "1b3e42a990e4d31971db299f0239740f03bd31d5",
                 "shasum": null
             },
             "require": {
@@ -2224,6 +2224,10 @@
                 "channelgrabber/stdlib": "^2.12.14",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "nocarrier/hal": "~0.9.4"
+            },
+            "conflict": {
+                "channelgrabber/cglib": "<1.10.2",
+                "channelgrabber/product": "<1.8.0"
             },
             "require-dev": {
                 "channelgrabber/phpunit": ">=1.0.2",
@@ -2250,7 +2254,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-25 15:19:45"
+            "time": "2016-07-26 10:40:16"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -8305,6 +8309,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.10.2",
+            "alias_normalized": "1.10.2.0",
+            "version": "dev-CGIV-7266-MoveStockModeToStockEntity",
+            "package": "channelgrabber/cglib"
+        },
+        {
             "alias": "1.8.0",
             "alias_normalized": "1.8.0.0",
             "version": "dev-CGIV-7266-MoveStockModeToStockEntity",
@@ -8319,6 +8329,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/product": 20,
         "channelgrabber/stock": 20,
