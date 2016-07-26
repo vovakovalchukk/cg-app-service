@@ -30,7 +30,10 @@ class Collection
                 $this->getParams('organisationUnitId') ?: [],
                 $this->getParams('orderId') ?: [],
                 $this->getParams('status') ?: [],
-                $this->getParams('shippingAccountId') ?: []
+                $this->getParams('shippingAccountId') ?: [],
+                $this->getParams('createdFrom') ?: null,
+                $this->getParams('createdTo') ?: null,
+                $this->getParams('shippingServiceCode') ?: []
             )
         );
     }
