@@ -181,6 +181,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
+            'billingExternalId'  => array(
+                'name'       => 'billingExternalId',
+                'required'   => false,
+                'validators' => []
+            ),
             'shippingAddressCompanyName'  => array(
                 'name'       => 'shippingAddressCompanyName',
                 'required'   => false,
@@ -241,7 +246,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
-
+            'shippingExternalId'  => array(
+                'name'       => 'shippingExternalId',
+                'required'   => false,
+                'validators' => []
+            ),
             'fulfilmentAddressCompanyName'  => array(
                 'name'       => 'fulfilmentAddressCompanyName',
                 'required'   => false,
@@ -302,7 +311,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
-
+            'fulfilmentExternalId'  => array(
+                'name'       => 'fulfilmentExternalId',
+                'required'   => false,
+                'validators' => []
+            ),
             'batch' => array(
                 'name'       => 'batch',
                 'required'   => false,
