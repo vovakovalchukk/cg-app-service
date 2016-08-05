@@ -1,12 +1,12 @@
 <?php
-namespace CG\Order\Locking;
+namespace CG\Order\Locking\Item;
 
 use CG\Locking\LockableInterface;
-use CG\Order\Shared\Entity as Order;
+use CG\Order\Shared\Item\Entity as Item;
 
-class Entity extends Order implements LockableInterface
+class Entity extends Item implements LockableInterface
 {
-    const LOCK_KEY_PREFIX = 'OrderLock';
+    const LOCK_KEY_PREFIX = 'OrderItemLock';
     const LOCK_KEY_SEPERATOR = ':';
 
     /**
@@ -14,7 +14,7 @@ class Entity extends Order implements LockableInterface
      */
     public function getOwnerId()
     {
-        return $this->getRootOrganisationUnitId() ?: $this->getOrganisationUnitId();
+        return $this->getOrganisationUnitId();
     }
 
     /**

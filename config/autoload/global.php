@@ -81,6 +81,8 @@ use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 //Item
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Service\Item\InvalidationService as ItemInvalidationService;
+use CG\Order\Locking\Item\Service as ItemLockingService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
@@ -1489,6 +1491,8 @@ return array(
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
                 OrderService::class => OrderLockingService::class,
+                ItemService::class => ItemLockingService::class,
+                ItemInvalidationService::class => ItemLockingService::class,
             ]
         )
     )
