@@ -106,7 +106,7 @@ class Db extends DbAbstract implements StorageInterface
         $statement = $sql->prepareStatementForSqlObject($select);
 
         $results = $statement->execute();
-        if ($results->count() != 1) {
+        if ($results->count() == 0) {
             throw new NotFound();
         }
 
