@@ -74,11 +74,14 @@ class Service extends ItemService
      */
     public function save($entity)
     {
+        $lock = $this->lockingService->lock($entity);
         try {
-            $lock = $this->lockingService->lock($entity);
-            return parent::save($entity);
-        } finally {
+            $entity = parent::save($entity);
             $this->lockingService->unlock($lock);
+            return $entity;
+        } catch (\Exception $exception) {
+            $this->lockingService->unlock($lock);
+            throw $exception;
         }
     }
 
