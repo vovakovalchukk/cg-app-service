@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7d8b5a9d832456a469b8e1b56a6bf55e",
-    "content-hash": "5e71916dc8fbaed0103b84e5007635e7",
+    "hash": "418ba49b1528630e7198863401ac8a33",
+    "content-hash": "ee19513ff4eca27330a15dca45c70360",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -288,16 +288,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.24.6",
+            "version": "1.24.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "86a3f80578db37a68cb3aa38d5d93290a3a0dad0"
+                "reference": "b4ac02cb3768160eb154316582804ca2b29e5805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.24.6-afbe59.zip",
-                "reference": "86a3f80578db37a68cb3aa38d5d93290a3a0dad0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.24.7-9a3c7f.zip",
+                "reference": "b4ac02cb3768160eb154316582804ca2b29e5805",
                 "shasum": null
             },
             "require": {
@@ -370,7 +370,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-12 12:47:28"
+            "time": "2016-07-20 09:23:35"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7293-OrderLocking",
+            "version": "1.23.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "d6d9153ade35f4abec2a50c4688303e258f11482"
+                "reference": "f114569c9d6804d8ab43df2caefb5235286d014c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7293-OrderLocking-3ca511.zip",
-                "reference": "d6d9153ade35f4abec2a50c4688303e258f11482",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.12-5c4fd8.zip",
+                "reference": "f114569c9d6804d8ab43df2caefb5235286d014c",
                 "shasum": null
             },
             "require": {
@@ -1352,7 +1352,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-05 09:32:39"
+            "time": "2016-08-09 07:27:31"
         },
         {
             "name": "channelgrabber/permission",
@@ -8307,18 +8307,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.12",
-            "alias_normalized": "1.23.12.0",
-            "version": "dev-CGIV-7293-OrderLocking",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
