@@ -45,6 +45,7 @@ use CG\Account\Client\PollingWindow\Storage\Api as AccountPollingWindowApiStorag
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
+use CG\Order\Locking\Service as OrderLockingService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -80,6 +81,8 @@ use CG\Order\Service\Alert\Storage\Db as AlertDbStorage;
 //Item
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Service\Item\InvalidationService as ItemInvalidationService;
+use CG\Order\Locking\Item\Service as ItemLockingService;
 use CG\Order\Shared\Item\Repository as ItemRepository;
 use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
@@ -537,6 +540,13 @@ return array(
                 )
             ),
             OrderService::class => array(
+                'parameters' => array(
+                    'repository' => OrderPersistentStorage::class,
+                    'storage' => OrderElasticSearchStorage::class,
+                    'filterStorage' => FilterCache::class
+                )
+            ),
+            OrderLockingService::class => array(
                 'parameters' => array(
                     'repository' => OrderPersistentStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
@@ -1480,6 +1490,9 @@ return array(
                 LabelStorage::class => LabelRepository::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
+                OrderService::class => OrderLockingService::class,
+                ItemService::class => ItemLockingService::class,
+                ItemInvalidationService::class => ItemLockingService::class,
             ]
         )
     )
