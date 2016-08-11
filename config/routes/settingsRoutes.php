@@ -52,6 +52,7 @@ use CG\Settings\Product\Entity as ProductEntity;
 use CG\Settings\Product\Mapper as ProductMapper;
 use CG\Settings\Product\Service as ProductService;
 
+// SetupProgress
 use CG\Controllers\Settings\SetupProgress;
 use CG\Controllers\Settings\SetupProgress\Collection as SetupProgressCollection;
 use CG\InputValidation\Settings\SetupProgress\Filter as SetupProgressCollectionValidation;
@@ -59,6 +60,15 @@ use CG\InputValidation\Settings\SetupProgress\Entity as SetupProgressEntityValid
 use CG\Settings\SetupProgress\Entity as SetupProgressEntity;
 use CG\Settings\SetupProgress\Mapper as SetupProgressMapper;
 use CG\Settings\SetupProgress\RestService as SetupProgressService;
+
+// Order
+use CG\Controllers\Settings\Order;
+use CG\Controllers\Settings\Order\Collection as OrderCollection;
+use CG\InputValidation\Settings\Order\Filter as OrderCollectionValidation;
+use CG\InputValidation\Settings\Order\Entity as OrderEntityValidation;
+use CG\Settings\Order\Entity as OrderEntity;
+use CG\Settings\Order\Mapper as OrderMapper;
+use CG\Settings\Order\RestService as OrderService;
 
 return [
     '/settings' => [
@@ -328,6 +338,46 @@ return [
             'mapperClass' => SetupProgressMapper::class,
             'entityClass' => SetupProgressEntity::class,
             'serviceClass' => SetupProgressService::class
+        ]
+    ],
+    '/settings/order' => [
+        'controllers' => function() use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(OrderCollection::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'OrderSettingsCollection',
+        'entityRoute' => '/settings/order/:id',
+        'validation' => [
+            'filterRules' => OrderCollectionValidation::class
+        ]
+    ],
+    '/settings/order/:id' => [
+        'controllers' => function($ouId) use ($di) {
+                $app = $di->get(Slim::class);
+                $method = $app->request()->getMethod();
+
+                $controller = $di->get(Order::class);
+                $app->view()->set(
+                    'RestResponse',
+                    $controller->$method($ouId, $app->request()->getBody())
+                );
+            },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'OrderSettingsEntity',
+        'validation' => [
+            'dataRules' => OrderEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => OrderMapper::class,
+            'entityClass' => OrderEntity::class,
+            'serviceClass' => OrderService::class
         ]
     ],
 ];

@@ -380,7 +380,7 @@ use CG\Settings\SetupProgress\Storage\Cache as SetupProgressSettingsCacheStorage
 use CG\Settings\SetupProgress\Storage\Db as SetupProgressSettingsDbStorage;
 use CG\Settings\SetupProgress\StorageInterface as SetupProgressSettingsStorage;
 
-return array(
+$config = array(
     'di' => array(
         'definition' => [
             'class' => [
@@ -1497,3 +1497,10 @@ return array(
         )
     )
 );
+
+$configFiles = glob(__DIR__ . '/global/*.php');
+foreach ($configFiles as $configFile) {
+    $configFileContents = require_once $configFile;
+    $config = \Zend\Stdlib\ArrayUtils::merge($config, $configFileContents);
+}
+return $config;
