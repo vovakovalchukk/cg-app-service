@@ -4,6 +4,7 @@ namespace CG\Settings\Order;
 use CG\Settings\Order\Filter;
 use CG\Settings\Order\Mapper;
 use CG\Settings\Order\Service;
+use Nocarrier\Hal;
 
 class RestService extends Service
 {
@@ -26,5 +27,11 @@ class RestService extends Service
         return $this->getMapper()->collectionToHal(
             $collection, Mapper::URL, $filter->getLimit(), $filter->getPage(), $filter->toArray()
         );
+    }
+
+    public function saveHal(Hal $hal, array $ids)
+    {
+        $entity = $this->fromHal($hal, $ids);
+        return $this->getMapper()->toHal($this->save($entity));
     }
 }
