@@ -151,6 +151,7 @@ use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as Correc
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
+use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1445,6 +1446,11 @@ $config = array(
                     'writeSql' => 'WriteSql',
                     'mapper' => SetupProgressSettingsMapper::class,
                 ],
+            ],
+            AutoArchiveOrdersCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',

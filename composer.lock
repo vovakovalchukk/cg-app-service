@@ -1278,12 +1278,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6a4a98daf6f839db6017ce6d356231c03b6bb749"
+                "reference": "fb31fc717e2e92fe2fa9fe724e3843f4f8ccf23a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7043-auto-archive-orders-51f1eb.zip",
-                "reference": "6a4a98daf6f839db6017ce6d356231c03b6bb749",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7043-auto-archive-orders-630c12.zip",
+                "reference": "fb31fc717e2e92fe2fa9fe724e3843f4f8ccf23a",
                 "shasum": null
             },
             "require": {
@@ -1291,6 +1291,7 @@
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": "^1.8.11",
                 "channelgrabber/channel": "^1.17.7",
+                "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": "^1.0.9",
@@ -1352,7 +1353,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-12 08:03:35"
+            "time": "2016-08-12 10:41:53"
         },
         {
             "name": "channelgrabber/permission",
@@ -1909,12 +1910,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "ee0bc765d53d8744fe1509d280b42fd04a94e215"
+                "reference": "1b8f94c5d8c5ee05d472d31f019920e58a16dca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-7043-auto-archive-orders-8a006c.zip",
-                "reference": "ee0bc765d53d8744fe1509d280b42fd04a94e215",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-7043-auto-archive-orders-ae29bb.zip",
+                "reference": "1b8f94c5d8c5ee05d472d31f019920e58a16dca7",
                 "shasum": null
             },
             "require": {
@@ -1940,7 +1941,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-11 15:00:23"
+            "time": "2016-08-12 08:48:24"
         },
         {
             "name": "channelgrabber/shopify",
