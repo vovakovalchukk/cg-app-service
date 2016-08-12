@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3cf255b6bb3d39ecff0adbca1aca99d1",
-    "content-hash": "86e6c917b6e67ecc7cba88247e24c20f",
+    "hash": "4516c6ca244a84f3d271dfa72384154e",
+    "content-hash": "ab3a2c0a78b936c3057c643ee069da67",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.23.13",
+            "version": "dev-CGIV-7043-auto-archive-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "59a3d65ecf289b890cd1660e81854009bba49046"
+                "reference": "6a4a98daf6f839db6017ce6d356231c03b6bb749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.13-62ca4d.zip",
-                "reference": "59a3d65ecf289b890cd1660e81854009bba49046",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7043-auto-archive-orders-51f1eb.zip",
+                "reference": "6a4a98daf6f839db6017ce6d356231c03b6bb749",
                 "shasum": null
             },
             "require": {
@@ -1309,7 +1309,7 @@
                 "channelgrabber/product": "^1.7.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "^1.3.9",
+                "channelgrabber/settings": "dev-CGIV-7043-auto-archive-orders as 1.3.14",
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.25",
@@ -1352,7 +1352,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-10 08:31:35"
+            "time": "2016-08-12 08:03:35"
         },
         {
             "name": "channelgrabber/permission",
@@ -8309,6 +8309,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.23.14",
+            "alias_normalized": "1.23.14.0",
+            "version": "dev-CGIV-7043-auto-archive-orders",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "1.3.14",
             "alias_normalized": "1.3.14.0",
             "version": "dev-CGIV-7043-auto-archive-orders",
@@ -8318,6 +8324,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
