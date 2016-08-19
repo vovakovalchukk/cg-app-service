@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4e02787ca969ec30c4df978f227f5de2",
-    "content-hash": "7ecdc712506b5f13aff29b7922dbf0d4",
+    "hash": "85e5dcc2c7000853aa12c43290a488c6",
+    "content-hash": "7681d0ba2604ea7a913bccf48251fd71",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2235,16 +2235,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-7181-amazon-mcf-with-fba",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "a05277ee811d22eaeca32e14f7bf6e4bf51c4506"
+                "reference": "4378ea9ae661f78865ad11a76a32167d2ba64101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-7181-amazon-mcf-with-fba-536dda.zip",
-                "reference": "a05277ee811d22eaeca32e14f7bf6e4bf51c4506",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.8.2-299227.zip",
+                "reference": "4378ea9ae661f78865ad11a76a32167d2ba64101",
                 "shasum": null
             },
             "require": {
@@ -2294,7 +2294,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-10 08:30:41"
+            "time": "2016-08-19 10:24:20"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -8428,18 +8428,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.8.2",
-            "alias_normalized": "1.8.2.0",
-            "version": "dev-EPIC-CGIV-7181-amazon-mcf-with-fba",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
