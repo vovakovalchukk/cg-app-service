@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3ea81524b7ec7c10cacca9e1ec03dd5",
-    "content-hash": "10802dbd773785a4e84667a86a8ba280",
+    "hash": "cdab2c1bf8896b1af183f168d87fccfb",
+    "content-hash": "eb8807f7c1582d62944fd2dbe58473ef",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1314,16 +1314,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7043-auto-archive-orders",
+            "version": "1.23.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9259434d06136e0245df5c5040724a4232bbbe23"
+                "reference": "e7c88db643062536618f3259a4607f6c35750fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7043-auto-archive-orders-37a55a.zip",
-                "reference": "9259434d06136e0245df5c5040724a4232bbbe23",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.17-202455.zip",
+                "reference": "e7c88db643062536618f3259a4607f6c35750fcc",
                 "shasum": null
             },
             "require": {
@@ -1350,11 +1350,11 @@
                 "channelgrabber/product": "^1.7.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "dev-CGIV-7043-auto-archive-orders as 1.3.14",
+                "channelgrabber/settings": "^1.3.14",
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.25",
-                "channelgrabber/stock": "^1.6.2",
+                "channelgrabber/stock": "^1.8.2",
                 "channelgrabber/tax": "^1.0.2",
                 "channelgrabber/template": "^1.4.3",
                 "channelgrabber/transaction": "^1.2.1",
@@ -1393,7 +1393,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-12 11:42:10"
+            "time": "2016-08-24 08:50:07"
         },
         {
             "name": "channelgrabber/permission",
@@ -1946,16 +1946,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-CGIV-7043-auto-archive-orders",
+            "version": "1.3.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "1b8f94c5d8c5ee05d472d31f019920e58a16dca7"
+                "reference": "e3093210177dacb113208f75ad6a7881f83148c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-7043-auto-archive-orders-ae29bb.zip",
-                "reference": "1b8f94c5d8c5ee05d472d31f019920e58a16dca7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.3.14-30a4d2.zip",
+                "reference": "e3093210177dacb113208f75ad6a7881f83148c4",
                 "shasum": null
             },
             "require": {
@@ -1981,7 +1981,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-12 08:48:24"
+            "time": "2016-08-24 08:45:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -8429,25 +8429,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.15",
-            "alias_normalized": "1.23.15.0",
-            "version": "dev-CGIV-7043-auto-archive-orders",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.3.14",
-            "alias_normalized": "1.3.14.0",
-            "version": "dev-CGIV-7043-auto-archive-orders",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/settings": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
