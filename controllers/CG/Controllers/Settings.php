@@ -24,7 +24,9 @@ class Settings
             ->addLink('shipping', '/settings/shipping')
             ->addLink('pickList', '/settings/pickList')
             ->addLink('api', '/settings/api')
-            ->addLink('product', '/settings/product');
+            ->addLink('product', '/settings/product')
+            ->addLink('setupProgress', '/settings/setupProgress')
+            ->addLink('order', '/settings/order');
         return $hal;
     }
 }

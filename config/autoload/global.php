@@ -151,6 +151,7 @@ use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as Correc
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
+use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -380,7 +381,7 @@ use CG\Settings\SetupProgress\Storage\Cache as SetupProgressSettingsCacheStorage
 use CG\Settings\SetupProgress\Storage\Db as SetupProgressSettingsDbStorage;
 use CG\Settings\SetupProgress\StorageInterface as SetupProgressSettingsStorage;
 
-return array(
+$config = array(
     'di' => array(
         'definition' => [
             'class' => [
@@ -1446,6 +1447,11 @@ return array(
                     'mapper' => SetupProgressSettingsMapper::class,
                 ],
             ],
+            AutoArchiveOrdersCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1497,3 +1503,10 @@ return array(
         )
     )
 );
+
+$configFiles = glob(__DIR__ . '/global/*.php');
+foreach ($configFiles as $configFile) {
+    $configFileContents = require_once $configFile;
+    $config = \Zend\Stdlib\ArrayUtils::merge($config, $configFileContents);
+}
+return $config;

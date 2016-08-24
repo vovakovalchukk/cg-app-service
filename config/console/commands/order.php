@@ -2,6 +2,7 @@
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
+use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
 use CG\Order\Shared\Command\UpdateAllItemsImages;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
@@ -98,6 +99,16 @@ return [
             if ($output->getVerbosity() > OutputInterface::VERBOSITY_QUIET) {
                 $output->writeln('Done, ' . $affected . ' OUs affected');
             }
+        }
+    ],
+    'order:autoArchive' => [
+        'description' => "Archive any orders older than the users configured threshold",
+        'options' => [],
+        'modulus' => true,
+        'command' => function() use ($di)
+        {
+            $command = $di->get(AutoArchiveOrders::class);
+            $command();
         }
     ],
 ];
