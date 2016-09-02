@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69d3e0aa5c5ba07f1c19c635197373f4",
-    "content-hash": "e6e78f874c235bb2bf5ea580fff3c239",
+    "hash": "44d3b5cb18cf749080f6bf624d0fc7b3",
+    "content-hash": "23261e9963d34c2dcc36240e638f6d17",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1653,16 +1653,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.8.0",
+            "version": "dev-CGIV-7429-EnforceStockAndLocation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f649850f9e9fdf6211e75317d70f640534d9fcf9"
+                "reference": "cfa53c3f349c9eb07f5467abb222613dd3468826"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.8.0-1148e2.zip",
-                "reference": "f649850f9e9fdf6211e75317d70f640534d9fcf9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-7429-EnforceStockAndLocation-e27b9c.zip",
+                "reference": "cfa53c3f349c9eb07f5467abb222613dd3468826",
                 "shasum": null
             },
             "require": {
@@ -1679,7 +1679,7 @@
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.24",
-                "channelgrabber/stock": "^1.8.1",
+                "channelgrabber/stock": "^1.8.2",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.7",
@@ -1711,7 +1711,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-27 09:03:14"
+            "time": "2016-09-02 09:14:06"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -8429,10 +8429,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.8.2",
+            "alias_normalized": "1.8.2.0",
+            "version": "dev-CGIV-7429-EnforceStockAndLocation",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
