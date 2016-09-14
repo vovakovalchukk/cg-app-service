@@ -1,6 +1,7 @@
 <?php
 namespace CG\Controllers\Stock;
 
+use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock as UpdateRelatedListingsForStockGearmanJobGenerator;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as Invalidator;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
@@ -23,24 +24,36 @@ class Stock
     use DeleteTrait;
     use InvalidationTrait;
 
+    /** @var StockMapper $stockMapper */
     protected $stockMapper;
+    /** @var Invalidator $invalidator */
     protected $invalidator;
+    /** @var UpdateRelatedListingsForStockGearmanJobGenerator $updateRelatedListingsForStock */
+    protected $updateRelatedListingsForStock;
 
-    public function __construct(Slim $app, Service $service, Di $di, StockMapper $stockMapper, Invalidator $invalidator)
-    {
+    public function __construct(
+        Slim $app,
+        Service $service,
+        Di $di,
+        StockMapper $stockMapper,
+        Invalidator $invalidator,
+        UpdateRelatedListingsForStockGearmanJobGenerator $updateRelatedListingsForStock
+    ) {
         $this
             ->setSlim($app)
             ->setService($service)
             ->setDi($di)
             ->setStockMapper($stockMapper)
-            ->setInvalidator($invalidator);
+            ->setInvalidator($invalidator)
+            ->setUpdateRelatedListingsForStock($updateRelatedListingsForStock);
     }
 
     public function put($id, Hal $hal)
     {
         $stockHal = $this->putTrait($id, $hal);
         try {
-            $this->invalidateStock($stockHal);
+            $stock = $this->invalidateStock($this->stockMapper->fromHal($stockHal));
+            $this->updateRelatedListingsForStock->generateJob($stock);
         } catch (Exception $exception) {
             // No-op. Save succeeded, everything else is superfluous
         }
@@ -79,5 +92,15 @@ class Stock
     protected function getInvalidator()
     {
         return $this->invalidator;
+    }
+
+    /**
+     * @return self
+     */
+    protected function setUpdateRelatedListingsForStock(
+        UpdateRelatedListingsForStockGearmanJobGenerator $updateRelatedListingsForStock
+    ) {
+        $this->updateRelatedListingsForStock = $updateRelatedListingsForStock;
+        return $this;
     }
 }
