@@ -61,11 +61,18 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'deleted'])]
             ],
-            'imageIds'  => [
-                'name' => 'imageIds',
+            'images'  => [
+                'name' => 'images',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "imageIds"])
+                    new IsArrayValidator(['name' => 'images'])
+                ]
+            ],
+            'listingImages'  => [
+                'name' => 'listingImages',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'listingImages'])
                 ]
             ],
             'taxRateIds' => [

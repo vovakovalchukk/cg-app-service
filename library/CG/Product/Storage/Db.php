@@ -289,20 +289,31 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function saveImageRelation(ProductEntity $entity)
     {
-        $delete = $this->getWriteSql()->delete('productImage');
-        $query = [
-            'productId' => $entity->getId(),
-        ];
-        $delete->where($query);
-        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
-        $productAttributeValueInsert = $this->getWriteSql()->insert('productImage');
-        foreach ($entity->getImageIds() as $order => $imageId) {
-            $productAttributeValueInsert->values([
-                'order' => $order,
-                'imageId' => $imageId,
-                'productId' => $entity->getId()
+        $productImageDelete = $this->getWriteSql()->delete('productImage')->where(['productId' => $entity->getId()]);
+        $this->getWriteSql()->prepareStatementForSqlObject($productImageDelete)->execute();
+
+        $productImageInsert = $this->getWriteSql()->insert('productImage');
+        foreach ($entity->getImageIds() as $image) {
+            $productImageInsert->values([
+                'productId' => $entity->getId(),
+                'imageId' => $image['id'],
+                'order' => $image['order'],
             ]);
-            $this->getWriteSql()->prepareStatementForSqlObject($productAttributeValueInsert)->execute();
+            $this->getWriteSql()->prepareStatementForSqlObject($productImageInsert)->execute();
+        }
+
+        $productListingImageDelete = $this->getWriteSql()->delete('productListingImage')->where(['productId' => $entity->getId()]);
+        $this->getWriteSql()->prepareStatementForSqlObject($productImageDelete)->execute();
+
+        $productListingImageInsert = $this->getWriteSql()->insert('productListingImage');
+        foreach ($entity->getImageListingIds() as $image) {
+            $productListingImageInsert->values([
+                'productId' => $entity->getId(),
+                'listingId' => $image['listingId'],
+                'imageId' => $image['id'],
+                'order' => $image['order'],
+            ]);
+            $this->getWriteSql()->prepareStatementForSqlObject($productListingImageInsert)->execute();
         }
     }
 
@@ -338,7 +349,13 @@ class Db extends DbAbstract implements StorageInterface
             ->join(
                 'productImage',
                 'productImage.productId = product.id',
-                ['imageId', 'order'],
+                ['imageId' => 'imageId', 'imageOrder' => 'order'],
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productListingImage',
+                'productListingImage.productId = product.id',
+                ['imageListingId' => 'listingId', 'listingImageId' => 'imageId', 'listingImageOrder' => 'order'],
                 Select::JOIN_LEFT
             )
             ->join(
