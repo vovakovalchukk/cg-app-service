@@ -204,7 +204,13 @@ class Db extends DbAbstract implements StorageInterface
     protected function insertEntity($entity)
     {
         $entityArray = $entity->toArray();
-        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds'], $entityArray['taxRateIds']);
+        unset(
+            $entityArray['attributeNames'],
+            $entityArray['attributeValues'],
+            $entityArray['imageIds'],
+            $entityArray['listingImageIds'],
+            $entityArray['taxRateIds']
+        );
 
         $insert = $this->getInsert()->values($entityArray);
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
@@ -255,7 +261,13 @@ class Db extends DbAbstract implements StorageInterface
     protected function updateEntity($entity)
     {
         $entityArray = $entity->toArray();
-        unset($entityArray['attributeNames'], $entityArray['attributeValues'], $entityArray['imageIds'], $entityArray['taxRateIds']);
+        unset(
+            $entityArray['attributeNames'],
+            $entityArray['attributeValues'],
+            $entityArray['imageIds'],
+            $entityArray['listingImageIds'],
+            $entityArray['taxRateIds']
+        );
 
         $update = $this->getUpdate()->set($entityArray)
             ->where(array('id' => $entity->getId()));
