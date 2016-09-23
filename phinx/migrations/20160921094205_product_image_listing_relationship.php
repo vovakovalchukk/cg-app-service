@@ -23,7 +23,8 @@ class ProductImageListingRelationship extends AbstractMigration
             ->addColumn('listingId', 'integer')
             ->addColumn('imageId', 'integer')
             ->addColumn('order', 'integer')
-            ->addForeignKey(['productId', 'imageId'], 'productImage', ['productId', 'imageId'], ['delete' => 'CASCADE', 'update' => 'CASCADE'])
+            ->addForeignKey('productId', 'product', 'id', ['delete' => 'CASCADE', 'update' => 'NOACTION'])
+            ->addForeignKey('listingId', 'listing', 'id', ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->create();
     }
 
