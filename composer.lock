@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1fa30226901813537fbd9064ecc7e159",
-    "content-hash": "d5a36f886ad4895055a598af39b28193",
+    "hash": "cd53253a7f5bc15137c54142c2eabe7d",
+    "content-hash": "285bac5460455f2628ae78258100157b",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1314,16 +1314,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7490-shopify-orders-missing-images",
+            "version": "1.23.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "970fa0119ec1d0c4a3a2143d04d6d0403de8b5b8"
+                "reference": "c1691b3485463f2b49bb6a5cb6c05868ac5e02e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7490-shopify-orders-missing-images-8b4897.zip",
-                "reference": "970fa0119ec1d0c4a3a2143d04d6d0403de8b5b8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.19-cae29f.zip",
+                "reference": "c1691b3485463f2b49bb6a5cb6c05868ac5e02e8",
                 "shasum": null
             },
             "require": {
@@ -1393,7 +1393,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-09-22 13:00:15"
+            "time": "2016-09-23 10:02:09"
         },
         {
             "name": "channelgrabber/permission",
@@ -2188,16 +2188,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-7490-shopify-orders-missing-images",
+            "version": "2.12.34",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "25ea0cb726e8e7479d000c487e0569b088dbe888"
+                "reference": "b073194e96f6d6a9a40cf173dd136885ae7e0630"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-7490-shopify-orders-missing-images-ff4915.zip",
-                "reference": "25ea0cb726e8e7479d000c487e0569b088dbe888",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.34-3416d8.zip",
+                "reference": "b073194e96f6d6a9a40cf173dd136885ae7e0630",
                 "shasum": null
             },
             "require": {
@@ -2233,7 +2233,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-09-22 12:32:36"
+            "time": "2016-09-23 10:01:50"
         },
         {
             "name": "channelgrabber/stock",
@@ -8430,25 +8430,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.18",
-            "alias_normalized": "1.23.18.0",
-            "version": "dev-CGIV-7490-shopify-orders-missing-images",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "2.12.34",
-            "alias_normalized": "2.12.34.0",
-            "version": "dev-CGIV-7490-shopify-orders-missing-images",
-            "package": "channelgrabber/stdlib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/stdlib": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
