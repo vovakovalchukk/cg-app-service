@@ -315,7 +315,7 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         $productListingImageDelete = $this->getWriteSql()->delete('productListingImage')->where(['productId' => $entity->getId()]);
-        $this->getWriteSql()->prepareStatementForSqlObject($productImageDelete)->execute();
+        $this->getWriteSql()->prepareStatementForSqlObject($productListingImageDelete)->execute();
 
         $productListingImageInsert = $this->getWriteSql()->insert('productListingImage');
         foreach ($entity->getImageListingIds() as $image) {
