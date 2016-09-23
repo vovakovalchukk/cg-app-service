@@ -2,6 +2,7 @@
 namespace CG\Slim\Versioning\ProductEntity;
 
 use CG\Product\Entity as Product;
+use CG\Product\Mapper as ProductMapper;
 use CG\Product\Service\Service as ProductService;
 use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -11,10 +12,12 @@ class Versioniser9 implements VersioniserInterface
 {
     /** @var ProductService $productService */
     protected $productService;
+    /** @var ProductMapper $productMapper */
+    protected $productMapper;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ProductMapper $productMapper)
     {
-        $this->setProductService($productService);
+        $this->setProductService($productService)->setProductMapper($productMapper);
     }
 
     public function upgradeRequest(array $params, Hal $request)
@@ -40,6 +43,17 @@ class Versioniser9 implements VersioniserInterface
             }
         }
         $request->setData($data);
+
+        $resources = $request->getResources();
+        $embeddedResource = $this->productMapper->getEmbeddedVariationResource();
+
+        if (!isset($resources[$embeddedResource])) {
+            return;
+        }
+
+        foreach ($resources[$embeddedResource] as $resource) {
+            $this->upgradeRequest($params, $resource);
+        }
     }
 
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
@@ -53,6 +67,17 @@ class Versioniser9 implements VersioniserInterface
         }
         unset($data['images'], $data['listingImages']);
         $response->setData($data);
+
+        $resources = $response->getResources();
+        $embeddedResource = $this->productMapper->getEmbeddedVariationResource();
+
+        if (!isset($resources[$embeddedResource])) {
+            return;
+        }
+
+        foreach ($resources[$embeddedResource] as $resource) {
+            $this->downgradeResponse($params, $resource, $requestedVersion);
+        }
     }
 
     /**
@@ -61,6 +86,15 @@ class Versioniser9 implements VersioniserInterface
     protected function setProductService(ProductService $productService)
     {
         $this->productService = $productService;
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    protected function setProductMapper(ProductMapper $productMapper)
+    {
+        $this->productMapper = $productMapper;
         return $this;
     }
 }
