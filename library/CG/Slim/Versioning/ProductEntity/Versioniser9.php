@@ -61,9 +61,8 @@ class Versioniser9 implements VersioniserInterface
         $data = $response->getData();
         $data['imageIds'] = [];
         if (isset($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $data['imageIds'][$image['order']] = $image['id'];
-            }
+            $data['imageIds'] = array_column($data['images'], 'id', 'order');
+            ksort($data['imageIds'], SORT_NUMERIC);
         }
         unset($data['images'], $data['listingImages']);
         $response->setData($data);
