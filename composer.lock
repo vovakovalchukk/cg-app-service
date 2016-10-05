@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e806450d372af27fa3d8f00848cb727",
-    "content-hash": "1befe919e77117f7f3bdec7fa8ecf67d",
+    "hash": "6d47e69384529615d4bf9a2d06a7e10c",
+    "content-hash": "82c3a12abff96fd2fc7a67883a3f9832",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1314,16 +1314,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7096-order-counts-for-error-states",
+            "version": "1.23.21",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4ef1923000981737abe050220cc59cb31459e063"
+                "reference": "32da45ea1c83130e4e94229236837abd84a3877c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7096-order-counts-for-error-states-3a8f29.zip",
-                "reference": "4ef1923000981737abe050220cc59cb31459e063",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.21-d0ed91.zip",
+                "reference": "32da45ea1c83130e4e94229236837abd84a3877c",
                 "shasum": null
             },
             "require": {
@@ -1393,7 +1393,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-10-05 09:21:51"
+            "time": "2016-10-05 13:40:28"
         },
         {
             "name": "channelgrabber/permission",
@@ -8430,18 +8430,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.23.20",
-            "alias_normalized": "1.23.20.0",
-            "version": "dev-CGIV-7096-order-counts-for-error-states",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
