@@ -5,7 +5,7 @@ class ProductDetail extends AbstractMigration
 {
     public function change()
     {
-        $this->table('productDetail')
+        $this->table('productDetail', ['collation' => 'utf8_general_ci'])
             ->addColumn('organisationUnitId', 'integer', ['signed' => false])
             ->addColumn('sku', 'string')
             ->addColumn('weight', 'decimal', ['precision' => 12, 'scale' => 7, 'null' => true])

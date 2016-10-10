@@ -10,7 +10,7 @@ class ListingStatusHistory extends AbstractMigration
     public function change()
     {
         $this
-            ->table(static::TABLE_NAME)
+            ->table(static::TABLE_NAME, ['collation' => 'utf8_general_ci'])
             ->addColumn('listingId', 'integer', ['signed' => false])
             ->addColumn('timestamp', 'datetime')
             ->addColumn('status', 'string')

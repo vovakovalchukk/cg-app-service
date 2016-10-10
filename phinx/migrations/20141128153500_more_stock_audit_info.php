@@ -5,23 +5,23 @@ class MoreStockAuditInfo extends AbstractMigration
 {
     public function up()
     {
-        $this->table('stockAuditSku')
+        $this->table('stockAuditSku', ['collation' => 'utf8_general_ci'])
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('sku', 'string')
             ->create();
-        $this->table('stockAuditOrganisationUnitId')
+        $this->table('stockAuditOrganisationUnitId', ['collation' => 'utf8_general_ci'])
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('organisationUnitId', 'integer')
             ->create();
-        $this->table('stockAuditUserId')
+        $this->table('stockAuditUserId', ['collation' => 'utf8_general_ci'])
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('userId', 'integer')
             ->create();
-        $this->table('stockAuditAccountId')
+        $this->table('stockAuditAccountId', ['collation' => 'utf8_general_ci'])
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('accountId', 'integer')
             ->create();
-        $this->table('stockAuditStockManagement')
+        $this->table('stockAuditStockManagement', ['collation' => 'utf8_general_ci'])
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('stockManagement', 'boolean')
             ->create();

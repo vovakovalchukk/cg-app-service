@@ -6,7 +6,7 @@ class CancelMigration extends AbstractMigration
 {
     public function change()
     {
-        $cancel = $this->table('cancel', ['id' => true, 'primary_key' => 'id']);
+        $cancel = $this->table('cancel', ['id' => true, 'primary_key' => 'id', 'collation' => 'utf8_general_ci']);
         $cancel->addColumn('reason', 'string')
             ->addColumn('orderId', 'string')
             ->addColumn('type', 'string')
@@ -14,7 +14,7 @@ class CancelMigration extends AbstractMigration
             ->addColumn('timestamp', 'timestamp')
             ->create();
 
-        $cancelItem = $this->table('cancelItem', ['id' => false]);
+        $cancelItem = $this->table('cancelItem', ['id' => false, 'collation' => 'utf8_general_ci']);
         $cancelItem->addColumn('cancelId', 'integer')
             ->addColumn('orderItemId', 'string')
             ->addColumn('sku', 'string')
