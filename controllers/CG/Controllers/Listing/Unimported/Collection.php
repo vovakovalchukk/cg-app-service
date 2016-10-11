@@ -2,7 +2,7 @@
 namespace CG\Controllers\Listing\Unimported;
 
 use CG\Listing\Unimported\Filter;
-use CG\Listing\Unimported\Service;
+use CG\Listing\Unimported\RestService as Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;

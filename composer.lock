@@ -989,17 +989,11 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.10.0",
+            "version": "dev-CGIV-6517-import-all-filtered-listings",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "670da680b495089fdbdeb06815476148fcee1535"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.10.0-568f5c.zip",
-                "reference": "670da680b495089fdbdeb06815476148fcee1535",
-                "shasum": null
+                "reference": "bbba818670608a6d11aed9719705009cb0eaa946"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -8430,16 +8424,24 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.10.1",
+            "alias_normalized": "1.10.1.0",
+            "version": "dev-CGIV-6517-import-all-filtered-listings",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

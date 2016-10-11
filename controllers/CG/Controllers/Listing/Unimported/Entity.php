@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\Listing\Unimported;
 
-use CG\Listing\Unimported\Service;
+use CG\Listing\Unimported\RestService as Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
