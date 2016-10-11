@@ -1,6 +1,7 @@
 <?php
 namespace CG\Listing\Unimported;
 
+use CG\Http\Exception\Exception3xx\NotModified;
 use CG\Image\Filter as ImageFilter;
 use CG\Image\Service as ImageStorage;
 use CG\Listing\Unimported\Collection as UnimportedListingCollection;
@@ -143,6 +144,17 @@ class RestService extends ServiceAbstract
     {
         // ASCII chars only, no leading / trailing whitespace
         return (preg_match('/^[[:ascii:]]+$/', $sku) && !preg_match('/(^\s|\s$)/', $sku));
+    }
+
+    public function saveCollection($listings)
+    {
+        foreach ($listings as $listing) {
+            try {
+                $this->repository->save($listing);
+            } catch (NotModified $e) {
+                //noop - If one of the listings hasn't been modified keep saving
+            }
+        }
     }
 
     // To satisfy \CG\Slim\Patch\ServiceTrait
