@@ -5,7 +5,7 @@ class StockLogTable extends AbstractMigration
 {
     public function change()
     {
-        $this->table('stockLog', ['id' => false])
+        $this->table('stockLog', ['id' => false, 'collation' => 'utf8_general_ci'])
             ->addColumn('id', 'string', ['null' => true])
             ->addColumn('date', 'date', ['null' => true])
             ->addColumn('time', 'time', ['null' => true])
@@ -25,7 +25,7 @@ class StockLogTable extends AbstractMigration
             ->addIndex(['sku'])
             ->create();
 
-        $this->table('stockLogToAdjustmentLogMap', ['id' => false, 'primary_key' => ['stockLogId', 'stockAdjustmentLogId']])
+        $this->table('stockLogToAdjustmentLogMap', ['id' => false, 'primary_key' => ['stockLogId', 'stockAdjustmentLogId'], 'collation' => 'utf8_general_ci'])
             ->addColumn('stockLogId', 'integer')
             ->addColumn('stockAdjustmentLogId', 'integer')
             ->addIndex(['stockLogId', 'stockAdjustmentLogId'])

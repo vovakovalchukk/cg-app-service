@@ -11,7 +11,7 @@ class OrderInvoiceNumberTable extends AbstractMigration
     public function up()
     {
         $this
-            ->table(static::TABLE, ['id' => false, 'primary_key' => ['orderId']])
+            ->table(static::TABLE, ['id' => false, 'primary_key' => ['orderId'], 'collation' => 'utf8_general_ci'])
             ->addColumn('orderId', 'string', ['limit' => 120])
             ->addColumn('rootOrganisationUnitId', 'integer')
             ->addColumn('invoiceNumber', 'integer')

@@ -5,7 +5,7 @@ class ListingMigration extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('listing');
+        $table = $this->table('listing', ['collation' => 'utf8_general_ci']);
         $table
             ->addColumn('organisationUnitId', 'integer')
             ->addColumn('productId', 'integer')
@@ -19,4 +19,3 @@ class ListingMigration extends AbstractMigration
             ->create();
     }
 }
- 

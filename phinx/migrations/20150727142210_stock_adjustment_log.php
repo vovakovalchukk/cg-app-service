@@ -12,7 +12,7 @@ class StockAdjustmentLog extends AbstractMigration
     {
         $this->table(static::TABLE)->drop();
         $this
-            ->table(static::TABLE, ['id' => false])
+            ->table(static::TABLE, ['id' => false, 'collation' => 'utf8_general_ci'])
             ->addColumn('id', 'string', ['limit' => 255, 'null' => false])
             ->addColumn('date', 'date', ['null' => false])
             ->addColumn('time', 'time', ['null' => false])

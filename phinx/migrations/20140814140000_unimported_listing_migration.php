@@ -5,7 +5,7 @@ class UnimportedListingMigration extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('unimportedListing');
+        $table = $this->table('unimportedListing', ['collation' => 'utf8_general_ci']);
         $table
             ->addColumn('organisationUnitId', 'integer')
             ->addColumn('accountId', 'integer')

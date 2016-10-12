@@ -12,7 +12,7 @@ class MultipleTaxRatesPerOu extends AbstractMigration
     public function up()
     {
         $this
-            ->table(static::TABLE_NEW, ['id' => false])
+            ->table(static::TABLE_NEW, ['id' => false, 'collation' => 'utf8_general_ci'])
             ->addColumn('productId', 'integer')
             ->addColumn('VATCountryCode', 'string')
             ->addColumn('taxRateId', 'string')

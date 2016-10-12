@@ -6,19 +6,19 @@ class StockAuditTables extends AbstractMigration
 {
     public function up()
     {
-        $stockAudit = $this->table('stockAudit');
+        $stockAudit = $this->table('stockAudit', ['collation' => 'utf8_general_ci']);
         $stockAudit
             ->addColumn('stid', 'string')
             ->addColumn('action', 'string')
             ->addColumn('time', 'datetime')
             ->create();
-        $stockAuditProductId = $this->table('stockAuditProductId');
+        $stockAuditProductId = $this->table('stockAuditProductId', ['collation' => 'utf8_general_ci']);
         $stockAuditProductId
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('productId', 'integer')
             ->addForeignKey('stockAuditId', 'stockAudit')
             ->create();
-        $stockAuditListingId = $this->table('stockAuditListingId');
+        $stockAuditListingId = $this->table('stockAuditListingId', ['collation' => 'utf8_general_ci']);
         $stockAuditListingId
             ->addColumn('stockAuditId', 'integer')
             ->addColumn('listingId', 'string')

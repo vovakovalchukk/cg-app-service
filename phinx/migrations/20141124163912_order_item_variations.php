@@ -9,7 +9,7 @@ class OrderItemVariations extends AbstractMigration
     public function up()
     {
         $this->table('item')->removeColumn('itemVariationAttribute')->update();
-        $this->table('itemVariationAttribute', ['id' => false, 'primary_key' => ['itemId', 'name']])
+        $this->table('itemVariationAttribute', ['id' => false, 'primary_key' => ['itemId', 'name'], 'collation' => 'utf8_general_ci'])
             ->addColumn('itemId', 'string')
             ->addColumn('name', 'string')
             ->addColumn('value', 'string')
