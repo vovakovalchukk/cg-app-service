@@ -993,7 +993,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "2ab1ebfa02ac4c6647b786d92f44d83cff16bb96"
+                "reference": "daff86e5994699b28a6be2232b69906b965fffd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-6517-import-all-filtered-listings-155ff0.zip",
+                "reference": "daff86e5994699b28a6be2232b69906b965fffd6",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1032,7 +1038,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-12 12:52:22"
+            "time": "2016-10-12 10:22:40"
         },
         {
             "name": "channelgrabber/locale",
@@ -8440,8 +8446,8 @@
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
