@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd2907e5b92f2e7b99ccffebf13b2daa",
-    "content-hash": "1fba17a7afb68d4f0ebd386a0ac3c804",
+    "hash": "f4a7fe261ce88ef04b43f3e49f0aa5c9",
+    "content-hash": "b3e2fb0f645b7c50cce960bd8f61397c",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1428,16 +1428,16 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "dev-CGIV-7125-4ByteUTF8",
+            "version": "0.3.8.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "72a84bfe683ca7e161c36706427e48417a8b72db"
+                "reference": "aeaeba35d79ecb3982c9ee2ef6a168231f6eab73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-dev-CGIV-7125-4ByteUTF8-0267f7.zip",
-                "reference": "72a84bfe683ca7e161c36706427e48417a8b72db",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.8.2-dde0a9.zip",
+                "reference": "aeaeba35d79ecb3982c9ee2ef6a168231f6eab73",
                 "shasum": null
             },
             "require": {
@@ -1488,7 +1488,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-10-10 11:30:22"
+            "time": "2016-10-11 15:35:33"
         },
         {
             "name": "channelgrabber/php-phantomjs",
@@ -8430,18 +8430,10 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.3.8.2",
-            "alias_normalized": "0.3.8.2",
-            "version": "dev-CGIV-7125-4ByteUTF8",
-            "package": "channelgrabber/phinx"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/phinx": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
