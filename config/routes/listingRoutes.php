@@ -128,7 +128,7 @@ return [
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'POST', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
         'name' => 'UnimportedListingCollection',
         'entityRoute' => '/unimportedListing/:listingId',
         'validation' => [
@@ -146,7 +146,7 @@ return [
                     $controller->$method($listingId, $app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         'name' => 'UnimportedListingEntity',
         'validation' => [
             "dataRules" => UnimportedListingEntityValidation::class,

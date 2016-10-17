@@ -13,7 +13,8 @@ class ProductListingMap extends AbstractMigration
                 'primary_key' => [
                     'productId',
                     'listingId'
-                ]
+                ],
+                'collation' => 'utf8_general_ci'
             ]
         );
 

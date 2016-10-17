@@ -5,7 +5,7 @@ class SetupProgressStep extends AbstractMigration
 {
     public function change()
     {
-        $product = $this->table('setupProgressStep', ['id' => false]);
+        $product = $this->table('setupProgressStep', ['id' => false, 'collation' => 'utf8_general_ci']);
         $product->addColumn('organisationUnitId', 'integer')
             ->addColumn('name', 'string')
             ->addColumn('status', 'string')

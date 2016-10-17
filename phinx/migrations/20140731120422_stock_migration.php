@@ -5,20 +5,20 @@ class StockMigration extends AbstractMigration
 {
     public function change()
     {
-        $stockTable = $this->table('stock');
+        $stockTable = $this->table('stock', ['collation' => 'utf8_general_ci']);
         $stockTable
             ->addColumn('organisationUnitId', 'integer')
             ->addColumn('sku', 'string', ['null' => true])
             ->addIndex(['organisationUnitId', 'sku'])
             ->create();
 
-        $locTable = $this->table('location');
+        $locTable = $this->table('location', ['collation' => 'utf8_general_ci']);
         $locTable
             ->addColumn('organisationUnitId', 'integer')
             ->addIndex('organisationUnitId')
             ->create();
 
-        $stockLocTable = $this->table('stockLocation', ['id' => false]);
+        $stockLocTable = $this->table('stockLocation', ['id' => false, 'collation' => 'utf8_general_ci']);
         $stockLocTable
             ->addColumn("stockId", 'integer')
             ->addColumn("locationId", 'integer')
@@ -32,4 +32,3 @@ class StockMigration extends AbstractMigration
             ->create();
     }
 }
- 

@@ -8,7 +8,7 @@ class AmazonShippingService extends AbstractMigration
     public function change()
     {
         $this
-            ->table(static::TABLE, ['id' => false, 'primary_key' => ['id']])
+            ->table(static::TABLE, ['id' => false, 'primary_key' => ['id'], 'collation' => 'utf8_general_ci'])
             ->addColumn('id', 'string', ['null' => false])
             ->addColumn('region', 'string', ['null' => false])
             ->addColumn('carrier', 'string', ['null' => false])

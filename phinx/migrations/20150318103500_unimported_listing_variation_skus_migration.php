@@ -6,7 +6,8 @@ class UnimportedListingVariationSkusMigration extends AbstractMigration
     public function up()
     {
         $unimportedListingVariationTable = $this->table(
-            'unimportedListingVariation'
+            'unimportedListingVariation',
+            ['collation' => 'utf8_general_ci']
         );
         $unimportedListingVariationTable
             ->addColumn('unimportedListingId', 'integer')
