@@ -42,7 +42,7 @@ class Entity implements RulesInterface
             'emailVerified' => [
                 'name' => 'emailVerified',
                 'required' => false,
-                'validators' => [],
+                'validators' => [new BooleanValidator(['name' => 'emailVerified'])],
             ],
             'productImages' => [
                 'name'       => 'autoEmail',
