@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Settings\Invoice;
 
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\EmailValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
@@ -32,6 +33,16 @@ class Entity implements RulesInterface
                 'name'       => 'autoEmail',
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
+            'emailSendAs' => [
+                'name' => 'emailSendAs',
+                'required' => false,
+                'validators' => [new EmailValidator(['name' => 'emailSendAs'])]
+            ],
+            'emailVerified' => [
+                'name' => 'emailVerified',
+                'required' => false,
+                'validators' => [],
             ],
             'productImages' => [
                 'name'       => 'autoEmail',

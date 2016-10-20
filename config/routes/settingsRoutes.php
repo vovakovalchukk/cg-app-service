@@ -120,7 +120,7 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'eTag' => [
             'mapperClass' => InvoiceMapper::class,
             'entityClass' => InvoiceEntity::class,
