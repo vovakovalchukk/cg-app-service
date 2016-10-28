@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f9c77a634601cca5d9ff00a798af9a3",
+    "content-hash": "b15aa2e986bc4074798a2a76b1c7a7fb",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1313,17 +1313,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.23.21",
+            "version": "dev-CGIV-7617-order-sequential-number",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "32da45ea1c83130e4e94229236837abd84a3877c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.21-d0ed91.zip",
-                "reference": "32da45ea1c83130e4e94229236837abd84a3877c",
-                "shasum": null
+                "reference": "7c46c57ad8544d0c8abefe4420f01bd3ba2c3890"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -3923,7 +3917,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:54:03"
+            "time": "2015-08-21T07:54:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -3979,7 +3973,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22 08:39:53"
+            "time": "2015-07-22T08:39:53+00:00"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
@@ -8429,16 +8423,24 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.23.22",
+            "alias_normalized": "1.23.22.0",
+            "version": "dev-CGIV-7617-order-sequential-number",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/constants": 20,
         "composer/composer": 20,
+        "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
