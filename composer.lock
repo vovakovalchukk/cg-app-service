@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c11295635471934f8066c344b3bf82f",
+    "content-hash": "e9c09b38a0e8ff85abb556bbe98dbb12",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1318,16 +1318,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7617-order-sequential-number",
+            "version": "dev-CGIV-7620-render-invoice-barcodes",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1b3447c6317f6eae42832007dcf1d08d48c02543"
+                "reference": "9b85cd569808fb4e4beea068e47c4bdc7457a579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7617-order-sequential-number-96697d.zip",
-                "reference": "1b3447c6317f6eae42832007dcf1d08d48c02543",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7620-render-invoice-barcodes-2ca9cb.zip",
+                "reference": "9b85cd569808fb4e4beea068e47c4bdc7457a579",
                 "shasum": null
             },
             "require": {
@@ -1397,7 +1397,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-10-31 11:46:53"
+            "time": "2016-10-31 11:47:03"
         },
         {
             "name": "channelgrabber/permission",
@@ -2390,16 +2390,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.4.8",
+            "version": "dev-CGIV-7620-render-invoice-barcodes",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "55965e393d101db8a0d4054cd856a588e3270f3b"
+                "reference": "af2ee38d57f185cdf85b83d73cbe3fa24476b71b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.8-d040f4.zip",
-                "reference": "55965e393d101db8a0d4054cd856a588e3270f3b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-CGIV-7620-render-invoice-barcodes-d92730.zip",
+                "reference": "af2ee38d57f185cdf85b83d73cbe3fa24476b71b",
                 "shasum": null
             },
             "require": {
@@ -2409,13 +2409,14 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/locale": "^1.0.7",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.23.8",
+                "channelgrabber/order": "dev-CGIV-7620-render-invoice-barcodes as 1.23.24",
                 "channelgrabber/product": "^1.2.0",
                 "channelgrabber/settings": "^1.3.8",
                 "channelgrabber/stdlib": "^2.10.4",
                 "channelgrabber/user": "^1.22.0",
                 "ext-gd": "*",
                 "guzzle/guzzle": "~3.7",
+                "picqer/php-barcode-generator": "~0.2.1",
                 "zendframework/zend-di": ">=2.2.5,<3.0",
                 "zendframework/zend-i18n": ">=2.2.5,<3.0",
                 "zendframework/zend-view": ">=2.2.6,<3.0",
@@ -2447,7 +2448,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-06T09:32:57+00:00"
+            "time": "2016-10-31 11:36:03"
         },
         {
             "name": "channelgrabber/transaction",
@@ -4088,6 +4089,80 @@
                 }
             },
             "time": "2013-08-25T18:04:46+00:00"
+        },
+        {
+            "name": "picqer/php-barcode-generator",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/picqer/php-barcode-generator.git",
+                "reference": "5328d821b076727163a3ad25373973055faadead"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/picqer-php-barcode-generator-5328d821b076727163a3ad25373973055faadead-zip-d1bb00.zip",
+                "reference": "5328d821b076727163a3ad25373973055faadead",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Picqer\\Barcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                },
+                {
+                    "name": "Casper Bakker",
+                    "email": "info@picqer.com"
+                }
+            ],
+            "description": "An easy to use, non-bloated, barcode generator in PHP. Creates SVG, PNG, JPG and HTML images from the most used 1D barcode standards.",
+            "homepage": "http://github.com/picqer/php-barcode-generator",
+            "keywords": [
+                "CODABAR",
+                "Code11",
+                "Code93",
+                "EAN13",
+                "KIX",
+                "KIXCODE",
+                "MSI",
+                "POSTNET",
+                "Pharma",
+                "Standard 2 of 5",
+                "barcode",
+                "barcode generator",
+                "code128",
+                "code39",
+                "ean",
+                "html",
+                "jpeg",
+                "jpg",
+                "php",
+                "png",
+                "svg",
+                "upc"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2016-10-17T14:20:28+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -8501,16 +8576,23 @@
     ],
     "aliases": [
         {
-            "alias": "1.23.22",
-            "alias_normalized": "1.23.22.0",
-            "version": "dev-CGIV-7617-order-sequential-number",
+            "alias": "1.23.24",
+            "alias_normalized": "1.23.24.0",
+            "version": "dev-CGIV-7620-render-invoice-barcodes",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.4.10",
+            "alias_normalized": "1.4.10.0",
+            "version": "dev-CGIV-7620-render-invoice-barcodes",
+            "package": "channelgrabber/template"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/template": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
