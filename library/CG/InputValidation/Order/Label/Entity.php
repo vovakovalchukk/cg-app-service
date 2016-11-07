@@ -69,7 +69,42 @@ class Entity implements RulesInterface
             'shippingServiceCode' => [
                 'name'       => 'shippingServiceCode',
                 'required'   => false,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => []
+            ],
+            'courierName' => [
+                'name'       => 'courierName',
+                'required'   => false,
+                'validators' => []
+            ],
+            'courierService' => [
+                'name'       => 'courierService',
+                'required'   => false,
+                'validators' => []
+            ],
+            'deliveryInstruction' => [
+                'name'       => 'deliveryInstruction',
+                'required'   => false,
+                'validators' => []
+            ],
+            'signature' => [
+                'name'       => 'signature',
+                'required'   => false,
+                'validators' => []
+            ],
+            'parcels' => [
+                'name'       => 'parcels',
+                'required'   => false,
+                'validators' => []
+            ],
+            'insurance' => [
+                'name'       => 'insurance',
+                'required'   => false,
+                'validators' => []
+            ],
+            'insuranceMonetary' => [
+                'name'       => 'insuranceMonetary',
+                'required'   => false,
+                'validators' => []
             ],
         ];
     }
