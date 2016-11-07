@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f0a56d9e1a7b9339cde92b73d6fdf30",
-    "content-hash": "4f62aece4a635c6698f2406e8c360ef6",
+    "hash": "c861e4c94b24d0b8a0fe88ca625412c0",
+    "content-hash": "344098bf39cd11e83d937bef0bab4d2e",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -1319,16 +1319,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.23.26",
+            "version": "dev-CGIV-7544-show-user-created-shipping-label-backend",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "81221457143d4b60099275d0b397282a0fbee999"
+                "reference": "61a10c17d2b84fdc00f1da48fdcc23e13d57d1a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.23.26-2fc83a.zip",
-                "reference": "81221457143d4b60099275d0b397282a0fbee999",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7544-show-user-created-shipping-label-backend-ad5001.zip",
+                "reference": "61a10c17d2b84fdc00f1da48fdcc23e13d57d1a3",
                 "shasum": null
             },
             "require": {
@@ -1398,7 +1398,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-03 12:18:30"
+            "time": "2016-11-07 11:38:52"
         },
         {
             "name": "channelgrabber/permission",
@@ -8610,10 +8610,18 @@
             "time": "2015-06-21 08:04:50"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.23.27",
+            "alias_normalized": "1.23.27.0",
+            "version": "dev-CGIV-7544-show-user-created-shipping-label-backend",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
