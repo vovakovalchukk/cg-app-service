@@ -81,8 +81,8 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
-            'deliveryInstruction' => [
-                'name'       => 'deliveryInstruction',
+            'deliveryInstructions' => [
+                'name'       => 'deliveryInstructions',
                 'required'   => false,
                 'validators' => []
             ],
