@@ -3,6 +3,9 @@ namespace CG\InputValidation\Order\Label;
 
 use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
@@ -74,42 +77,42 @@ class Entity implements RulesInterface
             'channelName' => [
                 'name'       => 'channelName',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'courierName' => [
                 'name'       => 'courierName',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'courierService' => [
                 'name'       => 'courierService',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'deliveryInstructions' => [
                 'name'       => 'deliveryInstructions',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'signature' => [
                 'name'       => 'signature',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new BooleanValidator(["name" => "signature"])]
             ],
             'parcels' => [
                 'name'       => 'parcels',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new IsArrayValidator(["name" => "parcels"])]
             ],
             'insurance' => [
                 'name'       => 'insurance',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new BooleanValidator(["name" => "insurance"])]
             ],
             'insuranceMonetary' => [
                 'name'       => 'insuranceMonetary',
                 'required'   => false,
-                'validators' => []
+                'validators' => [new DecimalValidator(['name' => 'insuranceMonetary'])]
             ],
         ];
     }
