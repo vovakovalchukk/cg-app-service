@@ -81,6 +81,7 @@ return [
                 'Versioniser_OrderLabelEntity_1' => OrderLabelEntity\Versioniser1::class,
                 'Versioniser_OrderLabelCollection_2' => OrderLabelCollection\Versioniser2::class,
                 'Versioniser_OrderLabelEntity_2' => OrderLabelEntity\Versioniser2::class,
+                'Versioniser_OrderLabelEntity_3' => OrderLabelEntity\Versioniser3::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
