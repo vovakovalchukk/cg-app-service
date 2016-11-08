@@ -582,7 +582,7 @@ return array(
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderLabel/:labelId',
         'name' => 'OrderLabelCollection',
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => LabelFilterValidationRules::class, "flatten" => false]
     ],
     '/orderLabel/:labelId' => [
