@@ -657,6 +657,6 @@ return array(
         'validation' => [
             "filterRules" => TrackingFilterValidationRules::class,
         ],
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
 );
