@@ -1,10 +1,18 @@
 <?php
 namespace CG\Stock\Command;
 
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Sql;
 
-class FindIncorrectlyAllocatedStock
+class FindIncorrectlyAllocatedStock implements LoggerAwareInterface
 {
+    use LogTrait;
+
+    const LOG_CODE = 'FindIncorrectlyAllocatedStockCommand';
+    const LOG_FINDINGS = 'FindIncorrectlyAllocatedStock command found OU %d, SKU %s had %d allocated but we expected %d. Details of expectation:';
+
     /** @var Sql */
     protected $sqlClient;
     
@@ -45,6 +53,45 @@ WHERE calculatedAllocated {$operator} allocated
 ORDER BY organisationUnitId, sku
 EOF;
 
-        return $this->sqlClient->getAdapter()->query($query)->execute();
+        $results = $this->sqlClient->getAdapter()->query($query)->execute();
+        $this->logFindings($results);
+
+        return $results;
+    }
+
+    protected function logFindings(ResultInterface $results)
+    {
+        if (count($results) == 0) {
+            return;
+        }
+
+        foreach ($results as $result) {
+            $details = $this->getExpectedAllocatedDetails($result);
+            $this->logDebugDump($details, static::LOG_FINDINGS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku'], $result['actual'], $result['expected']], static::LOG_CODE);
+        }
+    }
+
+    protected function getExpectedAllocatedDetails(array $result)
+    {
+        $query = <<<EOF
+SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus, 
+    `item`.`itemQuantity`, IF(`item`.`purchaseDate` > `account`.`account`.`cgCreationDate`, 'yes', 'no') AS afterAccountCreation
+FROM `item`
+JOIN `order` ON (`item`.`orderId` = `order`.`id`)
+JOIN `account`.`account` ON (`order`.`accountId` = `account`.`id`)
+WHERE `item`.`organisationUnitId` = ?
+AND `item`.`itemSku` = ?
+AND `item`.`itemQuantity` != 0
+AND 
+    (
+        (`item`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'))
+        OR
+        (`item`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new'))
+    )
+EOF;
+        $params = [$result['organisationUnitId'], $result['sku']];
+
+        $results = $this->sqlClient->getAdapter()->query($query, $params);
+        return iterator_to_array($results);
     }
 }
