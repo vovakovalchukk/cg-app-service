@@ -49,7 +49,7 @@ INNER JOIN (
 	WHERE item.stockManaged = 1
 	GROUP BY itemSku, item.organisationUnitId
 ) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
-WHERE calculatedAllocated {$operator} allocated
+WHERE allocated {$operator} calculatedAllocated
 ORDER BY organisationUnitId, sku
 EOF;
 
