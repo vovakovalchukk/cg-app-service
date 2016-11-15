@@ -3,9 +3,9 @@ use CG\Controllers\ExchangeRate\Entity as ExchangeRate;
 use CG\Controllers\ExchangeRate\Collection as ExchangeRateCollection;
 use CG\InputValidation\ExchangeRate\Entity as ExchangeRateEntityValidation;
 use CG\InputValidation\ExchangeRate\Filter as ExchangeRateCollectionValidation;
-use CG\Currency\Shared\ExchangeRate\Entity as ExchangeRateEntity;
-use CG\Currency\Shared\ExchangeRate\Mapper as ExchangeRateMapper;
-use CG\Currency\Shared\ExchangeRate\Service as ExchangeRateService;
+use CG\ExchangeRate\Entity as ExchangeRateEntity;
+use CG\ExchangeRate\Mapper as ExchangeRateMapper;
+use CG\ExchangeRate\Service as ExchangeRateService;
 
 
 return [
