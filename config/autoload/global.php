@@ -152,6 +152,7 @@ use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
+use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1450,6 +1451,11 @@ $config = array(
             AutoArchiveOrdersCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            FindIncorrectlyAllocatedStockCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadSql',
                 ]
             ],
             'preferences' => [
