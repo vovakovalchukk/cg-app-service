@@ -864,13 +864,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "c5e515631d291d367ccf33ac95c42b4fe971bc01"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-dev-CGIV-7659-integrate-with-open-exchange-rates-5c17c0.zip",
-                "reference": "c5e515631d291d367ccf33ac95c42b4fe971bc01",
-                "shasum": null
+                "reference": "728943e33021bb6d0b08d4e5acc5cbdf561334ab"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -892,7 +886,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-15T15:37:57+00:00"
+            "time": "2016-11-16T14:00:25+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -3970,7 +3964,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:54:03"
+            "time": "2015-08-21T07:54:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -4026,7 +4020,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22 08:39:53"
+            "time": "2015-07-22T08:39:53+00:00"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
@@ -8655,14 +8649,14 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "composer/composer": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/exchangerate": 20,
-        "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
