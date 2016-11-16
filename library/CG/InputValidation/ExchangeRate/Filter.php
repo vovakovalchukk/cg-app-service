@@ -25,7 +25,7 @@ class Filter implements RulesInterface
                 ],
                 'date' => [
                     'name'       => 'date',
-                    'required'   => true,
+                    'required'   => false,
                     'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
                 ]
             ]
