@@ -66,13 +66,10 @@ EOF;
 
     protected function logFindings(ResultInterface $results)
     {
-        if (count($results) == 0) {
-            return;
-        }
-
         foreach ($results as $result) {
             $details = $this->getExpectedAllocatedDetails($result);
-            $this->logDebugDump($details, static::LOG_FINDINGS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku'], $result['actual'], $result['expected']], static::LOG_CODE, ['ticket' => 'CGIV-7567']);
+            $discrepency = $this->areExpectationAndDetailsResultsDifferent($result, $details);
+            $this->logDebugDump($details, static::LOG_FINDINGS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku'], $result['actual'], $result['expected']], static::LOG_CODE, ['ticket' => 'CGIV-7567', 'discrepency' => $discrepency]);
 
             $detailsByOrder = $this->getExpectedAllocatedDetailsByOrderStatus($result);
             $this->logDebugDump($detailsByOrder, static::LOG_FINDINGS_ORDERS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku']], static::LOG_CODE, ['ticket' => 'CGIV-7567']);
@@ -125,5 +122,14 @@ EOF;
 
         $results = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($results);
+    }
+
+    protected function areExpectationAndDetailsResultsDifferent(array $result, array $details)
+    {
+        $count = 0;
+        foreach ($details as $detail) {
+            $count += $detail['itemQuantity'];
+        }
+        return ($count != $result['expected']);
     }
 }
