@@ -35,21 +35,25 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface
     public function findIncorrectlyAllocated($operator = '!=')
     {
                 $query = <<<EOF
-SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
+SELECT s.sku, s.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId
 INNER JOIN (
-	SELECT itemSku, item.organisationUnitId, SUM(
+	SELECT itemSku, order.rootOrganisationUnitId, SUM(
 		IF(item.purchaseDate > account.cgCreationDate,
-			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
-			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
+			IF(item.`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
+			IF(item.`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
 		)) as calculatedAllocated,
-        SUM(IF(`status` = 'unknown', itemQuantity, 0)) as unknownOrders
+        SUM(IF(item.`status` = 'unknown', itemQuantity, 0)) as unknownOrders
 	FROM item
+	INNER JOIN `order` ON item.orderId = order.id
 	INNER JOIN account.account ON item.accountId = account.id
 	WHERE item.stockManaged = 1
-	GROUP BY itemSku, item.organisationUnitId
-) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
+	GROUP BY itemSku, order.rootOrganisationUnitId
+) as calc ON (
+    calc.itemSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+    AND s.organisationUnitId = calc.rootOrganisationUnitId
+)
 WHERE allocated {$operator} calculatedAllocated
 ORDER BY organisationUnitId, sku
 EOF;
@@ -84,7 +88,7 @@ FROM `item`
 JOIN `order` ON (`item`.`orderId` = `order`.`id`)
 JOIN `account`.`account` ON (`order`.`accountId` = `account`.`id`)
 WHERE `item`.`organisationUnitId` = ?
-AND `item`.`itemSku` = ?
+AND `item`.`itemSku` LIKE ?
 AND `item`.`itemQuantity` != 0
 AND 
     (
@@ -93,10 +97,10 @@ AND
         (`item`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new'))
     )
 EOF;
-        $params = [$result['organisationUnitId'], $result['sku']];
+        $params = [$result['organisationUnitId'], \CG\Stdlib\escapeLikeValue($result['sku'])];
 
-        $results = $this->sqlClient->getAdapter()->query($query, $params);
-        return iterator_to_array($results);
+        $secondaryResults = $this->sqlClient->getAdapter()->query($query, $params);
+        return iterator_to_array($secondaryResults);
     }
 
     protected function getExpectedAllocatedDetailsByOrderStatus(array $result)
@@ -117,7 +121,7 @@ AND
         (`order`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new'))
     )
 EOF;
-        $params = [$result['organisationUnitId'], $result['sku']];
+        $params = [$result['organisationUnitId'], \CG\Stdlib\escapeLikeValue($result['sku'])];
 
         $results = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($results);
