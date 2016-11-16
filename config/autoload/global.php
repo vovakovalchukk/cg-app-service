@@ -382,6 +382,14 @@ use CG\Settings\SetupProgress\Storage\Cache as SetupProgressSettingsCacheStorage
 use CG\Settings\SetupProgress\Storage\Db as SetupProgressSettingsDbStorage;
 use CG\Settings\SetupProgress\StorageInterface as SetupProgressSettingsStorage;
 
+// ExchangeRate
+use CG\ExchangeRate\Service as ExchangeRateService;
+use CG\ExchangeRate\Repository as ExchangeRateRepository;
+use CG\ExchangeRate\Mapper as ExchangeRateMapper;
+use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
+use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
+use CG\ExchangeRate\StorageInterface as ExchangeRateStorage;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1447,6 +1455,26 @@ $config = array(
                     'writeSql' => 'WriteSql',
                     'mapper' => SetupProgressSettingsMapper::class,
                 ],
+            ],
+            ExchangeRateService::class => [
+                'parameters' => [
+                    'repository' => ExchangeRateRepository::class,
+                    'mapper' => ExchangeRateMapper::class
+                ]
+            ],
+            ExchangeRateRepository::class => [
+                'parameter' => [
+                    'storage' => ExchangeRateCacheStorage::class,
+                    'repository' => ExchangeRateDbStorage::class
+                ]
+            ],
+            ExchangeRateDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ExchangeRateMapper::class
+                ]
             ],
             AutoArchiveOrdersCommand::class => [
                 'parameter' => [
