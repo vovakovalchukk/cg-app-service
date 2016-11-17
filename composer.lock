@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "56fc72815245d119fbca669614e68842",
+    "content-hash": "f936d06c4caef854dc03ff7e54b19e05",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -532,7 +532,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1318,17 +1318,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.24.2.1",
+            "version": "dev-CGIV-7719-royal-mail-label-cancellation-error",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "90a63af068e28509160ea7ebb02fe6ccb0d91ea4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.24.2.1-3782b5.zip",
-                "reference": "90a63af068e28509160ea7ebb02fe6ccb0d91ea4",
-                "shasum": null
+                "reference": "0d2ccf2efae80849971a64286d477fb7b235ba0f"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -3934,7 +3928,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:54:03"
+            "time": "2015-08-21T07:54:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -3990,7 +3984,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22 08:39:53"
+            "time": "2015-07-22T08:39:53+00:00"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
@@ -8609,16 +8603,24 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.24.3.1",
+            "alias_normalized": "1.24.3.1",
+            "version": "dev-CGIV-7719-royal-mail-label-cancellation-error",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/constants": 20,
         "composer/composer": 20,
+        "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
