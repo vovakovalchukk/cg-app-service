@@ -388,7 +388,7 @@ use CG\ExchangeRate\Repository as ExchangeRateRepository;
 use CG\ExchangeRate\Mapper as ExchangeRateMapper;
 use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
 use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
-use CG\ExchangeRate\StorageInterface as ExchangeRateStorage;
+use CG\ExchangeRate\Storage\Api as ExchangeRateApiStorage;
 
 $config = array(
     'di' => array(
@@ -428,6 +428,8 @@ $config = array(
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
                 'StockLocationApiService' => StockLocationService::class,
+                'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
+                'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -1458,14 +1460,20 @@ $config = array(
             ],
             ExchangeRateService::class => [
                 'parameters' => [
-                    'repository' => ExchangeRateRepository::class,
+                    'repository' => 'ExchangeRateRepositoryPrimary',
                     'mapper' => ExchangeRateMapper::class
                 ]
             ],
-            ExchangeRateRepository::class => [
+            'ExchangeRateRepositoryPrimary' => [
                 'parameter' => [
                     'storage' => ExchangeRateCacheStorage::class,
-                    'repository' => ExchangeRateDbStorage::class
+                    'repository' => 'ExchangeRateRepositorySecondary'
+                ]
+            ],
+            'ExchangeRateRepositorySecondary' => [
+                'parameter' => [
+                    'storage' => ExchangeRateDbStorage::class,
+                    'repository' => ExchangeRateApiStorage::class
                 ]
             ],
             ExchangeRateDbStorage::class => [
