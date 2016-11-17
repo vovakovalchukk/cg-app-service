@@ -532,7 +532,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -864,7 +864,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "6639fdba6cdebd992717d3ae5e1123fd8ed0661d"
+                "reference": "6503b8b13f33c0c46e9de116c621e70f0c414aff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-dev-CGIV-7659-integrate-with-open-exchange-rates-3cab73.zip",
+                "reference": "6503b8b13f33c0c46e9de116c621e70f0c414aff",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -886,7 +892,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-16T14:00:25+00:00"
+            "time": "2016-11-17T11:34:31+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -3964,7 +3970,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21T07:54:03+00:00"
+            "time": "2015-08-21 07:54:03"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -4020,7 +4026,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22T08:39:53+00:00"
+            "time": "2015-07-22 08:39:53"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
@@ -8649,14 +8655,14 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "composer/composer": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/exchangerate": 20,
+        "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
