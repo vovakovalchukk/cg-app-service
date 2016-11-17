@@ -14,6 +14,7 @@ $files = [
     'removeThenCorrectImportedProducts.php',
     'reAddInActionOrdersToGearman.php',
     'account.php',
+    'currency.php',
 ];
 
 $commands = array();
