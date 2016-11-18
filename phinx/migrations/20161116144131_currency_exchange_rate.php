@@ -10,6 +10,7 @@ class CurrencyExchangeRate extends AbstractMigration
             ->addColumn('currencyCode', 'string')
             ->addColumn('baseCurrencyCode', 'string')
             ->addColumn('rate', 'decimal', ['precision' => 12, 'scale' => 4, 'null' => true])
+            ->addIndex(['datetime', 'currencyCode', 'baseCurrencyCode'], ['unique' => true])
             ->create();
     }
 }
