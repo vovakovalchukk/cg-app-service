@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "522a24156355e7d91658cf6c7b9912f8",
+    "content-hash": "2fe58c743093b4a8f62f7b7ffb755777",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -864,7 +864,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "d552701c9c71485e2ba4c12316a693c99e0fb9d6"
+                "reference": "023429a87cf70813bc8a107506aaad00a51f81b8"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -2222,17 +2222,11 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.34",
+            "version": "dev-CGIV-7659-integrate-with-open-exchange-rates",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "b073194e96f6d6a9a40cf173dd136885ae7e0630"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.34-3416d8.zip",
-                "reference": "b073194e96f6d6a9a40cf173dd136885ae7e0630",
-                "shasum": null
+                "reference": "21f7660a113f44231c2c672d785b783140e94361"
             },
             "require": {
                 "zendframework/zend-db": ">=2.2,<3.0"
@@ -8645,6 +8639,12 @@
             "alias_normalized": "1.0.1.0",
             "version": "dev-CGIV-7659-integrate-with-open-exchange-rates",
             "package": "channelgrabber/exchangerate"
+        },
+        {
+            "alias": "2.12.35",
+            "alias_normalized": "2.12.35.0",
+            "version": "dev-CGIV-7659-integrate-with-open-exchange-rates",
+            "package": "channelgrabber/stdlib"
         }
     ],
     "minimum-stability": "stable",
@@ -8652,6 +8652,7 @@
         "composer/composer": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/exchangerate": 20,
+        "channelgrabber/stdlib": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
