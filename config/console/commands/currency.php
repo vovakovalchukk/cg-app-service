@@ -7,7 +7,7 @@ return [
     'currency:fetchExchangeRates' => [
         'command' => function () use ($di) {
             $command = $di->get(ExchangeRateService::class);
-            $command->fetchAllExchangeRates($endOfDay);
+            $command->fetchAllExchangeRates();
         },
         'description' => "Fetch end-of-day exchange rates for all currencies from Open Exchange Rates",
         'arguments' => [
