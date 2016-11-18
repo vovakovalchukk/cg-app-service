@@ -59,6 +59,8 @@ return [
                 'Versioniser_OrderEntity_9' => OrderEntity\Versioniser9::class,
                 'Versioniser_OrderCollection_10' => OrderCollection\Versioniser10::class,
                 'Versioniser_OrderEntity_10' => OrderEntity\Versioniser10::class,
+                'Versioniser_OrderCollection_11' => OrderCollection\Versioniser11::class,
+                'Versioniser_OrderEntity_11' => OrderEntity\Versioniser11::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -79,6 +81,7 @@ return [
                 'Versioniser_OrderLabelEntity_1' => OrderLabelEntity\Versioniser1::class,
                 'Versioniser_OrderLabelCollection_2' => OrderLabelCollection\Versioniser2::class,
                 'Versioniser_OrderLabelEntity_2' => OrderLabelEntity\Versioniser2::class,
+                'Versioniser_OrderLabelEntity_3' => OrderLabelEntity\Versioniser3::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
@@ -176,6 +179,11 @@ return [
             'Versioniser_OrderCollection_10' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderEntity_10',
+                ],
+            ],
+            'Versioniser_OrderCollection_11' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_11',
                 ],
             ],
             'Versioniser_OrderItemCollection_1' => [

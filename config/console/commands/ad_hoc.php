@@ -14,6 +14,7 @@ use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
+use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 use CG\Template\Mapper as TemplateMapper;
 use CG\Template\Service as TemplateService;
 use Predis\Client as Redis;
@@ -63,33 +64,12 @@ return [
             ],
         ],
         'command' =>
-            function(InputInterface $input, OutputInterface $output) use ($di) {
-                $query = <<<EOF
-SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff
-FROM stock AS s
-INNER JOIN stockLocation AS sl ON s.id = sl.stockId
-INNER JOIN (
-	SELECT itemSku, item.organisationUnitId, SUM(
-		IF(item.purchaseDate > account.cgCreationDate,
-			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
-			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
-		)) as calculatedAllocated
-	FROM item
-	INNER JOIN account.account ON item.accountId = account.id
-	WHERE item.stockManaged = 1
-	GROUP BY itemSku, item.organisationUnitId
-) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
-WHERE calculatedAllocated > allocated
-ORDER BY organisationUnitId, sku
-EOF;
+            function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
+                $adjustments = $findCommand->findUnderAllocated();
 
-                /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
-                /** @var Adapter $adapter */
-                $adapter = $di->get('cg_appReadSql')->getAdapter();
-                /** @var ResultInterface $adjustments */
-                $adjustments = $adapter->query($query)->execute();
-
                 $command(
                     $input,
                     $output,
@@ -108,34 +88,13 @@ EOF;
             ],
         ],
         'command' =>
-            function(InputInterface $input, OutputInterface $output) use ($di) {
-                $query = <<<EOF
-SELECT s.sku, calc.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
-FROM stock AS s
-INNER JOIN stockLocation AS sl ON s.id = sl.stockId
-INNER JOIN (
-	SELECT itemSku, item.organisationUnitId, SUM(
-		IF(item.purchaseDate > account.cgCreationDate,
-			IF(`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
-			IF(`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
-		)) as calculatedAllocated,
-        SUM(IF(`status` = 'unknown', itemQuantity, 0)) as unknownOrders
-	FROM item
-	INNER JOIN account.account ON item.accountId = account.id
-	WHERE item.stockManaged = 1
-	GROUP BY itemSku, item.organisationUnitId
-) as calc ON calc.itemSku LIKE s.sku AND s.organisationUnitId = calc.organisationUnitId
-WHERE calculatedAllocated < allocated
-ORDER BY organisationUnitId, sku
-EOF;
+            function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
+                $adjustments = $findCommand->findOverAllocated();
 
                 /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
-                /** @var Adapter $adapter */
-                $adapter = $di->get('cg_appReadSql')->getAdapter();
-                /** @var ResultInterface $adjustments */
-                $adjustments = $adapter->query($query)->execute();
-
                 $command(
                     $input,
                     $output,

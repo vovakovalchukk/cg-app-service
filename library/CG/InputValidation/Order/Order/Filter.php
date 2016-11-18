@@ -275,6 +275,13 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'sequenceNumber' => [
+                'name' => 'sequenceNumber',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'sequenceNumber')
+                ]
+            ],
         ];
     }
 }

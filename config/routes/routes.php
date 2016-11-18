@@ -151,7 +151,7 @@ return array(
         'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderCollection',
         'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false),
-        'version' => new Version(1, 11),
+        'version' => new Version(1, 12),
         'entityRoute' => '/order/:orderId'
     ),
     '/order/:orderId' => array (
@@ -168,7 +168,7 @@ return array(
         'via' => array('GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'),
         'name' => 'OrderEntity',
         'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 11),
+        'version' => new Version(1, 12),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
@@ -226,7 +226,7 @@ return array(
         'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
         'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => OrderTrackingFilterValidationRules::class, "flatten" => false),
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ),
     '/order/:orderId/tracking/:trackingId' => array (
         'controllers' => function($orderId, $trackingId) use ($di) {
@@ -242,7 +242,7 @@ return array(
         'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
         'name' => 'OrderTrackingEntity',
         'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,
@@ -582,7 +582,7 @@ return array(
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderLabel/:labelId',
         'name' => 'OrderLabelCollection',
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => LabelFilterValidationRules::class, "flatten" => false]
     ],
     '/orderLabel/:labelId' => [
@@ -598,7 +598,7 @@ return array(
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderLabelEntity',
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => LabelMapper::class,
@@ -657,6 +657,6 @@ return array(
         'validation' => [
             "filterRules" => TrackingFilterValidationRules::class,
         ],
-        'version' => new Version(1, 2),
+        'version' => new Version(1, 3),
     ],
 );

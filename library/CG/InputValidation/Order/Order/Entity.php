@@ -369,6 +369,15 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ),
+            'sequenceNumber' => [
+                'name'       => 'sequenceNumber',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'sequenceNumber']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'sequenceNumber must be at least %min%'])
+                ]
+            ],
             'rootOrganisationUnitId' => [
                 'name'       => 'rootOrganisationUnitId',
                 'required'   => false,
