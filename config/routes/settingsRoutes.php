@@ -102,7 +102,7 @@ return [
         'validation' => [
             'filterRules' => CollectionValidation::class
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
     ],
     '/settings/invoice/:id' => [
         'controllers' => function($invoiceId) use ($di) {
