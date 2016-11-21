@@ -17,7 +17,7 @@ class Entity implements RulesInterface
             'date' => [
                 'name'       => 'date',
                 'required'   => false,
-                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+                'validators' => [new Date(['format' => 'Y-m-d'])]
             ]
         ];
     }

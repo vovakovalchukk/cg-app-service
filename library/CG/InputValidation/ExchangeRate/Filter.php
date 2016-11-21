@@ -23,15 +23,15 @@ class Filter implements RulesInterface
                         new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                     ]
                 ],
-                'datetimeFrom' => [
-                    'name'       => 'datetimeFrom',
+                'dateFrom' => [
+                    'name'       => 'dateFrom',
                     'required'   => false,
-                    'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+                    'validators' => [new Date(['format' => 'Y-m-d'])]
                 ],
-                'datetimeTo' => [
-                    'name'       => 'datetimeTo',
+                'dateTo' => [
+                    'name'       => 'dateTo',
                     'required'   => false,
-                    'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+                    'validators' => [new Date(['format' => 'Y-m-d'])]
                 ]
             ]
         );
