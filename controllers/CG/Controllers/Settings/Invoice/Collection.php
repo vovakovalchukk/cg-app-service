@@ -27,6 +27,8 @@ class Collection
                     $this->getParams('page'),
                     $this->getParams('emailSendAs'),
                     $this->getParams('emailVerified'),
+                    $this->getParams('emailBcc'),
+                    $this->getParams('copyRequired'),
                     $this->getParams('pendingVerification')
                 )
             );

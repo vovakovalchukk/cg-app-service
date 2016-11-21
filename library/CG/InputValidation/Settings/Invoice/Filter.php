@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Settings\Invoice;
 
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\EmailValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
@@ -32,6 +33,20 @@ class Filter implements RulesInterface
                 'required' => false,
                 'validators' => [
                     new BooleanValidator(['name' => 'emailVerified'])
+                ]
+            ],
+            'emailBcc' => [
+                'name' => 'emailBcc',
+                'required' => false,
+                'validators' => [
+                    new EmailValidator(['name' => 'emailBcc'])
+                ]
+            ],
+            'copyRequired' => [
+                'name' => 'copyRequired',
+                'required' => false,
+                'validators' => [
+                    new BooleanValidator(['name' => 'copyRequired'])
                 ]
             ],
             'pendingVerification' => [

@@ -44,6 +44,16 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new BooleanValidator(['name' => 'emailVerified'])],
             ],
+            'emailBcc' => [
+                'name' => 'emailBcc',
+                'required' => false,
+                'validators' => [new EmailValidator(['name' => 'emailBcc'])],
+            ],
+            'copyRequired' => [
+                'name' => 'copyRequired',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'copyRequired'])],
+            ],
             'productImages' => [
                 'name'       => 'autoEmail',
                 'required'   => false,
