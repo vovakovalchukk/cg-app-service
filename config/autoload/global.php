@@ -388,7 +388,7 @@ use CG\ExchangeRate\Repository as ExchangeRateRepository;
 use CG\ExchangeRate\Mapper as ExchangeRateMapper;
 use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
 use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
-use CG\ExchangeRate\Storage\Api as ExchangeRateApiStorage;
+use CG\ExchangeRate\Storage\ExternalApi as ExchangeRateExternalApiStorage;
 
 $config = array(
     'di' => array(
@@ -1473,7 +1473,7 @@ $config = array(
             'ExchangeRateRepositorySecondary' => [
                 'parameter' => [
                     'storage' => ExchangeRateDbStorage::class,
-                    'repository' => ExchangeRateApiStorage::class
+                    'repository' => ExchangeRateExternalApiStorage::class
                 ]
             ],
             ExchangeRateDbStorage::class => [

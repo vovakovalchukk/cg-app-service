@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "82a7666f0f23001afda5da2a8d26e45b",
+    "content-hash": "876620c18f48489a7b045179e6047a9d",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -532,7 +532,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -860,17 +860,11 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "1.0.0",
+            "version": "dev-CGIV-7636-support-non-gbp-orders-with-amazon-mcf",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.0.0-c04cfe.zip",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd",
-                "shasum": null
+                "reference": "e279099109783cf2e5735df3e3dc2e83eb4be0d9"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -3975,7 +3969,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:54:03"
+            "time": "2015-08-21T07:54:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -4031,7 +4025,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22 08:39:53"
+            "time": "2015-07-22T08:39:53+00:00"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
@@ -8801,16 +8795,24 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.1",
+            "alias_normalized": "1.0.1.0",
+            "version": "dev-CGIV-7636-support-non-gbp-orders-with-amazon-mcf",
+            "package": "channelgrabber/exchangerate"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/constants": 20,
         "composer/composer": 20,
+        "channelgrabber/constants": 20,
+        "channelgrabber/exchangerate": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
