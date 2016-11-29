@@ -382,6 +382,14 @@ use CG\Settings\SetupProgress\Storage\Cache as SetupProgressSettingsCacheStorage
 use CG\Settings\SetupProgress\Storage\Db as SetupProgressSettingsDbStorage;
 use CG\Settings\SetupProgress\StorageInterface as SetupProgressSettingsStorage;
 
+// ExchangeRate
+use CG\ExchangeRate\Service as ExchangeRateService;
+use CG\ExchangeRate\Repository as ExchangeRateRepository;
+use CG\ExchangeRate\Mapper as ExchangeRateMapper;
+use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
+use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
+use CG\ExchangeRate\Storage\Api as ExchangeRateApiStorage;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -420,6 +428,8 @@ $config = array(
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
                 'StockLocationApiService' => StockLocationService::class,
+                'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
+                'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -1447,6 +1457,32 @@ $config = array(
                     'writeSql' => 'WriteSql',
                     'mapper' => SetupProgressSettingsMapper::class,
                 ],
+            ],
+            ExchangeRateService::class => [
+                'parameters' => [
+                    'repository' => 'ExchangeRateRepositoryPrimary',
+                    'mapper' => ExchangeRateMapper::class
+                ]
+            ],
+            'ExchangeRateRepositoryPrimary' => [
+                'parameter' => [
+                    'storage' => ExchangeRateCacheStorage::class,
+                    'repository' => 'ExchangeRateRepositorySecondary'
+                ]
+            ],
+            'ExchangeRateRepositorySecondary' => [
+                'parameter' => [
+                    'storage' => ExchangeRateDbStorage::class,
+                    'repository' => ExchangeRateApiStorage::class
+                ]
+            ],
+            ExchangeRateDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ExchangeRateMapper::class
+                ]
             ],
             AutoArchiveOrdersCommand::class => [
                 'parameter' => [
