@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdb5822cd65bfab70a80e846bc0bf32e",
+    "content-hash": "be754051d8134da0125c787709926c7a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -860,21 +860,22 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd"
+                "reference": "47caa85ac5decca8d8c0ec1247032b645bd509ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.0.0-c04cfe.zip",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.1.0-024464.zip",
+                "reference": "47caa85ac5decca8d8c0ec1247032b645bd509ef",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": "^2.2.0"
+                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/stdlib": "^2.12.36"
             },
             "type": "library",
             "autoload": {
@@ -892,7 +893,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-23T15:48:45+00:00"
+            "time": "2016-11-29T15:35:49+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -3970,7 +3971,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-21 07:54:03"
+            "time": "2015-08-21T07:54:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -4026,7 +4027,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-07-22 08:39:53"
+            "time": "2015-07-22T08:39:53+00:00"
         },
         {
             "name": "php-units-of-measure/php-units-of-measure",
