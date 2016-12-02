@@ -44,6 +44,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new BooleanValidator(['name' => 'emailVerified'])],
             ],
+            'emailVerificationStatus' => [
+                'name' => 'emailVerificationStatus',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])],
+            ],
             'emailBcc' => [
                 'name' => 'emailBcc',
                 'required' => false,
