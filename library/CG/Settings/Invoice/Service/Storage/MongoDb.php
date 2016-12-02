@@ -47,9 +47,10 @@ class MongoDb implements StorageInterface
             }
 
             if ($filter->getPendingVerification()) {
-                $query['$or'] = [
+                $query['$and'] = [
                     [ '$or' => [ ['emailSendAs' => ['$ne' => null]], ['tradingCompanies.emailSendAs' => ['$ne' => null]] ]],
                     [ '$or' => [ ['emailVerified' => false], ['tradingCompanies.emailVerified' => false] ]],
+                    [ '$or' => [ ['emailVerificationStatus' => 'Pending'], ['emailVerificationStatus' => 'Pending'] ]],
                 ];
             }
 
