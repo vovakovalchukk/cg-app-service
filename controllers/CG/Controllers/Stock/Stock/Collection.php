@@ -43,7 +43,7 @@ class Collection
     {
         $stockHal = $this->postTrait($hal);
         try {
-            $this->invalidateStock($stockHal);
+            $this->invalidateStockHal($stockHal);
         } catch (Exception $exception) {
             // No-op. Save succeeded, everything else is superfluous
         }
