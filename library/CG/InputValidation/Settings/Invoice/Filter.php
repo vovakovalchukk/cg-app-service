@@ -55,6 +55,13 @@ class Filter implements RulesInterface
                 'validators' => [
                     new BooleanValidator(['name' => 'pendingVerification'])
                 ]
+            ],
+            'verifiedEmail' => [
+                'name' => 'verifiedEmail',
+                'required' => false,
+                'validators' => [
+                    new BooleanValidator(['name' => 'verifiedEmail'])
+                ]
             ]
         ];
     }

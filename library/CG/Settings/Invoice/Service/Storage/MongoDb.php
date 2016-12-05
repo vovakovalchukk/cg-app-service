@@ -48,10 +48,13 @@ class MongoDb implements StorageInterface
 
             if ($filter->getPendingVerification()) {
                 $query['$and'] = [
-                    [ '$or' => [ ['emailSendAs' => ['$ne' => null]], ['tradingCompanies.emailSendAs' => ['$ne' => null]] ]],
                     [ '$or' => [ ['emailVerified' => false], ['tradingCompanies.emailVerified' => false] ]],
-                    [ '$or' => [ ['emailVerificationStatus' => 'Pending'], ['emailVerificationStatus' => 'Pending'] ]],
+                    [ '$or' => [ ['emailVerificationStatus' => 'Pending'], ['tradingCompanies.emailVerificationStatus' => 'Pending'] ]],
                 ];
+            }
+
+            if ($filter->getVerifiedEmail()) {
+                $query['$or'] = [ ['emailVerified' => true], ['tradingCompanies.emailVerified' => true] ];
             }
 
             $limit = $filter->getLimit();

@@ -29,7 +29,8 @@ class Collection
                     $this->getParams('emailVerified'),
                     $this->getParams('emailBcc'),
                     $this->getParams('copyRequired'),
-                    $this->getParams('pendingVerification')
+                    $this->getParams('pendingVerification'),
+                    $this->getParams('verifiedEmail')
                 )
             );
         } catch (NotFound $e) {
