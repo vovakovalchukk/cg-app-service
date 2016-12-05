@@ -34,6 +34,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
+            'autoEmailAllowed' => [
+                'name' => 'autoEmailAllowed',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'autoEmailAllowed'])],
+            ],
             'emailSendAs' => [
                 'name' => 'emailSendAs',
                 'required' => false,
