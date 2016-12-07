@@ -175,17 +175,11 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.2.1",
+            "version": "dev-CGIV-7804-cache-invalidation-maps-of-maps",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.1-62c1b4.zip",
-                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f",
-                "shasum": null
+                "reference": "779bd935075756cac3b83ef588165111e4f989b3"
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
@@ -532,7 +526,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -8767,16 +8761,24 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.2.2",
+            "alias_normalized": "2.2.2.0",
+            "version": "dev-CGIV-7804-cache-invalidation-maps-of-maps",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/constants": 20,
         "composer/composer": 20,
+        "channelgrabber/cache": 20,
+        "channelgrabber/constants": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
