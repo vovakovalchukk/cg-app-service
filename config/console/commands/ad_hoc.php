@@ -1,4 +1,5 @@
 <?php
+use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
 use CG\Gearman\Client as GearmanClient;
@@ -293,4 +294,38 @@ EOF;
                 $output->writeln('Finished, ' . count($ouIds) . ' OUs have had templates created.');
             }
     ],
+
+    'ad-hoc:populateCacheInvalidationMapsOfMaps' => [
+        'description' => 'Create maps of all the invalidation maps',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+        {
+            $output->writeln('Starting populateCacheInvalidationMapsOfMaps command');
+
+            $redis = $di->get('reliable_redis');
+            $mapTypes = [
+                InvalidationHandler::COLLECTION_DEPENDENCY_MAP_PREFIX,
+                InvalidationHandler::COLLECTION_TYPE_MAP_PREFIX,
+                InvalidationHandler::COLLECTION_ENTITY_MAP_PREFIX,
+                InvalidationHandler::ENTITY_RELATED_MAP_PREFIX,
+                InvalidationHandler::ENTITY_FIELD_MAP_PREFIX,
+            ];
+
+            foreach ($mapTypes as $mapType) {
+                $output->writeln('Scanning for ' . $mapType);
+                $cursor = 0;
+                do {
+                    list($cursor, $results) = $redis->scan($cursor, 'MATCH', $mapType.':*');
+                    $output->writeln('  Got ' . count($results) . ' results, cursor now: ' . $cursor);
+
+                    foreach ($results as $result) {
+                        list(, $entityType) = explode(':', $result);
+                        $mapOfMapsKey = $mapType . 'Map:' . $entityType;
+                        $redis->sadd($mapOfMapsKey, base64_encode($result));
+                    }
+                } while ($cursor != 0);
+            }
+        }
+    ]
 ];
