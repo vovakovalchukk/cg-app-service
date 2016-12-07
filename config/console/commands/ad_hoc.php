@@ -314,6 +314,8 @@ EOF;
 
             foreach ($mapTypes as $mapType) {
                 $output->writeln('Scanning for ' . $mapType);
+                $mapsByEntityType = [];
+
                 $cursor = 0;
                 do {
                     list($cursor, $results) = $redis->scan($cursor, 'MATCH', $mapType.':*');
@@ -321,10 +323,23 @@ EOF;
 
                     foreach ($results as $result) {
                         list(, $entityType) = explode(':', $result);
-                        $mapOfMapsKey = $mapType . 'Map:' . $entityType;
-                        $redis->sadd($mapOfMapsKey, base64_encode($result));
+                        if (!isset($mapsByEntityType[$entityType])) {
+                            $mapsByEntityType[$entityType] = [];
+                        }
+                        $mapsByEntityType[$entityType][] = base64_encode($result);
                     }
                 } while ($cursor != 0);
+
+                $output->writeln('  Finished scanning. Adding maps to map-of-maps.');
+                foreach ($mapsByEntityType as $entityType => $maps) {
+                    $mapOfMapsKey = $mapType . 'Map:' . $entityType;
+                    // We can call SADD with multiple members but its unwise to do too many at once
+                    $chunkedMaps = array_chunk($maps, 50);
+                    foreach ($chunkedMaps as $chunk) {
+                        // In PHP 5.6+ we could use the splat ('...') operator here
+                        call_user_func_array([$redis, 'sadd'], array_merge([$mapOfMapsKey], $chunk));
+                    }
+                }
             }
         }
     ]
