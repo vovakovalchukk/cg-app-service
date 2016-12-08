@@ -181,6 +181,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
                 "reference": "99e5c7f4d48dd0582ac021b109872b342223c938"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-7804-cache-invalidation-maps-of-maps-f3153a.zip",
+                "reference": "99e5c7f4d48dd0582ac021b109872b342223c938",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
@@ -203,7 +209,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-08T14:18:28+00:00"
+            "time": "2016-12-08 11:12:24"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -526,7 +532,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -8771,14 +8777,14 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "composer/composer": 20,
         "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
+        "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
