@@ -388,7 +388,7 @@ use CG\ExchangeRate\Repository as ExchangeRateRepository;
 use CG\ExchangeRate\Mapper as ExchangeRateMapper;
 use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
 use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
-use CG\ExchangeRate\Storage\Api as ExchangeRateApiStorage;
+use CG\ExchangeRate\Storage\ExternalApi as ExchangeRateExternalApiStorage;
 
 $config = array(
     'di' => array(
@@ -1049,7 +1049,6 @@ $config = array(
             ],
             ListingService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class,
                     'stockStorage' => StockService::class
                 ]
@@ -1070,19 +1069,16 @@ $config = array(
             ],
             ListingClientService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class
                 ]
             ],
             ListingDeprService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class
                 ]
             ],
             UnimportedListingService::class => [
                 'parameters' => [
-                    'repository' => UnimportedListingRepository::class,
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
                 ]
@@ -1473,7 +1469,7 @@ $config = array(
             'ExchangeRateRepositorySecondary' => [
                 'parameter' => [
                     'storage' => ExchangeRateDbStorage::class,
-                    'repository' => ExchangeRateApiStorage::class
+                    'repository' => ExchangeRateExternalApiStorage::class
                 ]
             ],
             ExchangeRateDbStorage::class => [
@@ -1522,8 +1518,8 @@ $config = array(
                 OrderCountsStorage::class => OrderCountsRedisStorage::class,
                 ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
-                ListingStorage::class => ListingRepository::class,
-                UnimportedListingStorage::class => UnimportedListingRepository::class,
+                ListingStorage::class => ListingDbStorage::class,
+                UnimportedListingStorage::class => UnimportedListingDbStorage::class,
                 AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
                 ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
                 StockLocationStorage::class => StockLocationRepository::class,

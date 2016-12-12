@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0acbee4198e390f2d6edb3a14eb27413",
+    "content-hash": "113eaf2c0648ea383eee538286cd2510",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -175,16 +175,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f"
+                "reference": "cfcc5b550c5b34d0b24bc5972998f796b96bcb41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.1-62c1b4.zip",
-                "reference": "94945387d5ea0848f3d4be4d6dcd1a2ff6091f2f",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.2-77b033.zip",
+                "reference": "cfcc5b550c5b34d0b24bc5972998f796b96bcb41",
                 "shasum": null
             },
             "require": {
@@ -209,7 +209,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-04-08T14:18:28+00:00"
+            "time": "2016-12-08T12:50:48+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -860,21 +860,22 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd"
+                "reference": "47caa85ac5decca8d8c0ec1247032b645bd509ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.0.0-c04cfe.zip",
-                "reference": "adb72bfe3207e2aa868722334ac7184a545e0bdd",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.1.0-024464.zip",
+                "reference": "47caa85ac5decca8d8c0ec1247032b645bd509ef",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": "^2.2.0"
+                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/stdlib": "^2.12.36"
             },
             "type": "library",
             "autoload": {
@@ -892,7 +893,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-23T15:48:45+00:00"
+            "time": "2016-11-29T15:35:49+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -1358,12 +1359,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "568d377bc1291f27845c0afc651f9ecf7f1f3e70"
+                "reference": "0ed619f8759111ae9fe260d4be600c850a6e18d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6760-zero-rated-vat-invoices-cb7126.zip",
-                "reference": "568d377bc1291f27845c0afc651f9ecf7f1f3e70",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-6760-zero-rated-vat-invoices-33594c.zip",
+                "reference": "0ed619f8759111ae9fe260d4be600c850a6e18d7",
                 "shasum": null
             },
             "require": {
@@ -1433,7 +1434,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-29 16:33:21"
+            "time": "2016-11-30 12:05:48"
         },
         {
             "name": "channelgrabber/permission",
@@ -2703,17 +2704,17 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.11",
+            "version": "1.2.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "496d57e79f978eddf7d202a00b4e2ab14e623e03"
+                "reference": "ece54f4904937710d562d5a5602cfe9a27c7b405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.11-f50b46.zip",
-                "reference": "496d57e79f978eddf7d202a00b4e2ab14e623e03",
-                "shasum": "4987089f324c6e03501ec5824b4cb0ae665cbed3"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.12-5ee593.zip",
+                "reference": "ece54f4904937710d562d5a5602cfe9a27c7b405",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -2731,7 +2732,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-08-26T12:57:40+00:00"
+            "time": "2016-12-07T15:05:22+00:00"
         },
         {
             "name": "channelgrabber/vnderror",
