@@ -5,6 +5,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use CG\Stock\Command\AuditAllStock;
 use CG\Stock\Command\CreateMissingStock;
 use CG\Stock\Command\ProcessAudit;
+use CG\Stock\Command\RemoveDuplicateStock;
 use CG\Stock\Command\ZeroNegativeStock;
 use CG\Stock\Gearman\WorkerFunction\ProcessAudit as StockWorker;
 use CG\Stock\Gearman\WorkerFunction\ProcessAdjustmentAudit as AdjustmentWorker;
@@ -82,6 +83,23 @@ return [
             $output->writeLn('Finished createMissingStock command' . ($dryRun ? ' (DRY RUN)' : '') . ', ' . $affected . ' stock created. Check the logs for details.');
         },
         'description' => 'Identify products that should have a stock record but dont and create them',
+        'arguments' => [
+        ],
+        'options' => [
+            'wet-run' => [
+                'description' => 'Wet run, i.e. do the stock changes - without this it defaults to a dry run'
+            ]
+        ],
+    ],
+    'stock:removeDuplicateStock' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $dryRun = !$input->getOption('wet-run');
+            $output->writeLn('Starting removeDuplicateStock command' . ($dryRun ? ' (DRY RUN)' : ''));
+            $command = $di->get(RemoveDuplicateStock::class);
+            $affected = $command($dryRun);
+            $output->writeLn('Finished removeDuplicateStock command' . ($dryRun ? ' (DRY RUN)' : '') . ', ' . $affected . ' stock deleted. Check the logs for details.');
+        },
+        'description' => 'Identify duplicated stock records and delete them',
         'arguments' => [
         ],
         'options' => [
