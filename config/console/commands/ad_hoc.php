@@ -12,6 +12,8 @@ use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
+use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
+use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
@@ -342,5 +344,28 @@ EOF;
                 }
             }
         }
-    ]
+    ],
+
+    'ad-hoc:populateInvoiceSettingEmailSendAs' => [
+        'description' => 'Populate the Settings\\Invoice::emailSendAs field for existing users with autoEmail turned on',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+        {
+            $settingsStorage = $di->get(InvoiceSettingsRepository::class);
+            $filter = (new InvoiceSettingsFilter())
+                ->setLimit('all')
+                ->setPage(1);
+            $settings = $settingsStorage->fetchCollectionByFilter($filter);
+$output->writeln("Got ".$settings->count()." settings");
+            foreach ($settings as $ouSettings) {
+$output->writeln("Processing for OU ".$ouSettings->getId().". AutoEmail?: ".($ouSettings->getAutoEmail() ? 'yes' : 'no').', EmailSendAs?: '.($ouSettings->getEmailSendAs() ? 'yes':'no'));
+                if (!$ouSettings->getAutoEmail() || $ouSettings->getEmailSendAs()) {
+                    continue;
+                }
+                $ouSettings->setEmailSendAs('no-reply@orderhub.io');
+                $settingsStorage->save($ouSettings);
+            }
+        }
+    ],
 ];
