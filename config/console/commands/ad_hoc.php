@@ -357,9 +357,10 @@ EOF;
                 ->setLimit('all')
                 ->setPage(1);
             $settings = $settingsStorage->fetchCollectionByFilter($filter);
-$output->writeln("Got ".$settings->count()." settings");
+            $output->writeln("Got ".$settings->count()." settings");
+
             foreach ($settings as $ouSettings) {
-$output->writeln("Processing for OU ".$ouSettings->getId().". AutoEmail?: ".($ouSettings->getAutoEmail() ? 'yes' : 'no').', EmailSendAs?: '.($ouSettings->getEmailSendAs() ? 'yes':'no'));
+                $output->writeln("Processing for OU " . $ouSettings->getId() . ". AutoEmail?: " . ($ouSettings->getAutoEmail() ? 'yes' : 'no') . ', EmailSendAs?: ' . ($ouSettings->getEmailSendAs() ? 'yes':'no'));
                 if (!$ouSettings->getAutoEmail() || $ouSettings->getEmailSendAs()) {
                     continue;
                 }
