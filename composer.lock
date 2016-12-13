@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bd9e1e8c5f7520eacabcce3ac973330",
+    "content-hash": "9a42f46badec1df6e80c77a14c6cb80a",
     "packages": [
         {
             "name": "channelgrabber/amazon",
@@ -2702,13 +2702,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "291ba3c77dfe30eed41a3314cb59eac60f5ccc8d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-dev-CGIV-7089-use-users-email-address-when-sending-invoices-b87131.zip",
-                "reference": "291ba3c77dfe30eed41a3314cb59eac60f5ccc8d",
-                "shasum": null
+                "reference": "91c2402caae8d9a0f2e696ddff8ddb320a279d29"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -8712,10 +8706,10 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "composer/composer": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/settings": 20,
         "channelgrabber/validation": 20,
-        "composer/composer": 20,
         "php-jsonpatch/php-jsonpatch": 20,
         "php-jsonpointer/php-jsonpointer": 20,
         "phpish/link_header": 20,
