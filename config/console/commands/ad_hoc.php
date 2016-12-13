@@ -1,4 +1,5 @@
 <?php
+use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
 use CG\Gearman\Client as GearmanClient;
@@ -293,4 +294,53 @@ EOF;
                 $output->writeln('Finished, ' . count($ouIds) . ' OUs have had templates created.');
             }
     ],
+
+    'ad-hoc:populateCacheInvalidationMapsOfMaps' => [
+        'description' => 'Create maps of all the invalidation maps',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+        {
+            $output->writeln('Starting populateCacheInvalidationMapsOfMaps command');
+
+            $redis = $di->get('reliable_redis');
+            $mapTypes = [
+                InvalidationHandler::COLLECTION_DEPENDENCY_MAP_PREFIX,
+                InvalidationHandler::COLLECTION_TYPE_MAP_PREFIX,
+                InvalidationHandler::COLLECTION_ENTITY_MAP_PREFIX,
+                InvalidationHandler::ENTITY_RELATED_MAP_PREFIX,
+                InvalidationHandler::ENTITY_FIELD_MAP_PREFIX,
+            ];
+
+            foreach ($mapTypes as $mapType) {
+                $output->writeln('Scanning for ' . $mapType);
+                $mapsByEntityType = [];
+
+                $cursor = 0;
+                do {
+                    list($cursor, $results) = $redis->scan($cursor, 'MATCH', $mapType.':*');
+                    $output->writeln('  Got ' . count($results) . ' results, cursor now: ' . $cursor);
+
+                    foreach ($results as $result) {
+                        list(, $entityType) = explode(':', $result);
+                        if (!isset($mapsByEntityType[$entityType])) {
+                            $mapsByEntityType[$entityType] = [];
+                        }
+                        $mapsByEntityType[$entityType][] = base64_encode($result);
+                    }
+                } while ($cursor != 0);
+
+                $output->writeln('  Finished scanning. Adding maps to map-of-maps.');
+                foreach ($mapsByEntityType as $entityType => $maps) {
+                    $mapOfMapsKey = $mapType . 'Map:' . $entityType;
+                    // We can call SADD with multiple members but its unwise to do too many at once
+                    $chunkedMaps = array_chunk($maps, 50);
+                    foreach ($chunkedMaps as $chunk) {
+                        // In PHP 5.6+ we could use the splat ('...') operator here
+                        call_user_func_array([$redis, 'sadd'], array_merge([$mapOfMapsKey], $chunk));
+                    }
+                }
+            }
+        }
+    ]
 ];

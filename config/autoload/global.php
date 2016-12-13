@@ -151,6 +151,7 @@ use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as Correc
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
+use CG\Stock\Command\RemoveDuplicateStock as RemoveDuplicateStockCommand;
 use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 
@@ -1049,7 +1050,6 @@ $config = array(
             ],
             ListingService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class,
                     'stockStorage' => StockService::class
                 ]
@@ -1070,19 +1070,16 @@ $config = array(
             ],
             ListingClientService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class
                 ]
             ],
             ListingDeprService::class => [
                 'parameters' => [
-                    'repository' => ListingRepository::class,
                     'mapper' => ListingMapper::class
                 ]
             ],
             UnimportedListingService::class => [
                 'parameters' => [
-                    'repository' => UnimportedListingRepository::class,
                     'mapper' => UnimportedListingMapper::class,
                     'imageStorage' => ImageService::class
                 ]
@@ -1361,6 +1358,11 @@ $config = array(
                     'sqlClient' => 'ReadCGSql'
                 ]
             ],
+            RemoveDuplicateStockCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
             ProductMapper::class => [
                 'parameters' => [
                     'entityClass' => function() { return LockingProduct::class; },
@@ -1522,8 +1524,8 @@ $config = array(
                 OrderCountsStorage::class => OrderCountsRedisStorage::class,
                 ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
-                ListingStorage::class => ListingRepository::class,
-                UnimportedListingStorage::class => UnimportedListingRepository::class,
+                ListingStorage::class => ListingDbStorage::class,
+                UnimportedListingStorage::class => UnimportedListingDbStorage::class,
                 AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
                 ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
                 StockLocationStorage::class => StockLocationRepository::class,
