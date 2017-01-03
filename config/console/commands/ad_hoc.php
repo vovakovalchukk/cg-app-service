@@ -364,7 +364,8 @@ EOF;
                 if (!$ouSettings->getAutoEmail() || $ouSettings->getEmailSendAs()) {
                     continue;
                 }
-                $ouSettings->setEmailSendAs('no-reply@orderhub.io');
+                $ouSettings->setEmailSendAs('no-reply@orderhub.io')
+                    ->setAutoEmailAllowed(true);
                 $settingsStorage->save($ouSettings);
             }
         }
