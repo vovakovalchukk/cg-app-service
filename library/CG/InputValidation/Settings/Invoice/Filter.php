@@ -31,6 +31,7 @@ class Filter implements RulesInterface
             'emailVerified' => [
                 'name' => 'emailVerified',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'emailVerified'])
                 ]
@@ -45,6 +46,7 @@ class Filter implements RulesInterface
             'copyRequired' => [
                 'name' => 'copyRequired',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'copyRequired'])
                 ]
@@ -52,6 +54,7 @@ class Filter implements RulesInterface
             'pendingVerification' => [
                 'name' => 'pendingVerification',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'pendingVerification'])
                 ]
@@ -59,6 +62,7 @@ class Filter implements RulesInterface
             'verifiedEmail' => [
                 'name' => 'verifiedEmail',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'verifiedEmail'])
                 ]

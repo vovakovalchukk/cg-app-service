@@ -348,6 +348,7 @@ class Entity implements RulesInterface
             'archived' => [
                 'name'       => 'archived',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'archived'])],
             ],
             'fulfilmentChannel' => array(

@@ -37,6 +37,7 @@ class Entity implements RulesInterface
             'autoEmailAllowed' => [
                 'name' => 'autoEmailAllowed',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'autoEmailAllowed'])],
             ],
             'emailSendAs' => [
@@ -47,6 +48,7 @@ class Entity implements RulesInterface
             'emailVerified' => [
                 'name' => 'emailVerified',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'emailVerified'])],
             ],
             'emailVerificationStatus' => [
@@ -62,11 +64,13 @@ class Entity implements RulesInterface
             'copyRequired' => [
                 'name' => 'copyRequired',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'copyRequired'])],
             ],
             'productImages' => [
                 'name'       => 'autoEmail',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'active'])]
             ],
             'tradingCompanies' => [

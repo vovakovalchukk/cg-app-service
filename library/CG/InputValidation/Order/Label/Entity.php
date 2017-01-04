@@ -97,6 +97,7 @@ class Entity implements RulesInterface
             'signature' => [
                 'name'       => 'signature',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(["name" => "signature"])]
             ],
             'parcels' => [
@@ -107,6 +108,7 @@ class Entity implements RulesInterface
             'insurance' => [
                 'name'       => 'insurance',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(["name" => "insurance"])]
             ],
             'insuranceMonetary' => [
