@@ -49,6 +49,7 @@ class Filter implements RulesInterface
                 'deleted' => [
                     'name'       => 'deleted',
                     'required'   => false,
+                    'allow_empty' => true,
                     'validators' => [
                         new BooleanValidator(['name' => 'deleted'])
                     ]
@@ -63,6 +64,7 @@ class Filter implements RulesInterface
                 'embedVariationsAsLinks' => [
                     'name'       => 'embedVariationsAsLinks',
                     'required'   => false,
+                    'allow_empty' => true,
                     'validators' => [
                         new BooleanValidator(['name' => 'embedVariationsAsLinks'])
                     ]
@@ -70,6 +72,7 @@ class Filter implements RulesInterface
                 'replaceVariationWithParent' => [
                     'name'       => 'replaceVariationWithParent',
                     'required'   => false,
+                    'allow_empty' => true,
                     'validators' => [
                         new BooleanValidator(['name' => 'replaceVariationWithParent'])
                     ]

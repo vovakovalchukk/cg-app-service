@@ -105,6 +105,7 @@ class Entity implements RulesInterface
             'stockManaged' => [
                 'name'       => 'stockManaged',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'stockManaged'])]
             ],
             'calculatedTaxPercentage' => [

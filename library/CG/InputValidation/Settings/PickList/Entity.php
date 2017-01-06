@@ -34,11 +34,13 @@ class Entity implements RulesInterface
             'showPictures' => [
                 'name'       => 'showPictures',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'showPictures'])]
             ],
             'showSkuless' => [
                 'name'       => 'showSkuless',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'showSkuless'])]
             ]
         ];

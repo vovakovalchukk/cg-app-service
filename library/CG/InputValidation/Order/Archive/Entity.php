@@ -17,8 +17,8 @@ class Entity implements RulesInterface
             'archived' => array(
                 'name'       => 'archived',
                 'required'   => false,
-                'allowEmpty' => true,
-                'continueIfEmpty' => true,
+                'allow_empty' => true,
+                'continue_if_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'archived'])]
             )
         );

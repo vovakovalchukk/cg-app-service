@@ -29,6 +29,7 @@ class Filter implements RulesInterface
             'active' => array(
                 'name'       => 'active',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "active"])
                 ]
