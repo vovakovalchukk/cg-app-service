@@ -398,6 +398,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'recipientVatNumber' => [
+                'name' => 'recipientVatNumber',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         );
     }
 
