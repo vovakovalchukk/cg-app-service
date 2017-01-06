@@ -108,6 +108,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'archived' => [
                 'name' => 'archived',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "archived"])
                 ]
@@ -129,6 +130,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'multiLineOrder' => [
                 'name' => 'multiLineOrder',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "multiLineOrder"])
                 ]
@@ -136,6 +138,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'multiSameItem' => [
                 'name' => 'multiSameItem',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "multiSameItem"])
                 ]
@@ -207,6 +210,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'buyerMessage' => [
                 'name' => 'buyerMessage',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "buyerMessage"])
                 ]
@@ -214,6 +218,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'giftMessage' => [
                 'name' => 'giftMessage',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "giftMessage"])
                 ]
@@ -221,6 +226,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'hasItems' => [
                 'name' => 'hasItems',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'hasItems'])
                 ]
@@ -268,6 +274,7 @@ class Filter implements RulesInterface, ExclusionInterface
             'convertToOrderIds' => [
                 'name' => 'convertToOrderIds',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'convertToOrderIds'])]
             ],
             'customer' => [

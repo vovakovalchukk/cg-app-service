@@ -151,6 +151,7 @@ use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as Correc
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
+use CG\Stock\Command\RemoveDuplicateStock as RemoveDuplicateStockCommand;
 use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 
@@ -1353,6 +1354,11 @@ $config = array(
                 ]
             ],
             CreateMissingStockCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            RemoveDuplicateStockCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]

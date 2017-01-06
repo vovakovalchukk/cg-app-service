@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Settings\Invoice;
 
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\EmailValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
@@ -33,9 +34,43 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
+            'autoEmailAllowed' => [
+                'name' => 'autoEmailAllowed',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'autoEmailAllowed'])],
+            ],
+            'emailSendAs' => [
+                'name' => 'emailSendAs',
+                'required' => false,
+                'validators' => [new EmailValidator(['name' => 'emailSendAs'])]
+            ],
+            'emailVerified' => [
+                'name' => 'emailVerified',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'emailVerified'])],
+            ],
+            'emailVerificationStatus' => [
+                'name' => 'emailVerificationStatus',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])],
+            ],
+            'emailBcc' => [
+                'name' => 'emailBcc',
+                'required' => false,
+                'validators' => [new EmailValidator(['name' => 'emailBcc'])],
+            ],
+            'copyRequired' => [
+                'name' => 'copyRequired',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'copyRequired'])],
+            ],
             'productImages' => [
                 'name'       => 'autoEmail',
                 'required'   => false,
+                'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'active'])]
             ],
             'tradingCompanies' => [

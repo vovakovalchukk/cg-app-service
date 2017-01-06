@@ -106,6 +106,7 @@ class Filter implements RulesInterface
             'hidden' => [
                 'name' => 'hidden',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(["name" => "hidden"])
                 ]

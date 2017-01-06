@@ -41,6 +41,7 @@ class Filter implements RulesInterface
             'latest' => [
                 'name' => 'latest',
                 'required' => false,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'latest']),
                 ],
