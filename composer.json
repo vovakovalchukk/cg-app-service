@@ -1,10 +1,6 @@
 {
     "repositories": [
         {
-            "type": "git",
-            "url": "git@github.com:channelgrabber/Slim.git"
-        },
-        {
             "url": "https://composer.build.channelgrabber.com",
             "type": "composer",
             "options": {
@@ -60,7 +56,7 @@
         "channelgrabber/log": "~2.0.27",
         "channelgrabber/middleware": "~1.0.3",
         "channelgrabber/notification": "~1.0.0",
-        "channelgrabber/order": "dev-CGIV-7796-CGAppPhp71 as 1.24.7",
+        "channelgrabber/order": "~1.24.7",
         "channelgrabber/phinx": "~0.3.8",
         "channelgrabber/predis": "~1.0.12",
         "channelgrabber/product": "~1.9.0",
@@ -77,11 +73,11 @@
         "channelgrabber/stock": "~1.8.3",
         "channelgrabber/stock-locking": "~1.0.0",
         "channelgrabber/tax": "~1.0.2",
-        "channelgrabber/template": "dev-CGIV-7796-CGAppPhp71 as 1.14.13",
+        "channelgrabber/template": "~1.4.13",
         "channelgrabber/transaction": "~1.2.1",
         "channelgrabber/usage": "~1.0.7",
         "channelgrabber/user": "~1.22.0",
-        "channelgrabber/userpreference": "dev-CGIV-7796-CGAppPhp71 as 1.2.5",
+        "channelgrabber/userpreference": "~1.2.5",
         "channelgrabber/validation": "~1.2.13",
         "channelgrabber/vnderror": "~1.0.0",
         "channelgrabber/woocommerce": "~1.2.0",
@@ -93,7 +89,7 @@
         "phpish/link_header": "@dev",
         "predis/predis": "~0.8.7",
         "realityking/hash_equals": "@dev",
-        "slim/slim": "dev-2.x-mcrypt-polyfil as 2.6.3",
+        "slim/slim": "~2.6.3",
         "zendframework/zend-config": "2.4.0",
         "zendframework/zend-db": "2.4.0",
         "zendframework/zend-di": "2.4.0",

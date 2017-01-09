@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c98e1df03de7f242992513e43bf730cd",
+    "content-hash": "84f6ba80cc2a550a5459856db367842f",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1424,16 +1424,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7796-CGAppPhp71",
+            "version": "1.24.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "76d15db760e1ae537d749f61e9c61795e2f95a49"
+                "reference": "8d896f5b3ceb2a66e86762ac76baf441f9004dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7796-CGAppPhp71-5a2108.zip",
-                "reference": "76d15db760e1ae537d749f61e9c61795e2f95a49",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.24.7-45f1c2.zip",
+                "reference": "8d896f5b3ceb2a66e86762ac76baf441f9004dca",
                 "shasum": null
             },
             "require": {
@@ -1503,7 +1503,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-06 15:09:21"
+            "time": "2017-01-09T12:01:47+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2500,16 +2500,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-7796-CGAppPhp71",
+            "version": "1.4.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "a7db2359de24b5e98870abe40532c007a6ab8a3d"
+                "reference": "b876f92edd28891d85b43c22a3dd21925239ae6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-CGIV-7796-CGAppPhp71-83e6c3.zip",
-                "reference": "a7db2359de24b5e98870abe40532c007a6ab8a3d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.13-15c799.zip",
+                "reference": "b876f92edd28891d85b43c22a3dd21925239ae6f",
                 "shasum": null
             },
             "require": {
@@ -2558,7 +2558,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-06 15:10:31"
+            "time": "2017-01-09T12:06:15+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -2734,16 +2734,16 @@
         },
         {
             "name": "channelgrabber/userpreference",
-            "version": "dev-CGIV-7796-CGAppPhp71",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
-                "reference": "4aae5c426dc0e73207b873da0eb976c60c3a0c94"
+                "reference": "3cfa01b6bd7159f388161d97c3fbc1c2248f6c38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-dev-CGIV-7796-CGAppPhp71-fe6b4c.zip",
-                "reference": "4aae5c426dc0e73207b873da0eb976c60c3a0c94",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-1.2.5-23bcc6.zip",
+                "reference": "3cfa01b6bd7159f388161d97c3fbc1c2248f6c38",
                 "shasum": null
             },
             "require": {
@@ -2766,7 +2766,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-12-02 15:30:58"
+            "time": "2017-01-09T12:08:12+00:00"
         },
         {
             "name": "channelgrabber/validation",
@@ -5084,11 +5084,17 @@
         },
         {
             "name": "slim/slim",
-            "version": "dev-2.x-mcrypt-polyfil",
+            "version": "2.6.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:channelgrabber/Slim.git",
-                "reference": "415179e2a14b8eb5b26377c2c546116ef482c8cc"
+                "url": "https://github.com/slimphp/Slim.git",
+                "reference": "9224ed81ac1c412881e8d762755e3d76ebf580c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/slim-slim-9224ed81ac1c412881e8d762755e3d76ebf580c0-zip-7bc8fb.zip",
+                "reference": "9224ed81ac1c412881e8d762755e3d76ebf580c0",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5103,6 +5109,7 @@
                     "Slim": "."
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -5120,7 +5127,12 @@
                 "rest",
                 "router"
             ],
-            "time": "2016-11-23 14:34:30"
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2017-01-07T12:21:41+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -9160,41 +9172,12 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.24.7",
-            "alias_normalized": "1.24.7.0",
-            "version": "dev-CGIV-7796-CGAppPhp71",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.14.13",
-            "alias_normalized": "1.14.13.0",
-            "version": "dev-CGIV-7796-CGAppPhp71",
-            "package": "channelgrabber/template"
-        },
-        {
-            "alias": "1.2.5",
-            "alias_normalized": "1.2.5.0",
-            "version": "dev-CGIV-7796-CGAppPhp71",
-            "package": "channelgrabber/userpreference"
-        },
-        {
-            "alias": "2.6.3",
-            "alias_normalized": "2.6.3.0",
-            "version": "dev-2.x-mcrypt-polyfil",
-            "package": "slim/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/template": 20,
-        "channelgrabber/userpreference": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
-        "slim/slim": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
