@@ -371,4 +371,45 @@ EOF;
             }
         }
     ],
+
+    'ad-hoc:updateInvoiceSettingTradingCompaniesStructure' => [
+        'description' => 'Update the Settings\\Invoice::tradingCompanies structure to match the new format',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+        {
+            $settingsStorage = $di->get(InvoiceSettingsRepository::class);
+            $filter = (new InvoiceSettingsFilter())
+                ->setLimit('all')
+                ->setPage(1);
+            $settings = $settingsStorage->fetchCollectionByFilter($filter);
+            $output->writeln("Got ".$settings->count()." settings");
+
+            foreach ($settings as $ouSettings) {
+                $output->writeln("Processing for OU " . $ouSettings->getId() . ". Trading Companies?: " . (!empty($ouSettings->getTradingCompanies()) ? 'yes' : 'no'));
+                if (empty($ouSettings->getTradingCompanies())) {
+                    continue;
+                }
+                $formattedTradingCompanies = [];
+                foreach ($ouSettings->getTradingCompanies() as $key => $value) {
+                    if (is_array($value)) {
+                        continue;
+                    }
+                    $formattedTradingCompanies[$key] = [
+                        'id' => $key,
+                        'assignedInvoice' => $value,
+                        'emailSendAs' => null,
+                        'emailVerified' => false,
+                        'emailVerificationStatus' => false,
+                    ];
+                }
+                if (empty($formattedTradingCompanies)) {
+                    continue;
+                }
+
+                $ouSettings->setTradingCompanies($formattedTradingCompanies);
+                $settingsStorage->save($ouSettings);
+            }
+        }
+    ],
 ];
