@@ -63,7 +63,7 @@ class MongoDb implements StorageInterface
             $settings = $this->getMongoCollection()->find($query);
             if ($limit != 'all') {
                 $offset = ($page - 1) * $limit;
-                $settings->limit($limit)->skip($offset);
+                $settings->limit((int) $limit)->skip($offset);
             }
             if (!$settings->count(true)) {
                 throw new NotFound();
