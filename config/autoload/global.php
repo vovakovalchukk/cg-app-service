@@ -103,10 +103,12 @@ use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
 
 //UserChange
 use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
+use CG\Order\Shared\UserChange\Mapper as UserChangeMapper;
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
 use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
+use CG\Order\Service\UserChange\Storage\Db as UserChangeDbStorage;
 
 //Batch
 use CG\Order\Service\Batch\Service as BatchService;
@@ -686,15 +688,23 @@ $config = array(
             ),
             UserChangeService::class => array(
                 'parameters' => array(
-                    'repository' => UserChangeMongoDbStorage::class
+                    'repository' => UserChangeDbStorage::class
                 )
             ),
             UserChangeRepository::class => array(
                 'parameter' => array(
                     'storage' => UserChangeCacheStorage::class,
-                    'repository' => UserChangeMongoDbStorage::class
+                    'repository' => UserChangeDbStorage::class
                 )
             ),
+            UserChangeDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => UserChangeMapper::class,
+                ]
+            ],
             UserChangeMongoDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',

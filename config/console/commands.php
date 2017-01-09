@@ -11,6 +11,7 @@ $files = [
     'order.php',
     'migrateMongoOrderDataToMysql.php',
     'migrateMongoOrderItemDataToMysql.php',
+    'migrateMongoUserChangeDataToMysql.php',
     'removeThenCorrectImportedProducts.php',
     'reAddInActionOrdersToGearman.php',
     'account.php',
