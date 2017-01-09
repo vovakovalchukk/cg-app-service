@@ -1,7 +1,7 @@
 <?php
 use CG\Order\Service\UserChange\Storage\Db as DbStorage;
-use CG\Order\Shared\UserChange\Collection as Collection;
 use CG\Order\Shared\UserChange\Mapper as Mapper;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
@@ -11,16 +11,19 @@ return array(
             $mongoClient = $di->get('mongodb');
 
             $mapper = $di->get(Mapper::class);
-            $collection = new Collection($mapper->getEntityClass(), __FUNCTION__);
             $dbStorage = $di->get(DbStorage::class);
 
             $result = $mongoClient->order->userChange->find();
 
             foreach ($result as $userChangeData) {
-                $collection->attach($mapper->fromArray($userChangeData));
+                $userChange = $mapper->fromArray($userChangeData);
+                try {
+                    $dbStorage->fetch($userChange->getId());
+                    continue;
+                } catch (NotFound $ex) {
+                    $dbStorage->save($userChange);
+                }
             }
-
-            $dbStorage->saveCollection($collection);
         },
         'description' => 'Adds the mongo user-change data to mysql',
         'arguments' => [],
