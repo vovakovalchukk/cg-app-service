@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecf8d50ad16fccca437063c6016a9233",
+    "content-hash": "e1ab70126c920586fd9ebd5c5b2d5191",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1424,16 +1424,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7833-amazon-mcf-orders-missing-labels",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4be5db4a783d976dc8b068bcca9e0dbe3e7f3d27"
+                "reference": "eb0038cca376dca2db2c19cf05e7ea29ab226a66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7833-amazon-mcf-orders-missing-labels-441a39.zip",
-                "reference": "4be5db4a783d976dc8b068bcca9e0dbe3e7f3d27",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.25.0-d9c1f1.zip",
+                "reference": "eb0038cca376dca2db2c19cf05e7ea29ab226a66",
                 "shasum": null
             },
             "require": {
@@ -1503,7 +1503,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-09 16:15:30"
+            "time": "2017-01-10T10:43:17+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9232,18 +9232,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.25.0",
-            "alias_normalized": "1.25.0.0",
-            "version": "dev-CGIV-7833-amazon-mcf-orders-missing-labels",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
