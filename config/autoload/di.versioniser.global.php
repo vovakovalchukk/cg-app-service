@@ -120,6 +120,8 @@ return [
                 'Versioniser_InvoiceSettings_1' => InvoiceSettingsEntity\Versioniser1::class,
                 'Versioniser_InvoiceSettingsCollection_2' => InvoiceSettingsCollection\Versioniser2::class,
                 'Versioniser_InvoiceSettings_2' => InvoiceSettingsEntity\Versioniser2::class,
+                'Versioniser_InvoiceSettingsCollection_3' => InvoiceSettingsCollection\Versioniser3::class,
+                'Versioniser_InvoiceSettings_3' => InvoiceSettingsEntity\Versioniser3::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
