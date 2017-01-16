@@ -31,7 +31,7 @@ class Versioniser3 implements VersioniserInterface
              * @var InvoiceSetting $invoiceSetting
              */
             $invoiceSetting = $this->invoiceSettingsService->fetch($data['id']);
-            $data['emailContent'] = $invoiceSetting->getEmailContent();
+            $data['emailTemplate'] = $invoiceSetting->getEmailTemplate();
             $request->setData($data);
         } catch (NotFound $exception) {
             // New setting so there won't be a previously set email
@@ -41,7 +41,7 @@ class Versioniser3 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['emailContent']);
+        unset($data['emailTemplate']);
         $response->setData($data);
     }
 
