@@ -1,6 +1,5 @@
 <?php
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Table\ForeignKey;
 
 class OrderTagEfficiency extends AbstractMigration
 {
@@ -9,6 +8,8 @@ class OrderTagEfficiency extends AbstractMigration
      */
     public function up()
     {
+        $this->table('orderTag')->addIndex(['orderTag', 'organisationUnitId'])->update();
+
         $this
             ->table('orderTags', ['id' => false, 'primary_key' => ['orderTag', 'organisationUnitId'], 'collation' => 'utf8_general_ci'])
             ->addColumn('orderTag', 'string', ['length' => 120])
@@ -25,5 +26,6 @@ class OrderTagEfficiency extends AbstractMigration
     public function down()
     {
         $this->table('orderTags')->drop();
+        $this->table('orderTag')->removeIndex(['orderTag', 'organisationUnitId'])->update();
     }
 }
