@@ -5,7 +5,7 @@ class OrderItemExternalListingId extends AbstractMigration
 {
     public function change()
     {
-        $this->table('orderItem')
+        $this->table('item')
             ->addColumn('externalListingId', 'string', ['null' => true])
             ->addIndex(['externalListingId'], ['unique' => true])
             ->update();
