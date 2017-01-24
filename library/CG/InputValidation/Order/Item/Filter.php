@@ -108,6 +108,13 @@ class Filter implements RulesInterface
                     new Date(['format' => "Y-m-d H:i:s"])
                 ]
             ],
+            'externalListingId' => [
+                'name'       => 'externalListingId',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "externalListingId"])
+                ],
+            ],
         ];
     }
 }

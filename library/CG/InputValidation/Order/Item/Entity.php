@@ -128,6 +128,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IsArrayValidator(['name' => 'imageIds'])]
             ],
+            'externalListingId' => [
+                'name'       => 'externalListingId',
+                'required'   => false,
+                'validators' => []
+            ],
         ];
     }
 }
