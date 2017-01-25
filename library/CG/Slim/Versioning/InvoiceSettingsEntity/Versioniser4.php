@@ -7,7 +7,7 @@ use CG\Settings\Invoice\Shared\Entity as InvoiceSetting;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
 
-class Versioniser3 implements VersioniserInterface
+class Versioniser4 implements VersioniserInterface
 {
     /**
      * @var InvoiceSettingsService
@@ -22,7 +22,7 @@ class Versioniser3 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['id']) || isset($data['email'])) {
+        if (!isset($data['id']) || isset($data['emailTemplate'])) {
             return;
         }
 
