@@ -74,10 +74,16 @@ class Entity implements RulesInterface
                 'validators' => [new BooleanValidator(['name' => 'copyRequired'])],
             ],
             'productImages' => [
-                'name'       => 'autoEmail',
+                'name'       => 'productImages',
                 'required'   => false,
                 'allow_empty' => true,
-                'validators' => [new BooleanValidator(['name' => 'active'])]
+                'validators' => [new BooleanValidator(['name' => 'productImages'])]
+            ],
+            'itemBarcodes' => [
+                'name'       => 'itemBarcodes',
+                'required'   => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'itemBarcodes'])]
             ],
             'tradingCompanies' => [
                 'name' => 'tradingCompanies',

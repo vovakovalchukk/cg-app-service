@@ -124,6 +124,8 @@ return [
                 'Versioniser_InvoiceSettings_3' => InvoiceSettingsEntity\Versioniser3::class,
                 'Versioniser_InvoiceSettingsCollection_4' => InvoiceSettingsCollection\Versioniser4::class,
                 'Versioniser_InvoiceSettings_4' => InvoiceSettingsEntity\Versioniser4::class,
+                'Versioniser_InvoiceSettingsCollection_5' => InvoiceSettingsCollection\Versioniser5::class,
+                'Versioniser_InvoiceSettings_5' => InvoiceSettingsEntity\Versioniser5::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
