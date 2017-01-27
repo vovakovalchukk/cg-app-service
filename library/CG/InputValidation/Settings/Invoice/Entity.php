@@ -61,6 +61,12 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new EmailValidator(['name' => 'emailBcc'])],
             ],
+            'emailTemplate' => [
+                'name' => 'emailTemplate',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new EmailValidator(['name' => 'emailTemplate'])],
+            ],
             'copyRequired' => [
                 'name' => 'copyRequired',
                 'required' => false,
