@@ -11,6 +11,9 @@ use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
+use CG\Order\Shared\Item\Filter as ItemFilter;
+use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
+use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerFunction;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
@@ -236,6 +239,63 @@ EOF;
                                 );
                             }
                         }
+                        $progress->advance();
+                    }
+                }
+
+                $output->writeln('');
+                $output->writeln('');
+            }
+    ],
+    'ad-hoc:updateOrderItemImages' => [
+        'description' => 'Update all order items images by retrieving the correct image id from its listing/product/unimported listing',
+        'arguments' => [],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di) {
+                $gearmanClient = $di->get(GearmanClient::class);
+
+                $query = "SELECT `item`.`id` FROM `item`";
+
+                /** @var Mysqli $cgApp */
+                $cgApp = $di->get('cg_appReadMysqli');
+                /** @var OrderItemStorage $orderItemStorage */
+                $orderItemStorage = $di->get($di->instanceManager()->getTypePreferences(OrderItemStorage::class)[0]);
+
+                $itemIds = $cgApp->fetchColumn('id', $query);
+                $format = ' %current%/%max% [%bar%] %percent:3s%%';
+                $overwrite = true;
+                if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                    $format = ' %message%' . "\n" . $format;
+                    $overwrite = false;
+                }
+
+                $format = ' %current%/%max% [%bar%] %percent:3s%%';
+                $overwrite = true;
+                if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                    $format = ' %message%' . "\n" . $format;
+                    $overwrite = false;
+                }
+
+                $progress = new ProgressBar($output, count($itemIds));
+                $progress->setMessage('');
+                $progress->setFormat($format);
+                $progress->setOverwrite($overwrite);
+                $progress->start();
+
+
+                foreach (array_chunk($itemIds, 100) as $batchItemIds) {
+                    $filter = (new ItemFilter('all', 1))->setId($batchItemIds);
+                    /** @var Orders $orders */
+                    $items = $orderItemStorage->fetchCollectionByFilter($filter);
+
+                    /** @var Order $order */
+                    foreach ($items as $item) {
+                        $workload = new SetItemImagesWorkload($item);
+                        $gearmanClient->doLowBackground(
+                            SetItemImagesWorkerFunction::FUNCTION_NAME,
+                            serialize($workload),
+                            SetItemImagesWorkerFunction::FUNCTION_NAME . '-' . $item->getId()
+                        );
                         $progress->advance();
                     }
                 }
