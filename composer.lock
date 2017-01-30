@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e22296b700dd1443bb67cd9b1e1ae04",
+    "content-hash": "08f93a53b713d337394bcd89e55db633",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2060,7 +2060,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "4f67dc8e621bb0f11ff0f6fa06bd86ff3c23a630"
+                "reference": "72156df3ef01d12fa57c6a711d77f683e88ac90f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-7895-invoice-sku-barcodes-61a51f.zip",
+                "reference": "72156df3ef01d12fa57c6a711d77f683e88ac90f",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2085,7 +2091,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-27T09:44:45+00:00"
+            "time": "2017-01-27 11:49:48"
         },
         {
             "name": "channelgrabber/shopify",
@@ -7940,11 +7946,6 @@
                     "CG\\Codeception\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-17T16:11:07+00:00"
         },
         {
@@ -7975,11 +7976,6 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17T16:21:12+00:00"
@@ -9238,8 +9234,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.4.2",
-            "alias_normalized": "1.4.2.0",
+            "alias": "1.4.3",
+            "alias_normalized": "1.4.3.0",
             "version": "dev-CGIV-7895-invoice-sku-barcodes",
             "package": "channelgrabber/settings"
         }
@@ -9249,8 +9245,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/settings": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
