@@ -254,7 +254,8 @@ EOF;
             function(InputInterface $input, OutputInterface $output) use ($di) {
                 $gearmanClient = $di->get(GearmanClient::class);
 
-                $query = "SELECT `item`.`id` FROM `item`";
+                $query = "SELECT DISTINCT(i.id) FROM `item` i
+                          INNER JOIN `itemImage` ii ON ii.itemId = i.id;";
 
                 /** @var Mysqli $cgApp */
                 $cgApp = $di->get('cg_appReadMysqli');
