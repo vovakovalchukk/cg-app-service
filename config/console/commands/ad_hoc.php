@@ -255,7 +255,8 @@ EOF;
                 $gearmanClient = $di->get(GearmanClient::class);
 
                 $query = "SELECT DISTINCT(i.id) FROM `item` i
-                          INNER JOIN `itemImage` ii ON ii.itemId = i.id;";
+                          INNER JOIN `itemImage` ii ON ii.itemId = i.id
+                          INNER JOIN `order` o ON o.id = i.orderId";
 
                 /** @var Mysqli $cgApp */
                 $cgApp = $di->get('cg_appReadMysqli');
@@ -263,12 +264,6 @@ EOF;
                 $orderItemStorage = $di->get($di->instanceManager()->getTypePreferences(OrderItemStorage::class)[0]);
 
                 $itemIds = $cgApp->fetchColumn('id', $query);
-                $format = ' %current%/%max% [%bar%] %percent:3s%%';
-                $overwrite = true;
-                if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                    $format = ' %message%' . "\n" . $format;
-                    $overwrite = false;
-                }
 
                 $format = ' %current%/%max% [%bar%] %percent:3s%%';
                 $overwrite = true;
