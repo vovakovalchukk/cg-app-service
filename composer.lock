@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "854c7bc2acdfb05ffbe708a1fd33848c",
+    "content-hash": "c4bffb0248954955874214f92024d2f6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -395,16 +395,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.27.7",
+            "version": "1.27.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "dfc702515ce51bd9b0e56083138e9f10783e2c11"
+                "reference": "5004de5bd00b6b8ef7ee88e7d381ad0e6038ec59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.27.7-87604a.zip",
-                "reference": "dfc702515ce51bd9b0e56083138e9f10783e2c11",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.27.9-dde8af.zip",
+                "reference": "5004de5bd00b6b8ef7ee88e7d381ad0e6038ec59",
                 "shasum": null
             },
             "require": {
@@ -477,7 +477,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-12-01T09:10:40+00:00"
+            "time": "2017-01-16T13:29:33+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1428,12 +1428,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9691b96ecdd9fe056d3fc09290ab297678945857"
+                "reference": "4a30adac6e163155cc355763510a027e860dd668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7601-relate-orders-to-listings-ceaf74.zip",
-                "reference": "9691b96ecdd9fe056d3fc09290ab297678945857",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7601-relate-orders-to-listings-0c2be2.zip",
+                "reference": "4a30adac6e163155cc355763510a027e860dd668",
                 "shasum": null
             },
             "require": {
@@ -1503,7 +1503,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-27 13:01:00"
+            "time": "2017-01-30 15:44:49"
         },
         {
             "name": "channelgrabber/permission",
@@ -9269,8 +9269,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.25.2",
-            "alias_normalized": "1.25.2.0",
+            "alias": "1.25.7",
+            "alias_normalized": "1.25.7.0",
             "version": "dev-CGIV-7601-relate-orders-to-listings",
             "package": "channelgrabber/order"
         }
