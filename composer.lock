@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "598d7d69da9817984078d12645a7dd7a",
+    "content-hash": "408e8b89c95af73e7c76b96daeb1d7e5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -137,20 +137,20 @@
         },
         {
             "name": "channelgrabber/bigcommerce",
-            "version": "1.0.0",
+            "version": "dev-CGIV-7902-BigCommerceRetry429Error",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-bigcommerce.git",
-                "reference": "3b81baf9daf1efa96039d7d09db5e6dc358dadde"
+                "reference": "1194ad14076cdfcd362e38782fb4324b59568f86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-bigcommerce-1.0.0-877a5a.zip",
-                "reference": "3b81baf9daf1efa96039d7d09db5e6dc358dadde",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-bigcommerce-dev-CGIV-7902-BigCommerceRetry429Error-29cf38.zip",
+                "reference": "1194ad14076cdfcd362e38782fb4324b59568f86",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/channel": "^1.25.2",
+                "channelgrabber/channel": "^1.27.6",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/stdlib": "^2.12.24",
                 "channelgrabber/webhook-framework": "^1.0.0",
@@ -178,7 +178,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-12T08:02:12+00:00"
+            "time": "2017-01-31 11:29:23"
         },
         {
             "name": "channelgrabber/billing",
@@ -9232,9 +9232,17 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.4",
+            "alias_normalized": "1.0.4.0",
+            "version": "dev-CGIV-7902-BigCommerceRetry429Error",
+            "package": "channelgrabber/bigcommerce"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/bigcommerce": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
