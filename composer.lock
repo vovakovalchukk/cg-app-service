@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "408e8b89c95af73e7c76b96daeb1d7e5",
+    "content-hash": "6fc411dde5186f79f0a0f025c8d6fc6c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -137,16 +137,16 @@
         },
         {
             "name": "channelgrabber/bigcommerce",
-            "version": "dev-CGIV-7902-BigCommerceRetry429Error",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-bigcommerce.git",
-                "reference": "1194ad14076cdfcd362e38782fb4324b59568f86"
+                "reference": "b516a934c4e8877c6fd07d167e59fadfa1f82b9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-bigcommerce-dev-CGIV-7902-BigCommerceRetry429Error-29cf38.zip",
-                "reference": "1194ad14076cdfcd362e38782fb4324b59568f86",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-bigcommerce-1.0.5-8b8b05.zip",
+                "reference": "b516a934c4e8877c6fd07d167e59fadfa1f82b9d",
                 "shasum": null
             },
             "require": {
@@ -178,7 +178,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-31 11:29:23"
+            "time": "2017-02-03T12:11:57+00:00"
         },
         {
             "name": "channelgrabber/billing",
@@ -9232,17 +9232,9 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.0.4",
-            "alias_normalized": "1.0.4.0",
-            "version": "dev-CGIV-7902-BigCommerceRetry429Error",
-            "package": "channelgrabber/bigcommerce"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/bigcommerce": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
