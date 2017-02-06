@@ -131,10 +131,14 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 // Label
+use CG\Order\Shared\Label\Mapper as LabelMapper;
 use CG\Order\Shared\Label\StorageInterface as LabelStorage;
 use CG\Order\Shared\Label\Repository as LabelRepository;
 use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
 use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
+use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
+use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
+use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -761,10 +765,24 @@ $config = array(
                     'repository' => TagDbStorage::class
                 )
             ),
+            LabelMetaDataDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteCGSql',
+                    'mapper' => LabelMapper::class
+                ]
+            ],
+            LabelMetaPlusLabelDataStorage::class => [
+                'parameter' => [
+                    'metaDataStorage' => LabelMetaDataDbStorage::class,
+                    'labelDataStorage' => LabelLabelDataS3Storage::class,
+                ]
+            ],
             LabelRepository::class => [
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
-                    'repository' => LabelMongoDbStorage::class
+                    'repository' => LabelMetaPlusLabelDataStorage::class
                 ]
             ],
             AccountCommandService::class => array(

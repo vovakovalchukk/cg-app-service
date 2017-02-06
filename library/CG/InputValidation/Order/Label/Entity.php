@@ -116,6 +116,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new DecimalValidator(['name' => 'insuranceMonetary'])]
             ],
+            'mongoId' => [
+                'name'       => 'mongoId',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1, 'max' => 24])]
+            ],
         ];
     }
 }
