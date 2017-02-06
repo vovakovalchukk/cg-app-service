@@ -374,7 +374,9 @@ return array(
         'name' => 'OrderItemImages',
         'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'version' => new Version(1, 9),
-        // TODO: Add / Figure out etag settings
+        'eTag' => [
+            'entityClass' => ItemEntity::class,
+        ],
     ],
     '/orderItem/:orderItemId/fee' => array (
         'controllers' => function($orderItemId) use ($di) {

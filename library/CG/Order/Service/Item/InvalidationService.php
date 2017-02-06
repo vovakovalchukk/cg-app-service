@@ -14,14 +14,15 @@ use CG\Order\Shared\Item\Mapper as ItemMapper;
 use CG\Order\Shared\Item\StorageInterface as ItemStorage;
 use CG\Order\Shared\Status as OrderStatus;
 use CG\OrganisationUnit\Service as OUService;
+use CG\Slim\InvalidationInterface as EtagInvalidation;
 use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Auditor as StockAuditor;
 use CG\Stock\Location\AdjustmentDecider as StockLocationDecider;
 use CG\Stock\Service as StockService;
 use Exception;
+use GearmanClient;
 use Nocarrier\Hal;
 use Zend\EventManager\GlobalEventManager;
-use GearmanClient;
 
 class InvalidationService extends ItemService
 {
@@ -91,6 +92,7 @@ class InvalidationService extends ItemService
     protected function invalidateItem(ItemEntity $entity)
     {
         try {
+            $this->eventManager->trigger(EtagInvalidation::EVENT_ENTITY, null, ['id' => $entity->getId()]);
             $this->invalidator->invalidateOrderItem($entity);
         } catch (Exception $exception) {
             // Ignore invalidation errors
