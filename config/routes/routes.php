@@ -39,8 +39,10 @@ use CG\InputValidation\Order\Archive\Entity as ArchiveEntityValidationRules;
 //Item
 use CG\Controllers\Order\Item;
 use CG\Controllers\Order\Item\Collection as ItemCollection;
+use CG\Controllers\Order\Item\Images as ItemImages;
 use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
 use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
+use CG\InputValidation\Order\Item\Images as ItemImagesValidationRules;
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Shared\Item\Mapper as ItemMapper;
 use CG\Order\Service\Item\Service as ItemService;
@@ -357,6 +359,23 @@ return array(
             'serviceClass' => ItemService::class
         ]
     ),
+    '/orderItem/:orderItemId/images' => [
+        'controllers' => function($orderItemId) use ($di) {
+            /** @var Slim $app */
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ItemImages::class, array());
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $app->request()->getBody())
+            );
+        },
+        'via' => ['PUT', 'OPTIONS'],
+        'name' => 'OrderItemImages',
+        'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
+        'version' => new Version(1, 9),
+        // TODO: Add / Figure out etag settings
+    ],
     '/orderItem/:orderItemId/fee' => array (
         'controllers' => function($orderItemId) use ($di) {
                 $app = $di->get(Slim::class);

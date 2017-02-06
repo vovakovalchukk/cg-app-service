@@ -19,6 +19,7 @@ use CG\Stock\Auditor as StockAuditor;
 use CG\Stock\Location\AdjustmentDecider as StockLocationDecider;
 use CG\Stock\Service as StockService;
 use Exception;
+use Nocarrier\Hal;
 use Zend\EventManager\GlobalEventManager;
 use GearmanClient;
 
@@ -70,17 +71,35 @@ class InvalidationService extends ItemService
     public function save($entity)
     {
         $response = parent::save($entity);
-        $this->invalidate($entity);
+        $this->invalidateOrder($entity);
+        return $response;
+    }
+
+    public function updateImagesHal(ItemEntity $entity, Hal $hal)
+    {
+        $response = parent::updateImagesHal($entity, $hal);
+        $this->invalidateItem($entity);
         return $response;
     }
 
     public function remove(ItemEntity $entity)
     {
         parent::remove($entity);
-        $this->invalidate($entity);
+        $this->invalidateOrder($entity);
     }
 
-    protected function invalidate(ItemEntity $entity)
+    protected function invalidateItem(ItemEntity $entity)
+    {
+        try {
+            $this->invalidator->invalidateOrderItem($entity);
+        } catch (Exception $exception) {
+            // Ignore invalidation errors
+        } finally {
+            $this->invalidateOrder($entity);
+        }
+    }
+
+    protected function invalidateOrder(ItemEntity $entity)
     {
         try {
             $this->invalidator->invalidateOrderForOrderItem($entity);
