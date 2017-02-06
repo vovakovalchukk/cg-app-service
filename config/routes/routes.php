@@ -1,6 +1,7 @@
 <?php
 use Slim\Slim;
 use CG\Slim\Versioning\Version;
+use Zend\Di\Di;
 
 use CG\Controllers\Root;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
@@ -46,6 +47,7 @@ use CG\InputValidation\Order\Item\Images as ItemImagesValidationRules;
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Shared\Item\Mapper as ItemMapper;
 use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Service\Item\Image\EtagHelper as ItemImageEtagHelper;
 
 //Fee
 use CG\Controllers\Order\Item\Fee;
@@ -125,6 +127,8 @@ use CG\Order\Shared\Shipping\Method\Entity as ShippingMethodEntity;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
 
+/** @var Di $di */
+/** @var Slim $app */
 return array(
     '/' => array (
         'controllers' => function() use ($di) {
@@ -375,7 +379,12 @@ return array(
         'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'version' => new Version(1, 9),
         'eTag' => [
+            'mapperClass' => ItemMapper::class,
             'entityClass' => ItemEntity::class,
+            'serviceClass' => ItemService::class,
+            'helper' => function() use ($di, $app) {
+                return $di->get(ItemImageEtagHelper::class);
+            }
         ],
     ],
     '/orderItem/:orderItemId/fee' => array (

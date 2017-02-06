@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c0b6dd3da756c9451a2de46a07fafe5",
+    "content-hash": "bf4e22d08dbabf1a5dafd67dc5edf2f3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1330,16 +1330,16 @@
         },
         {
             "name": "channelgrabber/middleware",
-            "version": "1.0.3.2",
+            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-middleware.git",
-                "reference": "115bd59a1a652aa8f92597496ae10b60482f37b0"
+                "reference": "7c58611ad56079073e72fd38da30bc0e701a20a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.0.3.2-d9b7cf.zip",
-                "reference": "115bd59a1a652aa8f92597496ae10b60482f37b0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-dev-CGIV-7960-OrderItemImagesEndpoint-475775.zip",
+                "reference": "7c58611ad56079073e72fd38da30bc0e701a20a7",
                 "shasum": null
             },
             "require": {
@@ -1366,7 +1366,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-11-23T14:58:55+00:00"
+            "time": "2017-02-06 12:03:02"
         },
         {
             "name": "channelgrabber/notification",
@@ -2149,12 +2149,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "154757744136e2cdf5617ecfe4a139d2d36f4627"
+                "reference": "e356bcee008ea0efb8c9e2f5be2a025ff779b91b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-7960-OrderItemImagesEndpoint-20acac.zip",
-                "reference": "154757744136e2cdf5617ecfe4a139d2d36f4627",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-7960-OrderItemImagesEndpoint-e318ee.zip",
+                "reference": "e356bcee008ea0efb8c9e2f5be2a025ff779b91b",
                 "shasum": null
             },
             "require": {
@@ -2209,7 +2209,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-06 10:10:13"
+            "time": "2017-02-06 12:01:28"
         },
         {
             "name": "channelgrabber/spork",
@@ -9181,6 +9181,12 @@
             "package": "channelgrabber/cglib"
         },
         {
+            "alias": "1.0.4",
+            "alias_normalized": "1.0.4.0",
+            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
+            "package": "channelgrabber/middleware"
+        },
+        {
             "alias": "1.25.7",
             "alias_normalized": "1.25.7.0",
             "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
@@ -9197,6 +9203,7 @@
     "stability-flags": {
         "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/middleware": 20,
         "channelgrabber/order": 20,
         "channelgrabber/slim": 20,
         "phpish/link_header": 20,
