@@ -163,7 +163,7 @@ class S3 implements LabelDataInterface, StatsAwareInterface
         return $this->saveType($id, $ouId, $data, static::TYPE_IMAGE);
     }
 
-    protected function saveType(int $id, int $ouId, string $data, string $type)
+    protected function saveType(int $id, int $ouId, ?string $data, string $type)
     {
         if (!$data) {
             return $this->removeType($id, $ouId, $type);
