@@ -16,6 +16,7 @@ $files = [
     'reAddInActionOrdersToGearman.php',
     'account.php',
     'currency.php',
+    'migrateMongoOrderLabelDataToMysqlAndS3.php',
 ];
 
 $commands = array();
