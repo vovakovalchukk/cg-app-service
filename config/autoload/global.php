@@ -773,6 +773,11 @@ $config = array(
                     'mapper' => LabelMapper::class
                 ]
             ],
+            LabelLabelDataS3Storage::class => [
+                'parameter' => [
+                    'predisClient' => 'unreliable_redis',
+                ]
+            ],
             LabelMetaPlusLabelDataStorage::class => [
                 'parameter' => [
                     'metaDataStorage' => LabelMetaDataDbStorage::class,
