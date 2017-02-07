@@ -70,6 +70,13 @@ class Filter implements RulesInterface
                     new IsArrayValidator(["name" => "shippingServiceCode"])
                 ]
             ],
+            'mongoId' => [
+                'name' => 'mongoId',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(["name" => "mongoId"])
+                ]
+            ],
         ];
     }
 }

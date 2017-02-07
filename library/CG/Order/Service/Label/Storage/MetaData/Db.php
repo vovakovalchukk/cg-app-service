@@ -61,6 +61,9 @@ class Db extends DbAbstract implements MetaDataInterface
         if ($filter->getShippingServiceCode()) {
             $query["shippingServiceCode"] = $filter->getShippingServiceCode();
         }
+        if ($filter->getMongoId()) {
+            $query["mongoId"] = $filter->getMongoId();
+        }
         return $query;
     }
 
