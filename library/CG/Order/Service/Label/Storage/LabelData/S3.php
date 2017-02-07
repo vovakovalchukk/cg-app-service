@@ -5,17 +5,23 @@ use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use CG\Http\StatusCode;
 use CG\Order\Service\Label\Storage\LabelDataInterface;
+use CG\Stats\StatsAwareInterface;
+use CG\Stats\StatsTrait;
 use GuzzleHttp\Exception\ClientException;
 use Predis\Client as PredisClient;
 
-class S3 implements LabelDataInterface
+class S3 implements LabelDataInterface, StatsAwareInterface
 {
+    use StatsTrait;
+
     const BUCKET = 'orderhub-labeldata';
     const TYPE_DOCUMENT = 'label';
     const TYPE_IMAGE = 'image';
     const REDIS_KEY_HASHES_PREFIX = 'OrderLabelDataHashes:';
     const REDIS_KEY_CACHE_PREFIX = 'CG_Order_Shared_Label_Entity_data:';
     const REDIS_CACHE_EXPIRE_SEC = 172800; // 2 days
+    const STAT_S3 = 'orderlabel.storage.s3.ou-%d.%s.%s';
+    const STAT_CACHE = 'orderlabel.storage.cache.ou-%d.%s.%s';
 
     /** @var S3Client */
     protected $s3Client;
@@ -53,7 +59,7 @@ class S3 implements LabelDataInterface
 
     protected function fetchType(int $id, int $ouId, string $type): ?string
     {
-        $cached = $this->fetchFromCache($id, $type);
+        $cached = $this->fetchFromCache($id, $ouId, $type);
         if ($cached) {
             return $cached;
         }
@@ -65,7 +71,8 @@ class S3 implements LabelDataInterface
                 'Key'    => $this->getS3Key($ouId, $id, $extension),
             ]);
             $data = (string)$result['Body'];
-            $this->saveToCache($id, $data, $type);
+            $this->saveToCache($id, $ouId, $data, $type);
+            $this->statsIncrement(static::STAT_S3, [$ouId, 'fetch', $type]);
             return $data;
 
         } catch (S3Exception $e) {
@@ -76,10 +83,14 @@ class S3 implements LabelDataInterface
         }
     }
 
-    protected function fetchFromCache(int $id, string $type): ?string
+    protected function fetchFromCache(int $id, int $ouId, string $type): ?string
     {
         $key = $this->getCacheKey($id, $type);
-        return $this->predisClient->get($key);
+        $data = $this->predisClient->get($key);
+        if ($data) {
+            $this->statsIncrement(static::STAT_CACHE, [$ouId, 'fetch', $type]);
+        }
+        return $data;
     }
 
     public function remove($entity)
@@ -103,10 +114,11 @@ class S3 implements LabelDataInterface
     {
         try {
             $extension = $this->typeExtensions[$type];
-            $result = $this->s3Client->deleteObject([
+            $this->s3Client->deleteObject([
                 'Bucket' => static::BUCKET,
                 'Key'    => $this->getS3Key($ouId, $id, $extension),
             ]);
+            $this->statsIncrement(static::STAT_S3, [$ouId, 'remove', $type]);
 
         } catch (S3Exception $e) {
             if ($e->getStatusCode() != StatusCode::NOT_FOUND) {
@@ -115,7 +127,7 @@ class S3 implements LabelDataInterface
             // No-op
         }
         $this->removeHash($id, $type);
-        $this->removeFromcache($id, $type);
+        $this->removeFromCache($id, $ouId, $type);
         return $this;
     }
 
@@ -126,10 +138,11 @@ class S3 implements LabelDataInterface
         return $this;
     }
 
-    protected function removeFromCache(int $id, string $type)
+    protected function removeFromCache(int $id, int $ouId, string $type)
     {
         $key = $this->getCacheKey($id, $type);
         $this->predisClient->del($key);
+        $this->statsIncrement(static::STAT_CACHE, [$ouId, 'remove', $type]);
         return $this;
     }
 
@@ -164,7 +177,8 @@ class S3 implements LabelDataInterface
             'Key'    => $this->getS3Key($ouId, $id, $extension),
             'Body'   => $data
         ]);
-        $this->saveToCache($id, $data, $type);
+        $this->statsIncrement(static::STAT_S3, [$ouId, 'save', $type]);
+        $this->saveToCache($id, $ouId, $data, $type);
         return $this;
     }
 
@@ -181,10 +195,11 @@ class S3 implements LabelDataInterface
         return true;
     }
 
-    protected function saveToCache(int $id, string $data, string $type)
+    protected function saveToCache(int $id, int $ouId, string $data, string $type)
     {
         $key = $this->getCacheKey($id, $type);
         $this->predisClient->setex($key, static::REDIS_CACHE_EXPIRE_SEC, $data);
+        $this->statsIncrement(static::STAT_CACHE, [$ouId, 'save', $type]);
         return $this;
     }
 
