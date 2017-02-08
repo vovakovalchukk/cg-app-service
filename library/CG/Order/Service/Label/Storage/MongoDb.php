@@ -30,18 +30,20 @@ class MongoDb implements StorageInterface
 
     public function save($entity)
     {
-//        try {
-//            $label = $this->getMapper()->toMongoArray($entity);
-//            $save = $this->getMongoCollection()->save($label);
-//            if (!$save["updatedExisting"]) {
-//                $entity->setNewlyInserted(true);
-//            }
-//            return $entity;
-//        } catch (MongoException $e) {
-//            throw new StorageException($e->getMessage(), $e->getCode(), $e);
-//        }
-        // We're no longer saving to Mongo
-        return $entity;
+        // Don't save new entities to mongo as we're now using mysql
+        if (!$entity->getId() || is_numeric($entity->getId())) {
+            return $entity;
+        }
+        try {
+            $label = $this->getMapper()->toMongoArray($entity);
+            $save = $this->getMongoCollection()->save($label);
+            if (!$save["updatedExisting"]) {
+                $entity->setNewlyInserted(true);
+            }
+            return $entity;
+        } catch (MongoException $e) {
+            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     public function remove($entity)
