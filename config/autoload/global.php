@@ -131,10 +131,14 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 // Label
+use CG\Order\Shared\Label\Mapper as LabelMapper;
 use CG\Order\Shared\Label\StorageInterface as LabelStorage;
 use CG\Order\Shared\Label\Repository as LabelRepository;
 use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
 use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
+use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
+use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
+use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -433,6 +437,8 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
+                'OrderLabelRepositoryPrimary' => LabelRepository::class,
+                'OrderLabelRepositorySecondary' => LabelRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -761,10 +767,35 @@ $config = array(
                     'repository' => TagDbStorage::class
                 )
             ),
-            LabelRepository::class => [
+            LabelMetaDataDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteCGSql',
+                    'mapper' => LabelMapper::class
+                ]
+            ],
+            LabelLabelDataS3Storage::class => [
+                'parameter' => [
+                    'predisClient' => 'unreliable_redis',
+                ]
+            ],
+            LabelMetaPlusLabelDataStorage::class => [
+                'parameter' => [
+                    'metaDataStorage' => LabelMetaDataDbStorage::class,
+                    'labelDataStorage' => LabelLabelDataS3Storage::class,
+                ]
+            ],
+            'OrderLabelRepositoryPrimary' => [
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
-                    'repository' => LabelMongoDbStorage::class
+                    'repository' => 'OrderLabelRepositorySecondary'
+                ]
+            ],
+            'OrderLabelRepositorySecondary' => [
+                'parameter' => [
+                    'storage' => LabelMetaPlusLabelDataStorage::class,
+                    'repository' => LabelMongoDbStorage::class,
                 ]
             ],
             AccountCommandService::class => array(
@@ -1547,7 +1578,7 @@ $config = array(
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
-                LabelStorage::class => LabelRepository::class,
+                LabelStorage::class => 'OrderLabelRepositoryPrimary',
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
                 OrderService::class => OrderLockingService::class,
