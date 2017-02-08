@@ -13,6 +13,8 @@ use CG\Stdlib\DateTime as StdlibDateTime;
 
 class Entity implements RulesInterface
 {
+    use ImageValidationTrait;
+
     public function getRules()
     {
         return [
@@ -123,11 +125,7 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
-            'imageIds' => [
-                'name'       => 'imageIds',
-                'required'   => false,
-                'validators' => [new IsArrayValidator(['name' => 'imageIds'])]
-            ],
+            'imageIds' => $this->getImageValidationRules('imageIds'),
         ];
     }
 }

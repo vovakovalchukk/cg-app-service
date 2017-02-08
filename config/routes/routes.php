@@ -1,6 +1,7 @@
 <?php
 use Slim\Slim;
 use CG\Slim\Versioning\Version;
+use Zend\Di\Di;
 
 use CG\Controllers\Root;
 use CG\Controllers\Order\Order\Collection as OrderCollection;
@@ -39,11 +40,14 @@ use CG\InputValidation\Order\Archive\Entity as ArchiveEntityValidationRules;
 //Item
 use CG\Controllers\Order\Item;
 use CG\Controllers\Order\Item\Collection as ItemCollection;
+use CG\Controllers\Order\Item\Images as ItemImages;
 use CG\InputValidation\Order\Item\Entity as ItemEntityValidationRules;
 use CG\InputValidation\Order\Item\Filter as ItemFilterValidationRules;
+use CG\InputValidation\Order\Item\Images as ItemImagesValidationRules;
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Shared\Item\Mapper as ItemMapper;
 use CG\Order\Service\Item\Service as ItemService;
+use CG\Order\Service\Item\Image\EtagHelper as ItemImageEtagHelper;
 
 //Fee
 use CG\Controllers\Order\Item\Fee;
@@ -123,6 +127,8 @@ use CG\Order\Shared\Shipping\Method\Entity as ShippingMethodEntity;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
 
+/** @var Di $di */
+/** @var Slim $app */
 return array(
     '/' => array (
         'controllers' => function() use ($di) {
@@ -357,6 +363,30 @@ return array(
             'serviceClass' => ItemService::class
         ]
     ),
+    '/orderItem/:orderItemId/images' => [
+        'controllers' => function($orderItemId) use ($di) {
+            /** @var Slim $app */
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ItemImages::class, array());
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $app->request()->getBody())
+            );
+        },
+        'via' => ['PUT', 'OPTIONS'],
+        'name' => 'OrderItemImages',
+        'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
+        'version' => new Version(1, 9),
+        'eTag' => [
+            'mapperClass' => ItemMapper::class,
+            'entityClass' => ItemEntity::class,
+            'serviceClass' => ItemService::class,
+            'helper' => function() use ($di, $app) {
+                return $di->get(ItemImageEtagHelper::class);
+            }
+        ],
+    ],
     '/orderItem/:orderItemId/fee' => array (
         'controllers' => function($orderItemId) use ($di) {
                 $app = $di->get(Slim::class);
