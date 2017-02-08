@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "11e6afccb7b30ec58a256f7ee8b6379c",
+    "content-hash": "ee67c6d16fef2d39ec9fc35d11424f4b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -333,16 +333,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
+            "version": "1.11.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "69ba69165a05536d7299fee3c467517c5d45e4ba"
+                "reference": "fca582d12b5f23cd21e2953494fa7c53ca58c7a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-7960-OrderItemImagesEndpoint-8efd66.zip",
-                "reference": "69ba69165a05536d7299fee3c467517c5d45e4ba",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.11.5-46adca.zip",
+                "reference": "fca582d12b5f23cd21e2953494fa7c53ca58c7a0",
                 "shasum": null
             },
             "require": {
@@ -392,7 +392,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-06 09:06:11"
+            "time": "2017-02-08T11:21:59+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1058,16 +1058,16 @@
         },
         {
             "name": "channelgrabber/image",
-            "version": "1.2.2",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-image.git",
-                "reference": "71f867a18a197590916b3babd44d88966d517a11"
+                "reference": "9eb80df0acf7b52a6208e96d452f85637a796ff5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.2-0bf76f.zip",
-                "reference": "71f867a18a197590916b3babd44d88966d517a11",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.4-f2e7fc.zip",
+                "reference": "9eb80df0acf7b52a6208e96d452f85637a796ff5",
                 "shasum": null
             },
             "require": {
@@ -1094,7 +1094,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-10-18T10:36:01+00:00"
+            "time": "2017-01-30T12:17:33+00:00"
         },
         {
             "name": "channelgrabber/listing",
@@ -1330,16 +1330,16 @@
         },
         {
             "name": "channelgrabber/middleware",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-middleware.git",
-                "reference": "7c58611ad56079073e72fd38da30bc0e701a20a7"
+                "reference": "f8b75941d41951c20b4a97bf6f2fe0d086ad9c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-dev-CGIV-7960-OrderItemImagesEndpoint-475775.zip",
-                "reference": "7c58611ad56079073e72fd38da30bc0e701a20a7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.0.4-bae37e.zip",
+                "reference": "f8b75941d41951c20b4a97bf6f2fe0d086ad9c5e",
                 "shasum": null
             },
             "require": {
@@ -1366,7 +1366,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-06 12:03:02"
+            "time": "2017-02-08T11:25:28+00:00"
         },
         {
             "name": "channelgrabber/notification",
@@ -1425,16 +1425,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
+            "version": "1.25.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0c50baca5d51d087248c58a70ac6947a0e599aae"
+                "reference": "0433c1df2e63fd376038b84a79bd2d7d98144e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7960-OrderItemImagesEndpoint-5f80fa.zip",
-                "reference": "0c50baca5d51d087248c58a70ac6947a0e599aae",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.25.8-ee6e4e.zip",
+                "reference": "0433c1df2e63fd376038b84a79bd2d7d98144e36",
                 "shasum": null
             },
             "require": {
@@ -1461,13 +1461,13 @@
                 "channelgrabber/product": "^1.9.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "^1.4.0",
+                "channelgrabber/settings": "^1.5.0",
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.25",
                 "channelgrabber/stock": "^1.8.2",
                 "channelgrabber/tax": "^1.0.2",
-                "channelgrabber/template": "^1.4.3",
+                "channelgrabber/template": "^1.4.19",
                 "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.22.6",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
@@ -1504,7 +1504,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-07 08:52:52"
+            "time": "2017-02-08T11:29:37+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2057,16 +2057,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.4.3",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "4dc94037413a1e91d464d146617cea44bfb01252"
+                "reference": "472b9869c6253b0094f11097d7ec633abf61b474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.4.3-687137.zip",
-                "reference": "4dc94037413a1e91d464d146617cea44bfb01252",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.5.0-3cca4c.zip",
+                "reference": "472b9869c6253b0094f11097d7ec633abf61b474",
                 "shasum": null
             },
             "require": {
@@ -2092,7 +2092,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-31T09:03:39+00:00"
+            "time": "2017-02-08T09:44:29+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -2145,16 +2145,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
+            "version": "1.13.29",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "e356bcee008ea0efb8c9e2f5be2a025ff779b91b"
+                "reference": "34a74c5eff110f19e3eff04fe628e73961135427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-7960-OrderItemImagesEndpoint-e318ee.zip",
-                "reference": "e356bcee008ea0efb8c9e2f5be2a025ff779b91b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.29-66f12e.zip",
+                "reference": "34a74c5eff110f19e3eff04fe628e73961135427",
                 "shasum": null
             },
             "require": {
@@ -2209,7 +2209,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-06 12:01:28"
+            "time": "2017-02-08T11:34:14+00:00"
         },
         {
             "name": "channelgrabber/spork",
@@ -2501,16 +2501,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.4.13",
+            "version": "1.4.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "b876f92edd28891d85b43c22a3dd21925239ae6f"
+                "reference": "b6c5d39cf53724cdb93b0ceba8092abb6ee5356d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.13-15c799.zip",
-                "reference": "b876f92edd28891d85b43c22a3dd21925239ae6f",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.19-a21f29.zip",
+                "reference": "b6c5d39cf53724cdb93b0ceba8092abb6ee5356d",
                 "shasum": null
             },
             "require": {
@@ -2518,13 +2518,14 @@
                 "channelgrabber/channel": ">=1.6.0,<2.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
+                "channelgrabber/image": "^1.2.3",
                 "channelgrabber/locale": "^1.0.7",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.23.26",
+                "channelgrabber/order": "^1.24.6",
                 "channelgrabber/product": "^1.2.0",
-                "channelgrabber/settings": "^1.3.8",
+                "channelgrabber/settings": "^1.4.3",
                 "channelgrabber/stdlib": "^2.10.4",
-                "channelgrabber/user": "^1.22.0",
+                "channelgrabber/user": "^1.22.6",
                 "ext-gd": "*",
                 "guzzle/guzzle": "~3.7",
                 "picqer/php-barcode-generator": "~0.2.1",
@@ -2559,7 +2560,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-09T12:06:15+00:00"
+            "time": "2017-02-08T09:48:01+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -9173,39 +9174,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.11.5",
-            "alias_normalized": "1.11.5.0",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.0.4",
-            "alias_normalized": "1.0.4.0",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
-            "package": "channelgrabber/middleware"
-        },
-        {
-            "alias": "1.25.8",
-            "alias_normalized": "1.25.8.0",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.13.29",
-            "alias_normalized": "1.13.29.0",
-            "version": "dev-CGIV-7960-OrderItemImagesEndpoint",
-            "package": "channelgrabber/slim"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/middleware": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/slim": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
