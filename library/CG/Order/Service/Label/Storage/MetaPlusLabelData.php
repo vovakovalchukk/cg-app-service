@@ -56,6 +56,11 @@ class MetaPlusLabelData implements StorageInterface
 
     public function save($entity)
     {
+        // Catch entities loaded out of the old Mongo storage which will have string IDs
+        if ($entity->getId() && !is_numeric($entity->getId())) {
+            $entity->setMongoId($entity->getId());
+            $entity->setId(null);
+        }
         $this->metaDataStorage->save($entity);
         $this->labelDataStorage->save($entity);
         return $entity;
