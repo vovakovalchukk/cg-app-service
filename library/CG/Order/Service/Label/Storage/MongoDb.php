@@ -30,10 +30,6 @@ class MongoDb implements StorageInterface
 
     public function save($entity)
     {
-        // Don't save new entities to mongo as we're now using mysql
-        if (!$entity->getId() || is_numeric($entity->getId())) {
-            return $entity;
-        }
         try {
             $label = $this->getMapper()->toMongoArray($entity);
             $save = $this->getMongoCollection()->save($label);

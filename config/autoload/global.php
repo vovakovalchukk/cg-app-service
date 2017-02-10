@@ -437,8 +437,6 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
-                'OrderLabelRepositoryPrimary' => LabelRepository::class,
-                'OrderLabelRepositorySecondary' => LabelRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -786,16 +784,10 @@ $config = array(
                     'labelDataStorage' => LabelLabelDataS3Storage::class,
                 ]
             ],
-            'OrderLabelRepositoryPrimary' => [
+            LabelRepository::class => [
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
-                    'repository' => 'OrderLabelRepositorySecondary'
-                ]
-            ],
-            'OrderLabelRepositorySecondary' => [
-                'parameter' => [
-                    'storage' => LabelMetaPlusLabelDataStorage::class,
-                    'repository' => LabelMongoDbStorage::class,
+                    'repository' => LabelMetaPlusLabelDataStorage::class
                 ]
             ],
             AccountCommandService::class => array(
@@ -1578,7 +1570,7 @@ $config = array(
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
-                LabelStorage::class => 'OrderLabelRepositoryPrimary',
+                LabelStorage::class => LabelRepository::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
                 OrderService::class => OrderLockingService::class,
