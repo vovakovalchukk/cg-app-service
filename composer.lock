@@ -1510,17 +1510,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.26.0",
+            "version": "dev-CGIV-7417-vat-support-for-fulfilment-centres",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "35cd733bcaaada9ea19e534f2b1a8a3f136f38c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.26.0-889544.zip",
-                "reference": "35cd733bcaaada9ea19e534f2b1a8a3f136f38c4",
-                "shasum": null
+                "reference": "c8722c0c5c2247da48cc912db0e97ad9b23890bc"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -9438,13 +9432,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.26.1",
+            "alias_normalized": "1.26.1.0",
+            "version": "dev-CGIV-7417-vat-support-for-fulfilment-centres",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

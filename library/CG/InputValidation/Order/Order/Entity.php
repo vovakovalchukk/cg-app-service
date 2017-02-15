@@ -403,6 +403,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'shippingOriginCountryCode' => [
+                'name' => 'shippingOriginCountryCode',
+                'required' => false,
+                'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
+            ],
         );
     }
 
