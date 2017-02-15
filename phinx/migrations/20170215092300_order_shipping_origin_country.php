@@ -1,16 +1,27 @@
 <?php
-use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\AbstractOnlineSchemaChange;
 
-class OrderShippingOriginCountry extends AbstractMigration
+class OrderShippingOriginCountry extends AbstractOnlineSchemaChange
 {
-    public function change()
+    public function up()
     {
-        $this->table('order')
-            ->addColumn('shippingOriginCountryCode', 'string', ['null' => true, 'limit' => 2])
-            ->update();
+        $this->onlineSchemaChange('order', 'ADD COLUMN `shippingOriginCountryCode` varchar(2) NULL');
+        $this->onlineSchemaChange('orderLive', 'ADD COLUMN `shippingOriginCountryCode` varchar(2) NULL');
+        $this->insertData('order');
+        $this->insertData('orderLive');
+    }
 
-        $this->table('orderLive')
-            ->addColumn('shippingOriginCountryCode', 'string', ['null' => true, 'limit' => 2])
-            ->update();
+    public function down()
+    {
+        $this->onlineSchemaChange('order', 'DROP COLUMN `shippingOriginCountryCode`');
+        $this->onlineSchemaChange('orderLive', 'DROP COLUMN `shippingOriginCountryCode`');
+    }
+
+    protected function insertData($table)
+    {
+        $query = 'UPDATE `cg_app`.`'.$table.'` AS `order`'
+            . 'JOIN `directory`.`organisationUnit` AS `ou` ON (`order`.`organisationUnitId` = `ou`.`id`) '
+            . 'SET `order`.`shippingOriginCountryCode` = `ou`.`addressCountryCode`';
+        $this->execute($query);
     }
 }
