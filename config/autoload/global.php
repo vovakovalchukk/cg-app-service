@@ -56,6 +56,7 @@ use CG\Order\Client\Storage\Api as OrderApiStorage;
 use CG\Order\Client\StorageInterface as OrderClientStorage;
 use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
+use CG\Order\Shared\InvoiceEmailer\Service as InvoiceEmailerService;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -1528,6 +1529,11 @@ $config = array(
                 'parameter' => [
                     'sqlClient' => 'ReadSql',
                 ]
+            ],
+            InvoiceEmailerService::class => [
+                'parameters' => [
+                    'predisClient' => 'reliable_redis',
+                ],
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
