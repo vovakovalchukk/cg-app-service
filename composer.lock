@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "21523adb370af3227fdaf4eb773642c0",
+    "content-hash": "04e4fa1d03fae6a3d94d0db01ea9e043",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1511,16 +1511,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8016-MassItemImageUpdate",
+            "version": "1.26.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9e44f8a76bd120c476d5fc6f1f71244fd3695a74"
+                "reference": "64c29a2b7513ccd25407c131e07e60d5613a518e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8016-MassItemImageUpdate-f860ab.zip",
-                "reference": "9e44f8a76bd120c476d5fc6f1f71244fd3695a74",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.26.3-65d0e3.zip",
+                "reference": "64c29a2b7513ccd25407c131e07e60d5613a518e",
                 "shasum": null
             },
             "require": {
@@ -1590,7 +1590,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-21 11:14:19"
+            "time": "2017-02-22T13:51:02+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9439,18 +9439,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.26.2",
-            "alias_normalized": "1.26.2.0",
-            "version": "dev-CGIV-8016-MassItemImageUpdate",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
