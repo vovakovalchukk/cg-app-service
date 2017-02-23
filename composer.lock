@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6979da4c3f83154fb6e33a1ab6374b50",
+    "content-hash": "cf5327aaf67957830eb8538a53b6c29b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -680,7 +680,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1515,13 +1515,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c46b83cb6948a9daf5d2e4fd43303eec2b9f20a5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7417-vat-support-for-fulfilment-centres-e7fcee.zip",
-                "reference": "c46b83cb6948a9daf5d2e4fd43303eec2b9f20a5",
-                "shasum": null
+                "reference": "cd221b389d55fb11de74cb2f2cdec9fa6cfcc5fb"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1590,7 +1584,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-20 10:18:27"
+            "time": "2017-02-20T10:18:27+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2818,7 +2812,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-21 11:25:43"
+            "time": "2017-02-21T11:25:43+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -9501,8 +9495,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.26.3",
-            "alias_normalized": "1.26.3.0",
+            "alias": "1.27.0",
+            "alias_normalized": "1.27.0.0",
             "version": "dev-CGIV-7417-vat-support-for-fulfilment-centres",
             "package": "channelgrabber/order"
         },
@@ -9519,8 +9513,8 @@
         "channelgrabber/order": 20,
         "channelgrabber/user": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
