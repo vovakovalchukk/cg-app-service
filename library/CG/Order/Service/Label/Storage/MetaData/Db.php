@@ -3,6 +3,7 @@ namespace CG\Order\Service\Label\Storage\MetaData;
 
 use CG\Order\Service\Label\Storage\MetaDataInterface;
 use CG\Order\Shared\Label\Collection;
+use CG\Order\Shared\Label\Entity;
 use CG\Order\Shared\Label\Filter;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -11,6 +12,22 @@ use Zend\Db\Sql\Predicate\Operator;
 
 class Db extends DbAbstract implements MetaDataInterface
 {
+    public function fetch($id)
+    {
+        $entity = parent::fetch($id);
+        $this->fetchParcelsAndAddToEntity($entity);
+        return $entity;
+    }
+
+    protected function fetchParcelsAndAddToEntity(Entity $entity)
+    {
+        $select = $this->getReadSql()->select('orderLabelParcel');
+        $select->where(['orderLabelId' => $entity->getId()]);
+        $parcels = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        $entity->setParcels(iterator_to_array($parcels, false));
+        return $this;
+    }
+
     public function fetchCollectionByFilter(Filter $filter): Collection
     {
         try {
@@ -23,12 +40,14 @@ class Db extends DbAbstract implements MetaDataInterface
                     ->offset($offset);
             }
 
-            return $this->fetchPaginatedCollection(
+            $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
                 $this->getMapper()
             );
+            $this->fetchParcelsAndAddToCollection($collection);
+            return $collection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
@@ -65,6 +84,26 @@ class Db extends DbAbstract implements MetaDataInterface
             $query["mongoId"] = $filter->getMongoId();
         }
         return $query;
+    }
+
+    protected function fetchParcelsAndAddToCollection(Collection $collection)
+    {
+        $select = $this->getReadSql()->select('orderLabelParcel');
+        $select->where(['orderLabelId' => $collection->getIds()]);
+        $parcels = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        $parcelsByLabel = [];
+        foreach ($parcels as $parcel) {
+            $orderLabelId = $parcel['orderLabelId'];
+            if (!isset($parcelsByLabel[$orderLabelId])) {
+                $parcelsByLabel[$orderLabelId] = [];
+            }
+            $parcelsByLabel[$orderLabelId][] = $parcel;
+        }
+        foreach ($parcelsByLabel as $orderLabelId => $parcels) {
+            $entity = $collection->getById($orderLabelId);
+            $entity->setParcels($parcels);
+        }
+        return $this;
     }
 
     protected function insertEntity($entity)
