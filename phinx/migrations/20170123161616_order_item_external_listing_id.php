@@ -15,7 +15,7 @@ class OrderItemExternalListingId extends AbstractMigration
     public function up()
     {
         $this->onlineSchemaChange(static::TABLE, 'ADD COLUMN externalListingId VARCHAR(255)');
-        $this->onlineSchemaChange(static::TABLE, 'ADD KEY `ExternalListingId` (`externalListingId`, `organisationUnitId`, `channel`)');
+        $this->onlineSchemaChange(static::TABLE, 'ADD KEY `ExternalListingId` (`externalListingId`, `organisationUnitId`, `accountId`)');
     }
 
     /**
@@ -23,8 +23,8 @@ class OrderItemExternalListingId extends AbstractMigration
      */
     public function down()
     {
-        $this->onlineSchemaChange(static::TABLE, 'DROP COLUMN externalListingId');
         $this->onlineSchemaChange(static::TABLE, 'DROP KEY `ExternalListingId`');
+        $this->onlineSchemaChange(static::TABLE, 'DROP COLUMN externalListingId');
     }
 
     protected function onlineSchemaChange($table, $alter)
