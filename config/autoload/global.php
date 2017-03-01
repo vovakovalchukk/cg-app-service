@@ -56,6 +56,7 @@ use CG\Order\Client\Storage\Api as OrderApiStorage;
 use CG\Order\Client\StorageInterface as OrderClientStorage;
 use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
+use CG\Order\Shared\InvoiceEmailer\Service as InvoiceEmailerService;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -131,10 +132,14 @@ use CG\Order\Service\Tag\Storage\Db as TagDbStorage;
 use CG\Order\Shared\Tag\Mapper as TagMapper;
 
 // Label
+use CG\Order\Shared\Label\Mapper as LabelMapper;
 use CG\Order\Shared\Label\StorageInterface as LabelStorage;
 use CG\Order\Shared\Label\Repository as LabelRepository;
 use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
 use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
+use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
+use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
+use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -761,10 +766,29 @@ $config = array(
                     'repository' => TagDbStorage::class
                 )
             ),
+            LabelMetaDataDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteCGSql',
+                    'mapper' => LabelMapper::class
+                ]
+            ],
+            LabelLabelDataS3Storage::class => [
+                'parameter' => [
+                    'predisClient' => 'unreliable_redis',
+                ]
+            ],
+            LabelMetaPlusLabelDataStorage::class => [
+                'parameter' => [
+                    'metaDataStorage' => LabelMetaDataDbStorage::class,
+                    'labelDataStorage' => LabelLabelDataS3Storage::class,
+                ]
+            ],
             LabelRepository::class => [
                 'parameter' => [
                     'storage' => LabelCacheStorage::class,
-                    'repository' => LabelMongoDbStorage::class
+                    'repository' => LabelMetaPlusLabelDataStorage::class
                 ]
             ],
             AccountCommandService::class => array(
@@ -1505,6 +1529,11 @@ $config = array(
                 'parameter' => [
                     'sqlClient' => 'ReadSql',
                 ]
+            ],
+            InvoiceEmailerService::class => [
+                'parameters' => [
+                    'predisClient' => 'reliable_redis',
+                ],
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',

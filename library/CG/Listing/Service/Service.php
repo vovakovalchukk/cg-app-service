@@ -112,24 +112,6 @@ class Service extends ServiceAbstract
         $this->channelActions->listingDeleted($entity);
     }
 
-    public function removeAllListingsForAccount(AccountEntity $accountEntity)
-    {
-        $filter = (new Filter(static::CHUNK_AMOUNT, 1))->setAccountId([$accountEntity->getId()]);
-        $counter = 0;
-        try {
-            do {
-                $listings = $this->getRepository()->fetchCollectionByFilter($filter);
-                foreach($listings as $listing) {
-                    $this->remove($listing);
-                    $counter++;
-                }
-            } while (true);
-        } catch (NotFound $e) {
-            // Return the amount removed, all the listings should have been removed by this point
-            return $counter;
-        }
-    }
-
     protected function getGlobalEventManager()
     {
         return $this->globalEventManager;
