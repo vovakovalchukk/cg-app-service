@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e870e055d923c91f25b2ac77d0241c9",
+    "content-hash": "5ab1e9664b7db6f91ba5601f96be0309",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -680,7 +680,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1758,17 +1758,11 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.12",
+            "version": "dev-CGIV-8065-unhandled-redisc-onnection-failure",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.12-9c2fab.zip",
-                "reference": "b4ebe0fbcfd8cc2d2a194cd68844dad904e7ecf5",
-                "shasum": null
+                "reference": "d25cba2605ced415fe94fcb9fe9c681bd94e4d10"
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
@@ -1787,7 +1781,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-26T15:28:43+00:00"
+            "time": "2017-03-02T09:42:33+00:00"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -9499,13 +9493,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.13",
+            "alias_normalized": "1.0.13.0",
+            "version": "dev-CGIV-8065-unhandled-redisc-onnection-failure",
+            "package": "channelgrabber/predis"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/predis": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
