@@ -680,7 +680,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1764,6 +1764,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
                 "reference": "d25cba2605ced415fe94fcb9fe9c681bd94e4d10"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-8065-unhandled-redisc-onnection-failure-2f0b10.zip",
+                "reference": "d25cba2605ced415fe94fcb9fe9c681bd94e4d10",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -1781,7 +1787,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-02T09:42:33+00:00"
+            "time": "2017-03-02 10:55:01"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -9506,8 +9512,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/predis": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
