@@ -126,6 +126,11 @@ class Entity implements RulesInterface
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
             'imageIds' => $this->getImageValidationRules('imageIds'),
+            'externalListingId' => [
+                'name'       => 'externalListingId',
+                'required'   => false,
+                'validators' => []
+            ],
         ];
     }
 }
