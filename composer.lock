@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4f0795592fbe73cd4634cef2d55ab0c",
+    "content-hash": "9196941c0878ab8c990b02f4a4b90b7c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1511,16 +1511,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.27.3",
+            "version": "dev-CGIV-8096-SkipFBAVATCheckIfOneVAT",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "3932ae4b2b739550b83f0d9cd2cb7da7328f5de6"
+                "reference": "63e242ccb1da238a3eeb2b3a9bb7e7b9542fc76d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.27.3-012ec2.zip",
-                "reference": "3932ae4b2b739550b83f0d9cd2cb7da7328f5de6",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8096-SkipFBAVATCheckIfOneVAT-ade55a.zip",
+                "reference": "63e242ccb1da238a3eeb2b3a9bb7e7b9542fc76d",
                 "shasum": null
             },
             "require": {
@@ -1590,7 +1590,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-02T09:55:43+00:00"
+            "time": "2017-03-09 13:39:30"
         },
         {
             "name": "channelgrabber/permission",
@@ -8268,6 +8268,11 @@
                     "CG\\Codeception\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-02-17T16:11:07+00:00"
         },
         {
@@ -8298,6 +8303,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17T16:21:12+00:00"
@@ -9499,10 +9509,18 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.28.0",
+            "alias_normalized": "1.28.0.0",
+            "version": "dev-CGIV-8096-SkipFBAVATCheckIfOneVAT",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
