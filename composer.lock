@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb8774855962d88bbc64f73f1c6c2187",
+    "content-hash": "79a39616a70c0985a28ac2d75067d23c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1454,16 +1454,16 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "a83c57c8a800ed36bc8a8fe395f76c89e59fd1a8"
+                "reference": "2b908921bbbe146d06046198523d32ffd36ee877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-8086-StopHammeringSubscriptions-0437b9.zip",
-                "reference": "a83c57c8a800ed36bc8a8fe395f76c89e59fd1a8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.1.0-b404c1.zip",
+                "reference": "2b908921bbbe146d06046198523d32ffd36ee877",
                 "shasum": null
             },
             "require": {
@@ -1471,7 +1471,7 @@
                 "channelgrabber/channel": "^1.17.4",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/gearman": "^1.2.0",
-                "channelgrabber/queue": "dev-CGIV-8086-StopHammeringSubscriptions as 1.0.0",
+                "channelgrabber/queue": "^1.0.0",
                 "channelgrabber/settings": "^1.3.7",
                 "channelgrabber/stdlib": "^2.12.7",
                 "channelgrabber/user": "^1.19.0",
@@ -1505,7 +1505,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-08T10:49:16+00:00"
+            "time": "2017-03-13T10:08:43+00:00"
         },
         {
             "name": "channelgrabber/order",
@@ -1995,16 +1995,16 @@
         },
         {
             "name": "channelgrabber/queue",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-queue.git",
-                "reference": "6700305701bfc6d25005328eb3eff296514e0125"
+                "reference": "2e8f42fc0ce3b7c6e77c4cba9e0dce26fc09451f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-queue-dev-CGIV-8086-StopHammeringSubscriptions-f6cdf9.zip",
-                "reference": "6700305701bfc6d25005328eb3eff296514e0125",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-queue-1.0.0-d5513d.zip",
+                "reference": "2e8f42fc0ce3b7c6e77c4cba9e0dce26fc09451f",
                 "shasum": null
             },
             "require": {
@@ -2025,24 +2025,24 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-08T11:44:18+00:00"
+            "time": "2017-03-13T09:52:19+00:00"
         },
         {
             "name": "channelgrabber/redis",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis.git",
-                "reference": "a3ab38300a95feb03af250630a3b853c57daec47"
+                "reference": "a07e17ae8f880c9aaf4057627767caa1bbdfc48b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-dev-CGIV-8086-StopHammeringSubscriptions-5b5339.zip",
-                "reference": "a3ab38300a95feb03af250630a3b853c57daec47",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-1.0.0-93d5e1.zip",
+                "reference": "a07e17ae8f880c9aaf4057627767caa1bbdfc48b",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/queue": "dev-CGIV-8086-StopHammeringSubscriptions as 1.0.0",
+                "channelgrabber/queue": "^1.0.0",
                 "php": ">=7.1",
                 "predis/predis": "^0.8.3"
             },
@@ -2057,7 +2057,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-08T11:47:54+00:00"
+            "time": "2017-03-13T09:56:55+00:00"
         },
         {
             "name": "channelgrabber/redis-locking",
@@ -9542,34 +9542,12 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.0",
-            "alias_normalized": "1.1.0.0",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
-            "package": "channelgrabber/notification"
-        },
-        {
-            "alias": "1.0.0-dev",
-            "alias_normalized": "1.0.0.0-dev",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
-            "package": "channelgrabber/queue"
-        },
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-8086-StopHammeringSubscriptions",
-            "package": "channelgrabber/redis"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/notification": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
-        "channelgrabber/queue": 20,
-        "channelgrabber/redis": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
