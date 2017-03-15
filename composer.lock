@@ -681,7 +681,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1514,13 +1514,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "bcfc16d100bef7596bb46aa33c9fb19a22d4a710"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8094-amazon-fulfilled-shipment-data-missing-8865b7.zip",
-                "reference": "bcfc16d100bef7596bb46aa33c9fb19a22d4a710",
-                "shasum": null
+                "reference": "311a1d04c2220af5567e3a9c66df4ad14089d2ed"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1589,7 +1583,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-15 12:29:27"
+            "time": "2017-03-15T12:29:27+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9546,8 +9540,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
