@@ -1,4 +1,5 @@
 <?php
+use CG\Cache\Command\ValidateCollection as ValidateCollectionCommand;
 use CG\Notification\Queue as NotificationQueue;
 use CG\Redis\Queue as RedisQueue;
 
@@ -17,6 +18,11 @@ return [
                 'parameters' => [
                     'predis' => 'reliable_redis',
                     'keyPrefix' => function() { return 'NotificationQueue'; },
+                ],
+            ],
+            ValidateCollectionCommand::class => [
+                'parameters' => [
+                    'validationQueue' => 'CacheCollectionValidationQueue',
                 ],
             ],
         ],
