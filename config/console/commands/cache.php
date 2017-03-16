@@ -1,15 +1,16 @@
 <?php
 use CG\Cache\Command\ValidateCollection;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Di\Di;
 
 /** @var Di $di */
 return [
     'cache:validateCollections' => [
-        'command' => function(InputInterface $input) use ($di) {
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             /** @var ValidateCollection $command */
             $command = $di->newInstance(ValidateCollection::class);
-            $command->processQueue($input->getArgument('timeout'));
+            $command->processQueue($output, $input->getArgument('timeout'));
         },
         'description' => 'Validate all fetched collections, removing any collection from cache that fails',
         'arguments' => [

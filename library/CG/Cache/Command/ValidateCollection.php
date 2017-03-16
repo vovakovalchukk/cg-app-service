@@ -8,6 +8,7 @@ use CG\Queue\BlockingInterface as BlockingQueue;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ValidateCollection implements LoggerAwareInterface
 {
@@ -37,7 +38,7 @@ class ValidateCollection implements LoggerAwareInterface
         $this->mapClient = $mapClient;
     }
 
-    public function processQueue($timeout = 30)
+    public function processQueue(OutputInterface $output, $timeout = 30)
     {
         $delayLogs = [$this->getLogger(), 'delayLogs'];
         if (is_callable($delayLogs)) {
@@ -48,17 +49,22 @@ class ValidateCollection implements LoggerAwareInterface
         $queueKey = $this->validationQueue->generateQueueKey();
         $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
 
+        $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
+
         $processingQueue = $this->validationQueue->createBlockingProcessingQueue($queueKey, $processingQueueKey, $timeout);
         foreach ($processingQueue as $collectionValidationJson) {
+            $output->write('Validating Collection ');
             try {
                 $collectionValidation = Collection::fromJson($collectionValidationJson);
             } catch (\InvalidArgumentException $exception) {
+                $output->writeln('<bg=red;options=bold>[INVALID JSON]</>');
                 $this->logWarningException($exception, static::LOG_MSG_INVALID_JSON, [], static::LOG_CODE_INVALID_JSON);
                 $this->flushLogs();
                 continue;
             }
 
             $collectionKey = $collectionValidation->getCacheKey();
+            $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
             $missingFromMaps = [];
 
             foreach ($collectionValidation->getMaps() as $mapKey) {
@@ -78,8 +84,14 @@ class ValidateCollection implements LoggerAwareInterface
             }
 
             if (!empty($missingFromMaps)) {
+                $output->writeln('<bg=red;options=bold>[FAILED]</>');
+                foreach ($missingFromMaps as $mapKey) {
+                    $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
+                }
                 $this->logWarning(static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS, ['cacheKey' => $collectionKey, count($missingFromMaps)], static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS, ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]);
                 $this->client->delete($collectionKey);
+            } else {
+                $output->writeln('<bg=green;options=bold>[PASSED]</>');
             }
 
             $this->flushLogs();
