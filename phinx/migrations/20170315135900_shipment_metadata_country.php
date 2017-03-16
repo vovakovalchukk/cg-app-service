@@ -8,7 +8,7 @@ class ShipmentMetadataCountry extends AbstractMigration
         $this->table('shipmentMetadataCountry')
             ->addColumn('organisationUnitId', 'integer', ['signed' => false])
             ->addColumn('countryCode', 'string', ['length' => 2])
-            ->addIndex('organisationUnitId')
+            ->addIndex(['organisationUnitId', 'countryCode'], ['unique' => true])
             ->create();
     }
 }
