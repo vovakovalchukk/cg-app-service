@@ -22,7 +22,7 @@ return [
             ],
             ValidateCollectionCommand::class => [
                 'parameters' => [
-                    'validationQueue' => 'CacheCollectionValidationQueue',
+                    'validationQueue' => 'cache_validation_queue',
                 ],
             ],
         ],
