@@ -38,7 +38,7 @@ class ValidateCollection implements LoggerAwareInterface
         $this->mapClient = $mapClient;
     }
 
-    public function processQueue(OutputInterface $output, $timeout = 30, $maxProcess = null)
+    public function processQueue(OutputInterface $output, $batchSize, $timeout = 30, $maxProcess = null)
     {
         $delayLogs = [$this->getLogger(), 'delayLogs'];
         if (is_callable($delayLogs)) {
@@ -47,72 +47,113 @@ class ValidateCollection implements LoggerAwareInterface
         $this->flushLogs();
 
         $queueKey = $this->validationQueue->generateQueueKey();
-        $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
-
-        $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
 
         $process = true;
         if (extension_loaded('pcntl')) {
-            $signalHandler = function() use(&$process, $processingQueueKey) {
+            $signals = [];
+            $signalHandler = function() use(&$process, &$signals) {
                 $process = false;
+                foreach ($signals as $signal => $handler) {
+                    pcntl_signal($signal, $handler);
+                }
             };
-            pcntl_signal(SIGTERM, $signalHandler);
-            pcntl_signal(SIGINT, $signalHandler);
+            foreach ([SIGTERM, SIGINT] as $signal) {
+                $signals[$signal] = pcntl_signal_get_handler($signal);
+                pcntl_signal($signal, $signalHandler);
+            }
         }
 
-        $processed = 0;
-        $processingQueue = $this->validationQueue->createBlockingProcessingQueue($queueKey, $processingQueueKey, $timeout);
-        foreach ($processingQueue as $collectionValidationJson) {
-            $output->write('Validating Collection ');
-            try {
-                $collectionValidation = Collection::fromJson($collectionValidationJson);
-            } catch (\InvalidArgumentException $exception) {
-                $output->writeln('<bg=red;options=bold>[INVALID JSON]</>');
-                $this->logWarningException($exception, static::LOG_MSG_INVALID_JSON, [], static::LOG_CODE_INVALID_JSON);
+        $lastBatch = $processed = 0;
+        while ($process) {
+            $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
+            $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
+
+            $processingQueue = $this->validationQueue->createBlockingProcessingQueue(
+                $queueKey,
+                $processingQueueKey,
+                $timeout
+            );
+
+            foreach ($processingQueue as $collectionValidationJson) {
+                $this->validateCollection($output, $collectionValidationJson);
+
                 $this->flushLogs();
-                continue;
-            }
+                if (extension_loaded('pcntl')) {
+                    pcntl_signal_dispatch();
+                }
 
-            $collectionKey = $collectionValidation->getCacheKey();
-            $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
-            $missingFromMaps = [];
-
-            foreach ($collectionValidation->getMaps() as $mapKey) {
-                try {
-                    $map = $this->mapClient->setGet($mapKey);
-                    if (!is_array($map) || empty($map)) {
-                        throw new NotFound();
-                    }
-                    $mappedKeys = array_flip($map);
-                    if (!isset($mappedKeys[$collectionKey])) {
-                        $missingFromMaps[] = $mapKey;
-                    }
-                } catch (NotFound $exception) {
-                    // If the map is missing, that means we were not in it!
-                    $missingFromMaps[] = $mapKey;
+                $processed++;
+                $process = $process && (!$maxProcess || $maxProcess > $processed);
+                if (!$process || ($processed % $batchSize) == 0) {
+                    break;
                 }
             }
 
-            if (!empty($missingFromMaps)) {
-                $output->writeln('<bg=red;options=bold>[FAILED]</>');
-                foreach ($missingFromMaps as $mapKey) {
-                    $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
-                }
-                $this->logWarning(static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS, ['cacheKey' => $collectionKey, count($missingFromMaps)], static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS, ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]);
-                $this->client->delete($collectionKey);
-            } else {
-                $output->writeln('<bg=green;options=bold>[PASSED]</>');
+            if ($processed == $lastBatch || ($processed % $batchSize) != 0) {
+                $process = false;
             }
 
-            $this->flushLogs();
+            $lastBatch = $processed;
+            $this->validationQueue->removeProcessingQueue($processingQueueKey);
+
             if (extension_loaded('pcntl')) {
                 pcntl_signal_dispatch();
             }
-            if (!$process || ($maxProcess && $maxProcess <= ++$processed)) {
-                break;
+        }
+    }
+
+    protected function validateCollection(OutputInterface $output, $collectionValidationJson)
+    {
+        $output->write('Validating Collection ');
+        try {
+            $collectionValidation = Collection::fromJson($collectionValidationJson);
+        } catch (\InvalidArgumentException $exception) {
+            $output->writeln('<bg=red;options=bold>[INVALID JSON]</>');
+            $this->logWarningException(
+                $exception,
+                static::LOG_MSG_INVALID_JSON,
+                [],
+                static::LOG_CODE_INVALID_JSON
+            );
+            $this->flushLogs();
+            return;
+        }
+
+        $collectionKey = $collectionValidation->getCacheKey();
+        $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
+        $missingFromMaps = [];
+
+        foreach ($collectionValidation->getMaps() as $mapKey) {
+            try {
+                $map = $this->mapClient->setGet($mapKey);
+                if (!is_array($map) || empty($map)) {
+                    throw new NotFound();
+                }
+                $mappedKeys = array_flip($map);
+                if (!isset($mappedKeys[$collectionKey])) {
+                    $missingFromMaps[] = $mapKey;
+                }
+            } catch (NotFound $exception) {
+                // If the map is missing, that means we were not in it!
+                $missingFromMaps[] = $mapKey;
             }
         }
-        $this->validationQueue->removeProcessingQueue($processingQueueKey);
+
+        if (!empty($missingFromMaps)) {
+            $output->writeln('<bg=red;options=bold>[FAILED]</>');
+            foreach ($missingFromMaps as $mapKey) {
+                $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
+            }
+            $this->logWarning(
+                static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS,
+                ['cacheKey' => $collectionKey, count($missingFromMaps)],
+                static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS,
+                ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]
+            );
+            $this->client->delete($collectionKey);
+        } else {
+            $output->writeln('<bg=green;options=bold>[PASSED]</>');
+        }
     }
 
     public function requeueStaleProcessingQueues($age = null)
