@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2184c4fdcab8211ed498065f7976d56b",
+    "content-hash": "d652b6351313b573a9c9dd94345cbb9a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1046,16 +1046,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.2.27",
+            "version": "dev-CGIV-8128-CacheValidation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "ae1aa14d74edfa2a6c54cfa0465b45c1224aff1d"
+                "reference": "7fe58033349f014ffbb725d957682629a5504fa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.27-a76a92.zip",
-                "reference": "ae1aa14d74edfa2a6c54cfa0465b45c1224aff1d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-dev-CGIV-8128-CacheValidation-867866.zip",
+                "reference": "7fe58033349f014ffbb725d957682629a5504fa5",
                 "shasum": null
             },
             "require": {
@@ -1066,12 +1066,11 @@
                 "channelgrabber/predis": "^1.0.8",
                 "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.15",
-                "composer/composer": "@dev",
                 "ext-gearman": "*",
                 "guzzle/guzzle": "~3.7",
                 "symfony/process": "~2.1"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Gearman\\": "src"
@@ -1082,7 +1081,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-05T10:03:42+00:00"
+            "time": "2017-03-20 10:25:31"
         },
         {
             "name": "channelgrabber/http",
@@ -9481,6 +9480,12 @@
             "package": "channelgrabber/cache"
         },
         {
+            "alias": "1.2.29",
+            "alias_normalized": "1.2.29.0",
+            "version": "dev-CGIV-8128-CacheValidation",
+            "package": "channelgrabber/gearman"
+        },
+        {
             "alias": "1.0.1-dev",
             "alias_normalized": "1.0.1.0-dev",
             "version": "dev-CGIV-8128-CacheValidation",
@@ -9497,6 +9502,7 @@
     "stability-flags": {
         "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/gearman": 20,
         "channelgrabber/queue": 20,
         "channelgrabber/redis": 20,
         "phpish/link_header": 20,
