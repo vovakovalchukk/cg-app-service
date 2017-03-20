@@ -327,12 +327,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "5bd6c0d9f3a07670413caddb1e139cd929ae082d"
+                "reference": "6b14681c99f0642e5bafa503a43e36ca3a3bb3f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8128-CacheValidation-f6f59e.zip",
-                "reference": "5bd6c0d9f3a07670413caddb1e139cd929ae082d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8128-CacheValidation-78d00e.zip",
+                "reference": "6b14681c99f0642e5bafa503a43e36ca3a3bb3f9",
                 "shasum": null
             },
             "require": {
@@ -341,7 +341,7 @@
                 "channelgrabber/queue": "^1.0.0",
                 "channelgrabber/stdlib": "^2.12.42",
                 "composer/composer": "@dev",
-                "predis/predis": "~0.8.5"
+                "predis/predis": "~0.8.8"
             },
             "require-dev": {
                 "phpspec/phpspec": "2.0.*@dev",
@@ -358,21 +358,21 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-16 10:54:00"
+            "time": "2017-03-20 14:17:55"
         },
         {
             "name": "channelgrabber/cg-predis",
-            "version": "v0.8.7.1",
+            "version": "v0.8.8",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/predis.git",
-                "reference": "17eac2c3d981344cb29318d93352f1c56e60b3fb"
+                "reference": "abe02422bc29ff723fc2cbc969181b6cbf50b386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cg-predis-v0.8.7.1-35073a.zip",
-                "reference": "17eac2c3d981344cb29318d93352f1c56e60b3fb",
-                "shasum": "a08e8625381c0c4b9ec3e042edaca10cdf86adb5"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cg-predis-v0.8.8-ccdcdb.zip",
+                "reference": "abe02422bc29ff723fc2cbc969181b6cbf50b386",
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.2"
@@ -415,7 +415,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-03-11T13:39:45+00:00"
+            "time": "2017-03-20T12:43:59+00:00"
         },
         {
             "name": "channelgrabber/cglib",
@@ -1081,7 +1081,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-20 10:25:31"
+            "time": "2017-03-20T10:25:31+00:00"
         },
         {
             "name": "channelgrabber/http",
