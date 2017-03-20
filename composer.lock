@@ -323,16 +323,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.2.5",
+            "version": "2.2.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "a756ed7816f559a1ee7ab1c3ea08919a8c4025a3"
+                "reference": "9bd6123a9e3d44984c767d1de52ecb19a936c0fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.5-180773.zip",
-                "reference": "a756ed7816f559a1ee7ab1c3ea08919a8c4025a3",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.2.5.1-dfbf5e.zip",
+                "reference": "9bd6123a9e3d44984c767d1de52ecb19a936c0fa",
                 "shasum": null
             },
             "require": {
@@ -340,7 +340,7 @@
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.42",
                 "composer/composer": "@dev",
-                "predis/predis": "~0.8.5"
+                "predis/predis": "~0.8.8"
             },
             "require-dev": {
                 "phpspec/phpspec": "2.0.*@dev",
@@ -357,7 +357,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-16T09:52:26+00:00"
+            "time": "2017-03-20T13:09:19+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
