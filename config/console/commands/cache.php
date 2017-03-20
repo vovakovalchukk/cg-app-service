@@ -10,13 +10,16 @@ return [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             /** @var ValidateCollection $command */
             $command = $di->newInstance(ValidateCollection::class);
-            $command->processQueue($output, $input->getArgument('timeout'));
+            $command->processQueue($output, $input->getArgument('timeout'), $input->getArgument('maxProcess'));
         },
         'description' => 'Validate all fetched collections, removing any collection from cache that fails',
         'arguments' => [
             'timeout' => [
                 'description' => 'The length of time we should block for when waiting for a new collection to process. If set to 0, we will wait indefinetly. Default: 30 seconds',
                 'default' => 30,
+            ],
+            'maxProcess' => [
+                'description' => 'The maximum number of collections to validate. If not set, will keep processing until the qureue timeout is hit.',
             ],
         ],
     ],

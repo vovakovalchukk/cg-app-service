@@ -38,7 +38,7 @@ class ValidateCollection implements LoggerAwareInterface
         $this->mapClient = $mapClient;
     }
 
-    public function processQueue(OutputInterface $output, $timeout = 30)
+    public function processQueue(OutputInterface $output, $timeout = 30, $maxProcess = null)
     {
         $delayLogs = [$this->getLogger(), 'delayLogs'];
         if (is_callable($delayLogs)) {
@@ -51,6 +51,16 @@ class ValidateCollection implements LoggerAwareInterface
 
         $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
 
+        $process = true;
+        if (extension_loaded('pcntl')) {
+            $signalHandler = function() use(&$process, $processingQueueKey) {
+                $process = false;
+            };
+            pcntl_signal(SIGTERM, $signalHandler);
+            pcntl_signal(SIGINT, $signalHandler);
+        }
+
+        $processed = 0;
         $processingQueue = $this->validationQueue->createBlockingProcessingQueue($queueKey, $processingQueueKey, $timeout);
         foreach ($processingQueue as $collectionValidationJson) {
             $output->write('Validating Collection ');
@@ -95,6 +105,12 @@ class ValidateCollection implements LoggerAwareInterface
             }
 
             $this->flushLogs();
+            if (extension_loaded('pcntl')) {
+                pcntl_signal_dispatch();
+            }
+            if (!$process || ($maxProcess && $maxProcess <= ++$processed)) {
+                break;
+            }
         }
         $this->validationQueue->removeProcessingQueue($processingQueueKey);
     }
