@@ -63,7 +63,7 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
         $lastBatch = $processed = 0;
         while ($process) {
             $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
-            $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
+            $this->logProcessingQueueKey($output, $processingQueueKey);
 
             $processingQueue = $this->validationQueue->createBlockingProcessingQueue(
                 $queueKey,
@@ -96,26 +96,19 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
 
     protected function validateCollection(OutputInterface $output, $collectionValidationJson)
     {
-        $output->write('Validating Collection ');
+        $this->logValidationStarted($output);
         try {
             $collectionValidation = Collection::fromJson($collectionValidationJson);
         } catch (\InvalidArgumentException $exception) {
-            $output->writeln('<bg=red;options=bold>[INVALID JSON]</>');
-            $this->logWarningException(
-                $exception,
-                static::LOG_MSG_INVALID_JSON,
-                [],
-                static::LOG_CODE_INVALID_JSON
-            );
-            $this->flushLogs();
+            $this->logInvalidJson($output, $exception);
             return;
         }
 
         $collectionKey = $collectionValidation->getCacheKey();
-        $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
+        $this->logCollectionKey($output, $collectionKey);
 
         if (!$this->client->exists($collectionKey)) {
-            $output->writeln('<bg=green;options=bold>[DELETED]</>');
+            $this->logDoesNotExist($output);
             return;
         }
 
@@ -137,20 +130,52 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
         }
 
         if (!empty($missingFromMaps)) {
-            $output->writeln('<bg=red;options=bold>[FAILED]</>');
-            foreach ($missingFromMaps as $mapKey) {
-                $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
-            }
-            $this->logWarning(
-                static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS,
-                ['cacheKey' => $collectionKey, count($missingFromMaps)],
-                static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS,
-                ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]
-            );
+            $this->logMissingMaps($output, $collectionKey, $missingFromMaps);
             $this->client->delete($collectionKey);
         } else {
-            $output->writeln('<bg=green;options=bold>[PASSED]</>');
+            $this->logValidationPassed($output);
         }
+    }
+
+    protected function logProcessingQueueKey(OutputInterface $output, $processingQueueKey)
+    {
+        $output->writeln(sprintf('Creating processing queue <fg=green>%s</>', $processingQueueKey));
+    }
+
+    protected function logValidationStarted(OutputInterface $output)
+    {
+        $output->write('Validating Collection ');
+    }
+
+    protected function logInvalidJson(OutputInterface $output, \InvalidArgumentException $exception)
+    {
+        $output->writeln('<bg=red;options=bold>[INVALID JSON]</>');
+        $this->logWarningException($exception, static::LOG_MSG_INVALID_JSON, [], static::LOG_CODE_INVALID_JSON);
+        $this->flushLogs();
+    }
+
+    protected function logCollectionKey(OutputInterface $output, $collectionKey)
+    {
+        $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
+    }
+
+    protected function logDoesNotExist(OutputInterface $output)
+    {
+        $output->writeln('<bg=green;options=bold>[DELETED]</>');
+    }
+
+    protected function logMissingMaps(OutputInterface $output, $collectionKey, array $missingFromMaps)
+    {
+        $output->writeln('<bg=red;options=bold>[FAILED]</>');
+        foreach ($missingFromMaps as $mapKey) {
+            $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
+        }
+        $this->logWarning(static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS, ['cacheKey' => $collectionKey, count($missingFromMaps)], static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS, ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]);
+    }
+
+    protected function logValidationPassed(OutputInterface $output)
+    {
+        $output->writeln('<bg=green;options=bold>[PASSED]</>');
     }
 
     public function requeueStaleProcessingQueues($age = null)
