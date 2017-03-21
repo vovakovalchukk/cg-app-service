@@ -113,8 +113,13 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
 
         $collectionKey = $collectionValidation->getCacheKey();
         $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
-        $missingFromMaps = [];
 
+        if (!$this->client->exists($collectionKey)) {
+            $output->writeln('<bg=green;options=bold>[DELETED]</>');
+            return;
+        }
+
+        $missingFromMaps = [];
         foreach ($collectionValidation->getMaps() as $mapKey) {
             try {
                 $map = $this->mapClient->setGet($mapKey);
