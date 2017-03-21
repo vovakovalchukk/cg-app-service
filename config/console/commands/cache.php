@@ -1,4 +1,5 @@
 <?php
+use CG\Cache\Command\RequeueStaleProcessingQueues;
 use CG\Cache\Command\ValidateCollection;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +11,7 @@ return [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             /** @var ValidateCollection $command */
             $command = $di->newInstance(ValidateCollection::class);
-            $command->processQueue(
+            $command(
                 $output,
                 $input->getOption('batchSize'),
                 $input->getArgument('timeout'),
@@ -37,9 +38,9 @@ return [
     ],
     'cache:requeueStaleCollectionValidationProcessingQueues' => [
         'command' => function(InputInterface $input) use ($di) {
-            /** @var ValidateCollection $command */
-            $command = $di->newInstance(ValidateCollection::class);
-            $command->requeueStaleProcessingQueues($input->getArgument('age'));
+            /** @var RequeueStaleProcessingQueues $command */
+            $command = $di->newInstance(RequeueStaleProcessingQueues::class);
+            $command($input->getArgument('age'));
         },
         'description' => 'Requeue any stale collection validation processing queues',
         'arguments' => [

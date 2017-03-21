@@ -21,8 +21,6 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
     const LOG_MSG_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key was not found in all invalidation maps, removing collection from cache';
     const LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key (%s) was not found in %d invalidation maps, removing collection from cache';
-    const LOG_CODE_REQUEUE_FAILED_PROCESSING_QUEUE = 'Requeuing a failed processing queue';
-    const LOG_MSG_REQUEUE_FAILED_PROCESSING_QUEUE = 'Requeuing failed processing queue %s';
 
     /** @var BlockingQueue $validationQueue */
     protected $validationQueue;
@@ -30,6 +28,12 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
     protected $client;
     /** @var ClientMapInterface $mapClient */
     protected $mapClient;
+    /** @var bool $process */
+    protected $process;
+    /** @var int $processed */
+    protected $processed;
+    /** @var int $lastBatch */
+    protected $lastBatch;
 
     public function __construct(
         BlockingQueue $validationQueue,
@@ -41,7 +45,7 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
         $this->mapClient = $mapClient;
     }
 
-    public function processQueue(OutputInterface $output, $batchSize, $timeout = 30, $maxProcess = null)
+    public function __invoke(OutputInterface $output, $batchSize, $timeout = 30, $maxProcess = null)
     {
         $delayLogs = [$this->getLogger(), 'delayLogs'];
         if (is_callable($delayLogs)) {
@@ -49,19 +53,19 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
         }
         $this->flushLogs();
 
-        $queueKey = $this->validationQueue->generateQueueKey();
-
-        $process = true;
+        $this->process = true;
         $this->registerSignalHandler(
             [SIGTERM, SIGINT],
-            function() use(&$process) {
-                $process = false;
+            function() {
+                $this->process = false;
             },
             true
         );
 
-        $lastBatch = $processed = 0;
-        while ($process) {
+        $queueKey = $this->validationQueue->generateQueueKey();
+        $this->lastBatch = $this->processed = 0;
+
+        while ($this->process) {
             $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
             $this->logProcessingQueueKey($output, $processingQueueKey);
 
@@ -74,24 +78,42 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
             foreach ($processingQueue as $collectionValidationJson) {
                 $this->validateCollection($output, $collectionValidationJson);
 
+                $this->processed++;
+                if ($this->reachedMaxProcessCount($maxProcess)) {
+                    $this->process = false;
+                }
+
                 $this->flushLogs();
                 $this->dispatchSignals();
 
-                $processed++;
-                $process = $process && (!$maxProcess || $maxProcess > $processed);
-                if (!$process || ($processed % $batchSize) == 0) {
+                if (!$this->process || $this->isBatchFinished($batchSize)) {
                     break;
                 }
             }
 
-            if ($processed == $lastBatch || ($processed % $batchSize) != 0) {
-                $process = false;
+            if (!$this->didBatchProcess() || !$this->isBatchFinished($batchSize)) {
+                $this->process = false;
             }
 
-            $lastBatch = $processed;
+            $this->lastBatch = $this->processed;
             $this->validationQueue->removeProcessingQueue($processingQueueKey);
             $this->dispatchSignals();
         }
+    }
+
+    protected function reachedMaxProcessCount($maxProcess)
+    {
+        return $maxProcess && $this->processed >= $maxProcess;
+    }
+
+    protected function isBatchFinished($batchSize)
+    {
+        return ($this->processed % $batchSize) == 0;
+    }
+
+    protected function didBatchProcess()
+    {
+        return $this->processed > $this->lastBatch;
     }
 
     protected function validateCollection(OutputInterface $output, $collectionValidationJson)
@@ -176,14 +198,5 @@ class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
     protected function logValidationPassed(OutputInterface $output)
     {
         $output->writeln('<bg=green;options=bold>[PASSED]</>');
-    }
-
-    public function requeueStaleProcessingQueues($age = null)
-    {
-        $queueKey = $this->validationQueue->generateQueueKey();
-        foreach ($this->validationQueue->getStaleProcessingQueues($age) as $staleProcessingQueue) {
-            $this->logWarning(static::LOG_MSG_REQUEUE_FAILED_PROCESSING_QUEUE, [$staleProcessingQueue], static::LOG_CODE_REQUEUE_FAILED_PROCESSING_QUEUE);
-            $this->validationQueue->requeueProcessingQueue($queueKey, $staleProcessingQueue);
-        }
     }
 }
