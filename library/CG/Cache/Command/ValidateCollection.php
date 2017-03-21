@@ -8,11 +8,14 @@ use CG\Queue\BlockingInterface as BlockingQueue;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use CG\Stdlib\Process\PcntlAwareInterface;
+use CG\Stdlib\Process\PcntlTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ValidateCollection implements LoggerAwareInterface
+class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
 {
     use LogTrait;
+    use PcntlTrait;
 
     const LOG_CODE_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_MSG_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
@@ -49,19 +52,13 @@ class ValidateCollection implements LoggerAwareInterface
         $queueKey = $this->validationQueue->generateQueueKey();
 
         $process = true;
-        if (extension_loaded('pcntl')) {
-            $signals = [];
-            $signalHandler = function() use(&$process, &$signals) {
+        $this->registerSignalHandler(
+            [SIGTERM, SIGINT],
+            function() use(&$process) {
                 $process = false;
-                foreach ($signals as $signal => $handler) {
-                    pcntl_signal($signal, $handler);
-                }
-            };
-            foreach ([SIGTERM, SIGINT] as $signal) {
-                $signals[$signal] = pcntl_signal_get_handler($signal);
-                pcntl_signal($signal, $signalHandler);
-            }
-        }
+            },
+            true
+        );
 
         $lastBatch = $processed = 0;
         while ($process) {
@@ -78,9 +75,7 @@ class ValidateCollection implements LoggerAwareInterface
                 $this->validateCollection($output, $collectionValidationJson);
 
                 $this->flushLogs();
-                if (extension_loaded('pcntl')) {
-                    pcntl_signal_dispatch();
-                }
+                $this->dispatchSignals();
 
                 $processed++;
                 $process = $process && (!$maxProcess || $maxProcess > $processed);
@@ -95,10 +90,7 @@ class ValidateCollection implements LoggerAwareInterface
 
             $lastBatch = $processed;
             $this->validationQueue->removeProcessingQueue($processingQueueKey);
-
-            if (extension_loaded('pcntl')) {
-                pcntl_signal_dispatch();
-            }
+            $this->dispatchSignals();
         }
     }
 
