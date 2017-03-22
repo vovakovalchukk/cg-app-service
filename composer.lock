@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "120845ab4fa516f61402c468d4c33a2e",
+    "content-hash": "80e5e02ae66571d6ad59f09faec4583b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1510,16 +1510,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8094-amazon-fulfilled-shipment-data-missing",
+            "version": "1.28.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0833aec2f339bb1ff59685eacb1446e6fc8ff40b"
+                "reference": "dc6c06f26fcc34a566188ed96f9a01c901b98aee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8094-amazon-fulfilled-shipment-data-missing-3de9a0.zip",
-                "reference": "0833aec2f339bb1ff59685eacb1446e6fc8ff40b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.2-862541.zip",
+                "reference": "dc6c06f26fcc34a566188ed96f9a01c901b98aee",
                 "shasum": null
             },
             "require": {
@@ -1589,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-16 10:59:44"
+            "time": "2017-03-22T15:46:40+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9533,18 +9533,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.28.1",
-            "alias_normalized": "1.28.1.0",
-            "version": "dev-CGIV-8094-amazon-fulfilled-shipment-data-missing",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
