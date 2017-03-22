@@ -8,11 +8,10 @@ use CG\Queue\BlockingInterface as BlockingQueue;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stdlib\Process\PcntlAwareInterface;
 use CG\Stdlib\Process\PcntlTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ValidateCollection implements LoggerAwareInterface, PcntlAwareInterface
+class ValidateCollection implements LoggerAwareInterface
 {
     use LogTrait;
     use PcntlTrait;
