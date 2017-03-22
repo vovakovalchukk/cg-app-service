@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1029dc45ea847a6a7f7967da3f264ecc",
+    "content-hash": "315c46a8e6862d4668199947c96e7bec",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1848,17 +1848,11 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.9.0",
+            "version": "dev-CGIV-8149-products-with-no-stock",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "2ac32bf11e6034ca7e6d822761155e948d8861f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.9.0-78861b.zip",
-                "reference": "2ac32bf11e6034ca7e6d822761155e948d8861f4",
-                "shasum": null
+                "reference": "840266145ac7a644f0450f6a53e6cb610debb8f5"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -9472,13 +9466,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.9.1",
+            "alias_normalized": "1.9.1.0",
+            "version": "dev-CGIV-8149-products-with-no-stock",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
