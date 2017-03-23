@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c2e116b39fe16bf22956cad45845925",
+    "content-hash": "b619a13fc9251190d4e056c5b0932ef6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -323,23 +323,23 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-8128-CacheValidation",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "2086a5b8cee7888659a14e2e13e550d4fc357104"
+                "reference": "c0f90f1f44f52e0361bbf5e814d5d75623cd1b83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8128-CacheValidation-908013.zip",
-                "reference": "2086a5b8cee7888659a14e2e13e550d4fc357104",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.0-7c9c51.zip",
+                "reference": "c0f90f1f44f52e0361bbf5e814d5d75623cd1b83",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/queue": "^1.0.0",
-                "channelgrabber/stdlib": "dev-CGIV-8128-CacheValidation as 2.12.43",
+                "channelgrabber/stdlib": "^2.12.44",
                 "composer/composer": "@dev",
                 "predis/predis": "~0.8.8"
             },
@@ -358,7 +358,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-21T14:43:54+00:00"
+            "time": "2017-03-23T09:56:10+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -1047,16 +1047,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "dev-CGIV-8128-CacheValidation",
+            "version": "1.2.29",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "7fe58033349f014ffbb725d957682629a5504fa5"
+                "reference": "6fe0704a716ba6e38829e8067f832efe8f92db02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-dev-CGIV-8128-CacheValidation-867866.zip",
-                "reference": "7fe58033349f014ffbb725d957682629a5504fa5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.2.29-47aae7.zip",
+                "reference": "6fe0704a716ba6e38829e8067f832efe8f92db02",
                 "shasum": null
             },
             "require": {
@@ -1082,7 +1082,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-20T10:25:31+00:00"
+            "time": "2017-03-23T09:44:17+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -1996,16 +1996,16 @@
         },
         {
             "name": "channelgrabber/queue",
-            "version": "dev-CGIV-8128-CacheValidation",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-queue.git",
-                "reference": "9f48932c59863773c028f4fe796ffb57575ba1f9"
+                "reference": "f188f9d6e8db93db9f780bb59c0496f90cc53482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-queue-dev-CGIV-8128-CacheValidation-124fd5.zip",
-                "reference": "9f48932c59863773c028f4fe796ffb57575ba1f9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-queue-1.0.1-92c0a5.zip",
+                "reference": "f188f9d6e8db93db9f780bb59c0496f90cc53482",
                 "shasum": null
             },
             "require": {
@@ -2026,24 +2026,24 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-21T10:05:28+00:00"
+            "time": "2017-03-23T09:36:01+00:00"
         },
         {
             "name": "channelgrabber/redis",
-            "version": "dev-CGIV-8128-CacheValidation",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis.git",
-                "reference": "d32308a1452c84a090c4875f00bdc8d0a3399535"
+                "reference": "daa2d4da1fc6b25f748918dd63a8e0c1474a6418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-dev-CGIV-8128-CacheValidation-bcc574.zip",
-                "reference": "d32308a1452c84a090c4875f00bdc8d0a3399535",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-1.0.1-15e68f.zip",
+                "reference": "daa2d4da1fc6b25f748918dd63a8e0c1474a6418",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/queue": "dev-CGIV-8128-CacheValidation as 1.0.1",
+                "channelgrabber/queue": "^1.0.1",
                 "php": ">=7.1",
                 "predis/predis": "^0.8.3"
             },
@@ -2058,7 +2058,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-20T12:11:31+00:00"
+            "time": "2017-03-23T09:49:15+00:00"
         },
         {
             "name": "channelgrabber/redis-locking",
@@ -2418,16 +2418,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-8128-CacheValidation",
+            "version": "2.12.44",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "bc030983c30f172a9d26ce845036d28c82c043e1"
+                "reference": "10e8dcd490230f266cc9c5e4c7a4819fe66e0266"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-8128-CacheValidation-a0cfa2.zip",
-                "reference": "bc030983c30f172a9d26ce845036d28c82c043e1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.44-5b8f85.zip",
+                "reference": "10e8dcd490230f266cc9c5e4c7a4819fe66e0266",
                 "shasum": null
             },
             "require": {
@@ -2469,7 +2469,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-22T08:46:52+00:00"
+            "time": "2017-03-23T09:40:57+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -9544,46 +9544,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.3.0",
-            "alias_normalized": "2.3.0.0",
-            "version": "dev-CGIV-8128-CacheValidation",
-            "package": "channelgrabber/cache"
-        },
-        {
-            "alias": "1.2.29",
-            "alias_normalized": "1.2.29.0",
-            "version": "dev-CGIV-8128-CacheValidation",
-            "package": "channelgrabber/gearman"
-        },
-        {
-            "alias": "1.0.1-dev",
-            "alias_normalized": "1.0.1.0-dev",
-            "version": "dev-CGIV-8128-CacheValidation",
-            "package": "channelgrabber/queue"
-        },
-        {
-            "alias": "1.0.1",
-            "alias_normalized": "1.0.1.0",
-            "version": "dev-CGIV-8128-CacheValidation",
-            "package": "channelgrabber/redis"
-        },
-        {
-            "alias": "2.12.43",
-            "alias_normalized": "2.12.43.0",
-            "version": "dev-CGIV-8128-CacheValidation",
-            "package": "channelgrabber/stdlib"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/gearman": 20,
-        "channelgrabber/queue": 20,
-        "channelgrabber/redis": 20,
-        "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
