@@ -5,21 +5,29 @@ use CG\Cache\ClientInterface;
 use CG\Cache\ClientMapInterface;
 use CG\Cache\InvalidationHandler\ValidateCollection as Collection;
 use CG\Queue\BlockingInterface as BlockingQueue;
+use CG\Stats\StatsAwareInterface;
+use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\Process\PcntlTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ValidateCollection implements LoggerAwareInterface
+class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
 {
     use LogTrait;
+    use StatsTrait;
     use PcntlTrait;
 
     const LOG_CODE_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_MSG_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key was not found in all invalidation maps, removing collection from cache';
     const LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key (%s) was not found in %d invalidation maps, removing collection from cache';
+
+    const STAT_KEY = 'infrastructure.cache.validation.collection.%s.%s';
+    const STAT_PASSED = 'passed';
+    const STAT_FAILED = 'failed';
+    const STAT_DELETED = 'deleted';
 
     /** @var BlockingQueue $validationQueue */
     protected $validationQueue;
@@ -129,7 +137,7 @@ class ValidateCollection implements LoggerAwareInterface
         $this->logCollectionKey($output, $collectionKey);
 
         if (!$this->client->exists($collectionKey)) {
-            $this->logDoesNotExist($output);
+            $this->logDoesNotExist($output, $collectionKey);
             return;
         }
 
@@ -155,10 +163,10 @@ class ValidateCollection implements LoggerAwareInterface
                 $this->client->delete($collectionKey);
                 $this->logMissingMaps($output, $collectionKey, $missingFromMaps);
             } catch (NotFound $exception) {
-                $this->logDoesNotExist($output);
+                $this->logDoesNotExist($output, $collectionKey);
             }
         } else {
-            $this->logValidationPassed($output);
+            $this->logValidationPassed($output, $collectionKey);
         }
     }
 
@@ -184,9 +192,10 @@ class ValidateCollection implements LoggerAwareInterface
         $output->write(sprintf('<fg=green>%s</>: ', $collectionKey));
     }
 
-    protected function logDoesNotExist(OutputInterface $output)
+    protected function logDoesNotExist(OutputInterface $output, $collectionKey)
     {
         $output->writeln('<bg=green;options=bold>[DELETED]</>');
+        $this->statCollectionKey($collectionKey, static::STAT_DELETED);
     }
 
     protected function logMissingMaps(OutputInterface $output, $collectionKey, array $missingFromMaps)
@@ -196,10 +205,27 @@ class ValidateCollection implements LoggerAwareInterface
             $output->writeln(sprintf(' - <fg=red>%s</>', $mapKey));
         }
         $this->logWarning(static::LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS, ['cacheKey' => $collectionKey, count($missingFromMaps)], static::LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS, ['missingFromMaps' => implode(PHP_EOL, $missingFromMaps)]);
+        $this->statCollectionKey($collectionKey, static::STAT_FAILED);
     }
 
-    protected function logValidationPassed(OutputInterface $output)
+    protected function logValidationPassed(OutputInterface $output, $collectionKey)
     {
         $output->writeln('<bg=green;options=bold>[PASSED]</>');
+        $this->statCollectionKey($collectionKey, static::STAT_PASSED);
+    }
+
+    protected function statCollectionKey($collectionKey, $outcome)
+    {
+        $this->statsIncrement(static::STAT_KEY, [$this->mashKey($collectionKey), $outcome]);
+    }
+
+    protected function mashKey($collectionKey) {
+        if (preg_match('/(?<=^|\:)CG_[^\:]+(?=\:|$)/', $collectionKey, $matches)) {
+            return $matches[0];
+        }
+        if (preg_match('/^[^-:_]+/', $collectionKey, $matches)) {
+            return $matches[0];
+        }
+        return $collectionKey;
     }
 }
