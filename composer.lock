@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b619a13fc9251190d4e056c5b0932ef6",
+    "content-hash": "46daece79f81012bab73aec22eb0543d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -323,16 +323,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.3.0",
+            "version": "dev-CGIV-8169-CacheValidationPercentageChange",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "c0f90f1f44f52e0361bbf5e814d5d75623cd1b83"
+                "reference": "ed7881c1a892b8c88239bc2fb1b53e6621f3141f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.0-7c9c51.zip",
-                "reference": "c0f90f1f44f52e0361bbf5e814d5d75623cd1b83",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8169-CacheValidationPercentageChange-48b8f3.zip",
+                "reference": "ed7881c1a892b8c88239bc2fb1b53e6621f3141f",
                 "shasum": null
             },
             "require": {
@@ -358,7 +358,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-23T09:56:10+00:00"
+            "time": "2017-03-23 14:40:04"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -9544,9 +9544,17 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.3.1",
+            "alias_normalized": "2.3.1.0",
+            "version": "dev-CGIV-8169-CacheValidationPercentageChange",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
