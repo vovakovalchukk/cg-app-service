@@ -152,7 +152,11 @@ class ValidateCollection implements LoggerAwareInterface
 
         if (!empty($missingFromMaps)) {
             $this->logMissingMaps($output, $collectionKey, $missingFromMaps);
-            $this->client->delete($collectionKey);
+            try {
+                $this->client->delete($collectionKey);
+            } catch (NotFound $exception) {
+                // Already been deleted from cache - nothing left to do
+            }
         } else {
             $this->logValidationPassed($output);
         }
