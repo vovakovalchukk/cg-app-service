@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea596bbbb243be2a3c98e2d19bd97298",
+    "content-hash": "e40951345d7233deae765484591878b5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1184,16 +1184,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.11.7",
+            "version": "dev-CGIV-8119-HandleListingImportErrors",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "a4dba444c7e4bc0d6c3afdc49bb49b8aec0c0375"
+                "reference": "6cc2c6bac0deacb686cdf8c29467707a9aae2e5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.11.7-86d960.zip",
-                "reference": "a4dba444c7e4bc0d6c3afdc49bb49b8aec0c0375",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-8119-HandleListingImportErrors-5f0e24.zip",
+                "reference": "6cc2c6bac0deacb686cdf8c29467707a9aae2e5e",
                 "shasum": null
             },
             "require": {
@@ -1233,7 +1233,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-09T08:27:40+00:00"
+            "time": "2017-03-27 08:19:29"
         },
         {
             "name": "channelgrabber/locale",
@@ -9544,10 +9544,18 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.11.9",
+            "alias_normalized": "1.11.9.0",
+            "version": "dev-CGIV-8119-HandleListingImportErrors",
+            "package": "channelgrabber/listing"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
