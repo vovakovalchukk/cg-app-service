@@ -2176,17 +2176,11 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.5.0",
+            "version": "dev-CGIV-7903-map-invoice-template-to-trading-company-and-site",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "472b9869c6253b0094f11097d7ec633abf61b474"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.5.0-3cca4c.zip",
-                "reference": "472b9869c6253b0094f11097d7ec633abf61b474",
-                "shasum": null
+                "reference": "e4ae30c4e6a978f92865a4103b7dda6020ea4e0b"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -9472,13 +9466,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.1",
+            "alias_normalized": "1.5.1.0",
+            "version": "dev-CGIV-7903-map-invoice-template-to-trading-company-and-site",
+            "package": "channelgrabber/settings"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

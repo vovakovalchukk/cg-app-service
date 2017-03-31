@@ -70,6 +70,14 @@ use CG\Settings\Order\Entity as OrderEntity;
 use CG\Settings\Order\Mapper as OrderMapper;
 use CG\Settings\Order\RestService as OrderService;
 
+// InvoiceMapping
+use CG\Controllers\Settings\InvoiceMapping;
+use CG\Controllers\Settings\InvoiceMapping\Collection as InvoiceMappingCollection;
+use CG\Settings\InvoiceMapping\Entity as InvoiceMappingEntity;
+use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingMapper;
+use CG\Settings\InvoiceMapping\Service as InvoiceMappingService;
+use CG\InputValidation\Settings\InvoiceMapping\Entity as InvoiceMappingEntityValidation;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -378,6 +386,28 @@ return [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
             'serviceClass' => OrderService::class
+        ]
+    ],
+    '/settings/invoiceMapping/:id' => [
+        'controllers' => function($ouId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(InvoiceMapping::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($ouId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'InvoiceMappingEntity',
+        'validation' => [
+            'dataRules' => InvoiceMappingEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => InvoiceMappingMapper::class,
+            'entityClass' => InvoiceMappingEntity::class,
+            'serviceClass' => InvoiceMappingService::class
         ]
     ],
 ];
