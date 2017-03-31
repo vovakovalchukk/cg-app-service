@@ -92,6 +92,12 @@ class Entity implements RulesInterface
                     new IsArrayValidator(["name" => "tradingCompanies"])
                 ]
             ],
+            'itemSku' => [
+                'name' => 'itemSku',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'itemSku'])]
+            ],
         ];
     }
 }
