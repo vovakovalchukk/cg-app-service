@@ -17,6 +17,7 @@ $files = [
     'account.php',
     'currency.php',
     'migrateMongoOrderLabelDataToMysqlAndS3.php',
+    'cache.php',
 ];
 
 $commands = array();

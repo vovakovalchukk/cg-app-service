@@ -26,6 +26,14 @@ class CreateMissingStock implements LoggerAwareInterface
     public function __invoke($dryRun = true)
     {
         $this->logDebug('CreateMissingStock command invoked %s', [($dryRun ? 'DRY RUN' : '')], static::LOG_CODE);
+        $count = $this->createMissingStock($dryRun);
+        $count += $this->createMissingStockLocations($dryRun);
+        $this->logDebug('CreateMissingStock command finished %s', [($dryRun ? 'DRY RUN' : '')], static::LOG_CODE);
+        return $count;
+    }
+
+    protected function createMissingStock($dryRun)
+    {
         $skusMissingStock = $this->getSkusMissingStock();
         $count = count($skusMissingStock);
         $this->logDebug('Found %d products that are missing stock', [$count], static::LOG_CODE);
@@ -33,13 +41,31 @@ class CreateMissingStock implements LoggerAwareInterface
             return 0;
         }
         foreach ($skusMissingStock as $details) {
-            $this->logDebug('Creating for OU %d, SKU "%s"', [$details['organisationUnitId'], $details['sku']], static::LOG_CODE);
+            $this->logDebug('Creating stock for OU %d, SKU "%s"', [$details['organisationUnitId'], $details['sku']], static::LOG_CODE);
             $stock = $this->stockCreator->create($details['organisationUnitId'], $details['sku']);
             if (!$dryRun) {
                 $this->stockCreator->save($stock);
             }
         }
-        $this->logDebug('CreateMissingStock command finished %s', [($dryRun ? 'DRY RUN' : '')], static::LOG_CODE);
+        return $count;
+    }
+
+    protected function createMissingStockLocations($dryRun)
+    {
+        $skusMissingStockLocations = $this->getSkusMissingStockLocations();
+        $count = count($skusMissingStockLocations);
+        $this->logDebug('Found %d stocks that are missing stock locations', [$count], static::LOG_CODE);
+        if ($count == 0) {
+            return 0;
+        }
+        foreach ($skusMissingStockLocations as $details) {
+            $this->logDebug('Creating stock location for OU %d, SKU "%s"', [$details['organisationUnitId'], $details['sku']], static::LOG_CODE);
+            $stock = $this->stockCreator->fetchByOuAndSku($details['organisationUnitId'], $details['sku']);
+            $this->stockCreator->createStockLocationsForStock($stock);
+            if (!$dryRun) {
+                $this->stockCreator->saveStockLocations($stock->getLocations(), $stock);
+            }
+        }
         return $count;
     }
 
@@ -51,6 +77,15 @@ class CreateMissingStock implements LoggerAwareInterface
             . 'WHERE stock.id IS NULL '
             . 'AND (product.parentProductId > 0 OR variation.id IS NULL) '
             . 'AND product.sku != \'\'';
+
+        return $this->sqlClient->getAdapter()->query($query)->execute();
+    }
+
+    protected function getSkusMissingStockLocations()
+    {
+        $query = 'SELECT stock.sku, stock.organisationUnitId FROM stock '
+            . 'LEFT JOIN stockLocation ON (stock.id = stockLocation.stockId) '
+            . 'WHERE stockLocation.locationId IS NULL';
 
         return $this->sqlClient->getAdapter()->query($query)->execute();
     }
