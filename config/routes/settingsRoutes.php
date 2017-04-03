@@ -102,7 +102,7 @@ return [
         'validation' => [
             'filterRules' => CollectionValidation::class
         ],
-        'version' => new Version(1, 7),
+        'version' => new Version(1, 8),
     ],
     '/settings/invoice/:id' => [
         'controllers' => function($invoiceId) use ($di) {
@@ -120,7 +120,7 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
-        'version' => new Version(1, 7),
+        'version' => new Version(1, 8),
         'eTag' => [
             'mapperClass' => InvoiceMapper::class,
             'entityClass' => InvoiceEntity::class,

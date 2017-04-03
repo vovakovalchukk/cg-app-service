@@ -98,6 +98,12 @@ class Entity implements RulesInterface
                 'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'itemSku'])]
             ],
+            'useVerifiedEmailAddressForAmazonInvoices' => [
+                'name' => 'useVerifiedEmailAddressForAmazonInvoices',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'useVerifiedEmailAddressForAmazonInvoices'])]
+            ],
         ];
     }
 }
