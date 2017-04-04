@@ -127,8 +127,8 @@ class Db implements StorageInterface, LoggerAwareInterface
         if (!empty($filter->getAccountId())) {
             $query['orderSettings.accountId'] = $filter->getAccountId();
         }
-        if (!empty($filter->getRootOuId())) {
-            $query['orderSettings.rootOuId'] = $filter->getRootOuId();
+        if (!empty($filter->getOrganisationUnitId())) {
+            $query['orderSettings.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         return $query;
     }

@@ -13,14 +13,14 @@ class InvoiceMapToCompanySite extends AbstractMigration
             ]
         );
 
-        $table->addColumn('rootOuId', 'integer')
+        $table->addColumn('organisationUnitId', 'integer')
             ->addColumn('accountId', 'integer')
             ->addColumn('site', 'string')
             ->addColumn('invoiceId', 'integer')
             ->addColumn('sendViaEmail', 'string')
             ->addColumn('sendToFba', 'string')
             ->addIndex([
-                'rootOuId'
+                'site', 'accountId'
             ])->create();
     }
 

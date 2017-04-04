@@ -27,7 +27,7 @@ class Collection
                 $this->getParams('limit') ?: null,
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
-                $this->getParams('rootOuId') ?: [],
+                $this->getParams('organisationUnitId') ?: [],
                 $this->getParams('accountId') ?: []
             )
         );

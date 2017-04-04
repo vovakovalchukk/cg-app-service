@@ -24,13 +24,13 @@ class Filter implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
                 ]
             ],
-            'rootOuId' => [
-                'name' => 'rootOuId',
+            'organisationUnitId' => [
+                'name' => 'organisationUnitId',
                 'required' => true,
                 'validators' => [
-                    new IntegerValidator(['name' => 'rootOuId']),
+                    new IntegerValidator(['name' => 'organisationUnitId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'rootOuId must be at least %min%'])
+                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
             'accountId' => [
