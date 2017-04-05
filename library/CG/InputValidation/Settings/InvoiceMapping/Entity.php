@@ -22,7 +22,7 @@ class Entity implements RulesInterface
             ],
             'organisationUnitId' => [
                 'name' => 'organisationUnitId',
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     new IntegerValidator(['name' => 'organisationUnitId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
@@ -31,12 +31,8 @@ class Entity implements RulesInterface
             ],
             'invoiceId' => [
                 'name' => 'invoiceId',
-                'required' => true,
-                'validators' => [
-                    new IntegerValidator(['name' => 'invoiceId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'invoiceId must be at least %min%'])
-                ]
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'accountId' => [
                 'name' => 'accountId',
@@ -49,12 +45,12 @@ class Entity implements RulesInterface
             ],
             'sendViaEmail' => [
                 'name' => 'sendViaEmail',
-                'required' => true,
+                'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
             'sendToFba' => [
                 'name' => 'sendToFba',
-                'required' => true,
+                'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
         ];
