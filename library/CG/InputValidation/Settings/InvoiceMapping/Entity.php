@@ -38,6 +38,15 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'invoiceId must be at least %min%'])
                 ]
             ],
+            'accountId' => [
+                'name' => 'accountId',
+                'required' => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                ]
+            ],
             'sendViaEmail' => [
                 'name' => 'sendViaEmail',
                 'required' => true,
