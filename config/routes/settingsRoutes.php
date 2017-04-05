@@ -77,6 +77,7 @@ use CG\Settings\InvoiceMapping\Entity as InvoiceMappingEntity;
 use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingMapper;
 use CG\Settings\InvoiceMapping\Service as InvoiceMappingService;
 use CG\InputValidation\Settings\InvoiceMapping\Entity as InvoiceMappingEntityValidation;
+use CG\InputValidation\Settings\InvoiceMapping\Filter as InvoiceMappingCollectionValidation;
 
 return [
     '/settings' => [
@@ -386,6 +387,24 @@ return [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
             'serviceClass' => OrderService::class
+        ]
+    ],
+    '/settings/invoiceMapping' => [
+        'controllers' => function() use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(InvoiceMappingCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'InvoiceMappingCollection',
+        'entityRoute' => '/settings/invoiceMapping/:id',
+        'validation' => [
+            'filterRules' => InvoiceMappingCollectionValidation::class
         ]
     ],
     '/settings/invoiceMapping/:id' => [

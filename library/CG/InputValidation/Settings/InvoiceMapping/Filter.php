@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Settings\InvoiceMapping;
 
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\GreaterThan;
 use CG\Validation\Rules\PaginationTrait;
@@ -17,29 +18,23 @@ class Filter implements RulesInterface
             'page' => $this->getPageValidation(),
             'id' => [
                 'name'       => 'id',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'id']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                 ]
             ],
             'organisationUnitId' => [
                 'name' => 'organisationUnitId',
-                'required' => true,
+                'required' => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'organisationUnitId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
             'accountId' => [
                 'name' => 'accountId',
-                'required' => true,
+                'required' => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'accountId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                 ]
             ],
         ];

@@ -1,8 +1,8 @@
 <?php
 namespace CG\Controllers\Settings\InvoiceMapping;
 
-use CG\Settings\Order\Filter;
-use CG\Settings\Order\RestService;
+use CG\Settings\InvoiceMapping\Filter;
+use CG\Settings\InvoiceMapping\RestService;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
