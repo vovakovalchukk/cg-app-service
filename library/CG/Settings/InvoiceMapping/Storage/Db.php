@@ -122,13 +122,13 @@ class Db implements StorageInterface, LoggerAwareInterface
     {
         $query = [];
         if (!empty($filter->getId())) {
-            $query['orderSettings.id'] = $filter->getId();
+            $query['invoiceMapping.id'] = $filter->getId();
         }
         if (!empty($filter->getAccountId())) {
-            $query['orderSettings.accountId'] = $filter->getAccountId();
+            $query['invoiceMapping.accountId'] = $filter->getAccountId();
         }
         if (!empty($filter->getOrganisationUnitId())) {
-            $query['orderSettings.organisationUnitId'] = $filter->getOrganisationUnitId();
+            $query['invoiceMapping.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         return $query;
     }
