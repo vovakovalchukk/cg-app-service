@@ -18,6 +18,7 @@ $files = [
     'currency.php',
     'migrateMongoOrderLabelDataToMysqlAndS3.php',
     'cache.php',
+    'phinxMongoMigrations.php',
 ];
 
 $commands = array();
