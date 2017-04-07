@@ -682,7 +682,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1510,17 +1510,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.2",
+            "version": "dev-CGIV-8222-amazon-invoice-not-emailed",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "dc6c06f26fcc34a566188ed96f9a01c901b98aee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.2-862541.zip",
-                "reference": "dc6c06f26fcc34a566188ed96f9a01c901b98aee",
-                "shasum": null
+                "reference": "f79dbd7c4a763db3c7acf89c38e37d5e72b36b5c"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -9534,13 +9528,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.28.3",
+            "alias_normalized": "1.28.3.0",
+            "version": "dev-CGIV-8222-amazon-invoice-not-emailed",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
