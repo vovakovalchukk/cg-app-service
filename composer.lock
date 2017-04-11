@@ -682,7 +682,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1510,17 +1510,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.5",
+            "version": "dev-CGIV-8183-linked-orders-endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "39bdc515c5724427cd109b1a79a4f825e26cefd7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.5-44840f.zip",
-                "reference": "39bdc515c5724427cd109b1a79a4f825e26cefd7",
-                "shasum": null
+                "reference": "500789be378c2cff1bb1890c814657a8dd832539"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -9534,13 +9528,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.28.6",
+            "alias_normalized": "1.28.6.0",
+            "version": "dev-CGIV-8183-linked-orders-endpoint",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
