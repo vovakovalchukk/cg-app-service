@@ -107,7 +107,7 @@ class Entity implements RulesInterface
             'sendToFba' => [
                 'name'       => 'sendToFba',
                 'required'   => false,
-                'validators' => [new StringLength(['min' => 1])],
+                'validators' => [new BooleanValidator(['name' => 'sendToFba'])]
             ],
         ];
     }
