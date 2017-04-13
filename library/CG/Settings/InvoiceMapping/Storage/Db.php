@@ -19,8 +19,9 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Update;
+use CG\Stdlib\Storage\Db\DbAbstract;
 
-class Db implements StorageInterface, LoggerAwareInterface
+class Db extends DbAbstract implements StorageInterface
 {
     use LogTrait;
     use SqlStorage;
@@ -41,51 +42,6 @@ class Db implements StorageInterface, LoggerAwareInterface
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {
         $this->setReadSql($readSql)->setFastReadSql($fastReadSql)->setWriteSql($writeSql)->setMapper($mapper);
-    }
-
-    /**
-     * @return Entity
-     */
-    public function fetch($id)
-    {
-        return $this->fetchEntity(
-            $this->readSql,
-            $this->getSelect()->where([
-                'id' => $id
-            ]),
-            $this->mapper
-        );
-    }
-
-    protected function saveEntity($entity)
-    {
-        try {
-            $this->fetch($entity->getId());
-            return $this->updateEntity($entity);
-        } catch (NotFound $exception) {
-            return $this->insertEntity($entity);
-        }
-    }
-
-    protected function insertEntity($entity)
-    {
-        $insert = $this->getInsert()->values($entity->toArray());
-        $this->writeSql->prepareStatementForSqlObject($insert)->execute();
-        $entity->setNewlyInserted(true);
-        return $entity;
-    }
-
-    protected function updateEntity($entity)
-    {
-        $update = $this->getUpdate()->set($entity->toArray())->where(['id' => $entity->getId()]);
-        $this->writeSql->prepareStatementForSqlObject($update)->execute();
-        return $entity;
-    }
-
-    public function remove($entity)
-    {
-        $delete = $this->getDelete()->where(['id' => $entity->getId()]);
-        $this->writeSql->prepareStatementForSqlObject($delete)->execute();
     }
 
     /**
@@ -131,50 +87,6 @@ class Db implements StorageInterface, LoggerAwareInterface
             $query['invoiceMapping.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         return $query;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setReadSql(Sql $readSql)
-    {
-        $this->readSql = $readSql;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setFastReadSql(Sql $fastReadSql)
-    {
-        $this->fastReadSql = $fastReadSql;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setWriteSql(Sql $writeSql)
-    {
-        $this->writeSql = $writeSql;
-        return $this;
-    }
-
-    /**
-     * @return Sql
-     */
-    protected function getWriteSql()
-    {
-        return $this->writeSql;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setMapper(Mapper $mapper)
-    {
-        $this->mapper = $mapper;
-        return $this;
     }
 
     /**
