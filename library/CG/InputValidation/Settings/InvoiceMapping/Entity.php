@@ -13,7 +13,7 @@ class Entity implements RulesInterface
         return [
             'id' => [
                 'name'       => 'id',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     new IntegerValidator(['name' => 'id']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
