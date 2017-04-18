@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c266e9a4f5be0b2bc627fad6f3eb7655",
+    "content-hash": "3c1f9b867d40ea4d412bcf980ce45d36",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -682,7 +682,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1510,11 +1510,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8183-linked-orders-endpoint",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "500789be378c2cff1bb1890c814657a8dd832539"
+                "reference": "6548f60b8f07e2b0d448f01103f9f9d1d061a659"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-54fada.zip",
+                "reference": "6548f60b8f07e2b0d448f01103f9f9d1d061a659",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1583,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-07T09:01:46+00:00"
+            "time": "2017-04-18 08:48:05"
         },
         {
             "name": "channelgrabber/permission",
@@ -9532,7 +9538,7 @@
         {
             "alias": "1.28.6",
             "alias_normalized": "1.28.6.0",
-            "version": "dev-CGIV-8183-linked-orders-endpoint",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "package": "channelgrabber/order"
         }
     ],
@@ -9541,8 +9547,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
