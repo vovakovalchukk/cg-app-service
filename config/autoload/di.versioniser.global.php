@@ -24,6 +24,7 @@ use CG\Slim\Versioning\TrackingCollection;
 use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
+use CG\Slim\Versioning\UnimportedListingMarketplace;
 
 return [
     'di' => [
@@ -146,6 +147,7 @@ return [
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
+                'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
