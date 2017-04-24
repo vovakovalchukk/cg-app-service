@@ -77,12 +77,15 @@ return [
 
             /** @var ListingImport $command */
             $command = $di->get(ListingImport::class);
-            $command->importListings();
+            $command->importListings($input->getOption('automated'));
         },
         'description' => 'Fetch all the sales account and use a factory to generate the Gearman Jobs for each to download listings',
         'arguments' => [
         ],
         'options' => [
+            'automated' => [
+                'description' => 'Marks the jobs as being generated as part of an automated process',
+            ],
             'lowPriority' => [
                 'description' => 'Queue generated jobs at low priority',
             ],
