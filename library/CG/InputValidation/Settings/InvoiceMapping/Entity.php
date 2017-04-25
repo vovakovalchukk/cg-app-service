@@ -1,10 +1,12 @@
 <?php
 namespace CG\InputValidation\Settings\InvoiceMapping;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
+use Zend\Validator\Regex;
 
 class Entity implements RulesInterface
 {
@@ -15,9 +17,7 @@ class Entity implements RulesInterface
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'id']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
+                    new Regex('/^\d+\-\S+$/')
                 ]
             ],
             'organisationUnitId' => [
@@ -27,6 +27,15 @@ class Entity implements RulesInterface
                     new IntegerValidator(['name' => 'organisationUnitId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
+                ]
+            ],
+            'accountId' => [
+                'name' => 'accountId',
+                'required' => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
                 ]
             ],
             'site' => [
@@ -39,24 +48,15 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'accountId' => [
-                'name' => 'accountId',
-                'required' => false,
-                'validators' => [
-                    new IntegerValidator(['name' => 'accountId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
-                ]
-            ],
             'sendViaEmail' => [
                 'name' => 'sendViaEmail',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => [new BooleanValidator(['name' => 'sendViaEmail'])]
             ],
             'sendToFba' => [
                 'name' => 'sendToFba',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => [new BooleanValidator(['name' => 'sendToFba'])]
             ],
         ];
     }
