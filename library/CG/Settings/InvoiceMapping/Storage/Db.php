@@ -49,7 +49,7 @@ class Db extends DbAbstract implements StorageInterface
      */
     public function fetch($id)
     {
-        list($accountId, $site) = array_pad(explode('-', $id, 2), 2, '');
+        Entity::parseId($id, $accountId, $site);
         return $this->fetchEntity(
             $this->readSql,
             $this->getSelect()->where(['accountId' => $accountId, 'site' => $site]),
@@ -97,7 +97,7 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getId())) {
             $where = new Where(null, Where::COMBINED_BY_OR);
             foreach ($filter->getId() as $id) {
-                list($accountId, $site) = array_pad(explode('-', $id, 2), 2, '');
+                Entity::parseId($id, $accountId, $site);
                 $where->addPredicate(new Where(['accountId' => $accountId, 'site' => $site]));
             }
             $select->where($where);
