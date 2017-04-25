@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb0ba12663191b393a4e25291cebab45",
+    "content-hash": "0950d40d6282a01891596cf48fa68504",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8251-OrderEntityMarketplaceInfo",
+            "version": "dev-CGIV-8252-MarketplaceInvoiceGeneration",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4b9bae163d46cef988eb48be0c26779876eec85b"
+                "reference": "e696cab4d13222e35681303d57bd2a7ad0150382"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8251-OrderEntityMarketplaceInfo-d25147.zip",
-                "reference": "4b9bae163d46cef988eb48be0c26779876eec85b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8252-MarketplaceInvoiceGeneration-bac0cf.zip",
+                "reference": "e696cab4d13222e35681303d57bd2a7ad0150382",
                 "shasum": null
             },
             "require": {
@@ -1549,7 +1549,7 @@
                 "channelgrabber/product": "^1.9.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "^1.5.2",
+                "channelgrabber/settings": "dev-CGIV-8252-MarketplaceInvoiceGeneration as 1.5.3",
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.42",
@@ -1592,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-20 13:56:52"
+            "time": "2017-04-25 13:53:18"
         },
         {
             "name": "channelgrabber/permission",
@@ -2184,12 +2184,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "57a9266295b498c90a3dcb329f0a0fb64e20152e"
+                "reference": "221227a10c9e438ffee48012e8a87e32c6258c65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-8252-MarketplaceInvoiceGeneration-5a68e8.zip",
-                "reference": "57a9266295b498c90a3dcb329f0a0fb64e20152e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-8252-MarketplaceInvoiceGeneration-88b344.zip",
+                "reference": "221227a10c9e438ffee48012e8a87e32c6258c65",
                 "shasum": null
             },
             "require": {
@@ -2201,8 +2201,10 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.0",
-                "channelgrabber/validation": ">=1.2.6",
-                "composer/composer": "@dev"
+                "channelgrabber/validation": ">=1.2.6"
+            },
+            "conflict": {
+                "channelgrabber/order": "<1.28.8"
             },
             "type": "library",
             "autoload": {
@@ -2215,7 +2217,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-25 12:35:03"
+            "time": "2017-04-25 13:57:44"
         },
         {
             "name": "channelgrabber/shopify",
@@ -9485,9 +9487,9 @@
             "package": "channelgrabber/listing"
         },
         {
-            "alias": "1.28.7",
-            "alias_normalized": "1.28.7.0",
-            "version": "dev-CGIV-8251-OrderEntityMarketplaceInfo",
+            "alias": "1.28.8",
+            "alias_normalized": "1.28.8.0",
+            "version": "dev-CGIV-8252-MarketplaceInvoiceGeneration",
             "package": "channelgrabber/order"
         },
         {
