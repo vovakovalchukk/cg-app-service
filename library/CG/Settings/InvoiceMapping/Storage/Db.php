@@ -8,8 +8,8 @@ use CG\Settings\InvoiceMapping\Mapper;
 use CG\Settings\InvoiceMapping\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
-use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Db\DeadlockAwareSaveTrait;
 use CG\Stdlib\Storage\Db\Zend\Sql as SqlStorage;
 use CG\Stdlib\Storage\Db\Zend\TransactionTrait;
@@ -19,7 +19,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Update;
-use CG\Stdlib\Storage\Db\DbAbstract;
+use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -41,7 +41,34 @@ class Db extends DbAbstract implements StorageInterface
 
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {
-        $this->setReadSql($readSql)->setFastReadSql($fastReadSql)->setWriteSql($writeSql)->setMapper($mapper);
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+    }
+
+    /**
+     * @return Entity
+     */
+    public function fetch($id)
+    {
+        list($accountId, $site) = array_pad(explode('-', $id, 2), 2, '');
+        return $this->fetchEntity(
+            $this->readSql,
+            $this->getSelect()->where(['accountId' => $accountId, 'site' => $site]),
+            $this->mapper
+        );
+    }
+
+    /**
+     * @param Entity $entity
+     * @return Entity
+     */
+    protected function saveEntity($entity)
+    {
+        try {
+            $this->fetch($entity->getId());
+            return $this->updateEntity($entity);
+        } catch (NotFound $exception) {
+            return $this->insertEntity($entity);
+        }
     }
 
     /**
@@ -50,21 +77,12 @@ class Db extends DbAbstract implements StorageInterface
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
-            $query = $this->buildFilterQuery($filter);
-            $select = $this->getSelect()->where($query);
-
-            if ($filter->getLimit() != 'all') {
-                $offset = ($filter->getPage() - 1) * $filter->getLimit();
-                $select->limit($filter->getLimit())->offset($offset);
-            }
-
             return $this->fetchPaginatedCollection(
                 new Collection(Entity::class, __FUNCTION__, $filter->toArray()),
                 $this->readSql,
-                $select,
+                $this->filterQuery($this->getSelect(), $filter),
                 $this->mapper
             );
-
         } catch (ExceptionInterface $exception) {
             throw new StorageException(
                 $exception->getMessage(),
@@ -74,19 +92,57 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    protected function buildFilterQuery(Filter $filter)
+    protected function filterQuery(Select $select, Filter $filter)
     {
-        $query = [];
         if (!empty($filter->getId())) {
-            $query['invoiceMapping.id'] = $filter->getId();
+            $where = new Where(null, Where::COMBINED_BY_OR);
+            foreach ($filter->getId() as $id) {
+                list($accountId, $site) = array_pad(explode('-', $id, 2), 2, '');
+                $where->addPredicate(new Where(['accountId' => $accountId, 'site' => $site]));
+            }
+            $select->where($where);
         }
+
         if (!empty($filter->getAccountId())) {
-            $query['invoiceMapping.accountId'] = $filter->getAccountId();
+            $select->where(['accountId' => $filter->getAccountId()]);
         }
+
         if (!empty($filter->getOrganisationUnitId())) {
-            $query['invoiceMapping.organisationUnitId'] = $filter->getOrganisationUnitId();
+            $select->where(['organisationUnitId' => $filter->getOrganisationUnitId()]);
         }
-        return $query;
+
+        if (!empty($filter->getSite())) {
+            $select->where(['site' => $filter->getSite()]);
+        }
+
+        if ($filter->getLimit() != 'all') {
+            $offset = ($filter->getPage() - 1) * $filter->getLimit();
+            $select->limit($filter->getLimit())->offset($offset);
+        }
+
+        return $select;
+    }
+
+    /**
+     * @param Entity $entity
+     */
+    protected function insertEntity($entity)
+    {
+        $data = $entity->toArray(); unset($data['id']);
+        $insert = $this->getInsert()->values($data);
+        $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        return $entity->setNewlyInserted(true);
+    }
+
+    /**
+     * @param Entity $entity
+     */
+    protected function updateEntity($entity)
+    {
+        $data = $entity->toArray(); unset($data['id']);
+        $update = $this->getUpdate()->set($data)->where(['accountId' => $entity->getAccountId(), 'site' => $entity->getSite()]);
+        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+        return $entity;
     }
 
     /**

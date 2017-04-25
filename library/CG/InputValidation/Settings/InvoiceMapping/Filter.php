@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Settings\InvoiceMapping;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\GreaterThan;
 use CG\Validation\Rules\PaginationTrait;
@@ -17,10 +18,10 @@ class Filter implements RulesInterface
             'limit' => $this->getLimitValidation(),
             'page' => $this->getPageValidation(),
             'id' => [
-                'name'       => 'id',
-                'required'   => false,
+                'name' => 'id',
+                'required'  => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                    new IsArrayValidator(['name' => 'id'])
                 ]
             ],
             'organisationUnitId' => [
@@ -35,6 +36,13 @@ class Filter implements RulesInterface
                 'required' => false,
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                ]
+            ],
+            'site' => [
+                'name' => 'site',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'site'])
                 ]
             ],
         ];

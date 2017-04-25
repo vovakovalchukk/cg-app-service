@@ -28,7 +28,8 @@ class Collection
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
-                $this->getParams('accountId') ?: []
+                $this->getParams('accountId') ?: [],
+                $this->getParams('site') ?: []
             )
         );
     }
