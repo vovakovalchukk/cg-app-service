@@ -22,12 +22,6 @@ class Versioniser8 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-
-        if (isset($data['autoEmailAllowed'])) {
-            unset($data['autoEmailAllowed']);
-            $request->setData($data);
-        }
-
         if (!isset($data['id']) || isset($data['sendToFba'])) {
             return;
         }
@@ -45,7 +39,6 @@ class Versioniser8 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        $data['autoEmailAllowed'] = (bool) ($data['autoEmail'] ?? false);
         unset($data['sendToFba']);
         $response->setData($data);
     }
