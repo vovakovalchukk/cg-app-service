@@ -4,7 +4,6 @@ namespace CG\Settings\InvoiceMapping\Storage;
 use CG\Settings\InvoiceMapping\Collection;
 use CG\Settings\InvoiceMapping\Entity;
 use CG\Settings\InvoiceMapping\Filter;
-use CG\Settings\InvoiceMapping\Mapper;
 use CG\Settings\InvoiceMapping\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -36,10 +35,10 @@ class Db extends DbAbstract implements StorageInterface
     protected $fastReadSql;
     /** @var Sql $writeSql */
     protected $writeSql;
-    /** @var Mapper $mapper */
+    /** @var Db\Mapper $mapper */
     protected $mapper;
 
-    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Db\Mapper $mapper)
     {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
     }
@@ -128,7 +127,7 @@ class Db extends DbAbstract implements StorageInterface
      */
     protected function insertEntity($entity)
     {
-        $data = $entity->toArray(); unset($data['id']);
+        $data = $this->mapper->getEntityData($entity);
         $insert = $this->getInsert()->values($data);
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         return $entity->setNewlyInserted(true);
@@ -139,7 +138,7 @@ class Db extends DbAbstract implements StorageInterface
      */
     protected function updateEntity($entity)
     {
-        $data = $entity->toArray(); unset($data['id']);
+        $data = $this->mapper->getEntityData($entity);
         $update = $this->getUpdate()->set($data)->where(['accountId' => $entity->getAccountId(), 'site' => $entity->getSite()]);
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
         return $entity;

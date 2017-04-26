@@ -1,12 +1,14 @@
 <?php
 namespace CG\InputValidation\Settings\InvoiceMapping;
 
-use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
+use CG\Validation\ValidatorChain;
+use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
-use Zend\Validator\StringLength;
+use Zend\Validator\Identical;
 use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
@@ -51,12 +53,26 @@ class Entity implements RulesInterface
             'sendViaEmail' => [
                 'name' => 'sendViaEmail',
                 'required' => false,
-                'validators' => [new BooleanValidator(['name' => 'sendViaEmail'])]
+                'validators' => [
+                    (new ValidatorChain(
+                        [
+                            new ValidatorChain([new StringLength(['min' => 1]), new Date(['format' => 'Y-m-d H:i:s'])], false),
+                            new Identical(false)
+                        ]
+                    ))->setMessage('Must be a valid date (Y-m-d H:i:s) or false')
+                ]
             ],
             'sendToFba' => [
                 'name' => 'sendToFba',
                 'required' => false,
-                'validators' => [new BooleanValidator(['name' => 'sendToFba'])]
+                'validators' => [
+                    (new ValidatorChain(
+                        [
+                            new ValidatorChain([new StringLength(['min' => 1]), new Date(['format' => 'Y-m-d H:i:s'])], false),
+                            new Identical(false)
+                        ]
+                    ))->setMessage('Must be a valid date (Y-m-d H:i:s) or false')
+                ]
             ],
         ];
     }

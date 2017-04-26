@@ -34,12 +34,6 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
-            'autoEmailAllowed' => [
-                'name' => 'autoEmailAllowed',
-                'required' => false,
-                'allow_empty' => true,
-                'validators' => [new BooleanValidator(['name' => 'autoEmailAllowed'])],
-            ],
             'emailSendAs' => [
                 'name' => 'emailSendAs',
                 'required' => false,
@@ -107,7 +101,7 @@ class Entity implements RulesInterface
             'sendToFba' => [
                 'name'       => 'sendToFba',
                 'required'   => false,
-                'validators' => [new BooleanValidator(['name' => 'sendToFba'])]
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
         ];
     }

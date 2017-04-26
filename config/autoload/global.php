@@ -1545,7 +1545,6 @@ $config = array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => InvoiceMappingSettingsMapper::class
                 ]
             ],
             'preferences' => [
