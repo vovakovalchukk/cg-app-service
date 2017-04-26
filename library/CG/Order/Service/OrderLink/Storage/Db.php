@@ -116,7 +116,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         $select = $this->getReadSql()->select('orderLink');
         $select->join('orderLinkOrders', 'orderLink.id = orderLinkOrders.orderLinkId', [
-            'orderIds' => new Expression('GROUP_CONCAT(orderLinkOrders.orderId SEPARATOR ",")')
+            'orderIds' => new Expression('GROUP_CONCAT(DISTINCT orderLinkOrders.orderId SEPARATOR ",")')
         ])
             ->group('orderLink.id');
         return $select;
