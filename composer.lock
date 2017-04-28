@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e547282bc3c4de1f406a9dda1e7f9976",
+    "content-hash": "61aa3f90caf5878a92ef2dab058f35db",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -323,11 +323,17 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-8302-orders-embed-orderlinks",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
                 "reference": "b4de36e2104e554f071c5d24bdce63455d3d880e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-EPIC-CGIV-8175-linked-orders-284adc.zip",
+                "reference": "b4de36e2104e554f071c5d24bdce63455d3d880e",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
@@ -352,7 +358,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-06T12:48:03+00:00"
+            "time": "2017-04-28 11:33:24"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -676,7 +682,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1504,11 +1510,17 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8302-orders-embed-orderlinks",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
                 "reference": "7f694a2b24f7149230f81cd8e05f941f62747920"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-7c0e59.zip",
+                "reference": "7f694a2b24f7149230f81cd8e05f941f62747920",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1577,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-18T08:48:05+00:00"
+            "time": "2017-04-28 12:35:28"
         },
         {
             "name": "channelgrabber/permission",
@@ -9526,19 +9538,13 @@
         {
             "alias": "2.3.3",
             "alias_normalized": "2.3.3.0",
-            "version": "dev-CGIV-8302-orders-embed-orderlinks",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "package": "channelgrabber/cache"
         },
         {
             "alias": "1.28.6",
             "alias_normalized": "1.28.6.0",
             "version": "dev-EPIC-CGIV-8175-linked-orders",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.28.6",
-            "alias_normalized": "1.28.6.0",
-            "version": "dev-CGIV-8302-orders-embed-orderlinks",
             "package": "channelgrabber/order"
         }
     ],
@@ -9548,8 +9554,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
