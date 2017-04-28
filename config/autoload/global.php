@@ -111,6 +111,9 @@ use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
 use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Order\Service\UserChange\Storage\Db as UserChangeDbStorage;
 
+// OrderLink
+use CG\Order\Shared\OrderLink\Entity as OrderLinkEntity;
+
 //Batch
 use CG\Order\Service\Batch\Service as BatchService;
 use CG\Order\Shared\Batch\Repository as BatchRepository;
@@ -507,6 +510,13 @@ $config = array(
                                 'getter' => 'getOrderId'
                             ]
                         ],
+                        OrderLinkEntity::class => [
+                            [
+                                'entityClass' => OrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getOrderIds'
+                            ]
+                        ],
                         OrderEntity::class => [
                             ['entityClass' => ItemEntity::class],
                             ['entityClass' => NoteEntity::class],
@@ -516,6 +526,7 @@ $config = array(
                                 'entityClass' => UserChangeEntity::class,
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
+                            ['entityClass' => OrderLinkEntity::class],
                         ]
                     ],
                     'debugCachable' => [
