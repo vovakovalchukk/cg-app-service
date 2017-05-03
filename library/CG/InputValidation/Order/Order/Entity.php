@@ -408,6 +408,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
             ],
+            'marketplace' => [
+                'name'       => 'marketplace',
+                'required'   => false,
+                'validators' => []
+            ],
         );
     }
 

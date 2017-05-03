@@ -70,6 +70,15 @@ use CG\Settings\Order\Entity as OrderEntity;
 use CG\Settings\Order\Mapper as OrderMapper;
 use CG\Settings\Order\RestService as OrderService;
 
+// InvoiceMapping
+use CG\Controllers\Settings\InvoiceMapping;
+use CG\Controllers\Settings\InvoiceMapping\Collection as InvoiceMappingCollection;
+use CG\Settings\InvoiceMapping\Entity as InvoiceMappingEntity;
+use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingMapper;
+use CG\Settings\InvoiceMapping\Service as InvoiceMappingService;
+use CG\InputValidation\Settings\InvoiceMapping\Entity as InvoiceMappingEntityValidation;
+use CG\InputValidation\Settings\InvoiceMapping\Filter as InvoiceMappingCollectionValidation;
+
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -102,7 +111,7 @@ return [
         'validation' => [
             'filterRules' => CollectionValidation::class
         ],
-        'version' => new Version(1, 8),
+        'version' => new Version(1, 9),
     ],
     '/settings/invoice/:id' => [
         'controllers' => function($invoiceId) use ($di) {
@@ -120,7 +129,7 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
-        'version' => new Version(1, 8),
+        'version' => new Version(1, 9),
         'eTag' => [
             'mapperClass' => InvoiceMapper::class,
             'entityClass' => InvoiceEntity::class,
@@ -378,6 +387,46 @@ return [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
             'serviceClass' => OrderService::class
+        ]
+    ],
+    '/settings/invoiceMapping' => [
+        'controllers' => function() use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(InvoiceMappingCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'InvoiceMappingCollection',
+        'entityRoute' => '/settings/invoiceMapping/:id',
+        'validation' => [
+            'filterRules' => InvoiceMappingCollectionValidation::class
+        ]
+    ],
+    '/settings/invoiceMapping/:id' => [
+        'controllers' => function($ouId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(InvoiceMapping::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($ouId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'InvoiceMappingEntity',
+        'validation' => [
+            'dataRules' => InvoiceMappingEntityValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => InvoiceMappingMapper::class,
+            'entityClass' => InvoiceMappingEntity::class,
+            'serviceClass' => InvoiceMappingService::class
         ]
     ],
 ];

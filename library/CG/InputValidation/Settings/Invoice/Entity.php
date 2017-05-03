@@ -104,6 +104,11 @@ class Entity implements RulesInterface
                 'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'useVerifiedEmailAddressForAmazonInvoices'])]
             ],
+            'sendToFba' => [
+                'name'       => 'sendToFba',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
         ];
     }
 }

@@ -172,6 +172,6 @@ return [
         'validation' => [
             'filterRules' => UnimportedListingMarketplaceValidation::class,
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
 ];
