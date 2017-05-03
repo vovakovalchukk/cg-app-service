@@ -22,7 +22,10 @@ class Marketplace
     {
         $params = $this->getParams();
         return $this->getService()->fetchCollectionByFilterAsHal(
-            new Filter(isset($params['organisationUnitId']) ? $params['organisationUnitId'] : [])
+            new Filter(
+                isset($params['organisationUnitId']) ? $params['organisationUnitId'] : [],
+                isset($params['accountId']) ? $params['accountId'] : []
+            )
         );
     }
 } 

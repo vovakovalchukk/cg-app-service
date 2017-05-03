@@ -398,6 +398,13 @@ use CG\ExchangeRate\Storage\Db as ExchangeRateDbStorage;
 use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
 use CG\ExchangeRate\Storage\ExternalApi as ExchangeRateExternalApiStorage;
 
+// InvoiceMapping Settings
+use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingSettingsMapper;
+use CG\Settings\InvoiceMapping\Repository as InvoiceMappingSettingsRepository;
+use CG\Settings\InvoiceMapping\Storage\Cache as InvoiceMappingSettingsCacheStorage;
+use CG\Settings\InvoiceMapping\Storage\Db as InvoiceMappingSettingsDbStorage;
+use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1538,6 +1545,19 @@ $config = array(
                     'predisClient' => 'reliable_redis',
                 ],
             ],
+            InvoiceMappingSettingsRepository::class => [
+                'parameters' => [
+                    'storage' => InvoiceMappingSettingsCacheStorage::class,
+                    'repository' => InvoiceMappingSettingsDbStorage::class,
+                ],
+            ],
+            InvoiceMappingSettingsDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1585,6 +1605,7 @@ $config = array(
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
+                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class
             ]
         )
     )

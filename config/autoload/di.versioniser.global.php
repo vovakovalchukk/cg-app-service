@@ -24,6 +24,7 @@ use CG\Slim\Versioning\TrackingCollection;
 use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
+use CG\Slim\Versioning\UnimportedListingMarketplace;
 
 return [
     'di' => [
@@ -65,6 +66,8 @@ return [
                 'Versioniser_OrderEntity_12' => OrderEntity\Versioniser12::class,
                 'Versioniser_OrderCollection_13' => OrderCollection\Versioniser13::class,
                 'Versioniser_OrderEntity_13' => OrderEntity\Versioniser13::class,
+                'Versioniser_OrderCollection_14' => OrderCollection\Versioniser14::class,
+                'Versioniser_OrderEntity_14' => OrderEntity\Versioniser14::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -137,6 +140,8 @@ return [
                 'Versioniser_InvoiceSettings_6' => InvoiceSettingsEntity\Versioniser6::class,
                 'Versioniser_InvoiceSettingsCollection_7' => InvoiceSettingsCollection\Versioniser7::class,
                 'Versioniser_InvoiceSettings_7' => InvoiceSettingsEntity\Versioniser7::class,
+                'Versioniser_InvoiceSettingsCollection_8' => InvoiceSettingsCollection\Versioniser8::class,
+                'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
@@ -144,6 +149,7 @@ return [
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
+                'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

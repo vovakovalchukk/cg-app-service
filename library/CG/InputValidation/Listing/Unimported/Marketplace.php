@@ -17,6 +17,13 @@ class Marketplace implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
+            'accountId' => [
+                'name'       => 'accountId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                ]
+            ],
         ];
     }
 } 
