@@ -358,7 +358,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-28 11:33:24"
+            "time": "2017-04-28T11:33:24+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -682,7 +682,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1510,17 +1510,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-8175-linked-orders",
+            "version": "dev-CGIV-8223-linked-orders-auto-linking",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7f694a2b24f7149230f81cd8e05f941f62747920"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-7c0e59.zip",
-                "reference": "7f694a2b24f7149230f81cd8e05f941f62747920",
-                "shasum": null
+                "reference": "e7be286a685059ccfb2041eb000e9117a904fb8f"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1589,7 +1583,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-28 12:35:28"
+            "time": "2017-04-28T12:35:28+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9546,6 +9540,12 @@
             "alias_normalized": "1.28.6.0",
             "version": "dev-EPIC-CGIV-8175-linked-orders",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.28.6",
+            "alias_normalized": "1.28.6.0",
+            "version": "dev-CGIV-8223-linked-orders-auto-linking",
+            "package": "channelgrabber/order"
         }
     ],
     "minimum-stability": "stable",
@@ -9554,8 +9554,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

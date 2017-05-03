@@ -407,7 +407,7 @@ class Entity implements RulesInterface
                 'name' => 'shippingOriginCountryCode',
                 'required' => false,
                 'validators' => [(new InArray())->setHaystack(CountryCode::getCountryCodes())]
-            ],
+            ]
         );
     }
 
