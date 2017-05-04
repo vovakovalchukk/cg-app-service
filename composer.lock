@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "61aa3f90caf5878a92ef2dab058f35db",
+    "content-hash": "aba8c0414e5d58715877686a84e72dc8",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1517,12 +1517,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7f694a2b24f7149230f81cd8e05f941f62747920"
+                "reference": "2b50eabf8e671fe4b8abdd624428c831ed033065"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-7c0e59.zip",
-                "reference": "7f694a2b24f7149230f81cd8e05f941f62747920",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-8848a7.zip",
+                "reference": "2b50eabf8e671fe4b8abdd624428c831ed033065",
                 "shasum": null
             },
             "require": {
@@ -1592,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-28 12:35:28"
+            "time": "2017-05-04 10:32:17"
         },
         {
             "name": "channelgrabber/permission",
@@ -8308,11 +8308,6 @@
                     "CG\\Codeception\\": "src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-02-17T16:11:07+00:00"
         },
         {
@@ -8343,11 +8338,6 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17T16:21:12+00:00"
@@ -9557,8 +9547,8 @@
             "package": "channelgrabber/cache"
         },
         {
-            "alias": "1.28.6",
-            "alias_normalized": "1.28.6.0",
+            "alias": "1.28.8",
+            "alias_normalized": "1.28.8.0",
             "version": "dev-EPIC-CGIV-8175-linked-orders",
             "package": "channelgrabber/order"
         }
