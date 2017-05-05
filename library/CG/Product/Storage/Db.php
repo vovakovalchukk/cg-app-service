@@ -19,6 +19,7 @@ use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
+use function CG\Stdlib\escapeLikeValue;
 
 /**
  * @method Sql getFastReadSql
@@ -34,6 +35,9 @@ class Db extends DbAbstract implements StorageInterface
     {
         try {
             $total = $this->fetchEntityCount($filter);
+            if ($total == 0) {
+                throw new NotFound('No matching products');
+            }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
@@ -53,49 +57,105 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function createSelectFromFilter(Filter $filter)
     {
+        $variations = false;
         $select = $this->getReadSql()
             ->select('product')
-            ->quantifier(Select::QUANTIFIER_DISTINCT)
-            ->columns(['id' => 'id'])
+            ->columns(['_id' => 'id'])
             ->where($this->buildFilterQuery($filter));
 
-        $types = array_flip($filter->getType());
-        $typeQuery = new Predicate(null, Predicate::OP_OR);
         $searchTerm = $filter->getSearchTerm();
+        $types = array_fill_keys($filter->getType(), true);
+        $typeQuery = new Predicate(null, Predicate::OP_OR);
+        $sku = (array) $filter->getSku();
+        $skuMatchType = array_fill_keys($filter->getSkuMatchType(), true);
+        $skuMatchTypeQuery = new Predicate(null, Predicate::OP_OR);
 
-        if (isset($types[Filter::TYPE_SIMPLE]) || isset($types[Filter::TYPE_PARENT]) || $searchTerm) {
-            $select->join(
-                ['variation' => 'product'],
-                'variation.parentProductId = product.id',
-                [],
-                Select::JOIN_LEFT
-            );
+        if (isset($types[Filter::TYPE_SIMPLE])) {
+            $variations = true;
+            $typeQuery->isNull('variation.id');
+        }
 
-            if (isset($types[Filter::TYPE_SIMPLE])) {
-                $typeQuery->isNull('variation.id');
-            }
+        if (isset($types[Filter::TYPE_PARENT])) {
+            $variations = true;
+            $typeQuery->isNotNull('variation.id');
+        }
 
-            if (isset($types[Filter::TYPE_PARENT])) {
-                $typeQuery->isNotNull('variation.id');
-            }
-
-            if ($searchTerm) {
-                $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
-            }
+        if ($searchTerm) {
+            $variations = true;
+            $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
         }
 
         if (isset($types[Filter::TYPE_VARIATION])) {
             $typeQuery->notEqualTo('product.parentProductId', 0);
         }
 
+        if (!empty($sku) && !isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
+            if (isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
+                $skuMatchTypeQuery->addPredicate(
+                    (new Predicate())
+                        ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                        ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+                );
+            }
+            if (isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
+                $skuMatchTypeQuery->addPredicate(
+                    (new Predicate())
+                        ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                        ->greaterThan('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+                );
+            }
+            if (isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
+                $skuMatchTypeQuery->addPredicate(
+                    (new Predicate())
+                        ->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                        ->lessThan('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                        ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+                );
+            }
+        }
+
         if ($filter->getReplaceVariationWithParent()) {
             $select->columns(
-                ['id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
+                ['_id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
+            );
+        }
+
+        if ($variations || (!empty($sku) && $skuMatchTypeQuery->count() > 0)) {
+            $select->join(
+                ['variation' => 'product'],
+                'variation.parentProductId = product.id',
+                [],
+                Select::JOIN_LEFT
             );
         }
 
         if ($typeQuery->count() > 0) {
             $select->where($typeQuery);
+        }
+
+        if (!empty($sku) && $skuMatchTypeQuery->count() > 0) {
+            $column = 'IFNULL(variation.sku, product.sku)';
+            $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
+                return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
+            }, $sku));
+
+            $select
+                ->columns(
+                    array_merge(
+                        $select->getRawState(Select::COLUMNS),
+                        [
+                            'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
+                            'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
+                        ]
+                    )
+                )
+                ->group('_id')
+                ->having($skuMatchTypeQuery);
+        } else {
+            $select->quantifier(Select::QUANTIFIER_DISTINCT);
+            if (!empty($sku)) {
+                $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
+            }
         }
 
         return $select;
@@ -107,18 +167,11 @@ class Db extends DbAbstract implements StorageInterface
         $quantifier = $select->getRawState(Select::QUANTIFIER);
         $columns = $select->getRawState(Select::COLUMNS);
 
-        $select
-            ->reset(Select::QUANTIFIER)
-            ->columns(
-                [
-                    'count' => new Expression(
-                        sprintf('COUNT(%s ?)', $quantifier == Select::QUANTIFIER_DISTINCT ? Select::QUANTIFIER_DISTINCT : ''),
-                        [$columns['id']]
-                    ),
-                ]
-            );
+        $count = $this->getReadSql()
+            ->select(['products' => $select])
+            ->columns(['count' => new Expression('COUNT(_id)')]);
 
-        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        $results = $this->getReadSql()->prepareStatementForSqlObject($count)->execute();
         return $results->current()['count'];
     }
 
@@ -136,7 +189,7 @@ class Db extends DbAbstract implements StorageInterface
         if($results->count() == 0) {
             throw new NotFound();
         }
-        return array_column(iterator_to_array($results), 'id');
+        return array_column(iterator_to_array($results), '_id');
     }
 
     protected function fetchCollectionWithJoinQuery(ProductCollection $collection, Select $select)
@@ -165,15 +218,6 @@ class Db extends DbAbstract implements StorageInterface
         }
         if (!is_null($filter->getCgCreationDate())) {
             $query['product.cgCreationDate'] = $filter->getCgCreationDate();
-        }
-
-        if(!empty($filter->getSku())) {
-            // Must do SKU check as (LIKE OR LIKE) instead of IN() otherwise
-            // MySQL ignores trailing spaces and we get unexpected results
-            $sku = (array)$filter->getSku();
-            $where = $this->arrayFiltersToWhere($query);
-            $this->filterArrayValuesToOrdLikes('product.sku', $sku, $where);
-            return $where;
         }
         return $query;
     }
