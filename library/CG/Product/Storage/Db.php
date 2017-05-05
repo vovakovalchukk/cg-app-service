@@ -89,29 +89,35 @@ class Db extends DbAbstract implements StorageInterface
             $typeQuery->notEqualTo('product.parentProductId', 0);
         }
 
-        if (!empty($sku) && !isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
-            if (isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
-                $skuMatchTypeQuery->addPredicate(
-                    (new Predicate())
-                        ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                        ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-                );
-            }
-            if (isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
-                $skuMatchTypeQuery->addPredicate(
-                    (new Predicate())
-                        ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                        ->greaterThan('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-                );
-            }
-            if (isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
-                $skuMatchTypeQuery->addPredicate(
-                    (new Predicate())
-                        ->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                        ->lessThan('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                        ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-                );
-            }
+        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
+            $skuMatchTypeQuery->addPredicate(
+                (new Predicate())->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+            );
+        }
+
+        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
+            $skuMatchTypeQuery->addPredicate(
+                (new Predicate())
+                    ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                    ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+            );
+        }
+
+        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                (new Predicate())
+                    ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                    ->greaterThan('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+            );
+        }
+
+        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                (new Predicate())
+                    ->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                    ->lessThan('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
+                    ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
+            );
         }
 
         if ($filter->getReplaceVariationWithParent()) {
