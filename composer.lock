@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "69728f364c9a702c5856ca622e6d4904",
+    "content-hash": "5cb2786dce0d59087e71e021bedd190a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8223-linked-orders-auto-linking",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "21903fb286d55ec28b472d84f3ea6beb591764f6"
+                "reference": "d80a7cb89becd1ed8e0ecad9441ee7d1b198b15a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8223-linked-orders-auto-linking-4e1151.zip",
-                "reference": "21903fb286d55ec28b472d84f3ea6beb591764f6",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-8175-linked-orders-ee4a59.zip",
+                "reference": "d80a7cb89becd1ed8e0ecad9441ee7d1b198b15a",
                 "shasum": null
             },
             "require": {
@@ -1592,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-04 10:33:05"
+            "time": "2017-05-05 09:15:46"
         },
         {
             "name": "channelgrabber/permission",
@@ -9547,9 +9547,9 @@
             "package": "channelgrabber/cache"
         },
         {
-            "alias": "1.28.8",
-            "alias_normalized": "1.28.8.0",
-            "version": "dev-CGIV-8223-linked-orders-auto-linking",
+            "alias": "1.28.9",
+            "alias_normalized": "1.28.9.0",
+            "version": "dev-EPIC-CGIV-8175-linked-orders",
             "package": "channelgrabber/order"
         }
     ],
