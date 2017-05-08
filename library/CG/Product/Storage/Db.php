@@ -13,6 +13,7 @@ use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
 use CG\Zend\Stdlib\Db\Sql\InsertIgnore as InsertIgnore;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\Expression as Query;
 use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\Like;
 use Zend\Db\Sql\Predicate\NotIn;
@@ -57,67 +58,19 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function createSelectFromFilter(Filter $filter)
     {
-        $variations = false;
+        $joinWithVariations = false;
         $select = $this->getReadSql()
             ->select('product')
             ->columns(['_id' => 'id'])
             ->where($this->buildFilterQuery($filter));
 
-        $searchTerm = $filter->getSearchTerm();
-        $types = array_fill_keys($filter->getType(), true);
-        $typeQuery = new Predicate(null, Predicate::OP_OR);
         $sku = (array) $filter->getSku();
-        $skuMatchType = array_fill_keys($filter->getSkuMatchType(), true);
-        $skuMatchTypeQuery = new Predicate(null, Predicate::OP_OR);
+        $typeQuery = $this->buildTypeQuery(array_fill_keys($filter->getType(), true), $joinWithVariations);
+        $skuMatchTypeQuery = $this->buildSkuMatchQuery($sku, array_fill_keys($filter->getSkuMatchType(), true));
 
-        if (isset($types[Filter::TYPE_SIMPLE])) {
-            $variations = true;
-            $typeQuery->isNull('variation.id');
-        }
-
-        if (isset($types[Filter::TYPE_PARENT])) {
-            $variations = true;
-            $typeQuery->isNotNull('variation.id');
-        }
-
-        if ($searchTerm) {
-            $variations = true;
-            $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
-        }
-
-        if (isset($types[Filter::TYPE_VARIATION])) {
-            $typeQuery->notEqualTo('product.parentProductId', 0);
-        }
-
-        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
-            $skuMatchTypeQuery->addPredicate(
-                (new Predicate())->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-            );
-        }
-
-        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
-            $skuMatchTypeQuery->addPredicate(
-                (new Predicate())
-                    ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                    ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-            );
-        }
-
-        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
-            $skuMatchTypeQuery->addPredicate(
-                (new Predicate())
-                    ->equalTo('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                    ->greaterThan('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-            );
-        }
-
-        if (!empty($sku) && isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
-            $skuMatchTypeQuery->addPredicate(
-                (new Predicate())
-                    ->greaterThan('skuMatch', 0, Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                    ->lessThan('skuMatch', count($sku), Predicate::TYPE_IDENTIFIER, Predicate::TYPE_VALUE)
-                    ->equalTo('skuCount', 'skuMatch', Predicate::TYPE_IDENTIFIER, Predicate::TYPE_IDENTIFIER)
-            );
+        if ($searchTerm = $filter->getSearchTerm()) {
+            $joinWithVariations = true;
+            $select->where($this->buildSearchTermQuery($searchTerm));
         }
 
         if ($filter->getReplaceVariationWithParent()) {
@@ -126,7 +79,7 @@ class Db extends DbAbstract implements StorageInterface
             );
         }
 
-        if ($variations || (!empty($sku) && $skuMatchTypeQuery->count() > 0)) {
+        if ($joinWithVariations || (!empty($sku) && $skuMatchTypeQuery->count() > 0)) {
             $select->join(
                 ['variation' => 'product'],
                 'variation.parentProductId = product.id',
@@ -140,30 +93,13 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         if (!empty($sku) && $skuMatchTypeQuery->count() > 0) {
-            $column = 'IFNULL(variation.sku, product.sku)';
-            $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
-                return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
-            }, $sku));
-
-            $select
-                ->columns(
-                    array_merge(
-                        $select->getRawState(Select::COLUMNS),
-                        [
-                            'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
-                            'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
-                        ]
-                    )
-                )
-                ->group('_id')
-                ->having($skuMatchTypeQuery);
-        } else {
-            $select->quantifier(Select::QUANTIFIER_DISTINCT);
-            if (!empty($sku)) {
-                $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
-            }
+            return $this->addSkuMatchToSelect($select, $sku, $skuMatchTypeQuery);
         }
 
+        $select->quantifier(Select::QUANTIFIER_DISTINCT);
+        if (!empty($sku)) {
+            $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
+        }
         return $select;
     }
 
@@ -239,6 +175,82 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         return ["(" . implode(' OR ', $searchQuery) . ")" => array_fill(0, count($searchQuery), $likeSearchTerm)];
+    }
+
+    protected function buildTypeQuery(array $types, &$joinWithVariations = false)
+    {
+        $typeQuery = new Predicate(null, Predicate::OP_OR);
+
+        if (isset($types[Filter::TYPE_SIMPLE])) {
+            $joinWithVariations = true;
+            $typeQuery->isNull('variation.id');
+        }
+
+        if (isset($types[Filter::TYPE_PARENT])) {
+            $joinWithVariations = true;
+            $typeQuery->isNotNull('variation.id');
+        }
+
+        if (isset($types[Filter::TYPE_VARIATION])) {
+            $typeQuery->notEqualTo('product.parentProductId', 0);
+        }
+
+        return $typeQuery;
+    }
+
+    protected function buildSkuMatchQuery(array $sku, array $skuMatchType)
+    {
+        $skuMatchTypeQuery = new Predicate(null, Predicate::OP_OR);
+        if (empty($sku)) {
+            return $skuMatchTypeQuery;
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('skuMatch > 0')
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch = ? AND skuCount = skuMatch)', count($sku))
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch = ? AND skuCount > skuMatch)', count($sku))
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch > 0 AND skuMatch < ? AND skuCount = skuMatch)', count($sku))
+            );
+        }
+
+        return $skuMatchTypeQuery;
+    }
+
+    public function addSkuMatchToSelect(Select $select, array $sku, Predicate $skuMatchTypeQuery)
+    {
+        $column = 'IFNULL(variation.sku, product.sku)';
+        $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
+            return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
+        }, $sku));
+
+        return $select
+            ->columns(
+                array_merge(
+                    $select->getRawState(Select::COLUMNS),
+                    [
+                        'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
+                        'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
+                    ]
+                )
+            )
+            ->group('_id')
+            ->having($skuMatchTypeQuery);
     }
 
     public function fetch($id)
