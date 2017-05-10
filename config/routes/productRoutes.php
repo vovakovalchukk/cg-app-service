@@ -23,6 +23,14 @@ use CG\Product\Detail\Entity as ProductDetailEntity;
 use CG\Product\Detail\Mapper as ProductDetailMapper;
 use CG\Product\Detail\RestService as ProductDetailService;
 
+use CG\Controllers\ProductLink\Entity as ProductLinkController;
+use CG\Controllers\ProductLink\Collection as ProductLinkCollectionController;
+use CG\InputValidation\ProductLink\Entity as ProductLinkEntityValidation;
+use CG\InputValidation\ProductLink\Filter as ProductLinkCollectionValidation;
+use CG\Product\Link\Entity as ProductLinkEntity;
+use CG\Product\Link\Mapper as ProductLinkMapper;
+use CG\Product\Link\Service as ProductLinkService;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -144,6 +152,45 @@ return [
             'mapperClass' => ProductDetailMapper::class,
             'entityClass' => ProductDetailEntity::class,
             'serviceClass' => ProductDetailService::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLink' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkCollection',
+        'entityRoute' => '/productLink/:productLinkId',
+        'validation' => [
+            'filterRules' => ProductLinkCollectionValidation::class,
+            'dataRules' => ProductLinkEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLink/:productLinkId' => [
+        'controllers' => function($productLinkId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'ProductLinkEntity',
+        'validation' => [
+            'dataRules' => ProductLinkEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ProductLinkMapper::class,
+            'entityClass' => ProductLinkEntity::class,
+            'serviceClass' => ProductLinkService::class
         ],
         'version' => new Version(1, 1)
     ],
