@@ -26,7 +26,7 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetch($id)
     {
-        list($organisationUnitId, $sku) = explode('-', $id, 2);
+        [$organisationUnitId, $sku] = explode('-', $id, 2);
         $select = $this->getSelect()->where([
             'organisationUnitId' => $organisationUnitId,
             'productSku' => $sku,
