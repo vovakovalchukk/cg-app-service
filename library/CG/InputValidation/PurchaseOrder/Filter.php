@@ -1,6 +1,5 @@
 <?php
-namespace CG\InputValidation\ShipmentMetadata;
-
+namespace CG\InputValidation\PurchaseOrder;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
