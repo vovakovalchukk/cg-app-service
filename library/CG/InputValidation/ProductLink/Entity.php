@@ -34,7 +34,7 @@ class Entity implements RulesInterface
             'stock' => [
                 'name' => 'stock',
                 'required' => true,
-                'validators' => [new StockArray('stock')]
+                'validators' => [new StockQty(new IntegerValidator(), ['name' =>'stock'])]
             ],
         ];
     }

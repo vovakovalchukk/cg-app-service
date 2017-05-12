@@ -121,19 +121,13 @@ class Db extends DbAbstract implements StorageInterface
         return [
             'organisationUnitId' => $data['organisationUnitId'],
             'sku' => $data['productSku'],
-            'stock' => [[
-                'sku' => $data['stockSku'],
-                'quantity' => $data['quantity'],
-            ]]
+            'stock' => [$data['stockSku'] => $data['quantity']]
         ];
     }
 
     protected function appendStockRow(array &$array, array $data)
     {
-        $array['stock'][] = [
-            'sku' => $data['stockSku'],
-            'quantity' => $data['quantity'],
-        ];
+        $array['stock'][$data['stockSku']] = $data['quantity'];
     }
 
     /**
