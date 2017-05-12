@@ -127,6 +127,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(['name' => 'shippingAddressCountryExclude', 'haystack' => CountryCode::getCountryCodes()])
                 ]
             ],
+            'shippingAddressPostcode' => [
+                'name' => 'shippingAddressPostcode',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'shippingAddressPostCode'])
+                ]
+            ],
             'multiLineOrder' => [
                 'name' => 'multiLineOrder',
                 'required' => false,
