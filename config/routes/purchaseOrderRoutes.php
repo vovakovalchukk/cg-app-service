@@ -6,8 +6,13 @@ use CG\Controllers\PurchaseOrder\PurchaseOrder as PurchaseOrderController;
 use CG\Controllers\PurchaseOrder\PurchaseOrderItem\Collection as PurchaseOrderItemCollectionController;
 use CG\Controllers\PurchaseOrder\PurchaseOrderItem as PurchaseOrderItemController;
 
-use CG\InputValidation\PurchaseOrder\Entity as ValidationEntity;
-use CG\InputValidation\PurchaseOrder\Filter as ValidationFilter;
+use CG\InputValidation\PurchaseOrder\Entity as PurchaseOrderValidationEntity;
+use CG\InputValidation\PurchaseOrder\Filter as PurchaseOrderValidationFilter;
+
+use CG\InputValidation\PurchaseOrderItem\Entity as PurchaseOrderItemValidationEntity;
+use CG\InputValidation\PurchaseOrderItem\Filter as PurchaseOrderItemValidationFilter;
+
+
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Mapper as PurchaseOrderMapper;
 
@@ -21,8 +26,8 @@ return [
     "/purchaseOrderItem" => [
         "validation" => [
             "flatten" => false,
-            "dataRules" => ValidationEntity::class,
-            "filterRules" => ValidationFilter::class,
+            "dataRules" => PurchaseOrderItemValidationEntity::class,
+            "filterRules" => PurchaseOrderItemValidationFilter::class,
         ],
         "controllers" => function() use ($serviceManager) {
 
@@ -46,7 +51,7 @@ return [
     "/purchaseOrderItem/:id" => [
         "validation" => [
             "flatten" => false,
-            "dataRules" => ValidationEntity::class,
+            "dataRules" => PurchaseOrderItemValidationEntity::class,
             "filterRules" => null
         ],
         "controllers" => function($id) use ($serviceManager) {
@@ -74,8 +79,8 @@ return [
     "/purchaseOrder" => [
         "validation" => [
             "flatten" => false,
-            "dataRules" => ValidationEntity::class,
-            "filterRules" => ValidationFilter::class,
+            "dataRules" => PurchaseOrderValidationEntity::class,
+            "filterRules" => PurchaseOrderValidationFilter::class,
         ],
         "controllers" => function() use ($serviceManager) {
             $di = $serviceManager->get('Di');
@@ -98,7 +103,7 @@ return [
     "/purchaseOrder/:id" => [
         "validation" => [
             "flatten" => false,
-            "dataRules" => ValidationEntity::class,
+            "dataRules" => PurchaseOrderValidationEntity::class,
             "filterRules" => null
         ],
         "controllers" => function($id) use ($serviceManager) {

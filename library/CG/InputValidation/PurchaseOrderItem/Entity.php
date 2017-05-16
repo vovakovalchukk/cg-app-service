@@ -37,9 +37,7 @@ class Entity implements RulesInterface
             'SKU' => [
                 'name'       => 'SKU',
                 'required'   => true,
-                'validators' => [
-                    new IsArrayValidator(['name' => 'SKU'])
-                ]
+                'validators' => []
             ],
             'quantity' => [
                 'name'       => 'quantity',
