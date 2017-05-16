@@ -2,14 +2,75 @@
 
 use CG\Controllers\PurchaseOrder\PurchaseOrder\Collection as PurchaseOrderCollectionController;
 use CG\Controllers\PurchaseOrder\PurchaseOrder as PurchaseOrderController;
+
+use CG\Controllers\PurchaseOrder\PurchaseOrderItem\Collection as PurchaseOrderItemCollectionController;
+use CG\Controllers\PurchaseOrder\PurchaseOrderItem as PurchaseOrderItemController;
+
 use CG\InputValidation\PurchaseOrder\Entity as ValidationEntity;
 use CG\InputValidation\PurchaseOrder\Filter as ValidationFilter;
-use CG\PurchaseOrder\Entity;
-use CG\PurchaseOrder\Mapper;
+use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
+use CG\PurchaseOrder\Mapper as PurchaseOrderMapper;
+
+use CG\PurchaseOrder\PurchaseOrderItem\Entity as PurchaseOrderItemEntity;
+use CG\PurchaseOrder\PurchaseOrderItem\Mapper as PurchaseOrderItemMapper;
+
 use CG\Slim\Versioning\Version;
 use Slim\Slim;
 
 return [
+    "/purchaseOrderItem" => [
+        "validation" => [
+            "flatten" => false,
+            "dataRules" => ValidationEntity::class,
+            "filterRules" => ValidationFilter::class,
+        ],
+        "controllers" => function() use ($serviceManager) {
+
+            $di = $serviceManager->get('Di');
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(PurchaseOrderItemCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        "via" => [
+            'GET','POST','OPTIONS'
+        ],
+        'entityRoute' => '/purchaseOrderItem/:id',
+        "name" => "PurchaseOrderItemCollection",
+        "version" => new Version(1, 1)
+    ],
+    "/purchaseOrderItem/:id" => [
+        "validation" => [
+            "flatten" => false,
+            "dataRules" => ValidationEntity::class,
+            "filterRules" => null
+        ],
+        "controllers" => function($id) use ($serviceManager) {
+
+            $di = $serviceManager->get('Di');
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(PurchaseOrderItemController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($id, $app->request()->getBody())
+            );
+        },
+        "via" => [
+            'GET','PUT','DELETE','OPTIONS'
+        ],
+        "name" => "PurchaseOrderItem",
+        "version" => new Version(1, 1),
+        'eTag' => [
+            'mapperClass' => PurchaseOrderItemMapper::class,
+            'entityClass' => PurchaseOrderItemEntity::class
+        ]
+    ],
     "/purchaseOrder" => [
         "validation" => [
             "flatten" => false,
@@ -41,6 +102,7 @@ return [
             "filterRules" => null
         ],
         "controllers" => function($id) use ($serviceManager) {
+
             $di = $serviceManager->get('Di');
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
@@ -57,8 +119,9 @@ return [
         "name" => "PurchaseOrder",
         "version" => new Version(1, 1),
         'eTag' => [
-            'mapperClass' => Mapper::class,
-            'entityClass' => Entity::class
+            'mapperClass' => PurchaseOrderMapper::class,
+            'entityClass' => PurchaseOrderEntity::class
         ]
-    ],
+    ]
+
 ];

@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\PurchaseOrder\PurchaseOrder;
+namespace CG\Controllers\PurchaseOrder\PurchaseOrderItem;
 
-use CG\PurchaseOrder\Filter;
-use CG\PurchaseOrder\RestService;
+use CG\PurchaseOrder\PurchaseOrderItem\Filter;
+use CG\PurchaseOrder\PurchaseOrderItem\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 

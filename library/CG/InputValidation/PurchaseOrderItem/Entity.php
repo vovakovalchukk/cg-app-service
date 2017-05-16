@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\PurchaseOrder;
+namespace CG\InputValidation\PurchaseOrderItem;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
@@ -29,21 +29,21 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
-            'externalId' => [
-                'name'       => 'externalId',
-                'required'   => false,
+            'purchaseOrderId' => [
+                'name'       => 'purchaseOrderId',
+                'required'   => true,
                 'validators' => []
             ],
-//            'SKU' => [
-//                'name'       => 'SKU',
-//                'required'   => true,
-//                'validators' => [
-//                    new IsArrayValidator(['name' => 'SKU'])
-//                ]
-//            ],
-            'status' => [
-                'name'       => 'status',
-                'required'   => false,
+            'SKU' => [
+                'name'       => 'SKU',
+                'required'   => true,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'SKU'])
+                ]
+            ],
+            'quantity' => [
+                'name'       => 'quantity',
+                'required'   => true,
                 'validators' => []
             ]
         ];

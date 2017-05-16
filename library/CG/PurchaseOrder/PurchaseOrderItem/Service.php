@@ -1,11 +1,11 @@
 <?php
-namespace CG\PurchaseOrder;
+namespace CG\PurchaseOrder\PurchaseOrderItem;
 
-use CG\PurchaseOrder\Filter;
-use CG\PurchaseOrder\Mapper;
-use CG\PurchaseOrder\Repository;
+use CG\PurchaseOrder\PurchaseOrderItem\Filter;
+use CG\PurchaseOrder\PurchaseOrderItem\Mapper;
+use CG\PurchaseOrder\PurchaseOrderItem\Repository;
 
-use CG\PurchaseOrder\Storage\Api;
+use CG\PurchaseOrder\PurchaseOrderItem\Storage\Api;
 use CG\Stdlib\ServiceTrait;
 
 class Service

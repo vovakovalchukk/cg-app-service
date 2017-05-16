@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\PurchaseOrder;
 
-use CG\PurchaseOrder\RestService;
+use CG\PurchaseOrder\PurchaseOrderItem\RestService;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PatchTrait;
@@ -10,7 +10,7 @@ use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 
-class PurchaseOrder
+class PurchaseOrderItem
 {
     use ControllerTrait;
     use GetTrait;

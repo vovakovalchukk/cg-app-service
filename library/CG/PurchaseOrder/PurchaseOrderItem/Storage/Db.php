@@ -1,10 +1,10 @@
 <?php
-namespace CG\PurchaseOrder\Storage;
+namespace CG\PurchaseOrder\PurchaseOrderItem\Storage;
 
-use CG\PurchaseOrder\Collection;
-use CG\PurchaseOrder\Entity;
-use CG\PurchaseOrder\Filter;
-use CG\PurchaseOrder\StorageInterface;
+use CG\PurchaseOrder\PurchaseOrderItem\Collection;
+use CG\PurchaseOrder\PurchaseOrderItem\Entity;
+use CG\PurchaseOrder\PurchaseOrderItem\Filter;
+use CG\PurchaseOrder\PurchaseOrderItem\StorageInterface;
 
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
@@ -17,7 +17,7 @@ use CG\Zend\Stdlib\Db\Sql\InsertIgnore;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
-    const DB_TABLE_NAME = 'purchaseOrder';
+    const DB_TABLE_NAME = 'purchaseOrderItem';
 
     public function fetchCollectionByFilter(Filter $filter)
     {

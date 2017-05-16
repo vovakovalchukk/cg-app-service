@@ -1,5 +1,5 @@
 <?php
-namespace CG\PurchaseOrder;
+namespace CG\PurchaseOrder\PurchaseOrderItem;
 use CG\Slim\Patch\ServiceTrait as PatchTrait;
 use Zend\EventManager\GlobalEventManager as EventManager;
 
@@ -31,7 +31,7 @@ class RestService extends Service
 
         $collection = $this->fetchCollectionByFilter($filter);
         return $this->getMapper()->collectionToHal(
-            $collection, "/purchaseOrder", $filter->getLimit(), $filter->getPage(), $filter->toArray()
+            $collection, "/purchaseOrderItem", $filter->getLimit(), $filter->getPage(), $filter->toArray()
         );
     }
 
