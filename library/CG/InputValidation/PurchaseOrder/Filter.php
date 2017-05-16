@@ -2,6 +2,7 @@
 namespace CG\InputValidation\PurchaseOrder;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\IsArrauValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\Rules\ValidatorTrait;
@@ -28,6 +29,18 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
                 ]
             ],
+            'status' => [
+                'name'       => 'status',
+                'required'   => false,
+                'validators' => []
+            ],
+            'externalId' => [
+                'name'       => 'externalId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                ]
+            ]
         ];
 
         return array_merge($this->getPaginationValidation(), $rules);

@@ -29,23 +29,15 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ],
-            'externalId' => [
-                'name'       => 'externalId',
-                'required'   => false,
-                'validators' => []
-            ],
-//            'SKU' => [
-//                'name'       => 'SKU',
-//                'required'   => true,
-//                'validators' => [
-//                    new IsArrayValidator(['name' => 'SKU'])
-//                ]
-//            ],
             'status' => [
                 'name'       => 'status',
                 'required'   => false,
                 'validators' => []
-            ]
-        ];
+            ],
+            'externalId' => [
+                'name'       => 'externalId',
+                'required'   => false,
+                'validators' => []
+            ]];
     }
 }

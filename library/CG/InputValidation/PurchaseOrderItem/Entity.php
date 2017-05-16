@@ -34,8 +34,8 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => []
             ],
-            'SKU' => [
-                'name'       => 'SKU',
+            'sku' => [
+                'name'       => 'sku',
                 'required'   => true,
                 'validators' => []
             ],

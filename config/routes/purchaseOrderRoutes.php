@@ -2,23 +2,18 @@
 
 use CG\Controllers\PurchaseOrder\PurchaseOrder\Collection as PurchaseOrderCollectionController;
 use CG\Controllers\PurchaseOrder\PurchaseOrder as PurchaseOrderController;
-
 use CG\Controllers\PurchaseOrder\PurchaseOrderItem\Collection as PurchaseOrderItemCollectionController;
 use CG\Controllers\PurchaseOrder\PurchaseOrderItem as PurchaseOrderItemController;
-
 use CG\InputValidation\PurchaseOrder\Entity as PurchaseOrderValidationEntity;
 use CG\InputValidation\PurchaseOrder\Filter as PurchaseOrderValidationFilter;
-
 use CG\InputValidation\PurchaseOrderItem\Entity as PurchaseOrderItemValidationEntity;
 use CG\InputValidation\PurchaseOrderItem\Filter as PurchaseOrderItemValidationFilter;
-
-
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Mapper as PurchaseOrderMapper;
-
+use CG\PurchaseOrder\Service as PurchaseOrderService;
+use CG\PurchaseOrder\PurchaseOrderItem\Service as PurchaseOrderItemService;
 use CG\PurchaseOrder\PurchaseOrderItem\Entity as PurchaseOrderItemEntity;
 use CG\PurchaseOrder\PurchaseOrderItem\Mapper as PurchaseOrderItemMapper;
-
 use CG\Slim\Versioning\Version;
 use Slim\Slim;
 
@@ -73,7 +68,8 @@ return [
         "version" => new Version(1, 1),
         'eTag' => [
             'mapperClass' => PurchaseOrderItemMapper::class,
-            'entityClass' => PurchaseOrderItemEntity::class
+            'entityClass' => PurchaseOrderItemEntity::class,
+            'serviceClass' => PurchaseOrderItemService::class
         ]
     ],
     "/purchaseOrder" => [
@@ -125,7 +121,8 @@ return [
         "version" => new Version(1, 1),
         'eTag' => [
             'mapperClass' => PurchaseOrderMapper::class,
-            'entityClass' => PurchaseOrderEntity::class
+            'entityClass' => PurchaseOrderEntity::class,
+            'serviceClass' => PurchaseOrderService::class
         ]
     ]
 
