@@ -1,7 +1,7 @@
 <?php
-namespace CG\Controllers\PurchaseOrder;
+namespace CG\Controllers\PurchaseOrderItem;
 
-use CG\PurchaseOrder\PurchaseOrderItem\RestService;
+use CG\PurchaseOrder\Item\RestService;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PatchTrait;

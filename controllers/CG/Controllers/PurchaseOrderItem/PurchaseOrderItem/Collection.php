@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\PurchaseOrder\PurchaseOrderItem;
+namespace CG\Controllers\PurchaseOrderItem\PurchaseOrderItem;
 
-use CG\PurchaseOrder\PurchaseOrderItem\Filter;
-use CG\PurchaseOrder\PurchaseOrderItem\RestService;
+use CG\PurchaseOrder\Item\Filter;
+use CG\PurchaseOrder\Item\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 
@@ -36,6 +36,7 @@ class Collection
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
+                $this->getParams('purchaseOrderId') ?: [],
                 $this->getParams('sku') ?: []
             )
         );

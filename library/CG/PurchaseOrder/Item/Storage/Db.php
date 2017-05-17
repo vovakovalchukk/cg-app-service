@@ -1,14 +1,12 @@
 <?php
-namespace CG\PurchaseOrder\PurchaseOrderItem\Storage;
+namespace CG\PurchaseOrder\Item\Storage;
 
-use CG\PurchaseOrder\PurchaseOrderItem\Collection;
-use CG\PurchaseOrder\PurchaseOrderItem\Entity;
-use CG\PurchaseOrder\PurchaseOrderItem\Filter;
-use CG\PurchaseOrder\PurchaseOrderItem\StorageInterface;
-
+use CG\PurchaseOrder\Item\Collection;
+use CG\PurchaseOrder\Item\Entity;
+use CG\PurchaseOrder\Item\Filter;
+use CG\PurchaseOrder\Item\StorageInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
-
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
@@ -21,7 +19,6 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     public function fetchCollectionByFilter(Filter $filter)
     {
-
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
@@ -47,6 +44,19 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $query = [];
 
+        if (!empty($filter->getId())) {
+            $query['id'] = $filter->getId();
+        }
+        if (!empty($filter->getOrganisationUnitId())) {
+            $query['organisationUnitId'] = $filter->getOrganisationUnitId();
+        }
+        if (!empty($filter->getPurchaseOrderId())) {
+            $query['purchaseOrderId'] = $filter->getPurchaseOrderId();
+        }
+        if (!empty($filter->getSku())) {
+            $query['sku'] = $filter->getSku();
+        }
+        
         return $query;
     }
 

@@ -1,12 +1,10 @@
 <?php
 namespace CG\PurchaseOrder;
-use CG\Slim\Patch\ServiceTrait as PatchTrait;
+
 use Zend\EventManager\GlobalEventManager as EventManager;
 
 class RestService extends Service
 {
-    use PatchTrait;
-
     const DEFAULT_LIMIT = 10;
     const DEFAULT_PAGE = 1;
 
@@ -16,7 +14,7 @@ class RestService extends Service
     public function __construct(EventManager $eventManager, StorageInterface $repository, Mapper $mapper)
     {
         parent::__construct($repository, $mapper);
-        $this->setEventManager($eventManager);
+        $this->eventManager = $eventManager;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -33,15 +31,6 @@ class RestService extends Service
         return $this->getMapper()->collectionToHal(
             $collection, "/purchaseOrder", $filter->getLimit(), $filter->getPage(), $filter->toArray()
         );
-    }
-
-    /**
-     * @return self
-     */
-    protected function setEventManager(EventManager $eventManager)
-    {
-        $this->eventManager = $eventManager;
-        return $this;
     }
 
     /**

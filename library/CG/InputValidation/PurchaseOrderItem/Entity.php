@@ -20,6 +20,15 @@ class Entity implements RulesInterface
     public function getRules()
     {
         return [
+            'id' => [
+                'name'       => 'id',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'id']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'id must be at least %min%'])
+                ]
+            ],
             'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'required'   => true,
@@ -32,7 +41,11 @@ class Entity implements RulesInterface
             'purchaseOrderId' => [
                 'name'       => 'purchaseOrderId',
                 'required'   => true,
-                'validators' => []
+                'validators' => [
+                    new IntegerValidator(['name' => 'purchaseOrderId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'purchaseOrderId must be at least %min%'])
+                ]
             ],
             'sku' => [
                 'name'       => 'sku',
@@ -42,7 +55,11 @@ class Entity implements RulesInterface
             'quantity' => [
                 'name'       => 'quantity',
                 'required'   => true,
-                'validators' => []
+                'validators' => [
+                    new IntegerValidator(['name' => 'quantity']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'quantity must be at least %min%'])
+                ]
             ]
         ];
     }

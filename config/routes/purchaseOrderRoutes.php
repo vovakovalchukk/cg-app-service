@@ -2,8 +2,8 @@
 
 use CG\Controllers\PurchaseOrder\PurchaseOrder\Collection as PurchaseOrderCollectionController;
 use CG\Controllers\PurchaseOrder\PurchaseOrder as PurchaseOrderController;
-use CG\Controllers\PurchaseOrder\PurchaseOrderItem\Collection as PurchaseOrderItemCollectionController;
-use CG\Controllers\PurchaseOrder\PurchaseOrderItem as PurchaseOrderItemController;
+use CG\Controllers\PurchaseOrderItem\PurchaseOrderItem\Collection as PurchaseOrderItemCollectionController;
+use CG\Controllers\PurchaseOrderItem\PurchaseOrderItem as PurchaseOrderItemController;
 use CG\InputValidation\PurchaseOrder\Entity as PurchaseOrderValidationEntity;
 use CG\InputValidation\PurchaseOrder\Filter as PurchaseOrderValidationFilter;
 use CG\InputValidation\PurchaseOrderItem\Entity as PurchaseOrderItemValidationEntity;
@@ -11,9 +11,9 @@ use CG\InputValidation\PurchaseOrderItem\Filter as PurchaseOrderItemValidationFi
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Mapper as PurchaseOrderMapper;
 use CG\PurchaseOrder\Service as PurchaseOrderService;
-use CG\PurchaseOrder\PurchaseOrderItem\Service as PurchaseOrderItemService;
-use CG\PurchaseOrder\PurchaseOrderItem\Entity as PurchaseOrderItemEntity;
-use CG\PurchaseOrder\PurchaseOrderItem\Mapper as PurchaseOrderItemMapper;
+use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
+use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
+use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
 use CG\Slim\Versioning\Version;
 use Slim\Slim;
 
@@ -24,10 +24,8 @@ return [
             "dataRules" => PurchaseOrderItemValidationEntity::class,
             "filterRules" => PurchaseOrderItemValidationFilter::class,
         ],
-        "controllers" => function() use ($serviceManager) {
-
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function() use ($di, $app)
+        {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(PurchaseOrderItemCollectionController::class);
@@ -49,10 +47,8 @@ return [
             "dataRules" => PurchaseOrderItemValidationEntity::class,
             "filterRules" => null
         ],
-        "controllers" => function($id) use ($serviceManager) {
-
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function($id) use ($di, $app)
+        {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(PurchaseOrderItemController::class);
@@ -78,9 +74,8 @@ return [
             "dataRules" => PurchaseOrderValidationEntity::class,
             "filterRules" => PurchaseOrderValidationFilter::class,
         ],
-        "controllers" => function() use ($serviceManager) {
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function() use ($di, $app)
+        {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(PurchaseOrderCollectionController::class);
@@ -102,10 +97,8 @@ return [
             "dataRules" => PurchaseOrderValidationEntity::class,
             "filterRules" => null
         ],
-        "controllers" => function($id) use ($serviceManager) {
-
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function($id) use ($di, $app)
+        {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(PurchaseOrderController::class);

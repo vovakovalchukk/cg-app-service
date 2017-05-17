@@ -1,5 +1,5 @@
 <?php
-namespace CG\PurchaseOrder\PurchaseOrderItem\Storage;
+namespace CG\PurchaseOrder\Item\Storage;
 
 use CG\Cache\CacheAbstract;
 use CG\Cache\Storage\CollectionTrait;
@@ -9,11 +9,9 @@ use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
-
-use CG\PurchaseOrder\PurchaseOrderItem\Filter;
-use CG\PurchaseOrder\PurchaseOrderItem\Mapper;
-use CG\PurchaseOrder\PurchaseOrderItem\StorageInterface;
-
+use CG\PurchaseOrder\Item\Filter;
+use CG\PurchaseOrder\Item\Mapper;
+use CG\PurchaseOrder\Item\StorageInterface;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\PaginatedCollection as Collection;
@@ -32,7 +30,8 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
     }
 
-    public function fetchCollectionByFilter(Filter $filter) {
+    public function fetchCollectionByFilter(Filter $filter)
+    {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray());
         return $this->fetchCollection($collection);
     }

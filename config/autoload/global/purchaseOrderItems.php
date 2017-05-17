@@ -1,10 +1,10 @@
 <?php
 
-use CG\PurchaseOrder\PurchaseOrderItem\Repository;
-use CG\PurchaseOrder\PurchaseOrderItem\StorageInterface;
-use CG\PurchaseOrder\PurchaseOrderItem\Storage\Db;
-use CG\PurchaseOrder\PurchaseOrderItem\Storage\Cache;
-use CG\PurchaseOrder\PurchaseOrderItem\Mapper;
+use CG\PurchaseOrder\Item\Repository;
+use CG\PurchaseOrder\Item\StorageInterface;
+use CG\PurchaseOrder\Item\Storage\Db;
+use CG\PurchaseOrder\Item\Storage\Cache;
+use CG\PurchaseOrder\Item\Mapper;
 
 return [
     'di' => [

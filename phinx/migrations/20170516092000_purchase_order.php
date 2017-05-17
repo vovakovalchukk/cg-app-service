@@ -1,6 +1,7 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
+use Phinx\Db\Table\ForeignKey;
 
 class PurchaseOrder extends AbstractMigration
 {
@@ -10,7 +11,7 @@ class PurchaseOrder extends AbstractMigration
 
         $table->addColumn('organisationUnitId', 'integer')
             ->addColumn('status', 'string')
-            ->addColumn('externalId', 'integer')
+            ->addColumn('externalId', 'string')
             ->addColumn('created', 'datetime')
             ->addIndex('organisationUnitId')
             ->create();
@@ -20,8 +21,9 @@ class PurchaseOrder extends AbstractMigration
         $table->addColumn('organisationUnitId', 'integer')
             ->addColumn('purchaseOrderId', 'integer')
             ->addColumn('sku', 'string')
-            ->addColumn('quanitity', 'integer')
+            ->addColumn('quantity', 'integer')
             ->addIndex('organisationUnitId')
+            ->addForeignKey('purchaseOrderId', 'purchaseOrder', 'id', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::CASCADE])
             ->create();
     }
 }

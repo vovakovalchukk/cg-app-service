@@ -5,7 +5,6 @@ use CG\PurchaseOrder\Filter;
 use CG\PurchaseOrder\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
-
 use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use Zend\Di\Di;
@@ -36,7 +35,10 @@ class Collection
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
-                $this->getParams('sku') ?: []
+                $this->getParams('status') ?: [],
+                $this->getParams('externalId') ?: [],
+                $this->getParams('createdFrom') ?: null,
+                $this->getParams('createdTo') ?: null
             )
         );
     }

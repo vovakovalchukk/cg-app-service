@@ -3,6 +3,7 @@ namespace CG\InputValidation\PurchaseOrderItem;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\Rules\ValidatorTrait;
 use CG\Validation\RulesInterface;
@@ -26,6 +27,27 @@ class Filter implements RulesInterface
                 'required'   => false,
                 'validators' => [
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                ]
+            ],
+            'organisationUnitId' => [
+                'name'       => 'organisationUnitId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                ]
+            ],
+            'purchaseOrderId' => [
+                'name'       => 'purchaseOrderId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'purchaseOrderId')
+                ]
+            ],
+            'sku' => [
+                'name'       => 'sku',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'sku'])
                 ]
             ],
         ];
