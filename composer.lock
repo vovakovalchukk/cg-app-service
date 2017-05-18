@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d8b4ef5eb8e1d4375a30f7d3ebede0e",
+    "content-hash": "75fd7fb2fbec80e38480560ee4bc8b9d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -683,7 +683,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2015-02-06 12:09:38"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1951,11 +1951,17 @@
         },
         {
             "name": "channelgrabber/purchase-order",
-            "version": "dev-CGIV-8310-PurchaseOrdersLibrary",
+            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "0fc20db07451f78950e4fa88f7f2ffb07752bcf1"
+                "reference": "744caa7af0b8dcac00c6c65c33e9c2cf50d9cb0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-EPIC-CGIV-7460-purchase-orders-1-c9151d.zip",
+                "reference": "744caa7af0b8dcac00c6c65c33e9c2cf50d9cb0b",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/stdlib": "^2.12.42"
@@ -1975,7 +1981,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-12T10:15:00+00:00"
+            "time": "2017-05-18 10:35:32"
         },
         {
             "name": "channelgrabber/purge",
@@ -8648,6 +8654,11 @@
                 "constructor",
                 "instantiate"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
@@ -9015,6 +9026,11 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-11-01T13:02:21+00:00"
         },
         {
@@ -9088,6 +9104,11 @@
                 "testing",
                 "tests"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-07-01T14:09:19+00:00"
         },
         {
@@ -9310,6 +9331,11 @@
             "keywords": [
                 "template"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-21T13:50:34+00:00"
         },
         {
@@ -9854,7 +9880,7 @@
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-8310-PurchaseOrdersLibrary",
+            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
             "package": "channelgrabber/purchase-order"
         }
     ],
@@ -9863,8 +9889,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/purchase-order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
