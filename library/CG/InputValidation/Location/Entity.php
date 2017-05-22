@@ -26,6 +26,13 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
             ]
+            'type' => [
+                'name'       => 'type',
+                'required'   => true,
+                'validators' => [
+                    new StringLength(['min' => 1])
+                ]
+            ]
         ];
     }
 }
