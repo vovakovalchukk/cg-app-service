@@ -33,7 +33,13 @@ class Versioniser1 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['type'])) {
+        if (isset($data['type'])) {
+            return;
+        }
+        if (isset($data['id'])) {
+            $entity = $this->service->fetch($data['id']);
+            $data['type'] = $entity->getType();
+        } else {
             $data['type'] = Type::MERCHANT;
         }
         $request->setData($data);
