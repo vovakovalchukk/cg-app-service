@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2974ec801fbab656fb19033b28d71f31",
+    "content-hash": "4b6123afde85eb6af3ba2abd3745e5f3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2541,22 +2541,22 @@
         },
         {
             "name": "channelgrabber/stock-locking",
-            "version": "1.0.4",
+            "version": "dev-CGIV-8255-StockLocationWrapper",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "fc1d951df5f0c10aebb0cdf1c620c8a47dcdb77c"
+                "reference": "66fe24a98011e35e34ca14f36255a1466023e24b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-1.0.4-8d7232.zip",
-                "reference": "fc1d951df5f0c10aebb0cdf1c620c8a47dcdb77c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-CGIV-8255-StockLocationWrapper-9bd8b2.zip",
+                "reference": "66fe24a98011e35e34ca14f36255a1466023e24b",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/locking": "^1.1.0",
-                "channelgrabber/stock": "^1.7.0",
+                "channelgrabber/stock": "dev-CGIV-8255-StockLocationWrapper as 1.9.0",
                 "composer/composer": "@dev"
             },
             "require-dev": {
@@ -2578,7 +2578,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-27T13:22:25+00:00"
+            "time": "2017-05-22 11:47:20"
         },
         {
             "name": "channelgrabber/tax",
@@ -9561,6 +9561,12 @@
             "alias_normalized": "1.9.0.0",
             "version": "dev-CGIV-8255-StockLocationWrapper",
             "package": "channelgrabber/stock"
+        },
+        {
+            "alias": "1.0.5",
+            "alias_normalized": "1.0.5.0",
+            "version": "dev-CGIV-8255-StockLocationWrapper",
+            "package": "channelgrabber/stock-locking"
         }
     ],
     "minimum-stability": "stable",
@@ -9568,6 +9574,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/product": 20,
         "channelgrabber/stock": 20,
+        "channelgrabber/stock-locking": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
