@@ -8,6 +8,8 @@ use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\ListingEntity;
 use CG\Slim\Versioning\ListingStatusHistoryCollection;
 use CG\Slim\Versioning\ListingStatusHistoryEntity;
+use CG\Slim\Versioning\LocationEntity;
+use CG\Slim\Versioning\LocationCollection;
 use CG\Slim\Versioning\OrderCollection;
 use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
@@ -144,6 +146,8 @@ return [
                 'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
+                'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
+                'Versioniser_LocationEntity_1' => LocationEntity\Versioniser1::class,
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
