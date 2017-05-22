@@ -18,6 +18,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLocationCollection;
+use CG\Slim\Versioning\StockLocationEntity;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -150,6 +152,8 @@ return [
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
+                'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
+                'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

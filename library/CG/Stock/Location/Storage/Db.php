@@ -1,31 +1,57 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
-use CG\Stdlib\Exception\Runtime\Conflict;
-use CG\Stock\Location\Collection as LocationCollection;
-use CG\Stock\Location\Entity as LocationEntity;
-use CG\Stock\Location\StorageInterface;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime as StdlibDateTime;
-use CG\Stdlib\Storage\Db\DbAbstract;
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Stdlib\Exception\Storage as StorageException;
-use Zend\Db\Sql\Exception\ExceptionInterface;
 use CG\Stdlib\Exception\Runtime\PreconditionFailed;
+use CG\Stdlib\Exception\Runtime\Storage\Deadlock;
+use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Storage\Db\DbAbstract;
+use CG\Stock\Collection as Stock;
+use CG\Stock\Location\Collection as LocationCollection;
+use CG\Stock\Location\Entity as LocationEntity;
+use CG\Stock\Location\Filter;
+use CG\Stock\Location\StorageInterface;
+use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface
 {
+    public function fetchCollectionForStock(Stock $stock)
+    {
+        return $this->fetchCollectionByStockIds($stock->getIds());
+    }
+
     public function fetchCollectionByStockIds(array $stockIds)
     {
+        return $this->fetchCollectionByFilter(
+            new Filter('all', 1, $stockIds)
+        );
+    }
+
+    public function fetchCollectionByPaginationAndFilters($limit, $page, array $stockId, array $locationId)
+    {
+        return $this->fetchCollectionByFilter(
+            new Filter($limit, $page, $stockId, $locationId)
+        );
+    }
+
+    public function fetchCollectionByFilter(Filter $filter)
+    {
         try {
-            $select = $this->getSelect();
-            $query = [
-                'stockLocation.stockId' => $stockIds
-            ];
-            $select->where($query);
+            $select = $this->getSelect()->where($this->getQueryForFilter($filter));
+            $this->appendOuIdSkuFilter($select->where, $filter->getOuIdSku());
+
+            $limit = $filter->getLimit();
+            if ($limit != 'all') {
+                $offset = ($filter->getPage() - 1) * $limit;
+                $select->limit($limit)->offset($offset);
+            }
 
             return $this->fetchCollection(
-                new LocationCollection($this->getEntityClass(), __FUNCTION__, compact('stockIds')),
+                new LocationCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
                 $this->getMapper()
@@ -35,36 +61,32 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    public function fetchCollectionByPaginationAndFilters($limit, $page, array $stockId, array $locationId)
+    protected function getQueryForFilter(Filter $filter)
     {
-        try {
-            $select = $this->getSelect();
-
-            $query = [];
-            if(!empty($stockId)) {
-                $query['stockLocation.stockId'] = $stockId;
-            }
-            if(!empty($locationId)) {
-                $query['stockLocation.locationId'] = $locationId;
-            }
-
-            $select->where($query);
-
-            if ($limit != 'all') {
-                $offset = ($page - 1) * $limit;
-                $select->limit($limit)
-                    ->offset($offset);
-            }
-
-            return $this->fetchPaginatedCollection(
-                new LocationCollection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'stockId', 'locationId')),
-                $this->getReadSql(),
-                $select,
-                $this->getMapper()
-            );
-        } catch (ExceptionInterface $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        $query = [];
+        if (!empty($stockId = $filter->getStockId())) {
+            $query['stockLocation.stockId'] = $stockId;
         }
+        if (!empty($locationId = $filter->getLocationId())) {
+            $query['stockLocation.locationId'] = $locationId;
+        }
+        return $query;
+    }
+
+    protected function appendOuIdSkuFilter(Where $where, array $ouIdSkus)
+    {
+        if (empty($ouIdSkus)) {
+            return;
+        }
+
+        $filter = new Where(null, Where::OP_OR);
+        foreach ($ouIdSkus as $ouIdSku) {
+            [$organisationUnitId, $sku] = explode('-', $ouIdSku, 2);
+            $filter->addPredicate(
+                (new Where())->equalTo('organisationUnitId', $organisationUnitId)->equalTo('sku', $sku)
+            );
+        }
+        $where->addPredicate($filter);
     }
 
     public function remove($entity)
