@@ -25,7 +25,7 @@ class Entity implements RulesInterface
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
-            ]
+            ],
             'type' => [
                 'name'       => 'type',
                 'required'   => true,
