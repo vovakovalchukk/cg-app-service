@@ -21,6 +21,7 @@ class Mapper
                              ->addLink('order', '/order')
                              ->addLink('orderItem', '/orderItem')
                              ->addLink('orderLabel', '/orderLabel')
+                             ->addLink('orderLink', '/orderLink')
                              ->addLink('product', '/product')
                              ->addLink('productDetail', '/productDetail')
                              ->addLink('settings', '/settings')
