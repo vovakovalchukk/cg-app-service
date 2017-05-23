@@ -13,9 +13,18 @@ use CG\Stock\Location\LinkedLocation;
 use CG\Stock\Location\QuantifiedLocation;
 use CG\Stock\Location\RecursionException;
 use CG\Stock\Location\StorageInterface;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 
-class LinkedReplacer implements StorageInterface
+class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 {
+    use LogTrait;
+
+    const LOG_CODE_RECURSIVE_SAVE = 'Recursive save detected - stock location will not be updated again';
+    const LOG_MSG_RECURSIVE_SAVE = 'Recursive save detected - stock location %d (%s) will not be updated again';
+    const LOG_CODE_RECURSIVE_FETCH = 'Recursive fetch detected - stock location will be replaced with an zero\'d entity';
+    const LOG_MSG_RECURSIVE_FETCH = 'Recursive fetch detected - stock location %d (%s) will be replaced with an zero\'d entity';
+
     /** @var StorageInterface $locationStorage */
     protected $locationStorage;
     /** @var ProductLinkStorage $productLinkStorage */
@@ -48,8 +57,13 @@ class LinkedReplacer implements StorageInterface
         $ids[$entity->getId()] = true;
         $location = $this->getQuantifiedLocation($this->locationStorage->save($entity));
         if ($location instanceof LinkedLocation) {
+            /** @var Location $linkedLocation */
             foreach ($location->getLinkedLocations() as $linkedLocation) {
-                $this->save($linkedLocation, $ids);
+                try {
+                    $this->save($linkedLocation, $ids);
+                } catch (RecursionException $exception) {
+                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_SAVE, ['id' => $linkedLocation->getId(), 'sku' => $linkedLocation->getSku()], static::LOG_CODE_RECURSIVE_SAVE, ['ou' => $linkedLocation->getOrganisationUnitId()]);
+                }
             }
         }
         return $location;
@@ -67,12 +81,21 @@ class LinkedReplacer implements StorageInterface
 
     public function fetchCollectionByFilter(Filter $filter, array &$ids = [])
     {
+        /** @var Collection $locations */
         $locations = $this->locationStorage->fetchCollectionByFilter($filter);
-        foreach ($locations->getIds() as $id) {
-            if (isset($ids[$id])) {
-                throw new RecursionException(sprintf('Already fetched stock location with id %s'), $id);
+        /** @var Location $location */
+        foreach ($locations as $location) {
+            $id = $location->getId();
+            try {
+                if (isset($ids[$id])) {
+                    throw new RecursionException(sprintf('Already fetched stock location with id %s'), $id);
+                }
+                $ids[$id] = true;
+            } catch (RecursionException $exception) {
+                $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $id, 'sku' => $location->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $location->getOrganisationUnitId()]);
+                $locations->detach($location);
+                $locations->next();
             }
-            $ids[$id] = true;
         }
         return $this->getQuantifiedLocations($locations, $ids);
     }
