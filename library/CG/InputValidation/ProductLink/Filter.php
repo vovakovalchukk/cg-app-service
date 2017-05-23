@@ -31,6 +31,11 @@ class Filter implements RulesInterface
                     'required' => false,
                     'validators' => [new IsArrayValidator(['name' => 'stockSku'])]
                 ],
+                'ouIdProductSku' => [
+                    'name' => 'ouIdProductSku',
+                    'required' => false,
+                    'validators' => [new IsArrayValidator(['name' => 'ouIdProductSku'])]
+                ],
             ]
         );
     }

@@ -220,8 +220,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         }
 
         return $this->productLinkStorage->fetchCollectionByFilter(
-            // TODO: Implement `setOuIdSku` on the `ProductLinkFilter`
-            (new ProductLinkFilter(1, 1))->setOuIdSku($ouSkuMap)
+            (new ProductLinkFilter(1, 1))->setOuIdProductSku($ouSkuMap)
         );
     }
 

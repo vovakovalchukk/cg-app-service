@@ -31,7 +31,8 @@ class Collection
                 $this->getParams('page') ?: 1,
                 $this->getParams('organisationUnitId') ?: [],
                 $this->getParams('productSku') ?: [],
-                $this->getParams('stockSku') ?: []
+                $this->getParams('stockSku') ?: [],
+                $this->getParams('ouIdProductSku') ?: []
             )
         );
     }

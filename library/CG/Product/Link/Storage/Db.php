@@ -145,6 +145,11 @@ class Db extends DbAbstract implements StorageInterface
             ->columns(['organisationUnitId', 'productSku']);
 
         $this->buildFilterQuery($select, $filter);
+        if (($limit = $filter->getLimit()) !== 'all') {
+            $select
+                ->limit($limit)
+                ->offset(($filter->getPage() - 1) * $limit);
+        }
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
@@ -171,11 +176,23 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($stockSku = $filter->getStockSku())) {
             $this->filterArrayValuesToOrdLikes('stockSku', $stockSku, $select->where);
         }
-        if (($limit = $filter->getLimit()) !== 'all') {
-            $select
-                ->limit($limit)
-                ->offset(($filter->getPage() - 1) * $limit);
+        $this->appendOuIdProductSkuFilter($select->where, $filter->getOuIdProductSku());
+    }
+
+    protected function appendOuIdProductSkuFilter(Where $where, array $ouIdProductSkus)
+    {
+        if (empty($ouIdProductSkus)) {
+            return;
         }
+
+        $filter = new Where(null, WHERE::OP_OR);
+        foreach ($ouIdProductSkus as $ouIdProductSku) {
+            [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
+            $filter->addPredicate(
+                (new Where())->addPredicates(['organisationUnitId' => $organisationUnitId, 'productSku' => $productSku])
+            );
+        }
+        $where->addPredicate($filter);
     }
 
     /**
