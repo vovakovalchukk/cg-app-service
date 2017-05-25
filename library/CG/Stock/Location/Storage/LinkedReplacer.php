@@ -9,7 +9,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Location\Collection;
-use CG\Stock\Location\Entity as Location;
+use CG\Stock\Location\Entity as Location; // TODO: StockLocation
 use CG\Stock\Location\Filter;
 use CG\Stock\Location\LinkedLocation;
 use CG\Stock\Location\QuantifiedLocation;
@@ -351,6 +351,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             unset($skuQtyMap[$skuMap[strtolower($sku)]], $skuMap[strtolower($sku)]);
         }
 
+        // TODO: Refactor
         foreach ($skuQtyMap as $sku => $qty) {
             $quantifiedLinkedLocations->attach(
                 $this->buildQuantifiedLocation($location, $sku, $qty)
@@ -365,6 +366,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
      */
     protected function buildQuantifiedLocation(Location $location, $sku, $qty = 1)
     {
+        // TODO: Param for if we get stock or not
         return (new QuantifiedLocation(
             $location->getStockId(),
             $location->getLocationId(),

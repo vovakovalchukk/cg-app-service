@@ -1,6 +1,9 @@
 <?php
 namespace CG\Stock\Location;
 
+/**
+ * TODO: Add docblock
+ */
 class QuantifiedLocation extends Entity
 {
     protected $quantifier = 1;
