@@ -84,7 +84,7 @@ class Db extends DbAbstract implements StorageInterface
         ]);
 
         $result = $this->writeSql->prepareStatementForSqlObject($delete)->execute();
-        if ($result->count() == 0) {
+        if ($result->getAffectedRows() == 0) {
             throw new NotFound(sprintf('ProductLink not found with id %s', $entity->getId()));
         }
     }
