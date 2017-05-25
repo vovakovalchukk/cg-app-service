@@ -15,6 +15,7 @@ use CG\Stock\Location\RecursionException;
 use CG\Stock\Location\StorageInterface;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use function GuzzleHttp\Psr7\copy_to_stream;
 
 class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 {
@@ -43,15 +44,21 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         );
     }
 
+    /**
+     * @param Location $entity
+     */
     public function remove($entity)
     {
         $this->locationStorage->remove($entity);
     }
 
-    public function save($entity, array &$ids = [])
+    /**
+     * @param Location $entity
+     */
+    public function save($entity, array $ids = [])
     {
         if (isset($ids[$entity->getId()])) {
-            throw new RecursionException(sprintf('Already saved stock location with id %s'), $entity->getId());
+            throw new RecursionException(sprintf('Already saved stock location with id %s', $entity->getId()));
         }
 
         $ids[$entity->getId()] = true;
@@ -79,25 +86,11 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         return $this->fetchCollectionByFilter(new Filter($limit, $page, $stockId, $locationId));
     }
 
-    public function fetchCollectionByFilter(Filter $filter, array &$ids = [])
+    public function fetchCollectionByFilter(Filter $filter)
     {
-        /** @var Collection $locations */
-        $locations = $this->locationStorage->fetchCollectionByFilter($filter);
-        /** @var Location $location */
-        foreach ($locations as $location) {
-            $id = $location->getId();
-            try {
-                if (isset($ids[$id])) {
-                    throw new RecursionException(sprintf('Already fetched stock location with id %s'), $id);
-                }
-                $ids[$id] = true;
-            } catch (RecursionException $exception) {
-                $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $id, 'sku' => $location->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $location->getOrganisationUnitId()]);
-                $locations->detach($location);
-                $locations->next();
-            }
-        }
-        return $this->getQuantifiedLocations($locations, $ids);
+        return $this->getQuantifiedLocations(
+            $this->locationStorage->fetchCollectionByFilter($filter)
+        );
     }
 
     /**
@@ -157,18 +150,17 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     /**
      * @return Collection
      */
-    protected function getQuantifiedLocations(Collection $locations, array &$ids = [])
+    protected function getQuantifiedLocations(Collection $locations, array $skuQtyMap = [], array $ids = [])
     {
         try {
             $productLinks = $this->getProductLinks($locations);
         } catch (NotFound $exception) {
-            return $this->buildQuantifiedLocations($locations);
+            return $this->buildQuantifiedLocations($locations, $skuQtyMap);
         }
 
         try {
-            $linkedLocations = $this->fetchCollectionByFilter(
-                $this->getLinkedLocationsFilter($locations, $productLinks),
-                $ids
+            $linkedLocations = $this->locationStorage->fetchCollectionByFilter(
+                $this->getLinkedLocationsFilter($locations, $productLinks)
             );
         } catch (NotFound $exception) {
             $linkedLocations = new Collection(Location::class, __FUNCTION__, ['id' => $locations->getIds()]);
@@ -190,17 +182,32 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $productLink = $productLinksByOuAndSku[$key];
             $productLinkedLocations = new Collection(Location::class, __FUNCTION__, ['id' => [$location->getId()]]);
 
+            $locationsIds = $ids;
             foreach ($productLink->getStockSkuMap() as $sku => $qty) {
                 $productLinkedLocationKey = $this->generateLocationKey($location, $sku);
-                if (isset($linkedLocationsByLocationOuAndSku[$productLinkedLocationKey])) {
-                    $productLinkedLocations->attach($linkedLocationsByLocationOuAndSku[$productLinkedLocationKey]);
-                } else {
+                if (!isset($linkedLocationsByLocationOuAndSku[$productLinkedLocationKey])) {
+                    $productLinkedLocations->attach($this->buildQuantifiedLocation($location, $sku, $qty));
+                    continue;
+                }
+
+                /** @var Location $productLinkedLocation */
+                $productLinkedLocation = $linkedLocationsByLocationOuAndSku[$productLinkedLocationKey];
+                try {
+                    if (isset($locationsIds[$productLinkedLocation->getId()])) {
+                        throw new RecursionException(
+                            sprintf('Already fetched stock location with id %s for linked stock location %d', $productLinkedLocation->getId(), $location->getId())
+                        );
+                    }
+                    $locationsIds[$productLinkedLocation->getId()] = true;
+                    $productLinkedLocations->attach($productLinkedLocation);
+                } catch (RecursionException $exception) {
+                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedLocations->getId(), 'sku' => $productLinkedLocations->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedLocations->getOrganisationUnitId()]);
                     $productLinkedLocations->attach($this->buildQuantifiedLocation($location, $sku, $qty));
                 }
             }
 
             $quantifiedLocations->attach(
-                $this->buildQuantifiedLocations($productLinkedLocations, $productLink->getStockSkuMap())
+                $this->getQuantifiedLocations($productLinkedLocations, $productLink->getStockSkuMap(), $locationsIds)
             );
         }
 
