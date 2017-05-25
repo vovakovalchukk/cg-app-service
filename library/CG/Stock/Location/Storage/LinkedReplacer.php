@@ -200,7 +200,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                     $locationsIds[$productLinkedLocation->getId()] = true;
                     $productLinkedLocations->attach($productLinkedLocation);
                 } catch (RecursionException $exception) {
-                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedLocations->getId(), 'sku' => $productLinkedLocations->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedLocations->getOrganisationUnitId()]);
+                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedLocation->getId(), 'sku' => $productLinkedLocation->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedLocation->getOrganisationUnitId()]);
                 }
             }
 
@@ -370,8 +370,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $location->getLocationId(),
             $location->getOrganisationUnitId(),
             $sku,
-            0,
-            0
+            $location->getOnHand(),
+            $location->getAllocated()
         ))->setQuantifier($qty);
     }
 
