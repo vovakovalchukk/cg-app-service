@@ -169,6 +169,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         $linkedLocationsByLocationOuAndSku = $this->keyLinkedLocationsByLocationOuAndSku($linkedLocations);
 
         $quantifiedLocations = new Collection(Location::class, $locations->getSourceFilters(), $locations->getSourceDescription());
+        $quantifiedLocations->setTotal($locations->getTotal());
 
         /** @var Location $location */
         foreach ($locations as $location) {
@@ -382,6 +383,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         }
 
         $quantifiedLocations = new Collection(Location::class, $locations->getSourceDescription(), $locations->getSourceFilters());
+        $quantifiedLocations->setTotal($locations->getTotal());
 
         /** @var Location $location */
         foreach ($locations as $location) {

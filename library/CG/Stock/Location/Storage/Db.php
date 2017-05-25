@@ -50,7 +50,7 @@ class Db extends DbAbstract implements StorageInterface
                 $select->limit($limit)->offset($offset);
             }
 
-            return $this->fetchCollection(
+            return $this->fetchPaginatedCollection(
                 new LocationCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
