@@ -6,6 +6,8 @@ use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Filter as ProductLinkFilter;
 use CG\Product\Link\StorageInterface as ProductLinkStorage;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Location\Collection;
 use CG\Stock\Location\Entity as Location;
 use CG\Stock\Location\Filter;
@@ -13,9 +15,6 @@ use CG\Stock\Location\LinkedLocation;
 use CG\Stock\Location\QuantifiedLocation;
 use CG\Stock\Location\RecursionException;
 use CG\Stock\Location\StorageInterface;
-use CG\Stdlib\Log\LoggerAwareInterface;
-use CG\Stdlib\Log\LogTrait;
-use function GuzzleHttp\Psr7\copy_to_stream;
 
 class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 {
@@ -186,7 +185,6 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             foreach ($productLink->getStockSkuMap() as $sku => $qty) {
                 $productLinkedLocationKey = $this->generateLocationKey($location, $sku);
                 if (!isset($linkedLocationsByLocationOuAndSku[$productLinkedLocationKey])) {
-                    $productLinkedLocations->attach($this->buildQuantifiedLocation($location, $sku, $qty));
                     continue;
                 }
 
@@ -202,13 +200,24 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                     $productLinkedLocations->attach($productLinkedLocation);
                 } catch (RecursionException $exception) {
                     $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedLocations->getId(), 'sku' => $productLinkedLocations->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedLocations->getOrganisationUnitId()]);
-                    $productLinkedLocations->attach($this->buildQuantifiedLocation($location, $sku, $qty));
                 }
             }
 
-            $quantifiedLocations->attach(
-                $this->getQuantifiedLocations($productLinkedLocations, $productLink->getStockSkuMap(), $locationsIds)
+            $missingSkuMap = array_diff_ukey(
+                $productLink->getStockSkuMap(),
+                array_fill_keys($productLinkedLocations->getArrayOf('sku'), true),
+                function($productLinkSku, $locationSku) {
+                    return strcasecmp($productLinkSku, $locationSku);
+                }
             );
+
+            $productQuantifiedLocations = $this->getQuantifiedLocations($productLinkedLocations, $productLink->getStockSkuMap(), $locationsIds);
+            foreach ($missingSkuMap as $sku => $qty) {
+                $productQuantifiedLocations->attach(
+                    $this->buildQuantifiedLocation($location, $sku, $qty)
+                );
+            }
+            $quantifiedLocations->attach($productQuantifiedLocations);
         }
 
         return $quantifiedLocations;
