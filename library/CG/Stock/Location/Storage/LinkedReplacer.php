@@ -217,7 +217,17 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                     $this->buildQuantifiedLocation($location, $sku, $qty)
                 );
             }
-            $quantifiedLocations->attach($productQuantifiedLocations);
+
+            $quantifiedLocations->attach(
+                new LinkedLocation(
+                    $location->getId(),
+                    $location->getStockId(),
+                    $location->getLocationId(),
+                    $location->getOrganisationUnitId(),
+                    $location->getSku(),
+                    $productQuantifiedLocations
+                )
+            );
         }
 
         return $quantifiedLocations;
