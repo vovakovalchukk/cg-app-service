@@ -6,6 +6,8 @@ use CG\Stock\Location\Storage\Cache;
 use CG\Stock\Location\Storage\Db;
 use CG\Stock\Location\Storage\LinkedReplacer;
 use CG\Stock\Location\StorageInterface;
+use CG\Stock\Location\TypedEntity;
+use CG\Stock\Location\TypedMapper;
 use CG\Stock\Repository as StockRepository;
 
 return [
@@ -13,6 +15,7 @@ return [
         'instance' => [
             'preferences' => [
                 StorageInterface::class => LinkedReplacer::class,
+                Mapper::class => TypedMapper::class,
             ],
             Service::class => [
                 'parameters' => [
@@ -35,9 +38,13 @@ return [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
-                    'mapper' => Mapper::class
+                    'writeSql' => 'WriteSql'
                 ]
+            ],
+            TypedMapper::class => [
+                'parameters' => [
+                    'entityClass' => function() { return TypedEntity::class; }
+                ],
             ],
         ],
     ],

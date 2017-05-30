@@ -13,12 +13,19 @@ use CG\Stock\Collection as Stock;
 use CG\Stock\Location\Collection as LocationCollection;
 use CG\Stock\Location\Entity as LocationEntity;
 use CG\Stock\Location\Filter;
+use CG\Stock\Location\Mapper;
 use CG\Stock\Location\StorageInterface;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface
 {
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
+    {
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+    }
+
     public function fetchCollectionForStock(Stock $stock)
     {
         return $this->fetchCollectionByStockIds($stock->getIds());
