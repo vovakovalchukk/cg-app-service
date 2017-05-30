@@ -183,12 +183,16 @@ class Db extends DbAbstract implements StorageInterface
 
         if (isset($types[Filter::TYPE_SIMPLE])) {
             $joinWithVariations = true;
-            $typeQuery->isNull('variation.id');
+            $typeQuery->addPredicate(
+                (new Predicate(null, Predicate::OP_AND))->equalTo('product.parentProductId', 0)->isNull('variation.id')
+            );
         }
 
         if (isset($types[Filter::TYPE_PARENT])) {
             $joinWithVariations = true;
-            $typeQuery->isNotNull('variation.id');
+            $typeQuery->addPredicate(
+                (new Predicate(null, Predicate::OP_AND))->equalTo('product.parentProductId', 0)->isNotNull('variation.id')
+            );
         }
 
         if (isset($types[Filter::TYPE_VARIATION])) {
