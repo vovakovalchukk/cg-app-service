@@ -23,8 +23,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
     const LOG_CODE_RECURSIVE_SAVE = 'Recursive save detected - stock location will not be updated again';
     const LOG_MSG_RECURSIVE_SAVE = 'Recursive save detected - stock location %d (%s) will not be updated again';
-    const LOG_CODE_RECURSIVE_FETCH = 'Recursive fetch detected - stock location will be replaced with an zero\'d entity';
-    const LOG_MSG_RECURSIVE_FETCH = 'Recursive fetch detected - stock location %d (%s) will be replaced with an zero\'d entity';
+    const LOG_CODE_RECURSIVE_FETCH = 'Recursive fetch detected - stock location will be replaced with a zero\'d entity';
+    const LOG_MSG_RECURSIVE_FETCH = 'Recursive fetch detected - stock location %d (%s) will be replaced with a zero\'d entity';
 
     /** @var StorageInterface $locationStorage */
     protected $locationStorage;
