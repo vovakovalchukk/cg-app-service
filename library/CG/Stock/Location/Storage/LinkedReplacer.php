@@ -13,6 +13,7 @@ use CG\Stock\Location\Entity as Location; // TODO: StockLocation
 use CG\Stock\Location\Filter;
 use CG\Stock\Location\LinkedLocation;
 use CG\Stock\Location\QuantifiedLocation;
+use CG\Stock\Location\TypedEntity;
 use CG\Stock\Location\RecursionException;
 use CG\Stock\Location\StorageInterface;
 
@@ -137,6 +138,17 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
      */
     protected function getProductLink(Location $location)
     {
+        if (($location instanceof TypedEntity) && $location->getType() != TypedEntity::TYPE_LINKED) {
+            throw new NotFound(
+                sprintf(
+                    'Stock location %s is not a %s entity, but a %s entity',
+                    $location->getId(),
+                    TypedEntity::TYPE_LINKED,
+                    $location->getType()
+                )
+            );
+        }
+
         $productLink = $this->productLinkStorage->fetchCollectionByFilter(
             (new ProductLinkFilter(1, 1))
                 ->setOrganisationUnitId([$location->getOrganisationUnitId()])
@@ -243,7 +255,16 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
         /** @var Location $location */
         foreach ($locations as $location) {
+            if (($location instanceof TypedEntity) && $location->getType() != TypedEntity::TYPE_LINKED) {
+                continue;
+            }
             $ouSkuMap[] = $location->getOrganisationUnitId() . '-' . $location->getSku();
+        }
+
+        if (empty($ouSkuMap)) {
+            throw new NotFound(
+                sprintf('No stock locations of type %s to lookup product links for', TypedEntity::TYPE_LINKED)
+            );
         }
 
         return $this->productLinkStorage->fetchCollectionByFilter(
