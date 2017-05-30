@@ -215,7 +215,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $productQuantifiedLocations = $this->getQuantifiedLocations($productLinkedLocations, $productLink->getStockSkuMap(), $locationsIds);
             foreach ($missingSkuMap as $sku => $qty) {
                 $productQuantifiedLocations->attach(
-                    $this->buildQuantifiedLocation($location, $sku, $qty)
+                    $this->buildQuantifiedLocation($location, $sku, $qty, true)
                 );
             }
 
@@ -354,7 +354,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         // TODO: Refactor
         foreach ($skuQtyMap as $sku => $qty) {
             $quantifiedLinkedLocations->attach(
-                $this->buildQuantifiedLocation($location, $sku, $qty)
+                $this->buildQuantifiedLocation($location, $sku, $qty, true)
             );
         }
 
@@ -364,16 +364,15 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     /**
      * @return QuantifiedLocation
      */
-    protected function buildQuantifiedLocation(Location $location, $sku, $qty = 1)
+    protected function buildQuantifiedLocation(Location $location, $sku, $qty = 1, $zeroStock = false)
     {
-        // TODO: Param for if we get stock or not
         return (new QuantifiedLocation(
             $location->getStockId(),
             $location->getLocationId(),
             $location->getOrganisationUnitId(),
             $sku,
-            $location->getOnHand(),
-            $location->getAllocated()
+            !$zeroStock ? $location->getOnHand() : 0,
+            !$zeroStock ? $location->getAllocated() : 0
         ))->setQuantifier($qty);
     }
 
