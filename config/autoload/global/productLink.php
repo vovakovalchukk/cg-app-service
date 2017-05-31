@@ -1,14 +1,32 @@
 <?php
 use CG\Product\Link\Repository;
+use CG\Product\Link\Service as BaseService;
+use CG\Product\Link\Service\Service;
 use CG\Product\Link\Storage\Cache;
 use CG\Product\Link\Storage\Db;
 use CG\Product\Link\StorageInterface;
+use CG\Stock\Location\Repository as StockLocationRepository;
+use CG\Stock\Location\Service as StockLocationService;
 
 return [
     'di' => [
         'instance' => [
+            'aliases' => [
+                'InternalStockLocationService' => StockLocationService::class,
+            ],
             'preferences' => [
+                BaseService::class => Service::class,
                 StorageInterface::class => Repository::class,
+            ],
+            Service::class => [
+                'parameters' => [
+                    'stockLocationService' => 'InternalStockLocationService',
+                ],
+            ],
+            'InternalStockLocationService' => [
+                'parameters' => [
+                    'repository' => StockLocationRepository::class,
+                ],
             ],
             Repository:: class => [
                 'parameters' => [
