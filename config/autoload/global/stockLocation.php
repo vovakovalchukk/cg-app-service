@@ -1,4 +1,5 @@
 <?php
+use CG\Product\Link\Service as ProductLinkService;
 use CG\Stock\Location\Mapper;
 use CG\Stock\Location\Repository;
 use CG\Stock\Location\Service;
@@ -43,7 +44,8 @@ return [
             ],
             TypedMapper::class => [
                 'parameters' => [
-                    'entityClass' => function() { return TypedEntity::class; }
+                    'productLinkService' => ProductLinkService::class,
+                    'entityClass' => function() { return TypedEntity::class; },
                 ],
             ],
         ],
