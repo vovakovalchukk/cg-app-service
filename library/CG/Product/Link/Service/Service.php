@@ -3,6 +3,7 @@ namespace CG\Product\Link\Service;
 
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
 use CG\Product\Link\Entity as ProductLink;
+use CG\Product\Link\Filter;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
 use CG\Product\Link\StorageInterface;
@@ -19,6 +20,8 @@ use CG\Stock\Service as StockService;
 
 class Service extends BaseService
 {
+    const RECURSION_MSG = 'Circular dependency detected. The product you are trying to link (SKU: %s) is already used to calculate stock for another product that you are trying to link this product to (SKU: %s).';
+
     /** @var StockLocationService $stockLocationService */
     protected $stockLocationService;
     /** @var StockService $stockService */
@@ -56,9 +59,42 @@ class Service extends BaseService
             $currentEntity = null;
         }
 
+        $this->checkForRecursion($entity, [strtolower($entity->getProductSku()) => true]);
         $savedEntity = parent::save($entity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
+    }
+
+    protected function checkForRecursion(ProductLink $entity, array $productSkuMap)
+    {
+        $ouIdProductSku = [];
+        foreach (array_keys($entity->getStockSkuMap()) as $stockSku) {
+            $productSku = strtolower($stockSku);
+            if (isset($productSkuMap[$productSku])) {
+                throw new RecursionException(
+                    sprintf(static::RECURSION_MSG, $stockSku, $entity->getProductSku())
+                );
+            }
+            $productSkuMap[$productSku] = true;
+            $ouIdProductSku[] = $entity->getOrganisationUnitId() . '-' . $stockSku;
+        }
+
+        if (empty($ouIdProductSku)) {
+            return;
+        }
+
+        try {
+            $productLinks = $this->fetchCollectionByFilter(
+                (new Filter('all', 1))->setOuIdProductSku($ouIdProductSku)
+            );
+        } catch (NotFound $exception) {
+            return;
+        }
+
+        /** @var ProductLink $productLink */
+        foreach ($productLinks as $productLink) {
+            $this->checkForRecursion($productLink, $productSkuMap);
+        }
     }
 
     protected function updateRelatedStockLocationsFromRemove(ProductLink $entity)
