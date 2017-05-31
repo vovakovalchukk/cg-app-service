@@ -59,14 +59,16 @@ class Service extends BaseService
             $currentEntity = null;
         }
 
-        $this->checkForRecursion($entity, [strtolower($entity->getProductSku()) => true]);
+        $this->checkForRecursion($entity);
         $savedEntity = parent::save($entity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
 
-    protected function checkForRecursion(ProductLink $entity, array $productSkuMap)
+    protected function checkForRecursion(ProductLink $entity, array $productSkuMap = [])
     {
+        $productSkuMap[strtolower($entity->getProductSku())] = true;
+
         $ouIdProductSku = [];
         foreach (array_keys($entity->getStockSkuMap()) as $stockSku) {
             $productSku = strtolower($stockSku);
