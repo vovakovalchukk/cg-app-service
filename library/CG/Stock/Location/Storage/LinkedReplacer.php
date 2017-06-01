@@ -100,19 +100,10 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     {
         try {
             $productLink = $this->getProductLink($stockLocation);
+            return $this->getLinkedStockLocation($stockLocation, $productLink);
         } catch (NotFound $exception) {
             return $this->buildQuantifiedStockLocation($stockLocation, $stockLocation->getSku());
         }
-
-        $linkedStockLocations = $this->getLinkedStockLocations($stockLocation, $productLink);
-        return new LinkedLocation(
-            $stockLocation->getId(),
-            $stockLocation->getStockId(),
-            $stockLocation->getLocationId(),
-            $stockLocation->getOrganisationUnitId(),
-            $stockLocation->getSku(),
-            $this->buildQuantifiedLinkedStockLocations($stockLocation, $productLink, $linkedStockLocations)
-        );
     }
 
     /**
@@ -141,9 +132,9 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     }
 
     /**
-     * @return Collection
+     * @return LinkedLocation
      */
-    protected function getLinkedStockLocations(StockLocation $stockLocation, ProductLink $productLink)
+    protected function getLinkedStockLocation(StockLocation $stockLocation, ProductLink $productLink)
     {
         try {
             $ouSkuMap = [];
@@ -155,12 +146,21 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 throw new NotFound('No linked skus');
             }
 
-            return $this->fetchCollectionByFilter(
+            $linkedStockLocations = $this->fetchCollectionByFilter(
                 (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
             );
         } catch (NotFound $exception) {
-            return new Collection(StockLocation::class, __FUNCTION__, ['id' => [$stockLocation->getId()]]);
+            $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__, ['id' => [$stockLocation->getId()]]);
         }
+
+        return new LinkedLocation(
+            $stockLocation->getId(),
+            $stockLocation->getStockId(),
+            $stockLocation->getLocationId(),
+            $stockLocation->getOrganisationUnitId(),
+            $stockLocation->getSku(),
+            $this->buildQuantifiedLinkedStockLocations($stockLocation, $productLink, $linkedStockLocations)
+        );
     }
 
     /**
@@ -200,61 +200,12 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 continue;
             }
 
-            $productLink = $productLinksByOuAndSku[$key];
-            $productLinkedStockLocations = new Collection(StockLocation::class, __FUNCTION__, ['id' => [$stockLocation->getId()]]);
-
-            $stockLocationsIds = $ids;
-            foreach ($productLink->getStockSkuMap() as $sku => $qty) {
-                $productLinkedLocationKey = $this->generateStockLocationKey($stockLocation, $sku);
-                if (!isset($linkedStockLocationsByLocationOuAndSku[$productLinkedLocationKey])) {
-                    continue;
-                }
-
-                /** @var StockLocation $productLinkedStockLocation */
-                $productLinkedStockLocation = $linkedStockLocationsByLocationOuAndSku[$productLinkedLocationKey];
-                try {
-                    if (isset($stockLocationsIds[$productLinkedStockLocation->getId()])) {
-                        throw new RecursionException(
-                            sprintf(
-                                'Already fetched stock location with id %s for linked stock location %d',
-                                $productLinkedStockLocation->getId(),
-                                $stockLocation->getId()
-                            )
-                        );
-                    }
-                    $stockLocationsIds[$productLinkedStockLocation->getId()] = true;
-                    $productLinkedStockLocations->attach($productLinkedStockLocation);
-                } catch (RecursionException $exception) {
-                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedStockLocation->getId(), 'sku' => $productLinkedStockLocation->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedStockLocation->getOrganisationUnitId()]);
-                }
-            }
-
-            $productQuantifiedStockLocations = $this->getQuantifiedStockLocations(
-                $productLinkedStockLocations,
-                $productLink->getStockSkuMap(),
-                $stockLocationsIds
-            );
-
-            $this->attachMissingQuantifiedStockLocations(
-                $stockLocation,
-                $productQuantifiedStockLocations,
-                array_diff_ukey(
-                    $productLink->getStockSkuMap(),
-                    array_fill_keys($productLinkedStockLocations->getArrayOf('sku'), true),
-                    function($productLinkSku, $stockLocationSku) {
-                        return strcasecmp($productLinkSku, $stockLocationSku);
-                    }
-                )
-            );
-
             $quantifiedStockLocations->attach(
-                new LinkedLocation(
-                    $stockLocation->getId(),
-                    $stockLocation->getStockId(),
-                    $stockLocation->getLocationId(),
-                    $stockLocation->getOrganisationUnitId(),
-                    $stockLocation->getSku(),
-                    $productQuantifiedStockLocations
+                $this->getLinkedStockLocations(
+                    $stockLocation,
+                    $productLinksByOuAndSku[$key],
+                    $linkedStockLocationsByLocationOuAndSku,
+                    $ids
                 )
             );
         }
@@ -310,6 +261,89 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     }
 
     /**
+     * @param StockLocation[] $linkedStockLocationsByLocationOuAndSku
+     * @return LinkedLocation
+     */
+    protected function getLinkedStockLocations(
+        StockLocation $stockLocation,
+        ProductLink $productLink,
+        array $linkedStockLocationsByLocationOuAndSku,
+        array $stockLocationsIds
+    ) {
+        $productLinkedStockLocations = $this->buildProductLinkedStockLocations(
+            $stockLocation,
+            $productLink,
+            $linkedStockLocationsByLocationOuAndSku,
+            $stockLocationsIds
+        );
+
+        $productQuantifiedStockLocations = $this->getQuantifiedStockLocations(
+            $productLinkedStockLocations,
+            $productLink->getStockSkuMap(),
+            $stockLocationsIds
+        );
+
+        $this->attachMissingQuantifiedStockLocations(
+            $stockLocation,
+            $productQuantifiedStockLocations,
+            array_diff_ukey(
+                $productLink->getStockSkuMap(),
+                array_fill_keys($productLinkedStockLocations->getArrayOf('sku'), true),
+                function($productLinkSku, $stockLocationSku) {
+                    return strcasecmp($productLinkSku, $stockLocationSku);
+                }
+            )
+        );
+
+        return new LinkedLocation(
+            $stockLocation->getId(),
+            $stockLocation->getStockId(),
+            $stockLocation->getLocationId(),
+            $stockLocation->getOrganisationUnitId(),
+            $stockLocation->getSku(),
+            $productQuantifiedStockLocations
+        );
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function buildProductLinkedStockLocations(
+        StockLocation $stockLocation,
+        ProductLink $productLink,
+        array $linkedStockLocationsByLocationOuAndSku,
+        array &$stockLocationsIds
+    ) {
+        $productLinkedStockLocations = new Collection(StockLocation::class, __FUNCTION__, ['id' => [$stockLocation->getId()]]);
+
+        foreach ($productLink->getStockSkuMap() as $sku => $qty) {
+            $productLinkedLocationKey = $this->generateStockLocationKey($stockLocation, $sku);
+            if (!isset($linkedStockLocationsByLocationOuAndSku[$productLinkedLocationKey])) {
+                continue;
+            }
+
+            $productLinkedStockLocation = $linkedStockLocationsByLocationOuAndSku[$productLinkedLocationKey];
+            try {
+                if (isset($stockLocationsIds[$productLinkedStockLocation->getId()])) {
+                    throw new RecursionException(
+                        sprintf(
+                            'Already fetched stock location with id %s for linked stock location %d',
+                            $productLinkedStockLocation->getId(),
+                            $stockLocation->getId()
+                        )
+                    );
+                }
+                $stockLocationsIds[$productLinkedStockLocation->getId()] = true;
+                $productLinkedStockLocations->attach($productLinkedStockLocation);
+            } catch (RecursionException $exception) {
+                $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_FETCH, ['id' => $productLinkedStockLocation->getId(), 'sku' => $productLinkedStockLocation->getSku()], static::LOG_CODE_RECURSIVE_FETCH, ['ou' => $productLinkedStockLocation->getOrganisationUnitId()]);
+            }
+        }
+
+        return $productLinkedStockLocations;
+    }
+
+    /**
      * @return ProductLink[]
      */
     protected function keyProductLinksByOuAndSku(ProductLinks $productLinks)
@@ -325,6 +359,9 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         return $keydArray;
     }
 
+    /**
+     * @return string
+     */
     protected function generateStockLocationKey(StockLocation $stockLocation, $sku = null)
     {
         return implode(
@@ -411,6 +448,9 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         ))->setQuantifier($qty);
     }
 
+    /**
+     * @return Collection
+     */
     protected function buildQuantifiedStockLocations(Collection $stockLocations, array $skuQtyMap = [])
     {
         $skuMap = [];
