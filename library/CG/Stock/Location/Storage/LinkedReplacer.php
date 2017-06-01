@@ -229,25 +229,23 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 }
             }
 
-            $missingSkuMap = array_diff_ukey(
-                $productLink->getStockSkuMap(),
-                array_fill_keys($productLinkedStockLocations->getArrayOf('sku'), true),
-                function($productLinkSku, $locationSku) {
-                    return strcasecmp($productLinkSku, $locationSku);
-                }
-            );
-
             $productQuantifiedStockLocations = $this->getQuantifiedStockLocations(
                 $productLinkedStockLocations,
                 $productLink->getStockSkuMap(),
                 $stockLocationsIds
             );
 
-            foreach ($missingSkuMap as $sku => $qty) {
-                $productQuantifiedStockLocations->attach(
-                    $this->buildQuantifiedStockLocation($stockLocation, $sku, $qty, true)
-                );
-            }
+            $this->attachMissingQuantifiedStockLocations(
+                $stockLocation,
+                $productQuantifiedStockLocations,
+                array_diff_ukey(
+                    $productLink->getStockSkuMap(),
+                    array_fill_keys($productLinkedStockLocations->getArrayOf('sku'), true),
+                    function($productLinkSku, $stockLocationSku) {
+                        return strcasecmp($productLinkSku, $stockLocationSku);
+                    }
+                )
+            );
 
             $quantifiedStockLocations->attach(
                 new LinkedLocation(
@@ -394,13 +392,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             unset($skuQtyMap[$skuMap[strtolower($sku)]], $skuMap[strtolower($sku)]);
         }
 
-        // TODO: Refactor
-        foreach ($skuQtyMap as $sku => $qty) {
-            $quantifiedLinkedStockLocations->attach(
-                $this->buildQuantifiedStockLocation($stockLocation, $sku, $qty, true)
-            );
-        }
-
+        $this->attachMissingQuantifiedStockLocations($stockLocation, $quantifiedLinkedStockLocations, $skuQtyMap);
         return $quantifiedLinkedStockLocations;
     }
 
@@ -447,5 +439,17 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         }
 
         return $quantifiedStockLocations;
+    }
+
+    protected function attachMissingQuantifiedStockLocations(
+        StockLocation $stockLocation,
+        Collection $quantifiedLinkedStockLocations,
+        array $missingSkuQtyMap
+    ) {
+        foreach ($missingSkuQtyMap as $sku => $qty) {
+            $quantifiedLinkedStockLocations->attach(
+                $this->buildQuantifiedStockLocation($stockLocation, $sku, $qty, true)
+            );
+        }
     }
 }
