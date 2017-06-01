@@ -104,25 +104,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             return $this->buildQuantifiedStockLocation($stockLocation, $stockLocation->getSku());
         }
 
-        try {
-            $ouSkuMap = [];
-            foreach ($productLink->getStockSkuMap() as $sku => $qty) {
-                $ouSkuMap[] = $stockLocation->getOrganisationUnitId() . '-' . $sku;
-            }
-
-            if (empty($ouSkuMap)) {
-                throw new NotFound('No linked skus');
-            }
-
-            $locationIds = [$stockLocation->getId() => true];
-            $linkedStockLocations = $this->fetchCollectionByFilter(
-                (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap),
-                $locationIds
-            );
-        } catch (NotFound $exception) {
-            $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__, compact('id'));
-        }
-
+        $linkedStockLocations = $this->getLinkedStockLocations($stockLocation, $productLink);
         return new LinkedLocation(
             $stockLocation->getId(),
             $stockLocation->getStockId(),
@@ -156,6 +138,29 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         );
         $productLink->rewind();
         return $productLink->current();
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function getLinkedStockLocations(StockLocation $stockLocation, ProductLink $productLink)
+    {
+        try {
+            $ouSkuMap = [];
+            foreach ($productLink->getStockSkuMap() as $sku => $qty) {
+                $ouSkuMap[] = $stockLocation->getOrganisationUnitId() . '-' . $sku;
+            }
+
+            if (empty($ouSkuMap)) {
+                throw new NotFound('No linked skus');
+            }
+
+            return $this->fetchCollectionByFilter(
+                (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
+            );
+        } catch (NotFound $exception) {
+            return new Collection(StockLocation::class, __FUNCTION__, ['id' => [$stockLocation->getId()]]);
+        }
     }
 
     /**
