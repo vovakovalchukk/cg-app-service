@@ -2,7 +2,10 @@
 namespace CG\Stock\Location;
 
 /**
- * TODO: Add docblock
+ * This class represents a stock location where we need to deal with multiples. The current use case is for making up
+ * LinkedLocations where a sku is included with a qty.
+ * i.e. If a linked location has sku "test" and a qty of 2, if we say there are 3 in stock of "test", we can only make 1
+ * available `floor(3/2) = 1` to the linked location.
  */
 class QuantifiedLocation extends Entity
 {
