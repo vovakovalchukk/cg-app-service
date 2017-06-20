@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "11b2871f7e6ddcfbd83286cb5930f078",
+    "content-hash": "6aedf1ffd44bcfba2cb299a29f84787f",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1089,16 +1089,16 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.29",
+            "version": "dev-CGIV-8542-StatFailoverClient",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "89f02387cba94d32c8b4f69168cf0df2b92d63b8"
+                "reference": "b5df6412131893d04293cbcfe34bdd911bdba062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.29-2c9af9.zip",
-                "reference": "89f02387cba94d32c8b4f69168cf0df2b92d63b8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-dev-CGIV-8542-StatFailoverClient-ae4a04.zip",
+                "reference": "b5df6412131893d04293cbcfe34bdd911bdba062",
                 "shasum": null
             },
             "require": {
@@ -1143,7 +1143,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-17T11:37:52+00:00"
+            "time": "2017-06-20 14:52:15"
         },
         {
             "name": "channelgrabber/image",
@@ -9549,10 +9549,18 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.3.31",
+            "alias_normalized": "1.3.31.0",
+            "version": "dev-CGIV-8542-StatFailoverClient",
+            "package": "channelgrabber/http"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/http": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
