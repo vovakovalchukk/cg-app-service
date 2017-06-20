@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "11b2871f7e6ddcfbd83286cb5930f078",
+    "content-hash": "aef7bed23119095e3a3bf828d7e4b802",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -325,24 +325,24 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.3.4",
+            "version": "dev-CGIV-8529-StatCacheHitMiss",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "4954c05e0a263fdebece5541e0c2067d9bdbc826"
+                "reference": "58b0830d99f82ce698fecb95c89a5d8c16b4a069"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.4-559f8f.zip",
-                "reference": "4954c05e0a263fdebece5541e0c2067d9bdbc826",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8529-StatCacheHitMiss-1c6678.zip",
+                "reference": "58b0830d99f82ce698fecb95c89a5d8c16b4a069",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/queue": "^1.0.0",
+                "channelgrabber/stats": "^1.0.0",
                 "channelgrabber/stdlib": "^2.12.44",
-                "composer/composer": "@dev",
                 "predis/predis": "~0.8.8"
             },
             "require-dev": {
@@ -360,7 +360,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-10T13:01:38+00:00"
+            "time": "2017-06-20 12:34:42"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -9549,9 +9549,17 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.3.5",
+            "alias_normalized": "2.3.5.0",
+            "version": "dev-CGIV-8529-StatCacheHitMiss",
+            "package": "channelgrabber/cache"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
