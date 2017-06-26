@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a58b8860ffde11920a4e72736b7207b1",
+    "content-hash": "518a289e02633eb3c21ea11ecd072a19",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1278,11 +1278,11 @@
         },
         {
             "name": "channelgrabber/location",
-            "version": "dev-CGIV-8580-Add-includeStockOnAllSalesAccounts-column-to-cg_app-location-table",
+            "version": "dev-CGIV-8579-add-includeStockOnAllSalesAccounts-to-CG-Location-Entity",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-location.git",
-                "reference": "88663a05ac870b544ba7a68ffa6738865841f565"
+                "reference": "a0a35ee24a0c8baebd44c1793a49838c168c0382"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -9554,9 +9554,15 @@
             "package": "channelgrabber/location"
         },
         {
-            "alias": "1.1.3.1",
-            "alias_normalized": "1.1.3.1",
+            "alias": "1.1.4",
+            "alias_normalized": "1.1.4.0",
             "version": "dev-CGIV-8580-Add-includeStockOnAllSalesAccounts-column-to-cg_app-location-table",
+            "package": "channelgrabber/location"
+        },
+        {
+            "alias": "1.1.4",
+            "alias_normalized": "1.1.4.0",
+            "version": "dev-CGIV-8579-add-includeStockOnAllSalesAccounts-to-CG-Location-Entity",
             "package": "channelgrabber/location"
         }
     ],
