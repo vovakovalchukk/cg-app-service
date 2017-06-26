@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "32ce387215caaee5aea6944b467486b0",
+    "content-hash": "a58b8860ffde11920a4e72736b7207b1",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1278,11 +1278,11 @@
         },
         {
             "name": "channelgrabber/location",
-            "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
+            "version": "dev-CGIV-8580-Add-includeStockOnAllSalesAccounts-column-to-cg_app-location-table",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-location.git",
-                "reference": "3290e3f8b9efd5e3e67afb7fbe9ae7c292f26a0e"
+                "reference": "88663a05ac870b544ba7a68ffa6738865841f565"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1325,7 +1325,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-22T13:48:55+00:00"
+            "time": "2017-06-12T08:39:09+00:00"
         },
         {
             "name": "channelgrabber/locking",
@@ -9548,9 +9548,15 @@
     ],
     "aliases": [
         {
-            "alias": "1.1.4",
-            "alias_normalized": "1.1.4.0",
+            "alias": "1.1.3.1",
+            "alias_normalized": "1.1.3.1",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
+            "package": "channelgrabber/location"
+        },
+        {
+            "alias": "1.1.3.1",
+            "alias_normalized": "1.1.3.1",
+            "version": "dev-CGIV-8580-Add-includeStockOnAllSalesAccounts-column-to-cg_app-location-table",
             "package": "channelgrabber/location"
         }
     ],
