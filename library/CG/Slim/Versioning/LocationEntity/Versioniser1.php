@@ -1,7 +1,8 @@
 <?php
 namespace CG\Slim\Versioning\LocationEntity;
 
-use CG\Location\Type;
+use CG\Location\Entity as LocationEntity;
+use CG\Location\Type as LocationType;
 use CG\Order\Service\Item\Service;
 use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -39,8 +40,10 @@ class Versioniser1 implements VersioniserInterface
         if (isset($data['id'])) {
             $entity = $this->service->fetch($data['id']);
             $data['type'] = $entity->getType();
+            $data['includeStockOnAllChannels'] = $entity->getIncludeStockOnAllChannels();
         } else {
-            $data['type'] = Type::MERCHANT;
+            $data['type'] = LocationType::MERCHANT;
+            $data['includeStockOnAllChannels'] = LocationEntity::DEFAULT_INCLUDE_STOCK_ON_ALL_CHANNELS;
         }
         $request->setData($data);
     }
@@ -49,6 +52,7 @@ class Versioniser1 implements VersioniserInterface
     {
         $data = $response->getData();
         unset($data['type']);
+        unset($data['includeStockOnAllChannels']);
         $response->setData($data);
     }
 }

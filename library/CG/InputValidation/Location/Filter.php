@@ -37,6 +37,13 @@ class Filter implements RulesInterface
                     'validators' => [
                         new IsArrayValidator(["name" => "type"])
                     ]
+                ],
+                'includeStockOnAllChannels' => [
+                    'name'       => 'includeStockOnAllChannels',
+                    'required'   => false,
+                    'validators' => [
+                        new BooleanValidator(["name" => "includeStockOnAllChannels"])
+                    ]
                 ]
             ]
         );

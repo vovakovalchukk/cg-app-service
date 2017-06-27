@@ -32,6 +32,13 @@ class Entity implements RulesInterface
                 'validators' => [
                     new StringLength(['min' => 1])
                 ]
+            ],
+            'includeStockOnAllChannels' => [
+                'name'       => 'includeStockOnAllChannels',
+                'required'   => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'includeStockOnAllChannels'])
+                ]
             ]
         ];
     }
