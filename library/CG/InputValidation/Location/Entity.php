@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Location;
 
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
