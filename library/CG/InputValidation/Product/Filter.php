@@ -89,6 +89,13 @@ class Filter implements RulesInterface
                         new IsArrayValidator(['name' => 'type'])
                     ]
                 ],
+                'skuMatchType' => [
+                    'name'       => 'skuMatchType',
+                    'required'   => false,
+                    'validators' => [
+                        new IsArrayValidator(['name' => 'skuMatchType'])
+                    ]
+                ],
             ]
         );
     }
