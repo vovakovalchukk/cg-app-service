@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a58b8860ffde11920a4e72736b7207b1",
+    "content-hash": "a902b6e3ddf28c2958704c2002531509",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1282,7 +1282,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-location.git",
-                "reference": "88663a05ac870b544ba7a68ffa6738865841f565"
+                "reference": "0f7fa9966cfd300bbab7cdf3c78159312c915250"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1305,11 +1305,6 @@
                 "phpunit/phpunit": "~4.0.0"
             },
             "type": "di-definition",
-            "extra": {
-                "branch-alias": {
-                    "dev-develop": "1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Location\\": "src"
@@ -1325,7 +1320,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-06-12T08:39:09+00:00"
+            "time": "2016-01-07T15:28:23+00:00"
         },
         {
             "name": "channelgrabber/locking",
@@ -9547,12 +9542,6 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "1.1.3.1",
-            "alias_normalized": "1.1.3.1",
-            "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
-            "package": "channelgrabber/location"
-        },
         {
             "alias": "1.1.3.1",
             "alias_normalized": "1.1.3.1",
