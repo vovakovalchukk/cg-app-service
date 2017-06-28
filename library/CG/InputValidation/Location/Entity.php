@@ -37,6 +37,7 @@ class Entity implements RulesInterface
             'includeStockOnAllChannels' => [
                 'name'       => 'includeStockOnAllChannels',
                 'required'   => true,
+                'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'includeStockOnAllChannels'])
                 ]
