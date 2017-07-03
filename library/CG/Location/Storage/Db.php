@@ -45,9 +45,6 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getType())) {
             $query[static::DB_TABLE_NAME . '.type'] = $filter->getType();
         }
-        if (!empty($filter->getIncludeStockOnAllChannels())) {
-            $query[static::DB_TABLE_NAME . '.includeStockOnAllChannels'] = $filter->getIncludeStockOnAllChannels();
-        }
         if (!empty($filter->getOrganisationUnitId())) {
             $query[static::DB_TABLE_NAME . '.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
