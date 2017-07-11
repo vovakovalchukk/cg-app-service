@@ -156,16 +156,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.19.40",
+            "version": "1.19.41",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "bef270670cde9628560d273e5feb912524c3981d"
+                "reference": "d240e8e95bc466652a997916f41b0392fb739e80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.19.40-fa651c.zip",
-                "reference": "bef270670cde9628560d273e5feb912524c3981d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.19.41-60dff7.zip",
+                "reference": "d240e8e95bc466652a997916f41b0392fb739e80",
                 "shasum": null
             },
             "require": {
@@ -220,7 +220,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-21T09:50:10+00:00"
+            "time": "2017-04-25T10:02:18+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -485,16 +485,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.29.1",
+            "version": "1.29.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "ea05d016c111d1491a66c6031ea9ad309a802905"
+                "reference": "7f2602ee422a607e6543b6fb59bf8b06a2f22d6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.29.1-c339c4.zip",
-                "reference": "ea05d016c111d1491a66c6031ea9ad309a802905",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.29.3-383986.zip",
+                "reference": "7f2602ee422a607e6543b6fb59bf8b06a2f22d6e",
                 "shasum": null
             },
             "require": {
@@ -511,7 +511,7 @@
                 "channelgrabber/location": ">=1.1.1,<2.0.0",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.0.27",
-                "channelgrabber/order": "^1.18.1",
+                "channelgrabber/order": "^1.28.9",
                 "channelgrabber/permission": ">=1.0.1, <2.0.0",
                 "channelgrabber/predis": "^1.0.7",
                 "channelgrabber/product": "^1.9.0",
@@ -547,7 +547,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-TECH-12": "1.x-dev"
                 }
             },
             "autoload": {
@@ -568,7 +569,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-21T09:45:42+00:00"
+            "time": "2017-05-16T12:49:49+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1282,12 +1283,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-location.git",
-                "reference": "5f23341bc1abed9304b06c9579f04703054a7833"
+                "reference": "d876b165e75fc368f5b185a7884c1353ba0a8707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-location-dev-EPIC-CGIV-8210-Include-FBA-Stock-51742d.zip",
-                "reference": "5f23341bc1abed9304b06c9579f04703054a7833",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-location-dev-EPIC-CGIV-8210-Include-FBA-Stock-6f0e5a.zip",
+                "reference": "d876b165e75fc368f5b185a7884c1353ba0a8707",
                 "shasum": null
             },
             "require": {
@@ -1331,7 +1332,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-06-27 11:40:39"
+            "time": "2017-07-11 13:48:20"
         },
         {
             "name": "channelgrabber/locking",
