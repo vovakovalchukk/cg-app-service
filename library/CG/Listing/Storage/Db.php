@@ -82,7 +82,6 @@ class Db extends DbAbstract implements StorageInterface
             $where = $select->where->nest();
             $where->or->in(static::TABLE . '.externalId', $filter->getExternalId());
             $where->or->in(static::TABLE_LISTING_EXTERNAL_ID_MAP . '.externalId', $filter->getExternalId());
-            $select->where->unnest();
         }
         if (!empty($filter->getChannel())) {
             $select->where->in(static::TABLE . '.channel', $filter->getChannel());
@@ -157,7 +156,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function getEntityArray($entity)
     {
         $array = $entity->toArray();
-        unset($array['productIds'], $array['productSkus']);
+        unset($array['productIds'], $array['productSkus'], $array['skuExternalIdMap']);
         return $array;
     }
 
