@@ -5,92 +5,59 @@ use CG\Listing\Collection;
 use CG\Listing\Entity;
 use CG\Listing\Filter;
 use CG\Listing\StorageInterface;
-use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Storage\Db\DbAbstract;
+use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Expression;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Stdlib\Mapper\FromArrayInterface as ArrayMapper;
-use CG\Stdlib\CollectionInterface;
-use CG\Zend\Stdlib\Db\Sql\InsertIgnore;
-use Zend\Db\Sql\Sql as ZendSql;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Update;
 
+/**
+ * @method Sql getReadSql
+ * @method Sql getFastReadSql
+ * @method Sql getWriteSql
+ */
 class Db extends DbAbstract implements StorageInterface
 {
+    const TABLE = 'listing';
+    const TABLE_PRODUCT_MAP = 'productToListingMap';
+
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
-            $select = $this->buildFilterQuery($filter)->columns(['total' => new Expression('COUNT(DISTINCT id)')]);
-            $total = $this->getReadSql()->prepareStatementForSqlObject($select)->execute()->current()['total'];
-
-            if ($total == 0) {
-                throw new NotFound('No listings match requested filter', 404, null, 'ListingNotFound');
-            }
-
-            $select = $this->buildFilterQuery($filter)->quantifier(Select::QUANTIFIER_DISTINCT)->columns(['id']);
-            if ($filter->getLimit() != 'all') {
-                $offset = ($filter->getPage() - 1) * $filter->getLimit();
-                $select->limit($filter->getLimit())
-                    ->offset($offset);
-            }
-
-            $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
-            if ($results->count() == 0) {
-                throw new NotFound('No listings match requested filter', 404, null, 'ListingNotFound');
-            }
-
-            $listingsId = [];
-            foreach ($results as $listingData) {
-                $listingsId[] = $listingData['id'];
-            }
-
-            $select = $this->getSelect()->where(['id' => $listingsId]);
-            $collection = $this->fetchCollection(
+            /** @var Collection $collection */
+            $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
-                $select,
+                $this->buildFilterQuery($filter),
                 $this->getMapper()
             );
-            $collection->setTotal($total);
+
+            foreach ($this->fetchAssociatedProductInformation($collection->getIds()) as $productInformation) {
+                $listing = $collection->getById($productInformation['listingId']);
+                $listing->appendProductId($productInformation['productId']);
+                $listing->appendProductSku($productInformation['productId'], $productInformation['productSku']);
+            }
+
             return $collection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
-    protected function fetchCollection(
-        CollectionInterface $collection,
-        ZendSql $sql,
-        Select $select,
-        ArrayMapper $arrayMapper,
-        $expected = false
-    ) {
-        $results = $sql->prepareStatementForSqlObject($select)->execute();
-        if ($results->count() == 0 || ($expected !== false && $results->count() != $expected)) {
-            throw new NotFound("No Listings collection found");
-        }
-
-        foreach ($results as $listingData) {
-            if ($listing = $collection->getById($listingData['id'])) {
-                $listing->appendProductId($listingData['productId'])
-                    ->appendProductSku($listingData['productId'], $listingData['productSku']);
-                continue;
-            }
-            $listingData['productIds'] = [$listingData['productId']];
-            $listingData['productSkus'] = [$listingData['productId'] => $listingData['productSku']];
-            $collection->attach($arrayMapper->fromArray($listingData));
-        }
-
-        return $collection;
-    }
-
-    /**
-     * @return \Zend\Db\Sql\Select
-     */
     protected function buildFilterQuery(Filter $filter)
     {
-        $select = $this->getSelect(false);
+        $select = $this->getSelect()
+            ->join(
+                static::TABLE_PRODUCT_MAP,
+                'listing.id=productToListingMap.listingId',
+                [],
+                Select::JOIN_LEFT
+            )
+            ->group('listing.id');
+
         if (!empty($filter->getId())) {
             $select->where->in('listing.id', $filter->getId());
         }
@@ -98,9 +65,7 @@ class Db extends DbAbstract implements StorageInterface
             $select->where->in('listing.organisationUnitId', $filter->getOrganisationUnitId());
         }
         if (!empty($filter->getProductId())) {
-            $mapSelect = $this->getMapSelect()->columns(['listingId']);
-            $mapSelect->where->in('productId', $filter->getProductId());
-            $select->where->in('listing.id', $mapSelect);
+            $select->where->in('productToListingMap.productId', $filter->getProductId());
         }
         if (!empty($filter->getExternalId())) {
             $select->where->in('listing.externalId', $filter->getExternalId());
@@ -120,137 +85,120 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getMarketplace())) {
             $select->where->in('listing.marketplace', $filter->getMarketplace());
         }
+
         return $select;
     }
 
     public function fetch($id)
     {
-        $select = $this->getSelect()->where(array(
-            'id' => $id
-        ));
-        $statement = $this->getReadSql()->prepareStatementForSqlObject($select);
-
-        $results = $statement->execute();
-        if ($results->count() == 0) {
-            throw new NotFound("Listing $id not found in Db layer", 404, null, "ListingNotFound");
+        /** @var Entity $listing */
+        $listing = $this->fetchEntity($this->getReadSql(), $this->getSelect()->where(['id' => $id]), $this->getMapper());
+        foreach ($this->fetchAssociatedProductInformation([$listing->getId()]) as $productInformation) {
+            $listing->appendProductId($productInformation['productId']);
+            $listing->appendProductSku($productInformation['productId'], $productInformation['productSku']);
         }
-
-        $listing = $results->current();
-        $listing['productIds'] = [];
-        if (isset($listing['productId'])) {
-            foreach ($results as $listingData) {
-                $listing['productIds'][] = $listingData['productId'];
-                $listing['productSkus'][$listingData['productId']] = $listingData['productSku'];
-            }
-        }
-        unset($listing['productId'], $listing['productSku']);
-        return $this->getMapper()->fromArray($listing);
+        return $listing;
     }
 
+    protected function fetchAssociatedProductInformation(array $listingIds)
+    {
+        $select = $this->getSelect(static::TABLE_PRODUCT_MAP)->where(['listingId' => $listingIds]);
+        return $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+    }
+
+    /**
+     * @param Entity $entity
+     */
     protected function insertEntity($entity)
     {
-        $listingArr = $entity->toArray();
-        $productIds = $listingArr['productIds'];
-        $productSkus = $listingArr['productSkus'];
-        unset($listingArr['productIds'], $listingArr['productSkus']);
-        $insert = $this->getInsert()->values($listingArr);
-        $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
-        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
-        $this->insertProductMap($id, $productIds, $productSkus);
-
-        $entity->setId($id);
-        $entity->setNewlyInserted(true);
+        parent::insertEntity($entity);
+        $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
     }
 
+    /**
+     * @param Entity $entity
+     */
     protected function updateEntity($entity)
     {
-        $listingArr = $entity->toArray();
-        $listingId = $entity->getId();
-        $productIds = $listingArr['productIds'];
-        $productSkus = $listingArr['productSkus'];
-        $this->deleteProductMap($listingId);
-        $this->insertProductMap($listingId, $productIds, $productSkus);
-        unset($listingArr['productIds'], $listingArr['productSkus']);
-        $update = $this->getUpdate()->set($listingArr)
-            ->where(array('id' => $listingId));
-        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+        parent::updateEntity($entity);
+        $this->deleteAssociatedProductInformation($entity);
+        $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
+    }
+
+    /**
+     * @param Entity $entity
+     */
+    protected function getEntityArray($entity)
+    {
+        $array = $entity->toArray();
+        unset($array['productIds'], $array['productSkus']);
+        return $array;
     }
 
     public function remove($entity)
     {
-        $this->deleteProductMap($entity->getId());
+        $this->deleteAssociatedProductInformation($entity);
         parent::remove($entity);
     }
 
-    protected function insertProductMap($listingId, array $productIds, array $productSkus)
+    protected function insertAssociatedProductInformation(Entity $listing, array $productIds, array $productSkus)
     {
+        $productSkus = array_merge($productSkus, array_fill_keys($productIds, ''));
         if (empty($productIds) && empty($productSkus)) {
             return;
         }
-        foreach ($productIds as $productId) {
-            if (isset($productSkus[$productId])) {
-                continue;
-            }
-            $productSkus[$productId] = '';
-        }
-        $insert = new InsertIgnore('productToListingMap');
+
+        $insert = $this->getInsert(static::TABLE_PRODUCT_MAP);
         foreach ($productSkus as $productId => $productSku) {
-            $insert->values([
-                'listingId' => $listingId,
-                'productId' => $productId,
-                'productSku' => $productSku,
-            ]);
+            $insert->values(
+                [
+                    'productId' => $productId,
+                    'listingId' => $listing->getId(),
+                    'productSku' => $productSku,
+                ]
+            );
             $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         }
+
+        $listing->setProductIds($productIds)->setProductSkus($productSkus);
     }
 
-    protected function deleteProductMap($listingId)
+    protected function deleteAssociatedProductInformation(Entity $listing)
     {
-        $delete = $this->getMapDelete();
-        $delete->where(['listingId' => $listingId]);
+        $delete = $this->getDelete(static::TABLE_PRODUCT_MAP)->where(['listingId' => $listing->getId()]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
 
-    protected function getSelect($columns = true)
+    /**
+     * @return Select
+     */
+    protected function getSelect($table = self::TABLE)
     {
-        return $this->getReadSql()->select('listing')
-            ->join(
-                'productToListingMap',
-                'listing.id=productToListingMap.listingId',
-                $columns ? ['productId' => 'productId', 'productSku' => 'productSku'] : [],
-                Select::JOIN_LEFT
-            );
+        return $this->getReadSql()->select($table);
     }
 
-    protected function getInsert()
+    /**
+     * @return Insert
+     */
+    protected function getInsert($table = self::TABLE)
     {
-        return $this->getWriteSql()->insert('listing');
+        return $this->getWriteSql()->insert($table);
     }
 
-    protected function getUpdate()
+    /**
+     * @return Update
+     */
+    protected function getUpdate($table = self::TABLE)
     {
-        return $this->getWriteSql()->update('listing');
+        return $this->getWriteSql()->update($table);
     }
 
-    protected function getDelete()
+    /**
+     * @return Delete
+     */
+    protected function getDelete($table = self::TABLE)
     {
-        return $this->getWriteSql()->delete('listing');
-    }
-
-    protected function getMapSelect()
-    {
-        return $this->getWriteSql()->select('productToListingMap');
-    }
-
-    protected function getMapInsert()
-    {
-        return $this->getWriteSql()->insert('productToListingMap')
-            ->columns(['listingId', 'productId', 'productSku']);
-    }
-
-    protected function getMapDelete()
-    {
-        return $this->getWriteSql()->delete('productToListingMap');
+        return $this->getWriteSql()->delete($table);
     }
 
     public function getEntityClass()
