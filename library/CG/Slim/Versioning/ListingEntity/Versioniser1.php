@@ -1,16 +1,11 @@
 <?php
 namespace CG\Slim\Versioning\ListingEntity;
 
-use CG\Slim\Versioning\VersioniserInterface;
-use Nocarrier\Hal;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Product\Service\Service;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use Nocarrier\Hal;
 
-class Versioniser1 implements
-    VersioniserInterface,
-    LoggerAwareInterface
+class Versioniser1 extends AbstractVersioniser implements LoggerAwareInterface
 {
     use LogTrait;
 
