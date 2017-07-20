@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6aedf1ffd44bcfba2cb299a29f84787f",
+    "content-hash": "b65469491b36ad28d4449367c303040b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -325,24 +325,24 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "4954c05e0a263fdebece5541e0c2067d9bdbc826"
+                "reference": "cd03b7793c2b15fb11154db6a003f3e67405da02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.4-559f8f.zip",
-                "reference": "4954c05e0a263fdebece5541e0c2067d9bdbc826",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.5-8b017f.zip",
+                "reference": "cd03b7793c2b15fb11154db6a003f3e67405da02",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/queue": "^1.0.0",
+                "channelgrabber/stats": "^1.0.0",
                 "channelgrabber/stdlib": "^2.12.44",
-                "composer/composer": "@dev",
                 "predis/predis": "~0.8.8"
             },
             "require-dev": {
@@ -360,7 +360,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-10T13:01:38+00:00"
+            "time": "2017-06-21T13:26:52+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -1187,16 +1187,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.11.10",
+            "version": "1.11.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "5e241c5207d9a3457751962a80550807da3128dc"
+                "reference": "ef51c1fae94107d092a5fcd1d46b08f113411a8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.11.10-ceea98.zip",
-                "reference": "5e241c5207d9a3457751962a80550807da3128dc",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.11.11-e9a76f.zip",
+                "reference": "ef51c1fae94107d092a5fcd1d46b08f113411a8d",
                 "shasum": null
             },
             "require": {
@@ -1236,7 +1236,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-28T13:21:43+00:00"
+            "time": "2017-06-14T08:47:57+00:00"
         },
         {
             "name": "channelgrabber/locale",
