@@ -37,11 +37,13 @@ class Db extends DbAbstract implements StorageInterface
             );
 
             foreach ($this->fetchAssociatedProductInformation($collection->getIds()) as $productInformation) {
+                /** @var Entity $listing */
                 $listing = $collection->getById($productInformation['listingId']);
                 $listing->appendProductId($productInformation['productId']);
                 $listing->appendProductSku($productInformation['productId'], $productInformation['productSku']);
             }
             foreach ($this->fetchAssociatedListingExternalIds($collection->getIds()) as $externalIds) {
+                /** @var Entity $listing */
                 $listing = $collection->getById($externalIds['listingId']);
                 $listing->appendExternalId($externalIds['listingSku'], $externalIds['externalId']);
             }
@@ -169,7 +171,7 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function insertAssociatedProductInformation(Entity $listing, array $productIds, array $productSkus)
     {
-        $productSkus = array_merge($productSkus, array_fill_keys($productIds, ''));
+        $productSkus = $productSkus + array_fill_keys($productIds, '');
         if (empty($productIds) && empty($productSkus)) {
             return;
         }
@@ -178,8 +180,8 @@ class Db extends DbAbstract implements StorageInterface
         foreach ($productSkus as $productId => $productSku) {
             $insert->values(
                 [
-                    'productId' => $productId,
                     'listingId' => $listing->getId(),
+                    'productId' => $productId,
                     'productSku' => $productSku,
                 ]
             );
