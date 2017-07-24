@@ -13,6 +13,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Where;
 
 /**
  * @method Sql getReadSql
@@ -56,20 +57,7 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function buildFilterQuery(Filter $filter)
     {
-        $select = $this->getSelect()
-            ->join(
-                static::TABLE_PRODUCT_MAP,
-                static::TABLE . '.id=' . static::TABLE_PRODUCT_MAP . '.listingId',
-                [],
-                Select::JOIN_LEFT
-            )
-            ->join(
-                static::TABLE_LISTING_EXTERNAL_ID_MAP,
-                static::TABLE . '.id=' . static::TABLE_LISTING_EXTERNAL_ID_MAP . '.listingId',
-                [],
-                Select::JOIN_LEFT
-            )
-            ->group(static::TABLE . '.id');
+        $select = $this->getSelect()->group(static::TABLE . '.id');
 
         if (!empty($filter->getId())) {
             $select->where->in(static::TABLE . '.id', $filter->getId());
@@ -78,12 +66,13 @@ class Db extends DbAbstract implements StorageInterface
             $select->where->in(static::TABLE . '.organisationUnitId', $filter->getOrganisationUnitId());
         }
         if (!empty($filter->getProductId())) {
+            $select->join(
+                static::TABLE_PRODUCT_MAP,
+                static::TABLE . '.id=' . static::TABLE_PRODUCT_MAP . '.listingId',
+                [],
+                Select::JOIN_INNER
+            );
             $select->where->in(static::TABLE_PRODUCT_MAP . '.productId', $filter->getProductId());
-        }
-        if (!empty($filter->getExternalId())) {
-            $where = $select->where->nest();
-            $where->or->in(static::TABLE . '.externalId', $filter->getExternalId());
-            $where->or->in(static::TABLE_LISTING_EXTERNAL_ID_MAP . '.externalId', $filter->getExternalId());
         }
         if (!empty($filter->getChannel())) {
             $select->where->in(static::TABLE . '.channel', $filter->getChannel());
@@ -101,7 +90,23 @@ class Db extends DbAbstract implements StorageInterface
             $select->where->in(static::TABLE . '.marketplace', $filter->getMarketplace());
         }
 
-        return $select;
+        if (empty($filter->getExternalId())) {
+            return $select;
+        }
+
+        $listingExternalIdMap = clone $select;
+        $listingExternalIdMap->join(
+            static::TABLE_LISTING_EXTERNAL_ID_MAP,
+            static::TABLE . '.id=' . static::TABLE_LISTING_EXTERNAL_ID_MAP . '.listingId',
+            [],
+            Select::JOIN_INNER
+        );
+        $listingExternalIdMap->where->in(static::TABLE_LISTING_EXTERNAL_ID_MAP . '.externalId', $filter->getExternalId());
+
+        $select->where->in(static::TABLE . '.externalId', $filter->getExternalId());
+        $select->combine($listingExternalIdMap, Select::COMBINE_UNION, Select::QUANTIFIER_DISTINCT);
+
+        return $this->getSelect(['listings' => $select]);
     }
 
     public function fetch($id)
