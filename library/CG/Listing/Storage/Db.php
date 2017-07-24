@@ -90,7 +90,12 @@ class Db extends DbAbstract implements StorageInterface
             $select->where->in(static::TABLE . '.marketplace', $filter->getMarketplace());
         }
 
-        if (empty($filter->getExternalId())) {
+        return $this->restrictSelectByExternalId($select, $filter->getExternalId());
+    }
+
+    protected function restrictSelectByExternalId(Select $select, array $externalIds)
+    {
+        if (empty($externalIds)) {
             return $select;
         }
 
@@ -101,9 +106,9 @@ class Db extends DbAbstract implements StorageInterface
             [],
             Select::JOIN_INNER
         );
-        $listingExternalIdMap->where->in(static::TABLE_LISTING_EXTERNAL_ID_MAP . '.externalId', $filter->getExternalId());
+        $listingExternalIdMap->where->in(static::TABLE_LISTING_EXTERNAL_ID_MAP . '.externalId', $externalIds);
 
-        $select->where->in(static::TABLE . '.externalId', $filter->getExternalId());
+        $select->where->in(static::TABLE . '.externalId', $externalIds);
         $select->combine($listingExternalIdMap, Select::COMBINE_UNION, Select::QUANTIFIER_DISTINCT);
 
         return $this->getSelect(['listings' => $select]);
