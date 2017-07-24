@@ -29,11 +29,14 @@ class Db extends DbAbstract implements StorageInterface
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
+            $select = $this->buildFilterQuery($filter);
+            $this->applyLimitToSelect($select, $filter->getLimit(), $filter->getPage());
+
             /** @var Collection $collection */
             $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
-                $this->buildFilterQuery($filter),
+                $select,
                 $this->getMapper()
             );
 
@@ -112,6 +115,13 @@ class Db extends DbAbstract implements StorageInterface
         $select->combine($listingExternalIdMap, Select::COMBINE_UNION, Select::QUANTIFIER_DISTINCT);
 
         return $this->getSelect(['listings' => $select]);
+    }
+
+    protected function applyLimitToSelect(Select $select, $limit, $page)
+    {
+        if ($limit != 'all') {
+            $select->limit($limit)->offset(($page - 1) * $limit);
+        }
     }
 
     public function fetch($id)
