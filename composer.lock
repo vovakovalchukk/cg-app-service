@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7adfbe501f01e9c20e0141b3179edfe1",
+    "content-hash": "3d683c121c1da1f71d55cf51e299ee4d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -325,16 +325,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.3.5",
+            "version": "dev-CGIV-8710-ForceCollectionCacheKeys",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "cd03b7793c2b15fb11154db6a003f3e67405da02"
+                "reference": "8063c7ba45165e43893e6df3b23ed101c3c77acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.3.5-8b017f.zip",
-                "reference": "cd03b7793c2b15fb11154db6a003f3e67405da02",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8710-ForceCollectionCacheKeys-b78a2c.zip",
+                "reference": "8063c7ba45165e43893e6df3b23ed101c3c77acd",
                 "shasum": null
             },
             "require": {
@@ -342,7 +342,7 @@
                 "channelgrabber/predis": ">=1.0.3,<2.0.0",
                 "channelgrabber/queue": "^1.0.0",
                 "channelgrabber/stats": "^1.0.0",
-                "channelgrabber/stdlib": "^2.12.44",
+                "channelgrabber/stdlib": "dev-CGIV-8710-ForceCollectionCacheKeys as 2.12.48",
                 "predis/predis": "~0.8.8"
             },
             "require-dev": {
@@ -360,7 +360,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-06-21T13:26:52+00:00"
+            "time": "2017-07-25 13:20:53"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -2423,16 +2423,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.47",
+            "version": "dev-CGIV-8710-ForceCollectionCacheKeys",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "06c614e0b1581e70be940aff195f0cd8f60b162a"
+                "reference": "d6494472b6abff84b82d6634b0a2a050f2de07b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.47-cd78e7.zip",
-                "reference": "06c614e0b1581e70be940aff195f0cd8f60b162a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-8710-ForceCollectionCacheKeys-f99b1c.zip",
+                "reference": "d6494472b6abff84b82d6634b0a2a050f2de07b0",
                 "shasum": null
             },
             "require": {
@@ -2474,7 +2474,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-25T12:36:14+00:00"
+            "time": "2017-07-25 13:08:05"
         },
         {
             "name": "channelgrabber/stock",
@@ -9549,10 +9549,25 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.3.6",
+            "alias_normalized": "2.3.6.0",
+            "version": "dev-CGIV-8710-ForceCollectionCacheKeys",
+            "package": "channelgrabber/cache"
+        },
+        {
+            "alias": "2.12.48",
+            "alias_normalized": "2.12.48.0",
+            "version": "dev-CGIV-8710-ForceCollectionCacheKeys",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
