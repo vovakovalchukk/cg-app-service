@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "516c41335e4bfc1abf694f1026d5bf7f",
+    "content-hash": "4cfde1fc609865962c7790b51838ff77",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.15",
+            "version": "dev-CGIV-8718-AuditQueueBugs",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c1928d87bf2f8e6f9f90d71005b9ef1226f46638"
+                "reference": "bdadfe33278d97827999360e6a44292f0e7b86fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.15-7498db.zip",
-                "reference": "c1928d87bf2f8e6f9f90d71005b9ef1226f46638",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8718-AuditQueueBugs-a58fe7.zip",
+                "reference": "bdadfe33278d97827999360e6a44292f0e7b86fa",
                 "shasum": null
             },
             "require": {
@@ -1592,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-06-20T09:00:24+00:00"
+            "time": "2017-07-31 14:04:54"
         },
         {
             "name": "channelgrabber/permission",
@@ -2482,13 +2482,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e289e8c275d991e9020a8ca22decc273bbc63fae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-8718-AuditQueueBugs-e7f15b.zip",
-                "reference": "e289e8c275d991e9020a8ca22decc273bbc63fae",
-                "shasum": null
+                "reference": "e5dd085f7580ff6929b24a813b28d8eac53fe998"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2537,7 +2531,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-07-28 10:04:28"
+            "time": "2017-07-31 13:51:01"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -4735,7 +4729,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-08-25T18:04:46+00:00"
+            "time": "2013-08-25 18:04:46"
         },
         {
             "name": "phpseclib/mcrypt_compat",
@@ -5239,7 +5233,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-04-14T18:33:30+00:00"
+            "time": "2014-04-14 18:33:30"
         },
         {
             "name": "rhumsaa/vnderror",
@@ -9551,6 +9545,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.28.17",
+            "alias_normalized": "1.28.17.0",
+            "version": "dev-CGIV-8718-AuditQueueBugs",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "1.8.8",
             "alias_normalized": "1.8.8.0",
             "version": "dev-CGIV-8718-AuditQueueBugs",
@@ -9560,6 +9560,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
