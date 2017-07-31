@@ -2482,7 +2482,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e5dd085f7580ff6929b24a813b28d8eac53fe998"
+                "reference": "67b49a7cc47b36980f1e9403da97c52dc5f5b82b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-8718-AuditQueueBugs-18cefa.zip",
+                "reference": "67b49a7cc47b36980f1e9403da97c52dc5f5b82b",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2531,7 +2537,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-07-31 13:51:01"
+            "time": "2017-07-31 14:31:01"
         },
         {
             "name": "channelgrabber/stock-locking",
