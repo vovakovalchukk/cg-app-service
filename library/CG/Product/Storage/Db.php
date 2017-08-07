@@ -4,6 +4,7 @@ namespace CG\Product\Storage;
 use CG\Product\Collection as ProductCollection;
 use CG\Product\Entity as ProductEntity;
 use CG\Product\Filter;
+use CG\Product\Mapper;
 use CG\Product\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -32,6 +33,11 @@ class Db extends DbAbstract implements StorageInterface
     use ArrayFiltersToWhereTrait;
     use FilterArrayValuesToOrdLikesTrait;
 
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
+    {
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+    }
+
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
@@ -50,6 +56,7 @@ class Db extends DbAbstract implements StorageInterface
                 $select
             );
             $productCollection->setTotal($total);
+            $this->appendImages($productCollection);
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
@@ -261,7 +268,75 @@ class Db extends DbAbstract implements StorageInterface
     {
         $select = $this->getSelect()->where(['product.id' => $id]);
         $products = $this->fetchCollectionWithJoinQuery(new ProductCollection($this->getEntityClass(), __FUNCTION__), $select);
+        $this->appendImages($products);
         return $products->getById($id);
+    }
+
+    public function appendImages(ProductCollection $collection)
+    {
+        if ($collection->count() == 0) {
+            return;
+        }
+
+        $select = $this->getImageSelect($collection->getIds());
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        if ($results->count() == 0) {
+            return;
+        }
+
+        $productImages = [];
+        $productListingImages = [];
+
+        foreach ($results as $result) {
+            if (!isset($productImages[$result['productId']])) {
+                $productImages[$result['productId']] = [];
+            }
+
+            if (!isset($productListingImages[$result['productId']])) {
+                $productListingImages[$result['productId']] = [];
+            }
+
+            if (!isset($result['listingId'])) {
+                $productImages[$result['productId']][$result['order']] = [
+                    'id' => $result['imageId'],
+                    'order' => $result['order'],
+                ];
+                continue;
+            }
+
+            $key = $result['listingId'] . '-' . $result['order'];
+            $productListingImages[$result['productId']][$key] = [
+                'id' => $result['imageId'],
+                'listingId' => $result['listingId'],
+                'order' => $result['order'],
+            ];
+        }
+
+        /** @var ProductEntity $product */
+        foreach ($collection as $product) {
+            $productId = $product->getId();
+            if (isset($productImages[$productId])) {
+                $product->setImageIds(array_values($productImages[$productId]));
+            }
+            if (isset($productListingImages[$productId])) {
+                $product->setImageListingIds(array_values($productListingImages[$productId]));
+            }
+        }
+    }
+
+    protected function getImageSelect(array $productIds)
+    {
+        $productImages = $this->getReadSql()
+            ->select('productImage')
+            ->columns(['productId' => 'productId', 'listingId' => null, 'imageId' => 'imageId', 'order' => 'order'])
+            ->where(['productId' => $productIds]);
+
+        $productListingImages = $this->getReadSql()
+            ->select('productListingImage')
+            ->columns(['productId' => 'productId', 'listingId' => 'listingId', 'imageId' => 'imageId', 'order' => 'order'])
+            ->where(['productId' => $productIds]);
+
+        return $productImages->combine($productListingImages);
     }
 
     /**
@@ -424,18 +499,6 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSelect()
     {
         return $this->getReadSql()->select('product')
-            ->join(
-                'productImage',
-                'productImage.productId = product.id',
-                ['imageId' => 'imageId', 'imageOrder' => 'order'],
-                Select::JOIN_LEFT
-            )
-            ->join(
-                'productListingImage',
-                'productListingImage.productId = product.id',
-                ['imageListingId' => 'listingId', 'listingImageId' => 'imageId', 'listingImageOrder' => 'order'],
-                Select::JOIN_LEFT
-            )
             ->join(
                 'productAttribute',
                 'productAttribute.productId = product.id',
