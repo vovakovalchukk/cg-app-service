@@ -96,7 +96,6 @@ class Service extends BaseService implements StatsAwareInterface
     protected function updateRelatedListings(Stock $stock): Service
     {
         try {
-            /** @var StockCollection $stocks */
             $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         } catch (NotFound $e) {
             // No-op
