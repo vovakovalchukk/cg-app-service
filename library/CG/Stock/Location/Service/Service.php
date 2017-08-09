@@ -74,7 +74,7 @@ class Service extends BaseService implements StatsAwareInterface
         }
 
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelatedListings($stock->getOrganisationUnitId(), $stockLocation->getStockId());
+        $this->updateRelatedListings($stock);
         return $stockLocationHal;
     }
 
@@ -93,12 +93,11 @@ class Service extends BaseService implements StatsAwareInterface
         return $this;
     }
 
-    protected function updateRelatedListings(int $organisationUnitId, int $stockId): Service
+    protected function updateRelatedListings(Stock $stock): Service
     {
         try {
             /** @var StockCollection $stocks */
-            $stocks = $this->stockStorage->fetchCollectionByPaginationAndFilters('all', 1, [$stockId], [$organisationUnitId], [], []);
-            $this->updateRelatedListingsForStockGenerator->generateJob($stocks->getFirst());
+            $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         } catch (NotFound $e) {
             // No-op
         }
