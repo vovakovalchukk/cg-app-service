@@ -78,18 +78,6 @@ class Service extends BaseService implements StatsAwareInterface
         return $stockLocationHal;
     }
 
-    protected function updateRelatedListings(int $organisationUnitId, int $stockId): Service
-    {
-        try {
-            /** @var StockCollection $stocks */
-            $stocks = $this->stockStorage->fetchCollectionByPaginationAndFilters('all', 1, [$stockId], [$organisationUnitId], [], []);
-            $this->updateRelatedListingsForStockGenerator->generateJob($stocks->getFirst());
-        } catch (NotFound $e) {
-            // No-op
-        }
-        return $this;
-    }
-
     protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $entity): Service
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
@@ -101,6 +89,18 @@ class Service extends BaseService implements StatsAwareInterface
         ) {
             $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $entity->getId()], static::LOG_CODE_OVERSELL);
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
+        }
+        return $this;
+    }
+
+    protected function updateRelatedListings(int $organisationUnitId, int $stockId): Service
+    {
+        try {
+            /** @var StockCollection $stocks */
+            $stocks = $this->stockStorage->fetchCollectionByPaginationAndFilters('all', 1, [$stockId], [$organisationUnitId], [], []);
+            $this->updateRelatedListingsForStockGenerator->generateJob($stocks->getFirst());
+        } catch (NotFound $e) {
+            // No-op
         }
         return $this;
     }
