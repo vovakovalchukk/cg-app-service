@@ -467,7 +467,8 @@ $config = array(
                         StockLocationEntity::class => [
                             [
                                 'entityClass' => LockingStock::class,
-                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getStockId',
                             ]
                         ],
                         LockingStock::class => [
@@ -475,8 +476,9 @@ $config = array(
                         ],
                         LockingProduct::class => [
                             [
-                                'entityClass' => StockEntity::class,
-                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                                'entityClass' => LockingStock::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY,
+                                'getter' => 'getStock',
                             ],
                             ['entityClass' => ListingEntity::class],
                             ['entityClass' => ImageEntity::class]
