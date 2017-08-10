@@ -466,14 +466,14 @@ $config = array(
                     'relationships' => [
                         StockLocationEntity::class => [
                             [
-                                'entityClass' => StockEntity::class,
+                                'entityClass' => LockingStock::class,
                                 'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY
                             ]
                         ],
-                        StockEntity::class => [
+                        LockingStock::class => [
                             ['entityClass' => StockLocationEntity::class]
                         ],
-                        ProductEntity::class => [
+                        LockingProduct::class => [
                             [
                                 'entityClass' => StockEntity::class,
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
