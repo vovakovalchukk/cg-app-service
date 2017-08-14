@@ -1519,6 +1519,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
                 "reference": "4490355ad9b8bc9052a6c2334fb9a93483c75b00"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8450-dont-link-archived-orders-19b071.zip",
+                "reference": "4490355ad9b8bc9052a6c2334fb9a93483c75b00",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
@@ -1586,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-01T10:18:08+00:00"
+            "time": "2017-08-14 12:56:56"
         },
         {
             "name": "channelgrabber/permission",
@@ -2468,7 +2474,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-25T12:36:14+00:00"
+            "time": "2017-07-26T10:17:29+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -4729,7 +4735,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-08-25T18:04:46+00:00"
+            "time": "2013-08-25 18:04:46"
         },
         {
             "name": "phpseclib/mcrypt_compat",
@@ -9556,8 +9562,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
