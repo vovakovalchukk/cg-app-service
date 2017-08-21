@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c48e663aa7513d2b0239c4ba07470b3",
+    "content-hash": "22f70c06060c135dce358a27fb1bf2c6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -685,7 +685,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-02-06 12:09:38"
+            "time": "2015-02-06T12:09:38+00:00"
         },
         {
             "name": "channelgrabber/dataplug",
@@ -1513,17 +1513,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.19",
+            "version": "dev-CGIV-8788-optimize-external-customer-search",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7adbecea68dd9284eba6463689bbf60a20e587ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.19-e1ddf3.zip",
-                "reference": "7adbecea68dd9284eba6463689bbf60a20e587ca",
-                "shasum": null
+                "reference": "4afb57342ca7f8ec85da3c00a54f537e927780b6"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -4735,7 +4729,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-08-25 18:04:46"
+            "time": "2013-08-25T18:04:46+00:00"
         },
         {
             "name": "phpseclib/mcrypt_compat",
@@ -5239,7 +5233,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-04-14 18:33:30"
+            "time": "2014-04-14T18:33:30+00:00"
         },
         {
             "name": "rhumsaa/vnderror",
@@ -9549,13 +9543,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.28.21",
+            "alias_normalized": "1.28.21.0",
+            "version": "dev-CGIV-8788-optimize-external-customer-search",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
