@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aaa41e7f84d1b0308b8bf33708aaf95e",
+    "content-hash": "72e0d7fafd005680811b907efbe00f2b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.21",
+            "version": "dev-CGIV-8833-OrdersNotModified",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "00f54f55407d83d622a97c60a65164640c4faca4"
+                "reference": "78c579004c466b3408676bc8f9070f9aa68bfbfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.21-a59ee4.zip",
-                "reference": "00f54f55407d83d622a97c60a65164640c4faca4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8833-OrdersNotModified-5d3a9c.zip",
+                "reference": "78c579004c466b3408676bc8f9070f9aa68bfbfe",
                 "shasum": null
             },
             "require": {
@@ -1592,7 +1592,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T09:27:47+00:00"
+            "time": "2017-08-24T14:42:16+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9549,10 +9549,18 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.28.24",
+            "alias_normalized": "1.28.24.0",
+            "version": "dev-CGIV-8833-OrdersNotModified",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
