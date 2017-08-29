@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb7ad34f79535a870b49312f126f2ca5",
+    "content-hash": "fd0442ec95cc8faaa518ad6e74697340",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1951,20 +1951,21 @@
         },
         {
             "name": "channelgrabber/purchase-order",
-            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
+            "version": "dev-CGIV-8311-purchase-orders-complete-update-stock",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "744caa7af0b8dcac00c6c65c33e9c2cf50d9cb0b"
+                "reference": "de79f08d1b61a3dfe33adbd030eeeee151c0af0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-EPIC-CGIV-7460-purchase-orders-1-c9151d.zip",
-                "reference": "744caa7af0b8dcac00c6c65c33e9c2cf50d9cb0b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-86e59d.zip",
+                "reference": "de79f08d1b61a3dfe33adbd030eeeee151c0af0c",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/stdlib": "^2.12.42"
+                "channelgrabber/stdlib": "^2.12.42",
+                "channelgrabber/stock": "dev-CGIV-8416-refactor-stock-import-process as 1.9.0"
             },
             "type": "library",
             "autoload": {
@@ -1981,7 +1982,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-18T10:35:32+00:00"
+            "time": "2017-08-29T15:32:02+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -9892,7 +9893,7 @@
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
+            "version": "dev-CGIV-8311-purchase-orders-complete-update-stock",
             "package": "channelgrabber/purchase-order"
         },
         {
