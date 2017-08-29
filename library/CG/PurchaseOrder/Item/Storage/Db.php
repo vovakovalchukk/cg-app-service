@@ -5,13 +5,10 @@ use CG\PurchaseOrder\Item\Collection;
 use CG\PurchaseOrder\Item\Entity;
 use CG\PurchaseOrder\Item\Filter;
 use CG\PurchaseOrder\Item\StorageInterface;
-use CG\Stdlib\Storage\Db\DbAbstract;
-use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
-use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
+use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Exception\ExceptionInterface;
-use Zend\Db\Sql\Expression;
-use CG\Zend\Stdlib\Db\Sql\InsertIgnore;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {

@@ -24,5 +24,4 @@ class PurchaseOrder
             ->setService($service)
             ->setDi($di);
     }
-
 }

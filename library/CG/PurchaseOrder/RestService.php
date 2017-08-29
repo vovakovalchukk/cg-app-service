@@ -2,9 +2,11 @@
 namespace CG\PurchaseOrder;
 
 use CG\PurchaseOrder\Item\Filter as ItemFilter;
-use CG\PurchaseOrder\Item\Service as ItemService;
+use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Gearman\Generator\StockImport as StockImportGearmanJobGenerator;
 use Zend\EventManager\GlobalEventManager as EventManager;
+use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
 
 class RestService extends Service
 {
@@ -13,18 +15,23 @@ class RestService extends Service
 
     /** @var EventManager $eventManager */
     protected $eventManager;
-    /** @var ItemService */
-    protected $itemService;
 
     public function __construct(
-        EventManager $eventManager,
         StorageInterface $repository,
         Mapper $mapper,
-        ItemService $itemService
+        PurchaseOrderItemService $purchaseOrderItemService,
+        PurchaseOrderItemMapper $purchaseOrderItemMapper,
+        StockImportGearmanJobGenerator $stockImportGenerator,
+        EventManager $eventManager
     ) {
-        parent::__construct($repository, $mapper);
+        parent::__construct(
+            $repository,
+            $mapper,
+            $purchaseOrderItemService,
+            $purchaseOrderItemMapper,
+            $stockImportGenerator
+        );
         $this->eventManager = $eventManager;
-        $this->itemService = $itemService;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -71,7 +78,7 @@ class RestService extends Service
             ->setPage(1)
             ->setPurchaseOrderId($ids);
         try {
-            return $this->itemService->fetchCollectionByFilter($filter);
+            return $this->purchaseOrderItemService->fetchCollectionByFilter($filter);
         } catch (NotFound $e) {
             return null;
         }
