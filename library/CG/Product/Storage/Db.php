@@ -4,6 +4,7 @@ namespace CG\Product\Storage;
 use CG\Product\Collection as ProductCollection;
 use CG\Product\Entity as ProductEntity;
 use CG\Product\Filter;
+use CG\Product\Mapper;
 use CG\Product\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -13,12 +14,14 @@ use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
 use CG\Zend\Stdlib\Db\Sql\InsertIgnore as InsertIgnore;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\Expression as Query;
 use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\Like;
 use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
+use function CG\Stdlib\escapeLikeValue;
 
 /**
  * @method Sql getFastReadSql
@@ -30,10 +33,18 @@ class Db extends DbAbstract implements StorageInterface
     use ArrayFiltersToWhereTrait;
     use FilterArrayValuesToOrdLikesTrait;
 
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
+    {
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+    }
+
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
             $total = $this->fetchEntityCount($filter);
+            if ($total == 0) {
+                throw new NotFound('No matching products');
+            }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
@@ -45,6 +56,7 @@ class Db extends DbAbstract implements StorageInterface
                 $select
             );
             $productCollection->setTotal($total);
+            $this->appendImages($productCollection);
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
@@ -53,44 +65,33 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function createSelectFromFilter(Filter $filter)
     {
+        $joinWithVariations = false;
         $select = $this->getReadSql()
             ->select('product')
-            ->quantifier(Select::QUANTIFIER_DISTINCT)
-            ->columns(['id' => 'id'])
+            ->columns(['_id' => 'id'])
             ->where($this->buildFilterQuery($filter));
 
-        $types = array_flip($filter->getType());
-        $typeQuery = new Predicate(null, Predicate::OP_OR);
-        $searchTerm = $filter->getSearchTerm();
+        $sku = (array) $filter->getSku();
+        $typeQuery = $this->buildTypeQuery(array_fill_keys($filter->getType(), true), $joinWithVariations);
+        $skuMatchTypeQuery = $this->buildSkuMatchQuery($sku, array_fill_keys($filter->getSkuMatchType(), true));
 
-        if (isset($types[Filter::TYPE_SIMPLE]) || isset($types[Filter::TYPE_PARENT]) || $searchTerm) {
+        if ($searchTerm = $filter->getSearchTerm()) {
+            $joinWithVariations = true;
+            $select->where($this->buildSearchTermQuery($searchTerm));
+        }
+
+        if ($filter->getReplaceVariationWithParent()) {
+            $select->columns(
+                ['_id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
+            );
+        }
+
+        if ($joinWithVariations || (!empty($sku) && $skuMatchTypeQuery->count() > 0)) {
             $select->join(
                 ['variation' => 'product'],
                 'variation.parentProductId = product.id',
                 [],
                 Select::JOIN_LEFT
-            );
-
-            if (isset($types[Filter::TYPE_SIMPLE])) {
-                $typeQuery->isNull('variation.id');
-            }
-
-            if (isset($types[Filter::TYPE_PARENT])) {
-                $typeQuery->isNotNull('variation.id');
-            }
-
-            if ($searchTerm) {
-                $select->where($this->buildSearchTermQuery($filter->getSearchTerm()));
-            }
-        }
-
-        if (isset($types[Filter::TYPE_VARIATION])) {
-            $typeQuery->notEqualTo('product.parentProductId', 0);
-        }
-
-        if ($filter->getReplaceVariationWithParent()) {
-            $select->columns(
-                ['id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
             );
         }
 
@@ -98,6 +99,14 @@ class Db extends DbAbstract implements StorageInterface
             $select->where($typeQuery);
         }
 
+        if (!empty($sku) && $skuMatchTypeQuery->count() > 0) {
+            return $this->addSkuMatchToSelect($select, $sku, $skuMatchTypeQuery);
+        }
+
+        $select->quantifier(Select::QUANTIFIER_DISTINCT);
+        if (!empty($sku)) {
+            $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
+        }
         return $select;
     }
 
@@ -107,18 +116,11 @@ class Db extends DbAbstract implements StorageInterface
         $quantifier = $select->getRawState(Select::QUANTIFIER);
         $columns = $select->getRawState(Select::COLUMNS);
 
-        $select
-            ->reset(Select::QUANTIFIER)
-            ->columns(
-                [
-                    'count' => new Expression(
-                        sprintf('COUNT(%s ?)', $quantifier == Select::QUANTIFIER_DISTINCT ? Select::QUANTIFIER_DISTINCT : ''),
-                        [$columns['id']]
-                    ),
-                ]
-            );
+        $count = $this->getReadSql()
+            ->select(['products' => $select])
+            ->columns(['count' => new Expression('COUNT(_id)')]);
 
-        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        $results = $this->getReadSql()->prepareStatementForSqlObject($count)->execute();
         return $results->current()['count'];
     }
 
@@ -136,7 +138,7 @@ class Db extends DbAbstract implements StorageInterface
         if($results->count() == 0) {
             throw new NotFound();
         }
-        return array_column(iterator_to_array($results), 'id');
+        return array_column(iterator_to_array($results), '_id');
     }
 
     protected function fetchCollectionWithJoinQuery(ProductCollection $collection, Select $select)
@@ -166,15 +168,6 @@ class Db extends DbAbstract implements StorageInterface
         if (!is_null($filter->getCgCreationDate())) {
             $query['product.cgCreationDate'] = $filter->getCgCreationDate();
         }
-
-        if(!empty($filter->getSku())) {
-            // Must do SKU check as (LIKE OR LIKE) instead of IN() otherwise
-            // MySQL ignores trailing spaces and we get unexpected results
-            $sku = (array)$filter->getSku();
-            $where = $this->arrayFiltersToWhere($query);
-            $this->filterArrayValuesToOrdLikes('product.sku', $sku, $where);
-            return $where;
-        }
         return $query;
     }
 
@@ -191,11 +184,159 @@ class Db extends DbAbstract implements StorageInterface
         return ["(" . implode(' OR ', $searchQuery) . ")" => array_fill(0, count($searchQuery), $likeSearchTerm)];
     }
 
+    protected function buildTypeQuery(array $types, &$joinWithVariations = false)
+    {
+        $typeQuery = new Predicate(null, Predicate::OP_OR);
+
+        if (isset($types[Filter::TYPE_SIMPLE])) {
+            $joinWithVariations = true;
+            $typeQuery->addPredicate(
+                (new Predicate(null, Predicate::OP_AND))->equalTo('product.parentProductId', 0)->isNull('variation.id')
+            );
+        }
+
+        if (isset($types[Filter::TYPE_PARENT])) {
+            $joinWithVariations = true;
+            $typeQuery->addPredicate(
+                (new Predicate(null, Predicate::OP_AND))->equalTo('product.parentProductId', 0)->isNotNull('variation.id')
+            );
+        }
+
+        if (isset($types[Filter::TYPE_VARIATION])) {
+            $typeQuery->notEqualTo('product.parentProductId', 0);
+        }
+
+        return $typeQuery;
+    }
+
+    protected function buildSkuMatchQuery(array $sku, array $skuMatchType)
+    {
+        $skuMatchTypeQuery = new Predicate(null, Predicate::OP_OR);
+        if (empty($sku)) {
+            return $skuMatchTypeQuery;
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_ANY])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('skuMatch > 0')
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_ALL])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch = ? AND skuCount = skuMatch)', count($sku))
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_SUPERSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch = ? AND skuCount > skuMatch)', count($sku))
+            );
+        }
+
+        if (isset($skuMatchType[Filter::SKU_MATCH_SUBSET])) {
+            $skuMatchTypeQuery->addPredicate(
+                new Query('(skuMatch > 0 AND skuMatch < ? AND skuCount = skuMatch)', count($sku))
+            );
+        }
+
+        return $skuMatchTypeQuery;
+    }
+
+    public function addSkuMatchToSelect(Select $select, array $sku, Predicate $skuMatchTypeQuery)
+    {
+        $column = 'IFNULL(variation.sku, product.sku)';
+        $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
+            return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
+        }, $sku));
+
+        return $select
+            ->columns(
+                array_merge(
+                    $select->getRawState(Select::COLUMNS),
+                    [
+                        'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
+                        'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
+                    ]
+                )
+            )
+            ->group('_id')
+            ->having($skuMatchTypeQuery);
+    }
+
     public function fetch($id)
     {
         $select = $this->getSelect()->where(['product.id' => $id]);
         $products = $this->fetchCollectionWithJoinQuery(new ProductCollection($this->getEntityClass(), __FUNCTION__), $select);
+        $this->appendImages($products);
         return $products->getById($id);
+    }
+
+    public function appendImages(ProductCollection $collection)
+    {
+        if ($collection->count() == 0) {
+            return;
+        }
+
+        $select = $this->getImageSelect($collection->getIds());
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        if ($results->count() == 0) {
+            return;
+        }
+
+        $productImages = [];
+        $productListingImages = [];
+
+        foreach ($results as $result) {
+            if (!isset($productImages[$result['productId']])) {
+                $productImages[$result['productId']] = [];
+            }
+
+            if (!isset($productListingImages[$result['productId']])) {
+                $productListingImages[$result['productId']] = [];
+            }
+
+            if (!isset($result['listingId'])) {
+                $productImages[$result['productId']][$result['order']] = [
+                    'id' => $result['imageId'],
+                    'order' => $result['order'],
+                ];
+                continue;
+            }
+
+            $key = $result['listingId'] . '-' . $result['order'];
+            $productListingImages[$result['productId']][$key] = [
+                'id' => $result['imageId'],
+                'listingId' => $result['listingId'],
+                'order' => $result['order'],
+            ];
+        }
+
+        /** @var ProductEntity $product */
+        foreach ($collection as $product) {
+            $productId = $product->getId();
+            if (isset($productImages[$productId])) {
+                $product->setImageIds(array_values($productImages[$productId]));
+            }
+            if (isset($productListingImages[$productId])) {
+                $product->setImageListingIds(array_values($productListingImages[$productId]));
+            }
+        }
+    }
+
+    protected function getImageSelect(array $productIds)
+    {
+        $productImages = $this->getReadSql()
+            ->select('productImage')
+            ->columns(['productId' => 'productId', 'listingId' => null, 'imageId' => 'imageId', 'order' => 'order'])
+            ->where(['productId' => $productIds]);
+
+        $productListingImages = $this->getReadSql()
+            ->select('productListingImage')
+            ->columns(['productId' => 'productId', 'listingId' => 'listingId', 'imageId' => 'imageId', 'order' => 'order'])
+            ->where(['productId' => $productIds]);
+
+        return $productImages->combine($productListingImages);
     }
 
     /**
@@ -358,18 +499,6 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSelect()
     {
         return $this->getReadSql()->select('product')
-            ->join(
-                'productImage',
-                'productImage.productId = product.id',
-                ['imageId' => 'imageId', 'imageOrder' => 'order'],
-                Select::JOIN_LEFT
-            )
-            ->join(
-                'productListingImage',
-                'productListingImage.productId = product.id',
-                ['imageListingId' => 'listingId', 'listingImageId' => 'imageId', 'listingImageOrder' => 'order'],
-                Select::JOIN_LEFT
-            )
             ->join(
                 'productAttribute',
                 'productAttribute.productId = product.id',

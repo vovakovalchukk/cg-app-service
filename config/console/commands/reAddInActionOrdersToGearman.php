@@ -56,7 +56,11 @@ return [
             }
 
             $accountFilter = new AccountFilter;
-            $accountFilter->setId($accountIdArray)
+            $accountFilter
+                ->setId($accountIdArray)
+                ->setActive(true)
+                ->setDeleted(false)
+                ->setPending(false)
                 ->setLimit('all');
 
             $accountCollection = $accountService->fetchByFilter($accountFilter);
