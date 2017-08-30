@@ -1955,7 +1955,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "7474ae2f413b7ae2863d792ea86004235bd8f2b5"
+                "reference": "a794f8da8ea973dd0194313e90f35cfd9ef5ce6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-726ba4.zip",
+                "reference": "a794f8da8ea973dd0194313e90f35cfd9ef5ce6e",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/stdlib": "^2.12.42",
@@ -1976,7 +1982,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-30T11:35:01+00:00"
+            "time": "2017-08-30T15:42:55+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -9903,8 +9909,8 @@
         "channelgrabber/purchase-order": 20,
         "channelgrabber/stock": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
