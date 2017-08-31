@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd0442ec95cc8faaa518ad6e74697340",
+    "content-hash": "a37b637df2cd04ed87fd5364a34e0122",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -774,16 +774,16 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "60e5fff088458542976cde2493d9db1096c112d4"
+                "reference": "1fa9d38600a0d93bc9553ba7cc48dde73962663b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.0-1fb30f.zip",
-                "reference": "60e5fff088458542976cde2493d9db1096c112d4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.1-af7430.zip",
+                "reference": "1fa9d38600a0d93bc9553ba7cc48dde73962663b",
                 "shasum": null
             },
             "require": {
@@ -809,7 +809,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-30T13:39:22+00:00"
+            "time": "2017-08-31T08:01:55+00:00"
         },
         {
             "name": "channelgrabber/ebay",
@@ -1955,12 +1955,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "3558abc3e66255c1d120360025f69a04ee4c1f6e"
+                "reference": "b8d917399dfb5e8eb87cde48fa23544c4bf72c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-7d4615.zip",
-                "reference": "3558abc3e66255c1d120360025f69a04ee4c1f6e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-68e158.zip",
+                "reference": "b8d917399dfb5e8eb87cde48fa23544c4bf72c66",
                 "shasum": null
             },
             "require": {
@@ -1982,7 +1982,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-31T14:56:05+00:00"
+            "time": "2017-08-31T15:50:39+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -2454,16 +2454,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.48",
+            "version": "2.12.49",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "35ef87c0ab47f759112b9e6472e0bb3a554abfe1"
+                "reference": "8ff4f95c4c690697d7cf73be9281dd6b79a69ecd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.48-b3d8a9.zip",
-                "reference": "35ef87c0ab47f759112b9e6472e0bb3a554abfe1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.49-bb2b4e.zip",
+                "reference": "8ff4f95c4c690697d7cf73be9281dd6b79a69ecd",
                 "shasum": null
             },
             "require": {
@@ -2505,27 +2505,27 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-07-26T10:17:29+00:00"
+            "time": "2017-08-31T08:08:18+00:00"
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-8416-refactor-stock-import-process",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "fc7d77923fadb6cf0729b311240415166969f654"
+                "reference": "076232ed7e67b1c7c06b454520d8e7bae45c0204"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-8416-refactor-stock-import-process-3a304c.zip",
-                "reference": "fc7d77923fadb6cf0729b311240415166969f654",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.9.0-2e919b.zip",
+                "reference": "076232ed7e67b1c7c06b454520d8e7bae45c0204",
                 "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/di": "^2.2.1",
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -2536,7 +2536,7 @@
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/slim": "^1.13.2",
-                "channelgrabber/stdlib": "^2.12.14",
+                "channelgrabber/stdlib": "^2.12.49",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">= 7.1"
@@ -2570,7 +2570,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-25T10:24:22+00:00"
+            "time": "2017-08-31T08:36:49+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -9895,19 +9895,12 @@
             "alias_normalized": "1.0.0.0",
             "version": "dev-CGIV-8311-purchase-orders-complete-update-stock",
             "package": "channelgrabber/purchase-order"
-        },
-        {
-            "alias": "1.9.0",
-            "alias_normalized": "1.9.0.0",
-            "version": "dev-CGIV-8416-refactor-stock-import-process",
-            "package": "channelgrabber/stock"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/purchase-order": 20,
-        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
