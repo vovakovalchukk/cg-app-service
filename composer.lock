@@ -1955,17 +1955,17 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "a794f8da8ea973dd0194313e90f35cfd9ef5ce6e"
+                "reference": "3558abc3e66255c1d120360025f69a04ee4c1f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-726ba4.zip",
-                "reference": "a794f8da8ea973dd0194313e90f35cfd9ef5ce6e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-CGIV-8311-purchase-orders-complete-update-stock-7d4615.zip",
+                "reference": "3558abc3e66255c1d120360025f69a04ee4c1f6e",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/stdlib": "^2.12.42",
-                "channelgrabber/stock": "dev-CGIV-8416-refactor-stock-import-process as 1.9.0"
+                "channelgrabber/stock": "^1.9.0"
             },
             "type": "library",
             "autoload": {
@@ -1982,7 +1982,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-30T15:42:55+00:00"
+            "time": "2017-08-31T14:56:05+00:00"
         },
         {
             "name": "channelgrabber/purge",
