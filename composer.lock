@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "248ab4bc5b76b4e23b05cfcfca6578d1",
+    "content-hash": "2c33c3cb2a3ac3a5e474210c049c4dd1",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1458,16 +1458,16 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "1.1.0",
+            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "2b908921bbbe146d06046198523d32ffd36ee877"
+                "reference": "9093f588fdac4723b64e43e5394770325760fe58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.1.0-b404c1.zip",
-                "reference": "2b908921bbbe146d06046198523d32ffd36ee877",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-8853-LimitOrderNotificationToCertainFields-00ba53.zip",
+                "reference": "9093f588fdac4723b64e43e5394770325760fe58",
                 "shasum": null
             },
             "require": {
@@ -1481,6 +1481,7 @@
                 "channelgrabber/user": "^1.19.0",
                 "guzzlehttp/guzzle": ">=4.1,<6.0",
                 "jakeasmith/http_build_url": "~1.0",
+                "php": ">=7.1",
                 "zendframework/zend-config": "~2.3"
             },
             "require-dev": {
@@ -1509,20 +1510,20 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-13T10:08:43+00:00"
+            "time": "2017-09-04T09:43:33+00:00"
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.24",
+            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "5f8ac5d7fc76641ab2f6de2e9ec298812d627b69"
+                "reference": "68de8f9475730dc9c43a16fcdf158d513da3a9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.24-c022c8.zip",
-                "reference": "5f8ac5d7fc76641ab2f6de2e9ec298812d627b69",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8853-LimitOrderNotificationToCertainFields-beae74.zip",
+                "reference": "68de8f9475730dc9c43a16fcdf158d513da3a9cf",
                 "shasum": null
             },
             "require": {
@@ -1543,7 +1544,7 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/notification": "^1.0.0",
+                "channelgrabber/notification": "dev-CGIV-8853-LimitOrderNotificationToCertainFields as 1.1.1",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.9.0",
@@ -1592,7 +1593,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-24T15:28:04+00:00"
+            "time": "2017-09-04T10:05:22+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9549,10 +9550,25 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.1.1",
+            "alias_normalized": "1.1.1.0",
+            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
+            "package": "channelgrabber/notification"
+        },
+        {
+            "alias": "1.28.26",
+            "alias_normalized": "1.28.26.0",
+            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/notification": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
