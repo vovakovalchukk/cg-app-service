@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e015a677dda73b2ff595e4a5b27ea90a",
+    "content-hash": "273f830dbcef62eb2f96e6e01e9c7c04",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1458,7 +1458,7 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
@@ -1466,7 +1466,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-8853-LimitOrderNotificationToCertainFields-4773c7.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.2.0-4773c7.zip",
                 "reference": "c6cafdffdcace091d15009e8439529c40ee68b36",
                 "shasum": null
             },
@@ -1514,16 +1514,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
+            "version": "1.28.26",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e61b22d6a4c946fd7eb3a51ea4a4e5f81c8ce6b0"
+                "reference": "2b2c291617c3949f9a71b02af3dc9922b6d23012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8853-LimitOrderNotificationToCertainFields-7d4d60.zip",
-                "reference": "e61b22d6a4c946fd7eb3a51ea4a4e5f81c8ce6b0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.26-e1cc31.zip",
+                "reference": "2b2c291617c3949f9a71b02af3dc9922b6d23012",
                 "shasum": null
             },
             "require": {
@@ -1544,7 +1544,7 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/notification": "dev-CGIV-8853-LimitOrderNotificationToCertainFields as 1.1.1",
+                "channelgrabber/notification": "^1.2.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.9.0",
@@ -1593,7 +1593,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-04T11:21:29+00:00"
+            "time": "2017-09-04T13:11:37+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9550,25 +9550,10 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.2.0",
-            "alias_normalized": "1.2.0.0",
-            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
-            "package": "channelgrabber/notification"
-        },
-        {
-            "alias": "1.28.26",
-            "alias_normalized": "1.28.26.0",
-            "version": "dev-CGIV-8853-LimitOrderNotificationToCertainFields",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/notification": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
