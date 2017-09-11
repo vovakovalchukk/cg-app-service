@@ -18,7 +18,6 @@ return [
                     'repository' => Db::class,
                 ]
             ],
-
             Db::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',

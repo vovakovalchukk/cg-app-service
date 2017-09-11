@@ -1,12 +1,13 @@
 <?php
 namespace CG\PurchaseOrder;
 
+use CG\PurchaseOrder\Entity as PurchaseOrder;
 use CG\PurchaseOrder\Item\Filter as ItemFilter;
 use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
+use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Gearman\Generator\StockImport as StockImportGearmanJobGenerator;
 use Zend\EventManager\GlobalEventManager as EventManager;
-use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
 
 class RestService extends Service
 {
@@ -32,6 +33,22 @@ class RestService extends Service
             $stockImportGenerator
         );
         $this->eventManager = $eventManager;
+    }
+
+    public function save(PurchaseOrder $entity, array $itemEntities = null)
+    {
+        $shouldTriggerStockImport = $this->shouldTriggerStockImport($entity);
+        if ($itemEntities === null) {
+            $savedEntity = parent::save($entity);
+        } else {
+            $savedEntity = parent::save($entity, $itemEntities);
+        }
+
+        if ($shouldTriggerStockImport) {
+            $this->triggerStockImportUpdate($entity);
+        }
+
+        return $savedEntity;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
