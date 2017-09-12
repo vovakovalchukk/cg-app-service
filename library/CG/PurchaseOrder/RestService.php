@@ -57,13 +57,13 @@ class RestService extends Service
     public function remove(Entity $entity): void
     {
         $this->getRepository()->remove($entity);
-        if (empty($entity->getItems())) {
-            return;
-        }
-
-        /** @var Item $item */
-        foreach ($entity->getItems() as $item) {
-            $this->purchaseOrderItemService->remove($item);
+        try {
+            /** @var Item $item */
+            foreach ($this->purchaseOrderItemService->fetchAllByPurchaseOrderIds([$entity->getId()]) as $item) {
+                $this->purchaseOrderItemService->remove($item);
+            }
+        } catch (NotFound $e) {
+            // PO items not found, no-op
         }
     }
 
