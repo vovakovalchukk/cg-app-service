@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9fed0056d586ae320b803597f3e1ae7",
+    "content-hash": "093e3e02080aeef1b5d629cb9915bdf7",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -160,24 +160,25 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "73fd2605634926c45da7111b52ce7208f954713d"
+                "reference": "8b3c0296ea16056a2be9a2e36e54a3c0f9e68beb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-EPIC-CGIV-8210-Include-FBA-Stock-503eb2.zip",
-                "reference": "73fd2605634926c45da7111b52ce7208f954713d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-EPIC-CGIV-8210-Include-FBA-Stock-525c3f.zip",
+                "reference": "8b3c0296ea16056a2be9a2e36e54a3c0f9e68beb",
                 "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
-                "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "^1.12.0",
-                "channelgrabber/channel": "^1.31.0",
+                "channelgrabber/cache": "^2.4.2",
+                "channelgrabber/cglib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.13.1",
+                "channelgrabber/channel": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.32.3",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.9",
                 "channelgrabber/exchangerate": "^1.1.1",
+                "channelgrabber/feature-flags": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.0.1-dev",
                 "channelgrabber/gearman": "^1.2.22",
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
                 "channelgrabber/image": "^1.2.2",
@@ -185,13 +186,15 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/location": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.1.4",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/order": "^1.28.9",
+                "channelgrabber/order": "^1.28.22",
                 "channelgrabber/predis": "~1.0.12",
                 "channelgrabber/product": "^1.9.0",
                 "channelgrabber/scraper": ">=1.0.2,<2.0.0",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/stats": "^1.0.0",
-                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.49",
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.51",
+                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.9.1-dev",
+                "channelgrabber/stock-locking": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.0.5-dev",
                 "channelgrabber/user": "^1.22.9",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "contextio/php-contextio": "~2.1",
@@ -202,7 +205,7 @@
             },
             "require-dev": {
                 "channelgrabber/phpunit": ">=1.0.0",
-                "phpunit/phpunit": "~4.6.0"
+                "phpunit/phpunit": "^6.3"
             },
             "type": "library",
             "autoload": {
@@ -213,7 +216,10 @@
             "autoload-dev": {
                 "psr-4": {
                     "CG\\Amazon\\Test\\": "tests",
-                    "CG\\Amazon\\TestAsset\\": "tests/assets"
+                    "CG\\Amazon\\TestAsset\\": "tests/assets",
+                    "CG\\Channel\\Test\\": "vendor/channelgrabber/channel/tests/Channel/Test",
+                    "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test",
+                    "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
             "transport-options": {
@@ -221,7 +227,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T14:14:14+00:00"
+            "time": "2017-09-12T12:53:34+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -270,16 +276,16 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "1.11.10",
+            "version": "1.11.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "af7caf5e76a32aa8ecf0378715963df2a8dc4a96"
+                "reference": "236602d0508fa6ba1bb9e152f0360b946e445fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.11.10-437dab.zip",
-                "reference": "af7caf5e76a32aa8ecf0378715963df2a8dc4a96",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.11.12-82127b.zip",
+                "reference": "236602d0508fa6ba1bb9e152f0360b946e445fcc",
                 "shasum": null
             },
             "require": {
@@ -321,20 +327,20 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-10T10:57:55+00:00"
+            "time": "2017-09-06T12:31:16+00:00"
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.4.1",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "567cb23d4a45c272884c0f885a384fa26385bde9"
+                "reference": "6d1fbe8a3bf803101fb4a7ea90d82637e0039cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.4.1-172482.zip",
-                "reference": "567cb23d4a45c272884c0f885a384fa26385bde9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.4.2-290e21.zip",
+                "reference": "6d1fbe8a3bf803101fb4a7ea90d82637e0039cfc",
                 "shasum": null
             },
             "require": {
@@ -360,7 +366,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-22T14:20:19+00:00"
+            "time": "2017-08-29T09:46:11+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -425,12 +431,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "73d4b78565520f7e9f2dbb30855977bd0e7b4bb5"
+                "reference": "663337d0021ddf3279cc478b0b499ae33880e95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-8210-Include-FBA-Stock-e2d6d4.zip",
-                "reference": "73d4b78565520f7e9f2dbb30855977bd0e7b4bb5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-8210-Include-FBA-Stock-12d419.zip",
+                "reference": "663337d0021ddf3279cc478b0b499ae33880e95e",
                 "shasum": null
             },
             "require": {
@@ -448,7 +454,7 @@
                 "channelgrabber/product": "^1.9.2",
                 "channelgrabber/settings": "^1.5.3",
                 "channelgrabber/slim": "^1.13.0",
-                "channelgrabber/stdlib": "^2.12.47",
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.49",
                 "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.8.11",
                 "channelgrabber/stock-locking": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.0.5",
                 "channelgrabber/user": "^1.23.0",
@@ -458,7 +464,7 @@
             },
             "require-dev": {
                 "channelgrabber/phpunit": ">=1.0.4",
-                "phpunit/phpunit": "~4.0.0"
+                "phpunit/phpunit": "^6.3"
             },
             "type": "library",
             "extra": {
@@ -482,7 +488,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T14:07:14+00:00"
+            "time": "2017-09-11T15:34:17+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -490,12 +496,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "ed26270c2d9db9fe414b083b7959a81813ab9f97"
+                "reference": "0b9748460ded6670c31d9ea4653adafaa87e0360"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-8210-Include-FBA-Stock-e93ac0.zip",
-                "reference": "ed26270c2d9db9fe414b083b7959a81813ab9f97",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-EPIC-CGIV-8210-Include-FBA-Stock-1a9754.zip",
+                "reference": "0b9748460ded6670c31d9ea4653adafaa87e0360",
                 "shasum": null
             },
             "require": {
@@ -522,8 +528,8 @@
                 "channelgrabber/settings": "^1.3.9",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stats": ">=1.0.1,<2.0.0",
-                "channelgrabber/stdlib": "^2.12.42",
-                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.8.11",
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.51",
+                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.9.1",
                 "channelgrabber/stock-locking": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.0.5",
                 "channelgrabber/user": "^1.20.2",
                 "channelgrabber/zf2-email-template": "^1.0.12",
@@ -563,8 +569,8 @@
             },
             "autoload-dev": {
                 "psr-4": {
-                    "CG\\Channel\\Test\\": "tests/Channel",
-                    "CG\\Account\\Test\\": "tests/Account",
+                    "CG\\Channel\\Test\\": "tests/Channel/Test",
+                    "CG\\Account\\Test\\": "tests/Account/Test",
                     "CG\\Test\\": "tests/assets/"
                 }
             },
@@ -573,7 +579,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T13:50:53+00:00"
+            "time": "2017-09-12T11:05:16+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -781,16 +787,16 @@
         },
         {
             "name": "channelgrabber/di",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-di.git",
-                "reference": "60e5fff088458542976cde2493d9db1096c112d4"
+                "reference": "1fa9d38600a0d93bc9553ba7cc48dde73962663b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.0-1fb30f.zip",
-                "reference": "60e5fff088458542976cde2493d9db1096c112d4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.1-af7430.zip",
+                "reference": "1fa9d38600a0d93bc9553ba7cc48dde73962663b",
                 "shasum": null
             },
             "require": {
@@ -816,7 +822,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-03-30T13:39:22+00:00"
+            "time": "2017-08-31T08:01:55+00:00"
         },
         {
             "name": "channelgrabber/ebay",
@@ -1499,16 +1505,16 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "2b908921bbbe146d06046198523d32ffd36ee877"
+                "reference": "c6cafdffdcace091d15009e8439529c40ee68b36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.1.0-b404c1.zip",
-                "reference": "2b908921bbbe146d06046198523d32ffd36ee877",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.2.0-4773c7.zip",
+                "reference": "c6cafdffdcace091d15009e8439529c40ee68b36",
                 "shasum": null
             },
             "require": {
@@ -1522,6 +1528,7 @@
                 "channelgrabber/user": "^1.19.0",
                 "guzzlehttp/guzzle": ">=4.1,<6.0",
                 "jakeasmith/http_build_url": "~1.0",
+                "php": ">=7.1",
                 "zendframework/zend-config": "~2.3"
             },
             "require-dev": {
@@ -1550,20 +1557,20 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-13T10:08:43+00:00"
+            "time": "2017-09-04T11:17:04+00:00"
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.28.21",
+            "version": "1.29.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "00f54f55407d83d622a97c60a65164640c4faca4"
+                "reference": "95834c8814f02d6c2434916d77a2fa9899355ea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.28.21-a59ee4.zip",
-                "reference": "00f54f55407d83d622a97c60a65164640c4faca4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.29.2-b202f8.zip",
+                "reference": "95834c8814f02d6c2434916d77a2fa9899355ea6",
                 "shasum": null
             },
             "require": {
@@ -1584,7 +1591,7 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/notification": "^1.0.0",
+                "channelgrabber/notification": "^1.2.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.9.0",
@@ -1596,7 +1603,7 @@
                 "channelgrabber/stdlib": "^2.12.47",
                 "channelgrabber/stock": "^1.8.2",
                 "channelgrabber/tax": "^1.0.2",
-                "channelgrabber/template": "^1.4.19",
+                "channelgrabber/template": "^1.4.27",
                 "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.22.9",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
@@ -1633,7 +1640,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T09:27:47+00:00"
+            "time": "2017-09-11T07:34:37+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1897,12 +1904,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f40174ee47c8da6f746b874f3563191eec6ad8fa"
+                "reference": "f9bbdee88207be3103c3def718409fec90a3179d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-8210-Include-FBA-Stock-7f0786.zip",
-                "reference": "f40174ee47c8da6f746b874f3563191eec6ad8fa",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-8210-Include-FBA-Stock-7f0020.zip",
+                "reference": "f9bbdee88207be3103c3def718409fec90a3179d",
                 "shasum": null
             },
             "require": {
@@ -1952,7 +1959,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T14:27:53+00:00"
+            "time": "2017-09-12T13:07:32+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2469,12 +2476,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "1a181837ae6f1143c3980d5506ffab1d9972a5ce"
+                "reference": "b4589d755763cba98f087b14009ba53191b01e7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-EPIC-CGIV-8210-Include-FBA-Stock-7775dc.zip",
-                "reference": "1a181837ae6f1143c3980d5506ffab1d9972a5ce",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-EPIC-CGIV-8210-Include-FBA-Stock-88da56.zip",
+                "reference": "b4589d755763cba98f087b14009ba53191b01e7a",
                 "shasum": null
             },
             "require": {
@@ -2516,7 +2523,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T12:25:09+00:00"
+            "time": "2017-09-12T07:33:14+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -2524,18 +2531,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "b643f21302b85555b42b6911ee8ac7e328d5f38c"
+                "reference": "4866d80134a9d2572dcf68c77db952a66ae1ab37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-8210-Include-FBA-Stock-3b2545.zip",
-                "reference": "b643f21302b85555b42b6911ee8ac7e328d5f38c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-8210-Include-FBA-Stock-7e16ed.zip",
+                "reference": "4866d80134a9d2572dcf68c77db952a66ae1ab37",
                 "shasum": null
             },
             "require": {
+                "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/di": "^2.2.1",
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
@@ -2546,9 +2554,10 @@
                 "channelgrabber/permission": ">=1.0.1,<2.0.0",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/slim": "^1.13.2",
-                "channelgrabber/stdlib": "^2.12.14",
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.51",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
-                "nocarrier/hal": "~0.9.4"
+                "nocarrier/hal": "~0.9.4",
+                "php": ">= 7.1"
             },
             "conflict": {
                 "channelgrabber/cglib": "<1.10.2",
@@ -2579,7 +2588,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T13:14:31+00:00"
+            "time": "2017-09-12T10:29:51+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -2587,18 +2596,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "a0bb0ba86b943cfa7d16079c7ccf6f5bac60ef9a"
+                "reference": "8e22bc5c9b7a73dea8282dec15305c32f063f94a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-8210-Include-FBA-Stock-abc1e6.zip",
-                "reference": "a0bb0ba86b943cfa7d16079c7ccf6f5bac60ef9a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-8210-Include-FBA-Stock-13a151.zip",
+                "reference": "8e22bc5c9b7a73dea8282dec15305c32f063f94a",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/locking": "^1.1.0",
-                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.8.11"
+                "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.51-dev",
+                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.9.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.6.6"
@@ -2619,7 +2629,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-23T13:19:16+00:00"
+            "time": "2017-09-12T10:44:36+00:00"
         },
         {
             "name": "channelgrabber/tax",
@@ -2668,16 +2678,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.4.19",
+            "version": "1.4.27",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "b6c5d39cf53724cdb93b0ceba8092abb6ee5356d"
+                "reference": "93a9483715619863da9e62bbdac9da13f5d8988b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.19-a21f29.zip",
-                "reference": "b6c5d39cf53724cdb93b0ceba8092abb6ee5356d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.27-4adb3c.zip",
+                "reference": "93a9483715619863da9e62bbdac9da13f5d8988b",
                 "shasum": null
             },
             "require": {
@@ -2688,11 +2698,11 @@
                 "channelgrabber/image": "^1.2.3",
                 "channelgrabber/locale": "^1.0.7",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.24.6",
+                "channelgrabber/order": "^1.28.9",
                 "channelgrabber/product": "^1.2.0",
-                "channelgrabber/settings": "^1.4.3",
+                "channelgrabber/settings": "^1.5.1",
                 "channelgrabber/stdlib": "^2.10.4",
-                "channelgrabber/user": "^1.22.6",
+                "channelgrabber/user": "^1.22.9",
                 "ext-gd": "*",
                 "guzzle/guzzle": "~3.7",
                 "picqer/php-barcode-generator": "~0.2.1",
@@ -2727,7 +2737,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-02-08T09:48:01+00:00"
+            "time": "2017-09-05T14:32:21+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -2847,16 +2857,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.23.1",
+            "version": "1.23.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "e08f5de68e9c4f536ef78c4acbccff1f7495ff91"
+                "reference": "b5cba53c3b63ed927d4125551226196b8b9f969f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.23.1-6629db.zip",
-                "reference": "e08f5de68e9c4f536ef78c4acbccff1f7495ff91",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.23.2-6dc4e8.zip",
+                "reference": "b5cba53c3b63ed927d4125551226196b8b9f969f",
                 "shasum": null
             },
             "require": {
@@ -2899,7 +2909,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-11T10:50:25+00:00"
+            "time": "2017-09-06T12:33:16+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -9649,8 +9659,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.21.5",
-            "alias_normalized": "1.21.5.0",
+            "alias": "1.23.2",
+            "alias_normalized": "1.23.2.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/amazon"
         },
@@ -9661,10 +9671,16 @@
             "package": "channelgrabber/cglib"
         },
         {
-            "alias": "1.32.2",
-            "alias_normalized": "1.32.2.0",
+            "alias": "1.32.3",
+            "alias_normalized": "1.32.3.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.0.1-dev",
+            "alias_normalized": "1.0.1.0-dev",
+            "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
+            "package": "channelgrabber/feature-flags"
         },
         {
             "alias": "1.1.4",
@@ -9679,14 +9695,14 @@
             "package": "channelgrabber/product"
         },
         {
-            "alias": "2.12.49",
-            "alias_normalized": "2.12.49.0",
+            "alias": "2.12.51",
+            "alias_normalized": "2.12.51.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/stdlib"
         },
         {
-            "alias": "1.8.11",
-            "alias_normalized": "1.8.11.0",
+            "alias": "1.9.1",
+            "alias_normalized": "1.9.1.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/stock"
         },
@@ -9695,12 +9711,6 @@
             "alias_normalized": "1.0.5.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/stock-locking"
-        },
-        {
-            "alias": "1.0.1-dev",
-            "alias_normalized": "1.0.1.0-dev",
-            "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
-            "package": "channelgrabber/feature-flags"
         }
     ],
     "minimum-stability": "stable",
@@ -9709,6 +9719,7 @@
         "channelgrabber/cglib": 20,
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/feature-flags": 20,
         "channelgrabber/location": 20,
         "channelgrabber/product": 20,
         "channelgrabber/stdlib": 20,
@@ -9716,7 +9727,6 @@
         "channelgrabber/stock-locking": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
-        "channelgrabber/feature-flags": 20,
         "phpspec/phpspec": 20
     },
     "prefer-stable": false,
