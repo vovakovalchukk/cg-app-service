@@ -37,6 +37,13 @@ class Filter implements RulesInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ],
+            'userId' => [
+                'name'       => 'userId',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'userId'])
+                ]
+            ],
             'status' => [
                 'name'       => 'status',
                 'required'   => false,

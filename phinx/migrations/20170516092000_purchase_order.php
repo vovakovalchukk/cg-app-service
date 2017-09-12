@@ -10,6 +10,7 @@ class PurchaseOrder extends AbstractMigration
         $table = $this->table('purchaseOrder');
 
         $table->addColumn('organisationUnitId', 'integer')
+            ->addColumn('userId', 'integer')
             ->addColumn('status', 'string')
             ->addColumn('externalId', 'string')
             ->addColumn('created', 'datetime')

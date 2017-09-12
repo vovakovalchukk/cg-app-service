@@ -27,7 +27,6 @@ class RestService extends Service
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
     {
-
         if (!$filter->getLimit()) {
             $filter->setLimit(static::DEFAULT_LIMIT);
         }

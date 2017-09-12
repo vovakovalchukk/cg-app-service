@@ -29,7 +29,6 @@ class Collection
 
     public function getData()
     {
-
         return $this->getService()->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?: null,

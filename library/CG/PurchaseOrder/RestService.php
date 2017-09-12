@@ -1,9 +1,13 @@
 <?php
 namespace CG\PurchaseOrder;
 
+use CG\PurchaseOrder\Entity as PurchaseOrder;
 use CG\PurchaseOrder\Item\Filter as ItemFilter;
-use CG\PurchaseOrder\Item\Service as ItemService;
+use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
+use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
+use CG\PurchaseOrder\Item\Entity as Item;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Gearman\Generator\StockImport as StockImportGearmanJobGenerator;
 use Zend\EventManager\GlobalEventManager as EventManager;
 
 class RestService extends Service
@@ -13,18 +17,54 @@ class RestService extends Service
 
     /** @var EventManager $eventManager */
     protected $eventManager;
-    /** @var ItemService */
-    protected $itemService;
+    /** @var StockImportGearmanJobGenerator $stockImportGearmanJobGenerator */
+    protected $stockImportGearmanJobGenerator;
 
     public function __construct(
-        EventManager $eventManager,
         StorageInterface $repository,
         Mapper $mapper,
-        ItemService $itemService
+        PurchaseOrderItemService $purchaseOrderItemService,
+        PurchaseOrderItemMapper $purchaseOrderItemMapper,
+        StockImportGearmanJobGenerator $stockImportGenerator,
+        EventManager $eventManager
     ) {
-        parent::__construct($repository, $mapper);
+        parent::__construct(
+            $repository,
+            $mapper,
+            $purchaseOrderItemService,
+            $purchaseOrderItemMapper
+        );
         $this->eventManager = $eventManager;
-        $this->itemService = $itemService;
+        $this->stockImportGearmanJobGenerator = $stockImportGenerator;
+    }
+
+    public function save(PurchaseOrder $entity, array $itemEntities = null)
+    {
+        $shouldTriggerStockImport = $this->shouldTriggerStockImport($entity);
+        if ($itemEntities === null) {
+            $savedEntity = parent::save($entity);
+        } else {
+            $savedEntity = parent::save($entity, $itemEntities);
+        }
+
+        if ($shouldTriggerStockImport) {
+            $this->triggerStockImportUpdate($entity);
+        }
+
+        return $savedEntity;
+    }
+
+    public function remove(Entity $entity): void
+    {
+        $this->getRepository()->remove($entity);
+        try {
+            /** @var Item $item */
+            foreach ($this->purchaseOrderItemService->fetchAllByPurchaseOrderIds([$entity->getId()]) as $item) {
+                $this->purchaseOrderItemService->remove($item);
+            }
+        } catch (NotFound $e) {
+            // PO items not found, no-op
+        }
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -71,7 +111,7 @@ class RestService extends Service
             ->setPage(1)
             ->setPurchaseOrderId($ids);
         try {
-            return $this->itemService->fetchCollectionByFilter($filter);
+            return $this->purchaseOrderItemService->fetchCollectionByFilter($filter);
         } catch (NotFound $e) {
             return null;
         }
@@ -84,6 +124,31 @@ class RestService extends Service
             return;
         }
         $entity->setItems($items);
+    }
+
+    protected function shouldTriggerStockImport(PurchaseOrder $entity): bool
+    {
+        if ($entity->getStatus() !== Status::COMPLETE) {
+            return false;
+        }
+
+        try {
+            /** @var PurchaseOrder $exitingEntity */
+            $exitingEntity = $this->getRepository()->fetch($entity->getId());
+        } catch (NotFound $e) {
+            return true;
+        }
+        if ($exitingEntity->getStatus() === Status::COMPLETE) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function triggerStockImportUpdate(PurchaseOrder $purchaseOrder): void
+    {
+        /** Generate a job to trigger the stock import from PurchaseOrder */
+        $this->stockImportGearmanJobGenerator->generateJob($purchaseOrder);
     }
 
     /**

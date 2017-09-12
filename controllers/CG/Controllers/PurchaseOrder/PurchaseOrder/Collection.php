@@ -9,7 +9,6 @@ use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 
-
 class Collection
 {
     use ControllerTrait, GetTrait, PostTrait;
@@ -28,13 +27,13 @@ class Collection
 
     public function getData()
     {
-
         return $this->getService()->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?: null,
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
+                $this->getParams('userId') ?: [],
                 $this->getParams('status') ?: [],
                 $this->getParams('externalId') ?: [],
                 $this->getParams('createdFrom') ?: null,

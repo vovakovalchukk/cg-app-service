@@ -47,6 +47,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         if (!empty($filter->getOrganisationUnitId())) {
             $query['organisationUnitId'] = $filter->getOrganisationUnitId();
         }
+        if (!empty($filter->getUserId())) {
+            $query['userId'] = $filter->getUserId();
+        }
         if (!empty($filter->getStatus())) {
             $query['status'] = $filter->getStatus();
         }
