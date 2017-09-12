@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1340b8ff72f1ad5967b51fbfaf8003af",
+    "content-hash": "6397d75d8dd1b71a0d659ef53fd40c51",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1514,17 +1514,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.29.2",
+            "version": "dev-CGIV-8873-Images-linked-to-order-items-many-times",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "95834c8814f02d6c2434916d77a2fa9899355ea6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.29.2-b202f8.zip",
-                "reference": "95834c8814f02d6c2434916d77a2fa9899355ea6",
-                "shasum": null
+                "reference": "8aec32d56add0cbd70cb891f971532ff94e31095"
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -9550,13 +9544,21 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.29.3",
+            "alias_normalized": "1.29.3.0",
+            "version": "dev-CGIV-8873-Images-linked-to-order-items-many-times",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
