@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ba94bdb2dc9eac27270dcd3ecc69bff",
+    "content-hash": "a006161ec604f1fdb917a75dc0460d7d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1952,19 +1952,20 @@
         },
         {
             "name": "channelgrabber/purchase-order",
-            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "97ee242ca160674f3d77ef109c3930294f77029c"
+                "reference": "d46bcfed23ccef3fe908a6b6d495d12a8be2422f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-dev-EPIC-CGIV-7460-purchase-orders-1-4adc4d.zip",
-                "reference": "97ee242ca160674f3d77ef109c3930294f77029c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-1.0.0-cd4b6e.zip",
+                "reference": "d46bcfed23ccef3fe908a6b6d495d12a8be2422f",
                 "shasum": null
             },
             "require": {
+                "channelgrabber/constants": "dev-master",
                 "channelgrabber/stdlib": "^2.12.42",
                 "channelgrabber/stock": "^1.9.0"
             },
@@ -1983,7 +1984,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-12T13:46:16+00:00"
+            "time": "2017-09-13T08:58:08+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -9890,18 +9891,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-EPIC-CGIV-7460-purchase-orders-1",
-            "package": "channelgrabber/purchase-order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/purchase-order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
