@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "273f830dbcef62eb2f96e6e01e9c7c04",
+    "content-hash": "b96211194ffbe1470c4aaedfd44395a9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1147,16 +1147,16 @@
         },
         {
             "name": "channelgrabber/image",
-            "version": "1.2.4",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-image.git",
-                "reference": "9eb80df0acf7b52a6208e96d452f85637a796ff5"
+                "reference": "a54ba7f3fa429c670bc3aac032c9fa68d208d488"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.4-f2e7fc.zip",
-                "reference": "9eb80df0acf7b52a6208e96d452f85637a796ff5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.6-e5d54f.zip",
+                "reference": "a54ba7f3fa429c670bc3aac032c9fa68d208d488",
                 "shasum": null
             },
             "require": {
@@ -1183,7 +1183,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-30T12:17:33+00:00"
+            "time": "2017-08-14T14:42:42+00:00"
         },
         {
             "name": "channelgrabber/listing",
@@ -1372,16 +1372,16 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.1.1.1",
+            "version": "dev-CGIV-8859-loging_issue",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "f93d45869e3b8e7f3835030a22dd344a9db05917"
+                "reference": "3355fa6f6d01ed3d51e63355cffbb95364ad9e0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.1.1.1-d2ed78.zip",
-                "reference": "f93d45869e3b8e7f3835030a22dd344a9db05917",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-dev-CGIV-8859-loging_issue-f6b996.zip",
+                "reference": "3355fa6f6d01ed3d51e63355cffbb95364ad9e0f",
                 "shasum": null
             },
             "require": {
@@ -1414,7 +1414,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-03-07T10:33:56+00:00"
+            "time": "2017-09-13T08:17:39+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -9550,10 +9550,18 @@
             "time": "2015-06-21T08:04:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.1.2",
+            "alias_normalized": "2.1.2.0",
+            "version": "dev-CGIV-8859-loging_issue",
+            "package": "channelgrabber/log"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/log": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
