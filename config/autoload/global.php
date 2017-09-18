@@ -404,6 +404,10 @@ use CG\Settings\InvoiceMapping\Storage\Cache as InvoiceMappingSettingsCacheStora
 use CG\Settings\InvoiceMapping\Storage\Db as InvoiceMappingSettingsDbStorage;
 use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage;
 
+// PurchaseOrder
+use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
+use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -535,7 +539,17 @@ $config = array(
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
                             ['entityClass' => OrderLinkEntity::class],
-                        ]
+                        ],
+                        PurchaseOrderItemEntity::class => [
+                            [
+                                'entityClass' => PurchaseOrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getPurchaseOrderId'
+                            ]
+                        ],
+                        PurchaseOrderEntity::class => [
+                            ['entityClass' => ItemEntity::class],
+                        ],
                     ],
                     'debugCachable' => [
                     ],
