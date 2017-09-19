@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3bb9bb9f2663b8bba759c1ca217d3f8",
+    "content-hash": "46cd8452819ace35056dd357129c403a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2596,22 +2596,24 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "8e22bc5c9b7a73dea8282dec15305c32f063f94a"
+                "reference": "fa36e143456bad741b73bd27bd89e8d3e40c06da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-8210-Include-FBA-Stock-13a151.zip",
-                "reference": "8e22bc5c9b7a73dea8282dec15305c32f063f94a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-8210-Include-FBA-Stock-fb25ee.zip",
+                "reference": "fa36e143456bad741b73bd27bd89e8d3e40c06da",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
+                "channelgrabber/location": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.2.0",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/stdlib": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 2.12.51-dev",
-                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.9.1"
+                "channelgrabber/stock": "dev-EPIC-CGIV-8210-Include-FBA-Stock as 1.10.1",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.6.6"
+                "phpunit/phpunit": "~6.3"
             },
             "type": "library",
             "autoload": {
@@ -2629,7 +2631,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-12T10:44:36+00:00"
+            "time": "2017-09-19T12:09:36+00:00"
         },
         {
             "name": "channelgrabber/tax",
@@ -9707,8 +9709,8 @@
             "package": "channelgrabber/stock"
         },
         {
-            "alias": "1.0.5",
-            "alias_normalized": "1.0.5.0",
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
             "version": "dev-EPIC-CGIV-8210-Include-FBA-Stock",
             "package": "channelgrabber/stock-locking"
         }
