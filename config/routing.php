@@ -13,6 +13,7 @@ $files = [
     'exchangeRate.php',
     'shipmentMetadata.php',
     'orderLink.php',
+    'purchaseOrderRoutes.php',
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;
