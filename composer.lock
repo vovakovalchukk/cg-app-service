@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e8720c34642a91e9507f2eaefd67a66",
+    "content-hash": "59ed3649aee7e8cfab49776eb0b970ef",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1145,16 +1145,16 @@
         },
         {
             "name": "channelgrabber/image",
-            "version": "1.2.5",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-image.git",
-                "reference": "119517d640e296fcd440c2928634cb043febff89"
+                "reference": "108a73ddf4ccc5de6b14f37069b023423a71c6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.5-c14082.zip",
-                "reference": "119517d640e296fcd440c2928634cb043febff89",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.7-9c96e3.zip",
+                "reference": "108a73ddf4ccc5de6b14f37069b023423a71c6ba",
                 "shasum": null
             },
             "require": {
@@ -1181,7 +1181,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-10T08:09:23+00:00"
+            "time": "2017-09-22T10:59:28+00:00"
         },
         {
             "name": "channelgrabber/listing",
@@ -1514,7 +1514,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f871e402a2e3ad203337486d534ab9e5bb24f8cd"
+                "reference": "fd8a8a791200c42a4b359e0150c81a27fc0f9843"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8873-Images-linked-to-order-items-many-times-07904a.zip",
+                "reference": "fd8a8a791200c42a4b359e0150c81a27fc0f9843",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1583,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-13T12:03:26+00:00"
+            "time": "2017-09-22 11:19:56"
         },
         {
             "name": "channelgrabber/permission",
@@ -9887,8 +9893,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.29.3",
-            "alias_normalized": "1.29.3.0",
+            "alias": "1.29.4",
+            "alias_normalized": "1.29.4.0",
             "version": "dev-CGIV-8873-Images-linked-to-order-items-many-times",
             "package": "channelgrabber/order"
         }
@@ -9898,8 +9904,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
