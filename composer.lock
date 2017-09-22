@@ -1516,6 +1516,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
                 "reference": "7f3deccedf1cb0b340d6c3014f57b93a7909bb44"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8873-Images-linked-to-order-items-many-times-5fb528.zip",
+                "reference": "7f3deccedf1cb0b340d6c3014f57b93a7909bb44",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
@@ -1559,7 +1565,7 @@
             },
             "require-dev": {
                 "channelgrabber/phpunit": "~1.0.1",
-                "phpunit/phpunit": "4.6.*"
+                "phpunit/phpunit": "~6.3"
             },
             "type": "library",
             "extra": {
@@ -1583,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22T11:19:56+00:00"
+            "time": "2017-09-22 11:28:40"
         },
         {
             "name": "channelgrabber/permission",
@@ -9898,8 +9904,8 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
