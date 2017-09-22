@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8736f93244e299a6a7f608e7e1a1bea",
+    "content-hash": "0d92d531740114c1be4c52931fdccfa4",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1145,16 +1145,16 @@
         },
         {
             "name": "channelgrabber/image",
-            "version": "dev-CGIV-8870-reduce_logs",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-image.git",
-                "reference": "6d8b9f62d832adab0970f8b1880bf4e5fe5124eb"
+                "reference": "108a73ddf4ccc5de6b14f37069b023423a71c6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-dev-CGIV-8870-reduce_logs-b37f32.zip",
-                "reference": "6d8b9f62d832adab0970f8b1880bf4e5fe5124eb",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.7-9c96e3.zip",
+                "reference": "108a73ddf4ccc5de6b14f37069b023423a71c6ba",
                 "shasum": null
             },
             "require": {
@@ -1181,7 +1181,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-21T10:18:00+00:00"
+            "time": "2017-09-22T10:59:28+00:00"
         },
         {
             "name": "channelgrabber/listing",
@@ -9891,18 +9891,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.2.7",
-            "alias_normalized": "1.2.7.0",
-            "version": "dev-CGIV-8870-reduce_logs",
-            "package": "channelgrabber/image"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/image": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
