@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59ed3649aee7e8cfab49776eb0b970ef",
+    "content-hash": "f3265faba1533de623e0883a017aa141",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1510,16 +1510,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8873-Images-linked-to-order-items-many-times",
+            "version": "1.29.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "7f3deccedf1cb0b340d6c3014f57b93a7909bb44"
+                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8873-Images-linked-to-order-items-many-times-5fb528.zip",
-                "reference": "7f3deccedf1cb0b340d6c3014f57b93a7909bb44",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.29.4-f62d36.zip",
+                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa",
                 "shasum": null
             },
             "require": {
@@ -1589,7 +1589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22 11:28:40"
+            "time": "2017-09-22T14:22:25+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -9891,18 +9891,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.29.4",
-            "alias_normalized": "1.29.4.0",
-            "version": "dev-CGIV-8873-Images-linked-to-order-items-many-times",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
