@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3265faba1533de623e0883a017aa141",
+    "content-hash": "3faa5573d37220e69635af12a7050b14",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2456,20 +2456,21 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.12.49",
+            "version": "dev-CGIV-8901-WebHook-Endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "8ff4f95c4c690697d7cf73be9281dd6b79a69ecd"
+                "reference": "310851852043f3dd3f8b9df04b4e1ce3efdd35c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.12.49-bb2b4e.zip",
-                "reference": "8ff4f95c4c690697d7cf73be9281dd6b79a69ecd",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-8901-WebHook-Endpoint-12f511.zip",
+                "reference": "310851852043f3dd3f8b9df04b4e1ce3efdd35c1",
                 "shasum": null
             },
             "require": {
                 "phpseclib/mcrypt_compat": "~1.0.1",
+                "zendframework/zend-config": "^2.2.5",
                 "zendframework/zend-db": ">=2.2,<3.0"
             },
             "conflict": {
@@ -2507,7 +2508,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-31T08:08:18+00:00"
+            "time": "2017-09-24T19:34:29+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -9891,10 +9892,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.12.51",
+            "alias_normalized": "2.12.51.0",
+            "version": "dev-CGIV-8901-WebHook-Endpoint",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
