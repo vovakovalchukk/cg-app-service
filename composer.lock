@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3faa5573d37220e69635af12a7050b14",
+    "content-hash": "c669bb0c43d1d183654634e20660de42",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -484,16 +484,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.29.2",
+            "version": "1.29.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "9f1edb2a5b49675cb4e037b93dcfdf22e0dee833"
+                "reference": "7f2602ee422a607e6543b6fb59bf8b06a2f22d6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.29.2-3bd9e2.zip",
-                "reference": "9f1edb2a5b49675cb4e037b93dcfdf22e0dee833",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.29.3-383986.zip",
+                "reference": "7f2602ee422a607e6543b6fb59bf8b06a2f22d6e",
                 "shasum": null
             },
             "require": {
@@ -546,7 +546,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-TECH-12": "1.x-dev"
                 }
             },
             "autoload": {
@@ -567,7 +568,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-10T13:33:53+00:00"
+            "time": "2017-05-16T12:49:49+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -876,16 +877,16 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "1.8.47",
+            "version": "dev-CGIV-8901-WebHook-Endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "dbe0e4a3c30909df6a5152b0c92a80645c22855c"
+                "reference": "6a4a989d2fb6b48bcacbffcd4b6ef192a501454b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.8.47-caf1c3.zip",
-                "reference": "dbe0e4a3c30909df6a5152b0c92a80645c22855c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-8901-WebHook-Endpoint-e89f13.zip",
+                "reference": "6a4a989d2fb6b48bcacbffcd4b6ef192a501454b",
                 "shasum": null
             },
             "require": {
@@ -899,17 +900,18 @@
                 "channelgrabber/listing": "^1.6.0",
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.23.20",
-                "channelgrabber/php-phantomjs": ">=3.1.5",
+                "channelgrabber/order": "^1.28.25",
+                "channelgrabber/php-phantomjs": "^3.1.8",
                 "channelgrabber/product": "^1.5.0",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/stats": ">=1.0.4, <2.0.0",
-                "channelgrabber/stdlib": "^2.12.25",
+                "channelgrabber/stdlib": "dev-CGIV-8901-WebHook-Endpoint as 2.12.51",
                 "channelgrabber/tax": "^1.0.0",
                 "channelgrabber/zf2-stdlib": ">=1.1.18,<2.0.0",
                 "composer/composer": "@dev",
                 "ext-gearman": ">=1.1.0",
                 "guzzle/guzzle": "~3.7",
+                "php": ">=7.1",
                 "zendframework/zend-di": ">=2.2.5",
                 "zendframework/zend-eventmanager": ">=2.2.5"
             },
@@ -934,7 +936,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-11T09:29:57+00:00"
+            "time": "2017-09-24T19:37:05+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -1688,17 +1690,17 @@
         },
         {
             "name": "channelgrabber/php-phantomjs",
-            "version": "3.1.7",
+            "version": "3.1.8",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/php-phantomjs.git",
-                "reference": "14bf8b3cc0984d1e6b96166701dfe3897e52b1ee"
+                "reference": "f8f28253a0784ff31fdd67ce0e80240459635fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.7-9aedf6.zip",
-                "reference": "14bf8b3cc0984d1e6b96166701dfe3897e52b1ee",
-                "shasum": "2ab4fcb7984b7128088350fc789d4666a75b2f74"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.8-3446b6.zip",
+                "reference": "f8f28253a0784ff31fdd67ce0e80240459635fcc",
+                "shasum": null
             },
             "require": {
                 "jakoch/phantomjs-installer": "1.9.7",
@@ -1706,11 +1708,12 @@
                 "symfony/config": "~2.3",
                 "symfony/dependency-injection": "~2.3",
                 "symfony/filesystem": "~2.3",
+                "symfony/process": "~2.3",
                 "symfony/yaml": "~2.3",
                 "twig/twig": "~1.16"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "~4.0"
             },
             "bin": [
                 "bin/phantomloader"
@@ -1753,7 +1756,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2014-11-20T15:17:20+00:00"
+            "time": "2017-07-03T13:27:56+00:00"
         },
         {
             "name": "channelgrabber/predis",
@@ -9894,6 +9897,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.9.1",
+            "alias_normalized": "1.9.1.0",
+            "version": "dev-CGIV-8901-WebHook-Endpoint",
+            "package": "channelgrabber/ekm"
+        },
+        {
             "alias": "2.12.51",
             "alias_normalized": "2.12.51.0",
             "version": "dev-CGIV-8901-WebHook-Endpoint",
@@ -9903,6 +9912,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ekm": 20,
         "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
