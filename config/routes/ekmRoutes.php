@@ -32,7 +32,7 @@ return [
             );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
-        'entityRoute' => '/ekm/registration/:ekmRegistrationId',
+        'entityRoute' => '/ekm/registration/:registrationId',
         'name' => 'RegistrationCollection',
         'validation' => ["dataRules" => RegistrationEntityValidationRules::class, "filterRules" => RegistrationFilterValidationRules::class, "flatten" => false]
     ],
