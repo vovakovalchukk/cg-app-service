@@ -1,5 +1,5 @@
 <?php
-namespace CG\Settings\PackageRules\Storage;
+namespace CG\Ekm\Registration\Storage;
 
 use CG\Ekm\Registration\Collection;
 use CG\Ekm\Registration\Entity as Registration;
