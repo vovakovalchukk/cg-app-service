@@ -1,5 +1,14 @@
 <?php
 
+use CG\Controllers\Ekm\Ekm as EkmController;
+use CG\Controllers\Ekm\Registration\Entity as Registration;
+use CG\Controllers\Ekm\Registration\Collection as RegistrationCollection;
+use CG\Ekm\Registration\Entity as RegistrationEntity;
+use CG\Ekm\Registration\Mapper as RegistrationMapper;
+use CG\Ekm\Registration\Service as RegistrationService;
+use CG\InputValidation\Ekm\Registration\Entity as RegistrationEntityValidationRules;
+use CG\InputValidation\Ekm\Registration\Filter as RegistrationFilterValidationRules;
+
 return [
     '/ekm' => [
         'controllers' => function() use ($di, $app) {
@@ -27,17 +36,17 @@ return [
         'name' => 'RegistrationCollection',
         'validation' => ["dataRules" => RegistrationEntityValidationRules::class, "filterRules" => RegistrationFilterValidationRules::class, "flatten" => false]
     ],
-    '/ekm/registration/:ekmRegistrationId' => [
-        'controllers' => function($packageRulesId) use ($di, $app) {
+    '/ekm/registration/:registrationId' => [
+        'controllers' => function($registrationId) use ($di, $app) {
             $method = $app->request()->getMethod();
             $controller = $di->get(Registration::class, []);
             $app->view()->set(
                 'RestResponse',
-                $controller->$method($packageRulesId, $app->request()->getBody())
+                $controller->$method($registrationId, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'PackageRulesEntity',
+        'name' => 'RegistrationEntity',
         'validation' => ["dataRules" => RegistrationEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => RegistrationMapper::class,
