@@ -22,7 +22,10 @@ class Collection
         return $this->getService()->fetchCollectionByPaginationAsHal(
             $this->getParams('limit'),
             $this->getParams('page'),
-            $this->getParams('id') ?: []
+            $this->getParams('id') ?: [],
+            $this->getParams('ekmUsername') ?: [],
+            $this->getParams('token') ?: [],
+            $this->getParams('organisationUnitId') ?: []
         );
     }
 }
