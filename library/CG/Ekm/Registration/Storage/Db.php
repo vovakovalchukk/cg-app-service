@@ -51,7 +51,6 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getOrganisationUnitId())) {
             $query[static::DB_TABLE_NAME . '.organisationUnitId'] = $filter->getOrganisationUnitId();
         };
-
         return $query;
     }
 
