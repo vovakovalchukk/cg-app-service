@@ -2459,6 +2459,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
                 "reference": "1c83f95a03e712ea59343f9bced3c4839a10b191"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-8901-WebHook-Endpoint-d2ad8c.zip",
+                "reference": "1c83f95a03e712ea59343f9bced3c4839a10b191",
+                "shasum": null
+            },
             "require": {
                 "phpseclib/mcrypt_compat": "~1.0.1",
                 "zendframework/zend-config": "^2.2.5",
@@ -2499,7 +2505,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-24T19:34:29+00:00"
+            "time": "2017-09-25 13:45:54"
         },
         {
             "name": "channelgrabber/stock",
@@ -9903,8 +9909,8 @@
         "channelgrabber/ekm": 20,
         "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
