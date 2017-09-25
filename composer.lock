@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "64cbff7c097e4a1169a820b365cae513",
+    "content-hash": "bccf9c6b478dad8c24c5ce417c7653fc",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1368,16 +1368,16 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "dev-CGIV-8859-loging_issue",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "e449772860646c54ed061aec4f8a0b219b2994af"
+                "reference": "692fd47eedc4362e7d986ad78dbec941ae0f59c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-dev-CGIV-8859-loging_issue-364c3e.zip",
-                "reference": "e449772860646c54ed061aec4f8a0b219b2994af",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.1.2-f68d99.zip",
+                "reference": "692fd47eedc4362e7d986ad78dbec941ae0f59c7",
                 "shasum": null
             },
             "require": {
@@ -1410,7 +1410,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-14 09:56:56"
+            "time": "2017-09-25T12:29:20+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -9891,18 +9891,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.1.2",
-            "alias_normalized": "2.1.2.0",
-            "version": "dev-CGIV-8859-loging_issue",
-            "package": "channelgrabber/log"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/log": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
