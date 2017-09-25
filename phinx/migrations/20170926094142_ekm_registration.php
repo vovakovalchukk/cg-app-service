@@ -9,7 +9,7 @@ class EkmRegistration extends AbstractMigration
         $table = $this->table("ekmRegistration", ['id' => true, 'collation' => 'utf8_general_ci']);
         $table->addColumn('organisationUnitId', 'integer')
             ->addColumn('ekmUsername', 'string')
-            ->addColumn('json', 'string')
+            ->addColumn('json', 'text')
             ->addColumn('referrer', 'string')
             ->addColumn('application', 'string')
             ->addColumn('token', 'string')
