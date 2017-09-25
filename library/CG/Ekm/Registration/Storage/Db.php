@@ -52,24 +52,6 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function saveEntity($entity)
-    {
-        if($this->entityNotStored($entity)) {
-            $this->insertEntity($entity);
-        } else {
-            $this->updateEntity($entity);
-        }
-        return $entity;
-    }
-
-    protected function entityNotStored($entity)
-    {
-        $select = $this->getSelect()->where(['id' => $entity->getId()]);
-        $statement = $this->getReadSql()->prepareStatementForSqlObject($select);
-        $results = $statement->execute();
-        return $results->count() === 0;
-    }
-
     protected function getSelect()
     {
         return $this->getReadSql()->select(static::DB_TABLE_NAME);
