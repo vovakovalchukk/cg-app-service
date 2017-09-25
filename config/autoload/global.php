@@ -408,6 +408,11 @@ use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
+// Ekm Registration
+use CG\Ekm\Registration\Service as EkmRegistrationService;
+use CG\Ekm\Registration\Storage\Api as EkmRegistrationApi;
+use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1578,6 +1583,16 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
+            EkmRegistrationApi::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle',
+                ]
+            ],
+            EkmRegistrationService::class => [
+                'parameters' => [
+                    'repository' => EkmRegistrationApi::class,
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1625,7 +1640,8 @@ $config = array(
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
-                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class
+                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
+                EkmRegistrationStorage::class => EkmRegistrationApi::class
             ]
         )
     )
