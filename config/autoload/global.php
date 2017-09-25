@@ -413,6 +413,9 @@ use CG\Ekm\Registration\Service as EkmRegistrationService;
 use CG\Ekm\Registration\Storage\Api as EkmRegistrationApi;
 use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
 
+// Sites
+use CG\Stdlib\Sites;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1591,6 +1594,11 @@ $config = array(
             EkmRegistrationService::class => [
                 'parameters' => [
                     'repository' => EkmRegistrationApi::class,
+                ]
+            ],
+            Sites::class => [
+                'parameters' => [
+                    'config' => 'config'
                 ]
             ],
             'preferences' => [
