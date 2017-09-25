@@ -410,7 +410,8 @@ use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
 // Ekm Registration
 use CG\Ekm\Registration\Service as EkmRegistrationService;
-use CG\Ekm\Registration\Storage\Api as EkmRegistrationApi;
+use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
+use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
 use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
 
 // Sites
@@ -1586,14 +1587,17 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
-            EkmRegistrationApi::class => [
+            EkmRegistrationDb::class => [
                 'parameters' => [
-                    'client' => 'cg_app_guzzle',
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => EkmRegistrationMapper::class
                 ]
             ],
             EkmRegistrationService::class => [
                 'parameters' => [
-                    'repository' => EkmRegistrationApi::class,
+                    'repository' => EkmRegistrationDb::class,
                 ]
             ],
             Sites::class => [
@@ -1649,7 +1653,7 @@ $config = array(
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
                 InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
-                EkmRegistrationStorage::class => EkmRegistrationApi::class
+                EkmRegistrationStorage::class => EkmRegistrationDb::class
             ]
         )
     )
