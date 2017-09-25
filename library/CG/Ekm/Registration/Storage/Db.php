@@ -39,14 +39,17 @@ class Db extends DbAbstract implements StorageInterface
     protected function buildFilterQuery(Filter $filter)
     {
         $query = [];
+        if (!empty($filter->getId())) {
+            $query[static::DB_TABLE_NAME . '.id'] = $filter->getId();
+        }
         if (!empty($filter->getEkmUsername())) {
             $query[static::DB_TABLE_NAME . '.ekmUsername'] = $filter->getEkmUsername();
         }
         if (!empty($filter->getToken())) {
             $query[static::DB_TABLE_NAME . '.token'] = $filter->getToken();
         };
-        if (!empty($filter->getRootOrganisationUnitId())) {
-            $query[static::DB_TABLE_NAME . '.rootOrganisationUnitId'] = $filter->getRootOrganisationUnitId();
+        if (!empty($filter->getOrganisationUnitId())) {
+            $query[static::DB_TABLE_NAME . '.organisationUnitId'] = $filter->getOrganisationUnitId();
         };
 
         return $query;
