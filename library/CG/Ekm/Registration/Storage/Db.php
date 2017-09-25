@@ -52,35 +52,6 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    public function fetchCollectionByPagination($limit, $page, array $id)
-    {
-        try {
-            $query = [];
-            if(count($id)) {
-                $query[static::DB_TABLE_NAME . '.id'] = $id;
-            }
-
-            $select = $this->getSelect()
-                ->where($query);
-
-            if($limit != 'all') {
-                $offset = ($page - 1) * $limit;
-                $select->limit($limit)
-                    ->offset($offset);
-            }
-
-            return $this->fetchPaginatedCollection(
-                new Collection($this->getEntityClass(), __FUNCTION__,
-                    compact('limit', 'page', 'id')),
-                $this->getReadSql(),
-                $select,
-                $this->getMapper()
-            );
-        } catch (ExceptionInterface $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
-        }
-    }
-
     protected function saveEntity($entity)
     {
         if($this->entityNotStored($entity)) {
