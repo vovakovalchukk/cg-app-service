@@ -3,46 +3,23 @@ namespace CG\InputValidation\Ekm\Registration;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use CG\Validation\ValidatorChain;
 use Zend\Di\Di;
 use Zend\Validator\Between;
 use Zend\Validator\Identical;
+use CG\Validation\Rules\PaginationTrait;
 
 class Filter implements RulesInterface
 {
-    protected $di;
-
-    public function __construct(Di $di)
-    {
-        $this->setDi($di);
-    }
+    use PaginationTrait;
 
     public function getRules()
     {
         return [
-            'limit' => array(
-                'name'       => 'limit',
-                'required'   => false,
-                'validators' => [
-                    new ValidatorChain(
-                        [
-                            (new Between(['min' => 1]))
-                                ->setMessages(['notBetween' => 'limit should be at least %min%']),
-                            (new Identical('all'))
-                                ->setMessages([Identical::NOT_SAME => 'limit does not equal "%token%"'])
-                        ]
-                    )
-                ]
-            ),
-            'page' => [
-                'name'       => 'page',
-                'required'   => false,
-                'validators' => [
-                    (new Between(['min' => 1]))
-                        ->setMessages(['notBetween' => 'page should be at least %min%'])
-                ]
-            ],
+            'limit' => $this->getLimitValidation(),
+            'page' => $this->getPageValidation(),
             'id' => [
                 'name' => 'id',
                 'required' => false,

@@ -6,7 +6,7 @@ use CG\Slim\Renderer\ResponseType\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
 
-class Settings
+class Ekm
 {
     use ControllerTrait;
 
