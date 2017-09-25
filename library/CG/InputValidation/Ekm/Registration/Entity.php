@@ -39,10 +39,10 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'rootOrganisationUnitId' => [
-                'name'       => 'rootOrganisationUnitId',
+            'organisationUnitId' => [
+                'name'       => 'organisationUnitId',
                 'required'   => false,
-                'validators' => [new IntegerValidator(['name' => 'rootOrganisationUnitId'])]
+                'validators' => [new IntegerValidator(['name' => 'organisationUnitId'])]
             ],
             'createdDate' => [
                 'name' => 'createdDate',

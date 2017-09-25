@@ -41,11 +41,11 @@ class Filter implements RulesInterface
                     new IsArrayValidator(['name' => 'token'])
                 ]
             ],
-            'rootOrganisationUnitId' => [
-                'name'       => 'rootOrganisationUnitId',
+            'organisationUnitId' => [
+                'name'       => 'organisationUnitId',
                 'required'   => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'rootOrganisationUnitId')
+                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
                 ]
             ]
         ];
