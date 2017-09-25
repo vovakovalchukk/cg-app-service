@@ -1,5 +1,5 @@
 <?php
-namespace CG\Controllers;
+namespace CG\Controllers\Ekm;
 
 use CG\Slim\ControllerTrait;
 use CG\Slim\Renderer\ResponseType\Hal;

@@ -881,13 +881,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "8ab8592cd16f0102d4702101a41126e639018fab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-8901-WebHook-Endpoint-0fa176.zip",
-                "reference": "8ab8592cd16f0102d4702101a41126e639018fab",
-                "shasum": null
+                "reference": "337afd64c087f6f2eb57f509fde925712f2ad034"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -936,7 +930,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-25 08:19:07"
+            "time": "2017-09-25T08:19:07+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -2511,7 +2505,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-24 19:34:29"
+            "time": "2017-09-24T19:34:29+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -9915,8 +9909,8 @@
         "channelgrabber/ekm": 20,
         "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
