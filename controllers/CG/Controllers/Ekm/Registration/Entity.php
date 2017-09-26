@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\Ekm\Registration;
+namespace CG\Controllers\Ekm\Registration;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
