@@ -22,6 +22,7 @@ class Collection
     {
         $filter = new Filter('all', 1);
         $filter
+            ->setId($this->getParams('id') ?: [])
             ->setEkmUsername($this->getParams('ekmUsername') ?: [])
             ->setToken($this->getParams('token') ?: [])
             ->setOrganisationUnitId($this->getParams('organisationUnitId') ?: []);

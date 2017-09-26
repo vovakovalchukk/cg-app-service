@@ -35,4 +35,33 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray());
         return $this->fetchCollection($collection);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
