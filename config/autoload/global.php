@@ -267,9 +267,8 @@ use CG\Stock\Audit\Combined\StorageInterface as StockLogStorage;
 
 // Order Counts
 use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
-use CG\Order\Shared\OrderCounts\Mapper as OrderCountsMapper;
 use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
-use CG\Order\Shared\OrderCounts\Storage\Api as OrderCountsApiStorage;
+use CG\Order\Shared\OrderCounts\Storage\Db as OrderCountsDbStorage;
 use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
 
 // Listing
@@ -405,6 +404,10 @@ use CG\Settings\InvoiceMapping\Storage\Cache as InvoiceMappingSettingsCacheStora
 use CG\Settings\InvoiceMapping\Storage\Db as InvoiceMappingSettingsDbStorage;
 use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage;
 
+// PurchaseOrder
+use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
+use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -466,17 +469,19 @@ $config = array(
                     'relationships' => [
                         StockLocationEntity::class => [
                             [
-                                'entityClass' => StockEntity::class,
-                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY
+                                'entityClass' => LockingStock::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getStockId',
                             ]
                         ],
-                        StockEntity::class => [
+                        LockingStock::class => [
                             ['entityClass' => StockLocationEntity::class]
                         ],
-                        ProductEntity::class => [
+                        LockingProduct::class => [
                             [
-                                'entityClass' => StockEntity::class,
-                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
+                                'entityClass' => LockingStock::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY,
+                                'getter' => 'getStock',
                             ],
                             ['entityClass' => ListingEntity::class],
                             ['entityClass' => ImageEntity::class]
@@ -534,7 +539,17 @@ $config = array(
                                 'type' => InvalidationHandler::RELATION_TYPE_EMBED_ENTITY
                             ],
                             ['entityClass' => OrderLinkEntity::class],
-                        ]
+                        ],
+                        PurchaseOrderItemEntity::class => [
+                            [
+                                'entityClass' => PurchaseOrderEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getPurchaseOrderId'
+                            ]
+                        ],
+                        PurchaseOrderEntity::class => [
+                            ['entityClass' => ItemEntity::class],
+                        ],
                     ],
                     'debugCachable' => [
                     ],
@@ -1086,16 +1101,21 @@ $config = array(
                     'predisClient' => 'reliable_redis',
                 ],
             ],
+            OrderCountsRepository::class => [
+                'parameters' => [
+                    'storage' => OrderCountsRedisStorage::class,
+                    'repository' => OrderCountsDbStorage::class,
+                ],
+            ],
             OrderCountsRedisStorage::class => [
-                'parameter' => [
+                'parameters' => [
                     'client' => 'reliable_redis',
-                    'mapper' => OrderCountsMapper::class
                 ]
             ],
-            OrderCountsApiStorage::class => [
-                'parameter' => [
-                    'client' => "cg_app_guzzle",
-                ]
+            OrderCountsDbStorage::class => [
+                'parameters' => [
+                    'sql' => 'ReadMysqli',
+                ],
             ],
             ListingService::class => [
                 'parameters' => [
@@ -1583,7 +1603,7 @@ $config = array(
                 ProductDetailStorage::class => ProductDetailRepository::class,
                 ApiSettingsStorage::class => ApiSettingsRepository::class,
                 UnimportedListingMarketplaceStorage::class => UnimportedListingMarketplaceRepository::class,
-                OrderCountsStorage::class => OrderCountsRedisStorage::class,
+                OrderCountsStorage::class => OrderCountsRepository::class,
                 ProductSettingsStorage::class => ProductettingsRepository::class,
                 ProductStorage::class => ProductRepository::class,
                 ListingStorage::class => ListingDbStorage::class,

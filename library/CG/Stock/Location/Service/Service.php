@@ -2,15 +2,17 @@
 namespace CG\Stock\Location\Service;
 
 use CG\Account\Client\Service as AccountService;
+use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Product\Filter as ProductFilter;
 use CG\Product\Service\Service as ProductService;
 use CG\Product\StockMode;
+use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
+use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Mapper as LocationMapper;
@@ -18,9 +20,6 @@ use CG\Stock\Location\Service as BaseService;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
 
-/**
- * @property StockStorage $stockStorage
- */
 class Service extends BaseService implements StatsAwareInterface
 {
     use StatsTrait;
@@ -36,6 +35,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $accountService;
     /** @var ProductService $productService */
     protected $productService;
+    /** @var UpdateRelatedListingsForStock */
+    protected $updateRelatedListingsForStockGenerator;
 
     public function __construct(
         LocationStorage $repository,
@@ -45,43 +46,39 @@ class Service extends BaseService implements StatsAwareInterface
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
-        ProductService $productService
+        ProductService $productService,
+        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
-        $this
-            ->setOrganisationUnitService($organisationUnitService)
-            ->setAccountService($accountService)
-            ->setProductService($productService);
+        $this->organisationUnitService = $organisationUnitService;
+        $this->accountService = $accountService;
+        $this->productService = $productService;
+        $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
-
-    /**
-     * @param StockLocation $entity
-     */
-    public function save($entity, array $adjustmentIds = [])
+    public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {
             /** @var Stock $stock */
-            $stock = $this->stockStorage->fetch($entity->getStockId());
+            $stock = $this->stockStorage->fetch($stockLocation->getStockId());
         } catch (NotFound $exception) {
-            return parent::save($entity, $adjustmentIds);
+            return parent::save($stockLocation, $adjustmentIds);
         }
 
         try {
-            /** @var StockLocation $current */
-            $current = $this->fetch($entity->getId());
-            $this->handleOversell($stock, $current, $entity);
+            /** @var StockLocation $currentStockLocation */
+            $currentStockLocation = $this->fetch($stockLocation->getId());
+            $this->handleOversell($stock, $currentStockLocation, $stockLocation);
         } catch (NotFound $exception) {
             // Saving new entity - nothing to do
         }
 
-        return parent::save($entity, $adjustmentIds);
+        $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
+        $this->updateRelatedListings($stock);
+        return $stockLocationHal;
     }
 
-    /**
-     * @return self
-     */
-    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $entity)
+    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $entity): Service
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
         if (
@@ -96,30 +93,9 @@ class Service extends BaseService implements StatsAwareInterface
         return $this;
     }
 
-    /**
-     * @return self
-     */
-    protected function setOrganisationUnitService(OrganisationUnitService $organisationUnitService)
+    protected function updateRelatedListings(Stock $stock): Service
     {
-        $this->organisationUnitService = $organisationUnitService;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setAccountService(AccountService $accountService)
-    {
-        $this->accountService = $accountService;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setProductService(ProductService $productService)
-    {
-        $this->productService = $productService;
+        $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         return $this;
     }
 } 

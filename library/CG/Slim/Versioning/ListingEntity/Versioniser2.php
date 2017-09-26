@@ -1,39 +1,21 @@
 <?php
 namespace CG\Slim\Versioning\ListingEntity;
 
-use CG\Order\Service\Item\Service;
-use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
 
-class Versioniser2 implements VersioniserInterface
+class Versioniser2 extends AbstractVersioniser
 {
-    protected $service;
-
-    public function __construct(Service $service)
-    {
-        $this->setService($service);
-    }
-
-    public function setService(Service $service)
-    {
-        $this->service = $service;
-        return $this;
-    }
-
-    /**
-     * @return Service
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['url'])) {
-            $data['url'] = null;
+        if (!array_key_exists('url', $data)) {
+            try {
+                $entity = $this->fetchEntity($data);
+                $data['url'] = $entity->getUrl();
+            } catch (NotFound $exception) {
+                $data['url'] = null;
+            }
         }
         $request->setData($data);
     }
