@@ -2,6 +2,7 @@
 namespace CG\Controllers\Ekm\Registration;
 
 use CG\Ekm\Registration\Service;
+use CG\Ekm\Registration\Filter;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -19,13 +20,11 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('id') ?: [],
-            $this->getParams('ekmUsername') ?: [],
-            $this->getParams('token') ?: [],
-            $this->getParams('organisationUnitId') ?: []
-        );
+        $filter = new Filter('all', 1);
+        $filter
+            ->setEkmUsername($this->getParams('ekmUsername') ?: [])
+            ->setToken($this->getParams('token') ?: [])
+            ->setOrganisationUnitId($this->getParams('organisationUnitId') ?: []);
+        return $this->getService()->fetchCollectionByFilter($filter);
     }
 }
