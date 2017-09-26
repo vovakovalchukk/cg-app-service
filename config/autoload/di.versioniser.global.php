@@ -8,6 +8,8 @@ use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\ListingEntity;
 use CG\Slim\Versioning\ListingStatusHistoryCollection;
 use CG\Slim\Versioning\ListingStatusHistoryEntity;
+use CG\Slim\Versioning\LocationEntity;
+use CG\Slim\Versioning\LocationCollection;
 use CG\Slim\Versioning\OrderCollection;
 use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
@@ -32,16 +34,18 @@ return [
     'di' => [
         'instance' => [
             'aliases' => [
-                'Versioniser_ListingCollection_1' => ListingCollection\Versioniser1::class,
+                'Versioniser_ListingCollection_1' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_1' => ListingEntity\Versioniser1::class,
-                'Versioniser_ListingCollection_2' => ListingCollection\Versioniser2::class,
+                'Versioniser_ListingCollection_2' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_2' => ListingEntity\Versioniser2::class,
-                'Versioniser_ListingCollection_3' => ListingCollection\Versioniser3::class,
+                'Versioniser_ListingCollection_3' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_3' => ListingEntity\Versioniser3::class,
-                'Versioniser_ListingCollection_4' => ListingCollection\Versioniser4::class,
+                'Versioniser_ListingCollection_4' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_4' => ListingEntity\Versioniser4::class,
-                'Versioniser_ListingCollection_5' => ListingCollection\Versioniser5::class,
+                'Versioniser_ListingCollection_5' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_5' => ListingEntity\Versioniser5::class,
+                'Versioniser_ListingCollection_6' => ListingCollection\Versioniser::class,
+                'Versioniser_ListingEntity_6' => ListingEntity\Versioniser6::class,
                 'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,
@@ -146,6 +150,8 @@ return [
                 'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
+                'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
+                'Versioniser_LocationEntity_1' => LocationEntity\Versioniser1::class,
                 'Versioniser_TrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
@@ -157,12 +163,32 @@ return [
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
-                    'entityVersioner' => 'Versioniser_ListingEntity_1',
+                    'entityVersioniser' => 'Versioniser_ListingEntity_1',
                 ],
             ],
             'Versioniser_ListingCollection_2' => [
                 'parameter' => [
-                    'entityVersioner' => 'Versioniser_ListingEntity_2',
+                    'entityVersioniser' => 'Versioniser_ListingEntity_2',
+                ],
+            ],
+            'Versioniser_ListingCollection_3' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_3',
+                ],
+            ],
+            'Versioniser_ListingCollection_4' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_4',
+                ],
+            ],
+            'Versioniser_ListingCollection_5' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_5',
+                ],
+            ],
+            'Versioniser_ListingCollection_6' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_6',
                 ],
             ],
             'Versioniser_OrderCollection_1' => [

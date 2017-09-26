@@ -86,6 +86,13 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'replacedById must be at least %min%'])
                 ]
             ],
+            'skuExternalIdMap' => [
+                'name'       => 'skuExternalIdMap',
+                'required'   => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'skuExternalIdMap'])
+                ]
+            ],
         ];
     }
 }

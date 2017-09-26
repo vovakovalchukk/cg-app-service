@@ -37,7 +37,9 @@ class Mapper
                              ->addLink('orderCounts', '/orderCounts')
                              ->addLink('tracking', '/tracking')
                              ->addLink('courier', '/courier')
-                             ->addLink('shipmentMetadata', '/shipmentMetadata');
+                             ->addLink('shipmentMetadata', '/shipmentMetadata')
+                             ->addLink('purchaseOrder', '/purchaseOrder')
+                             ->addLink('purchaseOrderItem', '/purchaseOrderItem');
     }
 
     public function setDi(Di $di)

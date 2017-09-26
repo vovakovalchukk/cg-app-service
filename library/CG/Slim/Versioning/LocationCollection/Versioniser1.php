@@ -1,11 +1,11 @@
 <?php
-namespace CG\Slim\Versioning\ListingCollection;
+namespace CG\Slim\Versioning\LocationCollection;
 
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Product\Service\Service;
-use CG\Slim\Versioning\ListingEntity\Versioniser1 as EntityVersioniser;
+use CG\Slim\Versioning\LocationEntity\Versioniser1 as EntityVersioniser;
 
 class Versioniser1 implements VersioniserInterface
 {
@@ -22,14 +22,14 @@ class Versioniser1 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $resources = $response->getResources();
-        if (!isset($resources['listing'])) {
+        if (!isset($resources['location'])) {
             return $response;
         }
 
-        foreach ($resources['listing'] as $listing) {
+        foreach ($resources['location'] as $location) {
             $this->getEntityVersioniser()->downgradeResponse(
                 $params,
-                $listing,
+                $location,
                 $requestedVersion
             );
         }

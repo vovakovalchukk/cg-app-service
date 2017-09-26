@@ -1,6 +1,7 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
+use CG\Http\Exception\Exception4xx\UnprocessableEntity;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Stdlib\Exception\Runtime\Conflict;
@@ -9,26 +10,25 @@ use CG\Stdlib\Exception\Runtime\PreconditionFailed;
 use CG\Stdlib\Exception\Runtime\Storage\Deadlock;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
-use CG\Stock\Collection as Stock;
 use CG\Stock\Location\Collection as LocationCollection;
 use CG\Stock\Location\Entity as LocationEntity;
 use CG\Stock\Location\Filter;
 use CG\Stock\Location\Mapper;
 use CG\Stock\Location\StorageInterface;
+use Zend\Db\Adapter\Exception\RuntimeException as ZendDbException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface
 {
+    protected const ERROR_REGEX_FOREIGN_KEY = '|a foreign key constraint fails \(.*?FOREIGN KEY \(`?(?<key>.*?)`?\).*?\)|i';
+    protected const ERROR_MESSAGE_FOREIGN_KEY = 'Can not save stock location as %1$s is not valid, please confirm using correct %1$s';
+
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
-    }
-
-    public function fetchCollectionForStock(Stock $stock)
-    {
-        return $this->fetchCollectionByStockIds($stock->getIds());
     }
 
     public function fetchCollectionByStockIds(array $stockIds)
@@ -48,11 +48,11 @@ class Db extends DbAbstract implements StorageInterface
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
+            /** @var Select $select */
             $select = $this->getSelect()->where($this->getQueryForFilter($filter));
             $this->appendOuIdSkuFilter($select->where, $filter->getOuIdSku());
 
-            $limit = $filter->getLimit();
-            if ($limit != 'all') {
+            if (($limit = $filter->getLimit()) != 'all') {
                 $offset = ($filter->getPage() - 1) * $limit;
                 $select->limit($limit)->offset($offset);
             }
@@ -129,10 +129,14 @@ class Db extends DbAbstract implements StorageInterface
     protected function saveEntityWithAdjustments($entity, array $adjustmentIds)
     {
         try {
-            $this->fetch($entity->getId());
-            $this->updateEntityWithAdjustments($entity, $adjustmentIds);
-        } catch (NotFound $ex) {
-            $this->insertEntityWithAdjustments($entity, $adjustmentIds);
+            try {
+                $this->fetch($entity->getId());
+                $this->updateEntityWithAdjustments($entity, $adjustmentIds);
+            } catch (NotFound $ex) {
+                $this->insertEntityWithAdjustments($entity, $adjustmentIds);
+            }
+        } catch (ZendDbException $exception) {
+            throw $this->parseZendDbException($exception);
         }
         return $entity;
     }
@@ -179,6 +183,18 @@ class Db extends DbAbstract implements StorageInterface
                 );
             }
         }
+    }
+
+    protected function parseZendDbException(ZendDbException $exception) : \Exception
+    {
+        if (preg_match(static::ERROR_REGEX_FOREIGN_KEY, $exception->getMessage(), $match)) {
+            return new UnprocessableEntity(
+                sprintf(static::ERROR_MESSAGE_FOREIGN_KEY, $match['key']),
+                UnprocessableEntity::HTTP_CODE,
+                $exception
+            );
+        }
+        return $exception;
     }
 
     public function saveCollection(CollectionInterface $collection)

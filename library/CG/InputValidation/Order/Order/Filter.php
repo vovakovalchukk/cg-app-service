@@ -297,6 +297,20 @@ class Filter implements RulesInterface, ExclusionInterface
                     new ArrayOfIntegersValidator(new IntegerValidator(), 'sequenceNumber')
                 ]
             ],
+            'dispatchDateFrom' => [
+                'name' => 'dispatchDateFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
+            'dispatchDateTo' => [
+                'name' => 'dispatchDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => "Y-m-d H:i:s"])
+                ]
+            ],
         ];
     }
 }
