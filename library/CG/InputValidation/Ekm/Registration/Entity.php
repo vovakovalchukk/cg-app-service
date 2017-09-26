@@ -1,8 +1,10 @@
 <?php
 namespace CG\InputValidation\Ekm\Registration;
 
+use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\Date;
+use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
@@ -46,7 +48,7 @@ class Entity implements RulesInterface
             ],
             'createdDate' => [
                 'name' => 'createdDate',
-                'required' => false,
+                'required' => true,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
             'completedDate' => [
