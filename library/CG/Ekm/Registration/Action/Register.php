@@ -221,7 +221,7 @@ class Register implements LoggerAwareInterface
                 break;
             } catch (Exception $e) {
                 if ($i == $attempts) {
-                    $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS, ['rootOrganisationUnitId' => $rootOrganisationUnitId, 'attempts' => $attempts], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
+                    $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS, ['rootOu' => $rootOrganisationUnitId, 'attempts' => $attempts], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
                     throw $e;
                 }
                 continue;
