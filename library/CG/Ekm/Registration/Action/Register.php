@@ -41,14 +41,17 @@ class Register implements LoggerAwareInterface
     const LOG_MSG_REGISTRATION_CANT_CONNECT_TO_USER_DIRECTORY = 'Couldn\'t connect to User Directory when logging in, email: %s';
     const LOG_CODE_PASSWORD_INCORRECT = 'PasswordIncorrect';
     const LOG_MSG_REGISTRATION_PASSWORD_INCORRECT = 'Unknown error when registering. Email address: %s';
-    const LOG_CODE_CONNECT_EKM_ACCOUNT_FAILED = 'ConnectEkmAccountFailed';
-    const LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED = 'Failed to connect EKM account. EKM Username: %s, Email address: %s, Ou: %d, User: %d';
-    const LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER_FAILED = 'ConnectEkmAccountFailed';
+    const LOG_CODE_CONNECT_EKM_ACCOUNT = 'ConnectEkmAccount';
+    const LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS = 'Failed to connect EKM account, an error occurred and max attempts (%d) were exceeded. Root Ou: %d';
+    const LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED = 'Failed to connect EKM account. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d';
+    const LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS = 'ConnecteD EKM account. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d, Account: %d';
+    const LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER = 'CreateRootOuAndCreateUser';
     const LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED = 'Failed to create root Ou and user. EKM Username: %s, Email address: %s';
+    const LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS = 'Created root Ou and user. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d';
     const LOG_CODE_NOT_FOUND = 'NotFound';
     const LOG_MSG_REGISTRATION_NOT_FOUND = 'Failed to find registration. EKM Username: %s';
     const LOG_CODE_CONFLICT = 'Conflict';
-    const LOG_MSG_CONFLICT_UPDATE_REGISTRATION_ON_SUCCESS = 'Failed to update registration, a conflict occurred and max attempts (%d) were exceeded. Email address: %s, Registration: %d';
+    const LOG_MSG_CONFLICT_UPDATE_REGISTRATION_MAX_ATTEMPTS = 'Failed to update registration, a conflict occurred and max attempts (%d) were exceeded. Email address: %s, Registration: %d';
 
     /** @var  RegistrationService $registrationService */
     protected $registrationService;
@@ -116,7 +119,7 @@ class Register implements LoggerAwareInterface
         try {
             $processedRegistration = $this->createRootOuAndUser($this->getMapper()->toRegistrationData($registration));
         } catch(Exception $e) {
-            $this->logErrorException($e, static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER_FAILED]);
+            $this->logErrorException($e, static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
             throw $e;
         }
 
@@ -125,12 +128,17 @@ class Register implements LoggerAwareInterface
         /** @var User $user */
         $user = $processedRegistration->getUser()->getId();
 
+        $this->logDebug(static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId()], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
+
         try {
-            $this->connectEkmAccount($rootOu->getId(), $registration);
+            $account = $this->connectEkmAccount($rootOu->getId(), $registration);
         } catch(Exception $e) {
-            $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email, 'ou' => $rootOu->getId(), 'user' => $user->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT_FAILED]);
+            $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
             throw $e;
         }
+
+        $this->logDebug(static::LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId(), 'account' => $account->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
+
         return $rootOu->getId();
     }
 
@@ -178,7 +186,7 @@ class Register implements LoggerAwareInterface
         return $this->registerService->register($registrationData);
     }
 
-    protected function connectEkmAccount(int $rootOrganisationUnitId, array $registrationJson): void
+    protected function connectEkmAccount(int $rootOrganisationUnitId, array $registrationJson): Account
     {
         /** @var int $attempts */
         $attempts = static::MAX_ATTEMPTS_CONNECT_EKM_ACCOUNT;
@@ -191,16 +199,20 @@ class Register implements LoggerAwareInterface
         ];
         for ($i = 1; $i <= $attempts; $i++) {
             try {
-                $this->ekmAccountCreationService->connectAccount(
+                $account = $this->ekmAccountCreationService->connectAccount(
                     $rootOrganisationUnitId,
                     $accountId,
                     $accountConnectionParams
                 );
             } catch (Exception $e) {
+                if ($i == $attempts) {
+                    $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS, ['rootOrganisationUnitId' => $rootOrganisationUnitId, 'attempts' => $attempts], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
+                    throw $e;
+                }
                 continue;
             }
         }
-        return;
+        return $account;
     }
 
     protected function updateRegistrationOnCompletion(int $rootOrganisationUnitId, Registration $registration): void
@@ -214,7 +226,7 @@ class Register implements LoggerAwareInterface
                 $this->registrationService->save($registration);
             } catch(Conflict $e) {
                 if ($i == $attempts) {
-                    $this->logErrorException($e, static::LOG_MSG_CONFLICT_UPDATE_REGISTRATION_ON_SUCCESS, ['attempts' => $attempts, 'email' => $registration->getEmailAddress(), 'registration' => $registration->getId()], [static::LOG_CODE, static::LOG_CODE_CONFLICT]);
+                    $this->logErrorException($e, static::LOG_MSG_CONFLICT_UPDATE_REGISTRATION_MAX_ATTEMPTS, ['attempts' => $attempts, 'email' => $registration->getEmailAddress(), 'registration' => $registration->getId()], [static::LOG_CODE, static::LOG_CODE_CONFLICT]);
                     throw $e;
                 }
                 continue;
