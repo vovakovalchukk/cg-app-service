@@ -5,6 +5,7 @@ use CG\Ekm\Account\CreationService as EkmAccountCreationService;
 use CG\Ekm\Account\Service as EkmAccountService;
 use CG\Ekm\Registration\Entity as Registration;
 use CG\Ekm\Registration\Service as RegistrationService;
+use CG\Ekm\Registration\Mapper as RegistrationMapper;
 use CG\Http\StatusCode;
 use CG\OrganisationUnit\Entity as OrganisationUnit;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
@@ -55,6 +56,8 @@ class Register implements LoggerAwareInterface
 
     /** @var  RegistrationService $registrationService */
     protected $registrationService;
+    /** @var  RegistrationMapper $registrationMapper */
+    protected $registrationMapper;
     /** @var  EkmAccountService $ekmAccountService */
     protected $ekmAccountService;
     /** @var  EkmAccountCreationService $ekmAccountCreationService */
@@ -68,6 +71,7 @@ class Register implements LoggerAwareInterface
 
     public function __construct(
         RegistrationService $registrationService,
+        RegistrationMapper $registrationMapper,
         EkmAccountService $ekmAccountService,
         EkmAccountCreationService $ekmAccountCreationService,
         RegisterService $registerService,
@@ -75,6 +79,7 @@ class Register implements LoggerAwareInterface
         OrganisationUnitService $organisationUnitService
     ) {
         $this->registrationService = $registrationService;
+        $this->registrationMapper = $registrationMapper;
         $this->ekmAccountService = $ekmAccountService;
         $this->ekmAccountCreationService = $ekmAccountCreationService;
         $this->registerService = $registerService;
@@ -90,7 +95,6 @@ class Register implements LoggerAwareInterface
             $this->logErrorException($e, static::LOG_MSG_REGISTRATION_NOT_FOUND, ['ekmUsername' => $ekmUsername], [static::LOG_CODE, static::LOG_CODE_NOT_FOUND]);
             throw $e;
         }
-
         try {
             /**
              * CGIV-8903: Rather than automatically updating EKM accounts post registration which could disrupt service on existing accounts,
@@ -100,11 +104,13 @@ class Register implements LoggerAwareInterface
             $account = $this->ekmAccountService->fetchByEkmUsername($registration->getEkmUsername(), $registration->getEmailAddress());
             /** @var int $rootOrganisationUnitId */
             $rootOrganisationUnitId = $this->organisationUnitService->getRootOuFromOuId($account->getOrganisationUnitId())->getId();
+            die('account found');
         } catch(NotFound $e) {
             /** @var int $rootOrganisationUnitId */
             $rootOrganisationUnitId = $this->processRegistration($registration);
         }
 
+        die('successfully created account: ' .$rootOrganisationUnitId);
         $this->updateRegistrationOnCompletion($rootOrganisationUnitId, $registration);
         return;
     }
@@ -117,7 +123,7 @@ class Register implements LoggerAwareInterface
         $email = $registration->getEmailAddress();
 
         try {
-            $processedRegistration = $this->createRootOuAndUser($this->getMapper()->toRegistrationData($registration));
+            $processedRegistration = $this->createRootOuAndUser($this->registrationMapper->toRegistrationData($registration));
         } catch(Exception $e) {
             $this->logErrorException($e, static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
             throw $e;
