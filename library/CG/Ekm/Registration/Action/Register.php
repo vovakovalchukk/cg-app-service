@@ -208,7 +208,7 @@ class Register implements LoggerAwareInterface
         $accountConnectionParams = [
             'username' => $registration->getEkmUsername(),
             'password' => $registration->getEkmPassword(),
-            'apiKey' => $registration->getApiKey(),
+            'apiKey' => $registration->getEkmApiKey(),
             'apiUrl' => $registration->getEkmApiEndpoint(),
         ];
         for ($i = 1; $i <= $attempts; $i++) {
