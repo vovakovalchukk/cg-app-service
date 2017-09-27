@@ -44,7 +44,7 @@ class Register implements LoggerAwareInterface
     const LOG_CODE_CONNECT_EKM_ACCOUNT = 'ConnectEkmAccount';
     const LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS = 'Failed to connect EKM account, an error occurred and max attempts (%d) were exceeded. Root Ou: %d';
     const LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED = 'Failed to connect EKM account. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d';
-    const LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS = 'ConnecteD EKM account. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d, Account: %d';
+    const LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS = 'Connected EKM account. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d, Account: %d';
     const LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER = 'CreateRootOuAndCreateUser';
     const LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED = 'Failed to create root Ou and user. EKM Username: %s, Email address: %s';
     const LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS = 'Created root Ou and user. EKM Username: %s, Email address: %s, Root Ou: %d, User: %d';
