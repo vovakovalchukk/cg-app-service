@@ -164,6 +164,7 @@ class Register implements LoggerAwareInterface
             try {
                 $processedRegistration = $this->registerService->register($registrationData);
                 $this->logInfo(static::LOG_MSG_REGISTRATION_ATTEMPT, [$email], [static::LOG_CODE, static::LOG_CODE_REGISTRATION_ATTEMPT]);
+                break;
             } catch (InvalidInputException $e) {
                 $this->logInfo(static::LOG_MSG_REGISTRATION_INVALID, [$email], [static::LOG_CODE, static::LOG_CODE_REGISTRATION_INVALID]);
                 throw $e;
