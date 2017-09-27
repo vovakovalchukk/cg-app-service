@@ -2,7 +2,10 @@
 namespace CG\Ekm\Registration\Service;
 
 use CG\Ekm\Gearman\Generator\Registration\Action\Register as RegisterActionGenerator;
+use CG\Ekm\Registration\Mapper;
 use CG\Ekm\Registration\Service as BaseService;
+use CG\Ekm\Registration\StorageInterface;
+use CG\Stdlib\Sites;
 
 class Service extends BaseService
 {
@@ -11,7 +14,7 @@ class Service extends BaseService
     protected $registerActionGenerator;
 
     public function __construct(
-        Storage $repository,
+        StorageInterface $repository,
         Mapper $mapper,
         Sites $sites,
         RegisterActionGenerator $registerActionGenerator
