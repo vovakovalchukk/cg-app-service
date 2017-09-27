@@ -1,11 +1,12 @@
 <?php
 namespace CG\Ekm\Registration\Action;
 
+use CG\Account\Shared\Entity as Account;
 use CG\Ekm\Account\CreationService as EkmAccountCreationService;
 use CG\Ekm\Account\Service as EkmAccountService;
 use CG\Ekm\Registration\Entity as Registration;
-use CG\Ekm\Registration\Service as RegistrationService;
 use CG\Ekm\Registration\Mapper as RegistrationMapper;
+use CG\Ekm\Registration\Service as RegistrationService;
 use CG\Http\StatusCode;
 use CG\OrganisationUnit\Entity as OrganisationUnit;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
@@ -116,7 +117,6 @@ class Register implements LoggerAwareInterface
             $rootOrganisationUnitId = $this->processRegistration($registration);
         }
 
-        die('successfully created account: ' .$rootOrganisationUnitId);
         $this->updateRegistrationOnCompletion($rootOrganisationUnitId, $registration);
         return;
     }
@@ -136,7 +136,7 @@ class Register implements LoggerAwareInterface
         }
 
         /** @var OrganisationUnit $rootOu */
-        $rootOuId = $processedRegistration->getRootOrganisationUnit()->getId();
+        $rootOuId = $processedRegistration->getOrganisationUnit()->getId();
         /** @var User $user */
         $userId = $processedRegistration->getUser()->getId();
 
