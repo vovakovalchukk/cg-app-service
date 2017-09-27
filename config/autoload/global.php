@@ -409,6 +409,7 @@ use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
 ### Ekm\Registration
+use CG\Ekm\Account as EkmAccount;
 use CG\Ekm\Registration\Service as EkmRegistrationService;
 use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
 use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
@@ -421,6 +422,7 @@ use CG\Stdlib\Sites;
 
 ### Account\Creation\Service
 use CG\OrganisationUnit\StorageInterface as OrganisationUnitStorageInterface;
+use CG\Ekm\Account\CreationService as EkmAccountCreationService;
 use CG\User\StorageInterface as UserStorage;
 use CG\User\Storage\Api as UserApi;
 use CG\PasswordResetToken\StorageInterface as PasswordResetStorage;
@@ -1632,6 +1634,17 @@ $config = array(
                     'config' => 'config'
                 ]
             ],
+            EkmAccountCreationService::class => [
+                'parameters' => [
+                    'channelAccount' => 'config'
+                ]
+            ],
+            EkmAccountCreationService::class => [
+                'parameters' => [
+                    'cryptor' => 'ekm_cryptor',
+                    'channelAccount' => EkmAccount::class
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1681,7 +1694,6 @@ $config = array(
                 ItemInvalidationService::class => ItemLockingService::class,
                 InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
                 EkmRegistrationStorage::class => EkmRegistrationDb::class,
-                Cryptor::class => "ekm_cryptor",
                 OrganisationUnitStorageInterface::class => OrganisationUnitApi::class,
                 UserStorage::class => UserApi::class,
                 PasswordResetStorage::class => PasswordResetApi::class
