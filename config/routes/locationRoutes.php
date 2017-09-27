@@ -28,7 +28,8 @@ return [
         'validation' => [
             'filterRules' => LocationCollectionValidation::class,
             'dataRules' => LocationEntityValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/location/:locationId' => [
         'controllers' => function($locationId) use ($di, $app) {
@@ -45,6 +46,7 @@ return [
         'validation' => [
             "dataRules" => LocationEntityValidation::class,
         ],
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => LocationMapper::class,
             'entityClass' => LocationEntity::class,
