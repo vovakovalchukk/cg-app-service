@@ -1622,6 +1622,11 @@ $config = array(
                     'service' => EkmRegistrationServiceService::class,
                 ],
             ],
+            UserApi::class => [
+                'parameters' => [
+                    'guzzleHttpClient' => 'directory_guzzle'
+                ]
+            ],
             Sites::class => [
                 'parameters' => [
                     'config' => 'config'
