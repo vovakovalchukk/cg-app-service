@@ -413,6 +413,9 @@ use CG\Ekm\Registration\Service as EkmRegistrationService;
 use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
 use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
 use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
+use CG\Ekm\Registration\Service\Service as EkmRegistrationServiceService;
+use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
+use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
 
 // Sites
 use CG\Stdlib\Sites;
@@ -1587,6 +1590,7 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
+
             EkmRegistrationDb::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
@@ -1599,6 +1603,16 @@ $config = array(
                 'parameters' => [
                     'repository' => EkmRegistrationDb::class,
                 ]
+            ],
+            EkmRegistrationController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            EkmRegistrationCollectionController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
             ],
             Sites::class => [
                 'parameters' => [
