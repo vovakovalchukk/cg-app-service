@@ -577,7 +577,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22 14:08:01"
+            "time": "2017-09-22T14:08:01+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -890,13 +890,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "0731a75bfb2fa30a4653e4e39d949086458ec24d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-8903-EKMAppAccountRegistration-Job-7ba6ec.zip",
-                "reference": "0731a75bfb2fa30a4653e4e39d949086458ec24d",
-                "shasum": null
+                "reference": "2089603614c102fb16b3102304e29cf7ef038cc9"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -945,7 +939,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27 11:38:46"
+            "time": "2017-09-27T11:38:46+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -1356,7 +1350,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27 12:02:41"
+            "time": "2017-09-27T12:02:41+00:00"
         },
         {
             "name": "channelgrabber/location",
@@ -10653,8 +10647,8 @@
         "channelgrabber/zendesk": 20,
         "channelgrabber/zf2-register": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
