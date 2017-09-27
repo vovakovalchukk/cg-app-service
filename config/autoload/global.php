@@ -408,7 +408,7 @@ use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
-// Ekm Registration
+### Ekm\Registration
 use CG\Ekm\Registration\Service as EkmRegistrationService;
 use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
 use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
@@ -416,25 +416,17 @@ use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
 use CG\Ekm\Registration\Service\Service as EkmRegistrationServiceService;
 use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
 use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
-
-// Sites
 use CG\Stdlib\Sites;
+### End
 
-//// Account\Creation\Service
-///
-// OrganisationUnit
+### Account\Creation\Service
 use CG\OrganisationUnit\StorageInterface as OrganisationUnitStorageInterface;
-
-// User
 use CG\User\StorageInterface as UserStorage;
 use CG\User\Storage\Api as UserApi;
-
-// PasswordResetToken
 use CG\PasswordResetToken\StorageInterface as PasswordResetStorage;
 use CG\PasswordResetToken\Storage\Api as PasswordResetApi;
-
-// Cryptor
 use CG\Account\Credentials\Cryptor;
+### End
 
 
 $config = array(
