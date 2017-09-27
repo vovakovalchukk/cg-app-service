@@ -136,20 +136,20 @@ class Register implements LoggerAwareInterface
         }
 
         /** @var OrganisationUnit $rootOu */
-        $rootOu = $processedRegistration->getRootOrganisationUnit()->getId();
+        $rootOuId = $processedRegistration->getRootOrganisationUnit()->getId();
         /** @var User $user */
-        $user = $processedRegistration->getUser()->getId();
+        $userId = $processedRegistration->getUser()->getId();
 
-        $this->logDebug(static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId()], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
+        $this->logDebug(static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
 
         try {
             $account = $this->connectEkmAccount($rootOu->getId(), $registration);
         } catch(Exception $e) {
-            $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
+            $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
             throw $e;
         }
 
-        $this->logDebug(static::LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOu->getId(), 'user' => $user->getId(), 'account' => $account->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
+        $this->logDebug(static::LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId, 'account' => $account->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
 
         return $rootOu->getId();
     }
