@@ -200,16 +200,16 @@ class Register implements LoggerAwareInterface
         return $processedRegistration;
     }
 
-    protected function connectEkmAccount(int $rootOrganisationUnitId, array $registrationJson): Account
+    protected function connectEkmAccount(int $rootOrganisationUnitId, Registration $registration): Account
     {
         /** @var int $attempts */
         $attempts = static::MAX_ATTEMPTS_CONNECT_EKM_ACCOUNT;
         $accountId = null;
         $accountConnectionParams = [
-            'username' => $registrationJson['ekmUsername'],
-            'password' => $registrationJson['ekmPassword'],
-            'apiKey' => $registrationJson['ekmApiKey'],
-            'apiUrl' => $registrationJson['ekmApiEndpoint'],
+            'username' => $registration->getEkmUsername(),
+            'password' => $registration->getEkmPassword(),
+            'apiKey' => $registration->getApiKey(),
+            'apiUrl' => $registration->getEkmApiEndpoint(),
         ];
         for ($i = 1; $i <= $attempts; $i++) {
             try {
