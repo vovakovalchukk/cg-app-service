@@ -6,13 +6,16 @@ use CG\Ekm\Account\Service as EkmAccountService;
 use CG\Ekm\Registration\Entity as Registration;
 use CG\Ekm\Registration\Service as RegistrationService;
 use CG\Http\StatusCode;
+use CG\OrganisationUnit\Entity as OrganisationUnit;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\InvalidInputException;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use CG\User\Entity as User;
 use CG\User\Service as UserService;
+use CG_Register\Registration as ProcessedRegistration;
 use CG_Register\Service\RegisterService;
 use Exception;
 use Guzzle\Http\Exception\ClientErrorResponseException;
@@ -90,10 +93,12 @@ class Register implements LoggerAwareInterface
              * CGIV-8903: Rather than automatically updating EKM accounts post registration which could disrupt service on existing accounts,
              * we update the registration with the root ou id of the existing account and mark the registration as completed
              */
-            $registrationJson = $registration->getJson(true);
-            $account = $this->ekmAccountService->fetchByEkmUsername($registrationJson['ekmUsername'], $registrationJson['emailAddress']);
+            /** @var Account $account */
+            $account = $this->ekmAccountService->fetchByEkmUsername($registration->getEkmUsername(), $registration->getEmailAddress());
+            /** @var int $rootOrganisationUnitId */
             $rootOrganisationUnitId = $this->organisationUnitService->getRootOuFromOuId($account->getOrganisationUnitId())->getId();
         } catch(NotFound $e) {
+            /** @var int $rootOrganisationUnitId */
             $rootOrganisationUnitId = $this->processRegistration($registration);
         }
 
@@ -101,18 +106,34 @@ class Register implements LoggerAwareInterface
         return;
     }
 
+    public function fetchEkmAccountByEkmUsername(string $ekmUsername)
+    {
+        $filter = new AccountFilter('all', 1);
+        $filter->setChannel('ekm')
+            ->setEkmUsername($ekmUsername);
+        $accounts = $this->accountClientService->fetchByFilter($filter);
+        return $accounts->getFirst();
+    }
+
     protected function processRegistration(Registration $registration): int
     {
         /** @var string $ekmUsername */
         $ekmUsername = $registration->getEkmUsername();
         /** @var string $email */
-        $email = $registration->getJsonValue('emailAddress');
+        $email = $registration->getEmailAddress();
+
         try {
-            [$rootOu, $user] = $this->createRootOuAndUser($this->getMapper()->toRegistrationData($registration));
+            $processedRegistration = $this->createRootOuAndUser($this->getMapper()->toRegistrationData($registration));
         } catch(Exception $e) {
             $this->logErrorException($e, static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER_FAILED]);
             throw $e;
         }
+
+        /** @var OrganisationUnit $rootOu */
+        $rootOu = $processedRegistration->getRootOrganisationUnit()->getId();
+        /** @var User $user */
+        $user = $processedRegistration->getUser()->getId();
+
         try {
             $this->connectEkmAccount($rootOu->getId(), $registration);
         } catch(Exception $e) {
@@ -122,7 +143,7 @@ class Register implements LoggerAwareInterface
         return $rootOu->getId();
     }
 
-    protected function createRootOuAndUser(array $registrationData): array
+    protected function createRootOuAndUser(array $registrationData): ProcessedRegistration
     {
         /** @var int $attempts */
         $attempts = static::MAX_ATTEMPTS_CREATE_ROOT_OU_AND_USER;
@@ -163,7 +184,6 @@ class Register implements LoggerAwareInterface
                 throw $e;
             }
         }
-        /** @var [OrganisationUnit, User] [$ou, $user] */
         return $this->registerService->register($registrationData);
     }
 
@@ -203,7 +223,7 @@ class Register implements LoggerAwareInterface
                 $this->registrationService->save($registration);
             } catch(Conflict $e) {
                 if ($i == $attempts) {
-                    $this->logErrorException($e, static::LOG_MSG_CONFLICT_UPDATE_REGISTRATION_ON_SUCCESS, ['attempts' => $attempts, 'email' => $registration->getJsonValue('emailAddress'), 'registration' => $registration->getId()], [static::LOG_CODE, static::LOG_CODE_CONFLICT]);
+                    $this->logErrorException($e, static::LOG_MSG_CONFLICT_UPDATE_REGISTRATION_ON_SUCCESS, ['attempts' => $attempts, 'email' => $registration->getEmailAddress(), 'registration' => $registration->getId()], [static::LOG_CODE, static::LOG_CODE_CONFLICT]);
                     throw $e;
                 }
                 continue;

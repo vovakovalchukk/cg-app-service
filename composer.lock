@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6411be21986907655cbd49722411930",
+    "content-hash": "f391f374f4878376d90283a326423cd0",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -571,7 +571,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22 14:08:01"
+            "time": "2017-09-22T14:08:01+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -884,13 +884,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "658fec6a302993bc2c5b27e9a3f8d085dd86d500"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-8903-EKMAppAccountRegistration-Job-23cd40.zip",
-                "reference": "658fec6a302993bc2c5b27e9a3f8d085dd86d500",
-                "shasum": null
+                "reference": "0aa1ee79d1bc2a636c64351763c1b545d95e86b3"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -939,7 +933,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27 08:48:36"
+            "time": "2017-09-27T08:48:36+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -1317,7 +1311,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-24 10:38:26"
+            "time": "2017-09-24T10:38:26+00:00"
         },
         {
             "name": "channelgrabber/location",
@@ -10547,8 +10541,8 @@
         "channelgrabber/zendesk": 20,
         "channelgrabber/zf2-register": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
