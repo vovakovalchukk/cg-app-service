@@ -143,7 +143,7 @@ class Register implements LoggerAwareInterface
         $this->logDebug(static::LOG_MSG_CREATE_ROOT_OU_AND_CREATE_USER_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId], [static::LOG_CODE, static::LOG_CODE_CREATE_ROOT_OU_AND_CREATE_USER]);
 
         try {
-            $account = $this->connectEkmAccount($rootOu->getId(), $registration);
+            $account = $this->connectEkmAccount($rootOuId, $registration);
         } catch(Exception $e) {
             $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_FAILED, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
             throw $e;
@@ -151,7 +151,7 @@ class Register implements LoggerAwareInterface
 
         $this->logDebug(static::LOG_MSG_CONNECT_EKM_ACCOUNT_SUCCESS, ['ekmUsername' => $ekmUsername, 'email' => $email, 'rootOu' => $rootOuId, 'user' => $userId, 'account' => $account->getId()], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
 
-        return $rootOu->getId();
+        return $rootOuId;
     }
 
     protected function createRootOuAndUser(array $registrationData): ProcessedRegistration
