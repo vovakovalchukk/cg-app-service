@@ -420,6 +420,23 @@ use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionContr
 // Sites
 use CG\Stdlib\Sites;
 
+//// Account\Creation\Service
+///
+// OrganisationUnit
+use CG\OrganisationUnit\StorageInterface as OrganisationUnitStorageInterface;
+
+// User
+use CG\User\StorageInterface as UserStorage;
+use CG\User\Storage\Api as UserApi;
+
+// PasswordResetToken
+use CG\PasswordResetToken\StorageInterface as PasswordResetStorage;
+use CG\PasswordResetToken\Storage\Api as PasswordResetApi;
+
+// Cryptor
+use CG\Account\Credentials\Cryptor;
+
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1590,7 +1607,6 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
-
             EkmRegistrationDb::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
@@ -1667,7 +1683,11 @@ $config = array(
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
                 InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
-                EkmRegistrationStorage::class => EkmRegistrationDb::class
+                EkmRegistrationStorage::class => EkmRegistrationDb::class,
+                Cryptor::class => "ekm_cryptor",
+                OrganisationUnitStorageInterface::class => OrganisationUnitApi::class,
+                UserStorage::class => UserApi::class,
+                PasswordResetStorage::class => PasswordResetApi::class
             ]
         )
     )
