@@ -106,15 +106,6 @@ class Register implements LoggerAwareInterface
         return;
     }
 
-    public function fetchEkmAccountByEkmUsername(string $ekmUsername)
-    {
-        $filter = new AccountFilter('all', 1);
-        $filter->setChannel('ekm')
-            ->setEkmUsername($ekmUsername);
-        $accounts = $this->accountClientService->fetchByFilter($filter);
-        return $accounts->getFirst();
-    }
-
     protected function processRegistration(Registration $registration): int
     {
         /** @var string $ekmUsername */
