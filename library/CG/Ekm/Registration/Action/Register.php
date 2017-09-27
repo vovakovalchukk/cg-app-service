@@ -218,6 +218,7 @@ class Register implements LoggerAwareInterface
                     $accountId,
                     $accountConnectionParams
                 );
+                break;
             } catch (Exception $e) {
                 if ($i == $attempts) {
                     $this->logErrorException($e, static::LOG_MSG_CONNECT_EKM_ACCOUNT_MAX_ATTEMPTS, ['rootOrganisationUnitId' => $rootOrganisationUnitId, 'attempts' => $attempts], [static::LOG_CODE, static::LOG_CODE_CONNECT_EKM_ACCOUNT]);
@@ -238,6 +239,7 @@ class Register implements LoggerAwareInterface
             $registration->setCompletedDate();
             try {
                 $this->registrationService->save($registration);
+                break;
             } catch(Conflict $e) {
                 if ($i == $attempts) {
                     $this->logErrorException($e, static::LOG_MSG_CONFLICT_UPDATE_REGISTRATION_MAX_ATTEMPTS, ['attempts' => $attempts, 'email' => $registration->getEmailAddress(), 'registration' => $registration->getId()], [static::LOG_CODE, static::LOG_CODE_CONFLICT]);
