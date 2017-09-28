@@ -479,7 +479,7 @@ EOF;
 
             /** @var Mysqli $cgApp */
             $cgApp = $di->get('cg_appReadMysqli');
-            $orderIds = $cgApp->fetchColumn('id', 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `paymentDate` DESC');
+            $orderIds = $cgApp->fetchColumn('id', 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `purchaseDate` DESC');
 
             $format = ' %current%/%max% [%bar%] %percent:3s%%';
             $overwrite = true;
