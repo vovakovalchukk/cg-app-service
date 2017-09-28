@@ -420,17 +420,6 @@ use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionContr
 use CG\Stdlib\Sites;
 ### End
 
-### Account\Creation\Service
-use CG\OrganisationUnit\StorageInterface as OrganisationUnitStorageInterface;
-use CG\Ekm\Account\CreationService as EkmAccountCreationService;
-use CG\User\StorageInterface as UserStorage;
-use CG\User\Storage\Api as UserApi;
-use CG\PasswordResetToken\StorageInterface as PasswordResetStorage;
-use CG\PasswordResetToken\Storage\Api as PasswordResetApi;
-use CG\Account\Credentials\Cryptor;
-### End
-
-
 $config = array(
     'di' => array(
         'definition' => [
@@ -1624,25 +1613,9 @@ $config = array(
                     'service' => EkmRegistrationServiceService::class,
                 ],
             ],
-            UserApi::class => [
-                'parameters' => [
-                    'guzzleHttpClient' => 'directory_guzzle'
-                ]
-            ],
             Sites::class => [
                 'parameters' => [
                     'config' => 'config'
-                ]
-            ],
-            EkmAccountCreationService::class => [
-                'parameters' => [
-                    'channelAccount' => 'config'
-                ]
-            ],
-            EkmAccountCreationService::class => [
-                'parameters' => [
-                    'cryptor' => 'ekm_cryptor',
-                    'channelAccount' => EkmAccount::class
                 ]
             ],
             'preferences' => [
@@ -1693,10 +1666,7 @@ $config = array(
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
                 InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
-                EkmRegistrationStorage::class => EkmRegistrationDb::class,
-                OrganisationUnitStorageInterface::class => OrganisationUnitApi::class,
-                UserStorage::class => UserApi::class,
-                PasswordResetStorage::class => PasswordResetApi::class
+                EkmRegistrationStorage::class => EkmRegistrationDb::class
             ]
         )
     )
