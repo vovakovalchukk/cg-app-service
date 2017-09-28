@@ -72,6 +72,8 @@ return [
                 'Versioniser_OrderEntity_13' => OrderEntity\Versioniser13::class,
                 'Versioniser_OrderCollection_14' => OrderCollection\Versioniser14::class,
                 'Versioniser_OrderEntity_14' => OrderEntity\Versioniser14::class,
+                'Versioniser_OrderCollection_15' => OrderCollection\Versioniser15::class,
+                'Versioniser_OrderEntity_15' => OrderEntity\Versioniser15::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,

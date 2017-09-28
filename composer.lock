@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "89637b6435deec0411d9a3d14ddbefe0",
+    "content-hash": "d212c5c03fb894e04f0661a9182b4df5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1558,16 +1558,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.29.4",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa"
+                "reference": "1cafe6eed5f81600deb9a010068e4e67198f5fd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.29.4-f62d36.zip",
-                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8914-ExchangeRateOrderDetails-7649c4.zip",
+                "reference": "1cafe6eed5f81600deb9a010068e4e67198f5fd2",
                 "shasum": null
             },
             "require": {
@@ -1608,6 +1608,7 @@
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.10",
+                "php": ">=7.1",
                 "zendframework/zend-config": "^2.2.5",
                 "zendframework/zend-di": "^2.2.5"
             },
@@ -1637,7 +1638,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22T14:22:25+00:00"
+            "time": "2017-09-28T09:24:42+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10002,10 +10003,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.30.0",
+            "alias_normalized": "1.30.0.0",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
