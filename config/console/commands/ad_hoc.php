@@ -472,34 +472,23 @@ EOF;
     ],
     'ad-hoc:updateOrderExchangeRates' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
-            $output->writeln('Generating jobs...');
-
             /** @var UpdateExchangeRate $updateExchangeRate */
             $updateExchangeRate = $di->get(UpdateExchangeRate::class);
-
             /** @var Mysqli $cgApp */
             $cgApp = $di->get('cg_appReadMysqli');
-            $orderIds = $cgApp->fetchColumn('id', 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `purchaseDate` DESC');
 
-            $format = ' %current%/%max% [%bar%] %percent:3s%%';
-            $overwrite = true;
-            if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                $format = ' %message%' . "\n" . $format;
-                $overwrite = false;
+            $page = 0;
+            $select = 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `purchaseDate` DESC';
+
+            $output->writeln('Generating jobs...');
+            while (!empty($orderIds = $cgApp->fetchColumn('id', $select . ' LIMIT ' . (1000 * $page++) . ',1000'))) {
+                foreach ($orderIds as $orderId) {
+                    if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                        $output->writeln(sprintf('Generating job for order %s', $orderId));
+                    }
+                    ($updateExchangeRate)($orderId);
+                }
             }
-
-            $progress = new ProgressBar($output, count($orderIds));
-            $progress->setMessage('');
-            $progress->setFormat($format);
-            $progress->setOverwrite($overwrite);
-            $progress->start();
-
-            foreach ($orderIds as $orderId) {
-                $progress->setMessage(sprintf('Generating job for order %s', $orderId));
-                ($updateExchangeRate)($orderId);
-                $progress->advance();
-            }
-
             $output->writeln('');
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
