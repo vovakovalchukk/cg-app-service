@@ -478,7 +478,14 @@ EOF;
             $cgApp = $di->get('cg_appReadMysqli');
 
             $page = 0;
-            $select = 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `purchaseDate` DESC';
+            $count = 0;
+            $select = <<<SQL
+SELECT DISTINCT o.`id`
+FROM `order` o
+JOIN billing.subscription s ON o.`rootOrganisationUnitId` = s.`organisationUnitId` AND NOW() BETWEEN s.`fromDate` AND IFNULL(`toDate`, NOW())
+WHERE o.`exchangeRate` IS NULL
+ORDER BY o.`purchaseDate` DESC
+SQL;
 
             $output->writeln('Generating jobs...');
             while (!empty($orderIds = $cgApp->fetchColumn('id', $select . ' LIMIT ' . (1000 * $page++) . ',1000'))) {
@@ -487,9 +494,10 @@ EOF;
                         $output->writeln(sprintf('Generating job for order %s', $orderId));
                     }
                     ($updateExchangeRate)($orderId);
+                    $count++;
                 }
             }
-            $output->writeln('');
+            $output->writeln(sprintf('Generated %d jobs', $count));
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
