@@ -3,27 +3,28 @@ use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
 use CG\Gearman\Client as GearmanClient;
+use CG\Order\Client\Gearman\Generator\UpdateExchangeRate;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
+use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerFunction;
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
-use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
+use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
 use CG\Order\Client\StorageInterface as OrderStorage;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Order\Shared\Item\Filter as ItemFilter;
-use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
-use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerFunction;
+use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
-use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 use CG\Template\Mapper as TemplateMapper;
 use CG\Template\Service as TemplateService;
 use Predis\Client as Redis;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +32,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Di\Di;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /** @var Di $di */
 return [
@@ -75,6 +75,7 @@ return [
                 $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
                 $adjustments = $findCommand->findUnderAllocated();
 
+                /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
                 $command(
                     $input,
@@ -307,6 +308,7 @@ EOF;
         'command' => function(InputInterface $input, OutputInterface $output) use ($di)
             {
                 $output->writeln('Starting ensureProductsAndListingsAssociatedWithRootOu command');
+                /** @var EnsureProductsAndListingsAssociatedWithRootOu $command */
                 $command = $di->get(EnsureProductsAndListingsAssociatedWithRootOu::class);
                 $ouCount = $command();
                 $output->writeln('Finished, ' . $ouCount . ' OUs corrected. See logs for details.');
@@ -467,5 +469,39 @@ EOF;
                 $settingsStorage->save($ouSettings);
             }
         }
+    ],
+    'ad-hoc:updateOrderExchangeRates' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            $output->writeln('Generating jobs...');
+
+            /** @var UpdateExchangeRate $updateExchangeRate */
+            $updateExchangeRate = $di->get(UpdateExchangeRate::class);
+
+            /** @var Mysqli $cgApp */
+            $cgApp = $di->get('cg_appReadMysqli');
+            $orderIds = $cgApp->fetchColumn('id', 'SELECT `id` FROM `order` WHERE `exchangeRate` IS NULL ORDER BY `paymentDate` DESC');
+
+            $format = ' %current%/%max% [%bar%] %percent:3s%%';
+            $overwrite = true;
+            if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                $format = ' %message%' . "\n" . $format;
+                $overwrite = false;
+            }
+
+            $progress = new ProgressBar($output, count($orderIds));
+            $progress->setMessage('');
+            $progress->setFormat($format);
+            $progress->setOverwrite($overwrite);
+            $progress->start();
+
+            foreach ($orderIds as $orderId) {
+                $progress->setMessage(sprintf('Generating job for order %s', $orderId));
+                ($updateExchangeRate)($orderId);
+                $progress->advance();
+            }
+
+            $output->writeln('');
+        },
+        'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
 ];
