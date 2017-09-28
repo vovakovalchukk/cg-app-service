@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f4b70c039dd67933292ed6ad4414b00",
+    "content-hash": "8e9a42f2c752abc8129b946a3bb4d312",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -571,7 +571,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27T15:28:48+00:00"
+            "time": "2017-09-27 15:28:48"
         },
         {
             "name": "channelgrabber/cilex",
@@ -884,7 +884,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "e5176e4816ab5b4b1f625aefbb3bf3468261d0a2"
+                "reference": "613206b59c7cf050a9c18811a0467c732b8be04e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-dev-CGIV-8903-EKMAppAccountRegistration-Job-4875d1.zip",
+                "reference": "613206b59c7cf050a9c18811a0467c732b8be04e",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -895,7 +901,7 @@
                 "channelgrabber/gearman": "^1.2.4",
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
                 "channelgrabber/listing": "^1.6.0",
-                "channelgrabber/locale": "dev-CGIV-8903-EKMAppAccountRegistration-Job as 1.0.14",
+                "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.28.25",
                 "channelgrabber/php-phantomjs": "^3.1.8",
@@ -933,7 +939,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27T19:35:28+00:00"
+            "time": "2017-09-28 10:53:01"
         },
         {
             "name": "channelgrabber/email",
@@ -1270,11 +1276,17 @@
         },
         {
             "name": "channelgrabber/locale",
-            "version": "dev-CGIV-8903-EKMAppAccountRegistration-Job",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
-                "reference": "80b698fe390098551bf782023faac044b70099c7"
+                "reference": "ff04e055286fc6083149be54744d612530fd0178"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.0.13-11c99c.zip",
+                "reference": "ff04e055286fc6083149be54744d612530fd0178",
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -1298,7 +1310,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27T15:13:43+00:00"
+            "time": "2017-01-25T12:04:43+00:00"
         },
         {
             "name": "channelgrabber/location",
@@ -9997,12 +10009,6 @@
             "alias_normalized": "1.9.2.0",
             "version": "dev-CGIV-8903-EKMAppAccountRegistration-Job",
             "package": "channelgrabber/ekm"
-        },
-        {
-            "alias": "1.0.14",
-            "alias_normalized": "1.0.14.0",
-            "version": "dev-CGIV-8903-EKMAppAccountRegistration-Job",
-            "package": "channelgrabber/locale"
         }
     ],
     "minimum-stability": "stable",
@@ -10010,10 +10016,9 @@
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ekm": 20,
-        "channelgrabber/locale": 20,
         "phpish/link_header": 20,
-        "phpspec/phpspec": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "phpspec/phpspec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
