@@ -11,7 +11,7 @@ class OrderExchangeRates extends AbstractOnlineSchemaChange
         foreach (['order', 'orderLive'] as $table) {
             $this->onlineSchemaChange(
                 $table,
-                'ADD COLUMN `exchangeRate` DECIMAL(12, 4), ADD COLUMN `baseCurrencyCode` VARCHAR(255)'
+                'ADD COLUMN `exchangeRate` DECIMAL(12, 4), ADD COLUMN `exchangeRateCurrencyCode` VARCHAR(255)'
             );
         }
     }
@@ -24,7 +24,7 @@ class OrderExchangeRates extends AbstractOnlineSchemaChange
         foreach (['order', 'orderLive'] as $table) {
             $this->onlineSchemaChange(
                 $table,
-                'DROP COLUMN `exchangeRate`, DROP COLUMN `baseCurrencyCode`'
+                'DROP COLUMN `exchangeRate`, DROP COLUMN `exchangeRateCurrencyCode`'
             );
         }
     }
