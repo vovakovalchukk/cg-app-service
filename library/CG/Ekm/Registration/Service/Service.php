@@ -1,6 +1,7 @@
 <?php
 namespace CG\Ekm\Registration\Service;
 
+use CG\Ekm\Gearman\Generator\Registration\Action\Register as RegisterActionGenerator;
 use CG\Ekm\Registration\Mapper;
 use CG\Ekm\Registration\Service as BaseService;
 use CG\Ekm\Registration\StorageInterface;
