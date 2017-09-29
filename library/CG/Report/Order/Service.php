@@ -4,13 +4,18 @@ namespace CG\Report\Order;
 use CG\Db\Query;
 use CG\Order\Service\Filter;
 use CG\Order\Service\Storage\Persistent\Db;
+use CG\Report\Order\DateUnit\StrategyInterface;
 use CG\Report\Order\Dimension\DimensionInterface;
 use CG\Report\Order\Dimension\Factory as DimensionFactory;
 use CG\Report\Order\Metric\Factory as MetricFactory;
 use CG\Report\Order\DateUnit\Service as DateUnitService;
+use CG\Report\Order\Metric\MetricInterface;
+use CG\Stdlib\DateTime;
 
 class Service
 {
+    const ORDER_TABLE = 'order';
+
     /** @var Db */
     protected $orderDbService;
     /** @var MetricFactory */
@@ -28,25 +33,114 @@ class Service
         $this->dateUnitService = $dateUnitService;
     }
 
-    public function fetch(Filter $filterEntity, string $dimension, array $metrics)
+    public function fetch(Filter $filter, string $dimension, array $metrics)
     {
-        $where = $this->filterToWhere($filterEntity);
-        $query = $this->buildQuery($where, $dimension, $metrics);
+        [$start, $end] = $this->getDatesByFilter($filter);
+        $metricCollection = $this->buildMetricObjectsFromArray($metrics);
+        $unitStrategy = $this->dateUnitService->buildStrategyByLimit($start, $end, intval($filter->getLimit()));
+        $dimension = $this->dimensionFactory->getDimension($dimension);
+
+        $where = $this->filterToWhere($filter);
+        $query = $this->buildQuery($where, $unitStrategy, $dimension, $metricCollection);
+
         $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
+        $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
+        var_dump($arrayResult);die;
     }
 
-    protected function buildQuery(Query\Where $where, string $dimension, array $metrics)
+    public function buildDatesFromQueryResult(\mysqli_result $result)
     {
-        $dimension = $this->dimensionFactory->getDimension($dimension);
-        $query = $this->getSelect($dimension, $metrics)
+        $dates = $result->fetch_assoc();
+        return [
+            new DateTime($dates['start']),
+            new DateTime($dates['end'])
+        ];
+    }
+
+    protected function processResults(
+        array $result,
+        StrategyInterface $strategy,
+        DimensionInterface $dimension,
+        \SplObjectStorage $metrics
+    ) {
+        $metricKeys = $this->buildMetricKeys($metrics);
+        $dimensionValues = $this->getDimensionValuesFromResult($dimension, $result);
+
+        $response = [];
+        foreach ($dimensionValues as $dimensionValue) {
+            [$start, $end] = $this->getStartEndDateByDimension($result, $dimension->getKey(), $dimensionValue);
+            $response[$dimensionValue] = $this->dateUnitService->createZeroFilledArray($strategy, $start, $end, $metricKeys);
+        }
+
+        foreach ($result as $row) {
+            foreach ($metricKeys as $metricKey) {
+                $response[$row[$dimension->getKey()]][$row[DateUnitService::UNIT]][$metricKey] = $row[$metricKey];
+            }
+        }
+
+        return $response;
+    }
+
+    protected function buildMetricObjectsFromArray(array $metrics): \SplObjectStorage
+    {
+        $collection = new \SplObjectStorage();
+        foreach ($metrics as $metric) {
+            $collection->attach($this->metricFactory->getMetric($metric));
+        }
+        return $collection;
+    }
+
+    protected function buildMetricKeys(\SplObjectStorage $metrics)
+    {
+        $keys = [];
+        /** @var MetricInterface $metric */
+        foreach ($metrics as $metric) {
+            $keys[$metric->getKey()] = $metric->getKey();
+        }
+        return $keys;
+    }
+
+    protected function getDimensionValuesFromResult(DimensionInterface $dimension, array $result)
+    {
+        $dimensionKeys = [];
+        foreach ($result as $row) {
+            $key = $row[$dimension->getKey()];
+            if (!isset($dimensionKeys[$key])) {
+                $dimensionKeys[$key] = $key;
+            }
+        }
+        return $dimensionKeys;
+    }
+
+    protected function getStartEndDateByDimension(array $result, string $dimensionKey, string $dimensionValue)
+    {
+        $start = null;
+        $end = null;
+        foreach ($result as $row) {
+            if (!$start && isset($row[$dimensionKey]) && $row[$dimensionKey] == $dimensionValue) {
+                $start = $row[DateUnitService::UNIT];
+            }
+            $end = $row[DateUnitService::UNIT];
+        }
+        return [new DateTime($start), new DateTime($end)];
+    }
+
+    protected function buildQuery(
+        Query\Where $where,
+        StrategyInterface $unitStrategy,
+        DimensionInterface $dimension,
+        \SplObjectStorage $metrics
+    ) {
+        $query = $this->getSelect($unitStrategy, $dimension, $metrics)
             . ' WHERE '. $where->getWhere()
-            . $this->getGroupBy($dimension);
+            . $this->getGroupBy($unitStrategy, $dimension)
+            . $this->getOrderBy();
         return $query;
     }
 
     protected function filterToWhere(Filter $filterEntity)
     {
-        $orderTableName = '`'. $this->orderDbService->getOrderTableName() . '`';
+        $orderTableName = '`'. self::ORDER_TABLE . '`';
         $where = new Query\Where();
         $where
             ->in($orderTableName.'.id', $this->getColumnType('id'), $filterEntity->getOrderIds())
@@ -75,18 +169,52 @@ class Service
         return $this->orderDbService->getColumnType($column);
     }
 
-    protected function getSelect(DimensionInterface $dimension, array $metrics)
+    protected function getSelect(StrategyInterface $strategy, DimensionInterface $dimension, \SplObjectStorage $metrics)
     {
-        $select = 'SELECT ' . $this->dateUnitService->getSelect() . ', ' . $dimension->getSelect();
+        $select = 'SELECT ' . $strategy->getSelect() . ', ' . $dimension->getSelect();
         foreach ($metrics as $metric) {
-            $select .= ', ' . $this->metricFactory->getMetric($metric)->getSelect();
+            $select .= ', ' . $metric->getSelect();
         }
-        $select .= ' FROM `' . $this->orderDbService->getOrderTableName() . '`';
+        $select .= ' FROM `' . self::ORDER_TABLE . '`';
         return $select;
     }
 
-    protected function getGroupBy(DimensionInterface $dimension)
+    protected function getGroupBy(StrategyInterface $strategy, DimensionInterface $dimension)
     {
-        return ' GROUP BY ' . $this->dateUnitService->getGroupBy() . ', ' . $dimension->getGroupBy();
+        return ' GROUP BY ' . $strategy->getGroupBy() . ', ' . $dimension->getGroupBy();
+    }
+
+    protected function getOrderBy()
+    {
+        return ' ORDER BY `purchaseDate` ASC';
+    }
+
+    protected function getDatesByFilter(Filter $filter)
+    {
+        if ($filter->getPurchaseDateFrom() && $filter->getPurchaseDateTo()) {
+            return [
+                new DateTime($filter->getPurchaseDateFrom()),
+                new DateTime($filter->getPurchaseDateTo())
+            ];
+        }
+
+        return $this->getStartEndDatesFromQuery($this->filterToWhere($filter));
+    }
+
+    protected function getStartEndDatesFromQuery(Query\Where $where)
+    {
+        $query = $this->buildQueryForDates($where);
+        return $this->orderDbService->getReadSql()->query(
+            $query,
+            $where->getWhereParameters(),
+            [$this, 'buildDatesFromQueryResult']
+        );
+    }
+
+    protected function buildQueryForDates(Query\Where $where)
+    {
+        return 'SELECT MIN(purchaseDate) as start, MAX(purchaseDate) as end'
+            . ' FROM `' . self::ORDER_TABLE . '`'
+            . ' WHERE ' . $where->getWhere();
     }
 }
