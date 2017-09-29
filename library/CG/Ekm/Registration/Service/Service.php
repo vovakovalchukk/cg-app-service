@@ -11,9 +11,10 @@ class Service extends BaseService
     public function __construct(
         StorageInterface $repository,
         Mapper $mapper,
-        Sites $sites
+        Sites $sites,
+        RegisterActionGenerator $registerActionGenerator
     ) {
-        parent::__construct($repository, $mapper, $sites);
+        parent::__construct($repository, $mapper, $sites, $registerActionGenerator);
     }
 
     public function save($entity)
