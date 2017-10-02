@@ -2191,15 +2191,16 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-reporting.git",
-                "reference": "a5051cff23ea709c2f18cfdc595b46a96ea1d321"
+                "reference": "4c5c09c779aa1377f28553b6cb7ee41279e407f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-reporting-dev-CGIV-8915-reporting-api-891901.zip",
-                "reference": "a5051cff23ea709c2f18cfdc595b46a96ea1d321",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-reporting-dev-CGIV-8915-reporting-api-6f85a7.zip",
+                "reference": "4c5c09c779aa1377f28553b6cb7ee41279e407f4",
                 "shasum": null
             },
             "require": {
+                "channelgrabber/order": "^1.29.4",
                 "channelgrabber/stdlib": "^2.12.42"
             },
             "type": "library",
@@ -2223,7 +2224,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-29T15:29:01+00:00"
+            "time": "2017-10-02T12:52:08+00:00"
         },
         {
             "name": "channelgrabber/scraper",
