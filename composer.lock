@@ -1021,22 +1021,23 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "1.1.1",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "dafb2d217c3ebc436d7edad6e74a67655f895512"
+                "reference": "722bdb0e8bf7673fd5ac9b49451b7914b1a202da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.1.1-a39986.zip",
-                "reference": "dafb2d217c3ebc436d7edad6e74a67655f895512",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-dev-CGIV-8914-ExchangeRateOrderDetails-0ce3c5.zip",
+                "reference": "722bdb0e8bf7673fd5ac9b49451b7914b1a202da",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
-                "channelgrabber/stdlib": "^2.12.36"
+                "channelgrabber/stdlib": "^2.12.36",
+                "php": ">=7.1"
             },
             "type": "library",
             "autoload": {
@@ -1054,7 +1055,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-16T14:55:15+00:00"
+            "time": "2017-09-28T14:01:50+00:00"
         },
         {
             "name": "channelgrabber/feature-flags",
@@ -1558,16 +1559,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.29.4",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa"
+                "reference": "5f137910164c5d5f9e112bf90e2a55305695bf1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.29.4-f62d36.zip",
-                "reference": "6063e1d1f05c3cfa8c249b15a203fe8c5b67a4fa",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8914-ExchangeRateOrderDetails-44ce63.zip",
+                "reference": "5f137910164c5d5f9e112bf90e2a55305695bf1b",
                 "shasum": null
             },
             "require": {
@@ -1582,6 +1583,7 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/etag": "^1.6.0",
+                "channelgrabber/exchangerate": "dev-CGIV-8914-ExchangeRateOrderDetails as 1.2.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
@@ -1608,6 +1610,7 @@
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.10",
+                "php": ">=7.1",
                 "zendframework/zend-config": "^2.2.5",
                 "zendframework/zend-di": "^2.2.5"
             },
@@ -1637,7 +1640,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-22T14:22:25+00:00"
+            "time": "2017-09-28T14:57:35+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10049,12 +10052,26 @@
             "alias_normalized": "1.0.0.0",
             "version": "dev-CGIV-8915-reporting-api",
             "package": "channelgrabber/reporting"
+        },
+        {
+            "alias": "1.2.0",
+            "alias_normalized": "1.2.0.0",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
+            "package": "channelgrabber/exchangerate"
+        },
+        {
+            "alias": "1.30.0",
+            "alias_normalized": "1.30.0.0",
+            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
+            "package": "channelgrabber/order"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/reporting": 20,
+        "channelgrabber/exchangerate": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20

@@ -64,6 +64,9 @@ class Db implements StorageInterface
 
         $where = $this->filterToWhere($filter->getOrderFilter());
         $query = $this->buildQuery($where, $unitStrategy, $dimension, $metricCollection);
+        echo $query;
+        var_dump($where->getWhereParameters());
+        die;
 
         $result = $this->readSql->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
