@@ -122,7 +122,7 @@ class Db implements StorageInterface
         foreach ($response as $dimensionValue => $data) {
             foreach ($data as $dateUnit => $values) {
                 foreach ($values as $metricValue => $value) {
-                    $current = isset($total[$dateUnit][$metricValue]) ? $total[$dateUnit][$metricValue] : 0;
+                    $current = $total[$dateUnit][$metricValue] ?? 0;
                     $newValue = $response[$dimensionValue][$dateUnit][$metricValue];
                     $total[$dateUnit][$metricValue] = round($current + $newValue, 2);
                 }
@@ -199,7 +199,7 @@ class Db implements StorageInterface
         \SplObjectStorage $metrics
     ) {
         $query = $this->getSelect($unitStrategy, $dimension, $metrics)
-            . ' WHERE '. $where->getWhere()
+            . (!empty($where->getWhere()) ? ' WHERE '. $where->getWhere() : '')
             . $this->getGroupBy($unitStrategy, $dimension)
             . $this->getOrderBy();
         return $query;
@@ -227,6 +227,22 @@ class Db implements StorageInterface
             ->in($orderTableName.'.externalId', $this->getColumnType('externalId'), $filterEntity->getExternalId())
             ->in($orderTableName.'.externalUsername', $this->getColumnType('externalUsername'), $filterEntity->getExternalUsername())
             ->range($orderTableName.'.dispatchDate', $this->getColumnType('dispatchDate'), $filterEntity->getDispatchDateFrom(), $filterEntity->getDispatchDateTo());
+
+        if ($filterEntity->getBuyerMessage() === true) {
+            $where->notLike($orderTableName.'.buyerMessage', $this->getColumnType('buyerMessage'), '');
+        } elseif ($filterEntity->getBuyerMessage() === false) {
+            $where->like($orderTableName.'.buyerMessage', $this->getColumnType('buyerMessage'), '');
+        }
+
+        if ($filterEntity->getArchived() === true) {
+            $where->equals($orderTableName.'.archived', $this->getColumnType('archived'), $filterEntity->getArchived());
+        } elseif ($filterEntity->getArchived() === false) {
+            $where->notEquals($orderTableName.'.archived', $this->getColumnType('archived'), $filterEntity->getArchived());
+        }
+
+        if ($filterEntity->getCustomer()) {
+            $where->equals($orderTableName.'.externalUsername', $this->getColumnType('externalUsername'), $filterEntity->getCustomer());
+        }
 
         return $where;
     }
@@ -280,9 +296,12 @@ class Db implements StorageInterface
 
     protected function buildQueryForDates(Query\Where $where)
     {
-        return 'SELECT MIN(purchaseDate) as start, MAX(purchaseDate) as end'
-            . ' FROM `' . self::ORDER_TABLE . '`'
-            . ' WHERE ' . $where->getWhere();
+        $query = 'SELECT MIN(purchaseDate) as start, MAX(purchaseDate) as end'
+            . ' FROM `' . self::ORDER_TABLE . '`';
+        if ($where->getWhere()) {
+            $query .= ' WHERE ' . $where->getWhere();
+        }
+        return $query;
     }
 
 }
