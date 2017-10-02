@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "06a008d9f636270976c1b811308927a3",
+    "content-hash": "e873e64c0d37ef156ef5bc5990469cda",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -10042,7 +10042,14 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-CGIV-8915-reporting-api",
+            "package": "channelgrabber/reporting"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,

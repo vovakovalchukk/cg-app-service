@@ -2,9 +2,10 @@
 namespace CG\Controllers\Report\Order;
 
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
-use CG\Order\Service\Filter;
+use CG\Order\Service\Filter as OrderFilter;
 use CG\Permission\Exception as PermissionException;
-use CG\Report\Order\Service as ReportOrderService;
+use CG\Reporting\Order\Filter;
+use CG\Reporting\Order\Service as ReportingOrderService;
 use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Slim\Slim;
@@ -14,7 +15,7 @@ class Collection
 {
     use ControllerTrait;
 
-    public function __construct(Slim $app, Di $di, ReportOrderService $service)
+    public function __construct(Slim $app, Di $di, ReportingOrderService $service)
     {
         $this->setSlim($app);
         $this->setDi($di);
@@ -24,11 +25,7 @@ class Collection
     public function get(string $dimension)
     {
         try {
-            return $this->getService()->fetch(
-                $this->getOrderFilter(),
-                $dimension,
-                $this->getParams('metric') ?: []
-            );
+            return $this->getService()->fetch($this->getFilter($dimension));
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(),$e);
         } catch (PermissionException $e) {
@@ -36,8 +33,17 @@ class Collection
         }
     }
 
-    protected function getOrderFilter(): Filter
+    protected function getFilter(string $dimension)
     {
-        return $this->getDi()->newInstance(Filter::class, $this->getParams());
+        return new Filter(
+            $this->getOrderFilter(),
+            $dimension,
+            $this->getParams('metric') ?: []
+        );
+    }
+
+    protected function getOrderFilter(): OrderFilter
+    {
+        return $this->getDi()->newInstance(OrderFilter::class, $this->getParams());
     }
 }

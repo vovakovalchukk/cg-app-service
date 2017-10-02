@@ -1,5 +1,5 @@
 <?php
-namespace CG\Report\Order\Dimension;
+namespace CG\Reporting\Order\Metric;
 
 use CG\Di\Di;
 use Zend\Di\Exception\ClassNotFoundException;
@@ -13,9 +13,9 @@ class Factory
         $this->di = $di;
     }
 
-    public function getDimension(string $dimension): DimensionInterface
+    public function getMetric(string $metric): MetricInterface
     {
-        $class = $this->getClassNameByString($dimension);
+        $class = $this->getClassNameByString($metric);
         if (!class_exists($class)) {
             throw new ClassNotFoundException($class);
         }
@@ -23,8 +23,8 @@ class Factory
         return $this->di->get($class);
     }
 
-    protected function getClassNameByString(string $dimension)
+    protected function getClassNameByString(string $metric)
     {
-        return __NAMESPACE__ . '\\' . ucfirst($dimension);
+        return __NAMESPACE__ . '\\' . ucfirst($metric);
     }
 }

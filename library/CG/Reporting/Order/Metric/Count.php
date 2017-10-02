@@ -1,5 +1,5 @@
 <?php
-namespace CG\Report\Order\Metric;
+namespace CG\Reporting\Order\Metric;
 
 class Count implements MetricInterface
 {

@@ -1,22 +1,26 @@
 <?php
-namespace CG\Report\Order;
+namespace CG\Reporting\Order\Storage;
 
 use CG\Db\Query;
-use CG\Order\Service\Filter;
-use CG\Order\Service\Storage\Persistent\Db;
-use CG\Report\Order\DateUnit\StrategyInterface;
-use CG\Report\Order\Dimension\DimensionInterface;
-use CG\Report\Order\Dimension\Factory as DimensionFactory;
-use CG\Report\Order\Metric\Factory as MetricFactory;
-use CG\Report\Order\DateUnit\Service as DateUnitService;
-use CG\Report\Order\Metric\MetricInterface;
+use CG\Order\Service\Filter as OrderFilter;
+use CG\Order\Service\Storage\Persistent\Db as OrderDbService;
+use CG\Reporting\Order\Collection;
+use CG\Reporting\Order\DateUnit\Service as DateUnitService;
+use CG\Reporting\Order\DateUnit\StrategyInterface;
+use CG\Reporting\Order\Dimension\DimensionInterface;
+use CG\Reporting\Order\Dimension\Factory as DimensionFactory;
+use CG\Reporting\Order\Filter;
+use CG\Reporting\Order\Mapper;
+use CG\Reporting\Order\Metric\Factory as MetricFactory;
+use CG\Reporting\Order\Metric\MetricInterface;
+use CG\Reporting\Order\StorageInterface;
 use CG\Stdlib\DateTime;
 
-class Service
+class Db implements StorageInterface
 {
     const ORDER_TABLE = 'order';
 
-    /** @var Db */
+    /** @var OrderDbService */
     protected $orderDbService;
     /** @var MetricFactory */
     protected $metricFactory;
@@ -24,28 +28,40 @@ class Service
     protected $dimensionFactory;
     /** @var DateUnitService */
     protected $dateUnitService;
+    /** @var Mapper */
+    protected $mapper;
 
-    public function __construct(Db $orderDbService, MetricFactory $metricFactory, DimensionFactory $dimensionFactory, DateUnitService $dateUnitService)
-    {
+    public function __construct(
+        OrderDbService $orderDbService,
+        MetricFactory $metricFactory,
+        DimensionFactory $dimensionFactory,
+        DateUnitService $dateUnitService,
+        Mapper $mapper
+    ) {
         $this->orderDbService = $orderDbService;
         $this->metricFactory = $metricFactory;
         $this->dimensionFactory = $dimensionFactory;
         $this->dateUnitService = $dateUnitService;
+        $this->mapper = $mapper;
     }
 
-    public function fetch(Filter $filter, string $dimension, array $metrics)
+    public function fetchCollectionByFilter(Filter $filter)
     {
-        [$start, $end] = $this->getDatesByFilter($filter);
-        $metricCollection = $this->buildMetricObjectsFromArray($metrics);
-        $unitStrategy = $this->dateUnitService->buildStrategyByLimit($start, $end, intval($filter->getLimit()));
-        $dimension = $this->dimensionFactory->getDimension($dimension);
+        [$start, $end] = $this->getDatesByFilter($filter->getOrderFilter());
+        $metricCollection = $this->buildMetricObjectsFromArray($filter->getMetrics());
+        $unitStrategy = $this->dateUnitService->buildStrategyByLimit(
+            $start,
+            $end,
+            intval($filter->getOrderFilter()->getLimit())
+        );
+        $dimension = $this->dimensionFactory->getDimension($filter->getDimension());
 
-        $where = $this->filterToWhere($filter);
+        $where = $this->filterToWhere($filter->getOrderFilter());
         $query = $this->buildQuery($where, $unitStrategy, $dimension, $metricCollection);
 
         $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
-        var_dump($arrayResult);die;
+        return $this->buildCollectionFromArray($arrayResult, $filter->getDimension());
     }
 
     public function buildDatesFromQueryResult(\mysqli_result $result)
@@ -55,6 +71,16 @@ class Service
             new DateTime($dates['start']),
             new DateTime($dates['end'])
         ];
+    }
+
+    protected function buildCollectionFromArray(array $series, string $dimension)
+    {
+        $collection = new Collection($dimension);
+        foreach ($series as $data) {
+            $entity = $this->mapper->fromArray($data);
+            $collection->attach($entity);
+        }
+        return $collection;
     }
 
     protected function processResults(
@@ -78,7 +104,36 @@ class Service
             }
         }
 
+        $response = $this->addTotalToResponse($response);
+        return $this->formatResponseAsArray($response);
+    }
+
+    protected function addTotalToResponse(array $response): array
+    {
+        $total = [];
+        foreach ($response as $dimensionValue => $data) {
+            foreach ($data as $dateUnit => $values) {
+                foreach ($values as $metricValue => $value) {
+                    $current = isset($total[$dateUnit][$metricValue]) ? $total[$dateUnit][$metricValue] : 0;
+                    $newValue = $response[$dimensionValue][$dateUnit][$metricValue];
+                    $total[$dateUnit][$metricValue] = $current + $newValue;
+                }
+            }
+        }
+        $response['total'] = $total;
         return $response;
+    }
+
+    protected function formatResponseAsArray(array $response): array
+    {
+        $array = [];
+        foreach ($response as $dimensionValue => $data) {
+            $array[] = [
+                'name' => $dimensionValue,
+                'values' => $data
+            ];
+        }
+        return $array;
     }
 
     protected function buildMetricObjectsFromArray(array $metrics): \SplObjectStorage
@@ -138,7 +193,7 @@ class Service
         return $query;
     }
 
-    protected function filterToWhere(Filter $filterEntity)
+    protected function filterToWhere(OrderFilter $filterEntity)
     {
         $orderTableName = '`'. self::ORDER_TABLE . '`';
         $where = new Query\Where();
@@ -189,7 +244,7 @@ class Service
         return ' ORDER BY `purchaseDate` ASC';
     }
 
-    protected function getDatesByFilter(Filter $filter)
+    protected function getDatesByFilter(OrderFilter $filter)
     {
         if ($filter->getPurchaseDateFrom() && $filter->getPurchaseDateTo()) {
             return [
@@ -217,4 +272,5 @@ class Service
             . ' FROM `' . self::ORDER_TABLE . '`'
             . ' WHERE ' . $where->getWhere();
     }
+
 }

@@ -1,5 +1,5 @@
 <?php
-namespace CG\Report\Order\Dimension;
+namespace CG\Reporting\Order\Dimension;
 
 interface DimensionInterface
 {

@@ -1,5 +1,5 @@
 <?php
-namespace CG\Report\Order\DateUnit;
+namespace CG\Reporting\Order\DateUnit;
 
 use CG\Stdlib\DateTime;
 
