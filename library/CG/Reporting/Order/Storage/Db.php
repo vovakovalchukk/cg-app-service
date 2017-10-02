@@ -4,7 +4,6 @@ namespace CG\Reporting\Order\Storage;
 use CG\Db\Query;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Service\Storage\Persistent\Db as OrderDbService;
-use CG\Reporting\Order\Collection;
 use CG\Reporting\Order\DateUnit\Service as DateUnitService;
 use CG\Reporting\Order\DateUnit\StrategyInterface;
 use CG\Reporting\Order\Dimension\DimensionInterface;
@@ -47,7 +46,7 @@ class Db implements StorageInterface
         $this->mapper = $mapper;
     }
 
-    public function fetchCollectionByFilter(Filter $filter)
+    public function fetchByFilter(Filter $filter)
     {
         [$start, $end] = $this->getDatesByFilter($filter->getOrderFilter());
         $metricCollection = $this->buildMetricObjectsFromArray($filter->getMetrics());
@@ -64,12 +63,7 @@ class Db implements StorageInterface
         $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
 
-        return $this->buildCollectionFromArray(
-            $arrayResult,
-            $filter->getDimension(),
-            $unitStrategy->getType(),
-            $filter->getMetrics()
-        );
+        return $this->buildEntityFromArray($unitStrategy->getType(), $arrayResult);
     }
 
     public function buildDatesFromQueryResult(\mysqli_result $result)
@@ -81,14 +75,12 @@ class Db implements StorageInterface
         ];
     }
 
-    protected function buildCollectionFromArray(array $series, string $dimension, string $dateUnit, array $metrics)
+    protected function buildEntityFromArray(string $dateUnit, array $series)
     {
-        $collection = new Collection($dimension, $dateUnit, $metrics);
-        foreach ($series as $data) {
-            $entity = $this->mapper->fromArray($data);
-            $collection->attach($entity);
-        }
-        return $collection;
+        return $this->mapper->fromArray([
+            'dateUnit' => $dateUnit,
+            'series' => $series
+        ]);
     }
 
     protected function processResults(

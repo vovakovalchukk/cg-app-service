@@ -11,7 +11,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use Slim\Slim;
 use Zend\Di\Di;
 
-class Collection
+class Order
 {
     use ControllerTrait;
 

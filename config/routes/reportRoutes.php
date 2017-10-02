@@ -1,13 +1,13 @@
 <?php
 
-use CG\Controllers\Reporting\Order\Collection as ReportOrderCollection;
-use CG\InputValidation\Reporting\Order\Filter as OrderFilterValdiation;
+use CG\Controllers\Reporting\Order\Order as ReportOrder;
+use CG\InputValidation\Reporting\Order\Filter as OrderFilterValidation;
 
 return [
     '/report/order/:dimension' => [
         'controllers' => function($dimension) use ($app, $di) {
             $method = $app->request()->getMethod();
-            $controller = $di->get(ReportOrderCollection::class);
+            $controller = $di->get(ReportOrder::class);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($dimension)
@@ -18,7 +18,7 @@ return [
         'validation' => [
             "flatten" => false,
             "dataRules" => null,
-            "filterRules" => OrderFilterValdiation::class
+            "filterRules" => OrderFilterValidation::class
         ],
     ]
 ];
