@@ -63,7 +63,13 @@ class Db implements StorageInterface
 
         $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
-        return $this->buildCollectionFromArray($arrayResult, $filter->getDimension(), $unitStrategy->getType());
+
+        return $this->buildCollectionFromArray(
+            $arrayResult,
+            $filter->getDimension(),
+            $unitStrategy->getType(),
+            $filter->getMetrics()
+        );
     }
 
     public function buildDatesFromQueryResult(\mysqli_result $result)
@@ -75,9 +81,9 @@ class Db implements StorageInterface
         ];
     }
 
-    protected function buildCollectionFromArray(array $series, string $dimension, string $dateUnit)
+    protected function buildCollectionFromArray(array $series, string $dimension, string $dateUnit, array $metrics)
     {
-        $collection = new Collection($dimension, $dateUnit);
+        $collection = new Collection($dimension, $dateUnit, $metrics);
         foreach ($series as $data) {
             $entity = $this->mapper->fromArray($data);
             $collection->attach($entity);
