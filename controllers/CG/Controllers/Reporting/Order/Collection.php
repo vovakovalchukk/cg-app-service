@@ -1,5 +1,5 @@
 <?php
-namespace CG\Controllers\Report\Order;
+namespace CG\Controllers\Reporting\Order;
 
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Order\Service\Filter as OrderFilter;

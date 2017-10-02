@@ -15,6 +15,8 @@ use CG\Reporting\Order\Metric\Factory as MetricFactory;
 use CG\Reporting\Order\Metric\MetricInterface;
 use CG\Reporting\Order\StorageInterface;
 use CG\Stdlib\DateTime;
+use CG\Stdlib\Exception\Runtime\NotFound;
+use Zend\Di\Exception\ClassNotFoundException;
 
 class Db implements StorageInterface
 {
@@ -61,7 +63,7 @@ class Db implements StorageInterface
 
         $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
-        return $this->buildCollectionFromArray($arrayResult, $filter->getDimension());
+        return $this->buildCollectionFromArray($arrayResult, $filter->getDimension(), $unitStrategy->getType());
     }
 
     public function buildDatesFromQueryResult(\mysqli_result $result)
@@ -73,9 +75,9 @@ class Db implements StorageInterface
         ];
     }
 
-    protected function buildCollectionFromArray(array $series, string $dimension)
+    protected function buildCollectionFromArray(array $series, string $dimension, string $dateUnit)
     {
-        $collection = new Collection($dimension);
+        $collection = new Collection($dimension, $dateUnit);
         foreach ($series as $data) {
             $entity = $this->mapper->fromArray($data);
             $collection->attach($entity);
@@ -116,7 +118,7 @@ class Db implements StorageInterface
                 foreach ($values as $metricValue => $value) {
                     $current = isset($total[$dateUnit][$metricValue]) ? $total[$dateUnit][$metricValue] : 0;
                     $newValue = $response[$dimensionValue][$dateUnit][$metricValue];
-                    $total[$dateUnit][$metricValue] = $current + $newValue;
+                    $total[$dateUnit][$metricValue] = round($current + $newValue, 2);
                 }
             }
         }
@@ -138,11 +140,15 @@ class Db implements StorageInterface
 
     protected function buildMetricObjectsFromArray(array $metrics): \SplObjectStorage
     {
-        $collection = new \SplObjectStorage();
-        foreach ($metrics as $metric) {
-            $collection->attach($this->metricFactory->getMetric($metric));
+        try {
+            $collection = new \SplObjectStorage();
+            foreach ($metrics as $metric) {
+                $collection->attach($this->metricFactory->getMetric($metric));
+            }
+            return $collection;
+        } catch (ClassNotFoundException $e) {
+            throw new Notfound('Metric ' . $metric . ' not found.');
         }
-        return $collection;
     }
 
     protected function buildMetricKeys(\SplObjectStorage $metrics)

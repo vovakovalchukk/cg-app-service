@@ -1,6 +1,7 @@
 <?php
 
-use CG\Controllers\Report\Order\Collection as ReportOrderCollection;
+use CG\Controllers\Reporting\Order\Collection as ReportOrderCollection;
+use CG\InputValidation\Reporting\Order\Filter as OrderFilterValdiation;
 
 return [
     '/report/order/:dimension' => [
@@ -13,6 +14,11 @@ return [
             );
         },
         'via' => ['GET'],
-        'name' => 'ReportOrderCollection'
+        'name' => 'ReportOrderCollection',
+        'validation' => [
+            "flatten" => false,
+            "dataRules" => null,
+            "filterRules" => OrderFilterValdiation::class
+        ],
     ]
 ];
