@@ -1,6 +1,7 @@
 <?php
 namespace CG\Reporting\Order\Storage;
 
+use CG\Db\Mysqli as Sql;
 use CG\Db\Query;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Service\Storage\Persistent\Db as OrderDbService;
@@ -21,6 +22,8 @@ class Db implements StorageInterface
 {
     const ORDER_TABLE = 'order';
 
+    /** @var Sql */
+    protected $readSql;
     /** @var OrderDbService */
     protected $orderDbService;
     /** @var MetricFactory */
@@ -33,12 +36,14 @@ class Db implements StorageInterface
     protected $mapper;
 
     public function __construct(
+        Sql $readSql,
         OrderDbService $orderDbService,
         MetricFactory $metricFactory,
         DimensionFactory $dimensionFactory,
         DateUnitService $dateUnitService,
         Mapper $mapper
     ) {
+        $this->readSql = $readSql;
         $this->orderDbService = $orderDbService;
         $this->metricFactory = $metricFactory;
         $this->dimensionFactory = $dimensionFactory;
@@ -60,7 +65,7 @@ class Db implements StorageInterface
         $where = $this->filterToWhere($filter->getOrderFilter());
         $query = $this->buildQuery($where, $unitStrategy, $dimension, $metricCollection);
 
-        $result = $this->orderDbService->getReadSql()->query($query, $where->getWhereParameters());
+        $result = $this->readSql->query($query, $where->getWhereParameters());
         $arrayResult = $this->processResults($result, $unitStrategy, $dimension, $metricCollection);
 
         return $this->buildEntityFromArray($unitStrategy->getType(), $arrayResult);
@@ -279,7 +284,7 @@ class Db implements StorageInterface
     protected function getStartEndDatesFromQuery(Query\Where $where)
     {
         $query = $this->buildQueryForDates($where);
-        return $this->orderDbService->getReadSql()->query(
+        return $this->readSql->query(
             $query,
             $where->getWhereParameters(),
             [$this, 'buildDatesFromQueryResult']

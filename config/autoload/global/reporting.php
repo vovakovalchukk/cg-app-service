@@ -8,7 +8,12 @@ return [
         'instance' => [
             'preferences' => [
                 StorageInterface::class => DbStorage::class
+            ],
+            DbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadMysqli'
+                ]
             ]
         ]
-    ]
+    ],
 ];
