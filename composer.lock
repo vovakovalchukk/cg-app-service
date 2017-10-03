@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "17b7c23641352802f29e7df114b3bce0",
+    "content-hash": "5fa20bce4f5db6685518231b0271c20a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -329,16 +329,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-8913-AlwaysInvalidateCollectionsOnEntityDelete",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "107661546792f259f3661bb9019ef7748f72e9c1"
+                "reference": "7b70abb47ce022231591b7565a132fe97e799db2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-8913-AlwaysInvalidateCollectionsOnEntityDelete-a428bb.zip",
-                "reference": "107661546792f259f3661bb9019ef7748f72e9c1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.5.0-a7fc30.zip",
+                "reference": "7b70abb47ce022231591b7565a132fe97e799db2",
                 "shasum": null
             },
             "require": {
@@ -365,7 +365,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-02T11:22:07+00:00"
+            "time": "2017-10-03T12:34:18+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -10003,17 +10003,9 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.5.0",
-            "alias_normalized": "2.5.0.0",
-            "version": "dev-CGIV-8913-AlwaysInvalidateCollectionsOnEntityDelete",
-            "package": "channelgrabber/cache"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
