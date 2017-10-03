@@ -408,14 +408,16 @@ use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
-// Ekm Registration
+### Ekm\Registration
 use CG\Ekm\Registration\Service as EkmRegistrationService;
 use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
 use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
 use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
-
-// Sites
+use CG\Ekm\Registration\Service\Service as EkmRegistrationServiceService;
+use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
+use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
 use CG\Stdlib\Sites;
+### End
 
 $config = array(
     'di' => array(
@@ -1599,6 +1601,16 @@ $config = array(
                 'parameters' => [
                     'repository' => EkmRegistrationDb::class,
                 ]
+            ],
+            EkmRegistrationController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            EkmRegistrationCollectionController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
             ],
             Sites::class => [
                 'parameters' => [
