@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e873e64c0d37ef156ef5bc5990469cda",
+    "content-hash": "f60a84f5dee52c807a0f438523a22d2b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -10048,12 +10048,6 @@
     ],
     "aliases": [
         {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-8915-reporting-api",
-            "package": "channelgrabber/reporting"
-        },
-        {
             "alias": "1.2.0",
             "alias_normalized": "1.2.0.0",
             "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
@@ -10064,14 +10058,20 @@
             "alias_normalized": "1.30.0.0",
             "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-CGIV-8915-reporting-api",
+            "package": "channelgrabber/reporting"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/reporting": 20,
         "channelgrabber/exchangerate": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/reporting": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
