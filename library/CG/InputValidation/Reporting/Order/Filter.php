@@ -2,18 +2,12 @@
 namespace CG\InputValidation\Reporting\Order;
 
 use CG\InputValidation\Order\Order\Filter as OrderFilter;
-use CG\Validation\Rules\ValidatorTrait;
 use CG\Validation\Rules\IsArrayValidator;
-use Zend\Di\Di;
+use CG\Validation\Rules\ValidatorTrait;
 
 class Filter extends OrderFilter
 {
     use ValidatorTrait;
-
-    public function __construct(Di $di)
-    {
-        $this->di = $di;
-    }
 
     public function getRules()
     {

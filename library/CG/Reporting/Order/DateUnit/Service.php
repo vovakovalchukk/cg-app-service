@@ -19,7 +19,7 @@ class Service
     protected const UNIT_MAP = [
         self::UNIT_DAY => [
             self::SELECT => 'DATE_FORMAT(purchaseDate, \'%Y-%m-%d\') as ' . self::UNIT,
-            self::GROUP_BY => 'DATE_FORMAT(purchaseDate, \'%Y-%m-%d\')',
+            self::GROUP_BY => self::UNIT,
             self::UNIT_DIFF_FORMAT => '%a',
             self::UNIT_INTERVAL => 'P1D'
         ],

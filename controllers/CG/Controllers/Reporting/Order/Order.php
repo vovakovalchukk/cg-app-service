@@ -25,7 +25,7 @@ class Order
     public function get(string $dimension)
     {
         try {
-            return $this->getService()->fetch($this->getFilter($dimension));
+            return $this->getService()->fetchByFilterAsHal($this->getFilter($dimension));
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(),$e);
         } catch (PermissionException $e) {

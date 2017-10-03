@@ -3,6 +3,7 @@ namespace CG\Reporting\Order\Metric;
 
 use CG\Di\Di;
 use Zend\Di\Exception\ClassNotFoundException;
+use function CG\Stdlib\hyphenToFullyQualifiedClassname;
 
 class Factory
 {
@@ -25,6 +26,6 @@ class Factory
 
     protected function getClassNameByString(string $metric)
     {
-        return __NAMESPACE__ . '\\' . ucfirst($metric);
+        return __NAMESPACE__ . '\\' . hyphenToFullyQualifiedClassname($metric);
     }
 }
