@@ -9,6 +9,7 @@ use CG\Reporting\Order\DateUnit\Service as DateUnitService;
 use CG\Reporting\Order\DateUnit\StrategyInterface;
 use CG\Reporting\Order\Dimension\DimensionInterface;
 use CG\Reporting\Order\Dimension\Factory as DimensionFactory;
+use CG\Reporting\Order\Entity;
 use CG\Reporting\Order\Filter;
 use CG\Reporting\Order\Mapper;
 use CG\Reporting\Order\Metric\Factory as MetricFactory;
@@ -51,7 +52,7 @@ class Db implements StorageInterface
         $this->mapper = $mapper;
     }
 
-    public function fetchByFilter(Filter $filter)
+    public function fetchByFilter(Filter $filter): Entity
     {
         [$start, $end] = $this->getDatesByFilter($filter->getOrderFilter());
         $metricCollection = $this->buildMetricObjectsFromArray($filter->getMetrics());
@@ -80,7 +81,7 @@ class Db implements StorageInterface
         ];
     }
 
-    protected function buildEntityFromArray(string $dateUnit, array $series)
+    protected function buildEntityFromArray(string $dateUnit, array $series): Entity
     {
         return $this->mapper->fromArray([
             'dateUnit' => $dateUnit,
