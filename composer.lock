@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "daae48bedd010222148820694511cd31",
+    "content-hash": "f5673069ee9c12b99bdaaa7965339d7e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1022,16 +1022,16 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "722bdb0e8bf7673fd5ac9b49451b7914b1a202da"
+                "reference": "332c387f143ff562f590069a9cb15e8e59c820ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-dev-CGIV-8914-ExchangeRateOrderDetails-0ce3c5.zip",
-                "reference": "722bdb0e8bf7673fd5ac9b49451b7914b1a202da",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.2.0-63c576.zip",
+                "reference": "332c387f143ff562f590069a9cb15e8e59c820ae",
                 "shasum": null
             },
             "require": {
@@ -1056,7 +1056,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-28T14:01:50+00:00"
+            "time": "2017-10-05T10:46:57+00:00"
         },
         {
             "name": "channelgrabber/feature-flags",
@@ -1560,16 +1560,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
+            "version": "1.30.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "96e385ea9a20876429378649028d0db95f013bd1"
+                "reference": "52d5eb51857bc07e882d29350a5d42821566c4b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8914-ExchangeRateOrderDetails-843f35.zip",
-                "reference": "96e385ea9a20876429378649028d0db95f013bd1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.30.0-43a0a9.zip",
+                "reference": "52d5eb51857bc07e882d29350a5d42821566c4b5",
                 "shasum": null
             },
             "require": {
@@ -1584,7 +1584,7 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/etag": "^1.6.0",
-                "channelgrabber/exchangerate": "dev-CGIV-8914-ExchangeRateOrderDetails as 1.2.0",
+                "channelgrabber/exchangerate": "^1.2.0",
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
@@ -1641,7 +1641,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-04T14:22:37+00:00"
+            "time": "2017-10-05T11:13:30+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10006,25 +10006,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.2.0",
-            "alias_normalized": "1.2.0.0",
-            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
-            "package": "channelgrabber/exchangerate"
-        },
-        {
-            "alias": "1.30.0",
-            "alias_normalized": "1.30.0.0",
-            "version": "dev-CGIV-8914-ExchangeRateOrderDetails",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/exchangerate": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
