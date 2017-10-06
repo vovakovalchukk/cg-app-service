@@ -482,8 +482,8 @@ EOF;
             $select = <<<SQL
 SELECT DISTINCT o.`id`
 FROM `order` o
-JOIN billing.subscription s ON o.`rootOrganisationUnitId` = s.`organisationUnitId` AND NOW() BETWEEN s.`fromDate` AND IFNULL(`toDate`, NOW())
-WHERE o.`exchangeRate` IS NULL
+WHERE `exchangeRate` IS NULL
+AND EXISTS (SELECT `organisationUnitId` FROM billing.subscription WHERE o.`rootOrganisationUnitId` = `organisationUnitId` AND NOW() BETWEEN `fromDate` AND IFNULL(`toDate`, NOW()))
 ORDER BY o.`purchaseDate` DESC
 SQL;
 
