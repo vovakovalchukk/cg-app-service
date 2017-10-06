@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5673069ee9c12b99bdaaa7965339d7e",
+    "content-hash": "60c9530769b953337f363f18d4179a52",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2188,6 +2188,47 @@
                 }
             },
             "time": "2016-01-19T15:18:35+00:00"
+        },
+        {
+            "name": "channelgrabber/reporting",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-reporting.git",
+                "reference": "5c45520f107cf4278ac714675875826bda9820dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-reporting-1.0.0-0a6e47.zip",
+                "reference": "5c45520f107cf4278ac714675875826bda9820dd",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/order": "^1.29.4",
+                "channelgrabber/stdlib": "^2.12.42"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Reporting\\": "src"
+                }
+            },
+            "license": [
+                "commercial"
+            ],
+            "authors": [
+                {
+                    "name": "Eduard Busuioc",
+                    "email": "eduard.busuioc@channelgrabber.com"
+                }
+            ],
+            "description": "Handles the reporting classes",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2017-10-05T13:01:37+00:00"
         },
         {
             "name": "channelgrabber/scraper",
