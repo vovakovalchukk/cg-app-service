@@ -14,6 +14,7 @@ $files = [
     'shipmentMetadata.php',
     'orderLink.php',
     'purchaseOrderRoutes.php',
+    'reportRoutes.php',
     'ekmRoutes.php',
 ];
 foreach ($files as $file) {
