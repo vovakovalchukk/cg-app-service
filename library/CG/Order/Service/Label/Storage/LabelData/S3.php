@@ -2,12 +2,12 @@
 namespace CG\Order\Service\Label\Storage\LabelData;
 
 use Aws\S3\Exception\S3Exception;
-use Aws\S3\S3Client;
+use CG\FileStorage\S3\Adapter as S3Adapter;
 use CG\Http\StatusCode;
 use CG\Order\Service\Label\Storage\LabelDataInterface;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
-use GuzzleHttp\Exception\ClientException;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use Predis\Client as PredisClient;
 
 class S3 implements LabelDataInterface, StatsAwareInterface
@@ -23,8 +23,8 @@ class S3 implements LabelDataInterface, StatsAwareInterface
     const STAT_S3 = 'orderlabel.storage.s3.ou-%d.%s.%s';
     const STAT_CACHE = 'orderlabel.storage.cache.ou-%d.%s.%s';
 
-    /** @var S3Client */
-    protected $s3Client;
+    /** @var S3Adapter */
+    protected $fileStorage;
     /** @var PredisClient */
     protected $predisClient;
 
@@ -33,9 +33,10 @@ class S3 implements LabelDataInterface, StatsAwareInterface
         self::TYPE_IMAGE    => 'png',
     ];
 
-    public function __construct(S3Client $s3Client, PredisClient $predisClient)
+    public function __construct(S3Adapter $s3FileStorage, PredisClient $predisClient)
     {
-        $this->s3Client = $s3Client;
+        $this->fileStorage = $s3FileStorage;
+        $this->fileStorage->setLocation(static::BUCKET);
         $this->predisClient = $predisClient;
     }
 
@@ -64,21 +65,13 @@ class S3 implements LabelDataInterface, StatsAwareInterface
             return $cached;
         }
 
+        $extension = $this->typeExtensions[$type];
         try {
-            $extension = $this->typeExtensions[$type];
-            $result = $this->s3Client->getObject([
-                'Bucket' => static::BUCKET,
-                'Key'    => $this->getS3Key($ouId, $id, $extension),
-            ]);
-            $data = (string)$result['Body'];
-            $this->saveToCache($id, $ouId, $data, $type);
+            $result = $this->fileStorage->read($this->getS3Key($ouId, $id, $extension));
+            $this->saveToCache($id, $ouId, $result->getBody(), $type);
             $this->statsIncrement(static::STAT_S3, [$ouId, 'fetch', $type]);
-            return $data;
-
-        } catch (S3Exception $e) {
-            if ($e->getStatusCode() != StatusCode::NOT_FOUND) {
-                throw $e;
-            }
+            return $result->getBody();
+        } catch (NotFound $e) {
             return null;
         }
     }
@@ -114,16 +107,9 @@ class S3 implements LabelDataInterface, StatsAwareInterface
     {
         try {
             $extension = $this->typeExtensions[$type];
-            $this->s3Client->deleteObject([
-                'Bucket' => static::BUCKET,
-                'Key'    => $this->getS3Key($ouId, $id, $extension),
-            ]);
+            $this->fileStorage->delete($this->getS3Key($ouId, $id, $extension));
             $this->statsIncrement(static::STAT_S3, [$ouId, 'remove', $type]);
-
-        } catch (S3Exception $e) {
-            if ($e->getStatusCode() != StatusCode::NOT_FOUND) {
-                throw $e;
-            }
+        } catch (NotFound $e) {
             // No-op
         }
         $this->removeHash($id, $type);
@@ -172,11 +158,11 @@ class S3 implements LabelDataInterface, StatsAwareInterface
             return $this;
         }
         $extension = $this->typeExtensions[$type];
-        $result = $this->s3Client->putObject([
-            'Bucket' => static::BUCKET,
-            'Key'    => $this->getS3Key($ouId, $id, $extension),
-            'Body'   => $data
-        ]);
+
+        $this->fileStorage->write(
+            $this->getS3Key($ouId, $id, $extension), $data
+        );
+
         $this->statsIncrement(static::STAT_S3, [$ouId, 'save', $type]);
         $this->saveToCache($id, $ouId, $data, $type);
         return $this;
