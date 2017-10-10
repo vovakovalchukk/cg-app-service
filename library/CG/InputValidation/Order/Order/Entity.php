@@ -9,7 +9,6 @@ use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
-use Zend\Validator\Callback;
 use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
@@ -413,6 +412,16 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
+            'exchangeRate' => [
+                'name'       => 'exchangeRate',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['name' => 'exchangeRate'])]
+            ],
+            'exchangeRateCurrencyCode' => array(
+                'name'       => 'exchangeRateCurrencyCode',
+                'required'   => false,
+                'validators' => [(new InArray())->setHaystack(CurrencyCode::getCurrencyCodes())]
+            ),
         );
     }
 

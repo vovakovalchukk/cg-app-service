@@ -408,6 +408,16 @@ use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
 
+// Ekm\Registration
+use CG\Ekm\Registration\Service as EkmRegistrationService;
+use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
+use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
+use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
+use CG\Ekm\Registration\Service as EkmRegistrationServiceService;
+use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
+use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
+use CG\Stdlib\Sites;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1578,6 +1588,34 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
+            EkmRegistrationDb::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => EkmRegistrationMapper::class
+                ]
+            ],
+            EkmRegistrationService::class => [
+                'parameters' => [
+                    'repository' => EkmRegistrationDb::class,
+                ]
+            ],
+            EkmRegistrationController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            EkmRegistrationCollectionController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            Sites::class => [
+                'parameters' => [
+                    'config' => 'config'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1625,7 +1663,8 @@ $config = array(
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
-                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class
+                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
+                EkmRegistrationStorage::class => EkmRegistrationDb::class
             ]
         )
     )
