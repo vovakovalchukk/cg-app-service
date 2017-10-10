@@ -1,9 +1,7 @@
 <?php
 namespace CG\Order\Service\Label\Storage\LabelData;
 
-use Aws\S3\Exception\S3Exception;
 use CG\FileStorage\S3\Adapter as S3Adapter;
-use CG\Http\StatusCode;
 use CG\Order\Service\Label\Storage\LabelDataInterface;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
