@@ -34,7 +34,6 @@ class S3 implements LabelDataInterface, StatsAwareInterface
     public function __construct(S3Adapter $s3FileStorage, PredisClient $predisClient)
     {
         $this->fileStorage = $s3FileStorage;
-        $this->fileStorage->setLocation(static::BUCKET);
         $this->predisClient = $predisClient;
     }
 

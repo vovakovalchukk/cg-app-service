@@ -143,6 +143,7 @@ use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
 use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
 use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
 use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
+use CG\FileStorage\S3\Adapter as S3LabelDataAdapter;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -814,9 +815,15 @@ $config = array(
                     'mapper' => LabelMapper::class
                 ]
             ],
+            S3LabelDataAdapter::class => [
+                'parameter' => [
+                    'location' => function () { return LabelLabelDataS3Storage::BUCKET; }
+                ]
+            ],
             LabelLabelDataS3Storage::class => [
                 'parameter' => [
-                    'predisClient' => 'unreliable_redis',
+                    's3FileStorage' => S3LabelDataAdapter::class,
+                    'predisClient' => 'unreliable_redis'
                 ]
             ],
             LabelMetaPlusLabelDataStorage::class => [
