@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fce78ec0b6f35a2411c244e0b5e7592e",
+    "content-hash": "264a07987d865cb44f9b176a7fbdab6e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1594,16 +1594,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.31.0",
+            "version": "dev-CGIV-8945-order-count-fix",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a023fb18e41696058c25e9934bb8ac5c14c14142"
+                "reference": "150b00bb8b1c613c6199e799bc9d3af0f84143e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.31.0-80e7bd.zip",
-                "reference": "a023fb18e41696058c25e9934bb8ac5c14c14142",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8945-order-count-fix-3cd519.zip",
+                "reference": "150b00bb8b1c613c6199e799bc9d3af0f84143e5",
                 "shasum": null
             },
             "require": {
@@ -1675,7 +1675,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-10T15:17:44+00:00"
+            "time": "2017-10-11T14:05:03+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10087,12 +10087,19 @@
             "alias_normalized": "0.0.0.0",
             "version": "dev-CGIV-8930-cleanup-s3-temp-files",
             "package": "channelgrabber/file-storage"
+        },
+        {
+            "alias": "1.31.1",
+            "alias_normalized": "1.31.1.0",
+            "version": "dev-CGIV-8945-order-count-fix",
+            "package": "channelgrabber/order"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/file-storage": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
