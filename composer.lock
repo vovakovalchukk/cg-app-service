@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "62e062f6d70addd8dd8d27b899ace213",
+    "content-hash": "25c22bdc4fe815869df2202c23f63108",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1060,21 +1060,21 @@
         },
         {
             "name": "channelgrabber/feature-flags",
-            "version": "1.0.2",
+            "version": "dev-CGIV-8255-StockLocationWrapper",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-feature-flags.git",
-                "reference": "887b10d733da420acf1123dc7d7abe11a773d9bc"
+                "reference": "f3e7fd2a1c59329644c14cd94bbb93ea3e1a478e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-feature-flags-1.0.2-b70068.zip",
-                "reference": "887b10d733da420acf1123dc7d7abe11a773d9bc",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-feature-flags-dev-CGIV-8255-StockLocationWrapper-9c6317.zip",
+                "reference": "f3e7fd2a1c59329644c14cd94bbb93ea3e1a478e",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/user": "^1.20.6",
+                "channelgrabber/permission": "^1.0.0",
                 "opensoft/rollout": "^2.2",
                 "predis/predis": "^1.1"
             },
@@ -1089,7 +1089,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-27T08:30:43+00:00"
+            "time": "2017-10-17T11:26:42+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -10049,6 +10049,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.0.3",
+            "alias_normalized": "1.0.3.0",
+            "version": "dev-CGIV-8255-StockLocationWrapper",
+            "package": "channelgrabber/feature-flags"
+        },
+        {
             "alias": "1.9.7",
             "alias_normalized": "1.9.7.0",
             "version": "dev-CGIV-8255-StockLocationWrapper",
@@ -10070,6 +10076,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/feature-flags": 20,
         "channelgrabber/product": 20,
         "channelgrabber/stock": 20,
         "channelgrabber/stock-locking": 20,

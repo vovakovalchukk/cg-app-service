@@ -1,6 +1,8 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
+use CG\FeatureFlags\Feature;
+use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
 use CG\Product\Link\Collection as ProductLinks;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Filter as ProductLinkFilter;
@@ -30,11 +32,17 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected $locationStorage;
     /** @var ProductLinkStorage $productLinkStorage */
     protected $productLinkStorage;
+    /** @var FeatureFlagsService $featureFlagsService */
+    protected $featureFlagsService;
 
-    public function __construct(StorageInterface $locationStorage, ProductLinkStorage $productLinkStorage)
-    {
+    public function __construct(
+        StorageInterface $locationStorage,
+        ProductLinkStorage $productLinkStorage,
+        FeatureFlagsService $featureFlagsService
+    ) {
         $this->locationStorage = $locationStorage;
         $this->productLinkStorage = $productLinkStorage;
+        $this->featureFlagsService = $featureFlagsService;
     }
 
     public function fetch($id)
@@ -111,6 +119,10 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
      */
     protected function getProductLink(StockLocation $stockLocation)
     {
+        if (!$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stockLocation)) {
+            throw new NotFound(sprintf('Product links are disabled for ou %d', $stockLocation->getOrganisationUnitId()));
+        }
+
         if (($stockLocation instanceof TypedEntity) && $stockLocation->getType() != TypedEntity::TYPE_LINKED) {
             throw new NotFound(
                 sprintf(
@@ -127,8 +139,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 ->setOrganisationUnitId([$stockLocation->getOrganisationUnitId()])
                 ->setProductSku([$stockLocation->getSku()])
         );
-        $productLink->rewind();
-        return $productLink->current();
+        return $productLink->getFirst();
     }
 
     /**
@@ -222,7 +233,10 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
         /** @var StockLocation $stockLocation */
         foreach ($stockLocations as $stockLocation) {
-            if (($stockLocation instanceof TypedEntity) && $stockLocation->getType() != TypedEntity::TYPE_LINKED) {
+            if (
+                !$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stockLocation)
+                || (($stockLocation instanceof TypedEntity) && $stockLocation->getType() != TypedEntity::TYPE_LINKED)
+            ) {
                 continue;
             }
             $ouSkuMap[] = $stockLocation->getOrganisationUnitId() . '-' . $stockLocation->getSku();
