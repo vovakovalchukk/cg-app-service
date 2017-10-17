@@ -1064,17 +1064,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-feature-flags.git",
-                "reference": "f3e7fd2a1c59329644c14cd94bbb93ea3e1a478e"
+                "reference": "ac9d30911692c28e005b80af470e6d8859f2f5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-feature-flags-dev-CGIV-8255-StockLocationWrapper-9c6317.zip",
-                "reference": "f3e7fd2a1c59329644c14cd94bbb93ea3e1a478e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-feature-flags-dev-CGIV-8255-StockLocationWrapper-3607cb.zip",
+                "reference": "ac9d30911692c28e005b80af470e6d8859f2f5ac",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/permission": "^1.0.0",
+                "channelgrabber/user": "^1.20.6",
                 "opensoft/rollout": "^2.2",
                 "predis/predis": "^1.1"
             },
@@ -1089,7 +1090,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-17T11:26:42+00:00"
+            "time": "2017-10-17T14:26:24+00:00"
         },
         {
             "name": "channelgrabber/gearman",
