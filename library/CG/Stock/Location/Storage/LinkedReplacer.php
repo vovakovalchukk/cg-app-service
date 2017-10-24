@@ -7,6 +7,8 @@ use CG\Product\Link\Collection as ProductLinks;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Filter as ProductLinkFilter;
 use CG\Product\Link\StorageInterface as ProductLinkStorage;
+use CG\Stdlib\CollectionInterface;
+use CG\Stdlib\Exception\Runtime\MixedResultsException;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
@@ -82,6 +84,35 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             }
         }
         return $location;
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    public function saveCollection(CollectionInterface $collection)
+    {
+        $savedCollection = new Collection(
+            $collection->getEntityClass(),
+            $collection->getSourceDescription(),
+            $collection->getSourceFilters()
+        );
+        $exceptions = [];
+
+        foreach ($collection as $location) {
+            try {
+                $savedCollection->attach($this->save($location));
+            } catch (\Exception $exception) {
+                $exceptions[] = $exception;
+            }
+        }
+
+        if (empty($exception)) {
+            return $savedCollection;
+        }
+
+        throw (new MixedResultsException('Failed to save all linked stock locations'))
+            ->setSuccessfulCollection($savedCollection)
+            ->setFailureExceptions($exceptions);
     }
 
     public function fetchCollectionByStockIds(array $stockIds)
