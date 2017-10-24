@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a12dfa92bc613ad6e427a49061321dc",
+    "content-hash": "4ce1098fda2cc70a082028db7a7b9964",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1092,6 +1092,40 @@
             "time": "2017-09-27T08:30:43+00:00"
         },
         {
+            "name": "channelgrabber/file-storage",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-file-storage.git",
+                "reference": "55504d9b46fe07a44c0e1fdaebdba7413d923875"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-file-storage-1.0.0-cce2aa.zip",
+                "reference": "55504d9b46fe07a44c0e1fdaebdba7413d923875",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\FileStorage\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Eduard Busuioc",
+                    "email": "eduard.busuioc@channelgrabber.com"
+                }
+            ],
+            "description": "Handles the interaction with file storages",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2017-10-10T15:58:25+00:00"
+        },
+        {
             "name": "channelgrabber/gearman",
             "version": "1.2.29",
             "source": {
@@ -1560,16 +1594,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.30.0",
+            "version": "1.33.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "52d5eb51857bc07e882d29350a5d42821566c4b5"
+                "reference": "a6c2883cd0c2a97740f0d17555e85aedd4e24f97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.30.0-43a0a9.zip",
-                "reference": "52d5eb51857bc07e882d29350a5d42821566c4b5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.33.0-abc2b7.zip",
+                "reference": "a6c2883cd0c2a97740f0d17555e85aedd4e24f97",
                 "shasum": null
             },
             "require": {
@@ -1641,7 +1675,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-05T11:13:30+00:00"
+            "time": "2017-10-12T11:17:11+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1906,12 +1940,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "fe835748c479d8c04e2f4e213e558e15a682f7c2"
+                "reference": "71b1bfa2c308ca98c7631cb4092b7474f2fe5bb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-7256-LinkedProducts-b2adad.zip",
-                "reference": "fe835748c479d8c04e2f4e213e558e15a682f7c2",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-7256-LinkedProducts-d7be60.zip",
+                "reference": "71b1bfa2c308ca98c7631cb4092b7474f2fe5bb1",
                 "shasum": null
             },
             "require": {
@@ -1961,7 +1995,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-06T13:32:15+00:00"
+            "time": "2017-10-24T09:56:46+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
