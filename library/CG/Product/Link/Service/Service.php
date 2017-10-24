@@ -42,43 +42,43 @@ class Service extends BaseService
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
     }
 
-    public function remove($entity)
+    public function remove($productLink)
     {
-        parent::remove($entity);
-        $this->updateRelatedStockLocationsFromRemove($entity);
+        parent::remove($productLink);
+        $this->updateRelatedStockLocationsFromRemove($productLink);
     }
 
     /**
-     * @param ProductLink $entity
+     * @param ProductLink $productLink
      */
-    public function save($entity)
+    public function save($productLink)
     {
         try {
-            $currentEntity = $this->fetch($entity->getId());
+            $currentEntity = $this->fetch($productLink->getId());
         } catch (NotFound $exception) {
             $currentEntity = null;
         }
 
-        $this->checkForRecursion($entity);
-        $savedEntity = parent::save($entity);
+        $this->checkForRecursion($productLink);
+        $savedEntity = parent::save($productLink);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
 
-    protected function checkForRecursion(ProductLink $entity, array $productSkuMap = [])
+    protected function checkForRecursion(ProductLink $productLink, array $productSkuMap = [])
     {
-        $productSkuMap[strtolower($entity->getProductSku())] = true;
+        $productSkuMap[strtolower($productLink->getProductSku())] = true;
 
         $ouIdProductSku = [];
-        foreach (array_keys($entity->getStockSkuMap()) as $stockSku) {
+        foreach (array_keys($productLink->getStockSkuMap()) as $stockSku) {
             $productSku = strtolower($stockSku);
             if (isset($productSkuMap[$productSku])) {
                 throw new RecursionException(
-                    sprintf(static::RECURSION_MSG, $stockSku, $entity->getProductSku())
+                    sprintf(static::RECURSION_MSG, $stockSku, $productLink->getProductSku())
                 );
             }
             $productSkuMap[$productSku] = true;
-            $ouIdProductSku[] = $entity->getOrganisationUnitId() . '-' . $stockSku;
+            $ouIdProductSku[] = $productLink->getOrganisationUnitId() . '-' . $stockSku;
         }
 
         if (empty($ouIdProductSku)) {
@@ -99,9 +99,9 @@ class Service extends BaseService
         }
     }
 
-    protected function updateRelatedStockLocationsFromRemove(ProductLink $entity)
+    protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)
     {
-        $this->updateRelatedStockLocations($entity, TypedStockLocation::TYPE_REAL);
+        $this->updateRelatedStockLocations($productLink, TypedStockLocation::TYPE_REAL);
     }
 
     protected function updateRelatedStockLocationsFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)
@@ -112,12 +112,12 @@ class Service extends BaseService
         $this->updateRelatedStockLocations($savedEntity, TypedStockLocation::TYPE_LINKED);
     }
 
-    protected function updateRelatedStockLocations(ProductLink $entity, $type)
+    protected function updateRelatedStockLocations(ProductLink $productLink, $type)
     {
         try {
             $stockLocations = $this->stockLocationService->fetchCollectionByFilter(
                 (new StockLocationFilter('all', 1))
-                    ->setOuIdSku([$entity->getOrganisationUnitId() . '-' . $entity->getProductSku()])
+                    ->setOuIdSku([$productLink->getOrganisationUnitId() . '-' . $productLink->getProductSku()])
             );
         } catch (NotFound $exception) {
             // No stock locations to update
