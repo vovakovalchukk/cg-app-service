@@ -20,6 +20,8 @@ class Db extends DbAbstract implements StorageInterface
 {
     use FilterArrayValuesToOrdLikesTrait;
 
+    const RECURSION_MSG = 'Circular dependency detected. The product you are trying to link (SKU: %s) is already used to calculate stock for another product that you are trying to link this product to (SKU: %s).';
+
     public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
     {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
@@ -78,8 +80,17 @@ class Db extends DbAbstract implements StorageInterface
 
             $paths = [];
             foreach ($this->getLinkPaths($childId) as $linkPath) {
+                $linkIds = [$linkId => true];
                 $path[] = ['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => ($order = 0)];
+
                 foreach ($linkPath as $linkNode) {
+                    if (isset($linkIds[$linkNode['from']])) {
+                        throw new RecursionException(
+                            sprintf(static::RECURSION_MSG, $entity->getProductSku(), $this->getLinkSku($linkNode['from']))
+                        );
+                    }
+
+                    $linkIds[$linkNode['from']] = true;
                     $path[] = [
                         'from' => $linkNode['from'],
                         'to' => $linkNode['to'],
@@ -297,6 +308,16 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         return $results->current()['linkId'];
+    }
+
+    protected function getLinkSku($linkId)
+    {
+        $select = $this->writeSql->select('productLink')->columns(['sku'])->where(['linkId' => $linkId]);
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['sku'];
+        }
+        return '';
     }
 
     protected function getLinkPathIdMap($linkId, $lookup)
