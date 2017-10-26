@@ -144,7 +144,9 @@ class Service extends BaseService
         $updater = new class()
         {
             use LogTrait;
-            use SaveCollectionHandleErrorsTrait;
+            use SaveCollectionHandleErrorsTrait {
+                saveCollectionHandleErrors as public;
+            }
 
             /**
              * @param StockLocation $fetchedEntity
