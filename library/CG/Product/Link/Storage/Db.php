@@ -100,6 +100,10 @@ class Db extends DbAbstract implements StorageInterface
             }
         }
 
+        $expandedStock = [$linkId => []];
+        $this->appendExpandedStock($expandedStock);
+        $entity->setExpandedSkuMap($expandedStock[$linkId]['expandedStock'] ?? []);
+
         return $entity;
     }
 
@@ -135,7 +139,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         $nextPathId = new Expression('? + 1', ['paths.pathId'], [Expression::TYPE_IDENTIFIER]);
 
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select(['paths' => 'productLinkPath'])
             ->columns(['nextPathId' => $nextPathId])
             ->order('nextPathId')
@@ -143,10 +147,10 @@ class Db extends DbAbstract implements StorageInterface
 
         $select->where->expression(
             'NOT EXISTS (?)',
-            [$this->readSql->select('productLinkPath')->columns(['pathId'])->where(['pathId' => $nextPathId])]
+            [$this->writeSql->select('productLinkPath')->columns(['pathId'])->where(['pathId' => $nextPathId])]
         );
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         foreach ($results as $result) {
             return $result['nextPathId'];
         }
@@ -247,7 +251,7 @@ class Db extends DbAbstract implements StorageInterface
             return;
         }
 
-        $expanded = $this->readSql
+        $expanded = $this->writeSql
             ->select(['result' => 'productLinkPath'])
             ->columns(['pathId' => 'pathId', 'order' => new Expression('MAX(?)', ['result.order'], [Expression::TYPE_IDENTIFIER])])
             ->join(
@@ -258,7 +262,7 @@ class Db extends DbAbstract implements StorageInterface
             ->where(['lookup.from' => array_keys($productLinkArrays), 'lookup.order' => 0])
             ->group(['lookup.from', 'result.pathId']);
 
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select(['path' => 'productLinkPath'])
             ->columns(['quantity'])
             ->join(
@@ -272,7 +276,7 @@ class Db extends DbAbstract implements StorageInterface
                 ['linkId' => 'from']
             );
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         foreach ($results as $result) {
             if (isset($productLinkArrays[$result['linkId']])) {
                 $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] = $result['quantity'];
@@ -282,12 +286,12 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getLinkId($ouId, $sku)
     {
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select('productLink')
             ->columns(['linkId'])
             ->where(['organisationUnitId' => $ouId, 'sku' => $sku]);
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             throw new NotFound('Unable to find matching link');
         }
@@ -297,12 +301,12 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getLinkPathIdMap($linkId, $lookup)
     {
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select('productLinkPath')
             ->columns(['pathId', 'quantity', 'order'])
             ->where([$lookup => $linkId]);
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             return [];
         }
@@ -316,17 +320,17 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getLinkToCount($linkId, $lookup)
     {
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select('productLinkPath')
             ->where([$lookup => $linkId]);
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         return $results->count();
     }
 
     protected function getLinkPaths($linkId)
     {
-        $select = $this->readSql
+        $select = $this->writeSql
             ->select(['result' => 'productLinkPath'])
             ->columns(['pathId', 'from', 'to', 'quantity'])
             ->join(
@@ -337,7 +341,7 @@ class Db extends DbAbstract implements StorageInterface
             ->where(['lookup.from' => $linkId, 'lookup.order' => 0])
             ->order(['result.pathId', 'result.order']);
 
-        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             return [];
         }
