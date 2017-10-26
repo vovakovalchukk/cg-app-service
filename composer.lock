@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "08ee9a79ea838649ccc541f13b207f58",
+    "content-hash": "38b75b7eebd3c9287f90db21bb64bd8d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1412,16 +1412,16 @@
         },
         {
             "name": "channelgrabber/locking",
-            "version": "1.1.2",
+            "version": "dev-CGIV-8905-condense_locking_stats",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locking.git",
-                "reference": "0fd65d25c4e6d1bf6e88104f6a59bbdcbcfbfe00"
+                "reference": "586e5991fd0f379375dd28fd81a73289222ad971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locking-1.1.2-46058f.zip",
-                "reference": "0fd65d25c4e6d1bf6e88104f6a59bbdcbcfbfe00",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locking-dev-CGIV-8905-condense_locking_stats-a07931.zip",
+                "reference": "586e5991fd0f379375dd28fd81a73289222ad971",
                 "shasum": null
             },
             "require": {
@@ -1448,7 +1448,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-12-16T08:36:37+00:00"
+            "time": "2017-10-26T08:36:01+00:00"
         },
         {
             "name": "channelgrabber/log",
@@ -10081,10 +10081,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.1.3",
+            "alias_normalized": "1.1.3.0",
+            "version": "dev-CGIV-8905-condense_locking_stats",
+            "package": "channelgrabber/locking"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/locking": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
