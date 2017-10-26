@@ -71,6 +71,9 @@ class Db extends DbAbstract implements StorageInterface
             $entity->setNewlyInserted(true);
         }
 
+        $paths = [];
+        $edgePaths = $this->getLinkPathIdMap($linkId, 'to');
+
         foreach ($entity->getStockSkuMap() as $sku => $qty) {
             try {
                 $childId = $this->getLinkId($entity->getOrganisationUnitId(), $sku);
@@ -78,7 +81,7 @@ class Db extends DbAbstract implements StorageInterface
                 $childId = $this->insertLink($entity->getOrganisationUnitId(), $sku);
             }
 
-            $paths = [];
+            $newPaths = [];
             foreach ($this->getLinkPaths($childId) as $linkPath) {
                 $linkIds = [$linkId => true];
                 $path[] = ['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => ($order = 0)];
@@ -98,16 +101,34 @@ class Db extends DbAbstract implements StorageInterface
                         'order' => ++$order
                     ];
                 }
+                $newPaths[] = $path;
+            }
+
+            if (empty($newPaths)) {
+                $newPaths[] = [['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => 0]];
+            }
+
+            foreach ($newPaths as $path) {
+                $this->insertLinkPath($path);
                 $paths[] = $path;
             }
+        }
 
-            if (empty($paths)) {
-                $paths[] = [['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => 0]];
-            }
+        foreach ($edgePaths as $pathId => $edge) {
+            $edgePath = $this->getLinkPathIdMap($pathId, 'pathId');
+            $this->removePath($pathId);
 
             foreach ($paths as $path) {
-                $this->appendLinkPath($linkId, $path);
-                $this->insertLinkPath($path);
+                $this->insertLinkPath(
+                    array_merge($edgePath, array_map(
+                        function($path) use($edge) {
+                            $path['quantity'] *= $edge['quantity'];
+                            $path['order'] += $edge['order'] + 1;
+                            return $path;
+                        },
+                        $path
+                    ))
+                );
             }
         }
 
@@ -131,18 +152,6 @@ class Db extends DbAbstract implements StorageInterface
         foreach ($paths as $path) {
             $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $path);
             $this->writeSql->prepareStatementForSqlObject($insert)->execute();
-        }
-    }
-
-    protected function appendLinkPath($linkId, array $paths)
-    {
-        foreach ($this->getLinkPathIdMap($linkId, 'to') as $pathId => $map) {
-            foreach ($paths as $path) {
-                $path['quantity'] *= $map['quantity'];
-                $path['order'] += $map['order'] + 1;
-                $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $path);
-                $this->writeSql->prepareStatementForSqlObject($insert)->execute();
-            }
         }
     }
 
@@ -189,17 +198,43 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function removeLinkPaths($linkId)
     {
-        $pathIdOrderMap = $this->getLinkPathIdMap($linkId, 'from');
-        if (empty($pathIdOrderMap)) {
+        $linkIdMap = $this->getLinkPathIdMap($linkId, 'from');
+        if (empty($linkIdMap)) {
             return;
         }
 
         $delete = $this->getDelete('productLinkPath');
-        foreach ($pathIdOrderMap as $pathId => $map) {
+        foreach ($linkIdMap as $pathId => $map) {
             $delete->where->orPredicate(
                 (new Where())->equalTo('pathId', $pathId)->greaterThanOrEqualTo('order', $map['order'])
             );
         }
+        $this->writeSql->prepareStatementForSqlObject($delete)->execute();
+
+        $duplicateLinkIdMap = $this->getLinkPathIdMap($linkId, 'to');
+        if (empty($duplicateLinkIdMap)) {
+            return;
+        }
+
+        $duplicates = [];
+        foreach ($duplicateLinkIdMap as $pathId => $map) {
+            $id = $map['from'] . '-' . $map['order'];
+            if (!isset($duplicates[$id])) {
+                $duplicates[$id] = [];
+            } else {
+                $duplicates[$id][] = $pathId;
+            }
+        }
+
+        $duplicates = array_unique(array_merge(...array_values($duplicates)));
+        if (!empty($duplicates)) {
+            $this->removePath(...$duplicates);
+        }
+    }
+
+    protected function removePath(...$pathIds)
+    {
+        $delete = $this->getDelete('productLinkPath')->where(['pathId' => $pathIds]);
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
     }
 
@@ -289,9 +324,15 @@ class Db extends DbAbstract implements StorageInterface
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         foreach ($results as $result) {
-            if (isset($productLinkArrays[$result['linkId']])) {
-                $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] = $result['quantity'];
+            if (!isset($productLinkArrays[$result['linkId']])) {
+                continue;
             }
+
+            if (!isset($productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']])) {
+                $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] = 0;
+            }
+
+            $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] += $result['quantity'];
         }
     }
 
@@ -320,12 +361,12 @@ class Db extends DbAbstract implements StorageInterface
         return '';
     }
 
-    protected function getLinkPathIdMap($linkId, $lookup)
+    protected function getLinkPathIdMap($id, $lookup)
     {
         $select = $this->writeSql
             ->select('productLinkPath')
-            ->columns(['pathId', 'quantity', 'order'])
-            ->where([$lookup => $linkId]);
+            ->columns(['pathId', 'from', 'to', 'quantity', 'order'])
+            ->where([$lookup => $id]);
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
@@ -334,7 +375,12 @@ class Db extends DbAbstract implements StorageInterface
 
         $pathIdOrderMap = [];
         foreach ($results as $result) {
-            $pathIdOrderMap[$result['pathId']] = ['quantity' => $result['quantity'], 'order' => $result['order']];
+            $pathIdOrderMap[$result['pathId']] = [
+                'from' => $result['from'],
+                'to' => $result['to'],
+                'quantity' => $result['quantity'],
+                'order' => $result['order'],
+            ];
         }
         return $pathIdOrderMap;
     }
