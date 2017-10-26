@@ -39,15 +39,20 @@ class Db extends DbAbstract implements StorageInterface
             throw new NotFound(sprintf('ProductLink not found with id %s', $id));
         }
 
-        $array = false;
+        $linkId = null;
+        $array = null;
+
         foreach ($results as $data) {
-            if (!$array) {
+            if (!is_array($array)) {
+                $linkId = $data['id'];
                 $array = $this->toArray($data);
             } else {
                 $this->appendStockRow($array, $data);
             }
         }
 
+        $expandedStock = [$linkId => &$array];
+        $this->appendExpandedStock($expandedStock);
         return $this->mapper->fromArray($array);
     }
 
@@ -209,6 +214,7 @@ class Db extends DbAbstract implements StorageInterface
                 $this->appendStockRow($map[$id], $data);
             }
         }
+        $this->appendExpandedStock($map);
 
         $collection = new Collection(ProductLink::class, __FUNCTION__, $filter->toArray());
         $collection->setTotal(count($map));
@@ -225,13 +231,53 @@ class Db extends DbAbstract implements StorageInterface
         return [
             'organisationUnitId' => $data['organisationUnitId'],
             'sku' => $data['productSku'],
-            'stock' => [$data['stockSku'] => $data['quantity']]
+            'stock' => [$data['stockSku'] => $data['quantity']],
+            'expandedStock' => [],
         ];
     }
 
     protected function appendStockRow(array &$array, array $data)
     {
         $array['stock'][$data['stockSku']] = $data['quantity'];
+    }
+
+    protected function appendExpandedStock(array &$productLinkArrays)
+    {
+        if (empty($productLinkArrays)) {
+            return;
+        }
+
+        $expanded = $this->readSql
+            ->select(['result' => 'productLinkPath'])
+            ->columns(['pathId' => 'pathId', 'order' => new Expression('MAX(?)', ['result.order'], [Expression::TYPE_IDENTIFIER])])
+            ->join(
+                ['lookup' => 'productLinkPath'],
+                'result.pathId = lookup.pathId',
+                ['from']
+            )
+            ->where(['lookup.from' => array_keys($productLinkArrays), 'lookup.order' => 0])
+            ->group(['lookup.from', 'result.pathId']);
+
+        $select = $this->readSql
+            ->select(['path' => 'productLinkPath'])
+            ->columns(['quantity'])
+            ->join(
+                ['link' => 'productLink'],
+                'path.to = link.linkId',
+                ['sku']
+            )
+            ->join(
+                ['expanded' => $expanded],
+                'path.pathId = expanded.pathId AND path.order = expanded.order',
+                ['linkId' => 'from']
+            );
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            if (isset($productLinkArrays[$result['linkId']])) {
+                $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] = $result['quantity'];
+            }
+        }
     }
 
     protected function getLinkId($ouId, $sku)
