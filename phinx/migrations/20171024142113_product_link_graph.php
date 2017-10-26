@@ -56,6 +56,8 @@ class ProductLinkGraph extends AbstractMigration
             ->addColumn('quantity', 'integer', ['null' => false, 'signed' => false])
             ->addColumn('order', 'integer', ['null' => false, 'signed' => false])
             ->addIndex(['pathId', 'order'], ['unique' => true])
+            ->addIndex(['from', 'order'])
+            ->addIndex(['to', 'order'])
             ->addForeignKey('from', 'productLink', 'linkId', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::CASCADE])
             ->addForeignKey('to', 'productLink', 'linkId', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::CASCADE])
             ->create();
