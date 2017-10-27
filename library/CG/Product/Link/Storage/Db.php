@@ -146,28 +146,35 @@ class Db extends DbAbstract implements StorageInterface
         return $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
     }
 
-    protected function insertLinkPath(array $paths)
+    protected function insertLinkPath(array $path)
     {
         $pathId = $this->getNextPathId();
-        foreach ($paths as $path) {
-            $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $path);
+        foreach ($path as $node) {
+            $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $node);
             $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         }
     }
 
     protected function getNextPathId()
     {
-        $nextPathId = new Expression('? + 1', ['paths.pathId'], [Expression::TYPE_IDENTIFIER]);
-
         $select = $this->writeSql
-            ->select(['paths' => 'productLinkPath'])
-            ->columns(['nextPathId' => $nextPathId])
-            ->order('nextPathId')
-            ->limit(1);
+            ->select('productLinkPath')
+            ->columns(['nextPathId' => new Expression('? + 1', ['pathId'], [Expression::TYPE_IDENTIFIER])])
+            ->combine(
+                $this->writeSql->select()->columns(['nextPathId' => new Expression('?', [1])]),
+                Select::COMBINE_UNION,
+                Select::QUANTIFIER_ALL
+            );
 
+        $select = $this->writeSql->select(['missingPaths' => $select])->order('missingPaths.nextPathId')->limit(1);
         $select->where->expression(
             'NOT EXISTS (?)',
-            [$this->writeSql->select('productLinkPath')->columns(['pathId'])->where(['pathId' => $nextPathId])]
+            [
+                $this->writeSql
+                    ->select('productLinkPath')
+                    ->columns(['pathId'])
+                    ->where((new Where())->equalTo('pathId', 'missingPaths.nextPathId', Where::TYPE_IDENTIFIER, Where::TYPE_IDENTIFIER))
+            ]
         );
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
