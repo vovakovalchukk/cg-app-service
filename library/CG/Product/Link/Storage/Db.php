@@ -257,7 +257,7 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetchCollectionByFilter(Filter $filter)
     {
-        $results = $this->readSql->prepareStatementForSqlObject($this->getFilteredSelect($filter))->execute();
+        $results = $this->readSql->prepareStatementForSqlObject($this->getFilteredSelect($filter, $total))->execute();
         if ($results->count() == 0) {
             throw new NotFound('No ProductLinks found matching filter');
         }
@@ -274,7 +274,7 @@ class Db extends DbAbstract implements StorageInterface
         $this->appendExpandedStock($map);
 
         $collection = new Collection(ProductLink::class, __FUNCTION__, $filter->toArray());
-        $collection->setTotal(count($map));
+        $collection->setTotal($total);
 
         foreach ($map as $array) {
             $collection->attach($this->mapper->fromArray($array));
@@ -451,7 +451,7 @@ class Db extends DbAbstract implements StorageInterface
             );
     }
 
-    protected function getFilteredSelect(Filter $filter)
+    protected function getFilteredSelect(Filter $filter, &$total = null)
     {
         $select = $this->getSelect()->where(['path.order' => 0]);
         $this->buildFilterQuery($select, $filter);
@@ -461,6 +461,7 @@ class Db extends DbAbstract implements StorageInterface
             ->quantifier(Select::QUANTIFIER_DISTINCT)
             ->columns(['id']);
 
+        $total = $this->getTotal($idLookup);
         if (($limit = $filter->getLimit()) !== 'all') {
             $idLookup
                 ->limit($limit)
@@ -478,6 +479,18 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         return $this->getSelect()->where(['path.order' => 0, 'from.linkId' => $linkIds]);
+    }
+
+    protected function getTotal(Select $idLookup): int
+    {
+        $select = clone $idLookup;
+        $select->columns(['count' => new Expression('COUNT(? ?)', [Select::QUANTIFIER_DISTINCT, 'id'], [Expression::TYPE_LITERAL, Expression::TYPE_IDENTIFIER])]);
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['count'];
+        }
+        return 0;
     }
 
     protected function buildFilterQuery(Select $select, Filter $filter)

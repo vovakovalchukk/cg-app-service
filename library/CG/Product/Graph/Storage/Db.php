@@ -50,6 +50,8 @@ class Db implements StorageInterface, LoggerAwareInterface
     public function fetchCollectionByFilter(Filter $filter)
     {
         $linkIdSelect = $this->getLinkIdSelect(...$filter->getOuIdProductSku());
+        $total = $this->getTotal($linkIdSelect);
+
         if (($limit = $filter->getLimit()) !== 'all') {
             $linkIdSelect->limit($limit)->offset(($filter->getPage() - 1) * $limit);
         }
@@ -71,13 +73,25 @@ class Db implements StorageInterface, LoggerAwareInterface
         }
 
         $collection = new Collection(ProductGraph::class, __FUNCTION__, $filter->toArray());
-        $collection->setTotal(count($map));
+        $collection->setTotal($total);
 
         foreach ($map as $array) {
             $collection->attach($this->mapper->fromArray($array));
         }
 
         return $collection;
+    }
+
+    protected function getTotal(Select $linkIdSelect): int
+    {
+        $select = clone $linkIdSelect;
+        $select->columns(['count' => new Expression('COUNT(?)', ['linkId'], [Expression::TYPE_IDENTIFIER])]);
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['count'];
+        }
+        return 0;
     }
 
     protected function toArray($ouIdProductSku): array
