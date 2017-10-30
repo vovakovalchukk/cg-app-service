@@ -35,9 +35,6 @@ use CG\Controllers\ProductGraph\Entity as ProductGraphController;
 use CG\Controllers\ProductGraph\Collection as ProductGraphCollectionController;
 use CG\InputValidation\ProductGraph\Entity as ProductGraphEntityValidation;
 use CG\InputValidation\ProductGraph\Filter as ProductGraphCollectionValidation;
-use CG\Product\Graph\Entity as ProductGraphEntity;
-use CG\Product\Graph\Mapper as ProductGraphMapper;
-use CG\Product\Graph\Service as ProductGraphService;
 
 use CG\Slim\Versioning\Version;
 
