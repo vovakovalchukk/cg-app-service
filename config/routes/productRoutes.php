@@ -209,7 +209,7 @@ return [
             );
         },
         'via' => ['GET', 'OPTIONS'],
-        'name' => 'ProductLinkCollection',
+        'name' => 'ProductGraphCollection',
         'entityRoute' => '/productLink/:productLinkId',
         'validation' => [
             'filterRules' => ProductGraphCollectionValidation::class,
@@ -227,7 +227,7 @@ return [
             );
         },
         'via' => ['GET', 'DELETE', 'OPTIONS'],
-        'name' => 'ProductLinkEntity',
+        'name' => 'ProductGraphEntity',
         'validation' => [
             'dataRules' => ProductGraphEntityValidation::class,
         ],
