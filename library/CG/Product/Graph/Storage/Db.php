@@ -104,7 +104,7 @@ class Db implements StorageInterface, LoggerAwareInterface
         [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
         return [
             'organisationUnitId' => $organisationUnitId,
-            'sku' => $productSku,
+            'sku' => strtolower($productSku),
             'nodes' => [],
         ];
     }

@@ -21,7 +21,9 @@ use CG\Stdlib\Storage\SaveInterface;
 
 class Cache extends CacheAbstract implements StorageInterface, SaveInterface, SaveCollectionInterface, LoggerAwareInterface
 {
-    use FetchTrait;
+    use FetchTrait {
+        fetch as protected fetchTrait;
+    }
     use SaveTrait;
     use RemoveTrait;
     use RemoveByFieldTrait;
@@ -31,6 +33,11 @@ class Cache extends CacheAbstract implements StorageInterface, SaveInterface, Sa
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
+    }
+
+    public function fetch($id)
+    {
+        return $this->fetchTrait(strtolower($id));
     }
 
     public function invalidate($id)
