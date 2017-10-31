@@ -3,6 +3,8 @@ namespace CG\Product\Link\Service;
 
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
+use CG\Product\Graph\Entity as ProductGraph;
+use CG\Product\Graph\StorageInterface as ProductGraphStorage;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
@@ -21,6 +23,8 @@ use CG\Stock\StorageInterface as StockStorage;
 
 class Service extends BaseService
 {
+    /** @var ProductGraphStorage $productGraphStorage */
+    protected $productGraphStorage;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
@@ -31,11 +35,13 @@ class Service extends BaseService
     public function __construct(
         StorageInterface $storage,
         Mapper $mapper,
+        ProductGraphStorage $productGraphStorage,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
         NginxCacheInvalidator $nginxCacheInvalidator
     ) {
         parent::__construct($storage, $mapper);
+        $this->productGraphStorage = $productGraphStorage;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
@@ -43,6 +49,7 @@ class Service extends BaseService
 
     public function remove($productLink)
     {
+        $this->invalidateProductGraphs($productLink);
         parent::remove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
@@ -54,13 +61,34 @@ class Service extends BaseService
     {
         try {
             $currentEntity = $this->fetch($productLink->getId());
+            $this->invalidateProductGraphs($currentEntity);
         } catch (NotFound $exception) {
             $currentEntity = null;
         }
 
         $savedEntity = parent::save($productLink);
+        $this->invalidateProductGraphs($savedEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
+    }
+
+    protected function invalidateProductGraphs(ProductLink $productLink)
+    {
+        try {
+            /** @var ProductGraph $productGraph */
+            $productGraph = $this->productGraphStorage->fetch(
+                $this->generateOuIdSkuForProductLink($productLink)
+            );
+        } catch (NotFound $exception) {
+            // No related graphs to invalidate
+            return;
+        }
+
+        foreach ($productGraph as $sku => $quantity) {
+            $this->productGraphStorage->invalidate(
+                $this->generateOuIdSku($productGraph->getOrganisationUnitId(), $sku)
+            );
+        }
     }
 
     protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)

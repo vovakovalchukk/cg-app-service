@@ -13,6 +13,7 @@ use CG\Product\Graph\Collection;
 use CG\Product\Graph\Filter;
 use CG\Product\Graph\Mapper;
 use CG\Product\Graph\StorageInterface;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
@@ -30,6 +31,17 @@ class Cache extends CacheAbstract implements StorageInterface, SaveInterface, Sa
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
+    }
+
+    public function invalidate($id)
+    {
+        try {
+            $this->remove(
+                $this->fetch($id)
+            );
+        } catch (NotFound $exception) {
+            // Not in cache so can't invalidate
+        }
     }
 
     public function fetchCollectionByFilter(Filter $filter)

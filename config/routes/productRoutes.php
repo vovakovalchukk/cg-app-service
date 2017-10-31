@@ -226,7 +226,7 @@ return [
                 $controller->$method($productGraphId, $app->request()->getBody())
             );
         },
-        'via' => ['GET', 'OPTIONS'],
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
         'name' => 'ProductLinkEntity',
         'validation' => [
             'dataRules' => ProductGraphEntityValidation::class,
