@@ -1,7 +1,8 @@
 <?php
 namespace CG\Product\Link\Service;
 
-use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductGraph as ProductGraphNginxCacheInvalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as ProductStockNginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
 use CG\Product\Graph\Entity as ProductGraph;
 use CG\Product\Graph\StorageInterface as ProductGraphStorage;
@@ -25,26 +26,30 @@ class Service extends BaseService
 {
     /** @var ProductGraphStorage $productGraphStorage */
     protected $productGraphStorage;
+    /** @var ProductGraphNginxCacheInvalidator $productGraphNginxCacheInvalidator */
+    protected $productGraphNginxCacheInvalidator;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
     protected $stockStorage;
-    /** @var NginxCacheInvalidator $nginxCacheInvalidator */
-    protected $nginxCacheInvalidator;
+    /** @var ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator */
+    protected $productStockNginxCacheInvalidator;
 
     public function __construct(
         StorageInterface $storage,
         Mapper $mapper,
         ProductGraphStorage $productGraphStorage,
+        ProductGraphNginxCacheInvalidator $productGraphNginxCacheInvalidator,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
-        NginxCacheInvalidator $nginxCacheInvalidator
+        ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
     ) {
         parent::__construct($storage, $mapper);
         $this->productGraphStorage = $productGraphStorage;
+        $this->productGraphNginxCacheInvalidator = $productGraphNginxCacheInvalidator;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
-        $this->nginxCacheInvalidator = $nginxCacheInvalidator;
+        $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
     }
 
     public function remove($productLink)
@@ -85,9 +90,9 @@ class Service extends BaseService
         }
 
         foreach ($productGraph as $sku => $quantity) {
-            $this->productGraphStorage->invalidate(
-                $this->generateOuIdSku($productGraph->getOrganisationUnitId(), $sku)
-            );
+            $id = $this->generateOuIdSku($productGraph->getOrganisationUnitId(), $sku);
+            $this->productGraphStorage->invalidate($id);
+            $this->productGraphNginxCacheInvalidator->invalidate($id);
         }
     }
 
@@ -188,7 +193,7 @@ class Service extends BaseService
             if (!($stock instanceof Stock)) {
                 continue;
             }
-            $this->nginxCacheInvalidator->invalidateProductsForStockLocation(
+            $this->productStockNginxCacheInvalidator->invalidateProductsForStockLocation(
                 $stockLocation,
                 $stock
             );
