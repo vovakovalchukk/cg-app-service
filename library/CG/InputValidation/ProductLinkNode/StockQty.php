@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\ProductGraph;
+namespace CG\InputValidation\ProductLinkNode;
 
 use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\AbstractValidator;

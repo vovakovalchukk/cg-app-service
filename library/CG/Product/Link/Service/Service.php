@@ -1,15 +1,16 @@
 <?php
 namespace CG\Product\Link\Service;
 
-use CG\CGLib\Nginx\Cache\Invalidator\ProductGraph as ProductGraphNginxCacheInvalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductLink as ProductLinkNginxCacheInvalidator;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as ProductStockNginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
-use CG\Product\Graph\Entity as ProductGraph;
-use CG\Product\Graph\StorageInterface as ProductGraphStorage;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
 use CG\Product\Link\StorageInterface;
+use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
+use CG\Product\LinkNode\Entity as ProductLinkNode;
+use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Collection as StockCollection;
@@ -24,10 +25,12 @@ use CG\Stock\StorageInterface as StockStorage;
 
 class Service extends BaseService
 {
-    /** @var ProductGraphStorage $productGraphStorage */
-    protected $productGraphStorage;
-    /** @var ProductGraphNginxCacheInvalidator $productGraphNginxCacheInvalidator */
-    protected $productGraphNginxCacheInvalidator;
+    /** @var ProductLinkLeafStorage $productLinkLeafStorage */
+    protected $productLinkLeafStorage;
+    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
+    protected $productLinkNodeStorage;
+    /** @var ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator */
+    protected $productLinkNginxCacheInvalidator;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
@@ -38,15 +41,17 @@ class Service extends BaseService
     public function __construct(
         StorageInterface $storage,
         Mapper $mapper,
-        ProductGraphStorage $productGraphStorage,
-        ProductGraphNginxCacheInvalidator $productGraphNginxCacheInvalidator,
+        ProductLinkLeafStorage $productLinkLeafStorage,
+        ProductLinkNodeStorage $productLinkNodeStorage,
+        ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
         ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
     ) {
         parent::__construct($storage, $mapper);
-        $this->productGraphStorage = $productGraphStorage;
-        $this->productGraphNginxCacheInvalidator = $productGraphNginxCacheInvalidator;
+        $this->productLinkLeafStorage = $productLinkLeafStorage;
+        $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->productLinkNginxCacheInvalidator = $productLinkLeafStorage;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
         $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
@@ -54,7 +59,7 @@ class Service extends BaseService
 
     public function remove($productLink)
     {
-        $this->invalidateProductGraphs($productLink);
+        $this->invalidateProductLink($productLink);
         parent::remove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
@@ -66,22 +71,22 @@ class Service extends BaseService
     {
         try {
             $currentEntity = $this->fetch($productLink->getId());
-            $this->invalidateProductGraphs($currentEntity);
+            $this->invalidateProductLink($currentEntity);
         } catch (NotFound $exception) {
             $currentEntity = null;
         }
 
         $savedEntity = parent::save($productLink);
-        $this->invalidateProductGraphs($savedEntity);
+        $this->invalidateProductLink($savedEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
 
-    protected function invalidateProductGraphs(ProductLink $productLink)
+    protected function invalidateProductLink(ProductLink $productLink)
     {
         try {
-            /** @var ProductGraph $productGraph */
-            $productGraph = $this->productGraphStorage->fetch(
+            /** @var ProductLinkNode $productLinkNode */
+            $productLinkNode = $this->productLinkNodeStorage->fetch(
                 $this->generateOuIdSkuForProductLink($productLink)
             );
         } catch (NotFound $exception) {
@@ -89,10 +94,11 @@ class Service extends BaseService
             return;
         }
 
-        foreach ($productGraph as $sku => $quantity) {
-            $id = $this->generateOuIdSku($productGraph->getOrganisationUnitId(), $sku);
-            $this->productGraphStorage->invalidate($id);
-            $this->productGraphNginxCacheInvalidator->invalidate($id);
+        foreach ($productLinkNode as $sku => $quantity) {
+            $id = $this->generateOuIdSku($productLinkNode->getOrganisationUnitId(), $sku);
+            $this->productLinkLeafStorage->invalidate($id);
+            $this->productLinkNodeStorage->invalidate($id);
+            $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
         }
     }
 

@@ -1,6 +1,7 @@
 <?php
-namespace CG\InputValidation\ProductGraph;
+namespace CG\InputValidation\ProductLinkLeaf;
 
+use CG\InputValidation\ProductLink\StockQty;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
@@ -31,10 +32,10 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'nodes' => [
-                'name' => 'nodes',
+            'stock' => [
+                'name' => 'stock',
                 'required' => true,
-                'validators' => [new StockQty(new IntegerValidator(), ['name' =>'nodes'])]
+                'validators' => [new StockQty(new IntegerValidator(), ['name' => 'stock'])]
             ],
         ];
     }

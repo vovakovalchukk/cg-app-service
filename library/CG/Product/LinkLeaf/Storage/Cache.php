@@ -1,5 +1,5 @@
 <?php
-namespace CG\Product\Graph\Storage;
+namespace CG\Product\LinkLeaf\Storage;
 
 use CG\Cache\CacheAbstract;
 use CG\Cache\Storage\CollectionTrait;
@@ -9,10 +9,10 @@ use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
-use CG\Product\Graph\Collection;
-use CG\Product\Graph\Filter;
-use CG\Product\Graph\Mapper;
-use CG\Product\Graph\StorageInterface;
+use CG\Product\LinkLeaf\Collection;
+use CG\Product\LinkLeaf\Filter;
+use CG\Product\LinkLeaf\Mapper;
+use CG\Product\LinkLeaf\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;

@@ -1,10 +1,10 @@
 <?php
-namespace CG\Controllers\ProductGraph;
+namespace CG\Controllers\ProductLinkLeaf;
 
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Http\StatusCode;
 use CG\Permission\Exception as PermissionException;
-use CG\Product\Graph\Service;
+use CG\Product\LinkLeaf\Service;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;

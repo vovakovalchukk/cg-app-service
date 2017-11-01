@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\ProductLink;
+namespace CG\InputValidation\ProductLinkNode;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
@@ -31,10 +31,10 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'stock' => [
-                'name' => 'stock',
+            'nodes' => [
+                'name' => 'nodes',
                 'required' => true,
-                'validators' => [new StockQty(new IntegerValidator(), ['name' => 'stock'])]
+                'validators' => [new StockQty(new IntegerValidator(), ['name' =>'nodes'])]
             ],
         ];
     }

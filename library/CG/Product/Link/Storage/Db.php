@@ -15,6 +15,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use function CG\Stdlib\escapeLikeValue;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -30,31 +31,26 @@ class Db extends DbAbstract implements StorageInterface
     public function fetch($id)
     {
         [$organisationUnitId, $sku] = explode('-', $id, 2);
-        $select = $this->getSelect()->where([
-            'from.organisationUnitId' => $organisationUnitId,
-            'from.sku' => $sku,
-            'path.order' => 0,
-        ]);
+        $select = $this->getSelect()->where(
+            (new Where())
+                ->equalTo('from.organisationUnitId', $organisationUnitId)
+                ->like('from.sku', escapeLikeValue($sku))
+                ->equalTo('path.order', 0)
+        );
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             throw new NotFound(sprintf('ProductLink not found with id %s', $id));
         }
 
-        $linkId = null;
         $array = null;
-
         foreach ($results as $data) {
             if (!is_array($array)) {
-                $linkId = $data['id'];
                 $array = $this->toArray($data);
             } else {
                 $this->appendStockRow($array, $data);
             }
         }
-
-        $expandedStock = [$linkId => &$array];
-        $this->appendExpandedStock($expandedStock);
         return $this->mapper->fromArray($array);
     }
 
@@ -131,11 +127,6 @@ class Db extends DbAbstract implements StorageInterface
                 );
             }
         }
-
-        $expandedStock = [$linkId => []];
-        $this->appendExpandedStock($expandedStock);
-        $entity->setExpandedSkuMap($expandedStock[$linkId]['expandedStock'] ?? []);
-
         return $entity;
     }
 
@@ -271,15 +262,12 @@ class Db extends DbAbstract implements StorageInterface
                 $this->appendStockRow($map[$id], $data);
             }
         }
-        $this->appendExpandedStock($map);
 
         $collection = new Collection(ProductLink::class, __FUNCTION__, $filter->toArray());
         $collection->setTotal($total);
-
         foreach ($map as $array) {
             $collection->attach($this->mapper->fromArray($array));
         }
-
         return $collection;
     }
 
@@ -289,58 +277,12 @@ class Db extends DbAbstract implements StorageInterface
             'organisationUnitId' => $data['organisationUnitId'],
             'sku' => $data['productSku'],
             'stock' => [$data['stockSku'] => $data['quantity']],
-            'expandedStock' => [],
         ];
     }
 
     protected function appendStockRow(array &$array, array $data)
     {
         $array['stock'][$data['stockSku']] = $data['quantity'];
-    }
-
-    protected function appendExpandedStock(array &$productLinkArrays)
-    {
-        if (empty($productLinkArrays)) {
-            return;
-        }
-
-        $expanded = $this->writeSql
-            ->select(['result' => 'productLinkPath'])
-            ->columns(['pathId' => 'pathId', 'order' => new Expression('MAX(?)', ['result.order'], [Expression::TYPE_IDENTIFIER])])
-            ->join(
-                ['lookup' => 'productLinkPath'],
-                'result.pathId = lookup.pathId',
-                ['from']
-            )
-            ->where(['lookup.from' => array_keys($productLinkArrays), 'lookup.order' => 0])
-            ->group(['lookup.from', 'result.pathId']);
-
-        $select = $this->writeSql
-            ->select(['path' => 'productLinkPath'])
-            ->columns(['quantity'])
-            ->join(
-                ['link' => 'productLink'],
-                'path.to = link.linkId',
-                ['sku']
-            )
-            ->join(
-                ['expanded' => $expanded],
-                'path.pathId = expanded.pathId AND path.order = expanded.order',
-                ['linkId' => 'from']
-            );
-
-        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
-        foreach ($results as $result) {
-            if (!isset($productLinkArrays[$result['linkId']])) {
-                continue;
-            }
-
-            if (!isset($productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']])) {
-                $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] = 0;
-            }
-
-            $productLinkArrays[$result['linkId']]['expandedStock'][$result['sku']] += $result['quantity'];
-        }
     }
 
     protected function getLinkId($ouId, $sku)
@@ -502,7 +444,7 @@ class Db extends DbAbstract implements StorageInterface
             ]);
         }
         if (!empty($productSku = $filter->getProductSku())) {
-            $select->where(['from.sku' => $productSku]);
+            $this->filterArrayValuesToOrdLikes('from.sku', $productSku, $select->where);
         }
         if (!empty($stockSku = $filter->getStockSku())) {
             $this->filterArrayValuesToOrdLikes('to.sku', $stockSku, $select->where);
@@ -520,7 +462,9 @@ class Db extends DbAbstract implements StorageInterface
         foreach ($ouIdProductSkus as $ouIdProductSku) {
             [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
             $filter->addPredicate(
-                (new Where())->addPredicates(['from.organisationUnitId' => $organisationUnitId, 'from.sku' => $productSku])
+                (new Where())
+                    ->equalTo('from.organisationUnitId', $organisationUnitId)
+                    ->like('from.sku', escapeLikeValue($productSku))
             );
         }
         $where->addPredicate($filter);

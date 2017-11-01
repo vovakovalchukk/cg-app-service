@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\ProductGraph;
+namespace CG\Controllers\ProductLinkLeaf;
 
-use CG\Product\Graph\Filter;
-use CG\Product\Graph\Service;
+use CG\Product\LinkLeaf\Filter;
+use CG\Product\LinkLeaf\Service;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\ControllerTrait;
 use Slim\Slim;

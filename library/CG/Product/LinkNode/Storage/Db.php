@@ -1,24 +1,23 @@
 <?php
-namespace CG\Product\Graph\Storage;
+namespace CG\Product\LinkNode\Storage;
 
-use CG\Product\Graph\Collection;
-use CG\Product\Graph\Entity as ProductGraph;
-use CG\Product\Graph\Filter;
-use CG\Product\Graph\Mapper;
-use CG\Product\Graph\StorageInterface;
+use CG\Product\LinkNode\Collection;
+use CG\Product\LinkNode\Entity as LinkNode;
+use CG\Product\LinkNode\Filter;
+use CG\Product\LinkNode\Mapper;
+use CG\Product\LinkNode\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use function CG\Stdlib\escapeLikeValue;
 
 class Db implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
-    use FilterArrayValuesToOrdLikesTrait;
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -37,7 +36,7 @@ class Db implements StorageInterface, LoggerAwareInterface
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
-            throw new NotFound(sprintf('ProductGraph not found with id %s', $id));
+            throw new NotFound(sprintf('ProductLinkNode not found with id %s', $id));
         }
 
         $array = $this->toArray($id);
@@ -65,7 +64,7 @@ class Db implements StorageInterface, LoggerAwareInterface
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
-            throw new NotFound('No ProductGraph found matching filter');
+            throw new NotFound('No ProductLinkNode found matching filter');
         }
 
         $map = [];
@@ -77,7 +76,7 @@ class Db implements StorageInterface, LoggerAwareInterface
             $this->appendNodeRow($map[$id], $data);
         }
 
-        $collection = new Collection(ProductGraph::class, __FUNCTION__, $filter->toArray());
+        $collection = new Collection(LinkNode::class, __FUNCTION__, $filter->toArray());
         $collection->setTotal($total);
 
         foreach ($map as $array) {
@@ -120,7 +119,9 @@ class Db implements StorageInterface, LoggerAwareInterface
         foreach ($ouIdProductSkus as $ouIdProductSku) {
             [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
             $where->addPredicate(
-                (new Where())->addPredicates(['organisationUnitId' => $organisationUnitId, 'sku' => $productSku])
+                (new Where())
+                    ->equalTo('organisationUnitId', $organisationUnitId)
+                    ->like('sku', escapeLikeValue($productSku))
             );
         }
         return $this->readSql->select('productLink')->columns(['linkId'])->where($where);

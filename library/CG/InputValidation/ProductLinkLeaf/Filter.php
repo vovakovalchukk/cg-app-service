@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\ProductGraph;
+namespace CG\InputValidation\ProductLinkLeaf;
 
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
