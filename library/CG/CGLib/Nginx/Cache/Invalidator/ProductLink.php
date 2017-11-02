@@ -10,7 +10,7 @@ class ProductLink extends AbstractInvalidator
 
     protected $uriTypeMap = [
         self::TYPE_LEAF => '/productLinkLeaf',
-        self::TYPE_NODE => '/productLinkNode)',
+        self::TYPE_NODE => '/productLinkNode',
     ];
 
     public function invalidateRelated($id)

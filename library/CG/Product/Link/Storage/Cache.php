@@ -18,7 +18,9 @@ use CG\Stdlib\Log\LogTrait;
 
 class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterface
 {
-    use FetchTrait;
+    use FetchTrait {
+        fetch as protected fetchTrait;
+    }
     use SaveTrait;
     use RemoveTrait;
     use RemoveByFieldTrait;
@@ -28,6 +30,11 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
+    }
+
+    public function fetch($id)
+    {
+        return $this->fetchTrait(strtolower($id));
     }
 
     public function fetchCollectionByFilter(Filter $filter)

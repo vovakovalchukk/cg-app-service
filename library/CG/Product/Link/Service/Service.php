@@ -51,7 +51,7 @@ class Service extends BaseService
         parent::__construct($storage, $mapper);
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
-        $this->productLinkNginxCacheInvalidator = $productLinkLeafStorage;
+        $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
         $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
@@ -59,7 +59,7 @@ class Service extends BaseService
 
     public function remove($productLink)
     {
-        $this->invalidateProductLink($productLink);
+        $this->invalidateRelatedProductLink($productLink);
         parent::remove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
@@ -71,18 +71,18 @@ class Service extends BaseService
     {
         try {
             $currentEntity = $this->fetch($productLink->getId());
-            $this->invalidateProductLink($currentEntity);
+            $this->invalidateRelatedProductLink($currentEntity);
         } catch (NotFound $exception) {
             $currentEntity = null;
         }
 
         $savedEntity = parent::save($productLink);
-        $this->invalidateProductLink($savedEntity);
+        $this->invalidateRelatedProductLink($savedEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
 
-    protected function invalidateProductLink(ProductLink $productLink)
+    protected function invalidateRelatedProductLink(ProductLink $productLink)
     {
         try {
             /** @var ProductLinkNode $productLinkNode */
@@ -94,12 +94,22 @@ class Service extends BaseService
             return;
         }
 
-        foreach ($productLinkNode as $sku => $quantity) {
-            $id = $this->generateOuIdSku($productLinkNode->getOrganisationUnitId(), $sku);
-            $this->productLinkLeafStorage->invalidate($id);
-            $this->productLinkNodeStorage->invalidate($id);
-            $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
+        $this->invalidateProductLink(
+            $this->generateOuIdSkuForProductLink($productLink)
+        );
+
+        foreach ($productLinkNode as $sku) {
+            $this->invalidateProductLink(
+                $this->generateOuIdSku($productLinkNode->getOrganisationUnitId(), $sku)
+            );
         }
+    }
+
+    protected function invalidateProductLink($id)
+    {
+        $this->productLinkLeafStorage->invalidate($id);
+        $this->productLinkNodeStorage->invalidate($id);
+        $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 
     protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)
