@@ -30,12 +30,11 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetch($id)
     {
-        [$organisationUnitId, $sku] = explode('-', $id, 2);
+        [$organisationUnitId, $sku] = array_pad(explode('-', $id, 2), 2, '');
         $select = $this->getSelect()->where(
             (new Where())
-                ->equalTo('from.organisationUnitId', $organisationUnitId)
-                ->like('from.sku', escapeLikeValue($sku))
-                ->equalTo('path.order', 0)
+                ->equalTo('parent.organisationUnitId', $organisationUnitId)
+                ->like('parent.sku', escapeLikeValue($sku))
         );
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
@@ -54,6 +53,31 @@ class Db extends DbAbstract implements StorageInterface
         return $this->mapper->fromArray($array);
     }
 
+    public function fetchCollectionByFilter(Filter $filter)
+    {
+        $results = $this->readSql->prepareStatementForSqlObject($this->getFilteredSelect($filter, $total))->execute();
+        if ($results->count() == 0) {
+            throw new NotFound('No ProductLinks found matching filter');
+        }
+
+        $map = [];
+        foreach ($results as $data) {
+            $id = $data['id'];
+            if (!isset($map[$id])) {
+                $map[$id] = $this->toArray($data);
+            } else {
+                $this->appendStockRow($map[$id], $data);
+            }
+        }
+
+        $collection = new Collection(ProductLink::class, __FUNCTION__, $filter->toArray());
+        $collection->setTotal($total);
+        foreach ($map as $array) {
+            $collection->attach($this->mapper->fromArray($array));
+        }
+        return $collection;
+    }
+
     /**
      * @param ProductLink $entity
      */
@@ -62,14 +86,23 @@ class Db extends DbAbstract implements StorageInterface
         try {
             $linkId = $this->getLinkId($entity->getOrganisationUnitId(), $entity->getProductSku());
             $this->removeLinkPaths($linkId);
+            $this->removeEmptyPaths();
         } catch (NotFound $exception) {
             $linkId = $this->insertLink($entity->getOrganisationUnitId(), $entity->getProductSku());
             $entity->setNewlyInserted(true);
         }
 
-        $paths = [];
-        $edgePaths = $this->getLinkPathIdMap($linkId, 'to');
+        $parentPaths = $this->getLinkPathIdMap('child', $linkId);
+        $childPaths = $this->saveChildPaths($entity, $linkId);
+        $this->extendParentPaths($parentPaths, $childPaths);
+        $this->removeEmptyPaths();
 
+        return $entity;
+    }
+
+    protected function saveChildPaths(ProductLink $entity, $linkId)
+    {
+        $paths = [];
         foreach ($entity->getStockSkuMap() as $sku => $qty) {
             try {
                 $childId = $this->getLinkId($entity->getOrganisationUnitId(), $sku);
@@ -77,31 +110,35 @@ class Db extends DbAbstract implements StorageInterface
                 $childId = $this->insertLink($entity->getOrganisationUnitId(), $sku);
             }
 
-            $newPaths = [];
-            foreach ($this->getLinkPaths($childId) as $linkPath) {
-                $linkIds = [$linkId => true];
-                $path[] = ['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => ($order = 0)];
+            if ($linkId == $childId) {
+                throw new RecursionException(
+                    sprintf(static::RECURSION_MSG, $entity->getProductSku(), $sku)
+                );
+            }
 
+            $newPaths = [];
+            foreach ($this->getLinkPaths('link.linkId', $childId) as $linkPath) {
+                $linkIds = [$linkId => true];
+
+                $path = [['linkId' => $linkId, 'quantity' => 1, 'order' => ($order = 0)]];
                 foreach ($linkPath as $linkNode) {
-                    if (isset($linkIds[$linkNode['from']])) {
+                    if (isset($linkIds[$linkNode['linkId']])) {
                         throw new RecursionException(
-                            sprintf(static::RECURSION_MSG, $entity->getProductSku(), $this->getLinkSku($linkNode['from']))
+                            sprintf(static::RECURSION_MSG, $entity->getProductSku(), $this->getLinkSku($linkNode['linkId']))
                         );
                     }
 
-                    $linkIds[$linkNode['from']] = true;
-                    $path[] = [
-                        'from' => $linkNode['from'],
-                        'to' => $linkNode['to'],
-                        'quantity' => $linkNode['quantity'] * $qty,
-                        'order' => ++$order
-                    ];
+                    $linkIds[$linkNode['linkId']] = true;
+                    $path[] = ['linkId' => $linkNode['linkId'], 'quantity' => $qty * $linkNode['quantity'], 'order' => ++$order];
                 }
                 $newPaths[] = $path;
             }
 
             if (empty($newPaths)) {
-                $newPaths[] = [['from' => $linkId, 'to' => $childId, 'quantity' => $qty, 'order' => 0]];
+                $newPaths[] = [
+                    ['linkId' => $linkId, 'quantity' => 1, 'order' => 0],
+                    ['linkId' => $childId, 'quantity' => $qty, 'order' => 1],
+                ];
             }
 
             foreach ($newPaths as $path) {
@@ -109,17 +146,22 @@ class Db extends DbAbstract implements StorageInterface
                 $paths[] = $path;
             }
         }
+        return $paths;
+    }
 
-        foreach ($edgePaths as $pathId => $edge) {
-            $edgePath = $this->getLinkPathIdMap($pathId, 'pathId');
+    protected function extendParentPaths(array $parentPaths, array $childPaths)
+    {
+        foreach ($parentPaths as $pathId => $parentPath) {
+            $linkPaths = $this->getLinkPaths('path.pathId', $pathId);
             $this->removePath($pathId);
 
-            foreach ($paths as $path) {
+            foreach ($childPaths as $path) {
+                array_shift($path);
                 $this->insertLinkPath(
-                    array_merge($edgePath, array_map(
-                        function($path) use($edge) {
-                            $path['quantity'] *= $edge['quantity'];
-                            $path['order'] += $edge['order'] + 1;
+                    array_merge($linkPaths[$pathId], array_map(
+                        function ($path) use ($parentPath) {
+                            $path['quantity'] *= $parentPath['quantity'];
+                            $path['order'] += $parentPath['order'] + 1;
                             return $path;
                         },
                         $path
@@ -127,7 +169,6 @@ class Db extends DbAbstract implements StorageInterface
                 );
             }
         }
-        return $entity;
     }
 
     protected function insertLink($ouId, $sku)
@@ -191,32 +232,41 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         $this->removeLinkPaths($linkId);
+        $this->removeEmptyPaths();
         $this->removeLink($linkId);
     }
 
     protected function removeLinkPaths($linkId)
     {
-        $linkIdMap = $this->getLinkPathIdMap($linkId, 'from');
-        if (empty($linkIdMap)) {
+        $parentLinkPathIdMap = $this->getLinkPathIdMap('parent', $linkId);
+        if (empty($parentLinkPathIdMap)) {
             return;
         }
+        $this->removeParentPaths($parentLinkPathIdMap);
 
+        $childLinkPathIdMap = $this->getLinkPathIdMap('child', $linkId);;
+        if (empty($childLinkPathIdMap)) {
+            return;
+        }
+        $this->removeChildDuplicatePaths($childLinkPathIdMap);
+    }
+
+    protected function removeParentPaths(array $parentLinkPathIdMap)
+    {
         $delete = $this->getDelete('productLinkPath');
-        foreach ($linkIdMap as $pathId => $map) {
+        foreach ($parentLinkPathIdMap as $pathId => $map) {
             $delete->where->orPredicate(
-                (new Where())->equalTo('pathId', $pathId)->greaterThanOrEqualTo('order', $map['order'])
+                (new Where())->equalTo('pathId', $pathId)->greaterThan('order', $map['order'])
             );
         }
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
+    }
 
-        $duplicateLinkIdMap = $this->getLinkPathIdMap($linkId, 'to');
-        if (empty($duplicateLinkIdMap)) {
-            return;
-        }
-
+    protected function removeChildDuplicatePaths(array $childLinkPathIdMap)
+    {
         $duplicates = [];
-        foreach ($duplicateLinkIdMap as $pathId => $map) {
-            $id = $map['from'] . '-' . $map['order'];
+        foreach ($childLinkPathIdMap as $pathId => $map) {
+            $id = implode('-', [$map['parent'], $map['child'], $map['order']]);
             if (!isset($duplicates[$id])) {
                 $duplicates[$id] = [];
             } else {
@@ -230,6 +280,31 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
+    protected function removeEmptyPaths()
+    {
+        $select = $this->writeSql
+            ->select(['from' => 'productLinkPath'])
+            ->columns(['pathId'])
+            ->join(
+                ['to' => 'productLinkPath'],
+                new Expression('? = ? AND ? != ?', ['from.pathId', 'to.pathId', 'from.order' ,'to.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
+                [],
+                Select::JOIN_LEFT
+            )
+            ->where(['to.pathId' => null]);
+
+        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
+        if ($results->count() == 0) {
+            return;
+        }
+
+        $paths = [];
+        foreach ($results as $result) {
+            $paths[] = $result['pathId'];
+        }
+        $this->removePath(...$paths);
+    }
+
     protected function removePath(...$pathIds)
     {
         $delete = $this->getDelete('productLinkPath')->where(['pathId' => $pathIds]);
@@ -238,37 +313,12 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function removeLink($linkId)
     {
-        if ($this->getLinkToCount($linkId, 'to') > 0) {
+        if (!empty($this->getLinkPathIdMap('child', $linkId))) {
             return;
         }
 
         $delete = $this->getDelete()->where(['linkId' => $linkId]);
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
-    }
-
-    public function fetchCollectionByFilter(Filter $filter)
-    {
-        $results = $this->readSql->prepareStatementForSqlObject($this->getFilteredSelect($filter, $total))->execute();
-        if ($results->count() == 0) {
-            throw new NotFound('No ProductLinks found matching filter');
-        }
-
-        $map = [];
-        foreach ($results as $data) {
-            $id = $data['id'];
-            if (!isset($map[$id])) {
-                $map[$id] = $this->toArray($data);
-            } else {
-                $this->appendStockRow($map[$id], $data);
-            }
-        }
-
-        $collection = new Collection(ProductLink::class, __FUNCTION__, $filter->toArray());
-        $collection->setTotal($total);
-        foreach ($map as $array) {
-            $collection->attach($this->mapper->fromArray($array));
-        }
-        return $collection;
     }
 
     protected function toArray(array $data)
@@ -285,18 +335,21 @@ class Db extends DbAbstract implements StorageInterface
         $array['stock'][$data['stockSku']] = $data['quantity'];
     }
 
-    protected function getLinkId($ouId, $sku)
+    protected function getLinkId($organisationUnitId, $sku)
     {
         $select = $this->writeSql
             ->select('productLink')
             ->columns(['linkId'])
-            ->where(['organisationUnitId' => $ouId, 'sku' => $sku]);
+            ->where(
+                (new Where())
+                    ->equalTo('organisationUnitId', $organisationUnitId)
+                    ->like('sku', escapeLikeValue($sku))
+            );
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             throw new NotFound('Unable to find matching link');
         }
-
         return $results->current()['linkId'];
     }
 
@@ -310,12 +363,17 @@ class Db extends DbAbstract implements StorageInterface
         return '';
     }
 
-    protected function getLinkPathIdMap($id, $lookup)
+    protected function getLinkPathIdMap($lookup, $linkId)
     {
         $select = $this->writeSql
-            ->select('productLinkPath')
-            ->columns(['pathId', 'from', 'to', 'quantity', 'order'])
-            ->where([$lookup => $id]);
+            ->select(['parent' => 'productLinkPath'])
+            ->columns(['parent' => 'linkId', 'pathId' => 'pathId', 'order' => 'order'])
+            ->join(
+                ['child' => 'productLinkPath'],
+                new Expression('? = ? AND (? + 1) = ?', ['parent.pathId', 'child.pathId', 'parent.order', 'child.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
+                ['quantity' => 'quantity', 'child' => 'linkId']
+            )
+            ->where([sprintf('%s.linkId', $lookup) => $linkId]);
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
@@ -325,8 +383,8 @@ class Db extends DbAbstract implements StorageInterface
         $pathIdOrderMap = [];
         foreach ($results as $result) {
             $pathIdOrderMap[$result['pathId']] = [
-                'from' => $result['from'],
-                'to' => $result['to'],
+                'parent' => $result['parent'],
+                'child' => $result['child'],
                 'quantity' => $result['quantity'],
                 'order' => $result['order'],
             ];
@@ -334,28 +392,23 @@ class Db extends DbAbstract implements StorageInterface
         return $pathIdOrderMap;
     }
 
-    protected function getLinkToCount($linkId, $lookup)
+    protected function getLinkPaths($lookup, $linkId)
     {
         $select = $this->writeSql
-            ->select('productLinkPath')
-            ->where([$lookup => $linkId]);
-
-        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
-        return $results->count();
-    }
-
-    protected function getLinkPaths($linkId)
-    {
-        $select = $this->writeSql
-            ->select(['result' => 'productLinkPath'])
-            ->columns(['pathId', 'from', 'to', 'quantity'])
+            ->select(['link' => 'productLink'])
+            ->columns([])
             ->join(
-                ['lookup' => 'productLinkPath'],
-                'result.pathId = lookup.pathId',
+                ['path' => 'productLinkPath'],
+                new Expression('? = ? AND ? = 0', ['link.linkId', 'path.linkId', 'path.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
                 []
             )
-            ->where(['lookup.from' => $linkId, 'lookup.order' => 0])
-            ->order(['result.pathId', 'result.order']);
+            ->join(
+                ['paths' => 'productLinkPath'],
+                'path.pathId = paths.pathId',
+                ['pathId', 'linkId', 'quantity', 'order']
+            )
+            ->where([$lookup => $linkId])
+            ->order(['paths.pathId', 'paths.order']);
 
         $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
@@ -367,7 +420,11 @@ class Db extends DbAbstract implements StorageInterface
             if (!isset($paths[$result['pathId']])) {
                 $paths[$result['pathId']] = [];
             }
-            $paths[$result['pathId']][] = $result;
+            $paths[$result['pathId']][] = [
+                'linkId' => $result['linkId'],
+                'quantity' => $result['quantity'],
+                'order' => $result['order'],
+            ];
         }
         return $paths;
     }
@@ -375,27 +432,33 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSelect(): Select
     {
         return $this->readSql
-            ->select(['from' => 'productLink'])
+            ->select(['parent' => 'productLink'])
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
             ->columns([
                 'id' => 'linkId',
                 'organisationUnitId' => 'organisationUnitId',
                 'productSku' => 'sku',
             ])
             ->join(
-                ['path' => 'productLinkPath'],
-                'from.linkId = path.from',
-                ['pathId' => 'pathId', 'quantity' => 'quantity']
+                ['from' => 'productLinkPath'],
+                new Expression('? = ? AND ? = 0', ['parent.linkId', 'from.linkId', 'from.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
+                []
             )
             ->join(
-                ['to' => 'productLink'],
-                'path.to = to.linkId',
-                ['childId' => 'linkId', 'stockSku' => 'sku']
+                ['to' => 'productLinkPath'],
+                new Expression('? = ? AND (? + 1) = ?', ['from.pathId', 'to.pathId', 'from.order', 'to.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
+                ['quantity' => 'quantity']
+            )
+            ->join(
+                ['child' => 'productLink'],
+                'to.linkId = child.linkId',
+                ['stockSku' => 'sku']
             );
     }
 
     protected function getFilteredSelect(Filter $filter, &$total = null)
     {
-        $select = $this->getSelect()->where(['path.order' => 0]);
+        $select = $this->getSelect();
         $this->buildFilterQuery($select, $filter);
 
         $idLookup = $this->readSql
@@ -420,7 +483,7 @@ class Db extends DbAbstract implements StorageInterface
             $linkIds[] = $result['id'];
         }
 
-        return $this->getSelect()->where(['path.order' => 0, 'from.linkId' => $linkIds]);
+        return $this->getSelect()->where(['parent.linkId' => $linkIds]);
     }
 
     protected function getTotal(Select $idLookup): int
@@ -438,16 +501,13 @@ class Db extends DbAbstract implements StorageInterface
     protected function buildFilterQuery(Select $select, Filter $filter)
     {
         if (!empty($organisationUnitId = $filter->getOrganisationUnitId())) {
-            $select->where([
-                'from.organisationUnitId' => $organisationUnitId,
-                'to.organisationUnitId' => $organisationUnitId,
-            ]);
+            $select->where(['parent.organisationUnitId' => $organisationUnitId]);
         }
         if (!empty($productSku = $filter->getProductSku())) {
-            $this->filterArrayValuesToOrdLikes('from.sku', $productSku, $select->where);
+            $this->filterArrayValuesToOrdLikes('parent.sku', $productSku, $select->where);
         }
         if (!empty($stockSku = $filter->getStockSku())) {
-            $this->filterArrayValuesToOrdLikes('to.sku', $stockSku, $select->where);
+            $this->filterArrayValuesToOrdLikes('child.sku', $stockSku, $select->where);
         }
         $this->appendOuIdProductSkuFilter($select->where, $filter->getOuIdProductSku());
     }
@@ -460,11 +520,11 @@ class Db extends DbAbstract implements StorageInterface
 
         $filter = new Where(null, WHERE::OP_OR);
         foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
+            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
             $filter->addPredicate(
                 (new Where())
-                    ->equalTo('from.organisationUnitId', $organisationUnitId)
-                    ->like('from.sku', escapeLikeValue($productSku))
+                    ->equalTo('parent.organisationUnitId', $organisationUnitId)
+                    ->like('parent.sku', escapeLikeValue($productSku))
             );
         }
         $where->addPredicate($filter);

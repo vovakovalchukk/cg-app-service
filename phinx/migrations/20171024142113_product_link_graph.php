@@ -49,17 +49,13 @@ class ProductLinkGraph extends AbstractMigration
             ->addIndex(['organisationUnitId', 'sku'], ['unique' => true])
             ->create();
         $this
-            ->table('productLinkPath', ['id' => false, 'primary_key' => ['pathId', 'from', 'to'], 'collation' => 'utf8_general_ci'])
+            ->table('productLinkPath', ['id' => false, 'primary_key' => ['pathId', 'order'], 'collation' => 'utf8_general_ci'])
             ->addColumn('pathId', 'integer', ['null' => false, 'signed' => false])
-            ->addColumn('from', 'integer', ['null' => false, 'signed' => false])
-            ->addColumn('to', 'integer', ['null' => false, 'signed' => false])
+            ->addColumn('linkId', 'integer', ['null' => false, 'signed' => false])
             ->addColumn('quantity', 'integer', ['null' => false, 'signed' => false])
             ->addColumn('order', 'integer', ['null' => false, 'signed' => false])
-            ->addIndex(['pathId', 'order'], ['unique' => true])
-            ->addIndex(['from', 'order'])
-            ->addIndex(['to', 'order'])
-            ->addForeignKey('from', 'productLink', 'linkId', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::RESTRICT])
-            ->addForeignKey('to', 'productLink', 'linkId', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::RESTRICT])
+            ->addIndex(['linkId', 'order'])
+            ->addForeignKey('linkId', 'productLink', 'linkId', ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::RESTRICT])
             ->create();
 
         $links = [];
@@ -74,20 +70,14 @@ class ProductLinkGraph extends AbstractMigration
                     continue;
                 }
 
-                $order = 0;
-                $quantity = 1;
-
-                $from = $links[$rootKey];
+                $this->insertRow('productLinkPath', $pathId, $links[$rootKey], ($quantity = 1), ($order = 0));
                 foreach ($path as $node) {
                     if (!isset($links[$node['key']])) {
                         break;
                     }
 
-                    $to = $links[$node['key']];
                     $quantity *= $node['quantity'];
-
-                    $this->insertRow('productLinkPath', $pathId, $from, $to, $quantity, $order++);
-                    $from = $to;
+                    $this->insertRow('productLinkPath', $pathId, $links[$node['key']], $quantity, ++$order);
                 }
                 $pathId++;
             }
@@ -100,11 +90,11 @@ class ProductLinkGraph extends AbstractMigration
     public function down()
     {
         $productLinks = $this->query(
-            'SELECT plf.`organisationUnitId`, plf.`sku` as `productSku`, plt.`sku` as `stockSku`, plp.`quantity`'
-            . ' FROM productLinkPath plp'
-            . ' JOIN productLink plf ON plp.`from` = plf.`linkId`'
-            . ' JOIN productLink plt ON plp.`to` = plt.`linkId`'
-            . ' WHERE plp.`order` = 0;'
+            'SELECT DISTINCT parent.organisationUnitId, parent.sku as productSku, child.`sku` as stockSku, `to`.quantity'
+            . ' FROM productLink parent'
+            . ' JOIN productLinkPath `from` ON parent.linkId = `from`.linkId AND `from`.order = 0'
+            . ' JOIN productLinkPath `to` ON `from`.pathId = `to`.pathId AND (`from`.order + 1) = `to`.order'
+            . ' JOIN productLink child ON `to`.linkId = child.linkId'
         );
 
         $this->table('productLinkPath')->drop();

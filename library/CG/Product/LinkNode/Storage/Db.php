@@ -39,9 +39,12 @@ class Db implements StorageInterface, LoggerAwareInterface
             throw new NotFound(sprintf('ProductLinkNode not found with id %s', $id));
         }
 
-        $array = $this->toArray($id);
+        $array = null;
         foreach ($results as $data) {
-            $this->appendNodeRow($array, $data);
+            if (!is_array($array)) {
+                $array = $this->toArray($data);
+            }
+            $this->appendNode($array, $data);
         }
         return $this->mapper->fromArray($array);
     }
@@ -71,9 +74,9 @@ class Db implements StorageInterface, LoggerAwareInterface
         foreach ($results as $data) {
             $id = $data['id'];
             if (!isset($map[$id])) {
-                $map[$id] = $this->toArray($id);
+                $map[$id] = $this->toArray($data);
             }
-            $this->appendNodeRow($map[$id], $data);
+            $this->appendNode($map[$id], $data);
         }
 
         $collection = new Collection(LinkNode::class, __FUNCTION__, $filter->toArray());
@@ -98,93 +101,60 @@ class Db implements StorageInterface, LoggerAwareInterface
         return 0;
     }
 
-    protected function toArray($ouIdProductSku): array
+    protected function toArray(array $data)
     {
-        [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
         return [
-            'organisationUnitId' => $organisationUnitId,
-            'sku' => strtolower($productSku),
-            'nodes' => [],
+            'organisationUnitId' => $data['organisationUnitId'],
+            'sku' => $data['productSku'],
+            'ancestors' => [],
+            'descendants' => [],
         ];
     }
 
-    protected function appendNodeRow(array &$array, array $data)
+    protected function appendNode(array &$array, array $data)
     {
-        $array['nodes'][$data['sku']] = $data['quantity'];
+        $type = $data['ancestor'] ? 'ancestors' : 'descendants';
+        $array[$type][] = $data['node'];
     }
 
     protected function getLinkIdSelect(...$ouIdProductSkus): Select
     {
         $where = new Where(null, Where::COMBINED_BY_OR);
         foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
+            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
             $where->addPredicate(
                 (new Where())
                     ->equalTo('organisationUnitId', $organisationUnitId)
                     ->like('sku', escapeLikeValue($productSku))
             );
         }
-        return $this->readSql->select('productLink')->columns(['linkId'])->where($where);
+        return $this->readSql->select('productLink')->columns(['linkId', 'organisationUnitId', 'sku'])->where($where);
     }
 
     protected function getSelect(Select $linkIdSelect): Select
     {
-        $paths = $this->readSql
-            ->select(['link' => 'productLink'])
+        return $this->readSql
+            ->select(['lookup' => $linkIdSelect])
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
             ->columns([
-                'id' => new Expression('CONCAT_WS(?, ?, ?)', ['-', 'link.organisationUnitId', 'link.sku'], [Expression::TYPE_VALUE, Expression::TYPE_IDENTIFIER, Expression::TYPE_IDENTIFIER]),
+                'id' => 'linkId',
+                'organisationUnitId' => 'organisationUnitId',
+                'productSku' => 'sku',
             ])
             ->join(
                 ['path' => 'productLinkPath'],
-                new Expression('? IN (?, ?)', ['link.linkId', 'path.from', 'path.to'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
-                [
-                    'from' => 'from',
-                    'to' => 'to',
-                    'order' => new Expression('MAX(?)', ['path.order'], [Expression::TYPE_IDENTIFIER]),
-                ]
-            )
-            ->join(
-                ['links' => $linkIdSelect],
-                'link.linkId = links.linkId',
+                'lookup.linkId = path.linkId',
                 []
             )
-            ->group(['id', 'path.from', 'path.to']);
-
-        $lookup = $this->readSql
-            ->select(['path' => 'productLinkPath'])
-            ->columns(['pathId'])
             ->join(
-                ['paths' => $paths],
-                'path.from = paths.from AND path.to = paths.to AND path.order = paths.order',
-                ['id']
-            );
-
-        $graph = $this->readSql
-            ->select(['link' => 'productLink'])
-            ->quantifier(Select::QUANTIFIER_DISTINCT)
-            ->columns(['organisationUnitId', 'sku'])
-            ->join(
-                ['path' => 'productLinkPath'],
-                new Expression('IF(? = 0, ? IN (?, ?), link.linkId = path.to)', ['path.order', 'link.linkId', 'path.from', 'path.to'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
-                [
-                    'quantity' => new Expression('IF(? = 0 AND ? = ?, 1, ?)', ['path.order', 'link.linkId', 'path.from', 'path.quantity'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
-                    'order' => new Expression('IF(? = 0 AND ? = ?, 0, ? + 1)', ['path.order', 'link.linkId', 'path.from', 'path.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
-                ]
+                ['paths' => 'productLinkPath'],
+                new Expression('? = ? AND ? != ?', ['path.pathId', 'paths.pathId', 'path.order', 'paths.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
+                ['ancestor' => new Expression('? > ?', ['path.order', 'paths.order'], array_fill(0, 2, Expression::TYPE_IDENTIFIER))]
             )
             ->join(
-                ['lookup' => $lookup],
-                'path.pathId = lookup.pathId',
-                ['id']
+                ['node' => 'productLink'],
+                'paths.linkId = node.linkId',
+                ['node' => 'sku']
             );
-
-        return $this->readSql
-            ->select(['graph' => $graph])
-            ->columns([
-                'id' => 'id',
-                'organisationUnitId' => 'organisationUnitId',
-                'sku' => 'sku',
-                'quantity' => new Expression('SUM(?)', ['graph.quantity'], [Expression::TYPE_IDENTIFIER])
-            ])
-            ->group(['graph.id', 'graph.organisationUnitId', 'graph.sku']);
     }
 }

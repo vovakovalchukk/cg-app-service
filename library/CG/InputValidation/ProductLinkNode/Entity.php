@@ -2,6 +2,7 @@
 namespace CG\InputValidation\ProductLinkNode;
 
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\Regex;
@@ -31,10 +32,15 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'nodes' => [
-                'name' => 'nodes',
-                'required' => true,
-                'validators' => [new StockQty(new IntegerValidator(), ['name' =>'nodes'])]
+            'ancestors' => [
+                'name' => 'ancestors',
+                'required' => false,
+                'validators' => [new IsArrayValidator(['name' => 'ancestors'])]
+            ],
+            'descendants' => [
+                'name' => 'descendants',
+                'required' => false,
+                'validators' => [new IsArrayValidator(['name' => 'descendants'])]
             ],
         ];
     }

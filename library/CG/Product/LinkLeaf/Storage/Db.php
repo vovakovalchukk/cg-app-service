@@ -127,7 +127,7 @@ class Db implements StorageInterface, LoggerAwareInterface
     {
         $where = new Where(null, Where::COMBINED_BY_OR);
         foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = explode('-', $ouIdProductSku, 2);
+            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
             $where->addPredicate(
                 (new Where())
                     ->equalTo('link.organisationUnitId', $organisationUnitId)
@@ -137,10 +137,10 @@ class Db implements StorageInterface, LoggerAwareInterface
 
         return $this->readSql
             ->select(['path' => 'productLinkPath'])
-            ->columns(['pathId', 'from'])
+            ->columns(['pathId', 'linkId'])
             ->join(
                 ['link' => 'productLink'],
-                new Expression('? = ? AND ? = 0', ['path.from', 'link.linkId', 'path.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
+                new Expression('? = ? AND ? = 0', ['path.linkId', 'link.linkId', 'path.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
                 []
             )
             ->where($where);
@@ -154,16 +154,16 @@ class Db implements StorageInterface, LoggerAwareInterface
             ->join(
                 ['lookup' => $pathIdSelect],
                 'result.pathId = lookup.pathId',
-                ['from']
+                ['linkId']
             )
             ->group(['result.pathId']);
 
         return $this->readSql
             ->select(['lookup' => $lookup])
-            ->columns(['id' => new Expression('CONCAT_WS(\'-\', ?, ?)', ['from.organisationUnitId', 'from.sku'], array_fill(0, 2, Expression::TYPE_IDENTIFIER))])
+            ->columns(['id' => 'linkId'])
             ->join(
                 ['from' => 'productLink'],
-                'lookup.from = from.linkId',
+                'lookup.linkId = from.linkId',
                 ['organisationUnitId' => 'organisationUnitId', 'productSku' => 'sku']
             )
             ->join(
@@ -173,9 +173,9 @@ class Db implements StorageInterface, LoggerAwareInterface
             )
             ->join(
                 ['to' => 'productLink'],
-                'path.to = to.linkId',
+                'path.linkId = to.linkId',
                 ['stockSku' => 'sku']
             )
-            ->group(['lookup.from', 'path.to']);
+            ->group(['lookup.linkId', 'path.linkId']);
     }
 }
