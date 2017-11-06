@@ -20,6 +20,7 @@ use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use function CG\Stdlib\escapeLikeValue;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -50,7 +51,7 @@ class Db extends DbAbstract implements StorageInterface
         try {
             /** @var Select $select */
             $select = $this->getSelect()->where($this->getQueryForFilter($filter));
-            $this->appendOuIdSkuFilter($select->where, $filter->getOuIdSku());
+            $this->appendOuIdSkuFilter($select, $filter->getOuIdSku());
 
             if (($limit = $filter->getLimit()) != 'all') {
                 $offset = ($filter->getPage() - 1) * $limit;
@@ -80,20 +81,29 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function appendOuIdSkuFilter(Where $where, array $ouIdSkus)
+    protected function appendOuIdSkuFilter(Select $select, array $ouIdSkus)
     {
         if (empty($ouIdSkus)) {
             return;
         }
 
+        $select->join(
+            'stock',
+            'stockLocation.stockId = stock.id',
+            []
+        );
+
         $filter = new Where(null, Where::OP_OR);
         foreach ($ouIdSkus as $ouIdSku) {
             [$organisationUnitId, $sku] = explode('-', $ouIdSku, 2);
             $filter->addPredicate(
-                (new Where())->equalTo('organisationUnitId', $organisationUnitId)->equalTo('sku', $sku)
+                (new Where())
+                    ->equalTo('stock.organisationUnitId', $organisationUnitId)
+                    ->like('stock.sku', escapeLikeValue($sku))
             );
         }
-        $where->addPredicate($filter);
+
+        $select->where->addPredicate($filter);
     }
 
     public function remove($entity)

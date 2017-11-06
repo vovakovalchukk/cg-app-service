@@ -13,11 +13,9 @@ class LinkedLocation extends QuantifiedLocation
         $id,
         $stockId,
         $locationId,
-        $organisationUnitId,
-        $sku,
         Collection $linkedLocations
     ) {
-        parent::__construct($stockId, $locationId, $organisationUnitId, $sku, 0, 0, $id);
+        parent::__construct($stockId, $locationId, 0, 0, $id);
         $this->setLinkedLocations($linkedLocations);
     }
 

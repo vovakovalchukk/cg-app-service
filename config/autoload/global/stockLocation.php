@@ -1,6 +1,5 @@
 <?php
 use CG\Product\Link\Service as ProductLinkService;
-use CG\Stock\Location\Mapper;
 use CG\Stock\Location\Repository;
 use CG\Stock\Location\Service;
 use CG\Stock\Location\Storage\Cache;
@@ -16,34 +15,36 @@ return [
         'instance' => [
             'preferences' => [
                 StorageInterface::class => LinkedReplacer::class,
-                Mapper::class => TypedMapper::class,
             ],
             Service::class => [
                 'parameters' => [
                     'repository' => LinkedReplacer::class,
-                    'stockStorage' => StockRepository::class
-                ]
+                    'stockStorage' => StockRepository::class,
+                ],
             ],
             LinkedReplacer::class => [
                 'parameters' => [
                     'locationStorage' => Repository::class,
+                    'stockStorage' => StockRepository::class,
                 ],
             ],
             Repository::class => [
                 'parameters' => [
                     'storage' => Cache::class,
-                    'repository' => Db::class
-                ]
+                    'repository' => Db::class,
+                ],
             ],
             Db::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                ]
+                    'writeSql' => 'WriteSql',
+                    'mapper' => TypedMapper::class,
+                ],
             ],
             TypedMapper::class => [
                 'parameters' => [
+                    'stockStorage' => StockRepository::class,
                     'productLinkService' => ProductLinkService::class,
                     'entityClass' => function() { return TypedEntity::class; },
                 ],

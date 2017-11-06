@@ -7,6 +7,7 @@ use CG\Product\Link\Storage\Db;
 use CG\Product\Link\StorageInterface;
 use CG\Stock\Location\Repository as StockLocationRepository;
 use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Repository as StockRepository;
 
 return [
     'di' => [
@@ -20,7 +21,8 @@ return [
             ],
             Service::class => [
                 'parameters' => [
-                    'stockLocationService' => 'InternalStockLocationService',
+                    'stockLocationStorage' => 'InternalStockLocationService',
+                    'stockStorage' => StockRepository::class,
                 ],
             ],
             'InternalStockLocationService' => [

@@ -1,17 +1,22 @@
 <?php
 namespace CG\Stock\Location;
 
-use CG\Product\Link\Service as ProductLinkService;
+use CG\Product\Link\StorageInterface as ProductLinkStorage;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Entity as Stock;
+use CG\Stock\StorageInterface as StockStorage;
 
 class TypedMapper extends Mapper
 {
-    /** @var ProductLinkService $productLinkService */
-    protected $productLinkService;
+    /** @var StockStorage $stockStorage */
+    protected $stockStorage;
+    /** @var ProductLinkStorage $productLinkStorage */
+    protected $productLinkStorage;
 
-    public function __construct(ProductLinkService $productLinkService)
+    public function __construct(StockStorage $stockStorage, ProductLinkStorage $productLinkStorage)
     {
-        $this->productLinkService = $productLinkService;
+        $this->stockStorage = $stockStorage;
+        $this->productLinkStorage = $productLinkStorage;
     }
 
     public function fromArray(array $stockLocation)
@@ -26,7 +31,9 @@ class TypedMapper extends Mapper
     protected function getStockLocationType(TypedEntity $entity)
     {
         try {
-            $this->productLinkService->fetch($entity->getOrganisationUnitId() . '-' . $entity->getSku());
+            /** @var Stock $stock */
+            $stock = $this->stockStorage->fetch($entity->getStockId());
+            $this->productLinkStorage->fetch($stock->getOrganisationUnitId() . '-' . $stock->getSku());
             return TypedEntity::TYPE_LINKED;
         } catch (NotFound $exception) {
             return TypedEntity::TYPE_REAL;
