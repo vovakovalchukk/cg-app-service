@@ -9,14 +9,14 @@ use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Stdlib\DateTime as CGDateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spork\ProcessManager as Spork;
 use Zend\Di\Di;
 
 /**
  * @backupGlobals disabled
  */
-class AssignerIntegrationTest extends PHPUnit_Framework_TestCase
+class AssignerIntegrationTest extends TestCase
 {
     const TIMEOUT = 1;
 

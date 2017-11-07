@@ -3,7 +3,7 @@ namespace CG\SequentialNumbering\Test\Provider;
 
 use CG\SequentialNumbering\LockException;
 use CG\SequentialNumbering\Provider\Redis;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spork\Fork;
 use Spork\ProcessManager;
 use UnexpectedValueException;
@@ -12,7 +12,7 @@ use UnexpectedValueException;
  * @group integration
  * @backupGlobals disabled
  */
-class RedisTest extends PHPUnit_Framework_TestCase
+class RedisTest extends TestCase
 {
     use RedisTestTrait {
         setUpBeforeClass as setupPredis;

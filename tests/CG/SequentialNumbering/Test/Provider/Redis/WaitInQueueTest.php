@@ -3,14 +3,14 @@ namespace CG\SequentialNumbering\Test\Provider\Redis;
 
 use CG\SequentialNumbering\Provider\Redis\Async\WaitInQueue;
 use CG\SequentialNumbering\Test\Provider\RedisTestTrait;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Predis\Async\Client as PredisAsync;
 
 /**
  * @group integration
  * @backupGlobals disabled
  */
-class WaitInQueueTest extends PHPUnit_Framework_TestCase
+class WaitInQueueTest extends TestCase
 {
     use RedisTestTrait {
         setUpBeforeClass as setupPredis;
