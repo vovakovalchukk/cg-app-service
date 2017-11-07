@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0613f50ef8847eef85f34c36ed9d9df2",
+    "content-hash": "0abcee1015228d5c7b73d5b07248cd0c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -677,7 +677,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-constants-dev-master-1ee173.zip",
                 "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a",
-                "shasum": ""
+                "shasum": "829cfb41e8c6b36b6d952d01ba3fa44f8d4b47a6"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -1000,7 +1000,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.6.0-c5da24.zip",
                 "reference": "6dcdea929d5fc263475604dbd33a19d6c220c952",
-                "shasum": ""
+                "shasum": "23aba33412f7999d43dea8331289974f74de7ae8"
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1888,7 +1888,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-v0.2.3.2-60bf12.zip",
                 "reference": "27dbf1a362ff1e1ecb84cb42718ae9dadd97579d",
-                "shasum": ""
+                "shasum": "15eab37ac5c78f81f49e1262ec6ca517823a88d9"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -1937,16 +1937,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "b56b746891131fe6051f67c6be7976a0d6caced8"
+                "reference": "66268d051d4b873aea6a48744c8e98d6a0072c33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-8958-RemoveStockLocationOuAndSku-5714a1.zip",
-                "reference": "b56b746891131fe6051f67c6be7976a0d6caced8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-7256-LinkedProducts-333ff6.zip",
+                "reference": "66268d051d4b873aea6a48744c8e98d6a0072c33",
                 "shasum": null
             },
             "require": {
@@ -1996,7 +1996,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-07T11:19:06+00:00"
+            "time": "2017-11-07T16:22:18+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2197,7 +2197,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-1.0.0-2e6e76.zip",
                 "reference": "6f46c49376f1a27e63d5f1b6b832acf2c04a218b",
-                "shasum": ""
+                "shasum": "1f16dc79516d87e4068cefec44754a4b692a4c6d"
             },
             "require": {
                 "channelgrabber/locking": "^1.0.0",
@@ -2277,7 +2277,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-scraper-1.0.2-4bb7d4.zip",
                 "reference": "3fc7b2dcf46fd2acef0aa37fd7b62f360e2df362",
-                "shasum": ""
+                "shasum": "33f2506dd8c01931bcbbe025f464f68764cdd2af"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.1",
@@ -2317,7 +2317,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.0.1-5b4619.zip",
                 "reference": "14652da72ba7ac96794023fe9d4534e6aec2e945",
-                "shasum": ""
+                "shasum": "adc0f4ae101e11e981973079aa793bb872addcbe"
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -2511,7 +2511,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-spork-v0.2.1-5e3e04.zip",
                 "reference": "5fcf29931ee0574c6177e41c218c2e132e4f9e02",
-                "shasum": ""
+                "shasum": "905806f14db1d76d43a29056482d537eab3ca44a"
             },
             "require": {
                 "ext-pcntl": "*",
@@ -2563,7 +2563,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.6-3619a7.zip",
                 "reference": "54c50d32e976408ef2d8c6fca1f8489243a397f1",
-                "shasum": ""
+                "shasum": "23d80d0c0d5db631d1bbcbc7fc95e34e923e6b26"
             },
             "require": {
                 "channelgrabber/stdlib": ">=2.10.1, <3.0.0",
@@ -2642,7 +2642,7 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
@@ -2650,7 +2650,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-8958-RemoveStockLocationOuAndSku-efd0b2.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-7256-LinkedProducts-efd0b2.zip",
                 "reference": "d0907a85256352ed29114403f7542b218877c18a",
                 "shasum": null
             },
@@ -2709,16 +2709,16 @@
         },
         {
             "name": "channelgrabber/stock-locking",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "a5a0d7c5433a1ce18c61f6b5de3e52577e1c49b9"
+                "reference": "4f5be875dc7e9cfd5976505ff92524ba19f000c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-CGIV-8958-RemoveStockLocationOuAndSku-a059fa.zip",
-                "reference": "a5a0d7c5433a1ce18c61f6b5de3e52577e1c49b9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-7256-LinkedProducts-37dd11.zip",
+                "reference": "4f5be875dc7e9cfd5976505ff92524ba19f000c1",
                 "shasum": null
             },
             "require": {
@@ -2726,7 +2726,7 @@
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/stdlib": "^2.12.47",
-                "channelgrabber/stock": "dev-CGIV-8958-RemoveStockLocationOuAndSku as 1.12.0",
+                "channelgrabber/stock": "dev-EPIC-CGIV-7256-LinkedProducts as 1.12.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -2748,7 +2748,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-03T12:02:21+00:00"
+            "time": "2017-11-07T16:27:56+00:00"
         },
         {
             "name": "channelgrabber/tax",
@@ -3107,7 +3107,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-vnderror-1.0.0-0d0417.zip",
                 "reference": "75465f86a44fb8abff6e49b8c62d423617d8e2c0",
-                "shasum": ""
+                "shasum": "ce8a7b4791460e36ed9b1a51bf3a396a2ed5aa58"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -3706,7 +3706,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -3804,7 +3804,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzle-guzzle-0645b70d953bc1c067bbc8d5bc53194706b628d9-zip-ed28d5.zip",
                 "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
-                "shasum": ""
+                "shasum": "def1db73076f0261fb24891ce0291f42f433e379"
             },
             "require": {
                 "ext-curl": "*",
@@ -4088,7 +4088,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-ringphp-dbbb91d7f6c191e5e405e900e3102ac7f261bc0b-zip-6654cd.zip",
                 "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "shasum": ""
+                "shasum": "8dab3a339bf624c4ec71dd14092c3b222e8fd1c4"
             },
             "require": {
                 "guzzlehttp/streams": "~3.0",
@@ -4144,7 +4144,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-streams-47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5-zip-c67b5d.zip",
                 "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": ""
+                "shasum": "7c6759fca28bc65d2f45c4ce942b68dc91a50c6f"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4350,7 +4350,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/league-event-e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd-zip-4b249b.zip",
                 "reference": "e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd",
-                "shasum": ""
+                "shasum": "c9235a50752d53a26fc53ade2bcb22c53126ead9"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4474,7 +4474,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/liuggio-statsd-php-client-c42e6d6687b7b2d7683186ec7f4f03351cc3dbca-zip-00a50a.zip",
                 "reference": "c42e6d6687b7b2d7683186ec7f4f03351cc3dbca",
-                "shasum": ""
+                "shasum": "ea0ce6f010f0e1e585728820862f3892b79c55f0"
             },
             "require": {
                 "php": ">=5.3.2"
@@ -4929,7 +4929,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpish-link_header-c3f1aaa47511d4d774456f888081f16a53dd0133-zip-a449a9.zip",
                 "reference": "c3f1aaa47511d4d774456f888081f16a53dd0133",
-                "shasum": ""
+                "shasum": "a1bb80defcfdc7dcce7119d5865a7ad54b49468a"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8417,7 +8417,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zendpdf-2.0.2.2-20f803.zip",
                 "reference": "94890c3dfa81b906e66ee1d2e5bb4fedad0586a5",
-                "shasum": ""
+                "shasum": "7b89587b40bd010b3b09f4e907144ca580fae70d"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -8465,7 +8465,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phpunit-1.0.4-8aafa6.zip",
                 "reference": "0de580de8ebd38dc5d3995a7a2b86a47101b19ef",
-                "shasum": ""
+                "shasum": "2221f6a56e8751ed90f3b905b1fa34221630e477"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -10093,19 +10093,19 @@
         {
             "alias": "1.9.7",
             "alias_normalized": "1.9.7.0",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/product"
         },
         {
             "alias": "1.12.0",
             "alias_normalized": "1.12.0.0",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/stock"
         },
         {
             "alias": "1.1.2",
             "alias_normalized": "1.1.2.0",
-            "version": "dev-CGIV-8958-RemoveStockLocationOuAndSku",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/stock-locking"
         }
     ],
