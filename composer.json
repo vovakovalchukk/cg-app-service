@@ -22,8 +22,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CG\\Order\\Test\\": "tests/unit/CG/Order/Test",
-            "CG\\SequentialNumbering\\Test\\": "tests/unit/CG/SequentialNumbering/Test"
+            "CG\\Order\\Test\\": "tests/CG/Order/Test",
+            "CG\\SequentialNumbering\\Test\\": "tests/CG/SequentialNumbering/Test"
         }
     },
     "config": {
@@ -105,11 +105,8 @@
         "zendframework/zend-validator": "2.4.0"
     },
     "require-dev": {
-        "channelgrabber/codeception": "~1.2.1",
-        "channelgrabber/phpunit": "~1.0.0",
-        "codeception/codeception": "~1.8.0",
-        "phpspec/phpspec": "2.0.*@dev",
-        "phpspec/prophecy": "~1.0"
+        "channelgrabber/phpunit": "^1.0.0",
+        "phpunit/phpunit": "~4.0.0"
     },
     "scripts": {
         "post-install-cmd": "@setup",
