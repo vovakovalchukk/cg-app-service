@@ -3,15 +3,14 @@ namespace CG\SequentialNumbering\Test\Provider\Redis;
 
 use CG\SequentialNumbering\Provider\Redis\Async\Release;
 use CG\SequentialNumbering\Test\Provider\RedisTestTrait;
-use PHPUnit_Framework_TestCase;
-use Predis\Async\Client as PredisAsync;
+use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 
 /**
  * @group integration
  * @backupGlobals disabled
  */
-class ReleaseTest extends PHPUnit_Framework_TestCase
+class ReleaseTest extends TestCase
 {
     use RedisTestTrait {
         setUpBeforeClass as setupPredis;

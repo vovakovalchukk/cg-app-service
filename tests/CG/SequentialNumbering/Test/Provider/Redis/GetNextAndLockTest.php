@@ -1,15 +1,15 @@
 <?php
 namespace CG\SequentialNumbering\Test\Provider\Redis;
 
-use PHPUnit_Framework_TestCase;
 use CG\SequentialNumbering\Provider\Redis\Async\GetNextAndLock;
 use CG\SequentialNumbering\Test\Provider\RedisTestTrait;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group integration
  * @backupGlobals disabled
  */
-class GetNextAndLockTest extends PHPUnit_Framework_TestCase
+class GetNextAndLockTest extends TestCase
 {
     use RedisTestTrait {
         setUpBeforeClass as setupPredis;
