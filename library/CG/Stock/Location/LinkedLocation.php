@@ -21,7 +21,7 @@ class LinkedLocation extends QuantifiedLocation
 
     public function getAvailable($quantify = true)
     {
-        return $this->getStock(__FUNCTION__, static::MIN_VALUE, $quantify);
+        return $this->getOnHand($quantify) - $this->getAllocated($quantify);
     }
 
     public function getOnHand($quantify = true)
