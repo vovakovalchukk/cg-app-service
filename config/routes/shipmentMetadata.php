@@ -8,7 +8,6 @@ use CG\Order\Service\ShipmentMetadata\RestService;
 use CG\Order\Shared\ShipmentMetadata\Entity;
 use CG\Order\Shared\ShipmentMetadata\Mapper;
 use CG\Slim\Versioning\Version;
-use Slim\Slim;
 
 return [
     "/shipmentMetadata" => [
@@ -17,9 +16,7 @@ return [
             "dataRules" => ValidationEntity::class,
             "filterRules" => ValidationFilter::class,
         ],
-        "controllers" => function() use ($serviceManager) {
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function() use ($di, $app) {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(ShipmentMetadataCollectionController::class);
@@ -41,9 +38,7 @@ return [
             "dataRules" => ValidationEntity::class,
             "filterRules" => null
         ],
-        "controllers" => function($id) use ($serviceManager) {
-            $di = $serviceManager->get('Di');
-            $app = $di->get(Slim::class);
+        "controllers" => function($id) use ($di, $app) {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(ShipmentMetadataController::class);
@@ -55,7 +50,7 @@ return [
         "via" => [
             'GET','PUT','DELETE','OPTIONS'
         ],
-        "name" => "ShippingMetadata",
+        "name" => "ShipmentMetadataEntity",
         "version" => new Version(1, 1),
         'eTag' => [
             'mapperClass' => Mapper::class,

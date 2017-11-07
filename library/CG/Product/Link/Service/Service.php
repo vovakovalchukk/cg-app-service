@@ -1,13 +1,16 @@
 <?php
 namespace CG\Product\Link\Service;
 
-use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductLink as ProductLinkNginxCacheInvalidator;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as ProductStockNginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
 use CG\Product\Link\Entity as ProductLink;
-use CG\Product\Link\Filter;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
 use CG\Product\Link\StorageInterface;
+use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
+use CG\Product\LinkNode\Entity as ProductLinkNode;
+use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Collection as StockCollection;
@@ -22,30 +25,41 @@ use CG\Stock\StorageInterface as StockStorage;
 
 class Service extends BaseService
 {
-    const RECURSION_MSG = 'Circular dependency detected. The product you are trying to link (SKU: %s) is already used to calculate stock for another product that you are trying to link this product to (SKU: %s).';
-
+    /** @var ProductLinkLeafStorage $productLinkLeafStorage */
+    protected $productLinkLeafStorage;
+    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
+    protected $productLinkNodeStorage;
+    /** @var ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator */
+    protected $productLinkNginxCacheInvalidator;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
     protected $stockStorage;
-    /** @var NginxCacheInvalidator $nginxCacheInvalidator */
-    protected $nginxCacheInvalidator;
+    /** @var ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator */
+    protected $productStockNginxCacheInvalidator;
 
     public function __construct(
         StorageInterface $storage,
         Mapper $mapper,
+        ProductLinkLeafStorage $productLinkLeafStorage,
+        ProductLinkNodeStorage $productLinkNodeStorage,
+        ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
-        NginxCacheInvalidator $nginxCacheInvalidator
+        ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
     ) {
         parent::__construct($storage, $mapper);
+        $this->productLinkLeafStorage = $productLinkLeafStorage;
+        $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
-        $this->nginxCacheInvalidator = $nginxCacheInvalidator;
+        $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
     }
 
     public function remove($productLink)
     {
+        $this->invalidateRelatedProductLink($productLink);
         parent::remove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
@@ -57,48 +71,45 @@ class Service extends BaseService
     {
         try {
             $currentEntity = $this->fetch($productLink->getId());
+            $this->invalidateRelatedProductLink($currentEntity);
         } catch (NotFound $exception) {
             $currentEntity = null;
         }
 
-        $this->checkForRecursion($productLink);
         $savedEntity = parent::save($productLink);
+        $this->invalidateRelatedProductLink($savedEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
 
-    protected function checkForRecursion(ProductLink $productLink, array $productSkuMap = [])
+    protected function invalidateRelatedProductLink(ProductLink $productLink)
     {
-        $productSkuMap[strtolower($productLink->getProductSku())] = true;
-
-        $ouIdProductSku = [];
-        foreach (array_keys($productLink->getStockSkuMap()) as $stockSku) {
-            $productSku = strtolower($stockSku);
-            if (isset($productSkuMap[$productSku])) {
-                throw new RecursionException(
-                    sprintf(static::RECURSION_MSG, $stockSku, $productLink->getProductSku())
-                );
-            }
-            $productSkuMap[$productSku] = true;
-            $ouIdProductSku[] = $productLink->getOrganisationUnitId() . '-' . $stockSku;
-        }
-
-        if (empty($ouIdProductSku)) {
-            return;
-        }
-
         try {
-            $productLinks = $this->fetchCollectionByFilter(
-                (new Filter('all', 1))->setOuIdProductSku($ouIdProductSku)
+            /** @var ProductLinkNode $productLinkNode */
+            $productLinkNode = $this->productLinkNodeStorage->fetch(
+                $this->generateOuIdSkuForProductLink($productLink)
             );
         } catch (NotFound $exception) {
+            // No related graphs to invalidate
             return;
         }
 
-        /** @var ProductLink $productLink */
-        foreach ($productLinks as $productLink) {
-            $this->checkForRecursion($productLink, $productSkuMap);
+        $this->invalidateProductLink(
+            $this->generateOuIdSkuForProductLink($productLink)
+        );
+
+        foreach ($productLinkNode as $sku) {
+            $this->invalidateProductLink(
+                $this->generateOuIdSku($productLinkNode->getOrganisationUnitId(), $sku)
+            );
         }
+    }
+
+    protected function invalidateProductLink($id)
+    {
+        $this->productLinkLeafStorage->invalidate($id);
+        $this->productLinkNodeStorage->invalidate($id);
+        $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 
     protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)
@@ -198,7 +209,7 @@ class Service extends BaseService
             if (!($stock instanceof Stock)) {
                 continue;
             }
-            $this->nginxCacheInvalidator->invalidateProductsForStockLocation(
+            $this->productStockNginxCacheInvalidator->invalidateProductsForStockLocation(
                 $stockLocation,
                 $stock
             );

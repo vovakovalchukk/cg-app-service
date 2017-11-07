@@ -1,5 +1,5 @@
 <?php
-namespace CG\Product\Link\Service;
+namespace CG\Product\Link\Storage;
 
 class RecursionException extends \RuntimeException
 {

@@ -1,6 +1,7 @@
 <?php
-namespace CG\InputValidation\ProductLink;
+namespace CG\InputValidation\ProductLinkLeaf;
 
+use CG\InputValidation\ProductLink\StockQty;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;

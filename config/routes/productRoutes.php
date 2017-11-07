@@ -31,6 +31,16 @@ use CG\Product\Link\Entity as ProductLinkEntity;
 use CG\Product\Link\Mapper as ProductLinkMapper;
 use CG\Product\Link\Service as ProductLinkService;
 
+use CG\Controllers\ProductLinkLeaf\Entity as ProductLinkLeafController;
+use CG\Controllers\ProductLinkLeaf\Collection as ProductLinkLeafCollectionController;
+use CG\InputValidation\ProductLinkLeaf\Entity as ProductLinkLeafEntityValidation;
+use CG\InputValidation\ProductLinkLeaf\Filter as ProductLinkLeafCollectionValidation;
+
+use CG\Controllers\ProductLinkNode\Entity as ProductLinkNodeController;
+use CG\Controllers\ProductLinkNode\Collection as ProductLinkNodeCollectionController;
+use CG\InputValidation\ProductLinkNode\Entity as ProductLinkNodeEntityValidation;
+use CG\InputValidation\ProductLinkNode\Filter as ProductLinkNodeCollectionValidation;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -192,6 +202,76 @@ return [
             'entityClass' => ProductLinkEntity::class,
             'serviceClass' => ProductLinkService::class
         ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkLeaf' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkLeafCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkLeafCollection',
+        'entityRoute' => '/productLinkLeaf/:productLinkLeafId',
+        'validation' => [
+            'filterRules' => ProductLinkLeafCollectionValidation::class,
+            'dataRules' => ProductLinkLeafEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkLeaf/:productLinkLeafId' => [
+        'controllers' => function($productLinkLeafId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkLeafController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkLeafId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
+        'name' => 'ProductLinkLeafEntity',
+        'validation' => [
+            'dataRules' => ProductLinkLeafEntityValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkNode' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkNodeCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkNodeCollection',
+        'entityRoute' => '/productLinkNode/:productLinkNodeId',
+        'validation' => [
+            'filterRules' => ProductLinkNodeCollectionValidation::class,
+            'dataRules' => ProductLinkNodeEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkNode/:productLinkNodeId' => [
+        'controllers' => function($productLinkNodeId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkNodeController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkNodeId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
+        'name' => 'ProductLinkNodeEntity',
+        'validation' => [
+            'dataRules' => ProductLinkNodeEntityValidation::class,
+        ],
+        'eTag' => false,
         'version' => new Version(1, 1)
     ],
 ];
