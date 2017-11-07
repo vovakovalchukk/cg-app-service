@@ -100,7 +100,7 @@ class Service extends BaseService
 
         foreach ($productLinkNode as $sku) {
             $this->invalidateProductLink(
-                $this->generateOuIdSku($productLinkNode->getOrganisationUnitId(), $sku)
+                ProductLink::generateId($productLinkNode->getOrganisationUnitId(), $sku)
             );
         }
     }
@@ -176,19 +176,14 @@ class Service extends BaseService
         $this->invalidateStockLocations($stockLocations);
     }
 
-    protected function generateOuIdSku($ouId, $sku)
-    {
-        return $ouId . '-' . strtolower($sku);
-    }
-
     protected function generateOuIdSkuForProductLink(ProductLink $productLink)
     {
-        return $this->generateOuIdSku($productLink->getOrganisationUnitId(), $productLink->getProductSku());
+        return ProductLink::generateId($productLink->getOrganisationUnitId(), $productLink->getProductSku());
     }
 
     protected function generateOuIdSkuForStockLocation(StockLocation $stockLocation)
     {
-        return $this->generateOuIdSku($stockLocation->getOrganisationUnitId(), $stockLocation->getSku());
+        return ProductLink::generateId($stockLocation->getOrganisationUnitId(), $stockLocation->getSku());
     }
 
     protected function invalidateStockLocations(StockLocations $stockLocations)

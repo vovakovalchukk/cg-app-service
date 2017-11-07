@@ -174,7 +174,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         if (!$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stock)) {
             throw new NotFound(sprintf('Product links are disabled for ou %d', $stock->getOrganisationUnitId()));
         }
-        return $this->productLinkStorage->fetch($stock->getOrganisationUnitId() . '-' . $stock->getSku());
+        return $this->productLinkStorage->fetch(ProductLink::generateId($stock->getOrganisationUnitId(), $stock->getSku()));
     }
 
     /**
@@ -185,7 +185,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         try {
             $ouSkuMap = [];
             foreach ($productLink->getStockSkuMap() as $sku => $qty) {
-                $ouSkuMap[] = $productLink->getOrganisationUnitId() . '-' . $sku;
+                $ouSkuMap[] = ProductLink::generateId($productLink->getOrganisationUnitId(), $sku);
             }
 
             if (empty($ouSkuMap)) {
@@ -260,7 +260,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 continue;
             }
 
-            $key = $stock->getOrganisationUnitId() . '-' . strtolower($stock->getSku());
+            $key = ProductLink::generateId($stock->getOrganisationUnitId(), $stock->getSku());
             if (!isset($productLinksByOuAndSku[$key])) {
                 $quantifiedStockLocations->attach($this->buildQuantifiedStockLocation($stockLocation));
                 continue;
@@ -301,7 +301,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 continue;
             }
 
-            $ouSkuMap[] = $stock->getOrganisationUnitId() . '-' . $stock->getSku();
+            $ouSkuMap[] = ProductLink::generateId($stock->getOrganisationUnitId(), $stock->getSku());
         }
 
         if (empty($ouSkuMap)) {
@@ -325,7 +325,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         /** @var ProductLink $productLink */
         foreach ($productLinks as $productLink) {
             $ouSkuMap = array_merge($ouSkuMap, array_map(function($sku) use($productLink) {
-                return $productLink->getOrganisationUnitId() . '-' . $sku;
+                return ProductLink::generateId($productLink->getOrganisationUnitId(), $sku);
             }, array_keys($productLink->getStockSkuMap())));
         }
 
@@ -435,7 +435,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
         /** @var ProductLink $productLink */
         foreach ($productLinks as $productLink) {
-            $key = $productLink->getOrganisationUnitId() . '-' . strtolower($productLink->getProductSku());
+            $key = ProductLink::generateId($productLink->getOrganisationUnitId(),$productLink->getProductSku());
             $keydArray[$key] = $productLink;
         }
 
