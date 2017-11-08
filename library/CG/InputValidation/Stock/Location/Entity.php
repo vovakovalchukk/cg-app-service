@@ -34,20 +34,6 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'stockId must be at least %min%'])
                 ]
             ],
-            'organisationUnitId' => [
-                'name'       => 'organisationUnitId',
-                'required'   => true,
-                'validators' => [
-                    new IntegerValidator(['name' => 'organisationUnitId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
-                ]
-            ],
-            'sku' => [
-                'name' => 'sku',
-                'required' => true,
-                'validators' => [new StringLength(['min' => 1])]
-            ],
             'onHand' => [
                 'name'       => 'onHand',
                 'required'   => true,
