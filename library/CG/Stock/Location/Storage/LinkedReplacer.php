@@ -29,8 +29,6 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
 
-    const LOG_CODE_RECURSIVE_SAVE = 'Recursive save detected - stock location will not be updated again';
-    const LOG_MSG_RECURSIVE_SAVE = 'Recursive save detected - stock location %d will not be updated again';
     const LOG_CODE_RECURSIVE_FETCH = 'Recursive fetch detected - stock location will be replaced with a zero\'d entity';
     const LOG_MSG_RECURSIVE_FETCH = 'Recursive fetch detected - stock location %d (%s) will be replaced with a zero\'d entity';
 
@@ -73,25 +71,9 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     /**
      * @param StockLocation $entity
      */
-    public function save($entity, array $ids = [])
+    public function save($entity)
     {
-        if (isset($ids[$entity->getId()])) {
-            throw new RecursionException(sprintf('Already saved stock location with id %s', $entity->getId()));
-        }
-
-        $ids[$entity->getId()] = true;
-        $location = $this->getQuantifiedStockLocation($this->locationStorage->save($entity));
-        if ($location instanceof LinkedLocation) {
-            /** @var StockLocation $linkedLocation */
-            foreach ($location->getLinkedLocations() as $linkedLocation) {
-                try {
-                    $this->save($linkedLocation, $ids);
-                } catch (RecursionException $exception) {
-                    $this->logCriticalException($exception, static::LOG_MSG_RECURSIVE_SAVE, ['id' => $linkedLocation->getId()], static::LOG_CODE_RECURSIVE_SAVE);
-                }
-            }
-        }
-        return $location;
+        return $this->getQuantifiedStockLocation($this->locationStorage->save($entity));
     }
 
     /**
