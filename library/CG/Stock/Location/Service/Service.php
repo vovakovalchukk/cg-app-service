@@ -3,6 +3,7 @@ namespace CG\Stock\Location\Service;
 
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
 use CG\FeatureFlags\Feature;
 use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
@@ -15,6 +16,7 @@ use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
+use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Entity as StockLocation;
@@ -39,6 +41,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $accountService;
     /** @var ProductLinkNodeStorage $productLinkNodeStorage */
     protected $productLinkNodeStorage;
+    /** @var NginxCacheInvalidator $nginxCacheInvalidator */
+    protected $nginxCacheInvalidator;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
     /** @var FeatureFlagsService $featureFlagsService */
@@ -53,6 +57,7 @@ class Service extends BaseService implements StatsAwareInterface
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
         ProductLinkNodeStorage $productLinkNodeStorage,
+        NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
         FeatureFlagsService $featureFlagsService
     ) {
@@ -60,6 +65,7 @@ class Service extends BaseService implements StatsAwareInterface
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
         $this->featureFlagsService = $featureFlagsService;
     }
@@ -124,6 +130,7 @@ class Service extends BaseService implements StatsAwareInterface
                         iterator_to_array($productLinkNode)
                     ))
                 );
+                /** @var StockCollection $relatedStocks */
                 $relatedStocks = $this->stockStorage->fetchCollectionByFilter(
                     (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'))
                 );
@@ -131,7 +138,15 @@ class Service extends BaseService implements StatsAwareInterface
                 return;
             }
 
-            // TODO: Invalidate cache for stock and stock locations
+            /** @var StockLocation $relatedStockLocation */
+            foreach ($relatedStockLocations as $relatedStockLocation) {
+                $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+                if (!($relatedStock instanceof Stock)) {
+                    continue;
+                }
+                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
+            }
+
             foreach ($relatedStocks as $relatedStock) {
                 $this->updateRelatedListings($relatedStock);
             }
