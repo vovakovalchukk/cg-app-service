@@ -73,7 +73,47 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
      */
     public function save($entity)
     {
+        try {
+            $fetchedEntity = $this->fetch($entity->getId());
+        } catch (NotFound $exception) {
+            $fetchedEntity = $this->getQuantifiedStockLocation($entity);
+        }
+
+        $quantifiedEntity = $this->getQuantifiedStockLocation($entity);
+        if (
+            $quantifiedEntity instanceof LinkedLocation
+            && !empty($difference = $this->calculateDifference($fetchedEntity, $quantifiedEntity))
+        ) {
+            /** @var StockLocation $linkedLocation */
+            foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
+                $this->locationStorage->save(
+                    $this->applyDifference($linkedLocation, $difference)
+                );
+            }
+        }
+
         return $this->getQuantifiedStockLocation($this->locationStorage->save($entity));
+    }
+
+    protected function calculateDifference(StockLocation $previous, StockLocation $current): array
+    {
+        $difference = [];
+        foreach (['OnHand', 'Allocated'] as $stock) {
+            $stockDifference = $current->{'get' . $stock}() - $previous->{'get' . $stock}();
+            if ($stockDifference != 0) {
+                $difference[$stock] = $stockDifference;
+            }
+        }
+        return $difference;
+    }
+
+    protected function applyDifference(StockLocation $stockLocation, array $difference)
+    {
+        $quantifier = ($stockLocation instanceof QuantifiedLocation) ? $stockLocation->getQuantifier() : 1;
+        foreach ($difference as $stock => $stockDifference) {
+            $currentStock = $stockLocation->{'get' . $stock}();
+            $stockLocation->{'set' . $stock}($currentStock + ($quantifier * $stockDifference));
+        }
     }
 
     /**

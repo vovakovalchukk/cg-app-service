@@ -31,7 +31,7 @@ class LinkedLocation extends QuantifiedLocation
 
     public function setOnHand($onHand, $quantify = true)
     {
-        $this->setStock(__FUNCTION__, $onHand, $quantify);
+        // NoOp: Can't update stock!
         return $this;
     }
 
@@ -42,7 +42,7 @@ class LinkedLocation extends QuantifiedLocation
 
     public function setAllocated($allocated, $quantify = true)
     {
-        $this->setStock(__FUNCTION__, $allocated, $quantify);
+        // NoOp: Can't update stock!
         return $this;
     }
 
@@ -55,18 +55,6 @@ class LinkedLocation extends QuantifiedLocation
             $stock = $stock !== null ? $operator($stock, $locationStock) : $locationStock;
         }
         return (int) $stock;
-    }
-
-    protected function setStock($method, $value, $quantify)
-    {
-        if ($quantify) {
-            $value *= $this->quantifier;
-        }
-
-        /** @var QuantifiedLocation $location */
-        foreach ($this->linkedLocations as $location) {
-            $location->{$method}($value, $quantify);
-        }
     }
 
     /**
