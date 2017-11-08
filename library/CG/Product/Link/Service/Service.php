@@ -11,6 +11,8 @@ use CG\Product\Link\StorageInterface;
 use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
 use CG\Product\LinkNode\Entity as ProductLinkNode;
 use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
+use CG\Product\Mapper as ProductMapper;
+use CG\Product\Service\Service as ProductService;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Collection as StockCollection;
@@ -41,6 +43,8 @@ class Service extends BaseService
     public function __construct(
         StorageInterface $storage,
         Mapper $mapper,
+        ProductService $productService,
+        ProductMapper $productMapper,
         ProductLinkLeafStorage $productLinkLeafStorage,
         ProductLinkNodeStorage $productLinkNodeStorage,
         ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
@@ -48,7 +52,7 @@ class Service extends BaseService
         StockStorage $stockStorage,
         ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
     ) {
-        parent::__construct($storage, $mapper);
+        parent::__construct($storage, $mapper, $productService, $productMapper);
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
