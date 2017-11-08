@@ -5,14 +5,12 @@ use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Product\Service\Service as ProductService;
 use CG\Product\StockMode;
 use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
-use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Mapper as LocationMapper;
@@ -33,8 +31,6 @@ class Service extends BaseService implements StatsAwareInterface
     protected $organisationUnitService;
     /** @var AccountService $accountService */
     protected $accountService;
-    /** @var ProductService $productService */
-    protected $productService;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
 
@@ -46,13 +42,11 @@ class Service extends BaseService implements StatsAwareInterface
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
-        ProductService $productService,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
-        $this->productService = $productService;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
