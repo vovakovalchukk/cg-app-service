@@ -34,6 +34,11 @@ return [
                     'repository' => Db::class,
                 ],
             ],
+            Cache::class => [
+                'parameters' => [
+                    'mapper' => TypedMapper::class,
+                ],
+            ],
             Db::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
