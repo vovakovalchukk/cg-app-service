@@ -1,8 +1,8 @@
 <?php
-namespace CG\SequentialNumbering\Test\Provider\Redis;
+namespace CG\Test\SequentialNumbering\Provider\Redis;
 
-use CG\SequentialNumbering\Provider\Redis\Async\Release;
-use CG\SequentialNumbering\Test\Provider\RedisTestTrait;
+use CG\SequentialNumbering\Provider\Redis\Async\MarkUsed;
+use CG\Test\SequentialNumbering\Provider\RedisTestTrait;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 
@@ -10,7 +10,7 @@ use UnexpectedValueException;
  * @group integration
  * @backupGlobals disabled
  */
-class ReleaseTest extends TestCase
+class MarkUsedTest extends TestCase
 {
     use RedisTestTrait {
         setUpBeforeClass as setupPredis;
@@ -22,14 +22,15 @@ class ReleaseTest extends TestCase
     const SEQUENCE_NAME = 'GetNextAndLockTestSequence';
 
     /**
-     * @var Release $release
+     * @var MarkUsed $markUsed
      */
-    protected static $release;
+    protected static $markUsed;
 
     public static function setUpBeforeClass()
     {
         static::setupPredis();
-        static::$release = new Release(
+        static::$markUsed = new MarkUsed(
+            static::KEY,
             static::QUEUE,
             static::LOCK,
             static::SEQUENCE_NAME
@@ -54,15 +55,14 @@ class ReleaseTest extends TestCase
     /**
      * @group markUsed
      */
-    public function testReleaseWithLock()
+    public function testMarkedUsedWithLock()
     {
-        static::$predis->set(static::KEY, 1);
-        static::$predis->set(static::LOCK, 2);
-        $this->release(2);
+        static::$predis->set(static::LOCK, 1);
+        $this->markUsed(1);
         $this->assertEquals(
             1,
             static::$predis->get(static::KEY),
-            'Sequence number was changed even though we released it'
+            'Number was not saved as current number in sequence'
         );
     }
 
@@ -74,22 +74,22 @@ class ReleaseTest extends TestCase
         static::$predis->set(static::KEY, 1);
         static::$predis->set(static::LOCK, 1);
         try {
-            $this->release(2);
+            $this->markUsed(2);
             $this->fail('Should have thrown an exception if I mark used when don\t have the lock');
         } catch (UnexpectedValueException $exception) {
             $this->assertEquals(
                 1,
                 static::$predis->get(static::KEY),
-                'Sequence number was changed even though we never had the lock to released'
+                'Number was saved as current number in sequence even though we didn\'t have the lock'
             );
         }
     }
 
-    protected function release($number)
+    protected function markUsed($number)
     {
-        $release = static::$release;
+        $markUsed = static::$markUsed;
         try {
-            $release(static::$predisAsync, $number);
+            $markUsed(static::$predisAsync, $number);
         } finally {
             static::$predisAsync->disconnect();
         }

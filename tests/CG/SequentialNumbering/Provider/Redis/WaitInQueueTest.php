@@ -1,8 +1,8 @@
 <?php
-namespace CG\SequentialNumbering\Test\Provider\Redis;
+namespace CG\Test\SequentialNumbering\Provider\Redis;
 
 use CG\SequentialNumbering\Provider\Redis\Async\WaitInQueue;
-use CG\SequentialNumbering\Test\Provider\RedisTestTrait;
+use CG\Test\SequentialNumbering\Provider\RedisTestTrait;
 use PHPUnit\Framework\TestCase;
 use Predis\Async\Client as PredisAsync;
 

@@ -1,5 +1,5 @@
 <?php
-namespace CG\SequentialNumbering\Test\Provider;
+namespace CG\Test\SequentialNumbering\Provider;
 
 use CG\SequentialNumbering\Provider\Redis\GetNextAndLockCommand;
 use CG\SequentialNumbering\Provider\Redis\SetCurrentThenUnlockAndNotifyNextCommand;

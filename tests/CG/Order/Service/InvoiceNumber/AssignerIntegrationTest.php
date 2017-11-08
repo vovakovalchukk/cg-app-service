@@ -1,5 +1,5 @@
 <?php
-namespace CG\Order\Test\Service\InvoiceNumber;
+namespace CG\Test\Order\Service\InvoiceNumber;
 
 use CG\Account\Client\Service as AccountService;
 use CG\Account\Shared\Entity as Account;
