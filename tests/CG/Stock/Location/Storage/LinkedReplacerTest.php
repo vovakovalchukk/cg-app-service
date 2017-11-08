@@ -2,10 +2,9 @@
 namespace CG\Test\Stock\Location\Storage;
 
 use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
-use CG\Product\Link\Collection as ProductLinkCollection;
-use CG\Product\Link\Entity as ProductLink;
-use CG\Product\Link\Filter as ProductLinkFilter;
-use CG\Product\Link\StorageInterface as ProductLinkStorage;
+use CG\Product\LinkLeaf\Collection as ProductLinkLeafCollection;
+use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
+use CG\Product\LinkLeaf\Filter as ProductLinkLeafFilter;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
@@ -17,6 +16,7 @@ use CG\Stock\Location\QuantifiedLocation as QuantifiedStockLocation;
 use CG\Stock\Location\Storage\LinkedReplacer;
 use CG\Stock\Location\StorageInterface as StockLocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
+use CG\TestAsset\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
 use PHPUnit\Framework\TestCase;
 
 class LinkedReplacerTest extends TestCase
@@ -25,8 +25,8 @@ class LinkedReplacerTest extends TestCase
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
     protected $stockStorage;
-    /** @var ProductLinkStorage $productLinkStorage */
-    protected $productLinkStorage;
+    /** @var ProductLinkLeafStorage $productLinkLeafStorage */
+    protected $productLinkLeafStorage;
     /** @var bool $enabled */
     protected $enabled;
     /** @var LinkedReplacer $linkReplacer */
@@ -36,13 +36,13 @@ class LinkedReplacerTest extends TestCase
     {
         $this->stockLocationStorage = $this->setupStockLocationStorage();
         $this->stockStorage = $this->setupStockStorage();
-        $this->productLinkStorage = $this->setupProductLinkStorage();
+        $this->productLinkLeafStorage = $this->setupProductLinkLeafStorage();
         $this->enabled = true;
 
         $this->linkReplacer = new LinkedReplacer(
             $this->stockLocationStorage,
             $this->stockStorage,
-            $this->productLinkStorage,
+            $this->productLinkLeafStorage,
             $this->setupFeatureFlagsService()
         );
     }
@@ -243,109 +243,80 @@ class LinkedReplacerTest extends TestCase
         return $stockStorage;
     }
 
-    protected function setupProductLinkStorage()
+    protected function setupProductLinkLeafStorage()
     {
-        $productLinks = [];
-        $productLinkStorage = $this->getMockBuilder(ProductLinkStorage::class)->disableOriginalConstructor()->getMock();
-        $productLinkStorage
+        $productLinkLeafs = [];
+        $productLinkLeafStorage = $this->getMockBuilder(ProductLinkLeafStorage::class)->disableOriginalConstructor()->getMock();
+        $productLinkLeafStorage
             ->expects($this->any())
             ->method('fetch')
             ->willReturnCallback(
-                function($id) use (&$productLinks) {
-                    $productLink = $productLinks[$id] ?? null;
-                    if (!$productLink) {
-                        throw new NotFound(sprintf('No product link found matching id %s', $id));
+                function($id) use (&$productLinkLeafs) {
+                    $productLinkLeaf = $productLinkLeafs[$id] ?? null;
+                    if (!$productLinkLeaf) {
+                        throw new NotFound(sprintf('No product link leaf found matching id %s', $id));
                     }
-                    return $productLink;
+                    return $productLinkLeaf;
                 }
             );
-        $productLinkStorage
+        $productLinkLeafStorage
             ->expects($this->any())
             ->method('fetchCollectionByFilter')
             ->willReturnCallback(
-                function(ProductLinkFilter $filter) use (&$productLinks) {
-                    $filteredProductLinks = $productLinks;
-                    if (!empty($organisationUnitId = array_fill_keys($filter->getOrganisationUnitId(), true))) {
-                        $filteredProductLinks = array_filter(
-                            $filteredProductLinks,
-                            function(ProductLink $productLink) use($organisationUnitId) {
-                                return isset($organisationUnitId[$productLink->getOrganisationUnitId()]);
-                            }
-                        );
-                    }
-                    if (!empty($productSku = array_fill_keys(array_map('strtolower', $filter->getProductSku()), true))) {
-                        $filteredProductLinks = array_filter(
-                            $filteredProductLinks,
-                            function(ProductLink $productLink) use($productSku) {
-                                return isset($productSku[strtolower($productLink->getProductSku())]);
-                            }
-                        );
-                    }
-                    if (!empty($stockSku = array_fill_keys(array_map('strtolower', $filter->getStockSku()), true))) {
-                        $filteredProductLinks = array_filter(
-                            $filteredProductLinks,
-                            function(ProductLink $productLink) use($stockSku) {
-                                foreach ($productLink->getStockSkuMap() as $sku => $qty) {
-                                    if (isset($stockSku[strtolower($sku)])) {
-                                        return true;
-                                    }
-                                }
-                                return false;
-                            }
-                        );
-                    }
+                function(ProductLinkLeafFilter $filter) use (&$productLinkLeafs) {
+                    $filteredProductLinkLeafs = $productLinkLeafs;
                     if (!empty($ouIdProductSku = array_fill_keys($filter->getOuIdProductSku(), true))) {
-                        $filteredProductLinks = array_filter(
-                            $filteredProductLinks,
-                            function(ProductLink $productLink) use($ouIdProductSku) {
-                                return isset($ouIdProductSku[$productLink->getId()]);
+                        $filteredProductLinkLeafs = array_filter(
+                            $filteredProductLinkLeafs,
+                            function(ProductLinkLeaf $productLinkLeaf) use($ouIdProductSku) {
+                                return isset($ouIdProductSku[$productLinkLeaf->getId()]);
                             }
                         );
                     }
 
-                    $total = count($filteredProductLinks);
+                    $total = count($filteredProductLinkLeafs);
                     if ($filter->getLimit() !== 'all') {
-                        $filteredProductLinks = array_splice(
-                            $filteredProductLinks,
+                        $filteredProductLinkLeafs = array_splice(
+                            $filteredProductLinkLeafs,
                             ($filter->getPage() - 1) * $filter->getLimit(),
                             $filter->getLimit()
                         );
                     }
 
-                    if (empty($filteredProductLinks)) {
-                        throw new NotFound('No product link match filter');
+                    if (empty($filteredProductLinkLeafs)) {
+                        throw new NotFound('No product link leaf match filter');
                     }
 
-                    $collection = new ProductLinkCollection(ProductLink::class, 'fetchCollectionByFilter', $filter->toArray());
+                    $collection = new ProductLinkLeafCollection(ProductLinkLeaf::class, 'fetchCollectionByFilter', $filter->toArray());
                     $collection->setTotal($total);
-                    foreach ($filteredProductLinks as $productLink) {
-                        $collection->attach($productLink);
+                    foreach ($filteredProductLinkLeafs as $productLinkLeaf) {
+                        $collection->attach($productLinkLeaf);
                     }
                     return $collection;
                 }
             );
-        $productLinkStorage
+        $productLinkLeafStorage
             ->expects($this->any())
             ->method('save')
             ->willReturnCallback(
-                function(ProductLink $productLink) use (&$productLinks) {
-                    $id = $productLink->getId();
-                    return $productLinks[$id] = $productLink;
+                function(ProductLinkLeaf $productLinkLeaf) use (&$productLinkLeafs) {
+                    $id = $productLinkLeaf->getId();
+                    return $productLinkLeafs[$id] = $productLinkLeaf;
                 }
             );
-        $productLinkStorage
+        $productLinkLeafStorage
             ->expects($this->any())
             ->method('remove')
             ->willReturnCallback(
-                function(ProductLink $productLink) use (&$productLinks) {
-                    $id = $productLink->getId();
-                    if (!isset($productLinks[$id])) {
-                        throw new NotFound(sprintf('No product link found matching id %s', $id));
+                function(ProductLinkLeaf $productLinkLeaf) use (&$productLinkLeafs) {
+                    $id = $productLinkLeaf->getId();
+                    if (!isset($productLinkLeafs[$id])) {
+                        throw new NotFound(sprintf('No product link leaf found matching id %s', $id));
                     }
-                    unset($productLinks[$id]);
+                    unset($productLinkLeafs[$id]);
                 }
             );
-        return $productLinkStorage;
+        return $productLinkLeafStorage;
     }
 
     protected function setupFeatureFlagsService()
@@ -377,7 +348,7 @@ class LinkedReplacerTest extends TestCase
 
     public function testLoadsAllLinkedLocations()
     {
-        $this->createProductLink('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1]);
+        $this->createProductLinkLeaf('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1]);
         $skuStockData = [
             'sku1' => ['onHand' => 22, 'allocated' => 3],
             'sku2' => ['onHand' => 13, 'allocated' => 0],
@@ -411,7 +382,7 @@ class LinkedReplacerTest extends TestCase
 
     public function testLoadsQuantifiedLinkedLocations()
     {
-        $this->createProductLink('link', ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1]);
+        $this->createProductLinkLeaf('link', ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1]);
         $skuStockData = [
             'sku1' => ['onHand' => 22, 'allocated' => 3],
             'sku2' => ['onHand' => 13, 'allocated' => 0],
@@ -445,7 +416,7 @@ class LinkedReplacerTest extends TestCase
 
     public function testAccountsForMissingLocations()
     {
-        $this->createProductLink('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1]);
+        $this->createProductLinkLeaf('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1]);
         $skuStockData = [
             'sku1' => ['onHand' => 22, 'allocated' => 3],
             'sku2' => ['onHand' => 13, 'allocated' => 0],
@@ -487,10 +458,10 @@ class LinkedReplacerTest extends TestCase
         );
     }
 
-    protected function createProductLink($productSku, array $stockSkuMap): ProductLink
+    protected function createProductLinkLeaf($productSku, array $stockSkuMap): ProductLinkLeaf
     {
-        return $this->productLinkStorage->save(
-            new ProductLink(1, $productSku, $stockSkuMap)
+        return $this->productLinkLeafStorage->save(
+            new ProductLinkLeaf(1, $productSku, $stockSkuMap)
         );
     }
 }
