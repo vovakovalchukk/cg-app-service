@@ -3,6 +3,8 @@ namespace CG\Stock\Location\Service;
 
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
+use CG\FeatureFlags\Feature;
+use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Product\LinkNode\Entity as ProductLinkNode;
@@ -39,6 +41,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $productLinkNodeStorage;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
+    /** @var FeatureFlagsService $featureFlagsService */
+    protected $featureFlagsService;
 
     public function __construct(
         LocationStorage $repository,
@@ -49,13 +53,15 @@ class Service extends BaseService implements StatsAwareInterface
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
         ProductLinkNodeStorage $productLinkNodeStorage,
-        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
+        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
+        FeatureFlagsService $featureFlagsService
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
+        $this->featureFlagsService = $featureFlagsService;
     }
 
     /**
@@ -101,6 +107,10 @@ class Service extends BaseService implements StatsAwareInterface
     protected function updateRelated(Stock $stock)
     {
         try {
+            if (!$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stock)) {
+                return;
+            }
+
             try {
                 /** @var ProductLinkNode $productLinkNode */
                 $productLinkNode = $this->productLinkNodeStorage->fetch(
