@@ -23,6 +23,7 @@ use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Filter as StockLocationFilter;
 use CG\Stock\Location\Mapper as LocationMapper;
 use CG\Stock\Location\Service as BaseService;
+use CG\Stock\Location\Storage\Cache as StockLocationCache;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
 
@@ -41,6 +42,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $accountService;
     /** @var ProductLinkNodeStorage $productLinkNodeStorage */
     protected $productLinkNodeStorage;
+    /** @var StockLocationCache $stockLocationCache */
+    protected $stockLocationCache;
     /** @var NginxCacheInvalidator $nginxCacheInvalidator */
     protected $nginxCacheInvalidator;
     /** @var UpdateRelatedListingsForStock */
@@ -57,6 +60,7 @@ class Service extends BaseService implements StatsAwareInterface
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
         ProductLinkNodeStorage $productLinkNodeStorage,
+        StockLocationCache $stockLocationCache,
         NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
         FeatureFlagsService $featureFlagsService
@@ -65,6 +69,7 @@ class Service extends BaseService implements StatsAwareInterface
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->stockLocationCache = $stockLocationCache;
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
         $this->featureFlagsService = $featureFlagsService;
@@ -140,11 +145,12 @@ class Service extends BaseService implements StatsAwareInterface
 
             /** @var StockLocation $relatedStockLocation */
             foreach ($relatedStockLocations as $relatedStockLocation) {
+                $this->stockLocationCache->remove($relatedStockLocation);
+
                 $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-                if (!($relatedStock instanceof Stock)) {
-                    continue;
+                if ($relatedStock instanceof Stock) {
+                    $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
                 }
-                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
             }
 
             /** @var Stock $relatedStock */
