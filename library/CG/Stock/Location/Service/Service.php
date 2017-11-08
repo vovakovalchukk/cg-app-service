@@ -5,6 +5,8 @@ use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
+use CG\Product\LinkNode\Entity as ProductLinkNode;
+use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
 use CG\Product\StockMode;
 use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stats\StatsAwareInterface;
@@ -12,7 +14,9 @@ use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
 use CG\Stock\Entity as Stock;
+use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Entity as StockLocation;
+use CG\Stock\Location\Filter as StockLocationFilter;
 use CG\Stock\Location\Mapper as LocationMapper;
 use CG\Stock\Location\Service as BaseService;
 use CG\Stock\Location\StorageInterface as LocationStorage;
@@ -31,6 +35,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $organisationUnitService;
     /** @var AccountService $accountService */
     protected $accountService;
+    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
+    protected $productLinkNodeStorage;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
 
@@ -42,14 +48,19 @@ class Service extends BaseService implements StatsAwareInterface
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
+        ProductLinkNodeStorage $productLinkNodeStorage,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
+        $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
+    /**
+     * @param StockLocation $stockLocation
+     */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {
@@ -68,7 +79,7 @@ class Service extends BaseService implements StatsAwareInterface
         }
 
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelatedListings($stock);
+        $this->updateRelated($stock);
         return $stockLocationHal;
     }
 
@@ -85,6 +96,38 @@ class Service extends BaseService implements StatsAwareInterface
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
         }
         return $this;
+    }
+
+    protected function updateRelated(Stock $stock)
+    {
+        try {
+            try {
+                /** @var ProductLinkNode $productLinkNode */
+                $productLinkNode = $this->productLinkNodeStorage->fetch(
+                    ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
+                );
+                $relatedStockLocations = $this->fetchCollectionByFilter(
+                    (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
+                        function ($sku) use ($productLinkNode) {
+                            return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+                        },
+                        iterator_to_array($productLinkNode)
+                    ))
+                );
+                $relatedStocks = $this->stockStorage->fetchCollectionByFilter(
+                    (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'))
+                );
+            } catch (NotFound $exception) {
+                return;
+            }
+
+            // TODO: Invalidate cache for stock and stock locations
+            foreach ($relatedStocks as $relatedStock) {
+                $this->updateRelatedListings($relatedStock);
+            }
+        } finally {
+            $this->updateRelatedListings($stock);
+        }
     }
 
     protected function updateRelatedListings(Stock $stock): Service
