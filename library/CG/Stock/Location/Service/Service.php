@@ -147,6 +147,7 @@ class Service extends BaseService implements StatsAwareInterface
                 $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
             }
 
+            /** @var Stock $relatedStock */
             foreach ($relatedStocks as $relatedStock) {
                 $this->updateRelatedListings($relatedStock);
             }
