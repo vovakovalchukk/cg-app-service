@@ -139,9 +139,13 @@ class Service extends BaseService
     protected function updateRelatedStockLocations(array $ouIdSkuUpdateMap)
     {
         try {
+            /** @var StockLocations $stockLocations */
             $stockLocations = $this->stockLocationStorage->fetchCollectionByFilter(
-                (new StockLocationFilter('all', 1))
-                    ->setOuIdSku(array_keys($ouIdSkuUpdateMap))
+                (new StockLocationFilter('all', 1))->setOuIdSku(array_keys($ouIdSkuUpdateMap))
+            );
+            /** @var StockCollection $stocks */
+            $stocks = $this->stockStorage->fetchCollectionByFilter(
+                (new StockFilter('all', 1))->setId($stockLocations->getArrayOf('stockId'))
             );
         } catch (NotFound $exception) {
             // No stock locations to update
@@ -150,7 +154,12 @@ class Service extends BaseService
 
         /** @var StockLocation $stockLocation */
         foreach ($stockLocations as $stockLocation) {
-            $ouIdSku = $this->generateOuIdSkuForStockLocation($stockLocation);
+            $stock = $stocks->getById($stockLocation->getStockId());
+            if (!($stock instanceof Stock)) {
+                continue;
+            }
+
+            $ouIdSku = $this->generateOuIdSkuForStock($stock);
             if ($stockLocation instanceof TypedStockLocation && isset($ouIdSkuUpdateMap[$ouIdSku])) {
                 $stockLocation->setType($ouIdSkuUpdateMap[$ouIdSku]);
             }
@@ -177,7 +186,9 @@ class Service extends BaseService
         };
 
         $stockLocations = $updater->saveCollectionHandleErrors($this->stockLocationStorage, $stockLocations);
-        $this->invalidateStockLocations($stockLocations);
+        if ($stockLocations) {
+            $this->invalidateStockLocations($stockLocations);
+        }
     }
 
     protected function generateOuIdSkuForProductLink(ProductLink $productLink)
@@ -185,9 +196,9 @@ class Service extends BaseService
         return ProductLink::generateId($productLink->getOrganisationUnitId(), $productLink->getProductSku());
     }
 
-    protected function generateOuIdSkuForStockLocation(StockLocation $stockLocation)
+    protected function generateOuIdSkuForStock(Stock $stock)
     {
-        return ProductLink::generateId($stockLocation->getOrganisationUnitId(), $stockLocation->getSku());
+        return ProductLink::generateId($stock->getOrganisationUnitId(), $stock->getSku());
     }
 
     protected function invalidateStockLocations(StockLocations $stockLocations)
