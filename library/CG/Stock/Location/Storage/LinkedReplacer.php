@@ -82,28 +82,32 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         }
 
         $quantifiedEntity = $this->getQuantifiedStockLocation($entity, $missingStockLocationSkus);
-        if (
-            $quantifiedEntity instanceof LinkedLocation
-            && !empty($difference = $this->calculateDifference($fetchedEntity, $entity))
-        ) {
-            if (count($missingStockLocationSkus) > 0) {
-                throw (new ValidationMessagesException(StatusCode::UNPROCESSABLE_ENTITY))->addErrorWithField(
-                    'stockSku',
-                    sprintf(
-                        'You can not update linked stock location %s because the following stock location sku(s) are missing: %s',
-                        $entity->getId(),
-                        implode(', ', $missingStockLocationSkus)
-                    )
-                );
-            }
-
-            /** @var StockLocation $linkedLocation */
-            foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
-                $this->applyDifference($linkedLocation, $difference);
-                $this->locationStorage->save($linkedLocation);
-            }
+        if (!($quantifiedEntity instanceof LinkedLocation)) {
+            return $this->locationStorage->save($quantifiedEntity);
         }
-        return $this->locationStorage->save($quantifiedEntity);
+
+        if (count($missingStockLocationSkus) > 0) {
+            throw (new ValidationMessagesException(StatusCode::UNPROCESSABLE_ENTITY))->addErrorWithField(
+                'stockSku',
+                sprintf(
+                    'You can not update linked stock location %s because the following stock location sku(s) are missing: %s',
+                    $entity->getId(),
+                    implode(', ', $missingStockLocationSkus)
+                )
+            );
+        }
+
+        if (empty($difference = $this->calculateDifference($fetchedEntity, $entity))) {
+            return $quantifiedEntity;
+        }
+
+        /** @var StockLocation $linkedLocation */
+        foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
+            $this->applyDifference($linkedLocation, $difference);
+            $this->locationStorage->save($linkedLocation);
+        }
+
+        return $quantifiedEntity;
     }
 
     protected function calculateDifference(StockLocation $previous, StockLocation $current): array
