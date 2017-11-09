@@ -80,7 +80,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             return $this->locationStorage->save($quantifiedEntity);
         }
 
-        if (count($missingStockLocationSkus) > 0) {
+        if (!empty($missingStockLocationSkus)) {
             throw (new ValidationMessagesException(StatusCode::UNPROCESSABLE_ENTITY))->addErrorWithField(
                 'stockSku',
                 sprintf(
