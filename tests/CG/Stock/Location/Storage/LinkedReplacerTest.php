@@ -567,6 +567,28 @@ class LinkedReplacerTest extends TestCase
         }
     }
 
+    /**
+     * @expectedException \CG\Stdlib\Exception\Runtime\ValidationMessagesException
+     */
+    public function testPreventUpdateIfMissingLocations()
+    {
+        $this->createProductLinkLeaf('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1]);
+        $skuStockData = [
+            'sku1' => ['onHand' => 22, 'allocated' => 3],
+            'sku2' => ['onHand' => 13, 'allocated' => 0],
+            'sku3' => ['onHand' => 41, 'allocated' => 2],
+            'sku4' => ['onHand' => 12, 'allocated' => 4],
+        ];
+
+        $stockLocation = $this->createStockLocation('link');
+        foreach ($skuStockData as $sku => $stockData) {
+            $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
+        }
+
+        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        $this->linkReplacer->save($quantifiedStockLocation->setOnHand(15));
+    }
+
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
     {
         $this->stockStorage->save(

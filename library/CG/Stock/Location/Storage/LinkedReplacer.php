@@ -3,6 +3,7 @@ namespace CG\Stock\Location\Storage;
 
 use CG\FeatureFlags\Feature;
 use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
+use CG\Http\StatusCode;
 use CG\Product\LinkLeaf\Collection as ProductLinkLeafs;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
 use CG\Product\LinkLeaf\Filter as ProductLinkLeafFilter;
@@ -10,6 +11,7 @@ use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\Exception\Runtime\MixedResultsException;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Exception\Runtime\ValidationMessagesException;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Collection as StockCollection;
@@ -79,11 +81,22 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $fetchedEntity = $this->getQuantifiedStockLocation($entity);
         }
 
-        $quantifiedEntity = $this->getQuantifiedStockLocation($entity);
+        $quantifiedEntity = $this->getQuantifiedStockLocation($entity, $missingStockLocationSkus);
         if (
             $quantifiedEntity instanceof LinkedLocation
             && !empty($difference = $this->calculateDifference($fetchedEntity, $entity))
         ) {
+            if (count($missingStockLocationSkus) > 0) {
+                throw (new ValidationMessagesException(StatusCode::UNPROCESSABLE_ENTITY))->addErrorWithField(
+                    'stockSku',
+                    sprintf(
+                        'You can not update linked stock location %s because the following stock location sku(s) are missing: %s',
+                        $entity->getId(),
+                        implode(', ', $missingStockLocationSkus)
+                    )
+                );
+            }
+
             /** @var StockLocation $linkedLocation */
             foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
                 $this->applyDifference($linkedLocation, $difference);
@@ -160,12 +173,15 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         );
     }
 
-    protected function getQuantifiedStockLocation(StockLocation $stockLocation): QuantifiedLocation
-    {
+    protected function getQuantifiedStockLocation(
+        StockLocation $stockLocation,
+        &$missingStockLocationSkus = null
+    ): QuantifiedLocation {
         try {
             $productLinkLeaf = $this->getProductLinkLeaf($stockLocation);
-            return $this->getLinkedStockLocation($stockLocation, $productLinkLeaf);
+            return $this->getLinkedStockLocation($stockLocation, $productLinkLeaf, $missingStockLocationSkus);
         } catch (NotFound $exception) {
+            $missingStockLocationSkus = [];
             return $this->buildQuantifiedStockLocation($stockLocation);
         }
     }
@@ -193,7 +209,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
     protected function getLinkedStockLocation(
         StockLocation $stockLocation,
-        ProductLinkLeaf $productLinkLeaf
+        ProductLinkLeaf $productLinkLeaf,
+        &$missingStockLocationSkus = null
     ): LinkedLocation {
         try {
             $ouSkuMap = [];
@@ -216,7 +233,12 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $stockLocation->getId(),
             $stockLocation->getStockId(),
             $stockLocation->getLocationId(),
-            $this->buildQuantifiedLinkedStockLocations($stockLocation, $productLinkLeaf, $linkedStockLocations)
+            $this->buildQuantifiedLinkedStockLocations(
+                $stockLocation,
+                $productLinkLeaf,
+                $linkedStockLocations,
+                $missingStockLocationSkus
+            )
         );
     }
 
@@ -489,7 +511,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected function buildQuantifiedLinkedStockLocations(
         StockLocation $stockLocation,
         ProductLinkLeaf $productLinkLeaf,
-        Collection $linkedStockLocations
+        Collection $linkedStockLocations,
+        &$missingStockLocationSkus = null
     ): Collection {
         $skuQtyMap = $productLinkLeaf->getStockSkuMap();
 
@@ -535,6 +558,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             unset($skuQtyMap[$skuMap[strtolower($sku)]], $skuMap[strtolower($sku)]);
         }
 
+        $missingStockLocationSkus = array_keys($skuQtyMap);
         $this->attachMissingQuantifiedStockLocations($stockLocation, $quantifiedLinkedStockLocations, $skuQtyMap);
         return $quantifiedLinkedStockLocations;
     }
