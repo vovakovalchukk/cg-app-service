@@ -75,12 +75,6 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
      */
     public function save($entity)
     {
-        try {
-            $fetchedEntity = $this->fetch($entity->getId());
-        } catch (NotFound $exception) {
-            $fetchedEntity = $this->getQuantifiedStockLocation($entity);
-        }
-
         $quantifiedEntity = $this->getQuantifiedStockLocation($entity, $missingStockLocationSkus);
         if (!($quantifiedEntity instanceof LinkedLocation)) {
             return $this->locationStorage->save($quantifiedEntity);
@@ -95,6 +89,12 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                     implode(', ', $missingStockLocationSkus)
                 )
             );
+        }
+
+        try {
+            $fetchedEntity = $this->fetch($entity->getId());
+        } catch (NotFound $exception) {
+            $fetchedEntity = $this->getQuantifiedStockLocation($entity);
         }
 
         if (empty($difference = $this->calculateDifference($fetchedEntity, $entity))) {
