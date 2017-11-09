@@ -82,17 +82,15 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         $quantifiedEntity = $this->getQuantifiedStockLocation($entity);
         if (
             $quantifiedEntity instanceof LinkedLocation
-            && !empty($difference = $this->calculateDifference($fetchedEntity, $quantifiedEntity))
+            && !empty($difference = $this->calculateDifference($fetchedEntity, $entity))
         ) {
             /** @var StockLocation $linkedLocation */
             foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
-                $this->locationStorage->save(
-                    $this->applyDifference($linkedLocation, $difference)
-                );
+                $this->applyDifference($linkedLocation, $difference);
+                $this->locationStorage->save($linkedLocation);
             }
         }
-
-        return $this->getQuantifiedStockLocation($this->locationStorage->save($entity));
+        return $this->locationStorage->save($quantifiedEntity);
     }
 
     protected function calculateDifference(StockLocation $previous, StockLocation $current): array
@@ -111,8 +109,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     {
         $quantifier = ($stockLocation instanceof QuantifiedLocation) ? $stockLocation->getQuantifier() : 1;
         foreach ($difference as $stock => $stockDifference) {
-            $currentStock = $stockLocation->{'get' . $stock}();
-            $stockLocation->{'set' . $stock}($currentStock + ($quantifier * $stockDifference));
+            $currentStock = $stockLocation->{'get' . $stock}(false);
+            $stockLocation->{'set' . $stock}($currentStock + ($quantifier * $stockDifference), false);
         }
     }
 
@@ -503,7 +501,11 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         $quantifiedLinkedStockLocations = new Collection(
             StockLocation::class,
             __FUNCTION__,
-            compact('stockLocation', 'productLinkLeaf', 'linkedStockLocations')
+            [
+                'stockLocation' => $stockLocation->getId(),
+                'productLinkLeaf' => $productLinkLeaf->getId(),
+                'linkedStockLocations' => $linkedStockLocations->getIds(),
+            ]
         );
 
         /** @var StockCollection $stockCollection */
