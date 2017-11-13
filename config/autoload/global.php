@@ -143,6 +143,7 @@ use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
 use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
 use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
 use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
+use CG\FileStorage\S3\Adapter as S3LabelDataAdapter;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -407,6 +408,16 @@ use CG\Settings\InvoiceMapping\StorageInterface as InvoiceMappingSettingsStorage
 // PurchaseOrder
 use CG\PurchaseOrder\Entity as PurchaseOrderEntity;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItemEntity;
+
+// Ekm\Registration
+use CG\Ekm\Registration\Service as EkmRegistrationService;
+use CG\Ekm\Registration\Mapper as EkmRegistrationMapper;
+use CG\Ekm\Registration\Storage\Db as EkmRegistrationDb;
+use CG\Ekm\Registration\StorageInterface as EkmRegistrationStorage;
+use CG\Ekm\Registration\Service as EkmRegistrationServiceService;
+use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
+use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
+use CG\Stdlib\Sites;
 
 $config = array(
     'di' => array(
@@ -804,9 +815,15 @@ $config = array(
                     'mapper' => LabelMapper::class
                 ]
             ],
+            S3LabelDataAdapter::class => [
+                'parameter' => [
+                    'location' => function () { return LabelLabelDataS3Storage::BUCKET; }
+                ]
+            ],
             LabelLabelDataS3Storage::class => [
                 'parameter' => [
-                    'predisClient' => 'unreliable_redis',
+                    's3FileStorage' => S3LabelDataAdapter::class,
+                    'predisClient' => 'unreliable_redis'
                 ]
             ],
             LabelMetaPlusLabelDataStorage::class => [
@@ -1578,6 +1595,34 @@ $config = array(
                     'writeSql' => 'WriteSql',
                 ]
             ],
+            EkmRegistrationDb::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => EkmRegistrationMapper::class
+                ]
+            ],
+            EkmRegistrationService::class => [
+                'parameters' => [
+                    'repository' => EkmRegistrationDb::class,
+                ]
+            ],
+            EkmRegistrationController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            EkmRegistrationCollectionController::class => [
+                'parameters' => [
+                    'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            Sites::class => [
+                'parameters' => [
+                    'config' => 'config'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
@@ -1625,7 +1670,8 @@ $config = array(
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
-                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class
+                InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
+                EkmRegistrationStorage::class => EkmRegistrationDb::class
             ]
         )
     )

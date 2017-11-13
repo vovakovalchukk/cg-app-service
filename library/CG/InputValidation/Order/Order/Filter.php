@@ -311,6 +311,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new Date(['format' => "Y-m-d H:i:s"])
                 ]
             ],
+            'hasInvoice' => [
+                'name' => 'hasInvoice',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'hasInvoice'])
+                ]
+            ],
         ];
     }
 }

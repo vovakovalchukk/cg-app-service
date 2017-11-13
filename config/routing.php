@@ -14,6 +14,8 @@ $files = [
     'shipmentMetadata.php',
     'orderLink.php',
     'purchaseOrderRoutes.php',
+    'reportRoutes.php',
+    'ekmRoutes.php',
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;
