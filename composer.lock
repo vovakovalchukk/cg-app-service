@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf1e07b617fcc16fda78a33bdc90251c",
+    "content-hash": "a44bbecd515ca46ff7a44cce52dee24a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -18,7 +18,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/alcaeus/mongo-php-adapter/zipball/d3545f94ac76bdfbeb75b329e57ff2a0626aa429",
                 "reference": "d3545f94ac76bdfbeb75b329e57ff2a0626aa429",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-hash": "*",
@@ -81,7 +81,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/aws-aws-sdk-php-eb10e43cccf8e868f9622ab8ce2beb9fb756b5a8-zip-f3c789.zip",
                 "reference": "eb10e43cccf8e868f9622ab8ce2beb9fb756b5a8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1|^6.2.1",
@@ -677,7 +677,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-constants-dev-master-1ee173.zip",
                 "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -1000,7 +1000,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.6.0-c5da24.zip",
                 "reference": "6dcdea929d5fc263475604dbd33a19d6c220c952",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": ">=1.0.1",
@@ -1595,16 +1595,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.33.2",
+            "version": "dev-CGIV-8259-LinkedProductStockUpdates",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "94b438a48ceb337c9ea9629c9f6752dd4dabd1e0"
+                "reference": "6fe02a2171b116a04a17fd5a6659031926b9fc49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.33.2-4fcd64.zip",
-                "reference": "94b438a48ceb337c9ea9629c9f6752dd4dabd1e0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8259-LinkedProductStockUpdates-6df6a7.zip",
+                "reference": "6fe02a2171b116a04a17fd5a6659031926b9fc49",
                 "shasum": null
             },
             "require": {
@@ -1636,7 +1636,7 @@
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.47",
-                "channelgrabber/stock": "^1.8.2",
+                "channelgrabber/stock": "dev-CGIV-8259-LinkedProductStockUpdates as 1.12.0",
                 "channelgrabber/tax": "^1.0.2",
                 "channelgrabber/template": "^1.4.27",
                 "channelgrabber/transaction": "^1.2.1",
@@ -1676,7 +1676,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-08T08:47:42+00:00"
+            "time": "2017-11-13T15:22:26+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1888,7 +1888,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-v0.2.3.2-60bf12.zip",
                 "reference": "27dbf1a362ff1e1ecb84cb42718ae9dadd97579d",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2197,7 +2197,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-1.0.0-2e6e76.zip",
                 "reference": "6f46c49376f1a27e63d5f1b6b832acf2c04a218b",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/locking": "^1.0.0",
@@ -2277,7 +2277,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-scraper-1.0.2-4bb7d4.zip",
                 "reference": "3fc7b2dcf46fd2acef0aa37fd7b62f360e2df362",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": ">=2.0.1",
@@ -2317,7 +2317,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.0.1-5b4619.zip",
                 "reference": "14652da72ba7ac96794023fe9d4534e6aec2e945",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": ">=2.0.0,<3.0.0",
@@ -2511,7 +2511,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-spork-v0.2.1-5e3e04.zip",
                 "reference": "5fcf29931ee0574c6177e41c218c2e132e4f9e02",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-pcntl": "*",
@@ -2563,7 +2563,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.6-3619a7.zip",
                 "reference": "54c50d32e976408ef2d8c6fca1f8489243a397f1",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/stdlib": ">=2.10.1, <3.0.0",
@@ -2642,16 +2642,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "dev-CGIV-8259-LinkedProductStockUpdates",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e0a64a7ad853712cd88616e95e1b7b3508e38a90"
+                "reference": "a6189a5807346823d9eddba620a9fc958ceb22eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-7256-LinkedProducts-049f1e.zip",
-                "reference": "e0a64a7ad853712cd88616e95e1b7b3508e38a90",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-8259-LinkedProductStockUpdates-b79ff4.zip",
+                "reference": "a6189a5807346823d9eddba620a9fc958ceb22eb",
                 "shasum": null
             },
             "require": {
@@ -2687,7 +2687,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-CGIV-8259-LinkedProductStockUpdates": "1.12.0.x-dev"
                 }
             },
             "autoload": {
@@ -2705,7 +2706,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-09T13:43:16+00:00"
+            "time": "2017-11-13T15:32:22+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -3107,7 +3108,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-vnderror-1.0.0-0d0417.zip",
                 "reference": "75465f86a44fb8abff6e49b8c62d423617d8e2c0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -3309,7 +3310,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Cilex/Cilex/zipball/89ff6b821885b3f060d77de4d55ac8b4b9b42162",
                 "reference": "89ff6b821885b3f060d77de4d55ac8b4b9b42162",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "cilex/console-service-provider": "1.*",
@@ -3368,7 +3369,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Cilex/console-service-provider/zipball/25ee3d1875243d38e1a3448ff94bdf944f70d24e",
                 "reference": "25ee3d1875243d38e1a3448ff94bdf944f70d24e",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3",
@@ -3427,7 +3428,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/composer-ca-bundle-9dd73a03951357922d8aee6cc084500de93e2343-zip-379d64.zip",
                 "reference": "9dd73a03951357922d8aee6cc084500de93e2343",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-openssl": "*",
@@ -3491,7 +3492,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/composer-composer-c639623fa2178b404ed4bab80f0d1263853fa4ae-zip-50212b.zip",
                 "reference": "c639623fa2178b404ed4bab80f0d1263853fa4ae",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "composer/ca-bundle": "^1.0",
@@ -3573,7 +3574,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/composer-semver-c7cb9a2095a074d131b65a8a0cd294479d785573-zip-20ec66.zip",
                 "reference": "c7cb9a2095a074d131b65a8a0cd294479d785573",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.3.2 || ^7.0"
@@ -3640,7 +3641,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/composer-spdx-licenses-2603a0d7ddc00a015deb576fa5297ca43dee6b1c-zip-2fc6af.zip",
                 "reference": "2603a0d7ddc00a015deb576fa5297ca43dee6b1c",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.3.2 || ^7.0"
@@ -3706,7 +3707,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -3748,7 +3749,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-curl": "*",
@@ -3804,7 +3805,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzle-guzzle-0645b70d953bc1c067bbc8d5bc53194706b628d9-zip-ed28d5.zip",
                 "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-curl": "*",
@@ -3905,7 +3906,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-guzzle-70f1fa53b71c4647bf2762c09068a95f77e12fb8-zip-29950c.zip",
                 "reference": "70f1fa53b71c4647bf2762c09068a95f77e12fb8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "guzzlehttp/ringphp": "^1.1",
@@ -3962,7 +3963,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-promises-a59da6cf61d80060647ff4d3eb2c03a2bc694646-zip-081b1f.zip",
                 "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5.0"
@@ -4018,7 +4019,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-psr7-f5b8a8512e2b58b0071a7280e39f14f72e05d87c-zip-307522.zip",
                 "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0",
@@ -4088,7 +4089,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-ringphp-dbbb91d7f6c191e5e405e900e3102ac7f261bc0b-zip-6654cd.zip",
                 "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "guzzlehttp/streams": "~3.0",
@@ -4144,7 +4145,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/guzzlehttp-streams-47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5-zip-c67b5d.zip",
                 "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4199,7 +4200,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/jakeasmith-http_build_url-93c273e77cb1edead0cf8bcf8cd2003428e74e37-zip-926423.zip",
                 "reference": "93c273e77cb1edead0cf8bcf8cd2003428e74e37",
-                "shasum": ""
+                "shasum": null
             },
             "type": "library",
             "autoload": {
@@ -4237,7 +4238,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jakoch/phantomjs-installer/zipball/2431d7001a911c672b2ef04f447222a967134313",
                 "reference": "2431d7001a911c672b2ef04f447222a967134313",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-openssl": "*"
@@ -4278,7 +4279,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/justinrainbow-json-schema-429be236f296ca249d61c65649cdf2652f4a5e80-zip-9db898.zip",
                 "reference": "429be236f296ca249d61c65649cdf2652f4a5e80",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -4350,7 +4351,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/league-event-e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd-zip-4b249b.zip",
                 "reference": "e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4405,7 +4406,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/league-oauth2-server-3bec591393b1cc6a3fc02c94d18262e4ffad2e4f-zip-4bbc2c.zip",
                 "reference": "3bec591393b1cc6a3fc02c94d18262e4ffad2e4f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "league/event": "~2.1",
@@ -4474,7 +4475,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/liuggio-statsd-php-client-c42e6d6687b7b2d7683186ec7f4f03351cc3dbca-zip-00a50a.zip",
                 "reference": "c42e6d6687b7b2d7683186ec7f4f03351cc3dbca",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.2"
@@ -4529,7 +4530,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/mongodb-mongodb-a307dd60e71e1291c60927ea4f3a1905146063f5-zip-4b5a5a.zip",
                 "reference": "a307dd60e71e1291c60927ea4f3a1905146063f5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-mongodb": "^1.2.0",
@@ -4592,7 +4593,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/mtdowling-jmespath-php-adcc9531682cf87dfda21e1fd5d0e7a41d292fac-zip-77cc66.zip",
                 "reference": "adcc9531682cf87dfda21e1fd5d0e7a41d292fac",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4652,7 +4653,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/nocarrier-hal-08ffddf52733633403e0f4ca6e949b0c7cc186f8-zip-a081ad.zip",
                 "reference": "08ffddf52733633403e0f4ca6e949b0c7cc186f8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4705,7 +4706,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/opensoft-rollout-2e5a72b7e59b7296d50f36404a1e404f67e67636-zip-1c9b4a.zip",
                 "reference": "2e5a72b7e59b7296d50f36404a1e404f67e67636",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -4762,7 +4763,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/php-jsonpatch-php-jsonpatch-03b07d29980bfec04e3e9eb398e1b4ce8691b524-zip-4839a0.zip",
                 "reference": "03b07d29980bfec04e3e9eb398e1b4ce8691b524",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0",
@@ -4820,7 +4821,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/php-jsonpointer-php-jsonpointer-e79ac0e91752b74d1535aa95becc33c6f7e01a82-zip-fd5774.zip",
                 "reference": "e79ac0e91752b74d1535aa95becc33c6f7e01a82",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4873,7 +4874,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/php-units-of-measure-php-units-of-measure-2424d6444333603c04bc16bc864cd0b45730ea65-zip-ddc8b8.zip",
                 "reference": "2424d6444333603c04bc16bc864cd0b45730ea65",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4929,7 +4930,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpish-link_header-c3f1aaa47511d4d774456f888081f16a53dd0133-zip-a449a9.zip",
                 "reference": "c3f1aaa47511d4d774456f888081f16a53dd0133",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4976,7 +4977,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpseclib-mcrypt_compat-a1761aa8462471c9955af0bccbe3ae19159745ca-zip-96b6b4.zip",
                 "reference": "a1761aa8462471c9955af0bccbe3ae19159745ca",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0",
@@ -5030,7 +5031,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpseclib-phpseclib-f8dd0e18d2328c447dd4190fecd11ef52680d968-zip-ece5fb.zip",
                 "reference": "f8dd0e18d2328c447dd4190fecd11ef52680d968",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5127,7 +5128,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/picqer-php-barcode-generator-5328d821b076727163a3ad25373973055faadead-zip-d1bb00.zip",
                 "reference": "5328d821b076727163a3ad25373973055faadead",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -5201,7 +5202,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/fabpot/Pimple/zipball/ae11e57e8c2bb414b2ff93396dbbfc0eb92feb94",
                 "reference": "ae11e57e8c2bb414b2ff93396dbbfc0eb92feb94",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5247,7 +5248,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/psr-http-message-f6561bf28d520154e4b0ec72be95418abe6d9363-zip-7ab320.zip",
                 "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5302,7 +5303,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/psr-log-4ebe3a8bf773a19edfe0a84b6585ba3d401b724d-zip-6434e8.zip",
                 "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5355,7 +5356,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/react-event-loop-13e03b17e54ea864c6653a2cf6d146dad8464e91-zip-eb345b.zip",
                 "reference": "13e03b17e54ea864c6653a2cf6d146dad8464e91",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5402,7 +5403,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/react-promise-62785ae604c8d69725d693eb370e1d67e94c4053-zip-8b781e.zip",
                 "reference": "62785ae604c8d69725d693eb370e1d67e94c4053",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
@@ -5453,7 +5454,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/realityking-hash_equals-c94c380358f0649d4efe09c59fa94d16a65607bf-zip-1306d9.zip",
                 "reference": "c94c380358f0649d4efe09c59fa94d16a65607bf",
-                "shasum": ""
+                "shasum": null
             },
             "type": "library",
             "autoload": {
@@ -5496,7 +5497,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/ramsey/vnderror/zipball/06c03145f4d9a34f679feb53b8a5a885f4d8aae2",
                 "reference": "06c03145f4d9a34f679feb53b8a5a885f4d8aae2",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5541,7 +5542,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/seld-cli-prompt-a19a7376a4689d4d94cab66ab4f3c816019ba8dd-zip-c77c7f.zip",
                 "reference": "a19a7376a4689d4d94cab66ab4f3c816019ba8dd",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3"
@@ -5594,7 +5595,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/seld-jsonlint-50d63f2858d87c4738d5b76a7dcbb99fa8cf7c77-zip-971430.zip",
                 "reference": "50d63f2858d87c4738d5b76a7dcbb99fa8cf7c77",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.3 || ^7.0"
@@ -5648,7 +5649,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/seld-phar-utils-7009b5139491975ef6486545a39f3e6dad5ac30a-zip-8f0162.zip",
                 "reference": "7009b5139491975ef6486545a39f3e6dad5ac30a",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3"
@@ -5697,7 +5698,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/slim-slim-9224ed81ac1c412881e8d762755e3d76ebf580c0-zip-7bc8fb.zip",
                 "reference": "9224ed81ac1c412881e8d762755e3d76ebf580c0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5749,7 +5750,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-browser-kit-4386755566fc8d29bddf89694663b0e96cb01e61-zip-61b380.zip",
                 "reference": "4386755566fc8d29bddf89694663b0e96cb01e61",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9",
@@ -5811,7 +5812,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-class-loader-6789dc86c94c5686d90aa416ef63eb911e73fd26-zip-109efa.zip",
                 "reference": "6789dc86c94c5686d90aa416ef63eb911e73fd26",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9",
@@ -5869,7 +5870,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-config-0b8541d18507d10204a08384640ff6df3c739ebe-zip-3030c4.zip",
                 "reference": "0b8541d18507d10204a08384640ff6df3c739ebe",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9",
@@ -5930,7 +5931,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-console-c0807a2ca978e64d8945d373a9221a5c35d1a253-zip-8c3f2e.zip",
                 "reference": "c0807a2ca978e64d8945d373a9221a5c35d1a253",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9",
@@ -5996,7 +5997,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-css-selector-ba3204654efa779691fac9e948a96b4a7067e4ab-zip-14b7d3.zip",
                 "reference": "ba3204654efa779691fac9e948a96b4a7067e4ab",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6054,7 +6055,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-debug-697c527acd9ea1b2d3efac34d9806bf255278b0a-zip-ff5336.zip",
                 "reference": "697c527acd9ea1b2d3efac34d9806bf255278b0a",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5.9",
@@ -6116,7 +6117,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-dependency-injection-e1c722dfe4dd04453aeb6b7a6deefb400c878394-zip-f3d9ec.zip",
                 "reference": "e1c722dfe4dd04453aeb6b7a6deefb400c878394",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6184,7 +6185,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-dom-crawler-dd2fc76e011cb480b2d163c3b2deebd3de4471c8-zip-6ac63d.zip",
                 "reference": "dd2fc76e011cb480b2d163c3b2deebd3de4471c8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9",
@@ -6245,7 +6246,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-event-dispatcher-7fc8e2b4118ff316550596357325dfd92a51f531-zip-133e35.zip",
                 "reference": "7fc8e2b4118ff316550596357325dfd92a51f531",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6310,7 +6311,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-filesystem-714b1036010c354ae2b25d7f9ca27e14e265e9f2-zip-817d40.zip",
                 "reference": "714b1036010c354ae2b25d7f9ca27e14e265e9f2",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6364,7 +6365,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-finder-4f4e84811004e065a3bb5ceeb1d9aa592630f9ad-zip-aaad1f.zip",
                 "reference": "4f4e84811004e065a3bb5ceeb1d9aa592630f9ad",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6418,7 +6419,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-http-foundation-9de6add7f731e5af7f5b2e9c0da365e43383ebef-zip-6b5867.zip",
                 "reference": "9de6add7f731e5af7f5b2e9c0da365e43383ebef",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5.9",
@@ -6476,7 +6477,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-polyfill-apcu-5d4474f447403c3348e37b70acc2b95475b7befa-zip-50ef41.zip",
                 "reference": "5d4474f447403c3348e37b70acc2b95475b7befa",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6534,7 +6535,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-polyfill-mbstring-7c8fae0ac1d216eb54349e6a8baa57d515fe8803-zip-17eb6e.zip",
                 "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6598,7 +6599,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-process-57e52a0a6a80ea0aec4fc1b785a7920a95cb88a8-zip-219580.zip",
                 "reference": "57e52a0a6a80ea0aec4fc1b785a7920a95cb88a8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6652,7 +6653,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/symfony-yaml-93ccdde79f4b079c7558da4656a3cb1c50c68e02-zip-1dbd3e.zip",
                 "reference": "93ccdde79f4b079c7558da4656a3cb1c50c68e02",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.9"
@@ -6706,7 +6707,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/twig-twig-dd6ca96227917e1e85b41c7c3cc6507b411e0927-zip-59d249.zip",
                 "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.2.7"
@@ -6773,7 +6774,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-cache-5c4e6231082f74ab3e4fd58927c867ef4c24d71f-zip-86e9a7.zip",
                 "reference": "5c4e6231082f74ab3e4fd58927c867ef4c24d71f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -6839,7 +6840,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-code-0ed94f842ba60cdc900c46a61bdbd7ac95a3e140-zip-bf47dc.zip",
                 "reference": "0ed94f842ba60cdc900c46a61bdbd7ac95a3e140",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -6897,7 +6898,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-config-95f3a4b3fa85d49e6f060183122de4596fa6d29d-zip-33ced1.zip",
                 "reference": "95f3a4b3fa85d49e6f060183122de4596fa6d29d",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -6959,7 +6960,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-crypt-165ec063868884eb952f6bca258f464f7103b79f-zip-fedb91.zip",
                 "reference": "165ec063868884eb952f6bca258f464f7103b79f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7016,7 +7017,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-db-0802e3dadc8e54a66c20cf3cc13dbfd8d79ee6a4-zip-78fd3a.zip",
                 "reference": "0802e3dadc8e54a66c20cf3cc13dbfd8d79ee6a4",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7074,7 +7075,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-di-b9f8de081adecf71a003a569e9ba76c0a4c00bf2-zip-95d699.zip",
                 "reference": "b9f8de081adecf71a003a569e9ba76c0a4c00bf2",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7130,7 +7131,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-escaper-13f468ff824f3c83018b90aff892a1b3201383a9-zip-ac3a32.zip",
                 "reference": "13f468ff824f3c83018b90aff892a1b3201383a9",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23"
@@ -7180,7 +7181,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-eventmanager-58d21c95c7005a527262fd536499195f104e83f9-zip-1f32de.zip",
                 "reference": "58d21c95c7005a527262fd536499195f104e83f9",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7231,7 +7232,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-filter-6d8aed2da81b62a04747346c4370562cdbe34595-zip-ffcc60.zip",
                 "reference": "6d8aed2da81b62a04747346c4370562cdbe34595",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7292,7 +7293,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-form-779ba5da3dc040c52e632ea340462af2306c7682-zip-30b94b.zip",
                 "reference": "779ba5da3dc040c52e632ea340462af2306c7682",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7368,7 +7369,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-http-0456267c3825f3c4b558460e0bffeb4c496e6fb8-zip-d76a5a.zip",
                 "reference": "0456267c3825f3c4b558460e0bffeb4c496e6fb8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7424,7 +7425,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-i18n-9aebc5287373a802540d75fe5508417f866c2e52-zip-3f9f92.zip",
                 "reference": "9aebc5287373a802540d75fe5508417f866c2e52",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7493,7 +7494,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-inputfilter-4b1398f3635fae3cc5e873c5bb067274f3d10a93-zip-33080d.zip",
                 "reference": "4b1398f3635fae3cc5e873c5bb067274f3d10a93",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7550,7 +7551,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-json-2d845e151c1b9a237cf1899ac31e17fb10bd1e3f-zip-60cc35.zip",
                 "reference": "2d845e151c1b9a237cf1899ac31e17fb10bd1e3f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7609,7 +7610,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-loader-65de2c7a56f8eee633c6bf1cfab73e45648880d4-zip-b3f2ac.zip",
                 "reference": "65de2c7a56f8eee633c6bf1cfab73e45648880d4",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23"
@@ -7659,7 +7660,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mail-c1c73d7f44b3e815e955cd59b822954ca7a92a77-zip-edac3b.zip",
                 "reference": "c1c73d7f44b3e815e955cd59b822954ca7a92a77",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7720,7 +7721,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-math-f41fe4acfd809c14f2a802d1aa45dec8fcd2cc73-zip-478bbc.zip",
                 "reference": "f41fe4acfd809c14f2a802d1aa45dec8fcd2cc73",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23"
@@ -7776,7 +7777,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-memory-bbf8b9509660b2a97f2d6ccfefabffac3cca6a5c-zip-6aac87.zip",
                 "reference": "bbf8b9509660b2a97f2d6ccfefabffac3cca6a5c",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.5 || ^7.0"
@@ -7829,7 +7830,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mime-3e4a99a7693737342bc5c980b07ced17451739e1-zip-9ff287.zip",
                 "reference": "3e4a99a7693737342bc5c980b07ced17451739e1",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7884,7 +7885,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-modulemanager-af7ae3cd29a1efb73cc66ae1081e606039d5c20f-zip-ef00cb.zip",
                 "reference": "af7ae3cd29a1efb73cc66ae1081e606039d5c20f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -7947,7 +7948,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-mvc-5ecf513a82fe9fdeee84919eee45e8098639df04-zip-0fbcda.zip",
                 "reference": "5ecf513a82fe9fdeee84919eee45e8098639df04",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -8040,7 +8041,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-serializer-3c531789a9882a5deb721356a7bd2642b65d4b09-zip-3c8d31.zip",
                 "reference": "3c531789a9882a5deb721356a7bd2642b65d4b09",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -8098,7 +8099,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-servicemanager-57cf99fa5ac08c05a135a8d0d676c52a5e450083-zip-bf56e8.zip",
                 "reference": "57cf99fa5ac08c05a135a8d0d676c52a5e450083",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23"
@@ -8153,7 +8154,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-stdlib-cf05c5ba75606e47ffee91cedc72778da46f74c3-zip-8fb60d.zip",
                 "reference": "cf05c5ba75606e47ffee91cedc72778da46f74c3",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23"
@@ -8213,7 +8214,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-uri-33512866d20cc4bc54a0c1a6a0bdfcf5088939b3-zip-8ac5b6.zip",
                 "reference": "33512866d20cc4bc54a0c1a6a0bdfcf5088939b3",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -8266,7 +8267,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-validator-45fac2545a0f2eb66d71cb7966feee481e7c475f-zip-22b146.zip",
                 "reference": "45fac2545a0f2eb66d71cb7966feee481e7c475f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -8335,7 +8336,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zend-view-37beb1ad46e530f627b4b6c3716efd728e976ba9-zip-58ee42.zip",
                 "reference": "37beb1ad46e530f627b4b6c3716efd728e976ba9",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.23",
@@ -8417,7 +8418,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/zendframework-zendpdf-2.0.2.2-20f803.zip",
                 "reference": "94890c3dfa81b906e66ee1d2e5bb4fedad0586a5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3",
@@ -8465,7 +8466,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/behat-mink-0769e6d9726c140a54dbf827a438c0f9912749fe-zip-ae4f3d.zip",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.1",
@@ -8525,7 +8526,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/behat-mink-browserkit-driver-63960c8fcad4529faad1ff33e950217980baa64c-zip-dbf956.zip",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "behat/mink": "~1.5.0",
@@ -8585,7 +8586,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/behat-mink-goutte-driver-fa1b073b48761464feb0b05e6825da44b20118d8-zip-3f436f.zip",
                 "reference": "fa1b073b48761464feb0b05e6825da44b20118d8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "behat/mink-browserkit-driver": ">=1.0.5,<1.2.0",
@@ -8641,7 +8642,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/behat-mink-selenium2-driver-bcf1b537de37db6db0822d9e7bd97e600fd7a476-zip-16355d.zip",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "behat/mink": "~1.5.0",
@@ -8704,7 +8705,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phpunit-1.0.4-8aafa6.zip",
                 "reference": "0de580de8ebd38dc5d3995a7a2b86a47101b19ef",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -8741,7 +8742,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -8800,7 +8801,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/facebook-webdriver-36bf555115da4cb03b131b4c04b681a75acd47d1-zip-70c67f.zip",
                 "reference": "36bf555115da4cb03b131b4c04b681a75acd47d1",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.20"
@@ -8836,7 +8837,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/instaclick-php-webdriver-47a6019553a7a5b42d35493276ffc2c9252c53d5-zip-403190.zip",
                 "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-curl": "*",
@@ -8899,7 +8900,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/monolog-monolog-1e044bc4b34e91743943479f1be7a1d5eb93add0-zip-9bd94e.zip",
                 "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.0",
@@ -8982,7 +8983,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/myclabs-deep-copy-3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e-zip-9eba9e.zip",
                 "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.6 || ^7.0"
@@ -9032,7 +9033,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phar-io-manifest-2df402786ab5368a0169091f61a7c1e0eb6852d0-zip-b771a5.zip",
                 "reference": "2df402786ab5368a0169091f61a7c1e0eb6852d0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-dom": "*",
@@ -9092,7 +9093,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phar-io-version-a70c0ced4be299a63d32fa96d9281d03e94041df-zip-61e932.zip",
                 "reference": "a70c0ced4be299a63d32fa96d9281d03e94041df",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.6 || ^7.0"
@@ -9144,7 +9145,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpdocumentor-reflection-common-144c307535e82c8fdcaacbcfc1d6d8eeb896687c-zip-c3be2d.zip",
                 "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5"
@@ -9203,7 +9204,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpdocumentor-reflection-docblock-8331b5efe816ae05461b7ca1e721c01b46bafb3e-zip-319752.zip",
                 "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5",
@@ -9253,7 +9254,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpdocumentor-type-resolver-e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb-zip-e5468a.zip",
                 "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.5",
@@ -9305,7 +9306,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-php-diff-30e103d19519fe678ae64a60d77884ef3d71b28a-zip-b63c58.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": ""
+                "shasum": null
             },
             "type": "library",
             "autoload": {
@@ -9344,7 +9345,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-phpspec-61712147412cb647b6cb68b19833a60bfda759a1-zip-6bc9f9.zip",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3",
@@ -9422,7 +9423,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-prophecy-93d39f1f7f9326d746203c7c056f300f7f126073-zip-f944ab.zip",
                 "reference": "93d39f1f7f9326d746203c7c056f300f7f126073",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -9490,7 +9491,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-code-coverage-8e1d2397d8adf59a3f12b2878a3aaa66d1ab189d-zip-145f70.zip",
                 "reference": "8e1d2397d8adf59a3f12b2878a3aaa66d1ab189d",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-dom": "*",
@@ -9559,7 +9560,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-file-iterator-3cc8f69b3028d0f96a9078e6295d86e9bf019be5-zip-184bc9.zip",
                 "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -9611,7 +9612,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.zip",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.3.3"
@@ -9657,7 +9658,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-timer-3dcf38ca72b158baf0bc245e9184d3fdffa9c46f-zip-c27592.zip",
                 "reference": "3dcf38ca72b158baf0bc245e9184d3fdffa9c46f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.3.3 || ^7.0"
@@ -9711,7 +9712,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-token-stream-9a02332089ac48e704c70f6cefed30c224e3c0b0-zip-26f740.zip",
                 "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -9765,7 +9766,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-06b28548fd2b4a20c3cd6e247dc86331a7d4db13-zip-15b837.zip",
                 "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-dom": "*",
@@ -9854,7 +9855,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-phpunit-mock-objects-2f789b59ab89669015ad984afa350c4ec577ade0-zip-98f60b.zip",
                 "reference": "2f789b59ab89669015ad984afa350c4ec577ade0",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
@@ -9918,7 +9919,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-code-unit-reverse-lookup-4419fcdb5eabb9caa61a27c7a1db532a6b55dd18-zip-2b8d33.zip",
                 "reference": "4419fcdb5eabb9caa61a27c7a1db532a6b55dd18",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.6 || ^7.0"
@@ -9968,7 +9969,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-comparator-1174d9018191e93cb9d719edec01257fc05f8158-zip-5ecc61.zip",
                 "reference": "1174d9018191e93cb9d719edec01257fc05f8158",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0",
@@ -10037,7 +10038,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-diff-347c1d8b49c5c3ee30c7040ea6fc446790e6bddd-zip-599411.zip",
                 "reference": "347c1d8b49c5c3ee30c7040ea6fc446790e6bddd",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0"
@@ -10094,7 +10095,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-environment-cd0871b3975fb7fc44d11314fd1ee20925fce4f5-zip-b6a43c.zip",
                 "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0"
@@ -10149,7 +10150,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-exporter-234199f4528de6d12aaa58b612e98f7d36adb937-zip-ba849f.zip",
                 "reference": "234199f4528de6d12aaa58b612e98f7d36adb937",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0",
@@ -10221,7 +10222,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-global-state-e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4-zip-51dbeb.zip",
                 "reference": "e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0"
@@ -10277,7 +10278,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-object-enumerator-7cfd9e65d11ffb5af41198476395774d4c8a84c5-zip-360ba9.zip",
                 "reference": "7cfd9e65d11ffb5af41198476395774d4c8a84c5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0",
@@ -10329,7 +10330,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-object-reflector-773f97c67f28de00d397be301821b06708fca0be-zip-56c4ab.zip",
                 "reference": "773f97c67f28de00d397be301821b06708fca0be",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0"
@@ -10379,7 +10380,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-recursion-context-5b0cd723502bac3b006cbf3dbf7a1e3fcefe4fa8-zip-ab6a2f.zip",
                 "reference": "5b0cd723502bac3b006cbf3dbf7a1e3fcefe4fa8",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^7.0"
@@ -10437,7 +10438,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-resource-operations-ce990bb21759f94aeafd30209e8cfcdfa8bc3f52-zip-4a3a08.zip",
                 "reference": "ce990bb21759f94aeafd30209e8cfcdfa8bc3f52",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.6.0"
@@ -10484,7 +10485,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/sebastian-version-99732be0ddb3361e16ad77b68ba41efc8e979019-zip-0eee83.zip",
                 "reference": "99732be0ddb3361e16ad77b68ba41efc8e979019",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": ">=5.6"
@@ -10532,7 +10533,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/theseer-tokenizer-cb2f008f3f05af2893a87208fe6a6c4985483f8b-zip-1b9019.zip",
                 "reference": "cb2f008f3f05af2893a87208fe6a6c4985483f8b",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "ext-dom": "*",
@@ -10577,7 +10578,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/webmozart-assert-2db61e59ff05fe5126d152bd0655c9ea113e550f-zip-36e9ad.zip",
                 "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "php": "^5.3.3 || ^7.0"
@@ -10629,15 +10630,21 @@
             "package": "channelgrabber/feature-flags"
         },
         {
+            "alias": "1.33.4",
+            "alias_normalized": "1.33.4.0",
+            "version": "dev-CGIV-8259-LinkedProductStockUpdates",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "1.9.7",
             "alias_normalized": "1.9.7.0",
             "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/product"
         },
         {
-            "alias": "1.12.0",
-            "alias_normalized": "1.12.0.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "alias": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "alias_normalized": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "dev-CGIV-8259-LinkedProductStockUpdates",
             "package": "channelgrabber/stock"
         },
         {
@@ -10651,6 +10658,7 @@
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/feature-flags": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/product": 20,
         "channelgrabber/stock": 20,
         "channelgrabber/stock-locking": 20,
