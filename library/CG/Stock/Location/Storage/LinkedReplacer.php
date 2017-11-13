@@ -197,7 +197,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         }
 
         try {
-            $productLinkLeafss = $this->getProductLinkLeafs($stockCollection, $stockLocations);
+            $productLinkLeafs = $this->getProductLinkLeafs($stockCollection, $stockLocations);
         } catch (NotFound $exception) {
             return $this->buildQuantifiedStockLocations($stockCollection, $stockLocations, $skuQtyMap);
         }
@@ -205,7 +205,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         try {
             /** @var Collection $linkedStockLocations */
             $linkedStockLocations = $this->locationStorage->fetchCollectionByFilter(
-                $this->getLinkedStockLocationsFilter($stockLocations, $productLinkLeafss)
+                $this->getLinkedStockLocationsFilter($stockLocations, $productLinkLeafs)
             );
             /** @var StockCollection $linkedStock */
             $linkedStock = $this->stockStorage->fetchCollectionByFilter(
@@ -216,7 +216,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $linkedStock = new StockCollection(Stock::class, __FUNCTION__, ['id' => []]);
         }
 
-        $productLinkLeafsByOuAndSku = $this->keyProductLinkLeafsByOuAndSku($productLinkLeafss);
+        $productLinkLeafsByOuAndSku = $this->keyProductLinkLeafsByOuAndSku($productLinkLeafs);
         $linkedStockLocationsByLocationOuAndSku = $this->keyLinkedStockLocationsByLocationOuAndSku(
             $linkedStock,
             $linkedStockLocations
