@@ -1598,12 +1598,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6fe02a2171b116a04a17fd5a6659031926b9fc49"
+                "reference": "0262285c877e07524e9a47b94094774acc0d5db3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8259-LinkedProductStockUpdates-6df6a7.zip",
-                "reference": "6fe02a2171b116a04a17fd5a6659031926b9fc49",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8259-LinkedProductStockUpdates-45298c.zip",
+                "reference": "0262285c877e07524e9a47b94094774acc0d5db3",
                 "shasum": null
             },
             "require": {
@@ -1635,7 +1635,7 @@
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.47",
-                "channelgrabber/stock": "dev-CGIV-8259-LinkedProductStockUpdates as 1.12.0",
+                "channelgrabber/stock": "^1.8.2",
                 "channelgrabber/tax": "^1.0.2",
                 "channelgrabber/template": "^1.4.27",
                 "channelgrabber/transaction": "^1.2.1",
@@ -1675,7 +1675,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-13T15:22:26+00:00"
+            "time": "2017-11-14T09:51:19+00:00"
         },
         {
             "name": "channelgrabber/permission",

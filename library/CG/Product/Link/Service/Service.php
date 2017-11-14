@@ -4,7 +4,7 @@ namespace CG\Product\Link\Service;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductLink as ProductLinkNginxCacheInvalidator;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as ProductStockNginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
-use CG\Order\Service\Item\Service as OrderItemService;
+use CG\Order\Client\Gearman\Generator\AllocatedStockCorrection as AllocatedStockCorrectionGearmanJobGenerator;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
@@ -34,12 +34,12 @@ class Service extends BaseService
     protected $productLinkNodeStorage;
     /** @var ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator */
     protected $productLinkNginxCacheInvalidator;
+    /** @var AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator */
+    protected $allocatedStockCorrectionGearmanJobGenerator;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
     protected $stockStorage;
-    /** @var OrderItemService $orderItemService */
-    protected $orderItemService;
     /** @var ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator */
     protected $productStockNginxCacheInvalidator;
 
@@ -51,18 +51,18 @@ class Service extends BaseService
         ProductLinkLeafStorage $productLinkLeafStorage,
         ProductLinkNodeStorage $productLinkNodeStorage,
         ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
+        AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
-        OrderItemService $orderItemService,
         ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
     ) {
         parent::__construct($storage, $mapper, $productService, $productMapper);
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
+        $this->allocatedStockCorrectionGearmanJobGenerator = $allocatedStockCorrectionGearmanJobGenerator;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
-        $this->orderItemService = $orderItemService;
         $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
     }
 
@@ -70,6 +70,7 @@ class Service extends BaseService
     {
         $this->invalidateRelatedProductLink($productLink);
         parent::remove($productLink);
+        $this->correctAllocatedStockFromRemove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
 
@@ -87,6 +88,7 @@ class Service extends BaseService
 
         $savedEntity = parent::save($productLink);
         $this->invalidateRelatedProductLink($savedEntity);
+        $this->correctAllocatedStockFromSave($savedEntity, $currentEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
@@ -121,93 +123,79 @@ class Service extends BaseService
         $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 
+    protected function correctAllocatedStockFromRemove(ProductLink $productLink)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $productLink->getOrganisationUnitId(),
+            array_merge([$productLink->getProductSku()], array_keys($productLink->getStockSkuMap()))
+        );
+    }
+
     protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)
     {
-        $ouIdSkuUpdateMap = [
-            $this->generateOuIdSkuForProductLink($productLink) => [
-                'type' => TypedStockLocation::TYPE_REAL,
-                'allocated' => $this->calculateAllocated(
-                    $productLink->getOrganisationUnitId(),
-                    $productLink->getProductSku()
-                ),
-            ]
-        ];
+        $this->updateRelatedStockLocations(
+            [$this->generateOuIdSkuForProductLink($productLink) => TypedStockLocation::TYPE_REAL]
+        );
+    }
 
-        $this->appendAllocatedStockForProductLinkStock($ouIdSkuUpdateMap, $productLink);
-        $this->updateRelatedStockLocations($ouIdSkuUpdateMap);
+    protected function correctAllocatedStockFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)
+    {
+        if (!$currentEntity) {
+            ($this->allocatedStockCorrectionGearmanJobGenerator)(
+                $savedEntity->getOrganisationUnitId(),
+                array_merge([$savedEntity->getProductSku()], array_keys($savedEntity->getStockSkuMap()))
+            );
+            return;
+        }
+
+        if ($currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()) {
+            ($this->allocatedStockCorrectionGearmanJobGenerator)(
+                $currentEntity->getOrganisationUnitId(),
+                array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
+            );
+            ($this->allocatedStockCorrectionGearmanJobGenerator)(
+                $savedEntity->getOrganisationUnitId(),
+                array_merge([$savedEntity->getProductSku()], array_keys($savedEntity->getStockSkuMap()))
+            );
+            return;
+        }
+
+        $skus = [];
+        if ($currentEntity->getProductSku() != $savedEntity->getProductSku()) {
+            $skus[] = strtolower($currentEntity->getProductSku());
+            $skus[] = strtolower($savedEntity->getProductSku());
+        }
+
+        $removedStockSkus = array_diff_ukey($currentEntity->getStockSkuMap(), $savedEntity->getStockSkuMap(), 'strcasecmp');
+        foreach (array_keys($removedStockSkus) as $stockSku) {
+            $skus[] = strtolower($stockSku);
+        }
+
+        $newOrUpdatedStockSkus = array_diff_uassoc($savedEntity->getStockSkuMap(), $currentEntity->getStockSkuMap(), 'strcasecmp');
+        foreach (array_keys($newOrUpdatedStockSkus) as $stockSku) {
+            $skus[] = strtolower($stockSku);
+        }
+
+        $skus = array_unique($skus);
+        if (!empty($skus)) {
+            ($this->allocatedStockCorrectionGearmanJobGenerator)(
+                $savedEntity->getOrganisationUnitId(),
+                $skus
+            );
+        }
     }
 
     protected function updateRelatedStockLocationsFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)
     {
         $ouIdSkuUpdateMap = [
-            ($savedOuIdSku = $this->generateOuIdSkuForProductLink($savedEntity)) => [
-                'type' => TypedStockLocation::TYPE_LINKED,
-            ],
+            ($savedOuIdSku = $this->generateOuIdSkuForProductLink($savedEntity)) => TypedStockLocation::TYPE_LINKED,
         ];
 
         if ($currentEntity && ($currentOuIdSku = $this->generateOuIdSkuForProductLink($currentEntity)) != $savedOuIdSku) {
-            $ouIdSkuUpdateMap[$currentOuIdSku]['type'] = TypedStockLocation::TYPE_REAL;
-            $ouIdSkuUpdateMap[$currentOuIdSku]['allocated'] = $this->calculateAllocated(
-                $currentEntity->getOrganisationUnitId(),
-                $currentEntity->getProductSku()
-            );
-        }
-
-        $productSkuAllocated = $this->orderItemService->calculateAllocated(
-            $savedEntity->getOrganisationUnitId(),
-            $savedEntity->getProductSku()
-        );
-
-        if (!$currentEntity) {
-            $this->appendAllocatedStockForProductLinkStock($ouIdSkuUpdateMap, $savedEntity, $productSkuAllocated);
-            $this->updateRelatedStockLocations($ouIdSkuUpdateMap);
-            return;
-        }
-
-        if ($currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()) {
-            $this->appendAllocatedStockForProductLinkStock($ouIdSkuUpdateMap, $currentEntity);
-            $this->appendAllocatedStockForProductLinkStock($ouIdSkuUpdateMap, $savedEntity, $productSkuAllocated);
-            $this->updateRelatedStockLocations($ouIdSkuUpdateMap);
-            return;
-        }
-
-        $removedStockSkus = array_diff_ukey($currentEntity->getStockSkuMap(), $savedEntity->getStockSkuMap(), 'strcasecmp');
-        foreach (array_keys($removedStockSkus) as $stockSku) {
-            $ouIdSku = ProductLink::generateId($currentEntity->getOrganisationUnitId(), $stockSku);
-            $ouIdSkuUpdateMap[$ouIdSku]['allocated'] = $this->calculateAllocated(
-                $currentEntity->getOrganisationUnitId(),
-                $stockSku
-            );
-        }
-
-        $newOrUpdatedStockSkus = array_diff_uassoc($savedEntity->getStockSkuMap(), $currentEntity->getStockSkuMap(), 'strcasecmp');
-        foreach ($newOrUpdatedStockSkus as $stockSku => $qty) {
-            $ouIdSku = ProductLink::generateId($currentEntity->getOrganisationUnitId(), $stockSku);
-            $ouIdSkuUpdateMap[$ouIdSku]['allocated'] = $this->calculateAllocated(
-                $currentEntity->getOrganisationUnitId(),
-                $stockSku,
-                $productSkuAllocated * $qty
-            );
+            $ouIdSkuUpdateMap[$currentOuIdSku] = TypedStockLocation::TYPE_REAL;
         }
 
         $this->updateRelatedStockLocations($ouIdSkuUpdateMap);
-    }
-
-    protected function appendAllocatedStockForProductLinkStock(&$updates, ProductLink $productLink, int $productSkuAllocated = 0)
-    {
-        foreach ($productLink->getStockSkuMap() as $sku => $qty) {
-            $ouIdSku = ProductLink::generateId($productLink->getOrganisationUnitId(), $sku);
-            $updates[$ouIdSku]['allocated'] = $this->calculateAllocated(
-                $productLink->getOrganisationUnitId(),
-                $sku,
-                $productSkuAllocated * $qty
-            );
-        }
-    }
-
-    protected function calculateAllocated($organisationUnitId, $sku, int $productSkuAllocated = 0)
-    {
-        return $productSkuAllocated + $this->orderItemService->calculateAllocated($organisationUnitId, $sku);
     }
 
     protected function updateRelatedStockLocations(array $ouIdSkuUpdateMap)
@@ -234,11 +222,8 @@ class Service extends BaseService
             }
 
             $ouIdSku = $this->generateOuIdSkuForStock($stock);
-            if (isset($ouIdSkuUpdateMap[$ouIdSku]['allocated'])) {
-                $stockLocation->setAllocated($ouIdSkuUpdateMap[$ouIdSku]['allocated']);
-            }
-            if ($stockLocation instanceof TypedStockLocation && isset($ouIdSkuUpdateMap[$ouIdSku]['type'])) {
-                $stockLocation->setType($ouIdSkuUpdateMap[$ouIdSku]['type']);
+            if ($stockLocation instanceof TypedStockLocation && isset($ouIdSkuUpdateMap[$ouIdSku])) {
+                $stockLocation->setType($ouIdSkuUpdateMap[$ouIdSku]);
             }
         }
 
@@ -255,7 +240,6 @@ class Service extends BaseService
              */
             protected function reapplyChangesToEntityAfterConflict($fetchedEntity, $passedEntity)
             {
-                $fetchedEntity->setAllocated($passedEntity->getAllocated());
                 if ($fetchedEntity instanceof TypedStockLocation && $passedEntity instanceof TypedStockLocation) {
                     $fetchedEntity->setType($passedEntity->getType());
                 }
