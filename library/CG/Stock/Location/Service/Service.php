@@ -133,6 +133,9 @@ class Service extends BaseService implements StatsAwareInterface
                 return;
             }
 
+            /** @var Stock[] $updatedStocks */
+            $updatedStocks = [];
+
             /** @var StockLocation $relatedStockLocation */
             foreach ($relatedStockLocations as $relatedStockLocation) {
                 $this->stockLocationCache->remove($relatedStockLocation);
@@ -141,11 +144,20 @@ class Service extends BaseService implements StatsAwareInterface
                 if ($relatedStock instanceof Stock) {
                     $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
                 }
+
+                try {
+                    /** @var StockLocation $stockLocation */
+                    $stockLocation = $this->fetch($relatedStockLocation->getId());
+                    if ($stockLocation->getETag() != $relatedStockLocation->getETag()) {
+                        $updatedStocks[] = $relatedStock;
+                    }
+                } catch (NotFound $exception) {
+                    $updatedStocks[] = $relatedStock;
+                }
             }
 
-            /** @var Stock $relatedStock */
-            foreach ($relatedStocks as $relatedStock) {
-                $this->updateRelatedListings($relatedStock);
+            foreach ($updatedStocks as $updatedStock) {
+                $this->updateRelatedListings($updatedStock);
             }
         } finally {
             $this->updateRelatedListings($stock);
