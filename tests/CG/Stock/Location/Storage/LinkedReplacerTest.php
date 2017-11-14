@@ -1,7 +1,6 @@
 <?php
 namespace CG\Test\Stock\Location\Storage;
 
-use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
 use CG\Product\LinkLeaf\Collection as ProductLinkLeafCollection;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
 use CG\Product\LinkLeaf\Filter as ProductLinkLeafFilter;
@@ -27,8 +26,6 @@ class LinkedReplacerTest extends TestCase
     protected $stockStorage;
     /** @var ProductLinkLeafStorage $productLinkLeafStorage */
     protected $productLinkLeafStorage;
-    /** @var bool $enabled */
-    protected $enabled;
     /** @var LinkedReplacer $linkReplacer */
     protected $linkReplacer;
 
@@ -37,13 +34,11 @@ class LinkedReplacerTest extends TestCase
         $this->stockLocationStorage = $this->setupStockLocationStorage();
         $this->stockStorage = $this->setupStockStorage();
         $this->productLinkLeafStorage = $this->setupProductLinkLeafStorage();
-        $this->enabled = true;
 
         $this->linkReplacer = new LinkedReplacer(
             $this->stockLocationStorage,
             $this->stockStorage,
-            $this->productLinkLeafStorage,
-            $this->setupFeatureFlagsService()
+            $this->productLinkLeafStorage
         );
     }
 
@@ -317,14 +312,6 @@ class LinkedReplacerTest extends TestCase
                 }
             );
         return $productLinkLeafStorage;
-    }
-
-    protected function setupFeatureFlagsService()
-    {
-        $featureFlags = $this->getMockBuilder(FeatureFlagsService::class)->disableOriginalConstructor()->getMock();
-        $featureFlags->expects($this->any())->method('featureEnabledForEntity')->willReturn($this->enabled);
-        $featureFlags->expects($this->any())->method('featureEnabledForOu')->willReturn($this->enabled);
-        return $featureFlags;
     }
 
     public function testReturnsQuantifiedEntity()

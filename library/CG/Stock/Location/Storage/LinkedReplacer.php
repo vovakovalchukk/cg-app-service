@@ -1,8 +1,6 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
-use CG\FeatureFlags\Feature;
-use CG\FeatureFlags\Lookup\Service as FeatureFlagsService;
 use CG\Http\StatusCode;
 use CG\Product\LinkLeaf\Collection as ProductLinkLeafs;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
@@ -40,19 +38,15 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected $stockStorage;
     /** @var ProductLinkLeafStorage $productLinkLeafStorage */
     protected $productLinkLeafStorage;
-    /** @var FeatureFlagsService $featureFlagsService */
-    protected $featureFlagsService;
 
     public function __construct(
         StorageInterface $locationStorage,
         StockStorage $stockStorage,
-        ProductLinkLeafStorage $productLinkLeafStorage,
-        FeatureFlagsService $featureFlagsService
+        ProductLinkLeafStorage $productLinkLeafStorage
     ) {
         $this->locationStorage = $locationStorage;
         $this->stockStorage = $stockStorage;
         $this->productLinkLeafStorage = $productLinkLeafStorage;
-        $this->featureFlagsService = $featureFlagsService;
     }
 
     public function fetch($id)
@@ -205,9 +199,6 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
         /** @var Stock $stock */
         $stock = $this->stockStorage->fetch($stockLocation->getStockId());
-        if (!$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stock)) {
-            throw new NotFound(sprintf('Product links are disabled for ou %d', $stock->getOrganisationUnitId()));
-        }
         return $this->productLinkLeafStorage->fetch(ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku()));
     }
 
@@ -327,18 +318,9 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         /** @var StockLocation $stockLocation */
         foreach ($stockLocations as $stockLocation) {
             $stock = $stockCollection->getById($stockLocation->getStockId());
-            if (!($stock instanceof Stock)) {
-                continue;
+            if ($stock instanceof Stock) {
+                $ouSkuMap[] = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
             }
-
-            if (
-                !$this->featureFlagsService->featureEnabledForEntity(Feature::LINKED_PRODUCTS, $stock)
-                || (($stockLocation instanceof TypedEntity) && $stockLocation->getType() != TypedEntity::TYPE_LINKED)
-            ) {
-                continue;
-            }
-
-            $ouSkuMap[] = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
         }
 
         if (empty($ouSkuMap)) {
