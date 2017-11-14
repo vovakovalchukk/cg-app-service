@@ -143,29 +143,27 @@ class Service extends BaseService
         if (!$currentEntity) {
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $savedEntity->getOrganisationUnitId(),
-                array_merge([$savedEntity->getProductSku()], array_keys($savedEntity->getStockSkuMap()))
+                array_keys($savedEntity->getStockSkuMap())
             );
             return;
         }
 
-        if ($currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()) {
+        if (
+            $currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()
+            || $currentEntity->getProductSku() != $savedEntity->getProductSku()
+        ) {
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $currentEntity->getOrganisationUnitId(),
                 array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
             );
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $savedEntity->getOrganisationUnitId(),
-                array_merge([$savedEntity->getProductSku()], array_keys($savedEntity->getStockSkuMap()))
+                array_keys($savedEntity->getStockSkuMap())
             );
             return;
         }
 
         $skus = [];
-        if ($currentEntity->getProductSku() != $savedEntity->getProductSku()) {
-            $skus[] = strtolower($currentEntity->getProductSku());
-            $skus[] = strtolower($savedEntity->getProductSku());
-        }
-
         $removedStockSkus = array_diff_ukey($currentEntity->getStockSkuMap(), $savedEntity->getStockSkuMap(), 'strcasecmp');
         foreach (array_keys($removedStockSkus) as $stockSku) {
             $skus[] = strtolower($stockSku);
