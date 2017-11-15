@@ -6,7 +6,7 @@ class LinkedLocation extends QuantifiedLocation
     const MIN_VALUE = 'min';
     const MAX_VALUE = 'max';
 
-    /** @var Collection $linkedLocations */
+    /** @var LinkedCollection $linkedLocations */
     protected $linkedLocations;
     /** @var array $stockOverridden */
     protected $stockOverridden = [];
@@ -15,7 +15,7 @@ class LinkedLocation extends QuantifiedLocation
         $id,
         $stockId,
         $locationId,
-        Collection $linkedLocations
+        LinkedCollection $linkedLocations
     ) {
         parent::__construct($stockId, $locationId, 0, 0, $id);
         $this->setLinkedLocations($linkedLocations);
@@ -63,10 +63,7 @@ class LinkedLocation extends QuantifiedLocation
         return (int) $stock;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getLinkedLocations(): Collection
+    public function getLinkedLocations(): LinkedCollection
     {
         return $this->linkedLocations;
     }
@@ -74,7 +71,7 @@ class LinkedLocation extends QuantifiedLocation
     /**
      * @return self
      */
-    public function setLinkedLocations(Collection $linkedLocations)
+    public function setLinkedLocations(LinkedCollection $linkedLocations)
     {
         $this->linkedLocations = $linkedLocations;
         return $this;
