@@ -6,14 +6,16 @@ class LinkedLocation extends QuantifiedLocation
     const MIN_VALUE = 'min';
     const MAX_VALUE = 'max';
 
-    /** @var Collection $linkedLocations */
+    /** @var LinkedCollection $linkedLocations */
     protected $linkedLocations;
+    /** @var array $stockOverridden */
+    protected $stockOverridden = [];
 
     public function __construct(
         $id,
         $stockId,
         $locationId,
-        Collection $linkedLocations
+        LinkedCollection $linkedLocations
     ) {
         parent::__construct($stockId, $locationId, 0, 0, $id);
         $this->setLinkedLocations($linkedLocations);
@@ -26,53 +28,42 @@ class LinkedLocation extends QuantifiedLocation
 
     public function getOnHand($quantify = true)
     {
-        return $this->getStock(__FUNCTION__, static::MIN_VALUE, $quantify);
+        return $this->getStock(substr(__FUNCTION__, 3), static::MIN_VALUE, $quantify);
     }
 
     public function setOnHand($onHand, $quantify = true)
     {
-        $this->setStock(__FUNCTION__, $onHand, $quantify);
-        return $this;
+        $this->stockOverridden[substr(__FUNCTION__, 3)] = true;
+        return parent::setOnHand($onHand, $quantify);
     }
 
     public function getAllocated($quantify = true)
     {
-        return $this->getStock(__FUNCTION__, static::MAX_VALUE, $quantify);
+        return $this->getStock(substr(__FUNCTION__, 3), static::MAX_VALUE, $quantify);
     }
 
     public function setAllocated($allocated, $quantify = true)
     {
-        $this->setStock(__FUNCTION__, $allocated, $quantify);
-        return $this;
+        $this->stockOverridden[substr(__FUNCTION__, 3)] = true;
+        return parent::setAllocated($allocated, $quantify);
     }
 
     protected function getStock($method, $operator, $quantify)
     {
+        if (isset($this->stockOverridden[$method])) {
+            return parent::{'get' . $method}($quantify);
+        }
+
         $stock = null;
         /** @var QuantifiedLocation $location */
         foreach ($this->linkedLocations as $location) {
-            $locationStock = $location->{$method}($quantify);
+            $locationStock = $location->{'get' . $method}($quantify);
             $stock = $stock !== null ? $operator($stock, $locationStock) : $locationStock;
         }
         return (int) $stock;
     }
 
-    protected function setStock($method, $value, $quantify)
-    {
-        if ($quantify) {
-            $value *= $this->quantifier;
-        }
-
-        /** @var QuantifiedLocation $location */
-        foreach ($this->linkedLocations as $location) {
-            $location->{$method}($value, $quantify);
-        }
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getLinkedLocations(): Collection
+    public function getLinkedLocations(): LinkedCollection
     {
         return $this->linkedLocations;
     }
@@ -80,7 +71,7 @@ class LinkedLocation extends QuantifiedLocation
     /**
      * @return self
      */
-    public function setLinkedLocations(Collection $linkedLocations)
+    public function setLinkedLocations(LinkedCollection $linkedLocations)
     {
         $this->linkedLocations = $linkedLocations;
         return $this;

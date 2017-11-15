@@ -4,6 +4,7 @@ namespace CG\Product\Link\Service;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductLink as ProductLinkNginxCacheInvalidator;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as ProductStockNginxCacheInvalidator;
 use CG\Http\SaveCollectionHandleErrorsTrait;
+use CG\Order\Client\Gearman\Generator\AllocatedStockCorrection as AllocatedStockCorrectionGearmanJobGenerator;
 use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
@@ -32,6 +33,8 @@ class Service extends BaseService
     protected $productLinkNodeStorage;
     /** @var ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator */
     protected $productLinkNginxCacheInvalidator;
+    /** @var AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator */
+    protected $allocatedStockCorrectionGearmanJobGenerator;
     /** @var StockLocationStorage $stockLocationStorage */
     protected $stockLocationStorage;
     /** @var StockStorage $stockStorage */
@@ -46,6 +49,7 @@ class Service extends BaseService
         ProductLinkLeafStorage $productLinkLeafStorage,
         ProductLinkNodeStorage $productLinkNodeStorage,
         ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
+        AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator,
         StockLocationStorage $stockLocationStorage,
         StockStorage $stockStorage,
         ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator
@@ -54,6 +58,7 @@ class Service extends BaseService
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
+        $this->allocatedStockCorrectionGearmanJobGenerator = $allocatedStockCorrectionGearmanJobGenerator;
         $this->stockLocationStorage = $stockLocationStorage;
         $this->stockStorage = $stockStorage;
         $this->productStockNginxCacheInvalidator = $productStockNginxCacheInvalidator;
@@ -63,6 +68,7 @@ class Service extends BaseService
     {
         $this->invalidateRelatedProductLink($productLink);
         parent::remove($productLink);
+        $this->correctAllocatedStockFromRemove($productLink);
         $this->updateRelatedStockLocationsFromRemove($productLink);
     }
 
@@ -80,6 +86,7 @@ class Service extends BaseService
 
         $savedEntity = parent::save($productLink);
         $this->invalidateRelatedProductLink($savedEntity);
+        $this->correctAllocatedStockFromSave($savedEntity, $currentEntity);
         $this->updateRelatedStockLocationsFromSave($savedEntity, $currentEntity);
         return $savedEntity;
     }
@@ -114,11 +121,79 @@ class Service extends BaseService
         $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 
+    protected function correctAllocatedStockFromRemove(ProductLink $productLink)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $productLink->getOrganisationUnitId(),
+            ...array_merge([$productLink->getProductSku()], array_keys($productLink->getStockSkuMap()))
+        );
+    }
+
     protected function updateRelatedStockLocationsFromRemove(ProductLink $productLink)
     {
         $this->updateRelatedStockLocations(
             [$this->generateOuIdSkuForProductLink($productLink) => TypedStockLocation::TYPE_REAL]
         );
+    }
+
+    protected function correctAllocatedStockFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)
+    {
+        if (!$currentEntity) {
+            $this->recalculateAllocatedStock($savedEntity);
+            return;
+        }
+
+        if (
+            $currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()
+            || $currentEntity->getProductSku() != $savedEntity->getProductSku()
+        ) {
+            $this->recalculateAllAllocatedStock($savedEntity, $currentEntity);
+            return;
+        }
+
+        $this->recalculateChangedAllocatedStock($savedEntity, $currentEntity);
+    }
+
+    protected function recalculateAllocatedStock(ProductLink $savedEntity)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $savedEntity->getOrganisationUnitId(),
+            ...array_keys($savedEntity->getStockSkuMap())
+        );
+    }
+
+    protected function recalculateAllAllocatedStock(ProductLink $savedEntity, ProductLink $currentEntity)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $currentEntity->getOrganisationUnitId(),
+            ...array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
+        );
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $savedEntity->getOrganisationUnitId(),
+            ...array_keys($savedEntity->getStockSkuMap())
+        );
+    }
+
+    protected function recalculateChangedAllocatedStock(ProductLink $savedEntity, ProductLink $currentEntity)
+    {
+        $skus = [];
+        $removedStockSkus = array_diff_ukey($currentEntity->getStockSkuMap(), $savedEntity->getStockSkuMap(), 'strcasecmp');
+        foreach (array_keys($removedStockSkus) as $stockSku) {
+            $skus[] = strtolower($stockSku);
+        }
+
+        $newOrUpdatedStockSkus = array_diff_uassoc($savedEntity->getStockSkuMap(), $currentEntity->getStockSkuMap(), 'strcasecmp');
+        foreach (array_keys($newOrUpdatedStockSkus) as $stockSku) {
+            $skus[] = strtolower($stockSku);
+        }
+
+        $skus = array_unique($skus);
+        if (!empty($skus)) {
+            ($this->allocatedStockCorrectionGearmanJobGenerator)(
+                $savedEntity->getOrganisationUnitId(),
+                ...$skus
+            );
+        }
     }
 
     protected function updateRelatedStockLocationsFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)

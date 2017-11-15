@@ -95,7 +95,7 @@ class Db extends DbAbstract implements StorageInterface
 
         $filter = new Where(null, Where::OP_OR);
         foreach ($ouIdSkus as $ouIdSku) {
-            [$organisationUnitId, $sku] = explode('-', $ouIdSku, 2);
+            [$organisationUnitId, $sku] = array_pad(explode('-', $ouIdSku, 2), 2, '');
             $filter->addPredicate(
                 (new Where())
                     ->equalTo('stock.organisationUnitId', $organisationUnitId)
