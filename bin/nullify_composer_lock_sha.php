@@ -1,5 +1,3 @@
-#!/usr/bin/env php
-
 <?php
 
 $composerLockFilePath = dirname(__DIR__) . '/composer.lock';
