@@ -3,7 +3,7 @@ namespace CG\Stock\Location;
 
 class LinkedCollection extends Collection
 {
-    protected $missingSkus;
+    protected $missingSkus = [];
 
     public function getMissingSkus(): array
     {
