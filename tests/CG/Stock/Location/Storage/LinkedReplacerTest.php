@@ -11,6 +11,7 @@ use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Collection as StockLocationCollection;
 use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Filter as StockLocationFilter;
+use CG\Stock\Location\LinkedLocation as LinkedStockLocation;
 use CG\Stock\Location\QuantifiedLocation as QuantifiedStockLocation;
 use CG\Stock\Location\Storage\LinkedReplacer;
 use CG\Stock\Location\StorageInterface as StockLocationStorage;
@@ -346,20 +347,30 @@ class LinkedReplacerTest extends TestCase
             $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
         }
 
-        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        /** @var LinkedStockLocation $linkedStockLocation */
+        $linkedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        $this->assertInstanceOf(
+            LinkedStockLocation::class,
+            $linkedStockLocation,
+            'Stock location was not replaced with a quantified version'
+        );
+        $this->assertEmpty(
+            $linkedStockLocation->getLinkedLocations()->getMissingSkus(),
+            'Linked location has missing locations'
+        );
         $this->assertEquals(
             12,
-            $quantifiedStockLocation->getOnHand(),
+            $linkedStockLocation->getOnHand(),
             'Linked location did not return expected on hand stock'
         );
         $this->assertEquals(
             4,
-            $quantifiedStockLocation->getAllocated(),
+            $linkedStockLocation->getAllocated(),
             'Linked location did not return expected allocated stock'
         );
         $this->assertEquals(
             8,
-            $quantifiedStockLocation->getAvailable(),
+            $linkedStockLocation->getAvailable(),
             'Linked location did not return expected available stock'
         );
     }
@@ -379,20 +390,30 @@ class LinkedReplacerTest extends TestCase
             $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
         }
 
-        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        /** @var LinkedStockLocation $linkedStockLocation */
+        $linkedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        $this->assertInstanceOf(
+            LinkedStockLocation::class,
+            $linkedStockLocation,
+            'Stock location was not replaced with a quantified version'
+        );
+        $this->assertEmpty(
+            $linkedStockLocation->getLinkedLocations()->getMissingSkus(),
+            'Linked location has missing locations'
+        );
         $this->assertEquals(
             11,
-            $quantifiedStockLocation->getOnHand(),
+            $linkedStockLocation->getOnHand(),
             'Linked location did not return expected on hand stock'
         );
         $this->assertEquals(
             4,
-            $quantifiedStockLocation->getAllocated(),
+            $linkedStockLocation->getAllocated(),
             'Linked location did not return expected allocated stock'
         );
         $this->assertEquals(
             7,
-            $quantifiedStockLocation->getAvailable(),
+            $linkedStockLocation->getAvailable(),
             'Linked location did not return expected available stock'
         );
     }
@@ -412,20 +433,31 @@ class LinkedReplacerTest extends TestCase
             $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
         }
 
-        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        /** @var LinkedStockLocation $linkedStockLocation */
+        $linkedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        $this->assertInstanceOf(
+            LinkedStockLocation::class,
+            $linkedStockLocation,
+            'Stock location was not replaced with a quantified version'
+        );
+        $this->assertEquals(
+            ['sku5'],
+            $linkedStockLocation->getLinkedLocations()->getMissingSkus(),
+            'Linked location does not know about missing location'
+        );
         $this->assertEquals(
             0,
-            $quantifiedStockLocation->getOnHand(),
+            $linkedStockLocation->getOnHand(),
             'Linked location did not return expected on hand stock'
         );
         $this->assertEquals(
             4,
-            $quantifiedStockLocation->getAllocated(),
+            $linkedStockLocation->getAllocated(),
             'Linked location did not return expected allocated stock'
         );
         $this->assertEquals(
             -4,
-            $quantifiedStockLocation->getAvailable(),
+            $linkedStockLocation->getAvailable(),
             'Linked location did not return expected available stock'
         );
     }
@@ -557,7 +589,7 @@ class LinkedReplacerTest extends TestCase
     /**
      * @expectedException \CG\Stdlib\Exception\Runtime\ValidationMessagesException
      */
-    public function testPreventUpdateIfMissingLocations()
+    public function testPreventSaveIfMissingLocations()
     {
         $this->createProductLinkLeaf('link', ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1]);
         $skuStockData = [
@@ -572,8 +604,19 @@ class LinkedReplacerTest extends TestCase
             $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
         }
 
-        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
-        $this->linkReplacer->save($quantifiedStockLocation->setOnHand(15));
+        /** @var LinkedStockLocation $linkedStockLocation */
+        $linkedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+        $this->assertInstanceOf(
+            LinkedStockLocation::class,
+            $linkedStockLocation,
+            'Stock location was not replaced with a quantified version'
+        );
+        $this->assertEquals(
+            ['sku5'],
+            $linkedStockLocation->getLinkedLocations()->getMissingSkus(),
+            'Linked location does not know about missing location'
+        );
+        $this->linkReplacer->save($linkedStockLocation->setOnHand(15));
     }
 
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
