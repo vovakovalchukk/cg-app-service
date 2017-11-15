@@ -127,7 +127,7 @@ class Service extends BaseService
     {
         ($this->allocatedStockCorrectionGearmanJobGenerator)(
             $productLink->getOrganisationUnitId(),
-            array_merge([$productLink->getProductSku()], array_keys($productLink->getStockSkuMap()))
+            ...array_merge([$productLink->getProductSku()], array_keys($productLink->getStockSkuMap()))
         );
     }
 
@@ -143,7 +143,7 @@ class Service extends BaseService
         if (!$currentEntity) {
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $savedEntity->getOrganisationUnitId(),
-                array_keys($savedEntity->getStockSkuMap())
+                ...array_keys($savedEntity->getStockSkuMap())
             );
             return;
         }
@@ -154,11 +154,11 @@ class Service extends BaseService
         ) {
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $currentEntity->getOrganisationUnitId(),
-                array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
+                ...array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
             );
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $savedEntity->getOrganisationUnitId(),
-                array_keys($savedEntity->getStockSkuMap())
+                ...array_keys($savedEntity->getStockSkuMap())
             );
             return;
         }
@@ -178,7 +178,7 @@ class Service extends BaseService
         if (!empty($skus)) {
             ($this->allocatedStockCorrectionGearmanJobGenerator)(
                 $savedEntity->getOrganisationUnitId(),
-                $skus
+                ...$skus
             );
         }
     }
