@@ -141,10 +141,7 @@ class Service extends BaseService
     protected function correctAllocatedStockFromSave(ProductLink $savedEntity, ProductLink $currentEntity = null)
     {
         if (!$currentEntity) {
-            ($this->allocatedStockCorrectionGearmanJobGenerator)(
-                $savedEntity->getOrganisationUnitId(),
-                ...array_keys($savedEntity->getStockSkuMap())
-            );
+            $this->recalculateAllocatedStock($savedEntity);
             return;
         }
 
@@ -152,17 +149,35 @@ class Service extends BaseService
             $currentEntity->getOrganisationUnitId() != $savedEntity->getOrganisationUnitId()
             || $currentEntity->getProductSku() != $savedEntity->getProductSku()
         ) {
-            ($this->allocatedStockCorrectionGearmanJobGenerator)(
-                $currentEntity->getOrganisationUnitId(),
-                ...array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
-            );
-            ($this->allocatedStockCorrectionGearmanJobGenerator)(
-                $savedEntity->getOrganisationUnitId(),
-                ...array_keys($savedEntity->getStockSkuMap())
-            );
+            $this->recalculateAllAllocatedStock($savedEntity, $currentEntity);
             return;
         }
 
+        $this->recalculateChangedAllocatedStock($savedEntity, $currentEntity);
+    }
+
+    protected function recalculateAllocatedStock(ProductLink $savedEntity)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $savedEntity->getOrganisationUnitId(),
+            ...array_keys($savedEntity->getStockSkuMap())
+        );
+    }
+
+    protected function recalculateAllAllocatedStock(ProductLink $savedEntity, ProductLink $currentEntity)
+    {
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $currentEntity->getOrganisationUnitId(),
+            ...array_merge([$currentEntity->getProductSku()], array_keys($currentEntity->getStockSkuMap()))
+        );
+        ($this->allocatedStockCorrectionGearmanJobGenerator)(
+            $savedEntity->getOrganisationUnitId(),
+            ...array_keys($savedEntity->getStockSkuMap())
+        );
+    }
+
+    protected function recalculateChangedAllocatedStock(ProductLink $savedEntity, ProductLink $currentEntity)
+    {
         $skus = [];
         $removedStockSkus = array_diff_ukey($currentEntity->getStockSkuMap(), $savedEntity->getStockSkuMap(), 'strcasecmp');
         foreach (array_keys($removedStockSkus) as $stockSku) {
