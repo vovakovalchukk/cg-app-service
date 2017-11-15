@@ -1,7 +1,6 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
-use CG\CGLib\Nginx\Cache\Invalidator\ProductLink;
 use CG\Http\StatusCode;
 use CG\Product\LinkLeaf\Collection as ProductLinkLeafs;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
@@ -300,6 +299,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $key = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
             if (!isset($productLinkLeafsByOuAndSku[$key])) {
                 $quantifiedStockLocations->attach($this->buildQuantifiedStockLocation($stockLocation));
+                continue;
             }
 
             $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
