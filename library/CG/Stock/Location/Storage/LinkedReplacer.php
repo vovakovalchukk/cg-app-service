@@ -313,24 +313,24 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
     protected function getProductLinkLeafs(StockCollection $stockCollection, Collection $stockLocations): ProductLinkLeafs
     {
-        $ouSkuMap = [];
+        $ouSkuList = [];
 
         /** @var StockLocation $stockLocation */
         foreach ($stockLocations as $stockLocation) {
             $stock = $stockCollection->getById($stockLocation->getStockId());
             if ($stock instanceof Stock) {
-                $ouSkuMap[] = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
+                $ouSkuList[] = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
             }
         }
 
-        if (empty($ouSkuMap)) {
+        if (empty($ouSkuList)) {
             throw new NotFound(
                 sprintf('No stock locations of type %s to lookup product links for', TypedEntity::TYPE_LINKED)
             );
         }
 
         return $this->productLinkLeafStorage->fetchCollectionByFilter(
-            (new ProductLinkLeafFilter('all', 1))->setOuIdProductSku($ouSkuMap)
+            (new ProductLinkLeafFilter('all', 1))->setOuIdProductSku($ouSkuList)
         );
     }
 
