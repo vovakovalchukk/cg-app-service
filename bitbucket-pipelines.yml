@@ -11,5 +11,6 @@ pipelines:
         caches:
           - composer
         script:
+          - php bin/nullify_composer_lock_sha.php
           - composer install --no-progress --no-suggest --prefer-dist  --ignore-platform-reqs
           - vendor/bin/phpunit
