@@ -1,6 +1,7 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
+use CG\CGLib\Nginx\Cache\Invalidator\ProductLink;
 use CG\Http\StatusCode;
 use CG\Product\LinkLeaf\Collection as ProductLinkLeafs;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
@@ -231,12 +232,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected function getLinkedStockLocation(
         StockLocation $stockLocation,
         ProductLinkLeaf $productLinkLeaf,
-        Collection $linkedStockLocations = null
+        Collection $linkedStockLocations
     ): LinkedLocation {
-        if ($linkedStockLocations === null) {
-            $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
-        }
-
         return new LinkedLocation(
             $stockLocation->getId(),
             $stockLocation->getStockId(),
@@ -305,11 +302,19 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 $quantifiedStockLocations->attach($this->buildQuantifiedStockLocation($stockLocation));
             }
 
+            $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
+            foreach (array_keys($productLinkLeafsByOuAndSku[$key]->getStockSkuMap()) as $stockSku) {
+                $stockLocationKey = ProductLinkLeaf::generateId($productLinkLeafsByOuAndSku[$key]->getOrganisationUnitId(), $stockSku);
+                if (isset($linkedStockLocationsByLocationOuAndSku[$stockLocationKey])) {
+                    $linkedStockLocations->attach($linkedStockLocationsByLocationOuAndSku[$stockLocationKey]);
+                }
+            }
+
             $quantifiedStockLocations->attach(
                 $this->getLinkedStockLocation(
                     $stockLocation,
                     $productLinkLeafsByOuAndSku[$key],
-                    $linkedStockLocationsByLocationOuAndSku[$key] ?? null
+                    $linkedStockLocations
                 )
             );
         }
@@ -353,6 +358,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             }, array_keys($productLinkLeaf->getStockSkuMap())));
         }
 
+        $ouSkuMap = array_unique($ouSkuMap);
         if (empty($ouSkuMap)) {
             throw new NotFound('No linked skus');
         }
@@ -383,7 +389,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         StockCollection $stockCollection,
         Collection $linkedStockLocations
     ): array {
-        /** @var Collection[] $keydLinkedStockLocations */
+        /** @var StockLocation[] $keydLinkedStockLocations */
         $keydLinkedStockLocations = [];
 
         /** @var StockLocation $linkedStockLocation */
@@ -394,10 +400,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             }
 
             $key = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
-            if (!isset($keydLinkedStockLocations[$key])) {
-                $keydLinkedStockLocations[$key] = new Collection(StockLocation::class, __FUNCTION__);
-            }
-            $keydLinkedStockLocations[$key]->attach($linkedStockLocation);
+            $keydLinkedStockLocations[$key] = $linkedStockLocation;
         }
 
         return $keydLinkedStockLocations;
