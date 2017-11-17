@@ -1,74 +1,60 @@
 <?php
 
 namespace CG\Template\Command;
-use MongoClient;
-use CG\Template\Mapper as TemplateMapper;
-use CG\Template\Service as TemplateService;
-use CG\Template\Collection as TemplateCollection;
-use CG\Template\Entity as TemplateEntity;
+
+use CG\Template\Storage\Db as MySQLStorage;
+use CG\Template\Storage\MongoDb as MongoDbStorage;
 
 class MigrateMongoDataToMysql
 {
-    protected $mongoClient;
-    protected $mapper;
-    protected $service;
+    protected $db;
+    protected $mongoDb;
 
-    public function __construct()
-    {
+    public function __construct(
+        MySQLStorage $db,
+        MongoDbStorage $mongoDb
+    ) {
 
     }
 
     public function __invoke()
     {
         $collection = $this->migrate();
-        $idMap = [];
-        foreach ($collection as $transaction) {
-            $idMap[$transaction->getMongoId()] = $transaction->getId();
-        }
 
         return count($collection);
     }
 
     protected function migrate()
     {
+        $collection = $this->getMongoDb()
+            ->fetchCollectionByPagination('all', 1, [], [], []);
 
+        foreach($collection->toArray() as $entity) {
+            $this->getDb()->save($entity);
+        }
+
+        return $collection;
     }
 
-    public function rollback()
+    public function getDb(): MySQLStorage
     {
-
+        return $this->db;
     }
 
-    protected function getMongoClient(): MongoClient
+    public function setDb(MySQLStorage $db): MigrateMongoDataToMysql
     {
-        return $this->mongoClient;
-    }
-
-    protected function setMongoClient(MongoClient $mongoClient): MigrateMongoDataToMysql
-    {
-        $this->mongoClient = $mongoClient;
+        $this->db = $db;
         return $this;
     }
 
-    public function getMapper(): TemplateMapper
+    public function getMongoDb(): MongoDbStorage
     {
-        return $this->mapper;
+        return $this->mongoDb;
     }
 
-    public function setMapper($mapper): MigrateMongoDataToMysql
+    public function setMongoDb(MongoDbStorage $mongoDb): MigrateMongoDataToMysql
     {
-        $this->mapper = $mapper;
-        return $this;
-    }
-
-    public function getService(): TemplateService
-    {
-        return $this->service;
-    }
-
-    public function setService($service): MigrateMongoDataToMysql
-    {
-        $this->service = $service;
+        $this->mongoDb = $mongoDb;
         return $this;
     }
 }

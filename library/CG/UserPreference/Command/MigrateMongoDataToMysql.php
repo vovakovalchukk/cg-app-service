@@ -4,13 +4,9 @@ namespace CG\UserPreference\Command;
 
 use CG\UserPreference\Service\Storage\Db as MySQLStorage;
 use CG\UserPreference\Service\Storage\MongoDb as MongoDbStorage;
-use CG\UserPreference\Shared\Mapper as UserPreferenceMapper;
-use CG\UserPreference\Shared\Collection as UserPreferenceCollection;
-use CG\UserPreference\Shared\Entity as UserPreferenceEntity;
 
 class MigrateMongoDataToMysql
 {
-    protected $mapper;
     protected $db;
     protected $mongoDb;
 
@@ -36,22 +32,8 @@ class MigrateMongoDataToMysql
         foreach($collection->toArray() as $entity) {
             $this->getDb()->save($entity);
         }
-    }
 
-    public function rollback()
-    {
-
-    }
-
-    public function getMapper(): UserPreferenceMapper
-    {
-        return $this->mapper;
-    }
-
-    public function setMapper($mapper): MigrateMongoDataToMysql
-    {
-        $this->mapper = $mapper;
-        return $this;
+        return $collection;
     }
 
     public function getDb(): MySQLStorage
@@ -75,6 +57,4 @@ class MigrateMongoDataToMysql
         $this->mongoDb = $mongoDb;
         return $this;
     }
-
-
 }
