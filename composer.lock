@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5681cfb13d7b5d011d388011bdc392f6",
+    "content-hash": "5aebd03bebd8f517b013089e427255de",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2795,16 +2795,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "1.4.27",
+            "version": "dev-CGIV-9008-Migrate_storage_implementations_to_application",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "93a9483715619863da9e62bbdac9da13f5d8988b"
+                "reference": "3545a7dd6cc42c49ae0a39431fcbfffd3b00de5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.4.27-4adb3c.zip",
-                "reference": "93a9483715619863da9e62bbdac9da13f5d8988b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-dev-CGIV-9008-Migrate_storage_implementations_to_application-fa1888.zip",
+                "reference": "3545a7dd6cc42c49ae0a39431fcbfffd3b00de5b",
                 "shasum": null
             },
             "require": {
@@ -2854,7 +2854,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-09-05T14:32:21+00:00"
+            "time": "2017-11-17T11:53:15+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -3028,16 +3028,16 @@
         },
         {
             "name": "channelgrabber/userpreference",
-            "version": "1.2.5",
+            "version": "dev-CGIV-9005-Build_mysql_storage",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
-                "reference": "3cfa01b6bd7159f388161d97c3fbc1c2248f6c38"
+                "reference": "5691ee27ad3dc5547f2d79ce4a1a3080ae31c578"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-1.2.5-23bcc6.zip",
-                "reference": "3cfa01b6bd7159f388161d97c3fbc1c2248f6c38",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-dev-CGIV-9005-Build_mysql_storage-504a06.zip",
+                "reference": "5691ee27ad3dc5547f2d79ce4a1a3080ae31c578",
                 "shasum": null
             },
             "require": {
@@ -3060,7 +3060,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-09T12:08:12+00:00"
+            "time": "2017-11-17T15:25:37+00:00"
         },
         {
             "name": "channelgrabber/validation",
@@ -3704,7 +3704,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8819,7 +8819,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -10081,10 +10081,25 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.5.0",
+            "alias_normalized": "1.5.0.0",
+            "version": "dev-CGIV-9008-Migrate_storage_implementations_to_application",
+            "package": "channelgrabber/template"
+        },
+        {
+            "alias": "1.3.0",
+            "alias_normalized": "1.3.0.0",
+            "version": "dev-CGIV-9005-Build_mysql_storage",
+            "package": "channelgrabber/userpreference"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/template": 20,
+        "channelgrabber/userpreference": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
