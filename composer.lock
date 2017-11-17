@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5681cfb13d7b5d011d388011bdc392f6",
+    "content-hash": "f994dae2fc56b02c28b0ee27fe7b2548",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -491,16 +491,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.32.6",
+            "version": "1.32.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "60656bab9438d0679d6879566637423ea3ff7ca0"
+                "reference": "ca85e9b5bb3396f5ac08ab74318bc137372b89eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.32.6-c33221.zip",
-                "reference": "60656bab9438d0679d6879566637423ea3ff7ca0",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.32.8-68025b.zip",
+                "reference": "ca85e9b5bb3396f5ac08ab74318bc137372b89eb",
                 "shasum": null
             },
             "require": {
@@ -577,7 +577,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-03T08:28:04+00:00"
+            "time": "2017-11-15T08:29:26+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1263,6 +1263,46 @@
             "time": "2017-09-22T10:59:28+00:00"
         },
         {
+            "name": "channelgrabber/intercom",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-intercom.git",
+                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-intercom-1.3.2-a5b016.zip",
+                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/billing": ">=1.8.0, <2.0.0",
+                "channelgrabber/channel": ">=1.15.11,<2.0.0",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/gearman": "^1.2.4",
+                "channelgrabber/order": "^1.19.0",
+                "channelgrabber/product": "^1.4.12",
+                "channelgrabber/queue": "^1.0.0",
+                "channelgrabber/settings": "^1.3.6",
+                "channelgrabber/stdlib": "^2.12.42",
+                "channelgrabber/user": "^1.22.4",
+                "intercom/intercom-php": "~1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Intercom\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2017-11-09T14:23:33+00:00"
+        },
+        {
             "name": "channelgrabber/listing",
             "version": "1.11.13",
             "source": {
@@ -1594,23 +1634,23 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.33.3",
+            "version": "dev-CGIV-7140-allow-update-for-non-api-orders",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "41e8a1e774085a59354a858271a85ed3e2679510"
+                "reference": "cdde3fd81bfe0490c3d5eb3912265c7f1ddc7712"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.33.3-15e2d2.zip",
-                "reference": "41e8a1e774085a59354a858271a85ed3e2679510",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7140-allow-update-for-non-api-orders-3bf10f.zip",
+                "reference": "cdde3fd81bfe0490c3d5eb3912265c7f1ddc7712",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": "^1.8.11",
-                "channelgrabber/channel": "^1.26.1",
+                "channelgrabber/channel": "~1.32.7",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
@@ -1622,6 +1662,7 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
+                "channelgrabber/intercom": "~1.3.2",
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
@@ -1675,7 +1716,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-08T15:01:26+00:00"
+            "time": "2017-11-17T12:06:13+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -4184,6 +4225,57 @@
                 }
             },
             "time": "2014-10-12T19:18:40+00:00"
+        },
+        {
+            "name": "intercom/intercom-php",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/intercom/intercom-php.git",
+                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/intercom-intercom-php-a0a1bd91afbb6424fa4c003fe2dcd744fff24b51-zip-5b82bd.zip",
+                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.9",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Intercom": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache Version 2"
+            ],
+            "authors": [
+                {
+                    "name": "Intercom Platform Team",
+                    "homepage": "http://intercom.io"
+                }
+            ],
+            "description": "Intercom API client built on top of Guzzle 3",
+            "keywords": [
+                "Guzzle",
+                "api",
+                "intercom",
+                "intercom.io"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2015-04-03T12:10:19+00:00"
         },
         {
             "name": "jakeasmith/http_build_url",
@@ -10081,10 +10173,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.31.0",
+            "alias_normalized": "1.31.0.0",
+            "version": "dev-CGIV-7140-allow-update-for-non-api-orders",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20,
         "phpspec/phpspec": 20
