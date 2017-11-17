@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c63347efa86ac73df5c53bf24bceff6",
+    "content-hash": "94ff375bbe4fe3f71f502bee11c19935",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -426,7 +426,7 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-9003-OrderStockUpdate",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
@@ -434,7 +434,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-9003-OrderStockUpdate-7bf9ca.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-7256-LinkedProducts-7bf9ca.zip",
                 "reference": "5dc4dcc3168a68bd96d221b042bfdf37f259e77e",
                 "shasum": null
             },
@@ -1594,22 +1594,22 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-9003-OrderStockUpdate",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "84200812cb3a6ac977e83662a033d997ce9f7d30"
+                "reference": "fa5432ca8403f89c8b8526a45cc3a9416610882d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9003-OrderStockUpdate-a0af0d.zip",
-                "reference": "84200812cb3a6ac977e83662a033d997ce9f7d30",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-7256-LinkedProducts-4388c5.zip",
+                "reference": "fa5432ca8403f89c8b8526a45cc3a9416610882d",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "dev-CGIV-9003-OrderStockUpdate as 1.14.0",
+                "channelgrabber/cglib": "dev-EPIC-CGIV-7256-LinkedProducts as 1.14.0",
                 "channelgrabber/channel": "^1.26.1",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
@@ -1678,7 +1678,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-17T10:19:37+00:00"
+            "time": "2017-11-17T10:50:49+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10628,13 +10628,13 @@
         {
             "alias": "1.14.0",
             "alias_normalized": "1.14.0.0",
-            "version": "dev-CGIV-9003-OrderStockUpdate",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/cglib"
         },
         {
             "alias": "1.33.4",
             "alias_normalized": "1.33.4.0",
-            "version": "dev-CGIV-9003-OrderStockUpdate",
+            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
             "package": "channelgrabber/order"
         },
         {
