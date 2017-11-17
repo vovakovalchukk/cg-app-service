@@ -177,6 +177,7 @@ use CG\Order\Service\Filter\Entity\StorageInterface as FilterEntityStorage;
 use CG\Template\Service as TemplateService;
 use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
+use CG\Template\Storage\Db as TemplateDbStorage;
 use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
@@ -461,6 +462,7 @@ $config = array(
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
+                'TemplateMongoMigrationRepository' => TemplateRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -889,12 +891,18 @@ $config = array(
                     'repository' => TemplateRepository::class
                 )
             ),
-            TemplateRepository::class => array(
-                'parameter' => array(
+            TemplateRepository::class => [
+                'parameter' => [
                     'storage' => TemplateCacheStorage::class,
-                    'repository' => TemplateMongoDbStorage::class
-                )
-            ),
+                    'repository' => 'TemplateMongoMigrationRepository',
+                ],
+            ],
+            'TemplateMongoMigrationRepository' => [
+                'parameter' => [
+                    'storage' => TemplateDbStorage::class,
+                    'repository' => TemplateMongoDbStorage::class,
+                ],
+            ],
             ShippingMethodService::class => [
                 'parameter' => [
                     'repository' => ShippingMethodRepository::class
