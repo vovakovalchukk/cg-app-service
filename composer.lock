@@ -1598,12 +1598,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fdbacf2c2573936a6a46ee41526d568efc38649a"
+                "reference": "84200812cb3a6ac977e83662a033d997ce9f7d30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9003-OrderStockUpdate-693581.zip",
-                "reference": "fdbacf2c2573936a6a46ee41526d568efc38649a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9003-OrderStockUpdate-a0af0d.zip",
+                "reference": "84200812cb3a6ac977e83662a033d997ce9f7d30",
                 "shasum": null
             },
             "require": {
@@ -1667,7 +1667,10 @@
             "autoload-dev": {
                 "psr-4": {
                     "CG\\Order\\Test\\": "tests/src",
-                    "CG\\Order\\TestAsset\\": "tests/assets"
+                    "CG\\Order\\TestAsset\\": "tests/assets",
+                    "CG\\Channel\\Test\\": "vendor/channelgrabber/channel/tests/Channel/Test",
+                    "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test",
+                    "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
             "transport-options": {
@@ -1675,7 +1678,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-17T09:09:45+00:00"
+            "time": "2017-11-17T10:19:37+00:00"
         },
         {
             "name": "channelgrabber/permission",
