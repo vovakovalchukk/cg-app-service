@@ -7,6 +7,8 @@ class CreateUserPreferenceTable extends AbstractMigration
     {
         $this->table('userPreference')
             ->addColumn('preference', 'string')
+            ->addColumn('mongoId', 'string')
+            ->addIndex(['mongoId'], ['unique' => true])
             ->create();
     }
 }

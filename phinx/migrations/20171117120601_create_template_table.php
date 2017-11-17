@@ -13,6 +13,8 @@ class CreateTemplateTable extends AbstractMigration
             ->addColumn('name', 'string')
             ->addColumn('typeId', 'string')
             ->addColumn('editable', 'boolean')
+            ->addColumn('mongoId', 'string')
+            ->addIndex(['mongoId'], ['unique' => true])
             ->create();
     }
 }
