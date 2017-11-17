@@ -20,7 +20,7 @@ class Db extends DbAbstract implements StorageInterface
         try {
             $select = $this->getSelect();
 
-            if($limit !== 'all') {
+            if ($limit !== 'all') {
                 $offset = ($page - 1) * $limit;
                 $select->limit($limit)
                     ->offset($offset);
@@ -54,33 +54,31 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    /**
-     * @return \Zend\Db\Sql\Update
-     */
+    protected function saveEntity($entity)
+    {
+        if ($entity->getId(false) != null) {
+            $this->updateEntity($entity);
+        } else {
+            $this->insertEntity($entity);
+        }
+        return $entity;
+    }
+
     protected function getUpdate()
     {
         return $this->readSql->update(self::TABLE);
     }
 
-    /**
-     * @return \Zend\Db\Sql\Select
-     */
     protected function getSelect()
     {
         return $this->readSql->select(self::TABLE);
     }
 
-    /**
-     * @return \Zend\Db\Sql\Delete
-     */
     protected function getDelete()
     {
         return $this->readSql->delete(self::TABLE);
     }
 
-    /**
-     * @return \Zend\Db\Sql\Insert
-     */
     protected function getInsert()
     {
         return $this->readSql->insert(self::TABLE);
