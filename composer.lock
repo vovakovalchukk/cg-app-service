@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c8ccca585a70745c89dbf75bb6c96cb",
+    "content-hash": "4c63347efa86ac73df5c53bf24bceff6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -426,16 +426,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.13.4",
+            "version": "dev-CGIV-9003-OrderStockUpdate",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "bc09b3fa5b4c489f5daf97d18359cea961f7d5e8"
+                "reference": "5dc4dcc3168a68bd96d221b042bfdf37f259e77e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.13.4-269d6d.zip",
-                "reference": "bc09b3fa5b4c489f5daf97d18359cea961f7d5e8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-CGIV-9003-OrderStockUpdate-7bf9ca.zip",
+                "reference": "5dc4dcc3168a68bd96d221b042bfdf37f259e77e",
                 "shasum": null
             },
             "require": {
@@ -487,7 +487,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-10-19T09:10:08+00:00"
+            "time": "2017-11-17T08:58:27+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1594,22 +1594,22 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "dev-CGIV-9003-OrderStockUpdate",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "0bdcef4da64a7a00ede8780853be6848c2ef8696"
+                "reference": "fdbacf2c2573936a6a46ee41526d568efc38649a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-7256-LinkedProducts-88b9ef.zip",
-                "reference": "0bdcef4da64a7a00ede8780853be6848c2ef8696",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9003-OrderStockUpdate-693581.zip",
+                "reference": "fdbacf2c2573936a6a46ee41526d568efc38649a",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "^1.8.11",
+                "channelgrabber/cglib": "dev-CGIV-9003-OrderStockUpdate as 1.14.0",
                 "channelgrabber/channel": "^1.26.1",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
@@ -1675,7 +1675,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-15T15:22:42+00:00"
+            "time": "2017-11-17T09:09:45+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3706,7 +3706,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9611,7 +9611,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.zip",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -10623,9 +10623,15 @@
     ],
     "aliases": [
         {
+            "alias": "1.14.0",
+            "alias_normalized": "1.14.0.0",
+            "version": "dev-CGIV-9003-OrderStockUpdate",
+            "package": "channelgrabber/cglib"
+        },
+        {
             "alias": "1.33.4",
             "alias_normalized": "1.33.4.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "dev-CGIV-9003-OrderStockUpdate",
             "package": "channelgrabber/order"
         },
         {
@@ -10649,6 +10655,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "channelgrabber/product": 20,
