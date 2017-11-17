@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "94ff375bbe4fe3f71f502bee11c19935",
+    "content-hash": "6e770e1b1d64e48ac784c3459964ba7b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2345,16 +2345,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.5.3",
+            "version": "dev-CGIV-8319-ProductLinkPdf",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "122aa0648965e4a9a74ca0bcff51a7679b86396e"
+                "reference": "718c43f3d57310e159b05a11452462898bf05a8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.5.3-fc8fdb.zip",
-                "reference": "122aa0648965e4a9a74ca0bcff51a7679b86396e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-8319-ProductLinkPdf-70cfff.zip",
+                "reference": "718c43f3d57310e159b05a11452462898bf05a8c",
                 "shasum": null
             },
             "require": {
@@ -2382,7 +2382,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-04-28T13:25:46+00:00"
+            "time": "2017-11-16T15:41:43+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -10644,6 +10644,12 @@
             "package": "channelgrabber/product"
         },
         {
+            "alias": "1.5.4",
+            "alias_normalized": "1.5.4.0",
+            "version": "dev-CGIV-8319-ProductLinkPdf",
+            "package": "channelgrabber/settings"
+        },
+        {
             "alias": "1.12.1",
             "alias_normalized": "1.12.1.0",
             "version": "dev-EPIC-CGIV-7256-LinkedProducts",
@@ -10662,6 +10668,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
         "channelgrabber/product": 20,
+        "channelgrabber/settings": 20,
         "channelgrabber/stock": 20,
         "channelgrabber/stock-locking": 20,
         "phpish/link_header": 20,
