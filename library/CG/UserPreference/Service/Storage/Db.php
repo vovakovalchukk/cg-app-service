@@ -7,6 +7,7 @@ use CG\UserPreference\Shared\Collection as UserPreferenceCollection;
 use CG\UserPreference\Shared\Entity as UserPreferenceEntity;
 use CG\UserPreference\Shared\StorageInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Exception\Runtime\NotFound;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -46,6 +47,21 @@ class Db extends DbAbstract implements StorageInterface
             $this->insertEntity($entity);
         }
         return $entity;
+    }
+
+    public function fetch($id)
+    {
+        try {
+            return parent::fetch($id);
+        } catch (NotFound $exception) {
+            return $this->fetchEntity(
+                $this->getReadSql(),
+                $this->getSelect()->where(array(
+                    'mongoId' => $id
+                )),
+                $this->getMapper()
+            );
+        }
     }
 
     protected function getUpdate()
