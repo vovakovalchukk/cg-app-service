@@ -109,6 +109,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
+            'productLinks' => [
+                'name' => 'productLinks',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'productLinks'])]
+            ],
         ];
     }
 }
