@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "181f3948ea233441eeca93b88afb816d",
+    "content-hash": "e5d9024e976f5277eb8e38072159715e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1264,16 +1264,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.11.13",
+            "version": "dev-CGIV-9018-new-fields-product-endpoint",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "d80e50970790fce1b7ad14bc2659a5c73e37547c"
+                "reference": "aeecd3a6fc38b101762af393cd86ed3a7a0a243a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.11.13-a309b0.zip",
-                "reference": "d80e50970790fce1b7ad14bc2659a5c73e37547c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-CGIV-9018-new-fields-product-endpoint-1e4ad2.zip",
+                "reference": "aeecd3a6fc38b101762af393cd86ed3a7a0a243a",
                 "shasum": null
             },
             "require": {
@@ -1313,7 +1313,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-08-16T12:14:12+00:00"
+            "time": "2017-11-21T14:27:22+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -1943,7 +1943,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "04172a6006133842ce7b981119fca883af3691b3"
+                "reference": "79427ddd1c706c63cb27aba4a23dc2a95313374c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9018-new-fields-product-endpoint-7e19a2.zip",
+                "reference": "79427ddd1c706c63cb27aba4a23dc2a95313374c",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1992,7 +1998,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-21T13:20:53+00:00"
+            "time": "2017-11-21T14:29:37+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -10589,6 +10595,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.11.14",
+            "alias_normalized": "1.11.14.0",
+            "version": "dev-CGIV-9018-new-fields-product-endpoint",
+            "package": "channelgrabber/listing"
+        },
+        {
             "alias": "1.9.7",
             "alias_normalized": "1.9.7.0",
             "version": "dev-CGIV-9018-new-fields-product-endpoint",
@@ -10598,6 +10610,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
