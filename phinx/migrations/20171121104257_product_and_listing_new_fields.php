@@ -14,7 +14,8 @@ class ProductAndListingNewFields extends AbstractMigration
             ->update();
 
         $this->table('listing')
-            ->addColumn('description', 'string', ['length' => 4096, 'null' => true, 'after' => 'accountId'])
+            ->addColumn('name', 'string', ['length' => 255, 'null' => true, 'after' => 'accountId'])
+            ->addColumn('description', 'string', ['length' => 4096, 'null' => true, 'after' => 'name'])
             ->addColumn('price', 'decimal', ['precision' => 10, 'scale' => 4, 'null' => true, 'after' => 'description'])
             ->addColumn('cost', 'decimal', ['precision' => 10, 'scale' => 4, 'null' => true, 'after' => 'price'])
             ->addColumn('condition', 'string', ['length' => 40, 'null' => true, 'after' => 'cost'])
