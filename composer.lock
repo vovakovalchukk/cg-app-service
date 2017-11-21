@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e770e1b1d64e48ac784c3459964ba7b",
+    "content-hash": "6c1fe427e4efed86eab0580fc8e42edf",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -426,16 +426,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "5dc4dcc3168a68bd96d221b042bfdf37f259e77e"
+                "reference": "f7838744d67e63cf31071ccc2ce6ba1466bd6d13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-dev-EPIC-CGIV-7256-LinkedProducts-7bf9ca.zip",
-                "reference": "5dc4dcc3168a68bd96d221b042bfdf37f259e77e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.14.0-edb2fe.zip",
+                "reference": "f7838744d67e63cf31071ccc2ce6ba1466bd6d13",
                 "shasum": null
             },
             "require": {
@@ -487,7 +487,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-17T08:58:27+00:00"
+            "time": "2017-11-21T11:47:03+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1594,22 +1594,22 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "1.33.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fa5432ca8403f89c8b8526a45cc3a9416610882d"
+                "reference": "c080f5e52c70d782e0fc1601fdb52c997af7e735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-EPIC-CGIV-7256-LinkedProducts-4388c5.zip",
-                "reference": "fa5432ca8403f89c8b8526a45cc3a9416610882d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.33.4-b0af93.zip",
+                "reference": "c080f5e52c70d782e0fc1601fdb52c997af7e735",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "dev-EPIC-CGIV-7256-LinkedProducts as 1.14.0",
+                "channelgrabber/cglib": "^1.14.0",
                 "channelgrabber/channel": "^1.26.1",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
@@ -1678,7 +1678,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-17T10:50:49+00:00"
+            "time": "2017-11-21T11:52:55+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1939,16 +1939,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "1.9.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "17b8446d12436181ac58dbc9a7c1097276868b70"
+                "reference": "249ac6c563f1c41bedd1687c2c991516cca564f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-EPIC-CGIV-7256-LinkedProducts-c66ef7.zip",
-                "reference": "17b8446d12436181ac58dbc9a7c1097276868b70",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.9.7-a35778.zip",
+                "reference": "249ac6c563f1c41bedd1687c2c991516cca564f2",
                 "shasum": null
             },
             "require": {
@@ -1998,7 +1998,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-15T15:20:29+00:00"
+            "time": "2017-11-21T11:55:29+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2644,16 +2644,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "1b604554f595bc8c2f776fa4c2507bb56ea2e020"
+                "reference": "0ab0d1e5d356e530a5abaf395c8297e9fbf92335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-EPIC-CGIV-7256-LinkedProducts-40c508.zip",
-                "reference": "1b604554f595bc8c2f776fa4c2507bb56ea2e020",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.12.0-74542d.zip",
+                "reference": "0ab0d1e5d356e530a5abaf395c8297e9fbf92335",
                 "shasum": null
             },
             "require": {
@@ -2689,8 +2689,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev",
-                    "dev-CGIV-8259-LinkedProductStockUpdates": "1.12.0.x-dev"
+                    "dev-develop": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2708,20 +2707,20 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-15T15:25:01+00:00"
+            "time": "2017-11-21T11:57:46+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock-locking.git",
-                "reference": "4f5be875dc7e9cfd5976505ff92524ba19f000c1"
+                "reference": "0dd56fcf328cb350fd50011b95ad4afdaa97c4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-dev-EPIC-CGIV-7256-LinkedProducts-37dd11.zip",
-                "reference": "4f5be875dc7e9cfd5976505ff92524ba19f000c1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-1.1.2-ef8ce4.zip",
+                "reference": "0dd56fcf328cb350fd50011b95ad4afdaa97c4ae",
                 "shasum": null
             },
             "require": {
@@ -2729,7 +2728,7 @@
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/stdlib": "^2.12.47",
-                "channelgrabber/stock": "dev-EPIC-CGIV-7256-LinkedProducts as 1.12.0",
+                "channelgrabber/stock": "^1.12.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -2751,7 +2750,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-07T16:27:56+00:00"
+            "time": "2017-11-21T12:03:21+00:00"
         },
         {
             "name": "channelgrabber/tax",
@@ -10626,51 +10625,16 @@
     ],
     "aliases": [
         {
-            "alias": "1.14.0",
-            "alias_normalized": "1.14.0.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.33.4",
-            "alias_normalized": "1.33.4.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.9.7",
-            "alias_normalized": "1.9.7.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
-            "package": "channelgrabber/product"
-        },
-        {
             "alias": "1.5.4",
             "alias_normalized": "1.5.4.0",
             "version": "dev-CGIV-8319-ProductLinkPdf",
             "package": "channelgrabber/settings"
-        },
-        {
-            "alias": "1.12.1",
-            "alias_normalized": "1.12.1.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
-            "package": "channelgrabber/stock"
-        },
-        {
-            "alias": "1.1.2",
-            "alias_normalized": "1.1.2.0",
-            "version": "dev-EPIC-CGIV-7256-LinkedProducts",
-            "package": "channelgrabber/stock-locking"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/product": 20,
         "channelgrabber/settings": 20,
-        "channelgrabber/stock": 20,
-        "channelgrabber/stock-locking": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },

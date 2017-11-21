@@ -8,9 +8,11 @@ use CG\Cache\Storage\RemoveByFieldTrait;
 use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
+use CG\Cache\Strategy\Entity\VirtualEntity;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
 use CG\Product\LinkLeaf\Collection;
 use CG\Product\LinkLeaf\Filter;
+use CG\Product\LinkLeaf\Entity;
 use CG\Product\LinkLeaf\Mapper;
 use CG\Product\LinkLeaf\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -42,13 +44,13 @@ class Cache extends CacheAbstract implements StorageInterface, SaveInterface, Sa
 
     public function invalidate($id)
     {
+
         try {
-            $this->remove(
-                $this->fetch($id)
-            );
+            $entity = $this->fetch($id);
         } catch (NotFound $exception) {
-            // Not in cache so can't invalidate
+            $entity = new VirtualEntity($id, Entity::class);
         }
+        $this->remove($entity);
     }
 
     public function fetchCollectionByFilter(Filter $filter)
