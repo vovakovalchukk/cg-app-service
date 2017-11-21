@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Product;
 
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
@@ -36,6 +37,26 @@ class Entity implements RulesInterface
                 'name'       => 'name',
                 'required'   => false,
                 'validators' => []
+            ],
+            'description' => [
+                'name'       => 'description',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'price' => [
+                'name'       => 'price',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'cost' => [
+                'name'       => 'cost',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'condition' => [
+                'name'       => 'condition',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
             ],
             'parentProductId' => [
                 'name'       => 'parentProductId',
