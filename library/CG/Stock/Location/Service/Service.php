@@ -3,9 +3,11 @@ namespace CG\Stock\Location\Service;
 
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
+use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Product\Service\Service as ProductService;
+use CG\Product\LinkNode\Entity as ProductLinkNode;
+use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
 use CG\Product\StockMode;
 use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stats\StatsAwareInterface;
@@ -14,9 +16,12 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Auditor;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
+use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Entity as StockLocation;
+use CG\Stock\Location\Filter as StockLocationFilter;
 use CG\Stock\Location\Mapper as LocationMapper;
 use CG\Stock\Location\Service as BaseService;
+use CG\Stock\Location\Storage\Cache as StockLocationCache;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
 
@@ -33,8 +38,12 @@ class Service extends BaseService implements StatsAwareInterface
     protected $organisationUnitService;
     /** @var AccountService $accountService */
     protected $accountService;
-    /** @var ProductService $productService */
-    protected $productService;
+    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
+    protected $productLinkNodeStorage;
+    /** @var StockLocationCache $stockLocationCache */
+    protected $stockLocationCache;
+    /** @var NginxCacheInvalidator $nginxCacheInvalidator */
+    protected $nginxCacheInvalidator;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
 
@@ -46,16 +55,23 @@ class Service extends BaseService implements StatsAwareInterface
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
-        ProductService $productService,
+        ProductLinkNodeStorage $productLinkNodeStorage,
+        StockLocationCache $stockLocationCache,
+        NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
-        $this->productService = $productService;
+        $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->stockLocationCache = $stockLocationCache;
+        $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
+    /**
+     * @param StockLocation $stockLocation
+     */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {
@@ -74,7 +90,7 @@ class Service extends BaseService implements StatsAwareInterface
         }
 
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelatedListings($stock);
+        $this->updateRelated($stock);
         return $stockLocationHal;
     }
 
@@ -91,6 +107,61 @@ class Service extends BaseService implements StatsAwareInterface
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
         }
         return $this;
+    }
+
+    protected function updateRelated(Stock $stock)
+    {
+        try {
+            try {
+                /** @var ProductLinkNode $productLinkNode */
+                $productLinkNode = $this->productLinkNodeStorage->fetch(
+                    ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
+                );
+                $relatedStockLocations = $this->fetchCollectionByFilter(
+                    (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
+                        function ($sku) use ($productLinkNode) {
+                            return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+                        },
+                        iterator_to_array($productLinkNode)
+                    ))
+                );
+                /** @var StockCollection $relatedStocks */
+                $relatedStocks = $this->stockStorage->fetchCollectionByFilter(
+                    (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'))
+                );
+            } catch (NotFound $exception) {
+                return;
+            }
+
+            /** @var Stock[] $updatedStocks */
+            $updatedStocks = [];
+
+            /** @var StockLocation $relatedStockLocation */
+            foreach ($relatedStockLocations as $relatedStockLocation) {
+                $this->stockLocationCache->remove($relatedStockLocation);
+
+                $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+                if ($relatedStock instanceof Stock) {
+                    $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
+                }
+
+                try {
+                    /** @var StockLocation $stockLocation */
+                    $stockLocation = $this->fetch($relatedStockLocation->getId());
+                    if ($stockLocation->getETag() != $relatedStockLocation->getETag()) {
+                        $updatedStocks[] = $relatedStock;
+                    }
+                } catch (NotFound $exception) {
+                    $updatedStocks[] = $relatedStock;
+                }
+            }
+
+            foreach ($updatedStocks as $updatedStock) {
+                $this->updateRelatedListings($updatedStock);
+            }
+        } finally {
+            $this->updateRelatedListings($stock);
+        }
     }
 
     protected function updateRelatedListings(Stock $stock): Service

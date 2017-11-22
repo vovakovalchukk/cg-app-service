@@ -81,7 +81,8 @@ return [
         'validation' => [
             'filterRules' => LocationCollectionValidation::class,
             'dataRules' => LocationEntityValidation::class
-        ]
+        ],
+        'version' => new Version(1, 1)
     ],
     '/stockLocation/:id' => [
         'controllers' => function($id) use ($di, $app) {
@@ -102,7 +103,8 @@ return [
             'mapperClass' => StockLocationMapper::class,
             'entityClass' => StockLocationEntity::class,
             'serviceClass' => StockLocationService::class
-        ]
+        ],
+        'version' => new Version(1, 1)
     ],
     '/stockLog' => [
         'controllers' => function() use ($di, $app) {
