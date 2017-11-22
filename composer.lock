@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c1fe427e4efed86eab0580fc8e42edf",
+    "content-hash": "6bd898ce8a8ebc7818ee60d3057514f9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2345,16 +2345,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-CGIV-8319-ProductLinkPdf",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "718c43f3d57310e159b05a11452462898bf05a8c"
+                "reference": "be45bdf43e3392c7b9052432867130c4ac191ac9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-8319-ProductLinkPdf-70cfff.zip",
-                "reference": "718c43f3d57310e159b05a11452462898bf05a8c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.5.4-646644.zip",
+                "reference": "be45bdf43e3392c7b9052432867130c4ac191ac9",
                 "shasum": null
             },
             "require": {
@@ -2382,7 +2382,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-16T15:41:43+00:00"
+            "time": "2017-11-22T12:03:44+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -10623,18 +10623,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.5.4",
-            "alias_normalized": "1.5.4.0",
-            "version": "dev-CGIV-8319-ProductLinkPdf",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
