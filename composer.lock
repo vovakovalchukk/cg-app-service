@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e28eecf42605306bf7ad06288a7e8ab",
+    "content-hash": "8248932a4947921877e053c73431c3d9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1634,16 +1634,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-7140-allow-update-for-non-api-orders",
+            "version": "1.34.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6301eca45e5e2571720ad982adfe5f87df5bad6d"
+                "reference": "cca66582b84c0e5bcc8b1c7cb1e9028209fac764"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-7140-allow-update-for-non-api-orders-7f733f.zip",
-                "reference": "6301eca45e5e2571720ad982adfe5f87df5bad6d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.34.0-61c80d.zip",
+                "reference": "cca66582b84c0e5bcc8b1c7cb1e9028209fac764",
                 "shasum": null
             },
             "require": {
@@ -1719,7 +1719,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-11-22T13:47:12+00:00"
+            "time": "2017-11-23T10:50:01+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10685,18 +10685,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.31.0",
-            "alias_normalized": "1.31.0.0",
-            "version": "dev-CGIV-7140-allow-update-for-non-api-orders",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
