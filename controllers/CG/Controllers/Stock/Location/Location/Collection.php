@@ -6,6 +6,7 @@ use CG\Controllers\Stock\Location\InvalidationTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
+use CG\Stock\Location\Filter;
 use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Location\Service;
 use CG\Stock\Service as StockService;
@@ -57,11 +58,14 @@ class Collection
 
     public function getData()
     {
-        return $this->getService()->fetchCollectionByPaginationAndFiltersAsHal(
-            $this->getParams('limit'),
-            $this->getParams('page'),
-            $this->getParams('stockId') ?: [],
-            $this->getParams('locationId') ?: []
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            new Filter(
+                $this->getParams('limit') ?: Service::DEFAULT_LIMIT,
+                $this->getParams('page') ?: Service::DEFAULT_PAGE,
+                $this->getParams('stockId') ?: [],
+                $this->getParams('locationId') ?: [],
+                $this->getParams('ouIdSku') ?: []
+            )
         );
     }
 
