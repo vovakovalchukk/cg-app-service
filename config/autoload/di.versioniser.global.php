@@ -18,6 +18,7 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -104,6 +105,8 @@ return [
                 'Versioniser_OrderLabelEntity_4' => OrderLabelEntity\Versioniser4::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
+                'Versioniser_ProductDetailCollection_1' => ProductDetailEntity\Versioniser1::class,
+                'Versioniser_ProductDetailEntity_1' => ProductDetailEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
@@ -281,6 +284,11 @@ return [
             'Versioniser_TemplateCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_TemplateEntity_1'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_1'
                 ],
             ],
             'Versioniser_ProductCollection_1' => [
