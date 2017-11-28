@@ -14,7 +14,7 @@ class Versioniser2 implements VersioniserInterface
 
     public function __construct(InvoiceSettingsEntityVersioner2 $entityVersioner)
     {
-        $this->setEntityVersioner($entityVersioner);
+        $this->setEntityVersioniser($entityVersioner);
     }
 
     public function upgradeRequest(array $params, Hal $request)
@@ -39,7 +39,7 @@ class Versioniser2 implements VersioniserInterface
     /**
      * @return self
      */
-    protected function setEntityVersioner($entityVersioner)
+    protected function setEntityVersioniser($entityVersioner)
     {
         $this->entityVersioner = $entityVersioner;
         return $this;
