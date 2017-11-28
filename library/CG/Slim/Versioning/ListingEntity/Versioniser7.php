@@ -13,7 +13,6 @@ class Versioniser7 extends AbstractVersioniser
         }
 
         $data = $request->getData();
-        var_dump($data);
         try {
             $entity = $this->fetchEntity($data);
             $data['name'] = $entity->getName();
