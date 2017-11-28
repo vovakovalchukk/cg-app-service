@@ -55,6 +55,46 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new DecimalValidator(['name' => 'length'])]
             ],
+            'description' => [
+                'name'       => 'description',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'ean' => [
+                'name'       => 'ean',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'brand' => [
+                'name'       => 'brand',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'mpn' => [
+                'name'       => 'mpn',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'asin' => [
+                'name'       => 'asin',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'price' => [
+                'name'       => 'price',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'cost' => [
+                'name'       => 'cost',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'condition' => [
+                'name'       => 'condition',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }

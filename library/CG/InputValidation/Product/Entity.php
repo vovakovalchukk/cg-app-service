@@ -38,26 +38,6 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
-            'description' => [
-                'name'       => 'description',
-                'required'   => false,
-                'validators' => [new StringLength(['min' => 1])]
-            ],
-            'price' => [
-                'name'       => 'price',
-                'required'   => false,
-                'validators' => [new DecimalValidator(['min' => 0])]
-            ],
-            'cost' => [
-                'name'       => 'cost',
-                'required'   => false,
-                'validators' => [new DecimalValidator(['min' => 0])]
-            ],
-            'condition' => [
-                'name'       => 'condition',
-                'required'   => false,
-                'validators' => [new StringLength(['min' => 1])]
-            ],
             'parentProductId' => [
                 'name'       => 'parentProductId',
                 'required'   => true,
