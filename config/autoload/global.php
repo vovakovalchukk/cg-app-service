@@ -248,12 +248,7 @@ use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Mapper as StockMapper;
 use CG\Stock\Location\Entity as StockLocationEntity;
 use CG\Stock\Location\Service as StockLocationService;
-use CG\Stock\Location\Repository as StockLocationRepository;
-use CG\Stock\Location\Storage\Cache as StockLocationCacheStorage;
-use CG\Stock\Location\Storage\Db as StockLocationDbStorage;
 use CG\Stock\Location\Storage\Api as StockLocationApiStorage;
-use CG\Stock\Location\StorageInterface as StockLocationStorage;
-use CG\Stock\Location\Mapper as StockLocationMapper;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Locking\Creator as StockCreator;
 use CG\Stock\Locking\Entity as LockingStock;
@@ -1085,26 +1080,6 @@ $config = array(
                     'mapper' => StockMapper::class
                 ]
             ],
-            StockLocationService::class => [
-                'parameter' => [
-                    'repository' => StockLocationRepository::class,
-                    'stockStorage' => StockRepository::class
-                ]
-            ],
-            StockLocationRepository::class => [
-                'parameter' => [
-                    'storage' => StockLocationCacheStorage::class,
-                    'repository' => StockLocationDbStorage::class
-                ]
-            ],
-            StockLocationDbStorage::class => [
-                'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
-                    'mapper' => StockLocationMapper::class
-                ]
-            ],
             StockAdjustmentCalculator::class => [
                 'parameter' => [
                     'accountClient' => AccountApiStorage::class
@@ -1671,7 +1646,6 @@ $config = array(
                 UnimportedListingStorage::class => UnimportedListingDbStorage::class,
                 AccountPollingWindowStorage::class => AccountPollingWindowApiStorage::class,
                 ChannelShippingChannelsProviderInterface::class => DataplugCarriers::class,
-                StockLocationStorage::class => StockLocationRepository::class,
                 LocationStorage::class => LocationRepository::class,
                 OrderClientStorage::class => OrderApiStorage::class,
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes

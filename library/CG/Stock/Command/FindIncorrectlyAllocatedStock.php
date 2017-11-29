@@ -34,24 +34,36 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface
 
     public function findIncorrectlyAllocated($operator = '!=')
     {
-                $query = <<<EOF
+        $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, calculatedAllocated as expected, sl.allocated as actual, calculatedAllocated - allocated as diff, unknownOrders
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId
+INNER JOIN location AS l ON sl.locationId = l.id AND l.type = 'Merchant'
 INNER JOIN (
-	SELECT itemSku, order.rootOrganisationUnitId, SUM(
+    SELECT IFNULL(productLink.leafSku, item.itemSku) as allocatedSku, order.rootOrganisationUnitId, SUM(
 		IF(item.purchaseDate > account.cgCreationDate,
-			IF(item.`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'), itemQuantity, 0),
-			IF(item.`status` IN ('awaiting payment', 'new'), itemQuantity, 0)
-		)) as calculatedAllocated,
-        SUM(IF(item.`status` = 'unknown', itemQuantity, 0)) as unknownOrders
+			IF(item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'), item.itemQuantity, 0),
+			IF(item.`status` IN ('awaiting payment', 'new'), item.itemQuantity, 0)
+		)) * IFNULL(productLink.quantity, 1) as calculatedAllocated,
+        SUM(IF(item.`status` = 'unknown', item.itemQuantity, 0)) * IFNULL(productLink.quantity, 1) as unknownOrders
 	FROM item
 	INNER JOIN `order` ON item.orderId = order.id
 	INNER JOIN account.account ON item.accountId = account.id
-	WHERE item.stockManaged = 1
-	GROUP BY itemSku, order.rootOrganisationUnitId
+    LEFT JOIN (
+		SELECT root.organisationUnitId, root.sku, leaf.sku as leafSku, SUM(leafPath.quantity) as quantity
+		FROM productLink root
+		JOIN productLinkPath rootPath ON root.linkId = rootPath.linkId and rootPath.order = 0
+		JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
+		JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
+		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
+		GROUP BY root.organisationUnitId, root.sku, leaf.sku
+    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+	WHERE item.itemSku != ''
+	AND item.stockManaged = 1
+	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
+	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
-    calc.itemSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+    calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} calculatedAllocated
@@ -79,17 +91,26 @@ EOF;
     protected function getExpectedAllocatedDetails(array $result)
     {
         $query = <<<EOF
-SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus, 
-    `item`.`itemQuantity`, IF(`item`.`purchaseDate` > `account`.`account`.`cgCreationDate`, 'yes', 'no') AS afterAccountCreation
+SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
+    `item`.`itemQuantity` * IFNULL(productLink.quantity, 1) as `itemQuantity`, IF(`item`.`purchaseDate` > `account`.`account`.`cgCreationDate`, 'yes', 'no') AS afterAccountCreation
 FROM `item`
 JOIN `order` ON (`item`.`orderId` = `order`.`id`)
 JOIN `account`.`account` ON (`order`.`accountId` = `account`.`id`)
+LEFT JOIN (
+    SELECT root.organisationUnitId, root.sku, leaf.sku as leafSku, SUM(leafPath.quantity) as quantity
+    FROM productLink root
+    JOIN productLinkPath rootPath ON root.linkId = rootPath.linkId and rootPath.order = 0
+    JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
+    JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
+    JOIN productLink leaf ON leafPath.linkId = leaf.linkId
+    GROUP BY root.organisationUnitId, root.sku, leaf.sku
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 WHERE `item`.`organisationUnitId` = ?
-AND `item`.`itemSku` LIKE ?
+AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
-AND 
+AND
     (
-        (`item`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'))
+        (`item`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'))
         OR
         (`item`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new'))
     )
@@ -104,16 +125,25 @@ EOF;
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
-    `item`.`itemQuantity`, IF(`item`.`purchaseDate` > `account`.`account`.`cgCreationDate`, 'yes', 'no') AS afterAccountCreation
+    `item`.`itemQuantity` * IFNULL(productLink.quantity, 1) as `itemQuantity`, IF(`item`.`purchaseDate` > `account`.`account`.`cgCreationDate`, 'yes', 'no') AS afterAccountCreation
 FROM `item`
 JOIN `order` ON (`item`.`orderId` = `order`.`id`)
 JOIN `account`.`account` ON (`order`.`accountId` = `account`.`id`)
+LEFT JOIN (
+    SELECT root.organisationUnitId, root.sku, leaf.sku as leafSku, SUM(leafPath.quantity) as quantity
+    FROM productLink root
+    JOIN productLinkPath rootPath ON root.linkId = rootPath.linkId and rootPath.order = 0
+    JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
+    JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
+    JOIN productLink leaf ON leafPath.linkId = leaf.linkId
+    GROUP BY root.organisationUnitId, root.sku, leaf.sku
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 WHERE `item`.`organisationUnitId` = ?
-AND `item`.`itemSku` = ?
+AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
 AND
     (
-        (`order`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new','cancelling','dispatching','refunding'))
+        (`order`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'))
         OR
         (`order`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new'))
     )

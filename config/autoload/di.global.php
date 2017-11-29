@@ -8,6 +8,7 @@ use Zend\Di\Config;
 use Zend\Di\Di;
 use Zend\Di\InstanceManager;
 use Zend\Di\LocatorInterface;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
@@ -15,15 +16,14 @@ return [
     'service_manager' => [
         'factories' => [
             Di::class => function(ServiceLocatorInterface $serviceManager) {
-                /**
-                 * @var $configuration array
-                 */
+                /** @var $configuration array */
                 $configuration = $serviceManager->get('config');
-
-                /**
-                 * @var $cache StorageInterface
-                 */
-                $cache = $serviceManager->get('DiCacheStorage');
+                try {
+                    /** @var $cache StorageInterface */
+                    $cache = $serviceManager->get('DiCacheStorage');
+                } catch (ServiceNotFoundException $exception) {
+                    $cache = null;
+                }
 
                 $runtimeDefinition = new CacheDefinition(
                     null,
