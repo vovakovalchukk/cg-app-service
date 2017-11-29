@@ -125,6 +125,7 @@ use CG\Order\Shared\Batch\Mapper as BatchMapper;
 use CG\UserPreference\Service\Service as UserPreferenceService;
 use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
+use CG\UserPreference\Service\Storage\Db as UserPreferenceDbStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 
 //Tag
@@ -454,6 +455,7 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
+                'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -777,12 +779,18 @@ $config = array(
                     'repository' => UserPreferenceMongoDbStorage::class
                 )
             ),
-            UserPreferenceRepository::class => array(
-                'parameter' => array(
+            'UserPreferenceMongoMigrationRepository' => [
+                'parameter' => [
+                    'storage' => UserPreferenceDbStorage::class,
+                    'repository' => UserPreferenceMongoDbStorage::class,
+                ],
+            ],
+            UserPreferenceRepository::class => [
+                'parameter' => [
                     'storage' => UserPreferenceCacheStorage::class,
-                    'repository' => UserPreferenceMongoDbStorage::class
-                )
-            ),
+                    'repository' => 'UserPreferenceMongoMigrationRepository',
+                ]
+            ],
             TagDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
