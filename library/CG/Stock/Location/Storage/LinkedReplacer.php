@@ -121,10 +121,10 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
     protected function applyDifference(StockLocation $stockLocation, array $difference)
     {
-        $quantifier = ($stockLocation instanceof QuantifiedLocation) ? $stockLocation->getComponentMultiplier() : 1;
+        $componentMultiplier = ($stockLocation instanceof QuantifiedLocation) ? $stockLocation->getComponentMultiplier() : 1;
         foreach ($difference as $stock => $stockDifference) {
             $currentStock = $stockLocation->{'get' . $stock}(false);
-            $stockLocation->{'set' . $stock}($currentStock + ($quantifier * $stockDifference), false);
+            $stockLocation->{'set' . $stock}($currentStock + ($componentMultiplier * $stockDifference), false);
         }
     }
 
