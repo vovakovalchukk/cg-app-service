@@ -37,26 +37,4 @@ class MigrateMongoDataToMysql
 
         return $collection;
     }
-
-    public function getDb(): MySQLStorage
-    {
-        return $this->db;
-    }
-
-    public function setDb(MySQLStorage $db): MigrateMongoDataToMysql
-    {
-        $this->db = $db;
-        return $this;
-    }
-
-    public function getMongoDb(): MongoDbStorage
-    {
-        return $this->mongoDb;
-    }
-
-    public function setMongoDb(MongoDbStorage $mongoDb): MigrateMongoDataToMysql
-    {
-        $this->mongoDb = $mongoDb;
-        return $this;
-    }
 }
