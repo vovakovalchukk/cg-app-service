@@ -10,12 +10,14 @@ class MigrateMongoDataToMysql
     protected $db;
     protected $mongoDb;
 
-    public function __construct(
+    public function __1construct(
         MySQLStorage $db,
         MongoDbStorage $mongoDb
     ) {
-
+        $this->db = $db;
+        $this->mongoDb = $mongoDb;
     }
+
 
     public function __invoke()
     {
