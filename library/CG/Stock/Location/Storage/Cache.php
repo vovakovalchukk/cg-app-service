@@ -47,8 +47,8 @@ class Cache extends CacheAbstract implements StorageInterface
         );
     }
 
-    public function save($entity, array $adjustmentIds = [])
+    public function save($stockLocation, array $adjustmentIds = [])
     {
-        return $this->traitSave($entity);
+        return $this->traitSave($stockLocation);
     }
 }

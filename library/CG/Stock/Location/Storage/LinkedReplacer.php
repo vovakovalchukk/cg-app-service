@@ -57,54 +57,54 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     }
 
     /**
-     * @param StockLocation $entity
+     * @param StockLocation $stockLocation
      */
-    public function remove($entity)
+    public function remove($stockLocation)
     {
-        $this->locationStorage->remove($entity);
+        $this->locationStorage->remove($stockLocation);
     }
 
     /**
-     * @param StockLocation $entity
+     * @param StockLocation $stockLocation
      */
-    public function save($entity)
+    public function save($stockLocation)
     {
-        $quantifiedEntity = $this->getQuantifiedStockLocation($entity);
-        if (!($quantifiedEntity instanceof LinkedLocation)) {
-            return $this->locationStorage->save($quantifiedEntity);
+        $quantifiedStockLocation = $this->getQuantifiedStockLocation($stockLocation);
+        if (!($quantifiedStockLocation instanceof LinkedLocation)) {
+            return $this->locationStorage->save($quantifiedStockLocation);
         }
 
         if (
-            ($quantifiedEntity instanceof LinkedLocation)
-            && !empty($missingStockLocationSkus = $quantifiedEntity->getLinkedLocations()->getMissingSkus())
+            ($quantifiedStockLocation instanceof LinkedLocation)
+            && !empty($missingStockLocationSkus = $quantifiedStockLocation->getLinkedLocations()->getMissingSkus())
         ) {
             throw (new ValidationMessagesException(StatusCode::UNPROCESSABLE_ENTITY))->addErrorWithField(
                 'stockSku',
                 sprintf(
                     'You can not update linked stock location %s because the following stock location sku(s) are missing: %s',
-                    $entity->getId(),
+                    $stockLocation->getId(),
                     implode(', ', $missingStockLocationSkus)
                 )
             );
         }
 
         try {
-            $fetchedEntity = $this->fetch($entity->getId());
+            $fetchedStockLocation = $this->fetch($stockLocation->getId());
         } catch (NotFound $exception) {
-            $fetchedEntity = $this->getQuantifiedStockLocation($entity);
+            $fetchedStockLocation = $this->getQuantifiedStockLocation($stockLocation);
         }
 
-        if (empty($difference = $this->calculateDifference($fetchedEntity, $entity))) {
-            return $quantifiedEntity;
+        if (empty($difference = $this->calculateDifference($fetchedStockLocation, $stockLocation))) {
+            return $quantifiedStockLocation;
         }
 
         /** @var StockLocation $linkedLocation */
-        foreach ($quantifiedEntity->getLinkedLocations() as $linkedLocation) {
+        foreach ($quantifiedStockLocation->getLinkedLocations() as $linkedLocation) {
             $this->applyDifference($linkedLocation, $difference);
             $this->locationStorage->save($linkedLocation);
         }
 
-        return $quantifiedEntity;
+        return $quantifiedStockLocation;
     }
 
     protected function calculateDifference(StockLocation $previous, StockLocation $current): array
