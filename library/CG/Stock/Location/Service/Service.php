@@ -144,34 +144,46 @@ class Service extends BaseService implements StatsAwareInterface
 
     protected function updateRelated(Stock $stock, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
     {
+        /** @var StockLocation $relatedStockLocation */
+        foreach ($relatedStockLocations as $relatedStockLocation) {
+            $this->stockLocationCache->remove($relatedStockLocation);
+
+            $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+            if (!($relatedStock instanceof Stock)) {
+                continue;
+            }
+            $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
+        }
+
         try {
-            /** @var Stock[] $updatedStocks */
-            $updatedStocks = [];
+            $stockIds = $relatedStockLocations->getArrayOf('stockId');
+            $locationIds = $relatedStockLocations->getArrayOf('locationId');
+            if (empty($stockIds) || empty($locationIds)) {
+                throw new NotFound('No related stock loations to update');
+            }
 
-            /** @var StockLocation $relatedStockLocation */
-            foreach ($relatedStockLocations as $relatedStockLocation) {
-                $this->stockLocationCache->remove($relatedStockLocation);
+            /** @var StockLocationCollection $updatedStockLocations */
+            $updatedStockLocations = $this->fetchCollectionByFilter(
+                (new StockLocationFilter('all', 1))->setStockId($stockIds)->setLocationId($locationIds)
+            );
 
-                $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-                if (!($relatedStock instanceof Stock)) {
+            /** @var StockLocation $updatedStockLocation */
+            foreach ($updatedStockLocations as $updatedStockLocation) {
+                $stockLocation = $relatedStockLocations->getById($updatedStockLocation->getId());
+                if (
+                    !($stockLocation instanceof StockLocation)
+                    || $stockLocation->getETag() == $updatedStockLocation->getETag()
+                ) {
                     continue;
                 }
 
-                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
-                try {
-                    /** @var StockLocation $stockLocation */
-                    $stockLocation = $this->fetch($relatedStockLocation->getId());
-                    if ($stockLocation->getETag() != $relatedStockLocation->getETag()) {
-                        $updatedStocks[] = $relatedStock;
-                    }
-                } catch (NotFound $exception) {
-                    $updatedStocks[] = $relatedStock;
+                $relatedStock = $relatedStocks->getById($stockLocation->getStockId());
+                if ($relatedStock instanceof Stock) {
+                    $this->updateRelatedListings($relatedStock);
                 }
             }
-
-            foreach ($updatedStocks as $updatedStock) {
-                $this->updateRelatedListings($updatedStock);
-            }
+        } catch (NotFound $exception) {
+            // No related stock loations to update
         } finally {
             $this->updateRelatedListings($stock);
         }
