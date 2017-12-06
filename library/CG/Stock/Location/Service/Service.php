@@ -99,10 +99,15 @@ class Service extends BaseService implements StatsAwareInterface
 
     protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
     {
-        /** @var ProductLinkNode $productLinkNode */
-        $productLinkNode = $this->productLinkNodeStorage->fetch(
-            ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
-        );
+        try {
+            /** @var ProductLinkNode $productLinkNode */
+            $productLinkNode = $this->productLinkNodeStorage->fetch(
+                ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
+            );
+        } catch (NotFound $exception) {
+            $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $stock->getSku(), [], []);
+        }
+
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
             function ($sku) use ($productLinkNode) {
                 return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
@@ -111,6 +116,9 @@ class Service extends BaseService implements StatsAwareInterface
         ));
 
         try {
+            if (empty($filter->getOuIdSku())) {
+                throw new NotFound('No related stock locations');
+            }
             return $this->fetchCollectionByFilter($filter);
         } catch (NotFound $exception) {
             return new StockLocationCollection(StockLocation::class, 'fetchCollectionByFilter', $filter->toArray());
@@ -121,6 +129,9 @@ class Service extends BaseService implements StatsAwareInterface
     {
         $filter = (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'));
         try {
+            if (empty($filter->getId())) {
+                throw new NotFound('No related stock');
+            }
             return $this->stockStorage->fetchCollectionByFilter($filter);
         } catch (NotFound $exception) {
             return new StockCollection(Stock::class, 'fetchCollectionByFilter', $filter->toArray());
