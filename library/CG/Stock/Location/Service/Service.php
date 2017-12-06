@@ -17,6 +17,7 @@ use CG\Stock\Auditor;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Filter as StockFilter;
+use CG\Stock\Location\Collection as StockLocationCollection;
 use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Filter as StockLocationFilter;
 use CG\Stock\Location\Mapper as LocationMapper;
@@ -89,9 +90,41 @@ class Service extends BaseService implements StatsAwareInterface
             // Saving new entity - nothing to do
         }
 
+        $relatedStockLocations = $this->fetchRelatedStockLocations($stock);
+        $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelated($stock);
+        $this->updateRelated($stock, $relatedStocks, $relatedStockLocations);
         return $stockLocationHal;
+    }
+
+    protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
+    {
+        /** @var ProductLinkNode $productLinkNode */
+        $productLinkNode = $this->productLinkNodeStorage->fetch(
+            ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
+        );
+        $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
+            function ($sku) use ($productLinkNode) {
+                return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+            },
+            iterator_to_array($productLinkNode)
+        ));
+
+        try {
+            return $this->fetchCollectionByFilter($filter);
+        } catch (NotFound $exception) {
+            return new StockLocationCollection(StockLocation::class, 'fetchCollectionByFilter', $filter->toArray());
+        }
+    }
+
+    protected function fetchRelatedStock(StockLocationCollection $relatedStockLocations): StockCollection
+    {
+        $filter = (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'));
+        try {
+            return $this->stockStorage->fetchCollectionByFilter($filter);
+        } catch (NotFound $exception) {
+            return new StockCollection(Stock::class, 'fetchCollectionByFilter', $filter->toArray());
+        }
     }
 
     protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $updated): Service
@@ -109,30 +142,9 @@ class Service extends BaseService implements StatsAwareInterface
         return $this;
     }
 
-    protected function updateRelated(Stock $stock)
+    protected function updateRelated(Stock $stock, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
     {
         try {
-            try {
-                /** @var ProductLinkNode $productLinkNode */
-                $productLinkNode = $this->productLinkNodeStorage->fetch(
-                    ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
-                );
-                $relatedStockLocations = $this->fetchCollectionByFilter(
-                    (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
-                        function ($sku) use ($productLinkNode) {
-                            return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
-                        },
-                        iterator_to_array($productLinkNode)
-                    ))
-                );
-                /** @var StockCollection $relatedStocks */
-                $relatedStocks = $this->stockStorage->fetchCollectionByFilter(
-                    (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'))
-                );
-            } catch (NotFound $exception) {
-                return;
-            }
-
             /** @var Stock[] $updatedStocks */
             $updatedStocks = [];
 
@@ -141,10 +153,11 @@ class Service extends BaseService implements StatsAwareInterface
                 $this->stockLocationCache->remove($relatedStockLocation);
 
                 $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-                if ($relatedStock instanceof Stock) {
-                    $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
+                if (!($relatedStock instanceof Stock)) {
+                    continue;
                 }
 
+                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
                 try {
                     /** @var StockLocation $stockLocation */
                     $stockLocation = $this->fetch($relatedStockLocation->getId());
