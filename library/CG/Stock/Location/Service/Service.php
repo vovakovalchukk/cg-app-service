@@ -160,10 +160,9 @@ class Service extends BaseService implements StatsAwareInterface
             $this->stockLocationCache->remove($relatedStockLocation);
 
             $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-            if (!($relatedStock instanceof Stock)) {
-                continue;
+            if ($relatedStock instanceof Stock) {
+                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
             }
-            $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
         }
 
         try {
