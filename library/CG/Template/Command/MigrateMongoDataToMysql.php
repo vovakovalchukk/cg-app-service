@@ -4,17 +4,20 @@ namespace CG\Template\Command;
 
 use CG\Template\Storage\Db as MySQLStorage;
 use CG\Template\Storage\MongoDb as MongoDbStorage;
+use CG\Stdlib\Exception\Runtime\NotFound as NotFoundException;
 
 class MigrateMongoDataToMysql
 {
     protected $db;
+    /** @var MongoDbStorage */
     protected $mongoDb;
 
     public function __construct(
         MySQLStorage $db,
         MongoDbStorage $mongoDb
     ) {
-
+        $this->db = $db;
+        $this->mongoDb = $mongoDb;
     }
 
     public function __invoke()
@@ -26,35 +29,24 @@ class MigrateMongoDataToMysql
 
     protected function migrate()
     {
-        $collection = $this->getMongoDb()
-            ->fetchCollectionByPagination('all', 1, [], [], []);
+        $entityArray = [];
+        $page = 1;
+        do {
+            try {
 
-        foreach($collection->toArray() as $entity) {
-            $this->getDb()->save($entity);
+                $collection = $this->mongoDb
+                    ->fetchCollectionByPagination(100, $page, [], [], []);
+                array_merge($entityArray, $collection->toArray());
+                $page++;
+            } catch (NotFoundException $unused) {
+                break;
+            }
+        } while (true);
+
+        foreach ($entityArray as $entity) {
+            $this->db->save($entity);
         }
 
-        return $collection;
-    }
-
-    public function getDb(): MySQLStorage
-    {
-        return $this->db;
-    }
-
-    public function setDb(MySQLStorage $db): MigrateMongoDataToMysql
-    {
-        $this->db = $db;
-        return $this;
-    }
-
-    public function getMongoDb(): MongoDbStorage
-    {
-        return $this->mongoDb;
-    }
-
-    public function setMongoDb(MongoDbStorage $mongoDb): MigrateMongoDataToMysql
-    {
-        $this->mongoDb = $mongoDb;
-        return $this;
+        return $entityArray;
     }
 }
