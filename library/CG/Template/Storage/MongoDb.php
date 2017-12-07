@@ -21,8 +21,8 @@ class MongoDb implements StorageInterface
 
     public function __construct(\MongoClient $client, Mapper $mapper)
     {
-        $this->setClient($client)
-            ->setMapper($mapper);
+        $this->client = $client;
+        $this->mapper = $mapper;
     }
 
     public function save($entity)
@@ -76,7 +76,7 @@ class MongoDb implements StorageInterface
             if (!$templates->count(true)) {
                 throw new NotFound();
             }
-            $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type'));
+            $collection = new Collection(Entity::class, __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type'));
             $collection->setTotal($templates->count());
             foreach ($templates as $template) {
                 $collection->attach($this->getMapper()->fromMongoArray($template));
@@ -94,27 +94,7 @@ class MongoDb implements StorageInterface
         return $this->getClient()->$database->$collection;
     }
 
-    public function setClient(\MongoClient $client)
-    {
-        $this->client = $client;
-        return $this;
-    }
 
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    public function getEntityClass()
-    {
-        return Entity::class;
-    }
-
-    public function setMapper(Mapper $mapper)
-    {
-        $this->mapper = $mapper;
-        return $this;
-    }
 
     public function getMapper()
     {
