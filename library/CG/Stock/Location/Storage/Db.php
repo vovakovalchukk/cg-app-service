@@ -106,11 +106,11 @@ class Db extends DbAbstract implements StorageInterface
         $select->where->addPredicate($filter);
     }
 
-    public function remove($entity)
+    public function remove($stockLocation)
     {
         $delete = $this->getDelete()->where(array(
-            'locationId' => $entity->getLocationId(),
-            'stockId' => $entity->getStockId(),
+            'locationId' => $stockLocation->getLocationId(),
+            'stockId' => $stockLocation->getStockId(),
         ));
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
@@ -124,48 +124,48 @@ class Db extends DbAbstract implements StorageInterface
         );
     }
 
-    public function save($entity, array $adjustmentIds = [])
+    public function save($stockLocation, array $adjustmentIds = [])
     {
         $attempts = 5;
         try {
-            $this->startTransactionAndHandleDeadlock([$this, 'saveEntityWithAdjustments'], [$entity, $adjustmentIds], $attempts);
+            $this->startTransactionAndHandleDeadlock([$this, 'saveEntityWithAdjustments'], [$stockLocation, $adjustmentIds], $attempts);
         } catch (Deadlock $e) {
-            $this->logError('Deadlock handling failed, attempted %s times to save entity of type %s', [$attempts, get_class($entity)], 'MySQL Deadlock');
+            $this->logError('Deadlock handling failed, attempted %s times to save entity of type %s', [$attempts, get_class($stockLocation)], 'MySQL Deadlock');
             throw $e;
         }
-        return $entity;
+        return $stockLocation;
     }
 
-    protected function saveEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function saveEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
         try {
             try {
-                $this->fetch($entity->getId());
-                $this->updateEntityWithAdjustments($entity, $adjustmentIds);
+                $this->fetch($stockLocation->getId());
+                $this->updateEntityWithAdjustments($stockLocation, $adjustmentIds);
             } catch (NotFound $ex) {
-                $this->insertEntityWithAdjustments($entity, $adjustmentIds);
+                $this->insertEntityWithAdjustments($stockLocation, $adjustmentIds);
             }
         } catch (ZendDbException $exception) {
             throw $this->parseZendDbException($exception);
         }
-        return $entity;
+        return $stockLocation;
     }
 
-    protected function insertEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function insertEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
-        $insert = $this->getInsert()->values($this->toDbArray($entity));
+        $insert = $this->getInsert()->values($this->toDbArray($stockLocation));
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         $this->insertAdjustmentIds($adjustmentIds);
 
-        $entity->setNewlyInserted(true);
+        $stockLocation->setNewlyInserted(true);
     }
 
-    protected function updateEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function updateEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
-        $update = $this->getUpdate()->set($this->toDbArray($entity))
+        $update = $this->getUpdate()->set($this->toDbArray($stockLocation))
             ->where(array(
-                'locationId' => $entity->getLocationId(),
-                'stockId' => $entity->getStockId(),
+                'locationId' => $stockLocation->getLocationId(),
+                'stockId' => $stockLocation->getStockId(),
             ));
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
         $this->insertAdjustmentIds($adjustmentIds);
@@ -209,14 +209,14 @@ class Db extends DbAbstract implements StorageInterface
 
     public function saveCollection(CollectionInterface $collection)
     {
-        foreach ($collection as $entity) {
-            $this->save($entity);
+        foreach ($collection as $stockLocation) {
+            $this->save($stockLocation);
         }
     }
 
-    protected function toDbArray($entity)
+    protected function toDbArray($stockLocation)
     {
-        $data = $entity->toArray();
+        $data = $stockLocation->toArray();
         unset($data['id']);
         return $data;
     }

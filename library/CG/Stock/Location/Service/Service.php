@@ -94,16 +94,16 @@ class Service extends BaseService implements StatsAwareInterface
         return $stockLocationHal;
     }
 
-    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $entity): Service
+    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $updated): Service
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
         if (
             $current->getAvailable() >= 0
-            && $entity->getAvailable() < 0
+            && $updated->getAvailable() < 0
             && $this->accountService->isStockManagementEnabled($organisationUnitIds)
             && $stock->getStockMode() != StockMode::LIST_FIXED
         ) {
-            $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $entity->getId()], static::LOG_CODE_OVERSELL);
+            $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $updated->getId()], static::LOG_CODE_OVERSELL);
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
         }
         return $this;
