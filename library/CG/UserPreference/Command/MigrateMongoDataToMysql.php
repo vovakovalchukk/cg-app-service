@@ -4,6 +4,7 @@ namespace CG\UserPreference\Command;
 
 use CG\UserPreference\Service\Storage\Db as MySQLStorage;
 use CG\UserPreference\Service\Storage\MongoDb as MongoDbStorage;
+use CG\Stdlib\Exception\Runtime\NotFound as NotFoundException;
 
 class MigrateMongoDataToMysql
 {
@@ -28,13 +29,23 @@ class MigrateMongoDataToMysql
 
     protected function migrate()
     {
-        $collection = $this->getMongoDb()
-            ->fetchCollectionByPagination('all', 1);
+        $entityArray = [];
+        $page = 1;
+        do {
+            try {
+                $collection = $this->mongoDb
+                    ->fetchCollectionByPagination(100, $page, [], [], []);
+                array_merge($entityArray, $collection->toArray());
+                $page++;
+            } catch (NotFoundException $unused) {
+                break;
+            }
+        } while (true);
 
-        foreach($collection->toArray() as $entity) {
-            $this->getDb()->save($entity);
+        foreach ($entityArray as $entity) {
+            $this->db->save($entity);
         }
 
-        return $collection;
+        return $entityArray;
     }
 }
