@@ -9,7 +9,7 @@ namespace CG\Stock\Location;
  */
 class QuantifiedLocation extends Entity
 {
-    protected $quantifier = 1;
+    protected $componentMultiplier = 1;
 
     public function getAvailable($quantify = false)
     {
@@ -20,7 +20,7 @@ class QuantifiedLocation extends Entity
     {
         $onHand = parent::getOnHand();
         if ($quantify) {
-            return floor($onHand / $this->quantifier);
+            return floor($onHand / $this->componentMultiplier);
         }
         return $onHand;
     }
@@ -28,7 +28,7 @@ class QuantifiedLocation extends Entity
     public function setOnHand($onHand, $quantify = false)
     {
         if ($quantify) {
-            $onHand *= $this->quantifier;
+            $onHand *= $this->componentMultiplier;
         }
         return parent::setOnHand($onHand);
     }
@@ -37,7 +37,7 @@ class QuantifiedLocation extends Entity
     {
         $allocated = parent::getAllocated();
         if ($quantify) {
-            return ceil($allocated / $this->quantifier);
+            return ceil($allocated / $this->componentMultiplier);
         }
         return $allocated;
     }
@@ -45,7 +45,7 @@ class QuantifiedLocation extends Entity
     public function setAllocated($allocated, $quantify = false)
     {
         if ($quantify) {
-            $allocated *= $this->quantifier;
+            $allocated *= $this->componentMultiplier;
         }
         return parent::setAllocated($allocated);
     }
@@ -53,17 +53,17 @@ class QuantifiedLocation extends Entity
     /**
      * @return int
      */
-    public function getQuantifier()
+    public function getComponentMultiplier()
     {
-        return $this->quantifier;
+        return $this->componentMultiplier;
     }
 
     /**
      * @return self
      */
-    public function setQuantifier($quantifier)
+    public function setComponentMultiplier($componentMultiplier)
     {
-        $this->quantifier = (int) $quantifier;
+        $this->componentMultiplier = (int) $componentMultiplier;
         return $this;
     }
 }
