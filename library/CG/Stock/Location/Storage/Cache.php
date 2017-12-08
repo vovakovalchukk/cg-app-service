@@ -1,17 +1,18 @@
 <?php
 namespace CG\Stock\Location\Storage;
 
-use CG\Stock\Location\StorageInterface;
-use CG\Stock\Location\Mapper;
 use CG\Cache\CacheAbstract;
 use CG\Cache\Storage\CollectionTrait;
-use CG\Cache\Storage\SaveTrait;
-use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\FetchTrait;
 use CG\Cache\Storage\RemoveByFieldTrait;
-use CG\Stdlib\PaginatedCollection as Collection;
+use CG\Cache\Storage\RemoveTrait;
+use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
+use CG\Stdlib\PaginatedCollection as Collection;
+use CG\Stock\Location\Filter;
+use CG\Stock\Location\Mapper;
+use CG\Stock\Location\StorageInterface;
 
 class Cache extends CacheAbstract implements StorageInterface
 {
@@ -27,18 +28,27 @@ class Cache extends CacheAbstract implements StorageInterface
 
     public function fetchCollectionByStockIds(array $stockIds)
     {
-        $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('stockIds'));
-        return $this->fetchCollection($collection);
+        return $this->fetchCollectionByFilter(
+            new Filter('all', 1, $stockIds)
+        );
     }
 
     public function fetchCollectionByPaginationAndFilters($limit, $page, array $stockId, array $locationId)
     {
-        $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'stockId', 'locationId'));
-        return $this->fetchCollection($collection);
+        return $this->fetchCollectionByFilter(
+            new Filter($limit, $page, $stockId, $locationId)
+        );
     }
 
-    public function save($entity, array $adjustmentIds = [])
+    public function fetchCollectionByFilter(Filter $filter)
     {
-        return $this->traitSave($entity);
+        return $this->fetchCollection(
+            new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray())
+        );
+    }
+
+    public function save($stockLocation, array $adjustmentIds = [])
+    {
+        return $this->traitSave($stockLocation);
     }
 }

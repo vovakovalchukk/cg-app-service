@@ -12,58 +12,54 @@ use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stock\Location\Collection as LocationCollection;
 use CG\Stock\Location\Entity as LocationEntity;
+use CG\Stock\Location\Filter;
+use CG\Stock\Location\Mapper;
 use CG\Stock\Location\StorageInterface;
 use Zend\Db\Adapter\Exception\RuntimeException as ZendDbException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Where;
+use function CG\Stdlib\escapeLikeValue;
 
 class Db extends DbAbstract implements StorageInterface
 {
     protected const ERROR_REGEX_FOREIGN_KEY = '|a foreign key constraint fails \(.*?FOREIGN KEY \(`?(?<key>.*?)`?\).*?\)|i';
     protected const ERROR_MESSAGE_FOREIGN_KEY = 'Can not save stock location as %1$s is not valid, please confirm using correct %1$s';
 
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
+    {
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+    }
+
     public function fetchCollectionByStockIds(array $stockIds)
     {
-        try {
-            $select = $this->getSelect();
-            $query = [
-                'stockLocation.stockId' => $stockIds
-            ];
-            $select->where($query);
-
-            return $this->fetchCollection(
-                new LocationCollection($this->getEntityClass(), __FUNCTION__, compact('stockIds')),
-                $this->getReadSql(),
-                $select,
-                $this->getMapper()
-            );
-        } catch (ExceptionInterface $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
-        }
+        return $this->fetchCollectionByFilter(
+            new Filter('all', 1, $stockIds)
+        );
     }
 
     public function fetchCollectionByPaginationAndFilters($limit, $page, array $stockId, array $locationId)
     {
+        return $this->fetchCollectionByFilter(
+            new Filter($limit, $page, $stockId, $locationId)
+        );
+    }
+
+    public function fetchCollectionByFilter(Filter $filter)
+    {
         try {
-            $select = $this->getSelect();
+            /** @var Select $select */
+            $select = $this->getSelect()->where($this->getQueryForFilter($filter));
+            $this->appendOuIdSkuFilter($select, $filter->getOuIdSku());
 
-            $query = [];
-            if(!empty($stockId)) {
-                $query['stockLocation.stockId'] = $stockId;
-            }
-            if(!empty($locationId)) {
-                $query['stockLocation.locationId'] = $locationId;
-            }
-
-            $select->where($query);
-
-            if ($limit != 'all') {
-                $offset = ($page - 1) * $limit;
-                $select->limit($limit)
-                    ->offset($offset);
+            if (($limit = $filter->getLimit()) != 'all') {
+                $offset = ($filter->getPage() - 1) * $limit;
+                $select->limit($limit)->offset($offset);
             }
 
             return $this->fetchPaginatedCollection(
-                new LocationCollection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'stockId', 'locationId')),
+                new LocationCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
                 $this->getMapper()
@@ -73,11 +69,48 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    public function remove($entity)
+    protected function getQueryForFilter(Filter $filter)
+    {
+        $query = [];
+        if (!empty($stockId = $filter->getStockId())) {
+            $query['stockLocation.stockId'] = $stockId;
+        }
+        if (!empty($locationId = $filter->getLocationId())) {
+            $query['stockLocation.locationId'] = $locationId;
+        }
+        return $query;
+    }
+
+    protected function appendOuIdSkuFilter(Select $select, array $ouIdSkus)
+    {
+        if (empty($ouIdSkus)) {
+            return;
+        }
+
+        $select->join(
+            'stock',
+            'stockLocation.stockId = stock.id',
+            []
+        );
+
+        $filter = new Where(null, Where::OP_OR);
+        foreach ($ouIdSkus as $ouIdSku) {
+            [$organisationUnitId, $sku] = array_pad(explode('-', $ouIdSku, 2), 2, '');
+            $filter->addPredicate(
+                (new Where())
+                    ->equalTo('stock.organisationUnitId', $organisationUnitId)
+                    ->like('stock.sku', escapeLikeValue($sku))
+            );
+        }
+
+        $select->where->addPredicate($filter);
+    }
+
+    public function remove($stockLocation)
     {
         $delete = $this->getDelete()->where(array(
-            'locationId' => $entity->getLocationId(),
-            'stockId' => $entity->getStockId(),
+            'locationId' => $stockLocation->getLocationId(),
+            'stockId' => $stockLocation->getStockId(),
         ));
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
@@ -91,48 +124,48 @@ class Db extends DbAbstract implements StorageInterface
         );
     }
 
-    public function save($entity, array $adjustmentIds = [])
+    public function save($stockLocation, array $adjustmentIds = [])
     {
         $attempts = 5;
         try {
-            $this->startTransactionAndHandleDeadlock([$this, 'saveEntityWithAdjustments'], [$entity, $adjustmentIds], $attempts);
+            $this->startTransactionAndHandleDeadlock([$this, 'saveEntityWithAdjustments'], [$stockLocation, $adjustmentIds], $attempts);
         } catch (Deadlock $e) {
-            $this->logError('Deadlock handling failed, attempted %s times to save entity of type %s', [$attempts, get_class($entity)], 'MySQL Deadlock');
+            $this->logError('Deadlock handling failed, attempted %s times to save entity of type %s', [$attempts, get_class($stockLocation)], 'MySQL Deadlock');
             throw $e;
         }
-        return $entity;
+        return $stockLocation;
     }
 
-    protected function saveEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function saveEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
         try {
             try {
-                $this->fetch($entity->getId());
-                $this->updateEntityWithAdjustments($entity, $adjustmentIds);
+                $this->fetch($stockLocation->getId());
+                $this->updateEntityWithAdjustments($stockLocation, $adjustmentIds);
             } catch (NotFound $ex) {
-                $this->insertEntityWithAdjustments($entity, $adjustmentIds);
+                $this->insertEntityWithAdjustments($stockLocation, $adjustmentIds);
             }
         } catch (ZendDbException $exception) {
             throw $this->parseZendDbException($exception);
         }
-        return $entity;
+        return $stockLocation;
     }
 
-    protected function insertEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function insertEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
-        $insert = $this->getInsert()->values($this->toDbArray($entity));
+        $insert = $this->getInsert()->values($this->toDbArray($stockLocation));
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         $this->insertAdjustmentIds($adjustmentIds);
 
-        $entity->setNewlyInserted(true);
+        $stockLocation->setNewlyInserted(true);
     }
 
-    protected function updateEntityWithAdjustments($entity, array $adjustmentIds)
+    protected function updateEntityWithAdjustments($stockLocation, array $adjustmentIds)
     {
-        $update = $this->getUpdate()->set($this->toDbArray($entity))
+        $update = $this->getUpdate()->set($this->toDbArray($stockLocation))
             ->where(array(
-                'locationId' => $entity->getLocationId(),
-                'stockId' => $entity->getStockId(),
+                'locationId' => $stockLocation->getLocationId(),
+                'stockId' => $stockLocation->getStockId(),
             ));
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
         $this->insertAdjustmentIds($adjustmentIds);
@@ -176,14 +209,14 @@ class Db extends DbAbstract implements StorageInterface
 
     public function saveCollection(CollectionInterface $collection)
     {
-        foreach ($collection as $entity) {
-            $this->save($entity);
+        foreach ($collection as $stockLocation) {
+            $this->save($stockLocation);
         }
     }
 
-    protected function toDbArray($entity)
+    protected function toDbArray($stockLocation)
     {
-        $data = $entity->toArray();
+        $data = $stockLocation->toArray();
         unset($data['id']);
         return $data;
     }

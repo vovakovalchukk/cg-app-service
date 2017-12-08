@@ -148,6 +148,8 @@ return [
                 'Versioniser_InvoiceSettings_7' => InvoiceSettingsEntity\Versioniser7::class,
                 'Versioniser_InvoiceSettingsCollection_8' => InvoiceSettingsCollection\Versioniser8::class,
                 'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
+                'Versioniser_InvoiceSettingsCollection_9' => InvoiceSettingsCollection\Versioniser9::class,
+                'Versioniser_InvoiceSettings_9' => InvoiceSettingsEntity\Versioniser9::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
