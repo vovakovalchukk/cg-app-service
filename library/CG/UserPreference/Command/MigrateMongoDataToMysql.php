@@ -29,21 +29,22 @@ class MigrateMongoDataToMysql
     protected function migrate()
     {
         $entityArray = [];
+        $count = 0;
         $page = 1;
         do {
             try {
                 $collection = $this->mongoDb
                     ->fetchCollectionByPagination(100, $page, [], [], []);
-                array_merge($entityArray, $collection->toArray());
+
+                foreach ($collection as $entity) {
+                    $this->db->save($entity);
+                    $count++;
+                }
                 $page++;
             } catch (NotFoundException $unused) {
                 break;
             }
         } while (true);
-
-        foreach ($entityArray as $entity) {
-            $this->db->save($entity);
-        }
 
         return $entityArray;
     }

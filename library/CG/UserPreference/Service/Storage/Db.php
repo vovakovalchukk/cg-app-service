@@ -22,7 +22,7 @@ class Db extends DbAbstract implements StorageInterface
         try {
             $select = $this->getSelect();
 
-            if($limit !== 'all') {
+            if ($limit !== 'all') {
                 $offset = ($page - 1) * $limit;
                 $select->limit($limit)
                     ->offset($offset);
@@ -41,10 +41,27 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function saveEntity($entity)
     {
-        if ($entity->getId(false) != null) {
-            $this->updateEntity($entity);
+        if ($entity->getId(false) == null) {
+            if (null != $entity->getMongoId()) {
+                try {
+                    $dbEntity = $this->fetchEntity(
+                        $this->getReadSql(),
+                        $this->getSelect()->where(array(
+                            'mongoId' => $entity->getMongoId()
+                        )),
+                        $this->getMapper()
+                    );
+
+                    $entity->setId($dbEntity->getId());
+                    $this->updateEntity($entity);
+                } catch (NotFound $ignored) {
+                    $this->insertEntity($entity);
+                }
+            } else {
+                $this->insertEntity($entity);
+            }
         } else {
-            $this->insertEntity($entity);
+            $this->updateEntity($entity);
         }
         return $entity;
     }
@@ -84,7 +101,8 @@ class Db extends DbAbstract implements StorageInterface
         return $this->readSql->insert(self::TABLE);
     }
 
-    protected function getEntityClass() {
+    protected function getEntityClass()
+    {
         return UserPreferenceEntity::class;
     }
 }
