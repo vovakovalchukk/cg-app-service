@@ -37,6 +37,8 @@ class MigrateMongoDataToMysql
                     ->fetchCollectionByPagination(100, $page, [], [], []);
 
                 foreach ($collection as $entity) {
+                    $entity->setMongoId($entity->getId());
+                    $entity->setId(null);
                     $this->db->save($entity);
                     $count++;
                 }
