@@ -6,14 +6,25 @@ use Zend\Di\Di;
 /** @var Di $di */
 return [
     'currency:fetchExchangeRates' => [
-        'command' => function () use ($di) {
-            $command = $di->get(ExchangeRateService::class);
+        'command' => function (InputInterface $input) use ($di) {
+            $date = $input->getArgument('date');
+
             $date = new Date();
             $date->modify('-1 day');
+
+            if (!is_null($date)) {
+                $date = new Date($date);
+            }
+
+            $command = $di->get(ExchangeRateService::class);
             $command->fetchAllExchangeRates($date);
         },
         'description' => "Fetch end-of-day exchange rates for all currencies from Open Exchange Rates",
         'arguments' => [
+            'date' => [
+                'required' => false,
+                'default' => null
+            ],
         ],
         'options' => [
         ],
