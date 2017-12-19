@@ -1,19 +1,19 @@
 <?php
 use CG\ExchangeRate\Service as ExchangeRateService;
 use CG\Stdlib\Date;
+use Symfony\Component\Console\Input\InputInterface;
 use Zend\Di\Di;
 
 /** @var Di $di */
 return [
     'currency:fetchExchangeRates' => [
         'command' => function (InputInterface $input) use ($di) {
-            $date = $input->getArgument('date');
+            $inputDate = $input->getArgument('date');
 
             $date = new Date();
             $date->modify('-1 day');
-
-            if (!is_null($date)) {
-                $date = new Date($date);
+            if (!is_null($inputDate)) {
+                $date = new Date($inputDate);
             }
 
             $command = $di->get(ExchangeRateService::class);
