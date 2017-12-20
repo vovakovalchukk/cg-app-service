@@ -48,16 +48,16 @@ class Db extends DbAbstract implements StorageInterface
             $query['productDetail.sku'] = $filter->getSku();
         }
         if (!empty($filter->getEan())) {
-            $query['productDetail.ean'] = $filter->getSku();
+            $query['productDetail.ean'] = $filter->getEan();
         }
         if (!empty($filter->getBrand())) {
-            $query['productDetail.brand'] = $filter->getSku();
+            $query['productDetail.brand'] = $filter->getBrand();
         }
         if (!empty($filter->getMpn())) {
-            $query['productDetail.mpn'] = $filter->getSku();
+            $query['productDetail.mpn'] = $filter->getMpn();
         }
         if (!empty($filter->getAsin())) {
-            $query['productDetail.asin'] = $filter->getSku();
+            $query['productDetail.asin'] = $filter->getAsin();
         }
         return $query;
     }
