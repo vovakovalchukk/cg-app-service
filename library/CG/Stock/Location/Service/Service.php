@@ -17,6 +17,7 @@ use CG\Stock\Auditor;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Filter as StockFilter;
+use CG\Stock\Location\Collection as StockLocationCollection;
 use CG\Stock\Location\Entity as StockLocation;
 use CG\Stock\Location\Filter as StockLocationFilter;
 use CG\Stock\Location\Mapper as LocationMapper;
@@ -89,76 +90,110 @@ class Service extends BaseService implements StatsAwareInterface
             // Saving new entity - nothing to do
         }
 
+        $relatedStockLocations = $this->fetchRelatedStockLocations($stock);
+        $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelated($stock);
+        $this->updateRelated($stock, $relatedStocks, $relatedStockLocations);
         return $stockLocationHal;
     }
 
-    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $entity): Service
+    protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
+    {
+        try {
+            /** @var ProductLinkNode $productLinkNode */
+            $productLinkNode = $this->productLinkNodeStorage->fetch(
+                ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
+            );
+        } catch (NotFound $exception) {
+            $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $stock->getSku(), [], []);
+        }
+
+        $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
+            function ($sku) use ($productLinkNode) {
+                return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+            },
+            iterator_to_array($productLinkNode)
+        ));
+
+        try {
+            if (empty($filter->getOuIdSku())) {
+                throw new NotFound('No related stock locations');
+            }
+            return $this->fetchCollectionByFilter($filter);
+        } catch (NotFound $exception) {
+            return new StockLocationCollection(StockLocation::class, 'fetchCollectionByFilter', $filter->toArray());
+        }
+    }
+
+    protected function fetchRelatedStock(StockLocationCollection $relatedStockLocations): StockCollection
+    {
+        $filter = (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'));
+        try {
+            if (empty($filter->getId())) {
+                throw new NotFound('No related stock');
+            }
+            return $this->stockStorage->fetchCollectionByFilter($filter);
+        } catch (NotFound $exception) {
+            return new StockCollection(Stock::class, 'fetchCollectionByFilter', $filter->toArray());
+        }
+    }
+
+    protected function handleOversell(Stock $stock, StockLocation $current, StockLocation $updated): Service
     {
         $organisationUnitIds = $this->organisationUnitService->fetchRelatedOrganisationUnitIds($stock->getOrganisationUnitId());
         if (
             $current->getAvailable() >= 0
-            && $entity->getAvailable() < 0
+            && $updated->getAvailable() < 0
             && $this->accountService->isStockManagementEnabled($organisationUnitIds)
             && $stock->getStockMode() != StockMode::LIST_FIXED
         ) {
-            $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $entity->getId()], static::LOG_CODE_OVERSELL);
+            $this->logNotice(static::LOG_MSG_OVERSELL, [$stock->getSku(), $stock->getOrganisationUnitId(), $updated->getId()], static::LOG_CODE_OVERSELL);
             $this->statsIncrement(static::STATS_OVERSELL, [$stock->getOrganisationUnitId()]);
         }
         return $this;
     }
 
-    protected function updateRelated(Stock $stock)
+    protected function updateRelated(Stock $stock, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
     {
+        /** @var StockLocation $relatedStockLocation */
+        foreach ($relatedStockLocations as $relatedStockLocation) {
+            $this->stockLocationCache->remove($relatedStockLocation);
+
+            $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+            if ($relatedStock instanceof Stock) {
+                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
+            }
+        }
+
         try {
-            try {
-                /** @var ProductLinkNode $productLinkNode */
-                $productLinkNode = $this->productLinkNodeStorage->fetch(
-                    ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
-                );
-                $relatedStockLocations = $this->fetchCollectionByFilter(
-                    (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
-                        function ($sku) use ($productLinkNode) {
-                            return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
-                        },
-                        iterator_to_array($productLinkNode)
-                    ))
-                );
-                /** @var StockCollection $relatedStocks */
-                $relatedStocks = $this->stockStorage->fetchCollectionByFilter(
-                    (new StockFilter('all', 1))->setId($relatedStockLocations->getArrayOf('stockId'))
-                );
-            } catch (NotFound $exception) {
-                return;
+            $stockIds = $relatedStockLocations->getArrayOf('stockId');
+            $locationIds = $relatedStockLocations->getArrayOf('locationId');
+            if (empty($stockIds) || empty($locationIds)) {
+                throw new NotFound('No related stock loations to update');
             }
 
-            /** @var Stock[] $updatedStocks */
-            $updatedStocks = [];
+            /** @var StockLocationCollection $updatedStockLocations */
+            $updatedStockLocations = $this->fetchCollectionByFilter(
+                (new StockLocationFilter('all', 1))->setStockId($stockIds)->setLocationId($locationIds)
+            );
 
-            /** @var StockLocation $relatedStockLocation */
-            foreach ($relatedStockLocations as $relatedStockLocation) {
-                $this->stockLocationCache->remove($relatedStockLocation);
+            /** @var StockLocation $updatedStockLocation */
+            foreach ($updatedStockLocations as $updatedStockLocation) {
+                $stockLocation = $relatedStockLocations->getById($updatedStockLocation->getId());
+                if (
+                    !($stockLocation instanceof StockLocation)
+                    || $stockLocation->getETag() == $updatedStockLocation->getETag()
+                ) {
+                    continue;
+                }
 
-                $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+                $relatedStock = $relatedStocks->getById($stockLocation->getStockId());
                 if ($relatedStock instanceof Stock) {
-                    $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
-                }
-
-                try {
-                    /** @var StockLocation $stockLocation */
-                    $stockLocation = $this->fetch($relatedStockLocation->getId());
-                    if ($stockLocation->getETag() != $relatedStockLocation->getETag()) {
-                        $updatedStocks[] = $relatedStock;
-                    }
-                } catch (NotFound $exception) {
-                    $updatedStocks[] = $relatedStock;
+                    $this->updateRelatedListings($relatedStock);
                 }
             }
-
-            foreach ($updatedStocks as $updatedStock) {
-                $this->updateRelatedListings($updatedStock);
-            }
+        } catch (NotFound $exception) {
+            // No related stock loations to update
         } finally {
             $this->updateRelatedListings($stock);
         }

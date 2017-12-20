@@ -19,20 +19,20 @@ class TypedMapper extends Mapper
         $this->productLinkStorage = $productLinkStorage;
     }
 
-    public function fromArray(array $stockLocation)
+    public function fromArray(array $stockLocationArray)
     {
-        $entity = parent::fromArray($stockLocation);
-        if (!($entity instanceof TypedEntity)) {
-            return $entity;
+        $stockLocation = parent::fromArray($stockLocationArray);
+        if (!($stockLocation instanceof TypedEntity)) {
+            return $stockLocation;
         }
-        return $entity->setType($stockLocation['type'] ?? $this->getStockLocationType($entity));
+        return $stockLocation->setType($stockLocationArray['type'] ?? $this->getStockLocationType($stockLocation));
     }
 
-    protected function getStockLocationType(TypedEntity $entity)
+    protected function getStockLocationType(TypedEntity $stockLocation)
     {
         try {
             /** @var Stock $stock */
-            $stock = $this->stockStorage->fetch($entity->getStockId());
+            $stock = $this->stockStorage->fetch($stockLocation->getStockId());
             $this->productLinkStorage->fetch($stock->getOrganisationUnitId() . '-' . $stock->getSku());
             return TypedEntity::TYPE_LINKED;
         } catch (NotFound $exception) {
