@@ -42,7 +42,30 @@ return [
 
             /* @var $command ExchangeRateService */
             $command = $di->get(ExchangeRateService::class);
-            $res = $command->fetch(1);
+            $res = $command->fetch('2017-01-01_PLN_USD');
+
+            print_r($res);
+        },
+        'description' => "Fetch end-of-day exchange rates for all currencies from Open Exchange Rates",
+        'arguments' => [
+        ],
+        'options' => [
+        ],
+    ],
+
+    'currency:convertCurrency' => [
+        'command' => function () use ($di) {
+//            $inputDate = $input->getArgument('date');
+//
+            $date = new Date();
+            $date->modify('-2 day');
+//            if (!is_null($inputDate)) {
+//                $date = new Date($inputDate);
+//            }
+
+            /* @var $command ExchangeRateService */
+            $command = $di->get(ExchangeRateService::class);
+            $res = $command->fetchConversionRate('PLN', 'GBP', $date);
 
             print_r($res);
         },

@@ -72,7 +72,7 @@ class ExternalApi implements StorageInterface
         $collection = new Collection(Entity::class, __FUNCTION__);
 
         foreach ($rates as $currencyCode => $rate) {
-            $date = date(static::API_DATE_FORMAT,$timestamp);
+            $date = date(static::API_DATE_FORMAT, $timestamp);
             $entity = $this->mapper->fromArray([
                 'date' => $date,
                 'currencyCode' => $currencyCode,
@@ -87,7 +87,7 @@ class ExternalApi implements StorageInterface
 
     protected function getAPIUrl(Date $date)
     {
-        $parsedDateFilename = $date->getDate(Date::FORMAT).'.json';
+        $parsedDateFilename = $date->getDate(Date::FORMAT) . '.json';
         $queryStringKey = '?app_id=';
         return self::API_URL . $parsedDateFilename . $queryStringKey . self::APP_ID;
     }
