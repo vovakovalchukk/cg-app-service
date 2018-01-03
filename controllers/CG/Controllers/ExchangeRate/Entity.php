@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\ExchangeRate;
 
-use CG\Currency\Service\Service;
+use CG\ExchangeRate\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PatchTrait;

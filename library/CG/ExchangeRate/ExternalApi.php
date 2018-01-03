@@ -6,14 +6,10 @@ use CG\ExchangeRate\Entity;
 use CG\ExchangeRate\Filter;
 use CG\ExchangeRate\Mapper;
 use CG\ExchangeRate\StorageInterface;
-use CG\Http\Client\SaveEtagTrait;
-use CG\Http\Client\FetchTrait;
-use CG\Http\Client\RemoveTrait;
-use CG\Http\Client\EntityTrait;
 use CG\Http\Client\CollectionTrait;
 use CG\Stdlib\Date;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\ResponseInterface as GuzzleResponse;
 
 class ExternalApi implements StorageInterface
 {
@@ -21,7 +17,7 @@ class ExternalApi implements StorageInterface
     const API_URL = 'https://openexchangerates.org/api/historical/';
     const API_DATE_FORMAT = 'Y-m-d';
 
-    use SaveEtagTrait, RemoveTrait, FetchTrait, CollectionTrait, EntityTrait;
+    use CollectionTrait;
 
     protected $mapper;
     protected $client;
@@ -30,6 +26,27 @@ class ExternalApi implements StorageInterface
     {
         $this->setClient($client)
             ->setMapper($mapper);
+    }
+
+    public function fetch($id)
+    {
+        $date = Entity::getComponentsFromId($id)['date'];
+        $entity = $this->fetchCurrencyExchangeRates(new Date($date))->getById($id);
+        if ($entity) {
+            return $entity;
+        }
+        throw new NotFound(sprintf('Can\'t fetch exchange rate %s from external api', $id));
+    }
+
+    public function save($entity)
+    {
+        // Can't save to external api
+        return $entity;
+    }
+
+    public function remove($entity)
+    {
+        // Can't remove from external api
     }
 
     public function fetchCollectionByFilter(Filter $filter)

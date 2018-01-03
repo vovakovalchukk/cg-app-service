@@ -1,11 +1,12 @@
 <?php
+
 use CG\Controllers\ExchangeRate\Collection as ExchangeRateCollectionController;
 use CG\Controllers\ExchangeRate\Entity as ExchangeRateController;
-use CG\InputValidation\ExchangeRate\Entity as ExchangeRateEntityValidation;
-use CG\InputValidation\ExchangeRate\Filter as ExchangeRateCollectionValidation;
 use CG\ExchangeRate\Entity as ExchangeRate;
 use CG\ExchangeRate\Mapper as ExchangeRateMapper;
 use CG\ExchangeRate\Service as ExchangeRateService;
+use CG\InputValidation\ExchangeRate\Entity as ExchangeRateEntityValidation;
+use CG\InputValidation\ExchangeRate\Filter as ExchangeRateCollectionValidation;
 
 return [
     '/exchangeRate' => [
@@ -40,7 +41,6 @@ return [
         'validation' => [
             "dataRules" => ExchangeRateEntityValidation::class
         ],
-        'version' => new Version(1, 1),
         'eTag' => [
             'mapperClass' => ExchangeRateMapper::class,
             'entityClass' => ExchangeRate::class,

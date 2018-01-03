@@ -29,4 +29,29 @@ return [
         'options' => [
         ],
     ],
+
+    'currency:test' => [
+        'command' => function () use ($di) {
+//            $inputDate = $input->getArgument('date');
+//
+//            $date = new Date();
+//            $date->modify('-1 day');
+//            if (!is_null($inputDate)) {
+//                $date = new Date($inputDate);
+//            }
+
+            /* @var $command ExchangeRateService */
+            $command = $di->get(ExchangeRateService::class);
+            $res = $command->fetch(1);
+
+            print_r($res);
+        },
+        'description' => "Fetch end-of-day exchange rates for all currencies from Open Exchange Rates",
+        'arguments' => [
+        ],
+        'options' => [
+        ],
+    ],
+
+
 ];
