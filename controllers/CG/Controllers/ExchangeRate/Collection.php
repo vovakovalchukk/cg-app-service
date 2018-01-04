@@ -6,7 +6,6 @@ use CG\ExchangeRate\Service;
 use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
-
 use Slim\Slim;
 use Zend\Di\Di;
 

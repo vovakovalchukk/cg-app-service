@@ -1,5 +1,4 @@
 <?php
-
 use CG\Controllers\ExchangeRate\Collection as ExchangeRateCollectionController;
 use CG\Controllers\ExchangeRate\Entity as ExchangeRateController;
 use CG\ExchangeRate\Entity as ExchangeRate;
