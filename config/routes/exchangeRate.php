@@ -20,13 +20,13 @@ return [
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'ExchangeRateCollection',
-        'entityRoute' => '/exchangeRate/:exchangeRateId',
+        'entityRoute' => '/exchangeRate/:id',
         'validation' => [
             'filterRules' => ExchangeRateCollectionValidation::class,
             'dataRules' => ExchangeRateEntityValidation::class
         ]
     ],
-    '/exchangeRate/:exchangeRateId' => [
+    '/exchangeRate/:id' => [
         'controllers' => function($exchangeRateId) use ($di, $app) {
             $method = $app->request()->getMethod();
 

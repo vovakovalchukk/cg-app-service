@@ -57,17 +57,23 @@ return [
         'command' => function () use ($di) {
 //            $inputDate = $input->getArgument('date');
 //
-            $date = new Date();
-            $date->modify('-2 day');
+            $date = new Date('2017-12-20');
+//            $date->modify('-2 day');
 //            if (!is_null($inputDate)) {
 //                $date = new Date($inputDate);
 //            }
 
             /* @var $command ExchangeRateService */
             $command = $di->get(ExchangeRateService::class);
-            $res = $command->fetchConversionRate('PLN', 'GBP', $date);
+//            $res = $command->fetchConversionRate('PLN', 'GBP', $date);
 
-            print_r($res);
+//            $command->fetch('2018-01-03_PLN_USD');
+
+            sleep(1);
+
+            $command->removeById('2018-01-03_PLN_USD');
+
+//            print_r($res);
         },
         'description' => "Fetch end-of-day exchange rates for all currencies from Open Exchange Rates",
         'arguments' => [
