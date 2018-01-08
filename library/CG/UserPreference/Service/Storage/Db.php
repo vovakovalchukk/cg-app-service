@@ -83,7 +83,7 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getUpdate()
     {
-        return $this->readSql->update(self::TABLE);
+        return $this->writeSql->update(self::TABLE);
     }
 
     protected function getSelect()
@@ -93,12 +93,12 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getDelete()
     {
-        return $this->readSql->delete(self::TABLE);
+        return $this->writeSql->delete(self::TABLE);
     }
 
     protected function getInsert()
     {
-        return $this->readSql->insert(self::TABLE);
+        return $this->writeSql->insert(self::TABLE);
     }
 
     protected function getEntityClass()
