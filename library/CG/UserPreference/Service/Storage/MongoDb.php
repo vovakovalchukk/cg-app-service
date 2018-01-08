@@ -81,8 +81,30 @@ class MongoDb implements StorageInterface
         return $this->getClient()->$database->$collection;
     }
 
+    public function setClient(\MongoClient $client)
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
+
     public function getEntityClass()
     {
         return UserPreferenceEntity::class;
+    }
+
+    public function setMapper(UserPreferenceMapper $mapper)
+    {
+        $this->mapper = $mapper;
+        return $this;
+    }
+
+    public function getMapper()
+    {
+        return $this->mapper;
     }
 }

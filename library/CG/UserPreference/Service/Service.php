@@ -15,8 +15,8 @@ class Service
 
     public function __construct(UserPreferenceStorage $repository, UserPreferenceMapper $mapper)
     {
-        $this->repository = $repository;
-        $this->mapper = $mapper;
+        $this->setRepository($repository)
+            ->setMapper($mapper);
     }
 
     public function fetchCollectionByPaginationAsHal($limit, $page)
@@ -33,9 +33,21 @@ class Service
         $this->getRepository()->remove($entity);
     }
 
+    public function setRepository(UserPreferenceStorage $repository)
+    {
+        $this->repository = $repository;
+        return $this;
+    }
+
     public function getRepository()
     {
         return $this->repository;
+    }
+
+    public function setMapper(UserPreferenceMapper $mapper)
+    {
+        $this->mapper = $mapper;
+        return $this;
     }
 
     public function getMapper()
