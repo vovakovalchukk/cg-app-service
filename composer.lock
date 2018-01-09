@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f49e8a5ba3303675b32df18bad21c0d",
+    "content-hash": "217e8d55b105e0a065acae881fb73a70",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1647,12 +1647,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "78554fcf4828f4802a0d44a30acafdf45cf2db35"
+                "reference": "93aad67ccd6a99ac085119b4fa18fd9403f93e26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8441-new-orders-not-linked-when-items-not-yet-saved-9db74d.zip",
-                "reference": "78554fcf4828f4802a0d44a30acafdf45cf2db35",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-8441-new-orders-not-linked-when-items-not-yet-saved-dd7c20.zip",
+                "reference": "93aad67ccd6a99ac085119b4fa18fd9403f93e26",
                 "shasum": null
             },
             "require": {
@@ -1679,7 +1679,7 @@
                 "channelgrabber/notification": "^1.2.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
-                "channelgrabber/product": "^1.9.7",
+                "channelgrabber/product": "^1.10.1",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.5.3",
@@ -1729,7 +1729,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-12-13T16:43:47+00:00"
+            "time": "2018-01-09T08:41:44+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1990,16 +1990,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "38ccc5bb6c333e37bfb393e82a27daa2911b6d21"
+                "reference": "0c89239e572966882cffe6a08a2619462c62809c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.10.0-141430.zip",
-                "reference": "38ccc5bb6c333e37bfb393e82a27daa2911b6d21",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.10.1-476317.zip",
+                "reference": "0c89239e572966882cffe6a08a2619462c62809c",
                 "shasum": null
             },
             "require": {
@@ -2049,7 +2049,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-12-06T14:33:10+00:00"
+            "time": "2017-12-20T11:40:24+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -9717,7 +9717,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.zip",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -10729,8 +10729,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.35.1",
-            "alias_normalized": "1.35.1.0",
+            "alias": "1.35.2",
+            "alias_normalized": "1.35.2.0",
             "version": "dev-CGIV-8441-new-orders-not-linked-when-items-not-yet-saved",
             "package": "channelgrabber/order"
         }
