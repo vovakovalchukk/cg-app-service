@@ -30,7 +30,7 @@ class Entity implements RulesInterface
                 'name'       => 'parentId',
                 'required'   => false,
                 'validators' => [
-                    new IntegerValidator(['name' => 'id']),
+                    new IntegerValidator(['name' => 'parentId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'parentId must be at least %min%'])
                 ]
@@ -59,7 +59,21 @@ class Entity implements RulesInterface
                 'name'       => 'listable',
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'listable'])]
-            ]
+            ],
+            'enabled' => [
+                'name'       => 'enabled',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'enabled'])]
+            ],
+            'version' => [
+                'name'       => 'version',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'version']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'parentId must be at least %min%'])
+                ]
+            ],
         ];
     }
 }

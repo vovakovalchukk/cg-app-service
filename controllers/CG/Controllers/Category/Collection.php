@@ -29,14 +29,16 @@ class Collection
     {
         return $this->service->fetchCollectionByFilterAsHal(
             new Filter(
-                $this->getParams('limit') ?: 10,
-                $this->getParams('page') ?: 1,
-                $this->getParams('id') ?: [],
-                $this->getParams('parentId') ?: [],
-                $this->getParams('externalId') ?: [],
-                $this->getParams('channel') ?: [],
-                $this->getParams('listable') ?: null,
-                $this->getParams('marketplace') ?: []
+                $this->getParams('limit') ?? 10,
+                $this->getParams('page') ?? 1,
+                $this->getParams('id') ?? [],
+                $this->getParams('parentId') ?? [],
+                $this->getParams('externalId') ?? [],
+                $this->getParams('channel') ?? [],
+                $this->getParams('listable') ?? null,
+                $this->getParams('marketplace') ?? [],
+                $this->getParams('enabled') ?? null,
+                $this->getParams('version') ?? []
             )
         );
     }

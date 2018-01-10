@@ -17,11 +17,13 @@ class ProductCategory extends AbstractMigration
             ->addColumn('marketplace', 'string', ['length' => '20', 'null' => true])
             ->addColumn('listable', 'boolean', ['null' => true])
             ->addColumn('enabled', 'boolean', ['null' => true])
+            ->addColumn('version', 'integer', ['null' => true])
             ->addIndex('externalId')
             ->addIndex('parentId')
             ->addIndex('marketplace')
             ->addIndex('listable')
             ->addIndex('enabled')
+            ->addIndex('version')
             ->addIndex(['externalId', 'channel', 'marketplace'], ['unique' => true])
             ->create();
     }
