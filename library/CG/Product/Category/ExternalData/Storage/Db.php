@@ -43,9 +43,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         /** @var Entity $entity */
         $entity = $this->fetchEntity(
             $this->getReadSql(),
-            $this->getSelect()->where(array(
-                'categoryId' => $id
-            )),
+            $this->getSelect()->where(['categoryId' => $id]),
             $this->getMapper()
         );
         $entity->setData($this->getBuilderForEntity($entity)->fetch($entity));
