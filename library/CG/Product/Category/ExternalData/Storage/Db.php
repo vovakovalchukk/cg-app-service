@@ -121,9 +121,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
      */
     protected function insertEntity($entity)
     {
-        $entityArray = $entity->toArray();
-        unset($entityArray['externalData']);
-        $insert = $this->getInsert()->values($entityArray);
+        $insert = $this->getInsert()->values($this->getEntityArray($entity));
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
         $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
 
@@ -137,8 +135,21 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
      */
     protected function updateEntity($entity)
     {
-        parent::updateEntity($entity);
+        $update = $this->getUpdate()->set($this->getEntityArray($entity))
+            ->where(array('categoryId' => $entity->getId()));
+        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
         $this->getBuilderForEntity($entity)->update($entity->getData());
+    }
+
+    /**
+     * @param Entity $entity
+     * @return array
+     */
+    protected function getEntityArray($entity): array
+    {
+        $entityArray = $entity->toArray();
+        unset($entityArray['externalData']);
+        return $entityArray;
     }
 
     protected function getSelect(): Select
