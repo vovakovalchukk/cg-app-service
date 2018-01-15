@@ -1,8 +1,8 @@
 <?php
 namespace CG\Product\Category\ExternalData\Storage;
 
-use CG\Product\Category\ExternalData\BuilderInterface;
-use CG\Product\Category\ExternalData\BuilderFactory;
+use CG\Product\Category\ExternalData\ChannelServiceInterface;
+use CG\Product\Category\ExternalData\ChannelServiceFactory;
 use CG\Product\Category\ExternalData\Collection;
 use CG\Product\Category\ExternalData\Entity;
 use CG\Product\Category\ExternalData\Filter;
@@ -29,10 +29,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
     const DB_TABLE_NAME = 'categoryExternal';
 
-    /** @var  BuilderFactory */
+    /** @var  ChannelServiceFactory */
     protected $builderFactory;
 
-    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, ArrayMapper $mapper, BuilderFactory $channelFactory)
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, ArrayMapper $mapper, ChannelServiceFactory $channelFactory)
     {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
         $this->builderFactory = $channelFactory;
@@ -78,7 +78,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
             $this->setQueryOffsetAndLimit($filter, $select);
-            return $this->fetchFilteredCollection($filter, $select);
+            $collection = $this->fetchFilteredCollection($filter, $select);
+            $this->attachExternalDataForCollection($collection);
+            return $collection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
@@ -111,7 +113,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         );
     }
 
-    protected function getBuilderForEntity(Entity $entity): BuilderInterface
+    protected function getBuilderForEntity(Entity $entity): ChannelServiceInterface
     {
         return $this->builderFactory->getBuilderObjectByChannel($entity->getChannel());
     }
@@ -123,11 +125,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $insert = $this->getInsert()->values($this->getEntityArray($entity));
         $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
-        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
 
-        $entity->setCategoryId($id);
         $entity->setNewlyInserted(true);
-        $this->getBuilderForEntity($entity)->save($entity->getData());
+        $this->getBuilderForEntity($entity)->save($entity->getCategoryId(), $entity->getData());
     }
 
     /**
@@ -138,7 +138,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         $update = $this->getUpdate()->set($this->getEntityArray($entity))
             ->where(array('categoryId' => $entity->getId()));
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
-        $this->getBuilderForEntity($entity)->update($entity->getData());
+        $this->getBuilderForEntity($entity)->update($entity->getCategoryId(), $entity->getData());
     }
 
     /**
@@ -150,6 +150,15 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         $entityArray = $entity->toArray();
         unset($entityArray['externalData']);
         return $entityArray;
+    }
+
+    protected function attachExternalDataForCollection(Collection $collection): void
+    {
+        /** @var Entity $entity */
+        foreach ($collection as $entity) {
+            $data = $this->getBuilderForEntity($entity)->fetch($entity);
+            $entity->setData($data);
+        }
     }
 
     protected function getSelect(): Select

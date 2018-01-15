@@ -26,7 +26,7 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'CategoryCollection',
         'entityRoute' => '/category/:categoryId',
         'validation' => [
@@ -65,7 +65,7 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'CategoryExternalCollection',
         'entityRoute' => '/categoryExternal/:categoryId',
         'validation' => [
