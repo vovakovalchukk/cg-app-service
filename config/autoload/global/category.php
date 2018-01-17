@@ -14,13 +14,15 @@ use CG\Product\Category\ExternalData\Storage\Db as CategoryExternalStorageDb;
 use CG\Product\Category\ExternalData\StorageInterface as CategoryExternalStorageInterface;
 use CG\Product\Category\ExternalData\Mapper as CategoryExternalMapper;
 
+use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
+
 return [
     'di' => [
-        'preferences' => [
-            CategoryStorageInterface::class => CategoryRepository::class,
-            CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
-        ],
         'instance' => [
+            'preferences' => [
+                CategoryStorageInterface::class => CategoryRepository::class,
+                CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
+            ],
             CategoryStorageDb::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
@@ -58,6 +60,12 @@ return [
                 'parameters' => [
                     'storage' => CategoryExternalRepository::class
                 ]
+            ],
+            EbayChannelService::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
             ]
         ],
     ],

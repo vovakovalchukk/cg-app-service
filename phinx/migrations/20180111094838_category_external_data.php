@@ -8,11 +8,10 @@ class CategoryExternalData extends AbstractMigration
 
     public function change()
     {
-        $this->table(static::TABLE_NAME,  ['id' => false, 'primary_key' => 'categoryId'])
+        $this->table(static::TABLE_NAME,  ['id' => false, 'primary_key' => 'categoryId', 'collation' => 'utf8_general_ci'])
             ->addColumn('categoryId', 'integer', ['autoIncrement' => false, 'null' => false, 'signed' => false])
-            ->addColumn('channel', 'string', ['null' => false])
-            ->addIndex('categoryId')
-            ->addForeignKey('categoryId', 'category', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
+            ->addColumn('channel', 'string', ['limit' => 255, 'null' => false])
+            ->addIndex('channel')
             ->create();
     }
 }

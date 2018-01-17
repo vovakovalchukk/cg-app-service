@@ -68,8 +68,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
      */
     public function remove($entity)
     {
-        parent::remove($entity);
-        $this->getBuilderForEntity($entity)->remove($entity->getData());
+        $delete = $this->getWriteSql()->delete(static::DB_TABLE_NAME)
+            ->where(['categoryId' => $entity->getCategoryId()]);
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+        $this->getBuilderForEntity($entity)->remove($entity->getId(), $entity->getData());
     }
 
     public function fetchCollectionByFilter(Filter $filter)
