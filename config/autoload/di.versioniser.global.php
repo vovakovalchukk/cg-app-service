@@ -18,6 +18,8 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductDetailEntity;
+use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -44,6 +46,8 @@ return [
                 'Versioniser_ListingEntity_5' => ListingEntity\Versioniser5::class,
                 'Versioniser_ListingCollection_6' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_6' => ListingEntity\Versioniser6::class,
+                'Versioniser_ListingCollection_7' => ListingCollection\Versioniser::class,
+                'Versioniser_ListingEntity_7' => ListingEntity\Versioniser7::class,
                 'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,
@@ -102,6 +106,8 @@ return [
                 'Versioniser_OrderLabelEntity_4' => OrderLabelEntity\Versioniser4::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
+                'Versioniser_ProductDetailCollection_1' => ProductDetailCollection\Versioniser1::class,
+                'Versioniser_ProductDetailEntity_1' => ProductDetailEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
@@ -191,6 +197,11 @@ return [
                     'entityVersioniser' => 'Versioniser_ListingEntity_6',
                 ],
             ],
+            'Versioniser_ListingCollection_7' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_7',
+                ],
+            ],
             'Versioniser_OrderCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderEntity_1',
@@ -274,6 +285,11 @@ return [
             'Versioniser_TemplateCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_TemplateEntity_1'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_1'
                 ],
             ],
             'Versioniser_ProductCollection_1' => [

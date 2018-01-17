@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Listing;
 
+use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\ArrayOfPositiveIntegersValidator;
 use CG\Validation\Rules\IsArrayValidator;
@@ -47,6 +48,31 @@ class Entity implements RulesInterface
             'status' => [
                 'name'       => 'status',
                 'required'   => true,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'name' => [
+                'name'       => 'status',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'description' => [
+                'name'       => 'description',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'price' => [
+                'name'       => 'price',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'cost' => [
+                'name'       => 'cost',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['min' => 0])]
+            ],
+            'condition' => [
+                'name'       => 'condition',
+                'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
             'accountId' => [
