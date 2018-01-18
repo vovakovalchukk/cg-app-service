@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d9243780d8297a8ac4d302eaa1d34ea",
+    "content-hash": "9df3d366d3a47c12699e20023ba13831",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1899,16 +1899,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "dev-CGIV-9111-fix-locking",
+            "version": "1.0.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "e9d19d34f223fa5c2292ba405f394eb927b7abca"
+                "reference": "5cb33db93a1213826b8e067b50ed2b5e896e1ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-9111-fix-locking-61ab1b.zip",
-                "reference": "e9d19d34f223fa5c2292ba405f394eb927b7abca",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.14-75e4db.zip",
+                "reference": "5cb33db93a1213826b8e067b50ed2b5e896e1ee7",
                 "shasum": null
             },
             "require": {
@@ -1928,7 +1928,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-08 15:29:23"
+            "time": "2018-01-18T13:37:15+00:00"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -2242,21 +2242,21 @@
         },
         {
             "name": "channelgrabber/redis-locking",
-            "version": "dev-CGIV-9111-fix-locking",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis-locking.git",
-                "reference": "5d9b714c72450f79341d8d78dc51a2af1ebd1469"
+                "reference": "2550caf274708d088852a59d9c5bfc8ab172c7b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-dev-CGIV-9111-fix-locking-af1dde.zip",
-                "reference": "5d9b714c72450f79341d8d78dc51a2af1ebd1469",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-1.0.2-7efa0d.zip",
+                "reference": "2550caf274708d088852a59d9c5bfc8ab172c7b9",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/locking": "^1.0.0",
-                "channelgrabber/predis": "dev-CGIV-9111-fix-locking as 1.0.4",
+                "channelgrabber/predis": "^1.0.14",
                 "predis/predis": "~0.8.3"
             },
             "require-dev": {
@@ -2278,7 +2278,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-08 15:30:01"
+            "time": "2018-01-18T13:45:47+00:00"
         },
         {
             "name": "channelgrabber/reporting",
@@ -10700,25 +10700,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.0.14",
-            "alias_normalized": "1.0.14.0",
-            "version": "dev-CGIV-9111-fix-locking",
-            "package": "channelgrabber/predis"
-        },
-        {
-            "alias": "1.0.1",
-            "alias_normalized": "1.0.1.0",
-            "version": "dev-CGIV-9111-fix-locking",
-            "package": "channelgrabber/redis-locking"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/predis": 20,
-        "channelgrabber/redis-locking": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
