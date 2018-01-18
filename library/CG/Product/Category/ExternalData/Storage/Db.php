@@ -1,12 +1,15 @@
 <?php
 namespace CG\Product\Category\ExternalData\Storage;
 
-use CG\Product\Category\ExternalData\ChannelServiceInterface;
+use CG\Http\Exception\Exception4xx\UnprocessableEntity;
 use CG\Product\Category\ExternalData\ChannelServiceFactory;
+use CG\Product\Category\ExternalData\ChannelServiceInterface;
 use CG\Product\Category\ExternalData\Collection;
 use CG\Product\Category\ExternalData\Entity;
 use CG\Product\Category\ExternalData\Filter;
 use CG\Product\Category\ExternalData\StorageInterface;
+use CG\Product\Category\Service as CategoryService;
+use CG\Product\Category\Entity as Category;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Mapper\FromArrayInterface as ArrayMapper;
@@ -31,11 +34,20 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     /** @var  ChannelServiceFactory */
     protected $builderFactory;
+    /** @var  CategoryService */
+    protected $categoryService;
 
-    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, ArrayMapper $mapper, ChannelServiceFactory $channelFactory)
-    {
+    public function __construct(
+        Sql $readSql,
+        Sql $fastReadSql,
+        Sql $writeSql,
+        ArrayMapper $mapper,
+        ChannelServiceFactory $channelFactory,
+        CategoryService $categoryService
+    ) {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
         $this->builderFactory = $channelFactory;
+        $this->categoryService = $categoryService;
     }
 
     public function fetch($id)
@@ -55,6 +67,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
      */
     public function saveEntity($entity)
     {
+        $this->checkIfTheCategoryExists($entity);
         try {
             $this->fetch($entity->getCategoryId());
             $this->updateEntity($entity);
@@ -86,6 +99,20 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    protected function checkIfTheCategoryExists(Entity $entity)
+    {
+        try {
+            $this->fetchCategoryEntity($entity);
+        } catch (NotFound $e) {
+            throw new UnprocessableEntity('The given category ID: ' . $entity->getCategoryId() . ' is not a valid category');
+        }
+    }
+
+    protected function fetchCategoryEntity(Entity $entity): Category
+    {
+        return $this->categoryService->fetch($entity->getCategoryId());
     }
 
     protected function buildFilterQuery(Filter $filter)
@@ -138,7 +165,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function updateEntity($entity)
     {
         $update = $this->getUpdate()->set($this->getEntityArray($entity))
-            ->where(array('categoryId' => $entity->getId()));
+            ->where(['categoryId' => $entity->getId()]);
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
         $this->getBuilderForEntity($entity)->update($entity->getCategoryId(), $entity->getData());
     }
