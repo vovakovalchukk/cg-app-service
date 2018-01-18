@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "950d747a519722684d8271606bd5e4e1",
+    "content-hash": "32fcf67d5749aa11341414e8319ea623",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -491,16 +491,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.32.9",
+            "version": "1.33.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "3df21010b38b83f4374a2adeebb1d40c89f2e191"
+                "reference": "a75baa8333e674e704b984ea2b11861e9bcfd504"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.32.9-712e1d.zip",
-                "reference": "3df21010b38b83f4374a2adeebb1d40c89f2e191",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.33.2-8a0b96.zip",
+                "reference": "a75baa8333e674e704b984ea2b11861e9bcfd504",
                 "shasum": null
             },
             "require": {
@@ -577,7 +577,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-12-14T11:13:06+00:00"
+            "time": "2018-01-16T16:29:13+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -827,12 +827,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "405dc7de41f9bac78bc183b3d8c62b3764e7fe08"
+                "reference": "0f9f766142437bba933ad93c741fb7609f8ef48e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-LIS-18-fetch-ebay-category-features-40f586.zip",
-                "reference": "405dc7de41f9bac78bc183b3d8c62b3764e7fe08",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-LIS-18-fetch-ebay-category-features-5d288e.zip",
+                "reference": "0f9f766142437bba933ad93c741fb7609f8ef48e",
                 "shasum": null
             },
             "require": {
@@ -848,7 +848,7 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.28.7",
-                "channelgrabber/product": "dev-LIS-15-implement-categories as 1.10.1",
+                "channelgrabber/product": "dev-LIS-18-fetch-ebay-category-features as 1.11.1",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.12.50",
@@ -888,7 +888,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-18T09:25:58+00:00"
+            "time": "2018-01-18T13:30:09+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1997,7 +1997,7 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-LIS-15-implement-categories",
+            "version": "dev-LIS-18-fetch-ebay-category-features",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
@@ -2005,7 +2005,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-LIS-15-implement-categories-44514c.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-LIS-18-fetch-ebay-category-features-44514c.zip",
                 "reference": "95f54cea3622042dabcee0cb7076765d1e5024aa",
                 "shasum": null
             },
@@ -10715,7 +10715,7 @@
         {
             "alias": "1.11.1",
             "alias_normalized": "1.11.1.0",
-            "version": "dev-LIS-15-implement-categories",
+            "version": "dev-LIS-18-fetch-ebay-category-features",
             "package": "channelgrabber/product"
         }
     ],
