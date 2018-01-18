@@ -19,7 +19,6 @@ class Mapper
         /** @var Hal $hal */
         $hal =  $this->di->get(Hal::class, array('uri' => '/'));
         return $hal
-            ->addLink('category', '/category')
             ->addLink('listing', '/listing')
             ->addLink('location', '/location')
             ->addLink('order', '/order')
@@ -43,6 +42,8 @@ class Mapper
             ->addLink('courier', '/courier')
             ->addLink('shipmentMetadata', '/shipmentMetadata')
             ->addLink('purchaseOrder', '/purchaseOrder')
-            ->addLink('purchaseOrderItem', '/purchaseOrderItem');
+            ->addLink('purchaseOrderItem', '/purchaseOrderItem')
+            ->addLink('category', '/category')
+            ->addLink('categoryExternal', '/categoryExternal');
     }
 }

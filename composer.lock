@@ -838,7 +838,7 @@
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.11.0",
-                "channelgrabber/channel": "^1.32.8",
+                "channelgrabber/channel": "~1.33.2",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
@@ -2001,12 +2001,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "ce8da99b4d1e80829d4e89ba86f855c4bc7818f1"
+                "reference": "95f54cea3622042dabcee0cb7076765d1e5024aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-LIS-15-implement-categories-526ea2.zip",
-                "reference": "ce8da99b4d1e80829d4e89ba86f855c4bc7818f1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-LIS-15-implement-categories-44514c.zip",
+                "reference": "95f54cea3622042dabcee0cb7076765d1e5024aa",
                 "shasum": null
             },
             "require": {
@@ -2028,6 +2028,7 @@
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.7",
+                "php": ">=7.1",
                 "php-units-of-measure/php-units-of-measure": "^2.0.0",
                 "zendframework/zend-di": ">=2.2.5"
             },
@@ -2056,7 +2057,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-17T12:39:39+00:00"
+            "time": "2018-01-18T11:29:16+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
