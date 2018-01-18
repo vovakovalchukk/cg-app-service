@@ -14,7 +14,7 @@ use CG\Product\LinkNode\Storage\Cache as NodeCache;
 use CG\Product\LinkNode\Storage\Db as NodeDb;
 use CG\Product\LinkNode\StorageInterface as NodeStorageInterface;
 use CG\Stock\Location\Repository as StockLocationRepository;
-use CG\Stock\Location\Service as StockLocationService;
+use CG\Stock\Location\Service\Service as StockLocationService;
 use CG\Stock\Repository as StockRepository;
 
 return [
