@@ -31,7 +31,7 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [
                     new IntegerValidator(['name' => 'parentId']),
-                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                    (new GreaterThan(['min' => 0, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'parentId must be at least %min%'])
                 ]
             ],
