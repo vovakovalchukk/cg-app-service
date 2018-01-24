@@ -1,14 +1,22 @@
 <?php
 
-use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\AbstractOnlineSchemaChange;
 
-class CategoryAccountId extends AbstractMigration
+class CategoryAccountId extends AbstractOnlineSchemaChange
 {
-    public function change()
+    public function up()
     {
-        $this->table('category')
-            ->addColumn('accountId', 'integer', ['signed' => false, 'null' => true])
-            ->addIndex('accountId')
-            ->update();
+        $this->onlineSchemaChange(
+            'category',
+            'ADD COLUMN `accountId` int(11) UNSIGNED NULL, ADD INDEX `accountId` (`accountId`)'
+        );
+    }
+
+    public function down()
+    {
+        $this->onlineSchemaChange(
+            'category',
+            'DROP INDEX `accountId`, DROP COLUMN `accountId`'
+        );
     }
 }
