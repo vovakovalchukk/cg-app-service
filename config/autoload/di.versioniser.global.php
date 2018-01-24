@@ -2,6 +2,8 @@
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
+use CG\Slim\Versioning\CategoryCollection;
+use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
@@ -166,6 +168,8 @@ return [
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
+                'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
+                'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

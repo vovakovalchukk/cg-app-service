@@ -33,7 +33,7 @@ return [
             'filterRules' => FilterValidation::class,
             'dataRules' => CategoryValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/category/:categoryId' => [
         'controllers' => function($productLinkNodeId) use ($di, $app) {
@@ -49,7 +49,7 @@ return [
         'validation' => [
             'dataRules' => CategoryValidation::class,
         ],
-        'version' => new Version(1, 1),
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => CategoryMapper::class,
             'entityClass' => Category::class,
