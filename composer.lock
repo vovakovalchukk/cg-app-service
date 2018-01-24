@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c858607d4fb17f999b2ca27c70e75b7c",
+    "content-hash": "400d2796edf4b83930ad5d2a7aa6c8f5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2369,16 +2369,16 @@
         },
         {
             "name": "channelgrabber/sequential-numbering",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-sequential-numbering.git",
-                "reference": "6170f42f398dd231edc536d31ae5db78a9295952"
+                "reference": "ad7e3207da7fcb5f5fa41955a0653a6fcfc6de01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.0.2-4df0f6.zip",
-                "reference": "6170f42f398dd231edc536d31ae5db78a9295952",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.1.0-8813d6.zip",
+                "reference": "ad7e3207da7fcb5f5fa41955a0653a6fcfc6de01",
                 "shasum": null
             },
             "require": {
@@ -2386,13 +2386,22 @@
                 "channelgrabber/predis-async": "^0.2.3.2",
                 "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.2",
-                "composer/composer": "@dev",
+                "php": ">=7.1",
                 "predis/predis": "~0.8.3"
+            },
+            "require-dev": {
+                "channelgrabber/spork": "~0.2",
+                "phpunit/phpunit": "~6.3"
             },
             "type": "di-definition",
             "autoload": {
                 "psr-4": {
                     "CG\\SequentialNumbering\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Test\\SequentialNumbering\\": "tests/src"
                 }
             },
             "description": "Provides sequential number generators",
@@ -2401,7 +2410,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-19T13:42:55+00:00"
+            "time": "2018-01-23T16:33:30+00:00"
         },
         {
             "name": "channelgrabber/settings",
