@@ -2,9 +2,12 @@
 
 namespace CG\UserPreference\Service\Storage;
 
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\UserPreference\Shared\Collection as UserPreferenceCollection;
 use CG\UserPreference\Shared\Entity as UserPreferenceEntity;
+use CG\UserPreference\Shared\Entity;
 use CG\UserPreference\Shared\StorageInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -12,7 +15,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 class Db extends DbAbstract implements StorageInterface
 {
     /** @var string */
-    const TABLE = 'userPreferences';
+    const TABLE = 'userPreference';
 
     /**
      * @inheritDoc
@@ -39,6 +42,9 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
+    /**
+     * @param $entity Entity
+     */
     protected function saveEntity($entity)
     {
         if ($entity->getId(false) == null) {
@@ -61,7 +67,12 @@ class Db extends DbAbstract implements StorageInterface
                 $this->insertEntity($entity);
             }
         } else {
-            $this->updateEntity($entity);
+            try {
+                $dbEntity = $this->fetch($entity->getId(false));
+                $this->updateEntity($entity);
+            } catch (NotFound $ignored) {
+                $this->insertEntity($entity);
+            }
         }
         return $entity;
     }
