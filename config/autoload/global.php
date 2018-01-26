@@ -778,7 +778,7 @@ $config = array(
             ),
             UserPreferenceService::class => array(
                 'parameters' => array(
-                    'repository' => UserPreferenceMongoDbStorage::class
+                    'repository' => UserPreferenceRepository::class
                 )
             ),
             'UserPreferenceMongoMigrationRepository' => [
@@ -793,6 +793,14 @@ $config = array(
                     'repository' => 'UserPreferenceMongoMigrationRepository',
                 ]
             ],
+            UserPreferenceDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => BatchMapper::class
+                )
+            ),
             TagDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
