@@ -37,6 +37,26 @@ class Filter implements RulesInterface
                         new IsArrayValidator(['name' => 'sku'])
                     ]
                 ],
+                'ean' => [
+                    'name'       => 'ean',
+                    'required'   => false,
+                    'validators' => [new IsArrayValidator(['name' => 'ean'])]
+                ],
+                'brand' => [
+                    'name'       => 'brand',
+                    'required'   => false,
+                    'validators' => [new IsArrayValidator(['name' => 'brand'])]
+                ],
+                'mpn' => [
+                    'name'       => 'mpn',
+                    'required'   => false,
+                    'validators' => [new IsArrayValidator(['name' => 'mpn'])]
+                ],
+                'asin' => [
+                    'name'       => 'asin',
+                    'required'   => false,
+                    'validators' => [new IsArrayValidator(['name' => 'asin'])]
+                ],
             ]
         );
     }

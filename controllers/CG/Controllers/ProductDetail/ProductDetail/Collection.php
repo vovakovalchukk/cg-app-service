@@ -10,6 +10,12 @@ use CG\Slim\ControllerTrait;
 use Slim\Slim;
 use Zend\Di\Di;
 
+/**
+ * Class Collection
+ * @package CG\Controllers\ProductDetail\ProductDetail
+ * @method Di getDi()
+ * @method RestService getService()
+ */
 class Collection
 {
     use ControllerTrait;
@@ -32,13 +38,7 @@ class Collection
     public function getData()
     {
         return $this->getService()->fetchCollectionByFilterAsHal(
-            new Filter(
-                $this->getParams('limit') ?: null,
-                $this->getParams('page') ?: null,
-                $this->getParams('id') ?: [],
-                $this->getParams('organisationUnitId') ?: [],
-                $this->getParams('sku') ?: []
-            )
+            $this->getDi()->newInstance(Filter::class, $this->getParams())
         );
     }
 }
