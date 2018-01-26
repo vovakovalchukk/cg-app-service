@@ -6,17 +6,19 @@ class CategoryAccountId extends AbstractOnlineSchemaChange
 {
     public function up()
     {
-        $this->onlineSchemaChange(
-            'category',
-            'ADD COLUMN `accountId` int(11) UNSIGNED NULL, ADD INDEX `accountId` (`accountId`)'
-        );
+        $alter = 'ADD COLUMN `accountId` int(11) UNSIGNED NULL, '
+            . 'ADD INDEX `accountId` (`accountId`), '
+            . 'ADD UNIQUE INDEX `ExternalIdAccountId` (`externalId`, `accountId`)';
+
+        $this->onlineSchemaChange('category', $alter);
     }
 
     public function down()
     {
-        $this->onlineSchemaChange(
-            'category',
-            'DROP INDEX `accountId`, DROP COLUMN `accountId`'
-        );
+        $alter = 'DROP INDEX `ExternalIdAccountId`, '
+            . 'DROP INDEX `accountId`, '
+            . 'DROP COLUMN `accountId`';
+
+        $this->onlineSchemaChange('category', $alter);
     }
 }
