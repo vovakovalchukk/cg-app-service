@@ -37,6 +37,7 @@ class Collection
                 $this->getParams('channel') ?? [],
                 $this->getParams('listable') ?? null,
                 $this->getParams('marketplace') ?? [],
+                $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
                 $this->getParams('version') ?? []
             )
