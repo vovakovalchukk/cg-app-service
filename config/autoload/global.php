@@ -127,6 +127,7 @@ use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\Db as UserPreferenceDbStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
+use CG\UserPreference\Shared\Mapper as UserPreferenceMapper;
 
 //Tag
 use CG\Order\Service\Tag\Service as TagService;
@@ -798,7 +799,7 @@ $config = array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => BatchMapper::class
+                    'mapper' => UserPreferenceMapper::class
                 )
             ),
             TagDbStorage::class => array(
