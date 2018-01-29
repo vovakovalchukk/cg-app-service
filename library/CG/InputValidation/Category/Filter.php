@@ -57,6 +57,13 @@ class Filter implements RulesInterface
                         new IsArrayValidator(['name' => 'marketplace'])
                     ]
                 ],
+                'accountId' => [
+                    'name'       => 'accountId',
+                    'required'   => false,
+                    'validators' => [
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                    ]
+                ],
                 'enabled' => [
                     'name'       => 'enabled',
                     'required'   => false,
