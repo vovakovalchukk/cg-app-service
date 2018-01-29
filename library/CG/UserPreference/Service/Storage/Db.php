@@ -57,21 +57,23 @@ class Db extends DbAbstract implements StorageInterface
 
                     $entity->setId($dbEntity->getId());
                     $this->updateEntity($entity);
+                    return $entity;
                 } catch (NotFound $ignored) {
                     $this->insertEntity($entity);
+                    return $entity;
                 }
-            } else {
-                $this->insertEntity($entity);
             }
-        } else {
-            try {
-                $dbEntity = $this->fetch($entity->getId(false));
-                $this->updateEntity($entity);
-            } catch (NotFound $ignored) {
-                $this->insertEntity($entity);
-            }
+            $this->insertEntity($entity);
+            return $entity;
         }
-        return $entity;
+        try {
+            $dbEntity = $this->fetch($entity->getId(false));
+            $this->updateEntity($entity);
+            return $entity;
+        } catch (NotFound $ignored) {
+            $this->insertEntity($entity);
+            return $entity;
+        }
     }
 
     protected function getEntityArray($entity)
