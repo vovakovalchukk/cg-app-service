@@ -53,36 +53,38 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function saveEntity($entity)
     {
-        if ($entity->getId(false) == null) {
-            if (null != $entity->getMongoId()) {
-                try {
-                    $dbEntity = $this->fetchEntity(
-                        $this->getReadSql(),
-                        $this->getSelect()->where(array(
-                            'mongoId' => $entity->getMongoId()
-                        )),
-                        $this->getMapper()
-                    );
-
-                    $entity->setId($dbEntity->getId());
-                    $this->updateEntity($entity);
-                    return $entity;
-                } catch (NotFound $ignored) {
-                    $this->insertEntity($entity);
-                    return $entity;
-                }
+        if ($entity->getId(false) != null) {
+            try {
+                // There are instances where the entity has an ID but that ID does not exist in the database
+                $dbEntity = $this->fetch($entity->getId(false));
+                $this->updateEntity($entity);
+            } catch (NotFound $ignored) {
+                $this->insertEntity($entity);
             }
+            return $entity;
+        }
+
+        if (null == $entity->getMongoId()) {
             $this->insertEntity($entity);
             return $entity;
         }
+
         try {
-            $dbEntity = $this->fetch($entity->getId(false));
+            $dbEntity = $this->fetchEntity(
+                $this->getReadSql(),
+                $this->getSelect()->where(array(
+                    'mongoId' => $entity->getMongoId()
+                )),
+                $this->getMapper()
+            );
+
+            $entity->setId($dbEntity->getId());
             $this->updateEntity($entity);
-            return $entity;
         } catch (NotFound $ignored) {
             $this->insertEntity($entity);
-            return $entity;
         }
+
+        return $entity;
     }
 
     public function fetch($id)
