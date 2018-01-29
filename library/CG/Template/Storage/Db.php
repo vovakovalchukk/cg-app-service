@@ -18,49 +18,67 @@ class Db extends DbAbstract implements StorageInterface
      */
     public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type)
     {
-        try {
-            $select = $this->getSelect();
+        $select = $this->getSelect();
 
-            if ($limit !== 'all') {
-                $offset = ($page - 1) * $limit;
-                $select->limit($limit)
-                    ->offset($offset);
-            }
-
-            if (count($id)) {
-                $query[static::TABLE . '.id'] = $id;
-            }
-
-            if (count($organisationUnitId)) {
-                $query[static::TABLE . '.organisationUnitId'] = $organisationUnitId;
-            }
-
-            if (count($type)) {
-                $query[static::TABLE . '.type'] = $type;
-            }
-
-            $select = $this->getSelect()->where($query);
-            if ($limit != 'all') {
-                $offset = ($page - 1) * $limit;
-                $select->limit($limit)->offset($offset);
-            }
-            return $this->fetchPaginatedCollection(
-                new TemplateCollection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type')),
-                $this->getReadSql(),
-                $select,
-                $this->getMapper()
-            );
-        } catch (\Exception $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        if ($limit !== 'all') {
+            $offset = ($page - 1) * $limit;
+            $select->limit($limit)
+                ->offset($offset);
         }
+
+        if (count($id)) {
+            $query[static::TABLE . '.id'] = $id;
+        }
+
+        if (count($organisationUnitId)) {
+            $query[static::TABLE . '.organisationUnitId'] = $organisationUnitId;
+        }
+
+        if (count($type)) {
+            $query[static::TABLE . '.type'] = $type;
+        }
+
+        $select = $this->getSelect()->where($query);
+        if ($limit != 'all') {
+            $offset = ($page - 1) * $limit;
+            $select->limit($limit)->offset($offset);
+        }
+        return $this->fetchPaginatedCollection(
+            new TemplateCollection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type')),
+            $this->getReadSql(),
+            $select,
+            $this->getMapper()
+        );
     }
 
     protected function saveEntity($entity)
     {
-        if ($entity->getId(false) != null) {
-            $this->updateEntity($entity);
+        if ($entity->getId(false) == null) {
+            if (null != $entity->getMongoId()) {
+                try {
+                    $dbEntity = $this->fetchEntity(
+                        $this->getReadSql(),
+                        $this->getSelect()->where(array(
+                            'mongoId' => $entity->getMongoId()
+                        )),
+                        $this->getMapper()
+                    );
+
+                    $entity->setId($dbEntity->getId());
+                    $this->updateEntity($entity);
+                } catch (NotFound $ignored) {
+                    $this->insertEntity($entity);
+                }
+            } else {
+                $this->insertEntity($entity);
+            }
         } else {
-            $this->insertEntity($entity);
+            try {
+                $dbEntity = $this->fetch($entity->getId(false));
+                $this->updateEntity($entity);
+            } catch (NotFound $ignored) {
+                $this->insertEntity($entity);
+            }
         }
         return $entity;
     }
@@ -79,6 +97,15 @@ class Db extends DbAbstract implements StorageInterface
             );
         }
     }
+
+    protected function getEntityArray($entity)
+    {
+        $entityArray = parent::getEntityArray($entity);
+        $entityArray['elements'] = json_encode($entityArray['elements']);
+        $entityArray['paperPage'] = json_encode($entityArray['paperPage']);
+        return $entityArray;
+    }
+
 
     protected function getUpdate()
     {
