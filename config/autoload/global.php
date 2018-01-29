@@ -179,6 +179,7 @@ use CG\Template\Service as TemplateService;
 use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
 use CG\Template\Storage\Db as TemplateDbStorage;
+use CG\Template\Mapper as TemplateMapper;
 use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
@@ -907,6 +908,15 @@ $config = array(
                     'repository' => TemplateMongoDbStorage::class,
                 ],
             ],
+
+            TemplateDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => TemplateMapper::class
+                )
+            ),
             ShippingMethodService::class => [
                 'parameter' => [
                     'repository' => ShippingMethodRepository::class
@@ -1066,7 +1076,7 @@ $config = array(
             ],
             TransactionRedisClient::class => [
                 'parameter' => [
-                    'predis' => 'reliable_redis', 
+                    'predis' => 'reliable_redis',
                 ]
             ],
             StockService::class => [

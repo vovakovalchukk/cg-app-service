@@ -91,7 +91,7 @@ class MongoDb implements StorageInterface
     {
         $database = static::MONGO_DATABASE;
         $collection = static::MONGO_COLLECTION;
-        return $this->getClient()->$database->$collection;
+        return $this->client->$database->$collection;
     }
 
 
