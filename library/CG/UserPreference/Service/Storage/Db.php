@@ -42,9 +42,6 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    /**
-     * @param $entity Entity
-     */
     protected function saveEntity($entity)
     {
         if ($entity->getId(false) == null) {
@@ -77,6 +74,14 @@ class Db extends DbAbstract implements StorageInterface
         return $entity;
     }
 
+    protected function getEntityArray($entity)
+    {
+        $entityArray = parent::getEntityArray($entity);
+        $entityArray['preference'] = json_encode($entityArray['preference']);
+        return $entityArray;
+    }
+
+
     public function fetch($id)
     {
         try {
@@ -106,7 +111,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         return $this->writeSql->delete(self::TABLE);
     }
-
+    
     protected function getInsert()
     {
         return $this->writeSql->insert(self::TABLE);
