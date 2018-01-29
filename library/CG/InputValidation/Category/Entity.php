@@ -55,6 +55,15 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'accountId' => [
+                'name'       => 'accountId',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'accountId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'accountId must be at least %min%'])
+                ]
+            ],
             'listable' => [
                 'name'       => 'listable',
                 'required'   => false,
