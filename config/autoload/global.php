@@ -125,7 +125,9 @@ use CG\Order\Shared\Batch\Mapper as BatchMapper;
 use CG\UserPreference\Service\Service as UserPreferenceService;
 use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
+use CG\UserPreference\Service\Storage\Db as UserPreferenceDbStorage;
 use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
+use CG\UserPreference\Shared\Mapper as UserPreferenceMapper;
 
 //Tag
 use CG\Order\Service\Tag\Service as TagService;
@@ -176,6 +178,8 @@ use CG\Order\Service\Filter\Entity\StorageInterface as FilterEntityStorage;
 use CG\Template\Service as TemplateService;
 use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
+use CG\Template\Storage\Db as TemplateDbStorage;
+use CG\Template\Mapper as TemplateMapper;
 use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
@@ -454,6 +458,8 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
+                'TemplateMongoMigrationRepository' => TemplateRepository::class,
+                'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -774,13 +780,27 @@ $config = array(
             ),
             UserPreferenceService::class => array(
                 'parameters' => array(
-                    'repository' => UserPreferenceMongoDbStorage::class
+                    'repository' => UserPreferenceRepository::class
                 )
             ),
-            UserPreferenceRepository::class => array(
-                'parameter' => array(
+            'UserPreferenceMongoMigrationRepository' => [
+                'parameter' => [
+                    'storage' => UserPreferenceDbStorage::class,
+                    'repository' => UserPreferenceMongoDbStorage::class,
+                ],
+            ],
+            UserPreferenceRepository::class => [
+                'parameter' => [
                     'storage' => UserPreferenceCacheStorage::class,
-                    'repository' => UserPreferenceMongoDbStorage::class
+                    'repository' => 'UserPreferenceMongoMigrationRepository',
+                ]
+            ],
+            UserPreferenceDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => UserPreferenceMapper::class
                 )
             ),
             TagDbStorage::class => array(
@@ -876,10 +896,25 @@ $config = array(
                     'repository' => TemplateRepository::class
                 )
             ),
-            TemplateRepository::class => array(
-                'parameter' => array(
+            TemplateRepository::class => [
+                'parameter' => [
                     'storage' => TemplateCacheStorage::class,
-                    'repository' => TemplateMongoDbStorage::class
+                    'repository' => 'TemplateMongoMigrationRepository',
+                ],
+            ],
+            'TemplateMongoMigrationRepository' => [
+                'parameter' => [
+                    'storage' => TemplateDbStorage::class,
+                    'repository' => TemplateMongoDbStorage::class,
+                ],
+            ],
+
+            TemplateDbStorage::class => array(
+                'parameter' => array(
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => TemplateMapper::class
                 )
             ),
             ShippingMethodService::class => [
@@ -1041,7 +1076,7 @@ $config = array(
             ],
             TransactionRedisClient::class => [
                 'parameter' => [
-                    'predis' => 'reliable_redis', 
+                    'predis' => 'reliable_redis',
                 ]
             ],
             StockService::class => [

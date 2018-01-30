@@ -2,6 +2,8 @@
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
+use CG\Slim\Versioning\CategoryCollection;
+use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
@@ -18,6 +20,8 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductDetailEntity;
+use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -44,6 +48,8 @@ return [
                 'Versioniser_ListingEntity_5' => ListingEntity\Versioniser5::class,
                 'Versioniser_ListingCollection_6' => ListingCollection\Versioniser::class,
                 'Versioniser_ListingEntity_6' => ListingEntity\Versioniser6::class,
+                'Versioniser_ListingCollection_7' => ListingCollection\Versioniser::class,
+                'Versioniser_ListingEntity_7' => ListingEntity\Versioniser7::class,
                 'Versioniser_OrderCollection_1' => OrderCollection\Versioniser1::class,
                 'Versioniser_OrderEntity_1' => OrderEntity\Versioniser1::class,
                 'Versioniser_OrderCollection_2' => OrderCollection\Versioniser2::class,
@@ -102,6 +108,8 @@ return [
                 'Versioniser_OrderLabelEntity_4' => OrderLabelEntity\Versioniser4::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
+                'Versioniser_ProductDetailCollection_1' => ProductDetailCollection\Versioniser1::class,
+                'Versioniser_ProductDetailEntity_1' => ProductDetailEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
@@ -160,6 +168,8 @@ return [
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
+                'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
+                'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -189,6 +199,11 @@ return [
             'Versioniser_ListingCollection_6' => [
                 'parameter' => [
                     'entityVersioniser' => 'Versioniser_ListingEntity_6',
+                ],
+            ],
+            'Versioniser_ListingCollection_7' => [
+                'parameter' => [
+                    'entityVersioniser' => 'Versioniser_ListingEntity_7',
                 ],
             ],
             'Versioniser_OrderCollection_1' => [
@@ -274,6 +289,11 @@ return [
             'Versioniser_TemplateCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_TemplateEntity_1'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_1'
                 ],
             ],
             'Versioniser_ProductCollection_1' => [
