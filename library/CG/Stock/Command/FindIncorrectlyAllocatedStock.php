@@ -66,7 +66,7 @@ LEFT JOIN (
     calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
-WHERE allocated {$operator} calculatedAllocated
+WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
 ORDER BY organisationUnitId, sku
 EOF;
 
