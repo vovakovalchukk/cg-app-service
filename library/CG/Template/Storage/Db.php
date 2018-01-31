@@ -1,6 +1,7 @@
 <?php
 namespace CG\Template\Storage;
 
+use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Template\StorageInterface;
 use CG\Template\Entity as TemplateEntity;
@@ -8,7 +9,7 @@ use CG\Template\Collection as TemplateCollection;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Exception\Runtime\NotFound;
 
-class Db extends DbAbstract implements StorageInterface
+class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
     /** @var string */
     const TABLE = 'template';
