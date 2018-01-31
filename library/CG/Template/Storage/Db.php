@@ -105,8 +105,12 @@ class Db extends DbAbstract implements StorageInterface
     protected function getEntityArray($entity)
     {
         $entityArray = parent::getEntityArray($entity);
+        $entityArray['id'] = $entity->getId(false);
         $entityArray['elements'] = json_encode($entityArray['elements']);
         $entityArray['paperPage'] = json_encode($entityArray['paperPage']);
+        if ($mongoId = $entity->getMongoId()) {
+            $entityArray['mongoId'] = $mongoId;
+        }
         return $entityArray;
     }
 
