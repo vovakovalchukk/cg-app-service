@@ -27,16 +27,7 @@ class MongoDb implements StorageInterface
 
     public function save($entity)
     {
-        try {
-            $template = $this->getMapper()->toMongoArray($entity);
-            $save = $this->getMongoCollection()->save($template);
-            if (!$save["updatedExisting"]) {
-                $entity->setNewlyInserted(true);
-            }
-            return $entity;
-        } catch(\MongoException $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
-        }
+        return $entity;
     }
 
     public function remove($entity)

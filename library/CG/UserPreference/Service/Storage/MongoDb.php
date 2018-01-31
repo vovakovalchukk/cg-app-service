@@ -27,7 +27,7 @@ class MongoDb implements StorageInterface
 
     public function save($entity)
     {
-        return;
+        return $entity;
     }
 
     public function remove($entity)
