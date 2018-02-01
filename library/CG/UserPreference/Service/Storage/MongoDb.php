@@ -8,10 +8,16 @@ use CG\UserPreference\Shared\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\MongoDb\FetchTrait;
+use CG\Stdlib\Coerce\Id\StringTrait as IDCoersionOverride;
 
 class MongoDb implements StorageInterface
 {
-    use FetchTrait;
+    use IDCoersionOverride {
+        coerceId as protected coerceStringId;
+    }
+    use FetchTrait {
+        coerceId as protected coerceIdOriginal;
+    }
 
     protected $client;
     protected $mapper;
@@ -63,6 +69,11 @@ class MongoDb implements StorageInterface
         } catch (\MongoException $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    public function coerceId($class, $id)
+    {
+        return static::coerceStringId($id);
     }
 
     protected function getMongoCollection()
