@@ -1,6 +1,7 @@
 <?php
 namespace CG\Template\Storage;
 
+use CG\InputValidation\Template\Entity;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Template\StorageInterface;
@@ -58,6 +59,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             try {
                 // There are instances where the entity has an ID but that ID does not exist in the database
                 $dbEntity = $this->fetch($entity->getId(false));
+                // Ensure that the entity's mongo ID is maintained as this is lost as we save
+                $entity->setMongoId($dbEntity->getMongoId());
                 $this->updateEntity($entity);
             } catch (NotFound $ignored) {
                 $this->insertEntity($entity);
