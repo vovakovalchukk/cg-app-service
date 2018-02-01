@@ -9,6 +9,7 @@ use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\UserPreference\Shared\Collection;
@@ -19,10 +20,12 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
 {
     use CollectionTrait;
     use SaveTrait;
-    use FetchTrait;
     use RemoveTrait;
     use RemoveByFieldTrait;
     use LogTrait;
+    use FetchTrait {
+        fetch as protected traitFetch;
+    }
 
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
@@ -33,5 +36,18 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page'));
         return $this->fetchCollection($collection);
+    }
+
+    public function fetch($id)
+    {
+        try {
+            return $this->traitFetch($id);
+        } catch (\InvalidArgumentException $e) {
+            throw new NotFound(
+                'Unable to fetch user preferences using string ID',
+                0,
+                $e
+            );
+        }
     }
 }

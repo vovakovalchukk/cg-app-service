@@ -9,6 +9,7 @@ use CG\Cache\Storage\RemoveTrait;
 use CG\Cache\Storage\SaveTrait;
 use CG\Cache\Strategy\CollectionInterface as CollectionStrategy;
 use CG\Cache\Strategy\EntityInterface as EntityStrategy;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Template\Collection;
@@ -21,8 +22,10 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
     use SaveTrait;
     use RemoveTrait;
     use RemoveByFieldTrait;
-    use FetchTrait;
     use LogTrait;
+    use FetchTrait {
+        fetch as protected traitFetch;
+    }
 
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
@@ -38,5 +41,18 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
     public function getCollectionClass()
     {
         return Collection::class;
+    }
+
+    public function fetch($id)
+    {
+        try {
+            return $this->traitFetch($id);
+        } catch (\InvalidArgumentException $e) {
+            throw new NotFound(
+                'Unable to fetch template using string ID',
+                0,
+                $e
+            );
+        }
     }
 }
