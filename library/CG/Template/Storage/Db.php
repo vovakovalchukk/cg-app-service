@@ -94,8 +94,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     public function fetch($id)
     {
         try {
-            return parent::fetch($id);
-        } catch (NotFound $exception) {
+            return parent::fetch(TemplateEntity::coerceId($id));
+        } catch (NotFound|\InvalidArgumentException $exception) {
             return $this->fetchEntity(
                 $this->getReadSql(),
                 $this->getSelect()->where(array(

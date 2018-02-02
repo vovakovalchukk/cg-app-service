@@ -2,6 +2,7 @@
 
 namespace CG\UserPreference\Service\Storage;
 
+use CG\Controllers\UserPreference\UserPreference;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\Storage\Db\DbAbstract;
@@ -95,8 +96,8 @@ class Db extends DbAbstract implements StorageInterface
     public function fetch($id)
     {
         try {
-            return parent::fetch($id);
-        } catch (NotFound $exception) {
+            return parent::fetch(UserPreferenceEntity::coerceId($id));
+        } catch (NotFound|\InvalidArgumentException $exception) {
             return $this->fetchEntity(
                 $this->getReadSql(),
                 $this->getSelect()->where(array(
