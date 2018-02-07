@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "32cc349bdeca497a092a7eb3a758a712",
+    "content-hash": "bc027defd3acee6a6cee7f9de45a1735",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2713,16 +2713,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-9206-dispatch-failed-stock-adjustments",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "7b53289cd871d3cf9ce2162c8d199e4b02ba0da4"
+                "reference": "0197993953d7982ca4a4bcc63bee728f0aab5f6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-9206-dispatch-failed-stock-adjustments-717779.zip",
-                "reference": "7b53289cd871d3cf9ce2162c8d199e4b02ba0da4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.12.1-4fe84b.zip",
+                "reference": "0197993953d7982ca4a4bcc63bee728f0aab5f6d",
                 "shasum": null
             },
             "require": {
@@ -2776,7 +2776,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-02-02T14:29:53+00:00"
+            "time": "2018-02-07T09:03:56+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -10715,18 +10715,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.12.1",
-            "alias_normalized": "1.12.1.0",
-            "version": "dev-CGIV-9206-dispatch-failed-stock-adjustments",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
