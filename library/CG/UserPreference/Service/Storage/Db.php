@@ -2,15 +2,12 @@
 
 namespace CG\UserPreference\Service\Storage;
 
-use CG\Stdlib\Log\LoggerAwareInterface;
-use CG\Stdlib\Log\LogTrait;
+use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\UserPreference\Shared\Collection as UserPreferenceCollection;
 use CG\UserPreference\Shared\Entity as UserPreferenceEntity;
-use CG\UserPreference\Shared\Entity;
 use CG\UserPreference\Shared\StorageInterface;
-use CG\Stdlib\Exception\Storage as StorageException;
-use CG\Stdlib\Exception\Runtime\NotFound;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -95,8 +92,8 @@ class Db extends DbAbstract implements StorageInterface
     public function fetch($id)
     {
         try {
-            return parent::fetch($id);
-        } catch (NotFound $exception) {
+            return parent::fetch(UserPreferenceEntity::coerceId($id));
+        } catch (NotFound|\InvalidArgumentException $exception) {
             return $this->fetchEntity(
                 $this->getReadSql(),
                 $this->getSelect()->where(array(
