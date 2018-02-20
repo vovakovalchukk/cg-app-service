@@ -236,8 +236,6 @@ class Db extends DbAbstract implements StorageInterface
             $resultsArray[] = $result;
         }
 
-        $this->logDebug("BRYAN  " . var_export($resultsArray, 1));
-
         return $arrayMapper->fromArray($resultsArray);
     }
 
