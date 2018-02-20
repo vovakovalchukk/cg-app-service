@@ -183,7 +183,13 @@ class Db extends DbAbstract implements StorageInterface
             ->join(
                 self::CHILD_TABLE,
                 sprintf('%s.id = %s.invoiceSettingId', self::TABLE, self::CHILD_TABLE),
-                ZendSelect::SQL_STAR,
+                [
+                    'TCid' => 'id',
+                    'TCassignedInvoice'=>'assignedInvoice',
+                    'TCemailSendAs' => 'emailSendAs',
+                    'TCemailVerified' => 'emailVerified',
+                    'TCemailVerificationStatus' => 'emailVerificationStatus',
+                ],
                 ZendSelect::JOIN_LEFT
             );
     }
