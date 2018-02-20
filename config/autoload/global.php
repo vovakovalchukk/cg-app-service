@@ -461,6 +461,7 @@ $config = array(
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
                 'TemplateMongoMigrationRepository' => TemplateRepository::class,
+                'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
             ),
             'ReadCGSql' => array(
