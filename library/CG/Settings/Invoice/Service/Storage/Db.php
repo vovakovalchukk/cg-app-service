@@ -6,10 +6,13 @@ namespace CG\Settings\Invoice\Service\Storage;
 use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
 use CG\Settings\Invoice\Shared\Filter as InvoiceFilter;
 use CG\Settings\Invoice\Shared\StorageInterface;
+use CG\Stdlib\Coerce\Id\IntegerTrait as CoerceIntegerIdTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Mapper\FromArrayInterface as ArrayMapper;
 use CG\Stdlib\PaginatedCollection as InvoiceCollection;
 use CG\Stdlib\Storage\Db\DbAbstract;
+use InvalidArgumentException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select as ZendSelect;
@@ -18,6 +21,8 @@ use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface
 {
+    use CoerceIntegerIdTrait;
+
     const TABLE = 'invoiceSetting';
     const CHILD_TABLE = 'invoiceSettingTradingCompany';
 
@@ -48,7 +53,7 @@ class Db extends DbAbstract implements StorageInterface
 
             $idResults = $this->readSql->prepareStatementForSqlObject($select)->execute();
             $ids = [];
-            foreach($idResults as $idResult) {
+            foreach ($idResults as $idResult) {
                 $ids[] = $idResult->id;
             }
 
@@ -68,6 +73,47 @@ class Db extends DbAbstract implements StorageInterface
     }
 
     protected function saveEntity($entity)
+    {
+        $entity = $this->saveInvoiceSettings($entity);
+        $entity = $this->saveInvoiceSettingsTradingCompanies($entity);
+        return $entity;
+    }
+
+    protected function saveInvoiceSettingsTradingCompanies($entity)
+    {
+        $tradingCompanies = $entity->getTradingCompanies();
+        $updatedTradingCompanies = [];
+        foreach ($tradingCompanies as $tradingCompany) {
+            if (isset($tradingCompany['id'])) {
+                try {
+                    static::coerceId($tradingCompany['id']);
+                } catch (InvalidArgumentException $exception) {
+                    $tradingCompany['mongoId'] = $tradingCompany['id'];
+                    unset($tradingCompany['id']);
+                }
+            }
+            $tradingCompany['invoiceSettingId'] = $entity->getId(false);
+
+            if (isset($tradingCompany['id'])) {
+                try {
+                    $this->fetchTradingCompany($tradingCompany['id']);
+                } catch (NotFound $notFound) {
+                    $id = $this->insertTradingCompany($tradingCompany);
+                }
+                $this->updateTradingCompany($tradingCompany);
+            } else {
+                $id = $this->insertTradingCompany($tradingCompany);
+                $tradingCompany['id'] = $id;
+
+            }
+
+            $updatedTradingCompanies[$tradingCompany['id']] = $tradingCompany;
+        }
+        $entity->setTradingCompanies($updatedTradingCompanies);
+        return $entity;
+    }
+
+    protected function saveInvoiceSettings($entity)
     {
         if ($entity->getId(false) != null) {
             try {
@@ -91,7 +137,7 @@ class Db extends DbAbstract implements StorageInterface
             $dbEntity = $this->fetchEntity(
                 $this->getReadSql(),
                 $this->getSelect()->where(array(
-                    'mongoId' => $entity->getMongoId()
+                    SELF::TABLE . '.mongoId' => $entity->getMongoId()
                 )),
                 $this->getMapper()
             );
@@ -105,31 +151,94 @@ class Db extends DbAbstract implements StorageInterface
         return $entity;
     }
 
+    protected function insertTradingCompany($tradingCompany)
+    {
+        $insert = $this->getTradingCompanyInsert()->values($tradingCompany);
+        $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
+
+        return $id;
+    }
+
+    protected function updateTradingCompany($tradingCompany)
+    {
+        $update = $this->getTradingCompanyUpdate()->set($tradingCompany)
+            ->where(array('id' => $tradingCompany['id']));
+        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+    }
+
     protected function getEntityArray($entity)
     {
         $entityArray = parent::getEntityArray($entity);
         $entityArray['id'] = $entity->getId(false);
-        $entityArray['preference'] = json_encode($entityArray['preference']);
+        unset($entityArray['tradingCompanies']);
         if ($mongoId = $entity->getMongoId()) {
             $entityArray['mongoId'] = $mongoId;
         }
         return $entityArray;
     }
 
-
     public function fetch($id)
     {
         try {
-            return parent::fetch($id);
+            return $this->fetchEntity(
+                $this->getReadSql(),
+                $this->getSelect()->where([
+                    SELF::TABLE . '.id' => $id
+                ]),
+                $this->getMapper()
+            );
         } catch (NotFound $exception) {
             return $this->fetchEntity(
                 $this->getReadSql(),
-                $this->getSelect()->where(array(
-                    'mongoId' => $id
-                )),
+                $this->getSelect()->where([
+                    SELF::TABLE . '.mongoId' => $id
+                ]),
                 $this->getMapper()
             );
         }
+    }
+
+    public function remove($entity)
+    {
+        parent::remove($entity);
+        $delete = $this->getTradingCompanyDelete()->where(array(
+            'invoiceSettingId' => $entity->getId()
+        ));
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+    }
+
+    protected function fetchTradingCompany($id)
+    {
+        $select = $this->getTradingCompanySelect()->where(
+            [SELF::CHILD_TABLE . '.id' => $id]
+        );
+        $statement = $this->readSql->prepareStatementForSqlObject($select);
+
+        $results = $statement->execute();
+        if ($results->count() != 1) {
+            throw new NotFound('Could not retrieve trading company ', $id);
+        }
+
+        return $results->current();
+    }
+
+    protected function fetchEntity(ZendSql $sql, ZendSelect $select, ArrayMapper $arrayMapper)
+    {
+        $statement = $sql->prepareStatementForSqlObject($select);
+
+        $results = $statement->execute();
+        if ($results->count() < 1) {
+            throw new NotFound();
+        }
+        $resultsArray = [];
+        foreach ($results as $result) {
+            $resultsArray[] = $result;
+        }
+
+        $this->logDebug("BRYAN  " . var_export($resultsArray, 1));
+
+        return $arrayMapper->fromArray($resultsArray);
     }
 
     protected function buildFilterQuery(InvoiceFilter $filter)
@@ -170,11 +279,6 @@ class Db extends DbAbstract implements StorageInterface
         return $where;
     }
 
-    protected function getUpdate()
-    {
-        return $this->writeSql->update(self::TABLE);
-    }
-
     /** @return ZendSelect */
     protected function getSelect()
     {
@@ -185,10 +289,12 @@ class Db extends DbAbstract implements StorageInterface
                 sprintf('%s.id = %s.invoiceSettingId', self::TABLE, self::CHILD_TABLE),
                 [
                     'TCid' => 'id',
-                    'TCassignedInvoice'=>'assignedInvoice',
+                    'TCassignedInvoice' => 'assignedInvoice',
                     'TCemailSendAs' => 'emailSendAs',
                     'TCemailVerified' => 'emailVerified',
                     'TCemailVerificationStatus' => 'emailVerificationStatus',
+                    'TCinvoiceSettingId' => 'invoiceSettingId',
+                    'TCmongoId' => 'mongoId',
                 ],
                 ZendSelect::JOIN_LEFT
             );
@@ -202,6 +308,31 @@ class Db extends DbAbstract implements StorageInterface
     protected function getInsert()
     {
         return $this->writeSql->insert(self::TABLE);
+    }
+
+    protected function getUpdate()
+    {
+        return $this->writeSql->update(self::TABLE);
+    }
+
+    protected function getTradingCompanyInsert()
+    {
+        return $this->writeSql->insert(self::CHILD_TABLE);
+    }
+
+    protected function getTradingCompanyUpdate()
+    {
+        return $this->writeSql->update(self::CHILD_TABLE);
+    }
+
+    protected function getTradingCompanyDelete()
+    {
+        return $this->writeSql->delete(self::CHILD_TABLE);
+    }
+
+    protected function getTradingCompanySelect()
+    {
+        return $this->readSql->select(self::CHILD_TABLE);
     }
 
     protected function getEntityClass()
