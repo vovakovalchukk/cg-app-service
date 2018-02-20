@@ -284,8 +284,6 @@ use CG\Listing\StorageInterface as ListingStorage;
 
 // Listing Status History
 use CG\Listing\StatusHistory\StorageInterface as ListingStatusHistoryStorage;
-use CG\Listing\StatusHistory\Repository as ListingStatusHistoryRepository;
-use CG\Listing\StatusHistory\Storage\Cache as ListingStatusHistoryCacheStorage;
 use CG\Listing\StatusHistory\Storage\Db as ListingStatusHistoryDbStorage;
 
 // Unimported Listing
@@ -1518,12 +1516,6 @@ $config = array(
                     'cryptor' => 'amazon_cryptor',
                 ],
             ],
-            ListingStatusHistoryRepository::class => [
-                'parameters' => [
-                    'storage' => ListingStatusHistoryCacheStorage::class,
-                    'repository' => ListingStatusHistoryDbStorage::class,
-                ],
-            ],
             ListingStatusHistoryDbStorage::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
@@ -1674,7 +1666,7 @@ $config = array(
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelRepository::class,
-                ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
+                ListingStatusHistoryStorage::class => ListingStatusHistoryDbStorage::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
