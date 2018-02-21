@@ -166,7 +166,7 @@ return [
         {
             $output->writeln('Migrating Template data from MongoDB to MySQL');
             $command = $di->get(MigrateMongoTemplateDataToMysql::class);
-            $count = $command->migrate();
+            $count = $command();
             $output->writeln('Finished migration of Templates, ' . $count . ' processed');
         },
         'description' => 'Copies Transaction data over from MongoDB to MySQL',
@@ -177,7 +177,7 @@ return [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $output->writeln('Migrating Invoice Settings data from MongoDB to MySQL');
             $command = $di->get(MigrateMongoInvoiceSettingDataToMysql::class);
-            $count = $command->migrate();
+            $count = $command();
             $output->writeln('Finished migration of Invoice settings, ' . $count . ' processed');
         },
         'description' => 'Copies Transaction data over from MongoDB to MySQL',

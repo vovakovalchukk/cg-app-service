@@ -7,6 +7,7 @@ use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Template\Collection as TemplateCollection;
 use CG\Template\Entity as TemplateEntity;
 use CG\Template\StorageInterface;
+use Zend\Db\Sql\Select;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
@@ -25,6 +26,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $select->limit($limit)
                 ->offset($offset);
         }
+        $query = [];
 
         if (count($id)) {
             $query[static::TABLE . '.id'] = $id;
@@ -38,7 +40,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $query[static::TABLE . '.type'] = $type;
         }
 
-        $select = $this->getSelect()->where($query);
+
+        $select->where($query);
         if ($limit != 'all') {
             $offset = ($page - 1) * $limit;
             $select->limit($limit)->offset($offset);

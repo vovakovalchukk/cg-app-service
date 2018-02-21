@@ -5,6 +5,7 @@ namespace CG\Template\Command;
 use CG\Settings\InvoiceMapping\Repository as InvoiceMappingRepository;
 use CG\Settings\InvoiceMapping\Filter as InvoiceMappingFilter;
 use CG\Template\Storage\Db as MySQLStorage;
+use CG\Template\Storage\MongoDb as MongoDb;
 use CG\Template\Repository as TemplateRepository;
 use CG\Stdlib\Exception\Runtime\NotFound as NotFoundException;
 
@@ -15,14 +16,17 @@ class MigrateMongoDataToMysql
     protected $templateRepository;
     /** @var InvoiceMappingRepository */
     protected $invoiceMappingRepository;
+    protected $mongoDb;
 
     public function __construct(
         MySQLStorage $db,
+        MongoDb $mongoDb,
         TemplateRepository $templateRepository,
         InvoiceMappingRepository $invoiceMappingRepository
     )
     {
         $this->db = $db;
+        $this->mongoDb = $mongoDb;
         $this->templateRepository = $templateRepository;
         $this->invoiceMappingRepository = $invoiceMappingRepository;
     }
@@ -41,7 +45,7 @@ class MigrateMongoDataToMysql
         do {
             try {
 
-                $collection = $this->templateRepository
+                $collection = $this->mongoDb
                     ->fetchCollectionByPagination(50, $page, [], [], []);
                 array_merge($entityArray, $collection->toArray());
                 $page++;
