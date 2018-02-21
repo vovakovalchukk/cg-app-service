@@ -35,7 +35,7 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface
     public function findIncorrectlyAllocated($operator = '!=')
     {
         $query = <<<EOF
-SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, unknownOrders
+SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0)
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId AND sl.type = 'real'
 INNER JOIN location AS l ON sl.locationId = l.id AND l.type = 'Merchant'
