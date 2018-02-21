@@ -197,7 +197,9 @@ use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
 use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
+use CG\Settings\Invoice\Service\Storage\Db as InvoiceSettingsDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Settings\Invoice\Shared\Mapper as InvoiceSettingsMapper;
 
 // Alias Settings
 use CG\Settings\Shipping\Alias\Service as AliasSettingsService;
@@ -459,6 +461,7 @@ $config = array(
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
                 'TemplateMongoMigrationRepository' => TemplateRepository::class,
+                'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
             ),
             'ReadCGSql' => array(
@@ -946,17 +949,31 @@ $config = array(
                     'client' => 'directory_guzzle'
                 ]
             ],
-            InvoiceSettingsService::class => array(
-                'parameters' => array(
+            InvoiceSettingsService::class => [
+                'parameters' => [
                     'repository' => InvoiceSettingsRepository::class
-                )
-            ),
-            InvoiceSettingsRepository::class => array(
-                'parameter' => array(
+                ]
+            ],
+            InvoiceSettingsRepository::class => [
+                'parameter' => [
                     'storage' => InvoiceSettingsCacheStorage::class,
+                    'repository' => 'InvoiceSettingsMongoMigrationRepository'
+                ]
+            ],
+            'InvoiceSettingsMongoMigrationRepository' => [
+                'parameter' => [
+                    'storage' => InvoiceSettingsDbStorage::class,
                     'repository' => InvoiceSettingsMongoDbStorage::class
-                )
-            ),
+                ]
+            ],
+            InvoiceSettingsDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => InvoiceSettingsMapper::class
+                ]
+            ],
             UsageDb::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',
