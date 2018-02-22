@@ -22,8 +22,10 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
     use SaveTrait;
     use RemoveTrait;
     use RemoveByFieldTrait;
-    use FetchTrait;
     use LogTrait;
+    use FetchTrait {
+        fetch as protected traitFetch;
+    }
 
     public function __construct(Mapper $mapper, EntityStrategy $entityStrategy, CollectionStrategy $collectionStrategy)
     {
