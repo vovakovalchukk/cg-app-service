@@ -9,10 +9,16 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\PaginatedCollection as Collection;
 use CG\Stdlib\Storage\MongoDb\FetchTrait;
+use CG\Stdlib\Coerce\Id\StringTrait as IDCoersionOverride;
 
 class MongoDb implements StorageInterface
 {
-    use FetchTrait;
+    use IDCoersionOverride {
+        coerceId as protected coerceStringId;
+    }
+    use FetchTrait {
+        coerceId as protected coerceIdOriginal;
+    }
 
     protected $client;
     protected $mapper;
@@ -78,19 +84,15 @@ class MongoDb implements StorageInterface
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    public function coerceId($class, $id)
+    {
+        return static::coerceStringId($id);
+    }
     
     public function save($entity)
     {
-        try {
-            $invoice = $this->getMapper()->toMongoArray($entity);
-            $save = $this->getMongoCollection()->save($invoice);
-            if (!$save["updatedExisting"]) {
-                $entity->setNewlyInserted(true);
-            }
-            return $entity;
-        } catch(\MongoException $e) {
-            throw new StorageException($e->getMessage(), $e->getCode(), $e);
-        }
+        return $entity;
     }
 
     public function remove($entity)
