@@ -350,6 +350,7 @@ use CG\Settings\Api\StorageInterface as ApiSettingsStorage;
 use CG\Settings\Api\Repository as ApiSettingsRepository;
 use CG\Settings\Api\Storage\Cache as ApiSettingsCacheStorage;
 use CG\Settings\Api\Storage\Db as ApiSettingsDbStorage;
+use CG\Settings\Api\Storage\Factory as ApiSettingsFactoryStorage;
 
 // WooCommerce
 use CG\WooCommerce\ListingImport as WooCommerceListingImport;
@@ -458,6 +459,7 @@ $config = array(
                 'TemplateMongoMigrationRepository' => TemplateRepository::class,
                 'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
+                'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
             ),
             'ReadCGSql' => array(
                 'parameter' => array(
@@ -1361,8 +1363,14 @@ $config = array(
             ],
             ApiSettingsRepository::class => [
                 'parameters' => [
-                    'repository' => ApiSettingsDbStorage::class,
+                    'repository' => 'PersistentApiSettingsRepository',
                     'storage' => ApiSettingsCacheStorage::class,
+                ],
+            ],
+            'PersistentApiSettingsRepository' => [
+                'parameters' => [
+                    'repository' => ApiSettingsFactoryStorage::class,
+                    'storage' => ApiSettingsDbStorage::class,
                 ],
             ],
             ApiSettingsDbStorage::class => [

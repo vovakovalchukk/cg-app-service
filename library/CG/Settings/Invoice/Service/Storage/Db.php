@@ -14,6 +14,7 @@ use CG\Stdlib\PaginatedCollection as InvoiceCollection;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use InvalidArgumentException;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select as ZendSelect;
 use Zend\Db\Sql\Sql as ZendSql;
@@ -41,7 +42,7 @@ class Db extends DbAbstract implements StorageInterface
         try {
             $where = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($where);
-            $select->columns([sprintf('DISTINCT %s.id', self::TABLE)]);
+            $select->columns([ new Expression(sprintf('DISTINCT (%s.id) as id', self::TABLE))]);
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -54,11 +55,15 @@ class Db extends DbAbstract implements StorageInterface
             $idResults = $this->readSql->prepareStatementForSqlObject($select)->execute();
             $ids = [];
             foreach ($idResults as $idResult) {
-                $ids[] = $idResult->id;
+                $ids[$idResult['id']] = $idResult['id'];
+            }
+
+            if (count($idResults) == 0) {
+                throw new NotFound();
             }
 
             $idPredicate = new Predicate();
-            $idPredicate->in('id', $ids);
+            $idPredicate->in(self::TABLE . '.id', $ids);
             $idBasedSelect = $this->getSelect()->where($idPredicate);
 
             return $this->fetchCollection($collection, $this->readSql, $idBasedSelect, $this->mapper);

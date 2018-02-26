@@ -16,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Di\Di;
 use CG\UserPreference\Command\MigrateMongoDataToMysql as MigrateMongoUserPreferenceDataToMysql;
 use CG\Template\Command\MigrateMongoDataToMysql as MigrateMongoTemplateDataToMysql;
+use CG\Settings\Invoice\Command\MigrateMongoDataToMysql as MigrateMongoInvoiceSettingDataToMysql;
 
 /** @var Di $di */
 return [
@@ -163,10 +164,21 @@ return [
     'phinx:migrateMongoTemplateDataToMysql' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di)
         {
-            $output->writeln('Migrating Transaction data from MongoDB to MySQL');
+            $output->writeln('Migrating Template data from MongoDB to MySQL');
             $command = $di->get(MigrateMongoTemplateDataToMysql::class);
-            $count = $command->migrate();
-            $output->writeln('Finished migration of Templates, ' . $count . ' processed');
+            $counts = $command();
+            $output->writeln('Finished migration of Templates, ' . $counts->migrated . ' migrated ' . $counts->reindexed . ' re-mapped');
+        },
+        'description' => 'Copies Transaction data over from MongoDB to MySQL',
+        'arguments' => [],
+        'options' => []
+    ],
+    'phinx:migrateMongoInvoiceSettingsDataToMysql' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $output->writeln('Migrating Invoice Settings data from MongoDB to MySQL');
+            $command = $di->get(MigrateMongoInvoiceSettingDataToMysql::class);
+            $count = $command();
+            $output->writeln('Finished migration of Invoice settings, ' . $count . ' processed');
         },
         'description' => 'Copies Transaction data over from MongoDB to MySQL',
         'arguments' => [],
