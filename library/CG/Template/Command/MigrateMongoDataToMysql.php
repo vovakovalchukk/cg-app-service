@@ -89,6 +89,10 @@ class MigrateMongoDataToMysql
             }
             /** @var \CG\Settings\InvoiceMapping\Entity $invoiceMapping */
             foreach ($invoiceMappings as $invoiceMapping) {
+                if (null === $invoiceMapping->getInvoiceId()) {
+                    continue;
+                }
+
                 if (isset($invoices[$invoiceMapping->getInvoiceId()])) {
                     $invoice = $invoices[$invoiceMapping->getInvoiceId()];
                 } else {
@@ -100,7 +104,6 @@ class MigrateMongoDataToMysql
                     $invoices[$invoiceMapping->getInvoiceId()] = $invoice;
                 }
                 $invoiceMapping->setInvoiceId($invoice->getId());
-
                 try {
                     $this->invoiceMappingRepository->save($invoiceMapping);
                     $updated++;
