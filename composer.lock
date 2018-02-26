@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa7c6bfafc743008362de1893ca5cba7",
+    "content-hash": "6ec409413ada509ea0ae515c770181ac",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1278,46 +1278,6 @@
             "time": "2017-09-22T10:59:28+00:00"
         },
         {
-            "name": "channelgrabber/intercom",
-            "version": "1.3.2",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-intercom.git",
-                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-intercom-1.3.2-a5b016.zip",
-                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e",
-                "shasum": null
-            },
-            "require": {
-                "channelgrabber/billing": ">=1.8.0, <2.0.0",
-                "channelgrabber/channel": ">=1.15.11,<2.0.0",
-                "channelgrabber/constants": "dev-master",
-                "channelgrabber/gearman": "^1.2.4",
-                "channelgrabber/order": "^1.19.0",
-                "channelgrabber/product": "^1.4.12",
-                "channelgrabber/queue": "^1.0.0",
-                "channelgrabber/settings": "^1.3.6",
-                "channelgrabber/stdlib": "^2.12.42",
-                "channelgrabber/user": "^1.22.4",
-                "intercom/intercom-php": "~1.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CG\\Intercom\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2017-11-09T14:23:33+00:00"
-        },
-        {
             "name": "channelgrabber/listing",
             "version": "1.14.1",
             "source": {
@@ -1650,16 +1610,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.36.1",
+            "version": "1.36.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "83534cbebd81ce112a345fc452603ec9c37b5cbc"
+                "reference": "e9b4a8de16553bad8d173544ab8d0736f884f1f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.36.1-1953c8.zip",
-                "reference": "83534cbebd81ce112a345fc452603ec9c37b5cbc",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.36.4-d3d302.zip",
+                "reference": "e9b4a8de16553bad8d173544ab8d0736f884f1f6",
                 "shasum": null
             },
             "require": {
@@ -1679,7 +1639,6 @@
                 "channelgrabber/gearman": ">=1.1.0,<2.0.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
-                "channelgrabber/intercom": "~1.3.2",
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
@@ -1736,7 +1695,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-25T09:51:16+00:00"
+            "time": "2018-02-16T11:31:48+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2414,11 +2373,17 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-TAC-13-EnforceApiSettings",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "cc89e8bb1827db6f700957a5de5aed117545b08c"
+                "reference": "ebb7e679981543875fe4bf29d8fd1de7c720fb7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.6.0-392edd.zip",
+                "reference": "ebb7e679981543875fe4bf29d8fd1de7c720fb7b",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2446,7 +2411,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-02-20T16:24:49+00:00"
+            "time": "2018-02-26T09:06:13+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -3775,7 +3740,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4255,57 +4220,6 @@
                 }
             },
             "time": "2014-10-12T19:18:40+00:00"
-        },
-        {
-            "name": "intercom/intercom-php",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/intercom/intercom-php.git",
-                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/intercom-intercom-php-a0a1bd91afbb6424fa4c003fe2dcd744fff24b51-zip-5b82bd.zip",
-                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51",
-                "shasum": ""
-            },
-            "require": {
-                "guzzle/guzzle": "~3.9",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Intercom": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache Version 2"
-            ],
-            "authors": [
-                {
-                    "name": "Intercom Platform Team",
-                    "homepage": "http://intercom.io"
-                }
-            ],
-            "description": "Intercom API client built on top of Guzzle 3",
-            "keywords": [
-                "Guzzle",
-                "api",
-                "intercom",
-                "intercom.io"
-            ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2015-04-03T12:10:19+00:00"
         },
         {
             "name": "jakeasmith/http_build_url",
@@ -8583,7 +8497,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-0769e6d9726c140a54dbf827a438c0f9912749fe-zip-ae4f3d.zip",
+                "url": "https://api.github.com/repos/Behat/Mink/zipball/0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "shasum": ""
             },
@@ -8626,11 +8540,6 @@
                 "testing",
                 "web"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-04-13T23:39:27+00:00"
         },
         {
@@ -8643,7 +8552,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-browserkit-driver-63960c8fcad4529faad1ff33e950217980baa64c-zip-dbf956.zip",
+                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/63960c8fcad4529faad1ff33e950217980baa64c",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c",
                 "shasum": ""
             },
@@ -8686,11 +8595,6 @@
                 "browser",
                 "testing"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-04-13T23:46:30+00:00"
         },
         {
@@ -8703,7 +8607,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-goutte-driver-fa1b073b48761464feb0b05e6825da44b20118d8-zip-3f436f.zip",
+                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/fa1b073b48761464feb0b05e6825da44b20118d8",
                 "reference": "fa1b073b48761464feb0b05e6825da44b20118d8",
                 "shasum": ""
             },
@@ -8742,11 +8646,6 @@
                 "headless",
                 "testing"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-07-03T18:43:54+00:00"
         },
         {
@@ -8759,7 +8658,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-selenium2-driver-bcf1b537de37db6db0822d9e7bd97e600fd7a476-zip-16355d.zip",
+                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "shasum": ""
             },
@@ -8805,12 +8704,47 @@
                 "testing",
                 "webdriver"
             ],
+            "time": "2013-06-02T19:09:45+00:00"
+        },
+        {
+            "name": "channelgrabber/intercom",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-intercom.git",
+                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-intercom-1.3.2-a5b016.zip",
+                "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/billing": ">=1.8.0, <2.0.0",
+                "channelgrabber/channel": ">=1.15.11,<2.0.0",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/gearman": "^1.2.4",
+                "channelgrabber/order": "^1.19.0",
+                "channelgrabber/product": "^1.4.12",
+                "channelgrabber/queue": "^1.0.0",
+                "channelgrabber/settings": "^1.3.6",
+                "channelgrabber/stdlib": "^2.12.42",
+                "channelgrabber/user": "^1.22.4",
+                "intercom/intercom-php": "~1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Intercom\\": "src"
+                }
+            },
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-06-02T19:09:45+00:00"
+            "time": "2017-11-09T14:23:33+00:00"
         },
         {
             "name": "channelgrabber/phpunit",
@@ -8861,7 +8795,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -8918,7 +8852,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/facebook-webdriver-36bf555115da4cb03b131b4c04b681a75acd47d1-zip-70c67f.zip",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/36bf555115da4cb03b131b4c04b681a75acd47d1",
                 "reference": "36bf555115da4cb03b131b4c04b681a75acd47d1",
                 "shasum": ""
             },
@@ -8937,11 +8871,6 @@
             ],
             "description": "A php client for WebDriver",
             "homepage": "https://github.com/facebook/php-webdriver",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-10-15T05:25:07+00:00"
         },
         {
@@ -8954,7 +8883,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/instaclick-php-webdriver-47a6019553a7a5b42d35493276ffc2c9252c53d5-zip-403190.zip",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/47a6019553a7a5b42d35493276ffc2c9252c53d5",
                 "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5",
                 "shasum": ""
             },
@@ -8989,7 +8918,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -9000,12 +8929,58 @@
                 "webdriver",
                 "webtest"
             ],
+            "time": "2013-10-04T15:03:51+00:00"
+        },
+        {
+            "name": "intercom/intercom-php",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/intercom/intercom-php.git",
+                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/intercom-intercom-php-a0a1bd91afbb6424fa4c003fe2dcd744fff24b51-zip-5b82bd.zip",
+                "reference": "a0a1bd91afbb6424fa4c003fe2dcd744fff24b51",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.9",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Intercom": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache Version 2"
+            ],
+            "authors": [
+                {
+                    "name": "Intercom Platform Team",
+                    "homepage": "http://intercom.io"
+                }
+            ],
+            "description": "Intercom API client built on top of Guzzle 3",
+            "keywords": [
+                "Guzzle",
+                "api",
+                "intercom",
+                "intercom.io"
+            ],
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2013-10-04T15:03:51+00:00"
+            "time": "2015-04-03T12:10:19+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -9425,7 +9400,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-php-diff-30e103d19519fe678ae64a60d77884ef3d71b28a-zip-b63c58.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": ""
+                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
             },
             "type": "library",
             "autoload": {
@@ -9464,7 +9439,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-phpspec-61712147412cb647b6cb68b19833a60bfda759a1-zip-6bc9f9.zip",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": ""
+                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -9731,7 +9706,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.zip",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": ""
+                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -10741,18 +10716,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.0",
-            "alias_normalized": "1.6.0.0",
-            "version": "dev-TAC-13-EnforceApiSettings",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
