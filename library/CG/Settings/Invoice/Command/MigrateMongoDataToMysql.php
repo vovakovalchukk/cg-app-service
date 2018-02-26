@@ -2,6 +2,7 @@
 
 namespace CG\Settings\Invoice\Command;
 
+use CG\ETag\Exception\Conflict as ConflictException;
 use CG\Settings\Invoice\Service\Storage\Db as InvoiceSettingsDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Stdlib\Exception\Runtime\NotFound as NotFoundException;
@@ -23,13 +24,14 @@ class MigrateMongoDataToMysql
 
     public function __invoke()
     {
-        $collection = $this->migrate();
+        $count = $this->migrate();
 
-        return count($collection);
+        return $count;
     }
 
     protected function migrate()
     {
+        $updated = 0;
         $entityArray = [];
         $page = 1;
         $filter = new InvoiceSettingsFilter(50, $page);
@@ -45,10 +47,15 @@ class MigrateMongoDataToMysql
             }
 
             foreach($collection as $invoiceSetting) {
-                $this->db->save($invoiceSetting);
+                try {
+                    $this->db->save($invoiceSetting);
+                    $updated++;
+                } catch (NotFoundException|ConflictException $exception) {
+                    continue;
+                }
             }
         } while (true);
 
-        return $entityArray;
+        return $updated;
     }
 }

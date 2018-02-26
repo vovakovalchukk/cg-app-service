@@ -166,8 +166,8 @@ return [
         {
             $output->writeln('Migrating Template data from MongoDB to MySQL');
             $command = $di->get(MigrateMongoTemplateDataToMysql::class);
-            $count = $command();
-            $output->writeln('Finished migration of Templates, ' . $count . ' processed');
+            $counts = $command();
+            $output->writeln('Finished migration of Templates, ' . $counts->migrated . ' migrated ' . $counts->reindexed . ' re-mapped');
         },
         'description' => 'Copies Transaction data over from MongoDB to MySQL',
         'arguments' => [],
