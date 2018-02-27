@@ -28,6 +28,7 @@ class Cleanup
             foreach ($transaction->execute() as $status) {
                 $output->write($status ? ',' : '.');
             }
+            sleep(1);
         }
         $output->writeln('');
     }
