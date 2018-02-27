@@ -44,6 +44,7 @@ class Mapper
             ->addLink('purchaseOrder', '/purchaseOrder')
             ->addLink('purchaseOrderItem', '/purchaseOrderItem')
             ->addLink('category', '/category')
-            ->addLink('categoryExternal', '/categoryExternal');
+            ->addLink('categoryExternal', '/categoryExternal')
+            ->addLink('categoryTemplate', '/categoryTemplate');
     }
 }
