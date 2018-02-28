@@ -18,19 +18,23 @@ class Cleanup
         $this->predis->getProfile()->defineCommand('cleanupTransaction', ClearTransaction::class);
     }
 
-    public function __invoke(OutputInterface $output)
+    public function __invoke(OutputInterface $output, int $chunkSize = null)
     {
-        foreach ($this->fetchChunkedTransactionActionKeys() as $transactionActionKeys) {
+        $count = 0;
+        foreach ($this->fetchChunkedTransactionActionKeys($chunkSize ?? 50) as $transactionActionKeys) {
             $transaction = $this->predis->transaction();
             foreach ($this->mapTransactionActionsToTransactionKeys($transactionActionKeys) as $transactionAction => $transactionKey) {
                 $transaction->cleanupTransaction($transactionKey, $transactionAction);
             }
             foreach ($transaction->execute() as $status) {
+                $count++;
                 $output->write($status ? ',' : '.');
             }
             sleep(1);
         }
-        $output->writeln('');
+        if ($count > 0) {
+            $output->writeln('');
+        }
     }
 
     protected function fetchTransactionActionKeys(): \Traversable
@@ -38,7 +42,7 @@ class Cleanup
         return new PredisKeyspace($this->predis, sprintf('%s%s*', Transaction::ACTION_PREFIX, Transaction::SEPARATOR));
     }
 
-    protected function fetchChunkedTransactionActionKeys(int $chunkSize = 100): \Traversable
+    protected function fetchChunkedTransactionActionKeys(int $chunkSize): \Traversable
     {
         $chunk = [];
         foreach ($this->fetchTransactionActionKeys() as $transactionActionKey) {
