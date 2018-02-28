@@ -22,11 +22,11 @@ class Cleanup
     {
         $count = 0;
         foreach ($this->fetchChunkedTransactionActionKeys($chunkSize ?? 50) as $transactionActionKeys) {
-            $transaction = $this->predis->transaction();
+            $batch = $this->predis->transaction();
             foreach ($this->mapTransactionActionsToTransactionKeys($transactionActionKeys) as $transactionAction => $transactionKey) {
-                $transaction->cleanupTransaction($transactionKey, $transactionAction);
+                $batch->cleanupTransaction($transactionKey, $transactionAction);
             }
-            foreach ($transaction->execute() as $status) {
+            foreach ($batch->execute() as $status) {
                 $count++;
                 $output->write($status ? ',' : '.');
             }
