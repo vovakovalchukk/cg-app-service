@@ -139,9 +139,6 @@ use CG\Order\Shared\Tag\Mapper as TagMapper;
 // Label
 use CG\Order\Shared\Label\Mapper as LabelMapper;
 use CG\Order\Shared\Label\StorageInterface as LabelStorage;
-use CG\Order\Shared\Label\Repository as LabelRepository;
-use CG\Order\Service\Label\Storage\Cache as LabelCacheStorage;
-use CG\Order\Service\Label\Storage\MongoDb as LabelMongoDbStorage;
 use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataStorage;
 use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
 use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
@@ -286,8 +283,6 @@ use CG\Listing\StorageInterface as ListingStorage;
 
 // Listing Status History
 use CG\Listing\StatusHistory\StorageInterface as ListingStatusHistoryStorage;
-use CG\Listing\StatusHistory\Repository as ListingStatusHistoryRepository;
-use CG\Listing\StatusHistory\Storage\Cache as ListingStatusHistoryCacheStorage;
 use CG\Listing\StatusHistory\Storage\Db as ListingStatusHistoryDbStorage;
 
 // Unimported Listing
@@ -850,12 +845,6 @@ $config = array(
                 'parameter' => [
                     'metaDataStorage' => LabelMetaDataDbStorage::class,
                     'labelDataStorage' => LabelLabelDataS3Storage::class,
-                ]
-            ],
-            LabelRepository::class => [
-                'parameter' => [
-                    'storage' => LabelCacheStorage::class,
-                    'repository' => LabelMetaPlusLabelDataStorage::class
                 ]
             ],
             AccountCommandService::class => array(
@@ -1543,12 +1532,6 @@ $config = array(
                     'cryptor' => 'amazon_cryptor',
                 ],
             ],
-            ListingStatusHistoryRepository::class => [
-                'parameters' => [
-                    'storage' => ListingStatusHistoryCacheStorage::class,
-                    'repository' => ListingStatusHistoryDbStorage::class,
-                ],
-            ],
             ListingStatusHistoryDbStorage::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
@@ -1698,8 +1681,8 @@ $config = array(
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
-                LabelStorage::class => LabelRepository::class,
-                ListingStatusHistoryStorage::class => ListingStatusHistoryRepository::class,
+                LabelStorage::class => LabelMetaPlusLabelDataStorage::class,
+                ListingStatusHistoryStorage::class => ListingStatusHistoryDbStorage::class,
                 SetupProgressSettingsStorage::class => SetupProgressSettingsRepository::class,
                 OrderService::class => OrderLockingService::class,
                 ItemService::class => ItemLockingService::class,
