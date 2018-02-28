@@ -12,7 +12,7 @@ return [
             /** @var Cleanup $command */
             $command = $di->newInstance(Cleanup::class);
             $chunkSize = $input->getArgument('chunkSize');
-            if (!preg_match('/^[1-9][0-9]*$/', $chunkSize)) {
+            if (!is_null($chunkSize) && !preg_match('/^[1-9][0-9]*$/', $chunkSize)) {
                 throw new InvalidArgumentException('Argument "chunkSize" should be an positive integer');
             }
             $command($output, $chunkSize);
