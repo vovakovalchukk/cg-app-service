@@ -43,7 +43,8 @@ class Collection
             $this->getParams('purchaseDateTo'),
             $this->getParams('lastUpdateFromChannelFrom'),
             $this->getParams('lastUpdateFromChannelTo'),
-            $this->getParams('externalListingId') ?: []
+            $this->getParams('externalListingId') ?: [],
+            $this->getParams('hasImages')
         );
     }
 
