@@ -14,6 +14,13 @@ use CG\Product\Category\ExternalData\Storage\Db as CategoryExternalStorageDb;
 use CG\Product\Category\ExternalData\StorageInterface as CategoryExternalStorageInterface;
 use CG\Product\Category\ExternalData\Mapper as CategoryExternalMapper;
 
+use CG\Product\Category\Template\Repository as CategoryTemplateRepository;
+use CG\Product\Category\Template\Service as CategoryTemplateService;
+use CG\Product\Category\Template\Storage\Cache as CategoryTemplateStorageCache;
+use CG\Product\Category\Template\Storage\Db as CategoryTemplateStorageDb;
+use CG\Product\Category\Template\StorageInterface as CategoryTemplateStorageInterface;
+use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
+
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
 
 return [
@@ -22,6 +29,7 @@ return [
             'preferences' => [
                 CategoryStorageInterface::class => CategoryRepository::class,
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
+                CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -59,6 +67,25 @@ return [
             CategoryExternalService::class => [
                 'parameters' => [
                     'storage' => CategoryExternalRepository::class
+                ]
+            ],
+            CategoryTemplateStorageDb::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => CategoryTemplateMapper::class
+                ],
+            ],
+            CategoryTemplateRepository::class => [
+                'parameters' => [
+                    'storage' => CategoryTemplateStorageCache::class,
+                    'repository' => CategoryTemplateStorageDb::class
+                ]
+            ],
+            CategoryTemplateService::class => [
+                'parameters' => [
+                    'storage' => CategoryTemplateRepository::class
                 ]
             ],
             EbayChannelService::class => [

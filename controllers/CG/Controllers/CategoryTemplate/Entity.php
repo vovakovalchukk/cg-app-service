@@ -1,5 +1,5 @@
 <?php
-namespace CG\Controllers\CategoryExternal;
+namespace CG\Controllers\CategoryTemplate;
 
 use CG\Product\Category\Template\Service;
 use CG\Slim\Controller\Entity\DeleteTrait;
