@@ -4,16 +4,23 @@ use CG\Controllers\Category\Collection as CollectionController;
 use CG\Controllers\Category\Entity as CategoryController;
 use CG\Controllers\CategoryExternal\Collection as CategoryExternalCollectionController;
 use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
+use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
+use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
 use CG\InputValidation\Category\Entity as CategoryValidation;
 use CG\InputValidation\Category\Filter as FilterValidation;
 use CG\InputValidation\CategoryExternal\Entity as CategoryExternalValidation;
 use CG\InputValidation\CategoryExternal\Filter as CategoryExternalFilterValidation;
+use CG\InputValidation\CategoryTemplate\Entity as CategoryTemplateValidation;
+use CG\InputValidation\CategoryTemplate\Filter as FilterTemplateValidation;
 use CG\Product\Category\Entity as Category;
 use CG\Product\Category\ExternalData\Entity as CategoryExternal;
 use CG\Product\Category\ExternalData\Mapper as CategoryExternalMapper;
 use CG\Product\Category\ExternalData\Service as CategoryExternalService;
 use CG\Product\Category\Mapper as CategoryMapper;
 use CG\Product\Category\Service as CategoryService;
+use CG\Product\Category\Template\Entity as CategoryTemplate;
+use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
+use CG\Product\Category\Template\Service as CategoryTemplateService;
 use CG\Slim\Versioning\Version;
 
 return [
@@ -93,6 +100,45 @@ return [
             'mapperClass' => CategoryExternalMapper::class,
             'entityClass' => CategoryExternal::class,
             'serviceClass' => CategoryExternalService::class
+        ]
+    ],
+    '/categoryTemplate' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryTemplateCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'CategoryTemplateCollection',
+        'entityRoute' => '/categoryTemplate/:id',
+        'validation' => [
+            'filterRules' => FilterTemplateValidation::class,
+            'dataRules' => CategoryTemplateValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/categoryTemplate/:id' => [
+        'controllers' => function($categoryTemplateId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryTemplateController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($categoryTemplateId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'CategoryTemplateEntity',
+        'validation' => [
+            'dataRules' => CategoryTemplateValidation::class,
+        ],
+        'version' => new Version(1, 1),
+        'eTag' => [
+            'mapperClass' => CategoryTemplateMapper::class,
+            'entityClass' => CategoryTemplate::class,
+            'serviceClass' => CategoryTemplateService::class
         ]
     ],
 ];

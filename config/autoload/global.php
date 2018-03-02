@@ -236,6 +236,7 @@ use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 use CG\Transaction\ClientInterface as TransactionClientInterface;
 use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
+use CG\Transaction\Command\Cleanup as TransactionCleanupCommand;
 
 // Stock
 use CG\Stock\Entity as StockEntity;
@@ -1083,6 +1084,11 @@ $config = array(
                 ]
             ],
             TransactionRedisClient::class => [
+                'parameter' => [
+                    'predis' => 'reliable_redis',
+                ]
+            ],
+            TransactionCleanupCommand::class => [
                 'parameter' => [
                     'predis' => 'reliable_redis',
                 ]

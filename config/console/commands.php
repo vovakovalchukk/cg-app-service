@@ -19,6 +19,7 @@ $files = [
     'migrateMongoOrderLabelDataToMysqlAndS3.php',
     'cache.php',
     'phinxMongoMigrations.php',
+    'transaction.php',
 ];
 
 $commands = array();
