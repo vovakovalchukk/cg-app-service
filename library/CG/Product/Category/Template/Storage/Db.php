@@ -79,6 +79,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 return !empty($value);
             }
         );
+        if (isset($query['organisationUnitId'])) {
+            $query[static::TABLE.'.organisationUnitId'] = $query['organisationUnitId'];
+            unset($query['organisationUnitId']);
+        }
         if (isset($query['categoryId'])) {
             $query[static::TABLE_CATEGORIES.'.categoryId'] = $query['categoryId'];
             unset($query['categoryId']);
