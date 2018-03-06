@@ -1,14 +1,17 @@
 <?php
 namespace CG\Stock\Command;
 
+use CG\Cilex\ModulusAwareInterface;
+use CG\Cilex\ModulusTrait;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Sql;
 
-class FindIncorrectlyAllocatedStock implements LoggerAwareInterface
+class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwareInterface
 {
     use LogTrait;
+    use ModulusTrait;
 
     const LOG_CODE = 'FindIncorrectlyAllocatedStockCommand';
     const LOG_FINDINGS = 'FindIncorrectlyAllocatedStock command found OU %d, SKU %s had %d allocated but we expected %d. Details of expectation:';
