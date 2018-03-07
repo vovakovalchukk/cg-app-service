@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6aea1c738e9775413aff014d527cce6",
+    "content-hash": "164f0c5be925f2251ac56a8254a48967",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1610,16 +1610,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.38.1",
+            "version": "dev-CGIV-9294-order-item-image-fetch-issues",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "ae352aa6c8457cdaa4af0042fb9922d8bd26f422"
+                "reference": "26cbe565ebd5fffb19007b2712212a701395dfaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.38.1-d4d9d2.zip",
-                "reference": "ae352aa6c8457cdaa4af0042fb9922d8bd26f422",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9294-order-item-image-fetch-issues-cd1d81.zip",
+                "reference": "26cbe565ebd5fffb19007b2712212a701395dfaf",
                 "shasum": null
             },
             "require": {
@@ -1695,7 +1695,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-03-05T14:20:52+00:00"
+            "time": "2018-03-07T13:34:52+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10716,10 +10716,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.38.2",
+            "alias_normalized": "1.38.2.0",
+            "version": "dev-CGIV-9294-order-item-image-fetch-issues",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
