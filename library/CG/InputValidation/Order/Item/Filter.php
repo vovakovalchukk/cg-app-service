@@ -1,11 +1,12 @@
 <?php
 namespace CG\InputValidation\Order\Item;
 
+use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
-use CG\Validation\Rules\ArrayOfIntegersValidator;
-use CG\Validation\Rules\IntegerValidator;
 use Zend\Validator\Date;
 
 class Filter implements RulesInterface
@@ -114,6 +115,14 @@ class Filter implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(["name" => "externalListingId"])
                 ],
+            ],
+            'hasImages' => [
+                'name' => 'hasImages',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'hasImages'])
+                ]
             ],
         ];
     }
