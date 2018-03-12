@@ -13,7 +13,7 @@ class ClearTransaction extends ScriptedCommand
     public function getScript()
     {
         return <<<SCRIPT
-if !redis.call('EXISTS', KEYS[1]) then
+if redis.call('EXISTS', KEYS[1]) == 0 then
     return redis.call('DEL', KEYS[2])
 else
     return 0
