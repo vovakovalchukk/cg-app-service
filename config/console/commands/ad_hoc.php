@@ -84,7 +84,8 @@ return [
                     iterator_to_array($adjustments),
                     $input->getOption('fix')
                 );
-            }
+            },
+        'modulus' => true,
     ],
     'ad-hoc:correctOverAllocatedStock' => [
         'description' => 'Correct any discrepancies with allocated stock where we have over allocated, by default will display proposed changes and not apply',
@@ -110,7 +111,67 @@ return [
                     $input->getOption('fix'),
                     ['Unknown Orders']
                 );
-            }
+            },
+        'modulus' => true
+    ],
+    'ad-hoc:correctAllocatedStockForOU' => [
+        'description' => 'Correct any discrepancies with allocated stock, by default will display proposed changes and not apply',
+        'arguments' => [
+            'organisationUnitId' => [
+                'required' => true
+            ],
+        ],
+        'options' => [
+            'fix' => [
+                'description' => 'Apply updates to stock',
+            ],
+        ],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
+                $adjustments = $findCommand->findUnderAllocated($input->getArgument('organisationUnitId'));
+
+                /** @var StockAdjustmentCommand $command */
+                $command = $di->get(StockAdjustmentCommand::class);
+                $command(
+                    $input,
+                    $output,
+                    StockAdjustment::TYPE_ALLOCATED,
+                    iterator_to_array($adjustments),
+                    $input->getOption('fix')
+                );
+            },
+    ],
+    'ad-hoc:correctOverAllocatedStockForOU' => [
+        'description' => 'Correct any discrepancies with allocated stock where we have over allocated, by default will display proposed changes and not apply',
+        'arguments' => [
+            'organisationUnitId' => [
+                'required' => true
+            ],
+        ],
+        'options' => [
+            'fix' => [
+                'description' => 'Apply updates to stock',
+            ],
+        ],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
+                $adjustments = $findCommand->findOverAllocated($input->getArgument('organisationUnitId'));
+
+                /** @var StockAdjustmentCommand $command */
+                $command = $di->get(StockAdjustmentCommand::class);
+                $command(
+                    $input,
+                    $output,
+                    [StockAdjustment::TYPE_ALLOCATED, StockAdjustment::TYPE_ONHAND],
+                    iterator_to_array($adjustments),
+                    $input->getOption('fix'),
+                    ['Unknown Orders']
+                );
+            },
     ],
     'ad-hoc:validateOrderItemStatus' => [
         'description' => 'Reports any new order items that do not match their orders status since the command last run',
