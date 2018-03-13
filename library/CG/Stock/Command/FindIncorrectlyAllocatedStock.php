@@ -1,8 +1,11 @@
 <?php
 namespace CG\Stock\Command;
 
+use CG\Billing\Subscription\Collection as SubscriptionCollection;
+use CG\Billing\Subscription\Storage\Api as SubscriptionClient;
 use CG\Cilex\ModulusAwareInterface;
 use CG\Cilex\ModulusTrait;
+use CG\Stdlib\DateTime;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use Zend\Db\Adapter\Driver\ResultInterface;
@@ -19,24 +22,34 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
 
     /** @var Sql */
     protected $sqlClient;
+    protected $subscriptionClient;
     
-    public function __construct(Sql $sqlClient)
+    public function __construct(Sql $sqlClient, SubscriptionClient $subscriptionClient)
     {
         $this->sqlClient = $sqlClient;
+        $this->subscriptionClient = $subscriptionClient;
     }
 
-    public function findOverAllocated()
+    public function findOverAllocated($organisationUnitId = null)
     {
-        return $this->findIncorrectlyAllocated('>');
+        return $this->findIncorrectlyAllocated('>', $organisationUnitId);
     }
 
-    public function findUnderAllocated()
+    public function findUnderAllocated($organisationUnitId = null)
     {
-        return $this->findIncorrectlyAllocated('<');
+        return $this->findIncorrectlyAllocated('<', $organisationUnitId);
     }
 
-    public function findIncorrectlyAllocated($operator = '!=')
+    public function findIncorrectlyAllocated($operator = '!=', $organisationUnitId = null)
     {
+        $subscriptions = $this->getActiveSubscriptions($organisationUnitId);
+        $organisationUnitIds = $this->getOrganisationUnitIdsFromSubscriptions($subscriptions);
+        if (empty($organisationUnitIds)) {
+            $this->logNotice('No active organisation units to process - exiting', [], static::LOG_CODE);
+            return;
+        }
+        $organisationUnitIdString = implode(',', $organisationUnitIds);
+
         $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0)
 FROM stock AS s
@@ -59,20 +72,23 @@ LEFT JOIN (
 		JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
 		JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
 		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
+		WHERE root.organisationUnitId IN ({$organisationUnitIdString})
 		GROUP BY root.organisationUnitId, root.sku, leaf.sku
     ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
+	AND order.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
     calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
+AND organisationUnitId IN ({$organisationUnitIdString})
 ORDER BY organisationUnitId, sku
 EOF;
-
+print_r($query);die;
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
         $this->logFindings($results);
 
@@ -164,5 +180,27 @@ EOF;
             $count += $detail['itemQuantity'];
         }
         return ($count != $result['expected']);
+    }
+
+    protected function getActiveSubscriptions($organisationUnitId = null): SubscriptionCollection
+    {
+        $now = (new DateTime('now'))->resetTime();
+        $subscriptions = $this->subscriptionClient->fetchCollectionByPagination(
+            'all',
+            1,
+            [],
+            $now->stdFormat(),
+            $now->stdFormat(),
+            [$organisationUnitId],
+            [],
+            []
+        );
+        return $subscriptions;
+    }
+
+    protected function getOrganisationUnitIdsFromSubscriptions(SubscriptionCollection $subscriptions): array
+    {
+        //$subscriptions = $this->filterCollection($subscriptions);
+        return $subscriptions->getArrayOf('OrganisationUnitId');
     }
 }

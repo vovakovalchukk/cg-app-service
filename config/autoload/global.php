@@ -417,6 +417,21 @@ use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
 use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
 use CG\Stdlib\Sites;
 
+// Billing\Licence
+use CG\Billing\Licence\Service as BillingLicenceService;
+use CG\Billing\Licence\Storage\Api as BillingLicenceApiStorage;
+
+// Billing\Package
+use CG\Billing\Package\Service as BillingPackageService;
+use CG\Billing\Package\Storage\Api as BillingPackageApiStorage;
+
+// Billing\Subscription
+use CG\Billing\Subscription\Storage\Api as BillingSubscriptionApiStorage;
+
+// Billing\SubscriptionDiscount
+use CG\Billing\SubscriptionDiscount\Service as BillingSubscriptionDiscountService;
+use CG\Billing\SubscriptionDiscount\Storage\Api as BillingSubscriptionDiscountApiStorage;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -1599,6 +1614,7 @@ $config = array(
             FindIncorrectlyAllocatedStockCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadSql',
+                    'subscriptionClient' => BillingSubscriptionApiStorage::class
                 ]
             ],
             InvoiceEmailerService::class => [
@@ -1640,6 +1656,41 @@ $config = array(
             EkmRegistrationCollectionController::class => [
                 'parameters' => [
                     'service' => EkmRegistrationServiceService::class,
+                ],
+            ],
+            BillingLicenceApiStorage::class => [
+                'parameter' => [
+                    'client' => 'billing_guzzle',
+                ],
+            ],
+            BillingLicenceService::class => [
+                'parameter' => [
+                    'repository' => BillingLicenceApiStorage::class,
+                ],
+            ],
+            BillingPackageApiStorage::class => [
+                'parameter' => [
+                    'client' => 'billing_guzzle',
+                ],
+            ],
+            BillingPackageService::class => [
+                'parameter' => [
+                    'repository' => BillingPackageApiStorage::class,
+                ],
+            ],
+            BillingSubscriptionApiStorage::class => [
+                'parameter' => [
+                    'client' => 'billing_guzzle',
+                ],
+            ],
+            BillingSubscriptionDiscountApiStorage::class => [
+                'parameter' => [
+                    'client' => 'billing_guzzle',
+                ],
+            ],
+            BillingSubscriptionDiscountService::class => [
+                'parameter' => [
+                    'repository' => BillingSubscriptionDiscountApiStorage::class,
                 ],
             ],
             Sites::class => [
