@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59e00378312fada156d72fd510821857",
+    "content-hash": "71f0451ae574b6a2ab5706dfbbf1e089",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -329,16 +329,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-IN-84-ReportingCacheAttemptsWithCorrectInstanceAndPortReferences",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "ad5b70cff0feffc669b9e8c68a64ea88d5ef2f24"
+                "reference": "01ff8d2e0de1cdc0732b01fc27c22a2cd03e13dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-IN-84-ReportingCacheAttemptsWithCorrectInstanceAndPortReferences-1c4de3.zip",
-                "reference": "ad5b70cff0feffc669b9e8c68a64ea88d5ef2f24",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.5.3-9d2391.zip",
+                "reference": "01ff8d2e0de1cdc0732b01fc27c22a2cd03e13dc",
                 "shasum": null
             },
             "require": {
@@ -371,7 +371,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-03-12T15:51:55+00:00"
+            "time": "2018-03-13T13:25:19+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -10755,17 +10755,9 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.5.3",
-            "alias_normalized": "2.5.3.0",
-            "version": "dev-IN-84-ReportingCacheAttemptsWithCorrectInstanceAndPortReferences",
-            "package": "channelgrabber/cache"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
