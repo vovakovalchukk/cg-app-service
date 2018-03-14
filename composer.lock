@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0df215d42950823237ed0050752b9089",
+    "content-hash": "e5c6c85edcd55eed563e4a44beb4e942",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -491,16 +491,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.33.4",
+            "version": "1.33.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "5e487ba4186e5ac31fe80df4a6d4327e05b2e7ac"
+                "reference": "4bfa0c8cb6bdec5d5840b8bd1e4a90c13930ed15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.33.4-17878b.zip",
-                "reference": "5e487ba4186e5ac31fe80df4a6d4327e05b2e7ac",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.33.8-cea325.zip",
+                "reference": "4bfa0c8cb6bdec5d5840b8bd1e4a90c13930ed15",
                 "shasum": null
             },
             "require": {
@@ -511,6 +511,7 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
+                "channelgrabber/feature-flags": "^2.1.0",
                 "channelgrabber/gearman": "^1.2.19",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
@@ -577,7 +578,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-24T14:04:49+00:00"
+            "time": "2018-02-15T15:33:39+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -2674,16 +2675,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.12.1",
+            "version": "dev-CGIV-9270-correctallocatedstock-cron-modulus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "0197993953d7982ca4a4bcc63bee728f0aab5f6d"
+                "reference": "145238c69d2445b57838641102dffde34be528c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.12.1-4fe84b.zip",
-                "reference": "0197993953d7982ca4a4bcc63bee728f0aab5f6d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-9270-correctallocatedstock-cron-modulus-6203c6.zip",
+                "reference": "145238c69d2445b57838641102dffde34be528c0",
                 "shasum": null
             },
             "require": {
@@ -2737,7 +2738,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-02-07T09:03:56+00:00"
+            "time": "2018-03-14T13:23:52+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -10716,10 +10717,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.12.2",
+            "alias_normalized": "1.12.2.0",
+            "version": "dev-CGIV-9270-correctallocatedstock-cron-modulus",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
