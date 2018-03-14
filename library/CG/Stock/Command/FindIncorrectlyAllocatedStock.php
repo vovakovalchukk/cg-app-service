@@ -199,7 +199,6 @@ EOF;
 
     protected function getOrganisationUnitIdsFromSubscriptions(SubscriptionCollection $subscriptions): array
     {
-        //$subscriptions = $this->filterCollection($subscriptions);
         return $subscriptions->getArrayOf('OrganisationUnitId');
     }
 }
