@@ -301,6 +301,9 @@ use CG\Listing\Unimported\Marketplace\Repository as UnimportedListingMarketplace
 use CG\Listing\Unimported\Marketplace\Storage\Cache as UnimportedListingMarketplaceCacheStorage;
 use CG\Listing\Unimported\Marketplace\Storage\Db as UnimportedListingMarketplaceDbStorage;
 
+// Download Listings
+use CG\Channel\Listing\Download\Service as ChannelListingDownloadService;
+
 // Image
 use CG\Image\Entity as ImageEntity;
 use CG\Image\Service as ImageService;
@@ -606,6 +609,11 @@ $config = array(
                     'predis' => 'unreliable_redis'
                 )
             ),
+            ChannelListingDownloadService::class => [
+                'parameter' => [
+                    'accountStorage' => AccountApiStorage::class
+                ]
+            ],
             EtagRedis::class => array(
                 'parameter' => array(
                     'predisClient' => 'unreliable_redis'
