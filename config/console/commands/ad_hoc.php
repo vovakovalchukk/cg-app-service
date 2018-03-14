@@ -73,46 +73,20 @@ return [
             function(InputInterface $input, OutputInterface $output) use ($di)
             {
                 $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
-                $adjustments = $findCommand->findUnderAllocated();
+                $adjustments = $findCommand->findIncorrectlyAllocated();
 
                 /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
                 $command(
                     $input,
                     $output,
-                    StockAdjustment::TYPE_ALLOCATED,
-                    iterator_to_array($adjustments),
-                    $input->getOption('fix')
-                );
-            },
-        'modulus' => true,
-    ],
-    'ad-hoc:correctOverAllocatedStock' => [
-        'description' => 'Correct any discrepancies with allocated stock where we have over allocated, by default will display proposed changes and not apply',
-        'arguments' => [],
-        'options' => [
-            'fix' => [
-                'description' => 'Apply updates to stock',
-            ],
-        ],
-        'command' =>
-            function(InputInterface $input, OutputInterface $output) use ($di)
-            {
-                $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
-                $adjustments = $findCommand->findOverAllocated();
-
-                /** @var StockAdjustmentCommand $command */
-                $command = $di->get(StockAdjustmentCommand::class);
-                $command(
-                    $input,
-                    $output,
-                    [StockAdjustment::TYPE_ALLOCATED, StockAdjustment::TYPE_ONHAND],
+                    [],
                     iterator_to_array($adjustments),
                     $input->getOption('fix'),
                     ['Unknown Orders']
                 );
             },
-        'modulus' => true
+        'modulus' => true,
     ],
     'ad-hoc:correctAllocatedStockForOU' => [
         'description' => 'Correct any discrepancies with allocated stock, by default will display proposed changes and not apply',
