@@ -51,7 +51,7 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         $organisationUnitIdString = implode(',', $organisationUnitIds);
 
         $query = <<<EOF
-SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0)
+SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId AND sl.type = 'real'
 INNER JOIN location AS l ON sl.locationId = l.id AND l.type = 'Merchant'
@@ -85,10 +85,9 @@ LEFT JOIN (
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
-AND organisationUnitId IN ({$organisationUnitIdString})
-ORDER BY organisationUnitId, sku
+AND s.organisationUnitId IN ({$organisationUnitIdString})
+ORDER BY s.organisationUnitId, sku
 EOF;
-print_r($query);die;
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
         $this->logFindings($results);
 
