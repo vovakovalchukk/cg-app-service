@@ -420,20 +420,33 @@ use CG\Controllers\Ekm\Registration\Entity as EkmRegistrationController;
 use CG\Controllers\Ekm\Registration\Collection as EkmRegistrationCollectionController;
 use CG\Stdlib\Sites;
 
+// Billing\Discount
+use CG\Billing\Discount\StorageInterface as BillingDiscountStorage;
+use CG\Billing\Discount\Storage\Api as BillingDiscountApiStorage;
+
 // Billing\Licence
-use CG\Billing\Licence\Service as BillingLicenceService;
+use CG\Billing\Licence\StorageInterface as BillingLicenceStorage;
 use CG\Billing\Licence\Storage\Api as BillingLicenceApiStorage;
 
 // Billing\Package
-use CG\Billing\Package\Service as BillingPackageService;
+use CG\Billing\Package\StorageInterface as BillingPackageStorage;
 use CG\Billing\Package\Storage\Api as BillingPackageApiStorage;
 
 // Billing\Subscription
+use CG\Billing\Subscription\StorageInterface as BillingSubscriptionStorage;
 use CG\Billing\Subscription\Storage\Api as BillingSubscriptionApiStorage;
 
 // Billing\SubscriptionDiscount
-use CG\Billing\SubscriptionDiscount\Service as BillingSubscriptionDiscountService;
+use CG\Billing\SubscriptionDiscount\StorageInterface as BillingSubscriptionDiscountStorage;
 use CG\Billing\SubscriptionDiscount\Storage\Api as BillingSubscriptionDiscountApiStorage;
+
+// Billing\Transaction
+use CG\Billing\Transaction\StorageInterface as BillingTransactionStorage;
+use CG\Billing\Transaction\Storage\Api as BillingTransactionApiStorage;
+
+// Billing\BillingWindow
+use CG\Billing\BillingWindow\StorageInterface as BillingWindowStorage;
+use CG\Billing\BillingWindow\Storage\Api as BillingWindowStorageApi;
 
 $config = array(
     'di' => array(
@@ -1621,8 +1634,7 @@ $config = array(
             ],
             FindIncorrectlyAllocatedStockCommand::class => [
                 'parameter' => [
-                    'sqlClient' => 'ReadSql',
-                    'subscriptionClient' => BillingSubscriptionApiStorage::class
+                    'sqlClient' => 'ReadSql'
                 ]
             ],
             InvoiceEmailerService::class => [
@@ -1671,19 +1683,9 @@ $config = array(
                     'client' => 'billing_guzzle',
                 ],
             ],
-            BillingLicenceService::class => [
-                'parameter' => [
-                    'repository' => BillingLicenceApiStorage::class,
-                ],
-            ],
             BillingPackageApiStorage::class => [
                 'parameter' => [
                     'client' => 'billing_guzzle',
-                ],
-            ],
-            BillingPackageService::class => [
-                'parameter' => [
-                    'repository' => BillingPackageApiStorage::class,
                 ],
             ],
             BillingSubscriptionApiStorage::class => [
@@ -1694,11 +1696,6 @@ $config = array(
             BillingSubscriptionDiscountApiStorage::class => [
                 'parameter' => [
                     'client' => 'billing_guzzle',
-                ],
-            ],
-            BillingSubscriptionDiscountService::class => [
-                'parameter' => [
-                    'repository' => BillingSubscriptionDiscountApiStorage::class,
                 ],
             ],
             Sites::class => [
@@ -1753,7 +1750,14 @@ $config = array(
                 ItemService::class => ItemLockingService::class,
                 ItemInvalidationService::class => ItemLockingService::class,
                 InvoiceMappingSettingsStorage::class => InvoiceMappingSettingsRepository::class,
-                EkmRegistrationStorage::class => EkmRegistrationDb::class
+                EkmRegistrationStorage::class => EkmRegistrationDb::class,
+                BillingDiscountStorage::class => BillingDiscountApiStorage::class,
+                BillingLicenceStorage::class => BillingLicenceApiStorage::class,
+                BillingPackageStorage::class => BillingPackageApiStorage::class,
+                BillingSubscriptionDiscountStorage::class => BillingSubscriptionDiscountApiStorage::class,
+                BillingSubscriptionStorage::class => BillingSubscriptionApiStorage::class,
+                BillingWindowStorage::class => BillingWindowStorageApi::class,
+                BillingTransactionStorage::class => BillingTransactionApiStorage::class
             ]
         )
     )
