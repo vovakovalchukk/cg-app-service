@@ -2,7 +2,7 @@
 namespace CG\Stock\Command;
 
 use CG\Billing\Subscription\Collection as SubscriptionCollection;
-use CG\Billing\Subscription\Storage\Api as SubscriptionClient;
+use CG\Billing\Subscription\Service as SubscriptionService;
 use CG\Cilex\ModulusAwareInterface;
 use CG\Cilex\ModulusTrait;
 use CG\Stdlib\DateTime;
@@ -22,12 +22,12 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
 
     /** @var Sql */
     protected $sqlClient;
-    protected $subscriptionClient;
+    protected $subscriptionService;
     
-    public function __construct(Sql $sqlClient, SubscriptionClient $subscriptionClient)
+    public function __construct(Sql $sqlClient, SubscriptionService $subscriptionService)
     {
         $this->sqlClient = $sqlClient;
-        $this->subscriptionClient = $subscriptionClient;
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function findOverAllocated($organisationUnitId = null)
@@ -184,7 +184,7 @@ EOF;
     protected function getActiveSubscriptions($organisationUnitId = null): SubscriptionCollection
     {
         $now = (new DateTime('now'))->resetTime();
-        $subscriptions = $this->subscriptionClient->fetchCollectionByPagination(
+        $subscriptions = $this->subscriptionService->fetchCollectionByPagination(
             'all',
             1,
             [],
