@@ -43,6 +43,9 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
     public function findIncorrectlyAllocated($operator = '!=', $organisationUnitId = null)
     {
         $subscriptions = $this->getActiveSubscriptions($organisationUnitId);
+        if (is_null($organisationUnitId)) {
+            $this->filterCollection($subscriptions);
+        }
         $organisationUnitIds = $this->getOrganisationUnitIdsFromSubscriptions($subscriptions);
         if (empty($organisationUnitIds)) {
             $this->logNotice('No active organisation units to process - exiting', [], static::LOG_CODE);
