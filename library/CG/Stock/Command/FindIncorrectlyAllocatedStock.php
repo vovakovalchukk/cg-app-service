@@ -81,7 +81,7 @@ LEFT JOIN (
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
-	AND order.rootOrganisationUnitId IN ({$organisationUnitIdString})
+	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
     calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
