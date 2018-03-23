@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f86c930602d29b80be343669be00c7d5",
+    "content-hash": "06fc641942de4150c1f327e1a38bf2c1",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -589,25 +589,24 @@
         },
         {
             "name": "channelgrabber/cilex",
-            "version": "1.1.5",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "f9886fc08966e4a08a97ef114c6d850b112a0255"
+                "reference": "687ce842ff1e52019d495382cf4e07ab16dfa124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.1.5-0703c9.zip",
-                "reference": "f9886fc08966e4a08a97ef114c6d850b112a0255",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-dev-CGIV-9328-CleanupLogFields-e06a2b.zip",
+                "reference": "687ce842ff1e52019d495382cf4e07ab16dfa124",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/di": ">=1.0.1",
-                "channelgrabber/http": ">=1.2.29, <2.0.0",
+                "channelgrabber/http": "dev-CGIV-9328-CleanupLogFields as 1.3.32",
                 "channelgrabber/log": ">=1.5.0,<3.0.0",
-                "channelgrabber/stdlib": ">=2.4.1,<3.0.0",
+                "channelgrabber/stdlib": "dev-CGIV-9328-CleanupLogFields as 2.15.0",
                 "cilex/cilex": "1.0.1",
-                "php": ">=5.4.0",
+                "php": ">=7.1",
                 "symfony/event-dispatcher": "~2.1",
                 "zendframework/zend-di": ">=2.2.5,<3.0.0",
                 "zendframework/zend-eventmanager": ">=2.2.5,<3.0.0"
@@ -623,7 +622,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-07-12T12:50:17+00:00"
+            "time": "2018-03-23T11:38:38+00:00"
         },
         {
             "name": "channelgrabber/communication",
@@ -1189,16 +1188,16 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.31",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "f4e10832ee50f01ff6e7981c8aacbc350d8bd11a"
+                "reference": "e86937dba0ca93e36897736b366773b7076ac2e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.31-2107c3.zip",
-                "reference": "f4e10832ee50f01ff6e7981c8aacbc350d8bd11a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-dev-CGIV-9328-CleanupLogFields-6ab1ee.zip",
+                "reference": "e86937dba0ca93e36897736b366773b7076ac2e7",
                 "shasum": null
             },
             "require": {
@@ -1206,7 +1205,7 @@
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/stats": ">=1.0.6",
-                "channelgrabber/stdlib": "^2.12.26",
+                "channelgrabber/stdlib": "dev-CGIV-9328-CleanupLogFields as 2.15.0",
                 "ext-http": "*",
                 "ext-memcached": "*",
                 "guzzle/guzzle": "~3.7",
@@ -1243,7 +1242,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-07-21T08:39:32+00:00"
+            "time": "2018-03-23T10:00:15+00:00"
         },
         {
             "name": "channelgrabber/image",
@@ -1476,23 +1475,23 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.2.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "e198ff75cf590c970e77725cfef8143dcdb16df3"
+                "reference": "2b4ccd72c8c8b3fbf804f4a33b533a2827fd2dcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.2.0-2107ad.zip",
-                "reference": "e198ff75cf590c970e77725cfef8143dcdb16df3",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-dev-CGIV-9328-CleanupLogFields-908f08.zip",
+                "reference": "2b4ccd72c8c8b3fbf804f4a33b533a2827fd2dcc",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": "^2.14.1",
+                "channelgrabber/stdlib": "dev-CGIV-9328-CleanupLogFields as 2.15.0",
                 "channelgrabber/validation": ">=1.1.0",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=7.1",
@@ -1519,7 +1518,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-29T15:37:50+00:00"
+            "time": "2018-03-23T09:46:32+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -2473,41 +2472,44 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.13.30",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "697adbb6c3bc1c4e467a45137e997180f30c2c46"
+                "reference": "c1d66060c3f5905256d66fd9f6265ee620e42240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-1.13.30-467460.zip",
-                "reference": "697adbb6c3bc1c4e467a45137e997180f30c2c46",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-slim-dev-CGIV-9328-CleanupLogFields-97b288.zip",
+                "reference": "c1d66060c3f5905256d66fd9f6265ee620e42240",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
+                "channelgrabber/cilex": "dev-CGIV-9328-CleanupLogFields as 1.2.0-dev",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/etag": "^1.5.4",
-                "channelgrabber/http": "^1.3.27",
-                "channelgrabber/log": ">=2.0.6,<3.0.0",
+                "channelgrabber/http": "dev-CGIV-9328-CleanupLogFields as 1.3.32",
+                "channelgrabber/log": "dev-CGIV-9328-CleanupLogFields as 2.2.1",
                 "channelgrabber/permission": "^1.0.1",
                 "channelgrabber/purge": "^1.0.4.1",
-                "channelgrabber/stdlib": "^2.12.36.1",
+                "channelgrabber/stdlib": "dev-CGIV-9328-CleanupLogFields as 2.15.0",
                 "channelgrabber/transaction": ">=1.1.3, <2.0.0",
                 "channelgrabber/usage": ">=1.0.5",
                 "channelgrabber/usage-check": "^1.0.0",
                 "channelgrabber/validation": "^1.2.11",
                 "channelgrabber/vnderror": ">=1.0.0",
+                "channelgrabber/zf2-stdlib": "dev-CGIV-9328-CleanupLogFields as 1.3.0-dev",
                 "cilex/cilex": "1.0.1",
                 "league/oauth2-server": "~4.1.3",
                 "nocarrier/hal": "~0.9.4",
-                "php": ">=5.4.0",
+                "php": ">=7.1",
                 "php-jsonpatch/php-jsonpatch": "~1.2.3",
                 "rhumsaa/vnderror": "1.0.0",
                 "slim/slim": "^2.3.0",
-                "zendframework/zend-eventmanager": ">=2.2.5,<3.0"
+                "zendframework/zend-di": "^2.2.5",
+                "zendframework/zend-eventmanager": "^2.2.5"
             },
             "replace": {
                 "channelgrabber/slim-hal": "<=1.0.3"
@@ -2515,7 +2517,7 @@
             "require-dev": {
                 "phpunit/phpunit": "3.7.*"
             },
-            "type": "di-definition",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-develop": "1.x-dev"
@@ -2537,7 +2539,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-05-12T14:23:54+00:00"
+            "time": "2018-03-23T11:58:04+00:00"
         },
         {
             "name": "channelgrabber/spork",
@@ -2626,16 +2628,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.14.2",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "f20d81f2bfbf364b44fbf133e630e8788b6509c6"
+                "reference": "cc6ebde4aa48fce31b36c489ceeb554a2735ae9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.14.2-2cd688.zip",
-                "reference": "f20d81f2bfbf364b44fbf133e630e8788b6509c6",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-dev-CGIV-9328-CleanupLogFields-ea9fe8.zip",
+                "reference": "cc6ebde4aa48fce31b36c489ceeb554a2735ae9b",
                 "shasum": null
             },
             "require": {
@@ -2645,7 +2647,11 @@
                 "zendframework/zend-db": ">=2.2,<3.0"
             },
             "conflict": {
-                "channelgrabber/log": "<2.2.0"
+                "channelgrabber/cilex": "<1.2.0",
+                "channelgrabber/http": "<1.3.32",
+                "channelgrabber/log": "<2.2.0",
+                "channelgrabber/slim": "<1.14.0",
+                "channelgrabber/zf2-stdlib": "<1.3.0"
             },
             "provide": {
                 "ext-mcrypt": "*"
@@ -2679,7 +2685,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-02-28T09:34:22+00:00"
+            "time": "2018-03-23T11:40:17+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -3293,22 +3299,22 @@
         },
         {
             "name": "channelgrabber/zf2-stdlib",
-            "version": "1.2.2",
+            "version": "dev-CGIV-9328-CleanupLogFields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgzf2stdlib.git",
-                "reference": "6c312fb57f1bbba235b232dd0882880b980d6acd"
+                "reference": "bdf10c8047119bb319a761abf2d505c5aeb3009e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.2.2-f2c02a.zip",
-                "reference": "6c312fb57f1bbba235b232dd0882880b980d6acd",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-dev-CGIV-9328-CleanupLogFields-6e3813.zip",
+                "reference": "bdf10c8047119bb319a761abf2d505c5aeb3009e",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.1",
-                "channelgrabber/stdlib": "^2.10.13",
-                "composer/composer": "@dev",
+                "channelgrabber/stdlib": "dev-CGIV-9328-CleanupLogFields as 2.15.0",
+                "php": ">=7.1",
                 "zendframework/zend-cache": "^2.2",
                 "zendframework/zend-db": "^2.2",
                 "zendframework/zend-eventmanager": "^2.2",
@@ -3338,7 +3344,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-08-12T08:13:48+00:00"
+            "time": "2018-03-23T11:35:41+00:00"
         },
         {
             "name": "cilex/cilex",
@@ -3749,7 +3755,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8506,7 +8512,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Mink/zipball/0769e6d9726c140a54dbf827a438c0f9912749fe",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-0769e6d9726c140a54dbf827a438c0f9912749fe-zip-ae4f3d.zip",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "shasum": ""
             },
@@ -8549,6 +8555,11 @@
                 "testing",
                 "web"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:39:27+00:00"
         },
         {
@@ -8561,7 +8572,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/63960c8fcad4529faad1ff33e950217980baa64c",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-browserkit-driver-63960c8fcad4529faad1ff33e950217980baa64c-zip-dbf956.zip",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c",
                 "shasum": ""
             },
@@ -8604,6 +8615,11 @@
                 "browser",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:46:30+00:00"
         },
         {
@@ -8616,7 +8632,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/fa1b073b48761464feb0b05e6825da44b20118d8",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-goutte-driver-fa1b073b48761464feb0b05e6825da44b20118d8-zip-3f436f.zip",
                 "reference": "fa1b073b48761464feb0b05e6825da44b20118d8",
                 "shasum": ""
             },
@@ -8655,6 +8671,11 @@
                 "headless",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-07-03T18:43:54+00:00"
         },
         {
@@ -8667,7 +8688,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/bcf1b537de37db6db0822d9e7bd97e600fd7a476",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-selenium2-driver-bcf1b537de37db6db0822d9e7bd97e600fd7a476-zip-16355d.zip",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "shasum": ""
             },
@@ -8713,6 +8734,11 @@
                 "testing",
                 "webdriver"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-06-02T19:09:45+00:00"
         },
         {
@@ -8861,7 +8887,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/36bf555115da4cb03b131b4c04b681a75acd47d1",
+                "url": "https://composer.build.channelgrabber.com/dist/facebook-webdriver-36bf555115da4cb03b131b4c04b681a75acd47d1-zip-70c67f.zip",
                 "reference": "36bf555115da4cb03b131b4c04b681a75acd47d1",
                 "shasum": ""
             },
@@ -8880,6 +8906,11 @@
             ],
             "description": "A php client for WebDriver",
             "homepage": "https://github.com/facebook/php-webdriver",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-10-15T05:25:07+00:00"
         },
         {
@@ -8892,7 +8923,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/47a6019553a7a5b42d35493276ffc2c9252c53d5",
+                "url": "https://composer.build.channelgrabber.com/dist/instaclick-php-webdriver-47a6019553a7a5b42d35493276ffc2c9252c53d5-zip-403190.zip",
                 "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5",
                 "shasum": ""
             },
@@ -8927,7 +8958,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -8938,6 +8969,11 @@
                 "webdriver",
                 "webtest"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-10-04T15:03:51+00:00"
         },
         {
@@ -9409,7 +9445,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-php-diff-30e103d19519fe678ae64a60d77884ef3d71b28a-zip-b63c58.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -9448,7 +9484,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-phpspec-61712147412cb647b6cb68b19833a60bfda759a1-zip-6bc9f9.zip",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -10725,10 +10761,53 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.2.0",
+            "alias_normalized": "1.2.0.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/cilex"
+        },
+        {
+            "alias": "1.3.32",
+            "alias_normalized": "1.3.32.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/http"
+        },
+        {
+            "alias": "2.2.1",
+            "alias_normalized": "2.2.1.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/log"
+        },
+        {
+            "alias": "1.14.0",
+            "alias_normalized": "1.14.0.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/slim"
+        },
+        {
+            "alias": "2.15.0",
+            "alias_normalized": "2.15.0.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/stdlib"
+        },
+        {
+            "alias": "1.3.0",
+            "alias_normalized": "1.3.0.0",
+            "version": "dev-CGIV-9328-CleanupLogFields",
+            "package": "channelgrabber/zf2-stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cilex": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/http": 20,
+        "channelgrabber/log": 20,
+        "channelgrabber/slim": 20,
+        "channelgrabber/stdlib": 20,
+        "channelgrabber/zf2-stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
