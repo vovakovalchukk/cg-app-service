@@ -43,6 +43,9 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
     public function findIncorrectlyAllocated($operator = '!=', $organisationUnitId = null)
     {
         $subscriptions = $this->getActiveSubscriptions($organisationUnitId);
+        if (is_null($organisationUnitId)) {
+            $this->filterCollection($subscriptions);
+        }
         $organisationUnitIds = $this->getOrganisationUnitIdsFromSubscriptions($subscriptions);
         if (empty($organisationUnitIds)) {
             $this->logNotice('No active organisation units to process - exiting', [], static::LOG_CODE);
@@ -78,7 +81,7 @@ LEFT JOIN (
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
-	AND order.rootOrganisationUnitId IN ({$organisationUnitIdString})
+	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
     calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
