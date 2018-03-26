@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "957c349b94207c51d20af2bd3f453d5b",
+    "content-hash": "3f35cc82848954b12f18a1123bbe65fb",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1619,16 +1619,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-9185-missing_tag_in_order",
+            "version": "1.38.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "91aa6dc5bad981a94a5003bd2453545a67c71592"
+                "reference": "f5e4bada68be02412fdb704daf562dc823cb0c3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9185-missing_tag_in_order-8d4c88.zip",
-                "reference": "91aa6dc5bad981a94a5003bd2453545a67c71592",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.38.5-6a60ac.zip",
+                "reference": "f5e4bada68be02412fdb704daf562dc823cb0c3d",
                 "shasum": null
             },
             "require": {
@@ -1704,7 +1704,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-03-23T09:29:53+00:00"
+            "time": "2018-03-26T12:39:36+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2424,16 +2424,16 @@
         },
         {
             "name": "channelgrabber/shopify",
-            "version": "dev-CGIV-9185-missing_tag_in_order",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-shopify.git",
-                "reference": "f4217082ce88cedb776e24295b1e68162aca91d7"
+                "reference": "e15eacf3321effe75f2a6bd0fc08d160222c47e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-dev-CGIV-9185-missing_tag_in_order-9e81c9.zip",
-                "reference": "f4217082ce88cedb776e24295b1e68162aca91d7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-1.2.1-1bfc58.zip",
+                "reference": "e15eacf3321effe75f2a6bd0fc08d160222c47e4",
                 "shasum": null
             },
             "require": {
@@ -2442,7 +2442,7 @@
                 "channelgrabber/gearman": "^1.2.20",
                 "channelgrabber/listing": "^1.13.0",
                 "channelgrabber/log": "^2.0.27",
-                "channelgrabber/order": "dev-CGIV-9185-missing_tag_in_order as 1.38.5",
+                "channelgrabber/order": "^1.38.5",
                 "channelgrabber/product": "^1.11.4",
                 "channelgrabber/stdlib": "^2.12.33",
                 "channelgrabber/webhook-framework": "^1.0.0",
@@ -2471,7 +2471,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-03-23T09:35:15+00:00"
+            "time": "2018-03-26T12:42:16+00:00"
         },
         {
             "name": "channelgrabber/slim",
@@ -3751,7 +3751,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8806,7 +8806,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -10727,25 +10727,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.38.5",
-            "alias_normalized": "1.38.5.0",
-            "version": "dev-CGIV-9185-missing_tag_in_order",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.2.1",
-            "alias_normalized": "1.2.1.0",
-            "version": "dev-CGIV-9185-missing_tag_in_order",
-            "package": "channelgrabber/shopify"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/shopify": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
