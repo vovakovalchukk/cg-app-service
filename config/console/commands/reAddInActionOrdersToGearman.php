@@ -63,7 +63,7 @@ return [
                 ->setPending(false)
                 ->setLimit('all');
 
-            $accountCollection = $accountService->fetchByFilter($accountFilter);
+            $accountCollection = $accountService->fetchByFilter($accountFilter, true);
 
             foreach ($orderArray as $order) {
                 $account = $accountCollection->getById($order->getAccountId());
