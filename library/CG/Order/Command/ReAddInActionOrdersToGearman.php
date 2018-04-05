@@ -59,7 +59,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface
             $orderArray[] = $order;
         }
 
-        $this->logDebug('Found %s orders in actionable status', [$orders->count()], static::LOG_CODE);
+        $this->logDebug('Found %s orders in actionable status', [count($orderArray)], static::LOG_CODE);
 
         $accounts = $this->fetchAccounts($accountIdArray);
 
