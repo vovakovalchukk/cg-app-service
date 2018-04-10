@@ -7,7 +7,12 @@ use CG\Product\Detail\Filter as Filter;
 use CG\Product\Detail\StorageInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
+use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Expression;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -62,24 +67,62 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function getSelect()
+    protected function saveEntity($entity)
     {
-        return $this->getReadSql()->select('productDetail');
+        /** @var ProductDetail $entity */
+        $entity = parent::saveEntity($entity);
+        $this->saveCategoryTemplateIds($entity->getId(), $entity->getCategoryTemplateIds());
+        return $entity;
     }
 
-    protected function getInsert()
+    protected function saveCategoryTemplateIds(int $id, array $categoryTemplateIds)
     {
-        return $this->getWriteSql()->insert('productDetail');
+        $delete = $this->getDelete('productCategoryTemplate')->where(['productId' => $id]);
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+
+        foreach ($categoryTemplateIds as $categoryTemplateId) {
+            $insert = $this->getInsert('productCategoryTemplate')->values([
+                'productId' => $id,
+                'categoryTemplateId' => $categoryTemplateId,
+            ]);
+            $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        }
     }
 
-    protected function getUpdate()
+    protected function getEntityArray($entity)
     {
-        return $this->getWriteSql()->update('productDetail');
+        $array = parent::getEntityArray($entity);
+        unset($array['categoryTemplateIds']);
+        return $array;
     }
 
-    protected function getDelete()
+    protected function getSelect(): Select
     {
-        return $this->getWriteSql()->delete('productDetail');
+        /** @var Select $select */
+        $select = $this->getReadSql()->select('productDetail');
+        $select->join(
+            'productCategoryTemplate',
+            'productDetail.id = productCategoryTemplate.productId',
+            ['categoryTemplateIds' => new Expression('GROUP_CONCAT(? SEPARATOR ",")', ['productCategoryTemplate.categoryTemplateId'], [Expression::TYPE_IDENTIFIER])],
+            Select::JOIN_LEFT
+        );
+        $select->group('productDetail.id');
+        return $select;
+    }
+
+    protected function getInsert($table = 'productDetail'): Insert
+    {
+        return $this->getWriteSql()->insert($table);
+    }
+
+    protected function getUpdate($table = 'productDetail'): Update
+    {
+        return $this->getWriteSql()->update($table);
+    }
+
+    protected function getDelete($table = 'productDetail'): Delete
+    {
+        return $this->getWriteSql()->delete($table);
     }
 
     public function getEntityClass()

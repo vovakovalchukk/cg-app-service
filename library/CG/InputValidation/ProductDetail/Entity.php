@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\ProductDetail;
 
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
@@ -94,6 +95,21 @@ class Entity implements RulesInterface
                 'name'       => 'condition',
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
+            ],
+            'categoryTemplateIds' => [
+                'name' => 'categoryTemplateIds',
+                'required' => false,
+                'validators' => [new ArrayOfIntegersValidator(new IntegerValidator(), 'categoryTemplateIds')]
+            ],
+            'upc' => [
+                'name' => 'upc',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 12, 'max' => 12])]
+            ],
+            'isbn' => [
+                'name' => 'isbn',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 13, 'max' => 13])]
             ],
         ];
     }

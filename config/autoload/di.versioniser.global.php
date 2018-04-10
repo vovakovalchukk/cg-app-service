@@ -110,6 +110,8 @@ return [
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductDetailCollection_1' => ProductDetailCollection\Versioniser1::class,
                 'Versioniser_ProductDetailEntity_1' => ProductDetailEntity\Versioniser1::class,
+                'Versioniser_ProductDetailCollection_2' => ProductDetailCollection\Versioniser2::class,
+                'Versioniser_ProductDetailEntity_2' => ProductDetailEntity\Versioniser2::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,

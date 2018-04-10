@@ -3,13 +3,13 @@ namespace CG\Slim\Versioning\ProductDetailCollection;
 
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
-use CG\Slim\Versioning\ProductDetailEntity\Versioniser1 as EntityVersioniser1;
 
 class Versioniser1 implements VersioniserInterface
 {
+    /** @var VersioniserInterface */
     protected $entityVersioner;
 
-    public function __construct(EntityVersioniser1 $entityVersioner)
+    public function __construct(VersioniserInterface $entityVersioner)
     {
         $this->entityVersioner = $entityVersioner;
     }
