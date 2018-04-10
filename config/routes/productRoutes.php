@@ -23,6 +23,14 @@ use CG\Product\Detail\Entity as ProductDetailEntity;
 use CG\Product\Detail\Mapper as ProductDetailMapper;
 use CG\Product\Detail\RestService as ProductDetailService;
 
+use CG\Controllers\ProductChannelDetail\ProductChannelDetail as ProductChannelDetailController;
+use CG\Controllers\ProductChannelDetail\ProductChannelDetail\Collection as ProductChannelDetailCollectionController;
+use CG\InputValidation\ProductChannelDetail\Entity as ProductChannelDetailEntityValidation;
+use CG\InputValidation\ProductChannelDetail\Filter as ProductChannelDetailCollectionValidation;
+use CG\Product\ChannelDetail\Entity as ProductChannelDetailEntity;
+use CG\Product\ChannelDetail\Mapper as ProductChannelDetailMapper;
+use CG\Product\ChannelDetail\Service as ProductChannelDetailService;
+
 use CG\Controllers\ProductLink\Entity as ProductLinkController;
 use CG\Controllers\ProductLink\Collection as ProductLinkCollectionController;
 use CG\InputValidation\ProductLink\Entity as ProductLinkEntityValidation;
@@ -164,6 +172,45 @@ return [
             'serviceClass' => ProductDetailService::class
         ],
         'version' => new Version(1, 3)
+    ],
+    '/productChannelDetail' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductChannelDetailCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductChannelDetailCollection',
+        'entityRoute' => '/productChannelDetail/:productChannelDetailId',
+        'validation' => [
+            'filterRules' => ProductChannelDetailCollectionValidation::class,
+            'dataRules' => ProductChannelDetailEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productChannelDetail/:productChannelDetailId' => [
+        'controllers' => function($productChannelDetailId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductChannelDetailController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productChannelDetailId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductChannelDetailEntity',
+        'validation' => [
+            'dataRules' => ProductChannelDetailEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ProductChannelDetailMapper::class,
+            'entityClass' => ProductChannelDetailEntity::class,
+            'serviceClass' => ProductChannelDetailService::class
+        ],
+        'version' => new Version(1, 1)
     ],
     '/productLink' => [
         'controllers' => function() use ($di, $app) {
