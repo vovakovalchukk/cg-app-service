@@ -57,6 +57,21 @@ class Filter implements RulesInterface
                     'required'   => false,
                     'validators' => [new IsArrayValidator(['name' => 'asin'])]
                 ],
+                'categoryTemplateId' => [
+                    'name' => 'categoryTemplateId',
+                    'required' => false,
+                    'validators' => [new ArrayOfIntegersValidator(new IntegerValidator(), 'categoryTemplateId')]
+                ],
+                'upc' => [
+                    'name'=> 'upc',
+                    'required'=> false,
+                    'validators'=> [new IsArrayValidator(['name' => 'upc'])]
+                ],
+                'isbn' => [
+                    'name'=> 'isbn',
+                    'required'=> false,
+                    'validators'=> [new IsArrayValidator(['name' => 'isbn'])]
+                ],
             ]
         );
     }

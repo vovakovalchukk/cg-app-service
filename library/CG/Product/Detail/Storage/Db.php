@@ -5,6 +5,7 @@ use CG\Product\Detail\Collection;
 use CG\Product\Detail\Entity as ProductDetail;
 use CG\Product\Detail\Filter as Filter;
 use CG\Product\Detail\StorageInterface;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Delete;
@@ -20,7 +21,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         try {
             $query = $this->buildFilterQuery($filter);
-            $select = $this->getSelect()->where($query);
+            $select = $this->getSelect()->quantifier(Select::QUANTIFIER_DISTINCT)->columns(['id'])->where($query);
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -28,10 +29,19 @@ class Db extends DbAbstract implements StorageInterface
                     ->offset($offset);
             }
 
+            $ids = array_column(
+                iterator_to_array($this->getReadSql()->prepareStatementForSqlObject($select)->execute()),
+                'id'
+            );
+
+            if (empty($ids)) {
+                throw new NotFound('No matching ProductDetails found matching requested filters');
+            }
+
             return $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
-                $select,
+                $this->getSelect()->where(['id' => $ids]),
                 $this->getMapper()
             );
 
@@ -63,6 +73,15 @@ class Db extends DbAbstract implements StorageInterface
         }
         if (!empty($filter->getAsin())) {
             $query['productDetail.asin'] = $filter->getAsin();
+        }
+        if (!empty($filter->getCategoryTemplateId())) {
+            $query['productCategoryTemplate.categoryTemplateId'] = $filter->getCategoryTemplateId();
+        }
+        if (!empty($filter->getAsin())) {
+            $query['productDetail.asin'] = $filter->getAsin();
+        }
+        if (!empty($filter->getIsbn())) {
+            $query['productDetail.isbn'] = $filter->getIsbn();
         }
         return $query;
     }
