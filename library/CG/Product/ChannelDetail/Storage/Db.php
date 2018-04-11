@@ -88,6 +88,18 @@ class Db extends DbAbstract implements StorageInterface
     /**
      * @param ProductChannelDetail $entity
      */
+    protected function updateEntity($entity)
+    {
+        $update = $this->getUpdate()->set($this->getEntityArray($entity))->where([
+            'productId' => $entity->getProductId(),
+            'channel' => $entity->getChannel(),
+        ]);
+        $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
+    }
+
+    /**
+     * @param ProductChannelDetail $entity
+     */
     public function remove($entity)
     {
         $this->removeExternal($entity);
