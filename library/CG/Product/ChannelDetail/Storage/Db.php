@@ -5,6 +5,7 @@ use CG\Product\ChannelDetail\Collection;
 use CG\Product\ChannelDetail\Entity as ProductChannelDetail;
 use CG\Product\ChannelDetail\Filter;
 use CG\Product\ChannelDetail\Mapper;
+use CG\Product\ChannelDetail\Storage\External\Factory as ExternalStorageFactory;
 use CG\Product\ChannelDetail\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
@@ -19,9 +20,36 @@ use Zend\Db\Sql\Update;
 
 class Db extends DbAbstract implements StorageInterface
 {
-    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Mapper $mapper)
-    {
+    /** @var ExternalStorageFactory */
+    protected $externalStorageFactory;
+
+    public function __construct(
+        Sql $readSql,
+        Sql $fastReadSql,
+        Sql $writeSql,
+        Mapper $mapper,
+        ExternalStorageFactory $externalStorageFactory
+    ) {
         parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+        $this->externalStorageFactory = $externalStorageFactory;
+    }
+
+    public function fetch($id)
+    {
+        /** @var ProductChannelDetail $entity */
+        $entity = parent::fetch($id);
+        $this->fetchExternal($entity);
+        return $entity;
+    }
+
+    protected function fetchExternal(ProductChannelDetail $entity)
+    {
+        $entity->setExternal(
+            $this
+                ->externalStorageFactory
+                ->getStorageForChannel($entity->getChannel())
+                ->fetch($entity->getProductId())
+        );
     }
 
     /**
@@ -35,7 +63,16 @@ class Db extends DbAbstract implements StorageInterface
         } catch (NotFound $exception) {
             $this->insertEntity($entity);
         }
+        $this->saveExternal($entity);
         return $entity;
+    }
+
+    protected function saveExternal(ProductChannelDetail $entity)
+    {
+        $this
+            ->externalStorageFactory
+            ->getStorageForChannel($entity->getChannel())
+            ->save($entity->getProductId(), $entity->getExternal());
     }
 
     /**
@@ -53,11 +90,20 @@ class Db extends DbAbstract implements StorageInterface
      */
     public function remove($entity)
     {
+        $this->removeExternal($entity);
         $delete = $this->getDelete()->where([
             'productId' => $entity->getProductId(),
             'channel' => $entity->getChannel(),
         ]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+    }
+
+    protected function removeExternal(ProductChannelDetail $entity)
+    {
+        $this
+            ->externalStorageFactory
+            ->getStorageForChannel($entity->getChannel())
+            ->remove($entity->getProductId());
     }
 
     public function fetchCollectionByFilter(Filter $filter)
@@ -71,7 +117,8 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         try {
-            return $this->fetchPaginatedCollection(
+            /** @var Collection $collection */
+            $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
@@ -79,6 +126,27 @@ class Db extends DbAbstract implements StorageInterface
             );
         } catch (ExceptionInterface $exception) {
             throw new StorageException($exception->getMessage(), $exception->getCode(), $exception);
+        }
+
+        foreach ($collection->getArrayOf('channel') as $channel) {
+            $this->fetchMultipleExternal($channel, $collection->getBy('channel', $channel));
+        }
+
+        return $collection;
+    }
+
+    protected function fetchMultipleExternal(string $channel, Collection $collection)
+    {
+        $externals = $this
+            ->externalStorageFactory
+            ->getStorageForChannel($channel)
+            ->fetchMultiple($collection->getArrayOf('productId'));
+
+        foreach ($externals as $productId => $external) {
+            /** @var ProductChannelDetail $entity */
+            foreach ($collection->getBy('productId', $productId) as $entity) {
+                $entity->setExternal($external);
+            }
         }
     }
 
