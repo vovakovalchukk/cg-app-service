@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\ProductChannelDetail;
+namespace CG\InputValidation\ProductAccountDetail;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
@@ -30,11 +30,11 @@ class Filter implements RulesInterface
                         new ArrayOfIntegersValidator(new IntegerValidator(), 'productId')
                     ]
                 ],
-                'channel' => [
-                    'name' => 'channel',
+                'accountId' => [
+                    'name' => 'accountId',
                     'required' => false,
                     'validators' => [
-                        new IsArrayValidator(['name' => 'channel'])
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
                     ]
                 ],
                 'organisationUnitId' => [

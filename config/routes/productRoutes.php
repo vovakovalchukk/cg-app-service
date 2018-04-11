@@ -31,6 +31,14 @@ use CG\Product\ChannelDetail\Entity as ProductChannelDetailEntity;
 use CG\Product\ChannelDetail\Mapper as ProductChannelDetailMapper;
 use CG\Product\ChannelDetail\Service as ProductChannelDetailService;
 
+use CG\Controllers\ProductAccountDetail\ProductAccountDetail as ProductAccountDetailController;
+use CG\Controllers\ProductAccountDetail\ProductAccountDetail\Collection as ProductAccountDetailCollectionController;
+use CG\InputValidation\ProductAccountDetail\Entity as ProductAccountDetailEntityValidation;
+use CG\InputValidation\ProductAccountDetail\Filter as ProductAccountDetailCollectionValidation;
+use CG\Product\AccountDetail\Entity as ProductAccountDetailEntity;
+use CG\Product\AccountDetail\Mapper as ProductAccountDetailMapper;
+use CG\Product\AccountDetail\Service as ProductAccountDetailService;
+
 use CG\Controllers\ProductLink\Entity as ProductLinkController;
 use CG\Controllers\ProductLink\Collection as ProductLinkCollectionController;
 use CG\InputValidation\ProductLink\Entity as ProductLinkEntityValidation;
@@ -209,6 +217,45 @@ return [
             'mapperClass' => ProductChannelDetailMapper::class,
             'entityClass' => ProductChannelDetailEntity::class,
             'serviceClass' => ProductChannelDetailService::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productAccountDetail' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductAccountDetailCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductAccountDetailCollection',
+        'entityRoute' => '/productAccountDetail/:productAccountDetail',
+        'validation' => [
+            'filterRules' => ProductAccountDetailCollectionValidation::class,
+            'dataRules' => ProductAccountDetailEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productAccountDetail/:productAccountDetail' => [
+        'controllers' => function($productAccountDetail) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductAccountDetailController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productAccountDetail, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductChannelDetailEntity',
+        'validation' => [
+            'dataRules' => ProductAccountDetailEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ProductAccountDetailMapper::class,
+            'entityClass' => ProductAccountDetailEntity::class,
+            'serviceClass' => ProductAccountDetailService::class
         ],
         'version' => new Version(1, 1)
     ],
