@@ -24,12 +24,16 @@ class Collection
 
     protected function getCollection()
     {
-        return $this->getData();
+        return $this->service->fetchCollectionByFilter($this->getFilter($this->getParams()));
     }
 
     public function getData()
     {
-        $params = $this->getParams();
+        return $this->service->fetchCollectionByFilterAsHal($this->getFilter($this->getParams()));
+    }
+
+    protected function getFilter(array $params): Filter
+    {
         return new Filter(
             $params['limit'] ?? 10,
             $params['page'] ?? 1,

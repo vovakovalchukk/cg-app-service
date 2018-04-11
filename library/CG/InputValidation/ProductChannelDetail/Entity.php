@@ -42,7 +42,7 @@ class Entity implements RulesInterface
             ],
             'external' => [
                 'name' => 'external',
-                'required' => true,
+                'required' => false,
                 'validators' => [new IsArrayValidator(['name' => 'external'])]
             ],
         ];
