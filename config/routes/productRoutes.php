@@ -39,6 +39,14 @@ use CG\Product\AccountDetail\Entity as ProductAccountDetailEntity;
 use CG\Product\AccountDetail\Mapper as ProductAccountDetailMapper;
 use CG\Product\AccountDetail\Service as ProductAccountDetailService;
 
+use CG\Controllers\ProductCategoryDetail\ProductCategoryDetail as ProductCategoryDetailController;
+use CG\Controllers\ProductCategoryDetail\ProductCategoryDetail\Collection as ProductCategoryDetailCollectionController;
+use CG\InputValidation\ProductCategoryDetail\Entity as ProductCategoryDetailEntityValidation;
+use CG\InputValidation\ProductCategoryDetail\Filter as ProductCategoryDetailCollectionValidation;
+use CG\Product\CategoryDetail\Entity as ProductCategoryDetailEntity;
+use CG\Product\CategoryDetail\Mapper as ProductCategoryDetailMapper;
+use CG\Product\CategoryDetail\Service as ProductCategoryDetailService;
+
 use CG\Controllers\ProductLink\Entity as ProductLinkController;
 use CG\Controllers\ProductLink\Collection as ProductLinkCollectionController;
 use CG\InputValidation\ProductLink\Entity as ProductLinkEntityValidation;
@@ -231,20 +239,20 @@ return [
         },
         'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
         'name' => 'ProductAccountDetailCollection',
-        'entityRoute' => '/productAccountDetail/:productAccountDetail',
+        'entityRoute' => '/productAccountDetail/:productAccountDetailId',
         'validation' => [
             'filterRules' => ProductAccountDetailCollectionValidation::class,
             'dataRules' => ProductAccountDetailEntityValidation::class
         ],
         'version' => new Version(1, 1)
     ],
-    '/productAccountDetail/:productAccountDetail' => [
-        'controllers' => function($productAccountDetail) use ($di, $app) {
+    '/productAccountDetail/:productAccountDetailId' => [
+        'controllers' => function($productAccountDetailId) use ($di, $app) {
             $method = $app->request()->getMethod();
             $controller = $di->get(ProductAccountDetailController::class);
             $app->view()->set(
                 'RestResponse',
-                $controller->$method($productAccountDetail, $app->request()->getBody())
+                $controller->$method($productAccountDetailId, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -256,6 +264,45 @@ return [
             'mapperClass' => ProductAccountDetailMapper::class,
             'entityClass' => ProductAccountDetailEntity::class,
             'serviceClass' => ProductAccountDetailService::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productCategoryDetail' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductCategoryDetailCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductAccountDetailCollection',
+        'entityRoute' => '/productCategoryDetail/:productCategoryDetailId',
+        'validation' => [
+            'filterRules' => ProductCategoryDetailCollectionValidation::class,
+            'dataRules' => ProductCategoryDetailEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productCategoryDetail/:productCategoryDetailId' => [
+        'controllers' => function($productCategoryDetailId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductCategoryDetailController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productCategoryDetailId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        'name' => 'ProductChannelDetailEntity',
+        'validation' => [
+            'dataRules' => ProductCategoryDetailEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => ProductCategoryDetailMapper::class,
+            'entityClass' => ProductCategoryDetailEntity::class,
+            'serviceClass' => ProductCategoryDetailService::class
         ],
         'version' => new Version(1, 1)
     ],

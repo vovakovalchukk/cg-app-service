@@ -1,12 +1,12 @@
 <?php
-namespace CG\Product\ChannelDetail\Storage;
+namespace CG\Product\CategoryDetail\Storage;
 
-use CG\Product\ChannelDetail\Collection;
-use CG\Product\ChannelDetail\Entity as ProductChannelDetail;
-use CG\Product\ChannelDetail\Filter;
-use CG\Product\ChannelDetail\Mapper;
-use CG\Product\ChannelDetail\Storage\External\Factory as ExternalStorageFactory;
-use CG\Product\ChannelDetail\StorageInterface;
+use CG\Product\CategoryDetail\Collection;
+use CG\Product\CategoryDetail\Entity as ProductCategoryDetail;
+use CG\Product\CategoryDetail\Filter;
+use CG\Product\CategoryDetail\Mapper;
+use CG\Product\CategoryDetail\Storage\External\Factory as ExternalStorageFactory;
+use CG\Product\CategoryDetail\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
@@ -36,24 +36,24 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetch($id)
     {
-        /** @var ProductChannelDetail $entity */
+        /** @var ProductCategoryDetail $entity */
         $entity = parent::fetch($id);
         $this->fetchExternal($entity);
         return $entity;
     }
 
-    protected function fetchExternal(ProductChannelDetail $entity)
+    protected function fetchExternal(ProductCategoryDetail $entity)
     {
         $entity->setExternal(
             $this
                 ->externalStorageFactory
                 ->getStorageForChannel($entity->getChannel())
-                ->fetch($entity->getProductId())
+                ->fetch($entity->getProductId(), $entity->getCategoryId())
         );
     }
 
     /**
-     * @param ProductChannelDetail $entity
+     * @param ProductCategoryDetail $entity
      */
     protected function saveEntity($entity)
     {
@@ -67,16 +67,16 @@ class Db extends DbAbstract implements StorageInterface
         return $entity;
     }
 
-    protected function saveExternal(ProductChannelDetail $entity)
+    protected function saveExternal(ProductCategoryDetail $entity)
     {
         $this
             ->externalStorageFactory
             ->getStorageForChannel($entity->getChannel())
-            ->save($entity->getProductId(), $entity->getExternal());
+            ->save($entity->getProductId(), $entity->getCategoryId(), $entity->getExternal());
     }
 
     /**
-     * @param ProductChannelDetail $entity
+     * @param ProductCategoryDetail $entity
      */
     protected function insertEntity($entity)
     {
@@ -86,36 +86,36 @@ class Db extends DbAbstract implements StorageInterface
     }
 
     /**
-     * @param ProductChannelDetail $entity
+     * @param ProductCategoryDetail $entity
      */
     protected function updateEntity($entity)
     {
         $update = $this->getUpdate()->set($this->getEntityArray($entity))->where([
             'productId' => $entity->getProductId(),
-            'channel' => $entity->getChannel(),
+            'categoryId' => $entity->getCategoryId(),
         ]);
         $this->getWriteSql()->prepareStatementForSqlObject($update)->execute();
     }
 
     /**
-     * @param ProductChannelDetail $entity
+     * @param ProductCategoryDetail $entity
      */
     public function remove($entity)
     {
         $this->removeExternal($entity);
         $delete = $this->getDelete()->where([
             'productId' => $entity->getProductId(),
-            'channel' => $entity->getChannel(),
+            'categoryId' => $entity->getCategoryId(),
         ]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
     }
 
-    protected function removeExternal(ProductChannelDetail $entity)
+    protected function removeExternal(ProductCategoryDetail $entity)
     {
         $this
             ->externalStorageFactory
             ->getStorageForChannel($entity->getChannel())
-            ->remove($entity->getProductId());
+            ->remove($entity->getProductId(), $entity->getCategoryId());
     }
 
     public function fetchCollectionByFilter(Filter $filter)
@@ -149,15 +149,19 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function fetchMultipleExternal(string $channel, Collection $collection)
     {
-        $externals = $this
-            ->externalStorageFactory
-            ->getStorageForChannel($channel)
-            ->fetchMultiple($collection->getArrayOf('productId'));
+        $ids = [];
+        /** @var ProductCategoryDetail $entity */
+        foreach ($collection as $entity) {
+            $ids[] = [$entity->getProductId(), $entity->getCategoryId()];
+        }
 
-        foreach ($externals as $productId => $external) {
-            /** @var ProductChannelDetail $entity */
-            $entity = $collection->getById($productId . '-' . $channel);
-            $entity->setExternal($external);
+        $externals = $this->externalStorageFactory->getStorageForChannel($channel)->fetchMultiple($ids);
+        foreach ($externals as $productId => $categoryExternal) {
+            foreach ($categoryExternal as $categoryId => $external) {
+                /** @var ProductCategoryDetail $entity */
+                $entity = $collection->getById($productId . '-' . $categoryId);
+                $entity->setExternal($external);
+            }
         }
     }
 
@@ -165,16 +169,19 @@ class Db extends DbAbstract implements StorageInterface
     {
         $query = [];
         if (!empty($id = $filter->getId())) {
-            $query['productChannelDetail.id'] = $id;
+            $query['productCategoryDetail.id'] = $id;
         }
         if (!empty($productId = $filter->getProductId())) {
-            $query['productChannelDetail.productId'] = $productId;
+            $query['productCategoryDetail.productId'] = $productId;
+        }
+        if (!empty($categoryId = $filter->getCategoryId())) {
+            $query['productCategoryDetail.categoryId'] = $categoryId;
         }
         if (!empty($channel = $filter->getChannel())) {
-            $query['productChannelDetail.channel'] = $channel;
+            $query['productCategoryDetail.channel'] = $channel;
         }
         if (!empty($organisationUnitId = $filter->getOrganisationUnitId())) {
-            $query['productChannelDetail.organisationUnitId'] = $organisationUnitId;
+            $query['productCategoryDetail.organisationUnitId'] = $organisationUnitId;
         }
         return $query;
     }
@@ -189,31 +196,31 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSelect(): Select
     {
         /** @var Select $select */
-        $select = $this->getReadSql()->select('productChannelDetail');
+        $select = $this->getReadSql()->select('productCategoryDetail');
         $select->columns([
-            'id' => new Expression('CONCAT(?, ?, ?)', ['productId', '-', 'channel'], [Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_IDENTIFIER]),
+            'id' => new Expression('CONCAT(?, ?, ?)', ['productId', '-', 'categoryId'], [Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_IDENTIFIER]),
             Select::SQL_STAR
         ]);
-        return $this->getReadSql()->select(['productChannelDetail' => $select]);
+        return $this->getReadSql()->select(['productCategoryDetail' => $select]);
     }
 
     protected function getInsert(): Insert
     {
-        return $this->getWriteSql()->insert('productChannelDetail');
+        return $this->getWriteSql()->insert('productCategoryDetail');
     }
 
     protected function getUpdate(): Update
     {
-        return $this->getWriteSql()->update('productChannelDetail');
+        return $this->getWriteSql()->update('productCategoryDetail');
     }
 
     protected function getDelete(): Delete
     {
-        return $this->getWriteSql()->delete('productChannelDetail');
+        return $this->getWriteSql()->delete('productCategoryDetail');
     }
 
     public function getEntityClass()
     {
-        return ProductChannelDetail::class;
+        return ProductCategoryDetail::class;
     }
 }
