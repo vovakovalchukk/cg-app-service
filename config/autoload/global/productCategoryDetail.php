@@ -1,4 +1,6 @@
 <?php
+use CG\Ebay\Product\CategoryDetail\External\Storage\Db as EbayDbStorage;
+use CG\Ebay\Product\CategoryDetail\External\StorageInterface as EbayStorage;
 use CG\Product\CategoryDetail\Repository;
 use CG\Product\CategoryDetail\Storage\Cache;
 use CG\Product\CategoryDetail\Storage\Db;
@@ -9,6 +11,7 @@ return [
         'instance' => [
             'preferences' => [
                 StorageInterface::class => Repository::class,
+                EbayStorage::class => EbayDbStorage::class,
             ],
             Repository::class => [
                 'parameters' => [
@@ -20,6 +23,12 @@ return [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                ],
+            ],
+            EbayDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
                     'writeSql' => 'WriteSql',
                 ],
             ],
