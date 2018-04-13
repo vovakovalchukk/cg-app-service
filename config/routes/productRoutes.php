@@ -256,7 +256,7 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-        'name' => 'ProductChannelDetailEntity',
+        'name' => 'ProductAccountDetailEntity',
         'validation' => [
             'dataRules' => ProductAccountDetailEntityValidation::class,
         ],
@@ -277,7 +277,7 @@ return [
             );
         },
         'via' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
-        'name' => 'ProductAccountDetailCollection',
+        'name' => 'ProductCategoryDetailCollection',
         'entityRoute' => '/productCategoryDetail/:productCategoryDetailId',
         'validation' => [
             'filterRules' => ProductCategoryDetailCollectionValidation::class,
@@ -295,7 +295,7 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-        'name' => 'ProductChannelDetailEntity',
+        'name' => 'ProductCategoryDetailEntity',
         'validation' => [
             'dataRules' => ProductCategoryDetailEntityValidation::class,
         ],
