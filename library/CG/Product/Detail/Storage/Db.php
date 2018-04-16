@@ -21,6 +21,10 @@ class Db extends DbAbstract implements StorageInterface
     {
         try {
             $query = $this->buildFilterQuery($filter);
+            $total = $this->fetchEntityCount($query);
+            if ($total == 0) {
+                throw new NotFound('No matching ProductDetails found matching requested filters');
+            }
             $select = $this->getSelect()->quantifier(Select::QUANTIFIER_DISTINCT)->columns(['id'])->where($query);
 
             if ($filter->getLimit() != 'all') {
@@ -38,16 +42,30 @@ class Db extends DbAbstract implements StorageInterface
                 throw new NotFound('No matching ProductDetails found matching requested filters');
             }
 
-            return $this->fetchPaginatedCollection(
+            $productDetails = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $this->getSelect()->where(['id' => $ids]),
                 $this->getMapper()
             );
+            $productDetails->setTotal($total);
+            return $productDetails;
 
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    protected function fetchEntityCount($query)
+    {
+        $select = $this->getReadSql()
+            ->select('productDetail')
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->columns(['count' => new Expression('COUNT(id)')])
+            ->where($query);
+
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        return $results->current()['count'];
     }
 
     protected function buildFilterQuery(Filter $filter)
