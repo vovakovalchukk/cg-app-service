@@ -9,7 +9,7 @@ class ProductDetailExtension extends AbstractOnlineSchemaChange
      */
     public function up()
     {
-        $this->onlineSchemaChange('productDetail', 'ADD COLUMN `upc` VARCHAR(12) NULL, ADD COLUMN `isbn` VARCHAR(13) NULL');
+        $this->onlineSchemaChange('productDetail', 'ADD COLUMN `upc` VARCHAR(12) NULL, ADD COLUMN `isbn` VARCHAR(13) NULL', 200);
         $this
             ->table('productCategoryTemplate', ['id' => false, 'primary_key' => ['productId', 'categoryTemplateId']])
             ->addColumn('productId', 'integer')

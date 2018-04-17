@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "282ba8f491a927697db2d75a75a8d9d7",
+    "content-hash": "e9e0d29c65bf4f71faa205356304ef27",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1739,17 +1739,11 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.3.8.2",
+            "version": "dev-LIS-128-fixing_phinx",
             "source": {
                 "type": "git",
                 "url": "git@github.com:channelgrabber/phinx.git",
-                "reference": "aeaeba35d79ecb3982c9ee2ef6a168231f6eab73"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.8.2-dde0a9.zip",
-                "reference": "aeaeba35d79ecb3982c9ee2ef6a168231f6eab73",
-                "shasum": null
+                "reference": "1f9b1857282d268864e4ca8eab58030510a684ab"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -10739,10 +10733,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.3.9",
+            "alias_normalized": "0.3.9.0",
+            "version": "dev-LIS-128-fixing_phinx",
+            "package": "channelgrabber/phinx"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/phinx": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
