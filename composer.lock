@@ -1965,17 +1965,11 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.12.2",
+            "version": "dev-CGIV-9437-fatal_on_import",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "632786c2772abcfc6e0715d57025d7befe67ec66"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.12.2-225a09.zip",
-                "reference": "632786c2772abcfc6e0715d57025d7befe67ec66",
-                "shasum": null
+                "reference": "670917dfdbf81697e19a4bb77a73cfe3226822f6"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -10739,10 +10733,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.12.3",
+            "alias_normalized": "1.12.3.0",
+            "version": "dev-CGIV-9437-fatal_on_import",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
