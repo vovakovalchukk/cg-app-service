@@ -165,8 +165,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $insert->values(
                 [
                     'categoryTemplateId' => $entity->getId(),
-                    'categoryId' => $accountCategory->getCategory(),
-                    'accountId' => $accountCategory->getAccount(),
+                    'categoryId' => $accountCategory->getCategoryId(),
+                    'accountId' => $accountCategory->getAccountId(),
                     'organisationUnitId' => $entity->getOrganisationUnitId(),
                 ]
             );
