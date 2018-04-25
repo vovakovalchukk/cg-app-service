@@ -39,7 +39,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
-            if (isset($query[static::TABLE_CATEGORIES.'.categoryId'])) {
+            if (isset($query[static::TABLE_CATEGORIES.'.categoryId']) || isset($query[static::TABLE_CATEGORIES.'.accountId'])) {
                 $select->join(static::TABLE_CATEGORIES, static::TABLE_CATEGORIES.'.categoryTemplateId = '.static::TABLE.'.id', []);
                 $select->group(static::TABLE.'.id');
             }
@@ -80,6 +80,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 return !empty($value);
             }
         );
+
         if (isset($query['organisationUnitId'])) {
             $query[static::TABLE.'.organisationUnitId'] = $query['organisationUnitId'];
             unset($query['organisationUnitId']);
