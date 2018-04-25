@@ -37,6 +37,13 @@ class Filter implements RulesInterface
                         new ArrayOfIntegersValidator(new IntegerValidator(), 'categoryId')
                     ]
                 ],
+                'accountId' => [
+                    'name' => 'accountId',
+                    'required' => false,
+                    'validators' => [
+                        new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                    ]
+                ],
                 'search' => [
                     'name' => 'search',
                     'required' => false,
