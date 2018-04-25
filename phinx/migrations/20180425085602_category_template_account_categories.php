@@ -4,18 +4,23 @@ use Phinx\Migration\AbstractMigration;
 
 class CategoryTemplateAccountCategories extends AbstractMigration
 {
-    public function change()
+    public function up()
     {
         $this->execute('DELETE FROM `categoryTemplate`');
 
-        $this->table('categoryTemplateCategory')->drop();
-
-        $this->table('categoryTemplateCategory', ['id' => false, 'primary_key' => ['categoryTemplateId', 'categoryId'], 'collation' => 'utf8_unicode_ci'])
-            ->addColumn('categoryTemplateId', 'integer', ['signed' => false, 'null' => false])
+        $this->table('categoryTemplateCategory')
             ->addColumn('accountId', 'integer', ['signed' => false, 'null' => false])
-            ->addColumn('categoryId', 'integer', ['signed' => false, 'null' => false])
-            ->addColumn('organisationUnitId', 'integer', ['signed' => false, 'null' => false])
+            ->removeIndex(['organisationUnitId', 'categoryId'])
             ->addIndex(['organisationUnitId', 'categoryId', 'accountId'], ['unique' => true])
-            ->create();
+            ->update();
+    }
+
+    public function down()
+    {
+        $this->table('categoryTemplateCategory')
+            ->removeIndex(['organisationUnitId', 'categoryId', 'accountId'], ['unique' => true])
+            ->addIndex(['organisationUnitId', 'categoryId'])
+            ->removeColumn('accountId')
+            ->update();
     }
 }
