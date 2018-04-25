@@ -1971,6 +1971,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
                 "reference": "670917dfdbf81697e19a4bb77a73cfe3226822f6"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9437-fatal_on_import-122ca9.zip",
+                "reference": "670917dfdbf81697e19a4bb77a73cfe3226822f6",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/channel": "^1.32.7",
@@ -2690,16 +2696,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.12.2",
+            "version": "1.12.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "88ea1a3b69601472ac5549af6a3542aa7febef50"
+                "reference": "271fad464e3ad895ee02592405d1fab052aa1e9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.12.2-8127bb.zip",
-                "reference": "88ea1a3b69601472ac5549af6a3542aa7febef50",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.12.3-80ebb6.zip",
+                "reference": "271fad464e3ad895ee02592405d1fab052aa1e9d",
                 "shasum": null
             },
             "require": {
@@ -2753,7 +2759,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-03-21T10:25:15+00:00"
+            "time": "2018-04-25T10:35:46+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
