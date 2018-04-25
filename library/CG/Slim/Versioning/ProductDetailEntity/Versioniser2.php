@@ -26,7 +26,7 @@ class Versioniser2 implements VersioniserInterface
 
         try {
             /** @var ProductDetail $productDetail */
-            $productDetail = $this->service->fetch($params['id']);
+            $productDetail = $this->service->fetch($data['id']);
         } catch (NotFound $exception) {
             // Entity not found so no information to copy
             return;
