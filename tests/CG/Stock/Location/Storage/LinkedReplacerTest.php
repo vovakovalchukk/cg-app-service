@@ -185,7 +185,7 @@ class LinkedReplacerTest extends TestCase
                             }
                         );
                     }
-                    if (!empty($sku = array_fill_keys(array_map('strtolower', $filter->getSku()), true))) {
+                    if (!empty($sku = array_fill_keys(array_map('strtolower', $filter->getSku() ?? []), true))) {
                         $filteredStock = array_filter(
                             $filteredStock,
                             function(Stock $stock) use($sku) {

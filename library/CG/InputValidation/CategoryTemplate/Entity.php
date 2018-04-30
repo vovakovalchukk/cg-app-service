@@ -35,10 +35,10 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
             ],
-            'categoryIds' => [
-                'name' => 'categoryIds',
+            'accounts' => [
+                'name' => 'accounts',
                 'required' => true,
-                'validators' => [new IsArrayValidator(["name" => "categoryIds"])]
+                'validators' => [new IsArrayValidator(["name" => "accountId"])]
             ],
         ];
     }

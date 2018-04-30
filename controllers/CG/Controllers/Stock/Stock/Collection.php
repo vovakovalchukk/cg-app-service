@@ -58,7 +58,7 @@ class Collection
                 $this->getParams('page'),
                 $this->getParams('id') ?: [],
                 $this->getParams('organisationUnitId') ?: [],
-                $this->getParams('sku') ?: [],
+                $this->getParams('sku') ?: null,
                 $this->getParams('locationId') ?: [],
                 $this->getParams('stockMode') ?: []
             )
