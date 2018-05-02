@@ -45,7 +45,6 @@ use CG\Account\Client\PollingWindow\Storage\Api as AccountPollingWindowApiStorag
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
-use CG\Order\Locking\Service as OrderLockingService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -639,13 +638,6 @@ $config = array(
                 )
             ),
             OrderService::class => array(
-                'parameters' => array(
-                    'repository' => OrderPersistentStorage::class,
-                    'storage' => OrderElasticSearchStorage::class,
-                    'filterStorage' => FilterCache::class
-                )
-            ),
-            OrderLockingService::class => array(
                 'parameters' => array(
                     'repository' => OrderPersistentStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
