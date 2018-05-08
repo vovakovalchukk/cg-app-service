@@ -118,7 +118,7 @@ return [
             'filterRules' => FilterTemplateValidation::class,
             'dataRules' => CategoryTemplateValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/categoryTemplate/:id' => [
         'controllers' => function($categoryTemplateId) use ($di, $app) {
@@ -134,7 +134,7 @@ return [
         'validation' => [
             'dataRules' => CategoryTemplateValidation::class,
         ],
-        'version' => new Version(1, 1),
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => CategoryTemplateMapper::class,
             'entityClass' => CategoryTemplate::class,

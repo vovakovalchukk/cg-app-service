@@ -34,7 +34,8 @@ class Collection
                 $this->getParams('id') ?? [],
                 $this->getParams('organisationUnitId') ?? [],
                 $this->getParams('categoryId') ?? [],
-                $this->getParams('search') ?? null
+                $this->getParams('search') ?? null,
+                $this->getParams('accountId') ?? []
             )
         );
     }

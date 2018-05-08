@@ -29,8 +29,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         /** @var Entity $entity */
         $entity = parent::fetch($id);
-        $categoryIds = $this->fetchCategoryIdsForEntity($entity);
-        $entity->setCategoryIds($categoryIds);
+        $accountCategoriesArray = $this->fetchAccountCategoriesForEntity($entity);
+        $entity->setAccountCategoriesFromRawArray($accountCategoriesArray);
         return $entity;
     }
 
@@ -39,7 +39,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
-            if (isset($query[static::TABLE_CATEGORIES.'.categoryId'])) {
+            if (isset($query[static::TABLE_CATEGORIES.'.categoryId']) || isset($query[static::TABLE_CATEGORIES.'.accountId'])) {
                 $select->join(static::TABLE_CATEGORIES, static::TABLE_CATEGORIES.'.categoryTemplateId = '.static::TABLE.'.id', []);
                 $select->group(static::TABLE.'.id');
             }
@@ -57,11 +57,11 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 $select,
                 $this->getMapper()
             );
-            $categoryIdsByTemplate = $this->fetchCategoryIdsForCollection($collection);
-            foreach ($categoryIdsByTemplate as $templateId => $categoryIds) {
+            $accountCategoriesByTemplate = $this->fetchAccountCategoriesForCollection($collection);
+            foreach ($accountCategoriesByTemplate as $templateId => $accountCategories) {
                 /** @var Entity $template */
                 $template = $collection->getById($templateId);
-                $template->setCategoryIds($categoryIds);
+                $template->setAccountCategoriesFromRawArray($accountCategories);
             }
             return $collection;
 
@@ -80,13 +80,18 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 return !empty($value);
             }
         );
+
         if (isset($query['organisationUnitId'])) {
             $query[static::TABLE.'.organisationUnitId'] = $query['organisationUnitId'];
             unset($query['organisationUnitId']);
         }
-        if (isset($query['categoryId'])) {
-            $query[static::TABLE_CATEGORIES.'.categoryId'] = $query['categoryId'];
-            unset($query['categoryId']);
+        if (isset($query[Entity::KEY_CATEGORY_ID])) {
+            $query[static::TABLE_CATEGORIES.'.categoryId'] = $query[Entity::KEY_CATEGORY_ID];
+            unset($query[Entity::KEY_CATEGORY_ID]);
+        }
+        if (isset($query['accountId'])) {
+            $query[static::TABLE_CATEGORIES.'.accountId'] = $query['accountId'];
+            unset($query['accountId']);
         }
         if (isset($query['search'])) {
             $query = array_merge($query, $this->getSearchTermQuery($query['search']));
@@ -109,31 +114,33 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         ];
     }
 
-    protected function fetchCategoryIdsForEntity(Entity $entity): array
+    protected function fetchAccountCategoriesForEntity(Entity $entity): array
     {
-        $categoryIdsByTemplate = $this->fetchCategoryIdsForTemplateIds([$entity->getId()]);
-        if (!isset($categoryIdsByTemplate[$entity->getId()])) {
+        $accountCategoriesByTemplate = $this->fetchAccountCategoriesForTemplateIds([$entity->getId()]);
+        if (!isset($accountCategoriesByTemplate[$entity->getId()])) {
             return [];
         }
-        return $categoryIdsByTemplate[$entity->getId()];
+        return $accountCategoriesByTemplate[$entity->getId()];
     }
 
-    protected function fetchCategoryIdsForCollection(Collection $collection): array
+    protected function fetchAccountCategoriesForCollection(Collection $collection): array
     {
-        return $this->fetchCategoryIdsForTemplateIds($collection->getIds());
+        return $this->fetchAccountCategoriesForTemplateIds($collection->getIds());
     }
 
-    protected function fetchCategoryIdsForTemplateIds(array $templateIds): array
+    protected function fetchAccountCategoriesForTemplateIds(array $templateIds): array
     {
         $categoryRows = $this->fetchAssociatedCategoryIds($templateIds);
-        $categoryIdsByTemplate = [];
+        $accountCategoriesByTemplate = [];
         foreach ($categoryRows as $categoryRow) {
-            if (!isset($categoryIdsByTemplate[$categoryRow['categoryTemplateId']])) {
-                $categoryIdsByTemplate[$categoryRow['categoryTemplateId']] = [];
+            if (!isset($accountCategoriesByTemplate[$categoryRow['categoryTemplateId']])) {
+                $accountCategoriesByTemplate[$categoryRow['categoryTemplateId']] = [];
             }
-            $categoryIdsByTemplate[$categoryRow['categoryTemplateId']][] = $categoryRow['categoryId'];
+            $accountCategoriesByTemplate[$categoryRow['categoryTemplateId']][$categoryRow['accountId']] = [
+                Entity::KEY_CATEGORY_ID => $categoryRow['categoryId']
+            ];
         }
-        return $categoryIdsByTemplate;
+        return $accountCategoriesByTemplate;
     }
 
     protected function fetchAssociatedCategoryIds(array $templateIds): ResultInterface
@@ -150,15 +157,16 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     protected function insertAssociatedCategoryIds(Entity $entity)
     {
-        if (empty($entity->getCategoryIds())) {
+        if (empty($entity->getAccountCategories())) {
             return;
         }
         $insert = $this->getInsert(static::TABLE_CATEGORIES);
-        foreach ($entity->getCategoryIds() as $categoryId) {
+        foreach ($entity->getAccountCategories() as $accountCategory) {
             $insert->values(
                 [
                     'categoryTemplateId' => $entity->getId(),
-                    'categoryId' => $categoryId,
+                    'categoryId' => $accountCategory->getCategoryId(),
+                    'accountId' => $accountCategory->getAccountId(),
                     'organisationUnitId' => $entity->getOrganisationUnitId(),
                 ]
             );
@@ -169,7 +177,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function getEntityArray($entity)
     {
         $array = $entity->toArray();
-        unset($array['categoryIds']);
+        unset($array['accounts']);
         return $array;
     }
 

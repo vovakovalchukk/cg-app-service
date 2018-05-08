@@ -4,14 +4,16 @@ use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
 use CG\Slim\Versioning\CategoryCollection;
 use CG\Slim\Versioning\CategoryEntity;
+use CG\Slim\Versioning\CategoryTemplateCollection;
+use CG\Slim\Versioning\CategoryTemplateEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
 use CG\Slim\Versioning\ListingEntity;
 use CG\Slim\Versioning\ListingStatusHistoryCollection;
 use CG\Slim\Versioning\ListingStatusHistoryEntity;
-use CG\Slim\Versioning\LocationEntity;
 use CG\Slim\Versioning\LocationCollection;
+use CG\Slim\Versioning\LocationEntity;
 use CG\Slim\Versioning\OrderCollection;
 use CG\Slim\Versioning\OrderEntity;
 use CG\Slim\Versioning\OrderItemCollection;
@@ -19,9 +21,9 @@ use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\ProductCollection;
-use CG\Slim\Versioning\ProductEntity;
-use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductDetailCollection;
+use CG\Slim\Versioning\ProductDetailEntity;
+use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -172,6 +174,8 @@ return [
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
                 'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
+                'Versioniser_CategoryTemplateCollection_1' => CategoryTemplateCollection\Versioniser1::class,
+                'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
