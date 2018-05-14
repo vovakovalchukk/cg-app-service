@@ -114,6 +114,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new BooleanValidator(['name' => 'productLinks'])]
             ],
+            'mongoId' => [
+                'name' => 'mongoId',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
