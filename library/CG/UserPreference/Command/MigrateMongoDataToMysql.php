@@ -38,7 +38,7 @@ class MigrateMongoDataToMysql
 
                 foreach ($collection as $entity) {
                     $entity->setMongoId($entity->getId());
-                    $entity->setId(null);
+                    $entity->setId($entity->getId());
                     $this->db->save($entity);
                     $count++;
                 }
