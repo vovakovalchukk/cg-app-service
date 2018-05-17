@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0bc94e375306e4e244a9ab80b6378ec3",
+    "content-hash": "d5e875f7e9dd1b8df9040269e0e70a7c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -156,16 +156,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.25.1",
+            "version": "dev-LIS-226-update-product-with-amazon-data",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "e88a0081f03cec6575509afead96629f1e62c07d"
+                "reference": "79b7b7022dc94362ec13cdab4267e7e818458dda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.25.1-3b771f.zip",
-                "reference": "e88a0081f03cec6575509afead96629f1e62c07d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-LIS-226-update-product-with-amazon-data-2b881c.zip",
+                "reference": "79b7b7022dc94362ec13cdab4267e7e818458dda",
                 "shasum": null
             },
             "require": {
@@ -187,7 +187,7 @@
                 "channelgrabber/log": "^2.1.1",
                 "channelgrabber/order": "^1.34.3",
                 "channelgrabber/predis": "~1.0.12",
-                "channelgrabber/product": "^1.9.0",
+                "channelgrabber/product": "^1.12.2",
                 "channelgrabber/scraper": ">=1.0.2,<2.0.0",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/stats": "^1.0.0",
@@ -225,7 +225,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-16T16:28:53+00:00"
+            "time": "2018-05-17T09:23:25+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -10739,9 +10739,17 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.25.2",
+            "alias_normalized": "1.25.2.0",
+            "version": "dev-LIS-226-update-product-with-amazon-data",
+            "package": "channelgrabber/amazon"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
