@@ -269,6 +269,8 @@ use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
 use CG\Order\Shared\OrderCounts\Storage\Db as OrderCountsDbStorage;
 use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
+use CG\CGLib\Order\OrderCounts\CacheClearerInterface as OrderCountsCacheClearerInterface;
+use CG\CGLib\Nginx\Cache\Invalidator\OrderCounts as OrderCountsCacheClearer;
 
 // Listing
 use CG\Listing\Entity as ListingEntity;
@@ -1749,7 +1751,8 @@ $config = array(
                 BillingSubscriptionDiscountStorage::class => BillingSubscriptionDiscountApiStorage::class,
                 BillingSubscriptionStorage::class => BillingSubscriptionApiStorage::class,
                 BillingWindowStorage::class => BillingWindowStorageApi::class,
-                BillingTransactionStorage::class => BillingTransactionApiStorage::class
+                BillingTransactionStorage::class => BillingTransactionApiStorage::class,
+                OrderCountsCacheClearerInterface::class => OrderCountsCacheClearer::class,
             ]
         )
     )
