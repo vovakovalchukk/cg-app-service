@@ -4,6 +4,8 @@ namespace CG\Amazon\Product\CategoryDetail\External\Storage;
 use CG\Amazon\Product\CategoryDetail\External;
 use CG\Amazon\Product\CategoryDetail\External\StorageInterface;
 use CG\Product\CategoryDetail\ExternalInterface;
+use CG\Stdlib\Storage\Db\DeadlockHandlerTrait;
+use CG\Stdlib\Storage\Db\Zend\TransactionTrait;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Insert;
@@ -13,6 +15,9 @@ use Zend\Db\Sql\Where;
 
 class Db implements StorageInterface
 {
+    use DeadlockHandlerTrait;
+    use TransactionTrait;
+
     /** @var Sql */
     protected $readSql;
     /** @var Sql */
@@ -94,6 +99,11 @@ class Db implements StorageInterface
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
     {
+        $this->startTransactionAndHandleDeadlock([$this, 'saveExternalData'], func_get_args());
+    }
+
+    protected function saveExternalData(int $productId, int $categoryId, ExternalInterface $external): void
+    {
         $this->remove($productId, $categoryId);
 
         $array = $external->toArray();
@@ -149,5 +159,11 @@ class Db implements StorageInterface
     protected function getDelete(): Delete
     {
         return $this->writeSql->delete('productCategoryAmazonDetail');
+    }
+
+    // Required by traits
+    protected function getWriteSql()
+    {
+        return $this->writeSql;
     }
 }
