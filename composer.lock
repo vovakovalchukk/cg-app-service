@@ -156,17 +156,11 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-LIS-226-update-product-with-amazon-data",
+            "version": "dev-LIS-239-update-product-with-amazon-variation-data",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "79b7b7022dc94362ec13cdab4267e7e818458dda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-dev-LIS-226-update-product-with-amazon-data-2b881c.zip",
-                "reference": "79b7b7022dc94362ec13cdab4267e7e818458dda",
-                "shasum": null
+                "reference": "95a93109945ac1d869493c485d5d5187bf0fafcf"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -10744,6 +10738,12 @@
             "alias": "1.25.2",
             "alias_normalized": "1.25.2.0",
             "version": "dev-LIS-226-update-product-with-amazon-data",
+            "package": "channelgrabber/amazon"
+        },
+        {
+            "alias": "1.25.2",
+            "alias_normalized": "1.25.2.0",
+            "version": "dev-LIS-239-update-product-with-amazon-variation-data",
             "package": "channelgrabber/amazon"
         }
     ],

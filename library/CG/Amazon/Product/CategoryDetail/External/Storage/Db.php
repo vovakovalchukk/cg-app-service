@@ -78,22 +78,56 @@ class Db implements StorageInterface
                 $array[$productId] = [];
             }
             if (!isset($array[$productId][$categoryId])) {
-                $array[$productId][$categoryId] = [
-                    'subCategoryId' => $result['subCategoryId'],
+                $array[$productId][$categoryId] = array_merge($result, [
                     'itemSpecifics' => [],
-                ];
+                    'validValues' => [],
+                ]);
             }
-            if (!isset($result['name'])) {
-                continue;
-            }
-            if (isset($array[$productId][$categoryId]['itemSpecifics'][$result['name']])) {
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']]
-                    = (array) $array[$productId][$categoryId]['itemSpecifics'][$result['name']];
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']][] = $result['value'];
-            } else {
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']] = $result['value'];
-            }
+            $array = $this->mapItemSpecificFromResultToArray($result, $array, $productId, $categoryId);
+            $array = $this->mapValidValueFromResultToArray($result, $array, $productId, $categoryId);
         }
+        return $array;
+    }
+
+    protected function mapItemSpecificFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
+    {
+        if (!isset($result['aisName'])) {
+            return $array;
+        }
+        $itemSpecific = $result['aisName'];
+        $itemSpecificValue = $result['aisValue'];
+        $itemSpecifics = &$array[$productId][$categoryId]['itemSpecifics'];
+
+        if ($this->itemSpecificExists($itemSpecific, $itemSpecifics)) {
+            $itemSpecifics[$itemSpecific] = $this->ensureItemSpecificIsArray($itemSpecifics[$itemSpecific]);
+            $itemSpecifics[$itemSpecific][] = $itemSpecificValue;
+        } else {
+            $itemSpecifics[$itemSpecific] = $itemSpecificValue;
+        }
+        
+        return $array;
+    }
+
+    protected function itemSpecificExists(string $itemSpecific, array $itemSpecifics): bool
+    {
+        return (isset($itemSpecifics[$itemSpecific]));
+    }
+
+    protected function ensureItemSpecificIsArray($value): array
+    {
+        return (array)$value;
+    }
+
+    protected function mapValidValueFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
+    {
+        if (!isset($result['avvName'])) {
+            return $array;
+        }
+        $array[$productId][$categoryId]['validValues'][] = [
+            'name' => $result['avvName'],
+            'option' => $result['avvOption'],
+            'displayName' => $result['avvDisplayName'],
+        ];
         return $array;
     }
 
@@ -108,7 +142,8 @@ class Db implements StorageInterface
 
         $array = $external->toArray();
         $itemSpecifics = $array['itemSpecifics'] ?? [];
-        unset($array['itemSpecifics']);
+        $validValues = $array['validValues'] ?? [];
+        unset($array['itemSpecifics'], $array['validValues']);
 
         $insert = $this->getInsert()->values(array_merge(
             ['productId' => $productId, 'categoryId' => $categoryId],
@@ -116,6 +151,12 @@ class Db implements StorageInterface
         ));
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
 
+        $this->saveItemSpecifics($itemSpecifics, $productId, $categoryId);
+        $this->saveValidValues($validValues, $productId, $categoryId);
+    }
+
+    protected function saveItemSpecifics(array $itemSpecifics, int $productId, int $categoryId): void
+    {
         foreach ($itemSpecifics as $name => $values) {
             foreach (((array) $values) as $value) {
                 $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
@@ -126,6 +167,20 @@ class Db implements StorageInterface
                 ]);
                 $this->writeSql->prepareStatementForSqlObject($insert)->execute();
             }
+        }
+    }
+
+    protected function saveValidValues(array $validValues, int $productId, int $categoryId): void
+    {
+        foreach ($validValues as $validValue) {
+            $insert = $this->getInsert('productCategoryAmazonValidValues')->values([
+                'productId' => $productId,
+                'categoryId' => $categoryId,
+                'name' => $validValue['name'],
+                'option' => $validValue['option'],
+                'displayName' => $validValue['displayName'],
+            ]);
+            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         }
     }
 
@@ -146,7 +201,14 @@ class Db implements StorageInterface
                 'productCategoryAmazonItemSpecifics',
                 'productCategoryAmazonDetail.productId = productCategoryAmazonItemSpecifics.productId'
                 . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonItemSpecifics.categoryId',
-                ['name', 'value'],
+                ['aisName' => 'name', 'aisValue' => 'value'],
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productCategoryAmazonValidValues',
+                'productCategoryAmazonDetail.productId = productCategoryAmazonValidValues.productId'
+                . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonValidValues.categoryId',
+                ['avvName' => 'name', 'avvOption' => 'option', 'avvDisplayName' => 'displayName'],
                 Select::JOIN_LEFT
             );
     }
