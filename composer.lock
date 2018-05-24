@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b445587fa0f238fb70ce7d45350706af",
+    "content-hash": "27ab1b1ccd90c67a1642e29592cf2e04",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1630,7 +1630,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "19a3f6a333090961ec409bc7bac16e3c7674c5a2"
+                "reference": "4309bcdc74e72e4c62dca3373c1577ba2dec7272"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9319-order-save-speedups-12177c.zip",
+                "reference": "4309bcdc74e72e4c62dca3373c1577ba2dec7272",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/account": ">=1.0.26,<2.0.0",
@@ -1705,7 +1711,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-05-22T15:34:36+00:00"
+            "time": "2018-05-24T11:53:25+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1966,16 +1972,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.13.1.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "5f038911d6e8aeecc13360dae437b1f845ba7baa"
+                "reference": "eec6bcdca66c130c782c1fec6d2e17edda5f0281"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.13.1.1-0b5115.zip",
-                "reference": "5f038911d6e8aeecc13360dae437b1f845ba7baa",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.13.2-8a3a2d.zip",
+                "reference": "eec6bcdca66c130c782c1fec6d2e17edda5f0281",
                 "shasum": null
             },
             "require": {
@@ -2032,7 +2038,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-05-04T13:32:29+00:00"
+            "time": "2018-05-22T07:56:36+00:00"
         },
         {
             "name": "channelgrabber/product-locking",

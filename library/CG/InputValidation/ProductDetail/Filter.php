@@ -72,6 +72,11 @@ class Filter implements RulesInterface
                     'required'=> false,
                     'validators'=> [new IsArrayValidator(['name' => 'isbn'])]
                 ],
+                'gtin' => [
+                    'name'=> 'isbn',
+                    'required'=> false,
+                    'validators'=> [new IsArrayValidator(['name' => 'gtin'])]
+                ],
             ]
         );
     }

@@ -111,6 +111,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 13, 'max' => 13])]
             ],
+            'gtin' => [
+                'name' => 'isbn',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 9, 'max' => 14])]
+            ],
         ];
     }
 }
