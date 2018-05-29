@@ -149,7 +149,9 @@ class Db implements StorageInterface
     {
         foreach ($itemSpecifics as $itemSpecific => &$itemSpecificValue) {
             if (is_array($itemSpecificValue)) {
-                $itemSpecificValue = array_unique($itemSpecificValue);
+                $uniqueSpecifics = array_unique($itemSpecificValue);
+                // array_unique() always returns an associative array which causes problems when converted to JSON
+                $itemSpecificValue = array_values($uniqueSpecifics);
             }
         }
         return $itemSpecifics;
