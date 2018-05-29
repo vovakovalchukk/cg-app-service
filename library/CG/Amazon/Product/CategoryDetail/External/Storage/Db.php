@@ -56,6 +56,7 @@ class Db implements StorageInterface
         $array = $this->mapResultsToArray(
             $this->readSql->prepareStatementForSqlObject($select)->execute()
         );
+        $array = $this->filterResultsArrayToUniqueValues($array);
 
         $externals = [];
         foreach ($ids as $id) {
@@ -98,8 +99,8 @@ class Db implements StorageInterface
         $itemSpecificValue = $result['aisValue'];
         $itemSpecifics = &$array[$productId][$categoryId]['itemSpecifics'];
 
-        if ($this->itemSpecificExists($itemSpecific, $itemSpecifics)) {
-            $itemSpecifics[$itemSpecific] = $this->ensureItemSpecificIsArray($itemSpecifics[$itemSpecific]);
+        if ($this->itemSpecificHasMultipleUniqueValues($itemSpecifics, $itemSpecific, $itemSpecificValue)) {
+            $itemSpecifics[$itemSpecific] = (array)$itemSpecifics[$itemSpecific];
             $itemSpecifics[$itemSpecific][] = $itemSpecificValue;
         } else {
             $itemSpecifics[$itemSpecific] = $itemSpecificValue;
@@ -108,14 +109,10 @@ class Db implements StorageInterface
         return $array;
     }
 
-    protected function itemSpecificExists(string $itemSpecific, array $itemSpecifics): bool
+    protected function itemSpecificHasMultipleUniqueValues(array $itemSpecifics, string $itemSpecific, string $latestValue): bool
     {
-        return (isset($itemSpecifics[$itemSpecific]));
-    }
-
-    protected function ensureItemSpecificIsArray($value): array
-    {
-        return (array)$value;
+        return (isset($itemSpecifics[$itemSpecific]) &&
+            (is_array($itemSpecifics[$itemSpecific]) || $itemSpecifics[$itemSpecific] !== $latestValue));
     }
 
     protected function mapValidValueFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
@@ -129,6 +126,44 @@ class Db implements StorageInterface
             'displayName' => $result['avvDisplayName'],
         ];
         return $array;
+    }
+
+    protected function filterResultsArrayToUniqueValues(array $array): array
+    {
+        // Because we join on to multiple tables we end up with duplicated data
+        // Filtering them out in PHP is more efficient then trying to do it in MySQL
+        foreach ($array as $productId => &$categories) {
+            foreach ($categories as $categoryId => &$data) {
+                $data['itemSpecifics'] = $this->filterToUniqueItemSpecifics($data['itemSpecifics']);
+                $data['validValues'] = $this->filterToUniqueValidValues($data['validValues']);
+            }
+        }
+        return $array;
+    }
+
+    protected function filterToUniqueItemSpecifics(array $itemSpecifics): array
+    {
+        foreach ($itemSpecifics as $itemSpecific => &$itemSpecificValue) {
+            if (is_array($itemSpecificValue)) {
+                $itemSpecificValue = array_unique($itemSpecificValue);
+            }
+        }
+        return $itemSpecifics;
+    }
+
+    protected function filterToUniqueValidValues(array $validValues): array
+    {
+        $validValuesSeen = [];
+        $uniqueValidValues = array_filter($validValues, function($validValue) use (&$validValuesSeen)
+        {
+            if (!isset($validValuesSeen[$validValue['name']])) {
+                $validValuesSeen[$validValue['name']] = true;
+                return true;
+            }
+            return false;
+        });
+        // array_filter() always returns an associative array which causes problems when converted to JSON
+        return array_values($uniqueValidValues);
     }
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
