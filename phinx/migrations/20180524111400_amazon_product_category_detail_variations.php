@@ -15,11 +15,12 @@ class AmazonProductCategoryDetailVariations extends AbstractMigration
         $this
             ->table('productCategoryAmazonValidValues', [
                 'id' => false,
-                'primary_key' => ['productId', 'categoryId', 'name'],
+                'primary_key' => ['productId', 'categoryId', 'sku', 'name'],
                 'collation' => 'utf8_unicode_ci',
             ])
             ->addColumn('productId', 'integer')
             ->addColumn('categoryId', 'integer')
+            ->addColumn('sku', 'string')
             ->addColumn('name', 'string')
             ->addColumn('option', 'string')
             ->addColumn('displayName', 'string')

@@ -117,10 +117,14 @@ class Db implements StorageInterface
 
     protected function mapValidValueFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
     {
-        if (!isset($result['avvName'])) {
+        if (!isset($result['avvSku'])) {
             return $array;
         }
-        $array[$productId][$categoryId]['validValues'][] = [
+        $sku = $result['avvSku'];
+        if (!isset($array[$productId][$categoryId]['validValues'][$sku])) {
+            $array[$productId][$categoryId]['validValues'][$sku] = [];
+        }
+        $array[$productId][$categoryId]['validValues'][$sku][] = [
             'name' => $result['avvName'],
             'option' => $result['avvOption'],
             'displayName' => $result['avvDisplayName'],
@@ -153,17 +157,19 @@ class Db implements StorageInterface
 
     protected function filterToUniqueValidValues(array $validValues): array
     {
-        $validValuesSeen = [];
-        $uniqueValidValues = array_filter($validValues, function($validValue) use (&$validValuesSeen)
-        {
-            if (!isset($validValuesSeen[$validValue['name']])) {
-                $validValuesSeen[$validValue['name']] = true;
-                return true;
-            }
-            return false;
-        });
-        // array_filter() always returns an associative array which causes problems when converted to JSON
-        return array_values($uniqueValidValues);
+        foreach ($validValues as $sku => &$skuValidValues) {
+            $validValuesSeen = [];
+            $uniqueValidValues = array_filter($skuValidValues, function ($validValue) use (&$validValuesSeen) {
+                if (!isset($validValuesSeen[$validValue['name']])) {
+                    $validValuesSeen[$validValue['name']] = true;
+                    return true;
+                }
+                return false;
+            });
+            // array_filter() always returns an associative array which causes problems when converted to JSON
+            $skuValidValues = array_values($uniqueValidValues);
+        }
+        return $validValues;
     }
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
@@ -207,15 +213,18 @@ class Db implements StorageInterface
 
     protected function saveValidValues(array $validValues, int $productId, int $categoryId): void
     {
-        foreach ($validValues as $validValue) {
-            $insert = $this->getInsert('productCategoryAmazonValidValues')->values([
-                'productId' => $productId,
-                'categoryId' => $categoryId,
-                'name' => $validValue['name'],
-                'option' => $validValue['option'],
-                'displayName' => $validValue['displayName'],
-            ]);
-            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        foreach ($validValues as $sku => $skuValidValues) {
+            foreach ($skuValidValues as $validValue) {
+                $insert = $this->getInsert('productCategoryAmazonValidValues')->values([
+                    'productId' => $productId,
+                    'categoryId' => $categoryId,
+                    'sku' => $sku,
+                    'name' => $validValue['name'],
+                    'option' => $validValue['option'],
+                    'displayName' => $validValue['displayName'],
+                ]);
+                $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+            }
         }
     }
 
@@ -243,7 +252,7 @@ class Db implements StorageInterface
                 'productCategoryAmazonValidValues',
                 'productCategoryAmazonDetail.productId = productCategoryAmazonValidValues.productId'
                 . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonValidValues.categoryId',
-                ['avvName' => 'name', 'avvOption' => 'option', 'avvDisplayName' => 'displayName'],
+                ['avvSku' => 'sku', 'avvName' => 'name', 'avvOption' => 'option', 'avvDisplayName' => 'displayName'],
                 Select::JOIN_LEFT
             );
     }
