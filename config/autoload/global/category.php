@@ -21,8 +21,10 @@ use CG\Product\Category\Template\Storage\Db as CategoryTemplateStorageDb;
 use CG\Product\Category\Template\StorageInterface as CategoryTemplateStorageInterface;
 use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 
-use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
 use CG\Amazon\Category\ExternalData\StorageInterface as AmazonChannelStorage;
+use CG\Amazon\Category\ExternalData\Repository as AmazonChannelRepository;
+use CG\Amazon\Category\ExternalData\Storage\Cache as AmazonChannelCacheStorage;
+use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
 use CG\FileStorage\S3\Adapter as AmazonChannelFileAdapter;
 
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
@@ -37,7 +39,7 @@ return [
                 CategoryStorageInterface::class => CategoryRepository::class,
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
                 CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
-                AmazonChannelStorage::class => AmazonChannelFileStorage::class,
+                AmazonChannelStorage::class => AmazonChannelRepository::class,
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -100,6 +102,12 @@ return [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'writeSql' => 'WriteSql',
+                ],
+            ],
+            AmazonChannelRepository::class => [
+                'parameters' => [
+                    'storage' => AmazonChannelCacheStorage::class,
+                    'repository' => AmazonChannelFileStorage::class,
                 ],
             ],
             AmazonChannelFileStorage::class => [
