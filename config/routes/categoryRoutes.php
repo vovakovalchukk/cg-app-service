@@ -6,7 +6,7 @@ use CG\Controllers\CategoryExternal\Collection as CategoryExternalCollectionCont
 use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
 use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
 use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
-use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionController;
+use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionMapController;
 use CG\InputValidation\Category\Entity as CategoryValidation;
 use CG\InputValidation\Category\Filter as FilterValidation;
 use CG\InputValidation\CategoryExternal\Entity as CategoryExternalValidation;
