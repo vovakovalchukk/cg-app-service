@@ -25,7 +25,7 @@ class File implements StorageInterface
     {
         try {
             $data = json_decode(
-                $this->fileStorage->read($this->getFilePath($categoryId)),
+                $this->fileStorage->read($this->getFilePath($categoryId))->getBody(),
                 true
             );
         } catch (NotFound $exception) {
