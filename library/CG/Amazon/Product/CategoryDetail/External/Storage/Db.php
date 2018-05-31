@@ -151,7 +151,13 @@ class Db implements StorageInterface
                 'productCategoryAmazonItemSpecifics',
                 'productCategoryAmazonDetail.productId = productCategoryAmazonItemSpecifics.productId'
                 . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonItemSpecifics.categoryId',
-                ['name', 'value'],
+                ['name'],
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productCategoryAmazonItemSpecificsValues',
+                'productCategoryAmazonItemSpecifics.id = productCategoryAmazonItemSpecificsValues.itemSpecificId',
+                ['value'],
                 Select::JOIN_LEFT
             );
     }
