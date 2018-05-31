@@ -6,6 +6,7 @@ use CG\Controllers\CategoryExternal\Collection as CategoryExternalCollectionCont
 use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
 use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
 use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
+use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionController;
 use CG\InputValidation\Category\Entity as CategoryValidation;
 use CG\InputValidation\Category\Filter as FilterValidation;
 use CG\InputValidation\CategoryExternal\Entity as CategoryExternalValidation;
@@ -127,6 +128,27 @@ return [
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($categoryTemplateId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'CategoryTemplateEntity',
+        'validation' => [
+            'dataRules' => CategoryTemplateValidation::class,
+        ],
+        'version' => new Version(1, 2),
+        'eTag' => [
+            'mapperClass' => CategoryTemplateMapper::class,
+            'entityClass' => CategoryTemplate::class,
+            'serviceClass' => CategoryTemplateService::class
+        ]
+    ],
+    '/categoryVersionMap/:id' => [
+        'controllers' => function($categoryVersionMapId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($categoryVersionMapId, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
