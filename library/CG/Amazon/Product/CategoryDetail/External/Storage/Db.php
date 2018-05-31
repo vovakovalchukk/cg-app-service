@@ -117,12 +117,17 @@ class Db implements StorageInterface
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
 
         foreach ($itemSpecifics as $name => $values) {
+            $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
+                'productId' => $productId,
+                'categoryId' => $categoryId,
+                'name' => $name
+            ]);
+            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+            $id = $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
             foreach (((array) $values) as $value) {
-                $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
-                    'productId' => $productId,
-                    'categoryId' => $categoryId,
-                    'name' => $name,
-                    'value' => $value,
+                $insert = $this->getInsert('productCategoryAmazonItemSpecificsValues')->values([
+                    'itemSpecificId' => $id,
+                    'value' => $value
                 ]);
                 $this->writeSql->prepareStatementForSqlObject($insert)->execute();
             }
