@@ -1,8 +1,8 @@
 <?php
 namespace CG\Controllers\CategoryVersionMap;
 
-use CG\Product\Category\ExternalData\Filter;
-use CG\Product\Category\ExternalData\Service;
+use CG\Product\Category\VersionMap\Filter;
+use CG\Product\Category\VersionMap\Service;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -30,8 +30,7 @@ class Collection
         return $this->service->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?? 10,
-                $this->getParams('page') ?? 1,
-                $this->getParams('categoryId') ?? []
+                $this->getParams('page') ?? 1
             )
         );
     }

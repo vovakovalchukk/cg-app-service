@@ -22,6 +22,11 @@ use CG\Product\Category\Service as CategoryService;
 use CG\Product\Category\Template\Entity as CategoryTemplate;
 use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 use CG\Product\Category\Template\Service as CategoryTemplateService;
+use CG\Product\Category\VersionMap\Entity as CategoryVersionMap;
+use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
+use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
+use CG\InputValidation\CategoryVersionMap\Entity as CategoryVersionMapValidation;
+use CG\InputValidation\CategoryVersionMap\Filter as CategoryVersionMapFilterValidation;
 use CG\Slim\Versioning\Version;
 
 return [
@@ -152,15 +157,15 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'CategoryTemplateEntity',
+        'name' => 'CategoryVersionMapEntity',
         'validation' => [
-            'dataRules' => CategoryTemplateValidation::class,
+            'dataRules' => CategoryVersionMapValidation::class
         ],
-        'version' => new Version(1, 2),
-        'eTag' => [
-            'mapperClass' => CategoryTemplateMapper::class,
-            'entityClass' => CategoryTemplate::class,
-            'serviceClass' => CategoryTemplateService::class
-        ]
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
     ],
 ];

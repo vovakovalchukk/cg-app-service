@@ -23,6 +23,13 @@ use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
 
+use CG\Product\Category\VersionMap\Repository as CategoryVersionMapRepository;
+use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
+use CG\Product\Category\VersionMap\Storage\Cache as CategoryVersionMapStorageCache;
+use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapStorageDb;
+use CG\Product\Category\VersionMap\StorageInterface as CategoryVersionMapStorageInterface;
+use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
+
 return [
     'di' => [
         'instance' => [
@@ -30,6 +37,7 @@ return [
                 CategoryStorageInterface::class => CategoryRepository::class,
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
                 CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
+                CategoryVersionMapStorageInterface::class => CategoryVersionMapRepository::class
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -86,6 +94,25 @@ return [
             CategoryTemplateService::class => [
                 'parameters' => [
                     'storage' => CategoryTemplateRepository::class
+                ]
+            ],
+            CategoryVersionMapStorageDb::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => CategoryVersionMapMapper::class
+                ],
+            ],
+            CategoryVersionMapRepository::class => [
+                'parameters' => [
+                    'storage' => CategoryVersionMapStorageCache::class,
+                    'repository' => CategoryVersionMapStorageDb::class
+                ]
+            ],
+            CategoryVersionMapService::class => [
+                'parameters' => [
+                    'storage' => CategoryVersionMapRepository::class
                 ]
             ],
             EbayChannelService::class => [

@@ -48,7 +48,7 @@ class RestService extends ServiceAbstract
     public function fetchAsHal($id)
     {
         $entity = $this->fetch($id);
-        //Converting to Collection removes need for duplicate code throughout the codebase
+        //Converting to Collection.php removes need for duplicate code throughout the codebase
         $unimportedListingCollection = new UnimportedListingCollection(UnimportedListingEntity::class, __FUNCTION__, compact('id'));
         $unimportedListingCollection->attach($entity);
         $this->fetchCollectionEmbeds($unimportedListingCollection);

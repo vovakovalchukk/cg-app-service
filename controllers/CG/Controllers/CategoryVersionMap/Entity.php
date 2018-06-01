@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\CategoryVersionMap;
 
-use CG\Product\Category\ExternalData\Service;
+use CG\Product\Category\VersionMap\Service;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
