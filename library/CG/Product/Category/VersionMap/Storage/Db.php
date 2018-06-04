@@ -1,6 +1,7 @@
 <?php
 namespace CG\Product\Category\VersionMap\Storage;
 
+use CategoryVersionMap;
 use CG\Product\Category\VersionMap\Collection;
 use CG\Product\Category\VersionMap\Entity;
 use CG\Product\Category\VersionMap\Filter;
@@ -34,31 +35,13 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     public function fetch($id)
     {
-        $select = $this->readSql
-            ->select(self::DB_TABLE_NAME)
-            ->columns(['categoryVersionMapId' =>'id'])
-            ->join(
-                ['channel' => 'categoryVersionMapChannel'],
-                'channel.categoryVersionMapId = categoryVersionMap.id',
-                ['channel', 'marketplace', 'accountId', 'channelVersion' => 'version']
-            )
-            ->where(['categoryVersionMapId' => $id])
-            ->order('categoryVersionMapId DESC');
+        $select =$this->getSelect()
+            ->where(['categoryVersionMapId' => $id]);
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        $data = $this->getDataFromResult($results);
 
-        $channelVersionMaps = [];
-        foreach ($results as $result) {
-            $id = $result['categoryVersionMapId'];
-            $channelVersionMaps[] = ChannelVersionMap::fromArray($result)->toArray();
-        }
-
-        return $this->mapper->fromArray(
-            [
-                'id' => $id,
-                'versionMap' => $channelVersionMaps
-            ]
-        );
+        return $this->mapper->fromArray(reset($data));
     }
 
     public function fetchCollectionByFilter(Filter $filter)
@@ -66,6 +49,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
+            $total = $this->getTotalVersionMaps();
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -73,15 +57,39 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                     ->offset($offset);
             }
 
-            return $this->fetchPaginatedCollection(
-                new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
-                $this->getReadSql(),
-                $select,
-                $this->getMapper()
-            );
+            $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+            $results = $this->getDataFromResult($results);
+
+            $collection = new Collection(CategoryVersionMap::class, __FUNCTION__, $filter->toArray());
+            $collection->setTotal($total);
+
+            foreach($results as $result) {
+                $collection->attach($this->mapper->fromArray($result));
+            }
+
+            return $collection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    protected function getTotalVersionMaps(): int
+    {
+        $select = $this->getReadSql()->select();
+        $select->from(self::DB_TABLE_NAME)
+            ->columns([
+            'count' => new Expression(
+                'COUNT(? ?)',
+                [Select::QUANTIFIER_DISTINCT, 'id'],
+                [Expression::TYPE_LITERAL, Expression::TYPE_IDENTIFIER]
+            )
+        ]);
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['count'];
+        }
+        return 0;
     }
 
     protected function buildFilterQuery(Filter $filter)
@@ -98,7 +106,14 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     protected function getSelect()
     {
-        return $this->getReadSql()->select(static::DB_TABLE_NAME);
+        return $this->getReadSql()
+            ->select(self::DB_TABLE_NAME)
+            ->columns(['categoryVersionMapId' =>'id'])
+            ->join(
+                ['channel' => 'categoryVersionMapChannel'],
+                'channel.categoryVersionMapId = categoryVersionMap.id',
+                ['channel', 'marketplace', 'accountId', 'version']
+            );
     }
 
     protected function getInsert()
@@ -119,5 +134,25 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     public function getEntityClass()
     {
         return Entity::class;
+    }
+
+    public function getDataFromResult($results): array
+    {
+        $data = [];
+        foreach ($results as $result) {
+            $id = $result['categoryVersionMapId'];
+            $data[$id]['id'] = $result['categoryVersionMapId'];
+            $data[$id]['versionMap'][] = $this->getVersionMapFromData($result);
+        }
+        return $data;
+    }
+    public function getVersionMapFromData($data): array
+    {
+        return [
+            'channel' => $data['channel'],
+            'marketplace' => $data['marketplace'],
+            'accountId' => $data['accountId'],
+            'version' => $data['version']
+        ];
     }
 }

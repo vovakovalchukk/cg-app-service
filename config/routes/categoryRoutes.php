@@ -7,6 +7,8 @@ use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
 use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
 use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
 use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionMapController;
+use CG\Controllers\CategoryVersionMap\Collection as CategoryVersionMapCollectionController;
+
 use CG\InputValidation\Category\Entity as CategoryValidation;
 use CG\InputValidation\Category\Filter as FilterValidation;
 use CG\InputValidation\CategoryExternal\Entity as CategoryExternalValidation;
@@ -26,7 +28,6 @@ use CG\Product\Category\VersionMap\Entity as CategoryVersionMap;
 use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
 use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
 use CG\InputValidation\CategoryVersionMap\Entity as CategoryVersionMapValidation;
-use CG\InputValidation\CategoryVersionMap\Filter as CategoryVersionMapFilterValidation;
 use CG\Slim\Versioning\Version;
 
 return [
@@ -154,6 +155,27 @@ return [
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($categoryVersionMapId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'CategoryVersionMapEntity',
+        'validation' => [
+            'dataRules' => CategoryVersionMapValidation::class
+        ],
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
+    ],
+    '/categoryVersionMap' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
