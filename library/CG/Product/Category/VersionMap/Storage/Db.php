@@ -136,7 +136,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         return Entity::class;
     }
 
-    public function getDataFromResult($results): array
+    protected function getDataFromResult($results): array
     {
         $data = [];
         foreach ($results as $result) {
@@ -146,7 +146,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         }
         return $data;
     }
-    public function getVersionMapFromData($data): array
+    protected function getVersionMapFromData($data): array
     {
         return [
             'channel' => $data['channel'],
@@ -154,5 +154,18 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             'accountId' => $data['accountId'],
             'version' => $data['version']
         ];
+    }
+
+    public function getLatestId(): int
+    {
+        $select = $this->getReadSql()->select();
+        $select->from(self::DB_TABLE_NAME)
+            ->order(['id DESC']);
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['id'];
+        }
+        return 0;
     }
 }

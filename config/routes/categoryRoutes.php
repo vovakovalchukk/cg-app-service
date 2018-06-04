@@ -7,6 +7,7 @@ use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
 use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
 use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
 use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionMapController;
+use CG\Controllers\CategoryVersionMap\Latest\Entity as CategoryVersionMapLatestController;
 use CG\Controllers\CategoryVersionMap\Collection as CategoryVersionMapCollectionController;
 
 use CG\InputValidation\Category\Entity as CategoryValidation;
@@ -148,6 +149,24 @@ return [
             'serviceClass' => CategoryTemplateService::class
         ]
     ],
+    '/categoryVersionMap/latest' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapLatestController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET'],
+        'name' => 'CategoryVersionMapLatest',
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
+    ],
     '/categoryVersionMap/:id' => [
         'controllers' => function($categoryVersionMapId) use ($di, $app) {
             $method = $app->request()->getMethod();
@@ -179,7 +198,7 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'CategoryVersionMapEntity',
+        'name' => 'CategoryVersionMapCollection',
         'validation' => [
             'dataRules' => CategoryVersionMapValidation::class
         ],
