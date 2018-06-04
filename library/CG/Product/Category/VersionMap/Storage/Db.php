@@ -14,13 +14,11 @@ use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
-use function CG\Stdlib\escapeLikeValue;
-use CG\Product\Category\VersionMap\ChannelVersionMap;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
     const DB_TABLE_NAME = 'categoryVersionMap';
+    const DB_CHANNEL_VERSION_MAP_TABLE_NAME = 'categoryVersionMapChannel';
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -49,7 +47,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
-            $total = $this->getTotalVersionMaps();
+            $total = $this->getTotalVersionMaps($query);
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -73,7 +71,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         }
     }
 
-    protected function getTotalVersionMaps(): int
+    protected function getTotalVersionMaps($query = null): int
     {
         $select = $this->getReadSql()->select();
         $select->from(self::DB_TABLE_NAME)
@@ -84,6 +82,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 [Expression::TYPE_LITERAL, Expression::TYPE_IDENTIFIER]
             )
         ]);
+        if ($query !== null) {
+            $select->where($query);
+        }
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
         foreach ($results as $result) {
@@ -107,10 +108,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function getSelect()
     {
         return $this->getReadSql()
-            ->select(self::DB_TABLE_NAME)
+            ->select(static::DB_TABLE_NAME)
             ->columns(['categoryVersionMapId' =>'id'])
             ->join(
-                ['channel' => 'categoryVersionMapChannel'],
+                ['channel' => static::DB_CHANNEL_VERSION_MAP_TABLE_NAME],
                 'channel.categoryVersionMapId = categoryVersionMap.id',
                 ['channel', 'marketplace', 'accountId', 'version']
             );
