@@ -30,7 +30,8 @@ class Collection
         return $this->service->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?? 10,
-                $this->getParams('page') ?? 1
+                $this->getParams('page') ?? 1,
+                $this->getParams('id') ?? []
             )
         );
     }

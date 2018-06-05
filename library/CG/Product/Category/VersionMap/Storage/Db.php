@@ -89,6 +89,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             )
         ]);
         if ($query !== null) {
+            if (isset($query['categoryVersionMapId'])) {
+                $query['id'] = $query['categoryVersionMapId'];
+                unset($query['categoryVersionMapId']);
+            }
             $select->where($query);
         }
 
@@ -103,6 +107,10 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $filterArray = $filter->toArray();
         unset($filterArray['limit'], $filterArray['page']);
+        if (isset($filterArray['id'])) {
+            $filterArray['categoryVersionMapId'] = $filterArray['id'];
+            unset($filterArray['id']);
+        }
         return array_filter(
             $filterArray,
             function($value): bool {
