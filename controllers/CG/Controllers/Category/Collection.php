@@ -3,6 +3,7 @@ namespace CG\Controllers\Category;
 
 use CG\Product\Category\Filter;
 use CG\Product\Category\Service;
+use CG\Product\Category\VersionMap\Repository;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -18,11 +19,14 @@ class Collection
     protected $slim;
     /** @var Service $service */
     protected $service;
+    /** @var Repository $categoryVersionMapRepository */
+    protected $categoryVersionMapRepository;
 
-    public function __construct(Slim $slim, Service $service)
+    public function __construct(Slim $slim, Service $service, Repository $categoryVersionMapRepository)
     {
         $this->slim = $slim;
         $this->service = $service;
+        $this->categoryVersionMapRepository = $categoryVersionMapRepository;
     }
 
     public function getData()
@@ -40,7 +44,7 @@ class Collection
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
                 $this->getParams('version') ?? [],
-                $this->getParams('versionMapId') ?? null
+                $this->getParams('versionMapId') ?? $this->getCategoryVersionMapRepository()->getLatestId()
             )
         );
     }
@@ -53,5 +57,10 @@ class Collection
     protected function getService()
     {
         return $this->service;
+    }
+
+    protected function getCategoryVersionMapRepository(): Repository
+    {
+        return $this->categoryVersionMapRepository;
     }
 }
