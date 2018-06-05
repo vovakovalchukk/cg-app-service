@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "40481e9dbba1eba1b07236999f8aa8a8",
@@ -1965,17 +1965,11 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.13.2",
+            "version": "dev-LIS-216-category-version-map-api",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "eec6bcdca66c130c782c1fec6d2e17edda5f0281"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.13.2-8a3a2d.zip",
-                "reference": "eec6bcdca66c130c782c1fec6d2e17edda5f0281",
-                "shasum": null
+                "reference": "ce0f62ff03c60e4c60a06e64110911ea44ee0a4d"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -10739,10 +10733,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.3",
+            "alias_normalized": "1.13.3.0",
+            "version": "dev-LIS-216-category-version-map-api",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
