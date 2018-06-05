@@ -21,8 +21,8 @@ class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
 
     const LOG_CODE_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_MSG_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
-    const LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS = 'Collection.php key was not found in all invalidation maps, removing collection from cache';
-    const LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS = 'Collection.php key (%s) was not found in %d invalidation maps, removing collection from cache';
+    const LOG_CODE_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key was not found in all invalidation maps, removing collection from cache';
+    const LOG_MSG_COLLECTION_KEY_NOT_IN_MAPS = 'Collection key (%s) was not found in %d invalidation maps, removing collection from cache';
 
     const STAT_KEY = 'infrastructure.cache.validation.collection.%s.%s';
     const STAT_PASSED = 'passed';
@@ -177,7 +177,7 @@ class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
 
     protected function logValidationStarted(OutputInterface $output)
     {
-        $output->write('Validating Collection.php ');
+        $output->write('Validating Collection ');
     }
 
     protected function logInvalidJson(OutputInterface $output, \InvalidArgumentException $exception)

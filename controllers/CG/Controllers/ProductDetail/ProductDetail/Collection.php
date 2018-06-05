@@ -11,7 +11,7 @@ use Slim\Slim;
 use Zend\Di\Di;
 
 /**
- * Class Collection.php
+ * Class Collection
  * @package CG\Controllers\ProductDetail\ProductDetail
  * @method Di getDi()
  * @method RestService getService()
