@@ -7,6 +7,7 @@ use CG\Product\Category\VersionMap\Entity;
 use CG\Product\Category\VersionMap\Filter;
 use CG\Product\Category\VersionMap\Mapper;
 use CG\Product\Category\VersionMap\StorageInterface;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
@@ -37,6 +38,11 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             ->where(['categoryVersionMapId' => $id]);
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        if ($results->count() == 0) {
+            throw new NotFound();
+        }
+
         $data = $this->getDataFromResult($results);
 
         return $this->mapper->fromArray(reset($data));
@@ -105,6 +111,33 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         );
     }
 
+    protected function insertEntity($entity)
+    {
+
+        $versionMapId = $this->insertVersionMap($entity)->getId();
+
+        foreach ($entity->getVersionMap() as $channelVersionMap) {
+            $values = array_merge(['id' => null, 'categoryVersionMapId' => $versionMapId], $channelVersionMap->toArray());
+            $insert = $this->getWriteSql()
+                ->insert(static::DB_CHANNEL_VERSION_MAP_TABLE_NAME)
+                ->values($values);
+
+            $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        }
+    }
+
+    protected function insertVersionMap($entity): Entity
+    {
+        $insert = $this->getInsert()->values(['id' => null]);
+        $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+
+        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
+
+        $entity->setId($id);
+        $entity->setNewlyInserted(true);
+        return $entity;
+    }
+
     protected function getSelect()
     {
         return $this->getReadSql()
@@ -164,6 +197,11 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             ->order(['id DESC']);
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        if (!$results->count() > 0) {
+            throw new NotFound();
+        }
+
         foreach ($results as $result) {
             return $result['id'];
         }
