@@ -197,7 +197,7 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'DELETE', 'OPTIONS'],
         'name' => 'CategoryVersionMapCollection',
         'validation' => [
             'dataRules' => CategoryVersionMapValidation::class
