@@ -39,7 +39,8 @@ class Collection
                 $this->getParams('marketplace') ?? [],
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
-                $this->getParams('version') ?? []
+                $this->getParams('version') ?? [],
+                $this->getParams('versionMapId') ?? null
             )
         );
     }
