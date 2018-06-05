@@ -76,6 +76,13 @@ class Filter implements RulesInterface
                         new ArrayOfIntegersValidator(new IntegerValidator(), 'version')
                     ]
                 ],
+                'versionMapId' => [
+                    'name'       => 'versionMapId',
+                    'required'   => false,
+                    'validators' => [
+                        new IntegerValidator()
+                    ]
+                ],
             ]
         );
     }
