@@ -26,6 +26,8 @@ class CategoryVersionMap extends AbstractMigration
             ->addColumn('marketplace', 'string')
             ->addColumn('accountId', 'integer')
             ->addColumn('version', 'integer', ['null' => false])
+            ->addForeignKey('categoryVersionMapId', 'categoryVersionMap', 'id',
+                ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->addIndex(['channel', 'marketplace', 'accountId'], ['unique' => false])
             ->create();
     }
