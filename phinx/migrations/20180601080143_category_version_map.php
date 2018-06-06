@@ -7,15 +7,15 @@ class CategoryVersionMap extends AbstractMigration
     public function change()
     {
         $this
-            ->table('categoryVersionMap', ['id' => true, 'primary_key' => ['id']])
+            ->table('categoryVersionMap')
             ->create();
 
         $this
-            ->table('categoryVersionMapChannel', ['id' => true, 'primary_key' => ['id'], 'collation' => 'utf8_general_ci'])
+            ->table('categoryVersionMapChannel')
             ->addColumn('categoryVersionMapId', 'integer')
-            ->addColumn('channel', 'string', ['null' => false])
-            ->addColumn('marketplace', 'string')
-            ->addColumn('accountId', 'integer')
+            ->addColumn('channel', 'string', ['length' => '80', 'null' => false])
+            ->addColumn('marketplace', 'string', ['length' => '20',])
+            ->addColumn('accountId', 'integer', ['length' => '11'])
             ->addColumn('version', 'integer', ['null' => false])
             ->addForeignKey('categoryVersionMapId', 'categoryVersionMap', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
