@@ -429,4 +429,22 @@ return [
             'serviceClass' => InvoiceMappingService::class
         ]
     ],
+    '/settings/vat' => [
+        'controllers' => function() use ($di) {
+
+        },
+        'via' => '',
+        'name' => '',
+        'entityRoute' => '',
+        'validation' => [],
+    ],
+    '/settings/vat/:id' => [
+        'controllers' => function($ouId) use ($di) {
+
+        },
+        'via' => '',
+        'name' => '',
+        'validation' => [],
+        'eTag' => [],
+    ],
 ];
