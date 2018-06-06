@@ -176,7 +176,7 @@ return [
                 $controller->$method($categoryVersionMapId, $app->request()->getBody())
             );
         },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
         'name' => 'CategoryVersionMapEntity',
         'validation' => [
             'dataRules' => CategoryVersionMapValidation::class
@@ -197,7 +197,7 @@ return [
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => ['GET', 'POST', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'CategoryVersionMapCollection',
         'validation' => [
             'dataRules' => CategoryVersionMapValidation::class
