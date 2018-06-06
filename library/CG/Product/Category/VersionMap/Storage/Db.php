@@ -121,7 +121,6 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
     protected function insertEntity($entity)
     {
-
         $versionMapId = $this->insertVersionMap($entity)->getId();
 
         foreach ($entity->getVersionMap() as $channelVersionMap) {
