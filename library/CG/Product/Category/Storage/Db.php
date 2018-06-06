@@ -5,10 +5,16 @@ use CG\Product\Category\Collection;
 use CG\Product\Category\Entity;
 use CG\Product\Category\Filter;
 use CG\Product\Category\StorageInterface;
+use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapDb;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\Expression as Predicate;
+use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
@@ -18,7 +24,26 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         try {
             $query = $this->buildFilterQuery($filter);
-            $select = $this->getSelect()->where($query);
+            $select = $this->getSelect();
+            $where = new Where();
+
+            $select->join(
+                CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
+                new Expression('category.channel = categoryVersionMapChannel.channel AND categoryVersionMapChannel.categoryVersionMapId = ?', [$filter->getVersionMapId()]),
+                [],
+                Select::JOIN_LEFT
+            );
+
+            $where->addPredicates(
+                [
+                    new Predicate('(category.version IS NULL OR category.version = categoryVersionMapChannel.version)'),
+                    new Predicate('(category.marketplace IS NULL OR category.marketplace = categoryVersionMapChannel.marketplace)'),
+                    new Predicate('(category.accountId IS NULL OR category.accountId = categoryVersionMapChannel.accountId)')
+                ]
+            );
+            $where->addPredicates($query, PredicateSet::OP_AND);
+
+            $select->where($where);
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -40,7 +65,15 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function buildFilterQuery(Filter $filter)
     {
         $filterArray = $filter->toArray();
-        unset($filterArray['limit'], $filterArray['page']);
+        unset($filterArray['limit'], $filterArray['page'], $filterArray['versionMapId']);
+        if (isset($filterArray['id'])) {
+            $filterArray['category.id'] = $filterArray['id'];
+            unset($filterArray['id']);
+        }
+        if (isset($filterArray['channel'])) {
+            $filterArray['category.channel'] = $filterArray['channel'];
+            unset($filterArray['channel']);
+        }
         return array_filter(
             $filterArray,
             function($value): bool {
