@@ -110,11 +110,6 @@ return [
                     'repository' => CategoryVersionMapStorageDb::class
                 ]
             ],
-            CategoryVersionMapService::class => [
-                'parameters' => [
-                    'storage' => CategoryVersionMapRepository::class
-                ]
-            ],
             EbayChannelService::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',

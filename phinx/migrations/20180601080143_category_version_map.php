@@ -4,28 +4,19 @@ use Phinx\Migration\AbstractMigration;
 
 class CategoryVersionMap extends AbstractMigration
 {
-    /**
-     * Change Method.
-     *
-     * More information on this method is available here:
-     * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-     *
-     * Uncomment this method if you would like to use it.
-     *
-     */
     public function change()
     {
         $this
-            ->table('categoryVersionMap', ['id' => true, 'primary_key' => ['id']])
+            ->table('categoryVersionMap')
             ->create();
 
         $this
-            ->table('categoryVersionMapChannel', ['id' => true, 'primary_key' => ['id'], 'collation' => 'utf8_general_ci'])
+            ->table('categoryVersionMapChannel')
             ->addColumn('categoryVersionMapId', 'integer')
-            ->addColumn('channel', 'string', ['null' => false])
-            ->addColumn('marketplace', 'string')
-            ->addColumn('accountId', 'integer')
-            ->addColumn('version', 'integer', ['null' => false])
+            ->addColumn('channel', 'string', ['length' => '80'])
+            ->addColumn('marketplace', 'string', ['length' => '20', 'null' => true])
+            ->addColumn('accountId', 'integer', ['length' => '11', 'null' => true])
+            ->addColumn('version', 'integer')
             ->addForeignKey('categoryVersionMapId', 'categoryVersionMap', 'id',
                 ['delete' => 'CASCADE', 'update' => 'NOACTION'])
             ->addIndex(['channel', 'marketplace', 'accountId'], ['unique' => false])
