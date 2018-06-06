@@ -201,7 +201,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $select = $this->getReadSql()->select();
         $select->from(self::DB_TABLE_NAME)
-            ->order(['id DESC']);
+            ->order(['id DESC'])
+            ->limit(1);
 
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
