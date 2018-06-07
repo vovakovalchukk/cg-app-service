@@ -27,22 +27,11 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $select = $this->getSelect();
             $where = new Where();
 
-            $select->join(
-                CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
-                new Expression('category.channel = categoryVersionMapChannel.channel AND categoryVersionMapChannel.categoryVersionMapId = ?', [$filter->getVersionMapId()]),
-                [],
-                Select::JOIN_LEFT
-            );
+            if ($filter->getVersionMapId() !== null) {
+                list($select, $where, $filter) = $this->joinOnVersionMap($select, $where, $filter);
+            }
 
-            $where->addPredicates(
-                [
-                    new Predicate('(category.version IS NULL OR category.version = categoryVersionMapChannel.version)'),
-                    new Predicate('(category.marketplace IS NULL OR category.marketplace = categoryVersionMapChannel.marketplace)'),
-                    new Predicate('(category.accountId IS NULL OR category.accountId = categoryVersionMapChannel.accountId)')
-                ]
-            );
             $where->addPredicates($query, PredicateSet::OP_AND);
-
             $select->where($where);
 
             if ($filter->getLimit() != 'all') {
@@ -66,13 +55,13 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $filterArray = $filter->toArray();
         unset($filterArray['limit'], $filterArray['page'], $filterArray['versionMapId']);
-        if (isset($filterArray['id'])) {
-            $filterArray['category.id'] = $filterArray['id'];
-            unset($filterArray['id']);
-        }
-        if (isset($filterArray['channel'])) {
-            $filterArray['category.channel'] = $filterArray['channel'];
-            unset($filterArray['channel']);
+
+        foreach ($filterArray as $name => $filter) {
+            if (!$this->isFilterInPrefixBlacklist($name)) {
+                $newName = 'category.' . $name;
+                $filterArray[$newName] = $filter;
+                unset($filterArray[$name]);
+            }
         }
         return array_filter(
             $filterArray,
@@ -80,6 +69,36 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 return is_array($value) ? !empty($value) : !is_null($value);
             }
         );
+    }
+
+    protected function isFilterInPrefixBlacklist($filterName)
+    {
+        $blacklist = [
+            'limit' => true,
+            'page' => true,
+            'versionMapId' => true
+        ];
+        return isset($blacklist[$filterName]);
+    }
+
+    protected function joinOnVersionMap(Select $select, Where $where, Filter $filter): array
+    {
+        $select->join(
+            CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
+            new Expression('category.channel = categoryVersionMapChannel.channel AND categoryVersionMapChannel.categoryVersionMapId = ?', [$filter->getVersionMapId()]),
+            [],
+            Select::JOIN_LEFT
+        );
+
+        $where->addPredicates(
+            [
+                new Predicate('(category.version IS NULL OR category.version = categoryVersionMapChannel.version)'),
+                new Predicate('(category.marketplace IS NULL OR category.marketplace = categoryVersionMapChannel.marketplace)'),
+                new Predicate('(category.accountId IS NULL OR category.accountId = categoryVersionMapChannel.accountId)')
+            ]
+        );
+
+        return [$select, $where, $filter];
     }
 
     protected function getSelect()
