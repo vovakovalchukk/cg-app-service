@@ -28,7 +28,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             $where = new Where();
 
             if ($filter->getVersionMapId() !== null) {
-                list($select, $where, $filter) = $this->joinOnVersionMap($select, $where, $filter);
+                $this->joinOnVersionMap($select, $where, $filter);
             }
 
             $where->addPredicates($query, PredicateSet::OP_AND);
@@ -81,7 +81,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         return isset($blacklist[$filterName]);
     }
 
-    protected function joinOnVersionMap(Select $select, Where $where, Filter $filter): array
+    protected function joinOnVersionMap(Select $select, Where $where, Filter $filter)
     {
         $select->join(
             CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
@@ -98,7 +98,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
             ]
         );
 
-        return [$select, $where, $filter];
+        //return [$select, $where, $filter];
     }
 
     protected function getSelect()
