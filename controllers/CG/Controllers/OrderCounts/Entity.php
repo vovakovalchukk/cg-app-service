@@ -1,21 +1,17 @@
 <?php
 namespace CG\Controllers\OrderCounts;
 
-use CG\Http\StatusCode;
+use CG\CGLib\Nginx\Cache\Invalidator\OrderCounts as OrderCountsNginxCacheInvalidator;
 use CG\Order\Shared\OrderCounts\Service as ServiceService;
-use CG\Slim\ControllerTrait;
+use CG\Slim\Controller\Entity\DeleteTrait;
+use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PatchTrait;
-use Slim\Slim;
-use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
-use CG\Stdlib\Exception\Runtime\NotFound;
-use Zend\Di\Di;
-use Nocarrier\Hal;
+use CG\Slim\Controller\Entity\PutTrait;
+use CG\Slim\ControllerTrait;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Constant\Log\Service\Api;
-use CG\Slim\Controller\Entity\GetTrait;
-use CG\Slim\Controller\Entity\PutTrait;
-use CG\Slim\Controller\Entity\DeleteTrait;
+use Slim\Slim;
+use Zend\Di\Di;
 
 class OrderCounts implements LoggerAwareInterface
 {
@@ -26,10 +22,18 @@ class OrderCounts implements LoggerAwareInterface
     use PutTrait;
     use DeleteTrait;
 
-    public function __construct(Slim $app, ServiceService $service, Di $di)
+    protected $cacheInvalidator;
+
+    public function __construct(Slim $app, ServiceService $service, Di $di, OrderCountsNginxCacheInvalidator $cacheInvalidator)
     {
         $this->setSlim($app)
             ->setService($service)
             ->setDi($di);
+        $this->cacheInvalidator = $cacheInvalidator;
+    }
+
+    public function purge($organisationUnitId)
+    {
+        $this->cacheInvalidator->clearCache($organisationUnitId);
     }
 }
