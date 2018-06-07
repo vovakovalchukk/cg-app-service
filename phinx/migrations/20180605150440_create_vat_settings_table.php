@@ -7,11 +7,11 @@ class CreateVatSettingsTable extends AbstractMigration
     public function up()
     {
         $this
-            ->table('vatSettings', ['id' => false, 'primary_key' => ['organisationUnitId']])
-            ->addColumn('organisationUnitId', 'integer')
+            ->table('vatSettings', ['id' => false, 'primary_key' => ['id']])
+            ->addColumn('id', 'integer')
             ->addColumn('chargeVat', 'boolean', ['null' => true])
             ->create();
-        $this->execute('INSERT INTO `vatSettings` (`organisationUnitId`) SELECT DISTINCT `root` FROM `directory`.`organisationUnit`');
+        $this->execute('INSERT INTO `vatSettings` (`id`) SELECT DISTINCT `root` FROM `directory`.`organisationUnit`');
     }
 
     public function down()
