@@ -9,7 +9,8 @@ class CategoryVersionConstraint extends AbstractMigration
         $this
             ->table('category')
             ->removeIndex(['externalId', 'channel', 'marketplace'], ['unique' => true])
-            ->addIndex(['externalId', 'channel', 'marketplace', 'version'], ['unique' => true]);
+            ->addIndex(['externalId', 'channel', 'marketplace', 'version'], ['unique' => true])
+            ->save();
     }
 
     public function down()
@@ -17,6 +18,7 @@ class CategoryVersionConstraint extends AbstractMigration
         $this
             ->table('category')
             ->removeIndex(['externalId', 'channel', 'marketplace', 'version'], ['unique' => true])
-            ->addIndex(['externalId', 'channel', 'marketplace'], ['unique' => true]);
+            ->addIndex(['externalId', 'channel', 'marketplace'], ['unique' => true])
+            ->save();
     }
 }
