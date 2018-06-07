@@ -116,14 +116,28 @@ class Db implements StorageInterface
         ));
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
 
+        $this->insertItemSpecifics($itemSpecifics, $productId, $categoryId);
+    }
+
+    protected function insertItemSpecifics(
+        array $itemSpecifics,
+        int $productId,
+        int $categoryId,
+        int $parentId = 0
+    ): void {
         foreach ($itemSpecifics as $name => $values) {
             $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
                 'productId' => $productId,
                 'categoryId' => $categoryId,
+                'parentId' => $parentId,
                 'name' => $name
             ]);
             $this->writeSql->prepareStatementForSqlObject($insert)->execute();
             $id = $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
+            if (is_array($values) && $this->isAssociativeArray($values)) {
+                $this->insertItemSpecifics($values, $productId, $categoryId, $id);
+                continue;
+            }
             foreach (((array) $values) as $value) {
                 $insert = $this->getInsert('productCategoryAmazonItemSpecificsValues')->values([
                     'itemSpecificId' => $id,
@@ -133,6 +147,12 @@ class Db implements StorageInterface
             }
         }
     }
+
+    protected function isAssociativeArray(array $array): bool
+    {
+        return array_keys($array) !== range(0, count($array) - 1);
+    }
+
 
     public function remove(int $productId, int $categoryId): void
     {
