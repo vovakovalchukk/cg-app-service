@@ -80,37 +80,8 @@ class Db implements StorageInterface
     {
         $results = [];
         $results = $this->attachDetailsToResults($results, $details);
-//        $results = $this->attachItemSpecificsToResults($results, $itemSpecifics);
-
+        $results = $this->attachItemSpecificsToResults($results, $itemSpecifics);
         return $results;
-
-        die;
-        $array = [];
-        foreach ($results as $result) {
-            $productId = $result['productId'];
-            $categoryId = $result['categoryId'];
-            if (!isset($array[$productId])) {
-                $array[$productId] = [];
-            }
-            if (!isset($array[$productId][$categoryId])) {
-                $array[$productId][$categoryId] = [
-                    'subCategoryId' => $result['subCategoryId'],
-                    'itemSpecifics' => [],
-                ];
-            }
-            if (!isset($result['name'])) {
-                continue;
-            }
-            if (isset($array[$productId][$categoryId]['itemSpecifics'][$result['name']])) {
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']]
-                    = (array) $array[$productId][$categoryId]['itemSpecifics'][$result['name']];
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']][] = $result['value'];
-            } else {
-                $array[$productId][$categoryId]['itemSpecifics'][$result['name']] = $result['value'];
-            }
-        }
-        print_r($array);die;
-        return $array;
     }
 
     protected function attachDetailsToResults(array $results, ResultInterface $details): array
@@ -130,31 +101,55 @@ class Db implements StorageInterface
     protected function attachItemSpecificsToResults(array $results, ResultInterface $itemSpecifics): array
     {
         $itemSpecifics = ArrayUtils::iteratorToArray($itemSpecifics);
-        $productCategories = $this->extractProductCategoryForItemSpecific($itemSpecifics);
-        print_r($productCategories);die;
         foreach ($itemSpecifics as $itemSpecific) {
             $productId = $itemSpecific['productId'];
             $categoryId = $itemSpecific['categoryId'];
             if (!isset($results[$productId])) {
                 $results[$productId] = [$categoryId => []];
             }
+            if (isset($results[$productId][$categoryId]['itemSpecific'])) {
+                continue;
+            }
+            $results[$productId][$categoryId]['itemSpecifics'] = $this->buildItemSpecificsArrayForProductAndCategory(
+                $itemSpecifics,
+                $productId,
+                $categoryId
+            );
         }
         return $results;
     }
 
-    protected function extractProductCategoryForItemSpecific(array $itemSpecifics): array
+    protected function buildItemSpecificsArrayForProductAndCategory(
+        array $itemSpecifics,
+        int $productId,
+        int $categoryId
+    ): array {
+        $itemSpecifics = array_filter($itemSpecifics, function($itemSpecific) use ($productId, $categoryId) {
+            return $itemSpecific['productId'] == $productId && $itemSpecific['categoryId'] == $categoryId;
+        });
+
+        return $this->buildItemSpecificArrayForParent($itemSpecifics, 0);
+    }
+
+    protected function buildItemSpecificArrayForParent(array $itemSpecifics, int $parentId): array
     {
-        $productCategory = [];
+        $result = [];
         foreach ($itemSpecifics as $itemSpecific) {
-            $productId = $itemSpecific['productId'];
-            $categoryId = $itemSpecific['categoryId'];
-            if (!isset($productCategory[$productId])) {
-                $productCategory[$productId] = [];
+            if ($itemSpecific['parentId'] !== $parentId) {
+                continue;
             }
-            $productCategory[$productId][$categoryId] = $categoryId;
+            if (isset($result[$itemSpecific['name']])) {
+                $result[$itemSpecific['name']] = (array) $result[$itemSpecific['name']];
+                $result[$itemSpecific['name']][] = $itemSpecific['value'];
+                continue;
+            }
+            if ($itemSpecific['value']) {
+                $result[$itemSpecific['name']] = $itemSpecific['value'];
+                continue;
+            }
+            $result[$itemSpecific['name']] = $this->buildItemSpecificArrayForParent($itemSpecifics, $itemSpecific['id']);
         }
-        var_dump($productCategory);
-        die;
+        return $result;
     }
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
