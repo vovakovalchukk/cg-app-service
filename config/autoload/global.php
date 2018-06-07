@@ -432,6 +432,8 @@ use CG\Billing\Licence\Storage\Api as BillingLicenceApiStorage;
 // Billing\Package
 use CG\Billing\Package\StorageInterface as BillingPackageStorage;
 use CG\Billing\Package\Storage\Api as BillingPackageApiStorage;
+use CG\Billing\Subscription\Package\Storage\Api as SubscriptionPackageApiStorage;
+use CG\Billing\Subscription\Package\StorageInterface as SubscriptionPackageStorage;
 
 // Billing\Subscription
 use CG\Billing\Subscription\StorageInterface as BillingSubscriptionStorage;
@@ -1692,6 +1694,11 @@ $config = array(
                     'client' => 'billing_guzzle',
                 ],
             ],
+            SubscriptionPackageApiStorage::class => [
+                'parameters' => [
+                    'client' => 'billing_guzzle'
+                ]
+            ],
             Sites::class => [
                 'parameters' => [
                     'config' => 'config'
@@ -1753,6 +1760,7 @@ $config = array(
                 BillingWindowStorage::class => BillingWindowStorageApi::class,
                 BillingTransactionStorage::class => BillingTransactionApiStorage::class,
                 OrderCountsCacheClearerInterface::class => OrderCountsCacheClearer::class,
+                SubscriptionPackageStorage::class => SubscriptionPackageApiStorage::class,
             ]
         )
     )
