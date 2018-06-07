@@ -3,7 +3,7 @@ namespace CG\Controllers\Category;
 
 use CG\Product\Category\Filter;
 use CG\Product\Category\Service;
-use CG\Product\Category\VersionMap\Repository;
+use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -19,14 +19,14 @@ class Collection
     protected $slim;
     /** @var Service $service */
     protected $service;
-    /** @var Repository $categoryVersionMapRepository */
-    protected $categoryVersionMapRepository;
+    /** @var Service $categoryVersionMapService */
+    protected $categoryVersionMapService;
 
-    public function __construct(Slim $slim, Service $service, Repository $categoryVersionMapRepository)
+    public function __construct(Slim $slim, Service $service, CategoryVersionMapService $categoryVersionMapService)
     {
         $this->slim = $slim;
         $this->service = $service;
-        $this->categoryVersionMapRepository = $categoryVersionMapRepository;
+        $this->categoryVersionMapService = $categoryVersionMapService;
     }
 
     public function getData()
@@ -44,7 +44,7 @@ class Collection
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
                 $this->getParams('version') ?? [],
-                ($this->getParams('versionMapId')) ? $this->getParams('versionMapId') : ($this->getParams('version')) ? null : $this->getCategoryVersionMapRepository()->getLatestId()
+                ($this->getParams('versionMapId')) ? $this->getParams('versionMapId') : ($this->getParams('version')) ? null : $this->categoryVersionMapService->getLatestId()
             )
         );
     }
@@ -57,10 +57,5 @@ class Collection
     protected function getService()
     {
         return $this->service;
-    }
-
-    protected function getCategoryVersionMapRepository(): Repository
-    {
-        return $this->categoryVersionMapRepository;
     }
 }
