@@ -44,7 +44,7 @@ class Collection
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
                 $this->getParams('version') ?? [],
-                $this->getParams('versionMapId') ?? $this->getCategoryVersionMapRepository()->getLatestId()
+                $this->getParams('versionMapId') ?? null
             )
         );
     }
