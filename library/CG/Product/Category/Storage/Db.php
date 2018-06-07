@@ -57,11 +57,12 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         unset($filterArray['limit'], $filterArray['page'], $filterArray['versionMapId']);
 
         foreach ($filterArray as $name => $filter) {
-            if (!$this->isFilterInPrefixBlacklist($name)) {
-                $newName = 'category.' . $name;
-                $filterArray[$newName] = $filter;
-                unset($filterArray[$name]);
+            if ($this->isFilterInPrefixBlacklist($name)) {
+                break;
             }
+            $newName = 'category.' . $name;
+            $filterArray[$newName] = $filter;
+            unset($filterArray[$name]);
         }
         return array_filter(
             $filterArray,
