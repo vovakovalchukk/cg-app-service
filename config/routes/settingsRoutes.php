@@ -474,7 +474,7 @@ return [
         'eTag' => [
             'mapperClass' => VatMapper::class,
             'entityClass' => VatEntity::class,
-            'serviceClass' => VatService::class.
+            'serviceClass' => VatService::class,
         ],
     ],
 ];
