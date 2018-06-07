@@ -12,6 +12,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use Zend\Stdlib\ArrayUtils;
 
 class Db implements StorageInterface
 {
@@ -31,19 +32,26 @@ class Db implements StorageInterface
 
     public function fetch(int $productId, int $categoryId): ExternalInterface
     {
-        $select = $this->getSelect()->where([
-            'productCategoryAmazonDetail.productId' => $productId,
-            'productCategoryAmazonDetail.categoryId' => $categoryId,
+        $select = $this->getProductCategoryDetailSelect()->where([
+            'productId' => $productId,
+            'categoryId' => $categoryId
         ]);
-        $array = $this->mapResultsToArray(
-            $this->readSql->prepareStatementForSqlObject($select)->execute()
-        );
+        $detail = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        $select = $this->getItemSpecificsSelect()->where([
+            'productId' => $productId,
+            'categoryId' => $categoryId
+        ]);
+        $itemSpecifics = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        $array = $this->mapResultsToArray($detail, $itemSpecifics);
+
         return External::fromArray($array[$productId][$categoryId] ?? []);
     }
 
     public function fetchMultiple(array $ids): array
     {
-        $select = $this->getSelect();
+        $select = $this->getProductCategoryDetailSelect();
         foreach ($ids as $id) {
             [$productId, $categoryId] = $id;
             $select->where->orPredicate(
@@ -68,8 +76,15 @@ class Db implements StorageInterface
         return $externals;
     }
 
-    protected function mapResultsToArray(ResultInterface $results): array
+    protected function mapResultsToArray(ResultInterface $details, ResultInterface $itemSpecifics): array
     {
+        $results = [];
+        $results = $this->attachDetailsToResults($results, $details);
+//        $results = $this->attachItemSpecificsToResults($results, $itemSpecifics);
+
+        return $results;
+
+        die;
         $array = [];
         foreach ($results as $result) {
             $productId = $result['productId'];
@@ -94,7 +109,52 @@ class Db implements StorageInterface
                 $array[$productId][$categoryId]['itemSpecifics'][$result['name']] = $result['value'];
             }
         }
+        print_r($array);die;
         return $array;
+    }
+
+    protected function attachDetailsToResults(array $results, ResultInterface $details): array
+    {
+        foreach ($details as $detail) {
+            $productId = $detail['productId'];
+            $categoryId = $detail['categoryId'];
+            if (!isset($results[$productId])) {
+                $results[$productId] = [$categoryId => []];
+            }
+            $results[$productId][$categoryId]['subCategoryId'] = $detail['subCategoryId'];
+        }
+
+        return $results;
+    }
+
+    protected function attachItemSpecificsToResults(array $results, ResultInterface $itemSpecifics): array
+    {
+        $itemSpecifics = ArrayUtils::iteratorToArray($itemSpecifics);
+        $productCategories = $this->extractProductCategoryForItemSpecific($itemSpecifics);
+        print_r($productCategories);die;
+        foreach ($itemSpecifics as $itemSpecific) {
+            $productId = $itemSpecific['productId'];
+            $categoryId = $itemSpecific['categoryId'];
+            if (!isset($results[$productId])) {
+                $results[$productId] = [$categoryId => []];
+            }
+        }
+        return $results;
+    }
+
+    protected function extractProductCategoryForItemSpecific(array $itemSpecifics): array
+    {
+        $productCategory = [];
+        foreach ($itemSpecifics as $itemSpecific) {
+            $productId = $itemSpecific['productId'];
+            $categoryId = $itemSpecific['categoryId'];
+            if (!isset($productCategory[$productId])) {
+                $productCategory[$productId] = [];
+            }
+            $productCategory[$productId][$categoryId] = $categoryId;
+        }
+        var_dump($productCategory);
+        die;
     }
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
@@ -173,17 +233,16 @@ class Db implements StorageInterface
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
     }
 
-    protected function getSelect(): Select
+    protected function getProductCategoryDetailSelect(): Select
+    {
+        return $this->readSql->select('productCategoryAmazonDetail');
+    }
+
+    protected function getItemSpecificsSelect(): Select
     {
         return $this->readSql
-            ->select('productCategoryAmazonDetail')
-            ->join(
-                'productCategoryAmazonItemSpecifics',
-                'productCategoryAmazonDetail.productId = productCategoryAmazonItemSpecifics.productId'
-                . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonItemSpecifics.categoryId',
-                ['name'],
-                Select::JOIN_LEFT
-            )
+            ->select('productCategoryAmazonItemSpecifics')
+            ->columns(['id', 'productId', 'categoryId', 'name', 'parentId'])
             ->join(
                 'productCategoryAmazonItemSpecificsValues',
                 'productCategoryAmazonItemSpecifics.id = productCategoryAmazonItemSpecificsValues.itemSpecificId',
