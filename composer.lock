@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb980d0324e8601f7070c63b1327dcb9",
+    "content-hash": "11bda1422080070de0db1e8a7d686cfa",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2395,16 +2395,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.6.0",
+            "version": "dev-CGIV-9469-ou-vat-status-override",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "ebb7e679981543875fe4bf29d8fd1de7c720fb7b"
+                "reference": "2b8e03f242afa1553bdab4c02b0eb90d92481492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.6.0-392edd.zip",
-                "reference": "ebb7e679981543875fe4bf29d8fd1de7c720fb7b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-CGIV-9469-ou-vat-status-override-5bb3dd.zip",
+                "reference": "2b8e03f242afa1553bdab4c02b0eb90d92481492",
                 "shasum": null
             },
             "require": {
@@ -2433,7 +2433,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-02-26T09:06:13+00:00"
+            "time": "2018-06-07T11:50:04+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -10746,10 +10746,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.1",
+            "alias_normalized": "1.6.1.0",
+            "version": "dev-CGIV-9469-ou-vat-status-override",
+            "package": "channelgrabber/settings"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
