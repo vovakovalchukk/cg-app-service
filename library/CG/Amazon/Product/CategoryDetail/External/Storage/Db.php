@@ -51,19 +51,26 @@ class Db implements StorageInterface
 
     public function fetchMultiple(array $ids): array
     {
-        $select = $this->getProductCategoryDetailSelect();
+        $productDetailSelect = $this->getProductCategoryDetailSelect();
+        $itemSpecificsSelect = $this->getItemSpecificsSelect();
         foreach ($ids as $id) {
             [$productId, $categoryId] = $id;
-            $select->where->orPredicate(
+            $productDetailSelect->where->orPredicate(
                 (new Where())
-                    ->equalTo('productCategoryAmazonDetail.productId', $productId)
-                    ->equalTo('productCategoryAmazonDetail.categoryId', $categoryId)
+                    ->equalTo('productId', $productId)
+                    ->equalTo('categoryId', $categoryId)
+            );
+            $itemSpecificsSelect->where->orPredicate(
+                (new Where())
+                    ->equalTo('productId', $productId)
+                    ->equalTo('categoryId', $categoryId)
             );
         }
 
-        $array = $this->mapResultsToArray(
-            $this->readSql->prepareStatementForSqlObject($select)->execute()
-        );
+        $details = $this->readSql->prepareStatementForSqlObject($productDetailSelect)->execute();
+        $itemSpecifics = $this->readSql->prepareStatementForSqlObject($itemSpecificsSelect)->execute();
+
+        $array = $this->mapResultsToArray($details, $itemSpecifics);
 
         $externals = [];
         foreach ($ids as $id) {
