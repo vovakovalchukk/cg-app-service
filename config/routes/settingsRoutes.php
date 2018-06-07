@@ -79,6 +79,14 @@ use CG\Settings\InvoiceMapping\Service as InvoiceMappingService;
 use CG\InputValidation\Settings\InvoiceMapping\Entity as InvoiceMappingEntityValidation;
 use CG\InputValidation\Settings\InvoiceMapping\Filter as InvoiceMappingCollectionValidation;
 
+//VAT Settings
+use CG\Controllers\Settings\Vat;
+use CG\Controllers\Settings\Vat\Collection as VatCollection;
+use CG\InputValidation\Settings\Vat\Entity as VatEntityValidation;
+use CG\InputValidation\Settings\Vat\Filter as VatCollectionValidation;
+use CG\Settings\Vat\Entity as VatEntity;
+use CG\Settings\Vat\Mapper as VatMapper;
+use CG\Settings\Vat\RestService as VatService;
 return [
     '/settings' => [
         'controllers' => function() use ($di) {
@@ -431,20 +439,42 @@ return [
     ],
     '/settings/vat' => [
         'controllers' => function() use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
+            $controller = $di->get(VatCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
         },
-        'via' => '',
-        'name' => '',
-        'entityRoute' => '',
-        'validation' => [],
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'VatCollection',
+        'entityRoute' => '/settings/vat/:id',
+        'validation' => [
+            'filterRules' => VatCollectionValidation::class,
+        ],
     ],
     '/settings/vat/:id' => [
         'controllers' => function($ouId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
+            $controller = $di->get(Vat::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($ouId, $app->request()->getBody())
+            );
         },
-        'via' => '',
-        'name' => '',
-        'validation' => [],
-        'eTag' => [],
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'VatEntity',
+        'validation' => [
+            'dataRules' => VatEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => VatMapper::class,
+            'entityClass' => VatEntity::class,
+            'serviceClass' => VatService::class.
+        ],
     ],
 ];
