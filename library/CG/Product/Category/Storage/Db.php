@@ -98,8 +98,6 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
                 new Predicate('(category.accountId IS NULL OR category.accountId = categoryVersionMapChannel.accountId)')
             ]
         );
-
-        //return [$select, $where, $filter];
     }
 
     protected function getSelect()
