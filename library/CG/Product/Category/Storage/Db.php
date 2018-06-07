@@ -72,7 +72,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         );
     }
 
-    protected function isFilterInPrefixBlacklist($filterName)
+    protected function isFilterInPrefixBlacklist(string $filterName): bool
     {
         $blacklist = [
             'limit' => true,
