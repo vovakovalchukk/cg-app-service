@@ -126,25 +126,35 @@ class Db implements StorageInterface
         int $parentId = 0
     ): void {
         foreach ($itemSpecifics as $name => $values) {
-            $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
-                'productId' => $productId,
-                'categoryId' => $categoryId,
-                'parentId' => $parentId,
-                'name' => $name
-            ]);
-            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
-            $id = $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
+            $itemSpecificId = $this->insertItemSpecificName($name, $productId, $categoryId, $parentId);
             if (is_array($values) && $this->isAssociativeArray($values)) {
-                $this->insertItemSpecifics($values, $productId, $categoryId, $id);
+                $this->insertItemSpecifics($values, $productId, $categoryId, $itemSpecificId);
                 continue;
             }
-            foreach (((array) $values) as $value) {
-                $insert = $this->getInsert('productCategoryAmazonItemSpecificsValues')->values([
-                    'itemSpecificId' => $id,
-                    'value' => $value
-                ]);
-                $this->writeSql->prepareStatementForSqlObject($insert)->execute();
-            }
+            $this->insertItemSpecificValues($itemSpecificId, (array) $values);
+        }
+    }
+
+    protected function insertItemSpecificName(string $name, int $productId, int $categoryId, int $parentId): int
+    {
+        $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
+            'productId' => $productId,
+            'categoryId' => $categoryId,
+            'parentId' => $parentId,
+            'name' => $name
+        ]);
+        $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        return $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
+    }
+
+    protected function insertItemSpecificValues(int $id, array $values): void
+    {
+        foreach ($values as $value) {
+            $insert = $this->getInsert('productCategoryAmazonItemSpecificsValues')->values([
+                'itemSpecificId' => $id,
+                'value' => $value
+            ]);
+            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         }
     }
 
