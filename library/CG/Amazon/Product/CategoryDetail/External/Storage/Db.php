@@ -13,6 +13,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Stdlib\ArrayUtils;
+use function CG\Stdlib\isArrayAssociative;
 
 class Db implements StorageInterface
 {
@@ -189,7 +190,7 @@ class Db implements StorageInterface
     ): void {
         foreach ($itemSpecifics as $name => $values) {
             $itemSpecificId = $this->insertItemSpecificName($name, $productId, $categoryId, $parentId);
-            if (is_array($values) && $this->isAssociativeArray($values)) {
+            if (is_array($values) && isArrayAssociative($values)) {
                 $this->insertItemSpecifics($values, $productId, $categoryId, $itemSpecificId);
                 continue;
             }
@@ -219,12 +220,6 @@ class Db implements StorageInterface
             $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         }
     }
-
-    protected function isAssociativeArray(array $array): bool
-    {
-        return array_keys($array) !== range(0, count($array) - 1);
-    }
-
 
     public function remove(int $productId, int $categoryId): void
     {
