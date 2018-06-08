@@ -34,7 +34,7 @@ return [
                     $controller->$method($OUId, $app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS', 'PURGE'],
         'name' => 'OrderCountsEntity',
         'validation' => [
             "dataRules" => OrderCountsEntityValidation::class,
