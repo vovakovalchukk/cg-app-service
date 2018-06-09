@@ -151,7 +151,7 @@ class Db implements StorageInterface
                 $result[$itemSpecific['name']][] = $itemSpecific['value'];
                 continue;
             }
-            if ($itemSpecific['value']) {
+            if ($itemSpecific['value'] !== null) {
                 $result[$itemSpecific['name']] = $itemSpecific['value'];
                 continue;
             }
