@@ -21,22 +21,29 @@ class AmazonProductChannelAndCategoryDetail extends AbstractMigration
             ->create();
 
         $this
-            ->table(
-                'productCategoryAmazonItemSpecifics',
-                [
-                    'id' => false,
-                    'primary_key' => ['productId', 'categoryId', 'name', 'value'],
-                    'collation' => 'utf8_unicode_ci',
-                ]
-            )
+            ->table('productCategoryAmazonItemSpecifics')
             ->addColumn('productId', 'integer')
             ->addColumn('categoryId', 'integer')
-            ->addColumn('name', 'string')
-            ->addColumn('value', 'string')
+            ->addColumn('parentId', 'integer')
+            ->addColumn('name', 'string', ['limit' => 190])
             ->addForeignKey(
                 ['productId', 'categoryId'],
                 'productCategoryAmazonDetail',
                 ['productId', 'categoryId'],
+                ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::CASCADE]
+            )
+            ->addIndex(['productId', 'categoryId'])
+            ->addIndex('parentId')
+            ->create();
+
+        $this
+            ->table('productCategoryAmazonItemSpecificsValues')
+            ->addColumn('itemSpecificId', 'integer')
+            ->addColumn('value', 'string')
+            ->addForeignKey(
+                'itemSpecificId',
+                'productCategoryAmazonItemSpecifics',
+                'id',
                 ['update' => ForeignKey::CASCADE, 'delete' => ForeignKey::CASCADE]
             )
             ->create();

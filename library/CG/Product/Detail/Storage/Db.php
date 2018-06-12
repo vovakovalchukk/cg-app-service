@@ -95,11 +95,14 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getCategoryTemplateId())) {
             $query['productCategoryTemplate.categoryTemplateId'] = $filter->getCategoryTemplateId();
         }
-        if (!empty($filter->getAsin())) {
-            $query['productDetail.asin'] = $filter->getAsin();
+        if (!empty($filter->getUpc())) {
+            $query['productDetail.upc'] = $filter->getUpc();
         }
         if (!empty($filter->getIsbn())) {
             $query['productDetail.isbn'] = $filter->getIsbn();
+        }
+        if (!empty($filter->getGtin())) {
+            $query['productDetail.gtin'] = $filter->getGtin();
         }
         return $query;
     }

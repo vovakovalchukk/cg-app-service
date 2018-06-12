@@ -12,6 +12,8 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use Zend\Stdlib\ArrayUtils;
+use function CG\Stdlib\isArrayAssociative;
 
 class Db implements StorageInterface
 {
@@ -31,32 +33,59 @@ class Db implements StorageInterface
 
     public function fetch(int $productId, int $categoryId): ExternalInterface
     {
-        $select = $this->getSelect()->where([
-            'productCategoryAmazonDetail.productId' => $productId,
-            'productCategoryAmazonDetail.categoryId' => $categoryId,
+        $select = $this->getProductCategoryDetailSelect()->where([
+            'productId' => $productId,
+            'categoryId' => $categoryId
         ]);
-        $array = $this->mapResultsToArray(
-            $this->readSql->prepareStatementForSqlObject($select)->execute()
-        );
+        $detail = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        $select = $this->getItemSpecificsSelect()->where([
+            'productId' => $productId,
+            'categoryId' => $categoryId
+        ]);
+        $itemSpecifics = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        $select = $this->getValidValuesSelect()->where([
+            'productId' => $productId,
+            'categoryId' => $categoryId
+        ]);
+        $validValues = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        $array = $this->mapResultsToArray($detail, $itemSpecifics, $validValues);
+
         return External::fromArray($array[$productId][$categoryId] ?? []);
     }
 
     public function fetchMultiple(array $ids): array
     {
-        $select = $this->getSelect();
+        $productDetailSelect = $this->getProductCategoryDetailSelect();
+        $itemSpecificsSelect = $this->getItemSpecificsSelect();
+        $validValuesSelect = $this->getValidValuesSelect();
+
         foreach ($ids as $id) {
             [$productId, $categoryId] = $id;
-            $select->where->orPredicate(
+            $productDetailSelect->where->orPredicate(
                 (new Where())
-                    ->equalTo('productCategoryAmazonDetail.productId', $productId)
-                    ->equalTo('productCategoryAmazonDetail.categoryId', $categoryId)
+                    ->equalTo('productId', $productId)
+                    ->equalTo('categoryId', $categoryId)
+            );
+            $itemSpecificsSelect->where->orPredicate(
+                (new Where())
+                    ->equalTo('productId', $productId)
+                    ->equalTo('categoryId', $categoryId)
+            );
+            $validValuesSelect->where->orPredicate(
+                (new Where())
+                    ->equalTo('productId', $productId)
+                    ->equalTo('categoryId', $categoryId)
             );
         }
 
-        $array = $this->mapResultsToArray(
-            $this->readSql->prepareStatementForSqlObject($select)->execute()
-        );
-        $array = $this->filterResultsArrayToUniqueValues($array);
+        $details = $this->readSql->prepareStatementForSqlObject($productDetailSelect)->execute();
+        $itemSpecifics = $this->readSql->prepareStatementForSqlObject($itemSpecificsSelect)->execute();
+        $validValues = $this->readSql->prepareStatementForSqlObject($validValuesSelect)->execute();
+
+        $array = $this->mapResultsToArray($details, $itemSpecifics, $validValues);
 
         $externals = [];
         foreach ($ids as $id) {
@@ -69,109 +98,132 @@ class Db implements StorageInterface
         return $externals;
     }
 
-    protected function mapResultsToArray(ResultInterface $results): array
+    protected function mapResultsToArray(
+        ResultInterface $details,
+        ResultInterface $itemSpecifics,
+        ResultInterface $validValues
+    ): array {
+        $results = [];
+        $results = $this->attachDetailsToResults($results, $details);
+        $results = $this->attachItemSpecificsToResults($results, $itemSpecifics);
+        $results = $this->attachValidValuesToResults($results, $validValues);
+        return $results;
+    }
+
+    protected function attachDetailsToResults(array $results, ResultInterface $details): array
     {
-        $array = [];
-        foreach ($results as $result) {
-            $productId = $result['productId'];
-            $categoryId = $result['categoryId'];
-            if (!isset($array[$productId])) {
-                $array[$productId] = [];
+        foreach ($details as $detail) {
+            $productId = $detail['productId'];
+            $categoryId = $detail['categoryId'];
+            if (!isset($results[$productId])) {
+                $results[$productId] = [$categoryId => []];
             }
-            if (!isset($array[$productId][$categoryId])) {
-                $array[$productId][$categoryId] = array_merge($result, [
-                    'itemSpecifics' => [],
-                    'validValues' => [],
-                ]);
+            $results[$productId][$categoryId]['subCategoryId'] = $detail['subCategoryId'];
+            $results[$productId][$categoryId]['variationTheme'] = $detail['variationTheme'];
+        }
+
+        return $results;
+    }
+
+    protected function attachItemSpecificsToResults(array $results, ResultInterface $itemSpecifics): array
+    {
+        $itemSpecifics = ArrayUtils::iteratorToArray($itemSpecifics);
+        foreach ($itemSpecifics as $itemSpecific) {
+            $productId = $itemSpecific['productId'];
+            $categoryId = $itemSpecific['categoryId'];
+            if (!isset($results[$productId])) {
+                $results[$productId] = [$categoryId => []];
             }
-            $array = $this->mapItemSpecificFromResultToArray($result, $array, $productId, $categoryId);
-            $array = $this->mapValidValueFromResultToArray($result, $array, $productId, $categoryId);
-        }
-        return $array;
-    }
-
-    protected function mapItemSpecificFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
-    {
-        if (!isset($result['aisName'])) {
-            return $array;
-        }
-        $itemSpecific = $result['aisName'];
-        $itemSpecificValue = $result['aisValue'];
-        $itemSpecifics = &$array[$productId][$categoryId]['itemSpecifics'];
-
-        if ($this->itemSpecificHasMultipleUniqueValues($itemSpecifics, $itemSpecific, $itemSpecificValue)) {
-            $itemSpecifics[$itemSpecific] = (array)$itemSpecifics[$itemSpecific];
-            $itemSpecifics[$itemSpecific][] = $itemSpecificValue;
-        } else {
-            $itemSpecifics[$itemSpecific] = $itemSpecificValue;
-        }
-        
-        return $array;
-    }
-
-    protected function itemSpecificHasMultipleUniqueValues(array $itemSpecifics, string $itemSpecific, string $latestValue): bool
-    {
-        return (isset($itemSpecifics[$itemSpecific]) &&
-            (is_array($itemSpecifics[$itemSpecific]) || $itemSpecifics[$itemSpecific] !== $latestValue));
-    }
-
-    protected function mapValidValueFromResultToArray(array $result, array $array, int $productId, int $categoryId): array
-    {
-        if (!isset($result['avvSku'])) {
-            return $array;
-        }
-        $sku = $result['avvSku'];
-        if (!isset($array[$productId][$categoryId]['validValues'][$sku])) {
-            $array[$productId][$categoryId]['validValues'][$sku] = [];
-        }
-        $array[$productId][$categoryId]['validValues'][$sku][] = [
-            'name' => $result['avvName'],
-            'option' => $result['avvOption'],
-            'displayName' => $result['avvDisplayName'],
-        ];
-        return $array;
-    }
-
-    protected function filterResultsArrayToUniqueValues(array $array): array
-    {
-        // Because we join on to multiple tables we end up with duplicated data
-        // Filtering them out in PHP is more efficient then trying to do it in MySQL
-        foreach ($array as $productId => &$categories) {
-            foreach ($categories as $categoryId => &$data) {
-                $data['itemSpecifics'] = $this->filterToUniqueItemSpecifics($data['itemSpecifics']);
-                $data['validValues'] = $this->filterToUniqueValidValues($data['validValues']);
+            if (isset($results[$productId][$categoryId]['itemSpecific'])) {
+                continue;
             }
+            $results[$productId][$categoryId]['itemSpecifics'] = $this->buildItemSpecificsArrayForProductAndCategory(
+                $itemSpecifics,
+                $productId,
+                $categoryId
+            );
         }
-        return $array;
+        return $results;
     }
 
-    protected function filterToUniqueItemSpecifics(array $itemSpecifics): array
+    protected function buildItemSpecificsArrayForProductAndCategory(
+        array $itemSpecifics,
+        int $productId,
+        int $categoryId
+    ): array {
+        $itemSpecifics = array_filter($itemSpecifics, function($itemSpecific) use ($productId, $categoryId) {
+            return $itemSpecific['productId'] == $productId && $itemSpecific['categoryId'] == $categoryId;
+        });
+
+        return $this->buildItemSpecificArrayForParent($itemSpecifics, 0);
+    }
+
+    protected function buildItemSpecificArrayForParent(array $itemSpecifics, int $parentId): array
     {
-        foreach ($itemSpecifics as $itemSpecific => &$itemSpecificValue) {
-            if (is_array($itemSpecificValue)) {
-                $uniqueSpecifics = array_unique($itemSpecificValue);
-                // array_unique() always returns an associative array which causes problems when converted to JSON
-                $itemSpecificValue = array_values($uniqueSpecifics);
+        $result = [];
+        foreach ($itemSpecifics as $itemSpecific) {
+            if ($itemSpecific['parentId'] !== $parentId) {
+                continue;
             }
+            if (isset($result[$itemSpecific['name']])) {
+                $result[$itemSpecific['name']] = (array) $result[$itemSpecific['name']];
+                $result[$itemSpecific['name']][] = $itemSpecific['value'];
+                continue;
+            }
+            if ($itemSpecific['value'] !== null) {
+                $result[$itemSpecific['name']] = $itemSpecific['value'];
+                continue;
+            }
+            $result[$itemSpecific['name']] = $this->buildItemSpecificArrayForParent($itemSpecifics, $itemSpecific['id']);
         }
-        return $itemSpecifics;
+        return $result;
     }
 
-    protected function filterToUniqueValidValues(array $validValues): array
+
+    protected function attachValidValuesToResults(array $results, ResultInterface $validValues): array
     {
-        foreach ($validValues as $sku => &$skuValidValues) {
-            $validValuesSeen = [];
-            $uniqueValidValues = array_filter($skuValidValues, function ($validValue) use (&$validValuesSeen) {
-                if (!isset($validValuesSeen[$validValue['name']])) {
-                    $validValuesSeen[$validValue['name']] = true;
-                    return true;
-                }
-                return false;
-            });
-            // array_filter() always returns an associative array which causes problems when converted to JSON
-            $skuValidValues = array_values($uniqueValidValues);
+        $validValues = ArrayUtils::iteratorToArray($validValues);
+        foreach ($validValues as $validValue) {
+            $productId = $validValue['productId'];
+            $categoryId = $validValue['categoryId'];
+            if (!isset($results[$productId])) {
+                $results[$productId] = [$categoryId => []];
+            }
+            if (isset($results[$productId][$categoryId]['validValues'])) {
+                continue;
+            }
+            $results[$productId][$categoryId]['validValues'] = $this->buildValidValuesArrayForProductAndCategory(
+                $validValues,
+                $productId,
+                $categoryId
+            );
         }
-        return $validValues;
+        return $results;
+    }
+
+    protected function buildValidValuesArrayForProductAndCategory(
+        array $validValues,
+        int $productId,
+        int $categoryId
+    ): array {
+        $validValues = $itemSpecifics = array_filter($validValues, function($validValue) use ($productId, $categoryId) {
+            return $validValue['productId'] == $productId && $validValue['categoryId'] == $categoryId;
+        });
+
+        $result = [];
+        foreach ($validValues as $validValue) {
+            $sku = $validValue['sku'];
+            if (!isset($result[$sku])) {
+                $result[$sku] = [];
+            }
+
+            $result[$sku][] = [
+                'name' => $validValue['name'] ?? '',
+                'option' => $validValue['option'] ?? '',
+                'displayName' => $validValue['displayName'] ?? ''
+            ];
+        }
+        return $result;
     }
 
     public function save(int $productId, int $categoryId, ExternalInterface $external): void
@@ -194,26 +246,50 @@ class Db implements StorageInterface
         ));
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
 
-        $this->saveItemSpecifics($itemSpecifics, $productId, $categoryId);
-        $this->saveValidValues($validValues, $productId, $categoryId);
+        $this->insertItemSpecifics($itemSpecifics, $productId, $categoryId);
+        $this->insertValidValues($validValues, $productId, $categoryId);
     }
 
-    protected function saveItemSpecifics(array $itemSpecifics, int $productId, int $categoryId): void
-    {
+    protected function insertItemSpecifics(
+        array $itemSpecifics,
+        int $productId,
+        int $categoryId,
+        int $parentId = 0
+    ): void {
         foreach ($itemSpecifics as $name => $values) {
-            foreach (((array) $values) as $value) {
-                $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
-                    'productId' => $productId,
-                    'categoryId' => $categoryId,
-                    'name' => $name,
-                    'value' => $value,
-                ]);
-                $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+            $itemSpecificId = $this->insertItemSpecificName($name, $productId, $categoryId, $parentId);
+            if (is_array($values) && isArrayAssociative($values)) {
+                $this->insertItemSpecifics($values, $productId, $categoryId, $itemSpecificId);
+                continue;
             }
+            $this->insertItemSpecificValues($itemSpecificId, (array) $values);
         }
     }
 
-    protected function saveValidValues(array $validValues, int $productId, int $categoryId): void
+    protected function insertItemSpecificName(string $name, int $productId, int $categoryId, int $parentId): int
+    {
+        $insert = $this->getInsert('productCategoryAmazonItemSpecifics')->values([
+            'productId' => $productId,
+            'categoryId' => $categoryId,
+            'parentId' => $parentId,
+            'name' => $name
+        ]);
+        $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        return $this->writeSql->getAdapter()->getDriver()->getLastGeneratedValue();
+    }
+
+    protected function insertItemSpecificValues(int $id, array $values): void
+    {
+        foreach ($values as $value) {
+            $insert = $this->getInsert('productCategoryAmazonItemSpecificsValues')->values([
+                'itemSpecificId' => $id,
+                'value' => $value
+            ]);
+            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        }
+    }
+
+    protected function insertValidValues(array $validValues, int $productId, int $categoryId): void
     {
         foreach ($validValues as $sku => $skuValidValues) {
             foreach ($skuValidValues as $validValue) {
@@ -239,24 +315,29 @@ class Db implements StorageInterface
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
     }
 
-    protected function getSelect(): Select
+    protected function getProductCategoryDetailSelect(): Select
+    {
+        return $this->readSql->select('productCategoryAmazonDetail');
+    }
+
+    protected function getItemSpecificsSelect(): Select
     {
         return $this->readSql
-            ->select('productCategoryAmazonDetail')
+            ->select('productCategoryAmazonItemSpecifics')
+            ->columns(['id', 'productId', 'categoryId', 'name', 'parentId'])
             ->join(
-                'productCategoryAmazonItemSpecifics',
-                'productCategoryAmazonDetail.productId = productCategoryAmazonItemSpecifics.productId'
-                . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonItemSpecifics.categoryId',
-                ['aisName' => 'name', 'aisValue' => 'value'],
-                Select::JOIN_LEFT
-            )
-            ->join(
-                'productCategoryAmazonValidValues',
-                'productCategoryAmazonDetail.productId = productCategoryAmazonValidValues.productId'
-                . ' AND productCategoryAmazonDetail.categoryId = productCategoryAmazonValidValues.categoryId',
-                ['avvSku' => 'sku', 'avvName' => 'name', 'avvOption' => 'option', 'avvDisplayName' => 'displayName'],
+                'productCategoryAmazonItemSpecificsValues',
+                'productCategoryAmazonItemSpecifics.id = productCategoryAmazonItemSpecificsValues.itemSpecificId',
+                ['value'],
                 Select::JOIN_LEFT
             );
+    }
+
+    protected function getValidValuesSelect(): Select
+    {
+        return $this->readSql
+            ->select('productCategoryAmazonValidValues')
+            ->columns(['productId', 'categoryId', 'sku', 'name', 'option', 'displayName']);
     }
 
     protected function getInsert(string $table = 'productCategoryAmazonDetail'): Insert

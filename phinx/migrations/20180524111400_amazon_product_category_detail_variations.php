@@ -9,7 +9,7 @@ class AmazonProductCategoryDetailVariations extends AbstractMigration
     {
         $this
             ->table('productCategoryAmazonDetail')
-            ->addColumn('variationTheme', 'string')
+            ->addColumn('variationTheme', 'string', ['null' => true])
             ->update();
 
         $this
