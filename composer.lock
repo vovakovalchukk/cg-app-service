@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b0c9afc74434314aa821f2e2192e90f",
+    "content-hash": "1d1000a03691a6e8b77e259fdd33800d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -3129,16 +3129,16 @@
         },
         {
             "name": "channelgrabber/validation",
-            "version": "1.2.13",
+            "version": "dev-LIS-216-category-version-map-api",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-validation.git",
-                "reference": "5a7f29f4e2b7595570649a4ebd304267e0d954e5"
+                "reference": "bb4837aee1ddc1c3e50661cbb84e128c474718b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.13-00457d.zip",
-                "reference": "5a7f29f4e2b7595570649a4ebd304267e0d954e5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-dev-LIS-216-category-version-map-api-3ff7d8.zip",
+                "reference": "bb4837aee1ddc1c3e50661cbb84e128c474718b0",
                 "shasum": null
             },
             "require": {
@@ -3156,7 +3156,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2017-01-04T16:22:58+00:00"
+            "time": "2018-06-13T07:42:06+00:00"
         },
         {
             "name": "channelgrabber/vnderror",
@@ -10752,12 +10752,19 @@
             "alias_normalized": "1.13.3.0",
             "version": "dev-LIS-216-category-version-map-api",
             "package": "channelgrabber/product"
+        },
+        {
+            "alias": "1.2.14",
+            "alias_normalized": "1.2.14.0",
+            "version": "dev-LIS-216-category-version-map-api",
+            "package": "channelgrabber/validation"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/product": 20,
+        "channelgrabber/validation": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
