@@ -33,6 +33,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 
             $where->addPredicates($query, PredicateSet::OP_AND);
             $select->where($where);
+            $select->group('category.id');
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -86,21 +87,19 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         $select->join(
             CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
-            new Expression('category.channel = categoryVersionMapChannel.channel AND categoryVersionMapChannel.categoryVersionMapId = ?', [$filter->getVersionMapId()]),
+            new Expression('category.version IS NULL OR (category.version = categoryVersionMapChannel.version
+                    AND
+                    IF (category.marketplace IS NULL, TRUE, category.marketplace = categoryVersionMapChannel.marketplace)
+                    AND
+                    IF (category.accountId IS NULL, TRUE, category.accountId = categoryVersionMapChannel.accountId)
+                )
+                AND categoryVersionMapChannel.categoryVersionMapId =?', [$filter->getVersionMapId()]),
             [],
-            Select::JOIN_LEFT
-        );
-
-        $where->addPredicates(
-            [
-                new Predicate('(category.version IS NULL OR category.version = categoryVersionMapChannel.version)'),
-                new Predicate('(category.marketplace IS NULL OR category.marketplace = categoryVersionMapChannel.marketplace)'),
-                new Predicate('(category.accountId IS NULL OR category.accountId = categoryVersionMapChannel.accountId)')
-            ]
+            Select::JOIN_INNER
         );
     }
 
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         return $this->getReadSql()->select(static::DB_TABLE_NAME);
     }
