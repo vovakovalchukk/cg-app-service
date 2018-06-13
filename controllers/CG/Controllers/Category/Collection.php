@@ -31,6 +31,17 @@ class Collection
 
     public function getData()
     {
+        $versionMapId = null;
+
+        if (!is_null($this->getParams('versionMapId')))
+        {
+            $versionMapId = $this->getParams('versionMapId');
+        } elseif (is_null($this->getParams('versionMapId')) && !is_null($this->getParams('version'))) {
+            $versionMapId = null;
+        } else {
+            $versionMapId = $this->categoryVersionMapService->getLatestId();
+        }
+
         return $this->service->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?? 10,
@@ -44,7 +55,8 @@ class Collection
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
                 $this->getParams('version') ?? [],
-                ($this->getParams('versionMapId')) ? $this->getParams('versionMapId') : ($this->getParams('version')) ? null : $this->categoryVersionMapService->getLatestId()
+                $versionMapId
+
             )
         );
     }
