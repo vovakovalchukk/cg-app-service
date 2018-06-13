@@ -30,7 +30,7 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
     }
 
-    public function fetchCollectionByFilter(Filter $filter)
+    public function fetchCollectionByFilter(Filter $filter): Collection
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray());
         return $this->fetchCollection($collection);

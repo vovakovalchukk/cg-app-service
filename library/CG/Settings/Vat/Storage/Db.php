@@ -7,11 +7,15 @@ use CG\Settings\Vat\Filter as Filter;
 use CG\Settings\Vat\StorageInterface;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
+use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Update;
 
 class Db extends DbAbstract implements StorageInterface
 {
-    public function fetchCollectionByFilter(Filter $filter)
+    public function fetchCollectionByFilter(Filter $filter): Collection
     {
         try {
             $query = $this->buildFilterQuery($filter);
@@ -35,7 +39,7 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    protected function buildFilterQuery(Filter $filter)
+    protected function buildFilterQuery(Filter $filter): array
     {
         $query = [];
         if (!empty($filter->getId())) {
@@ -47,22 +51,22 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         return $this->getReadSql()->select('vatSettings');
     }
 
-    protected function getInsert()
+    protected function getInsert(): Insert
     {
         return $this->getWriteSql()->insert('vatSettings');
     }
 
-    protected function getUpdate()
+    protected function getUpdate(): Update
     {
         return $this->getWriteSql()->update('vatSettings');
     }
 
-    protected function getDelete()
+    protected function getDelete(): Delete
     {
         return $this->getWriteSql()->delete('vatSettings');
     }

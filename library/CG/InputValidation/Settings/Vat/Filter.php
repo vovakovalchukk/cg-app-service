@@ -1,18 +1,17 @@
 <?php
 namespace CG\InputValidation\Settings\Vat;
 
+use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
-use CG\Validation\Rules\ArrayOfIntegersValidator;
-use CG\Validation\Rules\IntegerValidator;
-use CG\Validation\Rules\IsArrayValidator;
 
 class Filter implements RulesInterface
 {
     use PaginationTrait;
 
-    public function getRules()
+    public function getRules(): array
     {
         return [
             'limit' => $this->getLimitValidation(),

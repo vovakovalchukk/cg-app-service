@@ -1,15 +1,14 @@
 <?php
 namespace CG\InputValidation\Settings\Vat;
 
-use CG\Validation\RulesInterface;
 use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
+use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
-use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
-    public function getRules()
+    public function getRules(): array
     {
         return [
             'id' => [
