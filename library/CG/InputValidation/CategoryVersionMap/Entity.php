@@ -1,10 +1,11 @@
 <?php
 namespace CG\InputValidation\CategoryVersionMap;
 
+use CG\Validation\Rules\ArrayOfObjectsValidator;
 use CG\Validation\Rules\IntegerValidator;
-use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
+
 
 class Entity implements RulesInterface
 {
@@ -23,7 +24,7 @@ class Entity implements RulesInterface
             'versionMap' => [
                 'name' => 'versionMap',
                 'required' => true,
-                'validators' => [new IsArrayValidator(['name' => 'versionMap'])]
+                'validators' => [new ArrayOfObjectsValidator('versionMap')]
             ],
         ];
     }

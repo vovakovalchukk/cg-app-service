@@ -45,7 +45,6 @@ use CG\Account\Client\PollingWindow\Storage\Api as AccountPollingWindowApiStorag
 //Order
 use CG\Order\Shared\Entity as OrderEntity;
 use CG\Order\Service\Service as OrderService;
-use CG\Order\Locking\Service as OrderLockingService;
 use CG\Order\Shared\Repository as OrderRepository;
 use CG\Order\Shared\StorageInterface as OrderStorage;
 use CG\Order\Service\Storage\Cache as OrderCacheStorage;
@@ -270,6 +269,8 @@ use CG\Order\Shared\OrderCounts\Repository as OrderCountsRepository;
 use CG\Order\Shared\OrderCounts\Storage\Redis as OrderCountsRedisStorage;
 use CG\Order\Shared\OrderCounts\Storage\Db as OrderCountsDbStorage;
 use CG\Order\Shared\OrderCounts\StorageInterface as OrderCountsStorage;
+use CG\CGLib\Order\OrderCounts\CacheClearerInterface as OrderCountsCacheClearerInterface;
+use CG\CGLib\Nginx\Cache\Invalidator\OrderCounts as OrderCountsCacheClearer;
 
 // Listing
 use CG\Listing\Entity as ListingEntity;
@@ -431,6 +432,8 @@ use CG\Billing\Licence\Storage\Api as BillingLicenceApiStorage;
 // Billing\Package
 use CG\Billing\Package\StorageInterface as BillingPackageStorage;
 use CG\Billing\Package\Storage\Api as BillingPackageApiStorage;
+use CG\Billing\Subscription\Package\Storage\Api as SubscriptionPackageApiStorage;
+use CG\Billing\Subscription\Package\StorageInterface as SubscriptionPackageStorage;
 
 // Billing\Subscription
 use CG\Billing\Subscription\StorageInterface as BillingSubscriptionStorage;
@@ -639,13 +642,6 @@ $config = array(
                 )
             ),
             OrderService::class => array(
-                'parameters' => array(
-                    'repository' => OrderPersistentStorage::class,
-                    'storage' => OrderElasticSearchStorage::class,
-                    'filterStorage' => FilterCache::class
-                )
-            ),
-            OrderLockingService::class => array(
                 'parameters' => array(
                     'repository' => OrderPersistentStorage::class,
                     'storage' => OrderElasticSearchStorage::class,
@@ -1698,6 +1694,11 @@ $config = array(
                     'client' => 'billing_guzzle',
                 ],
             ],
+            SubscriptionPackageApiStorage::class => [
+                'parameters' => [
+                    'client' => 'billing_guzzle'
+                ]
+            ],
             Sites::class => [
                 'parameters' => [
                     'config' => 'config'
@@ -1757,7 +1758,9 @@ $config = array(
                 BillingSubscriptionDiscountStorage::class => BillingSubscriptionDiscountApiStorage::class,
                 BillingSubscriptionStorage::class => BillingSubscriptionApiStorage::class,
                 BillingWindowStorage::class => BillingWindowStorageApi::class,
-                BillingTransactionStorage::class => BillingTransactionApiStorage::class
+                BillingTransactionStorage::class => BillingTransactionApiStorage::class,
+                OrderCountsCacheClearerInterface::class => OrderCountsCacheClearer::class,
+                SubscriptionPackageStorage::class => SubscriptionPackageApiStorage::class,
             ]
         )
     )

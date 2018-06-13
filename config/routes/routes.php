@@ -646,7 +646,7 @@ return array(
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'OPTIONS'],
+        'via' => ['POST', 'GET', 'OPTIONS'],
         'entityRoute' => '/shippingMethod/:id',
         'name' => 'ShippingMethodCollection',
         'validation' => [
