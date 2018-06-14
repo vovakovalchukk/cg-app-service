@@ -33,8 +33,7 @@ class Collection
     {
         $versionMapId = null;
 
-        if (!is_null($this->getParams('versionMapId')))
-        {
+        if (!is_null($this->getParams('versionMapId'))) {
             $versionMapId = $this->getParams('versionMapId');
         } elseif (is_null($this->getParams('versionMapId')) && !is_null($this->getParams('version'))) {
             $versionMapId = null;
