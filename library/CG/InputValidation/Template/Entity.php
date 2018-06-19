@@ -59,11 +59,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => []
             ),
-            'mongoId' => array(
+            'mongoId' => [
                 'name' => 'mongoId',
                 'required' => false,
                 'validators' => []
-            )
+            ]
         );
     }
 }
