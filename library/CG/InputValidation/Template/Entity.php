@@ -16,7 +16,7 @@ class Entity implements RulesInterface
             'id' => array(
                 'name' => 'id',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => []
             ),
             'type' => array(
                 'name' => 'type',
