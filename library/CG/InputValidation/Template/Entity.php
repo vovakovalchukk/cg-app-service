@@ -58,6 +58,11 @@ class Entity implements RulesInterface
                 'name' => 'editable',
                 'required' => false,
                 'validators' => []
+            ),
+            'mongoId' => array(
+                'name' => 'mongoId',
+                'required' => false,
+                'validators' => []
             )
         );
     }
