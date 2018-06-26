@@ -10,12 +10,12 @@ class AddShopifyAutomaticCategory extends AbstractMigration
     {
         $this->deleteAutomaticCategory();
         $categoryName = static::AUTOMATIC_CATEGORY_NAME;
-        $this->execute("
+        $this->execute('
             INSERT INTO `category`
               (`externalId`, `title`, `channel`, `listable`, `enabled`, `accountId`)
             VALUES 
-              ('automatic', '{$categoryName}', 'shopify', 1, 1, 0)
-        ");
+              ("automatic", "' . $categoryName . '", "shopify", 1, 1, 0)
+        ');
     }
 
     public function down()
@@ -26,11 +26,11 @@ class AddShopifyAutomaticCategory extends AbstractMigration
     protected function deleteAutomaticCategory(): void
     {
         $categoryName = static::AUTOMATIC_CATEGORY_NAME;
-        $this->execute("
+        $this->execute('
             DELETE FROM `category`
-            WHERE `category`.`channel` = 'shopify'
-            and `category`.`title` = '{$categoryName}'
+            WHERE `category`.`channel` = "shopify"
+            and `category`.`title` = "' . $categoryName . '"
             and `category`.`accountId` = 0
-        ");
+        ');
     }
 }
