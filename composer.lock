@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "386e3732a29f85aec324e62c806d006b",
+    "content-hash": "61bcf8de61752dddf0082800529dcf4b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -838,17 +838,11 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.12.6",
+            "version": "dev-TAC-133-save-return-policies",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "40f91b03135ef3fa62b9aac85b9822264aadc1fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.12.6-b1d76b.zip",
-                "reference": "40f91b03135ef3fa62b9aac85b9822264aadc1fe",
-                "shasum": null
+                "reference": "58c2a32df2c69c3f42a24e1c08e1a8d0ea6cfa22"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -10756,10 +10750,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.12.7",
+            "alias_normalized": "1.12.7.0",
+            "version": "dev-TAC-133-save-return-policies",
+            "package": "channelgrabber/ebay"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ebay": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
