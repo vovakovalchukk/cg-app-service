@@ -108,6 +108,8 @@ return [
                 'Versioniser_OrderLabelEntity_3' => OrderLabelEntity\Versioniser3::class,
                 'Versioniser_OrderLabelCollection_4' => OrderLabelCollection\Versioniser4::class,
                 'Versioniser_OrderLabelEntity_4' => OrderLabelEntity\Versioniser4::class,
+                'Versioniser_OrderLabelCollection_5' => OrderLabelCollection\Versioniser5::class,
+                'Versioniser_OrderLabelEntity_5' => OrderLabelEntity\Versioniser5::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
                 'Versioniser_ProductDetailCollection_1' => ProductDetailCollection\Versioniser1::class,

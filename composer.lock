@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fedee9b0589f10c0bfcf27462d24b32a",
+    "content-hash": "f59305762e119e10536362004df83ab0",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1635,16 +1635,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.38.8",
+            "version": "dev-TAC-116-order-label-cost",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e703918c14d7048d03315b3802097b4d3e1c9626"
+                "reference": "865d0506dee3bdc05898ffcfe1bddec6fc9e2b89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.38.8-75e515.zip",
-                "reference": "e703918c14d7048d03315b3802097b4d3e1c9626",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-TAC-116-order-label-cost-1232a8.zip",
+                "reference": "865d0506dee3bdc05898ffcfe1bddec6fc9e2b89",
                 "shasum": null
             },
             "require": {
@@ -1720,7 +1720,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-06T08:38:59+00:00"
+            "time": "2018-06-29T11:49:27+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3783,7 +3783,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8838,7 +8838,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -10759,10 +10759,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.38.9",
+            "alias_normalized": "1.38.9.0",
+            "version": "dev-TAC-116-order-label-cost",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },

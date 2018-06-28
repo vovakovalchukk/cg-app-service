@@ -121,6 +121,16 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1, 'max' => 24])]
             ],
+            'costPrice' => [
+                'name'       => 'costPrice',
+                'required'   => false,
+                'validators' => [new DecimalValidator(['name' => 'costPrice'])]
+            ],
+            'costCurrencyCode' => [
+                'name'       => 'costCurrencyCode',
+                'required'   => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
