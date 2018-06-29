@@ -76,7 +76,9 @@ class Db implements StorageInterface
                 $array[$productId][$categoryId] = [
                     'listingDuration' => $result['listingDuration'],
                     'itemSpecifics' => [],
-                    'returnPolicy' => $result['returnPolicy']
+                    'returnPolicy' => $result['returnPolicy'],
+                    'shippingPolicy' => $result['shippingPolicy'],
+                    'paymentPolicy' => $result['paymentPolicy']
                 ];
             }
             if (!isset($result['name'])) {
