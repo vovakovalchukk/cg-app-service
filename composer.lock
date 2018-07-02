@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "de61c9a9dfeefdefa26268e0ee99f1f8",
+    "content-hash": "721bf7e75af80d4a535c6b26659d12fd",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -505,16 +505,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.36.2",
+            "version": "dev-TAC-127-ebay-seller-policies",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "5a4e0f7bdc1d4e6f75b9877893afbb1d5d4ecf16"
+                "reference": "5fa04419613684fe54e85b6698ed31906f05a874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.36.2-bde5a1.zip",
-                "reference": "5a4e0f7bdc1d4e6f75b9877893afbb1d5d4ecf16",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-TAC-127-ebay-seller-policies-5e07b8.zip",
+                "reference": "5fa04419613684fe54e85b6698ed31906f05a874",
                 "shasum": null
             },
             "require": {
@@ -589,7 +589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-28T09:12:25+00:00"
+            "time": "2018-06-29T14:04:56+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -834,22 +834,22 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-TAC-143-save-shipping-and-payment-policies",
+            "version": "dev-TAC-127-ebay-seller-policies",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "9ab17e599e19dce1f4680a1efe40f93d63b08eeb"
+                "reference": "4c6f585d8c5c18d540a79da579d949d59e898516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-133-save-return-policies-37471f.zip",
-                "reference": "efadef61b7a189ba689a196227a330dc5df43ea1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-127-ebay-seller-policies-d10ef7.zip",
+                "reference": "4c6f585d8c5c18d540a79da579d949d59e898516",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.15.1",
-                "channelgrabber/channel": "^1.34.0",
+                "channelgrabber/channel": "dev-TAC-127-ebay-seller-policies as 1.36.3",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
@@ -899,7 +899,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-29T13:21:49+00:00"
+            "time": "2018-07-02T08:24:29+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -3783,7 +3783,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8838,7 +8838,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -10761,14 +10761,21 @@
     ],
     "aliases": [
         {
-            "alias": "1.12.7",
-            "alias_normalized": "1.12.7.0",
-            "version": "dev-TAC-143-save-shipping-and-payment-policies",
+            "alias": "1.36.3",
+            "alias_normalized": "1.36.3.0",
+            "version": "dev-TAC-127-ebay-seller-policies",
+            "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.12.9",
+            "alias_normalized": "1.12.9.0",
+            "version": "dev-TAC-127-ebay-seller-policies",
             "package": "channelgrabber/ebay"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ebay": 20,
         "phpish/link_header": 20,
