@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9015ab11c442b680025b7e503e2ece6",
+    "content-hash": "faf322f7ca1c68ce28ad4662a3b27354",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -505,16 +505,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-TAC-127-ebay-seller-policies",
+            "version": "1.36.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "f045a27135b803eb6cd583d0bcb03f7e3154656c"
+                "reference": "4cd726751d6529564879175c9df62886148739d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-TAC-127-ebay-seller-policies-59adbd.zip",
-                "reference": "f045a27135b803eb6cd583d0bcb03f7e3154656c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.36.4-041d70.zip",
+                "reference": "4cd726751d6529564879175c9df62886148739d3",
                 "shasum": null
             },
             "require": {
@@ -529,7 +529,7 @@
                 "channelgrabber/gearman": "^1.2.19",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
-                "channelgrabber/listing": "dev-TAC-127-ebay-seller-policies as 1.17.2",
+                "channelgrabber/listing": "^1.17.3",
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/location": ">=1.1.1,<2.0.0",
                 "channelgrabber/locking": "^1.1.0",
@@ -589,7 +589,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-04T11:48:29+00:00"
+            "time": "2018-07-05T13:14:37+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -834,22 +834,22 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-TAC-127-ebay-seller-policies",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "c98425a9afd37a6fc97cd67ec948deb6f3ffcaa4"
+                "reference": "edf8ab04e98d172e1825338a491e53d4379b4289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-127-ebay-seller-policies-8c9569.zip",
-                "reference": "c98425a9afd37a6fc97cd67ec948deb6f3ffcaa4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.13.0-e36a9e.zip",
+                "reference": "edf8ab04e98d172e1825338a491e53d4379b4289",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.15.1",
-                "channelgrabber/channel": "dev-TAC-127-ebay-seller-policies as 1.36.3",
+                "channelgrabber/channel": "^1.36.4",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
@@ -899,7 +899,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-02T12:57:27+00:00"
+            "time": "2018-07-05T13:44:36+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1300,16 +1300,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-TAC-127-ebay-seller-policies",
+            "version": "1.17.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "40c3575a2e1879edb4b614066ac54a51997af95b"
+                "reference": "4338e665a48c54955cb898aaaafd2c1f12b9b723"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-TAC-127-ebay-seller-policies-1de73b.zip",
-                "reference": "40c3575a2e1879edb4b614066ac54a51997af95b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.17.3-b91399.zip",
+                "reference": "4338e665a48c54955cb898aaaafd2c1f12b9b723",
                 "shasum": null
             },
             "require": {
@@ -1355,7 +1355,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-02T15:17:19+00:00"
+            "time": "2018-07-05T12:04:59+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -3788,7 +3788,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -8843,7 +8843,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -10764,32 +10764,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.36.3",
-            "alias_normalized": "1.36.3.0",
-            "version": "dev-TAC-127-ebay-seller-policies",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.12.9",
-            "alias_normalized": "1.12.9.0",
-            "version": "dev-TAC-127-ebay-seller-policies",
-            "package": "channelgrabber/ebay"
-        },
-        {
-            "alias": "1.17.2",
-            "alias_normalized": "1.17.2.0",
-            "version": "dev-TAC-127-ebay-seller-policies",
-            "package": "channelgrabber/listing"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/ebay": 20,
-        "channelgrabber/listing": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
