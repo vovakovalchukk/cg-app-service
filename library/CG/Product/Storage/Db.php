@@ -86,10 +86,10 @@ class Db extends DbAbstract implements StorageInterface
             );
         }
 
-        if ($joinWithVariations || (!empty($sku) && $skuMatchTypeQuery->count() > 0)) {
+        if ($joinWithVariations) {
             $select->join(
                 ['variation' => 'product'],
-                'variation.parentProductId = product.id',
+                'variation.parentProductId = product.id AND variation.organisationUnitId = product.organisationUnitId',
                 [],
                 Select::JOIN_LEFT
             );
@@ -100,7 +100,12 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         if (!empty($sku) && $skuMatchTypeQuery->count() > 0) {
-            return $this->addSkuMatchToSelect($select, $sku, $skuMatchTypeQuery);
+            return $this->addSkuMatchToSelect(
+                $select,
+                (array) $filter->getOrganisationUnitId(),
+                $sku,
+                $skuMatchTypeQuery
+            );
         }
 
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
@@ -243,22 +248,63 @@ class Db extends DbAbstract implements StorageInterface
         return $skuMatchTypeQuery;
     }
 
-    public function addSkuMatchToSelect(Select $select, array $sku, Predicate $skuMatchTypeQuery)
+    public function addSkuMatchToSelect(Select $select, array $ouId, array $sku, Predicate $skuMatchTypeQuery)
     {
-        $column = 'IFNULL(variation.sku, product.sku)';
+        $simpleSkuMatch = $this->getReadSql()
+            ->select(['simple' => 'product'])
+            ->columns(['id', 'sku'])
+            ->join(
+                ['variation' => 'product'],
+                'variation.parentProductId = simple.id AND variation.organisationUnitId = simple.organisationUnitId',
+                [],
+                Select::JOIN_LEFT
+            )
+            ->where([
+                'variation.id' => null,
+                new Predicate(array_map(function($sku) {
+                    return new Like('simple.sku', escapeLikeValue($sku));
+                }, array_values($sku)), Predicate::COMBINED_BY_OR),
+            ]);
+
+        $variationSkuMatch = $this->getReadSql()
+            ->select(['parent' => 'product'])
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->columns(['id'])
+            ->join(
+                ['lookup' => 'product'],
+                'lookup.parentProductId = parent.id AND lookup.organisationUnitId = parent.organisationUnitId',
+                []
+            )->join(
+                ['variation' => 'product'],
+                'variation.parentProductId = parent.id AND variation.organisationUnitId = parent.organisationUnitId',
+                ['sku']
+            )
+            ->where([
+                'parent.parentProductId' => 0,
+                new Predicate(array_map(function($sku) {
+                    return new Like('lookup.sku', escapeLikeValue($sku));
+                }, array_values($sku)), Predicate::COMBINED_BY_OR),
+            ]);
+
+        if (!empty($ouId)) {
+            $simpleSkuMatch->where(['simple.organisationUnitId' => array_values($ouId)]);
+            $variationSkuMatch->where(['parent.organisationUnitId' => array_values($ouId)]);
+        }
+
+        $skuMatch = $simpleSkuMatch->combine($variationSkuMatch);
+        $column = 'skuMatch.sku';
         $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
             return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
         }, $sku));
 
         return $select
-            ->columns(
-                array_merge(
-                    $select->getRawState(Select::COLUMNS),
-                    [
-                        'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
-                        'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
-                    ]
-                )
+            ->join(
+                ['skuMatch' => $skuMatch],
+                'product.id = skuMatch.id',
+                [
+                    'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
+                    'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
+                ]
             )
             ->group('_id')
             ->having($skuMatchTypeQuery);
