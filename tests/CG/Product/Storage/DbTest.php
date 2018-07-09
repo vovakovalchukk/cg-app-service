@@ -290,6 +290,16 @@ SQL
         }
     }
 
+    /**
+     * @expectedException \CG\Stdlib\Exception\Runtime\NotFound
+     */
+    public function testSubsetSkuNotFound()
+    {
+        $this->service->fetchCollectionByFilter(
+            (new Filter('all', 1))->setSku(['unknown'])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+        );
+    }
+
     public function getSupersetSkuMatchSkus()
     {
         yield [['var1']];
@@ -321,5 +331,15 @@ SQL
         }, $product->getVariations()->getArrayOf('sku'));
         $this->assertGreaterThan(count($skus), count($variationsSkus), 'Returned parent product doesn\'t have enough matching variations');
         $this->assertEquals(count($skus), count(array_filter($variationsSkus)), 'Returned parent product doesn\'t have enough matching variations');
+    }
+
+    /**
+     * @expectedException \CG\Stdlib\Exception\Runtime\NotFound
+     */
+    public function testSupersetSkuNotFound()
+    {
+        $this->service->fetchCollectionByFilter(
+            (new Filter('all', 1))->setSku(['var1', 'unknown'])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+        );
     }
 }
