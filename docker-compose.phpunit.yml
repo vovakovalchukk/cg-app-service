@@ -1,0 +1,25 @@
+version: '2'
+services:
+  phpunit:
+    image: channelgrabber/php71
+    working_dir: /var/www
+    command: vendor/bin/phpunit --group=integration
+    volumes:
+      - '.:/var/www:ro'
+    networks:
+      - cgapp
+    depends_on:
+      - mysql
+  mysql:
+    image: percona:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cg_app
+      MYSQL_USER: phpunit
+      MYSQL_PASSWORD: phpunit
+    networks:
+      - cgapp
+networks:
+  cgapp:
+    external: false
