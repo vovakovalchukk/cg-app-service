@@ -227,10 +227,13 @@ SQL
     {
         /** @var Collection $match */
         $match = $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku([$sku])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+            (new Filter('all', 1))
+                ->setSku([$sku])
+                ->setSkuMatchType([Filter::SKU_MATCH_ALL])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
 
-        $this->assertEquals($matches, $match->getTotal(), 'Db returned more products than expected');
+        $this->assertEquals($matches, $match->getTotal(), 'Db didn\'t return expected products');
         foreach ($match as $product) {
             if (!$product->isParent()) {
                 $this->assertEquals($sku, $product->getSku(), 'Returned product has wrong sku');
@@ -249,27 +252,33 @@ SQL
     public function testExactSkuNotFound()
     {
         $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku(['unknown'])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+            (new Filter('all', 1))
+                ->setSku(['unknown'])
+                ->setSkuMatchType([Filter::SKU_MATCH_ALL])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
     }
 
     public function getSubsetSkuMatchSkus()
     {
-        yield [['var1', 'var2', 'var3', 'var4']];
-        yield [['var4', 'var5']];
+        yield [['var1', 'var2', 'var3', 'var4'], 6];
+        yield [['var4', 'var5'], 2];
     }
 
     /**
      * @dataProvider getSubsetSkuMatchSkus
      */
-    public function testSubsetSkuMatch(array $skus)
+    public function testSubsetSkuMatch(array $skus, int $matches)
     {
         /** @var Collection $match */
         $match = $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku($skus)->setSkuMatchType([Filter::SKU_MATCH_SUBSET])
+            (new Filter('all', 1))
+                ->setSku($skus)
+                ->setSkuMatchType([Filter::SKU_MATCH_SUBSET])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
 
-        $this->assertGreaterThanOrEqual(1, $match->getTotal(), 'Db returned more products than expected');
+        $this->assertEquals($matches, $match->getTotal(), 'Db didn\'t return expected products');
         /** @var Product $product */
         foreach ($match as $product) {
             if ($product->isVariation()) {
@@ -296,7 +305,10 @@ SQL
     public function testSubsetSkuNotFound()
     {
         $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku(['unknown'])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+            (new Filter('all', 1))
+                ->setSku(['unknown'])
+                ->setSkuMatchType([Filter::SKU_MATCH_ALL])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
     }
 
@@ -317,7 +329,10 @@ SQL
     {
         /** @var Collection $match */
         $match = $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku($skus)->setSkuMatchType([Filter::SKU_MATCH_SUPERSET])
+            (new Filter('all', 1))
+                ->setSku($skus)
+                ->setSkuMatchType([Filter::SKU_MATCH_SUPERSET])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
 
         $this->assertEquals(1, $match->getTotal(), 'Db returned more products than expected');
@@ -339,7 +354,10 @@ SQL
     public function testSupersetSkuNotFound()
     {
         $this->service->fetchCollectionByFilter(
-            (new Filter('all', 1))->setSku(['var1', 'unknown'])->setSkuMatchType([Filter::SKU_MATCH_ALL])
+            (new Filter('all', 1))
+                ->setSku(['var1', 'unknown'])
+                ->setSkuMatchType([Filter::SKU_MATCH_ALL])
+                ->setType([Filter::TYPE_SIMPLE, Filter::TYPE_PARENT, Filter::TYPE_VARIATION])
         );
     }
 }
