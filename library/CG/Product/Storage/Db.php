@@ -105,15 +105,17 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         if ($skuMatchTypeQuery->count() > 0) {
-            return $this->addSkuMatchToSelect(
+            $this->addSkuMatchToSelect(
                 $select,
                 (array) $filter->getOrganisationUnitId(),
                 $sku,
                 $skuMatchTypeQuery
             );
+        } else {
+            $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
         }
 
-        return $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
+        return $select;
     }
 
     protected function fetchEntityCount(Filter $filter)
