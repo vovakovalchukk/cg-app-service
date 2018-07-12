@@ -491,7 +491,6 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
-                'TemplateMongoMigrationRepository' => TemplateRepository::class,
                 'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
                 'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
@@ -926,16 +925,9 @@ $config = array(
             TemplateRepository::class => [
                 'parameter' => [
                     'storage' => TemplateCacheStorage::class,
-                    'repository' => 'TemplateMongoMigrationRepository',
+                    'repository' => TemplateDbStorage::class,
                 ],
             ],
-            'TemplateMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => TemplateDbStorage::class,
-                    'repository' => TemplateMongoDbStorage::class,
-                ],
-            ],
-
             TemplateDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
