@@ -4,6 +4,7 @@
         <testsuite name="CG App API Test Suite">
             <directory>./tests/CG</directory>
             <exclude>./tests/CG/SequentialNumbering</exclude>
+            <exclude>./tests/CG/Order/Service/InvoiceNumber/AssignerIntegrationTest.php</exclude>
         </testsuite>
     </testsuites>
     <groups>
