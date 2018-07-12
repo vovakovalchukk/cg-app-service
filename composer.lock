@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "faf322f7ca1c68ce28ad4662a3b27354",
+    "content-hash": "8cddaab2c598dd6dfa23d30473f959a6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -156,16 +156,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.27.1",
+            "version": "1.27.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "4ef679d4ba3d86643bc41955c4222d822d29abad"
+                "reference": "4352902ebba2a3961b8e1f431cc0e065b78d02dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.27.1-9aeb76.zip",
-                "reference": "4ef679d4ba3d86643bc41955c4222d822d29abad",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.27.1.1-565936.zip",
+                "reference": "4352902ebba2a3961b8e1f431cc0e065b78d02dd",
                 "shasum": null
             },
             "require": {
@@ -186,7 +186,7 @@
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/log": "^2.1.1",
                 "channelgrabber/order": "^1.34.3",
-                "channelgrabber/predis": "~1.0.12",
+                "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.14.0",
                 "channelgrabber/scraper": "^1.1.0",
                 "channelgrabber/settings": "^1.3.10",
@@ -225,7 +225,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-04T09:31:00+00:00"
+            "time": "2018-07-12T12:59:59+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -336,21 +336,21 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.5.4",
+            "version": "dev-CGIV-9651-DeferredPredis",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "1dea4f93f6fde5d78dadf47ec9818dfd0026779a"
+                "reference": "a5292a3a3de708d78512a26a2487638c7dc4986b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.5.4-ff1414.zip",
-                "reference": "1dea4f93f6fde5d78dadf47ec9818dfd0026779a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-9651-DeferredPredis-788f6b.zip",
+                "reference": "a5292a3a3de708d78512a26a2487638c7dc4986b",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
-                "channelgrabber/predis": "^1.0.3",
+                "channelgrabber/predis": "dev-CGIV-9651-DeferredPredis as 1.1.0",
                 "channelgrabber/queue": "^1.0.0",
                 "channelgrabber/stats": "^1.0.0",
                 "channelgrabber/stdlib": "^2.12.48",
@@ -378,7 +378,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-21T11:43:26+00:00"
+            "time": "2018-07-12T14:52:01+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -1007,24 +1007,26 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.6.0",
+            "version": "dev-CGIV-9651-DeferredPredis",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "6dcdea929d5fc263475604dbd33a19d6c220c952"
+                "reference": "e5383aeb0c9c89ce7994987a897d1f2dd7b4e2b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.6.0-c5da24.zip",
-                "reference": "6dcdea929d5fc263475604dbd33a19d6c220c952",
-                "shasum": "23aba33412f7999d43dea8331289974f74de7ae8"
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-dev-CGIV-9651-DeferredPredis-a760d3.zip",
+                "reference": "e5383aeb0c9c89ce7994987a897d1f2dd7b4e2b9",
+                "shasum": null
             },
             "require": {
-                "channelgrabber/di": ">=1.0.1",
+                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/predis": "dev-CGIV-9651-DeferredPredis as 1.1.0",
                 "channelgrabber/stdlib": "^2.10.4",
+                "php": ">=7.1",
                 "predis/predis": "~0.8.3"
             },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\ETag\\": "src"
@@ -1035,7 +1037,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2015-04-30T14:35:36+00:00"
+            "time": "2018-07-12T14:00:26+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -1894,23 +1896,23 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.0.14",
+            "version": "dev-CGIV-9651-DeferredPredis",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "5cb33db93a1213826b8e067b50ed2b5e896e1ee7"
+                "reference": "66d0da07bda22b05cecbe6494a59cb0fe1ed572c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.0.14-75e4db.zip",
-                "reference": "5cb33db93a1213826b8e067b50ed2b5e896e1ee7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-dev-CGIV-9651-DeferredPredis-2e6449.zip",
+                "reference": "66d0da07bda22b05cecbe6494a59cb0fe1ed572c",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/di": "^2.2.0",
                 "channelgrabber/stdlib": "^2.10.4",
-                "composer/composer": "@dev"
+                "php": ">=7.1"
             },
             "type": "di-definition",
             "autoload": {
@@ -1923,7 +1925,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-01-18T13:37:15+00:00"
+            "time": "2018-07-12T13:14:41+00:00"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -10764,10 +10766,32 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.6.0",
+            "alias_normalized": "2.6.0.0",
+            "version": "dev-CGIV-9651-DeferredPredis",
+            "package": "channelgrabber/cache"
+        },
+        {
+            "alias": "1.7.0",
+            "alias_normalized": "1.7.0.0",
+            "version": "dev-CGIV-9651-DeferredPredis",
+            "package": "channelgrabber/etag"
+        },
+        {
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
+            "version": "dev-CGIV-9651-DeferredPredis",
+            "package": "channelgrabber/predis"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/etag": 20,
+        "channelgrabber/predis": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
