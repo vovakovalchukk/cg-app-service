@@ -5,10 +5,16 @@ use CG\Product\Category\Collection;
 use CG\Product\Category\Entity;
 use CG\Product\Category\Filter;
 use CG\Product\Category\StorageInterface;
+use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapDb;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Collection\SaveInterface as SaveCollectionInterface;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Exception\ExceptionInterface;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\Expression as Predicate;
+use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
@@ -18,7 +24,16 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     {
         try {
             $query = $this->buildFilterQuery($filter);
-            $select = $this->getSelect()->where($query);
+            $select = $this->getSelect();
+            $where = new Where();
+
+            if ($filter->getVersionMapId() !== null) {
+                $this->joinOnVersionMap($select, $where, $filter);
+            }
+
+            $where->addPredicates($query, PredicateSet::OP_AND);
+            $select->where($where);
+            $select->group('category.id');
 
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -40,7 +55,16 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function buildFilterQuery(Filter $filter)
     {
         $filterArray = $filter->toArray();
-        unset($filterArray['limit'], $filterArray['page']);
+        unset($filterArray['limit'], $filterArray['page'], $filterArray['versionMapId']);
+
+        foreach ($filterArray as $name => $filter) {
+            if ($this->isFilterInPrefixBlacklist($name)) {
+                break;
+            }
+            $newName = 'category.' . $name;
+            $filterArray[$newName] = $filter;
+            unset($filterArray[$name]);
+        }
         return array_filter(
             $filterArray,
             function($value): bool {
@@ -49,7 +73,33 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         );
     }
 
-    protected function getSelect()
+    protected function isFilterInPrefixBlacklist(string $filterName): bool
+    {
+        $blacklist = [
+            'limit' => true,
+            'page' => true,
+            'versionMapId' => true
+        ];
+        return isset($blacklist[$filterName]);
+    }
+
+    protected function joinOnVersionMap(Select $select, Where $where, Filter $filter)
+    {
+        $select->join(
+            CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
+            new Expression('category.version IS NULL OR (category.version = categoryVersionMapChannel.version
+                    AND
+                    IF (category.marketplace IS NULL, TRUE, category.marketplace = categoryVersionMapChannel.marketplace)
+                    AND
+                    IF (category.accountId IS NULL, TRUE, category.accountId = categoryVersionMapChannel.accountId)
+                )
+                AND categoryVersionMapChannel.categoryVersionMapId =?', [$filter->getVersionMapId()]),
+            [],
+            Select::JOIN_INNER
+        );
+    }
+
+    protected function getSelect(): Select
     {
         return $this->getReadSql()->select(static::DB_TABLE_NAME);
     }
