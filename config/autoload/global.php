@@ -491,7 +491,6 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
-                'TemplateMongoMigrationRepository' => TemplateRepository::class,
                 'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
                 'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
                 'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
@@ -622,7 +621,7 @@ $config = array(
             ),
             CacheRedis::class => array(
                 'parameter' => array(
-                    'predis' => 'unreliable_redis'
+                    'predis' => 'unreliable_redis_deferred'
                 )
             ),
             ChannelListingDownloadService::class => [
@@ -632,7 +631,7 @@ $config = array(
             ],
             EtagRedis::class => array(
                 'parameter' => array(
-                    'predisClient' => 'unreliable_redis'
+                    'predisClient' => 'unreliable_redis_deferred'
                 )
             ),
             OrderRepository::class => array(
@@ -926,16 +925,9 @@ $config = array(
             TemplateRepository::class => [
                 'parameter' => [
                     'storage' => TemplateCacheStorage::class,
-                    'repository' => 'TemplateMongoMigrationRepository',
+                    'repository' => TemplateDbStorage::class,
                 ],
             ],
-            'TemplateMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => TemplateDbStorage::class,
-                    'repository' => TemplateMongoDbStorage::class,
-                ],
-            ],
-
             TemplateDbStorage::class => array(
                 'parameter' => array(
                     'readSql' => 'ReadSql',
