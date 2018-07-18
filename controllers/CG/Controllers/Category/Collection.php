@@ -3,6 +3,7 @@ namespace CG\Controllers\Category;
 
 use CG\Product\Category\Filter;
 use CG\Product\Category\Service;
+use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -18,15 +19,28 @@ class Collection
     protected $slim;
     /** @var Service $service */
     protected $service;
+    /** @var Service $categoryVersionMapService */
+    protected $categoryVersionMapService;
 
-    public function __construct(Slim $slim, Service $service)
+    public function __construct(Slim $slim, Service $service, CategoryVersionMapService $categoryVersionMapService)
     {
         $this->slim = $slim;
         $this->service = $service;
+        $this->categoryVersionMapService = $categoryVersionMapService;
     }
 
     public function getData()
     {
+        $versionMapId = null;
+
+        if (!is_null($this->getParams('versionMapId'))) {
+            $versionMapId = $this->getParams('versionMapId');
+        } elseif (!is_null($this->getParams('version'))) {
+            $versionMapId = null;
+        } else {
+            $versionMapId = $this->categoryVersionMapService->getLatestId();
+        }
+
         return $this->service->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit') ?? 10,
@@ -39,7 +53,9 @@ class Collection
                 $this->getParams('marketplace') ?? [],
                 $this->getParams('accountId') ?? [],
                 $this->getParams('enabled') ?? null,
-                $this->getParams('version') ?? []
+                $this->getParams('version') ?? [],
+                $versionMapId
+
             )
         );
     }

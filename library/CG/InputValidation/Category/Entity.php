@@ -80,7 +80,7 @@ class Entity implements RulesInterface
                 'validators' => [
                     new IntegerValidator(['name' => 'version']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
-                        ->setMessages(['notGreaterThanInclusive' => 'parentId must be at least %min%'])
+                        ->setMessages(['notGreaterThanInclusive' => 'version must be at least %min%'])
                 ]
             ],
         ];
