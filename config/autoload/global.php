@@ -622,7 +622,7 @@ $config = array(
             ),
             CacheRedis::class => array(
                 'parameter' => array(
-                    'predis' => 'unreliable_redis'
+                    'predis' => 'unreliable_redis_deferred'
                 )
             ),
             ChannelListingDownloadService::class => [
@@ -632,7 +632,7 @@ $config = array(
             ],
             EtagRedis::class => array(
                 'parameter' => array(
-                    'predisClient' => 'unreliable_redis'
+                    'predisClient' => 'unreliable_redis_deferred'
                 )
             ),
             OrderRepository::class => array(
