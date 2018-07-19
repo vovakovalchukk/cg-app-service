@@ -3,6 +3,9 @@ namespace CG\Stock\Location;
 
 class LinkedLocation extends QuantifiedLocation
 {
+    const MIN_VALUE = 'min';
+    const MAX_VALUE = 'max';
+
     /** @var LinkedCollection $linkedLocations */
     protected $linkedLocations;
     /** @var array $stockOverridden */
@@ -25,11 +28,7 @@ class LinkedLocation extends QuantifiedLocation
 
     public function getOnHand($quantify = true)
     {
-        $method = substr(__FUNCTION__, 3);
-        if (isset($this->stockOverridden[$method])) {
-            return parent::{'get' . $method}($quantify);
-        }
-        return $this->getStock($method, $quantify);
+        return $this->getStock(substr(__FUNCTION__, 3), static::MIN_VALUE, $quantify);
     }
 
     public function setOnHand($onHand, $quantify = true)
@@ -40,14 +39,7 @@ class LinkedLocation extends QuantifiedLocation
 
     public function getAllocated($quantify = true)
     {
-        $method = substr(__FUNCTION__, 3);
-        if (isset($this->stockOverridden[$method])) {
-            return parent::{'get' . $method}($quantify);
-        }
-
-        $onHand = $this->getOnHand($quantify);
-        $available = $this->getStock('Available', $quantify);
-        return $onHand - $available;
+        return $this->getStock(substr(__FUNCTION__, 3), static::MAX_VALUE, $quantify);
     }
 
     public function setAllocated($allocated, $quantify = true)
@@ -56,13 +48,17 @@ class LinkedLocation extends QuantifiedLocation
         return parent::setAllocated($allocated, $quantify);
     }
 
-    protected function getStock($method, $quantify)
+    protected function getStock($method, $operator, $quantify)
     {
+        if (isset($this->stockOverridden[$method])) {
+            return parent::{'get' . $method}($quantify);
+        }
+
         $stock = null;
         /** @var QuantifiedLocation $location */
         foreach ($this->linkedLocations as $location) {
             $locationStock = $location->{'get' . $method}($quantify);
-            $stock = $stock !== null ? min($stock, $locationStock) : $locationStock;
+            $stock = $stock !== null ? $operator($stock, $locationStock) : $locationStock;
         }
         return (int) $stock;
     }
