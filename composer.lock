@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "99e4d7f4e2175b1aaffee6980f3c168a",
+    "content-hash": "816c2303c2b5a3ae6b11aa4520a0a6d5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1715,16 +1715,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-TAC-116-order-label-cost",
+            "version": "1.39.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "865d0506dee3bdc05898ffcfe1bddec6fc9e2b89"
+                "reference": "9ffdbde633731d7a48962a3990965fd383a55fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-TAC-116-order-label-cost-1232a8.zip",
-                "reference": "865d0506dee3bdc05898ffcfe1bddec6fc9e2b89",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.39.0-f028cc.zip",
+                "reference": "9ffdbde633731d7a48962a3990965fd383a55fcc",
                 "shasum": null
             },
             "require": {
@@ -1800,7 +1800,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-29T11:49:27+00:00"
+            "time": "2018-07-25T12:47:26+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11231,18 +11231,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.38.9",
-            "alias_normalized": "1.38.9.0",
-            "version": "dev-TAC-116-order-label-cost",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
