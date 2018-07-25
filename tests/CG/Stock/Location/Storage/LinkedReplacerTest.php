@@ -5,14 +5,17 @@ use CG\Product\LinkLeaf\Collection as ProductLinkLeafCollection;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
 use CG\Product\LinkLeaf\Filter as ProductLinkLeafFilter;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Adjustment;
+use CG\Stock\Adjustment\Factory as AdjustmentFactory;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Collection as StockLocationCollection;
 use CG\Stock\Location\Entity as StockLocation;
+use CG\Stock\Location\Filter;
 use CG\Stock\Location\Filter as StockLocationFilter;
-use CG\Stock\Location\LinkedLocation as LinkedStockLocation;
 use CG\Stock\Location\LinkedLocation;
+use CG\Stock\Location\LinkedLocation as LinkedStockLocation;
 use CG\Stock\Location\QuantifiedLocation as QuantifiedStockLocation;
 use CG\Stock\Location\Storage\LinkedReplacer;
 use CG\Stock\Location\StorageInterface as StockLocationStorage;
@@ -30,6 +33,8 @@ class LinkedReplacerTest extends TestCase
     protected $productLinkLeafStorage;
     /** @var LinkedReplacer $linkReplacer */
     protected $linkReplacer;
+    /** @var AdjustmentFactory */
+    protected $adjustmentFactory;
 
     protected function setUp()
     {
@@ -42,6 +47,8 @@ class LinkedReplacerTest extends TestCase
             $this->stockStorage,
             $this->productLinkLeafStorage
         );
+
+        $this->adjustmentFactory = new AdjustmentFactory();
     }
 
     protected function setupStockLocationStorage()
@@ -353,26 +360,56 @@ class LinkedReplacerTest extends TestCase
             'sku4' => ['onHand' => 12, 'allocated' => 4],
         ];
 
-        yield 'simple' => [
-            'link',
-            ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            [],
-            ['onHand' => 12, 'allocated' => 4],
-            $skuStockData,
-        ];
-        yield 'quantified' => [
-            'link',
-            ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            [],
-            ['onHand' => 11, 'allocated' => 4],
-            $skuStockData,
-        ];
-        yield 'missing' => [
-            'link',
-            ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1],
-            ['sku5'],
-            ['onHand' => 0, 'allocated' => 4],
-            $skuStockData,
+        return [
+            'simple' => [
+                'link',
+                ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                [],
+                ['onHand' => 12, 'allocated' => 4],
+                $skuStockData,
+            ],
+            'quantified' => [
+                'link',
+                ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                [],
+                ['onHand' => 11, 'allocated' => 3],
+                $skuStockData,
+            ],
+            'missing' => [
+                'link',
+                ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1],
+                ['sku5'],
+                ['onHand' => 0, 'allocated' => 0],
+                $skuStockData,
+            ],
+            'CGIV-9671 (OBSF30Q-BLACK)' => [
+                'OBSF30Q-BLACK',
+                ['OBSF-30Q-DP' => 1, 'OBSF30-SURROUND-BLAC' => 1],
+                [],
+                ['onHand' => 41, 'allocated' => 0],
+                [
+                    'OBSF-30Q-DP' => ['onHand' => 41, 'allocated' => 0],
+                    'OBSF30-SURROUND-BLAC' => ['onHand' => 1832, 'allocated' => 56],
+                ]
+            ],
+            'CGIV-9671 (PSK020)' => [
+                'PSK020',
+                ['T3550092' => 1, '3FV134403000' => 1, 'YMD650210404' => 1],
+                [],
+                ['onHand' => 5, 'allocated' => 0],
+                [
+                    'T3550092' => ['onHand' => 57, 'allocated' => 9],
+                    '3FV134403000' => ['onHand' => 5, 'allocated' => 0],
+                    'YMD650210404' => ['onHand' => 241, 'allocated' => 7],
+                ]
+            ],
+            'CGIV-9671 (allocated)' => [
+                'CGIV-9671',
+                ['sku1' => 1, 'sku3' => 1, 'sku4' => 1],
+                [],
+                ['onHand' => 12, 'allocated' => 4],
+                $skuStockData
+            ],
         ];
     }
 
@@ -388,7 +425,7 @@ class LinkedReplacerTest extends TestCase
     ) {
         $this->createProductLinkLeaf($linkSku, $linkMap);
 
-        $stockLocation = $this->createStockLocation('link');
+        $stockLocation = $this->createStockLocation($linkSku);
         foreach ($skuStockData as $sku => $stockData) {
             $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated']);
         }
@@ -494,12 +531,27 @@ class LinkedReplacerTest extends TestCase
             'quantified' => [
                 'linkMap' => ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
                 'missingSkus' => [],
-                'linkStock' => ['onHand' => 11, 'allocated' => 4],
+                'linkStock' => ['onHand' => 11, 'allocated' => 3],
             ],
             'missing' => [
                 'linkMap' => ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1, 'sku5' => 1],
                 'missingSkus' => ['sku5'],
-                'linkStock' => ['onHand' => 0, 'allocated' => 4],
+                'linkStock' => ['onHand' => 0, 'allocated' => 0],
+            ],
+            'OBSF30Q-BLACK' => [
+                'linkMap' => ['OBSF-30Q-DP' => 1, 'OBSF30-SURROUND-BLAC' => 1],
+                'missingSkus' => [],
+                'linkStock' => ['onHand' => 41, 'allocated' => 0],
+            ],
+            'PSK020' => [
+                'linkMap' => ['T3550092' => 1, '3FV134403000' => 1, 'YMD650210404' => 1],
+                'missingSkus' => [],
+                'linkStock' => ['onHand' => 5, 'allocated' => 0],
+            ],
+            'CGIV-9671' => [
+                'linkMap' => ['sku1' => 1, 'sku3' => 1, 'sku4' => 1],
+                'missingSkus' => [],
+                'linkStock' => ['onHand' => 12, 'allocated' => 4],
             ],
         ];
 
@@ -513,6 +565,11 @@ class LinkedReplacerTest extends TestCase
             'sku2' => ['onHand' => 13, 'allocated' => 0],
             'sku3' => ['onHand' => 41, 'allocated' => 2],
             'sku4' => ['onHand' => 12, 'allocated' => 4],
+            'OBSF-30Q-DP' => ['onHand' => 41, 'allocated' => 0],
+            'OBSF30-SURROUND-BLAC' => ['onHand' => 1832, 'allocated' => 56],
+            'T3550092' => ['onHand' => 57, 'allocated' => 9],
+            '3FV134403000' => ['onHand' => 5, 'allocated' => 0],
+            'YMD650210404' => ['onHand' => 241, 'allocated' => 7],
         ];
 
         foreach ($skuStockData as $sku => $stockData) {
@@ -604,52 +661,51 @@ class LinkedReplacerTest extends TestCase
 
     public function getTestStockUpdateData()
     {
-        yield 'simpleOnHand' => [
-            'link',
-            ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            ['onHand' => 12, 'savedOnHand' => 15, 'allocated' => 4, 'savedAllocated' => 4],
-            [
-                'sku1' => ['onHand' => 22, 'expectedOnHand' => 25, 'allocated' => 3, 'expectedAllocated' => 3],
-                'sku2' => ['onHand' => 13, 'expectedOnHand' => 16, 'allocated' => 0, 'expectedAllocated' => 0],
-                'sku3' => ['onHand' => 41, 'expectedOnHand' => 44, 'allocated' => 2, 'expectedAllocated' => 2],
-                'sku4' => ['onHand' => 12, 'expectedOnHand' => 15, 'allocated' => 4, 'expectedAllocated' => 4],
-            ]
-        ];
-
-        yield 'quantifiedOnHand' => [
-            'link',
-            ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            ['onHand' => 11, 'savedOnHand' => 15, 'allocated' => 4, 'savedAllocated' => 4],
-            [
-                'sku1' => ['onHand' => 23, 'expectedOnHand' => 31, 'allocated' => 3, 'expectedAllocated' => 3],
-                'sku2' => ['onHand' => 13, 'expectedOnHand' => 17, 'allocated' => 0, 'expectedAllocated' => 0],
-                'sku3' => ['onHand' => 41, 'expectedOnHand' => 45, 'allocated' => 2, 'expectedAllocated' => 2],
-                'sku4' => ['onHand' => 12, 'expectedOnHand' => 16, 'allocated' => 4, 'expectedAllocated' => 4],
-            ]
-        ];
-
-        yield 'simpleAllocated' => [
-            'link',
-            ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            ['onHand' => 12, 'savedOnHand' => 12, 'allocated' => 4, 'savedAllocated' => 5],
-            [
-                'sku1' => ['onHand' => 22, 'expectedOnHand' => 22, 'allocated' => 3, 'expectedAllocated' => 4],
-                'sku2' => ['onHand' => 13, 'expectedOnHand' => 13, 'allocated' => 0, 'expectedAllocated' => 1],
-                'sku3' => ['onHand' => 41, 'expectedOnHand' => 41, 'allocated' => 2, 'expectedAllocated' => 3],
-                'sku4' => ['onHand' => 12, 'expectedOnHand' => 12, 'allocated' => 4, 'expectedAllocated' => 5],
-            ]
-        ];
-
-        yield 'quantifiedAllocated' => [
-            'link',
-            ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
-            ['onHand' => 11, 'savedOnHand' => 11, 'allocated' => 4, 'savedAllocated' => 5],
-            [
-                'sku1' => ['onHand' => 23, 'expectedOnHand' => 23, 'allocated' => 3, 'expectedAllocated' => 5],
-                'sku2' => ['onHand' => 13, 'expectedOnHand' => 13, 'allocated' => 0, 'expectedAllocated' => 1],
-                'sku3' => ['onHand' => 41, 'expectedOnHand' => 41, 'allocated' => 2, 'expectedAllocated' => 3],
-                'sku4' => ['onHand' => 12, 'expectedOnHand' => 12, 'allocated' => 4, 'expectedAllocated' => 5],
-            ]
+        return [
+            'simpleOnHand' => [
+                'link',
+                ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                ['onHand' => 12, 'savedOnHand' => 15, 'allocated' => 4, 'savedAllocated' => 4],
+                [
+                    'sku1' => ['onHand' => 22, 'expectedOnHand' => 25, 'allocated' => 3, 'expectedAllocated' => 3],
+                    'sku2' => ['onHand' => 13, 'expectedOnHand' => 16, 'allocated' => 0, 'expectedAllocated' => 0],
+                    'sku3' => ['onHand' => 41, 'expectedOnHand' => 44, 'allocated' => 2, 'expectedAllocated' => 2],
+                    'sku4' => ['onHand' => 12, 'expectedOnHand' => 15, 'allocated' => 4, 'expectedAllocated' => 4],
+                ]
+            ],
+            'quantifiedOnHand' => [
+                'link',
+                ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                ['onHand' => 11, 'savedOnHand' => 15, 'allocated' => 3, 'savedAllocated' => 3],
+                [
+                    'sku1' => ['onHand' => 23, 'expectedOnHand' => 31, 'allocated' => 3, 'expectedAllocated' => 3],
+                    'sku2' => ['onHand' => 13, 'expectedOnHand' => 17, 'allocated' => 0, 'expectedAllocated' => 0],
+                    'sku3' => ['onHand' => 41, 'expectedOnHand' => 45, 'allocated' => 2, 'expectedAllocated' => 2],
+                    'sku4' => ['onHand' => 12, 'expectedOnHand' => 16, 'allocated' => 4, 'expectedAllocated' => 4],
+                ]
+            ],
+            'simpleAllocated' => [
+                'link',
+                ['sku1' => 1, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                ['onHand' => 12, 'savedOnHand' => 12, 'allocated' => 4, 'savedAllocated' => 5],
+                [
+                    'sku1' => ['onHand' => 22, 'expectedOnHand' => 22, 'allocated' => 3, 'expectedAllocated' => 4],
+                    'sku2' => ['onHand' => 13, 'expectedOnHand' => 13, 'allocated' => 0, 'expectedAllocated' => 1],
+                    'sku3' => ['onHand' => 41, 'expectedOnHand' => 41, 'allocated' => 2, 'expectedAllocated' => 3],
+                    'sku4' => ['onHand' => 12, 'expectedOnHand' => 12, 'allocated' => 4, 'expectedAllocated' => 5],
+                ]
+            ],
+            'quantifiedAllocated' => [
+                'link',
+                ['sku1' => 2, 'sku2' => 1, 'sku3' => 1, 'sku4' => 1],
+                ['onHand' => 11, 'savedOnHand' => 11, 'allocated' => 3, 'savedAllocated' => 4],
+                [
+                    'sku1' => ['onHand' => 23, 'expectedOnHand' => 23, 'allocated' => 3, 'expectedAllocated' => 5],
+                    'sku2' => ['onHand' => 13, 'expectedOnHand' => 13, 'allocated' => 0, 'expectedAllocated' => 1],
+                    'sku3' => ['onHand' => 41, 'expectedOnHand' => 41, 'allocated' => 2, 'expectedAllocated' => 3],
+                    'sku4' => ['onHand' => 12, 'expectedOnHand' => 12, 'allocated' => 4, 'expectedAllocated' => 5],
+                ]
+            ],
         ];
     }
 
@@ -757,6 +813,82 @@ class LinkedReplacerTest extends TestCase
             'Linked location does not know about missing location'
         );
         $this->linkReplacer->save($linkedStockLocation->setOnHand(15));
+    }
+
+    /**
+     * @see https://orderhub.atlassian.net/browse/CGIV-9684
+     */
+    public function testDispatchingOrderLowersStock()
+    {
+        $this->createStockLocation('BKY50', 1000, 0);
+        $this->createProductLinkLeaf('BKY500', ['BKY50' => 10]);
+        $this->createStockLocation('BKY500');
+        $this->createProductLinkLeaf('BKY1000', ['BKY50' => 20]);
+        $stockLocationIdToApplyAdjustments = $this->createStockLocation('BKY1000')->getId();
+
+        $tests = [
+            'new order' => [
+                'adjustments' => [
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ALLOCATED, 1, Adjustment::OPERATOR_INC),
+                ],
+                'expectedStock' => [
+                    'BKY50' => ['onHand' => 1000, 'allocated' => 20],
+                    'BKY500' => ['onHand' => 100, 'allocated' => 2],
+                    'BKY1000' => ['onHand' => 50, 'allocated' => 1],
+                ],
+            ],
+            'order dispatched' => [
+                'adjustments' => [
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ONHAND, 1, Adjustment::OPERATOR_DEC),
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ALLOCATED, 1, Adjustment::OPERATOR_DEC),
+                ],
+                'expectedStock' => [
+                    'BKY50' => ['onHand' => 980, 'allocated' => 0],
+                    'BKY500' => ['onHand' => 98, 'allocated' => 0],
+                    'BKY1000' => ['onHand' => 49, 'allocated' => 0],
+                ],
+            ]
+        ];
+
+        foreach ($tests as $action => $variables) {
+            /** @var Adjustment[] $adjustments */
+            /** @var array $expectedStock */
+            extract($variables);
+
+            /** @var StockLocation $stockLocationToApplyAdjustments */
+            $stockLocationToApplyAdjustments = $this->linkReplacer->fetch($stockLocationIdToApplyAdjustments);
+            foreach ($adjustments as $adjustment) {
+                $stockLocationToApplyAdjustments->applyAdjustment($adjustment);
+            }
+            $this->linkReplacer->save($stockLocationToApplyAdjustments);
+
+            $stockLocations = $this->linkReplacer->fetchCollectionByFilter(
+                (new Filter('all', 1))->setOuIdSku(array_map(function(string $sku) {
+                    return sprintf('1-%s', $sku);
+                }, array_keys($expectedStock)))
+            );
+
+            $this->assertEquals(count($expectedStock), $stockLocations->count(), 'Not all stock locations returned');
+
+            /** @var StockLocation $stockLocation */
+            foreach ($stockLocations as $stockLocation) {
+                $sku = $this->stockStorage->fetch($stockLocation->getStockId())->getSku();
+                $this->assertArrayHasKey($sku, $expectedStock, 'Unexpected stock location returned');
+                $this->assertEquals(
+                    [
+                        'onHand' => $expectedStock[$sku]['onHand'],
+                        'allocated' => $expectedStock[$sku]['allocated'],
+                        'available' => $expectedStock[$sku]['onHand'] - $expectedStock[$sku]['allocated'],
+                    ],
+                    [
+                        'onHand' => $stockLocation->getOnHand(),
+                        'allocated' => $stockLocation->getAllocated(),
+                        'available' => $stockLocation->getAvailable(),
+                    ],
+                    sprintf('Stock location (%s) has wrong stock values after %s', $sku, $action)
+                );
+            }
+        }
     }
 
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
