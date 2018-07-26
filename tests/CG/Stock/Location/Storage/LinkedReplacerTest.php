@@ -5,14 +5,17 @@ use CG\Product\LinkLeaf\Collection as ProductLinkLeafCollection;
 use CG\Product\LinkLeaf\Entity as ProductLinkLeaf;
 use CG\Product\LinkLeaf\Filter as ProductLinkLeafFilter;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Adjustment;
+use CG\Stock\Adjustment\Factory as AdjustmentFactory;
 use CG\Stock\Collection as StockCollection;
 use CG\Stock\Entity as Stock;
 use CG\Stock\Filter as StockFilter;
 use CG\Stock\Location\Collection as StockLocationCollection;
 use CG\Stock\Location\Entity as StockLocation;
+use CG\Stock\Location\Filter;
 use CG\Stock\Location\Filter as StockLocationFilter;
-use CG\Stock\Location\LinkedLocation as LinkedStockLocation;
 use CG\Stock\Location\LinkedLocation;
+use CG\Stock\Location\LinkedLocation as LinkedStockLocation;
 use CG\Stock\Location\QuantifiedLocation as QuantifiedStockLocation;
 use CG\Stock\Location\Storage\LinkedReplacer;
 use CG\Stock\Location\StorageInterface as StockLocationStorage;
@@ -30,6 +33,8 @@ class LinkedReplacerTest extends TestCase
     protected $productLinkLeafStorage;
     /** @var LinkedReplacer $linkReplacer */
     protected $linkReplacer;
+    /** @var AdjustmentFactory */
+    protected $adjustmentFactory;
 
     protected function setUp()
     {
@@ -42,6 +47,8 @@ class LinkedReplacerTest extends TestCase
             $this->stockStorage,
             $this->productLinkLeafStorage
         );
+
+        $this->adjustmentFactory = new AdjustmentFactory();
     }
 
     protected function setupStockLocationStorage()
@@ -806,6 +813,82 @@ class LinkedReplacerTest extends TestCase
             'Linked location does not know about missing location'
         );
         $this->linkReplacer->save($linkedStockLocation->setOnHand(15));
+    }
+
+    /**
+     * @see https://orderhub.atlassian.net/browse/CGIV-9684
+     */
+    public function testDispatchingOrderLowersStock()
+    {
+        $this->createStockLocation('BKY50', 1000, 0);
+        $this->createProductLinkLeaf('BKY500', ['BKY50' => 10]);
+        $this->createStockLocation('BKY500');
+        $this->createProductLinkLeaf('BKY1000', ['BKY50' => 20]);
+        $stockLocationIdToApplyAdjustments = $this->createStockLocation('BKY1000')->getId();
+
+        $tests = [
+            'new order' => [
+                'adjustments' => [
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ALLOCATED, 1, Adjustment::OPERATOR_INC),
+                ],
+                'expectedStock' => [
+                    'BKY50' => ['onHand' => 1000, 'allocated' => 20],
+                    'BKY500' => ['onHand' => 100, 'allocated' => 2],
+                    'BKY1000' => ['onHand' => 50, 'allocated' => 1],
+                ],
+            ],
+            'order dispatched' => [
+                'adjustments' => [
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ONHAND, 1, Adjustment::OPERATOR_DEC),
+                    ($this->adjustmentFactory)(Adjustment::TYPE_ALLOCATED, 1, Adjustment::OPERATOR_DEC),
+                ],
+                'expectedStock' => [
+                    'BKY50' => ['onHand' => 980, 'allocated' => 0],
+                    'BKY500' => ['onHand' => 98, 'allocated' => 0],
+                    'BKY1000' => ['onHand' => 49, 'allocated' => 0],
+                ],
+            ]
+        ];
+
+        foreach ($tests as $action => $variables) {
+            /** @var Adjustment[] $adjustments */
+            /** @var array $expectedStock */
+            extract($variables);
+
+            /** @var StockLocation $stockLocationToApplyAdjustments */
+            $stockLocationToApplyAdjustments = $this->linkReplacer->fetch($stockLocationIdToApplyAdjustments);
+            foreach ($adjustments as $adjustment) {
+                $stockLocationToApplyAdjustments->applyAdjustment($adjustment);
+            }
+            $this->linkReplacer->save($stockLocationToApplyAdjustments);
+
+            $stockLocations = $this->linkReplacer->fetchCollectionByFilter(
+                (new Filter('all', 1))->setOuIdSku(array_map(function(string $sku) {
+                    return sprintf('1-%s', $sku);
+                }, array_keys($expectedStock)))
+            );
+
+            $this->assertEquals(count($expectedStock), $stockLocations->count(), 'Not all stock locations returned');
+
+            /** @var StockLocation $stockLocation */
+            foreach ($stockLocations as $stockLocation) {
+                $sku = $this->stockStorage->fetch($stockLocation->getStockId())->getSku();
+                $this->assertArrayHasKey($sku, $expectedStock, 'Unexpected stock location returned');
+                $this->assertEquals(
+                    [
+                        'onHand' => $expectedStock[$sku]['onHand'],
+                        'allocated' => $expectedStock[$sku]['allocated'],
+                        'available' => $expectedStock[$sku]['onHand'] - $expectedStock[$sku]['allocated'],
+                    ],
+                    [
+                        'onHand' => $stockLocation->getOnHand(),
+                        'allocated' => $stockLocation->getAllocated(),
+                        'available' => $stockLocation->getAvailable(),
+                    ],
+                    sprintf('Stock location (%s) has wrong stock values after %s', $sku, $action)
+                );
+            }
+        }
     }
 
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
