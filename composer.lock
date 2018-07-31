@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11fc0106c01f67db66bb13f1ee307ace",
+    "content-hash": "2706ffce6874ba013482cfdb4eaba6e6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -336,16 +336,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-9697-CacheDefaultTTL",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "a51b79eb8c095b27d32398d472da6b759c2fa51d"
+                "reference": "ad5591710bc6eb1a46bf7df65a5f9dddf76f5b8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-dev-CGIV-9697-CacheDefaultTTL-ed9c50.zip",
-                "reference": "a51b79eb8c095b27d32398d472da6b759c2fa51d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.6.1-ebaec0.zip",
+                "reference": "ad5591710bc6eb1a46bf7df65a5f9dddf76f5b8f",
                 "shasum": null
             },
             "require": {
@@ -378,7 +378,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-30T14:19:05+00:00"
+            "time": "2018-07-31T11:47:23+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -11231,17 +11231,9 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.6.1",
-            "alias_normalized": "2.6.1.0",
-            "version": "dev-CGIV-9697-CacheDefaultTTL",
-            "package": "channelgrabber/cache"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cache": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
