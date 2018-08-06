@@ -15,7 +15,6 @@ use CG\ETag\Storage\Predis;
 use CG\ETag\StorageInterface;
 use Zend\Db\Sql\Sql;
 use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
-use CG\Cache\Client\Redis as CacheRedis;
 use CG\ETag\Storage\Predis as EtagRedis;
 
 use CG\Cache\EventManagerInterface;
@@ -617,11 +616,6 @@ $config = array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => AccountPollingWindowMapper::class
-                )
-            ),
-            CacheRedis::class => array(
-                'parameter' => array(
-                    'predis' => 'unreliable_redis_deferred'
                 )
             ),
             ChannelListingDownloadService::class => [
