@@ -1692,13 +1692,7 @@ $config = array(
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
-                'CG\Cache\ClientInterface' => 'CG\Cache\Client\Redis',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
-                'CG\Cache\ClientPipelineInterface' => 'CG\Cache\Client\RedisPipeline',
-                'CG\Cache\KeyGeneratorInterface' => 'CG\Cache\KeyGenerator\Redis',
-                'CG\Cache\Strategy\SerialisationInterface' => 'CG\Cache\Strategy\Serialisation\Serialize',
-                'CG\Cache\Strategy\CollectionInterface' => 'CG\Cache\Strategy\Collection\Entities',
-                'CG\Cache\Strategy\EntityInterface' => 'CG\Cache\Strategy\Entity\Standard',
                 StorageInterface::class => Predis::class,
                 \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
