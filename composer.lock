@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2706ffce6874ba013482cfdb4eaba6e6",
+    "content-hash": "d59d829834e8c3e89ed0001182cd7143",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -867,16 +867,16 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.13.1",
+            "version": "dev-TAC-191-save-ebay-epid",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "835e69522ca97b4d851fc66ad373b1e1191c8826"
+                "reference": "26f0d73b683344209b94ec8229f665b2c7726fa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.13.1-1c6eb1.zip",
-                "reference": "835e69522ca97b4d851fc66ad373b1e1191c8826",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-191-save-ebay-epid-60ae17.zip",
+                "reference": "26f0d73b683344209b94ec8229f665b2c7726fa2",
                 "shasum": null
             },
             "require": {
@@ -932,7 +932,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-23T08:07:55+00:00"
+            "time": "2018-08-06T14:55:51+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -11231,10 +11231,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.2",
+            "alias_normalized": "1.13.2.0",
+            "version": "dev-TAC-191-save-ebay-epid",
+            "package": "channelgrabber/ebay"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ebay": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
