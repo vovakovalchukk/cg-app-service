@@ -99,7 +99,7 @@ class Db implements StorageInterface
 
     protected function saveEpid(int $productId, External $external): void
     {
-        if (empty($external->getEpid()) || empty($external->getMarketplace())) {
+        if (empty($external->getEpid()) || $external->getMarketplace() === null) {
             return;
         }
 
