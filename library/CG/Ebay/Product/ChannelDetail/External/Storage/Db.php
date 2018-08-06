@@ -17,8 +17,10 @@ class Db implements StorageInterface
     /** @var Sql */
     protected $writeSql;
 
-    public function __construct(Sql $readSql, Sql $writeSql)
-    {
+    public function __construct(
+        Sql $readSql,
+        Sql $writeSql
+    ) {
         $this->readSql = $readSql;
         $this->writeSql = $writeSql;
     }
@@ -58,6 +60,8 @@ class Db implements StorageInterface
                     'dispatchTimeMax' => $result['dispatchTimeMax'],
                     'shippingMethod' => $result['shippingMethod'],
                     'shippingPrice' => $result['shippingPrice'],
+                    'epid' => $result['epid'],
+                    'marketplace' => $result['marketplace']
                 ];
             }
             if (isset($result['attributeValue'])) {
@@ -73,7 +77,7 @@ class Db implements StorageInterface
 
         $array = $external->toArray();
         $attributeImageMap = $array['attributeImageMap'] ?? [];
-        unset($array['attributeImageMap']);
+        unset($array['attributeImageMap'], $array['epid'], $array['marketplace']);
 
         $insert = $this->getInsert()->values(array_merge(
             ['productId' => $productId],
@@ -89,11 +93,30 @@ class Db implements StorageInterface
             ]);
             $this->writeSql->prepareStatementForSqlObject($insert)->execute();
         }
+
+        $this->saveEpid($productId, $external);
+    }
+
+    protected function saveEpid(int $productId, External $external): void
+    {
+        if (empty($external->getEpid()) || empty($external->getMarketplace())) {
+            return;
+        }
+
+        $insert = $this->getInsert('productEbayEpid')->values([
+            'productId' => $productId,
+            'marketplace' => $external->getMarketplace(),
+            'epid' => $external->getEpid()
+        ]);
+        $this->writeSql->prepareStatementForSqlObject($insert)->execute();
     }
 
     public function remove(int $productId): void
     {
         $delete = $this->getDelete()->where(['productEbayDetail.productId' => $productId]);
+        $this->writeSql->prepareStatementForSqlObject($delete)->execute();
+
+        $delete = $this->getDelete('productEbayEpid')->where(['productEbayEpid.productId' => $productId]);
         $this->writeSql->prepareStatementForSqlObject($delete)->execute();
     }
 
@@ -106,6 +129,12 @@ class Db implements StorageInterface
                 'productEbayDetail.productId = productEbayAttributeImage.productId',
                 ['attributeValue', 'imageId'],
                 Select::JOIN_LEFT
+            )
+            ->join(
+                'productEbayEpid',
+                'productEbayEpid.productId = productEbayDetail.productId',
+                ['epid', 'marketplace'],
+                Select::JOIN_LEFT
             );
     }
 
@@ -114,8 +143,8 @@ class Db implements StorageInterface
         return $this->writeSql->insert($table);
     }
 
-    protected function getDelete(): Delete
+    protected function getDelete(string $table = 'productEbayDetail'): Delete
     {
-        return $this->writeSql->delete('productEbayDetail');
+        return $this->writeSql->delete($table);
     }
 }
