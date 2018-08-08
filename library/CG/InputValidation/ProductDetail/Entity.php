@@ -109,7 +109,7 @@ class Entity implements RulesInterface
             'isbn' => [
                 'name' => 'isbn',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 13, 'max' => 13])]
+                'validators' => [new StringLength(['min' => 10, 'max' => 13])]
             ],
             'gtin' => [
                 'name' => 'isbn',
