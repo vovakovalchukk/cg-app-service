@@ -104,7 +104,7 @@ class Entity implements RulesInterface
             'upc' => [
                 'name' => 'upc',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 12, 'max' => 12])]
+                'validators' => [new StringLength(['min' => 12, 'max' => 13])]
             ],
             'isbn' => [
                 'name' => 'isbn',
@@ -114,7 +114,7 @@ class Entity implements RulesInterface
             'gtin' => [
                 'name' => 'isbn',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 9, 'max' => 14])]
+                'validators' => [new StringLength(['min' => 8, 'max' => 14])]
             ],
         ];
     }
