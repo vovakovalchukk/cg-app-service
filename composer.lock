@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4231f1cfb155ec1d906ac57cc8c3f230",
+    "content-hash": "e64de10420bb42e35a242b10d2ad093c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -792,16 +792,16 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.9",
+            "version": "dev-CGIV-9694-stop-pinging-mysql",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-db.git",
-                "reference": "5c4496722c62c55f568f23cf79db75164bee5305"
+                "reference": "47dc18a540320828c790869b8fcfb433c361cbce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.9-e45436.zip",
-                "reference": "5c4496722c62c55f568f23cf79db75164bee5305",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-dev-CGIV-9694-stop-pinging-mysql-8ab30d.zip",
+                "reference": "47dc18a540320828c790869b8fcfb433c361cbce",
                 "shasum": null
             },
             "require": {
@@ -824,7 +824,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2016-02-17T13:41:01+00:00"
+            "time": "2018-08-10T09:25:53+00:00"
         },
         {
             "name": "channelgrabber/di",
@@ -4015,7 +4015,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9361,7 +9361,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -11231,10 +11231,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.10",
+            "alias_normalized": "1.0.10.0",
+            "version": "dev-CGIV-9694-stop-pinging-mysql",
+            "package": "channelgrabber/db"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/db": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
