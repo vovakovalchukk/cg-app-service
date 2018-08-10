@@ -1,9 +1,11 @@
 <?php
 namespace CG\Controllers\Shipping\Method\Method;
 
+use CG\Http\StatusCode;
 use CG\Order\Service\Shipping\Method\Service;
-use CG\Slim\ControllerTrait;
 use CG\Slim\Controller\Collection\GetTrait;
+use CG\Slim\ControllerTrait;
+use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
 
@@ -29,5 +31,10 @@ class Collection
             $this->getParams('organisationUnitId') ?: []
         );
     }
+
+    public function post(Hal $hal)
+    {
+        $this->getSlim()->response()->setStatus(StatusCode::CREATED);
+        return $this->getService()->saveHal($hal);
+    }
 }
- 

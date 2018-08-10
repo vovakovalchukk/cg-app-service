@@ -612,7 +612,7 @@ return array(
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderLabel/:labelId',
         'name' => 'OrderLabelCollection',
-        'version' => new Version(1, 5),
+        'version' => new Version(1, 6),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => LabelFilterValidationRules::class, "flatten" => false]
     ],
     '/orderLabel/:labelId' => [
@@ -628,7 +628,7 @@ return array(
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderLabelEntity',
-        'version' => new Version(1, 5),
+        'version' => new Version(1, 6),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => LabelMapper::class,
@@ -646,7 +646,7 @@ return array(
                     $controller->$method($app->request()->getBody())
                 );
             },
-        'via' => ['GET', 'OPTIONS'],
+        'via' => ['POST', 'GET', 'OPTIONS'],
         'entityRoute' => '/shippingMethod/:id',
         'name' => 'ShippingMethodCollection',
         'validation' => [

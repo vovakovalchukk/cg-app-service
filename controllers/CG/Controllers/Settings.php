@@ -26,7 +26,8 @@ class Settings
             ->addLink('api', '/settings/api')
             ->addLink('product', '/settings/product')
             ->addLink('setupProgress', '/settings/setupProgress')
-            ->addLink('order', '/settings/order');
+            ->addLink('order', '/settings/order')
+            ->addLink('vat', '/settings/vat');
         return $hal;
     }
 }

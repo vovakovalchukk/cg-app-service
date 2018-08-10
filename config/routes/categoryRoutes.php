@@ -6,6 +6,10 @@ use CG\Controllers\CategoryExternal\Collection as CategoryExternalCollectionCont
 use CG\Controllers\CategoryExternal\Entity as CategoryExternalController;
 use CG\Controllers\CategoryTemplate\Collection as CategoryTemplateCollectionController;
 use CG\Controllers\CategoryTemplate\Entity as CategoryTemplateController;
+use CG\Controllers\CategoryVersionMap\Entity as CategoryVersionMapController;
+use CG\Controllers\CategoryVersionMap\Latest\Entity as CategoryVersionMapLatestController;
+use CG\Controllers\CategoryVersionMap\Collection as CategoryVersionMapCollectionController;
+
 use CG\InputValidation\Category\Entity as CategoryValidation;
 use CG\InputValidation\Category\Filter as FilterValidation;
 use CG\InputValidation\CategoryExternal\Entity as CategoryExternalValidation;
@@ -21,6 +25,10 @@ use CG\Product\Category\Service as CategoryService;
 use CG\Product\Category\Template\Entity as CategoryTemplate;
 use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 use CG\Product\Category\Template\Service as CategoryTemplateService;
+use CG\Product\Category\VersionMap\Entity as CategoryVersionMap;
+use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
+use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
+use CG\InputValidation\CategoryVersionMap\Entity as CategoryVersionMapValidation;
 use CG\Slim\Versioning\Version;
 
 return [
@@ -140,5 +148,65 @@ return [
             'entityClass' => CategoryTemplate::class,
             'serviceClass' => CategoryTemplateService::class
         ]
+    ],
+    '/categoryVersionMap/latest' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapLatestController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET'],
+        'name' => 'CategoryVersionMapLatest',
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
+    ],
+    '/categoryVersionMap/:id' => [
+        'controllers' => function($categoryVersionMapId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($categoryVersionMapId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
+        'name' => 'CategoryVersionMapEntity',
+        'validation' => [
+            'dataRules' => CategoryVersionMapValidation::class
+        ],
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
+    ],
+    '/categoryVersionMap' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(CategoryVersionMapCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'CategoryVersionMapCollection',
+        'validation' => [
+            'dataRules' => CategoryVersionMapValidation::class
+        ],
+        'version' => new Version(1, 1),
+        'eTag' => array(
+            'mapperClass' => CategoryVersionMapMapper::class,
+            'entityClass' => CategoryVersionMap::class,
+            'serviceClass' => CategoryVersionMapService::class
+        )
     ],
 ];
