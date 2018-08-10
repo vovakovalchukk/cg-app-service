@@ -23,7 +23,7 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
     /** @var Sql */
     protected $sqlClient;
     protected $subscriptionService;
-    
+
     public function __construct(Sql $sqlClient, SubscriptionService $subscriptionService)
     {
         $this->sqlClient = $sqlClient;
@@ -61,9 +61,9 @@ INNER JOIN location AS l ON sl.locationId = l.id AND l.type = 'Merchant'
 LEFT JOIN (
     SELECT IFNULL(productLink.leafSku, item.itemSku) as allocatedSku, order.rootOrganisationUnitId, SUM(
 		IF(item.purchaseDate > account.cgCreationDate,
-			IF(item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'), item.itemQuantity, 0),
-			IF(item.`status` IN ('awaiting payment', 'new'), item.itemQuantity, 0)
-		)) * IFNULL(productLink.quantity, 1) as calculatedAllocated,
+			IF(item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'), item.itemQuantity * IFNULL(productLink.quantity, 1), 0),
+			IF(item.`status` IN ('awaiting payment', 'new'), item.itemQuantity * IFNULL(productLink.quantity, 1), 0)
+		)) as calculatedAllocated,
         SUM(IF(item.`status` = 'unknown', item.itemQuantity, 0)) * IFNULL(productLink.quantity, 1) as unknownOrders
 	FROM item
 	INNER JOIN `order` ON item.orderId = order.id

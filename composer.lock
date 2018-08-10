@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d59d829834e8c3e89ed0001182cd7143",
+    "content-hash": "0d9ece8d7d1457a4eb37485566ede04b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -507,16 +507,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.36.5",
+            "version": "dev-TAC-148-ebay-pbse",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "079b4dc32e08c375aa9d4dc7a0a6bf069bbe9dd5"
+                "reference": "75cf918fe94241420b9f0cada32e8199e8c261b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.36.5-0042a2.zip",
-                "reference": "079b4dc32e08c375aa9d4dc7a0a6bf069bbe9dd5",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-TAC-148-ebay-pbse-d91f32.zip",
+                "reference": "75cf918fe94241420b9f0cada32e8199e8c261b2",
                 "shasum": null
             },
             "require": {
@@ -572,6 +572,11 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-TAC-125-fetch-usps-rates": "1.37.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Channel\\": "src/Channel",
@@ -591,7 +596,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-12T14:38:48+00:00"
+            "time": "2018-08-09T15:20:50+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -867,28 +872,28 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-TAC-191-save-ebay-epid",
+            "version": "dev-TAC-148-ebay-pbse",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "81a9d6178b869472e98df8a082da6aa1eb1f3a5d"
+                "reference": "ede3b6e85ffff2de31dc7859bbdaeeb40e46347a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-191-save-ebay-epid-3ac63c.zip",
-                "reference": "81a9d6178b869472e98df8a082da6aa1eb1f3a5d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-TAC-148-ebay-pbse-6fc1f3.zip",
+                "reference": "ede3b6e85ffff2de31dc7859bbdaeeb40e46347a",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.15.1",
-                "channelgrabber/channel": "^1.36.4",
+                "channelgrabber/channel": "dev-TAC-148-ebay-pbse as 1.36.8",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/gearman": "^1.2.13",
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
-                "channelgrabber/listing": "^1.16.2",
+                "channelgrabber/listing": "dev-TAC-148-ebay-pbse as 1.17.4",
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/order": "^1.28.7",
@@ -933,7 +938,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-06T15:05:34+00:00"
+            "time": "2018-08-09T15:26:35+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1376,16 +1381,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.17.3",
+            "version": "dev-TAC-148-ebay-pbse",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "4338e665a48c54955cb898aaaafd2c1f12b9b723"
+                "reference": "05a3b3ee84f26103764316abdda61ce2807da098"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-1.17.3-b91399.zip",
-                "reference": "4338e665a48c54955cb898aaaafd2c1f12b9b723",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-listing-dev-TAC-148-ebay-pbse-bc4b8b.zip",
+                "reference": "05a3b3ee84f26103764316abdda61ce2807da098",
                 "shasum": null
             },
             "require": {
@@ -1431,7 +1436,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-05T12:04:59+00:00"
+            "time": "2018-08-03T13:28:58+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -2062,16 +2067,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.15.0",
+            "version": "1.16.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "7477d2260a4d1efb2d8d520287abee715830e4da"
+                "reference": "d2eea15091e978326cb11dedc1ff6ce95b9866d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.15.0-d360cf.zip",
-                "reference": "7477d2260a4d1efb2d8d520287abee715830e4da",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.1-ef184d.zip",
+                "reference": "d2eea15091e978326cb11dedc1ff6ce95b9866d6",
                 "shasum": null
             },
             "require": {
@@ -2129,7 +2134,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-17T12:03:52+00:00"
+            "time": "2018-08-06T14:52:50+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11234,16 +11239,30 @@
     ],
     "aliases": [
         {
+            "alias": "1.36.8",
+            "alias_normalized": "1.36.8.0",
+            "version": "dev-TAC-148-ebay-pbse",
+            "package": "channelgrabber/channel"
+        },
+        {
             "alias": "1.13.2",
             "alias_normalized": "1.13.2.0",
-            "version": "dev-TAC-191-save-ebay-epid",
+            "version": "dev-TAC-148-ebay-pbse",
             "package": "channelgrabber/ebay"
+        },
+        {
+            "alias": "1.17.4",
+            "alias_normalized": "1.17.4.0",
+            "version": "dev-TAC-148-ebay-pbse",
+            "package": "channelgrabber/listing"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ebay": 20,
+        "channelgrabber/listing": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
