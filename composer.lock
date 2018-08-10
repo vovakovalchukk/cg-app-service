@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e64de10420bb42e35a242b10d2ad093c",
+    "content-hash": "09cb65031264121fc5a62fb4185cd537",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1715,16 +1715,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.39.0",
+            "version": "dev-CGIV-9694-stop-pinging-mysql",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9ffdbde633731d7a48962a3990965fd383a55fcc"
+                "reference": "1f34c26fb0c4f886002830f263fb9fc644eb8cc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.39.0-f028cc.zip",
-                "reference": "9ffdbde633731d7a48962a3990965fd383a55fcc",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9694-stop-pinging-mysql-066fdd.zip",
+                "reference": "1f34c26fb0c4f886002830f263fb9fc644eb8cc9",
                 "shasum": null
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/db": "^1.0.9",
+                "channelgrabber/db": "dev-CGIV-9694-stop-pinging-mysql as 1.0.10",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/etag": "^1.6.0",
@@ -1800,7 +1800,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-25T12:47:26+00:00"
+            "time": "2018-08-10T15:46:53+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11237,12 +11237,19 @@
             "alias_normalized": "1.0.10.0",
             "version": "dev-CGIV-9694-stop-pinging-mysql",
             "package": "channelgrabber/db"
+        },
+        {
+            "alias": "1.39.3",
+            "alias_normalized": "1.39.3.0",
+            "version": "dev-CGIV-9694-stop-pinging-mysql",
+            "package": "channelgrabber/order"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/db": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
