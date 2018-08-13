@@ -422,6 +422,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [(new InArray())->setHaystack(CurrencyCode::getCurrencyCodes())]
             ),
+            'weight' => [
+                'name' => 'weight',
+                'required' => false,
+                'validators' => [new DecimalValidator(['name' => 'weight'])]
+            ],
         );
     }
 
