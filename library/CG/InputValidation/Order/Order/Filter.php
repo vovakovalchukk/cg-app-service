@@ -319,6 +319,16 @@ class Filter implements RulesInterface, ExclusionInterface
                     new BooleanValidator(['name' => 'hasInvoice'])
                 ]
             ],
+            'weightMin' => [
+                'name' => 'weightMin',
+                'required' => false,
+                'validators' => [new DecimalValidator(['name' => 'weightMin'])]
+            ],
+            'weightMax' => [
+                'name' => 'weightMax',
+                'required' => false,
+                'validators' => [new DecimalValidator(['name' => 'weightMax'])]
+            ],
         ];
     }
 }
