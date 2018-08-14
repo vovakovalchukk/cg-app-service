@@ -72,7 +72,7 @@ class CalculateOrderWeight
 
         if (isset($progressBar)) {
             $progressBar->clear();
-            $this->output->writeln(sprintf('<fg=green>Generated %d jobs</>', $progressBar->getMaxSteps()));
+            $this->output->writeln(sprintf('<fg=green>Generated %d jobs</>', $progressBar->getProgress()));
         } else {
             $this->output->writeln('<fg=red>No orders found!</>');
         }
