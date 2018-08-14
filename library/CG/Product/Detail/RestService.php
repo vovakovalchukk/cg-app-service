@@ -1,7 +1,10 @@
 <?php
 namespace CG\Product\Detail;
 
+use CG\Order\Client\Gearman\Generator\CalculateOrderWeightForSku as CalculateOrderWeightForSkuGearmanJobGenerator;
+use CG\Product\Detail\Entity as ProductDetail;
 use CG\Slim\Patch\ServiceTrait as PatchTrait;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use Zend\EventManager\GlobalEventManager as EventManager;
 
 class RestService extends Service
@@ -13,11 +16,18 @@ class RestService extends Service
 
     /** @var EventManager $eventManager */
     protected $eventManager;
+    /** @var CalculateOrderWeightForSkuGearmanJobGenerator */
+    protected $calculateOrderWeightForSkuGearmanJobGenerator;
 
-    public function __construct(EventManager $eventManager, StorageInterface $repository, Mapper $mapper)
-    {
+    public function __construct(
+        EventManager $eventManager,
+        StorageInterface $repository,
+        Mapper $mapper,
+        CalculateOrderWeightForSkuGearmanJobGenerator $calculateOrderWeightForSkuGearmanJobGenerator
+    ) {
         parent::__construct($repository, $mapper);
-        $this->setEventManager($eventManager);
+        $this->eventManager = $eventManager;
+        $this->calculateOrderWeightForSkuGearmanJobGenerator = $calculateOrderWeightForSkuGearmanJobGenerator;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -36,12 +46,23 @@ class RestService extends Service
     }
 
     /**
-     * @return self
+     * @param ProductDetail $entity
      */
-    protected function setEventManager(EventManager $eventManager)
+    public function save($entity)
     {
-        $this->eventManager = $eventManager;
-        return $this;
+        try {
+            /** @var ProductDetail $previousEntity */
+            try {
+                $previousEntity = $this->fetch($entity->getId());
+            } catch (NotFound $exception) {
+                $previousEntity = null;
+            }
+            return parent::save($entity);
+        } finally {
+            if ($previousEntity === null || $previousEntity->getWeight() !== $entity->getWeight()) {
+                $this->calculateOrderWeightForSkuGearmanJobGenerator->generateJobForProductDetail($entity);
+            }
+        }
     }
 
     /**
