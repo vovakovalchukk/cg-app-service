@@ -1,13 +1,14 @@
 <?php
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use CG\Order\Command\CalculateOrderWeight;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
+use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Order\Shared\Command\UpdateAllItemsImages;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
-use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Stdlib\DateTime as StdlibDateTime;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 return [
     'order:updateAllItemsTax' => [
@@ -109,6 +110,34 @@ return [
         {
             $command = $di->get(AutoArchiveOrders::class);
             $command();
+        }
+    ],
+    'order:calculateOrderWeights' => [
+        'description' => 'Calculate the weight of all orders based on the associated product weights',
+        'options' => [
+            'ou' => [
+                'description' => 'Only update orders belonging to selected ous',
+                'value' => true,
+                'required' => true,
+                'array' => true,
+            ],
+            'account' => [
+                'description' => 'Only update orders belonging to selected accounts',
+                'value' => true,
+                'required' => true,
+                'array' => true,
+            ],
+            'includeArchived' => [
+                'description' => 'Also update archived orders',
+                'value' => false,
+            ],
+        ],
+        'command' => function(InputInterface $input, OutputInterface $output) use($di) {
+            ($di->get(CalculateOrderWeight::class, ['output' => $output]))(
+                $input->getOption('ou'),
+                $input->getOption('account'),
+                (bool) $input->getOption('includeArchived')
+            );
         }
     ],
 ];
