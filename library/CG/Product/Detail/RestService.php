@@ -65,6 +65,15 @@ class RestService extends Service
         }
     }
 
+    public function remove(ProductDetail $entity)
+    {
+        try {
+            parent::remove($entity);
+        } finally {
+            $this->calculateOrderWeightForSkuGearmanJobGenerator->generateJobForProductDetail($entity);
+        }
+    }
+
     /**
      * Required by PatchTrait
      * @return EventManager
