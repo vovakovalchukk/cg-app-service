@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0c0152c83d9078bd91488854b1f62a1",
+    "content-hash": "652002d8f46b9f4200e72c0c9587ccb8",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -507,16 +507,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-9453-type-hinting-in-filters",
+            "version": "1.37.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "91e2fd8be82474e6c79a1ed97886de79424a976d"
+                "reference": "3985106f98ef08d2d8bad4d1a3be32e2e05476e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9453-type-hinting-in-filters-672982.zip",
-                "reference": "91e2fd8be82474e6c79a1ed97886de79424a976d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.37.3-4be921.zip",
+                "reference": "3985106f98ef08d2d8bad4d1a3be32e2e05476e8",
                 "shasum": null
             },
             "require": {
@@ -596,7 +596,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-10T15:24:23+00:00"
+            "time": "2018-08-10T12:05:51+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -876,13 +876,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "ec0ed31ff0cee297220ef5300eb14db1022eb40f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-CGIV-9453-type-hinting-in-filters-0120f5.zip",
-                "reference": "ec0ed31ff0cee297220ef5300eb14db1022eb40f",
-                "shasum": null
+                "reference": "9b3f428ac274400cdae4c8670db9097b0ee86422"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -937,7 +931,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-08T10:03:18+00:00"
+            "time": "2018-08-14T09:06:13+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -3135,16 +3129,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "dev-CGIV-9453-type-hinting-in-filters",
+            "version": "1.26.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "01c9a45dabf9ea5f6b1b9c42fc1e3d506f003561"
+                "reference": "a9970e6f01a1b89ab263de11579fe7b7e3caf0f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-dev-CGIV-9453-type-hinting-in-filters-2b5354.zip",
-                "reference": "01c9a45dabf9ea5f6b1b9c42fc1e3d506f003561",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.26.2-39cc65.zip",
+                "reference": "a9970e6f01a1b89ab263de11579fe7b7e3caf0f9",
                 "shasum": null
             },
             "require": {
@@ -3190,7 +3184,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-10T14:58:24+00:00"
+            "time": "2018-07-23T13:57:27+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -11382,12 +11376,6 @@
             "package": "channelgrabber/amazon"
         },
         {
-            "alias": "1.37.3",
-            "alias_normalized": "1.37.3.0",
-            "version": "dev-CGIV-9453-type-hinting-in-filters",
-            "package": "channelgrabber/channel"
-        },
-        {
             "alias": "1.13.2",
             "alias_normalized": "1.13.2.0",
             "version": "dev-CGIV-9453-type-hinting-in-filters",
@@ -11458,18 +11446,11 @@
             "alias_normalized": "1.13.1.0",
             "version": "dev-CGIV-9453-type-hinting-in-filters",
             "package": "channelgrabber/stock"
-        },
-        {
-            "alias": "1.26.1",
-            "alias_normalized": "1.26.1.0",
-            "version": "dev-CGIV-9453-type-hinting-in-filters",
-            "package": "channelgrabber/user"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/amazon": 20,
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/ebay": 20,
         "channelgrabber/ekm": 20,
@@ -11483,7 +11464,6 @@
         "channelgrabber/reporting": 20,
         "channelgrabber/settings": 20,
         "channelgrabber/stock": 20,
-        "channelgrabber/user": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
