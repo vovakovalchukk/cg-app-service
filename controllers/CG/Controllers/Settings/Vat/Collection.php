@@ -28,7 +28,7 @@ class Collection
                 $this->getParams('limit') ?: null,
                 $this->getParams('page') ?: null,
                 $this->getParams('id') ?: [],
-                $this->getParams('chargeVat') ?: []
+                $this->getParams('chargeVat') ?: null
             )
         );
     }
