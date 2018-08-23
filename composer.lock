@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6b2b6099bede865b219b838006d3815",
+    "content-hash": "bd02e6e5df7938abdd414a085d5bb34e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1724,16 +1724,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-TAC-185-OrderWeight",
+            "version": "1.39.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "b47d55264f3dfb557bb5ff3b23f8e78f43a8f555"
+                "reference": "60ddb8eead962b499f1539c00686b34283185f9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-TAC-185-OrderWeight-c2d05a.zip",
-                "reference": "b47d55264f3dfb557bb5ff3b23f8e78f43a8f555",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.39.4-67d8c5.zip",
+                "reference": "60ddb8eead962b499f1539c00686b34283185f9b",
                 "shasum": null
             },
             "require": {
@@ -1809,7 +1809,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-17T11:22:26+00:00"
+            "time": "2018-08-23T09:11:16+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11375,18 +11375,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.40.0",
-            "alias_normalized": "1.40.0.0",
-            "version": "dev-TAC-185-OrderWeight",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
