@@ -54,8 +54,7 @@ class RestService extends Service
             $previousEntity = null;
             /** @var ProductDetail $previousEntity */
             try {
-                $id = $entity->getId();
-                if (is_null($id)) {
+                if (is_null($entity->getId())) {
                     throw new NotFound();
                 }
                 $previousEntity = $this->fetch($entity->getId());
