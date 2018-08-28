@@ -51,11 +51,16 @@ class RestService extends Service
     public function save($entity)
     {
         try {
+            $previousEntity = null;
             /** @var ProductDetail $previousEntity */
             try {
+                $id = $entity->getId();
+                if (is_null($id)) {
+                    throw new NotFound();
+                }
                 $previousEntity = $this->fetch($entity->getId());
             } catch (NotFound $exception) {
-                $previousEntity = null;
+                //noop
             }
             return parent::save($entity);
         } finally {
