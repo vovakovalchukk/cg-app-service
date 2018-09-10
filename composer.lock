@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd02e6e5df7938abdd414a085d5bb34e",
+    "content-hash": "43bc8ff5b9f47a5cbd8e6a02e84d7023",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1443,20 +1443,21 @@
         },
         {
             "name": "channelgrabber/locale",
-            "version": "1.1.3",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
-                "reference": "1bfce714c09866f5c3033dd8ea9a4b97d10c9a2b"
+                "reference": "d7c1ac9ef3d43406007e751fccc5a4071850ce55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.1.3-d1b51e.zip",
-                "reference": "1bfce714c09866f5c3033dd8ea9a4b97d10c9a2b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.2.1-fb7f25.zip",
+                "reference": "d7c1ac9ef3d43406007e751fccc5a4071850ce55",
                 "shasum": null
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.1",
+                "php-units-of-measure/php-units-of-measure": "^2.0.0"
             },
             "conflict": {
                 "channelgrabber/user": "<1.26.0"
@@ -1480,7 +1481,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-06-25T15:05:33+00:00"
+            "time": "2018-08-29T08:47:40+00:00"
         },
         {
             "name": "channelgrabber/location",
@@ -2070,16 +2071,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.3.1",
+            "version": "dev-CGIV-9621-list-to-ebay-with-no-barcode",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "9d5fd1f76ba30b501f17b7ce0dbbc3e276201708"
+                "reference": "936e9681beff5f6390a95b3f9586a4335a57dd89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.3.1-4b1690.zip",
-                "reference": "9d5fd1f76ba30b501f17b7ce0dbbc3e276201708",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9621-list-to-ebay-with-no-barcode-d68d73.zip",
+                "reference": "936e9681beff5f6390a95b3f9586a4335a57dd89",
                 "shasum": null
             },
             "require": {
@@ -2091,7 +2092,7 @@
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.15.0",
-                "channelgrabber/locale": "^1.1.3",
+                "channelgrabber/locale": "^1.2.1",
                 "channelgrabber/location": "^1.2.1",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/notification": "^1.0.0",
@@ -2103,7 +2104,6 @@
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.7",
                 "php": ">=7.1",
-                "php-units-of-measure/php-units-of-measure": "^2.0.0",
                 "zendframework/zend-di": ">=2.2.5"
             },
             "conflict": {
@@ -2137,7 +2137,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-17T10:05:16+00:00"
+            "time": "2018-09-10T10:10:55+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -4063,7 +4063,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9536,7 +9536,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -11375,10 +11375,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.16.5",
+            "alias_normalized": "1.16.5.0",
+            "version": "dev-CGIV-9621-list-to-ebay-with-no-barcode",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },

@@ -2,6 +2,7 @@
 namespace CG\InputValidation\ProductDetail;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\DecimalValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
@@ -115,6 +116,11 @@ class Entity implements RulesInterface
                 'name' => 'isbn',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 8, 'max' => 14])]
+            ],
+            'barcodeNotApplicable' => [
+                'name' => 'barcodeNotApplicable',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'barcodeNotApplicable'])]
             ],
         ];
     }
