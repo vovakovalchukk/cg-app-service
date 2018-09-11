@@ -60,7 +60,7 @@ class Db implements StorageInterface
                     'dispatchTimeMax' => $result['dispatchTimeMax'],
                     'shippingMethod' => $result['shippingMethod'],
                     'shippingPrice' => $result['shippingPrice'],
-                    'epid' => $result['epid'],
+                    'variationToEpid' => $result['variationToEpid'],
                     'marketplace' => $result['marketplace']
                 ];
             }
@@ -77,7 +77,7 @@ class Db implements StorageInterface
 
         $array = $external->toArray();
         $attributeImageMap = $array['attributeImageMap'] ?? [];
-        unset($array['attributeImageMap'], $array['epid'], $array['marketplace']);
+        unset($array['attributeImageMap'], $array['variationToEpid'], $array['marketplace']);
 
         $insert = $this->getInsert()->values(array_merge(
             ['productId' => $productId],
@@ -99,14 +99,14 @@ class Db implements StorageInterface
 
     protected function saveEpid(int $productId, External $external): void
     {
-        if (empty($external->getEpid()) || $external->getMarketplace() === null) {
+        if (empty($external->getVariationToEpid()) || $external->getMarketplace() === null) {
             return;
         }
 
         $insert = $this->getInsert('productEbayEpid')->values([
             'productId' => $productId,
             'marketplace' => $external->getMarketplace(),
-            'epid' => $external->getEpid()
+            'variationToEpid' => json_encode($external->getVariationToEpid())
         ]);
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
     }
@@ -133,7 +133,7 @@ class Db implements StorageInterface
             ->join(
                 'productEbayEpid',
                 'productEbayEpid.productId = productEbayDetail.productId',
-                ['epid', 'marketplace'],
+                ['variationToEpid', 'marketplace'],
                 Select::JOIN_LEFT
             );
     }
