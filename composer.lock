@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c28085b74d39ef05b87f3ff99ba86ba7",
+    "content-hash": "4ea3bd7db476c405b811768410dfd2d3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -871,7 +871,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "d0d6a433cf2659e1dcffe8237f5468cdcdd0759b"
+                "reference": "724d619f410f81fd50bfe3211a179e97d83d43b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-dev-STRAT-6-save-varaition-to-epid-b8565c.zip",
+                "reference": "724d619f410f81fd50bfe3211a179e97d83d43b8",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -927,7 +933,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-11T11:03:21+00:00"
+            "time": "2018-09-11T15:25:12+00:00"
         },
         {
             "name": "channelgrabber/ekm",

@@ -60,7 +60,7 @@ class Db implements StorageInterface
                     'dispatchTimeMax' => $result['dispatchTimeMax'],
                     'shippingMethod' => $result['shippingMethod'],
                     'shippingPrice' => $result['shippingPrice'],
-                    'variationToEpid' => $result['variationToEpid'],
+                    'variationToEpid' => json_decode($result['variationToEpid'], true),
                     'marketplace' => $result['marketplace']
                 ];
             }
