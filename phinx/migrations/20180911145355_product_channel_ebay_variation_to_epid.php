@@ -6,7 +6,7 @@ class ProductChannelEbayVariationToEpid extends AbstractMigration
     public function up()
     {
         // The existing data is not compatible with the new data structure so it might result in unwanted conflicts
-        $this->execute('DELETE FROM `productEbayEpid`');
+        $this->execute('TRUNCATE `productEbayEpid`');
 
         $this->table('productEbayEpid')
             ->addColumn('variationToEpid', 'string')
