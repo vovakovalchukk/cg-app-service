@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "817aba8fd44e48a7f7c631c33a502d34",
+    "content-hash": "255aa01c51a605fb88fee4ab1c8ad57c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -156,16 +156,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.27.10",
+            "version": "1.27.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "347644f4c4f6b7d719b698c23b9673f4fa746ead"
+                "reference": "d785e6790a4071691cb947a7da5679e35ce890b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.27.10-ef81f4.zip",
-                "reference": "347644f4c4f6b7d719b698c23b9673f4fa746ead",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.27.13-279acb.zip",
+                "reference": "d785e6790a4071691cb947a7da5679e35ce890b3",
                 "shasum": null
             },
             "require": {
@@ -225,7 +225,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-11T11:02:37+00:00"
+            "time": "2018-09-14T13:48:52+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -507,16 +507,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.39.1",
+            "version": "1.39.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "9f4dc4ddfe437195e76eda70508c1a08f41507f6"
+                "reference": "debdb11c20a04c0ee7a015f0858e0bb99f07c31e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.39.1-3f06d5.zip",
-                "reference": "9f4dc4ddfe437195e76eda70508c1a08f41507f6",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.39.2-9a1ca7.zip",
+                "reference": "debdb11c20a04c0ee7a015f0858e0bb99f07c31e",
                 "shasum": null
             },
             "require": {
@@ -591,7 +591,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-11T10:43:27+00:00"
+            "time": "2018-09-18T08:32:21+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -2066,16 +2066,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.5",
+            "version": "dev-CGIV-9880-optional-exclude-embedded-data",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "4d9cd3619b287bd5754f013e3a64776f1cad6cf1"
+                "reference": "17acbae5ffd953f70870bdf0606014f9008bbfb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.5-97edaa.zip",
-                "reference": "4d9cd3619b287bd5754f013e3a64776f1cad6cf1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9880-optional-exclude-embedded-data-ced8cb.zip",
+                "reference": "17acbae5ffd953f70870bdf0606014f9008bbfb4",
                 "shasum": null
             },
             "require": {
@@ -2132,7 +2132,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-18T08:32:21+00:00"
+            "time": "2018-09-24T13:04:43+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11372,10 +11372,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.16.6",
+            "alias_normalized": "1.16.6.0",
+            "version": "dev-CGIV-9880-optional-exclude-embedded-data",
+            "package": "channelgrabber/product"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
