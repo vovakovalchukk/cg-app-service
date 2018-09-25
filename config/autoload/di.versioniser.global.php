@@ -120,6 +120,8 @@ return [
                 'Versioniser_ProductDetailEntity_2' => ProductDetailEntity\Versioniser2::class,
                 'Versioniser_ProductDetailCollection_3' => ProductDetailCollection\Versioniser3::class,
                 'Versioniser_ProductDetailEntity_3' => ProductDetailEntity\Versioniser3::class,
+                'Versioniser_ProductDetailCollection_4' => ProductDetailCollection\Versioniser4::class,
+                'Versioniser_ProductDetailEntity_4' => ProductDetailEntity\Versioniser4::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
