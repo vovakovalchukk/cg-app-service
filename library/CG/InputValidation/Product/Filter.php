@@ -102,11 +102,6 @@ class Filter implements RulesInterface
                     'validators' => [
                         new IsArrayValidator(['name' => 'embeddedDataToReturn'])
                     ]
-                ],
-                'XDEBUG_SESSION_START' => [
-                    'name' => 'XDEBUG_SESSION_START',
-                    'required' => false,
-                    'validators' => []
                 ]
             ]
         );
