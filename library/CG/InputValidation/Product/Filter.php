@@ -96,11 +96,11 @@ class Filter implements RulesInterface
                         new IsArrayValidator(['name' => 'skuMatchType'])
                     ]
                 ],
-                'excludeEmbeddedData' => [
-                    'name' => 'excludeEmbeddedData',
+                'embeddedDataToReturn' => [
+                    'name' => 'embeddedDataToReturn',
                     'required' => false,
                     'validators' => [
-                        new BooleanValidator(['name' => 'excludeEmbeddedData'])
+                        new IsArrayValidator(['name' => 'embeddedDataToReturn'])
                     ]
                 ]
             ]
