@@ -2181,18 +2181,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-profiling.git",
-                "reference": "8be34ec19f2ce2113ef058d4c3086b88caccb9d1"
+                "reference": "d39e1abff2e8078b238bf25cf599e25e8c76db36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-dev-CGIV-9871-add-tideways-profiling-2edbb3.zip",
-                "reference": "8be34ec19f2ce2113ef058d4c3086b88caccb9d1",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-dev-CGIV-9871-add-tideways-profiling-3ab731.zip",
+                "reference": "d39e1abff2e8078b238bf25cf599e25e8c76db36",
                 "shasum": null
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "CG\\Profiling\\": "src"
+                    "CG\\Profiling\\": "src/"
                 }
             },
             "authors": [
@@ -2206,7 +2206,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-09T10:32:51+00:00"
+            "time": "2018-10-09T14:12:32+00:00"
         },
         {
             "name": "channelgrabber/purchase-order",
