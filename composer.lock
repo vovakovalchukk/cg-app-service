@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b9322d70c44325df6541e7d5636000d",
+    "content-hash": "1f04147c01cc8f015db5cf8d12a1235f",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2174,6 +2174,39 @@
                 }
             },
             "time": "2016-01-22T17:26:46+00:00"
+        },
+        {
+            "name": "channelgrabber/profiling",
+            "version": "dev-CGIV-9871-add-tideways-profiling",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-profiling.git",
+                "reference": "8be34ec19f2ce2113ef058d4c3086b88caccb9d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-dev-CGIV-9871-add-tideways-profiling-2edbb3.zip",
+                "reference": "8be34ec19f2ce2113ef058d4c3086b88caccb9d1",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Profiling\\": "src"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Eduard Busuioc",
+                    "email": "eduard.busuioc@channelgrabber.com"
+                }
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-10-09T10:32:51+00:00"
         },
         {
             "name": "channelgrabber/purchase-order",
@@ -11372,10 +11405,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-CGIV-9871-add-tideways-profiling",
+            "package": "channelgrabber/profiling"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/profiling": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
