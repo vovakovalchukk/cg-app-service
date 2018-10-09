@@ -19,7 +19,7 @@ foreach ($components as $component) {
     require_once __DIR__ . DS . $component . DS .'bootstrap.php';
 }
 
-Profiler::startProfiling('cg_app_dev', [], [
+Profiler::startProfiling(APPLICATION, [], [
     Profiler::MODE_BASIC => 70,
     Profiler::MODE_PROFILE => 29,
     Profiler::MODE_TRACE => 1
