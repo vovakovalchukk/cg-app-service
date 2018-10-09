@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff09344eb32d097a98104986f4630f64",
+    "content-hash": "25c65d445e13a06007b089b7d7c9d8b2",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -275,21 +275,22 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "1.14.1",
+            "version": "1.20.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "6c66eca431fb4bad9ca7a0789a7b33fcdc7e78e4"
+                "reference": "03128c02fcbaca60ef88b058b77e2a2ac73aa8d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.14.1-ded794.zip",
-                "reference": "6c66eca431fb4bad9ca7a0789a7b33fcdc7e78e4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.20.1-799f84.zip",
+                "reference": "03128c02fcbaca60ef88b058b77e2a2ac73aa8d5",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.4.3",
                 "channelgrabber/constants": "dev-master",
+                "channelgrabber/currency": "~1.0.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.2",
                 "channelgrabber/etag": "^1.5.4",
@@ -299,13 +300,18 @@
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/permission": ">=1.0.2",
                 "channelgrabber/phinx": "~0.3.2",
-                "channelgrabber/settings": "^1.5.5",
+                "channelgrabber/settings": "^1.6.2",
                 "channelgrabber/slim": "^1.13.14",
-                "channelgrabber/stdlib": "^2.13.2",
-                "channelgrabber/user": "^1.22.4",
-                "channelgrabber/zf2-email-template": "^1.0.20",
+                "channelgrabber/stdlib": "^2.16.1",
+                "channelgrabber/user": "^1.26.4",
+                "channelgrabber/zf2-email-template": "^1.0.23",
+                "channelgrabber/zf2-v4-ui": "^1.23.5",
                 "php": ">=7.1",
                 "zendframework/zend-di": ">=2.2.5"
+            },
+            "conflict": {
+                "channelgrabber/clearbooks": "<1.11.5",
+                "channelgrabber/payment": "<1.11.0"
             },
             "require-dev": {
                 "channelgrabber/phpunit": "dev-develop",
@@ -332,7 +338,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-05-16T09:47:29+00:00"
+            "time": "2018-10-05T13:44:54+00:00"
         },
         {
             "name": "channelgrabber/cache",
@@ -513,6 +519,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
                 "reference": "0ec85feefd9a3c91857004cfcca4789b99075d0d"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9968-channel-jobs-to-channel-gearman-instances-afdfcc.zip",
+                "reference": "0ec85feefd9a3c91857004cfcca4789b99075d0d",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/billing": "^1.19.7",
                 "channelgrabber/cache": "^2.1.0",
@@ -566,6 +578,11 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-9693-clean-gearman-dynamic-queues-for-inactive-users": "1.38.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Channel\\": "src/Channel",
@@ -1185,16 +1202,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.3.6",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "1662a28cad17bc980b32e9f3bb048bde363655ab"
+                "reference": "e2f661bc2e0fd8b5035dadbe663d691b000ab773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.3.6-7db7fa.zip",
-                "reference": "1662a28cad17bc980b32e9f3bb048bde363655ab",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-1.3.7-1ef8f2.zip",
+                "reference": "e2f661bc2e0fd8b5035dadbe663d691b000ab773",
                 "shasum": null
             },
             "require": {
@@ -1215,6 +1232,11 @@
                 "phpunit/phpunit": "~6.4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-9693-clean-gearman-dynamic-queues-for-inactive-users": "1.3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Gearman\\": "src"
@@ -1230,7 +1252,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-22T08:31:09+00:00"
+            "time": "2018-10-03T13:11:09+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -2730,16 +2752,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.15.2",
+            "version": "2.16.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "2265fb3046249df88527169b130466b2390635ea"
+                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.15.2-dd77d1.zip",
-                "reference": "2265fb3046249df88527169b130466b2390635ea",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.16.2-f1dec2.zip",
+                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131",
                 "shasum": null
             },
             "require": {
@@ -2763,6 +2785,7 @@
                 "phpunit/phpunit": "4.0.*"
             },
             "suggest": {
+                "channelgrabber/locale": "Provides a DateTime helper class for handling times in the users locale format/timezone",
                 "ext-imagick": "Allows for testing of pdf functions"
             },
             "type": "library",
@@ -2787,7 +2810,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-05-02T15:24:34+00:00"
+            "time": "2018-09-26T13:42:09+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -3125,16 +3148,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.26.2",
+            "version": "1.26.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "a9970e6f01a1b89ab263de11579fe7b7e3caf0f9"
+                "reference": "7aca77dd960a49f31e2761feafa1ed629c99a90c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.26.2-39cc65.zip",
-                "reference": "a9970e6f01a1b89ab263de11579fe7b7e3caf0f9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.26.4-646f2a.zip",
+                "reference": "7aca77dd960a49f31e2761feafa1ed629c99a90c",
                 "shasum": null
             },
             "require": {
@@ -3144,7 +3167,7 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": ">=1.0.1",
                 "channelgrabber/etag": "^1.5.4",
-                "channelgrabber/gearman": ">=1.0.11",
+                "channelgrabber/gearman": "^1.3.7",
                 "channelgrabber/http": "^1.3.16",
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
@@ -3180,7 +3203,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-23T13:57:27+00:00"
+            "time": "2018-10-03T13:20:24+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
