@@ -6,7 +6,7 @@ use CG\Profiling\Profiler;
 define('PROJECT_ROOT', dirname(__DIR__));
 define('DS', DIRECTORY_SEPARATOR);
 
-Profiler::startProfiling('cg_app', [], [
+Profiler::startProfiling(APPLICATION, [], [
     Profiler::MODE_BASIC => 70,
     Profiler::MODE_PROFILE => 29,
     Profiler::MODE_TRACE => 1
