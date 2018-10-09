@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e438cd0ab49c2c3cd810e13c06a2623c",
+    "content-hash": "ff09344eb32d097a98104986f4630f64",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -514,7 +514,7 @@
                 "reference": "0ec85feefd9a3c91857004cfcca4789b99075d0d"
             },
             "require": {
-                "channelgrabber/billing": "^1.11.10",
+                "channelgrabber/billing": "^1.19.7",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/constants": "dev-master",
@@ -522,7 +522,7 @@
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/feature-flags": "^2.1.0",
-                "channelgrabber/gearman": "^1.2.19",
+                "channelgrabber/gearman": "^1.3.7",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.17.3",
@@ -542,7 +542,7 @@
                 "channelgrabber/stdlib": "^2.14.1",
                 "channelgrabber/stock": "^1.10.1",
                 "channelgrabber/stock-locking": "^1.1.0",
-                "channelgrabber/user": "^1.26.0",
+                "channelgrabber/user": "^1.26.4",
                 "channelgrabber/zf2-email-template": "^1.0.12",
                 "ext-gearman": ">=1.1.0",
                 "guzzle/guzzle": "~3.7",
@@ -585,7 +585,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-18T08:32:21+00:00"
+            "time": "2018-10-09T14:23:01+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -11368,8 +11368,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.39.2",
-            "alias_normalized": "1.39.2.0",
+            "alias": "1.40.0",
+            "alias_normalized": "1.40.0.0",
             "version": "dev-CGIV-9968-channel-jobs-to-channel-gearman-instances",
             "package": "channelgrabber/channel"
         }
