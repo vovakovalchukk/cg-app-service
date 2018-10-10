@@ -517,12 +517,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "0ec85feefd9a3c91857004cfcca4789b99075d0d"
+                "reference": "428ff157764bf9971163de71bc924e05c1e248f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9968-channel-jobs-to-channel-gearman-instances-afdfcc.zip",
-                "reference": "0ec85feefd9a3c91857004cfcca4789b99075d0d",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9968-channel-jobs-to-channel-gearman-instances-85800d.zip",
+                "reference": "428ff157764bf9971163de71bc924e05c1e248f4",
                 "shasum": null
             },
             "require": {
@@ -578,11 +578,6 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-9693-clean-gearman-dynamic-queues-for-inactive-users": "1.38.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Channel\\": "src/Channel",
@@ -602,7 +597,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-09T14:23:01+00:00"
+            "time": "2018-10-10T10:44:22+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -4077,7 +4072,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9550,7 +9545,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
