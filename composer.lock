@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b9322d70c44325df6541e7d5636000d",
+    "content-hash": "f960b44a8757c06e586d773a7dd607c0",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1720,16 +1720,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.39.10",
+            "version": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "eed35275804a7afd53e4fdc2823be9bb5d3559b7"
+                "reference": "f9ae17b3d6b955928f98d7054c00b498ccbd8a89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.39.10-9fec96.zip",
-                "reference": "eed35275804a7afd53e4fdc2823be9bb5d3559b7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-6c70a3.zip",
+                "reference": "f9ae17b3d6b955928f98d7054c00b498ccbd8a89",
                 "shasum": null
             },
             "require": {
@@ -1805,7 +1805,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-11T10:43:47+00:00"
+            "time": "2018-10-11T12:46:30+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11372,10 +11372,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.39.11",
+            "alias_normalized": "1.39.11.0",
+            "version": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
