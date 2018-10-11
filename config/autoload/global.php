@@ -1690,6 +1690,12 @@ $config = array(
                     'config' => 'config'
                 ]
             ],
+            ItemLockingService::class => [
+                'parameters' => [
+                    'gearmanClient' => 'defaultGearmanClient',
+                    'orderGearmanClient' => 'orderGearmanClient'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
