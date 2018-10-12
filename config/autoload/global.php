@@ -162,6 +162,7 @@ use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Stock\Command\RemoveDuplicateStock as RemoveDuplicateStockCommand;
 use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
+use CG\Order\Client\Gearman\Generator\SaveOrderShippingMethod;
 
 //Filter
 use CG\Order\Service\Filter\Service as FilterService;
@@ -1694,6 +1695,11 @@ $config = array(
                 'parameters' => [
                     'gearmanClient' => 'defaultGearmanClient',
                     'orderGearmanClient' => 'orderGearmanClient'
+                ]
+            ],
+            SaveOrderShippingMethod::class => [
+                'parameters' => [
+                    'gearmanClient' => 'orderGearmanClient'
                 ]
             ],
             'preferences' => [
