@@ -6,6 +6,7 @@ use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
+use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
 
 return [
     'di' => [
@@ -27,6 +28,11 @@ return [
                     'filterStorage' => FilterCache::class,
                     'lockingService' => 'LockingServiceOrders',
                 ],
+            ],
+            LinkMatchingOrdersGenerator::class => [
+                'parameters' => [
+                    'orderGearmanClient' => 'orderGearmanClient',
+                ]
             ],
             'preferences' => [
                 OrderService::class => OrderLockingService::class,
