@@ -1724,12 +1724,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c7dc1746cbd6e86781748d9bdc53d1398eee6c6b"
+                "reference": "a6ad70b189444ee74b0160712dc3dbf4f0332417"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-623f4f.zip",
+                "reference": "a6ad70b189444ee74b0160712dc3dbf4f0332417",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": "^1.14.0",
-                "channelgrabber/channel": "^1.32.7",
+                "channelgrabber/channel": "^1.33.1",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
@@ -1745,7 +1751,7 @@
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/notification": "^1.2.0",
+                "channelgrabber/notification": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.2.2",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
                 "channelgrabber/product": "^1.12.3",
@@ -1799,7 +1805,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-12T10:19:39+00:00"
+            "time": "2018-10-12T13:48:12+00:00"
         },
         {
             "name": "channelgrabber/permission",
