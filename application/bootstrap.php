@@ -1,7 +1,7 @@
 <?php
 
 use CG\Log\FatalErrorHandler;
-use CG\Profiling\Profiler;
+use CG\Profiling\Service as Profiler;
 use Slim\Slim;
 
 define('PROJECT_ROOT', dirname(__DIR__));
