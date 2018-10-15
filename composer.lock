@@ -1668,17 +1668,11 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "80e5c364b95ae974db8349a1da2d7eefdc94ceab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-349438.zip",
-                "reference": "80e5c364b95ae974db8349a1da2d7eefdc94ceab",
-                "shasum": null
+                "reference": "995915f28f91147af7b42ff7a4114f6d71d9c4ec"
             },
             "require": {
                 "channelgrabber/billing": "^1.8.0",
-                "channelgrabber/channel": "^1.33.1",
+                "channelgrabber/channel": "^1.39.4",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/gearman": "^1.2.0",
                 "channelgrabber/queue": "^1.0.0",
@@ -1716,7 +1710,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-12T10:43:02+00:00"
+            "time": "2018-10-15T08:16:54+00:00"
         },
         {
             "name": "channelgrabber/order",
