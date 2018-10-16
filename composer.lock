@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f31f1e14c089410d41f0ebae6fff705",
+    "content-hash": "e190d990cec48eec8f24b703667ddfe3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2188,16 +2188,16 @@
         },
         {
             "name": "channelgrabber/profiling",
-            "version": "dev-CGIV-9871-add-tideways-profiling",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-profiling.git",
-                "reference": "8b0f59a2d90d1138d52018fc07d920ef249d425a"
+                "reference": "63f341f447bb8cc16f1db6e3fff321b702dfd5c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-dev-CGIV-9871-add-tideways-profiling-465582.zip",
-                "reference": "8b0f59a2d90d1138d52018fc07d920ef249d425a",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-1.0.0-dcec30.zip",
+                "reference": "63f341f447bb8cc16f1db6e3fff321b702dfd5c9",
                 "shasum": null
             },
             "type": "library",
@@ -2217,7 +2217,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-15T08:32:32+00:00"
+            "time": "2018-10-16T15:07:37+00:00"
         },
         {
             "name": "channelgrabber/purchase-order",
@@ -11417,18 +11417,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0",
-            "version": "dev-CGIV-9871-add-tideways-profiling",
-            "package": "channelgrabber/profiling"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/profiling": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
