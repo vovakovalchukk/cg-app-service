@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25c65d445e13a06007b089b7d7c9d8b2",
+    "content-hash": "e4cfe49b8e7be3650cfea4f2c91fdb30",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -513,16 +513,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-9968-channel-jobs-to-channel-gearman-instances",
+            "version": "1.40.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "1a49aa4da27bb31b0708ae4a347f7e38c7678553"
+                "reference": "b759b39fdd8933bd11bca361ac5ab5a231463de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9968-channel-jobs-to-channel-gearman-instances-e56103.zip",
-                "reference": "1a49aa4da27bb31b0708ae4a347f7e38c7678553",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.40.0-1d5a96.zip",
+                "reference": "b759b39fdd8933bd11bca361ac5ab5a231463de4",
                 "shasum": null
             },
             "require": {
@@ -597,7 +597,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-11T10:31:14+00:00"
+            "time": "2018-10-16T07:52:43+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -4072,7 +4072,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9545,7 +9545,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -11384,17 +11384,9 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.40.0",
-            "alias_normalized": "1.40.0.0",
-            "version": "dev-CGIV-9968-channel-jobs-to-channel-gearman-instances",
-            "package": "channelgrabber/channel"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
