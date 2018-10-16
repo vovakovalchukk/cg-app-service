@@ -74,6 +74,16 @@ class Entity implements RulesInterface
                     ))->setMessage('Must be a valid date (Y-m-d H:i:s) or false')
                 ]
             ],
+            'emailSubject' => [
+                'name' => 'invoiceId',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
+            'emailTemplate' => [
+                'name' => 'invoiceId',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         ];
     }
 }
