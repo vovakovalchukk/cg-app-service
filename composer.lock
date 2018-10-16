@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "455dcc05f672b0af23645b550076b05e",
+    "content-hash": "e190d990cec48eec8f24b703667ddfe3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2185,6 +2185,39 @@
                 }
             },
             "time": "2016-01-22T17:26:46+00:00"
+        },
+        {
+            "name": "channelgrabber/profiling",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-profiling.git",
+                "reference": "63f341f447bb8cc16f1db6e3fff321b702dfd5c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-1.0.0-dcec30.zip",
+                "reference": "63f341f447bb8cc16f1db6e3fff321b702dfd5c9",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Profiling\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Eduard Busuioc",
+                    "email": "eduard.busuioc@channelgrabber.com"
+                }
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-10-16T15:07:37+00:00"
         },
         {
             "name": "channelgrabber/purchase-order",
