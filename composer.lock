@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4cfe49b8e7be3650cfea4f2c91fdb30",
+    "content-hash": "455dcc05f672b0af23645b550076b05e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2500,16 +2500,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.6.3",
+            "version": "dev-TAC-223-add-invoice-mapping-fields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "ccad1eaaef9d8e1b360c9a40b6554dd671854d04"
+                "reference": "6a643017b653efde45ecc13868972a59dd697947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.6.3-da5b85.zip",
-                "reference": "ccad1eaaef9d8e1b360c9a40b6554dd671854d04",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-dev-TAC-223-add-invoice-mapping-fields-5381e4.zip",
+                "reference": "6a643017b653efde45ecc13868972a59dd697947",
                 "shasum": null
             },
             "require": {
@@ -2538,7 +2538,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-17T09:50:13+00:00"
+            "time": "2018-10-16T15:13:49+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -11384,10 +11384,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.4",
+            "alias_normalized": "1.6.4.0",
+            "version": "dev-TAC-223-add-invoice-mapping-fields",
+            "package": "channelgrabber/settings"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
