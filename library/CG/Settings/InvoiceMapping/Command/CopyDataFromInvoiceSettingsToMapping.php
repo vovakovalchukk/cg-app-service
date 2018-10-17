@@ -1,6 +1,7 @@
 <?php
 namespace CG\Settings\InvoiceMapping\Command;
 
+use CG\ETag\Exception\NotModified;
 use CG\Settings\Invoice\Shared\Entity as InvoiceSettingsEntity;
 use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceSettingsMapper;
@@ -106,7 +107,7 @@ class CopyDataFromInvoiceSettingsToMapping implements LoggerAwareInterface
     ): void {
         for ($retry = 0; $retry <= static::MAX_SAVE_RETRIES; $retry++) {
             try {
-                $invoiceMapping->setEmailTemplate($invoiceSettings->getEmailTemplate());
+                $this->applyUpdatesToInvoiceMappingFromSetting($invoiceMapping, $invoiceSettings);
                 $this->invoiceMappingService->save($invoiceMapping);
             } catch (Conflict $exception) {
                 try {
@@ -118,7 +119,26 @@ class CopyDataFromInvoiceSettingsToMapping implements LoggerAwareInterface
             } catch (NotFound $exception) {
                 $this->logWarningException($exception);
                 return;
+            } catch (NotModified $exception) {
+                return;
             }
+        }
+    }
+
+    protected function applyUpdatesToInvoiceMappingFromSetting(
+        InvoiceMappingEntity $invoiceMapping,
+        InvoiceSettingsEntity $invoiceSettings
+    ): void {
+        if ($invoiceSettings->getEmailTemplate() != InvoiceSettingsMapper::DEFAULT_EMAIL_TEMPLATE) {
+            $invoiceMapping->setEmailTemplate($invoiceSettings->getEmailTemplate());
+        }
+
+        if ($invoiceMapping->getSendToFba() === null) {
+            $invoiceMapping->setSendToFba($invoiceSettings->getSendToFba());
+        }
+
+        if ($invoiceMapping->getSendViaEmail() === null) {
+            $invoiceMapping->setSendViaEmail($invoiceSettings->getAutoEmail());
         }
     }
 }
