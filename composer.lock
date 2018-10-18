@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60fc78da74a00d5fd224ddf402e1d0c4",
+    "content-hash": "0312d01a1a36d81bfdea35b7c6c75908",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -517,12 +517,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "0abaeebd03e4d04e5299e4d99afccd5b9479cf7c"
+                "reference": "78be7bd30c23d63d77d8961f824f28e21029d096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-81e35a.zip",
-                "reference": "0abaeebd03e4d04e5299e4d99afccd5b9479cf7c",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-af77f2.zip",
+                "reference": "78be7bd30c23d63d77d8961f824f28e21029d096",
                 "shasum": null
             },
             "require": {
@@ -534,7 +534,7 @@
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/feature-flags": "^2.1.0",
-                "channelgrabber/gearman": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.3.x-dev",
+                "channelgrabber/gearman": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.4.1",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.17.3",
@@ -602,25 +602,26 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-15T14:16:15+00:00"
+            "time": "2018-10-18T15:23:36+00:00"
         },
         {
             "name": "channelgrabber/cilex",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cilex.git",
-                "reference": "0c99b55cb81989a9becb03454b8735c70188be93"
+                "reference": "fc9639202a8dce65d1917f5622e1f51136d16a8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.2.1-746b0f.zip",
-                "reference": "0c99b55cb81989a9becb03454b8735c70188be93",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.2.2-75b62d.zip",
+                "reference": "fc9639202a8dce65d1917f5622e1f51136d16a8d",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/http": "^1.3.32",
                 "channelgrabber/log": "^2.2.0",
+                "channelgrabber/profiling": "^1.1.0",
                 "channelgrabber/stdlib": "^2.15.0",
                 "cilex/cilex": "1.0.1",
                 "php": ">=7.1",
@@ -639,7 +640,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-17T10:23:33+00:00"
+            "time": "2018-10-18T10:33:15+00:00"
         },
         {
             "name": "channelgrabber/communication",
@@ -1206,17 +1207,17 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "67c62d78cfad4040a6bb01540eee057b92223d4b"
+                "reference": "afd7d6eb2826de364a3f72d8a96d7a01010fdb13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-8f6afb.zip",
-                "reference": "67c62d78cfad4040a6bb01540eee057b92223d4b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-gearman-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-d4b8d5.zip",
+                "reference": "afd7d6eb2826de364a3f72d8a96d7a01010fdb13",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cg-predis": "^0.8.7",
-                "channelgrabber/cilex": "^1.1.0",
+                "channelgrabber/cilex": "^1.2.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/log": "^2.2.0",
                 "channelgrabber/predis": "^1.0.8",
@@ -1252,7 +1253,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-15T13:22:07+00:00"
+            "time": "2018-10-18T14:13:45+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -1684,19 +1685,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "fc58e8ef8e1dcc256d9edc7ba3831d4dd2ca9f8e"
+                "reference": "f85fd150c841c6a03ff66b032b94d2eb244e42f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-a58ae8.zip",
-                "reference": "fc58e8ef8e1dcc256d9edc7ba3831d4dd2ca9f8e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-16736c.zip",
+                "reference": "f85fd150c841c6a03ff66b032b94d2eb244e42f1",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/billing": "^1.8.0",
-                "channelgrabber/channel": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.40.0",
+                "channelgrabber/channel": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.41.0",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/gearman": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.3.8",
+                "channelgrabber/gearman": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.4.1",
                 "channelgrabber/queue": "^1.0.0",
                 "channelgrabber/settings": "^1.3.7",
                 "channelgrabber/stdlib": "^2.12.7",
@@ -1732,7 +1733,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-15T14:41:04+00:00"
+            "time": "2018-10-18T14:38:25+00:00"
         },
         {
             "name": "channelgrabber/order",
@@ -1740,18 +1741,18 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "a6ad70b189444ee74b0160712dc3dbf4f0332417"
+                "reference": "3379542f63004116cafd094e25bd7d0558060b52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-623f4f.zip",
-                "reference": "a6ad70b189444ee74b0160712dc3dbf4f0332417",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-9970-orders-jobs-to-orders-gearman-instances-bb35c2.zip",
+                "reference": "3379542f63004116cafd094e25bd7d0558060b52",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": "^1.14.0",
-                "channelgrabber/channel": "^1.33.1",
+                "channelgrabber/channel": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.41.1",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/constants": "dev-master",
@@ -1761,16 +1762,16 @@
                 "channelgrabber/etag": "^1.6.0",
                 "channelgrabber/exchangerate": "^1.2.0",
                 "channelgrabber/feature-flags": "^2.0.1",
-                "channelgrabber/gearman": ">=1.3.6,<2.0.0",
+                "channelgrabber/gearman": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.4.1",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
-                "channelgrabber/locale": "^1.0.9",
+                "channelgrabber/locale": "^1.2.1",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
                 "channelgrabber/notification": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances as 1.2.2",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
-                "channelgrabber/product": "^1.12.3",
+                "channelgrabber/product": "1.16.7",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.5.3",
@@ -1821,7 +1822,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-12T13:48:12+00:00"
+            "time": "2018-10-18T15:27:00+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2190,6 +2191,39 @@
                 }
             },
             "time": "2016-01-22T17:26:46+00:00"
+        },
+        {
+            "name": "channelgrabber/profiling",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-profiling.git",
+                "reference": "0cb385d9a8ac5d0233ea14c31b3e1c11fd990e28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-1.1.0-3653a0.zip",
+                "reference": "0cb385d9a8ac5d0233ea14c31b3e1c11fd990e28",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Profiling\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Eduard Busuioc",
+                    "email": "eduard.busuioc@channelgrabber.com"
+                }
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-10-18T10:23:09+00:00"
         },
         {
             "name": "channelgrabber/purchase-order",
@@ -11391,14 +11425,14 @@
     ],
     "aliases": [
         {
-            "alias": "1.40.0",
-            "alias_normalized": "1.40.0.0",
+            "alias": "1.41.0",
+            "alias_normalized": "1.41.0.0",
             "version": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances",
             "package": "channelgrabber/channel"
         },
         {
-            "alias": "1.3.8",
-            "alias_normalized": "1.3.8.0",
+            "alias": "1.4.1",
+            "alias_normalized": "1.4.1.0",
             "version": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances",
             "package": "channelgrabber/gearman"
         },
@@ -11409,8 +11443,8 @@
             "package": "channelgrabber/notification"
         },
         {
-            "alias": "1.39.11",
-            "alias_normalized": "1.39.11.0",
+            "alias": "1.40.0",
+            "alias_normalized": "1.40.0.0",
             "version": "dev-CGIV-9970-orders-jobs-to-orders-gearman-instances",
             "package": "channelgrabber/order"
         }
