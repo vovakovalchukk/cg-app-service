@@ -48,14 +48,13 @@ class CopyDataFromInvoiceSettingsToMapping implements LoggerAwareInterface
     protected function fetchInvoiceSettings(): iterable
     {
         $page = 1;
+        $filter = (new InvoiceSettingsFilter())
+            ->setLimit(static::BATCH_SIZE);
         do {
             try {
                 /** @var PaginatedCollection $collection */
-                $collection = $this->invoiceSettingsService->fetchCollectionByFilter(
-                    (new InvoiceSettingsFilter())
-                        ->setPage($page++)
-                        ->setLimit(static::BATCH_SIZE)
-                );
+                $filter->setPage($page++);
+                $collection = $this->invoiceSettingsService->fetchCollectionByFilter($filter);
                 /** @var InvoiceSettingsEntity $invoiceSettings */
                 foreach ($collection as $invoiceSettings) {
                     yield $invoiceSettings;
