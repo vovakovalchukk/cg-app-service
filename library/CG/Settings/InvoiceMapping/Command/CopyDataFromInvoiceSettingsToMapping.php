@@ -20,8 +20,8 @@ class CopyDataFromInvoiceSettingsToMapping implements LoggerAwareInterface
 {
     use LogTrait;
 
+    const LOG_CODE = 'CopyDataFromInvoiceSettingsToMapping';
     const BATCH_SIZE = 100;
-
     const MAX_SAVE_RETRIES = 2;
 
     /** @var InvoiceSettingsService */
@@ -82,7 +82,11 @@ class CopyDataFromInvoiceSettingsToMapping implements LoggerAwareInterface
                 continue;
             }
 
-            $this->updateInvoiceMappingFromSetting($invoiceMapping, $invoiceSetting);
+            try {
+                $this->updateInvoiceMappingFromSetting($invoiceMapping, $invoiceSetting);
+            } catch (\Throwable $throwable) {
+                $this->logWarningException($throwable, "Caught throwable whilst migrating data for OU %d, will skip", ['ou' => $invoiceSetting->getOrganisationUnitId()], [static::LOG_CODE, 'UpdateError']);
+            }
         }
     }
 
