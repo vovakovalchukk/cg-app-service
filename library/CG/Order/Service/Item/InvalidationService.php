@@ -49,7 +49,8 @@ class InvalidationService extends ItemService
         LinkMatchingOrdersGenerator $linkMatchingOrdersGenerator,
         AutoEmailInvoiceGenerator $autoEmailInvoiceGenerator,
         CalculateOrderWeightGenerator $calculateOrderWeightGenerator,
-        Invalidator $invalidator
+        Invalidator $invalidator,
+        GearmanClient $orderGearmanClient
     ) {
         parent::__construct(
             $repository,
@@ -69,7 +70,8 @@ class InvalidationService extends ItemService
             $gearmanClient,
             $linkMatchingOrdersGenerator,
             $autoEmailInvoiceGenerator,
-            $calculateOrderWeightGenerator
+            $calculateOrderWeightGenerator,
+            $orderGearmanClient
         );
         $this->setInvalidator($invalidator);
     }
