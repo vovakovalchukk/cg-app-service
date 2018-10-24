@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb8db7a8cbfe4a9fb8e6cddff129affd",
+    "content-hash": "6f090540f064a2d2c9972514e0405282",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -445,36 +445,37 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.16.3",
+            "version": "1.16.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "94beb83db5a2c61238e95d235af5bad6936a36fe"
+                "reference": "ae9725bf82d267c6865ac489a9a91a67acf73ac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.16.3-797620.zip",
-                "reference": "94beb83db5a2c61238e95d235af5bad6936a36fe",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.16.12-1903e3.zip",
+                "reference": "ae9725bf82d267c6865ac489a9a91a67acf73ac1",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/billing": "^1.14.0",
+                "channelgrabber/billing": "^1.17.5",
                 "channelgrabber/channel": "^1.32.5",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/currency": "^1.0.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/feature-flags": "^2.0.1",
+                "channelgrabber/gearman": "^1.4.1",
                 "channelgrabber/http": "^1.3.25",
                 "channelgrabber/listing": "^1.11.11",
-                "channelgrabber/locale": "^1.0.19",
+                "channelgrabber/locale": "^1.2.1",
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/order": "^1.28.14",
                 "channelgrabber/predis": "^1.0.11",
-                "channelgrabber/product": "^1.9.2",
+                "channelgrabber/product": "^1.16.7",
                 "channelgrabber/settings": "^1.5.3",
                 "channelgrabber/slim": "^1.13.0",
-                "channelgrabber/stdlib": "^2.13.1",
+                "channelgrabber/stdlib": "^2.16.3",
                 "channelgrabber/stock": "^1.10.1",
                 "channelgrabber/stock-locking": "^1.1.0",
                 "channelgrabber/user": "^1.25.0",
@@ -509,7 +510,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-18T13:40:04+00:00"
+            "time": "2018-10-24T10:17:19+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1085,6 +1086,52 @@
                 }
             },
             "time": "2018-07-18T09:50:15+00:00"
+        },
+        {
+            "name": "channelgrabber/etsy",
+            "version": "dev-TAC-257-EtsyListings",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-etsy.git",
+                "reference": "ea637a84a2803d76c8185674582976a7fd5eb1ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etsy-dev-TAC-257-EtsyListings-122210.zip",
+                "reference": "ea637a84a2803d76c8185674582976a7fd5eb1ad",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/cglib": "~1.16.12",
+                "channelgrabber/channel": "^1.36.8",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/feature-flags": "^2.1.0",
+                "channelgrabber/http": "^1.3.0",
+                "channelgrabber/stdlib": "^2.14.1",
+                "ext-oauth": "*",
+                "guzzlehttp/guzzle": ">=4.1,<6.0",
+                "zendframework/zend-di": "^2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Etsy\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Etsy\\Test\\": "tests/src/"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-10-24T10:14:44+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -2785,16 +2832,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.16.2",
+            "version": "2.16.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131"
+                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.16.2-f1dec2.zip",
-                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.16.4-aea18d.zip",
+                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335",
                 "shasum": null
             },
             "require": {
@@ -2843,7 +2890,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-26T13:42:09+00:00"
+            "time": "2018-10-18T12:01:27+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -11422,10 +11469,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.3",
+            "alias_normalized": "1.0.3.0",
+            "version": "dev-TAC-257-EtsyListings",
+            "package": "channelgrabber/etsy"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/etsy": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
