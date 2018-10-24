@@ -8,7 +8,7 @@ use Zend\Di\Di;
 /** @var Di $di */
 return [
     'settings:migrate-invoice-settings-to-mapping' => [
-        'description' => '@TODO: fill this in!',
+        'description' => 'Migrate the deprecated Invoice Settings data to the individual Invoice Mappings',
         'arguments' => [],
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             /** @var CopyDataFromInvoiceSettingsToMapping $command */
