@@ -75,12 +75,12 @@ class Entity implements RulesInterface
                 ]
             ],
             'emailSubject' => [
-                'name' => 'invoiceId',
+                'name' => 'emailSubject',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
             'emailTemplate' => [
-                'name' => 'invoiceId',
+                'name' => 'emailTemplate',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
