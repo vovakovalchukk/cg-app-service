@@ -32,6 +32,7 @@ class Service extends BaseService implements StatsAwareInterface
 
     const LOG_CODE_OVERSELL = 'Stock oversell alert';
     const LOG_MSG_OVERSELL = '"%s" for ou %d has oversold at location %s';
+    const LOG_CODE = 'LocationServiceService';
 
     const STATS_OVERSELL = 'stock.oversell.ou-%d';
 
@@ -131,6 +132,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
     {
         $productSkus = $this->getRelatedSkus($stock);
+
+        $this->logDebugDump($productSkus, 'Found related product skus to %s for ouId %d', [$stock->getSku(), $stock->getOrganisationUnitId()], static::LOG_CODE);
 
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
             function ($sku) use ($stock) {
