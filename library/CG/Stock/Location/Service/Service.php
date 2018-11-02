@@ -75,6 +75,9 @@ class Service extends BaseService implements StatsAwareInterface
      */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
+
+        $this->logDebugDump($stockLocation, 'Stock Location is ', [], 'MYTEST');
+
         try {
             /** @var Stock $stock */
             $stock = $this->stockStorage->fetch($stockLocation->getStockId());
@@ -97,16 +100,44 @@ class Service extends BaseService implements StatsAwareInterface
         return $stockLocationHal;
     }
 
+    protected function getRelatedSkus(Stock $stock): array
+    {
+        $sku = $stock->getSku();
+
+        $productSkus = [];
+
+        while ($sku != null) {
+            try {
+                /** @var ProductLinkNode $productLinkNode */
+                $productLinkNode = $this->productLinkNodeStorage->fetch(
+                    ProductLinkNode::generateId($stock->getOrganisationUnitId(), $sku)
+                );
+            } catch (NotFound $exception) {
+                $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $sku, [], []);
+            }
+
+            $this->logDebugDump($productLinkNode, 'LINKED NODE', [], 'MYTEST');
+
+            if (empty($productLinkNode->getDescendants())) {
+                $sku = null;
+                break;
+            }
+
+            
+
+            $descendantsCount = count($productLinkNode->getDescendants());
+
+            $sku = $productLinkNode->getDescendants()[$descendantsCount-1];
+        }
+
+        return $productSkus;
+    }
+
     protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
     {
-        try {
-            /** @var ProductLinkNode $productLinkNode */
-            $productLinkNode = $this->productLinkNodeStorage->fetch(
-                ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
-            );
-        } catch (NotFound $exception) {
-            $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $stock->getSku(), [], []);
-        }
+
+
+
 
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
             function ($sku) use ($productLinkNode) {
@@ -114,6 +145,8 @@ class Service extends BaseService implements StatsAwareInterface
             },
             iterator_to_array($productLinkNode)
         ));
+
+        $this->logDebugDump($filter, 'LINKED NODE FILTER', [], 'MYTEST');
 
         try {
             if (empty($filter->getOuIdSku())) {
@@ -172,10 +205,15 @@ class Service extends BaseService implements StatsAwareInterface
                 throw new NotFound('No related stock loations to update');
             }
 
+            $this->logDebugDump($stockIds, 'Stock IDS', [], 'MYTEST');
+            $this->logDebugDump($locationIds, 'Location IDS', [], 'MYTEST');
+
             /** @var StockLocationCollection $updatedStockLocations */
             $updatedStockLocations = $this->fetchCollectionByFilter(
                 (new StockLocationFilter('all', 1))->setStockId($stockIds)->setLocationId($locationIds)
             );
+
+            $this->logDebugDump($updatedStockLocations, 'Updated Stock Locations', [], 'MYTEST');
 
             /** @var StockLocation $updatedStockLocation */
             foreach ($updatedStockLocations as $updatedStockLocation) {
