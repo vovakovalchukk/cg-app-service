@@ -118,32 +118,32 @@ class Service extends BaseService implements StatsAwareInterface
 
             $this->logDebugDump($productLinkNode, 'LINKED NODE', [], 'MYTEST');
 
+            if (!empty($productLinkNode->getAncestors())) {
+                $productSkus = array_merge($productSkus, $productLinkNode->getAncestors());
+            }
+
             if (empty($productLinkNode->getDescendants())) {
                 $sku = null;
                 break;
             }
 
-            
-
+            $productSkus = array_merge($productSkus, $productLinkNode->getDescendants());
             $descendantsCount = count($productLinkNode->getDescendants());
-
             $sku = $productLinkNode->getDescendants()[$descendantsCount-1];
         }
 
-        return $productSkus;
+        return array_values(array_unique($productSkus));
     }
 
     protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
     {
-
-
-
+        $productSkus = $this->getRelatedSkus($stock);
 
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
-            function ($sku) use ($productLinkNode) {
-                return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+            function ($sku) use ($stock) {
+                return ProductLinkNode::generateId($stock->getOrganisationUnitId(), $sku);
             },
-            iterator_to_array($productLinkNode)
+            $productSkus
         ));
 
         $this->logDebugDump($filter, 'LINKED NODE FILTER', [], 'MYTEST');
