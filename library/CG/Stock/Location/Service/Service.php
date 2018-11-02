@@ -75,9 +75,6 @@ class Service extends BaseService implements StatsAwareInterface
      */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
-
-        $this->logDebugDump($stockLocation, 'Stock Location is ', [], 'MYTEST');
-
         try {
             /** @var Stock $stock */
             $stock = $this->stockStorage->fetch($stockLocation->getStockId());
@@ -103,9 +100,7 @@ class Service extends BaseService implements StatsAwareInterface
     protected function getRelatedSkus(Stock $stock): array
     {
         $sku = $stock->getSku();
-
         $productSkus = [];
-
         while ($sku != null) {
             try {
                 /** @var ProductLinkNode $productLinkNode */
@@ -115,8 +110,6 @@ class Service extends BaseService implements StatsAwareInterface
             } catch (NotFound $exception) {
                 $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $sku, [], []);
             }
-
-            $this->logDebugDump($productLinkNode, 'LINKED NODE', [], 'MYTEST');
 
             if (!empty($productLinkNode->getAncestors())) {
                 $productSkus = array_merge($productSkus, $productLinkNode->getAncestors());
@@ -145,8 +138,6 @@ class Service extends BaseService implements StatsAwareInterface
             },
             $productSkus
         ));
-
-        $this->logDebugDump($filter, 'LINKED NODE FILTER', [], 'MYTEST');
 
         try {
             if (empty($filter->getOuIdSku())) {
@@ -205,15 +196,10 @@ class Service extends BaseService implements StatsAwareInterface
                 throw new NotFound('No related stock loations to update');
             }
 
-            $this->logDebugDump($stockIds, 'Stock IDS', [], 'MYTEST');
-            $this->logDebugDump($locationIds, 'Location IDS', [], 'MYTEST');
-
             /** @var StockLocationCollection $updatedStockLocations */
             $updatedStockLocations = $this->fetchCollectionByFilter(
                 (new StockLocationFilter('all', 1))->setStockId($stockIds)->setLocationId($locationIds)
             );
-
-            $this->logDebugDump($updatedStockLocations, 'Updated Stock Locations', [], 'MYTEST');
 
             /** @var StockLocation $updatedStockLocation */
             foreach ($updatedStockLocations as $updatedStockLocation) {
