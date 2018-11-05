@@ -66,6 +66,7 @@ use CG\InputValidation\ProductLinkNode\Entity as ProductLinkNodeEntityValidation
 use CG\InputValidation\ProductLinkNode\Filter as ProductLinkNodeCollectionValidation;
 
 use CG\Controllers\ProductLinkRelated\Entity as ProductLinkRelatedController;
+use CG\Controllers\ProductLinkRelated\Collection as ProductLinkRelatedCollectionController;
 use CG\InputValidation\ProductLinkRelated\Entity as ProductLinkRelatedValidation;
 use CG\InputValidation\ProductLinkRelated\Filter as ProductLinkRelatedFilterValidation;
 
@@ -419,13 +420,34 @@ return [
         'eTag' => false,
         'version' => new Version(1, 1)
     ],
-    '/productLinkRelated/:productLinkRelatedouIdSku' => [
-        'controllers' => function($productLinkNodeId) use ($di, $app) {
+
+//    '/productLinkRelated' => [
+//        'controllers' => function() use ($di, $app) {
+//            $method = $app->request()->getMethod();
+//            $controller = $di->get(ProductLinkRelatedCollectionController::class);
+//            $app->view()->set(
+//                'RestResponse',
+//                $controller->$method($app->request()->getBody())
+//            );
+//        },
+//        'via' => ['GET', 'OPTIONS'],
+//        'name' => 'ProductLinkNodeCollection',
+//        'entityRoute' => '/productLinkNode/:productLinkNodeId',
+//        'validation' => [
+//            'filterRules' => ProductLinkNodeCollectionValidation::class,
+//            'dataRules' => ProductLinkNodeEntityValidation::class
+//        ],
+//        'version' => new Version(1, 1)
+//    ],
+
+
+    '/productLinkRelated/:productLinkRelatedOuIdSku' => [
+        'controllers' => function($productLinkRelatedOuIdSku) use ($di, $app) {
             $method = $app->request()->getMethod();
             $controller = $di->get(ProductLinkRelatedController::class);
             $app->view()->set(
                 'RestResponse',
-                $controller->$method($productLinkNodeId, $app->request()->getBody())
+                $controller->$method($productLinkRelatedOuIdSku, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'OPTIONS'],

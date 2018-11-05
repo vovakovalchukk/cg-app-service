@@ -28,6 +28,8 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
+        $this->logDebug(__METHOD__, [], 'MYTEST');
+
         [$ouId, $sku] = explode('-', $id, 2);
 
         $where = new Where();
@@ -50,12 +52,14 @@ class Db implements StorageInterface, LoggerAwareInterface
         // NoOp - Data is calculated based on productLinks, nothing to invalidate
     }
 
-    protected function getRelatedSkus($results)
+    protected function getRelatedSkus($results): array
     {
         $relatedSkusMap = [];
         foreach ($results as $data) {
             $relatedSkusMap[] = $data['sku'];
         }
+
+        return $relatedSkusMap;
     }
 
     protected function toArray($organisationUnitId, $sku, array $relatedSkus): array

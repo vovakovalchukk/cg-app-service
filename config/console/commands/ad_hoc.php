@@ -543,14 +543,27 @@ SQL;
         'options' => [],
         'command' => function(InputInterface $input, OutputInterface $output) use ($di)
         {
-            /* @var $db \CG\Product\LinkRelated\Storage\Db */
-            $db = $di->get(CG\Product\LinkRelated\Storage\Db::class);
+//            /* @var $db \CG\Product\LinkRelated\Storage\Db */
+//            $db = $di->get(CG\Product\LinkRelated\Storage\Db::class);
+//
+//            $res = $db->fetch('66-snack/12bags');
+//
+//            echo "AFTER FECTH\n";
+//
+//            print_r($res);
 
-            $res = $db->fetch('66-snack/12bags');
+
+
+
+
+            /* @var $db \CG\Product\LinkRelated\Storage\Db */
+            $db = $di->get(CG\Product\LinkRelated\Service::class);
+
+            $res = $db->fetch('66-snack/6bags');
 
             echo "AFTER FECTH\n";
-
             print_r($res);
+
         }
     ],
 
