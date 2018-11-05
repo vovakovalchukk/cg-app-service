@@ -31,7 +31,13 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        $select = $this->getSelect($this->getLinkIdSelect($id));
+        [$ouId, $sku] = explode('-', $id, 2);
+
+        $where = new Where();
+        $where->equalTo('l1.organisationUnitId', $ouId)
+            ->equalTo('l1.sku', $sku);
+
+        $select = $this->getSelect()->where($where);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -83,7 +89,7 @@ class Db implements StorageInterface, LoggerAwareInterface
             $where->addPredicate(
                 (new Where())
                     ->equalTo('organisationUnitId', $organisationUnitId)
-                    ->like('sku', escapeLikeValue($productSku))
+                    ->equalTo('sku', escapeLikeValue($productSku))
             );
         }
         return $this->readSql->select('productLink')->columns(['linkId', 'organisationUnitId', 'sku'])->where($where);
@@ -91,28 +97,71 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     protected function getSelect(Select $linkIdSelect): Select
     {
+//        SELECT DISTINCT l4.`sku`
+//        FROM productLink l1
+//        JOIN productLinkPath p1 ON l1.`linkId` = p1.`linkId`
+//        JOIN productLinkPath p2 ON p1.`pathId` = p2.`pathId`
+//        JOIN productLinkPath p3 ON p2.`linkId` = p3.`linkId`
+//        JOIN productLinkPath p4 ON p3.`pathId` = p4.`pathId`
+//        JOIN productLink l4 ON p4.`linkId` = l4.`linkId`
+//        WHERE l1.`organisationUnitId` = 66 AND l1.`sku` LIKE "snack/1bag"
+
         return $this->readSql
-            ->select(['lookup' => $linkIdSelect])
+            ->select()
             ->quantifier(Select::QUANTIFIER_DISTINCT)
-            ->columns([
-                'id' => 'linkId',
-                'organisationUnitId' => 'organisationUnitId',
-                'productSku' => 'sku',
-            ])
+            ->from(['l1' => 'productLink'])
+            ->columns('sku')
             ->join(
-                ['path' => 'productLinkPath'],
-                'lookup.linkId = path.linkId',
+                ['p1' => 'productLinkPath'],
+                'l1.linkId = p1.linkId',
                 []
             )
             ->join(
-                ['paths' => 'productLinkPath'],
-                new Expression('? = ? AND ? != ?', ['path.pathId', 'paths.pathId', 'path.order', 'paths.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
-                ['ancestor' => new Expression('? > ?', ['path.order', 'paths.order'], array_fill(0, 2, Expression::TYPE_IDENTIFIER))]
+                ['p2' => 'productLinkPath'],
+                'p1.pathId = p2.pathId',
+                []
             )
             ->join(
-                ['node' => 'productLink'],
-                'paths.linkId = node.linkId',
-                ['node' => 'sku']
+                ['p3' => 'productLinkPath'],
+                'p2.linkId = p3.linkId',
+                []
+            )
+            ->join(
+                ['p4' => 'productLinkPath'],
+                'p3.pathId = p4.pathId',
+                []
+            )
+            ->join(
+                ['l2' => 'productLink'],
+                'p4.linkId = l2.linkId',
+                []
             );
+
+
+
+
+//        return $this->readSql
+//            ->select(['lookup' => $linkIdSelect])
+//            ->quantifier(Select::QUANTIFIER_DISTINCT)
+//            ->columns([
+//                'id' => 'linkId',
+//                'organisationUnitId' => 'organisationUnitId',
+//                'productSku' => 'sku',
+//            ])
+//            ->join(
+//                ['path' => 'productLinkPath'],
+//                'lookup.linkId = path.linkId',
+//                []
+//            )
+//            ->join(
+//                ['paths' => 'productLinkPath'],
+//                new Expression('? = ? AND ? != ?', ['path.pathId', 'paths.pathId', 'path.order', 'paths.order'], array_fill(0, 4, Expression::TYPE_IDENTIFIER)),
+//                ['ancestor' => new Expression('? > ?', ['path.order', 'paths.order'], array_fill(0, 2, Expression::TYPE_IDENTIFIER))]
+//            )
+//            ->join(
+//                ['node' => 'productLink'],
+//                'paths.linkId = node.linkId',
+//                ['node' => 'sku']
+//            );
     }
 }
