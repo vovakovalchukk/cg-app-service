@@ -420,14 +420,14 @@ return [
     '/productLinkRelated/:productLinkRelatedSku' => [
         'controllers' => function($productLinkNodeId) use ($di, $app) {
             $method = $app->request()->getMethod();
-            $controller = $di->get(ProductLinkNodeController::class);
+            $controller = $di->get(ProductLinkRelatedController::class);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($productLinkNodeId, $app->request()->getBody())
             );
         },
-        'via' => ['GET', 'DELETE', 'OPTIONS'],
-        'name' => 'ProductLinkNodeEntity',
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkRelatedEntity',
         'validation' => [
             'dataRules' => ProductLinkNodeEntityValidation::class,
         ],
