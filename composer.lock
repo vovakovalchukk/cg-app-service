@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbdb4587a6b9f6d075556d83fd823e56",
+    "content-hash": "33b55eb62f009f9671dfe0eb47fdb142",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1593,24 +1593,19 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.2.1",
+            "version": "dev-CGIV-10065-fatal-error-log-type",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "87d110692231b088f61b85efd0bcfe2bbeacdce9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.2.1-0aa203.zip",
-                "reference": "87d110692231b088f61b85efd0bcfe2bbeacdce9",
-                "shasum": null
+                "reference": "eefde54d3f1f816502b818447a75527e6b163045"
             },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/etag": ">=1.3.1",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
-                "channelgrabber/stdlib": "^2.15.0",
+                "channelgrabber/stdlib": "^2.16.4",
                 "channelgrabber/validation": ">=1.1.0",
+                "clue/socket-raw": "^1.3",
                 "nocarrier/hal": "~0.9.4",
                 "php": ">=7.1",
                 "psr/log": "^1.0",
@@ -1636,7 +1631,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-04-03T08:21:50+00:00"
+            "time": "2018-11-06T09:51:44+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -4110,7 +4105,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9583,7 +9578,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -11422,10 +11417,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.2.2",
+            "alias_normalized": "2.2.2.0",
+            "version": "dev-CGIV-10065-fatal-error-log-type",
+            "package": "channelgrabber/log"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/log": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
