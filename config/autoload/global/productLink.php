@@ -61,16 +61,16 @@ return [
                     'readSql' => 'ReadSql',
                 ],
             ],
-            LinkRelatedRepository::class => [
-                'parameters' => [
-                    'storage' => LinkRelatedDb::class,
-                ],
-            ],
-            LinkRelatedService::class => [
-                'parameters' => [
-                    'storage' => LinkRelatedRepository::class
-                ],
-            ],
+//            LinkRelatedRepository::class => [
+//                'parameters' => [
+//                    'storage' => LinkRelatedDb::class,
+//                ],
+//            ],
+//            LinkRelatedService::class => [
+//                'parameters' => [
+//                    'storage' => LinkRelatedRepository::class
+//                ],
+//            ],
         ],
     ],
 ];

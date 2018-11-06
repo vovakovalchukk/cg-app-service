@@ -559,7 +559,7 @@ SQL;
             /* @var $db \CG\Product\LinkRelated\Storage\Db */
             $db = $di->get(CG\Product\LinkRelated\Service::class);
 
-            $res = $db->fetch('66-snack/6bags');
+            $res = $db->fetch('66-snack/18bags');
 
             echo "AFTER FECTH\n";
             print_r($res);
