@@ -45,11 +45,6 @@ class Db implements StorageInterface, LoggerAwareInterface
         return $this->mapper->fromArray($this->toArray($ouId, $sku, $this->getRelatedSkus($results)));
     }
 
-    public function invalidate($id)
-    {
-        // NoOp - Data is calculated based on productLinks, nothing to invalidate
-    }
-
     protected function getRelatedSkus($results): array
     {
         $relatedSkusMap = [];
