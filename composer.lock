@@ -1599,6 +1599,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
                 "reference": "eefde54d3f1f816502b818447a75527e6b163045"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-dev-CGIV-10065-fatal-error-log-type-8ca608.zip",
+                "reference": "eefde54d3f1f816502b818447a75527e6b163045",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/cache": ">=2.0.1,<3.0.0",
                 "channelgrabber/etag": ">=1.3.1",
@@ -2780,16 +2786,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.16.2",
+            "version": "2.16.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131"
+                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.16.2-f1dec2.zip",
-                "reference": "c5736bcf6d610488e288fc33128bf4f5759ca131",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stdlib-2.16.4-aea18d.zip",
+                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335",
                 "shasum": null
             },
             "require": {
@@ -2838,7 +2844,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-09-26T13:42:09+00:00"
+            "time": "2018-10-18T12:01:27+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -3813,6 +3819,66 @@
                 "silex"
             ],
             "time": "2012-12-19T10:50:58+00:00"
+        },
+        {
+            "name": "clue/socket-raw",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clue/php-socket-raw.git",
+                "reference": "1f9060a973e2bc50389a89d9d2bdb64750fcc8f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/clue-socket-raw-1f9060a973e2bc50389a89d9d2bdb64750fcc8f1-zip-cb24f4.zip",
+                "reference": "1f9060a973e2bc50389a89d9d2bdb64750fcc8f1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-sockets": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Socket\\Raw\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@lueck.tv"
+                }
+            ],
+            "description": "Simple and lightweight OOP wrapper for PHP's low level sockets extension (ext-sockets)",
+            "homepage": "https://github.com/clue/php-socket-raw",
+            "keywords": [
+                "Socket",
+                "client",
+                "datagram",
+                "dgram",
+                "icmp",
+                "ipv6",
+                "server",
+                "stream",
+                "tcp",
+                "udg",
+                "udp",
+                "unix"
+            ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-06-10T19:13:19+00:00"
         },
         {
             "name": "composer/ca-bundle",
