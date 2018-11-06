@@ -49,7 +49,6 @@ class Service extends BaseService implements StatsAwareInterface
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
 
-
     public function __construct(
         LocationStorage $repository,
         LocationMapper $mapper,

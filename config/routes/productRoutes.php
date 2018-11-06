@@ -66,9 +66,7 @@ use CG\InputValidation\ProductLinkNode\Entity as ProductLinkNodeEntityValidation
 use CG\InputValidation\ProductLinkNode\Filter as ProductLinkNodeCollectionValidation;
 
 use CG\Controllers\ProductLinkRelated\Entity as ProductLinkRelatedController;
-use CG\Controllers\ProductLinkRelated\Collection as ProductLinkRelatedCollectionController;
 use CG\InputValidation\ProductLinkRelated\Entity as ProductLinkRelatedValidation;
-use CG\InputValidation\ProductLinkRelated\Filter as ProductLinkRelatedFilterValidation;
 
 use CG\Slim\Versioning\Version;
 

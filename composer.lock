@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae0f0862746206d2879e5b70fa5ed529",
+    "content-hash": "b54a784d02cdb2b514de86b287adf37e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2086,7 +2086,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "a5225cbde68612d2e10b8c6fed9c9895474fd11c"
+                "reference": "6df7e3ba40fb8d32e4ac929e32bc4a0f1210af4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9907-linked-products-issue-00a987.zip",
+                "reference": "6df7e3ba40fb8d32e4ac929e32bc4a0f1210af4b",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2142,7 +2148,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-05T11:31:53+00:00"
+            "time": "2018-11-06T10:40:02+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11418,8 +11424,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.16.8",
-            "alias_normalized": "1.16.8.0",
+            "alias": "1.16.9",
+            "alias_normalized": "1.16.9.0",
             "version": "dev-CGIV-9907-linked-products-issue",
             "package": "channelgrabber/product"
         }

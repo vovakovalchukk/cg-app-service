@@ -28,8 +28,6 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        $this->logDebug(__METHOD__, [], 'MYTEST');
-
         [$ouId, $sku] = explode('-', $id, 2);
 
         $where = new Where();
