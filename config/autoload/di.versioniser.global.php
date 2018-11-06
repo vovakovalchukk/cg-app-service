@@ -33,6 +33,8 @@ use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
 use CG\Slim\Versioning\UnimportedListingMarketplace;
+use CG\Slim\Versioning\InvoiceMappingEntity;
+use CG\Slim\Versioning\InvoiceMappingCollection;
 
 return [
     'di' => [
@@ -184,6 +186,8 @@ return [
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
                 'Versioniser_CategoryTemplateCollection_1' => CategoryTemplateCollection\Versioniser1::class,
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
+                'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
+                'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -405,6 +409,11 @@ return [
                     'entityVersioner' => 'Versioniser_StockEntity_1',
                 ],
             ],
+            'Versioniser_InvoiceMappingCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_InvoiceMappingEntity_1',
+                ]
+            ]
         ],
     ]
 ];
