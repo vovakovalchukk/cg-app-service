@@ -64,7 +64,6 @@ return [
             LinkRelatedRepository::class => [
                 'parameters' => [
                     'storage' => LinkRelatedDb::class,
-//                    'repository' => ''
                 ],
             ],
             LinkRelatedService::class => [
