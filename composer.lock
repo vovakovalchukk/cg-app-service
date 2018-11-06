@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33b55eb62f009f9671dfe0eb47fdb142",
+    "content-hash": "d342f2910472618f9e33e9ddaf1cb81e",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -445,36 +445,37 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.16.3",
+            "version": "1.16.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "94beb83db5a2c61238e95d235af5bad6936a36fe"
+                "reference": "ae9725bf82d267c6865ac489a9a91a67acf73ac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.16.3-797620.zip",
-                "reference": "94beb83db5a2c61238e95d235af5bad6936a36fe",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cglib-1.16.12-1903e3.zip",
+                "reference": "ae9725bf82d267c6865ac489a9a91a67acf73ac1",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/billing": "^1.14.0",
+                "channelgrabber/billing": "^1.17.5",
                 "channelgrabber/channel": "^1.32.5",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/currency": "^1.0.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/feature-flags": "^2.0.1",
+                "channelgrabber/gearman": "^1.4.1",
                 "channelgrabber/http": "^1.3.25",
                 "channelgrabber/listing": "^1.11.11",
-                "channelgrabber/locale": "^1.0.19",
+                "channelgrabber/locale": "^1.2.1",
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/order": "^1.28.14",
                 "channelgrabber/predis": "^1.0.11",
-                "channelgrabber/product": "^1.9.2",
+                "channelgrabber/product": "^1.16.7",
                 "channelgrabber/settings": "^1.5.3",
                 "channelgrabber/slim": "^1.13.0",
-                "channelgrabber/stdlib": "^2.13.1",
+                "channelgrabber/stdlib": "^2.16.3",
                 "channelgrabber/stock": "^1.10.1",
                 "channelgrabber/stock-locking": "^1.1.0",
                 "channelgrabber/user": "^1.25.0",
@@ -509,7 +510,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-07-18T13:40:04+00:00"
+            "time": "2018-10-24T10:17:19+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1085,6 +1086,52 @@
                 }
             },
             "time": "2018-07-18T09:50:15+00:00"
+        },
+        {
+            "name": "channelgrabber/etsy",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-etsy.git",
+                "reference": "6881bf30b9edbe9426e54fd7beaf29333f6861ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etsy-1.1.0-3cd734.zip",
+                "reference": "6881bf30b9edbe9426e54fd7beaf29333f6861ac",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/cglib": "~1.16.12",
+                "channelgrabber/channel": "^1.36.8",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/feature-flags": "^2.1.0",
+                "channelgrabber/http": "^1.3.0",
+                "channelgrabber/stdlib": "^2.14.1",
+                "ext-oauth": "*",
+                "guzzlehttp/guzzle": ">=4.1,<6.0",
+                "zendframework/zend-di": "^2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Etsy\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Etsy\\Test\\": "tests/src/"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
+            "time": "2018-11-06T11:18:57+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -11485,8 +11532,8 @@
     ],
     "aliases": [
         {
-            "alias": "2.2.2",
-            "alias_normalized": "2.2.2.0",
+            "alias": "2.3.3",
+            "alias_normalized": "2.3.3.0",
             "version": "dev-CGIV-10065-fatal-error-log-type",
             "package": "channelgrabber/log"
         }
