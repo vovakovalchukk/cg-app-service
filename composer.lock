@@ -1640,16 +1640,16 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "87d110692231b088f61b85efd0bcfe2bbeacdce9"
+                "reference": "31adbd1f72536197cc21d935d231e6a449c24b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.2.1-0aa203.zip",
-                "reference": "87d110692231b088f61b85efd0bcfe2bbeacdce9",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.2.2-cda8b7.zip",
+                "reference": "31adbd1f72536197cc21d935d231e6a449c24b2a",
                 "shasum": null
             },
             "require": {
@@ -1683,7 +1683,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-04-03T08:21:50+00:00"
+            "time": "2018-10-05T11:07:38+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -2135,6 +2135,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
                 "reference": "af3245899249a9f53eb376f5286bdf9ab6c84a9a"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-dev-CGIV-9907-linked-products-issue-c563c8.zip",
+                "reference": "af3245899249a9f53eb376f5286bdf9ab6c84a9a",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/channel": "^1.33.1",
@@ -2189,7 +2195,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-06T10:40:02+00:00"
+            "time": "2018-11-06T15:07:05+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
