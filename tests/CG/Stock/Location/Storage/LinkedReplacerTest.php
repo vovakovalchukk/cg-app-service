@@ -891,13 +891,28 @@ class LinkedReplacerTest extends TestCase
         }
     }
 
-    protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
+    /**
+     * @dataProvider getTestStockUpdateData
+     */
+    public function testSaveLinkedLocationInSecondStockLocation(
+        string $linkSku,
+        array $linkMap,
+        array $linkStock,
+        array $skuStockData
+    ) {
+        $this->testSaveLinkedLocation($linkSku, $linkMap, $linkStock, $skuStockData);
+        $newStockLocation = $this->createStockLocation($linkSku, 10, 2, 2);
+        //print_r($this->stockStorage->fetch($newStockLocation->getStockId()));
+        print_r($this->stockLocationStorage->fetchCollectionByStockIds([$newStockLocation->getStockId()]));
+    }
+
+    protected function createStockLocation($sku, $onHand = 0, $allocated = 0, $location = 1): StockLocation
     {
         $this->stockStorage->save(
             $stock = new Stock(1, $sku)
         );
         return $this->stockLocationStorage->save(
-            new StockLocation($stock->getId(), 1, $onHand, $allocated)
+            new StockLocation($stock->getId(), $location, $onHand, $allocated)
         );
     }
 
