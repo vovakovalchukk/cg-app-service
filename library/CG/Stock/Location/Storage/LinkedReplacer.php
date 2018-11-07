@@ -211,23 +211,19 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected function getLinkedStockLocations(
         StockLocation $stockLocation,
         ProductLinkLeaf $productLinkLeaf
-    ): ?Collection {
-        try {
-            $ouSkuMap = [];
-            foreach ($productLinkLeaf->getStockSkuMap() as $sku => $qty) {
-                $ouSkuMap[] = ProductLinkLeaf::generateId($productLinkLeaf->getOrganisationUnitId(), $sku);
-            }
-
-            if (empty($ouSkuMap)) {
-                throw new NotFound('No linked skus');
-            }
-
-            return $this->locationStorage->fetchCollectionByFilter(
-                (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
-            );
-        } catch (NotFound $exception) {
-            return null;
+    ): Collection {
+        $ouSkuMap = [];
+        foreach ($productLinkLeaf->getStockSkuMap() as $sku => $qty) {
+            $ouSkuMap[] = ProductLinkLeaf::generateId($productLinkLeaf->getOrganisationUnitId(), $sku);
         }
+
+        if (empty($ouSkuMap)) {
+            throw new NotFound('No linked skus');
+        }
+
+        return $this->locationStorage->fetchCollectionByFilter(
+            (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
+        );
     }
 
     protected function getLinkedStockLocation(
