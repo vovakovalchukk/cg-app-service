@@ -20,6 +20,7 @@ $files = [
     'cache.php',
     'phinxMongoMigrations.php',
     'transaction.php',
+    'settings.php'
 ];
 
 $commands = array();

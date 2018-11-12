@@ -65,6 +65,9 @@ use CG\Controllers\ProductLinkNode\Collection as ProductLinkNodeCollectionContro
 use CG\InputValidation\ProductLinkNode\Entity as ProductLinkNodeEntityValidation;
 use CG\InputValidation\ProductLinkNode\Filter as ProductLinkNodeCollectionValidation;
 
+use CG\Controllers\ProductLinkRelated\Entity as ProductLinkRelatedController;
+use CG\InputValidation\ProductLinkRelated\Entity as ProductLinkRelatedValidation;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -411,6 +414,23 @@ return [
         'name' => 'ProductLinkNodeEntity',
         'validation' => [
             'dataRules' => ProductLinkNodeEntityValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkRelated/:productLinkRelatedOuIdSku' => [
+        'controllers' => function($productLinkRelatedOuIdSku) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkRelatedController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkRelatedOuIdSku, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET'],
+        'name' => 'ProductLinkRelatedEntity',
+        'validation' => [
+            'dataRules' => ProductLinkRelatedValidation::class,
         ],
         'eTag' => false,
         'version' => new Version(1, 1)
