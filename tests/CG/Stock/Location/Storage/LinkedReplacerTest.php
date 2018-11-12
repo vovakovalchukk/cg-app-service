@@ -894,25 +894,38 @@ class LinkedReplacerTest extends TestCase
     /**
      * @dataProvider getTestStockUpdateData
      */
-    public function testSaveLinkedLocationInSecondStockLocation(
+    public function testSaveLinkedLocationInSecondLocationReturnsQuantifiedLocation(
         string $linkSku,
         array $linkMap,
-        array $linkStock,
         array $skuStockData
     ) {
-        $this->testSaveLinkedLocation($linkSku, $linkMap, $linkStock, $skuStockData);
-        $newStockLocation = $this->createStockLocation($linkSku, 10, 2, 2);
-        //print_r($this->stockStorage->fetch($newStockLocation->getStockId()));
-        print_r($this->stockLocationStorage->fetchCollectionByStockIds([$newStockLocation->getStockId()]));
+        $this->createProductLinkLeaf($linkSku, $linkMap);
+        $stockLocation = $this->createStockLocation($linkSku);
+
+        $skuIdMap = [];
+        foreach ($skuStockData as $sku => $stockData) {
+            $skuIdMap[$sku] = $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated'])->getId();
+        }
+
+        $stockLocationInSecondLocation = new StockLocation(
+            $stockLocation->getStockId(),
+            2,
+            $stockLocation->getOnHand(),
+            $stockLocation->getAllocated()
+        );
+
+        $quantifiedStockLocationSecondLocation = $this->linkReplacer->save($stockLocationInSecondLocation);
+
+        $this->assertInstanceOf(QuantifiedStockLocation::class, $quantifiedStockLocationSecondLocation);
     }
 
-    protected function createStockLocation($sku, $onHand = 0, $allocated = 0, $location = 1): StockLocation
+    protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
     {
         $this->stockStorage->save(
             $stock = new Stock(1, $sku)
         );
         return $this->stockLocationStorage->save(
-            new StockLocation($stock->getId(), $location, $onHand, $allocated)
+            new StockLocation($stock->getId(), 1, $onHand, $allocated)
         );
     }
 
