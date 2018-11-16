@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "badb451c34e735f7b80e35c77ef92274",
+    "content-hash": "e8e29e2b366a877ec5cde9981793dadd",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2895,17 +2895,11 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.13.2",
+            "version": "dev-CGIV-9628-incorrect-undispatched-figures",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "58a84b2b4a0ac20cba67416526f06c5427d250e5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.13.2-2f0497.zip",
-                "reference": "58a84b2b4a0ac20cba67416526f06c5427d250e5",
-                "shasum": null
+                "reference": "698a6feaa4162d05dc4999216fe9239ccab47b9b"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -11530,10 +11524,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.13.3",
+            "alias_normalized": "1.13.3.0",
+            "version": "dev-CGIV-9628-incorrect-undispatched-figures",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
