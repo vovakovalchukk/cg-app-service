@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "badb451c34e735f7b80e35c77ef92274",
+    "content-hash": "d1621ed1b22529599ef678a3e511182f",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1784,16 +1784,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.40.0",
+            "version": "dev-CGIV-10101-calculate-order-weight-item-specific",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f98cdfa3f9b6ef4e5610dc26b68492d48072ebb4"
+                "reference": "c093cbe4cacbd866c6873b637c1292d04ec9c495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.40.0-3885c9.zip",
-                "reference": "f98cdfa3f9b6ef4e5610dc26b68492d48072ebb4",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-10101-calculate-order-weight-item-specific-a7a9ff.zip",
+                "reference": "c093cbe4cacbd866c6873b637c1292d04ec9c495",
                 "shasum": null
             },
             "require": {
@@ -1821,7 +1821,7 @@
                 "channelgrabber/product": "^1.16.7",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
-                "channelgrabber/settings": "^1.5.3",
+                "channelgrabber/settings": "^1.6.4",
                 "channelgrabber/slim": "^1.13.22",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.12.47",
@@ -1869,7 +1869,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-22T14:20:10+00:00"
+            "time": "2018-11-19T10:21:47+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11530,10 +11530,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.41.1",
+            "alias_normalized": "1.41.1.0",
+            "version": "dev-CGIV-10101-calculate-order-weight-item-specific",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
