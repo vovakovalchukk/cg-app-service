@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1621ed1b22529599ef678a3e511182f",
+    "content-hash": "86e7460e097e36f10bd18ce1b4ce597c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1640,16 +1640,16 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "676c976cafce3f9fbe9bbe6531efcaba5038bc29"
+                "reference": "a9aa2a759bede8a6d10b1b8bb055708470f19e38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.3.3-025a83.zip",
-                "reference": "676c976cafce3f9fbe9bbe6531efcaba5038bc29",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.3.4-9f5f27.zip",
+                "reference": "a9aa2a759bede8a6d10b1b8bb055708470f19e38",
                 "shasum": null
             },
             "require": {
@@ -1684,7 +1684,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-07T10:56:08+00:00"
+            "time": "2018-11-26T10:56:54+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -1784,16 +1784,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-10101-calculate-order-weight-item-specific",
+            "version": "1.40.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "c093cbe4cacbd866c6873b637c1292d04ec9c495"
+                "reference": "ffc4d546f893d216f28b1b1c1b2efe90ac243197"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-dev-CGIV-10101-calculate-order-weight-item-specific-a7a9ff.zip",
-                "reference": "c093cbe4cacbd866c6873b637c1292d04ec9c495",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.40.1-87a858.zip",
+                "reference": "ffc4d546f893d216f28b1b1c1b2efe90ac243197",
                 "shasum": null
             },
             "require": {
@@ -1869,7 +1869,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-19T10:21:47+00:00"
+            "time": "2018-11-01T09:11:58+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -4258,7 +4258,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://composer.build.channelgrabber.com/dist/fabpot-goutte-794b196e76bdd37b5155cdecbad311f0a3b07625-zip-2d5a7a.zip",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
                 "shasum": ""
             },
@@ -4302,6 +4302,11 @@
             "keywords": [
                 "scraper"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-09T15:52:51+00:00"
         },
         {
@@ -9543,7 +9548,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/fa1b073b48761464feb0b05e6825da44b20118d8",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-goutte-driver-fa1b073b48761464feb0b05e6825da44b20118d8-zip-3f436f.zip",
                 "reference": "fa1b073b48761464feb0b05e6825da44b20118d8",
                 "shasum": ""
             },
@@ -9582,6 +9587,11 @@
                 "headless",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-07-03T18:43:54+00:00"
         },
         {
