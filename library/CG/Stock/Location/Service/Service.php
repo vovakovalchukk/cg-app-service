@@ -6,8 +6,8 @@ use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Product\LinkNode\Entity as ProductLinkNode;
-use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
+use CG\Product\LinkRelated\Entity as ProductLinkRelated;
+use CG\Product\LinkRelated\StorageInterface as ProductLinkRelatedStorage;
 use CG\Product\StockMode;
 use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stats\StatsAwareInterface;
@@ -32,6 +32,7 @@ class Service extends BaseService implements StatsAwareInterface
 
     const LOG_CODE_OVERSELL = 'Stock oversell alert';
     const LOG_MSG_OVERSELL = '"%s" for ou %d has oversold at location %s';
+    const LOG_CODE = 'LocationServiceService';
 
     const STATS_OVERSELL = 'stock.oversell.ou-%d';
 
@@ -39,8 +40,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $organisationUnitService;
     /** @var AccountService $accountService */
     protected $accountService;
-    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
-    protected $productLinkNodeStorage;
+    /* @var ProductLinkRelatedStorage */
+    protected $productLinkRelatedStorage;
     /** @var StockLocationCache $stockLocationCache */
     protected $stockLocationCache;
     /** @var NginxCacheInvalidator $nginxCacheInvalidator */
@@ -56,7 +57,7 @@ class Service extends BaseService implements StatsAwareInterface
         Notifier $notifier,
         OrganisationUnitService $organisationUnitService,
         AccountService $accountService,
-        ProductLinkNodeStorage $productLinkNodeStorage,
+        ProductLinkRelatedStorage $productLinkRelatedStorage,
         StockLocationCache $stockLocationCache,
         NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
@@ -64,7 +65,7 @@ class Service extends BaseService implements StatsAwareInterface
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
         $this->accountService = $accountService;
-        $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->productLinkRelatedStorage = $productLinkRelatedStorage;
         $this->stockLocationCache = $stockLocationCache;
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
@@ -100,19 +101,21 @@ class Service extends BaseService implements StatsAwareInterface
     protected function fetchRelatedStockLocations(Stock $stock): StockLocationCollection
     {
         try {
-            /** @var ProductLinkNode $productLinkNode */
-            $productLinkNode = $this->productLinkNodeStorage->fetch(
-                ProductLinkNode::generateId($stock->getOrganisationUnitId(), $stock->getSku())
-            );
-        } catch (NotFound $exception) {
-            $productLinkNode = new ProductLinkNode($stock->getOrganisationUnitId(), $stock->getSku(), [], []);
+            $productLinkRelatedId = ProductLinkRelated::generateId($stock->getOrganisationUnitId(), $stock->getSku());
+            /** @var $productLinkRelated \CG\Product\LinkRelated\Entity */
+            $productLinkRelated = $this->productLinkRelatedStorage->fetch($productLinkRelatedId);
+            $productSkus = $productLinkRelated->getRelatedSkusMap();
+        } catch (NotFound $e) {
+            $productSkus = [];
         }
 
+        $this->logDebugDump($productSkus, 'Found related product skus to %s for ouId %d', [$stock->getSku(), $stock->getOrganisationUnitId()], static::LOG_CODE);
+
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
-            function ($sku) use ($productLinkNode) {
-                return ProductLinkNode::generateId($productLinkNode->getOrganisationUnitId(), $sku);
+            function ($sku) use ($stock) {
+                return ProductLinkRelated::generateId($stock->getOrganisationUnitId(), $sku);
             },
-            iterator_to_array($productLinkNode)
+            $productSkus
         ));
 
         try {
