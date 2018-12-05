@@ -891,6 +891,34 @@ class LinkedReplacerTest extends TestCase
         }
     }
 
+    /**
+     * @dataProvider getTestStockUpdateData
+     */
+    public function testSaveLinkedLocationInSecondLocationReturnsQuantifiedLocation(
+        string $linkSku,
+        array $linkMap,
+        array $skuStockData
+    ) {
+        $this->createProductLinkLeaf($linkSku, $linkMap);
+        $stockLocation = $this->createStockLocation($linkSku);
+
+        $skuIdMap = [];
+        foreach ($skuStockData as $sku => $stockData) {
+            $skuIdMap[$sku] = $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated'])->getId();
+        }
+
+        $stockLocationInSecondLocation = new StockLocation(
+            $stockLocation->getStockId(),
+            2,
+            $stockLocation->getOnHand(),
+            $stockLocation->getAllocated()
+        );
+
+        $quantifiedStockLocationSecondLocation = $this->linkReplacer->save($stockLocationInSecondLocation);
+
+        $this->assertInstanceOf(QuantifiedStockLocation::class, $quantifiedStockLocationSecondLocation);
+    }
+
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
     {
         $this->stockStorage->save(
