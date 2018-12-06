@@ -73,13 +73,13 @@ class FileStorage implements StorageInterface
 
     protected function generateFilename(AuditAdjustment $entity): string
     {
-        return sprintf('Audit-Adjustment-%d-%s.json', $entity->getOrganisationUnitId(), $entity->getDate());
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s.json', $entity->getOrganisationUnitId(), $entity->getDate());
     }
 
     protected function loadFile(string $filename): File
     {
         try {
-            $data = $this->storageAdapter->read($filename);
+            $data = $this->storageAdapter->read($filename)->getBody();
         } catch (NotFound $exception) {
             $data = null;
         }

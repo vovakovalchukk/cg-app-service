@@ -1,14 +1,15 @@
 <?php
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use CG\Stock\Command\AuditAllStock;
 use CG\Stock\Command\CreateMissingStock;
+use CG\Stock\Command\MigrateStockAuditAdjustments;
 use CG\Stock\Command\ProcessAudit;
 use CG\Stock\Command\RemoveDuplicateStock;
 use CG\Stock\Command\ZeroNegativeStock;
-use CG\Stock\Gearman\WorkerFunction\ProcessAudit as StockWorker;
 use CG\Stock\Gearman\WorkerFunction\ProcessAdjustmentAudit as AdjustmentWorker;
+use CG\Stock\Gearman\WorkerFunction\ProcessAudit as StockWorker;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 return [
     'stock:processAudit' => [
@@ -44,6 +45,27 @@ return [
         'options' => [
 
         ]
+    ],
+    'stock:migrateAdjustmentAudit' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            $command = $di->get(MigrateStockAuditAdjustments::class);
+            $command($output, $input->getArgument('timeFrame'), $input->getOption('limit') ?? 1000);
+        },
+        'description' => 'Migrate stock audit adjustments to archive storage',
+        'arguments' => [
+            'timeFrame' => [
+                'description' => 'Migrate any stock adjustments alter than date',
+                'required' => false,
+                'default' => '1 day ago',
+            ],
+        ],
+        'options' => [
+            'limit' => [
+                'description' => 'Restricts the number of stock adjustments to migrate in this batch <comment>[default: 1000]</comment>',
+                'value' => true,
+                'required' => true,
+            ],
+        ],
     ],
     'stock:auditAll' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
