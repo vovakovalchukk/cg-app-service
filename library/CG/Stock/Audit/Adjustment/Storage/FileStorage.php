@@ -3,7 +3,9 @@ namespace CG\Stock\Audit\Adjustment\Storage;
 
 use CG\FileStorage\AdapterInterface as StorageAdapter;
 use CG\Stdlib\CollectionInterface;
+use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Audit\Adjustment\Collection as AuditAdjustments;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
@@ -27,7 +29,7 @@ class FileStorage implements StorageInterface
      */
     public function save($entity)
     {
-        $filename = $this->generateFilename($entity);
+        $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
         $this->saveFile($filename, $file);
@@ -39,13 +41,26 @@ class FileStorage implements StorageInterface
      */
     public function remove($entity)
     {
-        $filename = $this->generateFilename($entity);
+        $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         if (!isset($file[$entity->getId()])) {
             return;
         }
         unset($file[$entity->getId()]);
         $this->saveFile($filename, $file);
+    }
+
+    public function fetchCollection(array $ouIds, DateTime $from, DateTime $to): AuditAdjustments
+    {
+        $collection = new AuditAdjustments();
+        for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
+            foreach ($ouIds as $ouId) {
+                foreach ($this->loadFile($this->generateFilename($ouId, $date->stdDateFormat())) as $entity) {
+                    $collection->attach($entity);
+                }
+            }
+        }
+        return $collection;
     }
 
     public function saveCollection(CollectionInterface $collection)
@@ -55,7 +70,7 @@ class FileStorage implements StorageInterface
 
         /** @var AuditAdjustment $entity */
         foreach ($collection as $entity) {
-            $filename = $this->generateFilename($entity);
+            $filename = $this->generateEntityFilename($entity);
             $files[$filename] = $files[$filename] ?? [];
             $files[$filename][] = $entity;
         }
@@ -71,9 +86,14 @@ class FileStorage implements StorageInterface
         return $collection;
     }
 
-    protected function generateFilename(AuditAdjustment $entity): string
+    protected function generateEntityFilename(AuditAdjustment $entity): string
     {
-        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s.json', $entity->getOrganisationUnitId(), $entity->getDate());
+        return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate());
+    }
+
+    protected function generateFilename(int $outId, string $date): string
+    {
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s.json', $outId, $date);
     }
 
     protected function loadFile(string $filename): File
