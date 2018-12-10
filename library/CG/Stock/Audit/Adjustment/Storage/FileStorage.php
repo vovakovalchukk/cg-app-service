@@ -7,6 +7,7 @@ use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Audit\Adjustment\Collection as AuditAdjustments;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
+use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
 use CG\Stock\Audit\Adjustment\StorageInterface;
@@ -17,11 +18,14 @@ class FileStorage implements StorageInterface
     protected $storageAdapter;
     /** @var Mapper */
     protected $mapper;
+    /** @var Cache */
+    protected $cache;
 
-    public function __construct(StorageAdapter $storageAdapter, Mapper $mapper)
+    public function __construct(StorageAdapter $storageAdapter, Mapper $mapper, Cache $cache)
     {
         $this->storageAdapter = $storageAdapter;
         $this->mapper = $mapper;
+        $this->cache = $cache;
     }
 
     /**
@@ -55,7 +59,11 @@ class FileStorage implements StorageInterface
         $collection = new AuditAdjustments();
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
-                foreach ($this->loadFile($this->generateFilename($ouId, $date->stdDateFormat())) as $entity) {
+                $filename = $this->generateFilename($ouId, $date->stdDateFormat());
+                if ($this->cache->isFileLoader($filename)) {
+                    continue;
+                }
+                foreach ($this->loadFile($filename) as $entity) {
                     $collection->attach($entity);
                 }
             }
@@ -100,6 +108,7 @@ class FileStorage implements StorageInterface
     {
         try {
             $data = $this->storageAdapter->read($filename)->getBody();
+            $this->cache->markFileAsLoaded($filename);
         } catch (NotFound $exception) {
             $data = null;
         }
@@ -109,5 +118,6 @@ class FileStorage implements StorageInterface
     protected function saveFile(string $filename, File $file): void
     {
         $this->storageAdapter->write($filename, $this->mapper->fromFile($file));
+        $this->cache->markFileAsDirty($filename);
     }
 }

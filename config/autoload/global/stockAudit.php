@@ -3,6 +3,7 @@ use CG\FileStorage\S3\Adapter;
 use CG\Stock\Audit\Adjustment\Mapper as AdjustmentMapper;
 use CG\Stock\Audit\Adjustment\Storage\Db as AdjustmentDbStorage;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage as AdjustmentFileStorage;
+use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache as AdjustmentFileCache;
 use CG\Stock\Audit\Combined\Storage\FileStorage as CombinedFileStorage;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
 
@@ -34,6 +35,11 @@ return [
             'AdjustmentAWSS3Storage' => [
                 'parameters' => [
                     'location' => 'channelgrabber-stockaudit',
+                ],
+            ],
+            AdjustmentFileCache::class => [
+                'parameters' => [
+                    'predis' => 'reliable_redis',
                 ],
             ],
             CombinedFileStorage::class => [
