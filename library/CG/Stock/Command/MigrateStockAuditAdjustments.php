@@ -16,19 +16,19 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     protected const LOG_CODE = 'MigrateStockAuditAdjustments';
     protected const LOG_CODE_TIME_FRAME = 'Migrating stock audit adjustments';
-    protected const LOG_MSG_TIME_FRAME = 'Migrating stock audit adjustments older than %s (%s) - limited to %d';
+    protected const LOG_MSG_TIME_FRAME = 'Migrating stock audit adjustments older than or equal to %s (%s)';
     protected const LOG_CODE_UNSUPPORTED_STORAGE = 'Can not migrate from storage';
     protected const LOG_MSG_UNSUPPORTED_STORAGE = 'Can not migrate from storage';
     protected const LOG_CODE_NO_DATA = 'Found no stock audit adjustments to migrate';
     protected const LOG_MSG_NO_DATA = 'Found no stock audit adjustments to migrate';
     protected const LOG_CODE_FOUND_DATA = 'Found stock audit adjustments to migrate';
-    protected const LOG_MSG_FOUND_DATA = 'Found %d stock audit adjustment%s to migrate';
+    protected const LOG_MSG_FOUND_DATA = 'Found %d stock audit adjustment%s to migrate for %s';
     protected const LOG_CODE_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_MSG_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_CODE_MIGRATED = 'Migrated stock audit adjustments';
     protected const LOG_MSG_MIGRATED = 'Migrated stock audit adjustments';
 
-    /** @var StorageInterface */
+    /** @var StorageInterface|MigrationInterface */
     protected $storage;
     /** @var StorageInterface */
     protected $archive;
@@ -42,8 +42,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit)
     {
         $date = new Date((new DateTime($timeFrame))->resetTime()->stdDateFormat());
-        $this->logDebug(static::LOG_MSG_TIME_FRAME, [$timeFrame, 'date' => $date->getDate(), 'limit' => $limit], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
-        $output->writeln(sprintf(static::LOG_MSG_TIME_FRAME, $timeFrame, $date->getDate(), $limit));
+        $this->logDebug(static::LOG_MSG_TIME_FRAME, [$timeFrame, 'date' => $date->getDate()], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
+        $output->writeln(sprintf(static::LOG_MSG_TIME_FRAME, $timeFrame, $date->getDate()));
 
         if (!($this->storage instanceof MigrationInterface)) {
             $exception = new \LogicException(sprintf('Storage does not implement %s', MigrationInterface::class));
@@ -52,30 +52,43 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             throw $exception;
         }
 
-        try {
-            $collection = $this->storage->fetchCollectionOlderThan($date, $limit);
-        } catch (NotFound $exception) {
-            $this->logWarningException($exception, static::LOG_MSG_NO_DATA, [], [static::LOG_CODE, static::LOG_CODE_NO_DATA]);
+        $dates = $this->storage->fetchDatesWithDataOlderThanOrEqualTo($date, $limit);
+        if (empty($dates)) {
+            $this->logWarning(static::LOG_MSG_NO_DATA, [], [static::LOG_CODE, static::LOG_CODE_NO_DATA]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_NO_DATA));
             return;
         }
 
-        $this->logDebug(static::LOG_MSG_FOUND_DATA, [$collection->count(), $collection->count() != 1 ? 's' : ''], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-        $output->writeln(sprintf(static::LOG_MSG_FOUND_DATA, $collection->count(), $collection->count() != 1 ? 's' : ''));
+        foreach ($dates as $date) {
+            $this->migrateDate($output, $date);
+        }
+    }
+
+    protected function migrateDate(OutputInterface $output, Date $date)
+    {
+        try {
+            $collection = $this->storage->fetchCollectionForDate($date);
+        } catch (NotFound $exception) {
+            // No data for selected date - ignore
+            return;
+        }
+
+        $this->logDebug(static::LOG_MSG_FOUND_DATA, [$collection->count(), $collection->count() != 1 ? 's' : '', 'date' => $date->getDate()], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', $collection->count(), $collection->count() != 1 ? 's' : '', $date->getDate()));
 
         $this->storage->beginTransaction();
         try {
             $this->archive->saveCollection($collection);
-            $this->storage->removeCollection($collection);
+            $this->storage->removeCollectionForDate($date);
             $this->storage->commitTransaction();
         } catch (\Throwable $throwable) {
             $this->storage->rollbackTransaction();
-            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE]);
+            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [$date->getDate()], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['date' => $date->getDate()]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
-            throw $throwable;
+            return;
         }
 
-        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED]);
+        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['date' => $date->getDate()]);
         $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
     }
 }
