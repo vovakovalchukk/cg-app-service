@@ -129,7 +129,9 @@ class FileStorage implements StorageInterface
 
     protected function saveFile(string $filename, File $file): void
     {
-        $this->cache->removeFile($filename);
-        $this->storageAdapter->write($filename, $this->mapper->fromFile($file));
+        if ($file->isModified()) {
+            $this->cache->removeFile($filename);
+            $this->storageAdapter->write($filename, $this->mapper->fromFile($file));
+        }
     }
 }

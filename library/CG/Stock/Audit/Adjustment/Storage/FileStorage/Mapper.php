@@ -32,25 +32,11 @@ class Mapper
             $file[$entity->getId()] = $entity;
         }
 
-        return $file;
+        return $file->setInitialCount($file->count());
     }
 
     public function fromFile(?File $file): string
     {
-        return json_encode($this->toArray($file));
-    }
-
-    protected function toArray(?File $file): array
-    {
-        if ($file === null) {
-            return [];
-        }
-
-        $collection = [];
-        /** @var AuditAdjustment $entity */
-        foreach ($file as $entity) {
-            $collection[] = $entity->toArray();
-        }
-        return $collection;
+        return json_encode(!is_null($file) ? $file->toArray() : []);
     }
 }
