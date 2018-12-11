@@ -49,7 +49,7 @@ return [
     'stock:migrateAdjustmentAudit' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             $command = $di->get(MigrateStockAuditAdjustments::class);
-            $command($output, $input->getArgument('timeFrame'), $input->getOption('limit') ?? 30);
+            $command($output, $input->getArgument('timeFrame'), $input->getOption('limit'));
         },
         'description' => 'Migrate stock audit adjustments to archive storage',
         'arguments' => [
@@ -61,7 +61,7 @@ return [
         ],
         'options' => [
             'limit' => [
-                'description' => 'Restricts the number of stock adjustments dates to migrate in this batch <comment>[default: 30]</comment>',
+                'description' => 'Restricts the number of stock adjustments dates to migrate in this batch <comment>[default: unlimited]</comment>',
                 'value' => true,
                 'required' => true,
             ],
