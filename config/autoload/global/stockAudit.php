@@ -39,7 +39,7 @@ return [
             ],
             AdjustmentFileCache::class => [
                 'parameters' => [
-                    'predis' => 'reliable_redis',
+                    'predis' => 'stock-audit-file-cache_redis',
                 ],
             ],
             CombinedFileStorage::class => [
