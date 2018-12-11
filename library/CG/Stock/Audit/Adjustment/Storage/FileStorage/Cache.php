@@ -1,11 +1,13 @@
 <?php
 namespace CG\Stock\Audit\Adjustment\Storage\FileStorage;
 
+use CG\Stdlib\Exception\Runtime\NotFound;
 use Predis\Client as Predis;
 
 class Cache
 {
-    protected const KEY = 'AuditAdjustment::FileCache';
+    protected const KEY_PREFIX = 'AuditAdjustment:FileCache:';
+    protected const EXPIRE_AFTER_SECONDS = 60 * 60 * 24 * 365; // 1 year
 
     /** @var Predis */
     protected $predis;
@@ -15,18 +17,27 @@ class Cache
         $this->predis = $predis;
     }
 
-    public function markFileAsLoaded(string $filename): void
+    protected function generateCacheKey(string $filename): string
     {
-        $this->predis->sadd(static::KEY, $filename);
+        return static::KEY_PREFIX . $filename;
     }
 
-    public function markFileAsDirty(string $filename): void
+    public function loadFile(string $filename): string
     {
-        $this->predis->srem(static::KEY, $filename);
+        $data = $this->predis->get($this->generateCacheKey($filename));
+        if ($data !== null) {
+            return $data;
+        }
+        throw new NotFound(sprintf('Could not find %s in cache', $filename));
     }
 
-    public function isFileLoader(string $filename): bool
+    public function saveFile(string $filename, string $data): void
     {
-        return (bool) $this->predis->sismember(static::KEY, $filename);
+        $this->predis->setex($this->generateCacheKey($filename), static::EXPIRE_AFTER_SECONDS, $data);
+    }
+
+    public function removeFile(string $filename): void
+    {
+        $this->predis->del($this->generateCacheKey($filename));
     }
 }

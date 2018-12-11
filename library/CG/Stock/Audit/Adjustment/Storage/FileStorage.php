@@ -60,9 +60,6 @@ class FileStorage implements StorageInterface
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
                 $filename = $this->generateFilename($ouId, $date->stdDateFormat());
-                if ($this->cache->isFileLoader($filename)) {
-                    continue;
-                }
                 foreach ($this->loadFile($filename) as $entity) {
                     $collection->attach($entity);
                 }
@@ -84,7 +81,7 @@ class FileStorage implements StorageInterface
         }
 
         foreach ($files as $filename => $entities) {
-            $file = $this->loadFile($filename);
+            $file = $this->loadFile($filename, true);
             foreach ($entities as $entity) {
                 $file[$entity->getId()] = $entity;
             }
@@ -104,20 +101,35 @@ class FileStorage implements StorageInterface
         return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s.json', $outId, $date);
     }
 
-    protected function loadFile(string $filename): File
+    protected function loadFile(string $filename, bool $useCache = false): File
+    {
+        return $this->mapper->toFile(
+            $this->loadFileData($filename, $useCache)
+        );
+    }
+
+    protected function loadFileData(string $filename, bool $useCache): ?string
     {
         try {
-            $data = $this->storageAdapter->read($filename)->getBody();
-            $this->cache->markFileAsLoaded($filename);
+            if ($useCache) {
+                return $this->cache->loadFile($filename);
+            }
         } catch (NotFound $exception) {
-            $data = null;
+            // Ignore - try real storage
         }
-        return $this->mapper->toFile($data);
+
+        try {
+            $data = $this->storageAdapter->read($filename)->getBody();
+            $this->cache->saveFile($filename, $data);
+            return $data;
+        } catch (NotFound $exception) {
+            return null;
+        }
     }
 
     protected function saveFile(string $filename, File $file): void
     {
+        $this->cache->removeFile($filename);
         $this->storageAdapter->write($filename, $this->mapper->fromFile($file));
-        $this->cache->markFileAsDirty($filename);
     }
 }
