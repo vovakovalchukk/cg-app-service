@@ -5,6 +5,8 @@ use CG\FileStorage\AdapterInterface as StorageAdapter;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\Collection as AuditAdjustments;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache;
@@ -12,8 +14,14 @@ use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 
-class FileStorage implements StorageInterface
+class FileStorage implements StorageInterface, LoggerAwareInterface
 {
+    use LogTrait;
+
+    protected const LOG_CODE = 'StockAuditAdjustment::FileStorage';
+    protected const LOG_CODE_EXPENSIVE_METHOD_CALL = 'ExpensiveMethodCall';
+    protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this should method should be avoided where possible';
+
     /** @var StorageAdapter */
     protected $storageAdapter;
     /** @var Mapper */
@@ -33,6 +41,7 @@ class FileStorage implements StorageInterface
      */
     public function save($entity)
     {
+        $this->logWarning(static::LOG_MSG_EXPENSIVE_METHOD_CALL, [__METHOD__], [static::LOG_CODE, static::LOG_CODE_EXPENSIVE_METHOD_CALL]);
         $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
@@ -45,6 +54,7 @@ class FileStorage implements StorageInterface
      */
     public function remove($entity)
     {
+        $this->logWarning(static::LOG_MSG_EXPENSIVE_METHOD_CALL, [__METHOD__], [static::LOG_CODE, static::LOG_CODE_EXPENSIVE_METHOD_CALL]);
         $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         if (!isset($file[$entity->getId()])) {

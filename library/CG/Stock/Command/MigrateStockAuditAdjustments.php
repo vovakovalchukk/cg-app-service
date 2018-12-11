@@ -70,7 +70,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $this->storage->commitTransaction();
         } catch (\Throwable $throwable) {
             $this->storage->rollbackTransaction();
-            $this->logEmergencyException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE]);
+            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
             throw $throwable;
         }
