@@ -92,7 +92,8 @@ return [
             'highPriority' => [
                 'description' => 'Queue generated jobs at high priority',
             ],
-        ]
+        ],
+        'modulus' => true
     ],
     'channel:generateOrders' => [
         'command' => function(InputInterface $input) use ($di) {
