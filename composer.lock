@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b850888cdab862050109ca9ccf16f21",
+    "content-hash": "ce41c1f1817f8e90049fafb1707a5a66",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -514,17 +514,11 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.41.0",
+            "version": "dev-CGIV-10168-cron-sharding",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "ba6eb49c6fdf95c0654c080cd2f7a99ce5d9098b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-channel-1.41.0-4d986d.zip",
-                "reference": "ba6eb49c6fdf95c0654c080cd2f7a99ce5d9098b",
-                "shasum": null
+                "reference": "77cdc1199e0ae4f9b4916831d926c96ab7eb346a"
             },
             "require": {
                 "channelgrabber/billing": "^1.19.7",
@@ -602,7 +596,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-10-22T14:03:59+00:00"
+            "time": "2018-12-12T15:48:50+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -11530,9 +11524,17 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.41.1",
+            "alias_normalized": "1.41.1.0",
+            "version": "dev-CGIV-10168-cron-sharding",
+            "package": "channelgrabber/channel"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
