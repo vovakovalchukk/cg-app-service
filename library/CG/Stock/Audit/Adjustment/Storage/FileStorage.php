@@ -64,14 +64,16 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $this->saveFile($filename, $file);
     }
 
-    public function fetchCollection(array $ouIds, DateTime $from, DateTime $to): AuditAdjustments
+    public function fetchCollection(array $ouIds, array $skus, DateTime $from, DateTime $to): AuditAdjustments
     {
         $collection = new AuditAdjustments();
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
-                $filename = $this->generateFilename($ouId, $date->stdDateFormat());
-                foreach ($this->loadFile($filename) as $entity) {
-                    $collection->attach($entity);
+                foreach ($skus as $sku) {
+                    $filename = $this->generateFilename($ouId, $date->stdDateFormat(), $sku);
+                    foreach ($this->loadFile($filename) as $entity) {
+                        $collection->attach($entity);
+                    }
                 }
             }
         }
@@ -103,12 +105,12 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function generateEntityFilename(AuditAdjustment $entity): string
     {
-        return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate());
+        return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate(), $entity->getSku());
     }
 
-    protected function generateFilename(int $outId, string $date): string
+    protected function generateFilename(int $outId, string $date, string $sku): string
     {
-        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s.json', $outId, $date);
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s-%s.json', $outId, $date, base64_encode($sku));
     }
 
     protected function loadFile(string $filename, bool $useCache = false): File

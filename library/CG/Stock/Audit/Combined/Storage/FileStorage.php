@@ -36,15 +36,25 @@ class FileStorage implements StorageInterface
     protected function reloadAuditAdjustmentData(Filter $filter): void
     {
         $ouIds = $filter->getOrganisationUnitId();
+        $skus = $filter->getSku();
         $dateFrom = $filter->getDateTimeFrom();
         $dateTo = $filter->getDateTimeTo();
 
-        if (empty($ouIds) || empty($dateFrom) || empty($dateTo) || !in_array(Type::ADJUSTMENT, $filter->getType())) {
+        if (
+            empty($ouIds)
+            || empty($skus)
+            || empty($dateFrom)
+            || empty($dateTo)
+            || !in_array(Type::ADJUSTMENT, $filter->getType())
+        ) {
             return;
         }
 
-        $this->auditAdjustmentStorage->saveCollection(
-            $this->auditAdjustmentFileStorage->fetchCollection($ouIds, new DateTime($dateFrom), new DateTime($dateTo))
-        );
+        $this->auditAdjustmentStorage->saveCollection($this->auditAdjustmentFileStorage->fetchCollection(
+            $ouIds,
+            $skus,
+            new DateTime($dateFrom),
+            new DateTime($dateTo)
+        ));
     }
 }
