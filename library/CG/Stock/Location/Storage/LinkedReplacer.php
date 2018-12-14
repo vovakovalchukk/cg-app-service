@@ -64,16 +64,13 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         $this->locationStorage->remove($stockLocation);
     }
 
-    /**
-     * @param StockLocation $stockLocation
-     */
-    public function save($stockLocation)
+    public function save($stockLocation, array $adjustmentIds = [])
     {
         $quantifiedStockLocation = $this->getQuantifiedStockLocation($stockLocation);
         $quantifiedStockLocation->setOnHand($stockLocation->getOnHand())->setAllocated($stockLocation->getAllocated());
 
         if (!($quantifiedStockLocation instanceof LinkedLocation)) {
-            return $this->locationStorage->save($quantifiedStockLocation);
+            return $this->locationStorage->save($quantifiedStockLocation, $adjustmentIds);
         }
 
         if (
