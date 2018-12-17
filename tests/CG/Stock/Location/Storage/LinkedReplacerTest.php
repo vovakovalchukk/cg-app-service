@@ -919,6 +919,83 @@ class LinkedReplacerTest extends TestCase
         $this->assertInstanceOf(QuantifiedStockLocation::class, $quantifiedStockLocationSecondLocation);
     }
 
+    public function testSaveStockLocationNonLinkedWithAdjustmentIds()
+    {
+        $adjustmentIds = ['adj1-test', 'adj2-test'];
+        $stockLocation = $this->createStockLocation('sku1');
+
+        $this->stockLocationStorage
+            ->expects($this->once())
+            ->method('save')
+            ->with(
+                /** @var StockLocation $stockLocationArg */
+                $this->callback(function($stockLocationArg) use ($stockLocation) {
+                    return $stockLocationArg instanceof StockLocation && $stockLocation->getId() == $stockLocationArg->getId();
+                }),
+                $adjustmentIds
+            );
+
+        $this->linkReplacer->save($stockLocation, $adjustmentIds);
+    }
+
+    /**
+     * @dataProvider getTestStockUpdateData
+     * @param string $linkSku
+     * @param array $linkMap
+     * @param array $missingSkus
+     * @param array $linkStock
+     * @param array $skuStockData
+     */
+    public function testSaveStockLocationLinkedWithAdjustmentIds(
+        string $linkSku,
+        array $linkMap,
+        array $linkStock,
+        array $skuStockData
+    ) {
+        $adjustmentIds = ['adj1-test', 'adj2-test'];
+
+        $this->createProductLinkLeaf($linkSku, $linkMap);
+        $stockLocation = $this->createStockLocation($linkSku);
+
+        $skuIdMap = [];
+        foreach ($skuStockData as $sku => $stockData) {
+            $skuIdMap[$sku] = $this->createStockLocation($sku, $stockData['onHand'], $stockData['allocated'])->getId();
+        }
+
+        /** @var LinkedLocation $quantifiedStockLocation */
+        $quantifiedStockLocation = $this->linkReplacer->fetch($stockLocation->getId());
+
+        // This counter will have to change if the 'save' method on the stock location storage will be called earlier or later than this
+        $count = 3;
+        /** @var LinkedLocation $linkedLocation */
+        foreach ($quantifiedStockLocation->getLinkedLocations() as $linkedLocation) {
+
+            $this->stockLocationStorage
+                ->expects($this->at($count))
+                ->method('save')
+                ->with(
+                /** @var StockLocation $stockLocationArg */
+                    $this->callback(function ($stockLocationArg) use ($linkedLocation) {
+                        return $stockLocationArg instanceof StockLocation && $stockLocationArg->getId() == $linkedLocation->getId();
+                    }),
+                    array_map(
+                        function ($adjustmentId) use ($linkedLocation) {
+                            return $adjustmentId . '-' . $linkedLocation->getId();
+                        },
+                        $adjustmentIds
+                    )
+                );
+
+            $count++;
+        }
+
+        $quantifiedStockLocation->setOnHand($linkStock['savedOnHand'])->setAllocated($linkStock['savedAllocated']);
+
+        $this->linkReplacer->save(
+            $quantifiedStockLocation, $adjustmentIds
+        );
+    }
+
     protected function createStockLocation($sku, $onHand = 0, $allocated = 0): StockLocation
     {
         $this->stockStorage->save(
