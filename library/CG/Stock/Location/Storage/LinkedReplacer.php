@@ -97,13 +97,36 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             return $quantifiedStockLocation;
         }
 
+        $this->saveLinkedStockLocations($quantifiedStockLocation, $difference, $adjustmentIds);
+
+        return $quantifiedStockLocation;
+    }
+
+    protected function saveLinkedStockLocations(
+        LinkedLocation $quantifiedStockLocation,
+        array $difference,
+        array $adjustmentIds
+    ): void {
         /** @var StockLocation $linkedLocation */
         foreach ($quantifiedStockLocation->getLinkedLocations() as $linkedLocation) {
             $this->applyDifference($linkedLocation, $difference);
-            $this->locationStorage->save($linkedLocation);
+            $this->locationStorage->save(
+                $linkedLocation,
+                $this->buildAdjustmentIdsArrayForLinkedLocation($linkedLocation, $adjustmentIds)
+            );
         }
+    }
 
-        return $quantifiedStockLocation;
+    protected function buildAdjustmentIdsArrayForLinkedLocation(
+        StockLocation $linkedLocation,
+        array $adjustmentIds
+    ): array {
+        return array_map(
+            function($adjustmentId) use ($linkedLocation) {
+                return $adjustmentId . '-' . $linkedLocation->getId();
+            },
+            $adjustmentIds
+        );
     }
 
     protected function calculateDifference(StockLocation $previous, StockLocation $current): array
