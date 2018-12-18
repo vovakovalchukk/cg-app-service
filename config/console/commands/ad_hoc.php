@@ -63,7 +63,14 @@ return [
     ],
     'ad-hoc:correctAllocatedStock' => [
         'description' => 'Correct any discrepancies with allocated stock, by default will display proposed changes and not apply',
-        'arguments' => [],
+        'arguments' => [
+            'organisationUnitId' => [
+                'required' => false
+            ],
+            'sku' => [
+                'required' => false
+            ],
+        ],
         'options' => [
             'fix' => [
                 'description' => 'Apply updates to stock',
@@ -73,7 +80,11 @@ return [
             function(InputInterface $input, OutputInterface $output) use ($di)
             {
                 $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
-                $adjustments = $findCommand->findIncorrectlyAllocated();
+                $adjustments = $findCommand->findIncorrectlyAllocated(
+                    null,
+                    $input->getArgument('organisationUnitId'),
+                    $input->getArgument('sku')
+                );
 
                 /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
