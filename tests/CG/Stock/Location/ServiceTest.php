@@ -120,7 +120,7 @@ SQL
         );
     }
 
-    public function testStockLocation()
+    public function testStockLocationSaveWithAdjustmentIds()
     {
         $onHand = 10;
         $allocated = 5;
@@ -140,8 +140,8 @@ SQL
         } catch (PreconditionFailed $e) {
             /** @var StockLocation $fetchedLocation */
             $fetchedLocation =  $this->locationService->fetch('1-1');
-            $this->assertTrue($fetchedLocation ->getOnHand() === $onHand);
-            $this->assertTrue($fetchedLocation ->getAllocated() === $allocated);
+            $this->assertTrue($fetchedLocation->getOnHand() === $onHand);
+            $this->assertTrue($fetchedLocation->getAllocated() === $allocated);
             throw $e;
         }
     }
