@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b850888cdab862050109ca9ccf16f21",
+    "content-hash": "8691eb78498ce3aab123b005820c131f",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2899,7 +2899,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "18b529766fcc274f70a2ea96d51bf8654765d213"
+                "reference": "d8c27c7cdb8e5a965f2786c742df41a3eca49a7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-10197-prevent-stock-adjustment-saved-multiple-times-42471f.zip",
+                "reference": "d8c27c7cdb8e5a965f2786c742df41a3eca49a7c",
+                "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2952,7 +2958,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-08-17T09:54:18+00:00"
+            "time": "2018-12-18T14:22:33+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -4252,7 +4258,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/794b196e76bdd37b5155cdecbad311f0a3b07625",
+                "url": "https://composer.build.channelgrabber.com/dist/fabpot-goutte-794b196e76bdd37b5155cdecbad311f0a3b07625-zip-2d5a7a.zip",
                 "reference": "794b196e76bdd37b5155cdecbad311f0a3b07625",
                 "shasum": ""
             },
@@ -4296,6 +4302,11 @@
             "keywords": [
                 "scraper"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-10-09T15:52:51+00:00"
         },
         {
@@ -9537,7 +9548,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/fa1b073b48761464feb0b05e6825da44b20118d8",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-goutte-driver-fa1b073b48761464feb0b05e6825da44b20118d8-zip-3f436f.zip",
                 "reference": "fa1b073b48761464feb0b05e6825da44b20118d8",
                 "shasum": ""
             },
@@ -9576,6 +9587,11 @@
                 "headless",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-07-03T18:43:54+00:00"
         },
         {
