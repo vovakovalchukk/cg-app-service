@@ -122,7 +122,10 @@ SQL
 
     public function testStockLocation()
     {
-        $location = $this->createStockLocation(1, 1);
+        $onHand = 10;
+        $allocated = 5;
+
+        $location = $this->createStockLocation(1, 1, $onHand, $allocated);
         $adjustmentIds = ['abc-def'];
 
         $test = $this->locationService->save($location, $adjustmentIds);
@@ -130,8 +133,17 @@ SQL
 
         $this->expectException(PreconditionFailed::class);
 
-        $newLocation = $this->createStockLocation(2, 2);
-        $this->locationService->save($newLocation, $adjustmentIds);
+        try {
+            $location->setAllocated(10);
+            $location->setOnHand(20);
+            $this->locationService->save($location, $adjustmentIds);
+        } catch (PreconditionFailed $e) {
+            /** @var StockLocation $fetchedLocation */
+            $fetchedLocation =  $this->locationService->fetch('1-1');
+            $this->assertTrue($fetchedLocation ->getOnHand() === $onHand);
+            $this->assertTrue($fetchedLocation ->getAllocated() === $allocated);
+            throw $e;
+        }
     }
 
     protected function createStockLocation(
