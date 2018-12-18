@@ -47,8 +47,8 @@ class ServiceTest extends TestCase
 
         static::mysqli($connection, 'select_db', static::DB);
         static::mysqli($connection, 'set_charset', static::CHARSET);
-        static::mysqli($connection, 'query', 'DROP TABLE `stockLocation`');
-        static::mysqli($connection, 'query', 'DROP TABLE `stockTransaction`');
+        static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `stockLocation`');
+        static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `stockTransaction`');
         static::mysqli($connection, 'query',
             <<<SQL
 CREATE TABLE `stockLocation` (
