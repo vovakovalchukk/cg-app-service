@@ -942,7 +942,6 @@ class LinkedReplacerTest extends TestCase
      * @dataProvider getTestStockUpdateData
      * @param string $linkSku
      * @param array $linkMap
-     * @param array $missingSkus
      * @param array $linkStock
      * @param array $skuStockData
      */
