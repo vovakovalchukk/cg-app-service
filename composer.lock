@@ -2905,18 +2905,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "3c1d53910a75b9da99b179a02f457bdf31a2fad7"
+                "reference": "e4486472302171af6e410a88b92715727ca0d8f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6718-StockAuditAdjustmentAwSS3-3e38fa.zip",
-                "reference": "3c1d53910a75b9da99b179a02f457bdf31a2fad7",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-CGIV-6718-StockAuditAdjustmentAwSS3-c751eb.zip",
+                "reference": "e4486472302171af6e410a88b92715727ca0d8f6",
                 "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
+                "channelgrabber/db": "^1.0.4",
                 "channelgrabber/di": "^2.2.1",
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.6.0",
@@ -2964,7 +2965,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-12-11T14:21:41+00:00"
+            "time": "2018-12-19T12:35:35+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
