@@ -1,7 +1,10 @@
 <?php
 namespace CG\Stock\Audit\Adjustment\Storage;
 
-use CG\FileStorage\AdapterInterface as StorageAdapter;
+use CG\FileStorage\AsyncAdapterInterface as StorageAdapter;
+use CG\FileStorage\Promise;
+use CG\FileStorage\PromiseInterface;
+use CG\FileStorage\ResponseInterface;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -66,15 +69,23 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     public function fetchCollection(array $ouIds, array $skus, DateTime $from, DateTime $to): AuditAdjustments
     {
-        $collection = new AuditAdjustments();
+        /** @var PromiseInterface[] $promises */
+        $promises = [];
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
                 foreach ($skus as $sku) {
                     $filename = $this->generateFilename($ouId, $date->stdDateFormat(), $sku);
-                    foreach ($this->loadFile($filename) as $entity) {
-                        $collection->attach($entity);
-                    }
+                    $promises[] = $this->loadFileAsync($filename);
                 }
+            }
+        }
+
+        $collection = new AuditAdjustments();
+        foreach ($promises as $promise) {
+            /** @var File $file */
+            $file = $promise->wait();
+            foreach ($file as $entity) {
+                $collection->attach($entity);
             }
         }
         return $collection;
@@ -92,12 +103,19 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
             $files[$filename][] = $entity;
         }
 
+        $promises = [];
         foreach ($files as $filename => $entities) {
             $file = $this->loadFile($filename, true);
             foreach ($entities as $entity) {
                 $file[$entity->getId()] = $entity;
             }
-            $this->saveFile($filename, $file);
+            $promises[] = $this->saveFileAsync($filename, $file);
+        }
+
+        foreach ($promises as $promise) {
+            if ($promise instanceof PromiseInterface) {
+                $promise->wait();
+            }
         }
 
         return $collection;
@@ -115,35 +133,60 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function loadFile(string $filename, bool $useCache = false): File
     {
-        return $this->mapper->toFile(
-            $this->loadFileData($filename, $useCache)
-        );
+        return $this->loadFileAsync($filename, $useCache)->wait();
     }
 
-    protected function loadFileData(string $filename, bool $useCache): ?string
+    protected function loadFileAsync(string $filename, bool $useCache = false): PromiseInterface
+    {
+        return $this->loadFileData($filename, $useCache)->then(function(?string $data) {
+            return $this->mapper->toFile($data);
+        });
+    }
+
+    protected function loadFileData(string $filename, bool $useCache): PromiseInterface
     {
         try {
             if ($useCache) {
-                return $this->cache->loadFile($filename);
+                return Promise::createResolved(
+                    $this->cache->loadFile($filename)
+                );
             }
         } catch (NotFound $exception) {
             // Ignore - try real storage
         }
 
-        try {
-            $data = $this->storageAdapter->read($filename)->getBody();
-            $this->cache->saveFile($filename, $data);
-            return $data;
-        } catch (NotFound $exception) {
-            return null;
-        }
+        $promise = $this->storageAdapter->readAsync($filename);
+        $promise->then(
+            function(ResponseInterface $response) use($filename) {
+                $data = $response->getBody();
+                $this->cache->saveFile($filename, $data);
+                return $data;
+            },
+            function(\Throwable $throwable) {
+                if ($throwable instanceof NotFound) {
+                    return null;
+                }
+                throw $throwable;
+            }
+        );
+        return $promise;
     }
 
     protected function saveFile(string $filename, File $file): void
     {
-        if ($file->isModified()) {
-            $this->cache->removeFile($filename);
-            $this->storageAdapter->write($filename, $this->mapper->fromFile($file));
+        $promise = $this->saveFileAsync($filename, $file);
+        if ($promise instanceof PromiseInterface) {
+            $promise->wait();
         }
+    }
+
+    protected function saveFileAsync(string $filename, File $file): ?PromiseInterface
+    {
+        if (!$file->isModified()) {
+            return null;
+        }
+
+        $this->cache->removeFile($filename);
+        return $this->storageAdapter->writeAsync($filename, $this->mapper->fromFile($file));
     }
 }
