@@ -30,7 +30,7 @@ class Versioniser10 implements VersioniserInterface
             $data['itemVariationAttributes'] = $invoiceSetting->getItemVariationAttributes();
             $request->setData($data);
         } catch (NotFound $exception) {
-            // New setting so there won't be a previously set sendToFba setting
+            // No-op
         }
     }
 
