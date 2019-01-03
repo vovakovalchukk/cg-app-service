@@ -71,9 +71,6 @@ class Service extends BaseService implements StatsAwareInterface
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
-    /**
-     * @param StockLocation $stockLocation
-     */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {

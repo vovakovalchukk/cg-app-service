@@ -30,28 +30,36 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function findOverAllocated($organisationUnitId = null)
+    public function findOverAllocated(int $organisationUnitId = null, string $sku = null): iterable
     {
-        return $this->findIncorrectlyAllocated('>', $organisationUnitId);
+        return $this->findIncorrectlyAllocated('>', $organisationUnitId, $sku);
     }
 
-    public function findUnderAllocated($organisationUnitId = null)
+    public function findUnderAllocated(int $organisationUnitId = null, string $sku = null): iterable
     {
-        return $this->findIncorrectlyAllocated('<', $organisationUnitId);
+        return $this->findIncorrectlyAllocated('<', $organisationUnitId, $sku);
     }
 
-    public function findIncorrectlyAllocated($operator = '!=', $organisationUnitId = null)
+    public function findIncorrectlyAllocated(string $operator = null, int $organisationUnitId = null, string $sku = null): iterable
     {
+        $operator = $operator ?? '!=';
+
         $subscriptions = $this->getActiveSubscriptions($organisationUnitId);
-        if (is_null($organisationUnitId)) {
+        if (is_null($organisationUnitId) && is_null($sku)) {
             $this->filterCollection($subscriptions);
         }
         $organisationUnitIds = $this->getOrganisationUnitIdsFromSubscriptions($subscriptions);
         if (empty($organisationUnitIds)) {
             $this->logNotice('No active organisation units to process - exiting', [], static::LOG_CODE);
-            return;
+            return [];
         }
         $organisationUnitIdString = implode(',', $organisationUnitIds);
+
+        $skuWhere = "";
+        if ($sku !== null) {
+            $sku = \CG\Stdlib\escapeLikeValue($sku);
+            $skuWhere = "AND s.sku LIKE '$sku'";
+        }
 
         $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
@@ -89,6 +97,7 @@ LEFT JOIN (
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
 AND s.organisationUnitId IN ({$organisationUnitIdString})
+{$skuWhere}
 ORDER BY s.organisationUnitId, sku
 EOF;
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
@@ -97,7 +106,7 @@ EOF;
         return $results;
     }
 
-    protected function logFindings(ResultInterface $results)
+    protected function logFindings(ResultInterface $results): void
     {
         foreach ($results as $result) {
             $details = $this->getExpectedAllocatedDetails($result);
@@ -109,7 +118,7 @@ EOF;
         }
     }
 
-    protected function getExpectedAllocatedDetails(array $result)
+    protected function getExpectedAllocatedDetails(array $result): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -142,7 +151,7 @@ EOF;
         return iterator_to_array($secondaryResults);
     }
 
-    protected function getExpectedAllocatedDetailsByOrderStatus(array $result)
+    protected function getExpectedAllocatedDetailsByOrderStatus(array $result): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -175,7 +184,7 @@ EOF;
         return iterator_to_array($results);
     }
 
-    protected function areExpectationAndDetailsResultsDifferent(array $result, array $details)
+    protected function areExpectationAndDetailsResultsDifferent(array $result, array $details): bool
     {
         $count = 0;
         foreach ($details as $detail) {
@@ -193,7 +202,7 @@ EOF;
             [],
             $now->stdFormat(),
             $now->stdFormat(),
-            [$organisationUnitId],
+            $organisationUnitId ? [$organisationUnitId] : [],
             [],
             []
         );
