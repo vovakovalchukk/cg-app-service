@@ -1,20 +1,21 @@
 <?php
 namespace CG\Product\LinkRelated\Storage;
 
+use CG\Product\Link\Storage\DbLinkIdTrait;
 use CG\Product\LinkRelated\Mapper;
 use CG\Product\LinkRelated\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
-use function CG\Stdlib\escapeLikeValue;
 
 class Db implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
+    use DbLinkIdTrait;
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -29,29 +30,23 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        [$ouId, $sku] = explode('-', $id, 2);
-
-        $where = (new Where())
-            ->equalTo('search.organisationUnitId', $ouId)
-            ->like('search.sku', escapeLikeValue($sku));
-
-        $select = $this->getSelect()->where($where);
+        $select = $this->getSelect()->where($this->getLinkIdWhere('search', $id));
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
             throw new NotFound(sprintf('ProductLinkRelated not found with id %s', $id));
         }
 
+        ['organisationUnitId' => $ouId, 'sku' => $sku] = $results->current();
         return $this->mapper->fromArray($this->toArray($ouId, $sku, $this->getRelatedSkus($results)));
     }
 
-    protected function getRelatedSkus($results): array
+    protected function getRelatedSkus(ResultInterface $results): array
     {
         $relatedSkusMap = [];
         foreach ($results as $data) {
-            $relatedSkusMap[] = $data['sku'];
+            $relatedSkusMap[] = $data['relatedSku'];
         }
-
         return $relatedSkusMap;
     }
 
@@ -67,15 +62,19 @@ class Db implements StorageInterface, LoggerAwareInterface
     protected function getSelect(): Select
     {
         return $this->readSql
-            ->select(['search' => 'productLink'])->columns([])->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->select(['search' => 'productLink'])->columns(['organisationUnitId', 'sku'])->quantifier(Select::QUANTIFIER_DISTINCT)
             ->join(['searchLeafPath' => 'productLinkPath'], 'search.linkId = searchLeafPath.linkId', [])
-            ->join(['relatedMinPath' => 'productLinkPath'], new Expression('searchLeafPath.pathId = relatedMinPath.pathId AND relatedMinPath.order = ?', [0]), [])
+            ->join(
+                ['relatedMinPath' => 'productLinkPath'],
+                new Expression('? = ? AND ? = 0', ['searchLeafPath.pathId', 'relatedMinPath.pathId', 'relatedMinPath.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
+                []
+            )
             ->join(['relatedMinPaths' => 'productLinkPath'], 'relatedMinPath.linkId = relatedMinPaths.linkId', [])
             ->join(['productLinkPathMax' => $this->getMaxOrderSelect()], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
             ->join(['relatedMaxPath' => 'productLinkPath'], 'productLinkPathMax.pathId = relatedMaxPath.pathId AND productLinkPathMax.order = relatedMaxPath.order', [])
             ->join(['relatedRootPath' => 'productLinkPath'], 'relatedMaxPath.linkId = relatedRootPath.linkId', [])
             ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', [])
-            ->join(['related' => 'productLink'], 'relatedLeafPath.linkId = related.linkId', ['sku']);
+            ->join(['related' => 'productLink'], 'relatedLeafPath.linkId = related.linkId', ['relatedSku' => 'sku']);
     }
 
     protected function getMaxOrderSelect(): Select
