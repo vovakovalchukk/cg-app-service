@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb46dedb1226936e606eaa3838921314",
+    "content-hash": "d67be3eee552262bb14d33cdad4cfafe",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2890,16 +2890,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.14.0",
+            "version": "dev-TAC-305-LinkedAudit",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "c552d614e318f543a9f0dff0e83cc2eb9c39d63b"
+                "reference": "92a67a62023e6e64410da833e9580e47ce67e8d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-1.14.0-c006e9.zip",
-                "reference": "c552d614e318f543a9f0dff0e83cc2eb9c39d63b",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-TAC-305-LinkedAudit-301b46.zip",
+                "reference": "92a67a62023e6e64410da833e9580e47ce67e8d7",
                 "shasum": null
             },
             "require": {
@@ -2953,7 +2953,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2019-01-02T09:56:08+00:00"
+            "time": "2019-01-04T09:57:08+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -4211,7 +4211,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/contextio-php-contextio-800792db8030c7c01cd2a377b2e53f4d3850d584-zip-3a5383.zip",
+                "url": "https://api.github.com/repos/contextio/PHP-ContextIO/zipball/800792db8030c7c01cd2a377b2e53f4d3850d584",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
                 "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
@@ -5708,7 +5708,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/phpseclib-mcrypt_compat-a1761aa8462471c9955af0bccbe3ae19159745ca-zip-96b6b4.zip",
+                "url": "https://api.github.com/repos/phpseclib/mcrypt_compat/zipball/a1761aa8462471c9955af0bccbe3ae19159745ca",
                 "reference": "a1761aa8462471c9955af0bccbe3ae19159745ca",
                 "shasum": ""
             },
@@ -6185,7 +6185,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/realityking-hash_equals-c94c380358f0649d4efe09c59fa94d16a65607bf-zip-1306d9.zip",
+                "url": "https://api.github.com/repos/realityking/hash_equals/zipball/c94c380358f0649d4efe09c59fa94d16a65607bf",
                 "reference": "c94c380358f0649d4efe09c59fa94d16a65607bf",
                 "shasum": ""
             },
@@ -7505,7 +7505,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/whichbrowser-whichbrowser-4f1f3b4c78cecf502a4415c2bbd20b71cf64c043-zip-89f322.zip",
+                "url": "https://api.github.com/repos/WhichBrowser/Legacy/zipball/4f1f3b4c78cecf502a4415c2bbd20b71cf64c043",
                 "reference": "4f1f3b4c78cecf502a4415c2bbd20b71cf64c043",
                 "shasum": ""
             },
@@ -9373,7 +9373,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/zeroclipboard-zeroclipboard-e4f6ab73861924341792aa671592cdcb45d6e5cc-zip-757bd7.zip",
+                "url": "https://api.github.com/repos/zeroclipboard/zeroclipboard/zipball/e4f6ab73861924341792aa671592cdcb45d6e5cc",
                 "reference": "e4f6ab73861924341792aa671592cdcb45d6e5cc",
                 "shasum": ""
             },
@@ -11492,10 +11492,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.14.1",
+            "alias_normalized": "1.14.1.0",
+            "version": "dev-TAC-305-LinkedAudit",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
