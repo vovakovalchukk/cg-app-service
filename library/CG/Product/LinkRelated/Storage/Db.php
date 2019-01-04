@@ -6,6 +6,7 @@ use CG\Product\LinkRelated\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
@@ -30,10 +31,9 @@ class Db implements StorageInterface, LoggerAwareInterface
     {
         [$ouId, $sku] = explode('-', $id, 2);
 
-        $where = new Where();
-        $where
-            ->equalTo('l1.organisationUnitId', $ouId)
-            ->equalTo('l1.sku', escapeLikeValue($sku));
+        $where = (new Where())
+            ->equalTo('search.organisationUnitId', $ouId)
+            ->like('search.sku', escapeLikeValue($sku));
 
         $select = $this->getSelect()->where($where);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
@@ -67,34 +67,22 @@ class Db implements StorageInterface, LoggerAwareInterface
     protected function getSelect(): Select
     {
         return $this->readSql
-            ->select()
-            ->quantifier(Select::QUANTIFIER_DISTINCT)
-            ->from(['l1' => 'productLink'])
-            ->columns(['organisationUnitId'])
-            ->join(
-                ['p1' => 'productLinkPath'],
-                'l1.linkId = p1.linkId',
-                []
-            )
-            ->join(
-                ['p2' => 'productLinkPath'],
-                'p1.pathId = p2.pathId',
-                []
-            )
-            ->join(
-                ['p3' => 'productLinkPath'],
-                'p2.linkId = p3.linkId',
-                []
-            )
-            ->join(
-                ['p4' => 'productLinkPath'],
-                'p3.pathId = p4.pathId',
-                []
-            )
-            ->join(
-                ['l2' => 'productLink'],
-                'p4.linkId = l2.linkId',
-                ['sku']
-            );
+            ->select(['search' => 'productLink'])->columns([])->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->join(['searchLeafPath' => 'productLinkPath'], 'search.linkId = searchLeafPath.linkId', [])
+            ->join(['relatedMinPath' => 'productLinkPath'], new Expression('searchLeafPath.pathId = relatedMinPath.pathId AND relatedMinPath.order = ?', [0]), [])
+            ->join(['relatedMinPaths' => 'productLinkPath'], 'relatedMinPath.linkId = relatedMinPaths.linkId', [])
+            ->join(['productLinkPathMax' => $this->getMaxOrderSelect()], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
+            ->join(['relatedMaxPath' => 'productLinkPath'], 'productLinkPathMax.pathId = relatedMaxPath.pathId AND productLinkPathMax.order = relatedMaxPath.order', [])
+            ->join(['relatedRootPath' => 'productLinkPath'], 'relatedMaxPath.linkId = relatedRootPath.linkId', [])
+            ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', [])
+            ->join(['related' => 'productLink'], 'relatedLeafPath.linkId = related.linkId', ['sku']);
+    }
+
+    protected function getMaxOrderSelect(): Select
+    {
+        return $this->readSql
+            ->select('productLinkPath')
+            ->columns(['pathId', 'order' => new Expression('MAX(?)', ['order'], [Expression::TYPE_IDENTIFIER])])
+            ->group(['pathId']);
     }
 }
