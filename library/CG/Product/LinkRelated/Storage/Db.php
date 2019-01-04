@@ -2,6 +2,9 @@
 namespace CG\Product\LinkRelated\Storage;
 
 use CG\Product\Link\Storage\DbLinkIdTrait;
+use CG\Product\LinkRelated\Collection;
+use CG\Product\LinkRelated\Entity as LinkRelated;
+use CG\Product\LinkRelated\Filter;
 use CG\Product\LinkRelated\Mapper;
 use CG\Product\LinkRelated\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -30,7 +33,7 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        $select = $this->getSelect()->where($this->getLinkIdWhere('search', $id));
+        $select = $this->getSelect($this->getLinkIdSelect($id));
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -39,6 +42,72 @@ class Db implements StorageInterface, LoggerAwareInterface
 
         ['organisationUnitId' => $ouId, 'sku' => $sku] = $results->current();
         return $this->mapper->fromArray($this->toArray($ouId, $sku, $this->getRelatedSkus($results)));
+    }
+
+    public function fetchCollectionByFilter(Filter $filter)
+    {
+        $linkIdSelect = $this->getLinkIdSelect(...$filter->getOuIdProductSku());
+        $total = $this->getTotal($linkIdSelect);
+
+        if (($limit = $filter->getLimit()) !== 'all') {
+            $linkIdSelect->limit($limit)->offset(($filter->getPage() - 1) * $limit);
+        }
+
+        $select = $this->getSelect($linkIdSelect);
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+
+        if ($results->count() == 0) {
+            throw new NotFound('No ProductLinkRelated found matching filter');
+        }
+
+        $map = [];
+        foreach ($results as $data) {
+            $id = $data['id'];
+            $map[$id] = $map[$id] ?? [
+                'organisationUnitId' => $data['organisationUnitId'],
+                'sku' => $data['sku'],
+                'relatedSkus' => [],
+            ];
+            $map[$id]['relatedSkus'][] = $data['relatedSku'];
+        }
+
+        $collection = new Collection(LinkRelated::class, __FUNCTION__, $filter->toArray());
+        $collection->setTotal($total);
+
+        foreach ($map as $array) {
+            $collection->attach($this->mapper->fromArray($array));
+        }
+
+        return $collection;
+    }
+
+    protected function getLinkIdSelect(...$ouIdProductSkus): Select
+    {
+        return $this->readSql
+            ->select('productLink')
+            ->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->columns(['linkId', 'organisationUnitId', 'sku'])
+            ->join('productLinkPath', 'productLink.linkId = productLinkPath.linkId', [])
+            ->where($this->getLinkIdWhere('productLink', ...$ouIdProductSkus));
+    }
+
+    protected function getTotal(Select $linkIdSelect): int
+    {
+        $select = (clone $linkIdSelect)
+            ->reset(Select::QUANTIFIER)
+            ->columns([
+                'count' => new Expression(
+                    'COUNT(? ?)',
+                    [Select::QUANTIFIER_DISTINCT, 'productLink.linkId'],
+                    [Expression::TYPE_LITERAL, Expression::TYPE_IDENTIFIER]
+                ),
+            ]);
+
+        $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
+        foreach ($results as $result) {
+            return $result['count'];
+        }
+        return 0;
     }
 
     protected function getRelatedSkus(ResultInterface $results): array
@@ -59,10 +128,10 @@ class Db implements StorageInterface, LoggerAwareInterface
         ];
     }
 
-    protected function getSelect(): Select
+    protected function getSelect(Select $linkIdSelect): Select
     {
         return $this->readSql
-            ->select(['search' => 'productLink'])->columns(['organisationUnitId', 'sku'])->quantifier(Select::QUANTIFIER_DISTINCT)
+            ->select(['search' => $linkIdSelect])->columns(['id' => 'linkId', 'organisationUnitId', 'sku'])->quantifier(Select::QUANTIFIER_DISTINCT)
             ->join(['searchLeafPath' => 'productLinkPath'], 'search.linkId = searchLeafPath.linkId', [])
             ->join(
                 ['relatedMinPath' => 'productLinkPath'],
