@@ -1214,12 +1214,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-file-storage.git",
-                "reference": "844851563c4b666d2e98f564957fe0f13344ac5b"
+                "reference": "8fc27f4e5f7e74af50e9e146e8ca0c1d78fe92bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-file-storage-dev-CGIV-6718-StockAuditAdjustmentAwSS3-0eabb6.zip",
-                "reference": "844851563c4b666d2e98f564957fe0f13344ac5b",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/file-storage/channelgrabber-file-storage-dev-CGIV-6718-StockAuditAdjustmentAwSS3-59a038.zip",
+                "reference": "8fc27f4e5f7e74af50e9e146e8ca0c1d78fe92bb",
                 "shasum": null
             },
             "require": {
@@ -1241,12 +1241,7 @@
                 }
             ],
             "description": "Handles the interaction with file storages",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2018-12-19T12:00:44+00:00"
+            "time": "2019-01-07T12:58:25+00:00"
         },
         {
             "name": "channelgrabber/gearman",
@@ -2900,12 +2895,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e4486472302171af6e410a88b92715727ca0d8f6"
+                "reference": "eb167ee633efc1101eb4ccf4bfb33a3415ec1774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://channelgrabber-composer.s3.eu-west-2.amazonaws.com/dist/channelgrabber/stock/channelgrabber-stock-dev-CGIV-6718-StockAuditAdjustmentAwSS3-c751eb.zip",
-                "reference": "e4486472302171af6e410a88b92715727ca0d8f6",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-CGIV-6718-StockAuditAdjustmentAwSS3-3493ac.zip",
+                "reference": "eb167ee633efc1101eb4ccf4bfb33a3415ec1774",
                 "shasum": null
             },
             "require": {
@@ -2955,7 +2950,7 @@
                     "CG\\Stock\\Test\\": "tests"
                 }
             },
-            "time": "2018-12-19T12:35:35+00:00"
+            "time": "2019-01-07T12:57:31+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
