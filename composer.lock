@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "24123ca066452943aa477c961000e503",
+    "content-hash": "bb46dedb1226936e606eaa3838921314",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -156,16 +156,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.28.2",
+            "version": "1.28.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "a6d4da715d6bdc148511a582a9d92a7d23c9769e"
+                "reference": "7ae03c133cc36f053c6616a4c39a2ad9e9883fe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.28.2-000297.zip",
-                "reference": "a6d4da715d6bdc148511a582a9d92a7d23c9769e",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.28.5-92d683.zip",
+                "reference": "7ae03c133cc36f053c6616a4c39a2ad9e9883fe4",
                 "shasum": null
             },
             "require": {
@@ -225,7 +225,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-13T15:58:54+00:00"
+            "time": "2018-12-18T14:49:33+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -601,12 +601,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2018-11-19T09:46:52+00:00"
+            "time": "2019-01-02T14:07:02+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1644,16 +1639,16 @@
         },
         {
             "name": "channelgrabber/log",
-            "version": "2.3.3",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-log.git",
-                "reference": "676c976cafce3f9fbe9bbe6531efcaba5038bc29"
+                "reference": "e8f6458c866b89ed833fae3c532c2087429c7d1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.3.3-025a83.zip",
-                "reference": "676c976cafce3f9fbe9bbe6531efcaba5038bc29",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.3.5-bc6c2e.zip",
+                "reference": "e8f6458c866b89ed833fae3c532c2087429c7d1b",
                 "shasum": null
             },
             "require": {
@@ -1688,7 +1683,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-07T10:56:08+00:00"
+            "time": "2018-12-03T15:34:50+00:00"
         },
         {
             "name": "channelgrabber/middleware",
@@ -1873,7 +1868,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-19T09:49:30+00:00"
+            "time": "2018-11-27T11:37:19+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2134,16 +2129,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.9",
+            "version": "1.16.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "e8fe16d675ea6b07707e59b7ad047cea5e4be7d8"
+                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.9-6b980f.zip",
-                "reference": "e8fe16d675ea6b07707e59b7ad047cea5e4be7d8",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.10-cace8a.zip",
+                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7",
                 "shasum": null
             },
             "require": {
@@ -2200,7 +2195,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-07T14:43:20+00:00"
+            "time": "2018-12-06T15:56:24+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2964,7 +2959,7 @@
                     "local_cert": "composer.pem"
                 }
             },
-            "time": "2018-11-19T10:24:49+00:00"
+            "time": "2019-01-02T09:56:08+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -9437,7 +9432,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Mink/zipball/0769e6d9726c140a54dbf827a438c0f9912749fe",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-0769e6d9726c140a54dbf827a438c0f9912749fe-zip-ae4f3d.zip",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "shasum": ""
             },
@@ -9480,6 +9475,11 @@
                 "testing",
                 "web"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:39:27+00:00"
         },
         {
@@ -9492,7 +9492,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/63960c8fcad4529faad1ff33e950217980baa64c",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-browserkit-driver-63960c8fcad4529faad1ff33e950217980baa64c-zip-dbf956.zip",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c",
                 "shasum": ""
             },
@@ -9535,6 +9535,11 @@
                 "browser",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:46:30+00:00"
         },
         {
@@ -9547,7 +9552,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/bcf1b537de37db6db0822d9e7bd97e600fd7a476",
+                "url": "https://composer.build.channelgrabber.com/dist/behat-mink-selenium2-driver-bcf1b537de37db6db0822d9e7bd97e600fd7a476-zip-16355d.zip",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "shasum": ""
             },
@@ -9593,6 +9598,11 @@
                 "testing",
                 "webdriver"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-06-02T19:09:45+00:00"
         },
         {
@@ -9644,7 +9654,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.zip",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -9701,7 +9711,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/47a6019553a7a5b42d35493276ffc2c9252c53d5",
+                "url": "https://composer.build.channelgrabber.com/dist/instaclick-php-webdriver-47a6019553a7a5b42d35493276ffc2c9252c53d5-zip-403190.zip",
                 "reference": "47a6019553a7a5b42d35493276ffc2c9252c53d5",
                 "shasum": ""
             },
@@ -9736,7 +9746,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -9747,6 +9757,11 @@
                 "webdriver",
                 "webtest"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-10-04T15:03:51+00:00"
         },
         {
@@ -10167,7 +10182,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-php-diff-30e103d19519fe678ae64a60d77884ef3d71b28a-zip-b63c58.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -10206,7 +10221,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpspec-phpspec-61712147412cb647b6cb68b19833a60bfda759a1-zip-6bc9f9.zip",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -10473,7 +10488,7 @@
                 "type": "zip",
                 "url": "https://composer.build.channelgrabber.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.zip",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"

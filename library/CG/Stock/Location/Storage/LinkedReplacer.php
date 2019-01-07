@@ -64,16 +64,13 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
         $this->locationStorage->remove($stockLocation);
     }
 
-    /**
-     * @param StockLocation $stockLocation
-     */
-    public function save($stockLocation)
+    public function save($stockLocation, array $adjustmentIds = [])
     {
         $quantifiedStockLocation = $this->getQuantifiedStockLocation($stockLocation);
         $quantifiedStockLocation->setOnHand($stockLocation->getOnHand())->setAllocated($stockLocation->getAllocated());
 
         if (!($quantifiedStockLocation instanceof LinkedLocation)) {
-            return $this->locationStorage->save($quantifiedStockLocation);
+            return $this->locationStorage->save($quantifiedStockLocation, $adjustmentIds);
         }
 
         if (
@@ -100,13 +97,36 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             return $quantifiedStockLocation;
         }
 
+        $this->saveLinkedStockLocations($quantifiedStockLocation, $difference, $adjustmentIds);
+
+        return $quantifiedStockLocation;
+    }
+
+    protected function saveLinkedStockLocations(
+        LinkedLocation $quantifiedStockLocation,
+        array $difference,
+        array $adjustmentIds
+    ): void {
         /** @var StockLocation $linkedLocation */
         foreach ($quantifiedStockLocation->getLinkedLocations() as $linkedLocation) {
             $this->applyDifference($linkedLocation, $difference);
-            $this->locationStorage->save($linkedLocation);
+            $this->locationStorage->save(
+                $linkedLocation,
+                $this->buildAdjustmentIdsArrayForLinkedLocation($linkedLocation, $adjustmentIds)
+            );
         }
+    }
 
-        return $quantifiedStockLocation;
+    protected function buildAdjustmentIdsArrayForLinkedLocation(
+        StockLocation $linkedLocation,
+        array $adjustmentIds
+    ): array {
+        return array_map(
+            function($adjustmentId) use ($linkedLocation) {
+                return $adjustmentId . '-' . $linkedLocation->getId();
+            },
+            $adjustmentIds
+        );
     }
 
     protected function calculateDifference(StockLocation $previous, StockLocation $current): array
@@ -211,23 +231,19 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
     protected function getLinkedStockLocations(
         StockLocation $stockLocation,
         ProductLinkLeaf $productLinkLeaf
-    ): ?Collection {
-        try {
-            $ouSkuMap = [];
-            foreach ($productLinkLeaf->getStockSkuMap() as $sku => $qty) {
-                $ouSkuMap[] = ProductLinkLeaf::generateId($productLinkLeaf->getOrganisationUnitId(), $sku);
-            }
-
-            if (empty($ouSkuMap)) {
-                throw new NotFound('No linked skus');
-            }
-
-            return $this->locationStorage->fetchCollectionByFilter(
-                (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
-            );
-        } catch (NotFound $exception) {
-            return null;
+    ): Collection {
+        $ouSkuMap = [];
+        foreach ($productLinkLeaf->getStockSkuMap() as $sku => $qty) {
+            $ouSkuMap[] = ProductLinkLeaf::generateId($productLinkLeaf->getOrganisationUnitId(), $sku);
         }
+
+        if (empty($ouSkuMap)) {
+            throw new NotFound('No linked skus');
+        }
+
+        return $this->locationStorage->fetchCollectionByFilter(
+            (new Filter('all', 1))->setLocationId([$stockLocation->getLocationId()])->setOuIdSku($ouSkuMap)
+        );
     }
 
     protected function getLinkedStockLocation(
