@@ -70,6 +70,11 @@ use CG\Controllers\ProductLinkRelated\Collection as ProductLinkRelatedCollection
 use CG\InputValidation\ProductLinkRelated\Entity as ProductLinkRelatedValidation;
 use CG\InputValidation\ProductLinkRelated\Filter as ProductLinkRelatedCollectionValidation;
 
+use CG\Controllers\ProductLinkPaths\Entity as ProductLinkPathsController;
+use CG\Controllers\ProductLinkPaths\Collection as ProductLinkPathsCollectionController;
+use CG\InputValidation\ProductLinkPaths\Entity as ProductLinkPathsValidation;
+use CG\InputValidation\ProductLinkPaths\Filter as ProductLinkPathsCollectionValidation;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -451,6 +456,41 @@ return [
         'name' => 'ProductLinkRelatedEntity',
         'validation' => [
             'dataRules' => ProductLinkRelatedValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkPaths' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkPathsCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkPathsCollection',
+        'entityRoute' => '/productLinkPaths/:productLinkPathsId',
+        'validation' => [
+            'filterRules' => ProductLinkPathsCollectionValidation::class,
+            'dataRules' => ProductLinkPathsValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkPaths/:productLinkPathsId' => [
+        'controllers' => function($productLinkPathsId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkPathsController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkPathsId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET'],
+        'name' => 'ProductLinkPathsEntity',
+        'validation' => [
+            'dataRules' => ProductLinkPathsValidation::class,
         ],
         'eTag' => false,
         'version' => new Version(1, 1)

@@ -2,6 +2,7 @@
 namespace CG\Product\LinkRelated\Storage;
 
 use CG\Product\Link\Storage\DbLinkIdTrait;
+use CG\Product\Link\Storage\DbMaxOrderSelectTrait;
 use CG\Product\LinkRelated\Collection;
 use CG\Product\LinkRelated\Entity as LinkRelated;
 use CG\Product\LinkRelated\Filter;
@@ -19,6 +20,7 @@ class Db implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
     use DbLinkIdTrait;
+    use DbMaxOrderSelectTrait;
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -139,18 +141,10 @@ class Db implements StorageInterface, LoggerAwareInterface
                 []
             )
             ->join(['relatedMinPaths' => 'productLinkPath'], 'relatedMinPath.linkId = relatedMinPaths.linkId', [])
-            ->join(['productLinkPathMax' => $this->getMaxOrderSelect()], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
+            ->join(['productLinkPathMax' => $this->getMaxOrderSelect($this->readSql)], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
             ->join(['relatedMaxPath' => 'productLinkPath'], 'productLinkPathMax.pathId = relatedMaxPath.pathId AND productLinkPathMax.order = relatedMaxPath.order', [])
             ->join(['relatedRootPath' => 'productLinkPath'], 'relatedMaxPath.linkId = relatedRootPath.linkId', [])
             ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', [])
             ->join(['related' => 'productLink'], 'relatedLeafPath.linkId = related.linkId', ['relatedSku' => 'sku']);
-    }
-
-    protected function getMaxOrderSelect(): Select
-    {
-        return $this->readSql
-            ->select('productLinkPath')
-            ->columns(['pathId', 'order' => new Expression('MAX(?)', ['order'], [Expression::TYPE_IDENTIFIER])])
-            ->group(['pathId']);
     }
 }

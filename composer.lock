@@ -514,16 +514,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.42.5",
+            "version": "1.42.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea"
+                "reference": "f4ba2aa047bd04c73ba47d674470f92ac45a3d1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://channelgrabber-composer.s3.eu-west-2.amazonaws.com/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
-                "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.6-c97b80.zip",
+                "reference": "f4ba2aa047bd04c73ba47d674470f92ac45a3d1b",
                 "shasum": null
             },
             "require": {
@@ -597,7 +597,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2019-01-02T14:07:02+00:00"
+            "time": "2019-01-07T09:44:06+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -2129,12 +2129,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "b6d0cd98b3854ca6e10e36cf39f857fdb9403353"
+                "reference": "5de8e105bdc55b7fc882ce50ab0446e8c0d63ac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-TAC-305-LinkedAudit-1e2058.zip",
-                "reference": "b6d0cd98b3854ca6e10e36cf39f857fdb9403353",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-TAC-305-LinkedAudit-c2a54b.zip",
+                "reference": "5de8e105bdc55b7fc882ce50ab0446e8c0d63ac3",
                 "shasum": null
             },
             "require": {
@@ -2186,7 +2186,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-01-04T16:31:15+00:00"
+            "time": "2019-01-09T10:15:26+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2889,12 +2889,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "92a67a62023e6e64410da833e9580e47ce67e8d7"
+                "reference": "3fca7dabbc3e52af13bb63ff1018ecb4745f243b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-dev-TAC-305-LinkedAudit-301b46.zip",
-                "reference": "92a67a62023e6e64410da833e9580e47ce67e8d7",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-TAC-305-LinkedAudit-fa255a.zip",
+                "reference": "3fca7dabbc3e52af13bb63ff1018ecb4745f243b",
                 "shasum": null
             },
             "require": {
@@ -2943,12 +2943,7 @@
                     "CG\\Stock\\Test\\": "tests"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2019-01-04T09:57:08+00:00"
+            "time": "2019-01-08T12:15:30+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -5432,7 +5427,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/opensoft-rollout-2e5a72b7e59b7296d50f36404a1e404f67e67636-zip-1c9b4a.zip",
+                "url": "https://api.github.com/repos/opensoft/rollout/zipball/2e5a72b7e59b7296d50f36404a1e404f67e67636",
                 "reference": "2e5a72b7e59b7296d50f36404a1e404f67e67636",
                 "shasum": ""
             },
@@ -5600,7 +5595,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/php-units-of-measure-php-units-of-measure-2424d6444333603c04bc16bc864cd0b45730ea65-zip-ddc8b8.zip",
+                "url": "https://api.github.com/repos/PhpUnitsOfMeasure/php-units-of-measure/zipball/2424d6444333603c04bc16bc864cd0b45730ea65",
                 "reference": "2424d6444333603c04bc16bc864cd0b45730ea65",
                 "shasum": ""
             },
