@@ -11,6 +11,7 @@ use CG\Product\Link\Service as BaseService;
 use CG\Product\Link\StorageInterface;
 use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
 use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
+use CG\Product\LinkPaths\StorageInterface as ProductLinkPathsStorage;
 use CG\Product\LinkRelated\Entity as ProductLinkRelated;
 use CG\Product\LinkRelated\StorageInterface as ProductLinkRelatedStorage;
 use CG\Product\Mapper as ProductMapper;
@@ -34,6 +35,8 @@ class Service extends BaseService
     protected $productLinkNodeStorage;
     /** @var ProductLinkRelatedStorage */
     protected $productLinkRelatedStorage;
+    /** @var ProductLinkPathsStorage */
+    protected $productLinkPathsStorage;
     /** @var ProductLinkNginxCacheInvalidator */
     protected $productLinkNginxCacheInvalidator;
     /** @var AllocatedStockCorrectionGearmanJobGenerator */
@@ -52,6 +55,7 @@ class Service extends BaseService
         ProductLinkLeafStorage $productLinkLeafStorage,
         ProductLinkNodeStorage $productLinkNodeStorage,
         ProductLinkRelatedStorage $productLinkRelatedStorage,
+        ProductLinkPathsStorage $productLinkPathsStorage,
         ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
         AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator,
         StockLocationStorage $stockLocationStorage,
@@ -62,6 +66,7 @@ class Service extends BaseService
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
         $this->productLinkRelatedStorage = $productLinkRelatedStorage;
+        $this->productLinkPathsStorage = $productLinkPathsStorage;
         $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
         $this->allocatedStockCorrectionGearmanJobGenerator = $allocatedStockCorrectionGearmanJobGenerator;
         $this->stockLocationStorage = $stockLocationStorage;
@@ -120,6 +125,8 @@ class Service extends BaseService
     {
         $this->productLinkLeafStorage->invalidate($id);
         $this->productLinkNodeStorage->invalidate($id);
+        $this->productLinkRelatedStorage->invalidate($id);
+        $this->productLinkPathsStorage->invalidate($id);
         $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 

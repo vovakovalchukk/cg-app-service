@@ -452,7 +452,7 @@ return [
                 $controller->$method($productLinkRelatedOuIdSku, $app->request()->getBody())
             );
         },
-        'via' => ['GET'],
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
         'name' => 'ProductLinkRelatedEntity',
         'validation' => [
             'dataRules' => ProductLinkRelatedValidation::class,
@@ -487,7 +487,7 @@ return [
                 $controller->$method($productLinkPathsId, $app->request()->getBody())
             );
         },
-        'via' => ['GET'],
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
         'name' => 'ProductLinkPathsEntity',
         'validation' => [
             'dataRules' => ProductLinkPathsValidation::class,
