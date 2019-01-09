@@ -217,7 +217,7 @@ class Db extends DbAbstract implements StorageInterface
     public function remove($entity)
     {
         try {
-            $linkId = $this->getLinkId($entity->getId());
+            $linkId = $this->getLinkId($entity->getOrganisationUnitId(), $entity->getProductSku());
         } catch (NotFound $exception) {
             throw new NotFound(
                 sprintf('ProductLink not found with id %s', $entity->getId()),
