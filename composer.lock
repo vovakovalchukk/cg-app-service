@@ -522,7 +522,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://channelgrabber-composer.s3.eu-west-2.amazonaws.com/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
                 "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea",
                 "shasum": null
             },
@@ -2135,7 +2135,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.10-cace8a.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.10-cace8a.zip",
                 "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7",
                 "shasum": null
             },
@@ -2186,11 +2186,6 @@
             "autoload-dev": {
                 "psr-4": {
                     "CG\\Product\\Test\\": "tests/src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-12-06T15:56:24+00:00"
