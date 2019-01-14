@@ -3,6 +3,7 @@ namespace CG\InputValidation\Settings\PickList;
 
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\BooleanValidator;
+use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
@@ -42,7 +43,13 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'showSkuless'])]
-            ]
+            ],
+            'locationNames' => [
+                'name' => 'locationNames',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new IsArrayValidator(['name' => 'locationNames'])]
+            ],
         ];
     }
 }
