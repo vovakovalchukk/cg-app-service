@@ -6,6 +6,8 @@ use CG\Slim\Versioning\CategoryCollection;
 use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\CategoryTemplateCollection;
 use CG\Slim\Versioning\CategoryTemplateEntity;
+use CG\Slim\Versioning\InvoiceMappingCollection;
+use CG\Slim\Versioning\InvoiceMappingEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
@@ -20,6 +22,8 @@ use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
+use CG\Slim\Versioning\PickListSettingsCollection;
+use CG\Slim\Versioning\PickListSettingsEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
@@ -33,8 +37,6 @@ use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
 use CG\Slim\Versioning\UnimportedListingMarketplace;
-use CG\Slim\Versioning\InvoiceMappingEntity;
-use CG\Slim\Versioning\InvoiceMappingCollection;
 
 return [
     'di' => [
@@ -188,6 +190,8 @@ return [
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
+                'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
+                'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
