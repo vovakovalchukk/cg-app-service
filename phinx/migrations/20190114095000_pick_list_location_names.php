@@ -8,6 +8,11 @@ class PickListLocationNames extends AbstractMigration
     public function change()
     {
         $this
+            ->table('pickList')
+            ->addColumn('showPickingLocations', 'boolean')
+            ->update();
+
+        $this
             ->table('pickListLocationNames', ['id' => false, 'primary_key' => ['pickListId', 'level']])
             ->addColumn('pickListId', 'integer', ['null' => false])
             ->addColumn('level', 'integer', ['null' => false])

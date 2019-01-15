@@ -20,16 +20,17 @@ class Versioniser1 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['id']) || isset($data['locationNames'])) {
+        if (!isset($data['id']) || isset($data['showPickingLocations'], $data['locationNames'])) {
             return;
         }
 
         try {
             /** @var PickList $pickList */
             $pickList = $this->service->fetch($data['id']);
-            $data['locationNames'] = $pickList->getLocationNames();
+            $data['showPickingLocations'] = $data['showPickingLocations'] ?? $pickList->getShowPickingLocations();
+            $data['locationNames'] = $data['locationNames'] ?? $pickList->getLocationNames();
         } catch (NotFound $exception) {
-            $data['locationNames'] = [];
+            // Let mapper set defaults
         }
 
         $request->setData($data);
@@ -38,7 +39,7 @@ class Versioniser1 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['locationNames']);
+        unset($data['showPickingLocations'], $data['locationNames']);
         $response->setData($data);
     }
 }

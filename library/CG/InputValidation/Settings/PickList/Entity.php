@@ -44,6 +44,12 @@ class Entity implements RulesInterface
                 'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'showSkuless'])]
             ],
+            'showPickingLocations' => [
+                'name' => 'showPickingLocations',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'showPickingLocations'])]
+            ],
             'locationNames' => [
                 'name' => 'locationNames',
                 'required' => false,
