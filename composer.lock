@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd3a9c913d1cc31623016b1a30877ab3",
+    "content-hash": "caec688dfdd05f83adb510e3a472f7b7",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1942,16 +1942,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.10",
+            "version": "dev-TAC-287-ProductPickingLocation",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7"
+                "reference": "e5e561c0cbbf1b517f60d5f27940a13d6a5247c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.10-cace8a.zip",
-                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-TAC-287-ProductPickingLocation-88b110.zip",
+                "reference": "e5e561c0cbbf1b517f60d5f27940a13d6a5247c7",
                 "shasum": null
             },
             "require": {
@@ -2003,7 +2003,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2018-12-06T15:56:24+00:00"
+            "time": "2019-01-25T09:44:20+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -10655,6 +10655,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.16.11",
+            "alias_normalized": "1.16.11.0",
+            "version": "dev-TAC-287-ProductPickingLocation",
+            "package": "channelgrabber/product"
+        },
+        {
             "alias": "1.6.5",
             "alias_normalized": "1.6.5.0",
             "version": "dev-TAC-286-PickingLocationNames",
@@ -10664,6 +10670,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/product": 20,
         "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20

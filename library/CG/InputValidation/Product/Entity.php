@@ -87,6 +87,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'pickingLocations' => [
+                'name' => 'pickingLocations',
+                'required' => false,
+                'validators' => [new IsArrayValidator(['name' => 'pickingLocations'])]
+            ],
         ];
     }
 }
