@@ -293,7 +293,8 @@ return [
         'entityRoute' => '/settings/product/:id',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/product/:id' => [
         'controllers' => function($ouId) use ($di) {
@@ -311,6 +312,7 @@ return [
         'validation' => [
             'dataRules' => ProductEntityValidation::class
         ],
+        'version' => new Version(1, 2),
         'eTag' => [
             'mapperClass' => ProductMapper::class,
             'entityClass' => ProductEntity::class,

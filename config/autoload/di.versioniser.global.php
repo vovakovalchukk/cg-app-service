@@ -24,6 +24,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductSettingsCollection;
+use CG\Slim\Versioning\ProductSettingsEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -188,6 +190,8 @@ return [
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
+                'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
+                'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
