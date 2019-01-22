@@ -16,27 +16,27 @@ class LinkedLocation extends QuantifiedLocation
         $this->setLinkedLocations($linkedLocations);
     }
 
-    public function getAvailable($quantify = true)
+    public function getAvailable($quantify = true): int
     {
         return parent::getAvailable($quantify);
     }
 
-    public function getOnHand($quantify = true)
+    public function getOnHand($quantify = true): int
     {
         return parent::getOnHand($quantify);
     }
 
-    public function setOnHand($onHand, $quantify = true)
+    public function setOnHand(int $onHand, $quantify = true): Entity
     {
         return parent::setOnHand($onHand, $quantify);
     }
 
-    public function getAllocated($quantify = true)
+    public function getAllocated($quantify = true): int
     {
         return parent::getAllocated($quantify);
     }
 
-    public function setAllocated($allocated, $quantify = true)
+    public function setAllocated(int $allocated, $quantify = true): Entity
     {
         return parent::setAllocated($allocated, $quantify);
     }

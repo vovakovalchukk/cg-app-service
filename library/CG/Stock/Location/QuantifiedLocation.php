@@ -16,7 +16,7 @@ class QuantifiedLocation extends Entity
         return $this->getOnHand($quantify) - $this->getAllocated($quantify);
     }
 
-    public function getOnHand($quantify = false)
+    public function getOnHand($quantify = false): int
     {
         $onHand = parent::getOnHand();
         if ($quantify) {
@@ -25,7 +25,7 @@ class QuantifiedLocation extends Entity
         return $onHand;
     }
 
-    public function setOnHand($onHand, $quantify = false)
+    public function setOnHand(int $onHand, $quantify = false): Entity
     {
         if ($quantify) {
             $onHand *= $this->componentMultiplier;
@@ -33,7 +33,7 @@ class QuantifiedLocation extends Entity
         return parent::setOnHand($onHand);
     }
 
-    public function getAllocated($quantify = false)
+    public function getAllocated($quantify = false): int
     {
         $allocated = parent::getAllocated();
         if ($quantify) {
@@ -42,7 +42,7 @@ class QuantifiedLocation extends Entity
         return $allocated;
     }
 
-    public function setAllocated($allocated, $quantify = false)
+    public function setAllocated(int $allocated, $quantify = false): Entity
     {
         if ($quantify) {
             $allocated *= $this->componentMultiplier;
