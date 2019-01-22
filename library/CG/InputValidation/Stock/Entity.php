@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Stock;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
@@ -39,6 +40,18 @@ class Entity implements RulesInterface
                 'name'       => 'stockLevel',
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
+            ],
+            'includePurchaseOrders' => [
+                'name' => 'includePurchaseOrders',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'includePurchaseOrders'])],
+            ],
+            'includePurchaseOrdersUseDefault' => [
+                'name' => 'includePurchaseOrdersUseDefault',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'includePurchaseOrdersUseDefault'])],
             ],
         ];
     }

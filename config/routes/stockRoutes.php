@@ -41,7 +41,7 @@ return [
             'filterRules' => StockCollectionValidation::class,
             'dataRules' => StockEntityValidation::class
         ],
-        'version' => new Version(1, 2)
+        'version' => new Version(1, 3)
     ],
     '/stock/:stockId' => [
         'controllers' => function($stockId) use ($di, $app) {
@@ -63,7 +63,7 @@ return [
             'entityClass' => StockEntity::class,
             'serviceClass' => StockService::class
         ],
-        'version' => new Version(1, 2)
+        'version' => new Version(1, 3)
     ],
     '/stockLocation' => [
         'controllers' => function() use ($di, $app) {
