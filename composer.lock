@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "808e2e3930f0fd7c1e97ae03d7c82770",
+    "content-hash": "3a1339e64ce5c0c35a4e34e68feeccf1",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -522,7 +522,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://channelgrabber-composer.s3.eu-west-2.amazonaws.com/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
                 "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea",
                 "shasum": null
             },
@@ -1781,16 +1781,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-10289-prevent-order-email-from-being-removed",
+            "version": "1.43.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e092d571cd46363f66138bb3a2547f9b2eee52c0"
+                "reference": "e78b80cecbaf5193ccd279af2008b9b9030ccc30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-10289-prevent-order-email-from-being-removed-9caf6e.zip",
-                "reference": "e092d571cd46363f66138bb3a2547f9b2eee52c0",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.4-120edd.zip",
+                "reference": "e78b80cecbaf5193ccd279af2008b9b9030ccc30",
                 "shasum": null
             },
             "require": {
@@ -1861,7 +1861,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-01-21T12:25:11+00:00"
+            "time": "2019-01-22T09:58:26+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2130,7 +2130,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.10-cace8a.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.10-cace8a.zip",
                 "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7",
                 "shasum": null
             },
@@ -2181,11 +2181,6 @@
             "autoload-dev": {
                 "psr-4": {
                     "CG\\Product\\Test\\": "tests/src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-12-06T15:56:24+00:00"
@@ -2586,7 +2581,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-settings-1.6.4-5c5b6e.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.6.4-5c5b6e.zip",
                 "reference": "edc02ba46915359c66bebd0cb23a5dede29c6564",
                 "shasum": null
             },
@@ -2609,11 +2604,6 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Settings\\": "src"
-                }
-            },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-11-02T14:46:33+00:00"
@@ -4206,7 +4196,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/contextio/PHP-ContextIO/zipball/800792db8030c7c01cd2a377b2e53f4d3850d584",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9626,7 +9616,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8e884e78f9f0eb1329e445619e04456e64d8051d",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": ""
+                "shasum": "29cab3e5085315914f862084e02e1834d147d757"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -11465,18 +11455,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.43.1",
-            "alias_normalized": "1.43.1.0",
-            "version": "dev-CGIV-10289-prevent-order-email-from-being-removed",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
