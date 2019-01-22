@@ -28,6 +28,8 @@ use CG\Slim\Versioning\ProductSettingsCollection;
 use CG\Slim\Versioning\ProductSettingsEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLocationCollection;
+use CG\Slim\Versioning\StockLocationEntity;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -194,6 +196,8 @@ return [
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
                 'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
                 'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
+                'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
+                'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
