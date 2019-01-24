@@ -72,7 +72,7 @@ class RestService extends Service
 
     protected function alterStockOnPurchaseOrderCount(Entity $newEntity, Entity $existingEntity): void
     {
-        $diff = $existingEntity->getQuantity() - $newEntity->getQuantity();
+        $diff = $newEntity->getQuantity() - $existingEntity->getQuantity();
         if ($diff == 0) {
             return;
         }
