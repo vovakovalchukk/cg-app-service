@@ -22,10 +22,8 @@ class Invalidator extends AbstractInvalidator
     {
         try {
             $this->purgeResource(static::TYPE_PURCHASE_ORDER, $id);
-$this->logInfo('Purged PO %d, no probs', [$id], 'ABTEST');
         } catch (\Exception $ex) {
             // Ignore errors
-var_dump($ex);die();
         }
     }
 
