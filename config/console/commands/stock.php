@@ -5,6 +5,7 @@ use CG\Stock\Command\CreateMissingStock;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
 use CG\Stock\Command\ProcessAudit;
 use CG\Stock\Command\RemoveDuplicateStock;
+use CG\Stock\Command\SetOnPurchaseOrderCounts;
 use CG\Stock\Command\ZeroNegativeStock;
 use CG\Stock\Gearman\WorkerFunction\ProcessAdjustmentAudit as AdjustmentWorker;
 use CG\Stock\Gearman\WorkerFunction\ProcessAudit as StockWorker;
@@ -122,6 +123,23 @@ return [
             $output->writeLn('Finished removeDuplicateStock command' . ($dryRun ? ' (DRY RUN)' : '') . ', ' . $affected . ' stock deleted. Check the logs for details.');
         },
         'description' => 'Identify duplicated stock records and delete them',
+        'arguments' => [
+        ],
+        'options' => [
+            'wet-run' => [
+                'description' => 'Wet run, i.e. do the stock changes - without this it defaults to a dry run'
+            ]
+        ],
+    ],
+    'stock:setOnPurchaseOrderQuantities' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $dryRun = !$input->getOption('wet-run');
+            $output->writeLn('Starting setOnPurchaseOrder command' . ($dryRun ? ' (DRY RUN)' : ''));
+            $command = $di->get(SetOnPurchaseOrderCounts::class);
+            $affected = $command($dryRun);
+            $output->writeLn('Finished setOnPurchaseOrder command' . ($dryRun ? ' (DRY RUN)' : '') . ', ' . $affected . ' stock updated (via jobs). Check the logs for details.');
+        },
+        'description' => 'Set the onPurchaseOrder quantities on StockLocations based on current, open POs',
         'arguments' => [
         ],
         'options' => [
