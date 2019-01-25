@@ -5,6 +5,7 @@ use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
+use CG\Validation\Rules\BooleanValidator;
 
 class Entity implements RulesInterface
 {
@@ -30,6 +31,16 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'defaultStockLevel'])]
             ],
+            'lowStockThresholdOn' => [
+                'name'       => 'lowStockThresholdOn',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'lowStockThresholdOn'])]
+            ],
+            'lowStockThresholdValue' => [
+                'name'       => 'lowStockThresholdValue',
+                'required'   => false,
+                'validators' => [new IntegerValidator(['name' => 'lowStockThresholdValue'])]
+            ]
         ];
     }
 }

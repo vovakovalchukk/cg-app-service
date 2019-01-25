@@ -1,4 +1,5 @@
 <?php
+
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
@@ -6,6 +7,8 @@ use CG\Slim\Versioning\CategoryCollection;
 use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\CategoryTemplateCollection;
 use CG\Slim\Versioning\CategoryTemplateEntity;
+use CG\Slim\Versioning\InvoiceMappingCollection;
+use CG\Slim\Versioning\InvoiceMappingEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
@@ -24,6 +27,8 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductSettingsCollection;
+use CG\Slim\Versioning\ProductSettingsEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
 use CG\Slim\Versioning\TemplateCollection;
@@ -33,8 +38,6 @@ use CG\Slim\Versioning\TrackingEntity;
 use CG\Slim\Versioning\UnimportedListingCollection;
 use CG\Slim\Versioning\UnimportedListingEntity;
 use CG\Slim\Versioning\UnimportedListingMarketplace;
-use CG\Slim\Versioning\InvoiceMappingEntity;
-use CG\Slim\Versioning\InvoiceMappingCollection;
 
 return [
     'di' => [
@@ -142,6 +145,8 @@ return [
                 'Versioniser_ProductEntity_8' => ProductEntity\Versioniser8::class,
                 'Versioniser_ProductCollection_9' => ProductCollection\Versioniser9::class,
                 'Versioniser_ProductEntity_9' => ProductEntity\Versioniser9::class,
+                'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
+                'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
                 'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
                 'Versioniser_AliasSettingsCollection_2' => AliasSettingsCollection\Versioniser2::class,
@@ -357,6 +362,11 @@ return [
             'Versioniser_ProductCollection_9' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ProductEntity_9'
+                ],
+            ],
+            'Versioniser_ProductSettingsCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductSettingsEntity_1'
                 ],
             ],
             'Versioniser_AliasSettingsCollection_1' => [
