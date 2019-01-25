@@ -4,7 +4,7 @@ namespace CG\PurchaseOrder;
 use CG\PurchaseOrder\Entity as PurchaseOrder;
 use CG\PurchaseOrder\Item\Filter as ItemFilter;
 use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
-use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
+use CG\PurchaseOrder\Item\RestService as PurchaseOrderItemService;
 use CG\PurchaseOrder\Item\Entity as Item;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Gearman\Generator\AdjustOnPurchaseOrder as AdjustStockOnPurchaseOrderGenerator;
