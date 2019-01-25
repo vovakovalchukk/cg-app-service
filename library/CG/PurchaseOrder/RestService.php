@@ -62,7 +62,13 @@ class RestService extends Service
 
     public function remove(Entity $entity): void
     {
+        // Remove the items first! They need to check things on the PO before we delete that.
+        $this->removeItems($entity);
         $this->getRepository()->remove($entity);
+    }
+
+    protected function removeItems(Entity $entity): void
+    {
         try {
             /** @var Item $item */
             foreach ($this->purchaseOrderItemService->fetchAllByPurchaseOrderIds([$entity->getId()]) as $item) {
