@@ -1,14 +1,27 @@
 <?php
-use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\AbstractOnlineSchemaChange;
 
-class ProductLinkStockAudit extends AbstractMigration
+class ProductLinkStockAudit extends AbstractOnlineSchemaChange
 {
-    public function change()
+    /**
+     * Migrate Up.
+     */
+    public function up()
     {
-        $this
-            ->table('stockAdjustmentLog')
-            ->addColumn('referenceSku', 'string', ['after' => 'sku', 'null' => true])
-            ->addColumn('referenceQuantity', 'integer', ['after' => 'quantity', 'null' => true])
-            ->update();
+        $this->onlineSchemaChange('stockAdjustmentLog', implode(', ', [
+            'ADD COLUMN `referenceSku` VARCHAR(255) NULL AFTER `sku`',
+            'ADD COLUMN `referenceQuantity` INT(11) NULL AFTER `quantity`',
+        ]), 200);
+    }
+
+    /**
+     * Migrate Down.
+     */
+    public function down()
+    {
+        $this->onlineSchemaChange('stockAdjustmentLog', implode(', ', [
+            'DROP COLUMN `referenceSku`',
+            'DROP COLUMN `referenceQuantity`',
+        ]), 200);
     }
 }
