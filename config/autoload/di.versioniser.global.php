@@ -185,7 +185,9 @@ return [
                 'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
+                'Versioniser_StockCollection_2' => StockCollection\Versioniser2::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
+                'Versioniser_StockEntity_2' => StockEntity\Versioniser2::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
                 'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
@@ -417,6 +419,11 @@ return [
             'Versioniser_StockCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_StockEntity_1',
+                ],
+            ],
+            'Versioniser_StockCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_StockEntity_2',
                 ],
             ],
             'Versioniser_InvoiceMappingCollection_1' => [
