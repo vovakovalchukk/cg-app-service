@@ -138,11 +138,17 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
     protected function setOnPurchaseOrderQuantitiesBySku(array $quantitiesBySku, OrganisationUnit $rootOu, bool $dryRun): int
     {
         $updatedCount = 0;
+        if (empty($quantitiesBySku)) {
+            return $updatedCount;
+        }
         $stocks = $this->fetchStockBySkus(array_keys($quantitiesBySku), $rootOu);
         foreach ($stocks as $stock) {
             $quantity = $quantitiesBySku[$stock->getSku()];
             $stockLocation = $stock->getLocations()->getFirst();
             $adjustment = $quantity - $stockLocation->getOnPurchaseOrder();
+            if ($adjustment == 0) {
+                continue;
+            }
             $this->adjustOnPurchaseOrderQuantity($rootOu, $stock, $adjustment, $dryRun);
             $updatedCount++;
         }
@@ -162,9 +168,10 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
     protected function adjustOnPurchaseOrderQuantity(OrganisationUnit $rootOu, Stock $stock, int $adjustment, bool $dryRun): void
     {
         if ($dryRun) {
-            $this->logDebug('Dry run, would have adjusted OU %d, SKU %s onPurchaseOrder by %d', [$rootOu->getId(), $stock->getSku(), $adjustment], [static::LOG_CODE, 'Adjustment']);
+            $this->logDebug('Dry run, would have adjusted OU %d, SKU %s onPurchaseOrder quantity by %d', [$rootOu->getId(), $stock->getSku(), $adjustment], [static::LOG_CODE, 'Adjustment']);
             return;
         }
+        $this->logDebug('Adjusting OU %d, SKU %s onPurchaseOrder quantity by %d', [$rootOu->getId(), $stock->getSku(), $adjustment], [static::LOG_CODE, 'Adjustment']);
         $this->adjustOnPurchaseOrderGenerator->createJobFromRawData($rootOu->getId(), $stock->getSku(), $adjustment);
     }
 }
