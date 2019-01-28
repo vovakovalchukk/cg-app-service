@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c77f9c9b88af9b9d4732901e80be73b2",
+    "content-hash": "57e57e8de633cd9bc7289cde67b089c4",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -691,29 +691,29 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgconstants.git",
-                "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a"
+                "reference": "ae6aef0402188833e25482d801e60ed069e70e3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-constants-dev-master-1ee173.zip",
-                "reference": "2bba7dd2a124432258d1a81d6e42cc13708bf93a",
-                "shasum": "829cfb41e8c6b36b6d952d01ba3fa44f8d4b47a6"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/constants/channelgrabber-constants-dev-master-8e3e83.zip",
+                "reference": "ae6aef0402188833e25482d801e60ed069e70e3a",
+                "shasum": null
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "CG": ""
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2015-02-06T12:09:38+00:00"
+            "time": "2019-01-13T22:34:47+00:00"
         },
         {
             "name": "channelgrabber/currency",
@@ -1781,16 +1781,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.43.0",
+            "version": "1.43.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "fa29023d6e840fc5e42fca2784394cb15c0e0485"
+                "reference": "e78b80cecbaf5193ccd279af2008b9b9030ccc30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-order-1.43.0-51ff1b.zip",
-                "reference": "fa29023d6e840fc5e42fca2784394cb15c0e0485",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.4-120edd.zip",
+                "reference": "e78b80cecbaf5193ccd279af2008b9b9030ccc30",
                 "shasum": null
             },
             "require": {
@@ -1861,12 +1861,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2018-11-27T11:37:19+00:00"
+            "time": "2019-01-22T09:58:26+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2122,16 +2117,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.10",
+            "version": "1.16.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7"
+                "reference": "b366d28e9208901c2b4b00b4cf192165af8d4861"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-1.16.10-cace8a.zip",
-                "reference": "f7a48e8b11b106d69b0b35f076704c7ef4d07cd7",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.11-40856c.zip",
+                "reference": "b366d28e9208901c2b4b00b4cf192165af8d4861",
                 "shasum": null
             },
             "require": {
@@ -2183,12 +2178,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
-            "time": "2018-12-06T15:56:24+00:00"
+            "time": "2019-01-25T14:33:08+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11474,8 +11464,8 @@
             "package": "channelgrabber/settings"
         },
         {
-            "alias": "1.15.1",
-            "alias_normalized": "1.15.1.0",
+            "alias": "1.15.2",
+            "alias_normalized": "1.15.2.0",
             "version": "dev-TAC-326-include-po-stock-in-available",
             "package": "channelgrabber/stock"
         }

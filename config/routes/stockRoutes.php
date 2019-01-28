@@ -122,7 +122,8 @@ return [
         'validation' => [
             'filterRules' => StockLogFilterValidation::class,
             //'dataRules' => StockLogEntityValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2)
     ],
     // Deliberately left out /stockLog/:id for now
 ];
