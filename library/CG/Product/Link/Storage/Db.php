@@ -20,6 +20,7 @@ use function CG\Stdlib\escapeLikeValue;
 class Db extends DbAbstract implements StorageInterface
 {
     use FilterArrayValuesToOrdLikesTrait;
+    use DbLinkIdTrait;
 
     const RECURSION_MSG = 'Circular dependency detected. The product you are trying to link (SKU: %s) is already used to calculate stock for another product that you are trying to link this product to (SKU: %s).';
 
@@ -30,13 +31,7 @@ class Db extends DbAbstract implements StorageInterface
 
     public function fetch($id)
     {
-        [$organisationUnitId, $sku] = array_pad(explode('-', $id, 2), 2, '');
-        $select = $this->getSelect()->where(
-            (new Where())
-                ->equalTo('parent.organisationUnitId', $organisationUnitId)
-                ->like('parent.sku', escapeLikeValue($sku))
-        );
-
+        $select = $this->getSelect()->where($this->getLinkIdWhere('parent', $id));
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             throw new NotFound(sprintf('ProductLink not found with id %s', $id));
@@ -509,25 +504,9 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($stockSku = $filter->getStockSku())) {
             $this->filterArrayValuesToOrdLikes('child.sku', $stockSku, $select->where);
         }
-        $this->appendOuIdProductSkuFilter($select->where, $filter->getOuIdProductSku());
-    }
-
-    protected function appendOuIdProductSkuFilter(Where $where, array $ouIdProductSkus)
-    {
-        if (empty($ouIdProductSkus)) {
-            return;
+        if (!empty($ouIdProductSkus = $filter->getOuIdProductSku())) {
+            $select->where->addPredicate($this->getLinkIdWhere('parent', ...$ouIdProductSkus));
         }
-
-        $filter = new Where(null, WHERE::OP_OR);
-        foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
-            $filter->addPredicate(
-                (new Where())
-                    ->equalTo('parent.organisationUnitId', $organisationUnitId)
-                    ->like('parent.sku', escapeLikeValue($productSku))
-            );
-        }
-        $where->addPredicate($filter);
     }
 
     protected function getInsert($table = 'productLink'): Insert
