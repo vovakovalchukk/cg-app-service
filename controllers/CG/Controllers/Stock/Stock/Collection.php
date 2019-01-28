@@ -52,6 +52,9 @@ class Collection
 
     public function getData()
     {
+        $lowStockThresholdTriggered = $this->getParams('lowStockThresholdTriggered') !== null
+            ? filter_var($this->getParams('lowStockThresholdTriggered'), FILTER_VALIDATE_BOOLEAN) : null;
+
         return $this->getService()->fetchCollectionByFilterAsHal(
             new Filter(
                 $this->getParams('limit'),
@@ -60,7 +63,8 @@ class Collection
                 $this->getParams('organisationUnitId') ?: [],
                 $this->getParams('sku') ?: null,
                 $this->getParams('locationId') ?: [],
-                $this->getParams('stockMode') ?: []
+                $this->getParams('stockMode') ?: [],
+                $lowStockThresholdTriggered
             )
         );
     }
