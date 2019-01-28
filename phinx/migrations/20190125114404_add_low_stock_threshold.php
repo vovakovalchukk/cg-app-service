@@ -18,8 +18,8 @@ class AddLowStockThreshold extends AbstractOnlineSchemaChange
     public function down()
     {
         $alter = [
-            'DROP COLUMN `lowStockThresholdOn` TINYINT(1) NULL',
-            'DROP COLUMN `lowStockThresholdValue` INT(10) NULL'
+            'DROP COLUMN `lowStockThresholdOn`',
+            'DROP COLUMN `lowStockThresholdValue`'
         ];
 
         $this->onlineSchemaChange('productSettings', implode(', ', $alter), 200);
