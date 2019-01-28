@@ -50,7 +50,12 @@ class Entity implements RulesInterface
                 'name'       => 'lowStockThresholdValue',
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'lowStockThresholdValue'])]
-            ]
+            ],
+            'lowStockThresholdTriggered' => [
+                'name'       => 'lowStockThresholdTriggered',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'lowStockThresholdTriggered'])]
+            ],
         ];
     }
 }

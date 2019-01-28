@@ -2,6 +2,7 @@
 namespace CG\InputValidation\Stock;
 
 use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\Rules\PaginationTrait;
@@ -50,6 +51,11 @@ class Filter implements RulesInterface
                     'validators' => [
                         new IsArrayValidator(['name' => 'stockMode'])
                     ]
+                ],
+                'lowStockThresholdTriggered' => [
+                    'name'       => 'lowStockThresholdTriggered',
+                    'required'   => false,
+                    'validators' => [new BooleanValidator(['name' => 'lowStockThresholdTriggered'])]
                 ],
             ]
         );
