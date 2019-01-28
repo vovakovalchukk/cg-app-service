@@ -6,7 +6,10 @@ use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\PurchaseOrder\Collection as PurchaseOrderCollection;
 use CG\PurchaseOrder\Entity as PurchaseOrder;
 use CG\PurchaseOrder\Filter as PurchaseOrderFilter;
+use CG\PurchaseOrder\Item\Collection as PurchaseOrderItemCollection;
 use CG\PurchaseOrder\Item\Entity as PurchaseOrderItem;
+use CG\PurchaseOrder\Item\Filter as PurchaseOrderItemFilter;
+use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
 use CG\PurchaseOrder\Service as PurchaseOrderService;
 use CG\PurchaseOrder\Status as PurchaseOrderStatus;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -28,6 +31,8 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
     protected $organisationUnitService;
     /** @var PurchaseOrderService */
     protected $purchaseOrderService;
+    /** @var PurchaseOrderItemService */
+    protected $purchaseOrderItemService;
     /** @var StockService */
     protected $stockService;
     /** @var AdjustOnPurchaseOrderGenerator */
@@ -36,11 +41,13 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
     public function __construct(
         OrganisationUnitService $organisationUnitService,
         PurchaseOrderService $purchaseOrderService,
+        PurchaseOrderItemService $purchaseOrderItemService,
         StockService $stockService,
         AdjustOnPurchaseOrderGenerator $adjustOnPurchaseOrderGenerator
     ) {
         $this->organisationUnitService = $organisationUnitService;
         $this->purchaseOrderService = $purchaseOrderService;
+        $this->purchaseOrderItemService = $purchaseOrderItemService;
         $this->stockService = $stockService;
         $this->adjustOnPurchaseOrderGenerator = $adjustOnPurchaseOrderGenerator;
     }
@@ -69,7 +76,9 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
             return 0;
         }
         $this->logDebug('Found %d open Purchase Orders for OU %d', [$purchaseOrders->count(), $rootOu->getId()], [static::LOG_CODE, 'Count']);
-        $quantities = $this->getOnPurchaseOrderQuantitiesBySku($purchaseOrders);
+        // Because we're within the API the items are not embedded on the PO entities
+        $purchaseOrderItems = $this->fetchItemsForPurchaseOrders($purchaseOrders);
+        $quantities = $this->getOnPurchaseOrderQuantitiesBySku($purchaseOrderItems);
         return $this->setOnPurchaseOrderQuantitiesBySku($quantities, $rootOu, $dryRun);
     }
 
@@ -94,18 +103,34 @@ class SetOnPurchaseOrderCounts implements LoggerAwareInterface
             ->setStatus($statuses);
     }
 
-    protected function getOnPurchaseOrderQuantitiesBySku(PurchaseOrderCollection $purchaseOrders): array
+    protected function fetchItemsForPurchaseOrders(PurchaseOrderCollection $purchaseOrders): PurchaseOrderItemCollection
+    {
+        try {
+            $filter = $this->buildPurchaseOrderItemFilter($purchaseOrders);
+            return $this->purchaseOrderItemService->fetchCollectionByFilter($filter);
+        } catch (NotFound $e) {
+            $this->logWarning('There are open Purchase Orders for OU %d but none of them have items, this is unexpected.', [$purchaseOrders->getFirst()->getOrganisationUnitId()], [static::LOG_CODE, 'NoItems']);
+            return new PurchaseOrderItemCollection(PurchaseOrderItem::class, __FUNCTION__);
+        }
+    }
+
+    protected function buildPurchaseOrderItemFilter(PurchaseOrderCollection $purchaseOrders): PurchaseOrderItemFilter
+    {
+        return (new PurchaseOrderItemFilter())
+            ->setLimit('all')
+            ->setPage(1)
+            ->setPurchaseOrderId($purchaseOrders->getIds());
+    }
+
+    protected function getOnPurchaseOrderQuantitiesBySku(PurchaseOrderItemCollection $purchaseOrderItems): array
     {
         $quantities = [];
-        /** @var PurchaseOrder $purchaseOrder */
-        foreach ($purchaseOrders as $purchaseOrder) {
-            /** @var PurchaseOrderItem $item */
-            foreach ($purchaseOrder->getItems() as $item) {
-                if (!isset($quantities[$item->getSku()])) {
-                    $quantities[$item->getSku()] = 0;
-                }
-                $quantities[$item->getSku()] += $item->getQuantity();
+        /** @var PurchaseOrderItem $item */
+        foreach ($purchaseOrderItems as $item) {
+            if (!isset($quantities[$item->getSku()])) {
+                $quantities[$item->getSku()] = 0;
             }
+            $quantities[$item->getSku()] += $item->getQuantity();
         }
         return $quantities;
     }
