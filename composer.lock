@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c179395113e5c5188b97676781d0ffe",
+    "content-hash": "916345477d36ad543331ce16013239fa",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2343,16 +2343,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.6.4",
+            "version": "dev-EPIC-TAC-283-PickingLocations",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "edc02ba46915359c66bebd0cb23a5dede29c6564"
+                "reference": "c605e62d352978c49dded935f3aa29a775d48084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.6.4-5c5b6e.zip",
-                "reference": "edc02ba46915359c66bebd0cb23a5dede29c6564",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-EPIC-TAC-283-PickingLocations-cbba17.zip",
+                "reference": "c605e62d352978c49dded935f3aa29a775d48084",
                 "shasum": null
             },
             "require": {
@@ -2376,7 +2376,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2018-11-02T14:46:33+00:00"
+            "time": "2019-01-15T15:49:38+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -2565,16 +2565,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.16.4",
+            "version": "2.16.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335"
+                "reference": "a72dbe6d3790067a6aed4c61b3b78b1edfc183ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.4-aea18d.zip",
-                "reference": "06fdda6c4f6b832454d9fcb2e723dd6e65890335",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.5-509b13.zip",
+                "reference": "a72dbe6d3790067a6aed4c61b3b78b1edfc183ea",
                 "shasum": null
             },
             "require": {
@@ -2618,7 +2618,7 @@
                     "CG\\Stdlib\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2018-10-18T12:01:27+00:00"
+            "time": "2018-11-15T10:31:57+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -10653,10 +10653,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.6.5",
+            "alias_normalized": "1.6.5.0",
+            "version": "dev-EPIC-TAC-283-PickingLocations",
+            "package": "channelgrabber/settings"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },

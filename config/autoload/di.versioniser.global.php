@@ -22,6 +22,8 @@ use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
+use CG\Slim\Versioning\PickListSettingsCollection;
+use CG\Slim\Versioning\PickListSettingsEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
@@ -190,6 +192,8 @@ return [
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
                 'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
+                'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
+                'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
