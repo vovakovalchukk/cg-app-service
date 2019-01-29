@@ -2,6 +2,7 @@
 namespace CG\CGLib\Nginx\Cache\Invalidator;
 
 use CG\CGLib\Nginx\Cache\AbstractInvalidator;
+use CG\CGLib\Nginx\Cache\Resource;
 use CG\Product\LinkRelated\Service as LinkRelatedService;
 
 class ProductLink extends AbstractInvalidator
@@ -23,10 +24,12 @@ class ProductLink extends AbstractInvalidator
 
     public function invalidateRelated($id)
     {
-        $this->purgeResource(static::TYPE_LEAF, $id);
-        $this->purgeResource(static::TYPE_NODE, $id);
-        $this->purgeResource(static::TYPE_RELATED, $id);
-        $this->purgeResource(static::TYPE_PATHS, $id);
+        $this->purgeResources([
+            new Resource(static::TYPE_LEAF, $id),
+            new Resource(static::TYPE_NODE, $id),
+            new Resource(static::TYPE_RELATED, $id),
+            new Resource(static::TYPE_PATHS, $id),
+        ]);
     }
 
     protected function getUriForType($type)
