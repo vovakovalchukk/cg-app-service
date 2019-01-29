@@ -76,6 +76,11 @@ class Service extends BaseService implements StatsAwareInterface
         $this->lowStockThresholdUpdateGenerator = $lowStockThresholdUpdateGenerator;
     }
 
+    /**
+     * @param StockLocation $stockLocation
+     * @param array $adjustmentIds
+     * @return Hal
+     */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {
@@ -89,15 +94,18 @@ class Service extends BaseService implements StatsAwareInterface
             /** @var StockLocation $currentStockLocation */
             $currentStockLocation = $this->fetch($stockLocation->getId());
             $this->handleOversell($stock, $currentStockLocation, $stockLocation);
+            if ($currentStockLocation->getAvailable() !== $stockLocation->getAvailable()) {
+                $this->lowStockThresholdUpdateGenerator->generateJob($stock->getId());
+            }
         } catch (NotFound $exception) {
-            // Saving new entity - nothing to do
+            // Saving new entity
+            $this->lowStockThresholdUpdateGenerator->generateJob($stock->getId());
         }
 
         $relatedStockLocations = $this->fetchRelatedStockLocations($stock);
         $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
         $this->updateRelated($stock, $relatedStocks, $relatedStockLocations);
-        $this->lowStockThresholdUpdateGenerator->generateJob($stock->getId());
         return $stockLocationHal;
     }
 
