@@ -7,14 +7,14 @@ class AddDispatchableColumnToOrderAndOrderItem extends AbstractOnlineSchemaChang
 
     public function up()
     {
-        $alter = 'ADD dispatchable TINYINT(1) NOT NULL DEFAULT 0';
+        $alter = 'ADD COLUMN dispatchable TINYINT(1) NOT NULL DEFAULT 0';
         $this->onlineSchemaChange('order', $alter);
         $this->onlineSchemaChange('item', $alter);
     }
 
     public function down()
     {
-        $alter = 'drop dispatchable';
+        $alter = 'DROP COLUMN dispatchable';
         $this->onlineSchemaChange('order', $alter);
         $this->onlineSchemaChange('item', $alter);
     }
