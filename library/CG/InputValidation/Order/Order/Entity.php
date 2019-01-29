@@ -427,6 +427,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new DecimalValidator(['name' => 'weight'])]
             ],
+            'dispatchable' => [
+                'name' => 'dispatchable',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
+            ]
         );
     }
 
