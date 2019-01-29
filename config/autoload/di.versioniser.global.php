@@ -30,6 +30,7 @@ use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLogCollection;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -192,6 +193,7 @@ return [
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
+                'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
                 'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
                 'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
             ],

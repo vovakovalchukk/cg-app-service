@@ -1,6 +1,7 @@
 <?php
 namespace CG\Product\LinkNode\Storage;
 
+use CG\Product\Link\Storage\DbLinkIdTrait;
 use CG\Product\LinkNode\Collection;
 use CG\Product\LinkNode\Entity as LinkNode;
 use CG\Product\LinkNode\Filter;
@@ -12,12 +13,11 @@ use CG\Stdlib\Log\LogTrait;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
-use function CG\Stdlib\escapeLikeValue;
 
 class Db implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
+    use DbLinkIdTrait;
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -119,16 +119,10 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     protected function getLinkIdSelect(...$ouIdProductSkus): Select
     {
-        $where = new Where(null, Where::COMBINED_BY_OR);
-        foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
-            $where->addPredicate(
-                (new Where())
-                    ->equalTo('organisationUnitId', $organisationUnitId)
-                    ->like('sku', escapeLikeValue($productSku))
-            );
-        }
-        return $this->readSql->select('productLink')->columns(['linkId', 'organisationUnitId', 'sku'])->where($where);
+        return $this->readSql
+            ->select('productLink')
+            ->columns(['linkId', 'organisationUnitId', 'sku'])
+            ->where($this->getLinkIdWhere(null, ...$ouIdProductSkus));
     }
 
     protected function getSelect(Select $linkIdSelect): Select
