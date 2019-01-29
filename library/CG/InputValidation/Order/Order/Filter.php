@@ -329,6 +329,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'validators' => [new DecimalValidator(['name' => 'weightMax'])]
             ],
+            'dispatchable' => [
+                'name' => 'dispatchable',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(["name" => "dispatchable"])
+                ]
+            ]
         ];
     }
 }
