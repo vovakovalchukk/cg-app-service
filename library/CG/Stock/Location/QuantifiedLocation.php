@@ -50,6 +50,23 @@ class QuantifiedLocation extends Entity
         return parent::setAllocated($allocated);
     }
 
+    public function getOnPurchaseOrder($quantify = false): int
+    {
+        $onPurchaseOrder = parent::getOnPurchaseOrder();
+        if ($quantify) {
+            return ceil($onPurchaseOrder / $this->componentMultiplier);
+        }
+        return $onPurchaseOrder;
+    }
+
+    public function setOnPurchaseOrder(int $onPurchaseOrder, $quantify = false): Entity
+    {
+        if ($quantify) {
+            $onPurchaseOrder *= $this->componentMultiplier;
+        }
+        return parent::setOnPurchaseOrder($onPurchaseOrder);
+    }
+
     /**
      * @return int
      */

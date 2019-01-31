@@ -12,7 +12,7 @@ class LinkedLocation extends QuantifiedLocation
         $locationId,
         LinkedCollection $linkedLocations
     ) {
-        parent::__construct($stockId, $locationId, 0, 0, $id);
+        parent::__construct($stockId, $locationId, 0, 0, 0, $id);
         $this->setLinkedLocations($linkedLocations);
     }
 
@@ -39,6 +39,16 @@ class LinkedLocation extends QuantifiedLocation
     public function setAllocated(int $allocated, $quantify = true): Entity
     {
         return parent::setAllocated($allocated, $quantify);
+    }
+
+    public function getOnPurchaseOrder($quantify = true): int
+    {
+        return parent::getOnPurchaseOrder($quantify);
+    }
+
+    public function setOnPurchaseOrder(int $onPurchaseOrder, $quantify = true): Entity
+    {
+        return parent::setOnPurchaseOrder($onPurchaseOrder, $quantify);
     }
 
     public function getLinkedLocations(): LinkedCollection
