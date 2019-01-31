@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e16d0a4ee3be7ff19badcbdc5679e694",
+    "content-hash": "8dc4544f52aaa23123db975e444ea641",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1661,16 +1661,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.43.7.1",
+            "version": "dev-CGIV-10327-orders-not-sorted-newest-first-tidy-up",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "cebf300e73f933e4783994ff735696e662e24f07"
+                "reference": "920a8678e0efd346bcb5bb9f742047d00afa6e60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.7.1-f1e560.zip",
-                "reference": "cebf300e73f933e4783994ff735696e662e24f07",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-10327-orders-not-sorted-newest-first-tidy-up-ee9118.zip",
+                "reference": "920a8678e0efd346bcb5bb9f742047d00afa6e60",
                 "shasum": null
             },
             "require": {
@@ -1741,7 +1741,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-01-29T15:24:45+00:00"
+            "time": "2019-01-31T12:33:33+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11140,10 +11140,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.43.8",
+            "alias_normalized": "1.43.8.0",
+            "version": "dev-CGIV-10327-orders-not-sorted-newest-first-tidy-up",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
