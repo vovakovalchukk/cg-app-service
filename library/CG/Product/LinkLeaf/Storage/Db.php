@@ -1,6 +1,7 @@
 <?php
 namespace CG\Product\LinkLeaf\Storage;
 
+use CG\Product\Link\Storage\DbLinkIdTrait;
 use CG\Product\LinkLeaf\Collection;
 use CG\Product\LinkLeaf\Entity as LinkLeaf;
 use CG\Product\LinkLeaf\Filter;
@@ -12,12 +13,11 @@ use CG\Stdlib\Log\LogTrait;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
-use function CG\Stdlib\escapeLikeValue;
 
 class Db implements StorageInterface, LoggerAwareInterface
 {
     use LogTrait;
+    use DbLinkIdTrait;
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -125,16 +125,6 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     protected function getPathIdSelect(...$ouIdProductSkus): Select
     {
-        $where = new Where(null, Where::COMBINED_BY_OR);
-        foreach ($ouIdProductSkus as $ouIdProductSku) {
-            [$organisationUnitId, $productSku] = array_pad(explode('-', $ouIdProductSku, 2), 2, '');
-            $where->addPredicate(
-                (new Where())
-                    ->equalTo('link.organisationUnitId', $organisationUnitId)
-                    ->like('link.sku', escapeLikeValue($productSku))
-            );
-        }
-
         return $this->readSql
             ->select(['path' => 'productLinkPath'])
             ->columns(['pathId', 'linkId'])
@@ -143,7 +133,7 @@ class Db implements StorageInterface, LoggerAwareInterface
                 new Expression('? = ? AND ? = 0', ['path.linkId', 'link.linkId', 'path.order'], array_fill(0, 3, Expression::TYPE_IDENTIFIER)),
                 []
             )
-            ->where($where);
+            ->where($this->getLinkIdWhere('link', ...$ouIdProductSkus));
     }
 
     protected function getSelect(Select $pathIdSelect): Select

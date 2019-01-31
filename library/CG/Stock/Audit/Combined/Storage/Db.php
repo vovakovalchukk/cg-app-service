@@ -173,6 +173,7 @@ class Db extends DbAbstract implements StorageInterface
             'listingId' => new Expression('null'), 'productId' => new Expression('null'), 'itemStatus' => new Expression('null'), 
             'listingStatus' => new Expression('null'), 'adjustmentType' => new Expression('null'), 
             'adjustmentOperator' => new Expression('null'), 'adjustmentQty' => new Expression('null'),
+            'referenceSku' => new Expression('null'), 'adjustmentReferenceQuantity' => new Expression('null'),
             // Columns only present on stockLog
             'stockId', 'locationId', 'allocatedQty', 'onHandQty',
             // Columns from joined tables
@@ -192,6 +193,7 @@ class Db extends DbAbstract implements StorageInterface
             'stid', 'action', 'accountId', 'stockManagement',
             'listingId', 'productId', 'itemStatus', 'listingStatus',
             'adjustmentType' => 'type', 'adjustmentOperator' => 'operator', 'adjustmentQty' => 'quantity',
+            'referenceSku', 'adjustmentReferenceQuantity' => 'referenceQuantity',
             // Columns only present on stockLog
             'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
             'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
