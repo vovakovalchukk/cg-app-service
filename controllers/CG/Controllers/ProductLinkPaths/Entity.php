@@ -1,10 +1,10 @@
 <?php
-namespace CG\Controllers\ProductLinkRelated;
+namespace CG\Controllers\ProductLinkPaths;
 
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Http\StatusCode;
 use CG\Permission\Exception as PermissionException;
-use CG\Product\LinkRelated\Service;
+use CG\Product\LinkPaths\Service;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
