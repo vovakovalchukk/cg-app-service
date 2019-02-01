@@ -2,6 +2,7 @@
 namespace CG\Order\Service\OrderLink\Nginx\Cache;
 
 use CG\CGLib\Nginx\Cache\AbstractInvalidator;
+use CG\CGLib\Nginx\Cache\Resource;
 use CG\Order\Shared\OrderLink\Entity as OrderLink;
 
 class Invalidator extends AbstractInvalidator
@@ -16,15 +17,13 @@ class Invalidator extends AbstractInvalidator
 
     public function invalidateOrdersForOrderLink(OrderLink $orderLink)
     {
+        $resources = [];
         foreach ($orderLink->getOrderIds() as $orderId) {
-            $this->invalidateOrderById($orderId);
+            $resources[] = new Resource(static::TYPE_ORDER, $orderId);
         }
-    }
 
-    protected function invalidateOrderById($orderId)
-    {
         try {
-            $this->purgeResource(static::TYPE_ORDER, $orderId);
+            $this->purgeResources($resources);
         } catch (\Exception $ex) {
             // Ignore errors
         }
