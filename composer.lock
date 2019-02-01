@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e16d0a4ee3be7ff19badcbdc5679e694",
+    "content-hash": "7e814895ee715295c236664ec72ad643",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -164,7 +164,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.28.5-92d683.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-amazon-1.28.5-92d683.zip",
                 "reference": "7ae03c133cc36f053c6616a4c39a2ad9e9883fe4",
                 "shasum": null
             },
@@ -220,6 +220,11 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-12-18T14:49:33+00:00"
         },
         {
@@ -273,7 +278,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/billing/channelgrabber-billing-1.20.1-799f84.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-billing-1.20.1-799f84.zip",
                 "reference": "03128c02fcbaca60ef88b058b77e2a2ac73aa8d5",
                 "shasum": null
             },
@@ -323,6 +328,11 @@
                     "CG\\Billing\\Test\\": "tests"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-10-05T13:44:54+00:00"
         },
         {
@@ -335,7 +345,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cache/channelgrabber-cache-2.6.1-ebaec0.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cache-2.6.1-ebaec0.zip",
                 "reference": "ad5591710bc6eb1a46bf7df65a5f9dddf76f5b8f",
                 "shasum": null
             },
@@ -364,6 +374,11 @@
                     "CG\\Cache\\TestAsset\\": "tests/assets"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-07-31T11:47:23+00:00"
         },
         {
@@ -376,7 +391,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cg-predis/channelgrabber-cg-predis-v0.8.8-ccdcdb.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cg-predis-v0.8.8-ccdcdb.zip",
                 "reference": "abe02422bc29ff723fc2cbc969181b6cbf50b386",
                 "shasum": null
             },
@@ -416,6 +431,11 @@
                 "predis",
                 "redis"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-03-20T12:43:59+00:00"
         },
         {
@@ -485,16 +505,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.42.5",
+            "version": "1.42.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea"
+                "reference": "8ba0bf5e1b331a84a38f72dc16853da4f5b8cffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.5-8c98c4.zip",
-                "reference": "2349e555dcd3c3c22fec3cf0a815b5037d9dcdea",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.7-c55a4a.zip",
+                "reference": "8ba0bf5e1b331a84a38f72dc16853da4f5b8cffa",
                 "shasum": null
             },
             "require": {
@@ -568,7 +588,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2019-01-02T14:07:02+00:00"
+            "time": "2019-01-23T16:31:28+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -580,7 +600,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cilex/channelgrabber-cilex-1.2.2-75b62d.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-cilex-1.2.2-75b62d.zip",
                 "reference": "fc9639202a8dce65d1917f5622e1f51136d16a8d",
                 "shasum": null
             },
@@ -601,6 +621,11 @@
                     "CG\\Cilex\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-10-18T10:33:15+00:00"
         },
         {
@@ -613,7 +638,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/communication/channelgrabber-communication-1.0.9-62ede3.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-communication-1.0.9-62ede3.zip",
                 "reference": "35312b7d82269ddc21d289a0fa47b89f7a6a83ef",
                 "shasum": null
             },
@@ -644,6 +669,11 @@
                     "email": "matthew.king@channelgrabber.com"
                 }
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-02-09T13:56:26+00:00"
         },
         {
@@ -686,7 +716,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/currency/channelgrabber-currency-1.0.3-4e499e.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-currency-1.0.3-4e499e.zip",
                 "reference": "296181d6c6ad4f8ac2c6b8628dfa2dbc64c11321",
                 "shasum": null
             },
@@ -698,6 +728,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Currency\\": "src/"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-07-04T15:09:43+00:00"
@@ -712,7 +747,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/dataplug/channelgrabber-dataplug-1.2.8-f22446.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-dataplug-1.2.8-f22446.zip",
                 "reference": "9f6d9bd771eca552c5055e729153305b3bba963e",
                 "shasum": null
             },
@@ -746,6 +781,11 @@
                     "email": "dev@channelgrabber.com"
                 }
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-07-26T08:00:14+00:00"
         },
         {
@@ -758,7 +798,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/db/channelgrabber-db-1.0.10-10d0d2.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-db-1.0.10-10d0d2.zip",
                 "reference": "5ead8bb97a4623d9379c7059c094f4d00df9520e",
                 "shasum": null
             },
@@ -777,6 +817,11 @@
                     "CG\\Db\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T11:11:56+00:00"
         },
         {
@@ -789,7 +834,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/di/channelgrabber-di-2.2.1-af7430.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-di-2.2.1-af7430.zip",
                 "reference": "1fa9d38600a0d93bc9553ba7cc48dde73962663b",
                 "shasum": null
             },
@@ -811,6 +856,11 @@
                 }
             ],
             "description": "Dependency injection wrappers and compilation",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-08-31T08:01:55+00:00"
         },
         {
@@ -823,7 +873,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.16.0-44d27c.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ebay-1.16.0-44d27c.zip",
                 "reference": "712bf98406db64f6ca83568fb8caff0777e90667",
                 "shasum": null
             },
@@ -876,6 +926,11 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-11-14T13:39:18+00:00"
         },
         {
@@ -888,7 +943,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ekm/channelgrabber-ekm-1.10.14-a14f83.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-ekm-1.10.14-a14f83.zip",
                 "reference": "2e5695e11baf7011446edb8e58e8bceafc115dad",
                 "shasum": null
             },
@@ -936,6 +991,11 @@
                     "CG\\Ekm\\TestAsset\\": "tests/assets/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-09-11T11:02:59+00:00"
         },
         {
@@ -948,7 +1008,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/email/channelgrabber-email-1.1.2-700b6b.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-email-1.1.2-700b6b.zip",
                 "reference": "59f539466025416b009b63c40309a282424bee51",
                 "shasum": null
             },
@@ -972,6 +1032,11 @@
                     "CG\\Email\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-08-16T08:13:02+00:00"
         },
         {
@@ -984,7 +1049,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etag/channelgrabber-etag-1.7.0.1-9a54ac.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etag-1.7.0.1-9a54ac.zip",
                 "reference": "f03d5671ea2a2b8a3b8af32b6f6fbbee751fde00",
                 "shasum": null
             },
@@ -1001,6 +1066,11 @@
                     "CG\\ETag\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-07-18T09:50:15+00:00"
         },
         {
@@ -1013,7 +1083,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-1.1.0-3cd734.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-etsy-1.1.0-3cd734.zip",
                 "reference": "6881bf30b9edbe9426e54fd7beaf29333f6861ac",
                 "shasum": null
             },
@@ -1042,6 +1112,11 @@
                     "CG\\Etsy\\Test\\": "tests/src/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-11-06T11:18:57+00:00"
         },
         {
@@ -1054,7 +1129,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/exchangerate/channelgrabber-exchangerate-1.2.6-31a61d.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-exchangerate-1.2.6-31a61d.zip",
                 "reference": "28a1edbe8e954d723aed51c30f9610e52cb79535",
                 "shasum": null
             },
@@ -1075,6 +1150,11 @@
                     "CG\\ExchangeRate\\Test\\": "tests/src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T09:09:26+00:00"
         },
         {
@@ -1087,7 +1167,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/feature-flags/channelgrabber-feature-flags-2.1.0-3128eb.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-feature-flags-2.1.0-3128eb.zip",
                 "reference": "6d27060ca8c32a3a5195c2b2d0ee1033be30da59",
                 "shasum": null
             },
@@ -1110,6 +1190,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\FeatureFlags\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2017-12-20T11:18:03+00:00"
@@ -1210,7 +1295,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/http/channelgrabber-http-1.3.32-d807fc.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-http-1.3.32-d807fc.zip",
                 "reference": "6869a923e43e5b5d90a9d017f3e0d4ecbbe6597d",
                 "shasum": null
             },
@@ -1251,6 +1336,11 @@
                     "CG\\Http\\TestAsset\\": "tests/assets/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-04-03T08:26:39+00:00"
         },
         {
@@ -1263,7 +1353,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/image/channelgrabber-image-1.2.10-b129ba.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-image-1.2.10-b129ba.zip",
                 "reference": "ef77faccac1178baa4539c004c7f5049ab0077f5",
                 "shasum": null
             },
@@ -1287,6 +1377,11 @@
                     "CG\\Image\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T09:17:38+00:00"
         },
         {
@@ -1299,7 +1394,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/intercom/channelgrabber-intercom-1.3.2-a5b016.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-intercom-1.3.2-a5b016.zip",
                 "reference": "d0bfc128292d43d5ad349ecf199484aeae259b2e",
                 "shasum": null
             },
@@ -1320,6 +1415,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Intercom\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2017-11-09T14:23:33+00:00"
@@ -1388,7 +1488,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/locale/channelgrabber-locale-1.2.1-fb7f25.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locale-1.2.1-fb7f25.zip",
                 "reference": "d7c1ac9ef3d43406007e751fccc5a4071850ce55",
                 "shasum": null
             },
@@ -1413,6 +1513,11 @@
                     "CG\\Locale\\Test\\": "tests"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-29T08:47:40+00:00"
         },
         {
@@ -1425,7 +1530,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/location/channelgrabber-location-1.2.1-d02078.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-location-1.2.1-d02078.zip",
                 "reference": "2c401b5a118ce02ad6d0a476d478b7f5cfc0e0fa",
                 "shasum": null
             },
@@ -1465,6 +1570,11 @@
                     "CG\\Location\\Test\\": "tests"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T09:27:42+00:00"
         },
         {
@@ -1477,7 +1587,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/locking/channelgrabber-locking-1.1.3-4a7dc4.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-locking-1.1.3-4a7dc4.zip",
                 "reference": "20caaf18e2cc5c9ca8fe0c8b4d61a0a39c1af49a",
                 "shasum": null
             },
@@ -1500,6 +1610,11 @@
                     "CG\\Locking\\TestAsset\\": "tests/assets/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-11-08T14:42:32+00:00"
         },
         {
@@ -1512,7 +1627,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/log/channelgrabber-log-2.3.5-bc6c2e.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-log-2.3.5-bc6c2e.zip",
                 "reference": "e8f6458c866b89ed833fae3c532c2087429c7d1b",
                 "shasum": null
             },
@@ -1543,6 +1658,11 @@
                     "CG\\Log\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-12-03T15:34:50+00:00"
         },
         {
@@ -1555,7 +1675,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/middleware/channelgrabber-middleware-1.1.0-32f6d4.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-middleware-1.1.0-32f6d4.zip",
                 "reference": "e0f2f7167464099a71cd41e64b8b183f8bff187b",
                 "shasum": null
             },
@@ -1578,6 +1698,11 @@
                     "CG\\Middleware\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-06-22T08:28:57+00:00"
         },
         {
@@ -1590,7 +1715,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/notification/channelgrabber-notification-1.2.2-d19a48.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-notification-1.2.2-d19a48.zip",
                 "reference": "bfcd8d33f35b7e95c65a4db9d1f7555900618573",
                 "shasum": null
             },
@@ -1629,6 +1754,11 @@
                     "CG\\Notification\\TestAsset\\": "tests/assets"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-10-22T14:13:45+00:00"
         },
         {
@@ -1661,16 +1791,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.43.7.1",
+            "version": "1.43.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "cebf300e73f933e4783994ff735696e662e24f07"
+                "reference": "386ff78e6010968db744b581a4eb4fd1b1a6ceb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.7.1-f1e560.zip",
-                "reference": "cebf300e73f933e4783994ff735696e662e24f07",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.8-8c8ca8.zip",
+                "reference": "386ff78e6010968db744b581a4eb4fd1b1a6ceb3",
                 "shasum": null
             },
             "require": {
@@ -1741,7 +1871,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-01-29T15:24:45+00:00"
+            "time": "2019-01-30T13:59:52+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1753,7 +1883,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/permission/channelgrabber-permission-1.0.2-c7606d.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-permission-1.0.2-c7606d.zip",
                 "reference": "fd59111533c97fedda802b5d8510567a7020d955",
                 "shasum": null
             },
@@ -1765,6 +1895,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Permission\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2017-01-26T11:17:47+00:00"
@@ -1779,7 +1914,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.3.8.3-4a8164.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phinx-0.3.8.3-4a8164.zip",
                 "reference": "b94ea7cc0c4eaec70815143a228ecbbf98416ae9",
                 "shasum": null
             },
@@ -1826,6 +1961,11 @@
                 "migrations",
                 "phinx"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-04-17T13:27:37+00:00"
         },
         {
@@ -1838,7 +1978,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/php-phantomjs/channelgrabber-php-phantomjs-3.1.8-3446b6.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-php-phantomjs-3.1.8-3446b6.zip",
                 "reference": "f8f28253a0784ff31fdd67ce0e80240459635fcc",
                 "shasum": null
             },
@@ -1891,6 +2031,11 @@
                 "PhantomJS",
                 "Testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-07-03T13:27:56+00:00"
         },
         {
@@ -1903,7 +2048,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis/channelgrabber-predis-1.1.0-0e16b9.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-1.1.0-0e16b9.zip",
                 "reference": "19d8a31a677635965b2d859fac8c187d4c8c05b4",
                 "shasum": null
             },
@@ -1919,6 +2064,11 @@
                     "CG\\Predis\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-07-18T09:17:26+00:00"
         },
         {
@@ -1931,9 +2081,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis-async/channelgrabber-predis-async-v0.2.3.2-60bf12.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-predis-async-v0.2.3.2-60bf12.zip",
                 "reference": "27dbf1a362ff1e1ecb84cb42718ae9dadd97579d",
-                "shasum": null
+                "shasum": "15eab37ac5c78f81f49e1262ec6ca517823a88d9"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -1973,20 +2123,25 @@
                 "predis",
                 "redis"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-06-17T11:08:31+00:00"
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.11",
+            "version": "1.16.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "b366d28e9208901c2b4b00b4cf192165af8d4861"
+                "reference": "b506db46fd0b3c7a8ad16146797fa5b9fc8ec3b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.11-40856c.zip",
-                "reference": "b366d28e9208901c2b4b00b4cf192165af8d4861",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.12-615141.zip",
+                "reference": "b506db46fd0b3c7a8ad16146797fa5b9fc8ec3b0",
                 "shasum": null
             },
             "require": {
@@ -2038,7 +2193,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-01-25T14:33:08+00:00"
+            "time": "2019-01-31T14:32:09+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2050,7 +2205,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product-locking/channelgrabber-product-locking-1.0.1-a5d6b3.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-product-locking-1.0.1-a5d6b3.zip",
                 "reference": "a02f6259e47485d8869ebf22a4ba932678d306e3",
                 "shasum": null
             },
@@ -2074,6 +2229,11 @@
                     "CG\\Product\\Locking\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-01-22T17:26:46+00:00"
         },
         {
@@ -2086,7 +2246,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/profiling/channelgrabber-profiling-1.1.0-3653a0.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-profiling-1.1.0-3653a0.zip",
                 "reference": "0cb385d9a8ac5d0233ea14c31b3e1c11fd990e28",
                 "shasum": null
             },
@@ -2102,6 +2262,11 @@
                     "email": "eduard.busuioc@channelgrabber.com"
                 }
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-10-18T10:23:09+00:00"
         },
         {
@@ -2114,7 +2279,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/purchase-order/channelgrabber-purchase-order-1.0.1-f6f02c.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-purchase-order-1.0.1-f6f02c.zip",
                 "reference": "9329699a1600f8c720daf9c72639ea0dbaa143fc",
                 "shasum": null
             },
@@ -2133,6 +2298,11 @@
                 "commercial"
             ],
             "description": "Composer library for supporting purchase order code",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T09:40:45+00:00"
         },
         {
@@ -2184,7 +2354,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/queue/channelgrabber-queue-1.0.1-92c0a5.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-queue-1.0.1-92c0a5.zip",
                 "reference": "f188f9d6e8db93db9f780bb59c0496f90cc53482",
                 "shasum": null
             },
@@ -2201,6 +2371,11 @@
                     "CG\\Queue\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-03-23T09:36:01+00:00"
         },
         {
@@ -2213,7 +2388,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/redis/channelgrabber-redis-1.0.1-15e68f.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-1.0.1-15e68f.zip",
                 "reference": "daa2d4da1fc6b25f748918dd63a8e0c1474a6418",
                 "shasum": null
             },
@@ -2228,6 +2403,11 @@
                     "CG\\Redis\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-03-23T09:49:15+00:00"
         },
         {
@@ -2240,7 +2420,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/redis-locking/channelgrabber-redis-locking-1.0.2-7efa0d.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-redis-locking-1.0.2-7efa0d.zip",
                 "reference": "2550caf274708d088852a59d9c5bfc8ab172c7b9",
                 "shasum": null
             },
@@ -2263,6 +2443,11 @@
                     "CG\\Redis\\Locking\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-01-18T13:45:47+00:00"
         },
         {
@@ -2275,7 +2460,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/reporting/channelgrabber-reporting-1.0.1-bafe54.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-reporting-1.0.1-bafe54.zip",
                 "reference": "26b38dda7a6c5a0c028a986c2fd0e409d35a96cc",
                 "shasum": null
             },
@@ -2299,6 +2484,11 @@
                 }
             ],
             "description": "Handles the reporting classes",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-08-17T09:45:00+00:00"
         },
         {
@@ -2311,7 +2501,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/scraper/channelgrabber-scraper-1.1.1-475212.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-scraper-1.1.1-475212.zip",
                 "reference": "e163785fc109d47a47d586cefe149cbfaee8974b",
                 "shasum": null
             },
@@ -2334,6 +2524,11 @@
             "autoload-dev": {
                 "CG\\Scraper\\Test\\": "tests"
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-09-17T08:28:19+00:00"
         },
         {
@@ -2346,7 +2541,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/sequential-numbering/channelgrabber-sequential-numbering-1.1.0-8813d6.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-sequential-numbering-1.1.0-8813d6.zip",
                 "reference": "ad7e3207da7fcb5f5fa41955a0653a6fcfc6de01",
                 "shasum": null
             },
@@ -2374,6 +2569,11 @@
                 }
             },
             "description": "Provides sequential number generators",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-01-23T16:33:30+00:00"
         },
         {
@@ -2423,7 +2623,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/shopify/channelgrabber-shopify-1.2.1-1bfc58.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-shopify-1.2.1-1bfc58.zip",
                 "reference": "e15eacf3321effe75f2a6bd0fc08d160222c47e4",
                 "shasum": null
             },
@@ -2455,6 +2655,11 @@
                 "psr-4": {
                     "CG\\Shopify\\Test\\": "tests/",
                     "CG\\Shopify\\TestAsset\\": "tests/assets"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-03-26T12:42:16+00:00"
@@ -2529,13 +2734,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/spork.git",
-                "reference": "9e6188211a585d9cc31907e6074ae6135377f698"
+                "reference": "5fcf29931ee0574c6177e41c218c2e132e4f9e02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/spork/channelgrabber-spork-v0.2.1-31bee7.zip",
-                "reference": "9e6188211a585d9cc31907e6074ae6135377f698",
-                "shasum": null
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-spork-v0.2.1-5e3e04.zip",
+                "reference": "5fcf29931ee0574c6177e41c218c2e132e4f9e02",
+                "shasum": "905806f14db1d76d43a29056482d537eab3ca44a"
             },
             "require": {
                 "ext-pcntl": "*",
@@ -2568,6 +2773,11 @@
             ],
             "description": "Asynchronous PHP",
             "homepage": "https://github.com/channelgrabber/spork",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-16T11:12:42+00:00"
         },
         {
@@ -2580,9 +2790,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stats/channelgrabber-stats-1.0.6-3619a7.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stats-1.0.6-3619a7.zip",
                 "reference": "54c50d32e976408ef2d8c6fca1f8489243a397f1",
-                "shasum": null
+                "shasum": "23d80d0c0d5db631d1bbcbc7fc95e34e923e6b26"
             },
             "require": {
                 "channelgrabber/stdlib": ">=2.10.1, <3.0.0",
@@ -2596,6 +2806,11 @@
                 }
             },
             "description": "ChannelGrabber application stat logging",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2015-04-22T08:58:22+00:00"
         },
         {
@@ -2728,7 +2943,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock-locking/channelgrabber-stock-locking-1.1.2-ef8ce4.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-stock-locking-1.1.2-ef8ce4.zip",
                 "reference": "0dd56fcf328cb350fd50011b95ad4afdaa97c4ae",
                 "shasum": null
             },
@@ -2754,6 +2969,11 @@
                     "CG\\Stock\\Locking\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2017-11-21T12:03:21+00:00"
         },
         {
@@ -2766,7 +2986,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/tax/channelgrabber-tax-1.0.2-6fed75.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-tax-1.0.2-6fed75.zip",
                 "reference": "c5e35754f25f08015fca9146f1d7b28065abac70",
                 "shasum": null
             },
@@ -2794,6 +3014,11 @@
                     "CG\\Tax\\Test\\": "tests\\src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-06-28T08:12:20+00:00"
         },
         {
@@ -2806,7 +3031,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-1.6.1-e0aad4.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-template-1.6.1-e0aad4.zip",
                 "reference": "78b75570427991cb0881df1302b437dccf45e8eb",
                 "shasum": null
             },
@@ -2854,6 +3079,11 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-02-01T08:40:48+00:00"
         },
         {
@@ -2866,7 +3096,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/transaction/channelgrabber-transaction-1.2.1-a88fc1.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-transaction-1.2.1-a88fc1.zip",
                 "reference": "d8e8d7bed8664e959a4138ac2db30ad66f0266ad",
                 "shasum": null
             },
@@ -2891,6 +3121,11 @@
                     "CG\\Transaction\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-02-05T13:27:34+00:00"
         },
         {
@@ -2903,7 +3138,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage/channelgrabber-usage-1.0.7.1-5b0d86.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-1.0.7.1-5b0d86.zip",
                 "reference": "8c48ceb956311e15311087feb30152e92ff7e914",
                 "shasum": null
             },
@@ -2923,6 +3158,11 @@
                     "CG\\Usage\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-01-08T08:52:24+00:00"
         },
         {
@@ -2935,7 +3175,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage-check/channelgrabber-usage-check-1.0.0-1062ad.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-usage-check-1.0.0-1062ad.zip",
                 "reference": "85134ab5b7048c07da1570df629b0206ea915207",
                 "shasum": null
             },
@@ -2953,6 +3193,11 @@
                 }
             },
             "description": "Check usage against limits",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-02-05T08:50:13+00:00"
         },
         {
@@ -2965,7 +3210,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-1.26.4-646f2a.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-user-1.26.4-646f2a.zip",
                 "reference": "7aca77dd960a49f31e2761feafa1ed629c99a90c",
                 "shasum": null
             },
@@ -3007,6 +3252,11 @@
                     "CG\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-10-03T13:20:24+00:00"
         },
         {
@@ -3019,7 +3269,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/userpreference/channelgrabber-userpreference-1.3.1-b54faf.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-userpreference-1.3.1-b54faf.zip",
                 "reference": "73be3743bc9205cff190f9ced5972b18732e8fce",
                 "shasum": null
             },
@@ -3038,6 +3288,11 @@
                     "CG\\UserPreference\\": ""
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-02-01T08:41:06+00:00"
         },
         {
@@ -3050,7 +3305,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/validation/channelgrabber-validation-1.2.14-ed13c5.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-validation-1.2.14-ed13c5.zip",
                 "reference": "2982542e5fdb8120c98a02d420c68b45d533a316",
                 "shasum": null
             },
@@ -3062,6 +3317,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\Validation\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-07-16T08:49:45+00:00"
@@ -3076,9 +3336,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/vnderror/channelgrabber-vnderror-1.0.0-0d0417.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-vnderror-1.0.0-0d0417.zip",
                 "reference": "75465f86a44fb8abff6e49b8c62d423617d8e2c0",
-                "shasum": null
+                "shasum": "ce8a7b4791460e36ed9b1a51bf3a396a2ed5aa58"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -3135,7 +3395,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/webhook-framework/channelgrabber-webhook-framework-1.0.0-9c474c.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-webhook-framework-1.0.0-9c474c.zip",
                 "reference": "b864421cf97fa8b32c9788fda7b135ec983d9914",
                 "shasum": null
             },
@@ -3156,6 +3416,11 @@
                     "CG\\Webhook\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-08-12T07:55:48+00:00"
         },
         {
@@ -3168,7 +3433,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/woocommerce/channelgrabber-woocommerce-1.6.1-39b015.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-woocommerce-1.6.1-39b015.zip",
                 "reference": "b30c07253aaf7bd29d041575fb111ade8313828d",
                 "shasum": null
             },
@@ -3205,6 +3470,11 @@
                     "CG\\WooCommerce\\Test\\": "tests/"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-09-11T11:03:40+00:00"
         },
         {
@@ -3217,7 +3487,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/zf2-email-template/channelgrabber-zf2-email-template-1.0.24-202830.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-email-template-1.0.24-202830.zip",
                 "reference": "8bff4df4f5fcf52562eaf3dc0777c70638ddb4ca",
                 "shasum": null
             },
@@ -3242,6 +3512,11 @@
                 ]
             },
             "description": "email template module",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2018-06-07T09:09:36+00:00"
         },
         {
@@ -3254,7 +3529,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/zf2-installer/channelgrabber-zf2-installer-1.0.6-952a6e.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-installer-1.0.6-952a6e.zip",
                 "reference": "34fcd193d30969a9c40625e0b15ae9e7f16dfae8",
                 "shasum": null
             },
@@ -3275,6 +3550,11 @@
                     "CG\\Zend\\Installer\\": "src"
                 }
             },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2016-05-18T12:51:53+00:00"
         },
         {
@@ -3287,7 +3567,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/zf2-mustache/channelgrabber-zf2-mustache-1.0.1-73573c.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-mustache-1.0.1-73573c.zip",
                 "reference": "717fef94473c1d24c7ceec2ddad69dc6962c44c5",
                 "shasum": null
             },
@@ -3311,6 +3591,11 @@
                 ]
             },
             "description": "ZF2 Mustache rendering module",
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-08-14T15:58:28+00:00"
         },
         {
@@ -3323,7 +3608,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/zf2-stdlib/channelgrabber-zf2-stdlib-1.3.0-1217fb.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-zf2-stdlib-1.3.0-1217fb.zip",
                 "reference": "effbf020ab730ac20d64ce3f7a7aa7e5b633b1da",
                 "shasum": null
             },
@@ -3353,6 +3638,11 @@
             "autoload-dev": {
                 "psr-4": {
                     "CG\\Zend\\Stdlib\\Test\\": "tests"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2018-04-03T08:18:51+00:00"
@@ -3891,7 +4181,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/contextio/PHP-ContextIO/zipball/800792db8030c7c01cd2a377b2e53f4d3850d584",
                 "reference": "800792db8030c7c01cd2a377b2e53f4d3850d584",
-                "shasum": ""
+                "shasum": "db18bdade4c92a52b37ff8669884a9620f9d5dd5"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -9005,9 +9295,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/zendframework/zendpdf/zendframework-zendpdf-2.0.2.2-20f803.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/zendframework-zendpdf-2.0.2.2-20f803.zip",
                 "reference": "94890c3dfa81b906e66ee1d2e5bb4fedad0586a5",
-                "shasum": null
+                "shasum": "7b89587b40bd010b3b09f4e907144ca580fae70d"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -9034,6 +9324,11 @@
                 "pdf",
                 "zf2"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2014-09-22T08:39:00+00:00"
         },
         {
@@ -9142,6 +9437,11 @@
                 "testing",
                 "web"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:39:27+00:00"
         },
         {
@@ -9197,6 +9497,11 @@
                 "browser",
                 "testing"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-04-13T23:46:30+00:00"
         },
         {
@@ -9255,6 +9560,11 @@
                 "testing",
                 "webdriver"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-06-02T19:09:45+00:00"
         },
         {
@@ -9267,9 +9577,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phpunit/channelgrabber-phpunit-1.0.4-8aafa6.zip",
+                "url": "https://composer.build.channelgrabber.com/dist/channelgrabber-phpunit-1.0.4-8aafa6.zip",
                 "reference": "0de580de8ebd38dc5d3995a7a2b86a47101b19ef",
-                "shasum": null
+                "shasum": "2221f6a56e8751ed90f3b905b1fa34221630e477"
             },
             "require": {
                 "channelgrabber/di": ">=2.1.0",
@@ -9285,6 +9595,11 @@
             "autoload": {
                 "psr-4": {
                     "CG\\PhpUnit\\": "src"
+                }
+            },
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
                 }
             },
             "time": "2014-09-17T16:21:12+00:00"
@@ -9393,7 +9708,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -9404,6 +9719,11 @@
                 "webdriver",
                 "webtest"
             ],
+            "transport-options": {
+                "ssl": {
+                    "local_cert": "composer.pem"
+                }
+            },
             "time": "2013-10-04T15:03:51+00:00"
         },
         {
@@ -9824,7 +10144,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -9863,7 +10183,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/phpspec/zipball/61712147412cb647b6cb68b19833a60bfda759a1",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -10130,7 +10450,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
