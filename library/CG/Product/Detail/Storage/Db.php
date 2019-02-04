@@ -42,7 +42,7 @@ class Db extends DbAbstract implements StorageInterface
                 throw new NotFound('No matching ProductDetails found matching requested filters');
             }
 
-            $productDetails = $this->fetchPaginatedCollection(
+            $productDetails = $this->fetchCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $this->getSelect()->where(['id' => $ids]),
