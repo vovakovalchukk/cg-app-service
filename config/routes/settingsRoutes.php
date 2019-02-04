@@ -119,7 +119,7 @@ return [
         'validation' => [
             'filterRules' => CollectionValidation::class
         ],
-        'version' => new Version(1, 10),
+        'version' => new Version(1, 11),
     ],
     '/settings/invoice/:id' => [
         'controllers' => function($invoiceId) use ($di) {
@@ -137,7 +137,7 @@ return [
         'validation' => [
             "dataRules" => EntityValidation::class,
         ],
-        'version' => new Version(1, 10),
+        'version' => new Version(1, 11),
         'eTag' => [
             'mapperClass' => InvoiceMapper::class,
             'entityClass' => InvoiceEntity::class,
@@ -297,15 +297,15 @@ return [
     ],
     '/settings/product/:id' => [
         'controllers' => function($ouId) use ($di) {
-                $app = $di->get(Slim::class);
-                $method = $app->request()->getMethod();
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-                $controller = $di->get(Product::class);
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($ouId, $app->request()->getBody())
-                );
-            },
+            $controller = $di->get(Product::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($ouId, $app->request()->getBody())
+            );
+        },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'ProductSettingsEntity',
         'validation' => [
@@ -398,8 +398,7 @@ return [
         ]
     ],
     '/settings/invoiceMapping' => [
-        'controllers' => function() use ($di) {
-            $app = $di->get(Slim::class);
+        'controllers' => function() use ($di, $app) {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(InvoiceMappingCollection::class);
@@ -413,11 +412,11 @@ return [
         'entityRoute' => '/settings/invoiceMapping/:id',
         'validation' => [
             'filterRules' => InvoiceMappingCollectionValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/invoiceMapping/:id' => [
-        'controllers' => function($ouId) use ($di) {
-            $app = $di->get(Slim::class);
+        'controllers' => function($ouId) use ($di, $app) {
             $method = $app->request()->getMethod();
 
             $controller = $di->get(InvoiceMapping::class);
@@ -435,7 +434,8 @@ return [
             'mapperClass' => InvoiceMappingMapper::class,
             'entityClass' => InvoiceMappingEntity::class,
             'serviceClass' => InvoiceMappingService::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/vat' => [
         'controllers' => function() use ($di) {

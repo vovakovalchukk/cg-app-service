@@ -92,7 +92,8 @@ return [
             'highPriority' => [
                 'description' => 'Queue generated jobs at high priority',
             ],
-        ]
+        ],
+        'modulus' => true
     ],
     'channel:generateOrders' => [
         'command' => function(InputInterface $input) use ($di) {
@@ -153,7 +154,8 @@ return [
             'highPriority' => [
                 'description' => 'Queue generated jobs at high priority',
             ]
-        ]
+        ],
+        'modulus' => true
     ],
     'channel:pushStock' => [
         'command' => function(InputInterface $input, OutputInterface $output) use($di) {

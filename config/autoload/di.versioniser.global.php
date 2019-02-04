@@ -6,6 +6,8 @@ use CG\Slim\Versioning\CategoryCollection;
 use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\CategoryTemplateCollection;
 use CG\Slim\Versioning\CategoryTemplateEntity;
+use CG\Slim\Versioning\InvoiceMappingCollection;
+use CG\Slim\Versioning\InvoiceMappingEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
 use CG\Slim\Versioning\InvoiceSettingsEntity;
 use CG\Slim\Versioning\ListingCollection;
@@ -26,6 +28,7 @@ use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLogCollection;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -170,6 +173,8 @@ return [
                 'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
                 'Versioniser_InvoiceSettingsCollection_9' => InvoiceSettingsCollection\Versioniser9::class,
                 'Versioniser_InvoiceSettings_9' => InvoiceSettingsEntity\Versioniser9::class,
+                'Versioniser_InvoiceSettingsCollection_10' => InvoiceSettingsCollection\Versioniser10::class,
+                'Versioniser_InvoiceSettings_10' => InvoiceSettingsEntity\Versioniser10::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
@@ -184,6 +189,9 @@ return [
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
                 'Versioniser_CategoryTemplateCollection_1' => CategoryTemplateCollection\Versioniser1::class,
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
+                'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
+                'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
+                'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -405,6 +413,11 @@ return [
                     'entityVersioner' => 'Versioniser_StockEntity_1',
                 ],
             ],
+            'Versioniser_InvoiceMappingCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_InvoiceMappingEntity_1',
+                ]
+            ]
         ],
     ]
 ];
