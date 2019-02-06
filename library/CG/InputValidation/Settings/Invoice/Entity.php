@@ -85,6 +85,12 @@ class Entity implements RulesInterface
                 'allow_empty' => true,
                 'validators' => [new BooleanValidator(['name' => 'itemBarcodes'])]
             ],
+            'itemVariationAttributes' => [
+                'name'       => 'itemVariationAttributes',
+                'required'   => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'itemVariationAttributes'])]
+            ],
             'tradingCompanies' => [
                 'name' => 'tradingCompanies',
                 'required' => false,
