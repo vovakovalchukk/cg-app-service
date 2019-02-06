@@ -284,7 +284,7 @@ return [
         'via' => array('GET', 'PATCH', 'OPTIONS'),
         'name' => 'OrderItemCollection',
         'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
-        'version' => new Version(1, 10),
+        'version' => new Version(1, 11),
         'entityRoute' => '/orderItem/:orderItemId'
     ),
         '/orderItem/:orderItemId' => array (

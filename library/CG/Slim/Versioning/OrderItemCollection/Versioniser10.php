@@ -1,7 +1,7 @@
 <?php
 namespace CG\Slim\Versioning\OrderItemCollection;
 
-use CG\Slim\Versioning\OrderItemEntity\Versioniser9 as EntityVersioniser;
+use CG\Slim\Versioning\OrderItemEntity\Versioniser10 as EntityVersioniser;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 
