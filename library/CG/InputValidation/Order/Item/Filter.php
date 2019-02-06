@@ -132,6 +132,14 @@ class Filter implements RulesInterface
                     new BooleanValidator(['name' => 'orderArchived'])
                 ]
             ],
+            'dispatchable' => [
+                'name' => 'dispatchable',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(["name" => "dispatchable"])
+                ]
+            ]
         ];
     }
 }

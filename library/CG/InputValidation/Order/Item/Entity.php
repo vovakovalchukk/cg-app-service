@@ -131,6 +131,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
+            'dispatchable' => [
+                'name'       => 'dispatchable',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
+            ]
         ];
     }
 }

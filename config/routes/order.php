@@ -301,7 +301,7 @@ return [
         'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'),
         'name' => 'OrderItemEntity',
         'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 10),//Updating this requires an update to /orderItem/:orderItemId/images route also (Line 380)
+        'version' => new Version(1, 11),//Updating this requires an update to /orderItem/:orderItemId/images route also (Line 380)
         'eTag' => [
             'mapperClass' => ItemMapper::class,
         'entityClass' => ItemEntity::class,
