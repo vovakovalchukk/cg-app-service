@@ -13,7 +13,6 @@
 
 use CG\ETag\Storage\Predis;
 use CG\ETag\StorageInterface;
-use Zend\Db\Sql\Sql;
 use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\ETag\Storage\Predis as EtagRedis;
 
@@ -23,14 +22,10 @@ use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
-use Slim\Slim;
 
 // Account
 use CG\Account\Client\Service as AccountService;
-use CG\Account\Shared\Repository as AccountRepository;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
-use CG\Account\Service\Storage\Db as AccountPersistentStorage;
-use CG\Account\Shared\Mapper as AccountMapper;
 use CG\Channel\ShippingChannelsProviderInterface as ChannelShippingChannelsProviderInterface;
 use CG\Dataplug\Carriers as DataplugCarriers;
 
@@ -82,11 +77,8 @@ use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Service\Item\InvalidationService as ItemInvalidationService;
 use CG\Order\Locking\Item\Service as ItemLockingService;
-use CG\Order\Shared\Item\Repository as ItemRepository;
-use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
-use CG\Order\Service\Item\Transaction\UpdateItemAndStockFactory as UpdateItemAndStockTransactionFactory;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
@@ -176,13 +168,11 @@ use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
 use CG\Template\Storage\Db as TemplateDbStorage;
 use CG\Template\Mapper as TemplateMapper;
-use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 //Shipping
-use CG\Order\Shared\Shipping\Method\Entity as ShippingMethod;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
@@ -212,7 +202,6 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
-use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
 use CG\Product\Client\Service as ProductClientService;
 use CG\Product\Repository as ProductRepository;
@@ -238,7 +227,6 @@ use CG\Transaction\Client\Redis as TransactionRedisClient;
 use CG\Transaction\Command\Cleanup as TransactionCleanupCommand;
 
 // Stock
-use CG\Stock\Entity as StockEntity;
 use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
@@ -332,7 +320,6 @@ use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 // Logging
 use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
 
-use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
 // Product/VariationAttributeMap
@@ -349,7 +336,6 @@ use CG\Ekm\Product\TaxRate\Repository as EkmTaxRateRepository;
 use CG\Ekm\Product\TaxRate\Service as EkmTaxRateService;
 use CG\Ekm\Product\TaxRate\Storage\Cache as EkmTaxRateCache;
 use CG\Ekm\Product\TaxRate\Storage\Db as EkmTaxRateDb;
-use CG\Ekm\Product\TaxRate\StorageInterface as EkmTaxRateStorage;
 
 // Api Settings
 use CG\Settings\Api\StorageInterface as ApiSettingsStorage;
@@ -402,7 +388,6 @@ use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
 use CG\ExchangeRate\Storage\ExternalApi as ExchangeRateExternalApiStorage;
 
 // InvoiceMapping Settings
-use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingSettingsMapper;
 use CG\Settings\InvoiceMapping\Repository as InvoiceMappingSettingsRepository;
 use CG\Settings\InvoiceMapping\Storage\Cache as InvoiceMappingSettingsCacheStorage;
 use CG\Settings\InvoiceMapping\Storage\Db as InvoiceMappingSettingsDbStorage;
