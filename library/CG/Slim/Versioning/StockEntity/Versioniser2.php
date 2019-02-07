@@ -35,7 +35,7 @@ class Versioniser2 implements VersioniserInterface
 
             /** @var Stock $stock */
             $stock = $this->service->fetch($data['id']);
-            $data['lowStockThresholdOn'] = $stock->isLowStockThresholdOn();
+            $data['lowStockThresholdOn'] = $stock->getLowStockThresholdOn();
             $data['lowStockThresholdValue'] = $stock->getLowStockThresholdValue();
             $data['lowStockThresholdTriggered'] = $stock->isLowStockThresholdTriggered();
         } catch (NotFound $exception) {
