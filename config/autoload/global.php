@@ -244,6 +244,7 @@ use CG\Stock\Locking\Entity as LockingStock;
 use CG\Stock\Location\Service\Service as StockLocationServiceService;
 use CG\Controllers\Stock\Location\Location as StockLocationController;
 use CG\Controllers\Stock\Location\Location\Collection as StockLocationCollectionController;
+use CG\Order\Client\Gearman\Generator\DetermineDispatchableOrders as DetermineDispatchableOrdersGenerator;
 
 // StockLog
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
@@ -1690,6 +1691,11 @@ $config = array(
             ],
             SaveOrderShippingMethod::class => [
                 'parameters' => [
+                    'gearmanClient' => 'orderGearmanClient'
+                ]
+            ],
+            DetermineDispatchableOrdersGenerator::class => [
+                'parameteters' => [
                     'gearmanClient' => 'orderGearmanClient'
                 ]
             ],
