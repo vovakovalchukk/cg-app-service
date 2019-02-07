@@ -31,6 +31,7 @@ use CG\Slim\Versioning\ProductSettingsCollection;
 use CG\Slim\Versioning\ProductSettingsEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLogCollection;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
 use CG\Slim\Versioning\TrackingCollection;
@@ -177,6 +178,8 @@ return [
                 'Versioniser_InvoiceSettings_8' => InvoiceSettingsEntity\Versioniser8::class,
                 'Versioniser_InvoiceSettingsCollection_9' => InvoiceSettingsCollection\Versioniser9::class,
                 'Versioniser_InvoiceSettings_9' => InvoiceSettingsEntity\Versioniser9::class,
+                'Versioniser_InvoiceSettingsCollection_10' => InvoiceSettingsCollection\Versioniser10::class,
+                'Versioniser_InvoiceSettings_10' => InvoiceSettingsEntity\Versioniser10::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
@@ -195,6 +198,7 @@ return [
                 'Versioniser_CategoryTemplateEntity_1' => CategoryTemplateEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
+                'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

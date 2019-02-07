@@ -10,8 +10,10 @@ use CG\Product\Link\Mapper;
 use CG\Product\Link\Service as BaseService;
 use CG\Product\Link\StorageInterface;
 use CG\Product\LinkLeaf\StorageInterface as ProductLinkLeafStorage;
-use CG\Product\LinkNode\Entity as ProductLinkNode;
 use CG\Product\LinkNode\StorageInterface as ProductLinkNodeStorage;
+use CG\Product\LinkPaths\StorageInterface as ProductLinkPathsStorage;
+use CG\Product\LinkRelated\Entity as ProductLinkRelated;
+use CG\Product\LinkRelated\StorageInterface as ProductLinkRelatedStorage;
 use CG\Product\Mapper as ProductMapper;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LogTrait;
@@ -27,19 +29,23 @@ use CG\Stock\StorageInterface as StockStorage;
 
 class Service extends BaseService
 {
-    /** @var ProductLinkLeafStorage $productLinkLeafStorage */
+    /** @var ProductLinkLeafStorage */
     protected $productLinkLeafStorage;
-    /** @var ProductLinkNodeStorage $productLinkNodeStorage */
+    /** @var ProductLinkNodeStorage */
     protected $productLinkNodeStorage;
-    /** @var ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator */
+    /** @var ProductLinkRelatedStorage */
+    protected $productLinkRelatedStorage;
+    /** @var ProductLinkPathsStorage */
+    protected $productLinkPathsStorage;
+    /** @var ProductLinkNginxCacheInvalidator */
     protected $productLinkNginxCacheInvalidator;
-    /** @var AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator */
+    /** @var AllocatedStockCorrectionGearmanJobGenerator */
     protected $allocatedStockCorrectionGearmanJobGenerator;
-    /** @var StockLocationStorage $stockLocationStorage */
+    /** @var StockLocationStorage */
     protected $stockLocationStorage;
-    /** @var StockStorage $stockStorage */
+    /** @var StockStorage */
     protected $stockStorage;
-    /** @var ProductStockNginxCacheInvalidator $productStockNginxCacheInvalidator */
+    /** @var ProductStockNginxCacheInvalidator */
     protected $productStockNginxCacheInvalidator;
 
     public function __construct(
@@ -48,6 +54,8 @@ class Service extends BaseService
         ProductMapper $productMapper,
         ProductLinkLeafStorage $productLinkLeafStorage,
         ProductLinkNodeStorage $productLinkNodeStorage,
+        ProductLinkRelatedStorage $productLinkRelatedStorage,
+        ProductLinkPathsStorage $productLinkPathsStorage,
         ProductLinkNginxCacheInvalidator $productLinkNginxCacheInvalidator,
         AllocatedStockCorrectionGearmanJobGenerator $allocatedStockCorrectionGearmanJobGenerator,
         StockLocationStorage $stockLocationStorage,
@@ -57,6 +65,8 @@ class Service extends BaseService
         parent::__construct($storage, $mapper, $productMapper);
         $this->productLinkLeafStorage = $productLinkLeafStorage;
         $this->productLinkNodeStorage = $productLinkNodeStorage;
+        $this->productLinkRelatedStorage = $productLinkRelatedStorage;
+        $this->productLinkPathsStorage = $productLinkPathsStorage;
         $this->productLinkNginxCacheInvalidator = $productLinkNginxCacheInvalidator;
         $this->allocatedStockCorrectionGearmanJobGenerator = $allocatedStockCorrectionGearmanJobGenerator;
         $this->stockLocationStorage = $stockLocationStorage;
@@ -93,24 +103,21 @@ class Service extends BaseService
 
     protected function invalidateRelatedProductLink(ProductLink $productLink)
     {
-        try {
-            /** @var ProductLinkNode $productLinkNode */
-            $productLinkNode = $this->productLinkNodeStorage->fetch(
-                $this->generateOuIdSkuForProductLink($productLink)
-            );
-        } catch (NotFound $exception) {
-            // No related graphs to invalidate
-            return;
+        foreach ($this->getRelatedProductLinkIds($productLink->getId()) as $relatedProductLinkId) {
+            $this->invalidateProductLink($relatedProductLinkId);
         }
+    }
 
-        $this->invalidateProductLink(
-            $this->generateOuIdSkuForProductLink($productLink)
-        );
-
-        foreach ($productLinkNode as $sku) {
-            $this->invalidateProductLink(
-                ProductLink::generateId($productLinkNode->getOrganisationUnitId(), $sku)
-            );
+    protected function getRelatedProductLinkIds($id): array
+    {
+        try {
+            /** @var ProductLinkRelated $productLinkRelated */
+            $productLinkRelated = $this->productLinkRelatedStorage->fetch($id);
+            return array_map(function(string $sku) use($productLinkRelated) {
+                return ProductLinkRelated::generateId($productLinkRelated->getOrganisationUnitId(), $sku);
+            }, $productLinkRelated->getRelatedSkusMap());
+        } catch (NotFound $exception) {
+            return [$id];
         }
     }
 
@@ -118,6 +125,8 @@ class Service extends BaseService
     {
         $this->productLinkLeafStorage->invalidate($id);
         $this->productLinkNodeStorage->invalidate($id);
+        $this->productLinkRelatedStorage->invalidate($id);
+        $this->productLinkPathsStorage->invalidate($id);
         $this->productLinkNginxCacheInvalidator->invalidateRelated($id);
     }
 
