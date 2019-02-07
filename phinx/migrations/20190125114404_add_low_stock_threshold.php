@@ -6,17 +6,19 @@ class AddLowStockThreshold extends AbstractOnlineSchemaChange
 {
     public function up()
     {
-        $alter = [
-            'ADD COLUMN `lowStockThresholdOn` TINYINT(1) NULL',
-            'ADD COLUMN `lowStockThresholdValue` INT(10) NULL'
+        $productSettingsAlter = [
+            'ADD COLUMN `lowStockThresholdOn` TINYINT(1) NOT NULL DEFAULT FALSE',
+            'ADD COLUMN `lowStockThresholdValue` INT(10) NULL DEFAULT NULL'
         ];
 
-        $stockAlter = array_merge($alter, [
+        $stockAlter = [
+            'ADD COLUMN `lowStockThresholdOn` ENUM(\'true\',\'false\', \'default\') NOT NULL DEFAULT \'default\'',
+            'ADD COLUMN `lowStockThresholdValue` INT(10) NULL DEFAULT NULL',
             'ADD COLUMN `lowStockThresholdTriggered` TINYINT(1) NOT NULL DEFAULT FALSE',
             'ADD INDEX `LowStockThresholdTriggered` (`lowStockThresholdTriggered`)'
-        ]);
+        ];
 
-        $this->onlineSchemaChange('productSettings', implode(', ', $alter), 200);
+        $this->onlineSchemaChange('productSettings', implode(', ', $productSettingsAlter), 200);
         $this->onlineSchemaChange('stock', implode(', ', $stockAlter), 200);
     }
 
