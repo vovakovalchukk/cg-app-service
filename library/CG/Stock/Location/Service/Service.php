@@ -25,6 +25,7 @@ use CG\Stock\Location\Service as BaseService;
 use CG\Stock\Location\Storage\Cache as StockLocationCache;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
+use CG\Order\Client\Gearman\Generator\DetermineDispatchableOrders as DetermineDispatchableOrdersGenerator;
 
 class Service extends BaseService implements StatsAwareInterface
 {
@@ -48,6 +49,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $nginxCacheInvalidator;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
+    /** @var DetermineDispatchableOrdersGenerator */
+    protected $determineDispatchableOrdersJobGenerator;
 
     public function __construct(
         LocationStorage $repository,
@@ -60,7 +63,8 @@ class Service extends BaseService implements StatsAwareInterface
         ProductLinkRelatedStorage $productLinkRelatedStorage,
         StockLocationCache $stockLocationCache,
         NginxCacheInvalidator $nginxCacheInvalidator,
-        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator
+        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
+        DetermineDispatchableOrdersGenerator $determineDispatchableOrdersJobGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
@@ -69,6 +73,7 @@ class Service extends BaseService implements StatsAwareInterface
         $this->stockLocationCache = $stockLocationCache;
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
+        $this->determineDispatchableOrdersJobGenerator = $determineDispatchableOrdersJobGenerator;
     }
 
     public function save($stockLocation, array $adjustmentIds = []): Hal
@@ -92,6 +97,7 @@ class Service extends BaseService implements StatsAwareInterface
         $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
         $this->updateRelated($stock, $stockLocation, $relatedStocks, $relatedStockLocations);
+        $this->generateDetermineDispatchableOrdersJob($stock);
         return $stockLocationHal;
     }
 
@@ -209,5 +215,10 @@ class Service extends BaseService implements StatsAwareInterface
     {
         $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         return $this;
+    }
+
+    protected function generateDetermineDispatchableOrdersJob(Stock $stock)
+    {
+        $this->determineDispatchableOrdersJobGenerator->generateJobForRootOuIdAndSku($stock->getOrganisationUnitId(), $stock->getSku());
     }
 } 
