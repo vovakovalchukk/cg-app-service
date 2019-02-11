@@ -152,7 +152,7 @@ return [
         ],
         'options' => [],
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
-            $rootOrganisationUnitId = ((int)$input->getArgument('rootOrganisationUnit') ?: null);
+            $rootOrganisationUnitId = ((string)$input->getArgument('rootOrganisationUnit') ?: null);
 
             $command = $di->get(DetermineDispatchableOrders::class, ['output' => $output]);
             $command($rootOrganisationUnitId);
