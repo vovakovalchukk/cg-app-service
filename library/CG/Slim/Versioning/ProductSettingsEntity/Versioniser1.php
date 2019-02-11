@@ -20,7 +20,7 @@ class Versioniser1 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (isset($data['lowStockThresholdOn']) && isset($data['lowStockThresholdValue']) || !($params['id'] ?? null)) {
+        if (isset($data['lowStockThresholdOn'], $data['lowStockThresholdValue']) || !($params['id'] ?? null)) {
             return;
         }
 
