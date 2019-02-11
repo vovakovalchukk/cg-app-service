@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2b28afcb2dd617a341f7a5dbf9e18f6",
+    "content-hash": "ecb109f82890e98b10d5f5210bbd79d8",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1766,16 +1766,16 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.3.8.3",
+            "version": "dev-TAC-326-include-po-stock-in-available",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/phinx.git",
-                "reference": "b94ea7cc0c4eaec70815143a228ecbbf98416ae9"
+                "reference": "20dca359c299d67f960b9489c55b5b9172996f4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.3.8.3-4a8164.zip",
-                "reference": "b94ea7cc0c4eaec70815143a228ecbbf98416ae9",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-dev-TAC-326-include-po-stock-in-available-a269f7.zip",
+                "reference": "20dca359c299d67f960b9489c55b5b9172996f4c",
                 "shasum": null
             },
             "require": {
@@ -1821,7 +1821,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2018-04-17T13:27:37+00:00"
+            "time": "2019-01-22T13:52:54+00:00"
         },
         {
             "name": "channelgrabber/php-phantomjs",
@@ -2656,12 +2656,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "539ab17aa01d338ae36f467f1e34adb6bc99909a"
+                "reference": "61ae3106b6a2c194d5e2da1e9ecbccd231dda4f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-TAC-325-low-stock-threshold-c248cf.zip",
-                "reference": "539ab17aa01d338ae36f467f1e34adb6bc99909a",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-TAC-325-low-stock-threshold-f1afac.zip",
+                "reference": "61ae3106b6a2c194d5e2da1e9ecbccd231dda4f7",
                 "shasum": null
             },
             "require": {
@@ -2711,7 +2711,7 @@
                     "CG\\Stock\\Test\\": "tests"
                 }
             },
-            "time": "2019-02-07T15:42:27+00:00"
+            "time": "2019-02-11T09:32:19+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -10685,6 +10685,12 @@
     ],
     "aliases": [
         {
+            "alias": "0.3.8.4",
+            "alias_normalized": "0.3.8.4",
+            "version": "dev-TAC-326-include-po-stock-in-available",
+            "package": "channelgrabber/phinx"
+        },
+        {
             "alias": "1.7.0",
             "alias_normalized": "1.7.0.0",
             "version": "dev-TAC-325-low-stock-threshold",
@@ -10700,6 +10706,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/phinx": 20,
         "channelgrabber/settings": 20,
         "channelgrabber/stock": 20,
         "phpish/link_header": 20,

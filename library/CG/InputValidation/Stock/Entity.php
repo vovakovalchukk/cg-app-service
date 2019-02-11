@@ -41,6 +41,18 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'stockLevel'])]
             ],
+            'includePurchaseOrders' => [
+                'name' => 'includePurchaseOrders',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'includePurchaseOrders'])],
+            ],
+            'includePurchaseOrdersUseDefault' => [
+                'name' => 'includePurchaseOrdersUseDefault',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'includePurchaseOrdersUseDefault'])],
+            ],
             'lowStockThresholdOn' => [
                 'name'       => 'lowStockThresholdOn',
                 'required'   => false,

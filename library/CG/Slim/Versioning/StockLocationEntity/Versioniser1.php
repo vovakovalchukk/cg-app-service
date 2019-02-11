@@ -1,9 +1,9 @@
 <?php
-namespace CG\Slim\Versioning\ProductSettingsEntity;
+namespace CG\Slim\Versioning\StockLocationEntity;
 
 use CG\Slim\Versioning\VersioniserInterface;
-use CG\Settings\Product\Service;
-use CG\Settings\Product\Entity as ProductSetting;
+use CG\Stock\Location\Service;
+use CG\Stock\Location\Entity as StockLocation;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
 
@@ -20,24 +20,24 @@ class Versioniser1 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['id']) || isset($data['includePurchaseOrdersInAvailable'])) {
+        if (!isset($data['id']) || isset($data['onPurchaseOrder'])) {
             return;
         }
 
         try {
-            /** @var ProductSetting $productSetting */
-            $productSetting = $this->service->fetch($data['id']);
-            $data['includePurchaseOrdersInAvailable'] = $productSetting->isIncludePurchaseOrdersInAvailable();
+            /** @var StockLocation $stockLocation */
+            $stockLocation = $this->service->fetch($data['id']);
+            $data['onPurchaseOrder'] = $stockLocation->getOnPurchaseOrder();
             $request->setData($data);
         } catch (NotFound $exception) {
-            // New setting so there won't be a previously set value
+            // New entity so there won't be a previously set value
         }
     }
 
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['includePurchaseOrdersInAvailable']);
+        unset($data['onPurchaseOrder']);
         $response->setData($data);
     }
 }

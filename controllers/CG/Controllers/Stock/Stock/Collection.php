@@ -64,6 +64,8 @@ class Collection
                 $this->getParams('sku') ?: null,
                 $this->getParams('locationId') ?: [],
                 $this->getParams('stockMode') ?: [],
+                $this->getParams('includePurchaseOrders') ? filter_var($this->getParams('includePurchaseOrders'), FILTER_VALIDATE_BOOLEAN) : null,
+                $this->getParams('includePurchaseOrdersUseDefault') ? filter_var($this->getParams('includePurchaseOrdersUseDefault'), FILTER_VALIDATE_BOOLEAN) : null,
                 $lowStockThresholdTriggered
             )
         );

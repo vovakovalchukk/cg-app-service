@@ -52,6 +52,18 @@ class Filter implements RulesInterface
                         new IsArrayValidator(['name' => 'stockMode'])
                     ]
                 ],
+                'includePurchaseOrders' => [
+                    'name' => 'includePurchaseOrders',
+                    'required' => false,
+                    'allow_empty' => true,
+                    'validators' => [new BooleanValidator(['name' => 'includePurchaseOrders'])],
+                ],
+                'includePurchaseOrdersUseDefault' => [
+                    'name' => 'includePurchaseOrdersUseDefault',
+                    'required' => false,
+                    'allow_empty' => true,
+                    'validators' => [new BooleanValidator(['name' => 'includePurchaseOrdersUseDefault'])],
+                ],
                 'lowStockThresholdTriggered' => [
                     'name'       => 'lowStockThresholdTriggered',
                     'required'   => false,

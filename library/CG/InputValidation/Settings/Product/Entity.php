@@ -1,11 +1,11 @@
 <?php
 namespace CG\InputValidation\Settings\Product;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
-use CG\Validation\Rules\BooleanValidator;
 
 class Entity implements RulesInterface
 {
@@ -30,6 +30,12 @@ class Entity implements RulesInterface
                 'name'       => 'defaultStockLevel',
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'defaultStockLevel'])]
+            ],
+            'includePurchaseOrdersInAvailable' => [
+                'name' => 'includePurchaseOrdersInAvailable',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'includePurchaseOrdersInAvailable'])],
             ],
             'lowStockThresholdOn' => [
                 'name'       => 'lowStockThresholdOn',

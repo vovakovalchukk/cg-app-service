@@ -7,7 +7,7 @@ use CG\Stock\Entity as Stock;
 use CG\Stock\Service;
 use Nocarrier\Hal;
 
-class Versioniser2 implements VersioniserInterface
+class Versioniser3 implements VersioniserInterface
 {
     /** @var Service $service */
     protected $service;
@@ -20,15 +20,24 @@ class Versioniser2 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['id']) || isset($data['includePurchaseOrders'], $data['includePurchaseOrdersUseDefault'])) {
+        if (array_key_exists('lowStockThresholdOn', $data)
+            && array_key_exists('lowStockThresholdValue', $data)
+            && array_key_exists('lowStockThresholdTriggered', $data)
+        ) {
+            // We allow null values
             return;
         }
 
         try {
+            if (!isset($data['id'])) {
+                throw new NotFound('New entity');
+            }
+
             /** @var Stock $stock */
             $stock = $this->service->fetch($data['id']);
-            $data['includePurchaseOrders'] = $data['includePurchaseOrders'] ?? $stock->isIncludePurchaseOrders();
-            $data['includePurchaseOrdersUseDefault'] = $data['includePurchaseOrdersUseDefault'] ?? $stock->isIncludePurchaseOrdersUseDefault();
+            $data['lowStockThresholdOn'] = $stock->getLowStockThresholdOn();
+            $data['lowStockThresholdValue'] = $stock->getLowStockThresholdValue();
+            $data['lowStockThresholdTriggered'] = $stock->isLowStockThresholdTriggered();
         } catch (NotFound $exception) {
             // New entity - nothing to set
         }
@@ -39,7 +48,7 @@ class Versioniser2 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['includePurchaseOrders'], $data['includePurchaseOrdersUseDefault']);
+        unset($data['lowStockThresholdOn'], $data['lowStockThresholdValue'], $data['lowStockThresholdTriggered']);
         $response->setData($data);
     }
 }
