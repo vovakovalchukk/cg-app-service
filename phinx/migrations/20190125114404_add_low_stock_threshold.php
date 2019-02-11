@@ -12,7 +12,7 @@ class AddLowStockThreshold extends AbstractOnlineSchemaChange
         ];
 
         $stockAlter = [
-            'ADD COLUMN `lowStockThresholdOn` ENUM(\'true\',\'false\', \'default\') NOT NULL DEFAULT \'default\'',
+            'ADD COLUMN `lowStockThresholdOn` VARCHAR(20) NOT NULL DEFAULT \'default\'',
             'ADD COLUMN `lowStockThresholdValue` INT(10) NULL DEFAULT NULL',
             'ADD COLUMN `lowStockThresholdTriggered` TINYINT(1) NOT NULL DEFAULT FALSE',
             'ADD INDEX `LowStockThresholdTriggered` (`lowStockThresholdTriggered`)'
