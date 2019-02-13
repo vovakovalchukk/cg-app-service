@@ -35,6 +35,7 @@ class DbTest extends TestCase
         }
         static::mysqli($connection, 'select_db', static::DB);
         static::mysqli($connection, 'set_charset', static::CHARSET);
+        static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `productPickingLocation`');
         static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `productListingImage`');
         static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `productImage`');
         static::mysqli($connection, 'query', 'DROP TABLE IF EXISTS `productTaxRate`');
@@ -114,6 +115,18 @@ CREATE TABLE `productListingImage` (
   PRIMARY KEY (`productId`,`listingId`,`imageId`),
   KEY `_productListingImage_ibfk_2` (`listingId`),
   CONSTRAINT `productListingImage_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+SQL
+        );
+        static::mysqli($connection, 'query',
+            <<<SQL
+CREATE TABLE `productPickingLocation` (
+  `productId` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `name` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`productId`,`level`),
+  KEY `Level` (`level`),
+  CONSTRAINT `productPickingLocation_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 SQL
         );
@@ -200,6 +213,7 @@ SQL
                     'attachAttributeValuesToProductArray',
                     'attachProductImageIdsToProductArray',
                     'attachProductTaxRatesToProductArray',
+                    'attachProductPickingLocations',
                     'fromArraysToCollection',
                     'fromArrays',
                     'fromArray',

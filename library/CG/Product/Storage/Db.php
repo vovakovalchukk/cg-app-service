@@ -419,6 +419,7 @@ class Db extends DbAbstract implements StorageInterface
         $this->saveAttributeRelation($entity);
         $this->saveImageRelation($entity);
         $this->saveTaxRates($entity);
+        $this->savePickingLocations($entity);
 
         return $entity;
     }
@@ -463,7 +464,8 @@ class Db extends DbAbstract implements StorageInterface
             $entityArray['attributeValues'],
             $entityArray['imageIds'],
             $entityArray['listingImageIds'],
-            $entityArray['taxRateIds']
+            $entityArray['taxRateIds'],
+            $entityArray['pickingLocations']
         );
 
         $update = $this->getUpdate()->set($entityArray)
@@ -474,6 +476,7 @@ class Db extends DbAbstract implements StorageInterface
         $this->saveAttributeRelation($entity);
         $this->saveImageRelation($entity);
         $this->saveTaxRates($entity);
+        $this->savePickingLocations($entity);
 
         return $entity;
     }
@@ -549,6 +552,25 @@ class Db extends DbAbstract implements StorageInterface
         $this->commitTransaction();
     }
 
+    protected function savePickingLocations(ProductEntity $entity)
+    {
+        $this->beginTransaction();
+
+        $delete = $this->getWriteSql()->delete('productPickingLocation')->where(['productId' => $entity->getId()]);
+        $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+
+        foreach ($entity->getPickingLocations() as $level => $pickingLocation) {
+            $insert = $this->getWriteSql()->insert('productPickingLocation')->values([
+                'productId' => $entity->getId(),
+                'level' => $level,
+                'name' => $pickingLocation,
+            ]);
+            $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        }
+
+        $this->commitTransaction();
+    }
+
     /**
      * @return Select
      */
@@ -579,6 +601,12 @@ class Db extends DbAbstract implements StorageInterface
                 'productTaxRate',
                 'productTaxRate.productId = product.id',
                 ['taxRateId', 'VATCountryCode'],
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productPickingLocation',
+                'productPickingLocation.productId = product.id',
+                ['pickingLocationLevel' => 'level', 'pickingLocationName' => 'name'],
                 Select::JOIN_LEFT
             );
     }
