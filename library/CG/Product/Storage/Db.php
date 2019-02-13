@@ -142,6 +142,8 @@ class Db extends DbAbstract implements StorageInterface
                 ->offset($offset);
         }
 
+        $select->order('_id ASC');
+
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
             throw new NotFound();
