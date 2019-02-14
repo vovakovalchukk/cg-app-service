@@ -97,7 +97,7 @@ class Service extends BaseService implements StatsAwareInterface
         $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
         $this->updateRelated($stock, $stockLocation, $relatedStocks, $relatedStockLocations);
-        $this->generateDetermineAndUpdateDispatchableOrdersJob($stock);
+        $this->determineAndUpdateDispatchableOrdersJobGenerator->generateJobForRootOuIdAndSku($stock->getOrganisationUnitId(), $stock->getSku());
         return $stockLocationHal;
     }
 
@@ -216,9 +216,4 @@ class Service extends BaseService implements StatsAwareInterface
         $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         return $this;
     }
-
-    protected function generateDetermineAndUpdateDispatchableOrdersJob(Stock $stock)
-    {
-        $this->determineAndUpdateDispatchableOrdersJobGenerator->generateJobForRootOuIdAndSku($stock->getOrganisationUnitId(), $stock->getSku());
-    }
-} 
+}
