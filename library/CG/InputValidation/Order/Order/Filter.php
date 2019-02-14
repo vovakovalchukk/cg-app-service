@@ -336,10 +336,6 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new BooleanValidator(["name" => "dispatchable"])
                 ]
-            ],
-            'XDEBUG_SESSION_START' => [
-                'name' => 'XDEBUG_SESSION_START',
-                'required' => false
             ]
         ];
     }
