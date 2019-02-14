@@ -29,35 +29,35 @@ class Filter implements RulesInterface
                 'name'       => 'orderIds',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "orderIds"])
+                    new IsArrayValidator(['name' => 'orderIds'])
                 ],
             ],
             'accountId' => [
                 'name'       => 'accountId',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "accountId"])
+                    new IsArrayValidator(['name' => 'accountId'])
                 ],
             ],
             'externalId' => [
                 'name'       => 'externalId',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "externalId"])
+                    new IsArrayValidator(['name' => 'externalId'])
                 ],
             ],
             'itemSku' => [
                 'name'       => 'itemSku',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "itemSku"])
+                    new IsArrayValidator(['name' => 'itemSku'])
                 ],
             ],
             'status' => [
                 'name'       => 'status',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "status"])
+                    new IsArrayValidator(['name' => 'status'])
                 ],
             ],
             'organisationUnitId' => [
@@ -71,49 +71,49 @@ class Filter implements RulesInterface
                 'name' => 'cgCreationDateFrom',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'cgCreationDateTo' => [
                 'name' => 'cgCreationDateTo',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'purchaseDateFrom' => [
                 'name' => 'purchaseDateFrom',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'purchaseDateTo' => [
                 'name' => 'purchaseDateTo',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'lastUpdateFromChannelFrom' => [
                 'name' => 'lastUpdateFromChannelFrom',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'lastUpdateFromChannelTo' => [
                 'name' => 'lastUpdateFromChannelTo',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'externalListingId' => [
                 'name'       => 'externalListingId',
                 'required'   => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "externalListingId"])
+                    new IsArrayValidator(['name' => 'externalListingId'])
                 ],
             ],
             'hasImages' => [
@@ -137,7 +137,7 @@ class Filter implements RulesInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "dispatchable"])
+                    new BooleanValidator(['name' => 'dispatchable'])
                 ]
             ]
         ];
