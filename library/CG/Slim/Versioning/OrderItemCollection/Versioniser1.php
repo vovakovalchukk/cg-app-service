@@ -14,7 +14,7 @@ class Versioniser1 implements VersioniserInterface
         $this->setEntityVersioner($entityVersioner);
     }
 
-    public function setEntityVersioner(EntityVersioniser $entityVersioner)
+    public function setEntityVersioner(VersioniserInterface $entityVersioner)
     {
         $this->entityVersioner = $entityVersioner;
         return $this;

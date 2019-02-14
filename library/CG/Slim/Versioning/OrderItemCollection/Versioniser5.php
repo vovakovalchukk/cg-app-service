@@ -3,9 +3,9 @@ namespace CG\Slim\Versioning\OrderItemCollection;
 
 use CG\Slim\Versioning\VersioniserInterface;
 use CG\Slim\Versioning\OrderItemEntity\Versioniser5 as EntityVersioniser;
-use CG\Slim\Versioning\OrderItemEntity\Versioniser4 as PreviousEntityVersioniser;
+use CG\Slim\Versioning\OrderItemCollection\Versioniser1 as Versioniser1;
 
-class Versioniser5 extends PreviousEntityVersioniser implements VersioniserInterface
+class Versioniser5 extends Versioniser1 implements VersioniserInterface
 {
     public function __construct(EntityVersioniser $entityVersioner)
     {
