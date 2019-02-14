@@ -24,8 +24,8 @@ class Filter implements RulesInterface, ExclusionInterface
 {
     use PaginationTrait;
 
-    // In this instance, we want "orderFilter" to be exclusive to
-    // everything else, except for "limit" and "page" so the
+    // In this instance, we want 'orderFilter' to be exclusive to
+    // everything else, except for 'limit' and 'page' so the
     // returned array is generated programmatically.
     public function getExclusions()
     {
@@ -55,21 +55,21 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'orderIds',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "orderIds"])
+                    new IsArrayValidator(['name' => 'orderIds'])
                 ]
             ],
             'purchaseDateFrom' => [
                 'name' => 'purchaseDateFrom',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'purchaseDateTo' => [
                 'name' => 'purchaseDateTo',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'organisationUnitId' => [
@@ -88,7 +88,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'status',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "status"])
+                    new IsArrayValidator(['name' => 'status'])
                 ]
             ],
             'accountId' => [
@@ -102,7 +102,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'channel',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "channel"])
+                    new IsArrayValidator(['name' => 'channel'])
                 ]
             ],
             'archived' => [
@@ -110,7 +110,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "archived"])
+                    new BooleanValidator(['name' => 'archived'])
                 ]
             ],
             'shippingAddressCountry' => [
@@ -140,7 +140,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "multiLineOrder"])
+                    new BooleanValidator(['name' => 'multiLineOrder'])
                 ]
             ],
             'multiSameItem' => [
@@ -148,21 +148,21 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "multiSameItem"])
+                    new BooleanValidator(['name' => 'multiSameItem'])
                 ]
             ],
             'shippingMethod' => [
                 'name' => 'shippingMethod',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "shippingMethod"])
+                    new IsArrayValidator(['name' => 'shippingMethod'])
                 ]
             ],
             'batch' => [
                 'name' => 'batch',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "batch"])
+                    new IsArrayValidator(['name' => 'batch'])
                 ]
             ],
             'orderBy' => [
@@ -181,21 +181,21 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'tag',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "tag"])
+                    new IsArrayValidator(['name' => 'tag'])
                 ]
             ],
             'paymentMethod' => [
                 'name' => 'paymentMethod',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "paymentMethod"])
+                    new IsArrayValidator(['name' => 'paymentMethod'])
                 ]
             ],
             'paymentReference' => [
                 'name' => 'paymentReference',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "paymentReference"])
+                    new IsArrayValidator(['name' => 'paymentReference'])
                 ]
             ],
             'totalFrom' => [
@@ -220,7 +220,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "buyerMessage"])
+                    new BooleanValidator(['name' => 'buyerMessage'])
                 ]
             ],
             'giftMessage' => [
@@ -228,7 +228,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "giftMessage"])
+                    new BooleanValidator(['name' => 'giftMessage'])
                 ]
             ],
             'hasItems' => [
@@ -243,7 +243,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'fulfilmentChannel',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "fulfilmentChannel"])
+                    new IsArrayValidator(['name' => 'fulfilmentChannel'])
                 ]
             ],
             'invoiceNumber' => [
@@ -264,14 +264,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'externalId',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "externalId"])
+                    new IsArrayValidator(['name' => 'externalId'])
                 ]
             ],
             'externalUsername' => [
                 'name' => 'externalUsername',
                 'required' => false,
                 'validators' => [
-                    new IsArrayValidator(["name" => "externalUsername"])
+                    new IsArrayValidator(['name' => 'externalUsername'])
                 ]
             ],
             'id' => [
@@ -301,14 +301,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'dispatchDateFrom',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'dispatchDateTo' => [
                 'name' => 'dispatchDateTo',
                 'required' => false,
                 'validators' => [
-                    new Date(['format' => "Y-m-d H:i:s"])
+                    new Date(['format' => 'Y-m-d H:i:s'])
                 ]
             ],
             'hasInvoice' => [
@@ -334,7 +334,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(["name" => "dispatchable"])
+                    new BooleanValidator(['name' => 'dispatchable'])
                 ]
             ]
         ];
