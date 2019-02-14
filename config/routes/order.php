@@ -101,7 +101,7 @@ return [
         },
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderCollection',
-        'validation' => ["dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false],
+        'validation' => ['dataRules' => null, 'filterRules' => OrderFilterValidationRules::class, 'flatten' => false],
         'version' => new Version(1, 18),
         'entityRoute' => '/order/:orderId'
     ],
@@ -118,7 +118,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'OrderEntity',
-        'validation' => ["dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => OrderEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'version' => new Version(1, 18),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
@@ -141,9 +141,9 @@ return [
         'name' => 'OrderNoteCollection',
         'entityRoute' => '/order/:orderId/note/:noteId',
         'validation' => [
-            "dataRules" => NoteEntityValidationRules::class,
-            "filterRules" => NoteFilterValidationRules::class,
-            "flatten" => false
+            'dataRules' => NoteEntityValidationRules::class,
+            'filterRules' => NoteFilterValidationRules::class,
+            'flatten' => false
         ]
     ],
     '/order/:orderId/note/:noteId' => [
@@ -159,7 +159,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderNoteEntity',
-        'validation' => ["dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => NoteEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'eTag' => [
             'mapperClass' => NoteMapper::class,
             'entityClass' => NoteEntity::class,
@@ -181,9 +181,9 @@ return [
         'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
         'validation' => [
-            "dataRules" => OrderTrackingEntityValidationRules::class,
-            "filterRules" => OrderTrackingFilterValidationRules::class,
-            "flatten" => false
+            'dataRules' => OrderTrackingEntityValidationRules::class,
+            'filterRules' => OrderTrackingFilterValidationRules::class,
+            'flatten' => false
         ],
         'version' => new Version(1, 3),
     ],
@@ -201,9 +201,9 @@ return [
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderTrackingEntity',
         'validation' => [
-            "dataRules" => OrderTrackingEntityValidationRules::class,
-            "filterRules" => null,
-            "flatten" => false
+            'dataRules' => OrderTrackingEntityValidationRules::class,
+            'filterRules' => null,
+            'flatten' => false
         ],
         'version' => new Version(1, 3),
         'eTag' => [
@@ -227,9 +227,9 @@ return [
         'entityRoute' => '/order/:orderId/alert/:alertId',
         'name' => 'OrderAlertCollection',
         'validation' => [
-            "dataRules" => AlertEntityValidationRules::class,
-            "filterRules" => AlertFilterValidationRules::Class,
-            "flatten" => false
+            'dataRules' => AlertEntityValidationRules::class,
+            'filterRules' => AlertFilterValidationRules::Class,
+            'flatten' => false
         ]
     ],
     '/order/:orderId/alert/:alertId' => [
@@ -245,7 +245,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderAlertEntity',
-        'validation' => ["dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => AlertEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'eTag' => [
             'mapperClass' => AlertMapper::class,
             'entityClass' => AlertEntity::class,
@@ -265,7 +265,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'OPTIONS'],
         'name' => 'OrderArchiveEntity',
-        'validation' => ["dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false]
+        'validation' => ['dataRules' => ArchiveEntityValidationRules::class, 'filterRules' => null, 'flatten' => false]
     ],
     '/order/:orderId/userChange' => [
         'controllers' => function ($orderId) use ($di) {
@@ -281,9 +281,9 @@ return [
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderUserChangeEntity',
         'validation' => [
-            "dataRules" => UserChangeEntityValidationRules::class,
-            "filterRules" => null,
-            "flatten" => false
+            'dataRules' => UserChangeEntityValidationRules::class,
+            'filterRules' => null,
+            'flatten' => false
         ],
         'eTag' => [
             'mapperClass' => UserChangeMapper::class,
@@ -303,7 +303,7 @@ return [
         },
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderItemCollection',
-        'validation' => ["dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false],
+        'validation' => ['dataRules' => null, 'filterRules' => ItemFilterValidationRules::class, 'flatten' => false],
         'version' => new Version(1, 11),
         'entityRoute' => '/orderItem/:orderItemId'
     ],
@@ -320,7 +320,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'],
         'name' => 'OrderItemEntity',
-        'validation' => ["dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => ItemEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'version' => new Version(1, 11),
         //Updating this requires an update to /orderItem/:orderItemId/images route also (Line 380)
         'eTag' => [
@@ -368,9 +368,9 @@ return [
         'name' => 'OrderItemFeeCollection',
         'entityRoute' => '/orderItem/:orderItemId/fee/:feeId',
         'validation' => [
-            "dataRules" => FeeEntityValidationRules::class,
-            "filterRules" => FeeFilterValidationRules::class,
-            "flatten" => false
+            'dataRules' => FeeEntityValidationRules::class,
+            'filterRules' => FeeFilterValidationRules::class,
+            'flatten' => false
         ]
     ],
     '/orderItem/:orderItemId/fee/:feeId' => [
@@ -386,7 +386,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderItemFeeEntity',
-        'validation' => ["dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => FeeEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'eTag' => [
             'mapperClass' => FeeMapper::class,
             'entityClass' => FeeEntity::class,
@@ -408,9 +408,9 @@ return [
         'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
         'name' => 'OrderItemGiftWrapCollection',
         'validation' => [
-            "dataRules" => GiftWrapEntityValidationRules::class,
-            "filterRules" => GiftWrapFilterValidationRules::class,
-            "flatten" => false
+            'dataRules' => GiftWrapEntityValidationRules::class,
+            'filterRules' => GiftWrapFilterValidationRules::class,
+            'flatten' => false
         ]
     ],
     '/orderItem/:orderItemId/giftWrap/:giftWrapId' => [
@@ -427,9 +427,9 @@ return [
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderItemGiftWrapEntity',
         'validation' => [
-            "dataRules" => GiftWrapEntityValidationRules::class,
-            "filterRules" => null,
-            "flatten" => false
+            'dataRules' => GiftWrapEntityValidationRules::class,
+            'filterRules' => null,
+            'flatten' => false
         ],
         'eTag' => [
             'mapperClass' => GiftWrapMapper::class,
@@ -450,7 +450,7 @@ return [
         'via' => ['GET', 'OPTIONS'],
         'entityRoute' => '/orderBatch/:batchId',
         'name' => 'OrderBatchCollection',
-        'validation' => ["dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false]
+        'validation' => ['dataRules' => null, 'filterRules' => BatchFilterValidationRules::class, 'flatten' => false]
     ],
     '/orderBatch/:batchId' => [
         'controllers' => function ($batchId) use ($di) {
@@ -465,7 +465,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderBatchEntity',
-        'validation' => ["dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'validation' => ['dataRules' => BatchEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
         'eTag' => [
             'mapperClass' => BatchMapper::class,
             'entityClass' => BatchEntity::class,
