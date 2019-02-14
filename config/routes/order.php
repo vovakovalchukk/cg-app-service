@@ -89,354 +89,387 @@ use CG\Order\Shared\Tracking\Mapper as TrackingMapper;
 use CG\Order\Service\Tracking\Service as TrackingService;
 
 return [
-    '/order' => array (
-        'controllers' => function() use ($di) {
+    '/order' => [
+        'controllers' => function () use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
-            $controller = $di->get(OrderCollection::class, array());
+            $controller = $di->get(OrderCollection::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PATCH', 'OPTIONS'),
+        'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderCollection',
-        'validation' => array("dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false),
+        'validation' => ["dataRules" => null, "filterRules" => OrderFilterValidationRules::class, "flatten" => false],
         'version' => new Version(1, 18),
         'entityRoute' => '/order/:orderId'
-    ),
-        '/order/:orderId' => array (
-        'controllers' => function($orderId) use ($di) {
+    ],
+    '/order/:orderId' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(Order::class, array());
+            $controller = $di->get(Order::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'OrderEntity',
-        'validation' => array("dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => ["dataRules" => OrderEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'version' => new Version(1, 18),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
             'serviceClass' => OrderService::class
         ],
-    ),
-        '/order/:orderId/note' => array (
-        'controllers' => function($orderId) use ($di) {
+    ],
+    '/order/:orderId/note' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(NoteCollection::class, array());
+            $controller = $di->get(NoteCollection::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'POST', 'OPTIONS'),
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'OrderNoteCollection',
         'entityRoute' => '/order/:orderId/note/:noteId',
-        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => NoteFilterValidationRules::class, "flatten" => false)
-    ),
-        '/order/:orderId/note/:noteId' => array (
-        'controllers' => function($orderId, $noteId) use ($di) {
+        'validation' => [
+            "dataRules" => NoteEntityValidationRules::class,
+            "filterRules" => NoteFilterValidationRules::class,
+            "flatten" => false
+        ]
+    ],
+    '/order/:orderId/note/:noteId' => [
+        'controllers' => function ($orderId, $noteId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(Note::class, array());
+            $controller = $di->get(Note::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $noteId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderNoteEntity',
-        'validation' => array("dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => ["dataRules" => NoteEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => NoteMapper::class,
             'entityClass' => NoteEntity::class,
             'serviceClass' => NoteService::class
         ]
-    ),
-        '/order/:orderId/tracking' => array (
-        'controllers' => function($orderId) use ($di) {
+    ],
+    '/order/:orderId/tracking' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(OrderTrackingCollection::class, array());
+            $controller = $di->get(OrderTrackingCollection::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'POST', 'OPTIONS'),
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/order/:orderId/tracking/:trackingId',
         'name' => 'OrderTrackingCollection',
-        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => OrderTrackingFilterValidationRules::class, "flatten" => false),
+        'validation' => [
+            "dataRules" => OrderTrackingEntityValidationRules::class,
+            "filterRules" => OrderTrackingFilterValidationRules::class,
+            "flatten" => false
+        ],
         'version' => new Version(1, 3),
-    ),
-        '/order/:orderId/tracking/:trackingId' => array (
-        'controllers' => function($orderId, $trackingId) use ($di) {
+    ],
+    '/order/:orderId/tracking/:trackingId' => [
+        'controllers' => function ($orderId, $trackingId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(OrderTracking::class, array());
+            $controller = $di->get(OrderTracking::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $trackingId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderTrackingEntity',
-        'validation' => array("dataRules" => OrderTrackingEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => [
+            "dataRules" => OrderTrackingEntityValidationRules::class,
+            "filterRules" => null,
+            "flatten" => false
+        ],
         'version' => new Version(1, 3),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,
             'serviceClass' => TrackingService::class
         ]
-    ),
-        '/order/:orderId/alert' => array (
-        'controllers' => function($orderId) use ($di) {
+    ],
+    '/order/:orderId/alert' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(AlertCollection::class, array());
+            $controller = $di->get(AlertCollection::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'POST', 'OPTIONS'),
+        'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/order/:orderId/alert/:alertId',
         'name' => 'OrderAlertCollection',
-        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => AlertFilterValidationRules::Class, "flatten" => false)
-    ),
-        '/order/:orderId/alert/:alertId' => array (
-        'controllers' => function($orderId, $alertId) use ($di) {
+        'validation' => [
+            "dataRules" => AlertEntityValidationRules::class,
+            "filterRules" => AlertFilterValidationRules::Class,
+            "flatten" => false
+        ]
+    ],
+    '/order/:orderId/alert/:alertId' => [
+        'controllers' => function ($orderId, $alertId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(Alert::class, array());
+            $controller = $di->get(Alert::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $alertId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderAlertEntity',
-        'validation' => array("dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => ["dataRules" => AlertEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => AlertMapper::class,
             'entityClass' => AlertEntity::class,
             'serviceClass' => AlertService::class
         ]
-    ),
-        '/order/:orderId/archive' => array (
-        'controllers' => function($orderId) use ($di) {
+    ],
+    '/order/:orderId/archive' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(Archive::class, array());
+            $controller = $di->get(Archive::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'OPTIONS'],
         'name' => 'OrderArchiveEntity',
-        'validation' => array("dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false)
-    ),
-        '/order/:orderId/userChange' => array (
-        'controllers' => function($orderId) use ($di) {
+        'validation' => ["dataRules" => ArchiveEntityValidationRules::class, "filterRules" => null, "flatten" => false]
+    ],
+    '/order/:orderId/userChange' => [
+        'controllers' => function ($orderId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(UserChange::class, array());
+            $controller = $di->get(UserChange::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderUserChangeEntity',
-        'validation' => array("dataRules" => UserChangeEntityValidationRules::class, "filterRules" => null, "flatten" => false),
+        'validation' => [
+            "dataRules" => UserChangeEntityValidationRules::class,
+            "filterRules" => null,
+            "flatten" => false
+        ],
         'eTag' => [
             'mapperClass' => UserChangeMapper::class,
             'entityClass' => UserChangeEntity::class,
             'serviceClass' => UserChangeService::class
         ]
-    ),
-        '/orderItem' => array (
-        'controllers' => function() use ($di) {
+    ],
+    '/orderItem' => [
+        'controllers' => function () use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
-            $controller = $di->get(ItemCollection::class, array());
+            $controller = $di->get(ItemCollection::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($app->request->getBody())
             );
         },
-        'via' => array('GET', 'PATCH', 'OPTIONS'),
+        'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderItemCollection',
-        'validation' => array("dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false),
+        'validation' => ["dataRules" => null, "filterRules" => ItemFilterValidationRules::class, "flatten" => false],
         'version' => new Version(1, 11),
         'entityRoute' => '/orderItem/:orderItemId'
-    ),
-        '/orderItem/:orderItemId' => array (
-        'controllers' => function($orderItemId) use ($di) {
+    ],
+    '/orderItem/:orderItemId' => [
+        'controllers' => function ($orderItemId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(Item::class, array());
+            $controller = $di->get(Item::class, []);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($orderItemId, $app->request()->getBody())
             );
         },
-        'via' => array('GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'),
+        'via' => ['GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'],
         'name' => 'OrderItemEntity',
-        'validation' => array("dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-        'version' => new Version(1, 11),//Updating this requires an update to /orderItem/:orderItemId/images route also (Line 380)
+        'validation' => ["dataRules" => ItemEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'version' => new Version(1, 11),
+        //Updating this requires an update to /orderItem/:orderItemId/images route also (Line 380)
         'eTag' => [
             'mapperClass' => ItemMapper::class,
-        'entityClass' => ItemEntity::class,
-        'serviceClass' => ItemService::class
-    ]
-),
-    '/orderItem/:orderItemId/images' => [
-    'controllers' => function($orderItemId) use ($di) {
-        /** @var Slim $app */
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
-        $controller = $di->get(ItemImages::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($orderItemId, $app->request()->getBody())
-        );
-    },
-    'via' => ['PUT', 'OPTIONS'],
-    'name' => 'OrderItemImages',
-    'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
-    'version' => new Version(1, 10),
-    'eTag' => [
-        'mapperClass' => ItemMapper::class,
-        'entityClass' => ItemEntity::class,
-        'serviceClass' => ItemService::class,
-        'helper' => function() use ($di, $app) {
-            return $di->get(ItemImageEtagHelper::class);
-        }
+            'entityClass' => ItemEntity::class,
+            'serviceClass' => ItemService::class
+        ]
     ],
-],
-    '/orderItem/:orderItemId/fee' => array (
-    'controllers' => function($orderItemId) use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
+    '/orderItem/:orderItemId/images' => [
+        'controllers' => function ($orderItemId) use ($di) {
+            /** @var Slim $app */
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ItemImages::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $app->request()->getBody())
+            );
+        },
+        'via' => ['PUT', 'OPTIONS'],
+        'name' => 'OrderItemImages',
+        'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
+        'version' => new Version(1, 10),
+        'eTag' => [
+            'mapperClass' => ItemMapper::class,
+            'entityClass' => ItemEntity::class,
+            'serviceClass' => ItemService::class,
+            'helper' => function () use ($di, $app) {
+                return $di->get(ItemImageEtagHelper::class);
+            }
+        ],
+    ],
+    '/orderItem/:orderItemId/fee' => [
+        'controllers' => function ($orderItemId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-        $controller = $di->get(FeeCollection::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($orderItemId, $app->request()->getBody())
-        );
-    },
-    'via' => array('GET', 'POST', 'OPTIONS'),
-    'name' => 'OrderItemFeeCollection',
-    'entityRoute' => '/orderItem/:orderItemId/fee/:feeId',
-    'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => FeeFilterValidationRules::class, "flatten" => false)
-),
-    '/orderItem/:orderItemId/fee/:feeId' => array (
-    'controllers' => function($orderItemId, $feeId) use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
+            $controller = $di->get(FeeCollection::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'OrderItemFeeCollection',
+        'entityRoute' => '/orderItem/:orderItemId/fee/:feeId',
+        'validation' => [
+            "dataRules" => FeeEntityValidationRules::class,
+            "filterRules" => FeeFilterValidationRules::class,
+            "flatten" => false
+        ]
+    ],
+    '/orderItem/:orderItemId/fee/:feeId' => [
+        'controllers' => function ($orderItemId, $feeId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-        $controller = $di->get(Fee::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($orderItemId, $feeId, $app->request()->getBody())
-        );
-    },
-    'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-    'name' => 'OrderItemFeeEntity',
-    'validation' => array("dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-    'eTag' => [
-        'mapperClass' => FeeMapper::class,
-        'entityClass' => FeeEntity::class,
-        'serviceClass' => FeeService::class
-    ]
-),
-    '/orderItem/:orderItemId/giftWrap' => array (
-    'controllers' => function($orderItemId) use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
+            $controller = $di->get(Fee::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $feeId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'OrderItemFeeEntity',
+        'validation' => ["dataRules" => FeeEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'eTag' => [
+            'mapperClass' => FeeMapper::class,
+            'entityClass' => FeeEntity::class,
+            'serviceClass' => FeeService::class
+        ]
+    ],
+    '/orderItem/:orderItemId/giftWrap' => [
+        'controllers' => function ($orderItemId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-        $controller = $di->get(GiftWrapCollection::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($orderItemId, $app->request()->getBody())
-        );
-    },
-    'via' => array('GET', 'POST', 'OPTIONS'),
-    'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
-    'name' => 'OrderItemGiftWrapCollection',
-    'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => GiftWrapFilterValidationRules::class, "flatten" => false)
-),
-    '/orderItem/:orderItemId/giftWrap/:giftWrapId' => array (
-    'controllers' => function($orderItemId, $giftWrapId) use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
+            $controller = $di->get(GiftWrapCollection::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
+        'name' => 'OrderItemGiftWrapCollection',
+        'validation' => [
+            "dataRules" => GiftWrapEntityValidationRules::class,
+            "filterRules" => GiftWrapFilterValidationRules::class,
+            "flatten" => false
+        ]
+    ],
+    '/orderItem/:orderItemId/giftWrap/:giftWrapId' => [
+        'controllers' => function ($orderItemId, $giftWrapId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-        $controller = $di->get(GiftWrap::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($orderItemId, $giftWrapId, $app->request()->getBody())
-        );
-    },
-    'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-    'name' => 'OrderItemGiftWrapEntity',
-    'validation' => array("dataRules" => GiftWrapEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-    'eTag' => [
-        'mapperClass' => GiftWrapMapper::class,
-        'entityClass' => GiftWrapEntity::class,
-        'serviceClass' => GiftWrapService::class
-    ]
-),
-    '/orderBatch' => array (
-    'controllers' => function() use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
-        $controller = $di->get(BatchCollection::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method()
-        );
-    },
-    'via' => array('GET', 'OPTIONS'),
-    'entityRoute' => '/orderBatch/:batchId',
-    'name' => 'OrderBatchCollection',
-    'validation' => array("dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false)
-),
-    '/orderBatch/:batchId' => array (
-    'controllers' => function($batchId) use ($di) {
-        $app = $di->get(Slim::class);
-        $method = $app->request()->getMethod();
+            $controller = $di->get(GiftWrap::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($orderItemId, $giftWrapId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'OrderItemGiftWrapEntity',
+        'validation' => [
+            "dataRules" => GiftWrapEntityValidationRules::class,
+            "filterRules" => null,
+            "flatten" => false
+        ],
+        'eTag' => [
+            'mapperClass' => GiftWrapMapper::class,
+            'entityClass' => GiftWrapEntity::class,
+            'serviceClass' => GiftWrapService::class
+        ]
+    ],
+    '/orderBatch' => [
+        'controllers' => function () use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+            $controller = $di->get(BatchCollection::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method()
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'entityRoute' => '/orderBatch/:batchId',
+        'name' => 'OrderBatchCollection',
+        'validation' => ["dataRules" => null, "filterRules" => BatchFilterValidationRules::class, "flatten" => false]
+    ],
+    '/orderBatch/:batchId' => [
+        'controllers' => function ($batchId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-        $controller = $di->get(Batch::class, array());
-        $app->view()->set(
-            'RestResponse',
-            $controller->$method($batchId, $app->request()->getBody())
-        );
-    },
-    'via' => array('GET', 'PUT', 'DELETE', 'OPTIONS'),
-    'name' => 'OrderBatchEntity',
-    'validation' => array("dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false),
-    'eTag' => [
-        'mapperClass' => BatchMapper::class,
-        'entityClass' => BatchEntity::class,
-        'serviceClass' => BatchService::class
-    ]
-),
+            $controller = $di->get(Batch::class, []);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($batchId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'name' => 'OrderBatchEntity',
+        'validation' => ["dataRules" => BatchEntityValidationRules::class, "filterRules" => null, "flatten" => false],
+        'eTag' => [
+            'mapperClass' => BatchMapper::class,
+            'entityClass' => BatchEntity::class,
+            'serviceClass' => BatchService::class
+        ]
+    ],
 ];
