@@ -406,7 +406,8 @@ class Db extends DbAbstract implements StorageInterface
             $entityArray['attributeValues'],
             $entityArray['imageIds'],
             $entityArray['listingImageIds'],
-            $entityArray['taxRateIds']
+            $entityArray['taxRateIds'],
+            $entityArray['pickingLocations']
         );
 
         $insert = $this->getInsert()->values($entityArray);
