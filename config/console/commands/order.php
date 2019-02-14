@@ -143,7 +143,7 @@ return [
         }
     ],
     'order:determineAndUpdateDispatchableOrders' => [
-        'description' => "Determine which orders are dispatchable for a list of root OU ids and SKUs and updates them",
+        'description' => 'Determine which orders are dispatchable for a list of root OU ids and SKUs and updates them',
         'arguments' => [
             'rootOrganisationUnit' => [
                 'required' => false,
