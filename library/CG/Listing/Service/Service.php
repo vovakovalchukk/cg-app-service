@@ -1,7 +1,7 @@
 <?php
 namespace CG\Listing\Service;
 
-use CG\Account\Client\Entity as AccountEntity;
+use CG\CGLib\Nginx\Cache\Invalidator\Listing as NginxCacheInvalidator;
 use CG\Channel\ChannelActions;
 use CG\Listing\Collection;
 use CG\Listing\Entity;
@@ -32,6 +32,8 @@ class Service extends ServiceAbstract
     protected $statusHistoryService;
     /** @var ChannelActions $channelActions */
     protected $channelActions;
+    /** @var NginxCacheInvalidator */
+    protected $nginxCacheInvalidator;
 
     public function __construct(
         StorageInterface $repository,
@@ -39,13 +41,14 @@ class Service extends ServiceAbstract
         GlobalEventManager $globalEventManager,
         StatusChecker $statusChecker,
         StatusHistoryService $statusHistoryService,
-        ChannelActions $channelActions
+        ChannelActions $channelActions,
+        NginxCacheInvalidator $nginxCacheInvalidator
     ) {
         parent::__construct($repository, $mapper, $statusChecker);
-        $this
-            ->setGlobalEventManager($globalEventManager)
-            ->setStatusHistoryService($statusHistoryService)
-            ->setChannelActions($channelActions);
+        $this->globalEventManager = $globalEventManager;
+        $this->statusHistoryService = $statusHistoryService;
+        $this->channelActions = $channelActions;
+        $this->nginxCacheInvalidator = $nginxCacheInvalidator;
     }
 
     public function fetch($id)
@@ -102,7 +105,7 @@ class Service extends ServiceAbstract
     public function saveHal(Hal $hal, array $ids)
     {
         $listing = $this->fromHal($hal, $ids);
-        GlobalEventManager::trigger('listing.update', __CLASS__, ['listing' => $listing]);
+        $this->nginxCacheInvalidator->invalidateListing($listing);
         return $this->save($listing);
     }
 
@@ -110,42 +113,12 @@ class Service extends ServiceAbstract
     {
         parent::remove($entity);
         $this->channelActions->listingDeleted($entity);
+        $this->nginxCacheInvalidator->invalidateListing($entity);
     }
 
-    protected function getGlobalEventManager()
-    {
-        return $this->globalEventManager;
-    }
-
-    protected function setGlobalEventManager(GlobalEventManager $globalEventManager)
-    {
-        $this->globalEventManager = $globalEventManager;
-        return $this;
-    }
-
-    /**
-     * To satisfy PatchServiceTrait
-     */
+    /** To satisfy PatchServiceTrait */
     protected function getEventManager()
     {
-        return $this->getGlobalEventManager();
-    }
-
-    /**
-     * @return self
-     */
-    protected function setStatusHistoryService(StatusHistoryService $statusHistoryService)
-    {
-        $this->statusHistoryService = $statusHistoryService;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    protected function setChannelActions(ChannelActions $channelActions)
-    {
-        $this->channelActions = $channelActions;
-        return $this;
+        return $this->globalEventManager;
     }
 }

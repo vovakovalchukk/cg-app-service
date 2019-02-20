@@ -71,9 +71,6 @@ class Service extends BaseService implements StatsAwareInterface
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
     }
 
-    /**
-     * @param StockLocation $stockLocation
-     */
     public function save($stockLocation, array $adjustmentIds = []): Hal
     {
         try {
@@ -94,7 +91,7 @@ class Service extends BaseService implements StatsAwareInterface
         $relatedStockLocations = $this->fetchRelatedStockLocations($stock);
         $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
-        $this->updateRelated($stock, $relatedStocks, $relatedStockLocations);
+        $this->updateRelated($stock, $stockLocation, $relatedStocks, $relatedStockLocations);
         return $stockLocationHal;
     }
 
@@ -156,7 +153,7 @@ class Service extends BaseService implements StatsAwareInterface
         return $this;
     }
 
-    protected function updateRelated(Stock $stock, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
+    protected function updateRelated(Stock $stock, StockLocation $stockLocation, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
     {
         /** @var StockLocation $relatedStockLocation */
         foreach ($relatedStockLocations as $relatedStockLocation) {
@@ -172,7 +169,7 @@ class Service extends BaseService implements StatsAwareInterface
             $stockIds = $relatedStockLocations->getArrayOf('stockId');
             $locationIds = $relatedStockLocations->getArrayOf('locationId');
             if (empty($stockIds) || empty($locationIds)) {
-                throw new NotFound('No related stock loations to update');
+                throw new NotFound('No related stock locations to update');
             }
 
             /** @var StockLocationCollection $updatedStockLocations */
@@ -182,21 +179,27 @@ class Service extends BaseService implements StatsAwareInterface
 
             /** @var StockLocation $updatedStockLocation */
             foreach ($updatedStockLocations as $updatedStockLocation) {
-                $stockLocation = $relatedStockLocations->getById($updatedStockLocation->getId());
+                $relatedStockLocation = $relatedStockLocations->getById($updatedStockLocation->getId());
                 if (
-                    !($stockLocation instanceof StockLocation)
-                    || $stockLocation->getETag() == $updatedStockLocation->getETag()
+                    !($relatedStockLocation instanceof StockLocation)
+                    || $relatedStockLocation->getETag() == $updatedStockLocation->getETag()
                 ) {
                     continue;
                 }
 
-                $relatedStock = $relatedStocks->getById($stockLocation->getStockId());
-                if ($relatedStock instanceof Stock) {
-                    $this->updateRelatedListings($relatedStock);
+                $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
+                if (!($relatedStock instanceof Stock)) {
+                    continue;
                 }
+
+                if ($stockLocation->getId() != $relatedStockLocation->getId()) {
+                    $this->auditor->auditStockLocationChange($updatedStockLocation, $relatedStock);
+                }
+
+                $this->updateRelatedListings($relatedStock);
             }
         } catch (NotFound $exception) {
-            // No related stock loations to update
+            // No related stock locations to update
         } finally {
             $this->updateRelatedListings($stock);
         }

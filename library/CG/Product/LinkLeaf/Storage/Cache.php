@@ -44,7 +44,6 @@ class Cache extends CacheAbstract implements StorageInterface, SaveInterface, Sa
 
     public function invalidate($id)
     {
-
         try {
             $entity = $this->fetch($id);
         } catch (NotFound $exception) {

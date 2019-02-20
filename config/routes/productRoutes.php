@@ -66,7 +66,19 @@ use CG\InputValidation\ProductLinkNode\Entity as ProductLinkNodeEntityValidation
 use CG\InputValidation\ProductLinkNode\Filter as ProductLinkNodeCollectionValidation;
 
 use CG\Controllers\ProductLinkRelated\Entity as ProductLinkRelatedController;
+use CG\Controllers\ProductLinkRelated\Collection as ProductLinkRelatedCollectionController;
 use CG\InputValidation\ProductLinkRelated\Entity as ProductLinkRelatedValidation;
+use CG\InputValidation\ProductLinkRelated\Filter as ProductLinkRelatedCollectionValidation;
+
+use CG\Controllers\ProductLinkPaths\Entity as ProductLinkPathsController;
+use CG\Controllers\ProductLinkPaths\Collection as ProductLinkPathsCollectionController;
+use CG\InputValidation\ProductLinkPaths\Entity as ProductLinkPathsValidation;
+use CG\InputValidation\ProductLinkPaths\Filter as ProductLinkPathsCollectionValidation;
+
+use CG\Controllers\ProductPickingLocation\Entity as ProductPickingLocationController;
+use CG\Controllers\ProductPickingLocation\Collection as ProductPickingLocationCollectionController;
+use CG\InputValidation\ProductPickingLocation\Entity as ProductPickingLocationEntityValidation;
+use CG\InputValidation\ProductPickingLocation\Filter as ProductPickingLocationCollectionValidation;
 
 use CG\Slim\Versioning\Version;
 
@@ -88,7 +100,7 @@ return [
             'filterRules' => ProductCollectionValidation::class,
             'dataRules' => ProductEntityValidation::class
         ],
-        'version' => new Version(1, 10)
+        'version' => new Version(1, 11)
     ],
     '/product/:productId' => [
         'controllers' => function($productId) use ($di, $app) {
@@ -110,7 +122,7 @@ return [
             'entityClass' => ProductEntity::class,
             'serviceClass' => ProductService::class
         ],
-        'version' => new Version(1, 10)
+        'version' => new Version(1, 11)
     ],
     '/product/:productId/variationAttributeMap' => [
         'controllers' => function() use ($di, $app) {
@@ -418,6 +430,24 @@ return [
         'eTag' => false,
         'version' => new Version(1, 1)
     ],
+    '/productLinkRelated' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkRelatedCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkRelatedCollection',
+        'entityRoute' => '/productLinkRelated/:productLinkRelatedOuIdSku',
+        'validation' => [
+            'filterRules' => ProductLinkRelatedCollectionValidation::class,
+            'dataRules' => ProductLinkRelatedValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
     '/productLinkRelated/:productLinkRelatedOuIdSku' => [
         'controllers' => function($productLinkRelatedOuIdSku) use ($di, $app) {
             $method = $app->request()->getMethod();
@@ -427,10 +457,82 @@ return [
                 $controller->$method($productLinkRelatedOuIdSku, $app->request()->getBody())
             );
         },
-        'via' => ['GET'],
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
         'name' => 'ProductLinkRelatedEntity',
         'validation' => [
             'dataRules' => ProductLinkRelatedValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkPaths' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkPathsCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductLinkPathsCollection',
+        'entityRoute' => '/productLinkPaths/:productLinkPathsId',
+        'validation' => [
+            'filterRules' => ProductLinkPathsCollectionValidation::class,
+            'dataRules' => ProductLinkPathsValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productLinkPaths/:productLinkPathsId' => [
+        'controllers' => function($productLinkPathsId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+            $controller = $di->get(ProductLinkPathsController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productLinkPathsId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'DELETE', 'OPTIONS'],
+        'name' => 'ProductLinkPathsEntity',
+        'validation' => [
+            'dataRules' => ProductLinkPathsValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1)
+    ],
+    '/productPickingLocation' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(ProductPickingLocationCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductPickingLocationCollection',
+        'entityRoute' => '/productPickingLocation/:productPickingLocationId',
+        'validation' => [
+            'filterRules' => ProductPickingLocationCollectionValidation::class,
+            'dataRules' => ProductPickingLocationEntityValidation::class
+        ],
+        'version' => new Version(1, 1)
+    ],
+    '/productPickingLocation/:productPickingLocationId' => [
+        'controllers' => function($productPickingLocationId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(ProductPickingLocationController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productPickingLocationId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'OPTIONS'],
+        'name' => 'ProductPickingLocationEntity',
+        'validation' => [
+            'dataRules' => ProductPickingLocationEntityValidation::class,
         ],
         'eTag' => false,
         'version' => new Version(1, 1)
