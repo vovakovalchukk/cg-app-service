@@ -1695,7 +1695,7 @@ $config = array(
                 ]
             ],
             DetermineAndUpdateDispatchableOrdersGenerator::class => [
-                'parameteters' => [
+                'parameters' => [
                     'orderGearmanClient' => 'orderGearmanClient'
                 ]
             ],
