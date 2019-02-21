@@ -27,7 +27,7 @@ class Location implements PaginationInterface
         $this
             ->setSlim($app)
             ->setService($service)
-            ->setDi($di);;
+            ->setDi($di);
     }
 
     public function put($id, Hal $hal)
