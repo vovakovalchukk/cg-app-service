@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f736d295406aa814d69c98ede582592e",
+    "content-hash": "5767fc9ff821c24e5359f590ae5e5aa5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1669,12 +1669,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "8f0b0f10e72c750670abb7befa447f4d481253d8"
+                "reference": "6002c9b8786cf11c1ef1bae3938b2c3641762cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-328-order-dispatchable-flag-27a8af.zip",
-                "reference": "8f0b0f10e72c750670abb7befa447f4d481253d8",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-328-order-dispatchable-flag-fe0a62.zip",
+                "reference": "6002c9b8786cf11c1ef1bae3938b2c3641762cfc",
                 "shasum": null
             },
             "require": {
@@ -1746,7 +1746,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-02-20T14:00:49+00:00"
+            "time": "2019-02-20T14:57:05+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1982,17 +1982,11 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.16.15",
+            "version": "dev-HEAD",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "2024bca3f89099209195849fba6d719386e05d7d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.16.15-f55248.zip",
-                "reference": "2024bca3f89099209195849fba6d719386e05d7d",
-                "shasum": null
+                "reference": "c87c949302cc05af857b7bf9266a3a4eca28240c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2025,8 +2019,8 @@
                 "channelgrabber/woocommerce": "<=1.2.23"
             },
             "require-dev": {
-                "channelgrabber/phpunit": ">=1.0.2",
-                "phpunit/phpunit": "~4.0.0"
+                "channelgrabber/phpunit": "dev-develop",
+                "phpunit/phpunit": "~6.1"
             },
             "type": "di-definition",
             "extra": {
@@ -2044,7 +2038,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-02-14T14:17:51+00:00"
+            "time": "2019-02-21T11:30:49+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11206,6 +11200,12 @@
             "alias_normalized": "1.43.10.0",
             "version": "dev-TAC-328-order-dispatchable-flag",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.16.15",
+            "alias_normalized": "1.16.15.0",
+            "version": "dev-HEAD",
+            "package": "channelgrabber/product"
         }
     ],
     "minimum-stability": "stable",
@@ -11213,6 +11213,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/location": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
