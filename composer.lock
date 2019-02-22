@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2b157e238b8d5ab6ae664bcd8d24265",
+    "content-hash": "fd24bb18e43228842d4bfc31d5a82812",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -419,16 +419,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-10309-Oversell",
+            "version": "1.16.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "af37941a64be83110abaa9c84c9a9f8b0770ee0b"
+                "reference": "e0f64d6a76c48165d4ed22d699435b87c0a67345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-10309-Oversell-f12287.zip",
-                "reference": "af37941a64be83110abaa9c84c9a9f8b0770ee0b",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.16.18-691bb6.zip",
+                "reference": "e0f64d6a76c48165d4ed22d699435b87c0a67345",
                 "shasum": null
             },
             "require": {
@@ -481,7 +481,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2019-02-21T13:12:32+00:00"
+            "time": "2019-02-22T09:27:27+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1152,16 +1152,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "dev-CGIV-10309-Oversell",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "5913920e2464ee40d20a0905f502f92794be777c"
+                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-dev-CGIV-10309-Oversell-021c3b.zip",
-                "reference": "5913920e2464ee40d20a0905f502f92794be777c",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.5.1-e9b009.zip",
+                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4",
                 "shasum": null
             },
             "require": {
@@ -1198,7 +1198,7 @@
                     "CG\\Gearman\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-02-21T15:00:57+00:00"
+            "time": "2019-02-22T09:25:54+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -10081,7 +10081,6 @@
                 "mock",
                 "xunit"
             ],
-            "abandoned": true,
             "time": "2017-08-03T14:08:16+00:00"
         },
         {
@@ -10734,25 +10733,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.16.18",
-            "alias_normalized": "1.16.18.0",
-            "version": "dev-CGIV-10309-Oversell",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.5.1",
-            "alias_normalized": "1.5.1.0",
-            "version": "dev-CGIV-10309-Oversell",
-            "package": "channelgrabber/gearman"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/gearman": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
