@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d80d03845e6b43a63dd00e855517e02",
+    "content-hash": "10e473566c1e7387bb9646d9868f335c",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -419,16 +419,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.16.16",
+            "version": "1.16.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "42c3fabe9f1a96d12c3eeed2ade09436e4220c6e"
+                "reference": "e0f64d6a76c48165d4ed22d699435b87c0a67345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.16.16-51264c.zip",
-                "reference": "42c3fabe9f1a96d12c3eeed2ade09436e4220c6e",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.16.18-691bb6.zip",
+                "reference": "e0f64d6a76c48165d4ed22d699435b87c0a67345",
                 "shasum": null
             },
             "require": {
@@ -439,11 +439,12 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
                 "channelgrabber/feature-flags": "^2.0.1",
-                "channelgrabber/gearman": "^1.4.3",
+                "channelgrabber/gearman": "^1.4.4",
                 "channelgrabber/http": "^1.3.25",
                 "channelgrabber/listing": "^1.11.11",
                 "channelgrabber/locale": "^1.2.1",
                 "channelgrabber/location": "^1.2.0",
+                "channelgrabber/opsgenie": "^1.1.0",
                 "channelgrabber/order": "^1.28.14",
                 "channelgrabber/predis": "^1.0.11",
                 "channelgrabber/product": "^1.16.7",
@@ -480,7 +481,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2019-01-29T11:09:54+00:00"
+            "time": "2019-02-22T09:27:27+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1151,16 +1152,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.4.3",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "408257c2f1067c16b90f329f6dce1455e0ddd129"
+                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.4.3-85046b.zip",
-                "reference": "408257c2f1067c16b90f329f6dce1455e0ddd129",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.5.1-e9b009.zip",
+                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4",
                 "shasum": null
             },
             "require": {
@@ -1168,8 +1169,8 @@
                 "channelgrabber/cilex": "^1.2.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/log": "^2.2.0",
-                "channelgrabber/opsgenie": "^1.0.1",
-                "channelgrabber/predis": "^1.0.8",
+                "channelgrabber/opsgenie": "^1.1.0",
+                "channelgrabber/predis": "^1.1.1",
                 "channelgrabber/stats": "^1.0.6",
                 "channelgrabber/stdlib": "^2.12.15",
                 "ext-gearman": "*",
@@ -1197,7 +1198,7 @@
                     "CG\\Gearman\\Test\\": "tests/src"
                 }
             },
-            "time": "2018-12-18T12:19:52+00:00"
+            "time": "2019-02-22T09:25:54+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -1632,16 +1633,16 @@
         },
         {
             "name": "channelgrabber/opsgenie",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-opsgenie.git",
-                "reference": "303bd783257e70425423557e64b6b3d888e4ea14"
+                "reference": "7a15d80092efcf0d8a82192e4ace06064f910634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/opsgenie/channelgrabber-opsgenie-1.0.1-d51429.zip",
-                "reference": "303bd783257e70425423557e64b6b3d888e4ea14",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/opsgenie/channelgrabber-opsgenie-1.1.0-fed7b5.zip",
+                "reference": "7a15d80092efcf0d8a82192e4ace06064f910634",
                 "shasum": null
             },
             "require": {
@@ -1656,20 +1657,20 @@
                 }
             },
             "description": "ChannelGrabber opsgenie integration",
-            "time": "2018-12-18T12:14:58+00:00"
+            "time": "2019-02-01T14:29:01+00:00"
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.43.10",
+            "version": "1.43.11",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2ee3e161aea6e39e9c1e652e66013027dab9c3ae"
+                "reference": "a201b05d38f7002239cfe74cc1180614486bbeac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.10-e732ef.zip",
-                "reference": "2ee3e161aea6e39e9c1e652e66013027dab9c3ae",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.11-0569db.zip",
+                "reference": "a201b05d38f7002239cfe74cc1180614486bbeac",
                 "shasum": null
             },
             "require": {
@@ -1740,7 +1741,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-02-12T09:47:34+00:00"
+            "time": "2019-02-15T11:49:05+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -1894,22 +1895,22 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "19d8a31a677635965b2d859fac8c187d4c8c05b4"
+                "reference": "670eb8c16ab202cb620939ce8ee53b9e8bf198c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis/channelgrabber-predis-1.1.0-0e16b9.zip",
-                "reference": "19d8a31a677635965b2d859fac8c187d4c8c05b4",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis/channelgrabber-predis-1.1.1-c46657.zip",
+                "reference": "670eb8c16ab202cb620939ce8ee53b9e8bf198c0",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cg-predis": "~0.8.7",
                 "channelgrabber/di": "^2.2.0",
-                "channelgrabber/stdlib": "^2.10.4",
+                "channelgrabber/stdlib": "^2.16.3",
                 "php": ">=7.1"
             },
             "type": "di-definition",
@@ -1918,7 +1919,7 @@
                     "CG\\Predis\\": "src"
                 }
             },
-            "time": "2018-07-18T09:17:26+00:00"
+            "time": "2019-02-21T13:33:46+00:00"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -10080,6 +10081,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-08-03T14:08:16+00:00"
         },
         {

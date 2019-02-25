@@ -80,6 +80,9 @@ class Service extends BaseService implements StatsAwareInterface
             return parent::save($stockLocation, $adjustmentIds);
         }
 
+        $this->nginxCacheInvalidator->invalidateProductsForStockLocation($stockLocation, $stock);
+        $this->updateRelatedListings($stock);
+
         try {
             /** @var StockLocation $currentStockLocation */
             $currentStockLocation = $this->fetch($stockLocation->getId());
