@@ -824,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "0777499449600f9629534c95f626f8bf6cba21f5"
+                "reference": "ab884e4e7c12b747a9a593a5031feed3bab941b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10396-ebay-prevent-wiping-site-defaults-7712fd.zip",
-                "reference": "0777499449600f9629534c95f626f8bf6cba21f5",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10396-ebay-prevent-wiping-site-defaults-8e58a3.zip",
+                "reference": "ab884e4e7c12b747a9a593a5031feed3bab941b8",
                 "shasum": null
             },
             "require": {
@@ -881,7 +881,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2019-02-22T11:44:34+00:00"
+            "time": "2019-02-25T15:27:19+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -10463,6 +10463,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "transport-options": {
                 "ssl": {
                     "local_cert": "composer.pem"
