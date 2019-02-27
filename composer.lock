@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8d44ac25babea029487ea64ddf61904",
+    "content-hash": "690d20c5258f682c20b455a547d75b85",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -820,16 +820,16 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-CGIV-10396-ebay-prevent-wiping-site-defaults",
+            "version": "1.19.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "ab884e4e7c12b747a9a593a5031feed3bab941b8"
+                "reference": "5b8b6bcbcaaf0fa116459a9dd9dcdb68f9dc0e6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10396-ebay-prevent-wiping-site-defaults-8e58a3.zip",
-                "reference": "ab884e4e7c12b747a9a593a5031feed3bab941b8",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.19.3-60b044.zip",
+                "reference": "5b8b6bcbcaaf0fa116459a9dd9dcdb68f9dc0e6d",
                 "shasum": null
             },
             "require": {
@@ -881,7 +881,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2019-02-25T15:27:19+00:00"
+            "time": "2019-02-27T10:52:44+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -11186,18 +11186,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.19.3",
-            "alias_normalized": "1.19.3.0",
-            "version": "dev-CGIV-10396-ebay-prevent-wiping-site-defaults",
-            "package": "channelgrabber/ebay"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/ebay": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
