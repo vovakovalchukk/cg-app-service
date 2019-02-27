@@ -35,6 +35,7 @@ use CG\Product\Category\VersionMap\Storage\Cache as CategoryVersionMapStorageCac
 use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapStorageDb;
 use CG\Product\Category\VersionMap\StorageInterface as CategoryVersionMapStorageInterface;
 use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
+use CG\Product\Category\Gearman\Generator\MigrateCategoryTemplateVersion as MigrateCategoryTemplateVersionGenerator;
 
 return [
     'di' => [
@@ -136,6 +137,11 @@ return [
                 'parameters' => [
                     'fileStorage' => 'AmazonChannelFileAdapter',
                 ],
+            ],
+            MigrateCategoryTemplateVersionGenerator::class => [
+                'parameters' => [
+                    'gearmanClient' => 'productGearmanClient'
+                ]
             ],
             'AmazonChannelFileAdapter' => [
                 'parameters' => [
