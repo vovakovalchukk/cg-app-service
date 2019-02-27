@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ae78ea47c5f1443ce853030f9caf36a",
+    "content-hash": "48b7cec86b91e1277149f73e2494567d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -485,16 +485,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.42.12",
+            "version": "1.42.13",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "2d0799965ca6857b06da3f888cf881dec5f501c5"
+                "reference": "eb0cbe89addd62913c7aaa27bc9a2cd6ffca4819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.12-2de60b.zip",
-                "reference": "2d0799965ca6857b06da3f888cf881dec5f501c5",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.13-e980b4.zip",
+                "reference": "eb0cbe89addd62913c7aaa27bc9a2cd6ffca4819",
                 "shasum": null
             },
             "require": {
@@ -568,7 +568,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2019-02-14T14:18:17+00:00"
+            "time": "2019-02-25T10:56:59+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -1981,17 +1981,17 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "2b87a1880dece01a50fdc942afa3e4cf501a1e5e"
+                "reference": "252cfde2726d894a1a0f532631b9bee2900ab9c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10291-category-template-migration-b62406.zip",
-                "reference": "2b87a1880dece01a50fdc942afa3e4cf501a1e5e",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10291-category-template-migration-98bcd9.zip",
+                "reference": "252cfde2726d894a1a0f532631b9bee2900ab9c8",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/channel": "^1.33.1",
+                "channelgrabber/channel": "^1.42.13",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/etag": "^1.5.4",
@@ -2039,7 +2039,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-02-27T14:00:06+00:00"
+            "time": "2019-02-27T14:07:54+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
