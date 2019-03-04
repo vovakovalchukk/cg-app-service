@@ -874,14 +874,6 @@ class LinkedReplacerTest extends TestCase
             foreach ($stockLocations as $stockLocation) {
                 $sku = $this->stockStorage->fetch($stockLocation->getStockId())->getSku();
                 $this->assertArrayHasKey($sku, $expectedStock, 'Unexpected stock location returned');
-
-
-                echo "EX\n";
-                print_r($expectedStock[$sku]);
-
-                echo "SL\n";
-                print_r($stockLocation);
-
                 $this->assertEquals(
                     [
                         'onHand' => $expectedStock[$sku]['onHand'],
