@@ -414,14 +414,16 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 continue;
             }
 
-            $key = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
-
-            $key = $linkedStockLocation->getLocationId()."-".$stock->getSku();
-
+            $key = $this->generateKey($linkedStockLocation->getLocationId(), $stock->getSku());
             $keydLinkedStockLocations[$key] = $linkedStockLocation;
         }
 
         return $keydLinkedStockLocations;
+    }
+
+    protected function generateKey(int $locationId, string $stockSku): string
+    {
+        return $locationId . '-' . strtolower($stockSku);
     }
 
     protected function buildQuantifiedLinkedStockLocations(
