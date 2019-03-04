@@ -128,36 +128,6 @@ return [
                 );
             },
     ],
-
-
-
-    'ad-hoc:testSock' => [
-        'description' => '',
-        'arguments' => [],
-        'options' => [],
-        'command' =>
-            function(InputInterface $input, OutputInterface $output) use ($di)
-            {
-                /* @var $locationService \CG\Stock\Location\Service\Service */
-                $locationService = $di->get(CG\Stock\Location\Service\Service::class);
-
-
-                /* @var $ls \CG\Stock\Location\Service */
-                $ls = $di->get(CG\Stock\Location\Service::class);
-
-                /* @var $stockLocations \CG\Stock\Location\Collection */
-                $stockLocations = $ls->fetchCollectionByStockIds(['141','142']); //'141','142' //'135', '136', '137'
-
-//                print_r($stockLocations);
-//
-//                $stockLocation->setOnHand(rand(1,9999));
-////
-//                $locationService->save($stockLocation);
-            },
-    ],
-
-
-
     'ad-hoc:correctOverAllocatedStockForOU' => [
         'description' => 'Correct any discrepancies with allocated stock where we have over allocated, by default will display proposed changes and not apply',
         'arguments' => [
