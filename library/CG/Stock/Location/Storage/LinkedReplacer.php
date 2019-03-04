@@ -328,6 +328,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 }
             }
 
+
             $quantifiedStockLocations->attach(
                 $this->getLinkedStockLocation(
                     $stockLocation,
