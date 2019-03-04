@@ -319,7 +319,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 $quantifiedStockLocations->attach($this->buildQuantifiedStockLocation($stockLocation));
                 continue;
             }
-            
+
             $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
             foreach (array_keys($productLinkLeafsByOuAndSku[$key]->getStockSkuMap()) as $stockSku) {
                 $stockLocationKey = ProductLinkLeaf::generateId($productLinkLeafsByOuAndSku[$key]->getOrganisationUnitId(), $stockSku);
