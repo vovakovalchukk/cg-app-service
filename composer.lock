@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10e473566c1e7387bb9646d9868f335c",
+    "content-hash": "b065529a4a018ea2e51cb2c0106ed36a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -485,16 +485,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.42.10",
+            "version": "1.42.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "f229be1218ae658615d7b95ba158079de11f2588"
+                "reference": "2d0799965ca6857b06da3f888cf881dec5f501c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.10-eaa43b.zip",
-                "reference": "f229be1218ae658615d7b95ba158079de11f2588",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.12-2de60b.zip",
+                "reference": "2d0799965ca6857b06da3f888cf881dec5f501c5",
                 "shasum": null
             },
             "require": {
@@ -551,7 +551,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-CGIV-9957-amazon-unimported-listing-marketplace-issue": "1.42.x-dev"
+                    "dev-CGIV-8876-disable-accounts": "1.42.x-dev"
                 }
             },
             "autoload": {
@@ -568,7 +568,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2019-02-12T09:55:21+00:00"
+            "time": "2019-02-14T14:18:17+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -815,22 +815,22 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.16.0",
+            "version": "1.19.3.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "712bf98406db64f6ca83568fb8caff0777e90667"
+                "reference": "be9c13f4e7e6793df9f56e15bf171b8302966437"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.16.0-44d27c.zip",
-                "reference": "712bf98406db64f6ca83568fb8caff0777e90667",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.19.3.1-13cb6b.zip",
+                "reference": "be9c13f4e7e6793df9f56e15bf171b8302966437",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.15.1",
-                "channelgrabber/channel": "^1.39.2",
+                "channelgrabber/channel": "^1.42.11",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
@@ -876,7 +876,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2018-11-14T13:39:18+00:00"
+            "time": "2019-02-27T13:50:06+00:00"
         },
         {
             "name": "channelgrabber/ekm",
