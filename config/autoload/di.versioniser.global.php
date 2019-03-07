@@ -202,12 +202,12 @@ return [
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
                 'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
+                'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
+                'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
                 'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
                 'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
                 'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
                 'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
-                'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
-                'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

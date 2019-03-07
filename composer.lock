@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "690d20c5258f682c20b455a547d75b85",
+    "content-hash": "1e4a4482acc22f8bee05b71a0233de37",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2388,12 +2388,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "db3cad30701a64b671b8a1608c2059d26d40ea38"
+                "reference": "6f99f4e827d7fcac28b025fd6383f238bed33db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-TAC-326-include-po-stock-in-available-e9e192.zip",
-                "reference": "db3cad30701a64b671b8a1608c2059d26d40ea38",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-TAC-326-include-po-stock-in-available-d4d1b1.zip",
+                "reference": "6f99f4e827d7fcac28b025fd6383f238bed33db1",
                 "shasum": null
             },
             "require": {
@@ -2417,7 +2417,8 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2019-02-13T12:22:28+00:00"
+            "time": "2019-02-14T12:07:00+00:00"
+
         },
         {
             "name": "channelgrabber/shopify",
@@ -2667,7 +2668,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "aedc74b2d9a1139dd907ab5b5812936b3feb63a2"
+                "reference": "aa359257fa3cf5b452d92db1febe16a0042311ec"
             },
             "dist": {
                 "type": "zip",
@@ -2724,7 +2725,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2019-02-12T10:01:38+00:00"
+            "time": "2019-02-14T12:12:54+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -11197,14 +11198,14 @@
             "package": "channelgrabber/phinx"
         },
         {
-            "alias": "1.6.6",
-            "alias_normalized": "1.6.6.0",
+            "alias": "1.6.7",
+            "alias_normalized": "1.6.7.0",
             "version": "dev-TAC-326-include-po-stock-in-available",
             "package": "channelgrabber/settings"
         },
         {
-            "alias": "1.15.2",
-            "alias_normalized": "1.15.2.0",
+            "alias": "1.15.3",
+            "alias_normalized": "1.15.3.0",
             "version": "dev-TAC-326-include-po-stock-in-available",
             "package": "channelgrabber/stock"
         }
