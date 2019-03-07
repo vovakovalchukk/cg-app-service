@@ -23,6 +23,8 @@ use CG\Slim\Versioning\OrderItemCollection;
 use CG\Slim\Versioning\OrderItemEntity;
 use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
+use CG\Slim\Versioning\PickListSettingsCollection;
+use CG\Slim\Versioning\PickListSettingsEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
@@ -148,6 +150,8 @@ return [
                 'Versioniser_ProductEntity_8' => ProductEntity\Versioniser8::class,
                 'Versioniser_ProductCollection_9' => ProductCollection\Versioniser9::class,
                 'Versioniser_ProductEntity_9' => ProductEntity\Versioniser9::class,
+                'Versioniser_ProductCollection_10' => ProductCollection\Versioniser10::class,
+                'Versioniser_ProductEntity_10' => ProductEntity\Versioniser10::class,
                 'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
                 'Versioniser_ProductSettingsCollection_2' => ProductSettingsCollection\Versioniser2::class,
                 'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
@@ -205,6 +209,8 @@ return [
                 'Versioniser_InvoiceMappingEntity_1' => InvoiceMappingEntity\Versioniser1::class,
                 'Versioniser_InvoiceMappingCollection_1' => InvoiceMappingCollection\Versioniser1::class,
                 'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
+                'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
+                'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
                 'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
                 'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
             ],
@@ -377,6 +383,11 @@ return [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ProductEntity_9'
                 ],
+            ],
+            'Versioniser_ProductCollection_10' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductEntity_10'
+                ]
             ],
             'Versioniser_ProductSettingsCollection_1' => [
                 'parameter' => [
