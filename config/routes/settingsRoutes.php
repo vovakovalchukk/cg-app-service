@@ -213,7 +213,8 @@ return [
         'entityRoute' => '/settings/pickList/:id',
         'validation' => [
             'filterRules' => PickListCollectionValidation::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/pickList/:id' => [
         'controllers' => function($pickListId) use ($di) {
@@ -227,7 +228,7 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'PickListSettings',
+        'name' => 'PickListSettingsEntity',
         'validation' => [
             'dataRules' => PickListEntityValidation::class
         ],
@@ -235,7 +236,8 @@ return [
             'mapperClass' => PickListMapper::class,
             'entityClass' => PickListEntity::class,
             'serviceClass' => PickListService::class
-        ]
+        ],
+        'version' => new Version(1, 2),
     ],
     '/settings/api' => [
         'controllers' => function() use ($di) {
