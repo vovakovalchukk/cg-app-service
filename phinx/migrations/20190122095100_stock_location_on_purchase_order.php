@@ -6,7 +6,7 @@ class StockLocationOnPurchaseOrder extends AbstractOnlineSchemaChange
 {
     public function up()
     {
-        $alter = 'DROP INDEX `StockIdLocationId`,'
+        $alter = 'DROP INDEX `stockId`,'
             . 'ADD UNIQUE KEY `StockIdLocationId` (`stockId`,`locationId`),'
             . 'ADD COLUMN `onPurchaseOrder` INT(11) NOT NULL DEFAULT 0';
         $this->onlineSchemaChange('stockLocation', $alter);
