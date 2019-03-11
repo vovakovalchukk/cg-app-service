@@ -55,7 +55,8 @@ class RestService extends Service implements LoggerAwareInterface
 
     protected function handleLowStockThresholdChange(Entity $existingEntity, Entity $newEntity): void
     {
-        if ($existingEntity->isLowStockThresholdOn() == $newEntity->isLowStockThresholdOn()) {
+        if ($existingEntity->isLowStockThresholdOn() == $newEntity->isLowStockThresholdOn()
+            && $existingEntity->getLowStockThresholdValue() == $newEntity->getLowStockThresholdValue()) {
             return;
         }
         $this->logDebug(static::LOG_INCLUDE_LOW_STOCK_THRESHOLD_CHANGED, ['ou' => $newEntity->getOrganisationUnitId(), ($newEntity->isLowStockThresholdOn() ? 'true' : 'false')], [static::LOG_CODE, 'LowStockThresholdChanged']);
