@@ -19,7 +19,7 @@ foreach ($components as $component) {
     require_once __DIR__ . DS . $component . DS .'bootstrap.php';
 }
 
-$_GET['_tideways'] = ['method' => 'GET', 'time' => strtotime('+1 hour'), 'user' => 'dominikg+cgiv10243@channelgrabber.com'];
+$_GET['_tideways'] = ['method' => 'GET', 'time' => strtotime('+1 hour'), 'user' => '13417'];
 $vars = $_GET['_tideways'];
 $_GET['_tideways']['hash'] = hash_hmac('sha256', 'method=' . $vars['method'] . '&time=' . $vars['time'] . '&user=' . $vars['user'], md5('O8rHgRfEvwD2RxPX'));
 
