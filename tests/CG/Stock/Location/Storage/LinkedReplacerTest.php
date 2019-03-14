@@ -911,7 +911,8 @@ class LinkedReplacerTest extends TestCase
             $stockLocation->getStockId(),
             2,
             $stockLocation->getOnHand(),
-            $stockLocation->getAllocated()
+            $stockLocation->getAllocated(),
+            $stockLocation->getOnPurchaseOrder()
         );
 
         $quantifiedStockLocationSecondLocation = $this->linkReplacer->save($stockLocationInSecondLocation);
@@ -1001,7 +1002,7 @@ class LinkedReplacerTest extends TestCase
             $stock = new Stock(1, $sku)
         );
         return $this->stockLocationStorage->save(
-            new StockLocation($stock->getId(), 1, $onHand, $allocated)
+            new StockLocation($stock->getId(), 1, (int)$onHand, (int)$allocated, 0)
         );
     }
 

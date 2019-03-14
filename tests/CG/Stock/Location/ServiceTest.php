@@ -57,6 +57,7 @@ CREATE TABLE `stockLocation` (
   `onHand` int(11) NOT NULL DEFAULT '0',
   `allocated` int(11) NOT NULL DEFAULT '0',
   `type` varchar(255) NOT NULL DEFAULT 'real',
+  `onPurchaseOrder` int(11) NOT NULL DEFAULT '0',
   KEY `StockIdLocationId` (`stockId`,`locationId`),
   KEY `locationId` (`locationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -150,7 +151,8 @@ SQL
         int $stockId = 0,
         int $locationId = 0,
         int $onHand = 0,
-        int $allocated = 0
+        int $allocated = 0,
+        int $onPurchaseOrder = 0
     ): StockLocation {
         $stockId = $stockId === 0 ? mt_rand(1, 99999) : $stockId;
 
@@ -158,7 +160,8 @@ SQL
             $stockId,
             $locationId,
             $onHand,
-            $allocated
+            $allocated,
+            $onPurchaseOrder
         );
     }
 }

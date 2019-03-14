@@ -16,7 +16,7 @@ class QuantifiedLocation extends Entity
         return $this->getOnHand($quantify) - $this->getAllocated($quantify);
     }
 
-    public function getOnHand($quantify = false)
+    public function getOnHand($quantify = false): int
     {
         $onHand = parent::getOnHand();
         if ($quantify) {
@@ -25,7 +25,7 @@ class QuantifiedLocation extends Entity
         return $onHand;
     }
 
-    public function setOnHand($onHand, $quantify = false)
+    public function setOnHand(int $onHand, $quantify = false): Entity
     {
         if ($quantify) {
             $onHand *= $this->componentMultiplier;
@@ -33,7 +33,7 @@ class QuantifiedLocation extends Entity
         return parent::setOnHand($onHand);
     }
 
-    public function getAllocated($quantify = false)
+    public function getAllocated($quantify = false): int
     {
         $allocated = parent::getAllocated();
         if ($quantify) {
@@ -42,12 +42,29 @@ class QuantifiedLocation extends Entity
         return $allocated;
     }
 
-    public function setAllocated($allocated, $quantify = false)
+    public function setAllocated(int $allocated, $quantify = false): Entity
     {
         if ($quantify) {
             $allocated *= $this->componentMultiplier;
         }
         return parent::setAllocated($allocated);
+    }
+
+    public function getOnPurchaseOrder($quantify = false): int
+    {
+        $onPurchaseOrder = parent::getOnPurchaseOrder();
+        if ($quantify) {
+            return ceil($onPurchaseOrder / $this->componentMultiplier);
+        }
+        return $onPurchaseOrder;
+    }
+
+    public function setOnPurchaseOrder(int $onPurchaseOrder, $quantify = false): Entity
+    {
+        if ($quantify) {
+            $onPurchaseOrder *= $this->componentMultiplier;
+        }
+        return parent::setOnPurchaseOrder($onPurchaseOrder);
     }
 
     /**
