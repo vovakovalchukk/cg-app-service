@@ -310,7 +310,7 @@ class Db extends DbAbstract implements StorageInterface
             ])
             ->group('id');
 
-        return $sql = $select->join(
+        return $select->join(
             ['skuMatch' => $skuMatch],
             (new Predicate([
                 new Query('product.id = skuMatch.id'),
