@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f6b862faa77543eb4bbfeb6a7ab83ca",
+    "content-hash": "7f3176914dd53f36123adaef1ecf2f32",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -976,16 +976,16 @@
         },
         {
             "name": "channelgrabber/etag",
-            "version": "1.7.0.1",
+            "version": "dev-CGIV-10458-fix-etag-fatal",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgetag.git",
-                "reference": "f03d5671ea2a2b8a3b8af32b6f6fbbee751fde00"
+                "reference": "81cf2f3282eef3a85df2bd737c339de95a636a51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etag/channelgrabber-etag-1.7.0.1-9a54ac.zip",
-                "reference": "f03d5671ea2a2b8a3b8af32b6f6fbbee751fde00",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etag/channelgrabber-etag-dev-CGIV-10458-fix-etag-fatal-5d9281.zip",
+                "reference": "81cf2f3282eef3a85df2bd737c339de95a636a51",
                 "shasum": null
             },
             "require": {
@@ -1001,7 +1001,7 @@
                     "CG\\ETag\\": "src"
                 }
             },
-            "time": "2018-07-18T09:50:15+00:00"
+            "time": "2019-03-15T07:52:00+00:00"
         },
         {
             "name": "channelgrabber/etsy",
@@ -10895,6 +10895,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.7.1",
+            "alias_normalized": "1.7.1.0",
+            "version": "dev-CGIV-10458-fix-etag-fatal",
+            "package": "channelgrabber/etag"
+        },
+        {
             "alias": "1.14.6",
             "alias_normalized": "1.14.6.0",
             "version": "dev-CGIV-10458-fix-etag-fatal",
@@ -10904,6 +10910,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/etag": 20,
         "channelgrabber/slim": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
