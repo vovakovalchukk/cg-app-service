@@ -8,8 +8,6 @@ use CG\Product\Mapper;
 use CG\Product\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
-use CG\Stdlib\Log\LoggerAwareInterface;
-use CG\Stdlib\Log\LogTrait;
 use CG\Stdlib\Storage\Db\ArrayFiltersToWhereTrait;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
@@ -30,9 +28,8 @@ use function CG\Stdlib\escapeLikeValue;
  * @method Sql getReadSql
  * @method Sql getWriteSql
  */
-class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
+class Db extends DbAbstract implements StorageInterface
 {
-    use LogTrait;
     use ArrayFiltersToWhereTrait;
     use FilterArrayValuesToOrdLikesTrait;
 
@@ -107,13 +104,6 @@ class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
             return $select;
         }
 
-        $this->logDebugDump($sku, 'SKUS', [], 'MYTEST');
-
-
-//        $sku = array_map(function($sku){
-//            return escapeLikeValue($sku);
-//        }, $sku);
-
         if ($skuMatchTypeQuery->count() > 0) {
             $this->addSkuMatchToSelect(
                 $select,
@@ -130,11 +120,6 @@ class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
 
     protected function fetchEntityCount(Filter $filter)
     {
-        $this->logDebug(__METHOD__, [], 'MYTEST');
-
-
-        $this->logDebugDump($filter, 'FILTER', [], 'MYTEST');
-
         $select = $this->createSelectFromFilter($filter);
         $quantifier = $select->getRawState(Select::QUANTIFIER);
         $columns = $select->getRawState(Select::COLUMNS);
@@ -313,14 +298,8 @@ class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
 
         $column = "`skuMatch`.`sku`";
         $skuSelect = implode(" OR ", array_map(function($sku) use($column) {
-            return sprintf("%s LIKE '%s'", $column, escapeLikeValue($sku));
+            return sprintf("%s LIKE '%s'", $column, addcslashes(escapeLikeValue($sku), '\''));
         }, $sku));
-
-        $this->logDebug($skuSelect, [], 'MYTEST');
-
-
-        $this->logDebugDump(new Expression(sprintf("SUM(IF(%s, 1, 0))", $skuSelect)), 'EXPRESSION', [], 'MYTEST');
-
 
         $skuMatch = $this->getReadSql()
             ->select(['skuMatch' => $simpleSkuMatch->combine($variationSkuMatch, Select::COMBINE_UNION, Select::QUANTIFIER_DISTINCT)])
@@ -331,7 +310,7 @@ class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
             ])
             ->group('id');
 
-        $sql = $select->join(
+        return $sql = $select->join(
             ['skuMatch' => $skuMatch],
             (new Predicate([
                 new Query('product.id = skuMatch.id'),
@@ -339,12 +318,6 @@ class Db extends DbAbstract implements StorageInterface, LoggerAwareInterface
             ])),
             []
         );
-
-
-//        $this->logDebugDump($select->getSqlString(), 'SQL', [], 'MYTEST');
-
-        return $sql;
-
     }
 
     public function fetch($id)
