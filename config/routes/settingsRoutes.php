@@ -295,7 +295,8 @@ return [
         'entityRoute' => '/settings/product/:id',
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
-        ]
+        ],
+        'version' => new Version(1, 3),
     ],
     '/settings/product/:id' => [
         'controllers' => function($ouId) use ($di) {
@@ -317,7 +318,8 @@ return [
             'mapperClass' => ProductMapper::class,
             'entityClass' => ProductEntity::class,
             'serviceClass' => ProductService::class
-        ]
+        ],
+        'version' => new Version(1, 3),
     ],
     '/settings/setupProgress' => [
         'controllers' => function() use ($di) {

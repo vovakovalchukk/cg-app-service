@@ -44,6 +44,11 @@ class Entity implements RulesInterface
                 'required'   => true,
                 'validators' => [new IntegerValidator(['name' => 'allocated'])]
             ],
+            'onPurchaseOrder' => [
+                'name'       => 'onPurchaseOrder',
+                'required'   => true,
+                'validators' => [new IntegerValidator(['name' => 'onPurchaseOrder'])]
+            ],
         ];
     }
 }
