@@ -296,16 +296,16 @@ class Db extends DbAbstract implements StorageInterface
             $variationSkuMatch->where(['parent.organisationUnitId' => array_values($ouId)]);
         }
 
-        $column = 'skuMatch.sku';
-        $skuSelect = implode(' OR ', array_map(function($sku) use($column) {
-            return sprintf('%s LIKE "%s"', $column, escapeLikeValue($sku));
+        $column = "`skuMatch`.`sku`";
+        $skuSelect = implode(" OR ", array_map(function($sku) use($column) {
+            return sprintf("%s LIKE '%s'", $column, addcslashes(escapeLikeValue($sku), '\''));
         }, $sku));
 
         $skuMatch = $this->getReadSql()
             ->select(['skuMatch' => $simpleSkuMatch->combine($variationSkuMatch, Select::COMBINE_UNION, Select::QUANTIFIER_DISTINCT)])
             ->columns([
                 'id' => 'id',
-                'skuMatch' => new Expression(sprintf('SUM(IF(%s, 1, 0))', $skuSelect)),
+                'skuMatch' => new Expression(sprintf("SUM(IF(%s, 1, 0))", $skuSelect)),
                 'skuCount' => new Expression(sprintf('COUNT(%s)', $column)),
             ])
             ->group('id');
