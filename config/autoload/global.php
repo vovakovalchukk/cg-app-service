@@ -106,7 +106,6 @@ use CG\Order\Shared\UserChange\Mapper as UserChangeMapper;
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
-use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Order\Service\UserChange\Storage\Db as UserChangeDbStorage;
 
 // OrderLink
@@ -124,7 +123,6 @@ use CG\UserPreference\Service\Service as UserPreferenceService;
 use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\Db as UserPreferenceDbStorage;
-use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 use CG\UserPreference\Shared\Mapper as UserPreferenceMapper;
 
 //Tag
@@ -176,7 +174,6 @@ use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
 use CG\Template\Storage\Db as TemplateDbStorage;
 use CG\Template\Mapper as TemplateMapper;
-use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
@@ -192,7 +189,6 @@ use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage
 // Invoice Settings
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
-use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
 use CG\Settings\Invoice\Service\Storage\Db as InvoiceSettingsDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceSettingsMapper;
@@ -492,8 +488,6 @@ $config = array(
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
-                'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
-                'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
                 'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
             ),
             'ReadCGSql' => array(
@@ -780,13 +774,6 @@ $config = array(
                     'mapper' => UserChangeMapper::class,
                 ]
             ],
-            UserChangeMongoDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
             BatchService::class => array(
                 'parameters' => array(
                     'repository' => BatchDbStorage::class
@@ -811,16 +798,10 @@ $config = array(
                     'repository' => UserPreferenceRepository::class
                 )
             ),
-            'UserPreferenceMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => UserPreferenceDbStorage::class,
-                    'repository' => UserPreferenceMongoDbStorage::class,
-                ],
-            ],
             UserPreferenceRepository::class => [
                 'parameter' => [
                     'storage' => UserPreferenceCacheStorage::class,
-                    'repository' => 'UserPreferenceMongoMigrationRepository',
+                    'repository' => UserPreferenceDbStorage::class,
                 ]
             ],
             UserPreferenceDbStorage::class => array(
@@ -969,13 +950,7 @@ $config = array(
             InvoiceSettingsRepository::class => [
                 'parameter' => [
                     'storage' => InvoiceSettingsCacheStorage::class,
-                    'repository' => 'InvoiceSettingsMongoMigrationRepository'
-                ]
-            ],
-            'InvoiceSettingsMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => InvoiceSettingsDbStorage::class,
-                    'repository' => InvoiceSettingsMongoDbStorage::class
+                    'repository' => InvoiceSettingsDbStorage::class
                 ]
             ],
             InvoiceSettingsDbStorage::class => [
@@ -1712,7 +1687,6 @@ $config = array(
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
                 StorageInterface::class => Predis::class,
-                \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
                 UsageStorageInterface::class => UsageRepository::class,
