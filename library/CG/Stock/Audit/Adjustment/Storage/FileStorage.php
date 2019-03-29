@@ -23,7 +23,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected const LOG_CODE = 'StockAuditAdjustment::FileStorage';
     protected const LOG_CODE_EXPENSIVE_METHOD_CALL = 'ExpensiveMethodCall';
-    protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this should method should be avoided where possible';
+    protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this method should be avoided where possible';
 
     /** @var StorageAdapter */
     protected $storageAdapter;
@@ -105,16 +105,20 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
         $promises = [];
         foreach ($files as $filename => $entities) {
-            $file = $this->loadFile($filename, true);
-            foreach ($entities as $entity) {
-                $file[$entity->getId()] = $entity;
-            }
-            $promises[] = $this->saveFileAsync($filename, $file);
+            $promises[] = $this->loadFileAsync($filename, true)
+                ->then(function(File $file) use($filename, $entities) {
+                    foreach ($entities as $entity) {
+                        $file[$entity->getId()] = $entity;
+                    }
+                    return $this->saveFileAsync($filename, $file);
+                });
         }
 
-        foreach ($promises as $promise) {
-            if ($promise instanceof PromiseInterface) {
-                $promise->wait();
+        /** @var PromiseInterface $promise */
+        while ($promise = array_pop($promises)) {
+            $response = $promise->wait();
+            if ($response instanceof PromiseInterface) {
+                array_push($promises, $response);
             }
         }
 
@@ -126,9 +130,9 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate(), $entity->getSku());
     }
 
-    protected function generateFilename(int $outId, string $date, string $sku): string
+    protected function generateFilename(int $ouId, string $date, string $sku): string
     {
-        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s-%s.json', $outId, $date, base64_encode($sku));
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s-%s.json', $ouId, $date, base64_encode($sku));
     }
 
     protected function loadFile(string $filename, bool $useCache = false): File
