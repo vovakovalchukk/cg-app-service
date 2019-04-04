@@ -48,7 +48,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
-        $this->saveFile($filename, $file);
+        $this->saveFile($file);
         return $entity;
     }
 
@@ -58,13 +58,23 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
     public function remove($entity)
     {
         $this->logWarning(static::LOG_MSG_EXPENSIVE_METHOD_CALL, [__METHOD__], [static::LOG_CODE, static::LOG_CODE_EXPENSIVE_METHOD_CALL]);
-        $filename = $this->generateEntityFilename($entity);
-        $file = $this->loadFile($filename);
-        if (!isset($file[$entity->getId()])) {
-            return;
+
+        /** @var PromiseInterface[] $promises */
+        $promises = [];
+        foreach ([$this->generateEntityFilename($entity), $this->generateLegacyEntityFilename($entity)] as $filename) {
+            $promises[] = $this->loadFileAsync($filename);
         }
-        unset($file[$entity->getId()]);
-        $this->saveFile($filename, $file);
+
+        foreach ($promises as $promise) {
+            /** @var File $file */
+            $file = $promise->wait();
+            if (!isset($file[$entity->getId()])) {
+                continue;
+            }
+
+            unset($file[$entity->getId()]);
+            $this->saveFile($file);
+        }
     }
 
     public function fetchCollection(array $ouIds, array $skus, DateTime $from, DateTime $to): AuditAdjustments
@@ -74,8 +84,15 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
                 foreach ($skus as $sku) {
-                    $filename = $this->generateFilename($ouId, $date->stdDateFormat(), $sku);
-                    $promises[] = $this->loadFileAsync($filename);
+                    $filename = $this->generateFilename($ouId, $date, $sku);
+                    if (!isset($promises[$filename])) {
+                        $promises[$filename] = $this->loadFileAsync($filename);
+                    }
+
+                    $legacyFilename = $this->generateLegacyFilename($ouId, $date, $sku);
+                    if (!isset($promises[$legacyFilename])) {
+                        $promises[$legacyFilename] = $this->loadFileAsync($legacyFilename);
+                    }
                 }
             }
         }
@@ -110,7 +127,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
                     foreach ($entities as $entity) {
                         $file[$entity->getId()] = $entity;
                     }
-                    return $this->saveFileAsync($filename, $file);
+                    return $this->saveFileAsync($file);
                 });
         }
 
@@ -127,12 +144,33 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function generateEntityFilename(AuditAdjustment $entity): string
     {
-        return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate(), $entity->getSku());
+        return $this->generateFilename($entity->getOrganisationUnitId(), new DateTime($entity->getDate()), $entity->getSku());
     }
 
-    protected function generateFilename(int $ouId, string $date, string $sku): string
+    protected function generateLegacyEntityFilename(AuditAdjustment $entity): string
     {
-        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s-%s.json', $ouId, $date, base64_encode($sku));
+        return $this->generateLegacyFilename($entity->getOrganisationUnitId(), new DateTime($entity->getDate()), $entity->getSku());
+    }
+
+    protected function generateFilename(int $ouId, DateTime $date, string $sku): string
+    {
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf(
+            '%s/%s/%d/%s.json.gz',
+            $date->format('o'),
+            $date->format('W'),
+            $ouId,
+            base64_encode($sku)
+        );
+    }
+
+    protected function generateLegacyFilename(int $ouId, DateTime $date, string $sku): string
+    {
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf(
+            '%d-%s-%s.json',
+            $ouId,
+            $date->stdDateFormat(),
+            base64_encode($sku)
+        );
     }
 
     protected function loadFile(string $filename, bool $useCache = false): File
@@ -142,8 +180,9 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function loadFileAsync(string $filename, bool $useCache = false): PromiseInterface
     {
-        return $this->loadFileData($filename, $useCache)->then(function(?string $data) {
-            return $this->mapper->toFile($data);
+        $compressed = substr($filename, -8) == '.json.gz';
+        return $this->loadFileData($filename, $useCache)->then(function(?string $data) use($filename, $compressed) {
+            return $this->mapper->toFile($filename, $data, $compressed);
         });
     }
 
@@ -176,21 +215,21 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $promise;
     }
 
-    protected function saveFile(string $filename, File $file): void
+    protected function saveFile(File $file): void
     {
-        $promise = $this->saveFileAsync($filename, $file);
+        $promise = $this->saveFileAsync($file);
         if ($promise instanceof PromiseInterface) {
             $promise->wait();
         }
     }
 
-    protected function saveFileAsync(string $filename, File $file): ?PromiseInterface
+    protected function saveFileAsync(File $file): ?PromiseInterface
     {
         if (!$file->isModified()) {
             return null;
         }
 
-        $this->cache->removeFile($filename);
-        return $this->storageAdapter->writeAsync($filename, $this->mapper->fromFile($file));
+        $this->cache->removeFile($file->getFilename());
+        return $this->storageAdapter->writeAsync($file->getFilename(), $this->mapper->fromFile($file));
     }
 }

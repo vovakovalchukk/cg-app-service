@@ -6,6 +6,8 @@ use CG\Stock\Audit\Adjustment\Mapper as AuditAdjustmentMapper;
 
 class Mapper
 {
+    protected const COMPRESSION = 9;
+
     /** @var AuditAdjustmentMapper */
     protected $auditAdjustmentMapper;
 
@@ -14,11 +16,15 @@ class Mapper
         $this->auditAdjustmentMapper = $auditAdjustmentMapper;
     }
 
-    public function toFile(?string $data): File
+    public function toFile(string $filename, ?string $data, bool $compressed): File
     {
-        $file = new File();
+        $file = new File($filename, $compressed);
         if ($data === null) {
             return $file;
+        }
+
+        if ($compressed) {
+            $data = gzdecode($data);
         }
 
         $collection = json_decode($data, true);
@@ -32,11 +38,15 @@ class Mapper
             $file[$entity->getId()] = $entity;
         }
 
-        return $file->setInitialCount($file->count());
+        return $file->setHash($file->hash());
     }
 
-    public function fromFile(?File $file): string
+    public function fromFile(File $file): string
     {
-        return json_encode(!is_null($file) ? $file->toArray() : []);
+        $data = json_encode($file->toArray());
+        if ($file->isCompressed()) {
+            $data = gzencode($data, static::COMPRESSION);
+        }
+        return $data;
     }
 }
