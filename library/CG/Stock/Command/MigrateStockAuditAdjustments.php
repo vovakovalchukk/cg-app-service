@@ -42,7 +42,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit = null)
     {
-        $date = new Date((new DateTime($timeFrame))->resetTime()->stdDateFormat());
+        $date = $this->restrictDate(new Date((new DateTime($timeFrame))->resetTime()->stdDateFormat()));
         $this->logDebug(static::LOG_MSG_TIME_FRAME, [$timeFrame, 'date' => $date->getDate(), $limit ?? 'unlimited', $limit != 1 ? 's' : ''], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
         $output->writeln(sprintf(static::LOG_MSG_TIME_FRAME, $timeFrame, $date->getDate(), $limit ?? 'unlimited', $limit != 1 ? 's' : ''));
 
@@ -63,6 +63,14 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         foreach ($migrationPeriods as $migrationPeriod) {
             $this->migrateDate($output, $migrationPeriod);
         }
+    }
+
+    protected function restrictDate(Date $date): Date
+    {
+        $lastWeek = (new DateTime())->resetTime();
+        $lastWeek->sub(new \DateInterval(sprintf('P%dD', $lastWeek->format('N'))));
+        $lastWeek = new Date($lastWeek->stdDateFormat());
+        return $date->diff($lastWeek)->invert ? $lastWeek : $date;
     }
 
     protected function migrateDate(OutputInterface $output, MigrationPeriod $migrationPeriod)
