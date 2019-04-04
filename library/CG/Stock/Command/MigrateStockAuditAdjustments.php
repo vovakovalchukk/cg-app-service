@@ -7,6 +7,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
+use CG\Stock\Audit\Adjustment\MigrationPeriod;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -52,43 +53,44 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             throw $exception;
         }
 
-        $dates = $this->storage->fetchDatesWithDataOlderThanOrEqualTo($date, $limit);
-        if (empty($dates)) {
+        $migrationPeriods = $this->storage->fetchMigrationPeriodsWithDataOlderThanOrEqualTo($date, $limit);
+        if (empty($migrationPeriods)) {
             $this->logWarning(static::LOG_MSG_NO_DATA, [], [static::LOG_CODE, static::LOG_CODE_NO_DATA]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_NO_DATA));
             return;
         }
 
-        foreach ($dates as $date) {
-            $this->migrateDate($output, $date);
+        foreach ($migrationPeriods as $migrationPeriod) {
+            $this->migrateDate($output, $migrationPeriod);
         }
     }
 
-    protected function migrateDate(OutputInterface $output, Date $date)
+    protected function migrateDate(OutputInterface $output, MigrationPeriod $migrationPeriod)
     {
         try {
-            $collection = $this->storage->fetchCollectionForDate($date);
+            $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
         } catch (NotFound $exception) {
             // No data for selected date - ignore
             return;
         }
 
-        $this->logDebug(static::LOG_MSG_FOUND_DATA, [$collection->count(), $collection->count() != 1 ? 's' : '', 'date' => $date->getDate()], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', $collection->count(), $collection->count() != 1 ? 's' : '', $date->getDate()));
+        $period = sprintf('"%s" to "%s"', $migrationPeriod->getFrom()->getDate(), $migrationPeriod->getTo()->getDate());
+        $this->logDebug(static::LOG_MSG_FOUND_DATA, [$collection->count(), $collection->count() != 1 ? 's' : '', 'period' => $period], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', $collection->count(), $collection->count() != 1 ? 's' : '', $period));
 
         $this->storage->beginTransaction();
         try {
             $this->archive->saveCollection($collection);
-            $this->storage->removeCollectionForDate($date);
+            $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
             $this->storage->commitTransaction();
         } catch (\Throwable $throwable) {
             $this->storage->rollbackTransaction();
-            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [$date->getDate()], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['date' => $date->getDate()]);
+            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $period]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
             return;
         }
 
-        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['date' => $date->getDate()]);
+        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $period]);
         $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
     }
 }
