@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5687a75e0bcbc539fc2c201d921d5a9",
+    "content-hash": "18ec7b3a84701094967a3343653bbd52",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -3095,12 +3095,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-walmart.git",
-                "reference": "d4d92aa0e438d4ef678128234bad436d16acff85"
+                "reference": "e4bb1ebf84c5c0e1a633b0ebb47e60b5549c8712"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/walmart/channelgrabber-walmart-dev-TAC-363-walmart-items-report-878bf4.zip",
-                "reference": "d4d92aa0e438d4ef678128234bad436d16acff85",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/walmart/channelgrabber-walmart-dev-TAC-363-walmart-items-report-157b69.zip",
+                "reference": "e4bb1ebf84c5c0e1a633b0ebb47e60b5549c8712",
                 "shasum": null
             },
             "require": {
@@ -3124,7 +3124,7 @@
                     "CG\\Walmart\\Test\\": "tests/src/"
                 }
             },
-            "time": "2019-04-03T15:45:39+00:00"
+            "time": "2019-04-04T08:42:26+00:00"
         },
         {
             "name": "channelgrabber/webdriver",
@@ -10941,9 +10941,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/walmart": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20,
-        "channelgrabber/walmart": 20
+        "realityking/hash_equals": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
