@@ -6,6 +6,7 @@ use CG\Account\Shared\Collection as AccountCollection;
 use CG\Account\Shared\Entity as AccountEntity;
 use CG\Cilex\ModulusAwareInterface;
 use CG\Cilex\ModulusTrait;
+use CG\Walmart\Gearman\Generator\FetchInventoryReportForAccount;
 
 class GetItemsReportForAccounts implements ModulusAwareInterface
 {
@@ -15,15 +16,16 @@ class GetItemsReportForAccounts implements ModulusAwareInterface
 
     /** @var CommandService */
     protected $commandService;
-    /** @var  */
+    /** @var FetchInventoryReportForAccount */
     protected $jobGenerator;
 
-    public function __construct(CommandService $commandService)
+    public function __construct(CommandService $commandService, FetchInventoryReportForAccount $jobGenerator)
     {
         $this->commandService = $commandService;
+        $this->jobGenerator = $jobGenerator;
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         $accounts = $this->fetchEnabledAccounts();
         /** @var AccountEntity $account */

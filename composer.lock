@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e27abf43681195e4ed7dbc19cf6c4876",
+    "content-hash": "f5687a75e0bcbc539fc2c201d921d5a9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1202,16 +1202,16 @@
         },
         {
             "name": "channelgrabber/http",
-            "version": "1.3.32",
+            "version": "1.3.33",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cghttp.git",
-                "reference": "6869a923e43e5b5d90a9d017f3e0d4ecbbe6597d"
+                "reference": "6fb9f5748ea79a982c917ea9cc744143a57f9488"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/http/channelgrabber-http-1.3.32-d807fc.zip",
-                "reference": "6869a923e43e5b5d90a9d017f3e0d4ecbbe6597d",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/http/channelgrabber-http-1.3.33-4382c9.zip",
+                "reference": "6fb9f5748ea79a982c917ea9cc744143a57f9488",
                 "shasum": null
             },
             "require": {
@@ -1251,7 +1251,7 @@
                     "CG\\Http\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2018-04-03T08:26:39+00:00"
+            "time": "2018-11-09T09:30:56+00:00"
         },
         {
             "name": "channelgrabber/image",
@@ -3088,6 +3088,43 @@
                 }
             },
             "time": "2013-11-04T13:10:03+00:00"
+        },
+        {
+            "name": "channelgrabber/walmart",
+            "version": "dev-TAC-363-walmart-items-report",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-walmart.git",
+                "reference": "d4d92aa0e438d4ef678128234bad436d16acff85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/walmart/channelgrabber-walmart-dev-TAC-363-walmart-items-report-878bf4.zip",
+                "reference": "d4d92aa0e438d4ef678128234bad436d16acff85",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/channel": "^1.42.11",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/http": "^1.3.33",
+                "channelgrabber/stdlib": "^2.16.5",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Walmart\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Walmart\\Test\\": "tests/src/"
+                }
+            },
+            "time": "2019-04-03T15:45:39+00:00"
         },
         {
             "name": "channelgrabber/webdriver",
@@ -10893,12 +10930,20 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.1.1",
+            "alias_normalized": "1.1.1.0",
+            "version": "dev-TAC-363-walmart-items-report",
+            "package": "channelgrabber/walmart"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
-        "realityking/hash_equals": 20
+        "realityking/hash_equals": 20,
+        "channelgrabber/walmart": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
