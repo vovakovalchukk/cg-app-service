@@ -7,6 +7,7 @@ use CG\FileStorage\PromiseInterface;
 use CG\FileStorage\ResponseInterface;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime;
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
@@ -24,6 +25,8 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
     protected const LOG_CODE = 'StockAuditAdjustment::FileStorage';
     protected const LOG_CODE_EXPENSIVE_METHOD_CALL = 'ExpensiveMethodCall';
     protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this method should be avoided where possible';
+    protected const LOG_CODE_CONFLICT = 'Did not save file as modified';
+    protected const LOG_MSG_CONFLICT = 'Did not save file as modified';
 
     /** @var StorageAdapter */
     protected $storageAdapter;
@@ -48,7 +51,11 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
-        $this->saveFile($file);
+        try {
+            $this->saveFile($file);
+        } catch (Conflict $conflict) {
+            $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
+        }
         return $entity;
     }
 
@@ -73,7 +80,11 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
             }
 
             unset($file[$entity->getId()]);
-            $this->saveFile($file);
+            try {
+                $this->saveFile($file);
+            } catch (Conflict $conflict) {
+                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
+            }
         }
     }
 
@@ -133,9 +144,13 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
         /** @var PromiseInterface $promise */
         while ($promise = array_pop($promises)) {
-            $response = $promise->wait();
-            if ($response instanceof PromiseInterface) {
-                array_push($promises, $response);
+            try {
+                $response = $promise->wait();
+                if ($response instanceof PromiseInterface) {
+                    array_push($promises, $response);
+                }
+            } catch (Conflict $conflict) {
+                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
             }
         }
 
@@ -225,8 +240,14 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function saveFileAsync(File $file): ?PromiseInterface
     {
-        if (!$file->isModified()) {
+        $modified = $file->isModified();
+        if ($file->count() == 0 || !$modified) {
             return null;
+        }
+        if ($file->getInitialCount() > 0 && $modified) {
+            return Promise::createRejected(new Conflict(
+                sprintf('Failed to save %s, hash does not match (%s != %s)', $file->getFilename(), $file->getHash(), $file->hash())
+            ));
         }
 
         $this->cache->removeFile($file->getFilename());

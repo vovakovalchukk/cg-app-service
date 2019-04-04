@@ -10,6 +10,8 @@ class File extends \ArrayObject
     protected $filename;
     /** @var bool */
     protected $compressed;
+    /** @var int */
+    protected $initialCount;
     /** @var ?string */
     protected $hash;
 
@@ -18,6 +20,7 @@ class File extends \ArrayObject
         parent::__construct();
         $this->filename = $filename;
         $this->compressed = $compressed;
+        $this->initialCount = 0;
         $this->hash = null;
     }
 
@@ -29,6 +32,20 @@ class File extends \ArrayObject
     public function isCompressed(): bool
     {
         return $this->compressed;
+    }
+
+    public function getInitialCount(): int
+    {
+        return $this->initialCount;
+    }
+
+    /**
+     * @return self
+     */
+    public function setInitialCount(int $initialCount)
+    {
+        $this->initialCount = $initialCount;
+        return $this;
     }
 
     public function hash(): string

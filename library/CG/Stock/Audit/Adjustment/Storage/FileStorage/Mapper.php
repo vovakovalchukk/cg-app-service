@@ -38,7 +38,7 @@ class Mapper
             $file[$entity->getId()] = $entity;
         }
 
-        return $file->setHash($file->hash());
+        return $file->setInitialCount($file->count())->setHash($file->hash());
     }
 
     public function fromFile(File $file): string
