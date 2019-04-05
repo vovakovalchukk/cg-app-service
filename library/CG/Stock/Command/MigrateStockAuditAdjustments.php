@@ -8,6 +8,7 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationPeriod;
+use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -28,6 +29,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_MSG_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_CODE_MIGRATED = 'Migrated stock audit adjustments';
     protected const LOG_MSG_MIGRATED = 'Migrated stock audit adjustments';
+    protected const LOG_CODE_MIGRATION_TIMINGS = 'Timings';
+    protected const LOG_MSG_MIGRATION_TIMINGS = 'Migration completed in %ss';
 
     /** @var StorageInterface|MigrationInterface */
     protected $storage;
@@ -75,8 +78,13 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     protected function migrateDate(OutputInterface $output, MigrationPeriod $migrationPeriod)
     {
+        $migrationTimer = new MigrationTimer();
+        $totalTimer = $migrationTimer->getTotalTimer();
+
         try {
+            $loadTimer = $migrationTimer->getLoadTimer();
             $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
+            $loadTimer();
         } catch (NotFound $exception) {
             // No data for selected date - ignore
             return;
@@ -88,7 +96,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
         $this->storage->beginTransaction();
         try {
-            $this->archive->saveCollection($collection);
+            $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
             $this->storage->commitTransaction();
         } catch (\Throwable $throwable) {
@@ -96,6 +104,9 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $period]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
             return;
+        } finally {
+            $totalTimer();
+            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $period, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload()]);
         }
 
         $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $period]);

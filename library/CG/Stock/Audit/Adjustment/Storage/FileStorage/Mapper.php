@@ -3,6 +3,7 @@ namespace CG\Stock\Audit\Adjustment\Storage\FileStorage;
 
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
 use CG\Stock\Audit\Adjustment\Mapper as AuditAdjustmentMapper;
+use CG\Stock\Audit\Adjustment\MigrationTimer;
 
 class Mapper
 {
@@ -41,11 +42,13 @@ class Mapper
         return $file->setInitialCount($file->count())->setHash($file->hash());
     }
 
-    public function fromFile(File $file): string
+    public function fromFile(File $file, MigrationTimer $migrationTimer = null): string
     {
         $data = json_encode($file->toArray());
         if ($file->isCompressed()) {
+            $compressionTimer = ($migrationTimer !== null) ? $migrationTimer->getCompressionTimer() : function() {};
             $data = gzencode($data, static::COMPRESSION);
+            $compressionTimer();
         }
         return $data;
     }

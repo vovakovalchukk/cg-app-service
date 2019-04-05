@@ -13,6 +13,7 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\Collection as AuditAdjustments;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
+use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
@@ -119,7 +120,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $collection;
     }
 
-    public function saveCollection(CollectionInterface $collection)
+    public function saveCollection(CollectionInterface $collection, MigrationTimer $migrationTimer = null)
     {
         /** @var AuditAdjustment[] $files */
         $files = [];
@@ -134,11 +135,11 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $promises = [];
         foreach ($files as $filename => $entities) {
             $promises[] = $this->loadFileAsync($filename, true)
-                ->then(function(File $file) use($filename, $entities) {
+                ->then(function(File $file) use($filename, $entities, $migrationTimer) {
                     foreach ($entities as $entity) {
                         $file[$entity->getId()] = $entity;
                     }
-                    return $this->saveFileAsync($file);
+                    return $this->saveFileAsync($file, $migrationTimer);
                 });
         }
 
@@ -230,15 +231,15 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $promise;
     }
 
-    protected function saveFile(File $file): void
+    protected function saveFile(File $file, MigrationTimer $migrationTimer = null): void
     {
-        $promise = $this->saveFileAsync($file);
+        $promise = $this->saveFileAsync($file, $migrationTimer);
         if ($promise instanceof PromiseInterface) {
             $promise->wait();
         }
     }
 
-    protected function saveFileAsync(File $file): ?PromiseInterface
+    protected function saveFileAsync(File $file, MigrationTimer $migrationTimer = null): ?PromiseInterface
     {
         $modified = $file->isModified();
         if ($file->count() == 0 || !$modified) {
@@ -251,6 +252,24 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         }
 
         $this->cache->removeFile($file->getFilename());
-        return $this->storageAdapter->writeAsync($file->getFilename(), $this->mapper->fromFile($file));
+        $promise = $this->storageAdapter->writeAsync($file->getFilename(), $this->mapper->fromFile($file, $migrationTimer));
+
+        if ($migrationTimer === null) {
+            return $promise;
+        }
+
+        $uploadTimer = $migrationTimer->getUploadTimer();
+        $promise->then(
+            function($response) use($uploadTimer) {
+                $uploadTimer();
+                return $response;
+            },
+            function($response) use($uploadTimer) {
+                $uploadTimer();
+                return $response;
+            }
+        );
+
+        return $promise;
     }
 }
