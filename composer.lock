@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18ec7b3a84701094967a3343653bbd52",
+    "content-hash": "c28d3e504fc43c2b02a723d5baab3130",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1326,16 +1326,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "1.19.0",
+            "version": "dev-TAC-363-walmart-items-report",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "4c00f9c155a70dc3b9aa78874022f50f017137cb"
+                "reference": "10b88f1136614a31fa7885f421431537b823828d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-1.19.0-ad8c66.zip",
-                "reference": "4c00f9c155a70dc3b9aa78874022f50f017137cb",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-dev-TAC-363-walmart-items-report-c3aff1.zip",
+                "reference": "10b88f1136614a31fa7885f421431537b823828d",
                 "shasum": null
             },
             "require": {
@@ -1376,7 +1376,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2019-01-29T10:45:45+00:00"
+            "time": "2019-04-05T10:16:39+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -10932,6 +10932,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.19.1",
+            "alias_normalized": "1.19.1.0",
+            "version": "dev-TAC-363-walmart-items-report",
+            "package": "channelgrabber/listing"
+        },
+        {
             "alias": "1.1.1",
             "alias_normalized": "1.1.1.0",
             "version": "dev-TAC-363-walmart-items-report",
@@ -10941,6 +10947,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/listing": 20,
         "channelgrabber/walmart": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
