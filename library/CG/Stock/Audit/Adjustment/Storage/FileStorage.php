@@ -53,7 +53,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
         try {
-            $this->saveFile($file);
+            $this->saveFile($file, true);
         } catch (Conflict $conflict) {
             $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
         }
@@ -82,7 +82,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
             unset($file[$entity->getId()]);
             try {
-                $this->saveFile($file);
+                $this->saveFile($file, true);
             } catch (Conflict $conflict) {
                 $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
             }
@@ -139,7 +139,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
                     foreach ($entities as $entity) {
                         $file[$entity->getId()] = $entity;
                     }
-                    return $this->saveFileAsync($file, $migrationTimer);
+                    return $this->saveFileAsync($file, false, $migrationTimer);
                 });
         }
 
@@ -231,21 +231,21 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $promise;
     }
 
-    protected function saveFile(File $file, MigrationTimer $migrationTimer = null): void
+    protected function saveFile(File $file, bool $override = false, MigrationTimer $migrationTimer = null): void
     {
-        $promise = $this->saveFileAsync($file, $migrationTimer);
+        $promise = $this->saveFileAsync($file, $override, $migrationTimer);
         if ($promise instanceof PromiseInterface) {
             $promise->wait();
         }
     }
 
-    protected function saveFileAsync(File $file, MigrationTimer $migrationTimer = null): ?PromiseInterface
+    protected function saveFileAsync(File $file, bool $override = false, MigrationTimer $migrationTimer = null): ?PromiseInterface
     {
         $modified = $file->isModified();
         if ($file->count() == 0 || !$modified) {
             return null;
         }
-        if ($file->getInitialCount() > 0 && $modified) {
+        if (!$override && $file->getInitialCount() > 0 && $modified) {
             return Promise::createRejected(new Conflict(
                 sprintf('Failed to save %s, hash does not match (%s != %s)', $file->getFilename(), $file->getHash(), $file->hash())
             ));
