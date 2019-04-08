@@ -91,8 +91,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         }
 
         $period = sprintf('"%s" to "%s"', $migrationPeriod->getFrom()->getDate(), $migrationPeriod->getTo()->getDate());
-        $this->logDebug(static::LOG_MSG_FOUND_DATA, [$collection->count(), $collection->count() != 1 ? 's' : '', 'period' => $period], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', $collection->count(), $collection->count() != 1 ? 's' : '', $period));
+        $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $period], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $period));
 
         $this->storage->beginTransaction();
         try {
