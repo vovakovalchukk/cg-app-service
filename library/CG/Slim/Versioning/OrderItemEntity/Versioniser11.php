@@ -18,7 +18,6 @@ class Versioniser10 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-<<<<<<< HEAD
         if (isset($data['dispatchable'])) {
             return;
         }
@@ -27,16 +26,6 @@ class Versioniser10 implements VersioniserInterface
             try {
                 $item = $this->service->fetch($data['id']);
                 $data['dispatchable'] = $item->getDispatchable();
-=======
-        if (isset($data['customisation'])) {
-            return;
-        }
-        $data['customisation'] = null;
-        if (isset($data['id'])) {
-            try {
-                $item = $this->service->fetch($data['id']);
-                $data['customisation'] = $item->getCustomisation();
->>>>>>> 55707f115aeeaa04b9a9f18164667817c43c9af5
             } catch (NotFound $ex) {
                 // No existing item to copy from
             }
@@ -47,11 +36,7 @@ class Versioniser10 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-<<<<<<< HEAD
         unset($data['dispatchable']);
-=======
-        unset($data['customisation']);
->>>>>>> 55707f115aeeaa04b9a9f18164667817c43c9af5
         $response->setData($data);
     }
 
