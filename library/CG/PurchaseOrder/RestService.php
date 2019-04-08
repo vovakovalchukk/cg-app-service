@@ -54,7 +54,7 @@ class RestService extends Service
 
         if ($shouldTriggerStockImport) {
             $this->triggerStockImportUpdate($entity);
-            $this->subtractFromStockOnPurchaseOrderCounts($entity);
+//            $this->subtractFromStockOnPurchaseOrderCounts($entity);
         }
 
         return $savedEntity;
