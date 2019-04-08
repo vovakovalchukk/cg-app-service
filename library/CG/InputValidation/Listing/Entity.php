@@ -119,6 +119,11 @@ class Entity implements RulesInterface
                     new IsArrayValidator(['name' => 'skuExternalIdMap'])
                 ]
             ],
+            'lastModified' => [
+                'name'       => 'lastModified',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
         ];
     }
 }
