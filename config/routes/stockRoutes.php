@@ -41,7 +41,7 @@ return [
             'filterRules' => StockCollectionValidation::class,
             'dataRules' => StockEntityValidation::class
         ],
-        'version' => new Version(1, 2)
+        'version' => new Version(1, 4)
     ],
     '/stock/:stockId' => [
         'controllers' => function($stockId) use ($di, $app) {
@@ -63,7 +63,7 @@ return [
             'entityClass' => StockEntity::class,
             'serviceClass' => StockService::class
         ],
-        'version' => new Version(1, 2)
+        'version' => new Version(1, 4)
     ],
     '/stockLocation' => [
         'controllers' => function() use ($di, $app) {
@@ -82,7 +82,7 @@ return [
             'filterRules' => LocationCollectionValidation::class,
             'dataRules' => LocationEntityValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/stockLocation/:id' => [
         'controllers' => function($id) use ($di, $app) {
@@ -104,7 +104,7 @@ return [
             'entityClass' => StockLocationEntity::class,
             'serviceClass' => StockLocationService::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/stockLog' => [
         'controllers' => function() use ($di, $app) {

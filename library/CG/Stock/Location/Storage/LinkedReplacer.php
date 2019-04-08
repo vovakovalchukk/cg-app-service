@@ -487,7 +487,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
             $stockLocation->getStockId(),
             $stockLocation->getLocationId(),
             !$zeroStock ? $stockLocation->getOnHand() : 0,
-            !$zeroStock ? $stockLocation->getAllocated() : 0
+            !$zeroStock ? $stockLocation->getAllocated() : 0,
+            !$zeroStock ? $stockLocation->getOnPurchaseOrder() : 0
         ))->setComponentMultiplier($qty);
     }
 

@@ -131,6 +131,13 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
+            'customisation' => [
+                'name' => 'customisation',
+                'required' => false,
+                'validators' => [
+                    new StringLength(['min' => 1, 'max' => 16777215])
+                ],
+            ],
             'dispatchable' => [
                 'name'       => 'dispatchable',
                 'required'   => false,

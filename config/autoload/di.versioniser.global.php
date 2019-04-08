@@ -1,4 +1,5 @@
 <?php
+
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
@@ -28,8 +29,12 @@ use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
 use CG\Slim\Versioning\ProductEntity;
+use CG\Slim\Versioning\ProductSettingsCollection;
+use CG\Slim\Versioning\ProductSettingsEntity;
 use CG\Slim\Versioning\StockCollection;
 use CG\Slim\Versioning\StockEntity;
+use CG\Slim\Versioning\StockLocationCollection;
+use CG\Slim\Versioning\StockLocationEntity;
 use CG\Slim\Versioning\StockLogCollection;
 use CG\Slim\Versioning\TemplateCollection;
 use CG\Slim\Versioning\TemplateEntity;
@@ -151,6 +156,10 @@ return [
                 'Versioniser_ProductEntity_9' => ProductEntity\Versioniser9::class,
                 'Versioniser_ProductCollection_10' => ProductCollection\Versioniser10::class,
                 'Versioniser_ProductEntity_10' => ProductEntity\Versioniser10::class,
+                'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
+                'Versioniser_ProductSettingsCollection_2' => ProductSettingsCollection\Versioniser2::class,
+                'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
+                'Versioniser_ProductSettingsEntity_2' => ProductSettingsEntity\Versioniser2::class,
                 'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
                 'Versioniser_AliasSettingsCollection_2' => AliasSettingsCollection\Versioniser2::class,
@@ -191,7 +200,11 @@ return [
                 'Versioniser_OrderTrackingCollection_1' => TrackingCollection\Versioniser1::class,
                 'Versioniser_OrderTrackingEntity_1' => TrackingEntity\Versioniser1::class,
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
+                'Versioniser_StockCollection_2' => StockCollection\Versioniser2::class,
+                'Versioniser_StockCollection_3' => StockCollection\Versioniser3::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
+                'Versioniser_StockEntity_2' => StockEntity\Versioniser2::class,
+                'Versioniser_StockEntity_3' => StockEntity\Versioniser3::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
                 'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
@@ -202,6 +215,8 @@ return [
                 'Versioniser_StockLogCollection_1' => StockLogCollection\Versioniser1::class,
                 'Versioniser_PickListSettingsEntity_1' => PickListSettingsEntity\Versioniser1::class,
                 'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
+                'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
+                'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
@@ -376,6 +391,16 @@ return [
             'Versioniser_ProductCollection_10' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ProductEntity_10'
+                ]
+            ],
+            'Versioniser_ProductSettingsCollection_1' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductSettingsEntity_1'
+                ],
+            ],
+            'Versioniser_ProductSettingsCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductSettingsEntity_2'
                 ],
             ],
             'Versioniser_AliasSettingsCollection_1' => [
@@ -426,6 +451,11 @@ return [
             'Versioniser_StockCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_StockEntity_1',
+                ],
+            ],
+            'Versioniser_StockCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_StockEntity_2',
                 ],
             ],
             'Versioniser_InvoiceMappingCollection_1' => [

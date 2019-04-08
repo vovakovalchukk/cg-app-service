@@ -4,9 +4,10 @@ namespace CG\PurchaseOrder;
 use CG\PurchaseOrder\Entity as PurchaseOrder;
 use CG\PurchaseOrder\Item\Filter as ItemFilter;
 use CG\PurchaseOrder\Item\Mapper as PurchaseOrderItemMapper;
-use CG\PurchaseOrder\Item\Service as PurchaseOrderItemService;
+use CG\PurchaseOrder\Item\RestService as PurchaseOrderItemService;
 use CG\PurchaseOrder\Item\Entity as Item;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stock\Gearman\Generator\AdjustOnPurchaseOrder as AdjustStockOnPurchaseOrderGenerator;
 use CG\Stock\Gearman\Generator\StockImport as StockImportGearmanJobGenerator;
 use Zend\EventManager\GlobalEventManager as EventManager;
 
@@ -19,6 +20,8 @@ class RestService extends Service
     protected $eventManager;
     /** @var StockImportGearmanJobGenerator $stockImportGearmanJobGenerator */
     protected $stockImportGearmanJobGenerator;
+    /** @var AdjustStockOnPurchaseOrderGenerator */
+    protected $adjustStockOnPurchaseOrderGenerator;
 
     public function __construct(
         StorageInterface $repository,
@@ -26,7 +29,8 @@ class RestService extends Service
         PurchaseOrderItemService $purchaseOrderItemService,
         PurchaseOrderItemMapper $purchaseOrderItemMapper,
         StockImportGearmanJobGenerator $stockImportGenerator,
-        EventManager $eventManager
+        EventManager $eventManager,
+        AdjustStockOnPurchaseOrderGenerator $adjustStockOnPurchaseOrderGenerator
     ) {
         parent::__construct(
             $repository,
@@ -36,6 +40,7 @@ class RestService extends Service
         );
         $this->eventManager = $eventManager;
         $this->stockImportGearmanJobGenerator = $stockImportGenerator;
+        $this->adjustStockOnPurchaseOrderGenerator = $adjustStockOnPurchaseOrderGenerator;
     }
 
     public function save(PurchaseOrder $entity, array $itemEntities = null)
@@ -49,6 +54,7 @@ class RestService extends Service
 
         if ($shouldTriggerStockImport) {
             $this->triggerStockImportUpdate($entity);
+            $this->subtractFromStockOnPurchaseOrderCounts($entity);
         }
 
         return $savedEntity;
@@ -56,7 +62,13 @@ class RestService extends Service
 
     public function remove(Entity $entity): void
     {
+        // Remove the items first! They need to check things on the PO before we delete that.
+        $this->removeItems($entity);
         $this->getRepository()->remove($entity);
+    }
+
+    protected function removeItems(Entity $entity): void
+    {
         try {
             /** @var Item $item */
             foreach ($this->purchaseOrderItemService->fetchAllByPurchaseOrderIds([$entity->getId()]) as $item) {
@@ -149,6 +161,14 @@ class RestService extends Service
     {
         /** Generate a job to trigger the stock import from PurchaseOrder */
         $this->stockImportGearmanJobGenerator->generateJob($purchaseOrder);
+    }
+
+    protected function subtractFromStockOnPurchaseOrderCounts(PurchaseOrder $purchaseOrder): void
+    {
+        foreach ($purchaseOrder->getItems() as $item) {
+            $adjustment = 0 - $item->getQuantity();
+            ($this->adjustStockOnPurchaseOrderGenerator)($item, $adjustment);
+        }
     }
 
     /**
