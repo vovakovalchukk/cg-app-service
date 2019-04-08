@@ -6,7 +6,7 @@ use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
 
-class Versioniser10 implements VersioniserInterface
+class Versioniser11 implements VersioniserInterface
 {
     protected $service;
 
