@@ -7,11 +7,13 @@ use CG\FileStorage\PromiseInterface;
 use CG\FileStorage\ResponseInterface;
 use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\DateTime;
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\Collection as AuditAdjustments;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
+use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
@@ -23,7 +25,9 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected const LOG_CODE = 'StockAuditAdjustment::FileStorage';
     protected const LOG_CODE_EXPENSIVE_METHOD_CALL = 'ExpensiveMethodCall';
-    protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this should method should be avoided where possible';
+    protected const LOG_MSG_EXPENSIVE_METHOD_CALL = '%s is expensive as it requires loading an entire days file for one entity - this method should be avoided where possible';
+    protected const LOG_CODE_CONFLICT = 'Did not save file as modified';
+    protected const LOG_MSG_CONFLICT = 'Did not save file as modified';
 
     /** @var StorageAdapter */
     protected $storageAdapter;
@@ -48,7 +52,11 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         $filename = $this->generateEntityFilename($entity);
         $file = $this->loadFile($filename);
         $file[$entity->getId()] = $entity;
-        $this->saveFile($filename, $file);
+        try {
+            $this->saveFile($file, true);
+        } catch (Conflict $conflict) {
+            $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
+        }
         return $entity;
     }
 
@@ -58,13 +66,27 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
     public function remove($entity)
     {
         $this->logWarning(static::LOG_MSG_EXPENSIVE_METHOD_CALL, [__METHOD__], [static::LOG_CODE, static::LOG_CODE_EXPENSIVE_METHOD_CALL]);
-        $filename = $this->generateEntityFilename($entity);
-        $file = $this->loadFile($filename);
-        if (!isset($file[$entity->getId()])) {
-            return;
+
+        /** @var PromiseInterface[] $promises */
+        $promises = [];
+        foreach ([$this->generateEntityFilename($entity), $this->generateLegacyEntityFilename($entity)] as $filename) {
+            $promises[] = $this->loadFileAsync($filename);
         }
-        unset($file[$entity->getId()]);
-        $this->saveFile($filename, $file);
+
+        foreach ($promises as $promise) {
+            /** @var File $file */
+            $file = $promise->wait();
+            if (!isset($file[$entity->getId()])) {
+                continue;
+            }
+
+            unset($file[$entity->getId()]);
+            try {
+                $this->saveFile($file, true);
+            } catch (Conflict $conflict) {
+                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
+            }
+        }
     }
 
     public function fetchCollection(array $ouIds, array $skus, DateTime $from, DateTime $to): AuditAdjustments
@@ -74,8 +96,15 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
             foreach ($ouIds as $ouId) {
                 foreach ($skus as $sku) {
-                    $filename = $this->generateFilename($ouId, $date->stdDateFormat(), $sku);
-                    $promises[] = $this->loadFileAsync($filename);
+                    $filename = $this->generateFilename($ouId, $date, $sku);
+                    if (!isset($promises[$filename])) {
+                        $promises[$filename] = $this->loadFileAsync($filename);
+                    }
+
+                    $legacyFilename = $this->generateLegacyFilename($ouId, $date, $sku);
+                    if (!isset($promises[$legacyFilename])) {
+                        $promises[$legacyFilename] = $this->loadFileAsync($legacyFilename);
+                    }
                 }
             }
         }
@@ -91,7 +120,7 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $collection;
     }
 
-    public function saveCollection(CollectionInterface $collection)
+    public function saveCollection(CollectionInterface $collection, MigrationTimer $migrationTimer = null)
     {
         /** @var AuditAdjustment[] $files */
         $files = [];
@@ -105,16 +134,24 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
         $promises = [];
         foreach ($files as $filename => $entities) {
-            $file = $this->loadFile($filename, true);
-            foreach ($entities as $entity) {
-                $file[$entity->getId()] = $entity;
-            }
-            $promises[] = $this->saveFileAsync($filename, $file);
+            $promises[] = $this->loadFileAsync($filename, true)
+                ->then(function(File $file) use($filename, $entities, $migrationTimer) {
+                    foreach ($entities as $entity) {
+                        $file[$entity->getId()] = $entity;
+                    }
+                    return $this->saveFileAsync($file, false, $migrationTimer);
+                });
         }
 
-        foreach ($promises as $promise) {
-            if ($promise instanceof PromiseInterface) {
-                $promise->wait();
+        /** @var PromiseInterface $promise */
+        while ($promise = array_pop($promises)) {
+            try {
+                $response = $promise->wait();
+                if ($response instanceof PromiseInterface) {
+                    array_push($promises, $response);
+                }
+            } catch (Conflict $conflict) {
+                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
             }
         }
 
@@ -123,12 +160,33 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function generateEntityFilename(AuditAdjustment $entity): string
     {
-        return $this->generateFilename($entity->getOrganisationUnitId(), $entity->getDate(), $entity->getSku());
+        return $this->generateFilename($entity->getOrganisationUnitId(), new DateTime($entity->getDate()), $entity->getSku());
     }
 
-    protected function generateFilename(int $outId, string $date, string $sku): string
+    protected function generateLegacyEntityFilename(AuditAdjustment $entity): string
     {
-        return ENVIRONMENT . '/AuditAdjustment/' . sprintf('%d-%s-%s.json', $outId, $date, base64_encode($sku));
+        return $this->generateLegacyFilename($entity->getOrganisationUnitId(), new DateTime($entity->getDate()), $entity->getSku());
+    }
+
+    protected function generateFilename(int $ouId, DateTime $date, string $sku): string
+    {
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf(
+            '%s/%s/%d/%s.json.gz',
+            $date->format('o'),
+            $date->format('W'),
+            $ouId,
+            base64_encode($sku)
+        );
+    }
+
+    protected function generateLegacyFilename(int $ouId, DateTime $date, string $sku): string
+    {
+        return ENVIRONMENT . '/AuditAdjustment/' . sprintf(
+            '%d-%s-%s.json',
+            $ouId,
+            $date->stdDateFormat(),
+            base64_encode($sku)
+        );
     }
 
     protected function loadFile(string $filename, bool $useCache = false): File
@@ -138,8 +196,9 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     protected function loadFileAsync(string $filename, bool $useCache = false): PromiseInterface
     {
-        return $this->loadFileData($filename, $useCache)->then(function(?string $data) {
-            return $this->mapper->toFile($data);
+        $compressed = substr($filename, -8) == '.json.gz';
+        return $this->loadFileData($filename, $useCache)->then(function(?string $data) use($filename, $compressed) {
+            return $this->mapper->toFile($filename, $data, $compressed);
         });
     }
 
@@ -172,21 +231,45 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
         return $promise;
     }
 
-    protected function saveFile(string $filename, File $file): void
+    protected function saveFile(File $file, bool $override = false, MigrationTimer $migrationTimer = null): void
     {
-        $promise = $this->saveFileAsync($filename, $file);
+        $promise = $this->saveFileAsync($file, $override, $migrationTimer);
         if ($promise instanceof PromiseInterface) {
             $promise->wait();
         }
     }
 
-    protected function saveFileAsync(string $filename, File $file): ?PromiseInterface
+    protected function saveFileAsync(File $file, bool $override = false, MigrationTimer $migrationTimer = null): ?PromiseInterface
     {
-        if (!$file->isModified()) {
+        $modified = $file->isModified();
+        if ($file->count() == 0 || !$modified) {
             return null;
         }
+        if (!$override && $file->getInitialCount() > 0 && $modified) {
+            return Promise::createRejected(new Conflict(
+                sprintf('Failed to save %s, hash does not match (%s != %s)', $file->getFilename(), $file->getHash(), $file->hash())
+            ));
+        }
 
-        $this->cache->removeFile($filename);
-        return $this->storageAdapter->writeAsync($filename, $this->mapper->fromFile($file));
+        $this->cache->removeFile($file->getFilename());
+        $promise = $this->storageAdapter->writeAsync($file->getFilename(), $this->mapper->fromFile($file, $migrationTimer));
+
+        if ($migrationTimer === null) {
+            return $promise;
+        }
+
+        $uploadTimer = $migrationTimer->getUploadTimer();
+        $promise->then(
+            function($response) use($uploadTimer) {
+                $uploadTimer();
+                return $response;
+            },
+            function($response) use($uploadTimer) {
+                $uploadTimer();
+                return $response;
+            }
+        );
+
+        return $promise;
     }
 }
