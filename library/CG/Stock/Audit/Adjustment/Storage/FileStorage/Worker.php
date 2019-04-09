@@ -11,14 +11,13 @@ class Worker
     {
         $stack = [];
         foreach ($work as $job) {
+            array_push($stack, $job);
             while (count($stack) >= static::MAX_STACK_SIZE) {
                 $newJob = yield array_pop($stack);
                 if ($newJob !== null) {
                     array_push($stack, $newJob);
                 }
             }
-
-            array_push($stack, $job);
         }
 
         while ($job = array_pop($stack)) {
