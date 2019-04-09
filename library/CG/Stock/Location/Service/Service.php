@@ -68,7 +68,6 @@ class Service extends BaseService implements StatsAwareInterface
         NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
         LowStockThresholdUpdateGenerator $lowStockThresholdUpdateGenerator,
-        UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
         DetermineAndUpdateDispatchableOrdersGenerator $determineAndUpdateDispatchableOrdersJobGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
