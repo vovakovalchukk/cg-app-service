@@ -17,6 +17,7 @@ use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\File;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage\Mapper;
+use CG\Stock\Audit\Adjustment\Storage\FileStorage\Worker;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 
 class FileStorage implements StorageInterface, LoggerAwareInterface
@@ -91,36 +92,61 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
 
     public function fetchCollection(array $ouIds, array $skus, DateTime $from, DateTime $to): AuditAdjustments
     {
-        /** @var PromiseInterface[] $promises */
-        $promises = [];
-        for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
-            foreach ($ouIds as $ouId) {
-                foreach ($skus as $sku) {
-                    $filename = $this->generateFilename($ouId, $date, $sku);
-                    if (!isset($promises[$filename])) {
-                        $promises[$filename] = $this->loadFileAsync($filename);
-                    }
-
-                    $legacyFilename = $this->generateLegacyFilename($ouId, $date, $sku);
-                    if (!isset($promises[$legacyFilename])) {
-                        $promises[$legacyFilename] = $this->loadFileAsync($legacyFilename);
-                    }
-                }
-            }
-        }
-
         $collection = new AuditAdjustments();
-        foreach ($promises as $promise) {
+        $worker = Worker::generateWorker($this->generateFetchCollectionWorkload($ouIds, $skus, $from, $to));
+
+        /** @var PromiseInterface $promise */
+        foreach ($worker as $promise) {
             /** @var File $file */
             $file = $promise->wait();
             foreach ($file as $entity) {
                 $collection->attach($entity);
             }
         }
+
         return $collection;
     }
 
+    protected function generateFetchCollectionWorkload(array $ouIds, array $skus, DateTime $from, DateTime $to): \Generator
+    {
+        $files = [];
+        for ($date = $from->resetTime(); $date <= $to->resetTime(); $date->addOneDay()) {
+            foreach ($ouIds as $ouId) {
+                foreach ($skus as $sku) {
+                    $filename = $this->generateFilename($ouId, $date, $sku);
+                    if (!isset($files[$filename])) {
+                        yield $this->loadFileAsync($filename);
+                    }
+                    $files[$filename] = true;
+
+                    $legacyFilename = $this->generateLegacyFilename($ouId, $date, $sku);
+                    if (!isset($files[$legacyFilename])) {
+                        yield $this->loadFileAsync($legacyFilename);
+                    }
+                    $files[$legacyFilename] = true;
+                }
+            }
+        }
+    }
+
     public function saveCollection(CollectionInterface $collection, MigrationTimer $migrationTimer = null)
+    {
+        $worker = Worker::generateWorker($this->generateSaveCollectionWorkload($collection, $migrationTimer));
+        /** @var PromiseInterface $promise */
+        foreach ($worker as $promise) {
+            try {
+                $response = $promise->wait();
+                if ($response instanceof PromiseInterface) {
+                    $worker->send($response);
+                }
+            } catch (Conflict $conflict) {
+                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
+            }
+        }
+        return $collection;
+    }
+
+    protected function generateSaveCollectionWorkload(CollectionInterface $collection, MigrationTimer $migrationTimer = null): \Generator
     {
         /** @var AuditAdjustment[] $files */
         $files = [];
@@ -132,9 +158,8 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
             $files[$filename][] = $entity;
         }
 
-        $promises = [];
         foreach ($files as $filename => $entities) {
-            $promises[] = $this->loadFileAsync($filename, true)
+            yield $this->loadFileAsync($filename, true)
                 ->then(function(File $file) use($filename, $entities, $migrationTimer) {
                     foreach ($entities as $entity) {
                         $file[$entity->getId()] = $entity;
@@ -142,20 +167,6 @@ class FileStorage implements StorageInterface, LoggerAwareInterface
                     return $this->saveFileAsync($file, false, $migrationTimer);
                 });
         }
-
-        /** @var PromiseInterface $promise */
-        while ($promise = array_pop($promises)) {
-            try {
-                $response = $promise->wait();
-                if ($response instanceof PromiseInterface) {
-                    array_push($promises, $response);
-                }
-            } catch (Conflict $conflict) {
-                $this->logWarningException($conflict, static::LOG_MSG_CONFLICT, [], static::LOG_CODE_CONFLICT);
-            }
-        }
-
-        return $collection;
     }
 
     protected function generateEntityFilename(AuditAdjustment $entity): string
