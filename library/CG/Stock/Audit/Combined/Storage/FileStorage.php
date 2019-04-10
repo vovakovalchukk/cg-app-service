@@ -39,22 +39,25 @@ class FileStorage implements StorageInterface
         $skus = $filter->getSku();
         $dateFrom = $filter->getDateTimeFrom();
         $dateTo = $filter->getDateTimeTo();
+        $type = $filter->getType();
 
         if (
             empty($ouIds)
             || empty($skus)
             || empty($dateFrom)
             || empty($dateTo)
-            || !in_array(Type::ADJUSTMENT, $filter->getType())
+            || (!empty($type) && !in_array(Type::ADJUSTMENT, $type))
         ) {
             return;
         }
 
-        $this->auditAdjustmentStorage->saveCollection($this->auditAdjustmentFileStorage->fetchCollection(
-            $ouIds,
-            $skus,
-            new DateTime($dateFrom),
-            new DateTime($dateTo)
-        ));
+        $this->auditAdjustmentStorage->saveCollection(
+            $this->auditAdjustmentFileStorage->fetchCollection(
+                $ouIds,
+                $skus,
+                new DateTime($dateFrom),
+                new DateTime($dateTo)
+            )
+        );
     }
 }
