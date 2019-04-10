@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4bc022c08ff202da0e1e53390e1398b",
+    "content-hash": "d80af8087c20543f4cd41cb71e8c25e9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2463,16 +2463,16 @@
         },
         {
             "name": "channelgrabber/slim",
-            "version": "1.15.2",
+            "version": "dev-TAC-328-order-dispatchable-flag",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgslim.git",
-                "reference": "992bd5930185d2c6b2e9d9b0c436572bc86a0908"
+                "reference": "c48804302caf23e9c6126b8a871ddaba35177795"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/slim/channelgrabber-slim-1.15.2-6be003.zip",
-                "reference": "992bd5930185d2c6b2e9d9b0c436572bc86a0908",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/slim/channelgrabber-slim-dev-TAC-328-order-dispatchable-flag-b57a4a.zip",
+                "reference": "c48804302caf23e9c6126b8a871ddaba35177795",
                 "shasum": null
             },
             "require": {
@@ -2523,7 +2523,7 @@
                     "CG\\Slim\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2019-03-18T15:34:03+00:00"
+            "time": "2019-04-10T09:47:40+00:00"
         },
         {
             "name": "channelgrabber/spork",
@@ -10906,6 +10906,12 @@
             "alias_normalized": "1.43.10.0",
             "version": "dev-TAC-328-order-dispatchable-flag",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.15.3",
+            "alias_normalized": "1.15.3.0",
+            "version": "dev-TAC-328-order-dispatchable-flag",
+            "package": "channelgrabber/slim"
         }
     ],
     "minimum-stability": "stable",
@@ -10913,6 +10919,7 @@
         "channelgrabber/constants": 20,
         "channelgrabber/location": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/slim": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
