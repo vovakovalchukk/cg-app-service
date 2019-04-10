@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "985995b403d673320ddd04b818be75c7",
+    "content-hash": "756345a815fc65e2398129edc8c240b3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1335,12 +1335,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "5a9197cb26e17a73fc8bc9045c884e3221d54823"
+                "reference": "3bc966bca2e5b42050cf279c416230764756bbe2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-dev-CGIV-10503-unimported-listing-modified-time-99ec86.zip",
-                "reference": "5a9197cb26e17a73fc8bc9045c884e3221d54823",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-dev-CGIV-10503-unimported-listing-modified-time-2e7f08.zip",
+                "reference": "3bc966bca2e5b42050cf279c416230764756bbe2",
                 "shasum": null
             },
             "require": {
@@ -1381,7 +1381,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2019-04-02T13:28:51+00:00"
+            "time": "2019-04-10T14:35:06+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -1666,16 +1666,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.43.16",
+            "version": "1.43.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "e04d267628266f5ff797740696a0b10775a93c84"
+                "reference": "18d7e7036c0ba77ac3b6e2ccdc4629c613114f38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.16-5a0398.zip",
-                "reference": "e04d267628266f5ff797740696a0b10775a93c84",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.43.14-d4a70a.zip",
+                "reference": "18d7e7036c0ba77ac3b6e2ccdc4629c613114f38",
                 "shasum": null
             },
             "require": {
@@ -1746,7 +1746,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-03-28T15:03:22+00:00"
+            "time": "2019-03-26T16:55:54+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2663,16 +2663,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.16.2",
+            "version": "1.17.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "940cc25c44cd171a9e44ed84225ba177a304ee7c"
+                "reference": "2e38a87f29f435c8bf0f92233d7f374540b7ced7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.16.2-2f2af8.zip",
-                "reference": "940cc25c44cd171a9e44ed84225ba177a304ee7c",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.0.1-3fc684.zip",
+                "reference": "2e38a87f29f435c8bf0f92233d7f374540b7ced7",
                 "shasum": null
             },
             "require": {
@@ -2719,7 +2719,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2019-03-20T10:03:39+00:00"
+            "time": "2019-04-08T12:39:01+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -11355,8 +11355,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.19.1",
-            "alias_normalized": "1.19.1.0",
+            "alias": "1.19.2",
+            "alias_normalized": "1.19.2.0",
             "version": "dev-CGIV-10503-unimported-listing-modified-time",
             "package": "channelgrabber/listing"
         }
