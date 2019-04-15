@@ -1,6 +1,5 @@
 set :stage, :live
 
-server 'www-data@82.145.48.2', :roles => [:app, :php71]
 server 'www-data@94.130.132.23', :roles => [:app, :php71]
 server 'www-data@94.130.165.40', :roles => [:app, :php71]
 server 'www-data@94.130.50.177', :roles => [:app, :php71]
