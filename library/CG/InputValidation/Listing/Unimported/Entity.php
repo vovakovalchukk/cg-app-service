@@ -97,6 +97,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ],
+            'lastModified' => [
+                'name'       => 'lastModified',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
+            ],
         ];
     }
 }
