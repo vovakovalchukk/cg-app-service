@@ -55,13 +55,6 @@ class RestServiceTest extends TestCase
         );
     }
 
-    public function testCompletingPOTriggersUpdateOfStockOnPurchaseOrderCounts()
-    {
-        $purchaseOrder = $this->givenAPurchaseOrderIsNotYetCompleted();
-        $updatedPurchaseOrder = $this->whenThePurchaseOrderIsCompleted($purchaseOrder);
-        $this->thenStockOnPurchaseOrderCountsWillBeReducedByTheAmountsOnPO($updatedPurchaseOrder);
-    }
-
     public function testReSavingACompletedPODoesntTriggersUpdateOfStockOnPurchaseOrderCounts()
     {
         $purchaseOrder = $this->givenAPurchaseOrderIAlreadyCompleted();

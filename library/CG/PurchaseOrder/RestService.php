@@ -54,7 +54,6 @@ class RestService extends Service
 
         if ($shouldTriggerStockImport) {
             $this->triggerStockImportUpdate($entity);
-            $this->subtractFromStockOnPurchaseOrderCounts($entity);
         }
 
         return $savedEntity;
@@ -161,14 +160,6 @@ class RestService extends Service
     {
         /** Generate a job to trigger the stock import from PurchaseOrder */
         $this->stockImportGearmanJobGenerator->generateJob($purchaseOrder);
-    }
-
-    protected function subtractFromStockOnPurchaseOrderCounts(PurchaseOrder $purchaseOrder): void
-    {
-        foreach ($purchaseOrder->getItems() as $item) {
-            $adjustment = 0 - $item->getQuantity();
-            ($this->adjustStockOnPurchaseOrderGenerator)($item, $adjustment);
-        }
     }
 
     /**
