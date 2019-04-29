@@ -2,10 +2,10 @@
 namespace CG\Slim\Versioning\OrderItemCollection;
 
 use CG\Slim\Versioning\VersioniserInterface;
-use CG\Slim\Versioning\OrderItemEntity\Versioniser5 as EntityVersioniser;
+use CG\Slim\Versioning\OrderItemEntity\Versioniser11 as EntityVersioniser;
 use CG\Slim\Versioning\OrderItemCollection\Versioniser1 as Versioniser1;
 
-class Versioniser5 extends Versioniser1 implements VersioniserInterface
+class Versioniser11 extends Versioniser1 implements VersioniserInterface
 {
     public function __construct(EntityVersioniser $entityVersioner)
     {

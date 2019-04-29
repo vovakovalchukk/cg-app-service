@@ -138,6 +138,11 @@ class Entity implements RulesInterface
                     new StringLength(['min' => 1, 'max' => 16777215])
                 ],
             ],
+            'dispatchable' => [
+                'name'       => 'dispatchable',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
+            ]
         ];
     }
 }

@@ -1,4 +1,6 @@
 <?php
+
+use CG\Order\Shared\Command\DetermineAndUpdateDispatchableOrders;
 use CG\Order\Command\CalculateOrderWeight;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\AutoArchiveOrders;
@@ -138,6 +140,22 @@ return [
                 $input->getOption('account'),
                 (bool) $input->getOption('includeArchived')
             );
+        }
+    ],
+    'order:determineAndUpdateDispatchableOrders' => [
+        'description' => 'Determine which orders are dispatchable for a list of root OU ids and SKUs and updates them',
+        'arguments' => [
+            'rootOrganisationUnit' => [
+                'required' => false,
+                'default' => null
+            ]
+        ],
+        'options' => [],
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $rootOrganisationUnitId = ((string)$input->getArgument('rootOrganisationUnit') ?: null);
+
+            $command = $di->get(DetermineAndUpdateDispatchableOrders::class, ['output' => $output]);
+            $command($rootOrganisationUnitId);
         }
     ],
 ];
