@@ -2,6 +2,7 @@
 $routes = [];
 $files = [
     'routes.php',
+    'order.php',
     'templateRoutes.php',
     'settingsRoutes.php',
     'productRoutes.php',

@@ -3,25 +3,25 @@ namespace CG\Slim\Versioning\OrderItemCollection;
 
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
-use CG\Slim\Versioning\OrderItemEntity\Versioniser1 as EntityVersioniser1;
+use CG\Slim\Versioning\OrderItemEntity\Versioniser1 as EntityVersioniser;
 
 class Versioniser1 implements VersioniserInterface
 {
     protected $entityVersioner;
 
-    public function __construct(EntityVersioniser1 $entityVersioner)
+    public function __construct(EntityVersioniser $entityVersioner)
     {
         $this->setEntityVersioner($entityVersioner);
     }
 
-    public function setEntityVersioner(EntityVersioniser1 $entityVersioner)
+    public function setEntityVersioner(VersioniserInterface $entityVersioner)
     {
         $this->entityVersioner = $entityVersioner;
         return $this;
     }
 
     /**
-     * @return EntityVersioniser1
+     * @return EntityVersioniser
      */
     public function getEntityVersioner()
     {

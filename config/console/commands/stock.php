@@ -55,9 +55,9 @@ return [
         'description' => 'Migrate stock audit adjustments to archive storage',
         'arguments' => [
             'timeFrame' => [
-                'description' => 'Migrate any stock adjustments alter than date',
+                'description' => 'Migrate any stock adjustments older than date',
                 'required' => false,
-                'default' => '1 day ago',
+                'default' => '1 month ago',
             ],
         ],
         'options' => [

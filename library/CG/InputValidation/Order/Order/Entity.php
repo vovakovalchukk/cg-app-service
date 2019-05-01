@@ -327,7 +327,7 @@ class Entity implements RulesInterface
             'tag' => array (
                 'name' => 'tag',
                 'required' => false,
-                'validators' => [new IsArrayValidator(["name" => "tag"])]
+                'validators' => [new IsArrayValidator(['name' => 'tag'])]
             ),
             'paymentMethod' => array(
                 'name'       => 'paymentMethod',
@@ -342,7 +342,7 @@ class Entity implements RulesInterface
             'cancellations'  => array(
                 'name'       => 'cancellations',
                 'required'   => false,
-                'validators' => [new IsArrayValidator(["name" => "cancellations"])]
+                'validators' => [new IsArrayValidator(['name' => 'cancellations'])]
             ),
             'archived' => [
                 'name'       => 'archived',
@@ -427,6 +427,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new DecimalValidator(['name' => 'weight'])]
             ],
+            'dispatchable' => [
+                'name' => 'dispatchable',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
+            ]
         );
     }
 
