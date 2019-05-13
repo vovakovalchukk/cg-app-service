@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be7fdd24be65e643f913a2a64984d03a",
+    "content-hash": "f2c90074fcbfc72a051dbe649b8dc6f2",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -589,6 +589,43 @@
                 }
             },
             "time": "2018-10-18T10:33:15+00:00"
+        },
+        {
+            "name": "channelgrabber/classic",
+            "version": "dev-MIG-4-ClassicOrders",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-classic.git",
+                "reference": "8333182b763c107bfbda05eaa3fe92825e52467b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/classic/channelgrabber-classic-dev-MIG-4-ClassicOrders-ca376a.zip",
+                "reference": "8333182b763c107bfbda05eaa3fe92825e52467b"
+            },
+            "require": {
+                "channelgrabber/channel": "dev-MIG-4-ClassicOrders as 1.42.18",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/gearman": "^1.4.4",
+                "channelgrabber/stdlib": "^2.16.7",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Classic\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Classic\\Test\\": "tests/",
+                    "CG\\Classic\\TestAsset\\": "tests/assets"
+                }
+            },
+            "time": "2019-05-13T14:38:55+00:00"
         },
         {
             "name": "channelgrabber/communication",
@@ -2541,16 +2578,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.16.6",
+            "version": "2.16.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "ace3ffa47384af294582f8432ae14065c4fea92b"
+                "reference": "b9a5be011bc5b964b994bf87c476d9bb9281f243"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.6-4053e8.zip",
-                "reference": "ace3ffa47384af294582f8432ae14065c4fea92b"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.7-4e639b.zip",
+                "reference": "b9a5be011bc5b964b994bf87c476d9bb9281f243"
             },
             "require": {
                 "php": ">=7.1",
@@ -2593,7 +2630,7 @@
                     "CG\\Stdlib\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2019-01-29T10:51:46+00:00"
+            "time": "2019-02-13T12:22:45+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -10817,11 +10854,18 @@
             "alias_normalized": "1.42.18.0",
             "version": "dev-MIG-4-ClassicOrders",
             "package": "channelgrabber/channel"
+        },
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "dev-MIG-4-ClassicOrders",
+            "package": "channelgrabber/classic"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/channel": 20,
+        "channelgrabber/classic": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20

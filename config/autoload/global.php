@@ -134,6 +134,7 @@ use CG\FileStorage\S3\Adapter as S3LabelDataAdapter;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
+use CG\Channel\Gearman\Generator\Order\DownloadInterface as OrderDownloadGenerator;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
 use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Channel\Command\Service as AccountCommandService;
@@ -435,6 +436,9 @@ use CG\Billing\Transaction\Storage\Api as BillingTransactionApiStorage;
 use CG\Billing\BillingWindow\StorageInterface as BillingWindowStorage;
 use CG\Billing\BillingWindow\Storage\Api as BillingWindowStorageApi;
 
+// Classic
+use CG\Classic\Gearman\Generator\MultiAccountOrderDownload as ClassicOrderDownloadGenerator;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -458,7 +462,18 @@ $config = array(
                             ]
                         ]
                     ]
-                ]
+                ],
+                OrderDownloadCommand::class => [
+                    'methods' => [
+                        'registerChannelFactory' => [
+                            'channel' => ['required' => true],
+                            'factory' => [
+                                'type' => OrderDownloadGenerator::class,
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         ],
         'instance' => array(
@@ -469,7 +484,6 @@ $config = array(
                 'amazonReadCGSql' => CGSql::class,
                 'amazonFastReadCGSql' => CGSql::class,
                 'amazonWriteCGSql' => CGSql::class,
-                'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
                 'StockLocationApiService' => StockLocationService::class,
@@ -1227,10 +1241,13 @@ $config = array(
                     'client' => 'cg_app_guzzle'
                 ]
             ],
-            'EkmOrderDownloadCommand' => [
-                'parameter' => [
-                    'factory' => EkmOrderUpdateGenerator::class
-                ]
+            OrderDownloadCommand::class => [
+                'injections' => [
+                    'registerChannelFactory' => [
+                        ['channel' => 'ekm', 'factory' => EkmOrderUpdateGenerator::class],
+                        ['channel' => 'classic', 'factory' => ClassicOrderDownloadGenerator::class],
+                    ],
+                ],
             ],
             PickListDbStorage::class => [
                 'parameter' => [
