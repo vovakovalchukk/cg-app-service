@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2c90074fcbfc72a051dbe649b8dc6f2",
+    "content-hash": "5e14019663dba74751d2224fc937c774",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -479,7 +479,7 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-MIG-4-ClassicOrders",
+            "version": "dev-MIG-8-ClassicOrderMigrationQA",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
@@ -487,7 +487,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-MIG-4-ClassicOrders-222aa1.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-MIG-8-ClassicOrderMigrationQA-222aa1.zip",
                 "reference": "7d002c333b08703bf67c8011af63262eaf22218f"
             },
             "require": {
@@ -592,21 +592,20 @@
         },
         {
             "name": "channelgrabber/classic",
-            "version": "dev-MIG-4-ClassicOrders",
+            "version": "dev-MIG-8-ClassicOrderMigrationQA",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-classic.git",
-                "reference": "aac400084bb7745cf93544ce985528209a233083"
+                "reference": "a36f302e576fa9e1e0ee755f213359b8a4bd46a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/classic/channelgrabber-classic-dev-MIG-4-ClassicOrders-854cd1.zip",
-                "reference": "aac400084bb7745cf93544ce985528209a233083"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/classic/channelgrabber-classic-dev-MIG-8-ClassicOrderMigrationQA-3ddbc3.zip",
+                "reference": "a36f302e576fa9e1e0ee755f213359b8a4bd46a3"
             },
             "require": {
-                "channelgrabber/channel": "dev-MIG-4-ClassicOrders as 1.42.18",
+                "channelgrabber/channel": "dev-MIG-8-ClassicOrderMigrationQA as 1.42.18",
                 "channelgrabber/constants": "dev-master",
-                "channelgrabber/gearman": "^1.4.4",
                 "channelgrabber/stdlib": "^2.16.7",
                 "php": ">=7.1"
             },
@@ -625,7 +624,7 @@
                     "CG\\Classic\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2019-05-14T08:00:09+00:00"
+            "time": "2019-05-15T14:28:24+00:00"
         },
         {
             "name": "channelgrabber/communication",
@@ -10852,13 +10851,13 @@
         {
             "alias": "1.42.18",
             "alias_normalized": "1.42.18.0",
-            "version": "dev-MIG-4-ClassicOrders",
+            "version": "dev-MIG-8-ClassicOrderMigrationQA",
             "package": "channelgrabber/channel"
         },
         {
             "alias": "1.0.0",
             "alias_normalized": "1.0.0.0",
-            "version": "dev-MIG-4-ClassicOrders",
+            "version": "dev-MIG-8-ClassicOrderMigrationQA",
             "package": "channelgrabber/classic"
         }
     ],
