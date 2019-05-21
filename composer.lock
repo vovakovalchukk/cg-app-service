@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77faac1cb9c8e87c9ef21181e8ee4f5e",
+    "content-hash": "7eeb5121f2985d3a77002a48ae29d8ca",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1974,16 +1974,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-10291-category-template-migration",
+            "version": "1.17.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "c171b5af8197fe35b6bc439cbfca3be32f522f6f"
+                "reference": "593731cccf8f24a45bfd59f38e2543932e6e2351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10291-category-template-migration-bf11a2.zip",
-                "reference": "c171b5af8197fe35b6bc439cbfca3be32f522f6f",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.17.0-2fa8d4.zip",
+                "reference": "593731cccf8f24a45bfd59f38e2543932e6e2351",
                 "shasum": null
             },
             "require": {
@@ -2037,7 +2037,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-05-14T10:12:47+00:00"
+            "time": "2019-05-21T13:57:50+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -10931,18 +10931,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.16.20",
-            "alias_normalized": "1.16.20.0",
-            "version": "dev-CGIV-10291-category-template-migration",
-            "package": "channelgrabber/product"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
