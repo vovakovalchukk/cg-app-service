@@ -15,6 +15,7 @@ use Zend\Db\Sql\Predicate\Expression as Predicate;
 use Zend\Db\Sql\Predicate\PredicateSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
+use Zend\Db\Adapter\Platform\Mysql;
 
 class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
 {
@@ -88,6 +89,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         $select->join(
             CategoryVersionMapDb::DB_CHANNEL_VERSION_MAP_TABLE_NAME,
             new Expression('category.version IS NULL OR (category.version = categoryVersionMapChannel.version
+                    AND
+                    (category.channel = categoryVersionMapChannel.channel)
                     AND
                     IF (category.marketplace IS NULL, TRUE, category.marketplace = categoryVersionMapChannel.marketplace)
                     AND

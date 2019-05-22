@@ -92,6 +92,9 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getMarketplace())) {
             $select->where->in(static::TABLE . '.marketplace', $filter->getMarketplace());
         }
+        if (!empty($filter->getUrl())) {
+            $select->where->in(static::TABLE . '.url', $filter->getUrl());
+        }
 
         return $this->restrictSelectByExternalId($select, $filter->getExternalId());
     }
