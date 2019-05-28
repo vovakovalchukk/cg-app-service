@@ -24,7 +24,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_CODE_NO_DATA = 'Found no stock audit adjustments to migrate';
     protected const LOG_MSG_NO_DATA = 'Found no stock audit adjustments to migrate';
     protected const LOG_CODE_FOUND_DATA = 'Found stock audit adjustments to migrate';
-    protected const LOG_MSG_FOUND_DATA = 'Found %d stock audit adjustment%s to migrate for %s';
+    protected const LOG_MSG_FOUND_DATA = 'Found %s stock audit adjustment%s to migrate for %s';
     protected const LOG_CODE_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_MSG_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_CODE_MIGRATED = 'Migrated stock audit adjustments';
