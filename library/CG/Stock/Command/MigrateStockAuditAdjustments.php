@@ -18,7 +18,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     protected const LOG_CODE = 'MigrateStockAuditAdjustments';
     protected const LOG_CODE_TIME_FRAME = 'Migrating stock audit adjustments';
-    protected const LOG_MSG_TIME_FRAME = 'Migrating stock audit adjustments older than or equal to %s (%s) - limited to %s day%s';
+    protected const LOG_MSG_TIME_FRAME = 'Migrating stock audit adjustments older than or equal to %s (%s) - limited to %s period%s';
     protected const LOG_CODE_UNSUPPORTED_STORAGE = 'Can not migrate from storage';
     protected const LOG_MSG_UNSUPPORTED_STORAGE = 'Can not migrate from storage';
     protected const LOG_CODE_NO_DATA = 'Found no stock audit adjustments to migrate';
