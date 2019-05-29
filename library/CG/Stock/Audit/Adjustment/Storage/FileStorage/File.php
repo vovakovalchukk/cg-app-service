@@ -1,7 +1,6 @@
 <?php
 namespace CG\Stock\Audit\Adjustment\Storage\FileStorage;
 
-use function CG\Stdlib\flatten;
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
 
 class File extends \ArrayObject
@@ -50,7 +49,12 @@ class File extends \ArrayObject
 
     public function hash(): string
     {
-        return md5(implode('::', flatten($this->toArray())));
+        return md5(implode('::', array_map(
+            function(array $entityArray): string {
+                return md5(implode('::', $entityArray));
+            },
+            $this->toArray()
+        )));
     }
 
     public function getHash(): string
