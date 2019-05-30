@@ -1244,7 +1244,6 @@ $config = array(
             OrderDownloadCommand::class => [
                 'injections' => [
                     'registerChannelFactory' => [
-                        ['channel' => 'ekm', 'factory' => EkmOrderUpdateGenerator::class],
                         ['channel' => 'classic', 'factory' => ClassicOrderDownloadGenerator::class],
                     ],
                 ],
