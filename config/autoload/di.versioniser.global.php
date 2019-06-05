@@ -98,6 +98,8 @@ return [
                 'Versioniser_OrderEntity_16' => OrderEntity\Versioniser16::class,
                 'Versioniser_OrderCollection_17' => OrderCollection\Versioniser17::class,
                 'Versioniser_OrderEntity_17' => OrderEntity\Versioniser17::class,
+                'Versioniser_OrderCollection_18' => OrderCollection\Versioniser18::class,
+                'Versioniser_OrderEntity_18' => OrderEntity\Versioniser18::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
