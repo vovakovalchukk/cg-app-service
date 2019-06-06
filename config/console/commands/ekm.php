@@ -1,7 +1,5 @@
 <?php
 use CG\Channel\Command\Order\Download as OrderDownload;
-use CG\Channel\Command\Listing\Import as ListingImport;
-use CG\Channel\Command\Order\Generator as OrderGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 
 return array(
@@ -13,10 +11,8 @@ return array(
             $lowPriority = $input->getOption('lowPriority');
             $highPriority = $input->getOption('highPriority');
 
-            /**
-             * @var OrderDownload $command
-             */
-            $command = $di->get('EkmOrderDownloadCommand');
+            /** @var OrderDownload $command */
+            $command = $di->get(OrderDownload::class);
             $command->downloadOrders($channel, $from, $to, null, false, $lowPriority, $highPriority);
         },
         'description' => 'Fetch all ekm accounts and triggers order download jobs for the last 30days',
