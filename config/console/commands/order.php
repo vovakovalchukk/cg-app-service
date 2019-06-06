@@ -1,10 +1,11 @@
 <?php
 
-use CG\Order\Shared\Command\DetermineAndUpdateDispatchableOrders;
 use CG\Order\Command\CalculateOrderWeight;
+use CG\Order\Command\RedactOrders as RedactOrdersCommand;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
+use CG\Order\Shared\Command\DetermineAndUpdateDispatchableOrders;
 use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Order\Shared\Command\UpdateAllItemsImages;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
@@ -157,5 +158,32 @@ return [
             $command = $di->get(DetermineAndUpdateDispatchableOrders::class, ['output' => $output]);
             $command($rootOrganisationUnitId);
         }
+    ],
+    'order:redactOrders' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var RedactOrdersCommand $command */
+            $command = $di->get(RedactOrdersCommand::class);
+            $command(
+                $output,
+                $input->getArgument('channel'),
+                $input->getArgument('time')
+            );
+        },
+        'name' => 'CleanupListingReportLineSets',
+        'description' => 'Generates gearman jobs to redacts pii from orders if they are older than the supplied age',
+        'arguments' => [
+            'channel' => [
+                'description' => 'The channel to match orders for',
+                'required' => true,
+            ],
+            'time' => [
+                'description' => sprintf(
+                    'A DateTime-compatible relative time string, default is "%s"',
+                    RedactOrdersCommand::DEFAULT_DATE
+                ),
+                'required' => false,
+            ],
+        ],
+        'options' => [],
     ],
 ];

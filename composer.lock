@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62b752df44edefdcd5abb59e4efaf75d",
+    "content-hash": "8fec0185161740416735d679555624e6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -769,33 +769,29 @@
         },
         {
             "name": "channelgrabber/db",
-            "version": "1.0.10",
+            "version": "dev-TAC-439-RedactOrderAddress",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-db.git",
-                "reference": "5ead8bb97a4623d9379c7059c094f4d00df9520e"
+                "reference": "54833844c7844563c6343aeaee3b293bb7e25303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/db/channelgrabber-db-1.0.10-10d0d2.zip",
-                "reference": "5ead8bb97a4623d9379c7059c094f4d00df9520e"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/db/channelgrabber-db-dev-TAC-439-RedactOrderAddress-7f35b1.zip",
+                "reference": "54833844c7844563c6343aeaee3b293bb7e25303"
             },
             "require": {
-                "channelgrabber/di": ">=2.1.0",
-                "channelgrabber/stdlib": ">=2.12.0",
-                "composer/composer": "@dev"
+                "channelgrabber/di": "^2.1.0",
+                "channelgrabber/stdlib": "^2.12.0",
+                "php": ">=7.1"
             },
-            "require-dev": {
-                "channelgrabber/phpunit": ">=1.0.4",
-                "phpunit/phpunit": "~4.0.0"
-            },
-            "type": "di-definition",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\Db\\": "src"
                 }
             },
-            "time": "2018-08-17T11:11:56+00:00"
+            "time": "2019-06-06T14:15:58+00:00"
         },
         {
             "name": "channelgrabber/di",
@@ -1663,12 +1659,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "202ffd6638a5684d64230a72b082375053c7b69a"
+                "reference": "33e17923774f1fc7b8e5b5c14d20f1fd88993ebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-439-RedactOrderAddress-eacf61.zip",
-                "reference": "202ffd6638a5684d64230a72b082375053c7b69a"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-439-RedactOrderAddress-d8647a.zip",
+                "reference": "33e17923774f1fc7b8e5b5c14d20f1fd88993ebb"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1740,7 +1736,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-06-05T13:54:24+00:00"
+            "time": "2019-06-06T13:24:42+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -10892,6 +10888,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
+            "version": "dev-TAC-439-RedactOrderAddress",
+            "package": "channelgrabber/db"
+        },
+        {
             "alias": "1.45.0",
             "alias_normalized": "1.45.0.0",
             "version": "dev-TAC-439-RedactOrderAddress",
@@ -10907,6 +10909,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/db": 20,
         "channelgrabber/order": 20,
         "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
