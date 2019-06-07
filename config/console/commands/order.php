@@ -169,7 +169,6 @@ return [
                 $input->getArgument('time')
             );
         },
-        'name' => 'CleanupListingReportLineSets',
         'description' => 'Generates gearman jobs to redacts pii from orders if they are older than the supplied age',
         'arguments' => [
             'channel' => [
