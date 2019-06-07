@@ -4,6 +4,7 @@ namespace CG\Order\Command;
 use CG\Db\Mysqli;
 use CG\Db\Query\Where;
 use CG\Order\Client\Gearman\Generator\RedactOrder as GearmanJobGenerator;
+use CG\Order\Service\RedactLocker;
 use CG\Order\Service\Storage\Persistent\Db;
 use CG\Order\Shared\Address\Redacted as RedactedAddress;
 use CG\Stdlib\DateTime;
@@ -16,12 +17,15 @@ class RedactOrders
 
     /** @var Mysqli */
     protected $mysqli;
+    /** @var RedactLocker */
+    protected $redactLocker;
     /** @var GearmanJobGenerator */
     protected $gearmanJobGenerator;
 
-    public function __construct(Mysqli $mysqli, GearmanJobGenerator $gearmanJobGenerator)
+    public function __construct(Mysqli $mysqli, RedactLocker $redactLocker, GearmanJobGenerator $gearmanJobGenerator)
     {
         $this->mysqli = $mysqli;
+        $this->redactLocker = $redactLocker;
         $this->gearmanJobGenerator = $gearmanJobGenerator;
     }
 
@@ -37,11 +41,22 @@ class RedactOrders
 
         foreach ($this->matchOrders($channel, $dateTime) as $orderId) {
             $progressBar->setMessage($orderId, 'orderId');
+
+            if (!$this->redactLocker->canRedact($orderId)) {
+                $progressBar->setMessage(true, 'skip');
+                $progressBar->display();
+                $progressBar->setMessage(null, 'orderId');
+                $progressBar->setMessage(null, 'skip');
+                continue;
+            }
+
             $progressBar->display();
+            $progressBar->setMessage(null, 'orderId');
+
             ($this->gearmanJobGenerator)(
                 $orderId
             );
-            $progressBar->setMessage(null, 'orderId');
+
             $progressBar->advance();
         }
 
@@ -61,11 +76,15 @@ class RedactOrders
         });
         ProgressBar::setPlaceholderFormatterDefinition('orderId', function (ProgressBar $progressBar) {
             $orderId = $progressBar->getMessage('orderId');
+            if ($progressBar->getMessage('skip')) {
+                return $orderId ? sprintf("\033[2mSkipping order %s\033[0m\n", $orderId) : '';
+            }
             return $orderId ? sprintf("\033[2mGenerating job for order %s\033[0m\n", $orderId) : '';
         });
 
         $progressBar = new ProgressBar($output);
         $progressBar->setMessage(null, 'orderId');
+        $progressBar->setMessage(null, 'skip');
         $progressBar->setFormat($format);
         return $progressBar;
     }

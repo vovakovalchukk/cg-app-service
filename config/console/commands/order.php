@@ -2,6 +2,7 @@
 
 use CG\Order\Command\CalculateOrderWeight;
 use CG\Order\Command\RedactOrders as RedactOrdersCommand;
+use CG\Order\Command\RestoreRedactedOrder as RestoreRedactedOrderCommand;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
@@ -179,6 +180,32 @@ return [
                 'description' => sprintf(
                     'A DateTime-compatible relative time string, default is "%s"',
                     RedactOrdersCommand::DEFAULT_DATE
+                ),
+                'required' => false,
+            ],
+        ],
+        'options' => [],
+    ],
+    'order:restoreRedactedOrder' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var RestoreRedactedOrderCommand $command */
+            $command = $di->get(RestoreRedactedOrderCommand::class);
+            $command(
+                $output,
+                $input->getArgument('orderId'),
+                $input->getArgument('restoreUntil')
+            );
+        },
+        'description' => 'Restores redacted pii for an order',
+        'arguments' => [
+            'orderId' => [
+                'description' => 'The id of the order that the redacted data should be restored for',
+                'required' => true,
+            ],
+            'restoreUntil' => [
+                'description' => sprintf(
+                    'A DateTime-compatible relative time string, default is "%s"',
+                    RestoreRedactedOrderCommand::DEFAULT_RESTORE_UNTIL
                 ),
                 'required' => false,
             ],

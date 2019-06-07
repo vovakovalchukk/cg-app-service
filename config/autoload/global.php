@@ -51,6 +51,7 @@ use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInter
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
 use CG\Order\Shared\InvoiceEmailer\Service as InvoiceEmailerService;
 use CG\Order\Command\RedactOrders as RedactOrdersCommand;
+use CG\Order\Command\RestoreRedactedOrder as RestoreRedactedOrderCommand;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -662,6 +663,12 @@ $config = array(
             RedactOrdersCommand::class => [
                 'parameters' => [
                     'mysqli' => 'ReadMysqli',
+                ],
+            ],
+            RestoreRedactedOrderCommand::class => [
+                'parameters' => [
+                    'mysqli' => 'ReadMysqli',
+                    'orderStorage' => OrderApiStorage::class,
                 ],
             ],
             NoteService::class => array(
