@@ -7,6 +7,7 @@ use CG\Order\Client\Gearman\Generator\RedactOrder as GearmanJobGenerator;
 use CG\Order\Service\RedactLocker;
 use CG\Order\Service\Storage\Persistent\Db;
 use CG\Order\Shared\Address\Redacted as RedactedAddress;
+use CG\Order\Shared\Status as OrderStatus;
 use CG\Stdlib\DateTime;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -100,7 +101,14 @@ class RedactOrders
             ->append(
                 (new Where(Where::SEPERATOR_OR))
                     ->expression('`dispatchDate` < ?', [['s', $dateTime->stdFormat()]])
-                    ->expression('(`dispatchDate` IS NULL AND `purchaseDate` < ?)', [['s', $dateTime->stdFormat()]])
+                    ->expression(
+                        '(`dispatchDate` IS NULL AND `purchaseDate` < ? AND `status` NOT IN (?, ?))',
+                        [
+                            ['s', $dateTime->stdFormat()],
+                            ['s', OrderStatus::NEW_ORDER],
+                            ['s', OrderStatus::AWAITING_PAYMENT],
+                        ]
+                    )
             )
             ->append(
                 (new Where(Where::SEPERATOR_OR))
