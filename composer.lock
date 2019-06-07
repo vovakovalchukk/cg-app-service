@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fec0185161740416735d679555624e6",
+    "content-hash": "0053d4374189efee48d64c868de600fe",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -151,16 +151,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.28.17",
+            "version": "1.28.20",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "1b9088e86c7149f939ed14e23a8a83a721822373"
+                "reference": "3e133d35bef03520cf6760aa3ba58e8e7b29c1b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.28.17-f42397.zip",
-                "reference": "1b9088e86c7149f939ed14e23a8a83a721822373"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.28.20-daaf38.zip",
+                "reference": "3e133d35bef03520cf6760aa3ba58e8e7b29c1b4"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -172,7 +172,7 @@
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.9",
                 "channelgrabber/exchangerate": "^1.1.1",
-                "channelgrabber/gearman": "^1.5.0",
+                "channelgrabber/gearman": "^1.5.2",
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.18.4",
@@ -214,7 +214,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2019-04-17T11:08:54+00:00"
+            "time": "2019-06-06T12:35:34+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -1157,16 +1157,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4"
+                "reference": "b63c46ee06966e11b5f70bc43c8e190ad080f169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.5.1-e9b009.zip",
-                "reference": "f4fea2be8f3f5cc71191401bb89c304be84235d4"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.5.2-8ee156.zip",
+                "reference": "b63c46ee06966e11b5f70bc43c8e190ad080f169"
             },
             "require": {
                 "channelgrabber/cg-predis": "^0.8.7",
@@ -1202,7 +1202,7 @@
                     "CG\\Gearman\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-02-22T09:25:54+00:00"
+            "time": "2019-04-29T14:06:37+00:00"
         },
         {
             "name": "channelgrabber/http",
