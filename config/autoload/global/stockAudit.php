@@ -1,5 +1,6 @@
 <?php
 use CG\FileStorage\S3\Adapter;
+use CG\Locking\Service as LockingService;
 use CG\Stock\Audit\Adjustment\Mapper as AdjustmentMapper;
 use CG\Stock\Audit\Adjustment\Storage\Db as AdjustmentDbStorage;
 use CG\Stock\Audit\Adjustment\Storage\FileStorage as AdjustmentFileStorage;
@@ -12,11 +13,13 @@ return [
         'instance' => [
             'aliases' => [
                 'AdjustmentAWSS3Storage' => Adapter::class,
+                'LockingServiceStockAdjustmentMigration' => LockingService::class,
             ],
             MigrateStockAuditAdjustments::class => [
                 'parameters' => [
                     'storage' => AdjustmentDbStorage::class,
                     'archive' => AdjustmentFileStorage::class,
+                    'lockingService' => 'LockingServiceStockAdjustmentMigration',
                 ],
             ],
             AdjustmentDbStorage::class => [
@@ -46,6 +49,12 @@ return [
                 'parameters' => [
                     'auditAdjustmentStorage' => AdjustmentDbStorage::class,
                     'auditAdjustmentFileStorage' => AdjustmentFileStorage::class,
+                ],
+            ],
+            'LockingServiceStockAdjustmentMigration' => [
+                'parameters' => [
+                    'expireAfter' => 21600, // 6 hours
+                    'maxRetries' => 0,
                 ],
             ],
         ],
