@@ -95,7 +95,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $loadTimer();
         } catch (NotFound|LockingFailure $exception) {
             $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
-            $output->write(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
+            $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
             if (isset($lock)) {
                 $this->lockingService->unlock($lock);
             }
@@ -117,7 +117,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             return;
         } finally {
             $totalTimer();
-            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload()]);
+            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
             $this->lockingService->unlock($lock);
         }
 
