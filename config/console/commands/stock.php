@@ -1,5 +1,5 @@
 <?php
-
+use CG\Log\Shared\StorageInterface as LogStorage;
 use CG\Stock\Command\AuditAllStock;
 use CG\Stock\Command\CreateMissingStock;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
@@ -49,6 +49,7 @@ return [
     ],
     'stock:migrateAdjustmentAudit' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            $di->getUsingTypePreferences(LogStorage::class)->setDelay(false);
             $command = $di->get(MigrateStockAuditAdjustments::class);
             $command($output, $input->getArgument('timeFrame'), $input->getOption('limit'));
         },
