@@ -89,9 +89,9 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         $totalTimer = $migrationTimer->getTotalTimer();
 
         try {
-            $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
             $lock = $this->lockingService->lock($migrationPeriod);
             $loadTimer = $migrationTimer->getLoadTimer();
+            $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
             $loadTimer();
         } catch (NotFound|LockingFailure $exception) {
             $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
