@@ -94,11 +94,21 @@ class RestoreRedactedOrder
         );
     }
 
+    protected function decrypt(Order $order, string $encryptedData)
+    {
+        return $this->cryptor->decrypt(
+            $this->cryptor->getKey($order->getChannel()),
+            $encryptedData
+        );
+    }
+
     protected function restoreRedactedData(Order $order, array $encryptedData): void
     {
         foreach (['billingAddress', 'shippingAddress', 'fulfilmentAddress'] as $address) {
             $this->restoreRedactedAddress($order, $address, $encryptedData[$address] ?? '');
         }
+
+        $this->restoreBuyerMessage($order, $encryptedData['buyerMessage'] ?? '');
     }
 
     protected function restoreRedactedAddress(Order $order, string $type, string $encryptedData): void
@@ -109,10 +119,20 @@ class RestoreRedactedOrder
         }
 
         $order->{'set' . ucfirst($type)}($this->addressMapper->fromArray(
-            $this->cryptor->decrypt(
-                $this->cryptor->getKey($order->getChannel()),
-                $encryptedData
-            )
+            $this->decrypt($order, $encryptedData)
         ));
+    }
+
+    protected function restoreBuyerMessage(Order $order, string $encryptedData): void
+    {
+        if (!$order->getBuyerMessageRedacted()) {
+            return;
+        }
+
+        $order
+            ->setBuyerMessageRedacted(false)
+            ->setBuyerMessage(
+                $this->decrypt($order, $encryptedData)
+            );
     }
 }

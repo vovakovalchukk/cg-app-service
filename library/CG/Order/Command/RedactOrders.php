@@ -73,7 +73,7 @@ class RedactOrders
 
         ProgressBar::setPlaceholderFormatterDefinition('jobs', function (ProgressBar $progressBar) {
             $jobs = $progressBar->getProgress();
-            return sprintf('%d job%s', $jobs, $jobs !== 1 ? 's' : '');
+            return sprintf('%s job%s', number_format($jobs), $jobs !== 1 ? 's' : '');
         });
         ProgressBar::setPlaceholderFormatterDefinition('orderId', function (ProgressBar $progressBar) {
             $orderId = $progressBar->getMessage('orderId');
@@ -115,6 +115,11 @@ class RedactOrders
                     ->notEquals('`billingAddressId`', 's', RedactedAddress::ID)
                     ->notEquals('`shippingAddressId`', 's', RedactedAddress::ID)
                     ->notEquals('`fulfilmentAddressId`', 's', RedactedAddress::ID)
+                    ->append(
+                        (new Where())
+                            ->equals('`buyerMessageRedacted`', 'i', false)
+                            ->notEquals('`buyerMessage`', 's', '')
+                    )
             );
 
         yield from $this->mysqli->query(

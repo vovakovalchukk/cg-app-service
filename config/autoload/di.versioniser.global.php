@@ -100,6 +100,8 @@ return [
                 'Versioniser_OrderEntity_17' => OrderEntity\Versioniser17::class,
                 'Versioniser_OrderCollection_18' => OrderCollection\Versioniser18::class,
                 'Versioniser_OrderEntity_18' => OrderEntity\Versioniser18::class,
+                'Versioniser_OrderCollection_19' => OrderCollection\Versioniser19::class,
+                'Versioniser_OrderEntity_19' => OrderEntity\Versioniser19::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
