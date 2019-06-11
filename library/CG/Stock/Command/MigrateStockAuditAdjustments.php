@@ -72,7 +72,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
         $this->flushLogs();
         foreach ($migrationPeriods as $migrationPeriod) {
-            $this->migrateDate($output, $migrationPeriod);
+            $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
             $this->flushLogs();
         }
     }
