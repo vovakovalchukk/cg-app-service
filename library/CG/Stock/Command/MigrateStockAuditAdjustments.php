@@ -1,15 +1,17 @@
 <?php
 namespace CG\Stock\Command;
 
+use CG\Locking\Failure as LockingFailure;
+use CG\Locking\Service as LockingService;
 use CG\Stdlib\Date;
 use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
-use CG\Stock\Audit\Adjustment\MigrationPeriod;
 use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\StorageInterface;
+use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateStockAuditAdjustments implements LoggerAwareInterface
@@ -25,6 +27,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_MSG_NO_DATA = 'Found no stock audit adjustments to migrate';
     protected const LOG_CODE_FOUND_DATA = 'Found stock audit adjustments to migrate';
     protected const LOG_MSG_FOUND_DATA = 'Found %s stock audit adjustment%s to migrate for %s';
+    protected const LOG_CODE_SKIPPED = 'Skipping migration of stock audit adjustments';
+    protected const LOG_MSG_SKIPPED = 'Skipping migration of stock audit adjustments for %s: %s';
     protected const LOG_CODE_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_MSG_FAILURE = 'Failed to migrate stock audit adjustments';
     protected const LOG_CODE_MIGRATED = 'Migrated stock audit adjustments';
@@ -36,11 +40,14 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected $storage;
     /** @var StorageInterface */
     protected $archive;
+    /** @var LockingService */
+    protected $lockingService;
 
-    public function __construct(StorageInterface $storage, StorageInterface $archive)
+    public function __construct(StorageInterface $storage, StorageInterface $archive, LockingService $lockingService)
     {
         $this->storage = $storage;
         $this->archive = $archive;
+        $this->lockingService = $lockingService;
     }
 
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit = null)
@@ -63,10 +70,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             return;
         }
 
-        $this->flushLogs();
         foreach ($migrationPeriods as $migrationPeriod) {
-            $this->migrateDate($output, $migrationPeriod);
-            $this->flushLogs();
+            $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
         }
     }
 
@@ -84,34 +89,39 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         $totalTimer = $migrationTimer->getTotalTimer();
 
         try {
+            $lock = $this->lockingService->lock($migrationPeriod);
             $loadTimer = $migrationTimer->getLoadTimer();
             $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
             $loadTimer();
-        } catch (NotFound $exception) {
-            // No data for selected date - ignore
+        } catch (NotFound|LockingFailure $exception) {
+            $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
+            $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
+            if (isset($lock)) {
+                $this->lockingService->unlock($lock);
+            }
             return;
         }
 
-        $period = sprintf('"%s" to "%s"', $migrationPeriod->getFrom()->getDate(), $migrationPeriod->getTo()->getDate());
-        $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $period], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $period));
+        $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $migrationPeriod));
 
-        $this->storage->beginTransaction();
         try {
+            $this->storage->beginTransaction();
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
             $this->storage->commitTransaction();
         } catch (\Throwable $throwable) {
             $this->storage->rollbackTransaction();
-            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $period]);
+            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
             return;
         } finally {
             $totalTimer();
-            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $period, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload()]);
+            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
+            $this->lockingService->unlock($lock);
         }
 
-        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $period]);
+        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
         $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
     }
 }
