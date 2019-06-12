@@ -407,6 +407,7 @@ return [
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
         'name' => 'OrderItemGiftWrapCollection',
+        'version' => new Version(1, 2),
         'validation' => [
             'dataRules' => GiftWrapEntityValidationRules::class,
             'filterRules' => GiftWrapFilterValidationRules::class,
@@ -426,6 +427,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderItemGiftWrapEntity',
+        'version' => new Version(1, 2),
         'validation' => [
             'dataRules' => GiftWrapEntityValidationRules::class,
             'filterRules' => null,

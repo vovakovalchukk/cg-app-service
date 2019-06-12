@@ -120,6 +120,13 @@ class RedactOrders
                             ->equals('`buyerMessageRedacted`', 'i', false)
                             ->notEquals('`buyerMessage`', 's', '')
                     )
+                    ->exists(
+                        'SELECT `giftWrap`.`id` FROM `giftWrap` JOIN `item` ON `giftWrap`.`orderItemId` = `item`.`id`',
+                        (new Where())
+                            ->equals('`giftWrap`.`giftWrapRedacted`', 'i', false)
+                            ->notEquals('`giftWrap`.`giftWrapMessage`', 's', '')
+                            ->expression(sprintf('`item`.`orderId` = `%s`.`id`', Db::ORDER_TABLE_NAME))
+                    )
             );
 
         yield from $this->mysqli->query(
