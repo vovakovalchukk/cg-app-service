@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc3aa7b4d959e93ecabf4ba995e3fcf4",
+    "content-hash": "0d78e01ecb35e1223faa53f8e431ec79",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1655,7 +1655,7 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-develop",
+            "version": "1.45.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
@@ -1663,7 +1663,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-develop-8a6443.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.45.0.1-8a6443.zip",
                 "reference": "08b8b7958441372108b5f714e127cfacd456f3e3"
             },
             "require": {
@@ -10886,18 +10886,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.45.0.1",
-            "alias_normalized": "1.45.0.1",
-            "version": "dev-develop",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
