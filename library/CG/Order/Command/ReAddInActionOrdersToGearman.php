@@ -4,7 +4,6 @@ namespace CG\Order\Command;
 use CG\Account\Shared\Collection as Accounts;
 use CG\Account\Shared\Filter as AccountFilter;
 use CG\Account\Client\Service as AccountService;
-use CG\Channel\Command\Service;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
 use CG\Cilex\ModulusAwareInterface;
@@ -35,6 +34,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
     protected $orderItemService;
 
     const LOG_CODE = 'ReAddInActionOrdersToGearman';
+    const CHANNEL_TYPE = 'sales';
 
     public function __construct(
         AccountService $accountService,
@@ -103,7 +103,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
     {
         $accountFilter = new AccountFilter;
         $accountFilter
-            ->setType(Service::DEFAULT_TYPE)
+            ->setType(static::CHANNEL_TYPE)
             ->setActive(true)
             ->setDeleted(false)
             ->setPending(false)
