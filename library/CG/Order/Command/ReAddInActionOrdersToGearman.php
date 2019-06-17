@@ -78,7 +78,9 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface
     protected function fetchOrders()
     {
         $filter = new OrderFilter;
-        $filter->setLimit('all');
+        $filter
+            ->setLimit('all')
+            ->setArchived(false);
         $filter->setStatus([
             OrderStatus::DISPATCHING,
             OrderStatus::CANCELLING,
