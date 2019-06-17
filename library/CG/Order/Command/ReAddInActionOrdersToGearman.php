@@ -4,6 +4,7 @@ namespace CG\Order\Command;
 use CG\Account\Shared\Collection as Accounts;
 use CG\Account\Shared\Filter as AccountFilter;
 use CG\Account\Client\Service as AccountService;
+use CG\Channel\Command\Service;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
 use CG\Cilex\ModulusAwareInterface;
@@ -11,7 +12,7 @@ use CG\Cilex\ModulusTrait;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Service\Item\Service as OrderItemService;
 use CG\Order\Service\Filter as OrderFilter;
-use CG\Order\Shared\Collection;
+use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\Mapper as OrderMapper;
 use CG\Order\Shared\Cancel\Value as CancelValue;
@@ -82,7 +83,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
         }
     }
 
-    protected function fetchOrders(Accounts $accounts): Collection
+    protected function fetchOrders(Accounts $accounts): Orders
     {
         $filter = new OrderFilter;
         $filter
@@ -102,6 +103,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
     {
         $accountFilter = new AccountFilter;
         $accountFilter
+            ->setType(Service::DEFAULT_TYPE)
             ->setActive(true)
             ->setDeleted(false)
             ->setPending(false)
