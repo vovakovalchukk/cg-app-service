@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18013ef0436667ecf65776dddb44bdd8",
+    "content-hash": "d3cb9cc0ed1e687051bfa149a2ce69fc",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -151,11 +151,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-CGIV-10679-readd-in-action-orders-to-gearman",
+            "version": "1.28.20",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "7f5571056c217cec12e7cec5f6f6d724caed3031"
+                "reference": "3e133d35bef03520cf6760aa3ba58e8e7b29c1b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.28.20-daaf38.zip",
+                "reference": "3e133d35bef03520cf6760aa3ba58e8e7b29c1b4"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -478,7 +483,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "392756a69581fe656ee57ec3a41c60b3cf64407b"
+                "reference": "08f46c1c505847c466e2b19af6420cd24e88e51c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-CGIV-10679-readd-in-action-orders-to-gearman-80fc75.zip",
+                "reference": "08f46c1c505847c466e2b19af6420cd24e88e51c"
             },
             "require": {
                 "channelgrabber/billing": "^1.19.7",
@@ -546,7 +556,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2019-06-06T09:07:04+00:00"
+            "time": "2019-06-17T14:29:31+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -10878,21 +10888,14 @@
     ],
     "aliases": [
         {
-            "alias": "1.28.21",
-            "alias_normalized": "1.28.21.0",
-            "version": "dev-CGIV-10679-readd-in-action-orders-to-gearman",
-            "package": "channelgrabber/amazon"
-        },
-        {
-            "alias": "1.42.20",
-            "alias_normalized": "1.42.20.0",
+            "alias": "1.42.21",
+            "alias_normalized": "1.42.21.0",
             "version": "dev-CGIV-10679-readd-in-action-orders-to-gearman",
             "package": "channelgrabber/channel"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,

@@ -52,7 +52,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
 
     public function __invoke()
     {
-        $accounts = $this->accountLockingStampedePrevention->retrieveSalesAccounts();
+        $accounts = $this->accountLockingStampedePrevention->retrieveAccounts();
         $this->filterCollection($accounts);
 
         $orders = $this->fetchOrders($accounts);
