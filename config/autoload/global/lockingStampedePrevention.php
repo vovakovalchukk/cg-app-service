@@ -16,9 +16,9 @@ return [
                     'lockTtl' => 10,
                 ]
             ],
-            'preferences' => array(
+            'preferences' => [
                 LockingStampedePrevention::class => 'LockingStampedePreventionForAllSalesAccounts',
-            )
+            ]
         ]
     ]
 ];

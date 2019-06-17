@@ -562,6 +562,9 @@ SQL;
 
             $accounts = $pr->retrieveSalesAccounts();
 
+            /* @var $am \CG\Amazon\Account\AccountLockingStampedePrevention */
+            $am = $di->get(CG\Amazon\Account\AccountLockingStampedePrevention::class);
+//            $accounts = $am->retrieveAmazonSalesAccounts();
 
             print_r($accounts->getIds());
         }
