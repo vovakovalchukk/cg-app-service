@@ -1,9 +1,8 @@
 <?php
 namespace CG\Order\Command;
 
+use CG\Account\AccountLockingStampedePrevention;
 use CG\Account\Shared\Collection as Accounts;
-use CG\Account\Shared\Filter as AccountFilter;
-use CG\Account\Client\Service as AccountService;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
 use CG\Cilex\ModulusAwareInterface;
@@ -26,35 +25,34 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
     use LogTrait;
     use ModulusTrait;
 
-    protected $accountService;
     protected $dispatchGenerator;
     protected $cancelGenerator;
     protected $orderMapper;
     protected $orderService;
     protected $orderItemService;
+    protected $accountLockingStampedePrevention;
 
     const LOG_CODE = 'ReAddInActionOrdersToGearman';
-    const CHANNEL_TYPE = 'sales';
 
     public function __construct(
-        AccountService $accountService,
         DispatchGenerator $dispatchGenerator,
         CancelGenerator $cancelGenerator,
         OrderMapper $orderMapper,
         OrderService $orderService,
-        OrderItemService $orderItemService
+        OrderItemService $orderItemService,
+        AccountLockingStampedePrevention $accountLockingStampedePrevention
     ) {
-        $this->accountService = $accountService;
         $this->dispatchGenerator = $dispatchGenerator;
         $this->cancelGenerator = $cancelGenerator;
         $this->orderMapper = $orderMapper;
         $this->orderService = $orderService;
         $this->orderItemService = $orderItemService;
+        $this->accountLockingStampedePrevention = $accountLockingStampedePrevention;
     }
 
     public function __invoke()
     {
-        $accounts = $this->fetchAccounts();
+        $accounts = $this->accountLockingStampedePrevention->retrieveSalesAccounts();
         $this->filterCollection($accounts);
 
         $orders = $this->fetchOrders($accounts);
@@ -97,19 +95,6 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
         ]);
 
         return $this->orderService->fetchCollectionByFilter($filter);
-    }
-
-    protected function fetchAccounts(): Accounts
-    {
-        $accountFilter = new AccountFilter;
-        $accountFilter
-            ->setType(static::CHANNEL_TYPE)
-            ->setActive(true)
-            ->setDeleted(false)
-            ->setPending(false)
-            ->setLimit('all');
-
-        return $this->accountService->fetchByFilter($accountFilter, true);
     }
 
     protected function generateJobForOrder($order, $account)
