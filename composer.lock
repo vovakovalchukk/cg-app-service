@@ -479,16 +479,11 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.42.20",
+            "version": "dev-CGIV-10679-readd-in-action-orders-to-gearman",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "054e04f77937b46288d72239c475b9a5a2e055ac"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.42.20-6f7b57.zip",
-                "reference": "054e04f77937b46288d72239c475b9a5a2e055ac"
+                "reference": "0d97040e7c6e716f7ffee5b15caa667447469353"
             },
             "require": {
                 "channelgrabber/billing": "^1.19.7",
@@ -10886,9 +10881,17 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.42.20",
+            "alias_normalized": "1.42.20.0",
+            "version": "dev-CGIV-10679-readd-in-action-orders-to-gearman",
+            "package": "channelgrabber/channel"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
