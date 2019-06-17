@@ -547,26 +547,4 @@ SQL;
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
-
-
-
-
-    'ad-hoc:prevention' => [
-        'description' => '',
-        'arguments' => [],
-        'options' => [],
-        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
-        {
-            /* @var $pr \CG\Account\AccountLockingStampedePrevention */
-            $pr = $di->get(CG\Account\AccountLockingStampedePrevention::class);
-
-            $accounts = $pr->retrieveSalesAccounts();
-
-            /* @var $am \CG\Amazon\Account\AccountLockingStampedePrevention */
-            $am = $di->get(CG\Amazon\Account\AccountLockingStampedePrevention::class);
-//            $accounts = $am->retrieveAmazonSalesAccounts();
-
-            print_r($accounts->getIds());
-        }
-    ],
 ];
