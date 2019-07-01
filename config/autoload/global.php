@@ -250,7 +250,6 @@ use CG\Order\Client\Gearman\Generator\DetermineAndUpdateDispatchableOrders as De
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
 use CG\Stock\Audit\Combined\Repository as StockLogRepository;
 use CG\Stock\Audit\Combined\Storage\Cache as StockLogCacheStorage;
-use CG\Stock\Audit\Combined\Storage\FileStorage as StockLogFileStorage;
 use CG\Stock\Audit\Combined\Storage\Db as StockLogDbStorage;
 use CG\Stock\Audit\Combined\StorageInterface as StockLogStorage;
 
@@ -1135,13 +1134,8 @@ $config = array(
             StockLogRepository::class => [
                 'parameter' => [
                     'storage' => StockLogCacheStorage::class,
-                    'repository' => StockLogFileStorage::class,
+                    'repository' => StockLogDbStorage::class,
                 ]
-            ],
-            StockLogFileStorage::class => [
-                'parameter' => [
-                    'storage' => StockLogDbStorage::class,
-                ],
             ],
             StockLogDbStorage::class => [
                 'parameter' => [
@@ -1732,7 +1726,7 @@ $config = array(
                 LocationStorage::class => LocationRepository::class,
                 OrderClientStorage::class => OrderApiStorage::class,
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
-                StockLogStorage::class => StockLogFileStorage::class,
+                StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,
