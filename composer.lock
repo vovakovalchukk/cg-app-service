@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36ea86a027d7b25de85eecc6a5af7623",
+    "content-hash": "3ef837fa688403a9d87de7e154befc7b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2633,16 +2633,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-IN-393-StockAdjustmentLogsToAmazonRDS",
+            "version": "1.17.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "97f2d69fce24bd71add43d8fc4a13552f331f125"
+                "reference": "57f04c50d379bcb238621238925796c9954471cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-IN-393-StockAdjustmentLogsToAmazonRDS-faa3e6.zip",
-                "reference": "97f2d69fce24bd71add43d8fc4a13552f331f125"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.4-cd41bf.zip",
+                "reference": "57f04c50d379bcb238621238925796c9954471cd"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2688,7 +2688,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2019-07-02T14:57:06+00:00"
+            "time": "2019-07-03T08:50:23+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -10886,18 +10886,10 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.17.4",
-            "alias_normalized": "1.17.4.0",
-            "version": "dev-IN-393-StockAdjustmentLogsToAmazonRDS",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
