@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "29256d52c34aab1399029da6e88fcfb7",
+    "content-hash": "2462d64e66e130c23a13b04dfae0dc45",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2700,7 +2700,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.4-cd41bf.zip",
-                "reference": "57f04c50d379bcb238621238925796c9954471cd"
+                "reference": "57f04c50d379bcb238621238925796c9954471cd",
+                "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2832,12 +2833,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "3fa680643700a293ef5f91301814fd820e1a0512"
+                "reference": "46a6ba3eafaeca4b7579164652ea2fd018562be8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-442-invoice-generation-update-43de0d.zip",
-                "reference": "3fa680643700a293ef5f91301814fd820e1a0512",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-442-invoice-generation-update-de29f6.zip",
+                "reference": "46a6ba3eafaeca4b7579164652ea2fd018562be8",
                 "shasum": null
             },
             "require": {
@@ -2884,7 +2885,7 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-07-02T06:49:44+00:00"
+            "time": "2019-07-04T09:35:15+00:00"
         },
         {
             "name": "channelgrabber/transaction",
