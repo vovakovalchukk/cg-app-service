@@ -1,24 +1,20 @@
 <?php
-use CG\FileStorage\S3\Adapter;
 use CG\Locking\Service as LockingService;
 use CG\Stock\Audit\Adjustment\Mapper as AdjustmentMapper;
 use CG\Stock\Audit\Adjustment\Storage\Db as AdjustmentDbStorage;
-use CG\Stock\Audit\Adjustment\Storage\FileStorage as AdjustmentFileStorage;
-use CG\Stock\Audit\Adjustment\Storage\FileStorage\Cache as AdjustmentFileCache;
-use CG\Stock\Audit\Combined\Storage\FileStorage as CombinedFileStorage;
+use CG\Stock\Audit\Adjustment\Storage\ArchiveDb as AdjustmentArchiveDbStorage;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
 
 return [
     'di' => [
         'instance' => [
             'aliases' => [
-                'AdjustmentAWSS3Storage' => Adapter::class,
                 'LockingServiceStockAdjustmentMigration' => LockingService::class,
             ],
             MigrateStockAuditAdjustments::class => [
                 'parameters' => [
                     'storage' => AdjustmentDbStorage::class,
-                    'archive' => AdjustmentFileStorage::class,
+                    'archive' => AdjustmentArchiveDbStorage::class,
                     'lockingService' => 'LockingServiceStockAdjustmentMigration',
                 ],
             ],
@@ -30,25 +26,12 @@ return [
                     'mapper' => AdjustmentMapper::class,
                 ],
             ],
-            AdjustmentFileStorage::class => [
+            AdjustmentArchiveDbStorage::class => [
                 'parameters' => [
-                    'storageAdapter' => 'AdjustmentAWSS3Storage',
-                ],
-            ],
-            'AdjustmentAWSS3Storage' => [
-                'parameters' => [
-                    'location' => 'channelgrabber-stockaudit',
-                ],
-            ],
-            AdjustmentFileCache::class => [
-                'parameters' => [
-                    'predis' => 'stock-audit-file-cache_redis',
-                ],
-            ],
-            CombinedFileStorage::class => [
-                'parameters' => [
-                    'auditAdjustmentStorage' => AdjustmentDbStorage::class,
-                    'auditAdjustmentFileStorage' => AdjustmentFileStorage::class,
+                    'readSql' => 'channelgrabber-stockauditSql',
+                    'fastReadSql' => 'channelgrabber-stockauditSql',
+                    'writeSql' => 'channelgrabber-stockauditSql',
+                    'mapper' => AdjustmentMapper::class,
                 ],
             ],
             'LockingServiceStockAdjustmentMigration' => [
