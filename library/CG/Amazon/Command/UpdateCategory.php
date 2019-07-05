@@ -18,10 +18,15 @@ class UpdateCategory
         $this->categoryService = $categoryService;
     }
 
-    public function __invoke($parentCategoryId)
+    public function __invoke($parentCategoryId): bool
     {
-        $categories = $this->fetchCategories($parentCategoryId);
+        try {
+            $categories = $this->fetchCategories($parentCategoryId);
+        } catch (NotFound $e) {
+            return false;
+        }
         $this->updateCategories($categories);
+        return true;
     }
 
     protected function updateCategories(Categories $categories): void
@@ -30,7 +35,7 @@ class UpdateCategory
         foreach ($categories as $category) {
             try {
 
-                echo $category->getTitle();
+                echo $category->getTitle()."\n";
 
                 $this->saveCategoryWithNewVersion($category);
 
@@ -48,7 +53,7 @@ class UpdateCategory
 
     protected function fetchCategories(int $categoryId): Categories
     {
-        $filter = (new CategoryFilter())->setParentId($categoryId);
+        $filter = (new CategoryFilter())->setLimit('all')->setParentId([$categoryId]);
         return $this->categoryService->fetchCollectionByFilter($filter);
     }
 

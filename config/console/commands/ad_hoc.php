@@ -552,26 +552,27 @@ SQL;
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             /** @var Mysqli $cgApp */
             $cgApp = $di->get('cg_appReadMysqli');
+            $command = $di->get(CG\Amazon\Command\UpdateCategory::class);
 
             $page = 0;
             $count = 0;
             $select = <<<SQL
-SELECT MAX(pc.id) 
-FROM category as pc 
-WHERE pc.channel='amazon' AND pc.parentId = 0 GROUP BY pc.title, pc.marketplace ORDER BY pc.title
+SELECT MAX(`id`) AS `id`
+FROM `category`
+WHERE `channel`='amazon' AND `parentId` = 0 GROUP BY `title`, `marketplace` ORDER BY `title`
 SQL;
 
-            $output->writeln('Fetchin parent categories ...');
+            $output->writeln('Fetching parent categories ...');
             while (!empty($categoryIds = $cgApp->fetchColumn('id', $select . ' LIMIT ' . (1000 * $page++) . ',1000'))) {
                 foreach ($categoryIds as $categoryId) {
                     if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                        $output->writeln(sprintf('Generating job for order %s', $categoryId));
+                        $output->writeln(sprintf('Updating parent category %s', $categoryId));
                     }
-                    ($updateExchangeRate)($orderId);
+                    ($command)($categoryId);
                     $count++;
                 }
             }
-            $output->writeln(sprintf('Generated %d jobs', $count));
+            $output->writeln(sprintf('Updated %d categories', $count));
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
