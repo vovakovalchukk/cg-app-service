@@ -547,7 +547,6 @@ SQL;
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
-
     'ad-hoc:setAmazonCategoriesVersion' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
             /** @var Mysqli $cgApp */
