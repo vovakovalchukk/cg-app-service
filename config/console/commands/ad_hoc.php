@@ -577,9 +577,6 @@ SQL;
             }
 
             $command->addCategoryVersionMap($marketplaces);
-
-
-
             $output->writeln(sprintf('Updated %d parent categories', $count));
         },
         'description' => 'Setting version to all latest Amazon categories',

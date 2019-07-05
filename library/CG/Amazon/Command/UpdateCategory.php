@@ -1,18 +1,21 @@
 <?php
 namespace CG\Amazon\Command;
 
+use CG\Http\Exception\Exception3xx\NotModified;
 use CG\Product\Category\Collection as Categories;
 use CG\Product\Category\Entity as Category;
 use CG\Product\Category\Filter as CategoryFilter;
 use CG\Product\Category\Service as CategoryService;
+use CG\Product\Category\VersionMap\Entity as VersionMap;
 use CG\Product\Category\VersionMap\Mapper as VersionMapMapper;
 use CG\Product\Category\VersionMap\Service as VersionMapService;
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateCategory
 {
-    const VERSION = 5;
+    const VERSION = 1;
     const CHANNEL_NAME_AMAZON = 'amazon';
 
     protected $categoryService;
@@ -56,9 +59,6 @@ class UpdateCategory
         /* @var $category \CG\Product\Category\Entity */
         foreach ($categories as $category) {
             try {
-
-//                echo $category->getTitle()."\n";
-
                 $this->saveCategoryWithNewVersion($category);
                 $childCategories = $this->fetchCategories($category->getId());
                 if ($childCategories->count() <= 0) {
@@ -67,7 +67,7 @@ class UpdateCategory
 
                 $this->updateCategories($childCategories);
             } catch (NotFound $e) {
-//                echo $e->getMessage()."\n";
+                //no-op
             }
         }
     }
@@ -85,8 +85,12 @@ class UpdateCategory
 
     protected function saveCategoryWithNewVersion(Category $category): void
     {
-        $category->setVersion(static::VERSION);
-        $this->categoryService->save($category);
+        try {
+            $category->setVersion(static::VERSION);
+            $this->categoryService->save($category);
+        } catch (Conflict | NotModified $e) {
+            echo $e->getMessage()."\n";
+        }
     }
 
     protected function createVersionMap(string $countryCode): array
@@ -99,10 +103,9 @@ class UpdateCategory
         ];
     }
 
-    protected function createVersionMaps(array $countryCodes)
+    protected function createVersionMaps(array $countryCodes): VersionMap
     {
         $versionMaps = [];
-        
         foreach ($countryCodes as $countryCode) {
             $versionMaps[] = $this->createVersionMap($countryCode);
         }
