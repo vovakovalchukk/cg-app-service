@@ -5,28 +5,50 @@ use CG\Product\Category\Collection as Categories;
 use CG\Product\Category\Entity as Category;
 use CG\Product\Category\Filter as CategoryFilter;
 use CG\Product\Category\Service as CategoryService;
+use CG\Product\Category\VersionMap\Mapper as VersionMapMapper;
+use CG\Product\Category\VersionMap\Service as VersionMapService;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateCategory
 {
-    const VERSION = 1;
+    const VERSION = 5;
+    const CHANNEL_NAME_AMAZON = 'amazon';
 
     protected $categoryService;
+    protected $versionMapService;
+    protected $versionMapMapper;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, VersionMapService $versionMapService, VersionMapMapper $versionMapMapper)
     {
         $this->categoryService = $categoryService;
+        $this->versionMapService = $versionMapService;
+        $this->versionMapMapper = $versionMapMapper;
     }
 
-    public function __invoke($parentCategoryId): bool
+    public function addCategoryVersion(int $parentCategoryId, OutputInterface $output): array
     {
+        $marketplaces = [];
         try {
+            $parentCategory = $this->fetchParentCategory($parentCategoryId);
+
+            $output->writeln($parentCategory->getTitle(). ' ' . $parentCategory->getMarketplace());
+
+            $this->saveCategoryWithNewVersion($parentCategory);
+            $marketplaces[$parentCategory->getMarketplace()] = $parentCategory->getMarketplace();
             $categories = $this->fetchCategories($parentCategoryId);
         } catch (NotFound $e) {
-            return false;
+            return [];
         }
         $this->updateCategories($categories);
-        return true;
+
+        return $marketplaces;
+    }
+
+    public function addCategoryVersionMap(array $countryCodes)
+    {
+        $channelVersionMaps = $this->createVersionMaps($countryCodes);
+        $this->versionMapService->save($channelVersionMaps);
     }
 
     protected function updateCategories(Categories $categories): void
@@ -35,10 +57,9 @@ class UpdateCategory
         foreach ($categories as $category) {
             try {
 
-                echo $category->getTitle()."\n";
+//                echo $category->getTitle()."\n";
 
                 $this->saveCategoryWithNewVersion($category);
-
                 $childCategories = $this->fetchCategories($category->getId());
                 if ($childCategories->count() <= 0) {
                     throw new NotFound('Child categories have not been found');
@@ -46,9 +67,14 @@ class UpdateCategory
 
                 $this->updateCategories($childCategories);
             } catch (NotFound $e) {
-                echo $e->getMessage()."\n";
+//                echo $e->getMessage()."\n";
             }
         }
+    }
+
+    protected function fetchParentCategory(int $parentCategoryId): Category
+    {
+        return $this->categoryService->fetch($parentCategoryId);
     }
 
     protected function fetchCategories(int $categoryId): Categories
@@ -60,6 +86,31 @@ class UpdateCategory
     protected function saveCategoryWithNewVersion(Category $category): void
     {
         $category->setVersion(static::VERSION);
-//        $this->categoryService->save($category);
+        $this->categoryService->save($category);
+    }
+
+    protected function createVersionMap(string $countryCode): array
+    {
+        return [
+            'channel' => static::CHANNEL_NAME_AMAZON,
+            'marketplace' => $countryCode,
+            'accountId' => null,
+            'version' => static::VERSION
+        ];
+    }
+
+    protected function createVersionMaps(array $countryCodes)
+    {
+        $versionMaps = [];
+        
+        foreach ($countryCodes as $countryCode) {
+            $versionMaps[] = $this->createVersionMap($countryCode);
+        }
+
+        return $this->versionMapMapper->fromArray(
+            [
+                'versionMap' => $versionMaps
+            ]
+        );
     }
 }
