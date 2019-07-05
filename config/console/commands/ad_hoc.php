@@ -547,4 +547,32 @@ SQL;
         },
         'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
     ],
+
+    'ad-hoc:setAmazonCategoriesVersion' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var Mysqli $cgApp */
+            $cgApp = $di->get('cg_appReadMysqli');
+
+            $page = 0;
+            $count = 0;
+            $select = <<<SQL
+SELECT MAX(pc.id) 
+FROM category as pc 
+WHERE pc.channel='amazon' AND pc.parentId = 0 GROUP BY pc.title, pc.marketplace ORDER BY pc.title
+SQL;
+
+            $output->writeln('Fetchin parent categories ...');
+            while (!empty($categoryIds = $cgApp->fetchColumn('id', $select . ' LIMIT ' . (1000 * $page++) . ',1000'))) {
+                foreach ($categoryIds as $categoryId) {
+                    if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                        $output->writeln(sprintf('Generating job for order %s', $categoryId));
+                    }
+                    ($updateExchangeRate)($orderId);
+                    $count++;
+                }
+            }
+            $output->writeln(sprintf('Generated %d jobs', $count));
+        },
+        'description' => 'Triggers a job to update exchangerates for any orders that don\'t have one',
+    ],
 ];
