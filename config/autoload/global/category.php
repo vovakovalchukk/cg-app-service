@@ -26,6 +26,7 @@ use CG\Amazon\Category\ExternalData\Repository as AmazonChannelRepository;
 use CG\Amazon\Category\ExternalData\Storage\Cache as AmazonChannelCacheStorage;
 use CG\Amazon\Category\ExternalData\Storage\Db as AmazonChannelDbStorage;
 use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
+use CG\Amazon\Category\ExternalData\Storage\Migration as AmazonChannelMigrationStorage;
 use CG\FileStorage\S3\Adapter as AmazonChannelFileAdapter;
 
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
@@ -49,7 +50,7 @@ return [
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
                 CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
                 CategoryVersionMapStorageInterface::class => CategoryVersionMapRepository::class,
-                AmazonChannelStorage::class => AmazonChannelRepository::class
+                AmazonChannelStorage::class => AmazonChannelMigrationStorage::class
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -154,6 +155,13 @@ return [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'writeSql' => 'WriteSql',
+                ]
+            ],
+
+            AmazonChannelMigrationStorage::class => [
+                'parameters' => [
+                    'storage' => AmazonChannelDbStorage::class,
+                    'repository' => AmazonChannelRepository::class,
                 ]
             ],
         ],
