@@ -27,6 +27,8 @@ class Db implements StorageInterface
 
     public function fetch(int $categoryId): Data
     {
+        echo __METHOD__."\n";
+
         $select = $this->getSelect()->where(['id' => $categoryId]);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
@@ -42,6 +44,8 @@ class Db implements StorageInterface
 
     public function save(int $categoryId, Data $data): void
     {
+        echo __METHOD__."\n";
+
         $insert = $this->getInsert()->values(['id' => $categoryId, 'data' => json_encode($data->toArray())]);
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
     }

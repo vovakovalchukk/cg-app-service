@@ -565,11 +565,18 @@ SQL;
 
 //            $db->save(1584350, $data);
 
-            $rse = $db->fetch(1584350);
+//            $rse = $db->fetch(1584350);
 
-            print_r($rse);
+//            print_r($rse);
 
 //            $db->remove(1584350);
+
+            /* @var $migration \CG\Amazon\Category\ExternalData\Storage\Migration */
+            $migration = $di->get(CG\Amazon\Category\ExternalData\Storage\Migration::class);
+
+            $data = $migration->fetch(50001);
+
+//            print_r($data);
         }
     ],
 ];
