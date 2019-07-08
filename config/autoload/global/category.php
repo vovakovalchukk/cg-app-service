@@ -24,6 +24,7 @@ use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 use CG\Amazon\Category\ExternalData\StorageInterface as AmazonChannelStorage;
 use CG\Amazon\Category\ExternalData\Repository as AmazonChannelRepository;
 use CG\Amazon\Category\ExternalData\Storage\Cache as AmazonChannelCacheStorage;
+use CG\Amazon\Category\ExternalData\Storage\Db as AmazonChannelDbStorage;
 use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
 use CG\FileStorage\S3\Adapter as AmazonChannelFileAdapter;
 
@@ -147,6 +148,13 @@ return [
                 'parameters' => [
                     'location' => 'orderhub-amazoncategoryexternaldata',
                 ],
+            ],
+
+            AmazonChannelDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'writeSql' => 'WriteSql',
+                ]
             ],
         ],
     ],
