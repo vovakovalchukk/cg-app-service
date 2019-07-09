@@ -5,6 +5,7 @@ use CG\Product\Category\Collection as Categories;
 use CG\Product\Category\Filter as CategoryFilter;
 use CG\Product\Category\Service as CategoryService;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationCommand
 {
@@ -17,16 +18,30 @@ class MigrationCommand
         $this->categoryService = $categoryService;
     }
 
-    public function migrate()
+    public function __invoke(OutputInterface $output): void
     {
         $page = 1;
+        $totalCategories = 0;
+
         while (!is_null($categories = $this->fetchCategories($page))) {
-//            print_r($categories);
+            /* @var $category \CG\Product\Category\Entity */
+            foreach ($categories as $category) {
+                $this->fetchExternalData($category->getId());
+            }
 
-            echo $page . "\n";
-
+            $totalCategories += $categories->count();
+            $output->write('.');
             $page++;
         }
+
+        $output->writeln('');
+        $output->writeln('<fg=green>Completed</>');
+        $output->writeln('<fg=cyan>Migrated '.$totalCategories.' categories</>');
+    }
+
+    protected function fetchExternalData(int $categoryId): void
+    {
+        $this->migrationStorage->fetch($categoryId);
     }
 
     protected function fetchCategories($page): ?Categories
@@ -40,7 +55,6 @@ class MigrationCommand
 
             return $this->categoryService->fetchCollectionByFilter($filter);
         } catch (NotFound $e) {
-            echo $e->getMessage() . "\n";
             return null;
         }
     }
