@@ -9,8 +9,6 @@ class Migration extends Repository implements StorageInterface
 {
     public function save(int $categoryId, Data $data): void
     {
-        echo __METHOD__."\n";
-
         $this->storage->save($categoryId, $data);
     }
 }

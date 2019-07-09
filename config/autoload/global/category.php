@@ -150,14 +150,12 @@ return [
                     'location' => 'orderhub-amazoncategoryexternaldata',
                 ],
             ],
-
             AmazonChannelDbStorage::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'writeSql' => 'WriteSql',
                 ]
             ],
-
             AmazonChannelMigrationStorage::class => [
                 'parameters' => [
                     'storage' => AmazonChannelDbStorage::class,

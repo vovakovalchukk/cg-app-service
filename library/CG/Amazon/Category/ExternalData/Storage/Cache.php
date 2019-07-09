@@ -25,8 +25,6 @@ class Cache implements StorageInterface
 
     public function fetch(int $categoryId): Data
     {
-        echo __METHOD__."\n";
-
         $data = $this->client->get($this->getKey($categoryId));
         if ($data === null) {
             throw new NotFound('No amazon category external data found for categoryId');
@@ -36,8 +34,6 @@ class Cache implements StorageInterface
 
     public function save(int $categoryId, Data $data): void
     {
-        echo __METHOD__."\n";
-
         $this->client->set($this->getKey($categoryId), serialize($data));
     }
 

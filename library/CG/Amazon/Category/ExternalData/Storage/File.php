@@ -23,8 +23,6 @@ class File implements StorageInterface
 
     public function fetch(int $categoryId): Data
     {
-        echo __METHOD__."\n";
-
         try {
             $data = json_decode(
                 $this->fileStorage->read($this->getFilePath($categoryId))->getBody(),
@@ -38,8 +36,6 @@ class File implements StorageInterface
 
     public function save(int $categoryId, Data $data): void
     {
-        echo __METHOD__."\n";
-
         $this->fileStorage->write($this->getFilePath($categoryId), json_encode($data->toArray()));
     }
 

@@ -1,4 +1,8 @@
 <?php
+
+use CG\Amazon\Category\ExternalData\Data;
+use CG\Amazon\Category\ExternalData\Storage\Db;
+use CG\Amazon\Category\ExternalData\Storage\Migration;
 use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
@@ -574,9 +578,47 @@ SQL;
             /* @var $migration \CG\Amazon\Category\ExternalData\Storage\Migration */
             $migration = $di->get(CG\Amazon\Category\ExternalData\Storage\Migration::class);
 
-            $data = $migration->fetch(50001);
+//            $data = $migration->fetch(50001);
+
+            $migration->save(1584350, $data);
 
 //            print_r($data);
         }
     ],
+
+    'ad-hoc:amazonCategoryExternalDetailsMigration' => [
+        'description' => '',
+        'arguments' => [],
+        'options' => [],
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
+        {
+
+            $json = '{"variationThemes":[],"attributes":[{"name":"Books","required":true,"minValues":1,"maxValues":1,"type":"sequence","children":[{"name":"ProductType","required":true,"minValues":1,"maxValues":1,"type":"choice","children":[{"name":"BooksMisc","required":true,"minValues":1,"maxValues":1,"type":"sequence","children":[{"name":"Author","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Binding","required":true,"minValues":1,"maxValues":1,"type":"select","options":["Accessory","Album","Audiocd","Audiodownload","Bathbook","Boardbook","Bondedleather","Calendar","Cardbook","Cards","Cassette","Cdrom","Comic","Diary","Dvdrom","Flexibound","Foambook","Game","Hardcover","Hardcovercomic","Hardcoverspiral","Imitationleather","Journal","Kindleedition","Leatherbound","Library","Libraryaudiocd","Libraryaudiomp3","Looseleaf","Map","Massmarket","Microfiche","Microfilm","Miscsupplies","Mook","Mp3cd","Pamphlet","Paperback","Paperbackbunko","Paperbackshinsho","Perfect","Plasticcomb","Popup","Preloadeddigitalaudioplayer","Ragbook","Ringbound","Roughcut","School","Sheetmusic","Singleissuemagazine","Slide","Spiralbound","Stationery","Tankobonhardcover","Tankobonsoftcover","Textbook","Toy","Transparency","Turtleback","Unbound","Vinylbound","Wallchart","Workbook","Addressbook","Bargainbook","Consumerelectronics","Consumermagazine","Diskette","Dvdr","Gift","Jpoversizedbook","Kitchen","Librarymp3Cd","Miscellaneous","Notebook","Pocketbook","Podgeneric","Podhardback","Podpaperback","Pop-Up","Poster","Printedaccesscode","Saddlestitch","Threadbound","Unknownbinding"]},{"name":"DustJacket","required":false,"minValues":0,"maxValues":1,"type":"select","options":["NoDustJacket","LikeNew","VeryGood","Good","Acceptable"]},{"name":"Edition","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Editor","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Illustrator","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Introduction","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"IsAdultProduct","required":false,"minValues":0,"maxValues":1,"type":"select","options":["true","false"]},{"name":"IsFixedPrice","required":false,"minValues":0,"maxValues":1,"type":"select","options":["true","false"]},{"name":"Language","required":false,"minValues":0,"maxValues":1,"type":"select","options":["Abkhazian","Adygei","Afar","Afrikaans","Albanian","Alsatian","Amharic","Arabic","Aramaic","Armenian","Assamese","Aymara","Azerbaijani","Bambara","Bashkir","Basque","Bengali","Berber","Bhutani","Bihari","Bislama","Breton","Bulgarian","Burmese","Buryat","Byelorussian","CantoneseChinese","Castillian","Catalan","Cayuga","Cheyenne","Chinese","ClassicalNewari","Cornish","Corsican","Creole","CrimeanTatar","Croatian","Czech","Danish","Dargwa","Dutch","English","Esperanto","Estonian","Faroese","Farsi","Fiji","Filipino","Finnish","Flemish","French","FrenchCanadian","Frisian","Galician","Georgian","German","Gibberish","Greek","Greenlandic","Guarani","Gujarati","Gullah","Hausa","Hawaiian","Hebrew","Hindi","Hmong","Hungarian","Icelandic","IndoEuropean","Indonesian","Ingush","Interlingua","Interlingue","Inuktitun","Inuktitut","Inupiak","Inupiaq","Irish","Italian","Japanese","Javanese","Kalaallisut","Kalmyk","Kannada","KarachayBalkar","Kashmiri","Kashubian","Kazakh","Khmer","Kinyarwanda","Kirghiz","Kirundi","Klingon","Korean","Kurdish","Ladino","Lao","Lapp","Latin","Latvian","Lingala","Lithuanian","Lojban","LowerSorbian","Macedonian","Malagasy","Malay","Malayalam","Maltese","MandarinChinese","Maori","Marathi","Mende","MiddleEnglish","Mirandese","Moksha","Moldavian","Mongo","Mongolian","Multilingual","Nauru","Navaho","Nepali","Nogai","Norwegian","Occitan","OldEnglish","Oriya","Oromo","Pashto","Persian","PigLatin","Polish","Portuguese","Punjabi","Quechua","Romance","Romanian","Romany","Russian","Samaritan","Samoan","Sangho","Sanskrit","Serbian","Serbo-Croatian","Sesotho","Setswana","Shona","SichuanYi","Sicilian","SignLanguage","Sindhi","Sinhalese","Siswati","Slavic","Slovak","Slovakian","Slovene","Somali","Spanish","Sumerian","Sundanese","Swahili","Swedish","SwissGerman","Syriac","Tagalog","TaiwaneseChinese","Tajik","Tamil","Tatar","Telugu","Thai","Tibetan","Tigrinya","Tonga","Tsonga","Turkish","Turkmen","Twi","Udmurt","Uighur","Ukrainian","Ukranian","Unknown","Urdu","Uzbek","Vietnamese","Volapuk","Welsh","Wolof","Xhosa","Yiddish","Yoruba","Zhuang","Zulu"]},{"name":"Narrator","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Photographer","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Preface","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"PublicationDate","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"SignedBy","required":false,"minValues":0,"maxValues":1,"type":"select","options":["Author","Illustrator","Editor","Photographer","Other"]},{"name":"SourcedCountryCode","required":false,"minValues":0,"maxValues":1,"type":"select","options":["JP","US","GB","DE","Unknown"]},{"name":"Subject","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Translator","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Volume","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"NumberOfPages","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"BisacSubjectDescriptionCode","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"CollectionName","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"SeriesNumber","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"Format","required":false,"minValues":0,"maxValues":3,"type":"select","options":["engagement_calendar","student_calendar","sticker_book","audiobook","box_set","almanac_calendar","desk_calendar","wall_calendar","poster_calendar","advent_calendar","box_calendar","perpetual_calendar","day_to_day_calendar","project_calendar","collectors_edition","deluxe_edition","special_edition","special_extended_version","special_limited_edition","international_edition","standard_edition","large_print","coloring_book","picture_book","teachers_edition","pop_up","antique_books","wall_map","folded_map","bookmark_calendar","mini_calendar","other_calendar","roughcut","unabridged","abridged"]},{"name":"BookdataBicSubjectCode","required":false,"minValues":0,"maxValues":1,"type":"text"},{"name":"ThemaClassificationCode","required":false,"minValues":0,"maxValues":1,"type":"text"}]}]}]}]}';
+            $d = json_decode($json, 1);
+
+            $data = CG\Amazon\Category\ExternalData\Data::fromArray($d);
+
+            /* @var $db \CG\Amazon\Category\ExternalData\Storage\Db */
+            $db = $di->get(CG\Amazon\Category\ExternalData\Storage\Db::class);
+
+//            $db->save(1584350, $data);
+
+//            $rse = $db->fetch(1584350);
+
+//            print_r($rse);
+
+//            $db->remove(1584350);
+
+            /* @var $migration \CG\Amazon\Category\ExternalData\Storage\Migration */
+            $migration = $di->get(CG\Amazon\Category\ExternalData\Storage\Migration::class);
+
+//            $data = $migration->fetch(50001);
+
+            $migration->save(1584350, $data);
+
+//            print_r($data);
+        }
+    ],
+
+
 ];
