@@ -1,8 +1,4 @@
 <?php
-
-use CG\Amazon\Category\ExternalData\Data;
-use CG\Amazon\Category\ExternalData\Storage\Db;
-use CG\Amazon\Category\ExternalData\Storage\Migration;
 use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
