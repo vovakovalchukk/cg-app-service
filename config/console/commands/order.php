@@ -167,7 +167,8 @@ return [
             $command(
                 $output,
                 $input->getArgument('channel'),
-                $input->getArgument('time')
+                $input->getArgument('time'),
+                $input->getOption('limit')
             );
         },
         'description' => 'Generates gearman jobs to redacts pii from orders if they are older than the supplied age',
@@ -184,7 +185,13 @@ return [
                 'required' => false,
             ],
         ],
-        'options' => [],
+        'options' => [
+            'limit' => [
+                'description' => 'Limit the number of jobs that can be generated',
+                'value' => true,
+                'required' => true,
+            ],
+        ],
     ],
     'order:restoreRedactedOrder' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
