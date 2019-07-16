@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74e5d531e0b0e35512685f6c7f352f59",
+    "content-hash": "4c9b2491759ca0dc2ee73c08472a0424",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1844,16 +1844,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.45.3",
+            "version": "1.46.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f809932c46e1d7e63fd039d09c95617592c209c3"
+                "reference": "3d05344219b5d7be5845fbb57f68dbe5f8dcf3fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.45.3-8c5e11.zip",
-                "reference": "f809932c46e1d7e63fd039d09c95617592c209c3"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.46.0.1-1b72c3.zip",
+                "reference": "3d05344219b5d7be5845fbb57f68dbe5f8dcf3fb"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1926,7 +1926,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-07-08T12:50:34+00:00"
+            "time": "2019-07-15T07:50:25+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3094,42 +3094,32 @@
         },
         {
             "name": "channelgrabber/usage-check",
-            "version": "1.2.4",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-usage-check.git",
-                "reference": "46a99a436de831ce59877644a4f00059c7c0a8f5"
+                "reference": "85134ab5b7048c07da1570df629b0206ea915207"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage-check/channelgrabber-usage-check-1.2.4-168ad7.zip",
-                "reference": "46a99a436de831ce59877644a4f00059c7c0a8f5"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage-check/channelgrabber-usage-check-1.0.0-1062ad.zip",
+                "reference": "85134ab5b7048c07da1570df629b0206ea915207"
             },
             "require": {
-                "channelgrabber/billing": "^1.20.9",
-                "channelgrabber/constants": "dev-master",
-                "channelgrabber/di": "^2.2.0",
-                "channelgrabber/settings": "^1.5.5",
-                "channelgrabber/stdlib": "^2.7.0",
-                "channelgrabber/usage": "^1.0.2",
-                "php": ">=7.1"
+                "channelgrabber/billing": ">=1.1.3",
+                "channelgrabber/di": ">=2.0.0,<3.0.0",
+                "channelgrabber/stdlib": ">=2.7.0",
+                "channelgrabber/usage": ">=1.0.2",
+                "composer/composer": "@dev"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~6.3"
-            },
-            "type": "library",
+            "type": "di-definition",
             "autoload": {
                 "psr-4": {
                     "CG\\UsageCheck\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "CG\\UsageCheck\\Test\\": "tests/src"
-                }
-            },
             "description": "Check usage against limits",
-            "time": "2019-05-31T10:45:44+00:00"
+            "time": "2016-02-05T08:50:13+00:00"
         },
         {
             "name": "channelgrabber/user",

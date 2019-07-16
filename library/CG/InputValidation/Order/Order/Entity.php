@@ -91,6 +91,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ),
+            'buyerMessageRedacted' => [
+                'name' => 'buyerMessageRedacted',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'buyerMessageRedacted'])],
+            ],
             'purchaseDate' => array(
                 'name'       => 'purchaseDate',
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]

@@ -102,7 +102,7 @@ return [
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderCollection',
         'validation' => ['dataRules' => null, 'filterRules' => OrderFilterValidationRules::class, 'flatten' => false],
-        'version' => new Version(1, 19),
+        'version' => new Version(1, 20),
         'entityRoute' => '/order/:orderId'
     ],
     '/order/:orderId' => [
@@ -119,7 +119,7 @@ return [
         'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'OrderEntity',
         'validation' => ['dataRules' => OrderEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 19),
+        'version' => new Version(1, 20),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
@@ -407,6 +407,7 @@ return [
         'via' => ['GET', 'POST', 'OPTIONS'],
         'entityRoute' => '/orderItem/:orderItemId/giftWrap/:giftWrapId',
         'name' => 'OrderItemGiftWrapCollection',
+        'version' => new Version(1, 2),
         'validation' => [
             'dataRules' => GiftWrapEntityValidationRules::class,
             'filterRules' => GiftWrapFilterValidationRules::class,
@@ -426,6 +427,7 @@ return [
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderItemGiftWrapEntity',
+        'version' => new Version(1, 2),
         'validation' => [
             'dataRules' => GiftWrapEntityValidationRules::class,
             'filterRules' => null,

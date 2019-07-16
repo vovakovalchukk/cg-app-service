@@ -1,5 +1,4 @@
 <?php
-
 use CG\Account\Client\Storage\Api as AccountApiStorage;
 use CG\Slim\Versioning\AliasSettingsCollection;
 use CG\Slim\Versioning\AliasSettingsEntity;
@@ -7,6 +6,8 @@ use CG\Slim\Versioning\CategoryCollection;
 use CG\Slim\Versioning\CategoryEntity;
 use CG\Slim\Versioning\CategoryTemplateCollection;
 use CG\Slim\Versioning\CategoryTemplateEntity;
+use CG\Slim\Versioning\GiftWrapCollection;
+use CG\Slim\Versioning\GiftWrapEntity;
 use CG\Slim\Versioning\InvoiceMappingCollection;
 use CG\Slim\Versioning\InvoiceMappingEntity;
 use CG\Slim\Versioning\InvoiceSettingsCollection;
@@ -100,6 +101,8 @@ return [
                 'Versioniser_OrderEntity_17' => OrderEntity\Versioniser17::class,
                 'Versioniser_OrderCollection_18' => OrderCollection\Versioniser18::class,
                 'Versioniser_OrderEntity_18' => OrderEntity\Versioniser18::class,
+                'Versioniser_OrderCollection_19' => OrderCollection\Versioniser19::class,
+                'Versioniser_OrderEntity_19' => OrderEntity\Versioniser19::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -225,6 +228,8 @@ return [
                 'Versioniser_PickListSettingsCollection_1' => PickListSettingsCollection\Versioniser1::class,
                 'Versioniser_StockLocationCollection_1' => StockLocationCollection\Versioniser1::class,
                 'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
+                'Versioniser_OrderItemGiftWrapCollection_1' => GiftWrapCollection\Versioniser1::class,
+                'Versioniser_OrderItemGiftWrapEntity_1' => GiftWrapEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [

@@ -93,6 +93,7 @@ use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Shared\Item\GiftWrap\Repository as GiftWrapRepository;
 use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
+use CG\Order\Client\Item\GiftWrap\Storage\Api as GiftWrapApiStorage;
 
 //UserChange
 use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
@@ -668,6 +669,7 @@ $config = array(
                 'parameters' => [
                     'mysqli' => 'ReadMysqli',
                     'orderStorage' => OrderApiStorage::class,
+                    'giftWrapStorage' => GiftWrapApiStorage::class,
                 ],
             ],
             NoteService::class => array(
@@ -768,6 +770,11 @@ $config = array(
                     'writeSql' => 'WriteSql'
                 )
             ),
+            GiftWrapApiStorage::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle',
+                ],
+            ],
             UserChangeService::class => array(
                 'parameters' => array(
                     'repository' => UserChangeDbStorage::class
