@@ -153,9 +153,7 @@ return [
             AmazonChannelDbStorage::class => [
                 'parameters' => [
                     'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => '',
                 ]
             ],
             AmazonChannelMigrationStorage::class => [

@@ -4,27 +4,26 @@ namespace CG\Amazon\Category\ExternalData\Storage;
 use CG\Amazon\Category\ExternalData\Data;
 use CG\Amazon\Category\ExternalData\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use CG\Stdlib\Storage\Db\DbAbstract;
 use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 
-class Db extends DbAbstract implements StorageInterface
+class Db implements StorageInterface
 {
     const NOT_FOUND_MSG = 'Category External Details %d have not been found';
     const TABLE = 'amazonCategoryExternalData';
 
-//    /** @var Sql */
-//    protected $readSql;
-//    /** @var Sql */
-//    protected $writeSql;
-//
-//    public function __construct(Sql $readSql, Sql $writeSql)
-//    {
-//        $this->readSql = $readSql;
-//        $this->writeSql = $writeSql;
-//    }
+    /** @var Sql */
+    protected $readSql;
+    /** @var Sql */
+    protected $writeSql;
+
+    public function __construct(Sql $readSql, Sql $writeSql)
+    {
+        $this->readSql = $readSql;
+        $this->writeSql = $writeSql;
+    }
 
     public function fetch(int $categoryId): Data
     {
