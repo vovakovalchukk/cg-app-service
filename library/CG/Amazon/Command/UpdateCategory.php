@@ -39,11 +39,11 @@ class UpdateCategory
 
             $this->saveCategoryWithNewVersion($parentCategory);
             $marketplaces[$parentCategory->getMarketplace()] = $parentCategory->getMarketplace();
-            $categories = $this->fetchCategories($parentCategoryId);
+//            $categories = $this->fetchCategories($parentCategoryId);
         } catch (NotFound $e) {
             return [];
         }
-        $this->updateCategories($categories);
+        $this->updateCategories([$parentCategory->getId()]);
 
         return $marketplaces;
     }
@@ -54,23 +54,54 @@ class UpdateCategory
         $this->versionMapService->save($channelVersionMaps);
     }
 
-    protected function updateCategories(Categories $categories): void
+    protected function updateCategories(array $categoryIds)
     {
-        /* @var $category \CG\Product\Category\Entity */
-        foreach ($categories as $category) {
+        $childCategoryIds = [];
+        foreach ($categoryIds as $categoryId) {
             try {
-                $this->saveCategoryWithNewVersion($category);
-                $childCategories = $this->fetchCategories($category->getId());
+                //fetch By parent Id
+                $childCategories = $this->fetchCategories($categoryId);
                 if ($childCategories->count() <= 0) {
                     throw new NotFound('Child categories have not been found');
                 }
 
-                $this->updateCategories($childCategories);
+                //update and save
+                $this->saveCategoriesWithNewVersion($childCategories);
+                //copy ids to array
+                $childCategoryIds = array_merge($childCategories->getIds(), $childCategoryIds);
             } catch (NotFound $e) {
                 //no-op
             }
         }
+
+        if (empty($childCategoryIds)) {
+            return false;
+        }
+
+        $childCategories = null;
+        $this->updateCategories($childCategoryIds);
+        return true;
     }
+
+//    protected function oldUpdateCategories(Categories $categories): void
+//    {
+//        /* @var $category \CG\Product\Category\Entity */
+//        foreach ($categories as $category) {
+//            try {
+//                $this->saveCategoryWithNewVersion($category);
+//                $childCategories = $this->fetchCategories($category->getId());
+//                if ($childCategories->count() <= 0) {
+//                    throw new NotFound('Child categories have not been found');
+//                }
+//
+//
+//            } catch (NotFound $e) {
+//                //no-op
+//            }
+//        }
+//
+//        $this->oldUpdateCategories($childCategories);
+//    }
 
     protected function fetchParentCategory(int $parentCategoryId): Category
     {
@@ -81,6 +112,13 @@ class UpdateCategory
     {
         $filter = (new CategoryFilter())->setLimit('all')->setParentId([$categoryId]);
         return $this->categoryService->fetchCollectionByFilter($filter);
+    }
+
+    protected function saveCategoriesWithNewVersion(Categories $categories)
+    {
+        foreach ($categories as $category) {
+            $this->saveCategoryWithNewVersion($category);
+        }
     }
 
     protected function saveCategoryWithNewVersion(Category $category): void
