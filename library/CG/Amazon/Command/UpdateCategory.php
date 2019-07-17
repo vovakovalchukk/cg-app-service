@@ -53,24 +53,16 @@ class UpdateCategory
         $this->versionMapService->save($channelVersionMaps);
     }
 
-    protected function updateCategories(array $categoryIds): bool
+    protected function updateCategories(array $categoryIds): void
     {
-//        $childCategoryIds = [];
         foreach ($categoryIds as $categoryId) {
             try {
-//                $childCategoryIds = array_merge($this->saveCategoriesWithNewVersion($categoryId), $childCategoryIds);
                 $childCategoryIds = $this->saveCategoriesWithNewVersion($categoryId);
                 $this->updateCategories($childCategoryIds);
             } catch (NotFound $e) {
                 //no-op
             }
         }
-
-//        if (empty($childCategoryIds)) {
-//            return false;
-//        }
-//
-//        return true;
     }
 
     protected function fetchParentCategory(int $parentCategoryId): Category
