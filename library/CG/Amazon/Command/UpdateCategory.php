@@ -55,28 +55,22 @@ class UpdateCategory
 
     protected function updateCategories(array $categoryIds): bool
     {
-        $childCategoryIds = [];
+//        $childCategoryIds = [];
         foreach ($categoryIds as $categoryId) {
             try {
-                $childCategories = $this->fetchCategories($categoryId);
-                if ($childCategories->count() <= 0) {
-                    throw new NotFound('Child categories have not been found');
-                }
-
-                $this->saveCategoriesWithNewVersion($childCategories);
-                $childCategoryIds = array_merge($childCategories->getIds(), $childCategoryIds);
+//                $childCategoryIds = array_merge($this->saveCategoriesWithNewVersion($categoryId), $childCategoryIds);
+                $childCategoryIds = $this->saveCategoriesWithNewVersion($categoryId);
+                $this->updateCategories($childCategoryIds);
             } catch (NotFound $e) {
                 //no-op
             }
         }
 
-        if (empty($childCategoryIds)) {
-            return false;
-        }
-
-        $childCategories = null;
-        $this->updateCategories($childCategoryIds);
-        return true;
+//        if (empty($childCategoryIds)) {
+//            return false;
+//        }
+//
+//        return true;
     }
 
     protected function fetchParentCategory(int $parentCategoryId): Category
@@ -90,11 +84,18 @@ class UpdateCategory
         return $this->categoryService->fetchCollectionByFilter($filter);
     }
 
-    protected function saveCategoriesWithNewVersion(Categories $categories): void
+    protected function saveCategoriesWithNewVersion(int $categoryId): array
     {
-        foreach ($categories as $category) {
-            $this->saveCategoryWithNewVersion($category);
+        $childCategories = $this->fetchCategories($categoryId);
+        if ($childCategories->count() <= 0) {
+            throw new NotFound('Child categories have not been found');
         }
+
+        foreach ($childCategories as $childCategory) {
+            $this->saveCategoryWithNewVersion($childCategory);
+        }
+
+        return $childCategories->getIds();
     }
 
     protected function saveCategoryWithNewVersion(Category $category): void
