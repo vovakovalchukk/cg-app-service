@@ -17,7 +17,8 @@ $files = [
     'purchaseOrderRoutes.php',
     'reportRoutes.php',
     'ekmRoutes.php',
-    'categoryRoutes.php'
+    'categoryRoutes.php',
+    'listingTemplate.php'
 ];
 foreach ($files as $file) {
     $route = require_once __DIR__.'/routes/'.$file;
