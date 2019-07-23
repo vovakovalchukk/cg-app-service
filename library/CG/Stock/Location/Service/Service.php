@@ -96,7 +96,6 @@ class Service extends BaseService implements StatsAwareInterface
         }
 
         $this->nginxCacheInvalidator->invalidateProductsForStockLocation($stockLocation, $stock);
-        $this->updateRelatedListings($stock);
 
         try {
             /** @var StockLocation $currentStockLocation */
