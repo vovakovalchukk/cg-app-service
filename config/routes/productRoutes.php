@@ -220,7 +220,7 @@ return [
             'filterRules' => ProductChannelDetailCollectionValidation::class,
             'dataRules' => ProductChannelDetailEntityValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productChannelDetail/:productChannelDetailId' => [
         'controllers' => function($productChannelDetailId) use ($di, $app) {
@@ -241,7 +241,7 @@ return [
             'entityClass' => ProductChannelDetailEntity::class,
             'serviceClass' => ProductChannelDetailService::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productAccountDetail' => [
         'controllers' => function() use ($di, $app) {
