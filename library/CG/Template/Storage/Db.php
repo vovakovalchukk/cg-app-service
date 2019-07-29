@@ -56,6 +56,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         if (!empty($filter->getType())) {
             $query[static::TABLE . '.type'] = $filter->getType();
         }
+        if ($filter->getFavourite() !== null) {
+            $query[static::TABLE . '.favourite'] = $filter->getFavourite();
+        }
         return $query;
     }
 

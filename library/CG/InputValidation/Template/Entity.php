@@ -1,10 +1,10 @@
 <?php
 namespace CG\InputValidation\Template;
 
-use CG\Validation\RulesInterface;
-use CG\Validation\Rules\DecimalValidator;
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\IsArrayValidator;
+use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 
@@ -12,28 +12,28 @@ class Entity implements RulesInterface
 {
     public function getRules()
     {
-        return array(
-            'id' => array(
+        return [
+            'id' => [
                 'name' => 'id',
                 'required' => false,
                 'validators' => []
-            ),
-            'type' => array(
+            ],
+            'type' => [
                 'name' => 'type',
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
-            ),
-            'typeId' => array(
+            ],
+            'typeId' => [
                 'name' => 'typeId',
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
-            ),
-            'name' => array(
+            ],
+            'name' => [
                 'name' => 'name',
                 'required' => true,
                 'validators' => [new StringLength(['min' => 1])]
-            ),
-            'organisationUnitId' => array(
+            ],
+            'organisationUnitId' => [
                 'name' => 'organisationUnitId',
                 'required' => true,
                 'validators' => [
@@ -41,29 +41,34 @@ class Entity implements RulesInterface
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
-            ),
-            'paperPage' => array(
+            ],
+            'favourite' => [
+                'name' => 'favourite',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'favourite'])]
+            ],
+            'paperPage' => [
                 'name' => 'paperPage',
                 'required' => true,
                 'validators' => []
-            ),
-            'elements'  => array(
+            ],
+            'elements'  => [
                 'name' => 'elements',
                 'required' => true,
                 'validators' => [
                     new IsArrayValidator(["name" => "elements"])
                 ]
-            ),
-            'editable' => array(
+            ],
+            'editable' => [
                 'name' => 'editable',
                 'required' => false,
                 'validators' => []
-            ),
+            ],
             'mongoId' => [
                 'name' => 'mongoId',
                 'required' => false,
                 'validators' => []
             ]
-        );
+        ];
     }
 }

@@ -137,6 +137,8 @@ return [
                 'Versioniser_OrderLabelEntity_5' => OrderLabelEntity\Versioniser5::class,
                 'Versioniser_TemplateCollection_1' => TemplateCollection\Versioniser1::class,
                 'Versioniser_TemplateEntity_1' => TemplateEntity\Versioniser1::class,
+                'Versioniser_TemplateCollection_2' => TemplateCollection\Versioniser2::class,
+                'Versioniser_TemplateEntity_2' => TemplateEntity\Versioniser2::class,
                 'Versioniser_ProductDetailCollection_1' => ProductDetailCollection\Versioniser1::class,
                 'Versioniser_ProductDetailEntity_1' => ProductDetailEntity\Versioniser1::class,
                 'Versioniser_ProductDetailCollection_2' => ProductDetailCollection\Versioniser2::class,

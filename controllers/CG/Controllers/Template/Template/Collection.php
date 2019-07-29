@@ -31,7 +31,8 @@ class Collection
                     $this->getParams('page'),
                     $this->getParams('id') ?? [],
                     $this->getParams('organisationUnitId') ?? [],
-                    $this->getParams('type') ?? []
+                    $this->getParams('type') ?? [],
+                    $this->getParams('favourite')
                 )
             );
         } catch (NotFound $e) {
