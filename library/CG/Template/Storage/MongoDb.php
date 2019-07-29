@@ -3,6 +3,7 @@ namespace CG\Template\Storage;
 
 use CG\Template\Collection;
 use CG\Template\Entity;
+use CG\Template\Filter;
 use CG\Template\Mapper;
 use CG\Template\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -54,31 +55,37 @@ class MongoDb implements StorageInterface
         return static::coerceStringId($id);
     }
 
-    public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type)
+    public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type): Collection
+    {
+        $filter = new Filter($limit, $page, $id, $organisationUnitId, $type);
+        return $this->fetchCollectionByFilter($filter);
+    }
+
+    public function fetchCollectionByFilter(Filter $filter): Collection
     {
         try {
             $query = [];
-            if (count($id)) {
-                $query["_id"] = ['$in' => $id];
+            if (!empty($filter->getId())) {
+                $query["_id"] = ['$in' => $filter->getId()];
             }
 
-            if (count($organisationUnitId)) {
-                $query["organisationUnitId"] = ['$in' => array_map("intval", $organisationUnitId)];
+            if (!empty($filter->getOrganisationUnitId())) {
+                $query["organisationUnitId"] = ['$in' => array_map("intval", $filter->getOrganisationUnitId())];
             }
 
-            if (count($type)) {
-                $query["type"] = ['$in' => $type];
+            if (!empty($filter->getType())) {
+                $query["type"] = ['$in' => $filter->getType()];
             }
 
             $templates = $this->getMongoCollection()->find($query);
-            if ($limit != 'all') {
-                $offset = ($page - 1) * $limit;
-                $templates->limit((int) $limit)->skip($offset);
+            if ($filter->getLimit() != 'all') {
+                $offset = ($filter->getPage() - 1) * $filter->getLimit();
+                $templates->limit((int) $filter->getLimit())->skip($offset);
             }
             if (!$templates->count(true)) {
                 throw new NotFound();
             }
-            $collection = new Collection(Entity::class, __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type'));
+            $collection = new Collection(Entity::class, __FUNCTION__, $filter->toArray());
             $collection->setTotal($templates->count());
             foreach ($templates as $template) {
                 $collection->attach($this->getMapper()->fromMongoArray($template));
