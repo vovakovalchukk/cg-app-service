@@ -5,7 +5,7 @@ use CG\Product\ChannelDetail\Mapper;
 use CG\Slim\Versioning\VersioniserInterface;
 use Nocarrier\Hal;
 
-abstract class AbstractVersioniser
+abstract class AbstractVersioniser implements VersioniserInterface
 {
     /** @var VersioniserInterface $entityVersioniser */
     protected $entityVersioniser;
