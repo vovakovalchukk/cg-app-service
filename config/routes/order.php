@@ -102,7 +102,7 @@ return [
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderCollection',
         'validation' => ['dataRules' => null, 'filterRules' => OrderFilterValidationRules::class, 'flatten' => false],
-        'version' => new Version(1, 20),
+        'version' => new Version(1, 21),
         'entityRoute' => '/order/:orderId'
     ],
     '/order/:orderId' => [
@@ -119,7 +119,7 @@ return [
         'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'OrderEntity',
         'validation' => ['dataRules' => OrderEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 20),
+        'version' => new Version(1, 21),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
