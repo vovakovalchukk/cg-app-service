@@ -53,22 +53,15 @@ class Db extends DbAbstract implements StorageInterface
         return $entityArray;
     }
 
-    protected function insertEntity($entity)
+    public function save($entity)
     {
-        $insert = $this->getInsert()->values($this->getEntityArray($entity));
-        $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
-        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
-
-        $this->saveVariationSkus($id, $entity->getVariationSkus());
-
-        $entity->setId($id);
-        $entity->setNewlyInserted(true);
-    }
-
-    protected function updateEntity($entity)
-    {
-        parent::updateEntity($entity);
+        $this->saveEntity($entity);
+        if ($entity->isNewlyInserted()) {
+            $this->saveVariationSkus($entity->getId(), $entity->getVariationSkus());
+            return;
+        }
         $this->updateVariationSkus($entity);
+        return $entity;
     }
 
     public function remove($entity)
