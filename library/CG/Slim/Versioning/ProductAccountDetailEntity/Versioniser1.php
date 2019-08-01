@@ -40,6 +40,6 @@ class Versioniser1 implements VersioniserInterface
     {
         $data = $response->getData();
         unset($data['externalType'], $data['externalData']);
-        return $data;
+        $response->setData($data);
     }
 }

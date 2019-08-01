@@ -40,6 +40,6 @@ class Versioniser1 implements VersioniserInterface
     {
         $data = $response->getData();
         unset($data['external']['fulfillmentLatency']);
-        return $data;
+        $response->setData($data);
     }
 }
