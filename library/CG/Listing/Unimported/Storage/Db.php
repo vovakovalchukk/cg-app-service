@@ -55,8 +55,14 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function insertEntity($entity)
     {
-        parent::insertEntity($entity);
-        $this->saveVariationSkus($entity->getId(), $entity->getVariationSkus());
+        $insert = $this->getInsert()->values($this->getEntityArray($entity));
+        $this->getWriteSql()->prepareStatementForSqlObject($insert)->execute();
+        $id = $this->getWriteSql()->getAdapter()->getDriver()->getLastGeneratedValue();
+
+        $this->saveVariationSkus($id, $entity->getVariationSkus());
+
+        $entity->setId($id);
+        $entity->setNewlyInserted(true);
     }
 
     protected function updateEntity($entity)
@@ -167,7 +173,7 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getMarketplace())) {
             $query['unimportedListing.marketplace'] = $filter->getMarketplace();
         }
-        
+
         if (!empty($filter->getSku()) || !empty($filter->getVariationSkus())) {
             // Must do SKU check as (LIKE OR LIKE) instead of IN() otherwise
             // MySQL ignores trailing spaces and we get unexpected results
