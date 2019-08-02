@@ -56,9 +56,8 @@ class Db implements StorageInterface
         $array = [];
         foreach ($results as $result) {
             $productId = $result['productId'];
-            if (!isset($array[$productId])) {
-                $array[$productId] = ['conditionNote' => $result['conditionNote']];
-            }
+            unset($result['productId']);
+            $array[$productId] = $result;
         }
         return $array;
     }
