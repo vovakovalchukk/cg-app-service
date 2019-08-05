@@ -58,7 +58,7 @@ class Db extends DbAbstract implements StorageInterface
         $this->saveEntity($entity);
         if ($entity->isNewlyInserted()) {
             $this->saveVariationSkus($entity->getId(), $entity->getVariationSkus());
-            return;
+            return $entity;
         }
         $this->updateVariationSkus($entity);
         return $entity;
