@@ -336,7 +336,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new BooleanValidator(['name' => 'dispatchable'])
                 ]
-            ]
+            ],
+            'marketplace' => [
+                'name' => 'marketplace',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'marketplace'])
+                ]
+            ],
         ];
     }
 }
