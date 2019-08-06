@@ -368,6 +368,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new BooleanValidator(['name' => 'labelPrinted'])
                 ]
             ],
+            'hasCustomisation' => [
+                'name' => 'hasCustomisation',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'hasCustomisation'])
+                ]
+            ],
         ];
     }
 }
