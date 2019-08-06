@@ -344,6 +344,22 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(['name' => 'marketplace'])
                 ]
             ],
+            'invoicePrinted' => [
+                'name' => 'invoicePrinted',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'invoicePrinted'])
+                ]
+            ],
+            'invoiceEmailed' => [
+                'name' => 'invoiceEmailed',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'invoiceEmailed'])
+                ]
+            ],
         ];
     }
 }
