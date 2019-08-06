@@ -26,6 +26,8 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\PickListSettingsCollection;
 use CG\Slim\Versioning\PickListSettingsEntity;
+use CG\Slim\Versioning\ProductChannelDetailCollection;
+use CG\Slim\Versioning\ProductChannelDetailEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
@@ -232,6 +234,8 @@ return [
                 'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
                 'Versioniser_OrderItemGiftWrapCollection_1' => GiftWrapCollection\Versioniser1::class,
                 'Versioniser_OrderItemGiftWrapEntity_1' => GiftWrapEntity\Versioniser1::class,
+                'Versioniser_ProductChannelDetailCollection_1' => ProductChannelDetailCollection\Versioniser1::class,
+                'Versioniser_ProductChannelDetailEntity_1' => ProductChannelDetailEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
