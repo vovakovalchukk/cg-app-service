@@ -360,6 +360,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new BooleanValidator(['name' => 'invoiceEmailed'])
                 ]
             ],
+            'labelPrinted' => [
+                'name' => 'labelPrinted',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'labelPrinted'])
+                ]
+            ],
         ];
     }
 }
