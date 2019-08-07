@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3eada9906a4a247a9806154a755ed63",
+    "content-hash": "a2ab8d4905940ee0bead24b2981b3301",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1885,16 +1885,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.46.5",
+            "version": "dev-MIG-22-search-orders-by-specified-fields",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "f97d8773693422ea8c3d0002243cab14ce37af71"
+                "reference": "37979eb499f9afb13420aea7aa40abf6dcc775fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.46.5-2e121d.zip",
-                "reference": "f97d8773693422ea8c3d0002243cab14ce37af71"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-MIG-22-search-orders-by-specified-fields-35aeab.zip",
+                "reference": "37979eb499f9afb13420aea7aa40abf6dcc775fc"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1968,7 +1968,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-07-31T11:24:49+00:00"
+            "time": "2019-08-07T08:36:34+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11737,10 +11737,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.46.6",
+            "alias_normalized": "1.46.6.0",
+            "version": "dev-MIG-22-search-orders-by-specified-fields",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
