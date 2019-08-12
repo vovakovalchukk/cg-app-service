@@ -1,8 +1,8 @@
 <?php
-namespace CG\Slim\Versioning\ProductChannelDetailEntity;
+namespace CG\Slim\Versioning\ProductAccountDetailEntity;
 
-use CG\Amazon\Product\ChannelDetail\External as AmazonExternalData;
-use CG\Product\ChannelDetail\Service;
+use CG\Product\AccountDetail\ExternalInterface;
+use CG\Product\AccountDetail\Service;
 use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
@@ -20,15 +20,15 @@ class Versioniser1 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
-        if (!isset($data['id']) || $data['channel'] != 'amazon' || isset($data['external']['fulfillmentLatency'])) {
+        if (!isset($data['id']) || isset($data['externalType'], $data['externalData'])) {
             return;
         }
 
         try {
+            /** @var ExternalInterface $externalData */
             $externalData = $this->service->fetch($data['id'])->getExternal();
-            if ($externalData instanceof AmazonExternalData) {
-                $data['external']['fulfillmentLatency'] = $externalData->getFulfillmentLatency();
-            }
+            $data['externalType'] = $data['externalType'] ?? $externalData::type();
+            $data['externalData'] = $data['externalData'] ?? $externalData->toArray();
         } catch (NotFound $exception) {
             // New entity
         }
@@ -39,7 +39,7 @@ class Versioniser1 implements VersioniserInterface
     public function downgradeResponse(array $params, Hal $response, $requestedVersion)
     {
         $data = $response->getData();
-        unset($data['external']['fulfillmentLatency']);
+        unset($data['externalType'], $data['externalData']);
         $response->setData($data);
     }
 }

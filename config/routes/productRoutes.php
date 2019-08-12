@@ -259,7 +259,7 @@ return [
             'filterRules' => ProductAccountDetailCollectionValidation::class,
             'dataRules' => ProductAccountDetailEntityValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productAccountDetail/:productAccountDetailId' => [
         'controllers' => function($productAccountDetailId) use ($di, $app) {
@@ -280,7 +280,7 @@ return [
             'entityClass' => ProductAccountDetailEntity::class,
             'serviceClass' => ProductAccountDetailService::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productCategoryDetail' => [
         'controllers' => function() use ($di, $app) {
