@@ -26,6 +26,10 @@ use CG\Slim\Versioning\OrderLabelCollection;
 use CG\Slim\Versioning\OrderLabelEntity;
 use CG\Slim\Versioning\PickListSettingsCollection;
 use CG\Slim\Versioning\PickListSettingsEntity;
+use CG\Slim\Versioning\ProductAccountDetailCollection;
+use CG\Slim\Versioning\ProductAccountDetailEntity;
+use CG\Slim\Versioning\ProductChannelDetailCollection;
+use CG\Slim\Versioning\ProductChannelDetailEntity;
 use CG\Slim\Versioning\ProductCollection;
 use CG\Slim\Versioning\ProductDetailCollection;
 use CG\Slim\Versioning\ProductDetailEntity;
@@ -103,6 +107,8 @@ return [
                 'Versioniser_OrderEntity_18' => OrderEntity\Versioniser18::class,
                 'Versioniser_OrderCollection_19' => OrderCollection\Versioniser19::class,
                 'Versioniser_OrderEntity_19' => OrderEntity\Versioniser19::class,
+                'Versioniser_OrderCollection_20' => OrderCollection\Versioniser20::class,
+                'Versioniser_OrderEntity_20' => OrderEntity\Versioniser20::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
@@ -230,6 +236,10 @@ return [
                 'Versioniser_StockLocationEntity_1' => StockLocationEntity\Versioniser1::class,
                 'Versioniser_OrderItemGiftWrapCollection_1' => GiftWrapCollection\Versioniser1::class,
                 'Versioniser_OrderItemGiftWrapEntity_1' => GiftWrapEntity\Versioniser1::class,
+                'Versioniser_ProductChannelDetailCollection_1' => ProductChannelDetailCollection\Versioniser1::class,
+                'Versioniser_ProductChannelDetailEntity_1' => ProductChannelDetailEntity\Versioniser1::class,
+                'Versioniser_ProductAccountDetailCollection_1' => ProductAccountDetailCollection\Versioniser1::class,
+                'Versioniser_ProductAccountDetailEntity_1' => ProductAccountDetailEntity\Versioniser1::class,
             ],
             'Versioniser_ListingCollection_1' => [
                 'parameter' => [
