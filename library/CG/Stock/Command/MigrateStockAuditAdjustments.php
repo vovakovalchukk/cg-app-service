@@ -70,8 +70,21 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             return;
         }
 
-        foreach ($migrationPeriods as $migrationPeriod) {
-            $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
+        try {
+            gc_disable();
+            gc_collect_cycles();
+            gc_mem_caches();
+
+            foreach ($migrationPeriods as $migrationPeriod) {
+                try {
+                    $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
+                } finally {
+                    gc_collect_cycles();
+                    gc_mem_caches();
+                }
+            }
+        } finally {
+            gc_enable();
         }
     }
 
