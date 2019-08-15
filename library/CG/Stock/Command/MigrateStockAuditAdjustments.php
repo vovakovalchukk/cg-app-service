@@ -22,7 +22,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     use LogTrait;
 
     protected const PROCESS_COUNT = 'MigrateStockAuditAdjustments';
-    protected const MAX_PROCESSES = 1;
+    protected const MAX_PROCESSES = 3;
 
     protected const LOG_CODE = 'MigrateStockAuditAdjustments';
     protected const LOG_CODE_MAX_PROCESSES_REACHED = 'The maximum number of processes are already running';
