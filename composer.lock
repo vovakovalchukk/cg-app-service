@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f33f70bb602cc62411161002e5f1ee9c",
+    "content-hash": "7a261abfd3c25cf3653d9898202c7318",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2871,16 +2871,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-IN-409-StockAdjustmentLogMigrationLowerMemory",
+            "version": "1.17.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "4233f76be0c8c040bc450d3725155ac5bee9e522"
+                "reference": "b3948a482e7a951b4215d4507ffc43ead1efdf8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-IN-409-StockAdjustmentLogMigrationLowerMemory-716e69.zip",
-                "reference": "4233f76be0c8c040bc450d3725155ac5bee9e522"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.5-c32256.zip",
+                "reference": "b3948a482e7a951b4215d4507ffc43ead1efdf8c"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2926,7 +2926,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2019-08-15T14:45:20+00:00"
+            "time": "2019-08-15T15:02:12+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -11277,18 +11277,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.17.5",
-            "alias_normalized": "1.17.5.0",
-            "version": "dev-IN-409-StockAdjustmentLogMigrationLowerMemory",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
