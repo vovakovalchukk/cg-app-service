@@ -220,7 +220,7 @@ return [
             'filterRules' => ProductChannelDetailCollectionValidation::class,
             'dataRules' => ProductChannelDetailEntityValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productChannelDetail/:productChannelDetailId' => [
         'controllers' => function($productChannelDetailId) use ($di, $app) {
@@ -241,7 +241,7 @@ return [
             'entityClass' => ProductChannelDetailEntity::class,
             'serviceClass' => ProductChannelDetailService::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productAccountDetail' => [
         'controllers' => function() use ($di, $app) {
@@ -259,7 +259,7 @@ return [
             'filterRules' => ProductAccountDetailCollectionValidation::class,
             'dataRules' => ProductAccountDetailEntityValidation::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productAccountDetail/:productAccountDetailId' => [
         'controllers' => function($productAccountDetailId) use ($di, $app) {
@@ -280,7 +280,7 @@ return [
             'entityClass' => ProductAccountDetailEntity::class,
             'serviceClass' => ProductAccountDetailService::class
         ],
-        'version' => new Version(1, 1)
+        'version' => new Version(1, 2)
     ],
     '/productCategoryDetail' => [
         'controllers' => function() use ($di, $app) {

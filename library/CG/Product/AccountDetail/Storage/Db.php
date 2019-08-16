@@ -116,6 +116,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         $array = parent::getEntityArray($entity);
         unset($array['id']);
+        $array['externalData'] = json_encode($array['externalData'] ?? null);
         return $array;
     }
 
