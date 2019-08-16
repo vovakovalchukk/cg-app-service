@@ -121,6 +121,8 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         $entityArray['id'] = $entity->getId(false);
         $entityArray['elements'] = json_encode($entityArray['elements']);
         $entityArray['paperPage'] = json_encode($entityArray['paperPage']);
+        $entityArray['printPage'] = json_encode($entityArray['printPage']);
+        $entityArray['multiPerPage'] = json_encode($entityArray['multiPerPage']);
         if ($mongoId = $entity->getMongoId()) {
             $entityArray['mongoId'] = $mongoId;
         }

@@ -52,6 +52,16 @@ class Entity implements RulesInterface
                 'required' => true,
                 'validators' => []
             ],
+            'printPage' => [
+                'name' => 'printPage',
+                'required' => true,
+                'validators' => []
+            ],
+            'multiPerPage' => [
+                'name' => 'multiPerPage',
+                'required' => true,
+                'validators' => []
+            ],
             'elements'  => [
                 'name' => 'elements',
                 'required' => true,

@@ -30,7 +30,7 @@ return [
             "filterRules" => TemplateFilterValidationRules::class,
             "flatten" => false
         ],
-        'version' => new Version(1, 3)
+        'version' => new Version(1, 4)
     ],
     '/template/:id' => [
         'controllers' => function($templateId) use ($di) {
@@ -50,7 +50,7 @@ return [
             "filterRules" => null,
             "flatten" => false
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'eTag' => [
             'mapperClass' => TemplateMapper::class,
             'entityClass' => TemplateEntity::class,
