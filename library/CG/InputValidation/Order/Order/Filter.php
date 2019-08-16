@@ -84,6 +84,13 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'searchField' => [
+                'name' => 'searchField',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'searchField'])
+                ]
+            ],
             'status' => [
                 'name' => 'status',
                 'required' => false,

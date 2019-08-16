@@ -3,6 +3,8 @@ namespace CG\Stock\Command;
 
 use CG\Locking\Failure as LockingFailure;
 use CG\Locking\Service as LockingService;
+use CG\Predis\Command\DecrMin;
+use CG\Predis\Command\IncrMax;
 use CG\Stdlib\Date;
 use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -12,13 +14,19 @@ use CG\Stock\Audit\Adjustment\MigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
+use Predis\Client as Predis;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateStockAuditAdjustments implements LoggerAwareInterface
 {
     use LogTrait;
 
+    protected const PROCESS_COUNT = 'MigrateStockAuditAdjustments';
+    protected const MAX_PROCESSES = 3;
+
     protected const LOG_CODE = 'MigrateStockAuditAdjustments';
+    protected const LOG_CODE_MAX_PROCESSES_REACHED = 'The maximum number of processes are already running';
+    protected const LOG_MSG_MAX_PROCESSES_REACHED = 'The maximum number of processes are already running';
     protected const LOG_CODE_TIME_FRAME = 'Migrating stock audit adjustments';
     protected const LOG_MSG_TIME_FRAME = 'Migrating stock audit adjustments older than or equal to %s (%s) - limited to %s period%s';
     protected const LOG_CODE_UNSUPPORTED_STORAGE = 'Can not migrate from storage';
@@ -40,17 +48,46 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected $storage;
     /** @var StorageInterface */
     protected $archive;
+    /** @var Predis */
+    protected $predis;
     /** @var LockingService */
     protected $lockingService;
 
-    public function __construct(StorageInterface $storage, StorageInterface $archive, LockingService $lockingService)
-    {
+    public function __construct(
+        StorageInterface $storage,
+        StorageInterface $archive,
+        Predis $predis,
+        LockingService $lockingService
+    ) {
         $this->storage = $storage;
         $this->archive = $archive;
+        $this->setPredis($predis);
         $this->lockingService = $lockingService;
     }
 
+    protected function setPredis(Predis $predis): void
+    {
+        $this->predis = $predis;
+        $this->predis->getProfile()->defineCommand('incrmax', IncrMax::class);
+        $this->predis->getProfile()->defineCommand('decrmin', DecrMin::class);
+    }
+
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit = null)
+    {
+        if (!$this->predis->incrmax(static::PROCESS_COUNT, static::MAX_PROCESSES)) {
+            $this->logDebug(static::LOG_MSG_MAX_PROCESSES_REACHED, [], [static::LOG_CODE, static::LOG_CODE_MAX_PROCESSES_REACHED]);
+            $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MAX_PROCESSES_REACHED));
+            return;
+        }
+
+        register_shutdown_function(function () {
+            $this->predis->decrmin(static::PROCESS_COUNT, 0);
+        });
+
+        $this->migrateData($output, $timeFrame, $limit);
+    }
+
+    protected function migrateData(OutputInterface $output, string $timeFrame, int $limit = null)
     {
         $date = $this->restrictDate(new Date((new DateTime($timeFrame))->resetTime()->stdDateFormat()));
         $this->logDebug(static::LOG_MSG_TIME_FRAME, [$timeFrame, 'date' => $date->getDate(), $limit ?? 'unlimited', $limit != 1 ? 's' : ''], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
@@ -70,8 +107,21 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             return;
         }
 
-        foreach ($migrationPeriods as $migrationPeriod) {
-            $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
+        try {
+            gc_disable();
+            gc_collect_cycles();
+            gc_mem_caches();
+
+            foreach ($migrationPeriods as $migrationPeriod) {
+                try {
+                    $this->migrateDate($output, new MigrationPeriod($migrationPeriod));
+                } finally {
+                    gc_collect_cycles();
+                    gc_mem_caches();
+                }
+            }
+        } finally {
+            gc_enable();
         }
     }
 
