@@ -151,47 +151,49 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     protected function migrateDate(OutputInterface $output, MigrationPeriod $migrationPeriod)
     {
-        $migrationTimer = new MigrationTimer();
-        $totalTimer = $migrationTimer->getTotalTimer();
-
         try {
-            $lock = $this->lockingService->lock($migrationPeriod);
-            $loadTimer = $migrationTimer->getLoadTimer();
-            $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
-            $loadTimer();
-        } catch (NotFound|LockingFailure $exception) {
-            $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
-            $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
+            $migrationTimer = new MigrationTimer();
+            $totalTimer = $migrationTimer->getTotalTimer();
+
+            try {
+                $lock = $this->lockingService->lock($migrationPeriod);
+                $loadTimer = $migrationTimer->getLoadTimer();
+                $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
+                $loadTimer();
+            } catch (NotFound|LockingFailure $exception) {
+                $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
+                $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
+                return;
+            }
+
+            $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+            $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $migrationPeriod));
+
+            try {
+                $this->storage->beginTransaction();
+                $this->archive->saveCollection($collection, $migrationTimer);
+                $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
+                $this->storage->commitTransaction();
+                $this->statsIncrement(static::STAT_MIGRATION_COUNT, [], $collection->count());
+            } catch (\Throwable $throwable) {
+                $this->storage->rollbackTransaction();
+                $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
+                $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
+                if ($throwable instanceof AbortException) {
+                    throw $throwable;
+                }
+                return;
+            } finally {
+                $totalTimer();
+                $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
+            }
+
+            $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
+            $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
+        } finally {
             if (isset($lock)) {
                 $this->lockingService->unlock($lock);
             }
-            return;
         }
-
-        $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-        $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $migrationPeriod));
-
-        try {
-            $this->storage->beginTransaction();
-            $this->archive->saveCollection($collection, $migrationTimer);
-            $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
-            $this->storage->commitTransaction();
-            $this->statsIncrement(static::STAT_MIGRATION_COUNT, [], $collection->count());
-        } catch (\Throwable $throwable) {
-            $this->storage->rollbackTransaction();
-            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
-            $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
-            if ($throwable instanceof AbortException) {
-                throw $throwable;
-            }
-            return;
-        } finally {
-            $totalTimer();
-            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
-            $this->lockingService->unlock($lock);
-        }
-
-        $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
-        $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
     }
 }
