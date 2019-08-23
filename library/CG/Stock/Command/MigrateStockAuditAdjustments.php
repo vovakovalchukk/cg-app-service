@@ -6,6 +6,7 @@ use CG\Locking\Failure as LockingFailure;
 use CG\Locking\Service as LockingService;
 use CG\Predis\Command\DecrMin;
 use CG\Predis\Command\IncrMax;
+use CG\Stats\StatsTrait;
 use CG\Stdlib\Date;
 use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -22,6 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MigrateStockAuditAdjustments implements LoggerAwareInterface
 {
     use LogTrait;
+    use StatsTrait;
     use SignalHandlerTrait;
 
     protected const PROCESS_COUNT = 'MigrateStockAuditAdjustments';
@@ -46,6 +48,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_MSG_MIGRATED = 'Migrated stock audit adjustments';
     protected const LOG_CODE_MIGRATION_TIMINGS = 'Timings';
     protected const LOG_MSG_MIGRATION_TIMINGS = 'Migration completed in %ss';
+
+    protected const STAT_MIGRATION_COUNT = 'stock.audit.adjustment.migration';
 
     /** @var StorageInterface|MigrationInterface */
     protected $storage;
@@ -172,6 +176,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
             $this->storage->commitTransaction();
+            $this->statsIncrement(static::STAT_MIGRATION_COUNT, [], $collection->count());
         } catch (\Throwable $throwable) {
             $this->storage->rollbackTransaction();
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);

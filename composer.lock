@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e4dceeb6909fdf77ffe781e206a65b1",
+    "content-hash": "bca0d4535f071232f39c9bfb5a83a139",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2787,21 +2787,22 @@
         },
         {
             "name": "channelgrabber/stats",
-            "version": "1.0.6",
+            "version": "dev-CGIV-10878-SignalHandling",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stats.git",
-                "reference": "54c50d32e976408ef2d8c6fca1f8489243a397f1"
+                "reference": "f121ac97b717c956015735362edcdfa101f9b7ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stats/channelgrabber-stats-1.0.6-3619a7.zip",
-                "reference": "54c50d32e976408ef2d8c6fca1f8489243a397f1"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stats/channelgrabber-stats-dev-CGIV-10878-SignalHandling-4addc9.zip",
+                "reference": "f121ac97b717c956015735362edcdfa101f9b7ba"
             },
             "require": {
-                "channelgrabber/stdlib": ">=2.10.1, <3.0.0",
+                "channelgrabber/stdlib": "^2.10.1",
                 "liuggio/statsd-php-client": "~1.0.12",
-                "zendframework/zend-eventmanager": ">=2.2,<3.0"
+                "php": ">=7.1",
+                "zendframework/zend-eventmanager": "^2.2"
             },
             "type": "library",
             "autoload": {
@@ -2810,7 +2811,7 @@
                 }
             },
             "description": "ChannelGrabber application stat logging",
-            "time": "2015-04-22T08:58:22+00:00"
+            "time": "2019-08-23T11:14:48+00:00"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -11283,12 +11284,19 @@
             "alias_normalized": "1.16.25.0",
             "version": "dev-CGIV-10878-SignalHandling",
             "package": "channelgrabber/cglib"
+        },
+        {
+            "alias": "1.1.0",
+            "alias_normalized": "1.1.0.0",
+            "version": "dev-CGIV-10878-SignalHandling",
+            "package": "channelgrabber/stats"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/stats": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
