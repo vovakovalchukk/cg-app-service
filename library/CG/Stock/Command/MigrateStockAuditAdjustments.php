@@ -1,6 +1,7 @@
 <?php
 namespace CG\Stock\Command;
 
+use CG\CGLib\Command\SignalHandlerTrait;
 use CG\Locking\Failure as LockingFailure;
 use CG\Locking\Service as LockingService;
 use CG\Predis\Command\DecrMin;
@@ -10,6 +11,7 @@ use CG\Stdlib\DateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
+use CG\Stock\Audit\Adjustment\AbortException;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\StorageInterface;
@@ -20,6 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MigrateStockAuditAdjustments implements LoggerAwareInterface
 {
     use LogTrait;
+    use SignalHandlerTrait;
 
     protected const PROCESS_COUNT = 'MigrateStockAuditAdjustments';
     protected const MAX_PROCESSES = 3;
@@ -74,17 +77,26 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit = null)
     {
-        if (!$this->predis->incrmax(static::PROCESS_COUNT, static::MAX_PROCESSES)) {
-            $this->logDebug(static::LOG_MSG_MAX_PROCESSES_REACHED, [], [static::LOG_CODE, static::LOG_CODE_MAX_PROCESSES_REACHED]);
-            $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MAX_PROCESSES_REACHED));
-            return;
+        try {
+            $this->registerSignalHandler(function (int $signal) {
+                throw new AbortException(sprintf('Aborting due to %s signal', $this->signalName($signal)));
+            }, SIGINT, SIGTERM);
+
+            if (!($locked = $this->predis->incrmax(static::PROCESS_COUNT, static::MAX_PROCESSES))) {
+                $this->logDebug(static::LOG_MSG_MAX_PROCESSES_REACHED, [], [static::LOG_CODE, static::LOG_CODE_MAX_PROCESSES_REACHED]);
+                $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MAX_PROCESSES_REACHED));
+                return;
+            }
+
+            $this->migrateData($output, $timeFrame, $limit);
+        } catch (AbortException $abort) {
+            $output->writeln(sprintf('<error>%s</error>', $abort->getMessage()));
+        } finally {
+            $this->restoreSignalHandler(SIGINT, SIGTERM);
+            if ($locked ?? false) {
+                $this->predis->decrmin(static::PROCESS_COUNT, 0);
+            }
         }
-
-        register_shutdown_function(function () {
-            $this->predis->decrmin(static::PROCESS_COUNT, 0);
-        });
-
-        $this->migrateData($output, $timeFrame, $limit);
     }
 
     protected function migrateData(OutputInterface $output, string $timeFrame, int $limit = null)
@@ -164,6 +176,9 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $this->storage->rollbackTransaction();
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
+            if ($throwable instanceof AbortException) {
+                throw $throwable;
+            }
             return;
         } finally {
             $totalTimer();
