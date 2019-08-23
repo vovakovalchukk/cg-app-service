@@ -49,8 +49,8 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_CODE_MIGRATION_TIMINGS = 'Timings';
     protected const LOG_MSG_MIGRATION_TIMINGS = 'Migration completed in %ss';
 
-    protected const STAT_MIGRATION_COUNT = 'stock.audit.adjustment.migration';
-    protected const STAT_MIGRATION_TIMING = 'stock.audit.adjustment.migration.%s';
+    protected const STAT_MIGRATION_COUNT = 'stock.audit.adjustment.migration.%s';
+    protected const STAT_MIGRATION_TIMING = 'stock.audit.adjustment.migration.%s.%s';
 
     /** @var StorageInterface|MigrationInterface */
     protected $storage;
@@ -175,7 +175,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
                 $this->archive->saveCollection($collection, $migrationTimer);
                 $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
                 $this->storage->commitTransaction();
-                $this->statsIncrement(static::STAT_MIGRATION_COUNT, [], $collection->count());
+                $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
             } catch (\Throwable $throwable) {
                 $this->storage->rollbackTransaction();
                 $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
@@ -187,10 +187,10 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             } finally {
                 $totalTimer();
                 $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load']);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression']);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload']);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total']);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total', $this->getServerName()]);
             }
 
             $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
