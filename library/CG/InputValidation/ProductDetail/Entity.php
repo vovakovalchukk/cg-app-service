@@ -14,17 +14,6 @@ use Zend\Validator\StringLength;
 
 class Entity implements RulesInterface
 {
-    protected const ALLOWED_BARCODE_STRINGS = [
-        EanDoesNotApplyMap::ENGLISH => EanDoesNotApplyMap::ENGLISH,
-        EanDoesNotApplyMap::GERMAN => EanDoesNotApplyMap::GERMAN,
-        EanDoesNotApplyMap::FRENCH => EanDoesNotApplyMap::FRENCH,
-        EanDoesNotApplyMap::SPANISH => EanDoesNotApplyMap::SPANISH,
-        EanDoesNotApplyMap::ITALIAN => EanDoesNotApplyMap::ITALIAN,
-        EanDoesNotApplyMap::DUTCH => EanDoesNotApplyMap::DUTCH,
-        EanDoesNotApplyMap::POLISH => EanDoesNotApplyMap::POLISH,
-        EanDoesNotApplyMap::CHINESE => EanDoesNotApplyMap::CHINESE,
-    ];
-
     public function getRules()
     {
         return [
@@ -143,7 +132,7 @@ class Entity implements RulesInterface
     {
         return (new ValidatorChain(
             [
-                new InArrayValidator($name, static::ALLOWED_BARCODE_STRINGS),
+                new InArrayValidator($name, EanDoesNotApplyMap::getAllowedDoesNotApplyStrings()),
                 new StringLength(['min' => $min, 'max' => $max])
             ],
             true
