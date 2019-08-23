@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "35f6156e8fab2f2e4747ea2c59c27486",
+    "content-hash": "6b19e60460d08e257476db1e4c15e9cf",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1072,16 +1072,16 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.19.3.1",
+            "version": "dev-CGIV-10867-ebay-upc-does-not-apply",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "be9c13f4e7e6793df9f56e15bf171b8302966437"
+                "reference": "a9f4546f16c26fb2b896891e3e5f71fe3081d28c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.19.3.1-13cb6b.zip",
-                "reference": "be9c13f4e7e6793df9f56e15bf171b8302966437",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10867-ebay-upc-does-not-apply-4f6a8d.zip",
+                "reference": "a9f4546f16c26fb2b896891e3e5f71fe3081d28c",
                 "shasum": null
             },
             "require": {
@@ -1096,7 +1096,7 @@
                 "channelgrabber/listing": "^1.18.3",
                 "channelgrabber/locale": "^1.0.9",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.28.7",
+                "channelgrabber/order": "^1.43.16",
                 "channelgrabber/product": "^1.12.2",
                 "channelgrabber/settings": "^1.3.10",
                 "channelgrabber/slim": "^1.13.2",
@@ -1133,7 +1133,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2019-02-27T13:50:06+00:00"
+            "time": "2019-08-23T12:40:58+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -11818,10 +11818,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.19.10",
+            "alias_normalized": "1.19.10.0",
+            "version": "dev-CGIV-10867-ebay-upc-does-not-apply",
+            "package": "channelgrabber/ebay"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ebay": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
