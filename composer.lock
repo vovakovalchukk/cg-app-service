@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bca0d4535f071232f39c9bfb5a83a139",
+    "content-hash": "07421f8c6ecee90cd9184201a680c927",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -600,16 +600,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "dev-CGIV-10878-SignalHandling",
+            "version": "1.16.25",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "8c71d40cbf7a608f0578f1a88ba7bf6d2b3bab8b"
+                "reference": "192b9ec8afa68011e0f72beaec2a951d58c007c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-10878-SignalHandling-daaa7a.zip",
-                "reference": "8c71d40cbf7a608f0578f1a88ba7bf6d2b3bab8b"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.16.25-af5a6f.zip",
+                "reference": "192b9ec8afa68011e0f72beaec2a951d58c007c7"
             },
             "require": {
                 "channelgrabber/billing": "^1.20.14",
@@ -644,6 +644,9 @@
                 "channelgrabber/phpunit": ">=1.0.4",
                 "phpunit/phpunit": "^6.3"
             },
+            "suggest": {
+                "ext-pcntl": "Allows for handling signals in commands"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -661,7 +664,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2019-08-23T10:14:50+00:00"
+            "time": "2019-08-27T08:26:15+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -2787,16 +2790,16 @@
         },
         {
             "name": "channelgrabber/stats",
-            "version": "dev-CGIV-10878-SignalHandling",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stats.git",
-                "reference": "c785e94e680bc1f512d518272173c22ed5cb0bec"
+                "reference": "187e9796298fba80c9d01b98fa0c9243a7afb8bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stats/channelgrabber-stats-dev-CGIV-10878-SignalHandling-cbcd02.zip",
-                "reference": "c785e94e680bc1f512d518272173c22ed5cb0bec"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stats/channelgrabber-stats-1.1.0-d301fd.zip",
+                "reference": "187e9796298fba80c9d01b98fa0c9243a7afb8bd"
             },
             "require": {
                 "channelgrabber/stdlib": "^2.10.1",
@@ -2811,7 +2814,7 @@
                 }
             },
             "description": "ChannelGrabber application stat logging",
-            "time": "2019-08-23T13:49:49+00:00"
+            "time": "2019-08-27T08:21:42+00:00"
         },
         {
             "name": "channelgrabber/stdlib",
@@ -11278,25 +11281,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.16.25",
-            "alias_normalized": "1.16.25.0",
-            "version": "dev-CGIV-10878-SignalHandling",
-            "package": "channelgrabber/cglib"
-        },
-        {
-            "alias": "1.1.0",
-            "alias_normalized": "1.1.0.0",
-            "version": "dev-CGIV-10878-SignalHandling",
-            "package": "channelgrabber/stats"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/stats": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
