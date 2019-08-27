@@ -138,13 +138,12 @@ class Db extends DbAbstract implements StorageInterface
      */
     protected function storeCodesForEntity(Entity $entity)
     {
-        $entity->removeDuplicateCodes();
         $delete = $this
             ->getDelete(static::TABLE_NAME_CODE)
             ->where(['listingStatusHistoryId' => $entity->getId()]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
 
-        foreach ($entity->getCode() as $code) {
+        foreach ($entity->removeDuplicateCodes() as $code) {
             $insert = $this
                 ->getInsert(static::TABLE_NAME_CODE)
                 ->values(['listingStatusHistoryId' => $entity->getId(), 'code' => $code]);
