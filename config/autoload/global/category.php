@@ -24,7 +24,9 @@ use CG\Product\Category\Template\Mapper as CategoryTemplateMapper;
 use CG\Amazon\Category\ExternalData\StorageInterface as AmazonChannelStorage;
 use CG\Amazon\Category\ExternalData\Repository as AmazonChannelRepository;
 use CG\Amazon\Category\ExternalData\Storage\Cache as AmazonChannelCacheStorage;
+use CG\Amazon\Category\ExternalData\Storage\Db as AmazonChannelDbStorage;
 use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
+use CG\Amazon\Category\ExternalData\Storage\Migration as AmazonChannelMigrationStorage;
 use CG\FileStorage\S3\Adapter as AmazonChannelFileAdapter;
 
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
@@ -35,6 +37,7 @@ use CG\Product\Category\VersionMap\Storage\Cache as CategoryVersionMapStorageCac
 use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapStorageDb;
 use CG\Product\Category\VersionMap\StorageInterface as CategoryVersionMapStorageInterface;
 use CG\Product\Category\VersionMap\Mapper as CategoryVersionMapMapper;
+use CG\Product\Category\Gearman\Generator\MigrateCategoryTemplateVersion as MigrateCategoryTemplateVersionGenerator;
 
 return [
     'di' => [
@@ -47,7 +50,7 @@ return [
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
                 CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
                 CategoryVersionMapStorageInterface::class => CategoryVersionMapRepository::class,
-                AmazonChannelStorage::class => AmazonChannelRepository::class
+                AmazonChannelStorage::class => AmazonChannelMigrationStorage::class
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -137,10 +140,27 @@ return [
                     'fileStorage' => 'AmazonChannelFileAdapter',
                 ],
             ],
+            MigrateCategoryTemplateVersionGenerator::class => [
+                'parameters' => [
+                    'gearmanClient' => 'productGearmanClient'
+                ]
+            ],
             'AmazonChannelFileAdapter' => [
                 'parameters' => [
                     'location' => 'orderhub-amazoncategoryexternaldata',
                 ],
+            ],
+            AmazonChannelDbStorage::class => [
+                'parameters' => [
+                    'readSql' => 'ReadSql',
+                    'writeSql' => 'WriteSql',
+                ]
+            ],
+            AmazonChannelMigrationStorage::class => [
+                'parameters' => [
+                    'storage' => AmazonChannelDbStorage::class,
+                    'repository' => AmazonChannelRepository::class,
+                ]
             ],
         ],
     ],

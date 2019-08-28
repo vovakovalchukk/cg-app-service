@@ -1,13 +1,16 @@
 <?php
 namespace CG\Order\Command;
 
-use CG\Account\Client\Service as AccountService;
-use CG\Account\Shared\Filter as AccountFilter;
+use CG\Account\AccountLockingStampedePrevention;
+use CG\Account\Shared\Collection as Accounts;
 use CG\Channel\Gearman\Generator\Order\Dispatch as DispatchGenerator;
 use CG\Channel\Gearman\Generator\Order\Cancel as CancelGenerator;
+use CG\Cilex\ModulusAwareInterface;
+use CG\Cilex\ModulusTrait;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Service\Item\Service as OrderItemService;
 use CG\Order\Service\Filter as OrderFilter;
+use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\Mapper as OrderMapper;
 use CG\Order\Shared\Cancel\Value as CancelValue;
@@ -17,38 +20,42 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 
-class ReAddInActionOrdersToGearman implements LoggerAwareInterface
+class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAwareInterface
 {
     use LogTrait;
+    use ModulusTrait;
 
-    protected $accountService;
     protected $dispatchGenerator;
     protected $cancelGenerator;
     protected $orderMapper;
     protected $orderService;
     protected $orderItemService;
+    protected $accountLockingStampedePrevention;
 
     const LOG_CODE = 'ReAddInActionOrdersToGearman';
 
     public function __construct(
-        AccountService $accountService,
         DispatchGenerator $dispatchGenerator,
         CancelGenerator $cancelGenerator,
         OrderMapper $orderMapper,
         OrderService $orderService,
-        OrderItemService $orderItemService
+        OrderItemService $orderItemService,
+        AccountLockingStampedePrevention $accountLockingStampedePrevention
     ) {
-        $this->accountService = $accountService;
         $this->dispatchGenerator = $dispatchGenerator;
         $this->cancelGenerator = $cancelGenerator;
         $this->orderMapper = $orderMapper;
         $this->orderService = $orderService;
         $this->orderItemService = $orderItemService;
+        $this->accountLockingStampedePrevention = $accountLockingStampedePrevention;
     }
 
     public function __invoke()
     {
-        $orders = $this->fetchOrders();
+        $accounts = $this->accountLockingStampedePrevention->retrieveAccounts();
+        $this->filterCollection($accounts);
+
+        $orders = $this->fetchOrders($accounts);
 
         $accountIdArray = [];
         $orderArray = [];
@@ -61,7 +68,6 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface
 
         $this->logDebug('Found %s orders in actionable status', [count($orderArray)], static::LOG_CODE);
 
-        $accounts = $this->fetchAccounts($accountIdArray);
 
         foreach ($orderArray as $order) {
             $this->addGlobalLogEventParams(['order' => $order->getId(), 'account' => $order->getAccountId(), 'rootOu' => $order->getRootOrganisationUnitId()]);
@@ -75,10 +81,13 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface
         }
     }
 
-    protected function fetchOrders()
+    protected function fetchOrders(Accounts $accounts): Orders
     {
         $filter = new OrderFilter;
-        $filter->setLimit('all');
+        $filter
+            ->setLimit('all')
+            ->setArchived(false)
+            ->setAccountId(array_values($accounts->getIds()));
         $filter->setStatus([
             OrderStatus::DISPATCHING,
             OrderStatus::CANCELLING,
@@ -86,20 +95,6 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface
         ]);
 
         return $this->orderService->fetchCollectionByFilter($filter);
-    }
-
-    protected function fetchAccounts($accountIds)
-    {
-        $accountIdsUnique = array_keys(array_flip($accountIds));
-        $accountFilter = new AccountFilter;
-        $accountFilter
-            ->setId($accountIdsUnique)
-            ->setActive(true)
-            ->setDeleted(false)
-            ->setPending(false)
-            ->setLimit('all');
-
-        return $this->accountService->fetchByFilter($accountFilter, true);
     }
 
     protected function generateJobForOrder($order, $account)

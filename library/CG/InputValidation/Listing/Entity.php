@@ -6,6 +6,7 @@ use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\ArrayOfPositiveIntegersValidator;
 use CG\Validation\Rules\IsArrayValidator;
 use CG\Validation\RulesInterface;
+use Zend\Validator\Date;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 
@@ -118,6 +119,11 @@ class Entity implements RulesInterface
                 'validators' => [
                     new IsArrayValidator(['name' => 'skuExternalIdMap'])
                 ]
+            ],
+            'lastModified' => [
+                'name'       => 'lastModified',
+                'required'   => false,
+                'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
             ],
         ];
     }

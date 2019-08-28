@@ -13,7 +13,6 @@
 
 use CG\ETag\Storage\Predis;
 use CG\ETag\StorageInterface;
-use Zend\Db\Sql\Sql;
 use CG\Zend\Stdlib\Db\Sql\Sql as CGSql;
 use CG\ETag\Storage\Predis as EtagRedis;
 
@@ -23,14 +22,10 @@ use CG\Cache\IncrementorInterface;
 use CG\Cache\Increment\Incrementor;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\OrganisationUnit\Storage\Api as OrganisationUnitApi;
-use Slim\Slim;
 
 // Account
 use CG\Account\Client\Service as AccountService;
-use CG\Account\Shared\Repository as AccountRepository;
 use CG\Account\Client\Storage\Api as AccountApiStorage;
-use CG\Account\Service\Storage\Db as AccountPersistentStorage;
-use CG\Account\Shared\Mapper as AccountMapper;
 use CG\Channel\ShippingChannelsProviderInterface as ChannelShippingChannelsProviderInterface;
 use CG\Dataplug\Carriers as DataplugCarriers;
 
@@ -55,6 +50,8 @@ use CG\Order\Client\StorageInterface as OrderClientStorage;
 use CG\SequentialNumbering\ProviderInterface as SequentialNumberingProviderInterface;
 use CG\SequentialNumbering\Provider\Redis as SequentialNumberingProviderRedis;
 use CG\Order\Shared\InvoiceEmailer\Service as InvoiceEmailerService;
+use CG\Order\Command\RedactOrders as RedactOrdersCommand;
+use CG\Order\Command\RestoreRedactedOrder as RestoreRedactedOrderCommand;
 
 //Note
 use CG\Order\Shared\Note\Entity as NoteEntity;
@@ -82,11 +79,8 @@ use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Service\Item\InvalidationService as ItemInvalidationService;
 use CG\Order\Locking\Item\Service as ItemLockingService;
-use CG\Order\Shared\Item\Repository as ItemRepository;
-use CG\Order\Service\Item\Storage\Cache as ItemCacheStorage;
 use CG\Order\Shared\Item\StorageInterface as ItemStorageInterface;
 use CG\Order\Service\Item\Storage\Persistent\Db as ItemPersistentDbStorage;
-use CG\Order\Service\Item\Transaction\UpdateItemAndStockFactory as UpdateItemAndStockTransactionFactory;
 
 //Fee
 use CG\Order\Service\Item\Fee\Service as FeeService;
@@ -99,6 +93,7 @@ use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Shared\Item\GiftWrap\Repository as GiftWrapRepository;
 use CG\Order\Service\Item\GiftWrap\Storage\Cache as GiftWrapCacheStorage;
 use CG\Order\Service\Item\GiftWrap\Storage\Db as GiftWrapDbStorage;
+use CG\Order\Client\Item\GiftWrap\Storage\Api as GiftWrapApiStorage;
 
 //UserChange
 use CG\Order\Shared\UserChange\Entity as UserChangeEntity;
@@ -106,7 +101,6 @@ use CG\Order\Shared\UserChange\Mapper as UserChangeMapper;
 use CG\Order\Service\UserChange\Service as UserChangeService;
 use CG\Order\Shared\UserChange\Repository as UserChangeRepository;
 use CG\Order\Service\UserChange\Storage\Cache as UserChangeCacheStorage;
-use CG\Order\Service\UserChange\Storage\MongoDb as UserChangeMongoDbStorage;
 use CG\Order\Service\UserChange\Storage\Db as UserChangeDbStorage;
 
 // OrderLink
@@ -124,7 +118,6 @@ use CG\UserPreference\Service\Service as UserPreferenceService;
 use CG\UserPreference\Shared\Repository as UserPreferenceRepository;
 use CG\UserPreference\Service\Storage\Cache as UserPreferenceCacheStorage;
 use CG\UserPreference\Service\Storage\Db as UserPreferenceDbStorage;
-use CG\UserPreference\Service\Storage\MongoDb as UserPreferenceMongoDbStorage;
 use CG\UserPreference\Shared\Mapper as UserPreferenceMapper;
 
 //Tag
@@ -144,6 +137,7 @@ use CG\FileStorage\S3\Adapter as S3LabelDataAdapter;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
+use CG\Channel\Gearman\Generator\Order\DownloadInterface as OrderDownloadGenerator;
 use CG\Channel\Command\Order\Generator as OrderGeneratorCommand;
 use CG\Channel\Command\Order\Generator\SimpleOrderFactory;
 use CG\Channel\Command\Service as AccountCommandService;
@@ -176,13 +170,11 @@ use CG\Template\Repository as TemplateRepository;
 use CG\Template\Storage\Cache as TemplateCacheStorage;
 use CG\Template\Storage\Db as TemplateDbStorage;
 use CG\Template\Mapper as TemplateMapper;
-use CG\Template\Storage\MongoDb as TemplateMongoDbStorage;
 
 //Cancel
 use CG\Order\Service\Cancel\Storage\Db as CancelDbStorage;
 
 //Shipping
-use CG\Order\Shared\Shipping\Method\Entity as ShippingMethod;
 use CG\Order\Shared\Shipping\Method\Mapper as ShippingMethodMapper;
 use CG\Order\Shared\Shipping\Method\Repository as ShippingMethodRepository;
 use CG\Order\Service\Shipping\Method\Service as ShippingMethodService;
@@ -192,7 +184,6 @@ use CG\Order\Service\Shipping\Method\Storage\Cache as ShippingMethodCacheStorage
 // Invoice Settings
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Service\Storage\Cache as InvoiceSettingsCacheStorage;
-use CG\Settings\Invoice\Service\Storage\MongoDb as InvoiceSettingsMongoDbStorage;
 use CG\Settings\Invoice\Service\Storage\Db as InvoiceSettingsDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceSettingsMapper;
@@ -212,7 +203,6 @@ use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
 
 // Product
-use CG\Product\Entity as ProductEntity;
 use CG\Product\Service\Service as ProductService;
 use CG\Product\Client\Service as ProductClientService;
 use CG\Product\Repository as ProductRepository;
@@ -238,7 +228,6 @@ use CG\Transaction\Client\Redis as TransactionRedisClient;
 use CG\Transaction\Command\Cleanup as TransactionCleanupCommand;
 
 // Stock
-use CG\Stock\Entity as StockEntity;
 use CG\Stock\AdjustmentCalculator as StockAdjustmentCalculator;
 use CG\Stock\Service as StockService;
 use CG\Stock\Repository as StockRepository;
@@ -256,12 +245,12 @@ use CG\Stock\Locking\Entity as LockingStock;
 use CG\Stock\Location\Service\Service as StockLocationServiceService;
 use CG\Controllers\Stock\Location\Location as StockLocationController;
 use CG\Controllers\Stock\Location\Location\Collection as StockLocationCollectionController;
+use CG\Order\Client\Gearman\Generator\DetermineAndUpdateDispatchableOrders as DetermineAndUpdateDispatchableOrdersGenerator;
 
 // StockLog
 use CG\Stock\Audit\Combined\Mapper as StockLogMapper;
 use CG\Stock\Audit\Combined\Repository as StockLogRepository;
 use CG\Stock\Audit\Combined\Storage\Cache as StockLogCacheStorage;
-use CG\Stock\Audit\Combined\Storage\FileStorage as StockLogFileStorage;
 use CG\Stock\Audit\Combined\Storage\Db as StockLogDbStorage;
 use CG\Stock\Audit\Combined\StorageInterface as StockLogStorage;
 
@@ -332,7 +321,6 @@ use CG\Settings\PickList\Storage\Db as PickListDbStorage;
 // Logging
 use CG\Log\Shared\Storage\Redis\Channel as RedisChannel;
 
-use Symfony\Component\Console\Output\Output as SymfonyOutput;
 use CG\Product\Command\RemoveThenCorrectImportedProducts;
 
 // Product/VariationAttributeMap
@@ -349,7 +337,6 @@ use CG\Ekm\Product\TaxRate\Repository as EkmTaxRateRepository;
 use CG\Ekm\Product\TaxRate\Service as EkmTaxRateService;
 use CG\Ekm\Product\TaxRate\Storage\Cache as EkmTaxRateCache;
 use CG\Ekm\Product\TaxRate\Storage\Db as EkmTaxRateDb;
-use CG\Ekm\Product\TaxRate\StorageInterface as EkmTaxRateStorage;
 
 // Api Settings
 use CG\Settings\Api\StorageInterface as ApiSettingsStorage;
@@ -402,7 +389,6 @@ use CG\ExchangeRate\Storage\Cache as ExchangeRateCacheStorage;
 use CG\ExchangeRate\Storage\ExternalApi as ExchangeRateExternalApiStorage;
 
 // InvoiceMapping Settings
-use CG\Settings\InvoiceMapping\Mapper as InvoiceMappingSettingsMapper;
 use CG\Settings\InvoiceMapping\Repository as InvoiceMappingSettingsRepository;
 use CG\Settings\InvoiceMapping\Storage\Cache as InvoiceMappingSettingsCacheStorage;
 use CG\Settings\InvoiceMapping\Storage\Db as InvoiceMappingSettingsDbStorage;
@@ -452,6 +438,9 @@ use CG\Billing\Transaction\Storage\Api as BillingTransactionApiStorage;
 use CG\Billing\BillingWindow\StorageInterface as BillingWindowStorage;
 use CG\Billing\BillingWindow\Storage\Api as BillingWindowStorageApi;
 
+// Classic
+use CG\Classic\Gearman\Generator\MultiAccountOrderDownload as ClassicOrderDownloadGenerator;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -475,7 +464,18 @@ $config = array(
                             ]
                         ]
                     ]
-                ]
+                ],
+                OrderDownloadCommand::class => [
+                    'methods' => [
+                        'registerChannelFactory' => [
+                            'channel' => ['required' => true],
+                            'factory' => [
+                                'type' => OrderDownloadGenerator::class,
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         ],
         'instance' => array(
@@ -486,14 +486,11 @@ $config = array(
                 'amazonReadCGSql' => CGSql::class,
                 'amazonFastReadCGSql' => CGSql::class,
                 'amazonWriteCGSql' => CGSql::class,
-                'EkmOrderDownloadCommand' => OrderDownloadCommand::class,
                 'LiveOrderPersistentDbStorage' => OrderPersistentDbStorage::class,
                 'StockApiService' => StockService::class,
                 'StockLocationApiService' => StockLocationService::class,
                 'ExchangeRateRepositoryPrimary' => ExchangeRateRepository::class,
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
-                'InvoiceSettingsMongoMigrationRepository' => InvoiceSettingsRepository::class,
-                'UserPreferenceMongoMigrationRepository' => UserPreferenceRepository::class,
                 'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
             ),
             'ReadCGSql' => array(
@@ -663,6 +660,18 @@ $config = array(
                     'liveSqlClient' => 'LiveOrderPersistentDbStorage',
                 ]
             ],
+            RedactOrdersCommand::class => [
+                'parameters' => [
+                    'mysqli' => 'ReadMysqli',
+                ],
+            ],
+            RestoreRedactedOrderCommand::class => [
+                'parameters' => [
+                    'mysqli' => 'ReadMysqli',
+                    'orderStorage' => OrderApiStorage::class,
+                    'giftWrapStorage' => GiftWrapApiStorage::class,
+                ],
+            ],
             NoteService::class => array(
                 'parameters' => array(
                     'repository' => NoteDbStorage::class
@@ -761,6 +770,11 @@ $config = array(
                     'writeSql' => 'WriteSql'
                 )
             ),
+            GiftWrapApiStorage::class => [
+                'parameters' => [
+                    'client' => 'cg_app_guzzle',
+                ],
+            ],
             UserChangeService::class => array(
                 'parameters' => array(
                     'repository' => UserChangeDbStorage::class
@@ -780,13 +794,6 @@ $config = array(
                     'mapper' => UserChangeMapper::class,
                 ]
             ],
-            UserChangeMongoDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql'
-                )
-            ),
             BatchService::class => array(
                 'parameters' => array(
                     'repository' => BatchDbStorage::class
@@ -811,16 +818,10 @@ $config = array(
                     'repository' => UserPreferenceRepository::class
                 )
             ),
-            'UserPreferenceMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => UserPreferenceDbStorage::class,
-                    'repository' => UserPreferenceMongoDbStorage::class,
-                ],
-            ],
             UserPreferenceRepository::class => [
                 'parameter' => [
                     'storage' => UserPreferenceCacheStorage::class,
-                    'repository' => 'UserPreferenceMongoMigrationRepository',
+                    'repository' => UserPreferenceDbStorage::class,
                 ]
             ],
             UserPreferenceDbStorage::class => array(
@@ -969,13 +970,7 @@ $config = array(
             InvoiceSettingsRepository::class => [
                 'parameter' => [
                     'storage' => InvoiceSettingsCacheStorage::class,
-                    'repository' => 'InvoiceSettingsMongoMigrationRepository'
-                ]
-            ],
-            'InvoiceSettingsMongoMigrationRepository' => [
-                'parameter' => [
-                    'storage' => InvoiceSettingsDbStorage::class,
-                    'repository' => InvoiceSettingsMongoDbStorage::class
+                    'repository' => InvoiceSettingsDbStorage::class
                 ]
             ],
             InvoiceSettingsDbStorage::class => [
@@ -1146,13 +1141,8 @@ $config = array(
             StockLogRepository::class => [
                 'parameter' => [
                     'storage' => StockLogCacheStorage::class,
-                    'repository' => StockLogFileStorage::class,
+                    'repository' => StockLogDbStorage::class,
                 ]
-            ],
-            StockLogFileStorage::class => [
-                'parameter' => [
-                    'storage' => StockLogDbStorage::class,
-                ],
             ],
             StockLogDbStorage::class => [
                 'parameter' => [
@@ -1265,10 +1255,12 @@ $config = array(
                     'client' => 'cg_app_guzzle'
                 ]
             ],
-            'EkmOrderDownloadCommand' => [
-                'parameter' => [
-                    'factory' => EkmOrderUpdateGenerator::class
-                ]
+            OrderDownloadCommand::class => [
+                'injections' => [
+                    'registerChannelFactory' => [
+                        ['channel' => 'classic', 'factory' => ClassicOrderDownloadGenerator::class],
+                    ],
+                ],
             ],
             PickListDbStorage::class => [
                 'parameter' => [
@@ -1708,11 +1700,15 @@ $config = array(
                     'gearmanClient' => 'orderGearmanClient'
                 ]
             ],
+            DetermineAndUpdateDispatchableOrdersGenerator::class => [
+                'parameters' => [
+                    'orderGearmanClient' => 'orderGearmanClient'
+                ]
+            ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
                 'CG\Cache\IncrementInterface' => 'CG\Cache\Client\Redis',
                 StorageInterface::class => Predis::class,
-                \MongoClient::class => 'mongodb',
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
                 UsageStorageInterface::class => UsageRepository::class,
@@ -1737,7 +1733,7 @@ $config = array(
                 LocationStorage::class => LocationRepository::class,
                 OrderClientStorage::class => OrderApiStorage::class,
                 // Not using Cache storage for now as no easy way to invalidate it when either table changes
-                StockLogStorage::class => StockLogFileStorage::class,
+                StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
                 CustomerCountStorage::class => CustomerCountRepository::class,

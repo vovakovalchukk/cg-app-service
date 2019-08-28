@@ -1,5 +1,5 @@
 <?php
-
+use CG\Log\Shared\StorageInterface as LogStorage;
 use CG\Stock\Command\AuditAllStock;
 use CG\Stock\Command\CreateMissingStock;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
@@ -49,15 +49,16 @@ return [
     ],
     'stock:migrateAdjustmentAudit' => [
         'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            $di->getUsingTypePreferences(LogStorage::class)->setDelay(false);
             $command = $di->get(MigrateStockAuditAdjustments::class);
             $command($output, $input->getArgument('timeFrame'), $input->getOption('limit'));
         },
         'description' => 'Migrate stock audit adjustments to archive storage',
         'arguments' => [
             'timeFrame' => [
-                'description' => 'Migrate any stock adjustments alter than date',
+                'description' => 'Migrate any stock adjustments older than date',
                 'required' => false,
-                'default' => '1 day ago',
+                'default' => '1 month ago',
             ],
         ],
         'options' => [

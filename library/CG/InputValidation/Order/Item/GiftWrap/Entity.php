@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Order\Item\GiftWrap;
 
+use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\StringLength;
 use Zend\Validator\GreaterThan;
@@ -12,44 +13,49 @@ class Entity implements RulesInterface
     public function getRules()
     {
         return array(
-            'id' => array(
+            'id' => [
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => []
-            ),
-            'orderItemId' => array(
+            ],
+            'orderItemId' => [
                 'name'       => 'orderItemId',
                 'required'   => false,
                 'validators' => []
-            ),
-            'giftWrapType' => array(
+            ],
+            'giftWrapType' => [
                 'name'       => 'giftWrapType',
                 'required'   => false,
                 'validators' => []
-            ),
-            'giftWrapMessage' => array(
+            ],
+            'giftWrapMessage' => [
                 'name'       => 'giftWrapMessage',
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
-            ),
-            'giftWrapPrice' => array(
+            ],
+            'giftWrapPrice' => [
                 'name'       => 'giftWrapPrice',
                 'required'   => false,
                 'validators' => [new DecimalValidator(['min' => 0, 'name' => 'giftWrapPrice'])]
-            ),
-            'organisationUnitId' => array(
+            ],
+            'organisationUnitId' => [
                 'name'       => 'organisationUnitId',
                 'validators' => [
                     new IntegerValidator(['name' => 'organisationUnitId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'organisationUnitId must be at least %min%'])
                 ]
-            ),
-            'giftWrapTaxPercentage' => array(
+            ],
+            'giftWrapTaxPercentage' => [
                 'name'       => 'giftWrapTaxPercentage',
                 'required'   => false,
                 'validators' => [new DecimalValidator(['min' => 0, 'name' => 'giftWrapTaxPercentage'])]
-            )
+            ],
+            'giftWrapRedacted' => [
+                'name' => 'giftWrapRedacted',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'giftWrapRedacted'])],
+            ],
         );
     }
 }

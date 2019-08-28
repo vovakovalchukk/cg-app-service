@@ -175,6 +175,16 @@ class LinkedReplacerTest extends TestCase
             ->method('fetchCollectionByFilter')
             ->willReturnCallback(
                 function(StockFilter $filter) use (&$stocks) {
+                    // Ensure we don't get passed an 'empty' filter
+                    if ($filter->getLimit() == 'all' && $filter->getPage() == 1) {
+                        $filterArray = $filter->toArray();
+                        unset($filterArray['limit'], $filterArray['page']);
+                        $filterArray = array_filter($filterArray);
+                        if (empty($filterArray)) {
+                            throw new \RuntimeException('StockStorage::fetchCollectionByFilter() called with empty filter');
+                        }
+                    }
+
                     $filteredStock = $stocks;
                     if (!empty($id = array_fill_keys($filter->getId(), true))) {
                         $filteredStock = array_filter(
@@ -813,6 +823,22 @@ class LinkedReplacerTest extends TestCase
             'Linked location does not know about missing location'
         );
         $this->linkReplacer->save($linkedStockLocation->setOnHand(15));
+    }
+
+    public function testMissingStockLocationsDoesntCauseLookupOfAllStock()
+    {
+        $this->createProductLinkLeaf('link1', ['sku1' => 1]);
+        $this->createProductLinkLeaf('link2', ['sku2' => 1]);
+
+        $stockLocation1 = $this->createStockLocation('link1');
+        $this->createStockLocation('sku1', 0, 0);
+        $stockLocation2 = $this->createStockLocation('link2');
+        // DONT create stockLocation for sku2
+
+        $linkedStockLocations = $this->linkReplacer->fetchCollectionByStockIds([$stockLocation1->getStockId(), $stockLocation2->getStockId()]);
+        $linkedStockLocation = $linkedStockLocations->getById($stockLocation2->getId());
+        // An exception would be thrown if there was a problem. See setupStockStorage()
+        $this->assertEquals(0, $linkedStockLocation->getOnHand());
     }
 
     /**

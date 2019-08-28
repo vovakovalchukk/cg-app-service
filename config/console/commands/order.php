@@ -1,8 +1,12 @@
 <?php
+
 use CG\Order\Command\CalculateOrderWeight;
+use CG\Order\Command\RedactOrders as RedactOrdersCommand;
+use CG\Order\Command\RestoreRedactedOrder as RestoreRedactedOrderCommand;
 use CG\Order\Shared\Command\ApplyMissingStockAdjustmentsForCancDispRefOrders;
 use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\Order\Shared\Command\CorrectStockOfItemsWithIncorrectStockManagedFlag;
+use CG\Order\Shared\Command\DetermineAndUpdateDispatchableOrders;
 use CG\Order\Shared\Command\ReSyncOrderCounts;
 use CG\Order\Shared\Command\UpdateAllItemsImages;
 use CG\Order\Shared\Command\UpdateAllItemsTax;
@@ -139,5 +143,80 @@ return [
                 (bool) $input->getOption('includeArchived')
             );
         }
+    ],
+    'order:determineAndUpdateDispatchableOrders' => [
+        'description' => 'Determine which orders are dispatchable for a list of root OU ids and SKUs and updates them',
+        'arguments' => [
+            'rootOrganisationUnit' => [
+                'required' => false,
+                'default' => null
+            ]
+        ],
+        'options' => [],
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $rootOrganisationUnitId = ((string)$input->getArgument('rootOrganisationUnit') ?: null);
+
+            $command = $di->get(DetermineAndUpdateDispatchableOrders::class, ['output' => $output]);
+            $command($rootOrganisationUnitId);
+        }
+    ],
+    'order:redactOrders' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var RedactOrdersCommand $command */
+            $command = $di->get(RedactOrdersCommand::class);
+            $command(
+                $output,
+                $input->getArgument('channel'),
+                $input->getArgument('time'),
+                $input->getOption('limit')
+            );
+        },
+        'description' => 'Generates gearman jobs to redacts pii from orders if they are older than the supplied age',
+        'arguments' => [
+            'channel' => [
+                'description' => 'The channel to match orders for',
+                'required' => true,
+            ],
+            'time' => [
+                'description' => sprintf(
+                    'A DateTime-compatible relative time string, default is "%s"',
+                    RedactOrdersCommand::DEFAULT_DATE
+                ),
+                'required' => false,
+            ],
+        ],
+        'options' => [
+            'limit' => [
+                'description' => 'Limit the number of jobs that can be generated',
+                'value' => true,
+                'required' => true,
+            ],
+        ],
+    ],
+    'order:restoreRedactedOrder' => [
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var RestoreRedactedOrderCommand $command */
+            $command = $di->get(RestoreRedactedOrderCommand::class);
+            $command(
+                $output,
+                $input->getArgument('orderId'),
+                $input->getArgument('restoreUntil')
+            );
+        },
+        'description' => 'Restores redacted pii for an order',
+        'arguments' => [
+            'orderId' => [
+                'description' => 'The id of the order that the redacted data should be restored for',
+                'required' => true,
+            ],
+            'restoreUntil' => [
+                'description' => sprintf(
+                    'A DateTime-compatible relative time string, default is "%s"',
+                    RestoreRedactedOrderCommand::DEFAULT_RESTORE_UNTIL
+                ),
+                'required' => false,
+            ],
+        ],
+        'options' => [],
     ],
 ];

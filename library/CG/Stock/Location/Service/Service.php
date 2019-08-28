@@ -26,6 +26,7 @@ use CG\Stock\Location\Storage\Cache as StockLocationCache;
 use CG\Stock\Location\StorageInterface as LocationStorage;
 use CG\Stock\StorageInterface as StockStorage;
 use CG\Stock\Gearman\Generator\LowStockThresholdUpdate as LowStockThresholdUpdateGenerator;
+use CG\Order\Client\Gearman\Generator\DetermineAndUpdateDispatchableOrders as DetermineAndUpdateDispatchableOrdersGenerator;
 
 class Service extends BaseService implements StatsAwareInterface
 {
@@ -51,6 +52,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $updateRelatedListingsForStockGenerator;
     /** @var LowStockThresholdUpdateGenerator */
     protected $lowStockThresholdUpdateGenerator;
+    /** @var DetermineAndUpdateDispatchableOrdersGenerator */
+    protected $determineAndUpdateDispatchableOrdersJobGenerator;
 
     public function __construct(
         LocationStorage $repository,
@@ -64,7 +67,8 @@ class Service extends BaseService implements StatsAwareInterface
         StockLocationCache $stockLocationCache,
         NginxCacheInvalidator $nginxCacheInvalidator,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
-        LowStockThresholdUpdateGenerator $lowStockThresholdUpdateGenerator
+        LowStockThresholdUpdateGenerator $lowStockThresholdUpdateGenerator,
+        DetermineAndUpdateDispatchableOrdersGenerator $determineAndUpdateDispatchableOrdersJobGenerator
     ) {
         parent::__construct($repository, $mapper, $auditor, $stockStorage, $notifier);
         $this->organisationUnitService = $organisationUnitService;
@@ -74,6 +78,7 @@ class Service extends BaseService implements StatsAwareInterface
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
         $this->lowStockThresholdUpdateGenerator = $lowStockThresholdUpdateGenerator;
+        $this->determineAndUpdateDispatchableOrdersJobGenerator = $determineAndUpdateDispatchableOrdersJobGenerator;
     }
 
     /**
@@ -91,7 +96,6 @@ class Service extends BaseService implements StatsAwareInterface
         }
 
         $this->nginxCacheInvalidator->invalidateProductsForStockLocation($stockLocation, $stock);
-        $this->updateRelatedListings($stock);
 
         try {
             /** @var StockLocation $currentStockLocation */
@@ -109,6 +113,7 @@ class Service extends BaseService implements StatsAwareInterface
         $relatedStocks = $this->fetchRelatedStock($relatedStockLocations);
         $stockLocationHal = parent::save($stockLocation, $adjustmentIds);
         $this->updateRelated($stock, $stockLocation, $relatedStocks, $relatedStockLocations);
+        $this->determineAndUpdateDispatchableOrdersJobGenerator->generateJobForStock($stock);
         return $stockLocationHal;
     }
 
@@ -227,4 +232,4 @@ class Service extends BaseService implements StatsAwareInterface
         $this->updateRelatedListingsForStockGenerator->generateJob($stock);
         return $this;
     }
-} 
+}

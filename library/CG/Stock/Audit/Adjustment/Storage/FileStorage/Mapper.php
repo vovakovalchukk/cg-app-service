@@ -3,9 +3,12 @@ namespace CG\Stock\Audit\Adjustment\Storage\FileStorage;
 
 use CG\Stock\Audit\Adjustment\Entity as AuditAdjustment;
 use CG\Stock\Audit\Adjustment\Mapper as AuditAdjustmentMapper;
+use CG\Stock\Audit\Adjustment\MigrationTimer;
 
 class Mapper
 {
+    protected const COMPRESSION = 9;
+
     /** @var AuditAdjustmentMapper */
     protected $auditAdjustmentMapper;
 
@@ -14,11 +17,15 @@ class Mapper
         $this->auditAdjustmentMapper = $auditAdjustmentMapper;
     }
 
-    public function toFile(?string $data): File
+    public function toFile(string $filename, ?string $data, bool $compressed): File
     {
-        $file = new File();
+        $file = new File($filename, $compressed);
         if ($data === null) {
             return $file;
+        }
+
+        if ($compressed) {
+            $data = gzdecode($data);
         }
 
         $collection = json_decode($data, true);
@@ -32,11 +39,17 @@ class Mapper
             $file[$entity->getId()] = $entity;
         }
 
-        return $file->setInitialCount($file->count());
+        return $file->setInitialCount($file->count())->setHash($file->hash());
     }
 
-    public function fromFile(?File $file): string
+    public function fromFile(File $file, MigrationTimer $migrationTimer = null): string
     {
-        return json_encode(!is_null($file) ? $file->toArray() : []);
+        $data = json_encode($file->toArray());
+        if ($file->isCompressed()) {
+            $compressionTimer = ($migrationTimer !== null) ? $migrationTimer->getCompressionTimer() : function() {};
+            $data = gzencode($data, static::COMPRESSION);
+            $compressionTimer();
+        }
+        return $data;
     }
 }

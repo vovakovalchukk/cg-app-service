@@ -9,6 +9,7 @@ return [
         'description' => 'Add in progress Orders to gearman queues',
         'arguments' => [],
         'options' => [],
+        'modulus' => true,
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $command = $di->get(ReAddInActionOrdersToGearman::class);
             $command();

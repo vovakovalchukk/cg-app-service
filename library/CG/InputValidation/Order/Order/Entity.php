@@ -91,6 +91,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ),
+            'buyerMessageRedacted' => [
+                'name' => 'buyerMessageRedacted',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'buyerMessageRedacted'])],
+            ],
             'purchaseDate' => array(
                 'name'       => 'purchaseDate',
                 'validators' => [new Date(['format' => 'Y-m-d H:i:s'])]
@@ -120,6 +125,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
+            'billingAddressRedacted'  => [
+                'name'       => 'billingAddressRedacted',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'billingAddressRedacted'])],
+            ],
             'billingAddressCompanyName'  => array(
                 'name'       => 'billingAddressCompanyName',
                 'required'   => false,
@@ -185,6 +195,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
+            'shippingAddressRedacted'  => [
+                'name'       => 'shippingAddressRedacted',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'shippingAddressRedacted'])],
+            ],
             'shippingAddressCompanyName'  => array(
                 'name'       => 'shippingAddressCompanyName',
                 'required'   => false,
@@ -250,6 +265,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => []
             ),
+            'fulfilmentAddressRedacted'  => [
+                'name'       => 'fulfilmentAddressRedacted',
+                'required'   => false,
+                'validators' => [new BooleanValidator(['name' => 'fulfilmentAddressRedacted'])],
+            ],
             'fulfilmentAddressCompanyName'  => array(
                 'name'       => 'fulfilmentAddressCompanyName',
                 'required'   => false,
@@ -327,7 +347,7 @@ class Entity implements RulesInterface
             'tag' => array (
                 'name' => 'tag',
                 'required' => false,
-                'validators' => [new IsArrayValidator(["name" => "tag"])]
+                'validators' => [new IsArrayValidator(['name' => 'tag'])]
             ),
             'paymentMethod' => array(
                 'name'       => 'paymentMethod',
@@ -342,7 +362,7 @@ class Entity implements RulesInterface
             'cancellations'  => array(
                 'name'       => 'cancellations',
                 'required'   => false,
-                'validators' => [new IsArrayValidator(["name" => "cancellations"])]
+                'validators' => [new IsArrayValidator(['name' => 'cancellations'])]
             ),
             'archived' => [
                 'name'       => 'archived',
@@ -426,6 +446,16 @@ class Entity implements RulesInterface
                 'name' => 'weight',
                 'required' => false,
                 'validators' => [new DecimalValidator(['name' => 'weight'])]
+            ],
+            'dispatchable' => [
+                'name' => 'dispatchable',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
+            ],
+            'linkable' => [
+                'name' => 'linkable',
+                'required' => false,
+                'validators' => [new BooleanValidator(['name' => 'linkable'])]
             ],
         );
     }
