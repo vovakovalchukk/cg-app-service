@@ -1587,6 +1587,12 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
                 "reference": "7dd3701b9bc69580b9f3b924ffad7e573b58f4fa"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-dev-CGIV-10897-fix-erroring-jobs-79c078.zip",
+                "reference": "7dd3701b9bc69580b9f3b924ffad7e573b58f4fa",
+                "shasum": null
+            },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/constants": "dev-master",
@@ -1610,11 +1616,6 @@
                 "phpunit/phpunit": ">=6.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-LIS-238-allow-amazon-create-variation-listings": "1.16.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Listing\\": "src"
