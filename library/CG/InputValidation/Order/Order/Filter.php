@@ -84,6 +84,13 @@ class Filter implements RulesInterface, ExclusionInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'searchField' => [
+                'name' => 'searchField',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'searchField'])
+                ]
+            ],
             'status' => [
                 'name' => 'status',
                 'required' => false,
@@ -336,7 +343,46 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new BooleanValidator(['name' => 'dispatchable'])
                 ]
-            ]
+            ],
+            'marketplace' => [
+                'name' => 'marketplace',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'marketplace'])
+                ]
+            ],
+            'invoicePrinted' => [
+                'name' => 'invoicePrinted',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'invoicePrinted'])
+                ]
+            ],
+            'invoiceEmailed' => [
+                'name' => 'invoiceEmailed',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'invoiceEmailed'])
+                ]
+            ],
+            'labelPrinted' => [
+                'name' => 'labelPrinted',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'labelPrinted'])
+                ]
+            ],
+            'hasCustomisation' => [
+                'name' => 'hasCustomisation',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'hasCustomisation'])
+                ]
+            ],
         ];
     }
 }
