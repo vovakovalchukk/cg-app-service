@@ -66,8 +66,6 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
     public function save($stockLocation, array $adjustmentIds = [])
     {
-        $this->logDebugDump($stockLocation, 'STOCK LOCATION', [], 'MYTEST');
-
         $quantifiedStockLocation = $this->getQuantifiedStockLocation($stockLocation);
         $quantifiedStockLocation->setOnHand($stockLocation->getOnHand())->setAllocated($stockLocation->getAllocated());
 
@@ -320,10 +318,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
             $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
             foreach (array_keys($productLinkLeafsByOuAndSku[$key]->getStockSkuMap()) as $stockSku) {
-//                $stockLocationKey = ProductLinkLeaf::generateId($productLinkLeafsByOuAndSku[$key]->getOrganisationUnitId(), $stockSku);
-
                 $stockLocationKey = $this->generateKey($stockLocation->getLocationId(), $stockSku);
-
                 if (isset($linkedStockLocationsByLocationOuAndSku[$stockLocationKey])) {
                     $linkedStockLocations->attach($linkedStockLocationsByLocationOuAndSku[$stockLocationKey]);
                 }

@@ -177,22 +177,15 @@ class Service extends BaseService implements StatsAwareInterface
 
     protected function updateRelated(Stock $stock, StockLocation $stockLocation, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
     {
-        $this->logDebugDump($relatedStocks, 'RELATED STOCKS', [], 'MYTEST');
-        $this->logDebugDump($relatedStockLocations, 'RELATED STOCK LOCATIONS', [], 'MYTEST');
-
         /** @var StockLocation $relatedStockLocation */
         foreach ($relatedStockLocations as $relatedStockLocation) {
             $this->stockLocationCache->remove($relatedStockLocation);
-
-
 
             $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
             if ($relatedStock instanceof Stock) {
                 $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
             }
         }
-
-        $this->logDebug('AFTER NGINX VALIDATOR', [], 'MYTEST');
 
         try {
             $stockIds = $relatedStockLocations->getArrayOf('stockId');
@@ -208,15 +201,7 @@ class Service extends BaseService implements StatsAwareInterface
 
             /** @var StockLocation $updatedStockLocation */
             foreach ($updatedStockLocations as $updatedStockLocation) {
-
                 $relatedStockLocation = $relatedStockLocations->getById($updatedStockLocation->getId());
-
-                $this->logDebugDump($relatedStockLocation, 'RELATED STOCK LOCATION', [], 'MYTEST');
-                $this->logDebugDump($updatedStockLocation, 'UPDATED STOCK LOCATION', [], 'MYTEST');
-
-                $this->logDebug('INSTANCE OF SL '. ($relatedStockLocation instanceof StockLocation), [], 'MYTEST');
-                $this->logDebug("RELATED TAG ". $relatedStockLocation->getETag() . " UPDATED TAG " .$updatedStockLocation->getETag(), [], 'MYTEST');
-
                 if (
                     !($relatedStockLocation instanceof StockLocation)
                     || $relatedStockLocation->getETag() == $updatedStockLocation->getETag()
@@ -224,23 +209,14 @@ class Service extends BaseService implements StatsAwareInterface
                     continue;
                 }
 
-                $this->logDebug('AFTER ETAG', [], 'MYTEST');
-
                 $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-
-//                $this->logDebugDump($relatedStock, 'RELATED STOCK', [], 'MYTEST');
-
                 if (!($relatedStock instanceof Stock)) {
                     continue;
                 }
 
-                $this->logDebug('AFTER INSTANCE OF', [], 'MYTEST');
-
                 if ($stockLocation->getId() != $relatedStockLocation->getId()) {
                     $this->auditor->auditStockLocationChange($updatedStockLocation, $relatedStock);
                 }
-
-                $this->logDebug('AFTER AUDIT', [], 'MYTEST');
 
                 $this->updateRelatedListings($relatedStock);
             }
