@@ -213,6 +213,9 @@ class Service extends BaseService implements StatsAwareInterface
 
                 $this->logDebugDump($relatedStockLocation, 'RELATED STOCK LOCATION', [], 'MYTEST');
 
+                $this->logDebug('INSTANCE OF SL'. ($relatedStockLocation instanceof StockLocation), [], 'MYTEST');
+                $this->logDebug("RELATED TAG ". $relatedStockLocation->getETag() . " UPDATED TAG " .$updatedStockLocation->getETag(), [], 'MYTEST');
+
                 if (
                     !($relatedStockLocation instanceof StockLocation)
                     || $relatedStockLocation->getETag() == $updatedStockLocation->getETag()
