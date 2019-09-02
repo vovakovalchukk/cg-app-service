@@ -143,7 +143,7 @@ class Db extends DbAbstract implements StorageInterface
             ->where(['listingStatusHistoryId' => $entity->getId()]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
 
-        foreach ($entity->removeDuplicateCodes() as $code) {
+        foreach ($entity->getCode() as $code) {
             $insert = $this
                 ->getInsert(static::TABLE_NAME_CODE)
                 ->values(['listingStatusHistoryId' => $entity->getId(), 'code' => $code]);
