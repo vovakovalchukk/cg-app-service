@@ -1,11 +1,14 @@
 <?php
 namespace CG\InputValidation\ProductDetail;
 
+use CG\Ebay\Site\EanDoesNotApplyMap;
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\DecimalValidator;
+use CG\Validation\Rules\InArrayValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
+use CG\Validation\ValidatorChain;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\StringLength;
 
@@ -65,7 +68,7 @@ class Entity implements RulesInterface
             'ean' => [
                 'name'       => 'ean',
                 'required'   => false,
-                'validators' => [new StringLength(['min' => 1])]
+                'validators' => [$this->getBarcodeChainValidator(1, 13, 'ean')]
             ],
             'brand' => [
                 'name'       => 'brand',
@@ -105,7 +108,7 @@ class Entity implements RulesInterface
             'upc' => [
                 'name' => 'upc',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 12, 'max' => 13])]
+                'validators' => [$this->getBarcodeChainValidator(12, 13, 'upc')]
             ],
             'isbn' => [
                 'name' => 'isbn',
@@ -124,4 +127,16 @@ class Entity implements RulesInterface
             ],
         ];
     }
+
+    protected function getBarcodeChainValidator($min, $max, $name)
+    {
+        return (new ValidatorChain(
+            [
+                new InArrayValidator($name, EanDoesNotApplyMap::getAllowedDoesNotApplyStrings()),
+                new StringLength(['min' => $min, 'max' => $max])
+            ],
+            true
+        ))->setMessage($name . ' must be between ' . $min . ' and ' . $max .' characters');
+    }
+
 }
