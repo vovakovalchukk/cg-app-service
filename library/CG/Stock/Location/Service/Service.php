@@ -217,7 +217,7 @@ class Service extends BaseService implements StatsAwareInterface
                 if ($stockLocation->getId() != $relatedStockLocation->getId()) {
                     $this->auditor->auditStockLocationChange($updatedStockLocation, $relatedStock);
                 }
-
+                $this->sendStockNotification($relatedStock->getOrganisationUnitId(), $relatedStock->getId());
                 $this->updateRelatedListings($relatedStock);
             }
         } catch (NotFound $exception) {
