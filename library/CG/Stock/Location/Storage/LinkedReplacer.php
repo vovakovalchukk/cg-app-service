@@ -318,7 +318,7 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
             $linkedStockLocations = new Collection(StockLocation::class, __FUNCTION__);
             foreach (array_keys($productLinkLeafsByOuAndSku[$key]->getStockSkuMap()) as $stockSku) {
-                $stockLocationKey = ProductLinkLeaf::generateId($productLinkLeafsByOuAndSku[$key]->getOrganisationUnitId(), $stockSku);
+                $stockLocationKey = $this->generateKey($stockLocation->getLocationId(), $stockSku);
                 if (isset($linkedStockLocationsByLocationOuAndSku[$stockLocationKey])) {
                     $linkedStockLocations->attach($linkedStockLocationsByLocationOuAndSku[$stockLocationKey]);
                 }
@@ -413,11 +413,16 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
                 continue;
             }
 
-            $key = ProductLinkLeaf::generateId($stock->getOrganisationUnitId(), $stock->getSku());
+            $key = $this->generateKey($linkedStockLocation->getLocationId(), $stock->getSku());
             $keydLinkedStockLocations[$key] = $linkedStockLocation;
         }
 
         return $keydLinkedStockLocations;
+    }
+
+    protected function generateKey(int $locationId, string $stockSku): string
+    {
+        return $locationId . '-' . strtolower($stockSku);
     }
 
     protected function buildQuantifiedLinkedStockLocations(

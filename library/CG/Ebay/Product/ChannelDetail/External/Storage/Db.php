@@ -54,15 +54,9 @@ class Db implements StorageInterface
         foreach ($results as $result) {
             $productId = $result['productId'];
             if (!isset($array[$productId])) {
-                $array[$productId] = [
-                    'imageAttributeName' => $result['imageAttributeName'],
-                    'attributeImageMap' => [],
-                    'dispatchTimeMax' => $result['dispatchTimeMax'],
-                    'shippingMethod' => $result['shippingMethod'],
-                    'shippingPrice' => $result['shippingPrice'],
-                    'variationToEpid' => json_decode($result['variationToEpid'], true),
-                    'marketplace' => $result['marketplace']
-                ];
+                $array[$productId] = $result;
+                $array[$productId]['variationToEpid'] = json_decode($result['variationToEpid'], true);
+                $array[$productId]['attributeImageMap'] = [];
             }
             if (isset($result['attributeValue'])) {
                 $array[$productId]['attributeImageMap'][$result['attributeValue']] = $result['imageId'];
