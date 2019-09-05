@@ -47,6 +47,7 @@ class Mapper
             ->addLink('category', '/category')
             ->addLink('categoryExternal', '/categoryExternal')
             ->addLink('categoryTemplate', '/categoryTemplate')
-            ->addLink('CategoryVersionMap', '/categoryVersionMap');
+            ->addLink('CategoryVersionMap', '/categoryVersionMap')
+            ->addLink('ListingTemplate', '/listingTemplate');
     }
 }
