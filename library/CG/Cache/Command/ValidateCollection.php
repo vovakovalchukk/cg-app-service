@@ -4,20 +4,20 @@ namespace CG\Cache\Command;
 use CG\Cache\ClientInterface;
 use CG\Cache\ClientMapInterface;
 use CG\Cache\InvalidationHandler\ValidateCollection as Collection;
+use CG\CGLib\Command\SignalHandlerTrait;
 use CG\Queue\BlockingInterface as BlockingQueue;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stdlib\Process\PcntlTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
 {
     use LogTrait;
     use StatsTrait;
-    use PcntlTrait;
+    use SignalHandlerTrait;
 
     const LOG_CODE_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
     const LOG_MSG_INVALID_JSON = 'Invalid json for ValidateCollection request found on queue';
@@ -61,42 +61,54 @@ class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
         $this->flushLogs();
 
         $this->process = true;
-        $this->registerSignalHandler(
-            [SIGTERM, SIGINT],
-            function() {
-                $this->process = false;
-            },
-            true
-        );
+        $this->registerSignalHandler(function (int $signal) {
+            if ($this->process === false) {
+                throw new AbortException(
+                    sprintf('Aborting due to %s signal', $this->signalName($signal))
+                );
+            }
+            $this->process = false;
+        }, SIGTERM, SIGINT);
 
         $queueKey = $this->validationQueue->generateQueueKey();
         $this->lastBatch = $this->processed = 0;
 
         while ($this->process) {
-            $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
-            $this->logProcessingQueueKey($output, $processingQueueKey);
+            $this->process($output, $queueKey, $batchSize, $timeout, $maxProcess);
+        }
+    }
 
-            $processingQueue = $this->validationQueue->createBlockingProcessingQueue(
-                $queueKey,
-                $processingQueueKey,
-                $timeout
-            );
+    protected function process(OutputInterface $output, $queueKey, $batchSize, $timeout, $maxProcess)
+    {
+        $processingQueueKey = $this->validationQueue->generateProcessingQueueKey();
+        $this->logProcessingQueueKey($output, $processingQueueKey);
 
+        $processingQueue = $this->validationQueue->createBlockingProcessingQueue(
+            $queueKey,
+            $processingQueueKey,
+            $timeout
+        );
+
+        try {
             foreach ($processingQueue as $collectionValidationJson) {
-                $this->validateCollection($output, $collectionValidationJson);
+                try {
+                    $this->validateCollection($output, $collectionValidationJson);
 
-                $this->processed++;
-                if ($this->reachedMaxProcessCount($maxProcess)) {
-                    $this->process = false;
-                }
+                    $this->processed++;
+                    if ($this->reachedMaxProcessCount($maxProcess)) {
+                        $this->process = false;
+                    }
 
-                $this->flushLogs();
-                $this->dispatchSignals();
-
-                if (!$this->process || $this->isBatchFinished($batchSize)) {
-                    break;
+                    $this->flushLogs();
+                    if (!$this->process || $this->isBatchFinished($batchSize)) {
+                        break;
+                    }
+                } finally {
+                    unset($collectionValidationJson);
                 }
             }
+        } finally {
+            unset($processingQueue);
 
             if (!$this->didBatchProcess() || !$this->isBatchFinished($batchSize)) {
                 $this->process = false;
@@ -104,7 +116,7 @@ class ValidateCollection implements LoggerAwareInterface, StatsAwareInterface
 
             $this->lastBatch = $this->processed;
             $this->validationQueue->removeProcessingQueue($processingQueueKey);
-            $this->dispatchSignals();
+            gc_collect_cycles();
         }
     }
 
