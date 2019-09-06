@@ -113,7 +113,7 @@ class Entity implements RulesInterface
             'isbn' => [
                 'name' => 'isbn',
                 'required' => false,
-                'validators' => [new StringLength(['min' => 10, 'max' => 13])]
+                'validators' => [$this->getBarcodeChainValidator(10, 13, 'isbn')]
             ],
             'gtin' => [
                 'name' => 'isbn',
