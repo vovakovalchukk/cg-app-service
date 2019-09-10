@@ -25,14 +25,11 @@ use CG\Amazon\Category\ExternalData\StorageInterface as AmazonChannelStorage;
 use CG\Amazon\Category\ExternalData\Repository as AmazonChannelRepository;
 use CG\Amazon\Category\ExternalData\Storage\Cache as AmazonChannelCacheStorage;
 use CG\Amazon\Category\ExternalData\Storage\Db as AmazonChannelDbStorage;
-use CG\Amazon\Category\ExternalData\Storage\File as AmazonChannelFileStorage;
-use CG\Amazon\Category\ExternalData\Storage\Migration as AmazonChannelMigrationStorage;
 use CG\FileStorage\S3\Adapter as AmazonChannelFileAdapter;
 
 use CG\Ebay\Category\ExternalData\ChannelService as EbayChannelService;
 
 use CG\Product\Category\VersionMap\Repository as CategoryVersionMapRepository;
-use CG\Product\Category\VersionMap\Service as CategoryVersionMapService;
 use CG\Product\Category\VersionMap\Storage\Cache as CategoryVersionMapStorageCache;
 use CG\Product\Category\VersionMap\Storage\Db as CategoryVersionMapStorageDb;
 use CG\Product\Category\VersionMap\StorageInterface as CategoryVersionMapStorageInterface;
@@ -50,7 +47,7 @@ return [
                 CategoryExternalStorageInterface::class => CategoryExternalRepository::class,
                 CategoryTemplateStorageInterface::class => CategoryTemplateRepository::class,
                 CategoryVersionMapStorageInterface::class => CategoryVersionMapRepository::class,
-                AmazonChannelStorage::class => AmazonChannelMigrationStorage::class
+                AmazonChannelStorage::class => AmazonChannelRepository::class
             ],
             CategoryStorageDb::class => [
                 'parameters' => [
@@ -132,12 +129,7 @@ return [
             AmazonChannelRepository::class => [
                 'parameters' => [
                     'storage' => AmazonChannelCacheStorage::class,
-                    'repository' => AmazonChannelFileStorage::class,
-                ],
-            ],
-            AmazonChannelFileStorage::class => [
-                'parameters' => [
-                    'fileStorage' => 'AmazonChannelFileAdapter',
+                    'repository' => AmazonChannelDbStorage::class,
                 ],
             ],
             MigrateCategoryTemplateVersionGenerator::class => [
@@ -154,12 +146,6 @@ return [
                 'parameters' => [
                     'readSql' => 'ReadSql',
                     'writeSql' => 'WriteSql',
-                ]
-            ],
-            AmazonChannelMigrationStorage::class => [
-                'parameters' => [
-                    'storage' => AmazonChannelDbStorage::class,
-                    'repository' => AmazonChannelRepository::class,
                 ]
             ],
         ],
