@@ -579,16 +579,5 @@ SQL;
             $output->writeln(sprintf('Updated %d parent categories', $count));
         },
         'description' => 'Setting version to all latest Amazon categories',
-    ],
-    'ad-hoc:amazonCategoryExternalDetailsMigration' => [
-        'description' => '',
-        'arguments' => [],
-        'options' => [],
-        'command' => function(InputInterface $input, OutputInterface $output) use ($di)
-        {
-            /* @var $command \CG\Amazon\Category\ExternalData\MigrationCommand */
-            $command = $di->get(CG\Amazon\Category\ExternalData\MigrationCommand::class);
-            $command($output);
-        }
-    ],
+    ]
 ];

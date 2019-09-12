@@ -42,6 +42,7 @@ class Db implements StorageInterface
 
     public function save(int $categoryId, Data $data): void
     {
+        $this->remove($categoryId);
         $insert = $this->getInsert()->values(['id' => $categoryId, 'data' => json_encode($data->toArray())]);
         $this->writeSql->prepareStatementForSqlObject($insert)->execute();
     }
