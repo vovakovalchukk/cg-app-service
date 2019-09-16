@@ -1,6 +1,7 @@
 <?php
 namespace CG\InputValidation\Order\Order;
 
+use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Validation\Rules\ArrayOfIntegersValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
@@ -381,6 +382,20 @@ class Filter implements RulesInterface, ExclusionInterface
                 'allow_empty' => true,
                 'validators' => [
                     new BooleanValidator(['name' => 'hasCustomisation'])
+                ]
+            ],
+            'paymentDateFrom' => [
+                'name' => 'paymentDateFrom',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => StdlibDateTime::FORMAT])
+                ]
+            ],
+            'paymentDateTo' => [
+                'name' => 'paymentDateTo',
+                'required' => false,
+                'validators' => [
+                    new Date(['format' => StdlibDateTime::FORMAT])
                 ]
             ],
         ];
