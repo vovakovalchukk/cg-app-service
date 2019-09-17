@@ -201,6 +201,7 @@ use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
 use CG\Usage\Storage\Redis as UsageRedis;
 use CG\Usage\Repository as UsageRepository;
 use CG\Usage\StorageInterface as UsageStorageInterface;
+use CG\Usage\Aggregate\FetchInterface as UsageAggregateFetchInterface;
 
 // Product
 use CG\Product\Service\Service as ProductService;
@@ -1712,6 +1713,7 @@ $config = array(
                 EventManagerInterface::class => CGEventManager::class,
                 IncrementorInterface::class => Incrementor::class,
                 UsageStorageInterface::class => UsageRepository::class,
+                UsageAggregateFetchInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class,
                 /* Cache disabled for order items as not compatable with collection hydration strategy */
