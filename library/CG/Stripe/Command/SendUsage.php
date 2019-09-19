@@ -32,11 +32,25 @@ class SendUsage implements LoggerAwareInterface
 
     public function __invoke(DateTime $usageFrom = null, DateTime $usageTo = null, int $organisationUnitId = null): void
     {
-        $usageFrom = $usageFrom ?? new DateTime('24 hours ago');
-        $usageTo = $usageTo ?? new DateTime();
+        $usageFrom = $this->sanitiseFromDate($usageFrom);
+        $usageTo = $this->sanitiseToDate($usageTo);
         $this->logDebug(static::LOG_START, [$usageFrom->format(StdlibDateTime::FORMAT), $usageTo->format(StdlibDateTime::FORMAT), $organisationUnitId ?? 'all'], [static::LOG_CODE, 'Start']);
         $rootOus = $this->fetchRootOusToProcess($organisationUnitId);
         ($this->usageRecordCreator)($usageFrom, $usageTo, $rootOus);
+    }
+
+    protected function sanitiseFromDate(?DateTime $usageFrom ): DateTime
+    {
+        $usageFrom = $usageFrom ?? new DateTime('yesterday');
+        $usageFrom->setTime(0, 0, 0);
+        return $usageFrom;
+    }
+
+    protected function sanitiseToDate(?DateTime $usageTo): DateTime
+    {
+        $usageTo = $usageTo ?? new DateTime('yesterday');
+        $usageTo->setTime(23, 59, 59);
+        return $usageTo;
     }
 
     protected function fetchRootOusToProcess(int $organisationUnitId = null): OrganisationUnitCollection

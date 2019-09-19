@@ -20,11 +20,11 @@ return [
         'arguments' => [
             'from' => [
                 'required' => false,
-                'description' => 'When to get usage from. Defaults to today.',
+                'description' => 'When to get usage from. Times will be ignored, only the date will be used. Defaults to yesterday.',
             ],
             'to' => [
                 'required' => false,
-                'description' => 'When to get usage to. Defaults to today.',
+                'description' => 'When to get usage to. Times will be ignored, only the date will be used. Defaults to yesterday.',
             ],
             'organisationUnitId' => [
                 'required' => false,

@@ -49,11 +49,22 @@ class Creator implements LoggerAwareInterface
 
     public function __invoke(DateTime $usageFrom, DateTime $usageTo, OrganisationUnitCollection $rootOus): void
     {
+        $this->validateDates($usageFrom, $usageTo);
         /** @var OrganisationUnit $rootOu */
         foreach ($rootOus as $rootOu) {
             $this->addGlobalLogEventParams(['ou' => $rootOu->getId(), 'rootOu' => $rootOu->getId()]);
             $this->sendUsageForOu($rootOu, $usageFrom, $usageTo);
             $this->removeGlobalLogEventParams(['ou', 'rootOu']);
+        }
+    }
+
+    protected function validateDates(DateTime $usageFrom, DateTime $usageTo): void
+    {
+        if ($usageFrom->getTimestamp() > time()) {
+            throw new \InvalidArgumentException('Usage from date cannot be in the future');
+        }
+        if ($usageTo < $usageFrom) {
+            throw new \InvalidArgumentException('Usage to date cannot be before the from date');
         }
     }
 
