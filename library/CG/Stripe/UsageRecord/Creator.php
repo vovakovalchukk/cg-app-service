@@ -10,10 +10,10 @@ use CG\Stdlib\Log\LogTrait;
 use CG\Stripe\Client as StripeClient;
 use CG\Stripe\Product\Plan;
 use CG\Stripe\Request\CreateUsageRecord as CreateUsageRecordRequest;
-use CG\Stripe\Request\GetSubscriptions as GetSubscriptionsRequest;
-use CG\Stripe\Response\GetSubscriptions as GetSubscriptionsResponse;
 use CG\Stripe\Subscription;
+use CG\Stripe\Subscription\Exception\MultipleActiveSubscriptionsException;
 use CG\Stripe\Subscription\Item as SubscriptionItem;
+use CG\Stripe\Subscription\Service as SubscriptionService;
 use CG\Usage\Aggregate\FetchInterface as UsageStorage;
 use DateTime;
 
@@ -32,6 +32,8 @@ class Creator implements LoggerAwareInterface
 
     /** @var UsageStorage */
     protected $usageStorage;
+    /** @var SubscriptionService */
+    protected $subscriptionService;
     /** @var StripeClient */
     protected $stripeClient;
     /** @var string|null */
@@ -39,10 +41,12 @@ class Creator implements LoggerAwareInterface
 
     public function __construct(
         UsageStorage $usageStorage,
+        SubscriptionService $subscriptionService,
         StripeClient $stripeClient,
         ?string $accountsEmail = null
     ) {
         $this->usageStorage = $usageStorage;
+        $this->subscriptionService = $subscriptionService;
         $this->stripeClient = $stripeClient;
         $this->accountsEmail = $accountsEmail;
     }
@@ -89,44 +93,28 @@ class Creator implements LoggerAwareInterface
     protected function fetchStripeSubscription(OrganisationUnit $rootOu): ?Subscription
     {
         try {
-            $request = $this->buildGetSubscriptionsRequestForOu($rootOu);
-            /** @var GetSubscriptionsResponse $response */
-            $response = $this->stripeClient->send($request);
-            if (empty($response->getSubscriptions())) {
-                throw new NotFound();
-            }
-            if (count($response->getSubscriptions()) > 1) {
-                $this->handleMultipleActiveSubscriptions($rootOu, $response);
-                return null;
-            }
-            $subscriptions = $response->getSubscriptions();
-            return array_pop($subscriptions);
+            return $this->subscriptionService->fetchActiveForCustomer($rootOu->getStripeId());
 
         } catch (NotFound $e) {
             $this->logDebug(static::LOG_NO_SUBSCRIPTION, [$rootOu->getId()], [static::LOG_CODE, 'Subscription', 'None']);
             return null;
-        } catch (StorageException $e) {
+        } catch (MultipleActiveSubscriptionsException $e) {
+            $this->handleMultipleActiveSubscriptions($rootOu, $e);
+            return null;
+        } catch (\Throwable $e) {
             $this->logAlertException($e, static::LOG_SUBSCRIPTION_ERROR, [$rootOu->getId()], [static::LOG_CODE, 'Subscription', 'Error']);
             return null;
         }
     }
 
-    protected function buildGetSubscriptionsRequestForOu(OrganisationUnit $rootOu): GetSubscriptionsRequest
+    protected function handleMultipleActiveSubscriptions(OrganisationUnit $rootOu, MultipleActiveSubscriptionsException $e): void
     {
-        return (new GetSubscriptionsRequest())
-            ->setCustomer($rootOu->getStripeId())
-            ->setStatus(GetSubscriptionsRequest::STATUS_ACTIVE);
-    }
-
-    protected function handleMultipleActiveSubscriptions(OrganisationUnit $rootOu, GetSubscriptionsResponse $response): void
-    {
-        $this->logWarning(static::LOG_MULTI_SUBSCRIPTION, [$rootOu->getId(), count($response->getSubscriptions())], [static::LOG_CODE, 'Subscription', 'Multi']);
+        $this->logWarning(static::LOG_MULTI_SUBSCRIPTION, [$rootOu->getId(), count($e->getSubscriptions())], [static::LOG_CODE, 'Subscription', 'Multi']);
         if (!$this->accountsEmail) {
             return;
         }
 
-        $subscriptionIds = $this->getSubscriptionIdsFromResponse($response);
-        $subscriptionIdsText = implode(', ', $subscriptionIds);
+        $subscriptionIdsText = implode(', ', $e->getSubscriptionIds());
         $message = <<<EOS
 Hello,
 
@@ -147,15 +135,6 @@ EOS;
             'Multiple Stripe Subscriptions for OU ' . $rootOu->getId(),
             $message
         );
-    }
-
-    protected function getSubscriptionIdsFromResponse(GetSubscriptionsResponse $response): array
-    {
-        $subscriptionIds = [];
-        foreach ($response->getSubscriptions() as $subscription) {
-            $subscriptionIds[] = $subscription->getId();
-        }
-        return $subscriptionIds;
     }
 
     protected function getOrderSubscriptionItem(Subscription $subscription, OrganisationUnit $rootOu): ?SubscriptionItem
