@@ -213,8 +213,6 @@ use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 use CG\Order\Client\Gearman\Workload\UpdateItemsImagesFactory as UpdateItemsImagesWorkloadFactory;
 use CG\Product\Locking\Entity as LockingProduct;
-use CG\Product\Entity as Product;
-use CG\Product\Collection as Products;
 
 // ProductDetail
 use CG\Product\Detail\Mapper as ProductDetailMapper;
