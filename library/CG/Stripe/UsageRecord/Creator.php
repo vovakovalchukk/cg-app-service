@@ -3,8 +3,6 @@ namespace CG\Stripe\UsageRecord;
 
 use CG\OrganisationUnit\Collection as OrganisationUnitCollection;
 use CG\OrganisationUnit\Entity as OrganisationUnit;
-use CG\OrganisationUnit\Service as OrganisationUnitService;
-use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Log\LoggerAwareInterface;
@@ -24,7 +22,6 @@ class Creator implements LoggerAwareInterface
     use LogTrait;
 
     protected const LOG_CODE = 'StripeUsageRecordCreator';
-    protected const LOG_START = 'Gathering and sending usage between %s and %s for OUs: %s';
     protected const LOG_NO_STRIPE_ID = 'OU %d does not have a stripeId, will skip';
     protected const LOG_NO_SUBSCRIPTION = 'OU %d does not have a subscription within Stripe, will skip';
     protected const LOG_MULTI_SUBSCRIPTION = 'OU %d has %d subscriptions within Stripe, will notify accounts and skip';
@@ -33,8 +30,6 @@ class Creator implements LoggerAwareInterface
     protected const LOG_USAGE_RECORD_CREATED = 'Created UsageRecord in Stripe for OU %d';
     protected const LOG_USAGE_RECORD_ERROR = 'There was a problem creating the Stripe UsageRecord for OU %d';
 
-    /** @var OrganisationUnitService */
-    protected $organisationUnitService;
     /** @var UsageStorage */
     protected $usageStorage;
     /** @var StripeClient */
@@ -43,43 +38,23 @@ class Creator implements LoggerAwareInterface
     protected $accountsEmail;
 
     public function __construct(
-        OrganisationUnitService $organisationUnitService,
         UsageStorage $usageStorage,
         StripeClient $stripeClient,
         ?string $accountsEmail = null
     ) {
-        $this->organisationUnitService = $organisationUnitService;
         $this->usageStorage = $usageStorage;
         $this->stripeClient = $stripeClient;
         $this->accountsEmail = $accountsEmail;
     }
 
-    public function __invoke(DateTime $usageFrom = null, DateTime $usageTo = null, int $organisationUnitId = null): void
+    public function __invoke(DateTime $usageFrom, DateTime $usageTo, OrganisationUnitCollection $rootOus): void
     {
-        $usageFrom = $usageFrom ?? new DateTime('24 hours ago');
-        $usageTo = $usageTo ?? new DateTime();
-        $this->logDebug(static::LOG_START, [$usageFrom->format(StdlibDateTime::FORMAT), $usageTo->format(StdlibDateTime::FORMAT), $organisationUnitId ?? 'all'], [static::LOG_CODE, 'Start']);
-
-        $rootOus = $this->fetchRootOusToProcess($organisationUnitId);
         /** @var OrganisationUnit $rootOu */
         foreach ($rootOus as $rootOu) {
             $this->addGlobalLogEventParams(['ou' => $rootOu->getId(), 'rootOu' => $rootOu->getId()]);
             $this->sendUsageForOu($rootOu, $usageFrom, $usageTo);
             $this->removeGlobalLogEventParams(['ou', 'rootOu']);
         }
-    }
-
-    protected function fetchRootOusToProcess(int $organisationUnitId = null): OrganisationUnitCollection
-    {
-        if (!$organisationUnitId) {
-            return $this->organisationUnitService->fetchRootOus('all', 1);
-        }
-        /** @var OrganisationUnit $organisationUnit */
-        $organisationUnit = $this->organisationUnitService->fetch($organisationUnitId);
-        $rootOu = $organisationUnit->getRootEntity();
-        $collection = new OrganisationUnitCollection(OrganisationUnit::class, 'fetch', ['id' => $rootOu->getId()]);
-        $collection->attach($rootOu);
-        return $collection;
     }
 
     protected function sendUsageForOu(OrganisationUnit $rootOu, DateTime $usageFrom, DateTime $usageTo): void
