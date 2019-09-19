@@ -7,7 +7,7 @@ use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Stdlib\DateTime as StdlibDateTime;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stripe\UsageRecord\Creator as UsageRecordCreator;
+use CG\Stripe\UsageSubmitter;
 use DateTime;
 
 class SendUsage implements LoggerAwareInterface
@@ -19,15 +19,15 @@ class SendUsage implements LoggerAwareInterface
 
     /** @var OrganisationUnitService */
     protected $organisationUnitService;
-    /** @var UsageRecordCreator */
-    protected $usageRecordCreator;
+    /** @var UsageSubmitter */
+    protected $usageSubmitter;
 
     public function __construct(
         OrganisationUnitService $organisationUnitService,
-        UsageRecordCreator $usageRecordCreator
+        UsageSubmitter $usageSubmitter
     ) {
         $this->organisationUnitService = $organisationUnitService;
-        $this->usageRecordCreator = $usageRecordCreator;
+        $this->usageSubmitter = $usageSubmitter;
     }
 
     public function __invoke(DateTime $usageFrom = null, DateTime $usageTo = null, int $organisationUnitId = null): void
@@ -36,7 +36,7 @@ class SendUsage implements LoggerAwareInterface
         $usageTo = $this->sanitiseToDate($usageTo);
         $this->logDebug(static::LOG_START, [$usageFrom->format(StdlibDateTime::FORMAT), $usageTo->format(StdlibDateTime::FORMAT), $organisationUnitId ?? 'all'], [static::LOG_CODE, 'Start']);
         $rootOus = $this->fetchRootOusToProcess($organisationUnitId);
-        ($this->usageRecordCreator)($usageFrom, $usageTo, $rootOus);
+        ($this->usageSubmitter)($usageFrom, $usageTo, $rootOus);
     }
 
     protected function sanitiseFromDate(?DateTime $usageFrom ): DateTime
