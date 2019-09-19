@@ -1,5 +1,5 @@
 <?php
-namespace CG\Stripe\Command;
+namespace CG\Stripe\UsageRecord;
 
 use CG\OrganisationUnit\Collection as OrganisationUnitCollection;
 use CG\OrganisationUnit\Entity as OrganisationUnit;
@@ -19,11 +19,11 @@ use CG\Stripe\Subscription\Item as SubscriptionItem;
 use CG\Usage\Aggregate\FetchInterface as UsageStorage;
 use DateTime;
 
-class SendUsage implements LoggerAwareInterface
+class Creator implements LoggerAwareInterface
 {
     use LogTrait;
 
-    protected const LOG_CODE = 'StripeSendUsage';
+    protected const LOG_CODE = 'StripeUsageRecordCreator';
     protected const LOG_START = 'Gathering and sending usage between %s and %s for OUs: %s';
     protected const LOG_NO_STRIPE_ID = 'OU %d does not have a stripeId, will skip';
     protected const LOG_NO_SUBSCRIPTION = 'OU %d does not have a subscription within Stripe, will skip';
