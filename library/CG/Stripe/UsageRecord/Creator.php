@@ -7,13 +7,12 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
-use CG\Stripe\Client as StripeClient;
 use CG\Stripe\Product\Plan;
-use CG\Stripe\Request\CreateUsageRecord as CreateUsageRecordRequest;
 use CG\Stripe\Subscription;
 use CG\Stripe\Subscription\Exception\MultipleActiveSubscriptionsException;
 use CG\Stripe\Subscription\Item as SubscriptionItem;
 use CG\Stripe\Subscription\Service as SubscriptionService;
+use CG\Stripe\UsageRecord\Service as UsageRecordService;
 use CG\Usage\Aggregate\FetchInterface as UsageStorage;
 use DateTime;
 
@@ -34,20 +33,20 @@ class Creator implements LoggerAwareInterface
     protected $usageStorage;
     /** @var SubscriptionService */
     protected $subscriptionService;
-    /** @var StripeClient */
-    protected $stripeClient;
+    /** @var UsageRecordService */
+    protected $usageRecordService;
     /** @var string|null */
     protected $accountsEmail;
 
     public function __construct(
         UsageStorage $usageStorage,
         SubscriptionService $subscriptionService,
-        StripeClient $stripeClient,
+        UsageRecordService $usageRecordService,
         ?string $accountsEmail = null
     ) {
         $this->usageStorage = $usageStorage;
         $this->subscriptionService = $subscriptionService;
-        $this->stripeClient = $stripeClient;
+        $this->usageRecordService = $usageRecordService;
         $this->accountsEmail = $accountsEmail;
     }
 
@@ -161,16 +160,10 @@ EOS;
     protected function sendOrderCountToStripe(int $orderCount, SubscriptionItem $subscriptionItem, DateTime $date, OrganisationUnit $rootOu): void
     {
         try {
-            $request = $this->buildCreateUsageRequestForSubscriptionItem($subscriptionItem, $orderCount, $date);
-            $this->stripeClient->send($request);
+            $this->usageRecordService->increment($orderCount, $subscriptionItem, $date);
             $this->logDebug(static::LOG_USAGE_RECORD_CREATED, [$rootOu->getId()], [static::LOG_CODE, 'UsageRecord', 'Created']);
         } catch (StorageException $e) {
             $this->logAlertException($e, static::LOG_USAGE_RECORD_ERROR, [$rootOu->getId()], [static::LOG_CODE, 'UsageRecord', 'Error']);
         }
-    }
-
-    protected function buildCreateUsageRequestForSubscriptionItem(SubscriptionItem $subscriptionItem, int $orderCount, DateTime $date): CreateUsageRecordRequest
-    {
-        return new CreateUsageRecordRequest($subscriptionItem->getId(), $orderCount, $date->getTimestamp(), CreateUsageRecordRequest::ACTION_INC);
     }
 }
