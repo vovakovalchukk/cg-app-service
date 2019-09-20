@@ -597,6 +597,7 @@ $config = array(
                         ],
                     ],
                     'debugCachable' => [
+                        LockingProduct::class => true
                     ],
                 ]
             ],
