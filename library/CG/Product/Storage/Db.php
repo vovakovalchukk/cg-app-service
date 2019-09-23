@@ -413,7 +413,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function addMissingProductNames(ProductCollection $collection)
     {
         if ($collection->count() == 0) {
-            return;
+            return false;
         }
 
         $skus = [];
@@ -430,9 +430,21 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         if (empty($skus)) {
-            return;
+            return false;
         }
 
+        try {
+            $relatedProducts = $this->fetchRelatedProducts($skus, $ouIds);
+        } catch (NotFound $e) {
+            return false;
+        }
+
+        $this->setNonEmptyProductName($collection, $skus, $relatedProducts);
+        return true;
+    }
+
+    protected function fetchRelatedProducts(array $skus, array $ouIds): array
+    {
         $select = $this->getReadSql()
             ->select('product')
             ->columns([
@@ -441,11 +453,11 @@ class Db extends DbAbstract implements StorageInterface
                 'name' => 'name'
             ])
             ->join(
-                    ['parent' => 'product'],
-                    'product.parentProductId = parent.id',
-                    ['parentName' => 'name'],
-                    Select::JOIN_LEFT
-                )
+                ['parent' => 'product'],
+                'product.parentProductId = parent.id',
+                ['parentName' => 'name'],
+                Select::JOIN_LEFT
+            )
             ->where([
                 'product.organisationUnitId' => array_values(array_unique($ouIds)),
                 $this->getLikePredicateCombinedByOr('product.sku', $skus)
@@ -456,22 +468,16 @@ class Db extends DbAbstract implements StorageInterface
         $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
         $this->logDebug("MY QUERY ".$msg, [], 'MYTEST');
 
-        /*
-         * SELECT DISTINCT `product`.`id` AS `id`,  `product`.`sku`, `product`.`name`, `p2`.`name` AS `parentName`
-FROM `product`
-LEFT JOIN `product` AS `p2` ON `product`.`parentProductId` = `p2`.`id`
-WHERE `product`.`organisationUnitId` IN ('2') AND `product`.`deleted` = '' #AND `product`.`name` != ''
-AND (`product`.`sku` LIKE '487' OR `product`.`sku` LIKE '488' OR `product`.`sku` LIKE '489' OR `product`.`sku` LIKE '485' OR `product`.`sku` LIKE 'Relco/PS15/Navy/Medium')
-ORDER BY `id` ASC
-         */
-
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
-            return;
+            throw new NotFound();
         }
 
-        $relatedProducts = iterator_to_array($results);
+        return iterator_to_array($results);
+    }
 
+    protected function setNonEmptyProductName(ProductCollection $collection, array $skus, array $relatedProducts): void
+    {
         foreach ($skus as $sku) {
             $productName = null;
             $parentName = null;
@@ -480,8 +486,8 @@ ORDER BY `id` ASC
                     continue;
                 }
 
-                $productName = $relatedProduct['name'] != '' ? $relatedProduct['name'] : $productName;
-                $parentName = $relatedProduct['parentName'] != '' ? $relatedProduct['parentName'] : $parentName;
+                $productName = ($relatedProduct['name'] != '') ? $relatedProduct['name'] : $productName;
+                $parentName = ($relatedProduct['parentName'] != '') ? $relatedProduct['parentName'] : $parentName;
             }
 
             $skuProducts = $collection->getBy('sku', $sku);
