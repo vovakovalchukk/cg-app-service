@@ -57,6 +57,7 @@ class Db extends DbAbstract implements StorageInterface
             );
             $productCollection->setTotal($total);
             $this->appendImages($productCollection);
+            $this->addMissingProductNames($productCollection);
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
@@ -80,11 +81,15 @@ class Db extends DbAbstract implements StorageInterface
             $select->where($this->buildSearchTermQuery($searchTerm));
         }
 
+//        $this->logDebug("Filter RESULT ".$filter->getReplaceVariationWithParent(), [], 'MYTEST', []);
         if ($filter->getReplaceVariationWithParent()) {
             $select->columns(
                 ['_id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
             );
         }
+
+//        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
+//        $this->logDebug($msg, [], 'MYTEST', []);
 
         if ($joinWithVariations) {
             $select->join(
@@ -115,6 +120,8 @@ class Db extends DbAbstract implements StorageInterface
             $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
         }
 
+
+
         return $select;
     }
 
@@ -144,6 +151,10 @@ class Db extends DbAbstract implements StorageInterface
 
         $select->order('_id ASC');
 
+        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
+        $this->logDebug($msg, [], 'MYTEST', [], false);
+
+
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
             throw new NotFound();
@@ -154,6 +165,10 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchCollectionWithJoinQuery(ProductCollection $collection, Select $select)
     {
         $rows = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+
+        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
+        $this->logDebug($msg, [], 'MYTEST', [], false);
+
         if ($rows->count() == 0) {
             throw new NotFound();
         }
@@ -393,6 +408,48 @@ class Db extends DbAbstract implements StorageInterface
             ->where(['productId' => $productIds]);
 
         return $productImages->combine($productListingImages);
+    }
+
+    protected function addMissingProductNames(ProductCollection $collection)
+    {
+        if ($collection->count() == 0) {
+            return;
+        }
+
+        $missingNameSkus = [];
+
+        /* @var $entity ProductEntity */
+        foreach ($collection as $entity) {
+            if ($entity->getName() != '') {
+//                $entity->setName('My TeSt');
+                continue;
+            }
+
+            $missingNameSkus[] = $entity->getSku();
+        }
+
+        if (empty($missingNameIds)) {
+            return;
+        }
+
+        $select = $this->getReadSql()
+            ->select('product')
+            ->columns(['_id' => 'id'])
+            ->where($this->buildFilterQuery($filter));
+
+
+
+        /*
+         * SELECT DISTINCT `product`.`id` AS `id`,  `product`.`sku`, `product`.`name`, `p2`.`name` AS `parentName`
+FROM `product`
+LEFT JOIN `product` AS `p2` ON `product`.`parentProductId` = `p2`.`id`
+WHERE `product`.`organisationUnitId` IN ('2') AND `product`.`deleted` = '' #AND `product`.`name` != ''
+AND (`product`.`sku` LIKE '487' OR `product`.`sku` LIKE '488' OR `product`.`sku` LIKE '489' OR `product`.`sku` LIKE '485' OR `product`.`sku` LIKE 'Relco/PS15/Navy/Medium')
+ORDER BY `id` ASC
+         */
+
+
+
     }
 
     /**
