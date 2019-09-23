@@ -422,7 +422,6 @@ class Db extends DbAbstract implements StorageInterface
         /* @var $entity ProductEntity */
         foreach ($collection as $entity) {
             if ($entity->getName() != '') {
-//                $entity->setName('My TeSt');
                 continue;
             }
 
@@ -452,10 +451,6 @@ class Db extends DbAbstract implements StorageInterface
                 $this->getLikePredicateCombinedByOr('product.sku', $skus)
             ]);
 
-//        new Predicate(array_map(function($sku) {
-//            return new Like('product.sku', escapeLikeValue($sku));
-//        }, array_values($skus)), Predicate::COMBINED_BY_OR)
-
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
 
         $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
@@ -470,8 +465,30 @@ AND (`product`.`sku` LIKE '487' OR `product`.`sku` LIKE '488' OR `product`.`sku`
 ORDER BY `id` ASC
          */
 
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        if($results->count() == 0) {
+            return;
+        }
 
+        $relatedProducts = iterator_to_array($results);
 
+        foreach ($skus as $sku) {
+            $productName = null;
+            $parentName = null;
+            foreach ($relatedProducts as $relatedProduct) {
+                if ($relatedProduct['sku'] != $sku) {
+                    continue;
+                }
+
+                $productName = $relatedProduct['name'] != '' ? $relatedProduct['name'] : $productName;
+                $parentName = $relatedProduct['parentName'] != '' ? $relatedProduct['parentName'] : $parentName;
+            }
+
+            $skuProducts = $collection->getBy('sku', $sku);
+            foreach ($skuProducts as $skuProduct) {
+                $skuProduct->setName($productName ?? $parentName);
+            }
+        }
     }
 
     protected function getLikePredicateCombinedByOr(string $identifier, array $values): Predicate
