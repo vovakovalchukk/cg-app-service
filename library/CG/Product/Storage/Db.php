@@ -57,7 +57,10 @@ class Db extends DbAbstract implements StorageInterface
             );
             $productCollection->setTotal($total);
             $this->appendImages($productCollection);
-            $this->addMissingProductNames($productCollection);
+            if ($filter->getReturnNonEmptyNames()) {
+                $this->addMissingProductNames($productCollection);
+            }
+
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
