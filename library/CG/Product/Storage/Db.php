@@ -416,7 +416,8 @@ class Db extends DbAbstract implements StorageInterface
             return;
         }
 
-        $missingNameSkus = [];
+        $skus = [];
+        $ouIds = [];
 
         /* @var $entity ProductEntity */
         foreach ($collection as $entity) {
@@ -425,19 +426,40 @@ class Db extends DbAbstract implements StorageInterface
                 continue;
             }
 
-            $missingNameSkus[] = $entity->getSku();
+            $skus[] = $entity->getSku();
+            $ouIds[] = $entity->getOrganisationUnitId();
         }
 
-        if (empty($missingNameIds)) {
+        if (empty($skus)) {
             return;
         }
 
         $select = $this->getReadSql()
             ->select('product')
-            ->columns(['_id' => 'id'])
-            ->where($this->buildFilterQuery($filter));
+            ->columns([
+                'id' => 'id',
+                'sku' => 'sku',
+                'name' => 'name'
+            ])
+            ->join(
+                    ['parent' => 'product'],
+                    'product.parentProductId = parent.id',
+                    ['parentName' => 'name'],
+                    Select::JOIN_LEFT
+                )
+            ->where([
+                'product.organisationUnitId' => array_values(array_unique($ouIds)),
+                $this->getLikePredicateCombinedByOr('product.sku', $skus)
+            ]);
 
+//        new Predicate(array_map(function($sku) {
+//            return new Like('product.sku', escapeLikeValue($sku));
+//        }, array_values($skus)), Predicate::COMBINED_BY_OR)
 
+        $select->quantifier(Select::QUANTIFIER_DISTINCT);
+
+        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
+        $this->logDebug("MY QUERY ".$msg, [], 'MYTEST');
 
         /*
          * SELECT DISTINCT `product`.`id` AS `id`,  `product`.`sku`, `product`.`name`, `p2`.`name` AS `parentName`
@@ -450,6 +472,22 @@ ORDER BY `id` ASC
 
 
 
+    }
+
+    protected function getLikePredicateCombinedByOr(string $identifier, array $values): Predicate
+    {
+        $identifiers = array_fill(0, count($values), $identifier);
+
+        return new Predicate(
+            array_map(
+                function($value, $identifier) {
+                    return new Like($identifier, escapeLikeValue($value));
+                },
+                array_values($values),
+                array_values($identifiers)
+            ),
+            Predicate::COMBINED_BY_OR
+        );
     }
 
     /**
