@@ -463,15 +463,24 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function setNonEmptyProductName(ProductCollection $collection, array $skus, array $relatedProducts): void
     {
+        $relatedProductSkuMap = [];
+        foreach ($relatedProducts as $relatedProduct) {
+            $relatedProductSkuMap[$relatedProduct['sku']] = $relatedProductSkuMap[$relatedProduct['sku']] ?? [];
+            $relatedProductSkuMap[$relatedProduct['sku']][] = $relatedProduct;
+        }
+
         foreach ($skus as $sku) {
+            if (!isset($relatedProductSkuMap[$sku])) {
+                continue;
+            }
+
             $productName = null;
             $parentName = null;
-            foreach ($relatedProducts as $relatedProduct) {
-                if ($relatedProduct['sku'] != $sku) {
-                    continue;
-                }
-
+            foreach ($relatedProductSkuMap[$sku] as $relatedProduct) {
                 $productName = ($relatedProduct['name'] != '') ? $relatedProduct['name'] : $productName;
+                if ($productName !== null) {
+                    break;
+                }
                 $parentName = ($relatedProduct['parentName'] != '') ? $relatedProduct['parentName'] : $parentName;
             }
 
