@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "556ed9baf22f3b35f1a419ddac11e2f7",
+    "content-hash": "8059fd5d815da42358667e5dd5e1c6aa",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2966,6 +2966,39 @@
             "time": "2017-11-21T12:03:21+00:00"
         },
         {
+            "name": "channelgrabber/stripe",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-stripe.git",
+                "reference": "0365669ff4a3e667ccba02626429db231fc8e407"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stripe/channelgrabber-stripe-1.0.1-63328a.zip",
+                "reference": "0365669ff4a3e667ccba02626429db231fc8e407"
+            },
+            "require": {
+                "channelgrabber/stdlib": "^2.16.10",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Stripe\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Stripe\\Test\\": "tests/src/"
+                }
+            },
+            "time": "2019-09-23T08:47:29+00:00"
+        },
+        {
             "name": "channelgrabber/tax",
             "version": "1.0.2",
             "source": {
@@ -3161,16 +3194,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.26.4",
+            "version": "1.26.8.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "7aca77dd960a49f31e2761feafa1ed629c99a90c"
+                "reference": "aea9d6b44cc56b1f00b51f5a73f925aed2907bc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-1.26.4-646f2a.zip",
-                "reference": "7aca77dd960a49f31e2761feafa1ed629c99a90c"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-1.26.8.1-f4d9d8.zip",
+                "reference": "aea9d6b44cc56b1f00b51f5a73f925aed2907bc8"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3184,9 +3217,9 @@
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
                 "channelgrabber/permission": ">=1.0.1",
-                "channelgrabber/slim": "^1.13.14",
+                "channelgrabber/slim": "^1.14.0",
                 "channelgrabber/stats": ">=1.0.1, <2.0.0",
-                "channelgrabber/stdlib": "^2.12.47",
+                "channelgrabber/stdlib": "^2.16.3",
                 "channelgrabber/validation": ">=1.2.5",
                 "channelgrabber/zf2-stdlib": ">=1.1.17,<2.0.0",
                 "guzzle/guzzle": "~3.7",
@@ -3205,12 +3238,17 @@
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-9867-apc-for-ou": "1.26.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\": "src"
                 }
             },
-            "time": "2018-10-03T13:20:24+00:00"
+            "time": "2019-09-03T08:13:28+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
