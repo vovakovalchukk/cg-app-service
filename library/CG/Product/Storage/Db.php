@@ -84,15 +84,11 @@ class Db extends DbAbstract implements StorageInterface
             $select->where($this->buildSearchTermQuery($searchTerm));
         }
 
-//        $this->logDebug("Filter RESULT ".$filter->getReplaceVariationWithParent(), [], 'MYTEST', []);
         if ($filter->getReplaceVariationWithParent()) {
             $select->columns(
                 ['_id' => new Expression('IF(product.parentProductId > 0, product.parentProductId, product.id)')]
             );
         }
-
-//        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
-//        $this->logDebug($msg, [], 'MYTEST', []);
 
         if ($joinWithVariations) {
             $select->join(
@@ -123,8 +119,6 @@ class Db extends DbAbstract implements StorageInterface
             $this->filterArrayValuesToOrdLikes('product.sku', $sku, $select->where);
         }
 
-
-
         return $select;
     }
 
@@ -154,10 +148,6 @@ class Db extends DbAbstract implements StorageInterface
 
         $select->order('_id ASC');
 
-        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
-        $this->logDebug($msg, [], 'MYTEST', [], false);
-
-
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
             throw new NotFound();
@@ -168,10 +158,6 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchCollectionWithJoinQuery(ProductCollection $collection, Select $select)
     {
         $rows = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
-
-        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
-        $this->logDebug($msg, [], 'MYTEST', [], false);
-
         if ($rows->count() == 0) {
             throw new NotFound();
         }
@@ -413,7 +399,7 @@ class Db extends DbAbstract implements StorageInterface
         return $productImages->combine($productListingImages);
     }
 
-    protected function addMissingProductNames(ProductCollection $collection)
+    protected function addMissingProductNames(ProductCollection $collection): bool
     {
         if ($collection->count() == 0) {
             return false;
@@ -467,10 +453,6 @@ class Db extends DbAbstract implements StorageInterface
             ]);
 
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
-
-        $msg = $this->getReadSql()->getSqlStringForSqlObject($select);
-        $this->logDebug("MY QUERY ".$msg, [], 'MYTEST');
-
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
             throw new NotFound();
