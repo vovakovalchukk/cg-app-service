@@ -280,12 +280,14 @@ class Db extends DbAbstract implements StorageInterface
         if ($filter->getEmailSendAs()) {
             $query[self::TABLE . '.emailSendAs'] = $filter->getEmailSendAs();
         }
-
         if ($filter->getEmailVerified()) {
             $query[self::TABLE . '.emailVerified'] = $filter->getEmailVerified();
         }
+        if (!empty($filter->getId())) {
+            $query[self::TABLE . '.id'] = $filter->getId();
+        }
 
-        $where = new Where($query);
+        $where = (new Where())->addPredicates($query);
 
         if ($filter->getPendingVerification()) {
             $emailUnverifiedPredicate = new Predicate();
