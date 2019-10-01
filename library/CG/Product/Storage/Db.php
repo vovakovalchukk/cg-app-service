@@ -57,6 +57,10 @@ class Db extends DbAbstract implements StorageInterface
             );
             $productCollection->setTotal($total);
             $this->appendImages($productCollection);
+            if ($filter->getReturnNonEmptyNames()) {
+                $this->addMissingProductNames($productCollection);
+            }
+
             return $productCollection;
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
@@ -393,6 +397,114 @@ class Db extends DbAbstract implements StorageInterface
             ->where(['productId' => $productIds]);
 
         return $productImages->combine($productListingImages);
+    }
+
+    protected function addMissingProductNames(ProductCollection $collection): bool
+    {
+        if ($collection->count() == 0) {
+            return false;
+        }
+
+        $skus = [];
+        $ouIds = [];
+
+        /* @var $entity ProductEntity */
+        foreach ($collection as $entity) {
+            if ($entity->getName() != '') {
+                continue;
+            }
+
+            $skus[] = $entity->getSku();
+            $ouIds[] = $entity->getOrganisationUnitId();
+        }
+
+        if (empty($skus)) {
+            return false;
+        }
+
+        try {
+            $relatedProducts = $this->fetchRelatedProducts($skus, $ouIds);
+        } catch (NotFound $e) {
+            return false;
+        }
+
+        $this->setNonEmptyProductName($collection, $skus, $relatedProducts);
+        return true;
+    }
+
+    protected function fetchRelatedProducts(array $skus, array $ouIds): array
+    {
+        $select = $this->getReadSql()
+            ->select('product')
+            ->columns([
+                'id' => 'id',
+                'sku' => 'sku',
+                'name' => 'name'
+            ])
+            ->join(
+                ['parent' => 'product'],
+                'product.parentProductId = parent.id',
+                ['parentName' => 'name'],
+                Select::JOIN_LEFT
+            )
+            ->where([
+                'product.organisationUnitId' => array_values(array_unique($ouIds)),
+                $this->getLikePredicateCombinedByOr('product.sku', $skus)
+            ]);
+
+        $select->quantifier(Select::QUANTIFIER_DISTINCT);
+        $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
+        if($results->count() == 0) {
+            throw new NotFound();
+        }
+
+        return iterator_to_array($results);
+    }
+
+    protected function setNonEmptyProductName(ProductCollection $collection, array $skus, array $relatedProducts): void
+    {
+        $relatedProductSkuMap = [];
+        foreach ($relatedProducts as $relatedProduct) {
+            $relatedProductSkuMap[$relatedProduct['sku']] = $relatedProductSkuMap[$relatedProduct['sku']] ?? [];
+            $relatedProductSkuMap[$relatedProduct['sku']][] = $relatedProduct;
+        }
+
+        foreach ($skus as $sku) {
+            if (!isset($relatedProductSkuMap[$sku])) {
+                continue;
+            }
+
+            $productName = null;
+            $parentName = null;
+            foreach ($relatedProductSkuMap[$sku] as $relatedProduct) {
+                $productName = ($relatedProduct['name'] != '') ? $relatedProduct['name'] : $productName;
+                if ($productName !== null) {
+                    break;
+                }
+                $parentName = ($relatedProduct['parentName'] != '') ? $relatedProduct['parentName'] : $parentName;
+            }
+
+            $skuProducts = $collection->getBy('sku', $sku);
+            foreach ($skuProducts as $skuProduct) {
+                $skuProduct->setName($productName ?? $parentName);
+            }
+        }
+    }
+
+    protected function getLikePredicateCombinedByOr(string $identifier, array $values): Predicate
+    {
+        $identifiers = array_fill(0, count($values), $identifier);
+
+        return new Predicate(
+            array_map(
+                function($value, $identifier) {
+                    return new Like($identifier, escapeLikeValue($value));
+                },
+                array_values($values),
+                array_values($identifiers)
+            ),
+            Predicate::COMBINED_BY_OR
+        );
     }
 
     /**
