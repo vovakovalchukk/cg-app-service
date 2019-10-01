@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64f786a91e3f3bf61c4660c04876a086",
+    "content-hash": "3ce18b632a55fec753d32e009443905b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1879,16 +1879,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.47.1",
+            "version": "dev-TAC-517-RenderTableColumns",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "30bac93c286c3dbcff71cb64e37595cb703c041f"
+                "reference": "cb85cd33d95c5f08a39bfba1af238f34290234b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.47.1-86d7b6.zip",
-                "reference": "30bac93c286c3dbcff71cb64e37595cb703c041f"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-517-RenderTableColumns-0b5717.zip",
+                "reference": "cb85cd33d95c5f08a39bfba1af238f34290234b4"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1924,7 +1924,7 @@
                 "channelgrabber/stdlib": "^2.16.9",
                 "channelgrabber/stock": "^1.12.3",
                 "channelgrabber/tax": "^1.0.2",
-                "channelgrabber/template": "^1.4.27",
+                "channelgrabber/template": "dev-TAC-447-invoice-designer-improvements as 1.7.0",
                 "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.22.9",
                 "channelgrabber/webhook-server": "^1.0.0",
@@ -1934,6 +1934,7 @@
                 "guzzle/guzzle": "~3.7",
                 "nocarrier/hal": "~0.9.10",
                 "php": ">=7.1",
+                "php-units-of-measure/php-units-of-measure": "^2.0.0",
                 "zendframework/zend-config": "^2.2.5",
                 "zendframework/zend-di": "^2.2.5"
             },
@@ -1944,7 +1945,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-TAC-517-RenderTableColumns": "1.47.x-dev"
                 }
             },
             "autoload": {
@@ -1962,7 +1964,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-09-19T07:45:13+00:00"
+            "time": "2019-09-24T14:22:39+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3039,27 +3041,27 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-TAC-447-invoice-designer-improvements",
+            "version": "dev-TAC-517-RenderTableColumns",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "ec6b0909906981d1ee5469080208624f93356141"
+                "reference": "80b80957b7d5c8021602aa527d681827e39633a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-447-invoice-designer-improvements-f3b89c.zip",
-                "reference": "ec6b0909906981d1ee5469080208624f93356141"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-517-RenderTableColumns-844ae3.zip",
+                "reference": "80b80957b7d5c8021602aa527d681827e39633a2"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/channel": ">=1.6.0,<2.0.0",
+                "channelgrabber/channel": "^1.6.0",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/feature-flags": "^2.0.1",
                 "channelgrabber/image": "^1.2.3",
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "^1.46.9",
+                "channelgrabber/order": "dev-TAC-517-RenderTableColumns as 1.47.2",
                 "channelgrabber/product": "^1.10.1",
                 "channelgrabber/settings": "^1.6.5",
                 "channelgrabber/stdlib": "^2.12.47",
@@ -3070,9 +3072,9 @@
                 "php": ">=7.1",
                 "php-units-of-measure/php-units-of-measure": "^2.0.0",
                 "picqer/php-barcode-generator": "~0.2.1",
-                "zendframework/zend-di": ">=2.2.5,<3.0",
-                "zendframework/zend-i18n": ">=2.2.5,<3.0",
-                "zendframework/zend-view": ">=2.2.6,<3.0",
+                "zendframework/zend-di": "^2.2.5",
+                "zendframework/zend-i18n": "^2.2.5",
+                "zendframework/zend-view": "^2.2.6",
                 "zendframework/zendpdf": "2.0.2.2"
             },
             "require-dev": {
@@ -3082,7 +3084,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-TAC-517-RenderTableColumns": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -3096,7 +3099,7 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-09-16T10:36:14+00:00"
+            "time": "2019-10-03T14:45:32+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -11319,15 +11322,22 @@
     ],
     "aliases": [
         {
-            "alias": "1.7.0",
-            "alias_normalized": "1.7.0.0",
-            "version": "dev-TAC-447-invoice-designer-improvements",
+            "alias": "dev-TAC-447-invoice-designer-improvements",
+            "alias_normalized": "dev-TAC-447-invoice-designer-improvements",
+            "version": "dev-TAC-517-RenderTableColumns",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "dev-TAC-447-invoice-designer-improvements",
+            "alias_normalized": "dev-TAC-447-invoice-designer-improvements",
+            "version": "dev-TAC-517-RenderTableColumns",
             "package": "channelgrabber/template"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/template": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
