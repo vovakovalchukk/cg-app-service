@@ -1054,16 +1054,11 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.20.6",
+            "version": "dev-CGIV-10996-no-listing-being-imported-from-ebay",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "14fcbd8cad3f14a428b3cba21d9abef90c154d4c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.20.6-ccb1c6.zip",
-                "reference": "14fcbd8cad3f14a428b3cba21d9abef90c154d4c"
+                "reference": "38b6f9318d9545120f1c895b563e84779a66692c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2241,7 +2236,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "ccffecc79e96eb53610d63ed57ccd18a2262d593"
+                "reference": "2762c8005e3679efd664830fedc0f835f13dd70e"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -11347,6 +11342,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.20.7",
+            "alias_normalized": "1.20.7.0",
+            "version": "dev-CGIV-10996-no-listing-being-imported-from-ebay",
+            "package": "channelgrabber/ebay"
+        },
+        {
             "alias": "1.18.2",
             "alias_normalized": "1.18.2.0",
             "version": "dev-CGIV-10996-no-listing-being-imported-from-ebay",
@@ -11356,6 +11357,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/ebay": 20,
         "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
