@@ -214,6 +214,7 @@ use CG\Product\StorageInterface as ProductStorage;
 use CG\Order\Client\Gearman\Workload\UpdateItemsTaxFactory as UpdateItemsTaxWorkloadFactory;
 use CG\Order\Client\Gearman\Workload\UpdateItemsImagesFactory as UpdateItemsImagesWorkloadFactory;
 use CG\Product\Locking\Entity as LockingProduct;
+use CG\Product\Remove\Observer as ProductRemoveObserver;
 
 // ProductDetail
 use CG\Product\Detail\Mapper as ProductDetailMapper;
@@ -331,6 +332,9 @@ use CG\Product\VariationAttributeMap\Storage\Db as VariationAttributeMapDbStorag
 
 // Phantom JS
 use JonnyW\PhantomJs\Client as PhantomJSClient;
+
+//EBAY
+use CG\Ebay\Product\Remove\Observer\Subscriber as ProductRemoveSubscriber;
 
 // EKM
 use CG\Ekm\Product\TaxRate\Mapper as EkmTaxRateMapper;
@@ -474,6 +478,13 @@ $config = array(
                                 'type' => OrderDownloadGenerator::class,
                                 'required' => true,
                             ],
+                        ],
+                    ],
+                ],
+                ProductRemoveObserver::class => [
+                    'methods' => [
+                        'registerSubscriber' => [
+                            'subscriber' => ['required' => true]
                         ],
                     ],
                 ],
@@ -1706,6 +1717,14 @@ $config = array(
                 'parameters' => [
                     'orderGearmanClient' => 'orderGearmanClient'
                 ]
+            ],
+            ProductRemoveObserver::class => [
+                'injections' => [
+                    'registerSubscriber' => [
+                        ['subscriber' => ProductRemoveSubscriber::class],
+//                        ['subscriber' => ProductRemoveSubscriber::class],
+                    ],
+                ],
             ],
             'preferences' => [
                 'Zend\Di\LocatorInterface' => 'Zend\Di\Di',
