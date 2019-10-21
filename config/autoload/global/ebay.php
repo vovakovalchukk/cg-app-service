@@ -1,6 +1,6 @@
 <?php
 use CG\Ebay\ListingImport as EbayListingImport;
-use CG\Ebay\Gearman\Generator\RemoveItemRedisKey as RemoveItemRedisKeyGenerator;
+use CG\Ebay\Gearman\Generator\Listing\SubmitImport as ListingSubmitImportGenerator;
 
 return [
     'di' => [
@@ -10,7 +10,7 @@ return [
                     'gearmanClient' => 'ebayGearmanClient'
                 ]
             ],
-            RemoveItemRedisKeyGenerator::class => [
+            ListingSubmitImportGenerator::class => [
                 'parameters' => [
                     'gearmanClient' => 'ebayGearmanClient'
                 ]
