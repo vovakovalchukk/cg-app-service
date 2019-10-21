@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "089894e9c95d617bcd48d1bc5bddf21e",
+    "content-hash": "71c3c8387e0a550c5cd3bc7825a73241",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1058,12 +1058,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "eef804cb20849bfaa8a26a2adbb0da02b8bd80b0"
+                "reference": "6a6ccabc436f27aea94bbdceb1b5e2f6cb5cfdac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10996-no-listing-being-imported-from-ebay-4b6f92.zip",
-                "reference": "eef804cb20849bfaa8a26a2adbb0da02b8bd80b0"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10996-no-listing-being-imported-from-ebay-2336f3.zip",
+                "reference": "6a6ccabc436f27aea94bbdceb1b5e2f6cb5cfdac"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1115,7 +1115,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2019-10-21T10:01:51+00:00"
+            "time": "2019-10-21T13:45:23+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -2241,12 +2241,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "bab0ca0a76ec8f6c077ab7b45f7aac671d13c5b1"
+                "reference": "2bdd21c7f5f7573b2676335c83585fdf1ae321dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10996-no-listing-being-imported-from-ebay-48af5d.zip",
-                "reference": "bab0ca0a76ec8f6c077ab7b45f7aac671d13c5b1"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10996-no-listing-being-imported-from-ebay-f1bb15.zip",
+                "reference": "2bdd21c7f5f7573b2676335c83585fdf1ae321dc"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2300,7 +2300,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-10-21T08:26:37+00:00"
+            "time": "2019-10-21T13:31:26+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11352,14 +11352,14 @@
     ],
     "aliases": [
         {
-            "alias": "1.20.7",
-            "alias_normalized": "1.20.7.0",
+            "alias": "1.20.11",
+            "alias_normalized": "1.20.11.0",
             "version": "dev-CGIV-10996-no-listing-being-imported-from-ebay",
             "package": "channelgrabber/ebay"
         },
         {
-            "alias": "1.20.11",
-            "alias_normalized": "1.20.11.0",
+            "alias": "1.18.2",
+            "alias_normalized": "1.18.2.0",
             "version": "dev-CGIV-10996-no-listing-being-imported-from-ebay",
             "package": "channelgrabber/product"
         }

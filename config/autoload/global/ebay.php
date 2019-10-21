@@ -1,6 +1,6 @@
 <?php
-use CG\Ebay\ListingImport as EbayListingImport;
 use CG\Ebay\Gearman\Generator\Listing\SubmitImport as ListingSubmitImportGenerator;
+use CG\Ebay\ListingImport as EbayListingImport;
 
 return [
     'di' => [

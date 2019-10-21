@@ -1722,7 +1722,6 @@ $config = array(
                 'injections' => [
                     'registerSubscriber' => [
                         ['subscriber' => ProductRemoveSubscriber::class],
-//                        ['subscriber' => ProductRemoveSubscriber::class],
                     ],
                 ],
             ],
