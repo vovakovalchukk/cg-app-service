@@ -1060,6 +1060,11 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
                 "reference": "44afa57e4482c463b6aeda09fd03fe2589bf5327"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-10996-no-listing-being-imported-from-ebay-8a7fed.zip",
+                "reference": "44afa57e4482c463b6aeda09fd03fe2589bf5327"
+            },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cglib": "^1.15.1",
@@ -1110,7 +1115,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2019-10-18T16:00:03+00:00"
+            "time": "2019-10-21T08:26:14+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -2238,6 +2243,11 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
                 "reference": "bab0ca0a76ec8f6c077ab7b45f7aac671d13c5b1"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-10996-no-listing-being-imported-from-ebay-48af5d.zip",
+                "reference": "bab0ca0a76ec8f6c077ab7b45f7aac671d13c5b1"
+            },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/channel": "^1.42.13",
@@ -2290,7 +2300,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-10-18T09:33:01+00:00"
+            "time": "2019-10-21T08:26:37+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
