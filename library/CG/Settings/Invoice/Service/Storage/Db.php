@@ -7,12 +7,14 @@ use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
 use CG\Settings\Invoice\Shared\Filter as InvoiceFilter;
 use CG\Settings\Invoice\Shared\StorageInterface;
 use CG\Stdlib\Coerce\Id\IntegerTrait as CoerceIntegerIdTrait;
+use CG\Stdlib\CollectionInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Mapper\FromArrayInterface as ArrayMapper;
 use CG\Stdlib\PaginatedCollection as InvoiceCollection;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use InvalidArgumentException;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\Predicate;
@@ -75,6 +77,34 @@ class Db extends DbAbstract implements StorageInterface
                 $exception
             );
         }
+    }
+
+    protected function fetchCollection(CollectionInterface $collection, ZendSql $sql, ZendSelect $select, ArrayMapper $arrayMapper, $expected = false)
+    {
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        if ($results->count() == 0 || ($expected !== false && $results->count() != $expected)) {
+            throw new NotFound();
+        }
+
+        $entityData = $this->groupRowsByEntity($results);
+        foreach ($entityData as $rows) {
+            $collection->attach($arrayMapper->fromArray($rows));
+        }
+
+        return $collection;
+    }
+
+    protected function groupRowsByEntity(ResultInterface $results): array
+    {
+        $entityData = [];
+        foreach ($results as $row) {
+            $id = $row['id'];
+            if (!isset($entityData[$id])) {
+                $entityData[$id] = [];
+            }
+            $entityData[$id][] = $row;
+        }
+        return $entityData;
     }
 
     protected function saveEntity($entity)
@@ -250,12 +280,14 @@ class Db extends DbAbstract implements StorageInterface
         if ($filter->getEmailSendAs()) {
             $query[self::TABLE . '.emailSendAs'] = $filter->getEmailSendAs();
         }
-
         if ($filter->getEmailVerified()) {
             $query[self::TABLE . '.emailVerified'] = $filter->getEmailVerified();
         }
+        if (!empty($filter->getId())) {
+            $query[self::TABLE . '.id'] = $filter->getId();
+        }
 
-        $where = new Where($query);
+        $where = (new Where())->addPredicates($query);
 
         if ($filter->getPendingVerification()) {
             $emailUnverifiedPredicate = new Predicate();
