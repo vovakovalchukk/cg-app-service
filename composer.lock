@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a46636612a7f1400572037dfad815fea",
+    "content-hash": "8acb8eadca441d3c07d1ed1261b467ac",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -335,6 +335,45 @@
             "time": "2017-03-13T09:14:27+00:00"
         },
         {
+            "name": "channelgrabber/access",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-access.git",
+                "reference": "3dd4f18584d7bd343f03ffc9f62b8b85f00e01d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/access/channelgrabber-access-1.0.0-5e8cef.zip",
+                "reference": "3dd4f18584d7bd343f03ffc9f62b8b85f00e01d5",
+                "shasum": null
+            },
+            "require": {
+                "channelgrabber/billing": "^1.20.16",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/stdlib": "^2.16.10",
+                "channelgrabber/usage-check": "^1.2.4",
+                "channelgrabber/user": "^1.26.8",
+                "php": ">=7.1",
+                "zendframework/zend-di": ">=2.2,<3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Access\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Access\\Test\\": "tests/src/"
+                }
+            },
+            "time": "2019-09-05T12:42:31+00:00"
+        },
+        {
             "name": "channelgrabber/amazon",
             "version": "1.29.4",
             "source": {
@@ -449,16 +488,16 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "1.20.14",
+            "version": "1.20.16",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "a9aeee4ac66534283c28a4b0cb53da70912d5eb3"
+                "reference": "ac230c33086de37bdba750b3ea4d404df6eec089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/billing/channelgrabber-billing-1.20.14-b575f4.zip",
-                "reference": "a9aeee4ac66534283c28a4b0cb53da70912d5eb3",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/billing/channelgrabber-billing-1.20.16-8c4ca7.zip",
+                "reference": "ac230c33086de37bdba750b3ea4d404df6eec089",
                 "shasum": null
             },
             "require": {
@@ -493,6 +532,11 @@
                 "phpunit/phpunit": "~6.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-10250-failed-payments-find-missed-payments": "1.20.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Billing\\": "src"
@@ -508,7 +552,7 @@
                     "CG\\Billing\\Test\\": "tests"
                 }
             },
-            "time": "2019-07-18T09:24:51+00:00"
+            "time": "2019-07-29T14:33:28+00:00"
         },
         {
             "name": "channelgrabber/cache",
@@ -1868,19 +1912,20 @@
         },
         {
             "name": "channelgrabber/notification",
-            "version": "1.3.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-notification.git",
-                "reference": "78228587c448789fa0764d9b86368d09de84e3e5"
+                "reference": "bed37e713905a5c380bbf9158bea082c1d247a09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/notification/channelgrabber-notification-1.3.0-04c0b3.zip",
-                "reference": "78228587c448789fa0764d9b86368d09de84e3e5",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/notification/channelgrabber-notification-1.5.0-04d181.zip",
+                "reference": "bed37e713905a5c380bbf9158bea082c1d247a09",
                 "shasum": null
             },
             "require": {
+                "channelgrabber/access": "~1.0.0",
                 "channelgrabber/billing": "^1.8.0",
                 "channelgrabber/channel": "^1.41.0",
                 "channelgrabber/constants": "dev-master",
@@ -1893,7 +1938,8 @@
                 "guzzlehttp/guzzle": ">=4.1,<6.0",
                 "jakeasmith/http_build_url": "~1.0",
                 "php": ">=7.1",
-                "zendframework/zend-config": "~2.3"
+                "zendframework/zend-config": "~2.3",
+                "zendframework/zend-di": "~2.3"
             },
             "require-dev": {
                 "channelgrabber/phpunit": "^1.0.0",
@@ -1916,7 +1962,7 @@
                     "CG\\Notification\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2019-05-13T12:36:00+00:00"
+            "time": "2019-10-07T14:50:19+00:00"
         },
         {
             "name": "channelgrabber/opsgenie",
@@ -1954,15 +2000,16 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "04310307e4dec6a32bae304b99e0c6b377d1ca06"
+                "reference": "6b2c17d1894471a3314cf96633b1eef128d14823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-447-invoice-designer-improvements-c4fb9a.zip",
-                "reference": "04310307e4dec6a32bae304b99e0c6b377d1ca06",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-447-invoice-designer-improvements-f2b513.zip",
+                "reference": "6b2c17d1894471a3314cf96633b1eef128d14823",
                 "shasum": null
             },
             "require": {
+                "channelgrabber/access": "^1.0.0",
                 "channelgrabber/cache": "^2.1.0",
                 "channelgrabber/cglib": "^1.14.0",
                 "channelgrabber/channel": "^1.41.0",
@@ -1983,7 +2030,7 @@
                 "channelgrabber/location": "^1.2.2",
                 "channelgrabber/locking": "^1.1.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/notification": "^1.3.0",
+                "channelgrabber/notification": "^1.5.0",
                 "channelgrabber/opsgenie": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
@@ -2004,6 +2051,7 @@
                 "composer/composer": "@dev",
                 "ext-mongo": ">=1.4.4",
                 "guzzle/guzzle": "~3.7",
+                "league/csv": "~8.2.0",
                 "nocarrier/hal": "~0.9.10",
                 "php": ">=7.1",
                 "php-units-of-measure/php-units-of-measure": "^2.0.0",
@@ -2035,7 +2083,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-10-04T07:14:29+00:00"
+            "time": "2019-10-24T10:21:01+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3143,12 +3191,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "91c7b0cc66f1031becef73423c62896a53b857d6"
+                "reference": "71836065db906b2be0607aa010ab71d150370215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-447-invoice-designer-improvements-c80077.zip",
-                "reference": "91c7b0cc66f1031becef73423c62896a53b857d6",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-447-invoice-designer-improvements-fe99d6.zip",
+                "reference": "71836065db906b2be0607aa010ab71d150370215",
                 "shasum": null
             },
             "require": {
@@ -3160,11 +3208,11 @@
                 "channelgrabber/image": "^1.2.3",
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "dev-TAC-447-invoice-designer-improvements as 1.47.2",
+                "channelgrabber/order": "dev-TAC-447-invoice-designer-improvements as 1.47.7",
                 "channelgrabber/product": "^1.18.1",
                 "channelgrabber/settings": "^1.6.5",
                 "channelgrabber/stdlib": "^2.12.47",
-                "channelgrabber/user": "^1.26.0",
+                "channelgrabber/user": "^1.26.8",
                 "ext-gd": "*",
                 "ext-imagick": "*",
                 "guzzle/guzzle": "~3.7",
@@ -3183,7 +3231,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-TAC-447-invoice-designer-improvements": "1.7.0-dev"
                 }
             },
             "autoload": {
@@ -3197,7 +3245,7 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-10-04T07:36:48+00:00"
+            "time": "2019-10-24T11:02:55+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -3270,33 +3318,43 @@
         },
         {
             "name": "channelgrabber/usage-check",
-            "version": "1.0.0",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-usage-check.git",
-                "reference": "85134ab5b7048c07da1570df629b0206ea915207"
+                "reference": "46a99a436de831ce59877644a4f00059c7c0a8f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage-check/channelgrabber-usage-check-1.0.0-1062ad.zip",
-                "reference": "85134ab5b7048c07da1570df629b0206ea915207",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/usage-check/channelgrabber-usage-check-1.2.4-168ad7.zip",
+                "reference": "46a99a436de831ce59877644a4f00059c7c0a8f5",
                 "shasum": null
             },
             "require": {
-                "channelgrabber/billing": ">=1.1.3",
-                "channelgrabber/di": ">=2.0.0,<3.0.0",
-                "channelgrabber/stdlib": ">=2.7.0",
-                "channelgrabber/usage": ">=1.0.2",
-                "composer/composer": "@dev"
+                "channelgrabber/billing": "^1.20.9",
+                "channelgrabber/constants": "dev-master",
+                "channelgrabber/di": "^2.2.0",
+                "channelgrabber/settings": "^1.5.5",
+                "channelgrabber/stdlib": "^2.7.0",
+                "channelgrabber/usage": "^1.0.2",
+                "php": ">=7.1"
             },
-            "type": "di-definition",
+            "require-dev": {
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "CG\\UsageCheck\\": "src"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\UsageCheck\\Test\\": "tests/src"
+                }
+            },
             "description": "Check usage against limits",
-            "time": "2016-02-05T08:50:13+00:00"
+            "time": "2019-05-31T10:45:44+00:00"
         },
         {
             "name": "channelgrabber/user",
@@ -4941,6 +4999,63 @@
                 "schema"
             ],
             "time": "2017-05-16T21:06:09+00:00"
+        },
+        {
+            "name": "league/csv",
+            "version": "8.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/csv.git",
+                "reference": "d2aab1e7bde802582c3879acf03d92716577c76d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/d2aab1e7bde802582c3879acf03d92716577c76d",
+                "reference": "d2aab1e7bde802582c3879acf03d92716577c76d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Csv data manipulation made easy in PHP",
+            "homepage": "http://csv.thephpleague.com",
+            "keywords": [
+                "csv",
+                "export",
+                "filter",
+                "import",
+                "read",
+                "write"
+            ],
+            "time": "2018-02-06T08:27:03+00:00"
         },
         {
             "name": "liuggio/statsd-php-client",
@@ -11438,8 +11553,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.47.1",
-            "alias_normalized": "1.47.1.0",
+            "alias": "1.47.7",
+            "alias_normalized": "1.47.7.0",
             "version": "dev-TAC-447-invoice-designer-improvements",
             "package": "channelgrabber/order"
         },
