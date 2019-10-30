@@ -13,6 +13,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Template\Collection;
+use CG\Template\Filter;
 use CG\Template\Mapper;
 use CG\Template\StorageInterface;
 
@@ -32,9 +33,15 @@ class Cache extends CacheAbstract implements StorageInterface, LoggerAwareInterf
         parent::__construct($mapper, $entityStrategy, $collectionStrategy);
     }
 
-    public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type)
+    public function fetchCollectionByPagination($limit, $page, array $id, array $organisationUnitId, array $type): Collection
     {
         $collection = new Collection($this->getEntityClass(), __FUNCTION__, compact('limit', 'page', 'id', 'organisationUnitId', 'type'));
+        return $this->fetchCollection($collection);
+    }
+
+    public function fetchCollectionByFilter(Filter $filter): Collection
+    {
+        $collection = new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray());
         return $this->fetchCollection($collection);
     }
 

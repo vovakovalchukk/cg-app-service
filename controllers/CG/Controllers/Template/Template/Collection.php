@@ -1,6 +1,7 @@
 <?php
 namespace CG\Controllers\Template\Template;
 
+use CG\Template\Filter;
 use CG\Template\Service;
 use CG\Slim\ControllerTrait;
 use Slim\Slim;
@@ -24,12 +25,15 @@ class Collection
     public function get()
     {
         try {
-            return $this->getService()->fetchCollectionByPaginationAsHal(
-                $this->getParams('limit'),
-                $this->getParams('page'),
-                $this->getParams('id') ?: [],
-                $this->getParams('organisationUnitId') ?: [],
-                $this->getParams('type') ?: []
+            return $this->getService()->fetchCollectionByFilterAsHal(
+                new Filter(
+                    $this->getParams('limit'),
+                    $this->getParams('page'),
+                    $this->getParams('id') ?? [],
+                    $this->getParams('organisationUnitId') ?? [],
+                    $this->getParams('type') ?? [],
+                    $this->getParams('favourite')
+                )
             );
         } catch (NotFound $e) {
             throw new HttpNotFound($e->getMessage(), $e->getCode(), $e);
