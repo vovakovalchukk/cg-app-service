@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8acb8eadca441d3c07d1ed1261b467ac",
+    "content-hash": "c362a1a977d0030b7bf721768511bf79",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1996,16 +1996,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-TAC-447-invoice-designer-improvements",
+            "version": "1.47.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6b2c17d1894471a3314cf96633b1eef128d14823"
+                "reference": "5b95d48bc47a22cc1d8e2cc31e6cbb274a12f057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-447-invoice-designer-improvements-f2b513.zip",
-                "reference": "6b2c17d1894471a3314cf96633b1eef128d14823",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.47.7-705dbb.zip",
+                "reference": "5b95d48bc47a22cc1d8e2cc31e6cbb274a12f057",
                 "shasum": null
             },
             "require": {
@@ -2043,7 +2043,7 @@
                 "channelgrabber/stdlib": "^2.16.9",
                 "channelgrabber/stock": "^1.12.3",
                 "channelgrabber/tax": "^1.0.2",
-                "channelgrabber/template": "dev-TAC-447-invoice-designer-improvements as 1.7.0",
+                "channelgrabber/template": "^1.7.0",
                 "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.22.9",
                 "channelgrabber/webhook-server": "^1.0.0",
@@ -2083,7 +2083,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-10-24T10:21:01+00:00"
+            "time": "2019-10-30T12:00:43+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -3187,16 +3187,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-TAC-447-invoice-designer-improvements",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "71836065db906b2be0607aa010ab71d150370215"
+                "reference": "ca762fff40b271b82f9de14d7f311f318760b82d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-TAC-447-invoice-designer-improvements-fe99d6.zip",
-                "reference": "71836065db906b2be0607aa010ab71d150370215",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-1.7.0-199f4b.zip",
+                "reference": "ca762fff40b271b82f9de14d7f311f318760b82d",
                 "shasum": null
             },
             "require": {
@@ -3208,7 +3208,7 @@
                 "channelgrabber/image": "^1.2.3",
                 "channelgrabber/locale": "^1.1.0",
                 "channelgrabber/log": "^2.0.21",
-                "channelgrabber/order": "dev-TAC-447-invoice-designer-improvements as 1.47.7",
+                "channelgrabber/order": "^1.47.7",
                 "channelgrabber/product": "^1.18.1",
                 "channelgrabber/settings": "^1.6.5",
                 "channelgrabber/stdlib": "^2.12.47",
@@ -3245,7 +3245,7 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-10-24T11:02:55+00:00"
+            "time": "2019-10-30T12:16:56+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -11551,25 +11551,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.47.7",
-            "alias_normalized": "1.47.7.0",
-            "version": "dev-TAC-447-invoice-designer-improvements",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.7.0",
-            "alias_normalized": "1.7.0.0",
-            "version": "dev-TAC-447-invoice-designer-improvements",
-            "package": "channelgrabber/template"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/template": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
