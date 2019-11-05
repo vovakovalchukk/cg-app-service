@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4e23513e8843af162cdbd3d4d37ab07",
+    "content-hash": "efd9a488916b3d4a2a4be9727f85932a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -198,7 +198,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 }
             ],
             "description": "Common classes for PSR-6 adapters",
@@ -267,7 +267,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 }
             ],
             "description": "A PSR-6 cache implementation using apcu. This implementation supports tags",
@@ -316,7 +316,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 },
                 {
                     "name": "Nicolas Grekas",
@@ -1958,16 +1958,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.47.7",
+            "version": "dev-TAC-522-OrderLabelPreRender2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "5b95d48bc47a22cc1d8e2cc31e6cbb274a12f057"
+                "reference": "3deb4644f83a03a570232a1a4784776a9deec9a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.47.7-705dbb.zip",
-                "reference": "5b95d48bc47a22cc1d8e2cc31e6cbb274a12f057"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-522-OrderLabelPreRender2-635602.zip",
+                "reference": "3deb4644f83a03a570232a1a4784776a9deec9a0"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2004,7 +2004,7 @@
                 "channelgrabber/stdlib": "^2.16.9",
                 "channelgrabber/stock": "^1.12.3",
                 "channelgrabber/tax": "^1.0.2",
-                "channelgrabber/template": "^1.7.0",
+                "channelgrabber/template": "^1.8.2",
                 "channelgrabber/transaction": "^1.2.1",
                 "channelgrabber/user": "^1.22.9",
                 "channelgrabber/webhook-server": "^1.0.0",
@@ -2026,7 +2026,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-TAC-539-refactor-invoice-generation": "1.47.x-dev"
                 }
             },
             "autoload": {
@@ -2044,7 +2044,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2019-10-30T12:00:43+00:00"
+            "time": "2019-11-05T09:49:46+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -11467,10 +11467,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.47.10",
+            "alias_normalized": "1.47.10.0",
+            "version": "dev-TAC-522-OrderLabelPreRender2",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
