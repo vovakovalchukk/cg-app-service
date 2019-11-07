@@ -8,19 +8,24 @@ class Entity implements RulesInterface
 {
     public function getRules()
     {
-        return array(
-            'id' => array(
+        return [
+            'id' => [
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => []
-            ),
-            'preference' => array(
+            ],
+            'preference' => [
                 'name'       => 'preference',
                 'required'   => true,
                 'validators' => [
                     new IsArrayValidator(["name" => "preference"])
                 ]
-            )
-        );
+            ],
+            'mongoId' => [
+                'name'       => 'mongoId',
+                'required'   => false,
+                'validators' => []
+            ],
+        ];
     }
 }
