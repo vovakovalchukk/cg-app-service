@@ -165,6 +165,7 @@ class Db extends DbAbstract implements StorageInterface
         }
         $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
         $this->insertAssociatedListingExternalIds($entity, $entity->getSkuExternalIdMap());
+        return $entity;
     }
 
     /**
