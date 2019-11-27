@@ -2,6 +2,7 @@
 namespace CG\Product\Detail;
 
 use CG\Order\Client\Gearman\Generator\CalculateOrderWeightForSku as CalculateOrderWeightForSkuGearmanJobGenerator;
+use CG\Order\Client\Gearman\Generator\UpdateItemsSupplier as UpdateItemsSupplierGearmanJobGenerator;
 use CG\Product\Detail\Entity as ProductDetail;
 use CG\Slim\Patch\ServiceTrait as PatchTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
@@ -18,16 +19,20 @@ class RestService extends Service
     protected $eventManager;
     /** @var CalculateOrderWeightForSkuGearmanJobGenerator */
     protected $calculateOrderWeightForSkuGearmanJobGenerator;
+    /** @var UpdateItemsSupplierGearmanJobGenerator */
+    protected $updateItemsSupplierGearmanJobGenerator;
 
     public function __construct(
         EventManager $eventManager,
         StorageInterface $repository,
         Mapper $mapper,
-        CalculateOrderWeightForSkuGearmanJobGenerator $calculateOrderWeightForSkuGearmanJobGenerator
+        CalculateOrderWeightForSkuGearmanJobGenerator $calculateOrderWeightForSkuGearmanJobGenerator,
+        UpdateItemsSupplierGearmanJobGenerator $updateItemsSupplierGearmanJobGenerator
     ) {
         parent::__construct($repository, $mapper);
         $this->eventManager = $eventManager;
         $this->calculateOrderWeightForSkuGearmanJobGenerator = $calculateOrderWeightForSkuGearmanJobGenerator;
+        $this->updateItemsSupplierGearmanJobGenerator = $updateItemsSupplierGearmanJobGenerator;
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter)
@@ -65,6 +70,9 @@ class RestService extends Service
         } finally {
             if ($previousEntity === null || $previousEntity->getWeight() !== $entity->getWeight()) {
                 $this->calculateOrderWeightForSkuGearmanJobGenerator->generateJobForProductDetail($entity);
+            }
+            if (($previousEntity === null && $entity->getSupplierId() != null) || $previousEntity->getSupplierId() != $entity->getSupplierId()) {
+                ($this->updateItemsSupplierGearmanJobGenerator)($entity->getOrganisationUnitId(), $entity->getSku(), $entity->getSupplierId());
             }
         }
     }
