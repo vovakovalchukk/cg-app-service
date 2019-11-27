@@ -44,6 +44,7 @@ class Filter implements RulesInterface, ExclusionInterface
 
     public function getRules()
     {
+        $integerValidator = new IntegerValidator();
         return [
             'limit' => $this->getLimitValidation(),
             'page' => $this->getPageValidation(),
@@ -77,7 +78,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'organisationUnitId',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                    new ArrayOfIntegersValidator($integerValidator, 'organisationUnitId')
                 ]
             ],
             'searchTerm' => [
@@ -103,7 +104,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'accountId',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'accountId')
+                    new ArrayOfIntegersValidator($integerValidator, 'accountId')
                 ]
             ],
             'channel' => [
@@ -258,14 +259,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'invoiceNumber',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'invoiceNumber')
+                    new ArrayOfIntegersValidator($integerValidator, 'invoiceNumber')
                 ]
             ],
             'rootOrganisationUnitId' => [
                 'name' => 'rootOrganisationUnitId',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'rootOrganisationUnitId')
+                    new ArrayOfIntegersValidator($integerValidator, 'rootOrganisationUnitId')
                 ]
             ],
             'externalId' => [
@@ -302,7 +303,7 @@ class Filter implements RulesInterface, ExclusionInterface
                 'name' => 'sequenceNumber',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'sequenceNumber')
+                    new ArrayOfIntegersValidator($integerValidator, 'sequenceNumber')
                 ]
             ],
             'dispatchDateFrom' => [
@@ -397,6 +398,13 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new Date(['format' => StdlibDateTime::FORMAT])
                 ]
+            ],
+            'supplierId' => [
+                'name'       => 'supplierId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator($integerValidator, 'supplierId')
+                ],
             ],
         ];
     }

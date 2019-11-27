@@ -15,6 +15,7 @@ class Filter implements RulesInterface
 
     public function getRules()
     {
+        $integerValidator = new IntegerValidator();
         return [
             'limit' => $this->getLimitValidation(),
             'page' => $this->getPageValidation(),
@@ -22,7 +23,7 @@ class Filter implements RulesInterface
                 'name'       => 'id',
                 'required'   => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                    new ArrayOfIntegersValidator($integerValidator, 'id')
                 ],
             ],
             'orderIds' => [
@@ -64,7 +65,7 @@ class Filter implements RulesInterface
                 'name' => 'organisationUnitId',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                    new ArrayOfIntegersValidator($integerValidator, 'organisationUnitId')
                 ]
             ],
             'cgCreationDateFrom' => [
@@ -139,7 +140,14 @@ class Filter implements RulesInterface
                 'validators' => [
                     new BooleanValidator(['name' => 'dispatchable'])
                 ]
-            ]
+            ],
+            'supplierId' => [
+                'name'       => 'supplierId',
+                'required'   => false,
+                'validators' => [
+                    new ArrayOfIntegersValidator($integerValidator, 'supplierId')
+                ],
+            ],
         ];
     }
 }

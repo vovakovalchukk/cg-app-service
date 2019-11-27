@@ -131,6 +131,8 @@ return [
                 'Versioniser_OrderItemEntity_10' => OrderItemEntity\Versioniser10::class,
                 'Versioniser_OrderItemCollection_11' => OrderItemCollection\Versioniser11::class,
                 'Versioniser_OrderItemEntity_11' => OrderItemEntity\Versioniser11::class,
+                'Versioniser_OrderItemCollection_12' => OrderItemCollection\Versioniser12::class,
+                'Versioniser_OrderItemEntity_12' => OrderItemEntity\Versioniser12::class,
                 'Versioniser_OrderLabelCollection_1' => OrderLabelCollection\Versioniser1::class,
                 'Versioniser_OrderLabelEntity_1' => OrderLabelEntity\Versioniser1::class,
                 'Versioniser_OrderLabelCollection_2' => OrderLabelCollection\Versioniser2::class,
