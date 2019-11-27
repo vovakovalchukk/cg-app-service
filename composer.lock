@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c50454ab44066c73a8e1a647dbcce80a",
+    "content-hash": "44d2635cbca4eb3cb014289b011db410",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2297,16 +2297,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.18.3",
+            "version": "dev-TAC-564-supplier-on-order-items",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "31f1f26941f88c8a4cc1cfb97ae8a116339d7294"
+                "reference": "000b1f0a0ca2647e72b71eae9eb0ce1b567b52ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.18.3-a0995b.zip",
-                "reference": "31f1f26941f88c8a4cc1cfb97ae8a116339d7294"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-TAC-564-supplier-on-order-items-740fdf.zip",
+                "reference": "000b1f0a0ca2647e72b71eae9eb0ce1b567b52ce"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2360,7 +2360,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2019-10-31T14:48:16+00:00"
+            "time": "2019-11-27T13:31:30+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11938,12 +11938,19 @@
             "alias_normalized": "1.47.16.0",
             "version": "dev-TAC-564-supplier-on-order-items",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.18.4",
+            "alias_normalized": "1.18.4.0",
+            "version": "dev-TAC-564-supplier-on-order-items",
+            "package": "channelgrabber/product"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },

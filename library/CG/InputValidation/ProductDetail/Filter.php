@@ -13,6 +13,7 @@ class Filter implements RulesInterface
 
     public function getRules()
     {
+        $integerValidator = new IntegerValidator();
         return array_merge(
             $this->getPaginationValidation(),
             [
@@ -20,14 +21,14 @@ class Filter implements RulesInterface
                     'name'       => 'id',
                     'required'   => false,
                     'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                        new ArrayOfIntegersValidator($integerValidator, 'id')
                     ]
                 ],
                 'organisationUnitId' => [
                     'name'       => 'organisationUnitId',
                     'required'   => false,
                     'validators' => [
-                        new ArrayOfIntegersValidator(new IntegerValidator(), 'organisationUnitId')
+                        new ArrayOfIntegersValidator($integerValidator, 'organisationUnitId')
                     ]
                 ],
                 'sku' => [
@@ -60,7 +61,7 @@ class Filter implements RulesInterface
                 'categoryTemplateId' => [
                     'name' => 'categoryTemplateId',
                     'required' => false,
-                    'validators' => [new ArrayOfIntegersValidator(new IntegerValidator(), 'categoryTemplateId')]
+                    'validators' => [new ArrayOfIntegersValidator($integerValidator, 'categoryTemplateId')]
                 ],
                 'upc' => [
                     'name'=> 'upc',
@@ -76,6 +77,11 @@ class Filter implements RulesInterface
                     'name'=> 'isbn',
                     'required'=> false,
                     'validators'=> [new IsArrayValidator(['name' => 'gtin'])]
+                ],
+                'supplierId' => [
+                    'name' => 'supplierId',
+                    'required' => false,
+                    'validators' => [new ArrayOfIntegersValidator($integerValidator, 'supplierId')]
                 ],
             ]
         );
