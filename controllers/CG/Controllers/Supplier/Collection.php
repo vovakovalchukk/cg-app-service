@@ -2,7 +2,7 @@
 namespace CG\Controllers\Supplier;
 
 use CG\Supplier\Filter;
-use CG\Supplier\Service;
+use CG\Supplier\RestService as Service;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;

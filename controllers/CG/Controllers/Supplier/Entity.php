@@ -1,7 +1,7 @@
 <?php
 namespace CG\Controllers\Supplier;
 
-use CG\Supplier\Service;
+use CG\Supplier\RestService as Service;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
