@@ -156,23 +156,14 @@ class Db extends DbAbstract implements StorageInterface
     /**
      * @param Entity $entity
      */
-    protected function insertEntity($entity)
+    public function save($entity)
     {
-        parent::insertEntity($entity);
-        $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
-        $this->insertAssociatedListingExternalIds($entity, $entity->getSkuExternalIdMap());
-    }
-
-    /**
-     * @param Entity $entity
-     */
-    protected function updateEntity($entity)
-    {
-        parent::updateEntity($entity);
+        parent::save($entity);
         $this->deleteAssociatedProductInformation($entity);
         $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
         $this->deleteAssociatedListingExternalIds($entity);
         $this->insertAssociatedListingExternalIds($entity, $entity->getSkuExternalIdMap());
+        return $entity;
     }
 
     /**
