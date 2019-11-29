@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d2d0b8cea90e78b90b6f9bef6add8e6",
+    "content-hash": "a6a9ea846399b7c2fe266bcd2d1ed31b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2008,7 +2008,7 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-10676-some-orders-missing-weight",
+            "version": "1.47.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
@@ -2016,7 +2016,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-10676-some-orders-missing-weight-7db285.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.47.19-7db285.zip",
                 "reference": "76515acbb7028b929fb8e1618679d43d1b885f8c",
                 "shasum": null
             },
@@ -12016,18 +12016,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.47.19",
-            "alias_normalized": "1.47.19.0",
-            "version": "dev-CGIV-10676-some-orders-missing-weight",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
