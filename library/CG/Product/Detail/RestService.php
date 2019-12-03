@@ -71,10 +71,23 @@ class RestService extends Service
             if ($previousEntity === null || $previousEntity->getWeight() !== $entity->getWeight()) {
                 $this->calculateOrderWeightForSkuGearmanJobGenerator->generateJobForProductDetail($entity);
             }
-            if (($previousEntity === null && $entity->getSupplierId() != null) || $previousEntity->getSupplierId() != $entity->getSupplierId()) {
+            if ($this->shouldUpdateItemsSupplier($entity, $previousEntity)) {
                 ($this->updateItemsSupplierGearmanJobGenerator)($entity->getOrganisationUnitId(), $entity->getSku(), $entity->getSupplierId());
             }
         }
+    }
+
+    protected function shouldUpdateItemsSupplier(ProductDetail $entity, ?ProductDetail $previousEntity = null): bool
+    {
+        // New entity with a supplier set
+        if ($previousEntity === null && $entity->getSupplierId() != null) {
+            return true;
+        }
+        // Existing entity with supplier changed
+        if ($previousEntity && $previousEntity->getSupplierId() != $entity->getSupplierId()) {
+            return true;
+        }
+        return false;
     }
 
     public function remove(ProductDetail $entity)
