@@ -343,7 +343,7 @@ return [
         'via' => ['PUT', 'OPTIONS'],
         'name' => 'OrderItemImages',
         'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 12),
+        'version' => new Version(1, 13),
         'eTag' => [
             'mapperClass' => ItemMapper::class,
             'entityClass' => ItemEntity::class,
