@@ -142,7 +142,16 @@ class Entity implements RulesInterface
                 'name'       => 'dispatchable',
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'dispatchable'])]
-            ]
+            ],
+            'supplierId' => [
+                'name'       => 'supplierId',
+                'required'   => false,
+                'validators' => [
+                    new IntegerValidator(['name' => 'supplierId']),
+                    (new GreaterThan(['min' => 1, 'inclusive' => true]))
+                        ->setMessages(['notGreaterThanInclusive' => 'supplierId must be at least %min%'])
+                ]
+            ],
         ];
     }
 }

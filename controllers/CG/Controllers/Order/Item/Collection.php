@@ -45,7 +45,9 @@ class Collection
             $this->getParams('lastUpdateFromChannelTo'),
             $this->getParams('externalListingId') ?: [],
             $this->getParams('hasImages'),
-            $this->getParams('orderArchived')
+            $this->getParams('orderArchived'),
+            $this->getParams('dispatchable'),
+            $this->getParams('supplierId') ?? []
         );
     }
 
