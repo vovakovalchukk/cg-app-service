@@ -304,7 +304,7 @@ return [
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderItemCollection',
         'validation' => ['dataRules' => null, 'filterRules' => ItemFilterValidationRules::class, 'flatten' => false],
-        'version' => new Version(1, 12),
+        'version' => new Version(1, 13),
         'entityRoute' => '/orderItem/:orderItemId'
     ],
     '/orderItem/:orderItemId' => [
@@ -321,7 +321,7 @@ return [
         'via' => ['GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH'],
         'name' => 'OrderItemEntity',
         'validation' => ['dataRules' => ItemEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 12),
+        'version' => new Version(1, 13),
         //Updating this requires an update to /orderItem/:orderItemId/images route also (Line 346)
         'eTag' => [
             'mapperClass' => ItemMapper::class,
@@ -343,7 +343,7 @@ return [
         'via' => ['PUT', 'OPTIONS'],
         'name' => 'OrderItemImages',
         'validation' => ['dataRules' => ItemImagesValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 12),
+        'version' => new Version(1, 13),
         'eTag' => [
             'mapperClass' => ItemMapper::class,
             'entityClass' => ItemEntity::class,

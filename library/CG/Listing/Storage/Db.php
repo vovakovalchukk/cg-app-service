@@ -152,18 +152,26 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getSelect(static::TABLE_LISTING_EXTERNAL_ID_MAP)->where(['listingId' => $listingIds]);
         return $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
     }
+    /**
+     * @param Entity $entity
+     */
+    protected function insertEntity($entity)
+    {
+        parent::insertEntity($entity);
+        $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
+        $this->insertAssociatedListingExternalIds($entity, $entity->getSkuExternalIdMap());
+    }
 
     /**
      * @param Entity $entity
      */
-    public function save($entity)
+    protected function updateEntity($entity)
     {
-        parent::save($entity);
+        parent::updateEntity($entity);
         $this->deleteAssociatedProductInformation($entity);
         $this->insertAssociatedProductInformation($entity, $entity->getProductIds(), $entity->getProductSkus());
         $this->deleteAssociatedListingExternalIds($entity);
         $this->insertAssociatedListingExternalIds($entity, $entity->getSkuExternalIdMap());
-        return $entity;
     }
 
     /**
