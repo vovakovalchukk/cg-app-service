@@ -12,7 +12,7 @@ use Zend\Db\Sql\Predicate\Operator;
 
 class Db extends DbAbstract implements MetaDataInterface
 {
-    protected const LOG_CODE = 'LabelMetaDataDb';
+    protected const LOG_CODE = 'LabelMetaDataDbStorage';
 
     public function fetch($id)
     {
