@@ -12,6 +12,8 @@ use Zend\Db\Sql\Predicate\Operator;
 
 class Db extends DbAbstract implements MetaDataInterface
 {
+    protected const LOG_CODE = 'LabelMetaDataDb';
+
     public function fetch($id)
     {
         $entity = parent::fetch($id);
@@ -127,16 +129,20 @@ class Db extends DbAbstract implements MetaDataInterface
 
     public function remove($entity)
     {
+        $this->logDebug('About to remove orderLabel entity data in %s', [__METHOD__], static::LOG_CODE);
         parent::remove($entity);
         $this->removeParcels($entity);
+        $this->logDebug('Completed removing orderLabel entity data in %s', [__METHOD__], static::LOG_CODE);
     }
 
     protected function removeParcels($entity)
     {
+        $this->logDebug('About to remove orderLabelParcel entity data in %s', [__METHOD__], static::LOG_CODE);
         $delete = $this->getWriteSql()->delete('orderLabelParcel')->where([
             'orderLabelId' => $entity->getId()
         ]);
         $this->getWriteSql()->prepareStatementForSqlObject($delete)->execute();
+        $this->logDebug('Completed removing orderLabelParcel entity data in %s', [__METHOD__], static::LOG_CODE);
     }
 
     protected function updateEntity($entity)
