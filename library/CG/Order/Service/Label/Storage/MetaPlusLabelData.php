@@ -7,9 +7,15 @@ use CG\Order\Shared\Label\Collection;
 use CG\Order\Shared\Label\Entity;
 use CG\Order\Shared\Label\Filter;
 use CG\Order\Shared\Label\StorageInterface;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 
-class MetaPlusLabelData implements StorageInterface
+class MetaPlusLabelData implements StorageInterface, LoggerAwareInterface
 {
+    use LogTrait;
+
+    protected const LOG_CODE = 'MetaPlusLabelDataStorage';
+
     /** @var MetaDataInterface */
     protected $metaDataStorage;
     /** @var LabelDataInterface */
@@ -49,8 +55,10 @@ class MetaPlusLabelData implements StorageInterface
 
     public function remove($entity)
     {
+        $this->logDebug('About to remove orderLabel entity data in %s', [__METHOD__], static::LOG_CODE);
         $this->metaDataStorage->remove($entity);
         $this->labelDataStorage->remove($entity);
+        $this->logDebug('Completed removing orderLabel entity data in %s', [__METHOD__], static::LOG_CODE);
         return $this;
     }
 

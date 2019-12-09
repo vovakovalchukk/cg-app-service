@@ -6,11 +6,16 @@ use CG\Order\Service\Label\Storage\LabelDataInterface;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use Predis\Client as PredisClient;
 
-class S3 implements LabelDataInterface, StatsAwareInterface
+class S3 implements LabelDataInterface, StatsAwareInterface, LoggerAwareInterface
 {
     use StatsTrait;
+    use LogTrait;
+
+    protected const LOG_CODE = 'LabelDataS3Storage';
 
     const BUCKET = 'orderhub-labeldata';
     const TYPE_DOCUMENT = 'label';
@@ -85,8 +90,10 @@ class S3 implements LabelDataInterface, StatsAwareInterface
 
     public function remove($entity)
     {
+        $this->logDebug('About to remove orderLabelDocument entity data in %s', [__METHOD__], static::LOG_CODE);
         $this->removeDocument($entity->getId(), $entity->getOrganisationUnitId());
         $this->removeImage($entity->getId(), $entity->getOrganisationUnitId());
+        $this->logDebug('Completed removing orderLabelDocument entity data in %s', [__METHOD__], static::LOG_CODE);
         return $this;
     }
 
