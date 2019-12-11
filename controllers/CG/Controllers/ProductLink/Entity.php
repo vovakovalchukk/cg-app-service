@@ -6,13 +6,16 @@ use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
 use CG\Slim\ControllerTrait;
+use Nocarrier\Hal;
 use Slim\Slim;
 
 class Entity
 {
     use ControllerTrait;
     use GetTrait;
-    use PutTrait;
+    use PutTrait {
+        put as putTrait;
+    }
     use DeleteTrait;
 
     /** @var Slim $slim */
@@ -24,6 +27,15 @@ class Entity
     {
         $this->slim = $slim;
         $this->service = $service;
+    }
+
+    public function put($id, Hal $hal)
+    {
+        try {
+            $this->putTrait($id, $hal);
+        } catch (\Throwable $exception) {
+            
+        }
     }
 
     /**
