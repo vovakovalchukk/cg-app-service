@@ -6,10 +6,12 @@ use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;
 use CG\Slim\ControllerTrait;
+use CG\Stdlib\Log\LoggerAwareInterface;
+use CG\Stdlib\Log\LogTrait;
 use Nocarrier\Hal;
 use Slim\Slim;
 
-class Entity
+class Entity implements LoggerAwareInterface
 {
     use ControllerTrait;
     use GetTrait;
@@ -17,6 +19,9 @@ class Entity
         put as putTrait;
     }
     use DeleteTrait;
+    use LogTrait;
+
+    protected const LOG_CODE = 'ProductLinkController';
 
     /** @var Slim $slim */
     protected $slim;
@@ -34,7 +39,8 @@ class Entity
         try {
             $this->putTrait($id, $hal);
         } catch (\Throwable $exception) {
-            
+            $this->logDebugException($exception, 'Logging ProductLink PUT request exception', [], static::LOG_CODE);
+            throw $exception;
         }
     }
 
