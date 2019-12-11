@@ -16,7 +16,7 @@ class Entity implements LoggerAwareInterface
     use ControllerTrait;
     use GetTrait;
     use PutTrait {
-        put as putTrait;
+        put as protected putTrait;
     }
     use DeleteTrait;
     use LogTrait;
@@ -37,7 +37,7 @@ class Entity implements LoggerAwareInterface
     public function put($id, Hal $hal)
     {
         try {
-            $this->putTrait($id, $hal);
+            return $this->putTrait($id, $hal);
         } catch (\Throwable $exception) {
             $this->logDebugException($exception, 'Logging ProductLink PUT request exception', [], static::LOG_CODE);
             throw $exception;
