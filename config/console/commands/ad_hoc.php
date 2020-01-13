@@ -1,4 +1,5 @@
 <?php
+
 use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
@@ -18,9 +19,15 @@ use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Settings\InvoiceMapping\Entity as InvoiceMapping;
+use CG\Settings\InvoiceMapping\Filter as InvoiceMappingFilter;
+use CG\Settings\InvoiceMapping\Service as InvoiceMappingService;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
+use CG\Template\Element\Text as TextElement;
+use CG\Template\Entity as Template;
+use CG\Template\Filter as TemplateFilter;
 use CG\Template\Mapper as TemplateMapper;
 use CG\Template\Service as TemplateService;
 use Predis\Client as Redis;
@@ -579,5 +586,62 @@ SQL;
             $output->writeln(sprintf('Updated %d parent categories', $count));
         },
         'description' => 'Setting version to all latest Amazon categories',
+    ],
+    'adhoc:convertTemplateTagsFromPercentToBraceStyle' => [
+        'description' => 'Updates Templates to replace old percent-style tag delimiters with new brace-style ones',
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            $output->writeln('Processing Templates');
+            /** @var TemplateService $templateService */
+            $templateService = $di->get(TemplateService::class);
+            $limit = 300;
+            $page = 0;
+            do {
+                $templates = $templateService->fetchCollectionByFilter(
+                    (new TemplateFilter($limit, ++$page))
+                );
+                /** @var Template $template */
+                foreach ($templates as $template) {
+                    $updated = false;
+                    foreach ($template->getElements() as $element) {
+                        if (!$element instanceof TextElement || !strstr($element->getText(), '%%')) {
+                            continue;
+                        }
+                        $replacedText = preg_replace('/%%\s?([a-zA-Z0-9\.\-]+)\s?%%/','{{$1}}', $element->getText());
+                        $element->setText($replacedText);
+                        $updated = true;
+                    }
+                    if (!$updated) {
+                        continue;
+                    }
+                    $templateService->save($template);
+                    $output->writeln('  Updated Template ' . $template->getId());
+                }
+            } while ($page*$limit <= $templates->getTotal());
+
+            $output->writeln('Processing email templates (InvoiceMappings)');
+            /** @var InvoiceMappingService $invoiceMappingService */
+            $invoiceMappingService = $di->get(InvoiceMappingService::class);
+            $limit = 300;
+            $page = 0;
+            do {
+                $invoiceMappings = $invoiceMappingService->fetchCollectionByFilter(
+                    (new InvoiceMappingFilter($limit, ++$page))
+                );
+                /** @var InvoiceMapping $invoiceMapping */
+                foreach ($invoiceMappings as $invoiceMapping) {
+                    if (!strstr($invoiceMapping->getEmailSubject(), '%%') && !strstr($invoiceMapping->getEmailTemplate(), '%%')) {
+                        continue;
+                    }
+                    $replacedSubject = preg_replace('/%%\s?([a-zA-Z0-9\.\-]+)\s?%%/','{{$1}}', $invoiceMapping->getEmailSubject());
+                    $replacedTemplate = preg_replace('/%%\s?([a-zA-Z0-9\.\-]+)\s?%%/','{{$1}}', $invoiceMapping->getEmailTemplate());
+                    $invoiceMapping->setEmailSubject($replacedSubject)->setEmailTemplate($replacedTemplate);
+                    $invoiceMappingService->save($invoiceMapping);
+                    $output->writeln('  Updated InvoiceMapping ' . $invoiceMapping->getId());
+                }
+            } while ($page*$limit <= $invoiceMappings->getTotal());
+
+        },
+        'arguments' => [],
+        'options' => [],
     ]
 ];
