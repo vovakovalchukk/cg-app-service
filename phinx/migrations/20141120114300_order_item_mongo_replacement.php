@@ -1,12 +1,17 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderItemMongoReplacement extends AbstractMigration
+class OrderItemMongoReplacement extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'item';
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'phinx:migrateMongoOrderItemDataToMysql';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderLinkable extends AbstractOnlineSchemaChange
+class OrderLinkable extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     protected $tables = ['order', 'orderLive'];
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

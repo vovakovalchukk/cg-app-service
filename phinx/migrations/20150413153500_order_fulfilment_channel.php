@@ -1,9 +1,15 @@
 <?php
-use Phinx\Migration\AbstractMigration;
 use CG\Order\Shared\Entity as Order;
+use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderFulfilmentChannel extends AbstractMigration
+class OrderFulfilmentChannel extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         foreach(["order", "orderLive"] as $table) {

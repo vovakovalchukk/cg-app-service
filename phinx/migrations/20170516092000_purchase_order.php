@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Table\ForeignKey;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class PurchaseOrder extends AbstractMigration
+class PurchaseOrder extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $table = $this->table('purchaseOrder');

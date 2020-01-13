@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderInvoiceNumberTable extends AbstractMigration
+class OrderInvoiceNumberTable extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'orderInvoice';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

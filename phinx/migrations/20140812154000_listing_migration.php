@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingMigration extends AbstractMigration
+class ListingMigration extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     public function change()
     {
         $table = $this->table('listing', ['collation' => 'utf8_general_ci']);

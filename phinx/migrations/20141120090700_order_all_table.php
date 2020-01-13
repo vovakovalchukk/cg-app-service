@@ -1,13 +1,18 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderAllTable extends AbstractMigration
+class OrderAllTable extends AbstractMigration implements EnvironmentAwareInterface
 {
     const OLD_TABLE_NAME = 'order';
     const TABLE_NAME = 'orderLive';
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'phinx:migrateMongoOrderDataToMysql';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

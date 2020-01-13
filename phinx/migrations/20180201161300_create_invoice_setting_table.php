@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter as Adapter;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class CreateInvoiceSettingTable extends AbstractMigration
+class CreateInvoiceSettingTable extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $this->table('invoiceSetting', ['collation' => 'utf8_general_ci'])

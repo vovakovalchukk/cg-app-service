@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ConvertEbayOrderIds extends AbstractMigration
+class ConvertEbayOrderIds extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $this->execute($this->getOrdersUpdateSql('CONCAT_WS("-", o.accountId, e.ebayOrderId)'));

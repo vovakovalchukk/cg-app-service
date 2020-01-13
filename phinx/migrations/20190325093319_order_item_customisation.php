@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderItemCustomisation extends AbstractOnlineSchemaChange
+class OrderItemCustomisation extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     const TABLE = 'item';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

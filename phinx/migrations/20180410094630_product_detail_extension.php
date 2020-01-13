@@ -1,9 +1,15 @@
 <?php
 use Phinx\Db\Table\ForeignKey;
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductDetailExtension extends AbstractOnlineSchemaChange
+class ProductDetailExtension extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

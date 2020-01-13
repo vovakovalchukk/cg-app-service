@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderApiMigration extends AbstractMigration
+class OrderApiMigration extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

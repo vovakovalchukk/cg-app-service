@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductWeightReduceDp extends AbstractMigration
+class ProductWeightReduceDp extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_MODIFY = 'productDetail';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class MultipleTaxRatesPerOu extends AbstractMigration
+class MultipleTaxRatesPerOu extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_MODIFY = 'product';
     const TABLE_NEW = 'productTaxRate';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

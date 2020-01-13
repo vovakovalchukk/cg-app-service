@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class CategoryExternalData extends AbstractMigration
+class CategoryExternalData extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'categoryExternal';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function change()
     {

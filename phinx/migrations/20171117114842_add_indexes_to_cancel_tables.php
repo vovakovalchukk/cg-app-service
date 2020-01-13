@@ -1,11 +1,16 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AddIndexesToCancelTables extends AbstractMigration
+class AddIndexesToCancelTables extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_CANCEL = 'cancel';
     const TABLE_CANCEL_ITEM = 'cancelItem';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

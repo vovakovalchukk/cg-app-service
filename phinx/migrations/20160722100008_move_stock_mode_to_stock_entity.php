@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class MoveStockModeToStockEntity extends AbstractMigration
+class MoveStockModeToStockEntity extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_PRODUCT = 'product';
     const TABLE_STOCK = 'stock';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

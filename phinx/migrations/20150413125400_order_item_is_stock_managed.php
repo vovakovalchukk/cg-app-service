@@ -1,11 +1,16 @@
 <?php
-use Phinx\Migration\AbstractMigration;
-
 use CG\Order\Shared\Item\Entity as Item;
+use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderItemIsStockManaged extends AbstractMigration
+class OrderItemIsStockManaged extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'item';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function change()
     {

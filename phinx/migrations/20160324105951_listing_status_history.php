@@ -1,11 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
-
 use Phinx\Db\Adapter\MysqlAdapter;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingStatusHistory extends AbstractMigration
+class ListingStatusHistory extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'listingStatusHistory';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
 
     public function change()
     {

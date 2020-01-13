@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductChannelEbayVariationToEpid extends AbstractMigration
+class ProductChannelEbayVariationToEpid extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         // The existing data is not compatible with the new data structure so it might result in unwanted conflicts

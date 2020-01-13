@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AmazonShippingService extends AbstractMigration
+class AmazonShippingService extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'amazon.shippingService';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function change()
     {

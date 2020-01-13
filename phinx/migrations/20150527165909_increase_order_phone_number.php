@@ -1,11 +1,16 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class IncreaseOrderPhoneNumber extends AbstractMigration
+class IncreaseOrderPhoneNumber extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'address';
     const COLUMN_NAME = 'phoneNumber';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

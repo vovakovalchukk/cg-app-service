@@ -1,9 +1,13 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AddDispatchableColumnToOrderLive extends AbstractOnlineSchemaChange
+class AddDispatchableColumnToOrderLive extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

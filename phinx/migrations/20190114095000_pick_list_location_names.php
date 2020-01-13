@@ -2,9 +2,15 @@
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Db\Table\ForeignKey;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class PickListLocationNames extends AbstractMigration
+class PickListLocationNames extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $this
