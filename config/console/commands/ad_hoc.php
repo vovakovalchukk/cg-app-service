@@ -15,9 +15,12 @@ use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Order\Shared\Item\Filter as ItemFilter;
 use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
+use CG\Product\Detail\Filter as ProductDetailFilter;
+use CG\Product\Detail\Service as ProductDetailService;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
 use CG\Settings\Invoice\Shared\Filter as InvoiceSettingsFilter;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
+use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stock\Adjustment as StockAdjustment;
 use CG\Stock\Command\Adjustment as StockAdjustmentCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
@@ -32,6 +35,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Di\Di;
+use CG\ETag\Exception\NotModified as ETagNotModified;
+use CG\Http\Exception\Exception3xx\NotModified as HttpNotModified;
 
 /** @var Di $di */
 return [
@@ -579,5 +584,45 @@ SQL;
             $output->writeln(sprintf('Updated %d parent categories', $count));
         },
         'description' => 'Setting version to all latest Amazon categories',
+    ],
+    'adhoc:removeTrailingSpaceFromDetailProductSku' => [
+        'description' => 'Removes trailing spaces from sku in Product Detail Entity',
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+
+            /** @var $productDetailService \CG\Product\Detail\Service */
+            $productDetailService = $di->newInstance(ProductDetailService::class);
+
+            $page = 1;
+
+            $filter = new ProductDetailFilter(100);
+
+            while (true) {
+                $output->writeln('<bg=blue>Page '.$page.'</>');
+                $filter->setPage($page);
+
+                try {
+                    $productDetails = $productDetailService->fetchCollectionByFilter($filter);
+                } catch (NotFound $exception) {
+                    $output->writeln($exception->getMessage());
+                    break;
+                }
+
+                /* @var $productDetail \CG\Product\Detail\Entity */
+                foreach ($productDetails as $productDetail) {
+                    $output->writeln('Updating ' . $productDetail->getSku() . ' ('.$productDetail->getId().')');
+                    try {
+                        // SKUs are now trimmed on mapping so we can simply save the ProductDetail back
+                        $productDetailService->save($productDetail);
+                    } catch (ETagNotModified | HttpNotModified $exception) {
+                        $output->writeln('<fg=yellow>'.$exception->getMessage().'</>');
+                    }
+                }
+                $page++;
+            }
+
+            $output->writeln('<fg=green>COMPLETED</>');
+        },
+        'arguments' => [],
+        'options' => [],
     ]
 ];
