@@ -2,7 +2,9 @@
 use CG\Cache\InvalidationHandler;
 use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu;
 use CG\Db\Mysqli;
+use CG\ETag\Exception\NotModified as ETagNotModified;
 use CG\Gearman\Client as GearmanClient;
+use CG\Http\Exception\Exception3xx\NotModified as HttpNotModified;
 use CG\Order\Client\Gearman\Generator\UpdateExchangeRate;
 use CG\Order\Client\Gearman\WorkerFunction\SetInvoiceByOU as WorkerFunction;
 use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerFunction;
@@ -35,8 +37,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Di\Di;
-use CG\ETag\Exception\NotModified as ETagNotModified;
-use CG\Http\Exception\Exception3xx\NotModified as HttpNotModified;
 
 /** @var Di $di */
 return [
