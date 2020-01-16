@@ -11,7 +11,7 @@ class OrderItemRefund extends AbstractMigration
             ->addColumn('organisationUnitId', 'integer', ['null' => false])
             ->addColumn('itemId', 'string', ['null' => false])
             ->addColumn('amount', 'decimal', ['precision' => 12, 'scale' => 4, 'null' => false])
-            ->addIndex('organisationUnitId')
+            ->addIndex(['organisationUnitId', 'itemId'])
             ->addIndex('itemId')
             ->create();
     }
