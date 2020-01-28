@@ -869,7 +869,8 @@ $config = array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteCGSql',
-                    'mapper' => LabelMapper::class
+                    'mapper' => LabelMapper::class,
+                    'debugQueries' => true,
                 ]
             ],
             S3LabelDataAdapter::class => [
