@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9aee49955c511077c0f0aa343b48492d",
+    "content-hash": "bc061380be612c7b473a36eb0b7ccf95",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2894,16 +2894,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "2.16.12",
+            "version": "dev-CGIV-11120-MissingOrderLabels",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "58e3b30ea80ed58d5ae01e4266e5a2c5135db9d0"
+                "reference": "681d0669c211080a147cfc517a789d8919c06f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.12-8ec875.zip",
-                "reference": "58e3b30ea80ed58d5ae01e4266e5a2c5135db9d0"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-dev-CGIV-11120-MissingOrderLabels-1a17de.zip",
+                "reference": "681d0669c211080a147cfc517a789d8919c06f1b"
             },
             "require": {
                 "php": ">=7.1",
@@ -2947,7 +2947,7 @@
                     "CG\\Stdlib\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2020-01-28T12:21:35+00:00"
+            "time": "2020-01-29T12:18:26+00:00"
         },
         {
             "name": "channelgrabber/stock",
@@ -11503,10 +11503,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.16.13",
+            "alias_normalized": "2.16.13.0",
+            "version": "dev-CGIV-11120-MissingOrderLabels",
+            "package": "channelgrabber/stdlib"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/stdlib": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
