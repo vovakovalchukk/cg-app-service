@@ -181,8 +181,10 @@ return [
                 'Versioniser_ProductEntity_10' => ProductEntity\Versioniser10::class,
                 'Versioniser_ProductSettingsCollection_1' => ProductSettingsCollection\Versioniser1::class,
                 'Versioniser_ProductSettingsCollection_2' => ProductSettingsCollection\Versioniser2::class,
+                'Versioniser_ProductSettingsCollection_3' => ProductSettingsCollection\Versioniser3::class,
                 'Versioniser_ProductSettingsEntity_1' => ProductSettingsEntity\Versioniser1::class,
                 'Versioniser_ProductSettingsEntity_2' => ProductSettingsEntity\Versioniser2::class,
+                'Versioniser_ProductSettingsEntity_3' => ProductSettingsEntity\Versioniser3::class,
                 'Versioniser_AliasSettingsCollection_1' => AliasSettingsCollection\Versioniser1::class,
                 'Versioniser_AliasSettingsEntity_1' => AliasSettingsEntity\Versioniser1::class,
                 'Versioniser_AliasSettingsCollection_2' => AliasSettingsCollection\Versioniser2::class,
@@ -227,9 +229,11 @@ return [
                 'Versioniser_StockCollection_1' => StockCollection\Versioniser::class,
                 'Versioniser_StockCollection_2' => StockCollection\Versioniser2::class,
                 'Versioniser_StockCollection_3' => StockCollection\Versioniser3::class,
+                'Versioniser_StockCollection_4' => StockCollection\Versioniser4::class,
                 'Versioniser_StockEntity_1' => StockEntity\Versioniser1::class,
                 'Versioniser_StockEntity_2' => StockEntity\Versioniser2::class,
                 'Versioniser_StockEntity_3' => StockEntity\Versioniser3::class,
+                'Versioniser_StockEntity_4' => StockEntity\Versioniser4::class,
                 'Versioniser_UnimportedListingMarketplace_1' => UnimportedListingMarketplace\Versioniser1::class,
                 'Versioniser_CategoryCollection_1' => CategoryCollection\Versioniser1::class,
                 'Versioniser_CategoryEntity_1' => CategoryEntity\Versioniser1::class,
@@ -474,6 +478,11 @@ return [
                     'entityVersioner' => 'Versioniser_ProductSettingsEntity_2'
                 ],
             ],
+            'Versioniser_ProductSettingsCollection_3' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductSettingsEntity_3'
+                ],
+            ],
             'Versioniser_AliasSettingsCollection_1' => [
                 'parameter' => [
                     'aliasVersioniser1' => 'Versioniser_AliasSettingsEntity_1'
@@ -537,6 +546,16 @@ return [
             'Versioniser_StockCollection_2' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_StockEntity_2',
+                ],
+            ],
+            'Versioniser_StockCollection_3' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_StockEntity_3',
+                ],
+            ],
+            'Versioniser_StockCollection_4' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_StockEntity_4',
                 ],
             ],
             'Versioniser_InvoiceMappingCollection_1' => [
