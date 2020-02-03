@@ -33,12 +33,12 @@ class Entity implements RulesInterface
             ),
             'number' => array(
                 'name'       => 'number',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [new StringLength(['min' => 1])]
             ),
             'carrier' => array(
                 'name'       => 'carrier',
-                'required'   => true,
+                'required'   => false,
                 'validators' => []
             ),
             'organisationUnitId' => array(
