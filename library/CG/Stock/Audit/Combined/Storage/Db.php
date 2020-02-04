@@ -272,7 +272,7 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function getListingUrlSelect(array $listingIds): Select
     {
-        return $this->listingReadSql->select('listing')->columns(['id', 'listingUrl'])->where(['id' => $listingIds]);
+        return $this->listingReadSql->select('listing')->columns(['id', 'listingUrl' => 'url'])->where(['id' => $listingIds]);
     }
 
     public function getEntityClass()
