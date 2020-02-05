@@ -1,9 +1,15 @@
 <?php
 
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AddReorderQuantity extends AbstractOnlineSchemaChange
+class AddReorderQuantity extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $productSettingsAlter = 'ADD COLUMN `reorderQuantity` INT(10) NULL DEFAULT 1';
