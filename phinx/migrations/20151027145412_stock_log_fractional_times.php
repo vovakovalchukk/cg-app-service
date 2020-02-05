@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockLogFractionalTimes extends AbstractMigration
+class StockLogFractionalTimes extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     protected function getTableNames()
     {
         return ['stockLog', 'stockAdjustmentLog'];

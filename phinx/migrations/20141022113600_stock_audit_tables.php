@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockAuditTables extends AbstractMigration
+class StockAuditTables extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $stockAudit = $this->table('stockAudit', ['collation' => 'utf8_general_ci']);

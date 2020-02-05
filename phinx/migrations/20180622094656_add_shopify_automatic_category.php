@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AddShopifyAutomaticCategory extends AbstractMigration
+class AddShopifyAutomaticCategory extends AbstractMigration implements EnvironmentAwareInterface
 {
     const AUTOMATIC_CATEGORY_NAME = 'Automatic/Smart';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

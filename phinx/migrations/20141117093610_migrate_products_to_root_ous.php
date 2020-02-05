@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class MigrateProductsToRootOus extends AbstractMigration
+class MigrateProductsToRootOus extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $products = $this->query('SELECT `id`, `organisationUnitId` FROM `product`;');

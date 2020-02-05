@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class Utf8FourByteColumns extends AbstractOnlineSchemaChange
+class Utf8FourByteColumns extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     protected function getColumnsToUpdate()
     {
         return [

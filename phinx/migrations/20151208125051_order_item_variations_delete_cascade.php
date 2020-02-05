@@ -1,9 +1,15 @@
 <?php
-use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Table\ForeignKey;
+use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderItemVariationsDeleteCascade extends AbstractMigration
+class OrderItemVariationsDeleteCascade extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

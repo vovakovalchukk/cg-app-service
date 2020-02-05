@@ -1,8 +1,14 @@
 <?php
+use Phinx\Migration\EnvironmentAwareInterface;
 use Phinx\Migration\AbstractOnlineSchemaChange;
 
-class OrderMarketplace extends AbstractOnlineSchemaChange
+class OrderMarketplace extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

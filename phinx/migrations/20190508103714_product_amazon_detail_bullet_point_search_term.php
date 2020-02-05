@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductAmazonDetailBulletPointSearchTerm extends AbstractOnlineSchemaChange
+class ProductAmazonDetailBulletPointSearchTerm extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     const TABLE = 'productAmazonDetail';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

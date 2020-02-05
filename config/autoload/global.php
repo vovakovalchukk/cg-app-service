@@ -495,6 +495,9 @@ $config = array(
                 'ReadCGSql' => CGSql::class,
                 'FastReadCGSql' => CGSql::class,
                 'WriteCGSql' => CGSql::class,
+                'listingsReadCGSql' => CGSql::class,
+                'listingsFastReadCGSql' => CGSql::class,
+                'listingsWriteCGSql' => CGSql::class,
                 'amazonReadCGSql' => CGSql::class,
                 'amazonFastReadCGSql' => CGSql::class,
                 'amazonWriteCGSql' => CGSql::class,
@@ -505,21 +508,36 @@ $config = array(
                 'ExchangeRateRepositorySecondary' => ExchangeRateRepository::class,
                 'PersistentApiSettingsRepository' => ApiSettingsRepository::class,
             ),
-            'ReadCGSql' => array(
-                'parameter' => array(
-                    'adapter' => 'Read'
-                )
-            ),
-            'FastReadCGSql' => array(
-                'parameter' => array(
-                    'adapter' => 'FastRead'
-                )
-            ),
-            'WriteCGSql' => array(
-                'parameter' => array(
-                    'adapter' => 'Write'
-                )
-            ),
+            'ReadCGSql' => [
+                'parameter' => [
+                    'adapter' => 'Read',
+                ],
+            ],
+            'FastReadCGSql' => [
+                'parameter' => [
+                    'adapter' => 'FastRead',
+                ],
+            ],
+            'WriteCGSql' => [
+                'parameter' => [
+                    'adapter' => 'Write',
+                ],
+            ],
+            'listingsReadCGSql' => [
+                'parameter' => [
+                    'adapter' => 'listingsRead',
+                ],
+            ],
+            'listingsFastReadCGSql' => [
+                'parameter' => [
+                    'adapter' => 'listingsFastRead',
+                ],
+            ],
+            'listingsWriteCGSql' => [
+                'parameter' => [
+                    'adapter' => 'listingsWrite',
+                ],
+            ],
             InvalidationHandler::class => [
                 'parameters' => [
                     'relationships' => [
@@ -1162,6 +1180,7 @@ $config = array(
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
+                    'listingReadSql' => 'listingsReadSql',
                     'mapper' => StockLogMapper::class
                 ]
             ],
@@ -1200,9 +1219,9 @@ $config = array(
             ],
             ListingDbStorage::class => [
                 'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'readSql' => 'listingsReadSql',
+                    'fastReadSql' => 'listingsFastReadSql',
+                    'writeSql' => 'listingsWriteSql',
                     'mapper' => ListingMapper::class
                 ]
             ],
@@ -1230,9 +1249,9 @@ $config = array(
             ],
             UnimportedListingDbStorage::class => [
                 'parameter' => [
-                    'readSql' => 'ReadCGSql',
-                    'fastReadSql' => 'FastReadCGSql',
-                    'writeSql' => 'WriteCGSql',
+                    'readSql' => 'listingsReadCGSql',
+                    'fastReadSql' => 'listingsFastReadCGSql',
+                    'writeSql' => 'listingsWriteCGSql',
                     'mapper' => UnimportedListingMapper::class
                 ]
             ],
@@ -1457,8 +1476,8 @@ $config = array(
             ],
             UnimportedListingMarketplaceDbStorage::class => [
                 'parameters' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
+                    'readSql' => 'listingsReadSql',
+                    'fastReadSql' => 'listingsFastReadSql',
                 ],
             ],
             ProductettingsRepository::class => [
@@ -1570,9 +1589,9 @@ $config = array(
             ],
             ListingStatusHistoryDbStorage::class => [
                 'parameters' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'readSql' => 'listingsReadSql',
+                    'fastReadSql' => 'listingsFastReadSql',
+                    'writeSql' => 'listingsWriteSql',
                 ],
             ],
             SalesAccountDisable::class => [

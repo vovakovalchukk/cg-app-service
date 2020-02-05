@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockAdjustmentLogArchive extends AbstractMigration
+class StockAdjustmentLogArchive extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     protected function init()
     {
         require_once './config/env.local.php';

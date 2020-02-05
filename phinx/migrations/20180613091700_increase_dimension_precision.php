@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class IncreaseDimensionPrecision extends AbstractOnlineSchemaChange
+class IncreaseDimensionPrecision extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

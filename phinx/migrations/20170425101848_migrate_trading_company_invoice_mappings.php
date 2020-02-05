@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class MigrateTradingCompanyInvoiceMappings extends AbstractMigration
+class MigrateTradingCompanyInvoiceMappings extends AbstractMigration implements EnvironmentAwareInterface
 {
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'phinx:migrateOUInvoiceMappings';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

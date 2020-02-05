@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductCategory extends AbstractMigration
+class ProductCategory extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'category';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function change()
     {

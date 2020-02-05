@@ -1,10 +1,16 @@
 <?php
 use Phinx\Db\Table\ForeignKey;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingStatusHistoryCode extends AbstractMigration
+class ListingStatusHistoryCode extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME = 'listingStatusHistoryCode';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
 
     public function change()
     {

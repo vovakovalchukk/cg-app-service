@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingUniqueKey extends AbstractMigration
+class ListingUniqueKey extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     public function up()
     {
         $this->execute("START TRANSACTION;

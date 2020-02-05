@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afcc3035f2cf15912531b96254b37d15",
+    "content-hash": "ab55909d22a2e194e39781f22429a0df",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -438,7 +438,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-02-04T09:27:17+00:00"
+            "time": "2020-02-04T11:50:58+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -549,7 +549,7 @@
                     "CG\\Billing\\Test\\": "tests"
                 }
             },
-            "time": "2020-02-04T09:42:21+00:00"
+            "time": "2020-02-04T11:51:40+00:00"
         },
         {
             "name": "channelgrabber/cache",
@@ -1155,7 +1155,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2020-02-04T10:38:44+00:00"
+            "time": "2020-02-04T12:02:51+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1216,7 +1216,7 @@
                     "CG\\Ekm\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2020-02-04T10:48:39+00:00"
+            "time": "2020-02-04T10:51:53+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -1385,7 +1385,7 @@
                     "CG\\ExchangeRate\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-04T10:55:55+00:00"
+            "time": "2020-02-04T10:59:02+00:00"
         },
         {
             "name": "channelgrabber/feature-flags",
@@ -2068,20 +2068,19 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.5.2",
+            "version": "0.5.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/phinx.git",
-                "reference": "560febcf8cc704fcd025885ee0b07a0e4b935c69"
+                "reference": "a9b300b71b23523b148961175780a5e1af7e6942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.5.2-ed4619.zip",
-                "reference": "560febcf8cc704fcd025885ee0b07a0e4b935c69"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.5.6-3886f2.zip",
+                "reference": "a9b300b71b23523b148961175780a5e1af7e6942"
             },
             "require": {
                 "php": ">=5.4",
-                "symfony/class-loader": "~2.8|~3.0",
                 "symfony/config": "~2.8|~3.0",
                 "symfony/console": "~2.8|~3.0",
                 "symfony/yaml": "~2.8|~3.0"
@@ -2113,7 +2112,7 @@
                 {
                     "name": "Rob Morgan",
                     "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au",
+                    "homepage": "https://robmorgan.id.au",
                     "role": "Lead Developer"
                 },
                 {
@@ -2132,7 +2131,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2019-07-11T07:59:51+00:00"
+            "time": "2020-02-04T22:15:04+00:00"
         },
         {
             "name": "channelgrabber/predis",
@@ -2371,7 +2370,7 @@
                 "commercial"
             ],
             "description": "Composer library for supporting purchase order code",
-            "time": "2020-02-04T13:22:55+00:00"
+            "time": "2020-02-04T13:26:18+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -3341,7 +3340,7 @@
                     "CG\\UserPreference\\": ""
                 }
             },
-            "time": "2020-02-04T14:05:04+00:00"
+            "time": "2020-02-04T14:06:49+00:00"
         },
         {
             "name": "channelgrabber/validation",
@@ -6534,59 +6533,6 @@
             "time": "2017-04-12T14:07:15+00:00"
         },
         {
-            "name": "symfony/class-loader",
-            "version": "v2.8.20",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/class-loader.git",
-                "reference": "6789dc86c94c5686d90aa416ef63eb911e73fd26"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/class-loader/zipball/6789dc86c94c5686d90aa416ef63eb911e73fd26",
-                "reference": "6789dc86c94c5686d90aa416ef63eb911e73fd26",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "symfony/polyfill-apcu": "~1.1"
-            },
-            "require-dev": {
-                "symfony/finder": "^2.0.5|~3.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\ClassLoader\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony ClassLoader Component",
-            "homepage": "https://symfony.com",
-            "time": "2017-04-12T14:07:15+00:00"
-        },
-        {
             "name": "symfony/config",
             "version": "v2.8.20",
             "source": {
@@ -7026,59 +6972,6 @@
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
             "time": "2017-06-01T20:52:29+00:00"
-        },
-        {
-            "name": "symfony/polyfill-apcu",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-apcu.git",
-                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/5d4474f447403c3348e37b70acc2b95475b7befa",
-                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "apcu",
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2016-11-14T01:06:16+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -11191,6 +11084,59 @@
             "time": "2016-10-03T07:35:21+00:00"
         },
         {
+            "name": "symfony/class-loader",
+            "version": "v2.8.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "6789dc86c94c5686d90aa416ef63eb911e73fd26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/6789dc86c94c5686d90aa416ef63eb911e73fd26",
+                "reference": "6789dc86c94c5686d90aa416ef63eb911e73fd26",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/polyfill-apcu": "~1.1"
+            },
+            "require-dev": {
+                "symfony/finder": "^2.0.5|~3.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-04-12T14:07:15+00:00"
+        },
+        {
             "name": "symfony/dependency-injection",
             "version": "v2.8.20",
             "source": {
@@ -11305,6 +11251,59 @@
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
             "time": "2017-05-01T14:55:58+00:00"
+        },
+        {
+            "name": "symfony/polyfill-apcu",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-apcu.git",
+                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/5d4474f447403c3348e37b70acc2b95475b7befa",
+                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "apcu",
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-11-14T01:06:16+00:00"
         },
         {
             "name": "theseer/tokenizer",
