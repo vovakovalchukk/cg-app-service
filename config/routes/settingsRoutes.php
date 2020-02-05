@@ -296,7 +296,7 @@ return [
         'validation' => [
             'filterRules' => ProductCollectionValidation::class
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
     ],
     '/settings/product/:id' => [
         'controllers' => function($ouId) use ($di) {
@@ -319,7 +319,7 @@ return [
             'entityClass' => ProductEntity::class,
             'serviceClass' => ProductService::class
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
     ],
     '/settings/setupProgress' => [
         'controllers' => function() use ($di) {
