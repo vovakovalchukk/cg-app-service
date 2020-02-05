@@ -1,11 +1,17 @@
 <?php
 use CG\Amazon\Region\Urls;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
-class ListingMarketplaceSupport extends AbstractMigration
+class ListingMarketplaceSupport extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     protected function getTableNames()
     {
         return ['listing', 'unimportedListing'];

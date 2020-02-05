@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderWeights extends AbstractOnlineSchemaChange
+class OrderWeights extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     protected const TABLES = ['order', 'orderLive'];
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class SetupProgressStep extends AbstractMigration
+class SetupProgressStep extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $product = $this->table('setupProgressStep', ['id' => false, 'collation' => 'utf8_general_ci']);

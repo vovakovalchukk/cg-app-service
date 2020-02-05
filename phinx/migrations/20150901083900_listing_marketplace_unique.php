@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingMarketplaceUnique extends AbstractMigration
+class ListingMarketplaceUnique extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'listing';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
 
     /**
      * Migrate Up.

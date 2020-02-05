@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderExchangeRatesJobCreation extends AbstractMigration
+class OrderExchangeRatesJobCreation extends AbstractMigration implements EnvironmentAwareInterface
 {
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'ad-hoc:updateOrderExchangeRates --quiet';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

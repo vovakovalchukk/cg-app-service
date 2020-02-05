@@ -19,9 +19,9 @@ return [
             ],
             Db::class => [
                 'parameters' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
+                    'readSql' => 'listingsReadSql',
+                    'fastReadSql' => 'listingsFastReadSql',
+                    'writeSql' => 'listingsWriteSql',
                     'mapper' => Mapper::class,
                 ],
             ],

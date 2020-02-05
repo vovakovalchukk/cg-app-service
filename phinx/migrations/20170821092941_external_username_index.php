@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ExternalUsernameIndex extends AbstractOnlineSchemaChange
+class ExternalUsernameIndex extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     const TABLE_ORDER = 'order';
     const TABLE_ORDER_LIVE = 'orderLive';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

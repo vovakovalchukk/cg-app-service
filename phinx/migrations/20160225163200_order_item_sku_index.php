@@ -1,13 +1,19 @@
 <?php
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
 /**
  * @property MysqlAdapter $adapter
  */
-class OrderItemSkuIndex extends AbstractMigration
+class OrderItemSkuIndex extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'item';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class CancelMigration extends AbstractMigration
+class CancelMigration extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $cancel = $this->table('cancel', ['id' => true, 'primary_key' => 'id', 'collation' => 'utf8_general_ci']);

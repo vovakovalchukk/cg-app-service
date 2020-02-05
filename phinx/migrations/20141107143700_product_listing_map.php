@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductListingMap extends AbstractMigration
+class ProductListingMap extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     public function up()
     {
         $table = $this->table(
@@ -20,10 +25,12 @@ class ProductListingMap extends AbstractMigration
 
         $table->addColumn('productId', 'integer')
             ->addColumn('listingId', 'integer')
-            ->addIndex([
-                'listingId',
-                'productId'
-            ])->create();
+            ->addIndex(
+                [
+                    'listingId',
+                    'productId'
+                ]
+            )->create();
 
         $this->execute(
             'INSERT IGNORE INTO productToListingMap ( listingId, productId ) ' .

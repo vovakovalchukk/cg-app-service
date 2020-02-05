@@ -1,9 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockIncludePurchaseOrders extends AbstractOnlineSchemaChange
+class StockIncludePurchaseOrders extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $alter = 'ADD COLUMN `includePurchaseOrders` TINYINT(1) NOT NULL DEFAULT 0, '

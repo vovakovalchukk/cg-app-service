@@ -1,13 +1,19 @@
 <?php
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
 /**
  * @property MysqlAdapter $adapter
  */
-class OrderVatNumber extends AbstractMigration
+class OrderVatNumber extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'orderInvoice';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

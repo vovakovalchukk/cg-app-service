@@ -1,12 +1,17 @@
 <?php
-
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class UserChange extends AbstractMigration
+class UserChange extends AbstractMigration implements EnvironmentAwareInterface
 {
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'phinx:migrateMongoUserChangeDataToMysql';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

@@ -1,9 +1,15 @@
 <?php
 use CG\Stock\Location\TypedEntity;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockLocationType extends AbstractMigration
+class StockLocationType extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $this

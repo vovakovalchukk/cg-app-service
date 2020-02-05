@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderItemLongName extends AbstractMigration
+class OrderItemLongName extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'item';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

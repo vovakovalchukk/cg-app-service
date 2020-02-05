@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class RemoveOriginalOrderIdUniqueIndex extends AbstractMigration
+class RemoveOriginalOrderIdUniqueIndex extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         foreach ($this->getTables() as $table) {
