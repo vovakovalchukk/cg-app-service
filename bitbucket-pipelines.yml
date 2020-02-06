@@ -8,20 +8,36 @@ image: channelgrabber/php71
 pipelines:
   default:
     - step:
+        name: Composer Install
         caches:
           - composer
         script:
-          - echo '127.0.0.1 mysql' >> /etc/hosts
           - php bin/nullify_composer_lock_sha.php
           - composer install --no-progress --no-suggest --prefer-dist  --ignore-platform-reqs
-          - vendor/bin/phpunit --log-junit ./test-reports/junit.xml
-          - vendor/bin/phpunit --group=integration --log-junit ./test-reports/junit.integration.xml
-        services:
-          - mysql
+        artifacts:
+          - vendor/**
+    - parallel:
+        - step:
+            name: Unit Tests
+            script:
+              - vendor/bin/phpunit --log-junit ./test-reports/junit.xml
+        - step:
+            name: Integration Tests
+            script:
+              - echo '127.0.0.1 mysql' >> /etc/hosts
+              - vendor/bin/phpunit --group=integration --log-junit ./test-reports/junit.integration.xml
+            services:
+              - mysql
+        - step:
+            name: Static Analysis
+            script:
+              - mkdir -p ./test-reports
+              - vendor/bin/phpstan analyse --error-format junit > ./test-reports/junit.analysis.xml
+
 definitions:
   services:
     mysql:
-      image: percona:5.6
+      image: percona:5.7
       environment:
         MYSQL_ROOT_PASSWORD: password
         MYSQL_DATABASE: cg_app
