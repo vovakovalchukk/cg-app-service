@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5b1b829ceea0811eabb315ceb939953",
+    "content-hash": "4c35b67546ae272ff903d9a94429d095",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -198,7 +198,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 }
             ],
             "description": "Common classes for PSR-6 adapters",
@@ -267,7 +267,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 }
             ],
             "description": "A PSR-6 cache implementation using apcu. This implementation supports tags",
@@ -316,7 +316,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 },
                 {
                     "name": "Nicolas Grekas",
@@ -374,16 +374,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.33.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "c9c96777aa89c1152cf4c7738e2be7692c603916"
+                "reference": "be731e08425e185b3a7238e680ae9ead5f3b60a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-11235-ResetIdOnRollback-b1b900.zip",
-                "reference": "c9c96777aa89c1152cf4c7738e2be7692c603916"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.33.4-785588.zip",
+                "reference": "be731e08425e185b3a7238e680ae9ead5f3b60a3"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -438,7 +438,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-02-05T14:46:50+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -486,16 +486,16 @@
         },
         {
             "name": "channelgrabber/billing",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.20.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-billing.git",
-                "reference": "437bd06e5dc20bf279a66e19cac83757b34ff296"
+                "reference": "3a34a04e23e28d91a98276e807cf7eb6595bf0ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/billing/channelgrabber-billing-dev-CGIV-11235-ResetIdOnRollback-31042c.zip",
-                "reference": "437bd06e5dc20bf279a66e19cac83757b34ff296"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/billing/channelgrabber-billing-1.20.17-195ea3.zip",
+                "reference": "3a34a04e23e28d91a98276e807cf7eb6595bf0ec"
             },
             "require": {
                 "channelgrabber/cache": "^2.4.3",
@@ -549,20 +549,20 @@
                     "CG\\Billing\\Test\\": "tests"
                 }
             },
-            "time": "2020-02-04T11:51:40+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/cache",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "a067219083ec0571a62386fd49cbc1de65fcb394"
+                "reference": "bfebc6925d422f1bc572613133a6370383bd4af6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cache/channelgrabber-cache-dev-CGIV-11235-ResetIdOnRollback-01b431.zip",
-                "reference": "a067219083ec0571a62386fd49cbc1de65fcb394"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cache/channelgrabber-cache-2.7.0-93e271.zip",
+                "reference": "bfebc6925d422f1bc572613133a6370383bd4af6"
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
@@ -589,7 +589,7 @@
                     "CG\\Cache\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2020-02-04T09:13:15+00:00"
+            "time": "2020-02-06T10:26:01+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -712,16 +712,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.43.17",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "e4396d3313d4931559fe1029298024eaaf2b928a"
+                "reference": "ef15ff61fd2481029f632e9aa01b479956ca7ee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-CGIV-11235-ResetIdOnRollback-d17357.zip",
-                "reference": "e4396d3313d4931559fe1029298024eaaf2b928a"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.43.17-da581d.zip",
+                "reference": "ef15ff61fd2481029f632e9aa01b479956ca7ee8"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -790,7 +790,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2020-02-04T09:55:59+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -862,16 +862,16 @@
         },
         {
             "name": "channelgrabber/communication",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-communication.git",
-                "reference": "7bf08934ca5d96b25e027f8251edd234ba15fd28"
+                "reference": "37adabdffe46a8db78755b47fe47cd8342aa0fa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/communication/channelgrabber-communication-dev-CGIV-11235-ResetIdOnRollback-98d7ac.zip",
-                "reference": "7bf08934ca5d96b25e027f8251edd234ba15fd28"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/communication/channelgrabber-communication-1.1.1-e5dae2.zip",
+                "reference": "37adabdffe46a8db78755b47fe47cd8342aa0fa4"
             },
             "require": {
                 "channelgrabber/channel": "^1.16.20",
@@ -895,7 +895,7 @@
                     "CG\\Communication\\Test\\": "tests"
                 }
             },
-            "time": "2020-02-04T10:28:32+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/constants",
@@ -990,16 +990,16 @@
         },
         {
             "name": "channelgrabber/dataplug",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.2.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-dataplug.git",
-                "reference": "061872d8d96b346b85bfd51582fe51ba495d2188"
+                "reference": "91db7d7dbbc5bfdc040bed9103201cdbdb4994bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/dataplug/channelgrabber-dataplug-dev-CGIV-11235-ResetIdOnRollback-54e2c4.zip",
-                "reference": "061872d8d96b346b85bfd51582fe51ba495d2188"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/dataplug/channelgrabber-dataplug-1.2.9-c9487e.zip",
+                "reference": "91db7d7dbbc5bfdc040bed9103201cdbdb4994bb"
             },
             "require": {
                 "channelgrabber/channel": "^1.25.0",
@@ -1031,7 +1031,7 @@
                     "email": "dev@channelgrabber.com"
                 }
             ],
-            "time": "2020-02-04T10:33:10+00:00"
+            "time": "2020-02-06T11:42:34+00:00"
         },
         {
             "name": "channelgrabber/db",
@@ -1094,16 +1094,16 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.21.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "f5acedbc3e81435999b936e7de361be3ceac7d17"
+                "reference": "d6885b992de9d3611a41d7ce01779f73030c70bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-dev-CGIV-11235-ResetIdOnRollback-7f2ce9.zip",
-                "reference": "f5acedbc3e81435999b936e7de361be3ceac7d17"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.21.2-ed45dd.zip",
+                "reference": "d6885b992de9d3611a41d7ce01779f73030c70bf"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1155,20 +1155,20 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2020-02-04T12:02:51+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "d6abb6393f1e42972b22bd2e64376a34ce611776"
+                "reference": "1da218a8bbc33b0eb6fc310a477a8352e83024a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ekm/channelgrabber-ekm-dev-CGIV-11235-ResetIdOnRollback-2af01b.zip",
-                "reference": "d6abb6393f1e42972b22bd2e64376a34ce611776"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ekm/channelgrabber-ekm-1.18.2-6625fb.zip",
+                "reference": "1da218a8bbc33b0eb6fc310a477a8352e83024a6"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1216,7 +1216,7 @@
                     "CG\\Ekm\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2020-02-04T10:51:53+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/email",
@@ -1357,16 +1357,16 @@
         },
         {
             "name": "channelgrabber/exchangerate",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-exchangerate.git",
-                "reference": "ba2710319acf744aa1fed329456dd866eb31c78e"
+                "reference": "a8ee79bb29eec49e2e91601c4e9b702da4b793e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/exchangerate/channelgrabber-exchangerate-dev-CGIV-11235-ResetIdOnRollback-9dd1ca.zip",
-                "reference": "ba2710319acf744aa1fed329456dd866eb31c78e"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/exchangerate/channelgrabber-exchangerate-1.2.7-847c41.zip",
+                "reference": "a8ee79bb29eec49e2e91601c4e9b702da4b793e9"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -1385,20 +1385,20 @@
                     "CG\\ExchangeRate\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-04T10:59:02+00:00"
+            "time": "2020-02-06T11:42:34+00:00"
         },
         {
             "name": "channelgrabber/feature-flags",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-feature-flags.git",
-                "reference": "02fc3ea183c5f7bf12a9978ff8aed451e1c63ee4"
+                "reference": "9c9452351e2467f23922ce7258af0b1ca5626473"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/feature-flags/channelgrabber-feature-flags-dev-CGIV-11235-ResetIdOnRollback-5cdee9.zip",
-                "reference": "02fc3ea183c5f7bf12a9978ff8aed451e1c63ee4"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/feature-flags/channelgrabber-feature-flags-2.1.4-65d75b.zip",
+                "reference": "9c9452351e2467f23922ce7258af0b1ca5626473"
             },
             "require": {
                 "channelgrabber/cache": "^2.5.2",
@@ -1421,7 +1421,7 @@
                     "CG\\FeatureFlags\\": "src"
                 }
             },
-            "time": "2020-02-04T11:04:16+00:00"
+            "time": "2020-02-06T11:42:34+00:00"
         },
         {
             "name": "channelgrabber/file-storage",
@@ -1561,16 +1561,16 @@
         },
         {
             "name": "channelgrabber/image",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.2.12",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-image.git",
-                "reference": "02fa66418553575ad2c261378b1a823df2053aa8"
+                "reference": "ae7e60a13d6504d1147a44f8722b4f45f591a3d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/image/channelgrabber-image-dev-CGIV-11235-ResetIdOnRollback-a24a0d.zip",
-                "reference": "02fa66418553575ad2c261378b1a823df2053aa8"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/image/channelgrabber-image-1.2.12-35aa22.zip",
+                "reference": "ae7e60a13d6504d1147a44f8722b4f45f591a3d7"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1592,7 +1592,7 @@
                     "CG\\Image\\": "src"
                 }
             },
-            "time": "2020-02-04T11:08:24+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/intercom",
@@ -1630,16 +1630,16 @@
         },
         {
             "name": "channelgrabber/listing",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.20.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-listing.git",
-                "reference": "544e4d9c31668e732f25417f7eba905fe3857e98"
+                "reference": "ba2f08f8d5c0eaf9851d18a72c3d4c2005726958"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-dev-CGIV-11235-ResetIdOnRollback-0c38fc.zip",
-                "reference": "544e4d9c31668e732f25417f7eba905fe3857e98"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/listing/channelgrabber-listing-1.20.1-f7801b.zip",
+                "reference": "ba2f08f8d5c0eaf9851d18a72c3d4c2005726958"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -1674,7 +1674,7 @@
                     "CG\\Listing\\Test\\": "tests"
                 }
             },
-            "time": "2020-02-04T11:15:00+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/locale",
@@ -1714,16 +1714,16 @@
         },
         {
             "name": "channelgrabber/location",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-location.git",
-                "reference": "f53d49f9d98e8274414756ec68ff71e848570a38"
+                "reference": "ede00a215d2ef51d1b0a64eaa5457bf51b30fd18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/location/channelgrabber-location-dev-CGIV-11235-ResetIdOnRollback-65ccb8.zip",
-                "reference": "f53d49f9d98e8274414756ec68ff71e848570a38"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/location/channelgrabber-location-1.2.3-f04dee.zip",
+                "reference": "ede00a215d2ef51d1b0a64eaa5457bf51b30fd18"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1761,7 +1761,7 @@
                     "CG\\Location\\Test\\": "tests"
                 }
             },
-            "time": "2020-02-04T11:19:24+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/locking",
@@ -1958,16 +1958,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.48.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "d8c94563408f4fe6208a5510e5079e0afc84ba98"
+                "reference": "92f1c3498513bf18892ca4c2011eac9af8b686d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11235-ResetIdOnRollback-c74fe5.zip",
-                "reference": "d8c94563408f4fe6208a5510e5079e0afc84ba98"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.48.8-54eb5f.zip",
+                "reference": "92f1c3498513bf18892ca4c2011eac9af8b686d7"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2039,7 +2039,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-02-04T11:34:41+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/permission",
@@ -2220,16 +2220,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.18.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "23d09f5446b0843ef04666dc5190c3c6b1e68dfd"
+                "reference": "6848d3a1e4c9fed08cf31890d270d27dfc53dbb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-11235-ResetIdOnRollback-5a871b.zip",
-                "reference": "23d09f5446b0843ef04666dc5190c3c6b1e68dfd"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.18.7-9d67d8.zip",
+                "reference": "6848d3a1e4c9fed08cf31890d270d27dfc53dbb7"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2278,7 +2278,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-04T13:17:37+00:00"
+            "time": "2020-02-06T11:47:53+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2344,16 +2344,16 @@
         },
         {
             "name": "channelgrabber/purchase-order",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "311a51501b969d6e9e6602a1abb001d8e59b7621"
+                "reference": "e864404770ecd95c464a31a0584b9dd9ae6bbc73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/purchase-order/channelgrabber-purchase-order-dev-CGIV-11235-ResetIdOnRollback-21cb43.zip",
-                "reference": "311a51501b969d6e9e6602a1abb001d8e59b7621"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/purchase-order/channelgrabber-purchase-order-1.0.4-78c953.zip",
+                "reference": "e864404770ecd95c464a31a0584b9dd9ae6bbc73"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -2370,7 +2370,7 @@
                 "commercial"
             ],
             "description": "Composer library for supporting purchase order code",
-            "time": "2020-02-04T13:26:18+00:00"
+            "time": "2020-02-06T11:42:34+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -2608,16 +2608,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "5396b89ba57e5c4a7734cb233e019602eb62b727"
+                "reference": "4bba9fb1be74acb70d8044fc7a5723e87a3f0e81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-CGIV-11235-ResetIdOnRollback-3883c8.zip",
-                "reference": "5396b89ba57e5c4a7734cb233e019602eb62b727"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.8.3-d6ecda.zip",
+                "reference": "4bba9fb1be74acb70d8044fc7a5723e87a3f0e81"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2641,7 +2641,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2020-02-05T14:48:29+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -2827,16 +2827,16 @@
         },
         {
             "name": "channelgrabber/stdlib",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "2.16.15",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgstdlib.git",
-                "reference": "4c98b0ebe6dfe13c48cd0e8e3193b8da3a6795d6"
+                "reference": "f4e2366af0ded4e2db146ef5c758a697542cbb97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-dev-CGIV-11235-ResetIdOnRollback-da8740.zip",
-                "reference": "4c98b0ebe6dfe13c48cd0e8e3193b8da3a6795d6"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stdlib/channelgrabber-stdlib-2.16.15-c0192e.zip",
+                "reference": "f4e2366af0ded4e2db146ef5c758a697542cbb97"
             },
             "require": {
                 "php": ">=7.1",
@@ -2881,20 +2881,20 @@
                     "CG\\Stdlib\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2020-02-05T14:43:11+00:00"
+            "time": "2020-02-06T11:42:34+00:00"
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.17.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "8db60fa5a187689b2e34fcc63f1b4c5a27a90aa8"
+                "reference": "06f05226c99736a66abb5b5a14ad0a5a7f38b1e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-CGIV-11235-ResetIdOnRollback-edc512.zip",
-                "reference": "8db60fa5a187689b2e34fcc63f1b4c5a27a90aa8"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.9-4af3f3.zip",
+                "reference": "06f05226c99736a66abb5b5a14ad0a5a7f38b1e8"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2940,7 +2940,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2020-02-05T16:06:38+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -3014,16 +3014,16 @@
         },
         {
             "name": "channelgrabber/supplier",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-supplier.git",
-                "reference": "4d9a543066334f4a7cb7d84cb20ceab53d0cd9ba"
+                "reference": "7e450938b89942568cd90bf21cb8a60626d92d62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/supplier/channelgrabber-supplier-dev-CGIV-11235-ResetIdOnRollback-69b63e.zip",
-                "reference": "4d9a543066334f4a7cb7d84cb20ceab53d0cd9ba"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/supplier/channelgrabber-supplier-1.0.2-94965d.zip",
+                "reference": "7e450938b89942568cd90bf21cb8a60626d92d62"
             },
             "require": {
                 "channelgrabber/stdlib": "^2.16.10",
@@ -3043,7 +3043,7 @@
                     "CG\\Supplier\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-02-04T13:45:44+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/tax",
@@ -3086,16 +3086,16 @@
         },
         {
             "name": "channelgrabber/template",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.9.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-template.git",
-                "reference": "9960182b518cd5fee70f12705ebe0b27f044bcd9"
+                "reference": "142196e9da5cb98c96bcb81c0d9a3531082c8cfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-dev-CGIV-11235-ResetIdOnRollback-e60677.zip",
-                "reference": "9960182b518cd5fee70f12705ebe0b27f044bcd9"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/template/channelgrabber-template-1.9.5-d44ca9.zip",
+                "reference": "142196e9da5cb98c96bcb81c0d9a3531082c8cfb"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3146,7 +3146,7 @@
                     "CG\\Template\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-04T13:49:59+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/transaction",
@@ -3256,16 +3256,16 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.27.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "f469fc26e4a0416290c3e17ee75c389dbd781dec"
+                "reference": "a12e510a869a92dd0f19c478af0f1ea07fb92b0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-dev-CGIV-11235-ResetIdOnRollback-0e31aa.zip",
-                "reference": "f469fc26e4a0416290c3e17ee75c389dbd781dec"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-1.27.1-fae314.zip",
+                "reference": "a12e510a869a92dd0f19c478af0f1ea07fb92b0c"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3310,20 +3310,20 @@
                     "CG\\": "src"
                 }
             },
-            "time": "2020-02-04T13:59:34+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-userpreference.git",
-                "reference": "9bad8bac921715890c77575cb36c3d768f45f175"
+                "reference": "e49a21ebf635f3cbd3cface1085b1c222344d403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/userpreference/channelgrabber-userpreference-dev-CGIV-11235-ResetIdOnRollback-c99f4c.zip",
-                "reference": "9bad8bac921715890c77575cb36c3d768f45f175"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/userpreference/channelgrabber-userpreference-1.3.2-71ed9d.zip",
+                "reference": "e49a21ebf635f3cbd3cface1085b1c222344d403"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -3340,7 +3340,7 @@
                     "CG\\UserPreference\\": ""
                 }
             },
-            "time": "2020-02-04T14:06:49+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/validation",
@@ -3458,16 +3458,16 @@
         },
         {
             "name": "channelgrabber/webhook-server",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-webhook-server.git",
-                "reference": "c1a9284d38397b031b934c772a0ac656c1ae7f76"
+                "reference": "efedba77ddba239aa85b0c84e74660a5cf28556b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/webhook-server/channelgrabber-webhook-server-dev-CGIV-11235-ResetIdOnRollback-9f37ba.zip",
-                "reference": "c1a9284d38397b031b934c772a0ac656c1ae7f76"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/webhook-server/channelgrabber-webhook-server-1.0.1-e51d49.zip",
+                "reference": "efedba77ddba239aa85b0c84e74660a5cf28556b"
             },
             "require": {
                 "channelgrabber/cache": "^2.6.2",
@@ -3493,7 +3493,7 @@
                     "CG\\WebhookServer\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-02-04T14:15:14+00:00"
+            "time": "2020-02-06T11:57:51+00:00"
         },
         {
             "name": "channelgrabber/woocommerce",
@@ -6272,7 +6272,8 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com"
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -9421,7 +9422,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -9987,8 +9988,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -11501,179 +11501,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.33.4",
-            "alias_normalized": "1.33.4.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/amazon"
-        },
-        {
-            "alias": "1.20.17",
-            "alias_normalized": "1.20.17.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/billing"
-        },
-        {
-            "alias": "2.7.0",
-            "alias_normalized": "2.7.0.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/cache"
-        },
-        {
-            "alias": "1.43.17",
-            "alias_normalized": "1.43.17.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/channel"
-        },
-        {
-            "alias": "1.1.1-dev",
-            "alias_normalized": "1.1.1.0-dev",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/communication"
-        },
-        {
-            "alias": "1.2.9",
-            "alias_normalized": "1.2.9.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/dataplug"
-        },
-        {
-            "alias": "1.21.2",
-            "alias_normalized": "1.21.2.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/ebay"
-        },
-        {
-            "alias": "1.18.2",
-            "alias_normalized": "1.18.2.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/ekm"
-        },
-        {
-            "alias": "1.2.7",
-            "alias_normalized": "1.2.7.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/exchangerate"
-        },
-        {
-            "alias": "2.1.4-dev",
-            "alias_normalized": "2.1.4.0-dev",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/feature-flags"
-        },
-        {
-            "alias": "1.2.12",
-            "alias_normalized": "1.2.12.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/image"
-        },
-        {
-            "alias": "1.20.1",
-            "alias_normalized": "1.20.1.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/listing"
-        },
-        {
-            "alias": "1.2.3",
-            "alias_normalized": "1.2.3.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/location"
-        },
-        {
-            "alias": "1.48.8",
-            "alias_normalized": "1.48.8.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.18.7",
-            "alias_normalized": "1.18.7.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/product"
-        },
-        {
-            "alias": "1.0.4",
-            "alias_normalized": "1.0.4.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/purchase-order"
-        },
-        {
-            "alias": "1.8.3",
-            "alias_normalized": "1.8.3.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/settings"
-        },
-        {
-            "alias": "2.16.15",
-            "alias_normalized": "2.16.15.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/stdlib"
-        },
-        {
-            "alias": "1.17.9",
-            "alias_normalized": "1.17.9.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/stock"
-        },
-        {
-            "alias": "1.0.2",
-            "alias_normalized": "1.0.2.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/supplier"
-        },
-        {
-            "alias": "1.9.5",
-            "alias_normalized": "1.9.5.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/template"
-        },
-        {
-            "alias": "1.27.1",
-            "alias_normalized": "1.27.1.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/user"
-        },
-        {
-            "alias": "1.3.2",
-            "alias_normalized": "1.3.2.0",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/userpreference"
-        },
-        {
-            "alias": "1.0.1-dev",
-            "alias_normalized": "1.0.1.0-dev",
-            "version": "dev-CGIV-11235-ResetIdOnRollback",
-            "package": "channelgrabber/webhook-server"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
-        "channelgrabber/billing": 20,
-        "channelgrabber/cache": 20,
-        "channelgrabber/channel": 20,
-        "channelgrabber/communication": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/dataplug": 20,
-        "channelgrabber/ebay": 20,
-        "channelgrabber/ekm": 20,
-        "channelgrabber/exchangerate": 20,
-        "channelgrabber/feature-flags": 20,
-        "channelgrabber/image": 20,
-        "channelgrabber/listing": 20,
-        "channelgrabber/location": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/product": 20,
-        "channelgrabber/purchase-order": 20,
-        "channelgrabber/settings": 20,
-        "channelgrabber/stdlib": 20,
-        "channelgrabber/stock": 20,
-        "channelgrabber/supplier": 20,
-        "channelgrabber/template": 20,
-        "channelgrabber/user": 20,
-        "channelgrabber/userpreference": 20,
-        "channelgrabber/webhook-server": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
