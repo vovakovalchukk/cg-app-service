@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5335e55e6e25dfada0c832a33733d6d8",
+    "content-hash": "60bc425ff0c9c5cae258a0d57a3a7ab2",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -374,16 +374,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.33.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "9050ccb973ff77d1874571ccbda1cede86f28b89"
+                "reference": "7240f54ba3e7c52936e8e3f29ded21d2306b3611"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-TAC-597-Phpstan-ce8e88.zip",
-                "reference": "9050ccb973ff77d1874571ccbda1cede86f28b89"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.33.5-903f4d.zip",
+                "reference": "7240f54ba3e7c52936e8e3f29ded21d2306b3611"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -438,7 +438,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-02-06T12:37:30+00:00"
+            "time": "2020-02-06T13:46:04+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -1016,16 +1016,16 @@
         },
         {
             "name": "channelgrabber/developer",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-developer.git",
-                "reference": "dd093ff56239c660884d7edc9a7af7980aa47b01"
+                "reference": "4e6d8f6138cd64e2c71d07565f204be63e01e60b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/developer/channelgrabber-developer-dev-TAC-597-Phpstan-5ad96d.zip",
-                "reference": "dd093ff56239c660884d7edc9a7af7980aa47b01"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/developer/channelgrabber-developer-1.0.3-1ffaab.zip",
+                "reference": "4e6d8f6138cd64e2c71d07565f204be63e01e60b"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -1047,7 +1047,7 @@
                     "CG\\Developer\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-02-06T13:17:57+00:00"
+            "time": "2020-02-06T13:51:16+00:00"
         },
         {
             "name": "channelgrabber/di",
@@ -1149,16 +1149,16 @@
         },
         {
             "name": "channelgrabber/ekm",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.18.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ekm.git",
-                "reference": "69713ec16507ec88281a58f50e6008c6a8b7a5ab"
+                "reference": "7fe7c5eb79bc356ccaa7524525757f2edf47a09f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ekm/channelgrabber-ekm-dev-TAC-597-Phpstan-5aa83c.zip",
-                "reference": "69713ec16507ec88281a58f50e6008c6a8b7a5ab"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ekm/channelgrabber-ekm-1.18.3-399125.zip",
+                "reference": "7fe7c5eb79bc356ccaa7524525757f2edf47a09f"
             },
             "require": {
                 "channelgrabber/cache": "^2.1.0",
@@ -1206,20 +1206,20 @@
                     "CG\\Ekm\\TestAsset\\": "tests/assets/"
                 }
             },
-            "time": "2020-02-06T12:45:38+00:00"
+            "time": "2020-02-06T13:54:04+00:00"
         },
         {
             "name": "channelgrabber/email",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-email.git",
-                "reference": "c143d7a151d84cade1d0806cdcdf10031ae48618"
+                "reference": "e9733b81c696ab254af442f81d5cc8c43edac975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/email/channelgrabber-email-dev-TAC-597-Phpstan-119be5.zip",
-                "reference": "c143d7a151d84cade1d0806cdcdf10031ae48618"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/email/channelgrabber-email-1.1.3-a0901e.zip",
+                "reference": "e9733b81c696ab254af442f81d5cc8c43edac975"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
@@ -1241,7 +1241,7 @@
                     "CG\\Email\\": "src"
                 }
             },
-            "time": "2020-02-06T09:59:17+00:00"
+            "time": "2020-02-06T13:57:28+00:00"
         },
         {
             "name": "channelgrabber/email-verification",
@@ -1307,16 +1307,16 @@
         },
         {
             "name": "channelgrabber/etsy",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-etsy.git",
-                "reference": "d5c845b2576f9423483b0734f2f9be2b40b7d636"
+                "reference": "b42220240472321f3c86f7ad99a5475d8a8ec3ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-dev-TAC-597-Phpstan-f84d8c.zip",
-                "reference": "d5c845b2576f9423483b0734f2f9be2b40b7d636"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-1.2.1-7212eb.zip",
+                "reference": "b42220240472321f3c86f7ad99a5475d8a8ec3ef"
             },
             "require": {
                 "channelgrabber/cglib": "~1.16.12",
@@ -1346,7 +1346,7 @@
                     "CG\\Etsy\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-02-06T11:33:14+00:00"
+            "time": "2020-02-06T14:03:36+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -1589,16 +1589,16 @@
         },
         {
             "name": "channelgrabber/intercom",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-intercom.git",
-                "reference": "2717d78f0843b335ff8e0ebc78afbbe02b3dd3c7"
+                "reference": "e83a6d582edff2e0bdb0801780d9764b380a1d6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/intercom/channelgrabber-intercom-dev-TAC-597-Phpstan-b23994.zip",
-                "reference": "2717d78f0843b335ff8e0ebc78afbbe02b3dd3c7"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/intercom/channelgrabber-intercom-1.6.0-af3c90.zip",
+                "reference": "e83a6d582edff2e0bdb0801780d9764b380a1d6c"
             },
             "require": {
                 "channelgrabber/billing": "^1.13.1",
@@ -1629,7 +1629,7 @@
                     "CG\\Intercom\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-06T11:43:15+00:00"
+            "time": "2020-02-06T14:05:33+00:00"
         },
         {
             "name": "channelgrabber/listing",
@@ -1961,16 +1961,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.48.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6f08487c5464c0c10c4b91964523df5205bd7ec4"
+                "reference": "bfad037ed120969f3113f1c8ea0121d48d4f2f00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-597-Phpstan-05f9b7.zip",
-                "reference": "6f08487c5464c0c10c4b91964523df5205bd7ec4"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.48.9-41aabb.zip",
+                "reference": "bfad037ed120969f3113f1c8ea0121d48d4f2f00"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2042,7 +2042,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-02-06T12:49:57+00:00"
+            "time": "2020-02-06T14:08:07+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2261,16 +2261,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-TAC-597-Phpstan",
+            "version": "1.18.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "f0acb34b4e43aea74f189ea70e3c7192bc12ac20"
+                "reference": "eb5b1ca95a8878cf5a2b42ad4a3e36d3ad272b59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-TAC-597-Phpstan-599a6e.zip",
-                "reference": "f0acb34b4e43aea74f189ea70e3c7192bc12ac20"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.18.8-cb0046.zip",
+                "reference": "eb5b1ca95a8878cf5a2b42ad4a3e36d3ad272b59"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2319,7 +2319,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-02-06T12:53:05+00:00"
+            "time": "2020-02-06T14:10:02+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -11634,67 +11634,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.33.5",
-            "alias_normalized": "1.33.5.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/amazon"
-        },
-        {
-            "alias": "1.0.3",
-            "alias_normalized": "1.0.3.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/developer"
-        },
-        {
-            "alias": "1.18.3",
-            "alias_normalized": "1.18.3.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/ekm"
-        },
-        {
-            "alias": "1.1.3",
-            "alias_normalized": "1.1.3.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/email"
-        },
-        {
-            "alias": "1.2.1",
-            "alias_normalized": "1.2.1.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/etsy"
-        },
-        {
-            "alias": "1.6.0-dev",
-            "alias_normalized": "1.6.0.0-dev",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/intercom"
-        },
-        {
-            "alias": "1.48.9",
-            "alias_normalized": "1.48.9.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.18.8",
-            "alias_normalized": "1.18.8.0",
-            "version": "dev-TAC-597-Phpstan",
-            "package": "channelgrabber/product"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/developer": 20,
-        "channelgrabber/ekm": 20,
-        "channelgrabber/email": 20,
-        "channelgrabber/etsy": 20,
-        "channelgrabber/intercom": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
