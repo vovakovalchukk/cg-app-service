@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5975ec3feaf9bac6ffc0e843e23e94ea",
+    "content-hash": "b9bc74ee46ef278e3af0fd9bd9445146",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2390,21 +2390,21 @@
         },
         {
             "name": "channelgrabber/purchase-order",
-            "version": "1.0.4",
+            "version": "dev-TAC-598-fix-phpstan-errors-in-app",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-purchase-order.git",
-                "reference": "e864404770ecd95c464a31a0584b9dd9ae6bbc73"
+                "reference": "f1a9cd95bfa57d44de6545fa95b877cdf468acfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/purchase-order/channelgrabber-purchase-order-1.0.4-78c953.zip",
-                "reference": "e864404770ecd95c464a31a0584b9dd9ae6bbc73"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/purchase-order/channelgrabber-purchase-order-dev-TAC-598-fix-phpstan-errors-in-app-7b836a.zip",
+                "reference": "f1a9cd95bfa57d44de6545fa95b877cdf468acfc"
             },
             "require": {
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/stdlib": "^2.12.42",
-                "channelgrabber/stock": "^1.9.0"
+                "channelgrabber/stock": "dev-TAC-598-fix-phpstan-errors-in-app as 1.18.0"
             },
             "type": "library",
             "autoload": {
@@ -2416,7 +2416,7 @@
                 "commercial"
             ],
             "description": "Composer library for supporting purchase order code",
-            "time": "2020-02-06T11:42:34+00:00"
+            "time": "2020-02-10T15:35:15+00:00"
         },
         {
             "name": "channelgrabber/purge",
@@ -2932,16 +2932,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.17.9",
+            "version": "dev-TAC-598-fix-phpstan-errors-in-app",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "06f05226c99736a66abb5b5a14ad0a5a7f38b1e8"
+                "reference": "fbaea58ebb05afea5607b2b8ab01a8bbf3f7da8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.17.9-4af3f3.zip",
-                "reference": "06f05226c99736a66abb5b5a14ad0a5a7f38b1e8"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-TAC-598-fix-phpstan-errors-in-app-15d02b.zip",
+                "reference": "fbaea58ebb05afea5607b2b8ab01a8bbf3f7da8d"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -2987,7 +2987,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2020-02-06T11:57:51+00:00"
+            "time": "2020-02-10T15:30:21+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -12030,12 +12030,26 @@
             "alias_normalized": "1.49.0.0",
             "version": "dev-TAC-598-fix-phpstan-errors-in-app",
             "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.0.5",
+            "alias_normalized": "1.0.5.0",
+            "version": "dev-TAC-598-fix-phpstan-errors-in-app",
+            "package": "channelgrabber/purchase-order"
+        },
+        {
+            "alias": "1.18.0",
+            "alias_normalized": "1.18.0.0",
+            "version": "dev-TAC-598-fix-phpstan-errors-in-app",
+            "package": "channelgrabber/stock"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/purchase-order": 20,
+        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
