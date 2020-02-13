@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e3a9b85b80ecc155ae0b99e8a861a73",
+    "content-hash": "a59fb5a6cb97dea23f69e6b9d180c3a9",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1966,16 +1966,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.49.0",
+            "version": "dev-TAC-585-partial-refunds-amazon",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "af979cf087d13c0f3d17b2d4e3efec91b0d03de2"
+                "reference": "e1ae4ea745b690a3caa0d24505c4d8daa85a51f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.49.0-039197.zip",
-                "reference": "af979cf087d13c0f3d17b2d4e3efec91b0d03de2"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-585-partial-refunds-amazon-95697c.zip",
+                "reference": "e1ae4ea745b690a3caa0d24505c4d8daa85a51f0"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2047,7 +2047,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-02-11T11:41:03+00:00"
+            "time": "2020-02-13T14:15:47+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -12024,10 +12024,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.49.1",
+            "alias_normalized": "1.49.1.0",
+            "version": "dev-TAC-585-partial-refunds-amazon",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
