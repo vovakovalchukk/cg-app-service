@@ -58,10 +58,10 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         $skuWhere = "";
         if ($sku !== null) {
             $sku = \CG\Stdlib\escapeLikeValue($sku);
-            $skuWhere = "AND s.sku LIKE '$sku'";
+            $skuWhere = "AND s.sku LIKE '" . $sku . "'";
         }
 
-        $query = <<<EOF
+        $query = "
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
 FROM stock AS s
 INNER JOIN stockLocation AS sl ON s.id = sl.stockId AND sl.type = 'real'
@@ -83,23 +83,26 @@ LEFT JOIN (
 		JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
 		JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
 		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
-		WHERE root.organisationUnitId IN ({$organisationUnitIdString})
+		WHERE root.organisationUnitId IN (" . $organisationUnitIdString . ")
 		GROUP BY root.organisationUnitId, root.sku, leaf.sku
     ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
-	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
+	AND account.rootOrganisationUnitId IN (" . $organisationUnitIdString . ")
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
     calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
-WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
-AND s.organisationUnitId IN ({$organisationUnitIdString})
-{$skuWhere}
+WHERE allocated " . $operator . " IFNULL(calculatedAllocated, 0)
+AND s.organisationUnitId IN (" . $organisationUnitIdString . ")
+" . $skuWhere . "
 ORDER BY s.organisationUnitId, sku
-EOF;
+";
+
+        echo $query . "\n";
+
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
         $this->logFindings($results);
 
