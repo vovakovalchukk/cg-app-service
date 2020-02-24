@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractOnlineSchemaChange;
 
-class CategoryIndexUpdate extends AbstractOnlineSchemaChange
+class CategoryIndexIncludeParent extends AbstractOnlineSchemaChange
 {
     private const TABLE = 'category';
 
