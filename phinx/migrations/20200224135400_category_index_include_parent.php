@@ -1,10 +1,16 @@
 <?php
 
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class CategoryIndexIncludeParent extends AbstractOnlineSchemaChange
+class CategoryIndexIncludeParent extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     private const TABLE = 'category';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {
