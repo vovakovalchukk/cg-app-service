@@ -1,6 +1,7 @@
 <?php
 namespace CG\Transaction\Command;
 
+use CG\Transaction\Command\Cleanup\TransactionKeyMap;
 use CG\Transaction\Entity as Transaction;
 use CG\Transaction\Predis\ClearTransaction;
 use Predis\Client as Predis;
@@ -59,12 +60,11 @@ class Cleanup
         }
     }
 
-    protected function mapTransactionActionsToTransactionKeys(array $transactionActionKeys): array
+    protected function mapTransactionActionsToTransactionKeys(array $transactionActionKeys): \Generator
     {
-        $transactionActionToKeyMap = [];
         foreach ($transactionActionKeys as $transactionAction) {
-            $transactionActionToKeyMap[$transactionAction] = explode(Transaction::SEPARATOR, $transactionAction, 3)[2];
+            [, $timestamp, $transactionKey] = explode(Transaction::SEPARATOR, $transactionAction, 3);
+            yield new TransactionKeyMap($transactionKey, $transactionAction, $timestamp);
         }
-        return $transactionActionToKeyMap;
     }
 }
