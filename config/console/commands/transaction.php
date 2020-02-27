@@ -1,4 +1,5 @@
 <?php
+use CG\Stdlib\DateTime;
 use CG\Transaction\Command\Cleanup;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,11 +12,11 @@ return [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             /** @var Cleanup $command */
             $command = $di->newInstance(Cleanup::class);
-            $chunkSize = $input->getArgument('chunkSize');
-            if (!is_null($chunkSize) && !preg_match('/^[1-9][0-9]*$/', $chunkSize)) {
-                throw new InvalidArgumentException('Argument "chunkSize" should be a positive integer');
+            $timeThreshold = $input->getArgument('timeThreshold');
+            if (!is_null($chunkSize) && (new DateTime($timeThreshold)) > (new DateTime('now'))) {
+                throw new InvalidArgumentException('timeThreshold can\'t be in the future');
             }
-            $command($output, $chunkSize);
+            $command($input, $output);
         },
         'description' => 'Cleanup any old transactions',
         'arguments' => [
@@ -23,6 +24,10 @@ return [
                 'required' => false,
                 'description' => 'Set the number of transactions to be cleaned up in one request',
             ],
+            'timeThreshold' => [
+                'required' => false,
+                'description' => 'Remove transactions from before this time - this is a relative time string e.g. 1 month ago',
+            ]
         ],
         'options' => []
     ],
