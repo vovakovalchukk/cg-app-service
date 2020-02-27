@@ -1,10 +1,10 @@
 <?php
 namespace CG\Transaction\Command;
 
-use CG\Predis\Command\ClearStaleTransaction;
 use CG\Stdlib\DateTime;
 use CG\Transaction\Command\Cleanup\TransactionKeyMap;
 use CG\Transaction\Entity as Transaction;
+use CG\Transaction\Predis\ClearStaleTransaction;
 use Predis\Client as Predis;
 use Predis\Collection\Iterator\Keyspace as PredisKeyspace;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
