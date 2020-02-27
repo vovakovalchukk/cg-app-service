@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderShippingOriginCountry extends AbstractOnlineSchemaChange
+class OrderShippingOriginCountry extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $this->onlineSchemaChange('order', 'ADD COLUMN `shippingOriginCountryCode` varchar(2) NULL');

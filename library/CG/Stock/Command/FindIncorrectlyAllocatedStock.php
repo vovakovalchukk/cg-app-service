@@ -85,14 +85,14 @@ LEFT JOIN (
 		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
 		WHERE root.organisationUnitId IN ({$organisationUnitIdString})
 		GROUP BY root.organisationUnitId, root.sku, leaf.sku
-    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
 	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
-    calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+    calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
@@ -134,7 +134,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
@@ -167,7 +167,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0

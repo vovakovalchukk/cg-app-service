@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class UnimportedListingVariationSkusMigration extends AbstractMigration
+class UnimportedListingVariationSkusMigration extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     public function up()
     {
         $unimportedListingVariationTable = $this->table(

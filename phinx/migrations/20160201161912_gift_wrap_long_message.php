@@ -1,10 +1,16 @@
 <?php
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class GiftWrapLongMessage extends AbstractMigration
+class GiftWrapLongMessage extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'giftWrap';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductImageListingRelationship extends AbstractMigration
+class ProductImageListingRelationship extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $delete = 'DELETE i FROM productImage i LEFT JOIN product p ON i.productId = p.id WHERE p.id IS NULL';

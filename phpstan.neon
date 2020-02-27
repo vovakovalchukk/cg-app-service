@@ -1,0 +1,16 @@
+parameters:
+    customRulesetUsed: true
+    paths:
+        - controllers
+        - library
+        - vendor/channelgrabber
+    excludes_analyse:
+        - vendor/channelgrabber/*/tests/*
+        - vendor/channelgrabber/*/Tests/*
+        - vendor/channelgrabber/*/Test/*
+        - vendor/channelgrabber/*/spec/*
+        - vendor/channelgrabber/*/examples/*
+        - vendor/channelgrabber/*/phinx/migrations/*
+        - vendor/channelgrabber/*/di/definitions/*
+    featureToggles:
+        parallel: true

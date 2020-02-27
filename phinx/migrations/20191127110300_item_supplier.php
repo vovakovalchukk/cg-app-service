@@ -1,8 +1,14 @@
 <?php
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ItemSupplier extends AbstractOnlineSchemaChange
+class ItemSupplier extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function up()
     {
         $this->onlineSchemaChange('item', 'ADD COLUMN `supplierId` INT(11)');

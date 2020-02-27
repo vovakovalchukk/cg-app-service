@@ -23,6 +23,7 @@ class Mapper
             ->addLink('location', '/location')
             ->addLink('order', '/order')
             ->addLink('orderItem', '/orderItem')
+            ->addLink('orderItemRefund', '/orderItemRefund')
             ->addLink('orderLabel', '/orderLabel')
             ->addLink('orderLink', '/orderLink')
             ->addLink('product', '/product')

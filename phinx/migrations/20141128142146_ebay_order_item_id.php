@@ -1,9 +1,15 @@
 <?php
-use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Table\ForeignKey;
+use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class EbayOrderItemId extends AbstractMigration
+class EbayOrderItemId extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingTemplates extends AbstractMigration
+class ListingTemplates extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
+
     public function change()
     {
         $this

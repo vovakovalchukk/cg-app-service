@@ -1,8 +1,8 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class AllowEmptyAddresses extends AbstractMigration
+class AllowEmptyAddresses extends AbstractMigration implements EnvironmentAwareInterface
 {
     protected $columns = [
         'addressCompanyName' => true,
@@ -18,6 +18,11 @@ class AllowEmptyAddresses extends AbstractMigration
         'phoneNumber' => true,
         'addressCountryCode' => true,
     ];
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

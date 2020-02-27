@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class VariationMappingPopulation extends AbstractMigration
+class VariationMappingPopulation extends AbstractMigration implements EnvironmentAwareInterface
 {
     const LISTING_ATTRIBUTE_MAPPING_TABLE = 'variationAttributeMap';
     const PRODUCT_ATTRIBUTE_TABLE = 'productAttribute';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function up()
     {

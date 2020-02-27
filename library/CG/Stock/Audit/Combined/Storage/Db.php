@@ -1,22 +1,27 @@
 <?php
 namespace CG\Stock\Audit\Combined\Storage;
 
+use CG\Stdlib;
+use CG\Stdlib\Exception\Storage as StorageException;
+use CG\Stdlib\Mapper\FromArrayInterface as ArrayMapper;
+use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stock\Audit\Combined\Collection;
 use CG\Stock\Audit\Combined\Entity as StockLog;
 use CG\Stock\Audit\Combined\Filter as Filter;
 use CG\Stock\Audit\Combined\StorageInterface;
 use CG\Stock\Audit\Combined\Type;
-use CG\Stdlib\Exception\Storage as StorageException;
-use CG\Stdlib\Storage\Db\DbAbstract;
-use CG\Stdlib;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
 
 class Db extends DbAbstract implements StorageInterface
 {
     const DEFAULT_SORT_DIR = 'ASC';
+
+    /** @var Sql */
+    protected $listingReadSql;
 
     protected $sortByMap = [
         'dateTime' => 'getSortByDateTime'
@@ -31,6 +36,12 @@ class Db extends DbAbstract implements StorageInterface
         ]
     ];
 
+    public function __construct(Sql $readSql, Sql $fastReadSql, Sql $writeSql, Sql $listingReadSql, ArrayMapper $mapper)
+    {
+        parent::__construct($readSql, $fastReadSql, $writeSql, $mapper);
+        $this->listingReadSql = $listingReadSql;
+    }
+
     public function fetchCollectionByFilter(Filter $filter)
     {
         try {
@@ -39,16 +50,18 @@ class Db extends DbAbstract implements StorageInterface
             $this->applySorting($select, $filter)
                 ->applyPagination($select, $filter);
 
-            return $this->fetchPaginatedCollection(
+            $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $select,
                 $this->getMapper()
             );
-
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
+
+        $this->appendListingUrls($collection);
+        return $collection;
     }
 
     protected function getFilteredSelect(Filter $filter)
@@ -154,13 +167,13 @@ class Db extends DbAbstract implements StorageInterface
         return $this;
     }
 
-    protected function getCombinedSelect(Select $stockLogSelect, Select $stockAdjustmentSelect)
+    protected function getCombinedSelect(Select $stockLogSelect, Select $stockAdjustmentSelect): Select
     {
         $stockLogSelect->combine($stockAdjustmentSelect);
         return $this->getReadSql()->select(['sl' => $stockLogSelect]);
     }
 
-    protected function getStockLogSelect()
+    protected function getStockLogSelect(): Select
     {
         $select = $this->getReadSql()->select('stockLog');
         $select->columns([
@@ -178,12 +191,12 @@ class Db extends DbAbstract implements StorageInterface
             'stockId', 'locationId', 'allocatedQty', 'onHandQty',
             // Columns from joined tables
             'orderId' => new Expression('null'), 'orderExternalId' => new Expression('null'),
-            'accountName' => new Expression('null'), 'listingUrl' => new Expression('null'),
+            'accountName' => new Expression('null'),
         ]);
         return $select;
     }
 
-    protected function getStockAdjustmentLogSelect()
+    protected function getStockAdjustmentLogSelect(): Select
     {
         $select = $this->getReadSql()->select('stockAdjustmentLog');
         $select->columns([
@@ -224,13 +237,42 @@ class Db extends DbAbstract implements StorageInterface
             [],
             Select::JOIN_LEFT
         );
-        $select->join(
-            'listing',
-            'listing.id = stockAdjustmentLog.listingId',
-            ['listingUrl' => 'url'],
-            Select::JOIN_LEFT
-        );
         return $select;
+    }
+
+    protected function appendListingUrls(Collection $collection): void
+    {
+        $listingIds = array_filter($collection->getArrayOf('listingId'));
+        if (empty($listingIds)) {
+            return;
+        }
+
+        $listingUrls = $this->getListingUrlMap($listingIds);
+
+        /** @var StockLog $entity */
+        foreach ($collection as $entity) {
+            $listingId = $entity->getListingId();
+            if (isset($listingUrls[$listingId])) {
+                $entity->setListingUrl($listingUrls[$listingId]);
+            }
+        }
+    }
+
+    protected function getListingUrlMap($listingIds): array
+    {
+        $select = $this->getListingUrlSelect($listingIds);
+        $results = $this->listingReadSql->prepareStatementForSqlObject($select)->execute();
+
+        $listingUrls = [];
+        foreach ($results as $result) {
+            $listingUrls[$result['id']] = $result['listingUrl'];
+        }
+        return $listingUrls;
+    }
+
+    protected function getListingUrlSelect(array $listingIds): Select
+    {
+        return $this->listingReadSql->select('listing')->columns(['id', 'listingUrl' => 'url'])->where(['id' => $listingIds]);
     }
 
     public function getEntityClass()

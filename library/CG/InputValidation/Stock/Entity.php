@@ -68,6 +68,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new BooleanValidator(['name' => 'lowStockThresholdTriggered'])]
             ],
+            'reorderQuantity' => [
+                'name'       => 'reorderQuantity',
+                'required'   => false,
+                'validators' => [new IntegerValidator(['name' => 'reorderQuantity'])]
+            ],
         ];
     }
 }

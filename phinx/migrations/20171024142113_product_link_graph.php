@@ -1,10 +1,16 @@
 <?php
-use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Table\ForeignKey;
 use Phinx\Db\Adapter\MysqlAdapter;
+use Phinx\Db\Table\ForeignKey;
+use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductLinkGraph extends AbstractMigration
+class ProductLinkGraph extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     /**
      * Migrate Up.
      */

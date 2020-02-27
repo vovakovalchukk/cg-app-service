@@ -1,9 +1,15 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class StockAdjustmentLog extends AbstractMigration
+class StockAdjustmentLog extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE = 'stockAdjustmentLog';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.

@@ -1,12 +1,17 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class CategoryExternalEbay extends AbstractMigration
+class CategoryExternalEbay extends AbstractMigration implements EnvironmentAwareInterface
 {
     const TABLE_NAME_FEATURE = 'ebayCategoryFeatures';
     const TABLE_NAME_FEATURE_DEFAULTS = 'ebayCategoryFeatureDefaults';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     public function change()
     {

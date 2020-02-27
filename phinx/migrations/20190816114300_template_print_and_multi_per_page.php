@@ -1,10 +1,14 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Adapter\MysqlAdapter as Adapter;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class TemplatePrintAndMultiPerPage extends AbstractMigration
+class TemplatePrintAndMultiPerPage extends AbstractMigration implements EnvironmentAwareInterface
 {
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
+
     public function change()
     {
         $this->table('template')

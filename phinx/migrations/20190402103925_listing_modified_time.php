@@ -1,10 +1,15 @@
 <?php
-
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ListingModifiedTime extends AbstractOnlineSchemaChange
+class ListingModifiedTime extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     const TABLE = 'listing';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'listings';
+    }
 
     public function up()
     {

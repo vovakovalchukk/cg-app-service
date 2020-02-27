@@ -1,10 +1,16 @@
 <?php
 use Phinx\Migration\AbstractMigration;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class InvoiceSettingsUseVerifiedEmailAddressForAmazonInvoices extends AbstractMigration
+class InvoiceSettingsUseVerifiedEmailAddressForAmazonInvoices extends AbstractMigration implements EnvironmentAwareInterface
 {
     const CILEX_LOCATION = '/../../console/app.php';
     const CILEX_CMD = 'phinx:defaultUseVerifiedEmailAddressForAmazonInvoices';
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
+    }
 
     /**
      * Migrate Up.
