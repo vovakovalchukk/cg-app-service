@@ -225,6 +225,7 @@ use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
+use CG\Transaction\GetOldTransactionsClientInterface;
 use CG\Transaction\LockInterface as LockClientInterface;
 use CG\Transaction\Client\Redis as TransactionRedisClient;
 use CG\Transaction\Command\Cleanup as TransactionCleanupCommand;
@@ -1754,6 +1755,7 @@ $config = array(
                 UsageAggregateFetchInterface::class => UsageRepository::class,
                 LockClientInterface::class => TransactionRedisClient::class,
                 TransactionClientInterface::class => TransactionRedisClient::class,
+                GetOldTransactionsClientInterface::class => TransactionRedisClient::class,
                 /* Cache disabled for order items as not compatable with collection hydration strategy */
                 ItemStorageInterface::class => ItemPersistentDbStorage::class,
                 StockStorage::class => StockService::class,
