@@ -3,7 +3,6 @@ namespace CG\Order\Service\Item;
 
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Nginx\Cache\Invalidator\OrderItems as Invalidator;
-use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\Order\Client\Gearman\Generator\AutoEmailInvoice as AutoEmailInvoiceGenerator;
 use CG\Order\Client\Gearman\Generator\CalculateOrderWeight as CalculateOrderWeightGenerator;
 use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
@@ -11,6 +10,7 @@ use CG\Order\Service\Item\Fee\Service as FeeService;
 use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Service\Item\Service as ItemService;
 use CG\Order\Service\Item\Transaction\UpdateItemAndStockFactory as TransactionFactory;
+use CG\Order\Service\Notification\Notifier as Notifier;
 use CG\Order\Shared\Item\Entity as ItemEntity;
 use CG\Order\Shared\Item\Mapper as ItemMapper;
 use CG\Order\Shared\Item\StorageInterface as ItemStorage;
