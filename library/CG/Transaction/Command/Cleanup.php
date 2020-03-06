@@ -30,6 +30,7 @@ class Cleanup
         $count = 0;
         $chunkSize = $this->getChunkSize($input);
         $cutoffTimestamp = $this->getCutoffTimestamp($input);
+        $this->predis->clearstaletransaction(1,2,3,4);
         foreach ($this->fetchChunkedTransactionActionKeys($chunkSize) as $transactionActionKeys) {
             $batch = $this->predis->transaction();
             /** @var TransactionKeyMap $transactionKeyMap */
