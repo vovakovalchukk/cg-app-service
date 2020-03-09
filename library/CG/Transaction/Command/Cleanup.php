@@ -23,6 +23,7 @@ class Cleanup
     {
         $this->predis = $predis;
         $this->predis->getProfile()->defineCommand('clearstaletransaction', ClearStaleTransaction::class);
+        $this->predis->script('load', (new ClearStaleTransaction())->getScript());
     }
 
     public function __invoke(InputInterface $input, OutputInterface $output)
