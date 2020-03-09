@@ -7,7 +7,7 @@ local function deleteTransaction()
 end
 
 local function getTransactionTimestamp()
-    return redis.call('GET', KEYS[1]) or 0
+    return tonumber(redis.call('GET', KEYS[1])) or 0
 end
 
 local function txActionOlderThanTransaction(txActionTimestamp, transactionTimestamp)
