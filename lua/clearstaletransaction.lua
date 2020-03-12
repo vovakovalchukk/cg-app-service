@@ -10,6 +10,10 @@ local function getTransactionTimestamp()
     return tonumber(redis.call('GET', KEYS[1])) or 0
 end
 
+local function transactionDoesntExist(transactionTimestamp)
+    return transactionTimestamp == 0
+end
+
 local function txActionOlderThanTransaction(txActionTimestamp, transactionTimestamp)
     return transactionTimestamp > txActionTimestamp
 end
@@ -26,6 +30,10 @@ local txActionTimestamp = tonumber(ARGV[1])
 local cutoffTimestamp = tonumber(ARGV[2])
 local transactionTimestamp = getTransactionTimestamp()
 local status = 0
+
+if transactionDoesntExist(transactionTimestamp) then
+    return getOutputStatus(status, deleteTxAction())
+end
 
 if txActionOlderThanTransaction(txActionTimestamp, transactionTimestamp) then
     status = getOutputStatus(status, deleteTxAction())
