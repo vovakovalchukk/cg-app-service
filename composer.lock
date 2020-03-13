@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9360d22f3786b7c196feb7c32410baef",
+    "content-hash": "3e614df9aed4b3390fcdc66f773ad061",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -147,11 +147,6 @@
                 "s3",
                 "sdk"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-11T21:23:43+00:00"
         },
         {
@@ -203,7 +198,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 }
             ],
             "description": "Common classes for PSR-6 adapters",
@@ -272,7 +267,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 }
             ],
             "description": "A PSR-6 cache implementation using apcu. This implementation supports tags",
@@ -321,7 +316,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/nyholm"
+                    "homepage": "https://github.com/Nyholm"
                 },
                 {
                     "name": "Nicolas Grekas",
@@ -2266,21 +2261,20 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "dev-CGIV-11294-product-links-causing-variation-listing-import-problems",
+            "version": "1.20.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "9b1264f4bb2f9c86042f627136e5ee95ffe49c94"
+                "reference": "ff7db9de205222bd942a24a76987886305f712d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-11294-product-links-causing-variation-listing-import-problems-bc7336.zip",
-                "reference": "9b1264f4bb2f9c86042f627136e5ee95ffe49c94"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.20.1-08506f.zip",
+                "reference": "ff7db9de205222bd942a24a76987886305f712d3"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/channel": "^1.42.13",
-                "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/http": "^1.3.14",
@@ -2324,7 +2318,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-03-11T13:26:13+00:00"
+            "time": "2020-03-13T08:48:22+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -3972,11 +3966,6 @@
                 "udp",
                 "unix"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2018-06-10T19:13:19+00:00"
         },
         {
@@ -4315,11 +4304,6 @@
                 "contextio",
                 "imap"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-08-25T01:42:05+00:00"
         },
         {
@@ -4369,11 +4353,6 @@
             "keywords": [
                 "scraper"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-05-05T21:14:57+00:00"
         },
         {
@@ -4435,11 +4414,6 @@
                 "webdriver"
             ],
             "abandoned": "php-webdriver/webdriver",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2018-05-16T17:37:13+00:00"
         },
         {
@@ -4454,7 +4428,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
                 "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
-                "shasum": "def1db73076f0261fb24891ce0291f42f433e379"
+                "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
@@ -4536,11 +4510,6 @@
                 "web service"
             ],
             "abandoned": "guzzlehttp/guzzle",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-03-18T18:23:50+00:00"
         },
         {
@@ -4593,11 +4562,6 @@
                 "rest",
                 "web service"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-07-15T19:28:39+00:00"
         },
         {
@@ -4649,11 +4613,6 @@
             "keywords": [
                 "promise"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-12-20T10:07:11+00:00"
         },
         {
@@ -4735,7 +4694,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
                 "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "shasum": "8dab3a339bf624c4ec71dd14092c3b222e8fd1c4"
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/streams": "~3.0",
@@ -4773,11 +4732,6 @@
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
             "abandoned": true,
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-05-20T03:37:09+00:00"
         },
         {
@@ -4792,7 +4746,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
                 "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": "7c6759fca28bc65d2f45c4ce942b68dc91a50c6f"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -4829,11 +4783,6 @@
                 "stream"
             ],
             "abandoned": true,
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
@@ -4867,11 +4816,6 @@
                 }
             ],
             "description": "Provides functionality for http_build_url() to environments without pecl_http.",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-01T15:36:40+00:00"
         },
         {
@@ -5009,7 +4953,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/liuggio/statsd-php-client/zipball/c42e6d6687b7b2d7683186ec7f4f03351cc3dbca",
                 "reference": "c42e6d6687b7b2d7683186ec7f4f03351cc3dbca",
-                "shasum": "ea0ce6f010f0e1e585728820862f3892b79c55f0"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -5045,11 +4989,6 @@
                 "php",
                 "statsd"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-07-23T23:12:45+00:00"
         },
         {
@@ -5108,11 +5047,6 @@
                 "mongodb",
                 "persistence"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-02-16T18:40:32+00:00"
         },
         {
@@ -5168,11 +5102,6 @@
                 "json",
                 "jsonpath"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-12-03T22:08:25+00:00"
         },
         {
@@ -5219,11 +5148,6 @@
                 "mustache",
                 "templating"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-07-11T12:54:05+00:00"
         },
         {
@@ -5281,11 +5205,6 @@
                 "zipalign",
                 "ziparchive"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2018-04-25T09:44:11+00:00"
         },
         {
@@ -5334,11 +5253,6 @@
                 "rest",
                 "xml"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-09-07T11:14:47+00:00"
         },
         {
@@ -5453,11 +5367,6 @@
                 "switches",
                 "toggle"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-08-01T17:45:55+00:00"
         },
         {
@@ -5561,11 +5470,6 @@
                 "json modification",
                 "json patch"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-04-08T00:37:11+00:00"
         },
         {
@@ -5614,11 +5518,6 @@
                 "json pointer",
                 "json traversal"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-05-20T23:07:34+00:00"
         },
         {
@@ -5670,11 +5569,6 @@
                 "data",
                 "measurements"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-12-12T19:31:49+00:00"
         },
         {
@@ -5689,7 +5583,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpish/link_header/zipball/c3f1aaa47511d4d774456f888081f16a53dd0133",
                 "reference": "c3f1aaa47511d4d774456f888081f16a53dd0133",
-                "shasum": "a1bb80defcfdc7dcce7119d5865a7ad54b49468a"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -5717,11 +5611,6 @@
             "keywords": [
                 "http"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-08-25T18:04:46+00:00"
         },
         {
@@ -5771,11 +5660,6 @@
                 "encryption",
                 "mcrypt"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-11-01T00:48:18+00:00"
         },
         {
@@ -5868,11 +5752,6 @@
                 "x.509",
                 "x509"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-08T05:58:35+00:00"
         },
         {
@@ -5942,11 +5821,6 @@
                 "svg",
                 "upc"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-10-17T14:20:28+00:00"
         },
         {
@@ -6141,11 +6015,6 @@
                 "request",
                 "response"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -6324,11 +6193,6 @@
             "keywords": [
                 "event-loop"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-12-28T22:48:03+00:00"
         },
         {
@@ -6375,11 +6239,6 @@
                 "promise",
                 "promises"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-25T12:08:31+00:00"
         },
         {
@@ -6418,11 +6277,6 @@
                 "hash",
                 "timing attack"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-04-14T18:33:30+00:00"
         },
         {
@@ -6455,7 +6309,8 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com"
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -6608,11 +6463,6 @@
                 "rest",
                 "router"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-01-07T12:21:41+00:00"
         },
         {
@@ -6670,11 +6520,6 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-12T14:07:15+00:00"
         },
         {
@@ -6731,11 +6576,6 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-12T14:07:15+00:00"
         },
         {
@@ -6850,11 +6690,6 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-01T14:31:55+00:00"
         },
         {
@@ -6912,11 +6747,6 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-07-30T07:22:48+00:00"
         },
         {
@@ -6973,11 +6803,6 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-12T14:07:15+00:00"
         },
         {
@@ -7038,11 +6863,6 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-26T16:56:54+00:00"
         },
         {
@@ -7357,11 +7177,6 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-01T14:31:55+00:00"
         },
         {
@@ -9289,11 +9104,6 @@
                 "paste",
                 "zclip"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-07-27T06:38:43+00:00"
         }
     ],
@@ -9613,11 +9423,6 @@
                 "constructor",
                 "instantiate"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
@@ -9665,7 +9470,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -9722,11 +9527,6 @@
                 "intercom",
                 "intercom.io"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-04-03T12:10:19+00:00"
         },
         {
@@ -9782,7 +9582,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/event/zipball/e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd",
                 "reference": "e4bfc88dbcb60c8d8a2939a71f9813e141bbe4cd",
-                "shasum": "c9235a50752d53a26fc53ade2bcb22c53126ead9"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -9818,11 +9618,6 @@
                 "event",
                 "listener"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-05-21T12:24:47+00:00"
         },
         {
@@ -9887,11 +9682,6 @@
                 "secure",
                 "server"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-09-13T13:42:53+00:00"
         },
         {
@@ -9970,11 +9760,6 @@
                 "logging",
                 "psr-3"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-13T07:08:03+00:00"
         },
         {
@@ -10020,11 +9805,6 @@
                 "object",
                 "object graph"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-10-19T19:58:43+00:00"
         },
         {
@@ -10080,11 +9860,6 @@
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-05T18:14:27+00:00"
         },
         {
@@ -10132,11 +9907,6 @@
                 }
             ],
             "description": "Library for handling version information and constraints",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-05T17:38:23+00:00"
         },
         {
@@ -10191,11 +9961,6 @@
                 "reflection",
                 "static analysis"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-12-27T11:43:31+00:00"
         },
         {
@@ -10241,11 +10006,6 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-09-30T07:12:33+00:00"
         },
         {
@@ -10293,11 +10053,6 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-11-25T06:54:22+00:00"
         },
         {
@@ -10312,7 +10067,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "shasum": "40a47a24a66032fd268680def25c0985ddf31c35"
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -10327,16 +10082,10 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2013-11-01T13:02:21+00:00"
         },
         {
@@ -10351,7 +10100,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/phpspec/zipball/61712147412cb647b6cb68b19833a60bfda759a1",
                 "reference": "61712147412cb647b6cb68b19833a60bfda759a1",
-                "shasum": "16df5bce0ddfa3b936d25221f13ea29cd2cfbd54"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -10410,11 +10159,6 @@
                 "testing",
                 "tests"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2014-07-01T14:09:19+00:00"
         },
         {
@@ -10478,11 +10222,6 @@
                 "spy",
                 "stub"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-02T20:05:34+00:00"
         },
         {
@@ -10586,11 +10325,6 @@
                 "testing",
                 "xunit"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-11-03T13:47:33+00:00"
         },
         {
@@ -10638,11 +10372,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-10-03T07:40:28+00:00"
         },
         {
@@ -10657,7 +10386,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "9390dce7fd48dfb168c06b72a690c7bb18c5b85b"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -10684,11 +10413,6 @@
             "keywords": [
                 "template"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-06-21T13:50:34+00:00"
         },
         {
@@ -10738,11 +10462,6 @@
             "keywords": [
                 "timer"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-02-26T11:10:40+00:00"
         },
         {
@@ -10792,11 +10511,6 @@
             "keywords": [
                 "tokenizer"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-08-20T05:47:52+00:00"
         },
         {
@@ -10881,11 +10595,6 @@
                 "testing",
                 "xunit"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-11-08T11:26:09+00:00"
         },
         {
@@ -10946,11 +10655,6 @@
                 "xunit"
             ],
             "abandoned": true,
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-08-03T14:08:16+00:00"
         },
         {
@@ -10996,11 +10700,6 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-04T06:30:41+00:00"
         },
         {
@@ -11065,11 +10764,6 @@
                 "compare",
                 "equality"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-11-03T07:16:52+00:00"
         },
         {
@@ -11122,11 +10816,6 @@
             "keywords": [
                 "diff"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-08-03T08:09:46+00:00"
         },
         {
@@ -11177,11 +10866,6 @@
                 "environment",
                 "hhvm"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-07-01T08:51:00+00:00"
         },
         {
@@ -11249,11 +10933,6 @@
                 "export",
                 "exporter"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-03T13:19:02+00:00"
         },
         {
@@ -11305,11 +10984,6 @@
             "keywords": [
                 "global state"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-27T15:39:26+00:00"
         },
         {
@@ -11357,11 +11031,6 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-08-03T12:35:26+00:00"
         },
         {
@@ -11407,11 +11076,6 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-29T09:07:27+00:00"
         },
         {
@@ -11465,11 +11129,6 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-03-03T06:23:57+00:00"
         },
         {
@@ -11512,11 +11171,6 @@
             ],
             "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-07-28T20:34:47+00:00"
         },
         {
@@ -11560,11 +11214,6 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-10-03T07:35:21+00:00"
         },
         {
@@ -11618,11 +11267,6 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-12T14:07:15+00:00"
         },
         {
@@ -11686,11 +11330,6 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-26T01:38:53+00:00"
         },
         {
@@ -11744,11 +11383,6 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-05-01T14:55:58+00:00"
         },
         {
@@ -11802,11 +11436,6 @@
                 "portable",
                 "shim"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-11-14T01:06:16+00:00"
         },
         {
@@ -11847,11 +11476,6 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-07T12:08:54+00:00"
         },
         {
@@ -11914,11 +11538,6 @@
             "keywords": [
                 "templating"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2017-04-20T17:39:48+00:00"
         },
         {
@@ -11969,11 +11588,6 @@
                 "check",
                 "validate"
             ],
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2016-11-23T20:04:58+00:00"
         },
         {
@@ -12017,26 +11631,13 @@
                 "useragent"
             ],
             "abandoned": "whichbrowser/legacy",
-            "transport-options": {
-                "ssl": {
-                    "local_cert": "composer.pem"
-                }
-            },
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.18.9",
-            "alias_normalized": "1.18.9.0",
-            "version": "dev-CGIV-11294-product-links-causing-variation-listing-import-problems",
-            "package": "channelgrabber/product"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/product": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
