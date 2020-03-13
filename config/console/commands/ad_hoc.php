@@ -122,13 +122,12 @@ return [
             'fix' => [
                 'description' => 'Apply updates to stock',
             ],
-            'useNew' => []
         ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di)
             {
                 $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
-                $adjustments = $findCommand->findUnderAllocated($input->getArgument('organisationUnitId'), null, $input->getOption('useNew') ?? false);
+                $adjustments = $findCommand->findUnderAllocated($input->getArgument('organisationUnitId'));
 
                 /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);
@@ -152,13 +151,12 @@ return [
             'fix' => [
                 'description' => 'Apply updates to stock',
             ],
-            'useNew' => []
         ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di)
             {
                 $findCommand = $di->get(FindIncorrectlyAllocatedStockCommand::class);
-                $adjustments = $findCommand->findOverAllocated($input->getArgument('organisationUnitId'), null, $input->getOption('useNew') ?? false);
+                $adjustments = $findCommand->findOverAllocated($input->getArgument('organisationUnitId'));
 
                 /** @var StockAdjustmentCommand $command */
                 $command = $di->get(StockAdjustmentCommand::class);

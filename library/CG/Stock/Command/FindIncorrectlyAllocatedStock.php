@@ -30,17 +30,17 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function findOverAllocated(int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
+    public function findOverAllocated(int $organisationUnitId = null, string $sku = null): iterable
     {
-        return $this->findIncorrectlyAllocated('>', $organisationUnitId, $sku, $isNew);
+        return $this->findIncorrectlyAllocated('>', $organisationUnitId, $sku);
     }
 
-    public function findUnderAllocated(int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
+    public function findUnderAllocated(int $organisationUnitId = null, string $sku = null): iterable
     {
-        return $this->findIncorrectlyAllocated('<', $organisationUnitId, $sku, $isNew);
+        return $this->findIncorrectlyAllocated('<', $organisationUnitId, $sku);
     }
 
-    public function findIncorrectlyAllocated(string $operator = null, int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
+    public function findIncorrectlyAllocated(string $operator = null, int $organisationUnitId = null, string $sku = null): iterable
     {
         $operator = $operator ?? '!=';
 
@@ -60,13 +60,6 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
             $sku = \CG\Stdlib\escapeLikeValue($sku);
             $skuWhere = "AND s.sku LIKE '$sku'";
         }
-
-        $leftJoinProductLink = $isNew ? "LOWER(item.itemSku) = LOWER(productLink.sku)" : <<<'EOD'
-item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
-EOD;
-        $leftJoinItem = $isNew ? "LOWER(calc.allocatedSku) = LOWER(s.sku)" : <<<'EOD'
-calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
-EOD;
 
         $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
@@ -92,14 +85,14 @@ LEFT JOIN (
 		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
 		WHERE root.organisationUnitId IN ({$organisationUnitIdString})
 		GROUP BY root.organisationUnitId, root.sku, leaf.sku
-    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
+    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND LOWER(item.itemSku) = LOWER(productLink.sku)
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
 	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
-    {$leftJoinItem}
+    LOWER(calc.allocatedSku) = LOWER(s.sku)
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
@@ -108,24 +101,24 @@ AND s.organisationUnitId IN ({$organisationUnitIdString})
 ORDER BY s.organisationUnitId, sku
 EOF;
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
-        $this->logFindings($results, $leftJoinProductLink);
+        $this->logFindings($results);
 
         return $results;
     }
 
-    protected function logFindings(ResultInterface $results, string $leftJoinProductLink): void
+    protected function logFindings(ResultInterface $results): void
     {
         foreach ($results as $result) {
-            $details = $this->getExpectedAllocatedDetails($result, $leftJoinProductLink);
+            $details = $this->getExpectedAllocatedDetails($result);
             $discrepency = $this->areExpectationAndDetailsResultsDifferent($result, $details);
             $this->logDebugDump($details, static::LOG_FINDINGS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku'], $result['actual'], $result['expected']], static::LOG_CODE, ['ticket' => 'CGIV-7567', 'discrepency' => $discrepency]);
 
-            $detailsByOrder = $this->getExpectedAllocatedDetailsByOrderStatus($result, $leftJoinProductLink);
+            $detailsByOrder = $this->getExpectedAllocatedDetailsByOrderStatus($result);
             $this->logDebugDump($detailsByOrder, static::LOG_FINDINGS_ORDERS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku']], static::LOG_CODE, ['ticket' => 'CGIV-7567']);
         }
     }
 
-    protected function getExpectedAllocatedDetails(array $result, string $leftJoinProductLink): array
+    protected function getExpectedAllocatedDetails(array $result): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -141,7 +134,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND LOWER(item.itemSku) = LOWER(productLink.sku)
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
@@ -158,7 +151,7 @@ EOF;
         return iterator_to_array($secondaryResults);
     }
 
-    protected function getExpectedAllocatedDetailsByOrderStatus(array $result, string $leftJoinProductLink): array
+    protected function getExpectedAllocatedDetailsByOrderStatus(array $result): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -174,7 +167,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND LOWER(item.itemSku) = LOWER(productLink.sku)
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
