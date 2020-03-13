@@ -104,24 +104,24 @@ AND s.organisationUnitId IN ({$organisationUnitIdString})
 ORDER BY s.organisationUnitId, sku
 EOF;
         $results = $this->sqlClient->getAdapter()->query($query)->execute();
-        $this->logFindings($results);
+        $this->logFindings($results, $leftJoinProductLink);
 
         return $results;
     }
 
-    protected function logFindings(ResultInterface $results): void
+    protected function logFindings(ResultInterface $results, string $leftJoinProductLink): void
     {
         foreach ($results as $result) {
-            $details = $this->getExpectedAllocatedDetails($result);
+            $details = $this->getExpectedAllocatedDetails($result, $leftJoinProductLink);
             $discrepency = $this->areExpectationAndDetailsResultsDifferent($result, $details);
             $this->logDebugDump($details, static::LOG_FINDINGS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku'], $result['actual'], $result['expected']], static::LOG_CODE, ['ticket' => 'CGIV-7567', 'discrepency' => $discrepency]);
 
-            $detailsByOrder = $this->getExpectedAllocatedDetailsByOrderStatus($result);
+            $detailsByOrder = $this->getExpectedAllocatedDetailsByOrderStatus($result, $leftJoinProductLink);
             $this->logDebugDump($detailsByOrder, static::LOG_FINDINGS_ORDERS, ['ou' => $result['organisationUnitId'], 'sku' => $result['sku']], static::LOG_CODE, ['ticket' => 'CGIV-7567']);
         }
     }
 
-    protected function getExpectedAllocatedDetails(array $result): array
+    protected function getExpectedAllocatedDetails(array $result, string $leftJoinProductLink): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -137,7 +137,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
@@ -154,7 +154,7 @@ EOF;
         return iterator_to_array($secondaryResults);
     }
 
-    protected function getExpectedAllocatedDetailsByOrderStatus(array $result): array
+    protected function getExpectedAllocatedDetailsByOrderStatus(array $result, string $leftJoinProductLink): array
     {
         $query = <<<EOF
 SELECT `item`.`orderId`, `item`.`id` AS itemId, `item`.`status` AS itemStatus, `order`.`status` AS orderStatus,
@@ -170,7 +170,7 @@ LEFT JOIN (
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
-) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
 WHERE `item`.`organisationUnitId` = ?
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
