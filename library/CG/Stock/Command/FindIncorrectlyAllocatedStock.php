@@ -30,17 +30,17 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function findOverAllocated(int $organisationUnitId = null, string $sku = null): iterable
+    public function findOverAllocated(int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
     {
-        return $this->findIncorrectlyAllocated('>', $organisationUnitId, $sku);
+        return $this->findIncorrectlyAllocated('>', $organisationUnitId, $sku, $isNew);
     }
 
-    public function findUnderAllocated(int $organisationUnitId = null, string $sku = null): iterable
+    public function findUnderAllocated(int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
     {
-        return $this->findIncorrectlyAllocated('<', $organisationUnitId, $sku);
+        return $this->findIncorrectlyAllocated('<', $organisationUnitId, $sku, $isNew);
     }
 
-    public function findIncorrectlyAllocated(string $operator = null, int $organisationUnitId = null, string $sku = null): iterable
+    public function findIncorrectlyAllocated(string $operator = null, int $organisationUnitId = null, string $sku = null, bool $isNew = false): iterable
     {
         $operator = $operator ?? '!=';
 
@@ -60,6 +60,9 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
             $sku = \CG\Stdlib\escapeLikeValue($sku);
             $skuWhere = "AND s.sku LIKE '$sku'";
         }
+
+        $leftJoinProductLink = $isNew ? "LOWER(item.itemSku) = LOWER(productLink.sku)" : "item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')";
+        $leftJoinItem = $isNew ? "LOWER(calc.allocatedSku) = LOWER(s.sku)" : "calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')";
 
         $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
@@ -85,14 +88,14 @@ LEFT JOIN (
 		JOIN productLink leaf ON leafPath.linkId = leaf.linkId
 		WHERE root.organisationUnitId IN ({$organisationUnitIdString})
 		GROUP BY root.organisationUnitId, root.sku, leaf.sku
-    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+    ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND {$leftJoinProductLink}
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
 	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
 	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
-    calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+    {$leftJoinItem}
     AND s.organisationUnitId = calc.rootOrganisationUnitId
 )
 WHERE allocated {$operator} IFNULL(calculatedAllocated, 0)
