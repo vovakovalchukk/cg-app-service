@@ -61,8 +61,12 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
             $skuWhere = "AND s.sku LIKE '$sku'";
         }
 
-        $leftJoinProductLink = $isNew ? "LOWER(item.itemSku) = LOWER(productLink.sku)" : "item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')";
-        $leftJoinItem = $isNew ? "LOWER(calc.allocatedSku) = LOWER(s.sku)" : "calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')";
+        $leftJoinProductLink = $isNew ? "LOWER(item.itemSku) = LOWER(productLink.sku)" : <<<'EOD'
+item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+EOD;
+        $leftJoinItem = $isNew ? "LOWER(calc.allocatedSku) = LOWER(s.sku)" : <<<'EOD'
+calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+EOD;
 
         $query = <<<EOF
 SELECT s.sku, s.organisationUnitId, IFNULL(calculatedAllocated, 0) as expected, sl.allocated as actual, IFNULL(calculatedAllocated, 0) - allocated as diff, IFNULL(unknownOrders, 0) as unknownOrders
