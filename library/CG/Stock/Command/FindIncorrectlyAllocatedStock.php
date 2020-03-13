@@ -62,10 +62,10 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
         }
 
         $leftJoinProductLink = $isNew ? "LOWER(item.itemSku) = LOWER(productLink.sku)" : <<<'EOD'
-item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 EOD;
         $leftJoinItem = $isNew ? "LOWER(calc.allocatedSku) = LOWER(s.sku)" : <<<'EOD'
-calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '%', '\\\\\\\\%'), '_', '\\\\\\\\_')
+calc.allocatedSku LIKE REPLACE(REPLACE(REPLACE(s.sku, '\\\\', '\\\\\\\\'), '%', '\\\\%'), '_', '\\\\_')
 EOD;
 
         $query = <<<EOF
