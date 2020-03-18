@@ -1,11 +1,12 @@
 <?php
 namespace CG\Stock\Command;
 
-use CG\Billing\Subscription\Collection as SubscriptionCollection;
-use CG\Billing\Subscription\Service as SubscriptionService;
+use CG\Access\BulkAccessService;
 use CG\Cilex\ModulusAwareInterface;
 use CG\Cilex\ModulusTrait;
-use CG\Stdlib\DateTime;
+use CG\OrganisationUnit\Collection as OrganisationUnits;
+use CG\OrganisationUnit\Filter as OrganisationUnitFilter;
+use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use Zend\Db\Adapter\Driver\ResultInterface;
@@ -22,12 +23,19 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
 
     /** @var Sql */
     protected $sqlClient;
-    protected $subscriptionService;
+    /** @var OrganisationUnitService */
+    protected $organisationUnitService;
+    /** @var BulkAccessService */
+    protected $bulkAccessService;
 
-    public function __construct(Sql $sqlClient, SubscriptionService $subscriptionService)
-    {
+    public function __construct(
+        Sql $sqlClient,
+        OrganisationUnitService $organisationUnitService,
+        BulkAccessService $bulkAccessService
+    ) {
         $this->sqlClient = $sqlClient;
-        $this->subscriptionService = $subscriptionService;
+        $this->organisationUnitService = $organisationUnitService;
+        $this->bulkAccessService = $bulkAccessService;
     }
 
     public function findOverAllocated(int $organisationUnitId = null, string $sku = null): iterable
@@ -44,11 +52,11 @@ class FindIncorrectlyAllocatedStock implements LoggerAwareInterface, ModulusAwar
     {
         $operator = $operator ?? '!=';
 
-        $subscriptions = $this->getActiveSubscriptions($organisationUnitId);
+        $organisationUnits = $this->getOrganisationUnits($organisationUnitId);
         if (is_null($organisationUnitId) && is_null($sku)) {
-            $this->filterCollection($subscriptions);
+            $this->filterCollection($organisationUnits);
         }
-        $organisationUnitIds = $this->getOrganisationUnitIdsFromSubscriptions($subscriptions);
+        $organisationUnitIds = $this->getActiveOrganisationUnitIds($organisationUnits);
         if (empty($organisationUnitIds)) {
             $this->logNotice('No active organisation units to process - exiting', [], static::LOG_CODE);
             return [];
@@ -193,24 +201,20 @@ EOF;
         return ($count != $result['expected']);
     }
 
-    protected function getActiveSubscriptions($organisationUnitId = null): SubscriptionCollection
+    protected function getOrganisationUnits(?int $organisationUnitId = null): OrganisationUnits
     {
-        $now = (new DateTime('now'))->resetTime();
-        $subscriptions = $this->subscriptionService->fetchCollectionByPagination(
-            'all',
-            1,
-            [],
-            $now->stdFormat(),
-            $now->stdFormat(),
-            $organisationUnitId ? [$organisationUnitId] : [],
-            [],
-            []
+        if ($organisationUnitId === null) {
+            return $this->organisationUnitService->fetchRootOus('all', 1);
+        }
+        return $this->organisationUnitService->fetchCollectionByFilter(
+            (new OrganisationUnitFilter(1, 1))
+                ->setId([$organisationUnitId])
         );
-        return $subscriptions;
     }
 
-    protected function getOrganisationUnitIdsFromSubscriptions(SubscriptionCollection $subscriptions): array
+    protected function getActiveOrganisationUnitIds(OrganisationUnits $organisationUnits): array
     {
-        return $subscriptions->getArrayOf('OrganisationUnitId');
+        $organisationUnitSystemAccess = $this->bulkAccessService->getSystemAccess($organisationUnits);
+        return array_keys(array_filter($organisationUnitSystemAccess));
     }
 }
