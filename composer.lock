@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "974220b9677a12968c237c75a0a3546f",
+    "content-hash": "5847740075d9277834246ac22e1f6619",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -345,19 +345,19 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-access.git",
-                "reference": "1ae6180c7fe244ed880864c27e6452235b815910"
+                "reference": "74737ba9b88c9ba570f2c6134763e06fa63c73b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/access/channelgrabber-access-dev-TAC-516-bulk-access-strategies-4a23db.zip",
-                "reference": "1ae6180c7fe244ed880864c27e6452235b815910",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/access/channelgrabber-access-dev-TAC-516-bulk-access-strategies-e595cf.zip",
+                "reference": "74737ba9b88c9ba570f2c6134763e06fa63c73b1",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/billing": "^1.20.16",
                 "channelgrabber/stdlib": "^2.16.10",
                 "channelgrabber/usage-check": "^1.2.4",
-                "channelgrabber/user": "^1.26.8",
+                "channelgrabber/user": "dev-TAC-516-bulk-access-strategies as 1.28.1",
                 "php": ">=7.1",
                 "zendframework/zend-di": ">=2.2,<3.0"
             },
@@ -365,6 +365,11 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-TAC-516-bulk-access-strategies": "1.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Access\\": "src/"
@@ -375,7 +380,7 @@
                     "CG\\Access\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-03-17T09:47:15+00:00"
+            "time": "2020-03-20T13:11:45+00:00"
         },
         {
             "name": "channelgrabber/amazon",
@@ -3371,22 +3376,21 @@
         },
         {
             "name": "channelgrabber/user",
-            "version": "1.27.1",
+            "version": "dev-TAC-516-bulk-access-strategies",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cguser.git",
-                "reference": "a12e510a869a92dd0f19c478af0f1ea07fb92b0c"
+                "reference": "d3bc48a82be3b0dcd0a1eac5ebdbb8ad093841a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-1.27.1-fae314.zip",
-                "reference": "a12e510a869a92dd0f19c478af0f1ea07fb92b0c",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/user/channelgrabber-user-dev-TAC-516-bulk-access-strategies-49623f.zip",
+                "reference": "d3bc48a82be3b0dcd0a1eac5ebdbb8ad093841a5",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
                 "channelgrabber/cg-predis": "^0.8.7",
-                "channelgrabber/constants": "dev-master",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": ">=1.0.1",
                 "channelgrabber/etag": "^1.5.4",
@@ -3426,7 +3430,7 @@
                     "CG\\": "src"
                 }
             },
-            "time": "2020-02-06T11:57:51+00:00"
+            "time": "2020-03-20T13:00:50+00:00"
         },
         {
             "name": "channelgrabber/userpreference",
@@ -12114,12 +12118,19 @@
             "alias_normalized": "1.1.1.0",
             "version": "dev-TAC-516-bulk-access-strategies",
             "package": "channelgrabber/access"
+        },
+        {
+            "alias": "1.28.1",
+            "alias_normalized": "1.28.1.0",
+            "version": "dev-TAC-516-bulk-access-strategies",
+            "package": "channelgrabber/user"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/access": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/user": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
