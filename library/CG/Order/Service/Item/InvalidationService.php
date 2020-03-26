@@ -6,6 +6,7 @@ use CG\CGLib\Nginx\Cache\Invalidator\OrderItems as Invalidator;
 use CG\Order\Client\Gearman\Generator\AutoEmailInvoice as AutoEmailInvoiceGenerator;
 use CG\Order\Client\Gearman\Generator\CalculateOrderWeight as CalculateOrderWeightGenerator;
 use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
+use CG\Order\Client\Gearman\Generator\UpdateItemsSupplier as UpdateItemsSupplierGearmanJobGenerator;
 use CG\Order\Service\Item\Fee\Service as FeeService;
 use CG\Order\Service\Item\GiftWrap\Service as GiftWrapService;
 use CG\Order\Service\Item\Service as ItemService;
@@ -29,6 +30,8 @@ class InvalidationService extends ItemService
 {
     /** @var Invalidator $invalidator */
     protected $invalidator;
+    /** @var UpdateItemsSupplierGearmanJobGenerator */
+    protected $updateItemsSupplierGearmanJobGenerator;
 
     public function __construct(
         ItemStorage $repository,
@@ -50,7 +53,8 @@ class InvalidationService extends ItemService
         AutoEmailInvoiceGenerator $autoEmailInvoiceGenerator,
         CalculateOrderWeightGenerator $calculateOrderWeightGenerator,
         Invalidator $invalidator,
-        GearmanClient $orderGearmanClient
+        GearmanClient $orderGearmanClient,
+        UpdateItemsSupplierGearmanJobGenerator $updateItemsSupplierGearmanJobGenerator
     ) {
         parent::__construct(
             $repository,
@@ -71,7 +75,8 @@ class InvalidationService extends ItemService
             $linkMatchingOrdersGenerator,
             $autoEmailInvoiceGenerator,
             $calculateOrderWeightGenerator,
-            $orderGearmanClient
+            $orderGearmanClient,
+            $updateItemsSupplierGearmanJobGenerator
         );
         $this->setInvalidator($invalidator);
     }

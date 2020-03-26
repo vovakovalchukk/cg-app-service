@@ -12,6 +12,7 @@ use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerF
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
 use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
 use CG\Order\Client\StorageInterface as OrderStorage;
+use CG\Order\Command\UpdateItemsWithSuppliers;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
@@ -684,6 +685,16 @@ SQL;
             }
 
             $output->writeln('<fg=green>COMPLETED</>');
+        },
+        'arguments' => [],
+        'options' => [],
+    ],
+    'ad-hoc:updateItemsWithSuppliers' => [
+        'description' => 'Generates jobs to update all the order items with suppliers from the product details',
+        'command' => function(InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var UpdateItemsWithSuppliers $command */
+            $command = $di->newInstance(UpdateItemsWithSuppliers::class);
+            $command($output);
         },
         'arguments' => [],
         'options' => [],
