@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c08b6158a37052669826f4cbc1afd982",
+    "content-hash": "ff4a557c3e1f67513fdea1d910e3e318",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -649,21 +649,20 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.16.27",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "2e376399a68a6c51a7d4770c146086f166c45efb"
+                "reference": "31a9931ce93af64afbf48e1246eb7a68fc5af09a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.16.27-335251.zip",
-                "reference": "2e376399a68a6c51a7d4770c146086f166c45efb"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-11321-oversells-on-high-order-volume-skus-420a79.zip",
+                "reference": "31a9931ce93af64afbf48e1246eb7a68fc5af09a"
             },
             "require": {
                 "channelgrabber/billing": "^1.20.14",
                 "channelgrabber/channel": "^1.32.5",
-                "channelgrabber/constants": "dev-master",
                 "channelgrabber/currency": "^1.0.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.1.1",
@@ -678,10 +677,11 @@
                 "channelgrabber/predis": "^1.0.11",
                 "channelgrabber/product": "^1.16.7",
                 "channelgrabber/purge": "^1.0.6",
+                "channelgrabber/redis": "^1.0.1",
                 "channelgrabber/settings": "^1.5.3",
                 "channelgrabber/slim": "^1.14.4",
                 "channelgrabber/stdlib": "^2.16.6",
-                "channelgrabber/stock": "^1.16.0",
+                "channelgrabber/stock": "dev-CGIV-11321-oversells-on-high-order-volume-skus as 1.19.1",
                 "channelgrabber/stock-locking": "^1.1.0",
                 "channelgrabber/user": "^1.25.0",
                 "channelgrabber/zf2-email-template": "^1.0.24",
@@ -713,7 +713,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2019-12-03T15:23:04+00:00"
+            "time": "2020-03-26T10:03:40+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1089,20 +1089,20 @@
         },
         {
             "name": "channelgrabber/ebay",
-            "version": "1.21.2",
+            "version": "1.21.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-ebay.git",
-                "reference": "d6885b992de9d3611a41d7ce01779f73030c70bf"
+                "reference": "56377ba89874a47846933b2e07ef28776a324102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.21.2-ed45dd.zip",
-                "reference": "d6885b992de9d3611a41d7ce01779f73030c70bf"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/ebay/channelgrabber-ebay-1.21.2.1-c0ebff.zip",
+                "reference": "56377ba89874a47846933b2e07ef28776a324102"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/cglib": "~1.16.27",
+                "channelgrabber/cglib": "^1.16.27",
                 "channelgrabber/channel": "^1.43.9",
                 "channelgrabber/communication": "^1.0.0",
                 "channelgrabber/constants": "dev-master",
@@ -1150,7 +1150,7 @@
                     "CG\\Product\\Test\\": "vendor/channelgrabber/product/tests/src/"
                 }
             },
-            "time": "2020-02-06T11:47:53+00:00"
+            "time": "2020-03-18T16:32:42+00:00"
         },
         {
             "name": "channelgrabber/ekm",
@@ -1312,19 +1312,19 @@
         },
         {
             "name": "channelgrabber/etsy",
-            "version": "1.2.2",
+            "version": "1.2.2.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-etsy.git",
-                "reference": "78e24352eddec1c93bf7ba8ec7e444fb963ef04f"
+                "reference": "7898a817d27af5b2f5aca81d2eaf1b1e6efd05e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-1.2.2-a33576.zip",
-                "reference": "78e24352eddec1c93bf7ba8ec7e444fb963ef04f"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-1.2.2.1-7d928b.zip",
+                "reference": "7898a817d27af5b2f5aca81d2eaf1b1e6efd05e5"
             },
             "require": {
-                "channelgrabber/cglib": "~1.16.12",
+                "channelgrabber/cglib": "^1.16.12",
                 "channelgrabber/channel": "^1.42.11",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/feature-flags": "^2.1.0",
@@ -1351,7 +1351,7 @@
                     "CG\\Etsy\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-02-20T12:15:31+00:00"
+            "time": "2020-03-18T16:36:37+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -1966,25 +1966,24 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.50.2",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "1ebeefd68a4f8c3b651b8901a2544a4e3c5dd3d1"
+                "reference": "275548a2ebd2062774a4fec717cfb44e9324dec3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.50.2-5b8021.zip",
-                "reference": "1ebeefd68a4f8c3b651b8901a2544a4e3c5dd3d1"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11321-oversells-on-high-order-volume-skus-c04308.zip",
+                "reference": "275548a2ebd2062774a4fec717cfb44e9324dec3"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "^1.14.0",
+                "channelgrabber/cglib": "dev-CGIV-11321-oversells-on-high-order-volume-skus as 1.17.2",
                 "channelgrabber/channel": "^1.43.10",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
-                "channelgrabber/constants": "dev-master",
                 "channelgrabber/courieradapter": "^1.6.0",
                 "channelgrabber/db": "^1.0.9",
                 "channelgrabber/di": "^2.2.0",
@@ -2010,7 +2009,7 @@
                 "channelgrabber/slim": "^1.15.3",
                 "channelgrabber/stats": ">=1.0.0,<2.0.0",
                 "channelgrabber/stdlib": "^2.16.9",
-                "channelgrabber/stock": "^1.12.3",
+                "channelgrabber/stock": "dev-CGIV-11321-oversells-on-high-order-volume-skus as 1.19.1",
                 "channelgrabber/tax": "^1.0.2",
                 "channelgrabber/template": "^1.9.2",
                 "channelgrabber/transaction": "^1.3.0",
@@ -2047,7 +2046,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-03-09T13:59:29+00:00"
+            "time": "2020-03-26T10:05:27+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2931,21 +2930,20 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "1.18.1",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "a27698a636111f669c132d1d390a6048d1e101f4"
+                "reference": "891ec0c1bdebe7d2049061de75bb852a53d11290"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.18.1-b1f7d7.zip",
-                "reference": "a27698a636111f669c132d1d390a6048d1e101f4"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-CGIV-11321-oversells-on-high-order-volume-skus-e9e53e.zip",
+                "reference": "891ec0c1bdebe7d2049061de75bb852a53d11290"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.0.6",
-                "channelgrabber/constants": "dev-master",
                 "channelgrabber/db": "^1.0.4",
                 "channelgrabber/di": "^2.2.1",
                 "channelgrabber/email": "^1.0.8",
@@ -2986,7 +2984,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2020-03-09T14:05:13+00:00"
+            "time": "2020-03-25T16:33:37+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -8142,7 +8140,7 @@
             "version": "2.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zend-inputfilter.git",
+                "url": "git@bitbucket.org:channelgrabber/zend-inputfilter.git",
                 "reference": "ef3fd94bd97f09145a8c2473e239db632dd976e3"
             },
             "dist": {
@@ -12024,10 +12022,32 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.17.2",
+            "alias_normalized": "1.17.2.0",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/cglib"
+        },
+        {
+            "alias": "1.51.3",
+            "alias_normalized": "1.51.3.0",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/order"
+        },
+        {
+            "alias": "1.19.1",
+            "alias_normalized": "1.19.1.0",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/stock"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
+        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
