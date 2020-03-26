@@ -18,6 +18,7 @@ return [
             'StockAdjustmentRedisQueue' => [
                 'parameters' => [
                     'predis' => 'reliable_redis',
+                    'keyPrefix' => StockAdjustmentQueuer::QUEUE_KEY_PREFIX,
                 ]
             ]
         ]
