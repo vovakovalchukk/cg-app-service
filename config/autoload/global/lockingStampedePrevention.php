@@ -1,6 +1,10 @@
 <?php
 
+use CG\Cache\StampedePrevention\Caching\Strategy\Runtime as RuntimeCachingStrategy;
+use CG\Cache\StampedePrevention\Caching\StrategyInterface as CachingStrategyInterface;
 use CG\Cache\StampedePrevention\Locking as LockingStampedePrevention;
+use CG\Cache\StampedePrevention\Locking\Strategy\Standard as StandardLockingStrategy;
+use CG\Cache\StampedePrevention\Locking\StrategyInterface as LockingStrategyInterface;
 
 return [
     'di' => [
@@ -18,6 +22,8 @@ return [
             ],
             'preferences' => [
                 LockingStampedePrevention::class => 'LockingStampedePreventionForAllSalesAccounts',
+                LockingStrategyInterface::class => StandardLockingStrategy::class,
+                CachingStrategyInterface::class => RuntimeCachingStrategy::class,
             ]
         ]
     ]
