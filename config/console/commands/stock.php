@@ -1,4 +1,6 @@
 <?php
+
+use CG\CGLib\Adjustment\Queuer as StockAdjustmentQueuer;
 use CG\Log\Shared\StorageInterface as LogStorage;
 use CG\Stock\Command\AuditAllStock;
 use CG\Stock\Command\CreateMissingStock;
@@ -148,5 +150,20 @@ return [
                 'description' => 'Wet run, i.e. do the stock changes - without this it defaults to a dry run'
             ]
         ],
+    ],
+    'stock:requeueStaleProcessingQueues' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var StockAdjustmentQueuer $queuer */
+            $queuer = $di->get(StockAdjustmentQueuer::class);
+            $queuer->requeueStaleProcessingQueues($input->getArgument('age'));
+        },
+        'description' => 'Find and requeue any stock adjustment processing queues that have gone stale',
+        'arguments' => [
+            'age' => [
+                'description' => 'How old the processing queue needs to be before re-queuing it',
+                'required' => false,
+            ],
+        ],
+        'options' => [],
     ],
 ];
