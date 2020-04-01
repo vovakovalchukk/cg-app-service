@@ -151,6 +151,16 @@ return [
             ]
         ],
     ],
+    'stock:ensureJobsForAdjustmentQueues' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var StockAdjustmentQueuer $queuer */
+            $queuer = $di->get(StockAdjustmentQueuer::class);
+            $queuer->createJobsForAllQueues();
+        },
+        'description' => 'Make sure there is a job to process each current stock adjustment queue',
+        'arguments' => [],
+        'options' => [],
+    ],
     'stock:requeueStaleProcessingQueues' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             /** @var StockAdjustmentQueuer $queuer */

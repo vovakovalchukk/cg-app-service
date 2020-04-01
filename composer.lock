@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a94c282588ef2e816185222b8458ede",
+    "content-hash": "3761b930bbe952cf3ffa5d130217ecaf",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -557,16 +557,16 @@
         },
         {
             "name": "channelgrabber/cache",
-            "version": "2.8.1",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgcache.git",
-                "reference": "28686b52abbafee1c99f6851529665893feaf8e3"
+                "reference": "b6d46711cf26d70211cf150e871945c19315ce20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cache/channelgrabber-cache-2.8.1-77501a.zip",
-                "reference": "28686b52abbafee1c99f6851529665893feaf8e3"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cache/channelgrabber-cache-dev-CGIV-11321-oversells-on-high-order-volume-skus-419604.zip",
+                "reference": "b6d46711cf26d70211cf150e871945c19315ce20"
             },
             "require": {
                 "channelgrabber/di": "^2.2.0",
@@ -598,7 +598,7 @@
                     "CG\\Cache\\TestAsset\\": "tests/assets"
                 }
             },
-            "time": "2020-03-24T12:53:44+00:00"
+            "time": "2020-04-01T09:42:41+00:00"
         },
         {
             "name": "channelgrabber/cg-predis",
@@ -657,12 +657,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "3809fc70b30398a14c4cce9e23c4ee42afc9cdf3"
+                "reference": "4c82d4b6ed570beb8bcdfff2cdcb47cf846a9793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-11321-oversells-on-high-order-volume-skus-6c55f1.zip",
-                "reference": "3809fc70b30398a14c4cce9e23c4ee42afc9cdf3"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-11321-oversells-on-high-order-volume-skus-ac5971.zip",
+                "reference": "4c82d4b6ed570beb8bcdfff2cdcb47cf846a9793"
             },
             "require": {
                 "channelgrabber/billing": "^1.20.14",
@@ -682,7 +682,8 @@
                 "channelgrabber/predis": "^1.0.11",
                 "channelgrabber/product": "^1.16.7",
                 "channelgrabber/purge": "^1.0.6",
-                "channelgrabber/redis": "^1.0.1",
+                "channelgrabber/queue": "dev-CGIV-11321-oversells-on-high-order-volume-skus as 1.1.0-dev",
+                "channelgrabber/redis": "dev-CGIV-11321-oversells-on-high-order-volume-skus as 1.0.2",
                 "channelgrabber/settings": "^1.5.3",
                 "channelgrabber/slim": "^1.14.4",
                 "channelgrabber/stdlib": "^2.16.6",
@@ -718,7 +719,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2020-03-30T15:30:53+00:00"
+            "time": "2020-04-01T10:45:49+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -2460,16 +2461,16 @@
         },
         {
             "name": "channelgrabber/queue",
-            "version": "1.0.1",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-queue.git",
-                "reference": "f188f9d6e8db93db9f780bb59c0496f90cc53482"
+                "reference": "f17fec882b8be09361062d15e5adaeae4d79bd1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/queue/channelgrabber-queue-1.0.1-92c0a5.zip",
-                "reference": "f188f9d6e8db93db9f780bb59c0496f90cc53482"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/queue/channelgrabber-queue-dev-CGIV-11321-oversells-on-high-order-volume-skus-28466c.zip",
+                "reference": "f17fec882b8be09361062d15e5adaeae4d79bd1f"
             },
             "require": {
                 "channelgrabber/stdlib": "^2.12.38",
@@ -2484,20 +2485,20 @@
                     "CG\\Queue\\": "src"
                 }
             },
-            "time": "2017-03-23T09:36:01+00:00"
+            "time": "2020-04-01T09:33:26+00:00"
         },
         {
             "name": "channelgrabber/redis",
-            "version": "1.0.1",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-redis.git",
-                "reference": "daa2d4da1fc6b25f748918dd63a8e0c1474a6418"
+                "reference": "6e28dc5b5f39381a36b65c58c3bfe6ce87e85115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/redis/channelgrabber-redis-1.0.1-15e68f.zip",
-                "reference": "daa2d4da1fc6b25f748918dd63a8e0c1474a6418"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/redis/channelgrabber-redis-dev-CGIV-11321-oversells-on-high-order-volume-skus-580bfd.zip",
+                "reference": "6e28dc5b5f39381a36b65c58c3bfe6ce87e85115"
             },
             "require": {
                 "channelgrabber/queue": "^1.0.1",
@@ -2510,7 +2511,7 @@
                     "CG\\Redis\\": "src"
                 }
             },
-            "time": "2017-03-23T09:49:15+00:00"
+            "time": "2020-04-01T09:57:04+00:00"
         },
         {
             "name": "channelgrabber/redis-locking",
@@ -12027,6 +12028,12 @@
     ],
     "aliases": [
         {
+            "alias": "2.8.1",
+            "alias_normalized": "2.8.1.0",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/cache"
+        },
+        {
             "alias": "1.17.2",
             "alias_normalized": "1.17.2.0",
             "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
@@ -12039,6 +12046,18 @@
             "package": "channelgrabber/order"
         },
         {
+            "alias": "1.1.0-dev",
+            "alias_normalized": "1.1.0.0-dev",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/queue"
+        },
+        {
+            "alias": "1.0.2",
+            "alias_normalized": "1.0.2.0",
+            "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
+            "package": "channelgrabber/redis"
+        },
+        {
             "alias": "1.19.1",
             "alias_normalized": "1.19.1.0",
             "version": "dev-CGIV-11321-oversells-on-high-order-volume-skus",
@@ -12047,9 +12066,12 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cache": 20,
         "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
         "channelgrabber/order": 20,
+        "channelgrabber/queue": 20,
+        "channelgrabber/redis": 20,
         "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
