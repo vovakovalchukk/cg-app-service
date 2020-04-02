@@ -182,11 +182,13 @@ return [
         ],
         'command' =>
             function(InputInterface $input, OutputInterface $output) use ($di) {
+                $partiallyRefunded = OrderStatus::PARTIALLY_REFUNDED;
+                $refunded = OrderStatus::REFUNDED;
                 $query = <<<EOF
 SELECT o.`id` as `orderId`, i.`id` as `orderItemId`, o.`channel`, o.`status` as `orderStatus`, i.`status` as `itemStatus`
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
-WHERE o.`status` != i.`status`
+WHERE o.`status` != i.`status` AND (o.`status` != '{$partiallyRefunded}' OR (o.`status` = '{$partiallyRefunded}' AND i.`status` != '{$refunded}'))
 ORDER BY o.`id`, i.`id`
 EOF;
 
@@ -253,7 +255,7 @@ EOF;
 SELECT DISTINCT  o.`id` as `orderId`
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
-WHERE o.`status` != i.`status` AND o.`status` != '{$partiallyRefunded}' AND i.`status` != '{$refunded}'
+WHERE o.`status` != i.`status` AND (o.`status` != '{$partiallyRefunded}' OR (o.`status` = '{$partiallyRefunded}' AND i.`status` != '{$refunded}'))
 AND (o.lastUpdateFromChannel <= DATE_SUB(NOW(), INTERVAL {$hours} HOUR) OR o.lastUpdateFromChannel IS NULL)
 EOF;
                 if ($input->getArgument('organisationUnitId')) {
