@@ -174,7 +174,11 @@ return [
     ],
     'ad-hoc:validateOrderItemStatus' => [
         'description' => 'Reports any new order items that do not match their orders status since the command last run',
-        'arguments' => [],
+        'arguments' => [
+            'organisationUnitId' => [
+                'required' => false
+            ],
+        ],
         'options' => [
             'all' => [
                 'description' => 'Get all orders, even if we have previously reported on it',
@@ -189,8 +193,11 @@ SELECT o.`id` as `orderId`, i.`id` as `orderItemId`, o.`channel`, o.`status` as 
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
 WHERE o.`status` != i.`status` AND (o.`status` != '{$partiallyRefunded}' OR (o.`status` = '{$partiallyRefunded}' AND i.`status` != '{$refunded}'))
-ORDER BY o.`id`, i.`id`
 EOF;
+                if ($input->getArgument('organisationUnitId')) {
+                    $query .= ' AND o.`organisationUnitId` = ' . $input->getArgument('organisationUnitId');
+                }
+                $query .= ' ORDER BY o.`id`, i.`id`';
 
                 /** @var Redis $redis */
                 $redis = $di->get('reliable_redis');
