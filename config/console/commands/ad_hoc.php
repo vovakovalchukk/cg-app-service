@@ -228,7 +228,14 @@ EOF;
     ],
     'ad-hoc:updateOrderItemStatus' => [
         'description' => 'Update all order items where their status does not match their order status, by default will just output current status',
-        'arguments' => [],
+        'arguments' => [
+            'organisationUnitId' => [
+                'required' => false
+            ],
+            'ageInHours' => [
+                'required' => false
+            ],
+        ],
         'options' => [
             'fix' => [
                 'description' => 'Update item statuses',
@@ -241,14 +248,18 @@ EOF;
 
                 $partiallyRefunded = OrderStatus::PARTIALLY_REFUNDED;
                 $refunded = OrderStatus::REFUNDED;
+                $hours = $input->getArgument('ageInHours') ?? 6;
                 $query = <<<EOF
 SELECT DISTINCT  o.`id` as `orderId`
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
 WHERE o.`status` != i.`status` AND o.`status` != '{$partiallyRefunded}' AND i.`status` != '{$refunded}'
-AND (o.lastUpdateFromChannel <= DATE_SUB(NOW(), INTERVAL 6 HOUR) OR o.lastUpdateFromChannel IS NULL)
-ORDER BY o.`purchaseDate`
+AND (o.lastUpdateFromChannel <= DATE_SUB(NOW(), INTERVAL {$hours} HOUR) OR o.lastUpdateFromChannel IS NULL)
 EOF;
+                if ($input->getArgument('organisationUnitId')) {
+                    $query .= ' AND o.`organisationUnitId` = ' . $input->getArgument('organisationUnitId');
+                }
+                $query .= ' ORDER BY o.`purchaseDate`';
 
                 /** @var Mysqli $cgApp */
                 $cgApp = $di->get('cg_appReadMysqli');
