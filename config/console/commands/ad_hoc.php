@@ -19,6 +19,7 @@ use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Order\Shared\Item\Filter as ItemFilter;
 use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
+use CG\Order\Shared\Status as OrderStatus;
 use CG\Product\Detail\Filter as ProductDetailFilter;
 use CG\Product\Detail\Service as ProductDetailService;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
@@ -238,11 +239,13 @@ EOF;
                 $output->getFormatter()->setStyle('b', new OutputFormatterStyle(null, null, ['bold']));
                 $output->getFormatter()->setStyle('empty', new OutputFormatterStyle('red', null, ['bold']));
 
+                $partiallyRefunded = OrderStatus::PARTIALLY_REFUNDED;
+                $refunded = OrderStatus::REFUNDED;
                 $query = <<<EOF
 SELECT DISTINCT  o.`id` as `orderId`
 FROM `order` o
 JOIN item i ON o.id = i.`orderId`
-WHERE o.`status` != i.`status`
+WHERE o.`status` != i.`status` AND o.`status` != '{$partiallyRefunded}' AND i.`status` != '{$refunded}'
 AND (o.lastUpdateFromChannel <= DATE_SUB(NOW(), INTERVAL 6 HOUR) OR o.lastUpdateFromChannel IS NULL)
 ORDER BY o.`purchaseDate`
 EOF;
