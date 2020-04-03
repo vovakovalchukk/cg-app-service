@@ -77,7 +77,7 @@ INNER JOIN location AS l ON sl.locationId = l.id AND l.type = 'Merchant'
 LEFT JOIN (
     SELECT IFNULL(productLink.leafSku, item.itemSku) as allocatedSku, order.rootOrganisationUnitId, SUM(
 		IF(item.purchaseDate > account.cgCreationDate,
-			IF(item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'), item.itemQuantity * IFNULL(productLink.quantity, 1), 0),
+			IF(item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'cancel failed', 'dispatch failed'), item.itemQuantity * IFNULL(productLink.quantity, 1), 0),
 			IF(item.`status` IN ('awaiting payment', 'new'), item.itemQuantity * IFNULL(productLink.quantity, 1), 0)
 		)) as calculatedAllocated,
         SUM(IF(item.`status` = 'unknown', item.itemQuantity, 0)) * IFNULL(productLink.quantity, 1) as unknownOrders
@@ -96,7 +96,7 @@ LEFT JOIN (
     ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\%'), '_', '\\_')
 	WHERE item.itemSku != ''
 	AND item.stockManaged = 1
-	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'unknown')
+	AND item.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'cancel failed', 'dispatch failed',  'unknown')
 	AND account.rootOrganisationUnitId IN ({$organisationUnitIdString})
 	GROUP BY allocatedSku, order.rootOrganisationUnitId
 ) as calc ON (
@@ -148,7 +148,7 @@ AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
 AND
     (
-        (`item`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'))
+        (`item`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'cancel failed', 'dispatch failed'))
         OR
         (`item`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new'))
     )
@@ -181,7 +181,7 @@ AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
 AND
     (
-        (`order`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding'))
+        (`order`.`purchaseDate` > `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new', 'cancelling', 'dispatching', 'refunding', 'cancel failed', 'dispatch failed'))
         OR
         (`order`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new'))
     )
