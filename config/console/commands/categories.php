@@ -16,9 +16,9 @@ return [
              * @var UpdateNullVersionCategories $command
              */
             $command = $di->get(UpdateNullVersionCategories::class);
-            $command->update($output, $channelName, $marketplace);
+            $command($output, $channelName, $marketplace);
         },
-        'description' => 'Fetch all accounts for the provided channel then generate Gearman jobs to get orders from the respective channel.',
+        'description' => 'Remove null version in categories which channels have been moved to categoryVersionMapper',
         'arguments' => [
             'channelName' => [
                 'required' => true

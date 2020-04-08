@@ -20,7 +20,7 @@ class UpdateNullVersionCategories
         $this->categoryService = $categoryService;
     }
 
-    public function update(OutputInterface $output, $channelName, $marketplace): void
+    public function __invoke(OutputInterface $output, string $channelName, string $marketplace): void
     {
         $filter = (new Filter())
             ->setLimit(50)
