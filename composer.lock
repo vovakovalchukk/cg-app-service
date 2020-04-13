@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "624bec607d7f1574452a5631383c0675",
+    "content-hash": "ac6872d8e69074f603bae9ef8773b9be",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -378,12 +378,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "d01a1a11ef510bec2f919c49d6ab76e937b345ba"
+                "reference": "00cb9e59d116437149536849e8eea2e0cdfdcf33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-TAC-605-amazon-invoice-upload-fa35e8.zip",
-                "reference": "d01a1a11ef510bec2f919c49d6ab76e937b345ba",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-TAC-605-amazon-invoice-upload-6aa29b.zip",
+                "reference": "00cb9e59d116437149536849e8eea2e0cdfdcf33",
                 "shasum": null
             },
             "require": {
@@ -438,7 +438,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-04-10T13:18:35+00:00"
+            "time": "2020-04-13T12:54:59+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -2007,7 +2007,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "25e13cccb2edcfa938c2d7bfd244b75cb7ab0b8f"
+                "reference": "cb97cbce6064e82090ee8c27e2eec1e9f1e4a292"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-605-amazon-invoice-upload-fab912.zip",
+                "reference": "cb97cbce6064e82090ee8c27e2eec1e9f1e4a292",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2078,7 +2084,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-04-06T08:08:56+00:00"
+            "time": "2020-04-13T12:49:59+00:00"
         },
         {
             "name": "channelgrabber/partner",
