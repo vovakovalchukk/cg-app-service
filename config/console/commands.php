@@ -22,6 +22,7 @@ $files = [
     'transaction.php',
     'settings.php',
     'stripe.php',
+    'categories.php'
 ];
 
 $commands = array();
