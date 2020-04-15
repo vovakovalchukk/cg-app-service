@@ -22,6 +22,7 @@ class Versioniser18 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
+        $data['id'] = $data['id'] ?? $params['orderId'] ?? null;
 
         try {
             if (!isset($data['id'])) {
