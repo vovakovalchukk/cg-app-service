@@ -26,8 +26,11 @@ class Versioniser19 implements VersioniserInterface
         $data = $request->getData();
 
         try {
+            if (!isset($data['id'])) {
+                throw new NotFound();
+            }
             /** @var Order $order */
-            $order = $this->service->fetch($data['id'] ?? null);
+            $order = $this->service->fetch($data['id']);
         } catch (NotFound $e) {
             // New order so there won't be a previously set value
             $order = null;
