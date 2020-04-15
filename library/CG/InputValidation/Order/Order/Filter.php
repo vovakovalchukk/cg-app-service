@@ -406,6 +406,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new ArrayOfIntegersValidator($integerValidator, 'supplierId')
                 ],
             ],
+            'linked' => [
+                'name' => 'linked',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'linked'])
+                ]
+            ],
         ];
     }
 }
