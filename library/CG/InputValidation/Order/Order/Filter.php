@@ -193,6 +193,13 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(['name' => 'tag'])
                 ]
             ],
+            'excludeTag' => [
+                'name' => 'excludeTag',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'tag'])
+                ]
+            ],
             'paymentMethod' => [
                 'name' => 'paymentMethod',
                 'required' => false,
