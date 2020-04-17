@@ -24,10 +24,14 @@ class Versioniser19 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
+        $data['id'] = $data['id'] ?? $params['orderId'] ?? null;
 
         try {
+            if (!isset($data['id'])) {
+                throw new NotFound();
+            }
             /** @var Order $order */
-            $order = $this->service->fetch($data['id'] ?? null);
+            $order = $this->service->fetch($data['id']);
         } catch (NotFound $e) {
             // New order so there won't be a previously set value
             $order = null;

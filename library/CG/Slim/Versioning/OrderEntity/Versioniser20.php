@@ -22,6 +22,8 @@ class Versioniser20 implements VersioniserInterface
     public function upgradeRequest(array $params, Hal $request)
     {
         $data = $request->getData();
+        $data['id'] = $data['id'] ?? $params['orderId'] ?? null;
+
         if (isset($data['linkable'])) {
             return;
         }

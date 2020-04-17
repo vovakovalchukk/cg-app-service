@@ -144,12 +144,12 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(['name' => 'shippingAddressPostCode'])
                 ]
             ],
-            'multiLineOrder' => [
-                'name' => 'multiLineOrder',
+            'multiLineSameOrder' => [
+                'name' => 'multiLineSameOrder',
                 'required' => false,
                 'allow_empty' => true,
                 'validators' => [
-                    new BooleanValidator(['name' => 'multiLineOrder'])
+                    new BooleanValidator(['name' => 'multiLineSameOrder'])
                 ]
             ],
             'multiSameItem' => [
