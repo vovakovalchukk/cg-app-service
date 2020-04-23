@@ -627,7 +627,7 @@ $config = array(
                         ],
                     ],
                     'debugCachable' => [
-                        LockingProduct::class => true
+                        StockLocationEntity::class => true
                     ],
                 ]
             ],
