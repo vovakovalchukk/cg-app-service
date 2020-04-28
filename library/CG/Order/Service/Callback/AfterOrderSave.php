@@ -48,7 +48,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
 
     public function triggerCallbacksForExistingOrder(Order $order, Order $existingOrder): void
     {
-        $this->generateOrderCountJobForExistingOrder($order, $existingOrder);
+        $this->updateOrderCountGenerator->createJob($order, $existingOrder);
         $this->triggerCallbacksForOrder($order);
     }
 
@@ -70,6 +70,6 @@ class AfterOrderSave implements AfterOrderSaveInterface
 
     protected function generateOrderCountJobForExistingOrder(Order $order, Order $existingOrder): void
     {
-        $this->updateOrderCountGenerator->createJob($order, $existingOrder);
+
     }
 }
