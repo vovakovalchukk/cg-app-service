@@ -70,10 +70,6 @@ class AfterOrderSave implements AfterOrderSaveInterface
 
     protected function generateOrderCountJobForExistingOrder(Order $order, Order $existingOrder): void
     {
-        if ($order->getStatus() == $existingOrder->getStatus()) {
-            return;
-        }
-
-        $this->updateOrderCountGenerator->createJob($order);
+        $this->updateOrderCountGenerator->createJob($order, $existingOrder);
     }
 }
