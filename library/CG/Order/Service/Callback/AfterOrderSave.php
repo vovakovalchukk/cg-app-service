@@ -67,9 +67,4 @@ class AfterOrderSave implements AfterOrderSaveInterface
         $this->linkMatchingOrdersGenerator->generateForOrder($order);
         $this->exchangeRateUpdater->addJobForOrder($order);
     }
-
-    protected function generateOrderCountJobForExistingOrder(Order $order, Order $existingOrder): void
-    {
-
-    }
 }
