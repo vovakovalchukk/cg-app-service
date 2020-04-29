@@ -1,10 +1,10 @@
 <?php
-use CG\Bigcommerce\ListingImport as BigcommerceListingImport;
+use CG\BigCommerce\ListingImport as BigCommerceListingImport;
 
 return [
     'di' => [
         'instance' => [
-            BigcommerceListingImport::class => [
+            BigCommerceListingImport::class => [
                 'parameters' => [
                     'gearmanClient' => 'bigcommerceGearmanClient'
                 ]
