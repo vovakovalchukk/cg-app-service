@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "deabc689ded202d1ca6e25ffedeff13e",
+    "content-hash": "c82aa203ab04c877074038d8658d1de5",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -198,7 +198,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 }
             ],
             "description": "Common classes for PSR-6 adapters",
@@ -267,7 +267,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 }
             ],
             "description": "A PSR-6 cache implementation using apcu. This implementation supports tags",
@@ -316,7 +316,7 @@
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "homepage": "https://github.com/nyholm"
                 },
                 {
                     "name": "Nicolas Grekas",
@@ -1965,16 +1965,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-TAC-616-linked-orders-filter",
+            "version": "dev-qa-20200430-0930",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "be0d490f43fb041a7a81926ffe43f5a425100308"
+                "reference": "815a770b316fb2db5daf91c01f251f4a3cc786f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-TAC-616-linked-orders-filter-c0132a.zip",
-                "reference": "be0d490f43fb041a7a81926ffe43f5a425100308"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-qa-20200430-0930-b523f1.zip",
+                "reference": "815a770b316fb2db5daf91c01f251f4a3cc786f8"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2045,7 +2045,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-04-30T07:21:05+00:00"
+            "time": "2020-04-30T08:41:21+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -6310,8 +6310,7 @@
             "authors": [
                 {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com",
-                    "role": "Developer"
+                    "homepage": "http://benramsey.com"
                 }
             ],
             "description": "application/vnd.error builder / formatter for PHP 5.3+",
@@ -9471,7 +9470,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -10083,7 +10082,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -11639,7 +11639,7 @@
         {
             "alias": "1.54.1",
             "alias_normalized": "1.54.1.0",
-            "version": "dev-TAC-616-linked-orders-filter",
+            "version": "dev-qa-20200430-0930",
             "package": "channelgrabber/order"
         }
     ],
@@ -11653,5 +11653,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
