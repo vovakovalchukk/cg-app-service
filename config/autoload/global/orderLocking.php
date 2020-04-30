@@ -1,12 +1,13 @@
 <?php
 
 use CG\Locking\Service as LockingService;
+use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
 use CG\Order\Locking\Service as OrderLockingService;
+use CG\Order\Service\Callback\AfterOrderSave;
 use CG\Order\Service\Filter\Storage\Cache as FilterCache;
 use CG\Order\Service\Service as OrderService;
 use CG\Order\Service\Storage\ElasticSearch as OrderElasticSearchStorage;
 use CG\Order\Service\Storage\Persistent as OrderPersistentStorage;
-use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
 
 return [
     'di' => [
@@ -27,6 +28,7 @@ return [
                     'storage' => OrderElasticSearchStorage::class,
                     'filterStorage' => FilterCache::class,
                     'lockingService' => 'LockingServiceOrders',
+                    'afterOrderSave' => AfterOrderSave::class
                 ],
             ],
             LinkMatchingOrdersGenerator::class => [

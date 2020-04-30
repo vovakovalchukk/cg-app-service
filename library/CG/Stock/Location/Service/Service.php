@@ -4,6 +4,7 @@ namespace CG\Stock\Location\Service;
 use CG\Account\Client\Service as AccountService;
 use CG\CGLib\Gearman\Generator\UpdateRelatedListingsForStock;
 use CG\CGLib\Nginx\Cache\Invalidator\ProductStock as NginxCacheInvalidator;
+use CG\ETag\Storage\Predis as ETagCache;
 use CG\Notification\Gearman\Generator\Dispatcher as Notifier;
 use CG\OrganisationUnit\Service as OrganisationUnitService;
 use CG\Product\LinkRelated\Entity as ProductLinkRelated;
@@ -48,6 +49,8 @@ class Service extends BaseService implements StatsAwareInterface
     protected $stockLocationCache;
     /** @var NginxCacheInvalidator $nginxCacheInvalidator */
     protected $nginxCacheInvalidator;
+    /** @var ETagCache */
+    protected $etagCache;
     /** @var UpdateRelatedListingsForStock */
     protected $updateRelatedListingsForStockGenerator;
     /** @var LowStockThresholdUpdateGenerator */
@@ -66,6 +69,7 @@ class Service extends BaseService implements StatsAwareInterface
         ProductLinkRelatedStorage $productLinkRelatedStorage,
         StockLocationCache $stockLocationCache,
         NginxCacheInvalidator $nginxCacheInvalidator,
+        ETagCache $etagCache,
         UpdateRelatedListingsForStock $updateRelatedListingsForStockGenerator,
         LowStockThresholdUpdateGenerator $lowStockThresholdUpdateGenerator,
         DetermineAndUpdateDispatchableOrdersGenerator $determineAndUpdateDispatchableOrdersJobGenerator
@@ -76,6 +80,7 @@ class Service extends BaseService implements StatsAwareInterface
         $this->productLinkRelatedStorage = $productLinkRelatedStorage;
         $this->stockLocationCache = $stockLocationCache;
         $this->nginxCacheInvalidator = $nginxCacheInvalidator;
+        $this->etagCache = $etagCache;
         $this->updateRelatedListingsForStockGenerator = $updateRelatedListingsForStockGenerator;
         $this->lowStockThresholdUpdateGenerator = $lowStockThresholdUpdateGenerator;
         $this->determineAndUpdateDispatchableOrdersJobGenerator = $determineAndUpdateDispatchableOrdersJobGenerator;
@@ -180,6 +185,7 @@ class Service extends BaseService implements StatsAwareInterface
         /** @var StockLocation $relatedStockLocation */
         foreach ($relatedStockLocations as $relatedStockLocation) {
             $this->stockLocationCache->remove($relatedStockLocation);
+            $this->etagCache->remove($relatedStockLocation, StockLocation::class);
 
             $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
             if ($relatedStock instanceof Stock) {
