@@ -193,6 +193,13 @@ class Filter implements RulesInterface, ExclusionInterface
                     new IsArrayValidator(['name' => 'tag'])
                 ]
             ],
+            'excludeTag' => [
+                'name' => 'excludeTag',
+                'required' => false,
+                'validators' => [
+                    new IsArrayValidator(['name' => 'tag'])
+                ]
+            ],
             'paymentMethod' => [
                 'name' => 'paymentMethod',
                 'required' => false,
@@ -405,6 +412,14 @@ class Filter implements RulesInterface, ExclusionInterface
                 'validators' => [
                     new ArrayOfIntegersValidator($integerValidator, 'supplierId')
                 ],
+            ],
+            'linked' => [
+                'name' => 'linked',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'linked'])
+                ]
             ],
         ];
     }
