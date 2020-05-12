@@ -24,7 +24,8 @@ return [
             ],
             LinkedReplacer::class => [
                 'parameters' => [
-                    'locationStorage' => Repository::class,
+                    // Note: using Db storage directly as Cache has proven unreliable
+                    'locationStorage' => Db::class,
                     'stockStorage' => StockRepository::class,
                 ],
             ],
