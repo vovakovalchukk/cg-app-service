@@ -51,7 +51,7 @@ class Versioniser18 implements VersioniserInterface
         $redacted = $address ? $address->isRedacted() : false;
         $data[$type . 'AddressRedacted'] = $data[$type . 'AddressRedacted'] ?? $redacted;
 
-        if (!$data[$type . 'AddressRedacted'] || $data[$type . 'Address1'] ?? null !== AddressRedacted::ADDRESS_1) {
+        if (!$data[$type . 'AddressRedacted'] || ($data[$type . 'Address1'] ?? null) !== AddressRedacted::ADDRESS_1) {
             return;
         }
 
