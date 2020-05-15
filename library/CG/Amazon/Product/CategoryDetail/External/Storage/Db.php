@@ -120,6 +120,7 @@ class Db implements StorageInterface
             }
             $results[$productId][$categoryId]['subCategoryId'] = $detail['subCategoryId'];
             $results[$productId][$categoryId]['variationTheme'] = $detail['variationTheme'];
+            $results[$productId][$categoryId]['productType'] = $detail['productType'];
         }
 
         return $results;
