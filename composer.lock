@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdec37202d377e54884fe8e2d3d7c25d",
+    "content-hash": "0d4d97e4fa65d3de7885a25b8409ab9a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -383,12 +383,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "015b527c457e07a3a1e87078e99b11d51d35de1d"
+                "reference": "02e4161edc483509b8ec0c7e599f2e659c743ee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-11429-amazon-one-search-term-per-listing-f8e79b.zip",
-                "reference": "015b527c457e07a3a1e87078e99b11d51d35de1d",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-11429-amazon-one-search-term-per-listing-f1140a.zip",
+                "reference": "02e4161edc483509b8ec0c7e599f2e659c743ee8",
                 "shasum": null
             },
             "require": {
@@ -443,7 +443,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-05-18T15:30:29+00:00"
+            "time": "2020-05-20T14:16:09+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -2164,6 +2164,12 @@
                 "url": "git@bitbucket.org:channelgrabber/phinx.git",
                 "reference": "466457bc1ab43f5de32ed30b6b063d77ab474be3"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-dev-CGIV-11429-amazon-one-search-term-per-listing-be828c.zip",
+                "reference": "466457bc1ab43f5de32ed30b6b063d77ab474be3",
+                "shasum": null
+            },
             "require": {
                 "php": ">=5.4",
                 "symfony/config": "~2.8|~3.0",
@@ -2216,7 +2222,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2020-02-04T22:15:04+00:00"
+            "time": "2020-05-20T11:28:59+00:00"
         },
         {
             "name": "channelgrabber/predis",
@@ -12107,8 +12113,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.36.6",
-            "alias_normalized": "1.36.6.0",
+            "alias": "1.36.8",
+            "alias_normalized": "1.36.8.0",
             "version": "dev-CGIV-11429-amazon-one-search-term-per-listing",
             "package": "channelgrabber/amazon"
         },
