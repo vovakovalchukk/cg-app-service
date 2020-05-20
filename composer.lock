@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5cf9e90c758b36f77cede29573bc745",
+    "content-hash": "cdec37202d377e54884fe8e2d3d7c25d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -379,16 +379,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-CGIV-11410-amazon-correct-variation-parentage",
+            "version": "dev-CGIV-11429-amazon-one-search-term-per-listing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "2dedaf89d50bc332a433692cd7ee33abfdea8209"
+                "reference": "015b527c457e07a3a1e87078e99b11d51d35de1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-11410-amazon-correct-variation-parentage-c91542.zip",
-                "reference": "2dedaf89d50bc332a433692cd7ee33abfdea8209",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-11429-amazon-one-search-term-per-listing-f8e79b.zip",
+                "reference": "015b527c457e07a3a1e87078e99b11d51d35de1d",
                 "shasum": null
             },
             "require": {
@@ -443,7 +443,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-05-15T16:56:38+00:00"
+            "time": "2020-05-18T15:30:29+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -2008,16 +2008,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.54.1",
+            "version": "1.54.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "4c23765a4b13d0bd973c649eceb413e5d20d4b1e"
+                "reference": "16babe966b1217f42f39c2ad2e40a44d0a1e6163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.54.1-48b70e.zip",
-                "reference": "4c23765a4b13d0bd973c649eceb413e5d20d4b1e",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.54.2-09b70a.zip",
+                "reference": "16babe966b1217f42f39c2ad2e40a44d0a1e6163",
                 "shasum": null
             },
             "require": {
@@ -2089,7 +2089,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-04-30T10:24:53+00:00"
+            "time": "2020-05-19T08:57:21+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2158,17 +2158,11 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "0.5.6",
+            "version": "dev-CGIV-11429-amazon-one-search-term-per-listing",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/phinx.git",
-                "reference": "a9b300b71b23523b148961175780a5e1af7e6942"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.5.6-3886f2.zip",
-                "reference": "a9b300b71b23523b148961175780a5e1af7e6942",
-                "shasum": null
+                "reference": "466457bc1ab43f5de32ed30b6b063d77ab474be3"
             },
             "require": {
                 "php": ">=5.4",
@@ -12115,14 +12109,21 @@
         {
             "alias": "1.36.6",
             "alias_normalized": "1.36.6.0",
-            "version": "dev-CGIV-11410-amazon-correct-variation-parentage",
+            "version": "dev-CGIV-11429-amazon-one-search-term-per-listing",
             "package": "channelgrabber/amazon"
+        },
+        {
+            "alias": "0.5.7",
+            "alias_normalized": "0.5.7.0",
+            "version": "dev-CGIV-11429-amazon-one-search-term-per-listing",
+            "package": "channelgrabber/phinx"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/phinx": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
