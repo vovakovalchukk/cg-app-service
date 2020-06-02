@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc57493d5bfb4d326d4e0e4d378fe618",
+    "content-hash": "945c6b349cd5e3574b97bc3a27452297",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2008,7 +2008,7 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-11448-hotfix",
+            "version": "1.54.4.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
@@ -2016,7 +2016,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11448-hotfix-8f7050.zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.54.4.1-8f7050.zip",
                 "reference": "6389db4843d5145838321d0dfb097c0d4f429804",
                 "shasum": null
             },
@@ -12111,18 +12111,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.54.5",
-            "alias_normalized": "1.54.5.0",
-            "version": "dev-CGIV-11448-hotfix",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
