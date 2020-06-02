@@ -95,6 +95,7 @@ class RedactOrders
      */
     protected function matchOrders(string $channel, DateTime $dateTime, int $maxResults = null): iterable
     {
+        $minimumId = null;
         for ($offset = 0; ; $offset += $limit) {
             $limit = 1000;
             if ($maxResults !== null) {
@@ -108,6 +109,7 @@ class RedactOrders
             $sql = sprintf('SELECT `id` FROM `%s`', Db::ORDER_TABLE_NAME);
             $where = (new Where())
                 ->equals('`channel`', 's', $channel)
+                ->range('`id`', 's', $minimumId)
                 ->append(
                     (new Where(Where::SEPERATOR_OR))
                         ->expression('`dispatchDate` < ?', [['s', $dateTime->stdFormat()]])
@@ -139,22 +141,20 @@ class RedactOrders
                         )
                 );
 
-            $results = $this->mysqli->query(
-                $sql . $where . sprintf(' LIMIT %d, %d', $offset, $limit),
-                $where->getWhereParameters(),
-                function (\mysqli_result $result): iterable {
-                    while ($order = $result->fetch_assoc()) {
-                        yield $order['id'];
+            $results = iterator_to_array(
+                $this->mysqli->query(
+                    $sql . $where . sprintf(' LIMIT %d', $limit),
+                    $where->getWhereParameters(),
+                    function (\mysqli_result $result): iterable {
+                        while ($order = $result->fetch_assoc()) {
+                            yield $order['id'];
+                        }
                     }
-                }
+                )
             );
-
-            $count = 0;
-            foreach ($results as $result) {
-                $count++;
-                yield $result;
-            }
-
+            yield from $results;
+            $count = count($results);
+            $minimumId = end($results);
             if ($count < $limit) {
                 return;
             }
