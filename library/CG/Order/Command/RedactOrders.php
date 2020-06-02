@@ -143,7 +143,7 @@ class RedactOrders
 
             $results = iterator_to_array(
                 $this->mysqli->query(
-                    $sql . $where . sprintf(' LIMIT %d', $limit),
+                    $sql . $where . sprintf(' ORDER BY `id` ASC LIMIT %d', $limit),
                     $where->getWhereParameters(),
                     function (\mysqli_result $result): iterable {
                         while ($order = $result->fetch_assoc()) {
