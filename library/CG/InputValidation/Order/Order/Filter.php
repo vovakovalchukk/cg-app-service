@@ -421,6 +421,14 @@ class Filter implements RulesInterface, ExclusionInterface
                     new BooleanValidator(['name' => 'linked'])
                 ]
             ],
+            'useCachedOrderIds' => [
+                'name' => 'useCachedOrderIds',
+                'required' => false,
+                'allow_empty' => true,
+                'validators' => [
+                    new BooleanValidator(['name' => 'useCachedOrderIds'])
+                ]
+            ],
         ];
     }
 }
