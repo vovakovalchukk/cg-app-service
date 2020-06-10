@@ -143,6 +143,7 @@ LEFT JOIN (
         FROM productLinkPath
         JOIN productLink root ON root.`linkId` = productLinkPath.`linkId`
         WHERE root.`organisationUnitId` =  ?
+        AND root.`sku` LIKE ? 
         GROUP BY pathId
     ) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
@@ -161,7 +162,8 @@ AND
     )
 EOF;
         $ouId = $result['organisationUnitId'];
-        $params = [$ouId, $ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $sku = \CG\Stdlib\escapeLikeValue($result['sku']);
+        $params = [$ouId, $sku, $ouId, $ouId, $sku];
 
         $secondaryResults = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($secondaryResults);
@@ -184,6 +186,7 @@ LEFT JOIN (
         FROM productLinkPath
         JOIN productLink root ON root.`linkId` = productLinkPath.`linkId`
         WHERE root.`organisationUnitId` =  ?
+        AND root.`sku` LIKE ? 
         GROUP BY pathId
     ) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
@@ -202,7 +205,8 @@ AND
     )
 EOF;
         $ouId = $result['organisationUnitId'];
-        $params = [$ouId, $ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $sku = \CG\Stdlib\escapeLikeValue($result['sku']);
+        $params = [$ouId, $sku, $ouId, $ouId, $sku];
 
         $results = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($results);
