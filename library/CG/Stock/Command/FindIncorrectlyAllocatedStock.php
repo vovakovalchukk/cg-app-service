@@ -144,6 +144,7 @@ LEFT JOIN (
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
 ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\%'), '_', '\\_')
 WHERE `item`.`organisationUnitId` = ?
+AND `account`.`rootOrganisationUnitId` = ? 
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
 AND
@@ -153,7 +154,8 @@ AND
         (`item`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `item`.`status` IN ('awaiting payment', 'new'))
     )
 EOF;
-        $params = [$result['organisationUnitId'], \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $ouId = $result['organisationUnitId'];
+        $params = [$ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
 
         $secondaryResults = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($secondaryResults);
@@ -177,6 +179,7 @@ LEFT JOIN (
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
 ) AS productLink ON order.rootOrganisationUnitId = productLink.organisationUnitId AND item.itemSku LIKE REPLACE(REPLACE(REPLACE(productLink.sku, '\\\\', '\\\\\\\\'), '%', '\\%'), '_', '\\_')
 WHERE `item`.`organisationUnitId` = ?
+AND `account`.`rootOrganisationUnitId` = ? 
 AND IFNULL(productLink.leafSku, `item`.`itemSku`) LIKE ?
 AND `item`.`itemQuantity` != 0
 AND
@@ -186,7 +189,8 @@ AND
         (`order`.`purchaseDate` <= `account`.`account`.`cgCreationDate` AND `order`.`status` IN ('awaiting payment', 'new'))
     )
 EOF;
-        $params = [$result['organisationUnitId'], \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $ouId = $result['organisationUnitId'];
+        $params = [$ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
 
         $results = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($results);
