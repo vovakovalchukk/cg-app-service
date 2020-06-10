@@ -138,7 +138,13 @@ LEFT JOIN (
     SELECT root.organisationUnitId, root.sku, leaf.sku as leafSku, SUM(leafPath.quantity) as quantity
     FROM productLink root
     JOIN productLinkPath rootPath ON root.linkId = rootPath.linkId and rootPath.order = 0
-    JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
+    JOIN (
+        SELECT pathId, MAX(`order`) as `order` 
+        FROM productLinkPath
+        JOIN productLink root ON root.`linkId` = productLinkPath.`linkId`
+        WHERE root.`organisationUnitId` =  ?
+        GROUP BY pathId
+    ) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
@@ -155,7 +161,7 @@ AND
     )
 EOF;
         $ouId = $result['organisationUnitId'];
-        $params = [$ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $params = [$ouId, $ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
 
         $secondaryResults = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($secondaryResults);
@@ -173,7 +179,13 @@ LEFT JOIN (
     SELECT root.organisationUnitId, root.sku, leaf.sku as leafSku, SUM(leafPath.quantity) as quantity
     FROM productLink root
     JOIN productLinkPath rootPath ON root.linkId = rootPath.linkId and rootPath.order = 0
-    JOIN (SELECT pathId, MAX(`order`) as `order` FROM productLinkPath GROUP BY pathId) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
+    JOIN (
+        SELECT pathId, MAX(`order`) as `order` 
+        FROM productLinkPath
+        JOIN productLink root ON root.`linkId` = productLinkPath.`linkId`
+        WHERE root.`organisationUnitId` =  ?
+        GROUP BY pathId
+    ) leafPathOrder ON rootPath.pathId = leafPathOrder.pathId
     JOIN productLinkPath leafPath ON leafPathOrder.pathId = leafPath.pathId and leafPathOrder.order = leafPath.order
     JOIN productLink leaf ON leafPath.linkId = leaf.linkId
     GROUP BY root.organisationUnitId, root.sku, leaf.sku
@@ -190,7 +202,7 @@ AND
     )
 EOF;
         $ouId = $result['organisationUnitId'];
-        $params = [$ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
+        $params = [$ouId, $ouId, $ouId, \CG\Stdlib\escapeLikeValue($result['sku'])];
 
         $results = $this->sqlClient->getAdapter()->query($query, $params);
         return iterator_to_array($results);
