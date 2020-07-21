@@ -6,7 +6,9 @@ use CG\Product\Link\Entity as ProductLink;
 use CG\Product\Link\Filter;
 use CG\Product\Link\Mapper;
 use CG\Product\Link\StorageInterface;
+use CG\Stdlib\Exception\Runtime\Conflict;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use CG\Stdlib\Exception\Runtime\Storage\Deadlock;
 use CG\Stdlib\Storage\Db\DbAbstract;
 use CG\Stdlib\Storage\Db\FilterArrayValuesToOrdLikesTrait;
 use Zend\Db\Sql\Delete;
@@ -175,10 +177,14 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function insertLinkPath(array $path)
     {
-        $pathId = $this->getNextPathId();
-        foreach ($path as $node) {
-            $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $node);
-            $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+        try {
+            $pathId = $this->getNextPathId();
+            foreach ($path as $node) {
+                $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $node);
+                $this->writeSql->prepareStatementForSqlObject($insert)->execute();
+            }
+        } catch (Conflict $e) {
+            throw new Deadlock('pathId already used by another process', 0, $e);
         }
     }
 
