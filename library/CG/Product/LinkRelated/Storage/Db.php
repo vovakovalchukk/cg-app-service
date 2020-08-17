@@ -35,7 +35,7 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        $select = $this->getSelect($this->getLinkIdSelect($id));
+        $select = $this->getSelect($this->getLinkIdSelect($id), $id);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -60,7 +60,7 @@ class Db implements StorageInterface, LoggerAwareInterface
             $linkIdSelect->limit($limit)->offset(($filter->getPage() - 1) * $limit);
         }
 
-        $select = $this->getSelect($linkIdSelect);
+        $select = $this->getSelect($linkIdSelect, ...$filter->getOuIdProductSku());
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -135,7 +135,7 @@ class Db implements StorageInterface, LoggerAwareInterface
         ];
     }
 
-    protected function getSelect(Select $linkIdSelect): Select
+    protected function getSelect(Select $linkIdSelect, ...$ouIdProductSkus): Select
     {
         return $this->readSql
             ->select(['search' => $linkIdSelect])->columns(['id' => 'linkId', 'organisationUnitId', 'sku'])->quantifier(Select::QUANTIFIER_DISTINCT)
@@ -146,7 +146,7 @@ class Db implements StorageInterface, LoggerAwareInterface
                 []
             )
             ->join(['relatedMinPaths' => 'productLinkPath'], 'relatedMinPath.linkId = relatedMinPaths.linkId', [])
-            ->join(['productLinkPathMax' => $this->getMaxOrderSelect($this->readSql)], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
+            ->join(['productLinkPathMax' => $this->getMaxOrderSelect($this->readSql, ...$ouIdProductSkus)], 'relatedMinPaths.pathId = productLinkPathMax.pathId', [])
             ->join(['relatedMaxPath' => 'productLinkPath'], 'productLinkPathMax.pathId = relatedMaxPath.pathId AND productLinkPathMax.order = relatedMaxPath.order', [])
             ->join(['relatedRootPath' => 'productLinkPath'], 'relatedMaxPath.linkId = relatedRootPath.linkId', [])
             ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', [])

@@ -35,7 +35,7 @@ class Db implements StorageInterface, LoggerAwareInterface
 
     public function fetch($id)
     {
-        $select = $this->getSelect($this->getLinkIdSelect($id));
+        $select = $this->getSelect($this->getLinkIdSelect($id), $id);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -60,7 +60,7 @@ class Db implements StorageInterface, LoggerAwareInterface
             $linkIdSelect->limit($limit)->offset(($filter->getPage() - 1) * $limit);
         }
 
-        $select = $this->getSelect($linkIdSelect);
+        $select = $this->getSelect($linkIdSelect, ...$filter->getOuIdProductSku());
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
 
         if ($results->count() == 0) {
@@ -124,12 +124,12 @@ class Db implements StorageInterface, LoggerAwareInterface
             ->where($this->getLinkIdWhere('productLink', ...$ouIdProductSkus));
     }
 
-    protected function getSelect(Select $linkIdSelect): Select
+    protected function getSelect(Select $linkIdSelect, ...$ouIdProductSkus): Select
     {
         return $this->readSql
             ->select(['search' => $linkIdSelect])->columns(['id' => 'linkId', 'organisationUnitId', 'sku'])->quantifier(Select::QUANTIFIER_DISTINCT)
             ->join(['searchLeafPath' => 'productLinkPath'], 'search.linkId = searchLeafPath.linkId', [])
-            ->join(['productLinkPathMax' => $this->getMaxOrderSelect($this->readSql)], 'searchLeafPath.pathId = productLinkPathMax.pathId', [])
+            ->join(['productLinkPathMax' => $this->getMaxOrderSelect($this->readSql, ...$ouIdProductSkus)], 'searchLeafPath.pathId = productLinkPathMax.pathId', [])
             ->join(['relatedPath' => 'productLinkPath'], 'productLinkPathMax.pathId = relatedPath.pathId AND productLinkPathMax.order = relatedPath.order', [])
             ->join(['relatedRootPath' => 'productLinkPath'], 'relatedPath.linkId = relatedRootPath.linkId', [])
             ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', ['pathId', 'quantity'])
