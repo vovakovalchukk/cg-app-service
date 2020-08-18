@@ -17,11 +17,16 @@ trait DbMaxOrderSelectTrait
             $ouIds[$organisationUnitId] = $organisationUnitId;
         }
 
-        return $readSql
+        $select = $readSql
             ->select('productLinkPath')
             ->columns(['pathId', 'order' => new Expression('MAX(?)', ['order'], [Expression::TYPE_IDENTIFIER])])
-            ->join('productLink', 'productLink.linkId = productLinkPath.linkId', [])
-            ->where('productLink.organisationUnitId', array_values($ouIds))
-            ->group(['pathId']);
+            ->join('productLink', 'productLink.linkId = productLinkPath.linkId', []);
+
+        if (!empty($ouIds)) {
+            $select->where->in('productLink.organisationUnitId', array_values($ouIds));
+        }
+
+        $select->group(['pathId']);
+        return $select;
     }
 }
