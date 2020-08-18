@@ -18,6 +18,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use function CG\Stdlib\escapeLikeValue;
+use function CG\Stdlib\generateRandomBase64String;
 
 class Db extends DbAbstract implements StorageInterface
 {
@@ -178,7 +179,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function insertLinkPath(array $path)
     {
         try {
-            $pathId = $this->getNextPathId();
+            $pathId = generateRandomBase64String(64);
             foreach ($path as $node) {
                 $insert = $this->getInsert('productLinkPath')->values(['pathId' => $pathId] + $node);
                 $this->writeSql->prepareStatementForSqlObject($insert)->execute();
@@ -186,35 +187,6 @@ class Db extends DbAbstract implements StorageInterface
         } catch (Conflict $e) {
             throw new Deadlock('pathId already used by another process', 0, $e);
         }
-    }
-
-    protected function getNextPathId()
-    {
-        $select = $this->writeSql
-            ->select('productLinkPath')
-            ->columns(['nextPathId' => new Expression('? + 1', ['pathId'], [Expression::TYPE_IDENTIFIER])])
-            ->combine(
-                $this->writeSql->select()->columns(['nextPathId' => new Expression('?', [1])]),
-                Select::COMBINE_UNION,
-                Select::QUANTIFIER_ALL
-            );
-
-        $select = $this->writeSql->select(['missingPaths' => $select])->order('missingPaths.nextPathId')->limit(1);
-        $select->where->expression(
-            'NOT EXISTS (?)',
-            [
-                $this->writeSql
-                    ->select('productLinkPath')
-                    ->columns(['pathId'])
-                    ->where((new Where())->equalTo('pathId', 'missingPaths.nextPathId', Where::TYPE_IDENTIFIER, Where::TYPE_IDENTIFIER))
-            ]
-        );
-
-        $results = $this->writeSql->prepareStatementForSqlObject($select)->execute();
-        foreach ($results as $result) {
-            return $result['nextPathId'];
-        }
-        return 1;
     }
 
     /**
