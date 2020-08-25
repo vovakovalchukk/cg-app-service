@@ -11,8 +11,5 @@ return [
                 ],
             ],
         ],
-        'preferences' => [
-
-        ],
     ],
 ];
