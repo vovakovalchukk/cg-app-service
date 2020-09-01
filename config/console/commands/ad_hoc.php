@@ -737,9 +737,8 @@ SQL;
             ],
             'organisationUnitIds' => [
                 'description' => 'A space-separated list of root organisationUnit IDs',
-                'required' => false,
+                'required' => true,
                 'array' => true,
-                'default' => [],
             ],
         ],
         'options' => [],
