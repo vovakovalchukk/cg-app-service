@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5d8d9e0cc08afc380bbfeb027713e82",
+    "content-hash": "e5a0dde61c1ecc790512d8d2add519f2",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2313,16 +2313,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.20.1",
+            "version": "1.20.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "ff7db9de205222bd942a24a76987886305f712d3"
+                "reference": "d6e3a30577c6ddaca4f18d4b656873b4bb5c39eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.20.1-08506f.zip",
-                "reference": "ff7db9de205222bd942a24a76987886305f712d3",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.20.6-f09053.zip",
+                "reference": "d6e3a30577c6ddaca4f18d4b656873b4bb5c39eb",
                 "shasum": null
             },
             "require": {
@@ -2341,6 +2341,7 @@
                 "channelgrabber/slim": "^1.13.2",
                 "channelgrabber/stdlib": "^2.16.11",
                 "channelgrabber/stock": "^1.13.0",
+                "channelgrabber/supplier": "^1.0.1",
                 "channelgrabber/webhook-server": "^1.0.0",
                 "channelgrabber/zf2-stdlib": ">=1.1.17",
                 "guzzle/guzzle": "~3.7",
@@ -2371,7 +2372,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-03-13T08:48:22+00:00"
+            "time": "2020-08-27T14:11:24+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
