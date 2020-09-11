@@ -180,18 +180,15 @@ class Service extends BaseService implements StatsAwareInterface
         return $this;
     }
 
-    protected function updateRelated(Stock $stock, StockLocation $stockLocation, StockCollection $relatedStocks, StockLocationCollection $relatedStockLocations)
-    {
-        /** @var StockLocation $relatedStockLocation */
-        foreach ($relatedStockLocations as $relatedStockLocation) {
-            $this->stockLocationCache->remove($relatedStockLocation);
-            $this->etagCache->remove($relatedStockLocation, StockLocation::class);
-
-            $relatedStock = $relatedStocks->getById($relatedStockLocation->getStockId());
-            if ($relatedStock instanceof Stock) {
-                $this->nginxCacheInvalidator->invalidateProductsForStockLocation($relatedStockLocation, $relatedStock);
-            }
-        }
+    protected function updateRelated(
+        Stock $stock,
+        StockLocation $stockLocation,
+        StockCollection $relatedStocks,
+        StockLocationCollection $relatedStockLocations
+    ) {
+        $this->removeCachedRelatedStockLocations($relatedStockLocations);
+        $this->removeRelatedStockLocationEtags($relatedStockLocations);
+        $this->invalidateRelatedProductsCache($relatedStocks, $relatedStockLocations);
 
         try {
             $stockIds = $relatedStockLocations->getArrayOf('stockId');
@@ -231,6 +228,23 @@ class Service extends BaseService implements StatsAwareInterface
         } finally {
             $this->updateRelatedListings($stock);
         }
+    }
+
+    protected function removeCachedRelatedStockLocations(StockLocationCollection $relatedStockLocations): void
+    {
+        $this->stockLocationCache->removeCollection($relatedStockLocations);
+    }
+
+    protected function removeRelatedStockLocationEtags(StockLocationCollection $relatedStockLocations): void
+    {
+        $this->etagCache->removeCollection($relatedStockLocations);
+    }
+
+    protected function invalidateRelatedProductsCache(
+        StockCollection $relatedStocks,
+        StockLocationCollection $relatedStockLocations
+    ): void {
+        $this->nginxCacheInvalidator->invalidateProductsForStockLocations($relatedStockLocations, $relatedStocks);
     }
 
     protected function updateRelatedListings(Stock $stock): Service
