@@ -298,8 +298,8 @@ class LinkedReplacer implements StorageInterface, LoggerAwareInterface
 
         $quantifiedStockLocations = new Collection(
             StockLocation::class,
-            $stockLocations->getSourceFilters(),
-            $stockLocations->getSourceDescription()
+            $stockLocations->getSourceDescription(),
+            $stockLocations->getSourceFilters()
         );
         $quantifiedStockLocations->setTotal($stockLocations->getTotal());
 
