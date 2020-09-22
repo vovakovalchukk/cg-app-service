@@ -12,6 +12,7 @@ use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerF
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
 use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
 use CG\Order\Client\StorageInterface as OrderStorage;
+use CG\Order\Command\ClearCachedCustomerCountsByPattern as ClearCachedCustomerCountsByPatternCommand;
 use CG\Order\Command\UpdateItemsWithSuppliers;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Collection as Orders;
@@ -721,5 +722,25 @@ SQL;
         },
         'arguments' => [],
         'options' => [],
-    ]
+    ],
+    'ad-hoc:clearCustomerCountsByPattern' => [
+        'description' => 'Clears customer order counts from cache via a glob-style pattern',
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            /** @var ClearCachedCustomerCountsByPatternCommand $command */
+            $command = $di->newInstance(ClearCachedCustomerCountsByPatternCommand::class);
+            $command($input->getArgument('pattern'), $input->getArgument('organisationUnitIds'));
+        },
+        'arguments' => [
+            'pattern' => [
+                'description' => 'A glob-style pattern e.g. "*@marketplace.amazon.*"',
+                'required' => true,
+            ],
+            'organisationUnitIds' => [
+                'description' => 'A space-separated list of root organisationUnit IDs',
+                'required' => true,
+                'array' => true,
+            ],
+        ],
+        'options' => [],
+    ],
 ];

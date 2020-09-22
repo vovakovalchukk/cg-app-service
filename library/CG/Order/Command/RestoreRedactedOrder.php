@@ -7,6 +7,7 @@ use CG\Http\Exception\Exception3xx\NotModified;
 use CG\Order\Service\RedactLocker;
 use CG\Order\Shared\Address\Mapper as AddressMapper;
 use CG\Order\Shared\Address\Redacted as RedactedAddress;
+use CG\Order\Shared\CustomerCounts\Service as CustomerCountsService;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Order\Shared\Item\GiftWrap\Entity as GiftWrap;
@@ -33,6 +34,8 @@ class RestoreRedactedOrder
     protected $redactLocker;
     /** @var AddressMapper */
     protected $addressMapper;
+    /** @var CustomerCountsService */
+    protected $customerCountsService;
 
     public function __construct(
         Mysqli $mysqli,
@@ -40,7 +43,8 @@ class RestoreRedactedOrder
         GiftWrapStorage $giftWrapStorage,
         Cryptor $cryptor,
         RedactLocker $redactLocker,
-        AddressMapper $addressMapper
+        AddressMapper $addressMapper,
+        CustomerCountsService $customerCountsService
     ) {
         $this->mysqli = $mysqli;
         $this->orderStorage = $orderStorage;
@@ -48,6 +52,7 @@ class RestoreRedactedOrder
         $this->cryptor = $cryptor;
         $this->redactLocker = $redactLocker;
         $this->addressMapper = $addressMapper;
+        $this->customerCountsService = $customerCountsService;
     }
 
     public function __invoke(OutputInterface $output, string $orderId, string $restoreUntil = null)
@@ -64,6 +69,7 @@ class RestoreRedactedOrder
 
         $this->redactLocker->preventRedaction($order->getId(), $dateTime);
         $this->restoreOrder($output, $order);
+        $this->customerCountsService->incrementForOrder($order);
 
         /** @var OrderItem $orderItem */
         foreach ($order->getItems() as $orderItem) {
