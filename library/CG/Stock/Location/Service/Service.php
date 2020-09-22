@@ -232,7 +232,14 @@ class Service extends BaseService implements StatsAwareInterface
 
     protected function removeCachedRelatedStockLocations(StockLocationCollection $relatedStockLocations): void
     {
-        $this->stockLocationCache->removeCollection($relatedStockLocations);
+        try {
+            $this->stockLocationCache->removeCollection($relatedStockLocations);
+        } catch (NotFound $e) {
+            // no-op
+        }
+        foreach ($relatedStockLocations as $relatedStockLocation) {
+            $this->stockLocationCache->remove($relatedStockLocation);
+        }
     }
 
     protected function removeRelatedStockLocationEtags(StockLocationCollection $relatedStockLocations): void
