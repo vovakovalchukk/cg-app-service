@@ -11,7 +11,7 @@ class MigrationPeriod extends Adjustment\MigrationPeriod implements Lockable
 
     public function __construct(Adjustment\MigrationPeriod $period)
     {
-        parent::__construct($period->getFrom(), $period->getTo());
+        parent::__construct($period->getFrom(), $period->getTo(), $period->getBatchLimit());
     }
 
     public function getOwnerId()
