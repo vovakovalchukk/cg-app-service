@@ -4,8 +4,8 @@ namespace CG\Stock\Command;
 use CG\CGLib\Command\SignalHandlerTrait;
 use CG\Locking\Failure as LockingFailure;
 use CG\Locking\Service as LockingService;
-use CG\Predis\Command\DecrMin;
-use CG\Predis\Command\IncrMax;
+use CG\Log\ItidService;
+use CG\Predis\Command\ZAddMaxEx;
 use CG\Stats\StatsTrait;
 use CG\Stdlib\Date;
 use CG\Stdlib\DateTime;
@@ -14,6 +14,7 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\AbortException;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
+use CG\Stock\Audit\Adjustment\MigrationProgress;
 use CG\Stock\Audit\Adjustment\MigrationTimer;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
@@ -26,8 +27,9 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     use StatsTrait;
     use SignalHandlerTrait;
 
-    protected const PROCESS_COUNT = 'MigrateStockAuditAdjustments';
+    protected const PROCESSES_BY_START_TIME = 'MigrateStockAuditAdjustmentsProcesses';
     protected const MAX_PROCESSES = 3;
+    protected const PROCESS_TIMEOUT = 21600; // six hours in seconds, temporary value for review purposes
 
     protected const LOG_CODE = 'MigrateStockAuditAdjustments';
     protected const LOG_CODE_MAX_PROCESSES_REACHED = 'The maximum number of processes are already running';
@@ -60,24 +62,27 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected $predis;
     /** @var LockingService */
     protected $lockingService;
+    /** @var ItidService */
+    protected $itidService;
 
     public function __construct(
         StorageInterface $storage,
         StorageInterface $archive,
         Predis $predis,
-        LockingService $lockingService
+        LockingService $lockingService,
+        ItidService $itidService
     ) {
         $this->storage = $storage;
         $this->archive = $archive;
         $this->setPredis($predis);
         $this->lockingService = $lockingService;
+        $this->itidService = $itidService;
     }
 
     protected function setPredis(Predis $predis): void
     {
         $this->predis = $predis;
-        $this->predis->getProfile()->defineCommand('incrmax', IncrMax::class);
-        $this->predis->getProfile()->defineCommand('decrmin', DecrMin::class);
+        $this->predis->getProfile()->defineCommand('zaddmaxex', ZAddMaxEx::class);
     }
 
     public function __invoke(OutputInterface $output, string $timeFrame, int $limit = null)
@@ -87,7 +92,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
                 throw new AbortException(sprintf('Aborting due to %s signal', $this->signalName($signal)));
             }, SIGINT, SIGTERM);
 
-            if (!($locked = $this->predis->incrmax(static::PROCESS_COUNT, static::MAX_PROCESSES))) {
+            if (!($locked = $this->canProceed())) {
                 $this->logDebug(static::LOG_MSG_MAX_PROCESSES_REACHED, [], [static::LOG_CODE, static::LOG_CODE_MAX_PROCESSES_REACHED]);
                 $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MAX_PROCESSES_REACHED));
                 return;
@@ -99,9 +104,24 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         } finally {
             $this->restoreSignalHandler(SIGINT, SIGTERM);
             if ($locked ?? false) {
-                $this->predis->decrmin(static::PROCESS_COUNT, 0);
+                $this->predis->zrem(static::PROCESSES_BY_START_TIME, $this->getProcessIdentifier());
             }
         }
+    }
+
+    protected function canProceed(): bool
+    {
+        return $this->updateProcessTimeout();
+    }
+
+    protected function updateProcessTimeout(): bool
+    {
+        return $this->predis->zaddmaxex(
+            static::PROCESSES_BY_START_TIME,
+            $this->getProcessIdentifier(),
+            static::MAX_PROCESSES,
+            static::PROCESS_TIMEOUT
+        );
     }
 
     protected function migrateData(OutputInterface $output, string $timeFrame, int $limit = null)
@@ -152,53 +172,84 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
 
     protected function migrateDate(OutputInterface $output, MigrationPeriod $migrationPeriod)
     {
+        $migrationTimer = new MigrationTimer();
+        $migrationProgress = new MigrationProgress();
         try {
-            $migrationTimer = new MigrationTimer();
-            $totalTimer = $migrationTimer->getTotalTimer();
-
-            try {
-                $lock = $this->lockingService->lock($migrationPeriod);
-                $loadTimer = $migrationTimer->getLoadTimer();
-                $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
-                $loadTimer();
-            } catch (NotFound|LockingFailure $exception) {
-                $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
-                $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
-                return;
-            }
-
-            $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($collection->count()), $collection->count() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-            $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($collection->count()), $collection->count() != 1 ? 's' : '', $migrationPeriod));
-
-            try {
-                $this->storage->beginTransaction();
-                $this->archive->saveCollection($collection, $migrationTimer);
-                $this->storage->removeCollectionForMigrationPeriod($migrationPeriod);
-                $this->storage->commitTransaction();
-                $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
-            } catch (\Throwable $throwable) {
-                $this->storage->rollbackTransaction();
-                $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
-                $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
-                if ($throwable instanceof AbortException) {
-                    throw $throwable;
-                }
-                return;
-            } finally {
-                $totalTimer();
-                $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $collection->count()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total', $this->getServerName()]);
-            }
-
-            $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
-            $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
+            $lock = $this->lockingService->lock($migrationPeriod);
+            $this->migrateBatches($output, $migrationPeriod, $migrationTimer, $migrationProgress);
+        } catch (LockingFailure $exception) {
+            $this->logDebug(static::LOG_MSG_SKIPPED, ['period' => $migrationPeriod, $exception->getMessage()], [static::LOG_CODE, static::LOG_CODE_SKIPPED]);
+            $output->writeln(sprintf(static::LOG_MSG_SKIPPED, $migrationPeriod, sprintf('<error>%s</error>', $exception->getMessage())));
+            return;
         } finally {
             if (isset($lock)) {
                 $this->lockingService->unlock($lock);
             }
         }
+    }
+
+    protected function migrateBatches(
+        OutputInterface $output,
+        MigrationPeriod $migrationPeriod,
+        MigrationTimer $migrationTimer,
+        MigrationProgress $migrationProgress
+    ): void {
+        $totalTimer = $migrationTimer->getTotalTimer();
+        while (true) {
+            try {
+                $this->migrateBatch($output, $migrationPeriod, $migrationTimer, $migrationProgress);
+            } catch (NotFound $e) {
+                // no remaining results for period
+                $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+                $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', $migrationPeriod));
+                return;
+            } finally {
+                $totalTimer();
+                $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $migrationProgress->getResultsMigrated()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload', $this->getServerName()]);
+                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total', $this->getServerName()]);
+                $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
+                $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
+            }
+        }
+    }
+
+    protected function migrateBatch(
+        OutputInterface $output,
+        MigrationPeriod $migrationPeriod,
+        MigrationTimer $migrationTimer,
+        MigrationProgress $migrationProgress
+    ): void {
+        $loadTimer = $migrationTimer->getLoadTimer();
+        $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
+        $loadTimer();
+        $migrationProgress->incrementResultsFound($collection->count());
+        try {
+            $this->storage->beginTransaction();
+            $this->archive->saveCollection($collection, $migrationTimer);
+            $this->storage->removeCollection($collection);
+            $this->storage->commitTransaction();
+            $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
+            $migrationProgress->incrementResultsMigrated($collection->count());
+            $this->updateProcessTimeout();
+        } catch (\Throwable $throwable) {
+            $this->storage->rollbackTransaction();
+            $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
+            $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
+            if ($throwable instanceof AbortException) {
+                throw $throwable;
+            }
+            return;
+        } finally {
+            gc_collect_cycles();
+            gc_mem_caches();
+        }
+    }
+
+    protected function getProcessIdentifier(): string
+    {
+        return $this->itidService->getItid();
     }
 }
