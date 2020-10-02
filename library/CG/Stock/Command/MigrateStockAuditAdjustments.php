@@ -195,24 +195,26 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         MigrationProgress $migrationProgress
     ): void {
         $totalTimer = $migrationTimer->getTotalTimer();
-        while (true) {
-            try {
-                $this->migrateBatch($output, $migrationPeriod, $migrationTimer, $migrationProgress);
-            } catch (NotFound $e) {
-                // no remaining results for period
-                $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
-                $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', $migrationPeriod));
-                return;
-            } finally {
-                $totalTimer();
-                $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $migrationProgress->getResultsMigrated()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload', $this->getServerName()]);
-                $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total', $this->getServerName()]);
-                $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
-                $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
+        try {
+            while (true) {
+                try {
+                    $this->migrateBatch($output, $migrationPeriod, $migrationTimer, $migrationProgress);
+                } catch (NotFound $e) {
+                    // no remaining results for period
+                    $this->logDebug(static::LOG_MSG_FOUND_DATA, [number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', 'period' => $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_FOUND_DATA]);
+                    $output->write(sprintf(static::LOG_MSG_FOUND_DATA . '... ', number_format($migrationProgress->getResultsFound()), $migrationProgress->getResultsFound() != 1 ? 's' : '', $migrationPeriod));
+                    return;
+                }
             }
+        } finally {
+            $totalTimer();
+            $this->logDebug(static::LOG_MSG_MIGRATION_TIMINGS, ['timings.total' => $migrationTimer->getTotal()], [static::LOG_CODE, static::LOG_CODE_MIGRATION_TIMINGS], ['period' => $migrationPeriod, 'timings.load' => $migrationTimer->getLoad(), 'timings.compression' => $migrationTimer->getCompression(), 'timings.upload' => $migrationTimer->getUpload(), 'count' => $migrationProgress->getResultsMigrated()]);
+            $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getLoad(), ['load', $this->getServerName()]);
+            $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getCompression(), ['compression', $this->getServerName()]);
+            $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getUpload(), ['upload', $this->getServerName()]);
+            $this->statsTiming(static::STAT_MIGRATION_TIMING, $migrationTimer->getTotal(), ['total', $this->getServerName()]);
+            $this->logDebug(static::LOG_MSG_MIGRATED, [], [static::LOG_CODE, static::LOG_CODE_MIGRATED], ['period' => $migrationPeriod]);
+            $output->writeln(sprintf('<info>%s</info>', static::LOG_MSG_MIGRATED));
         }
     }
 
