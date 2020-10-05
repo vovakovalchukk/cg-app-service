@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c4598dfd5630607318c74251e81a1b2",
+    "content-hash": "7ac61ab048009c53648f4a32d96c8edf",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2226,16 +2226,16 @@
         },
         {
             "name": "channelgrabber/predis",
-            "version": "dev-CGIV-11612-stock-adjustment-migration-pagination",
+            "version": "1.1.15",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cgpredis.git",
-                "reference": "62b248b22a2caf84736dddff8c49f79943815e06"
+                "reference": "299cd3fab7b38706af4a0773aa9e1bbc0b9a5fe6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis/channelgrabber-predis-dev-CGIV-11612-stock-adjustment-migration-pagination-39dfda.zip",
-                "reference": "62b248b22a2caf84736dddff8c49f79943815e06",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/predis/channelgrabber-predis-1.1.15-ee02d8.zip",
+                "reference": "299cd3fab7b38706af4a0773aa9e1bbc0b9a5fe6",
                 "shasum": null
             },
             "require": {
@@ -2255,7 +2255,7 @@
                     "CG\\Predis\\": "src"
                 }
             },
-            "time": "2020-10-01T12:32:31+00:00"
+            "time": "2020-10-05T07:04:46+00:00"
         },
         {
             "name": "channelgrabber/predis-async",
@@ -2996,16 +2996,16 @@
         },
         {
             "name": "channelgrabber/stock",
-            "version": "dev-CGIV-11612-stock-adjustment-migration-pagination",
+            "version": "1.20.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-stock.git",
-                "reference": "e2d851997f028c2170ea6f55573626dc28e7c304"
+                "reference": "b5c78971b61b3b4ae7a0a647109f976870018983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-dev-CGIV-11612-stock-adjustment-migration-pagination-b107f7.zip",
-                "reference": "e2d851997f028c2170ea6f55573626dc28e7c304",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/stock/channelgrabber-stock-1.20.1-c87c4f.zip",
+                "reference": "b5c78971b61b3b4ae7a0a647109f976870018983",
                 "shasum": null
             },
             "require": {
@@ -3051,7 +3051,7 @@
                     "CG\\Account\\Test\\": "vendor/channelgrabber/channel/tests/Account/Test"
                 }
             },
-            "time": "2020-09-28T15:40:06+00:00"
+            "time": "2020-10-05T07:06:29+00:00"
         },
         {
             "name": "channelgrabber/stock-locking",
@@ -12179,25 +12179,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.1.14",
-            "alias_normalized": "1.1.14.0",
-            "version": "dev-CGIV-11612-stock-adjustment-migration-pagination",
-            "package": "channelgrabber/predis"
-        },
-        {
-            "alias": "1.20.1",
-            "alias_normalized": "1.20.1.0",
-            "version": "dev-CGIV-11612-stock-adjustment-migration-pagination",
-            "package": "channelgrabber/stock"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/predis": 20,
-        "channelgrabber/stock": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
