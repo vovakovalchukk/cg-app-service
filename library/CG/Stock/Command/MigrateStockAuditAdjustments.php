@@ -228,16 +228,20 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
         $loadTimer();
         $migrationProgress->incrementResultsFound($collection->count());
+        $transactionCommitted = false;
         try {
             $this->storage->beginTransaction();
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollection($collection);
             $this->storage->commitTransaction();
+            $transactionCommitted = true;
             $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
             $migrationProgress->incrementResultsMigrated($collection->count());
             $this->updateProcessTimeout();
         } catch (\Throwable $throwable) {
-            $this->storage->rollbackTransaction();
+            if (!$transactionCommitted) {
+                $this->storage->rollbackTransaction();
+            }
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
             if ($throwable instanceof AbortException) {
