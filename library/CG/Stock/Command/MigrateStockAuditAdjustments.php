@@ -20,6 +20,7 @@ use CG\Stock\Audit\Adjustment\StorageInterface;
 use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
 use Predis\Client as Predis;
 use Symfony\Component\Console\Output\OutputInterface;
+use Zend\Db\Adapter\Exception\InvalidQueryException;
 
 class MigrateStockAuditAdjustments implements LoggerAwareInterface
 {
@@ -244,13 +245,21 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             }
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_FAILURE));
-            if ($throwable instanceof AbortException) {
-                throw $throwable;
-            }
+            $this->handleSpecificMigrationException($throwable);
             return;
         } finally {
             gc_collect_cycles();
             gc_mem_caches();
+        }
+    }
+
+    protected function handleSpecificMigrationException(\Throwable $throwable): void
+    {
+        if ($throwable instanceof AbortException) {
+            throw $throwable;
+        }
+        if ($throwable instanceof InvalidQueryException) {
+            throw new AbortException($throwable->getMessage(), $throwable->getCode(), $throwable);
         }
     }
 
