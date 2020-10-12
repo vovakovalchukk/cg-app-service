@@ -122,7 +122,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             $this->getProcessIdentifier(),
             static::MAX_PROCESSES,
             static::PROCESS_TIMEOUT
-        );
+        ) !== null;
     }
 
     protected function migrateData(OutputInterface $output, string $timeFrame, int $limit = null)
