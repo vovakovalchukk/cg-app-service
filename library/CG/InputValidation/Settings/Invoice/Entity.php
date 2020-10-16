@@ -125,6 +125,12 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'additionalShippingLabels' => [
+                'name'       => 'additionalShippingLabels',
+                'required'   => false,
+                'allow_empty' => true,
+                'validators' => [new BooleanValidator(['name' => 'additionalShippingLabels'])]
+            ],
         ];
     }
 }

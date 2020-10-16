@@ -219,6 +219,8 @@ return [
                 'Versioniser_InvoiceSettings_9' => InvoiceSettingsEntity\Versioniser9::class,
                 'Versioniser_InvoiceSettingsCollection_10' => InvoiceSettingsCollection\Versioniser10::class,
                 'Versioniser_InvoiceSettings_10' => InvoiceSettingsEntity\Versioniser10::class,
+                'Versioniser_InvoiceSettingsCollection_11' => InvoiceSettingsCollection\Versioniser11::class,
+                'Versioniser_InvoiceSettings_11' => InvoiceSettingsEntity\Versioniser11::class,
                 'Versioniser_ListingStatusHistoryCollection_1' => ListingStatusHistoryCollection\Versioniser1::class,
                 'Versioniser_ListingStatusHistoryEntity_1' => ListingStatusHistoryEntity\Versioniser1::class,
                 'Versioniser_LocationCollection_1' => LocationCollection\Versioniser1::class,
