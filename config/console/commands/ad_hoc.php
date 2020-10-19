@@ -21,6 +21,7 @@ use CG\Order\Shared\Item\Entity as OrderItem;
 use CG\Order\Shared\Item\Filter as ItemFilter;
 use CG\Order\Shared\Item\StorageInterface as OrderItemStorage;
 use CG\Order\Shared\Status as OrderStatus;
+use CG\Predis\Command\HmsetEx;
 use CG\Product\Detail\Filter as ProductDetailFilter;
 use CG\Product\Detail\Service as ProductDetailService;
 use CG\Settings\Invoice\Service\Service as InvoiceSettingsService;
@@ -47,6 +48,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Di\Di;
+
+use Predis\Client as PredisClient;
 
 /** @var Di $di */
 return [
@@ -742,5 +745,31 @@ SQL;
             ],
         ],
         'options' => [],
+    ],
+
+    'ad-hoc:redis-test' => [
+        'description' => '',
+        'arguments' => [
+        ],
+        'options' => [
+        ],
+        'command' =>
+            function(InputInterface $input, OutputInterface $output) use ($di)
+            {
+                $predisClient = $di->get(PredisClient::class);
+                $predisClient->getProfile()->defineCommand('hmsetex', HmsetEx::class);
+
+                $arr = [
+                    'img0',
+                    'img1',
+                    'img2',
+                ];
+
+//                $predisClient->hmsetex('TESTKEY', 60, $arr);
+
+                foreach ($arr as $key => $item) {
+                    $predisClient->hmsetex('TESTKEY', 60, $key, $item);
+                }
+            },
     ],
 ];
