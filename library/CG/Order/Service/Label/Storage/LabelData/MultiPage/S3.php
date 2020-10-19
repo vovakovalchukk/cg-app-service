@@ -239,9 +239,18 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
         return $this;
     }
 
-    protected function getS3KeyImages(int $ouId, int $id, int $imageIndex, string $extension): string
+    protected function getS3KeyImages(int $ouId, int $id, ?int $imageIndex = null, ?string $extension = null): string
     {
-        return ENVIRONMENT . '/' . $ouId . '/' . $id . '/' . $imageIndex . '.' . $extension;
+        $key = ENVIRONMENT . '/' . $ouId . '/' . $id;
+
+        if (!is_null($imageIndex)) {
+            $key .= '/' . $imageIndex;
+        }
+        if (!is_null($extension)) {
+            $key .= '.' . $extension;
+        }
+
+        return $key;
     }
 
 //    protected function getCacheKey(int $id, string $type): string
