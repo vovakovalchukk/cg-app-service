@@ -12,36 +12,13 @@ use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use Predis\Client as PredisClient;
 
-class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface, LoggerAwareInterface
+class S3 extends LabelDataS3 implements LabelDataInterface
 {
-    use StatsTrait;
-    use LogTrait;
-
-    protected const LOG_CODE = 'LabelDataS3Storage';
-
-    const BUCKET = 'orderhub-labeldata';
-    const TYPE_DOCUMENT = 'label';
-    const TYPE_IMAGE = 'image';
-    const REDIS_KEY_HASHES_PREFIX = 'OrderLabelDataHashes:';
-    const REDIS_KEY_CACHE_PREFIX = 'CG_Order_Shared_Label_Entity_data:';
-    const REDIS_CACHE_EXPIRE_SEC = 172800; // 2 days
-    const STAT_S3 = 'orderlabel.storage.s3.ou-%d.%s.%s';
-    const STAT_CACHE = 'orderlabel.storage.cache.ou-%d.%s.%s';
-
-    /** @var S3Adapter */
-    protected $fileStorage;
-    /** @var PredisClient */
-    protected $predisClient;
-
-    protected $typeExtensions = [
-        self::TYPE_DOCUMENT => 'pdf',
-        self::TYPE_IMAGE    => 'png',
-    ];
+    protected const LOG_CODE = 'LabelDataMultiPageS3Storage';
 
     public function __construct(S3Adapter $s3FileStorage, PredisClient $predisClient)
     {
-        $this->fileStorage = $s3FileStorage;
-        $this->predisClient = $predisClient;
+        parent::__construct($s3FileStorage, $predisClient);
         $this->predisClient->getProfile()->defineCommand('hmsetex', HmsetEx::class);
     }
 
@@ -49,43 +26,44 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
     {
         return [
             static::TYPE_DOCUMENT => $this->fetchDocument($id, $ouId),
-            static::TYPE_IMAGE    => $this->fetchImage($id, $ouId),
+            static::TYPE_IMAGE    => $this->fetchImages($id, $ouId),
         ];
     }
 
-    protected function fetchDocument(int $id, int $ouId): ?string
+    protected function fetchImages(int $id, int $ouId): ?array
     {
-        return $this->fetchType($id, $ouId, static::TYPE_DOCUMENT);
-    }
-
-    protected function fetchImage(int $id, int $ouId): ?string
-    {
-        return $this->fetchType($id, $ouId, static::TYPE_IMAGE);
-    }
-
-    protected function fetchType(int $id, int $ouId, string $type): ?string
-    {
-        $cached = $this->fetchFromCache($id, $ouId, $type);
+        $type = static::TYPE_IMAGE;
+        $cached = $this->fetchImagesFromCache($id, $ouId, $type);
         if ($cached) {
             return $cached;
         }
 
         $extension = $this->typeExtensions[$type];
+        $images = [];
+        $imageIndex = 0;
+
         try {
-            $result = $this->fileStorage->read($this->getS3Key($ouId, $id, $extension));
-            $this->saveImagesToCache($id, $ouId, $result->getBody(), $type);
-            $this->statsIncrement(static::STAT_S3, [$ouId, 'fetch', $type]);
-            return $result->getBody();
+            while (true) {
+                $result = $this->fileStorage->read($this->getS3KeyImages($ouId, $id, $imageIndex, $extension));
+                $images[] = $result->getBody();
+                $imageIndex++;
+            }
         } catch (NotFound $e) {
-            return null;
+            //no-op
         }
+        if (!empty($images)) {
+            $this->saveImagesToCache($id, $ouId, $images, $type);
+            $this->statsIncrement(static::STAT_S3, [$ouId, 'fetch', $type]);
+        }
+
+        return $images;
     }
 
-    protected function fetchFromCache(int $id, int $ouId, string $type): ?string
+    protected function fetchImagesFromCache(int $id, int $ouId, string $type): ?array
     {
         $key = $this->getCacheKey($id, $type);
-        $data = $this->predisClient->get($key);
-        if ($data) {
+        $data = $this->predisClient->hgetall($key);
+        if (!empty($data)) {
             $this->statsIncrement(static::STAT_CACHE, [$ouId, 'fetch', $type]);
         }
         return $data;
@@ -95,24 +73,16 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
     {
         $this->logDebug('About to remove orderLabelDocument entity data in %s', [__METHOD__], static::LOG_CODE);
         $this->removeDocument($entity->getId(), $entity->getOrganisationUnitId());
-        $this->removeImage($entity->getId(), $entity->getOrganisationUnitId());
+        $this->removeImages($entity->getId(), $entity->getOrganisationUnitId());
         $this->logDebug('Completed removing orderLabelDocument entity data in %s', [__METHOD__], static::LOG_CODE);
         return $this;
     }
 
-//    protected function removeDocument(int $id, int $ouId)
-//    {
-//        return $this->removeType($id, $ouId, static::TYPE_DOCUMENT);
-//    }
-
-    protected function removeImage(int $id, int $ouId)
+    protected function removeImages(int $id, int $ouId): S3
     {
-//        return $this->removeType($id, $ouId, static::TYPE_IMAGE);
-
         $type = static::TYPE_IMAGE;
         try {
-            $extension = $this->typeExtensions[$type];
-            $this->fileStorage->delete($this->getS3Key($ouId, $id, $extension));
+            $this->fileStorage->delete($this->getS3KeyImages($ouId, $id));
             $this->statsIncrement(static::STAT_S3, [$ouId, 'remove', $type]);
         } catch (NotFound $e) {
             // No-op
@@ -122,54 +92,18 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
         return $this;
     }
 
-//    protected function removeType(int $id, int $ouId, string $type)
-//    {
-//        try {
-//            $extension = $this->typeExtensions[$type];
-//            $this->fileStorage->delete($this->getS3Key($ouId, $id, $extension));
-//            $this->statsIncrement(static::STAT_S3, [$ouId, 'remove', $type]);
-//        } catch (NotFound $e) {
-//            // No-op
-//        }
-//        $this->removeHash($id, $type);
-//        $this->removeFromCache($id, $ouId, $type);
-//        return $this;
-//    }
-
-    protected function removeHash(int $id, string $type)
-    {
-        $redisKey = static::REDIS_KEY_HASHES_PREFIX . $type;
-        $this->predisClient->hdel($redisKey, $id);
-        return $this;
-    }
-
-    protected function removeFromCache(int $id, int $ouId, string $type)
-    {
-        $key = $this->getCacheKey($id, $type);
-        $this->predisClient->del($key);
-        $this->statsIncrement(static::STAT_CACHE, [$ouId, 'remove', $type]);
-        return $this;
-    }
-
     public function save($entity)
     {
         $this->saveDocument($entity->getId(), $entity->getOrganisationUnitId(), $entity->getLabel());
-        $this->saveImage($entity->getId(), $entity->getOrganisationUnitId(), $entity->getImage());
+        $this->saveImages($entity->getId(), $entity->getOrganisationUnitId(), $entity->getImage());
         return $this;
     }
 
-    protected function saveDocument(int $id, int $ouId, ?string $data)
+    protected function saveImages(int $id, int $ouId, ?array $data): S3
     {
-        return parent::saveType($id, $ouId, $data, static::TYPE_DOCUMENT);
-    }
-
-    protected function saveImage(int $id, int $ouId, ?array $data)
-    {
-//        return $this->saveType($id, $ouId, $data, static::TYPE_IMAGE);
         $type = static::TYPE_IMAGE;
-
         if (!$data) {
-            return $this->removeType($id, $ouId, $type);
+            return $this->removeImage($id, $ouId);
         }
         if (!$this->hasImageHashChanged($id, $data, $type)) {
             return $this;
@@ -187,30 +121,7 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
         $this->saveImagesToCache($id, $ouId, $data, $type);
 
         return $this;
-
-
-
-
     }
-
-//    protected function saveType(int $id, int $ouId, ?string $data, string $type)
-//    {
-//        if (!$data) {
-//            return $this->removeType($id, $ouId, $type);
-//        }
-//        if (!$this->hasHashChanged($id, $data, $type)) {
-//            return $this;
-//        }
-//        $extension = $this->typeExtensions[$type];
-//
-//        $this->fileStorage->write(
-//            $this->getS3KeyImages($ouId, $id, $extension), $data
-//        );
-//
-//        $this->statsIncrement(static::STAT_S3, [$ouId, 'save', $type]);
-//        $this->saveImagesToCache($id, $ouId, $data, $type);
-//        return $this;
-//    }
 
     protected function hasImageHashChanged(int $id, array $data, string $type): bool
     {
@@ -229,7 +140,7 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
         return true;
     }
 
-    protected function saveImagesToCache(int $id, int $ouId, array $data, string $type)
+    protected function saveImagesToCache(int $id, int $ouId, array $data, string $type): S3
     {
         $key = $this->getCacheKey($id, $type);
         foreach ($data as $index => $itemData) {
@@ -252,9 +163,4 @@ class S3 extends LabelDataS3 implements LabelDataInterface, StatsAwareInterface,
 
         return $key;
     }
-
-//    protected function getCacheKey(int $id, string $type): string
-//    {
-//        return static::REDIS_KEY_CACHE_PREFIX . $type . ':' . $id;
-//    }
 }
