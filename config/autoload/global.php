@@ -904,16 +904,16 @@ $config = array(
                     'predisClient' => 'unreliable_redis'
                 ]
             ],
-            LabelMetaPlusLabelDataStorage::class => [
-                'parameter' => [
-                    'metaDataStorage' => LabelMetaDataDbStorage::class,
-                    'labelDataStorage' => LabelDataMultiPageRepository::class,
-                ]
-            ],
             LabelDataMultiPageRepository::class => [
                 'parameter' => [
                     'multiPageStorage' => LabelDataMultiPageS3Storage::class,
                     'singlePageStorage' => LabelLabelDataS3Storage::class,
+                ]
+            ],
+            LabelMetaPlusLabelDataStorage::class => [
+                'parameter' => [
+                    'metaDataStorage' => LabelMetaDataDbStorage::class,
+                    'labelDataStorage' => LabelDataMultiPageRepository::class,
                 ]
             ],
             AccountCommandService::class => array(

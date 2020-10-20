@@ -11,6 +11,7 @@ use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use Predis\Client as PredisClient;
+use Predis\PredisException;
 
 class S3 extends LabelDataS3 implements LabelDataInterface
 {
@@ -61,12 +62,16 @@ class S3 extends LabelDataS3 implements LabelDataInterface
 
     protected function fetchImagesFromCache(int $id, int $ouId, string $type): ?array
     {
-        $key = $this->getCacheKey($id, $type);
-        $data = $this->predisClient->hgetall($key);
-        if (!empty($data)) {
-            $this->statsIncrement(static::STAT_CACHE, [$ouId, 'fetch', $type]);
+        try {
+            $key = $this->getCacheKey($id, $type);
+            $data = $this->predisClient->hgetall($key);
+            if (!empty($data)) {
+                $this->statsIncrement(static::STAT_CACHE, [$ouId, 'fetch', $type]);
+            }
+            return $data;
+        } catch (PredisException $exception) {
+            return null;
         }
-        return $data;
     }
 
     public function remove($entity)
