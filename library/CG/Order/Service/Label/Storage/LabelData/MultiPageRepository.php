@@ -4,7 +4,6 @@ namespace CG\Order\Service\Label\Storage\LabelData;
 use CG\Order\Service\Label\Storage\LabelDataInterface;
 use CG\Stats\StatsAwareInterface;
 use CG\Stats\StatsTrait;
-use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
 use CG\Stdlib\Log\LogTrait;
 use CG\Order\Service\Label\Storage\LabelData\S3 as SinglePageS3Storage;
