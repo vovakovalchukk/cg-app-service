@@ -190,7 +190,7 @@ return array(
             },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'OrderLabelEntity',
-        'version' => new Version(1, 6),
+        'version' => new Version(1, 7),
         'validation' => ["dataRules" => LabelEntityValidationRules::class, "filterRules" => null, "flatten" => false],
         'eTag' => [
             'mapperClass' => LabelMapper::class,

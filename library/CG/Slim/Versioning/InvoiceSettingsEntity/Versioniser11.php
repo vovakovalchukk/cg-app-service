@@ -27,7 +27,7 @@ class Versioniser11 implements VersioniserInterface
         try {
             /** @var InvoiceSetting $invoiceSetting */
             $invoiceSetting = $this->invoiceSettingsService->fetch($data['id']);
-            $data['itemVariationAttributes'] = $invoiceSetting->getAdditionalShippingLabels();
+            $data['additionalShippingLabels'] = $invoiceSetting->getAdditionalShippingLabels();
             $request->setData($data);
         } catch (NotFound $exception) {
             // No-op
