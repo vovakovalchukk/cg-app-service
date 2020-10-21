@@ -160,7 +160,7 @@ class Db extends DbAbstract implements MetaDataInterface
     protected function getEntityArray($entity)
     {
         $array = $entity->toArray();
-        unset($array['label'], $array['image'], $array['parcels']);
+        unset($array['label'], $array['image'], $array['parcels'], $array['images']);
         return $array;
     }
 
