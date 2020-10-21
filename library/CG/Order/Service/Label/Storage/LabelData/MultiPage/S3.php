@@ -100,7 +100,7 @@ class S3 extends LabelDataS3 implements LabelDataInterface
     public function save($entity)
     {
         $this->saveDocument($entity->getId(), $entity->getOrganisationUnitId(), $entity->getLabel());
-        $this->saveImages($entity->getId(), $entity->getOrganisationUnitId(), $entity->getImage());
+        $this->saveImages($entity->getId(), $entity->getOrganisationUnitId(), $entity->getImages());
         return $this;
     }
 

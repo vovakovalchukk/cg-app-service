@@ -37,7 +37,7 @@ class MetaPlusLabelData implements StorageInterface, LoggerAwareInterface
         $labelData = $this->labelDataStorage->fetch($entity->getId(), $entity->getOrganisationUnitId());
         $entity->setLabel($labelData['label'])
             ->setImage($labelData['image'][0] ?? null)
-            ->setImages($labelData['image']);
+            ->setImages($labelData['image'] ?? []);
         return $entity;
     }
 
@@ -51,7 +51,7 @@ class MetaPlusLabelData implements StorageInterface, LoggerAwareInterface
             $labelData = $this->labelDataStorage->fetch($entity->getId(), $entity->getOrganisationUnitId());
             $entity->setLabel($labelData['label'])
                 ->setImage($labelData['image'][0] ?? null)
-                ->setImages($labelData['image']);
+                ->setImages($labelData['image'] ?? []);
         }
         return $collection;
     }
