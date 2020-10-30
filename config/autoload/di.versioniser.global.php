@@ -159,6 +159,8 @@ return [
                 'Versioniser_ProductDetailEntity_4' => ProductDetailEntity\Versioniser4::class,
                 'Versioniser_ProductDetailCollection_5' => ProductDetailCollection\Versioniser5::class,
                 'Versioniser_ProductDetailEntity_5' => ProductDetailEntity\Versioniser5::class,
+                'Versioniser_ProductDetailCollection_6' => ProductDetailCollection\Versioniser6::class,
+                'Versioniser_ProductDetailEntity_6' => ProductDetailEntity\Versioniser6::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
@@ -416,6 +418,31 @@ return [
             'Versioniser_ProductDetailCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ProductDetailEntity_1'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_2' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_2'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_3' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_3'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_4' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_4'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_5' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_5'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_6' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_6'
                 ],
             ],
             'Versioniser_ProductCollection_1' => [

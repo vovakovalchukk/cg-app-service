@@ -180,7 +180,7 @@ return [
             'filterRules' => ProductDetailCollectionValidation::class,
             'dataRules' => ProductDetailEntityValidation::class
         ],
-        'version' => new Version(1, 6)
+        'version' => new Version(1, 7)
     ],
     '/productDetail/:productDetailId' => [
         'controllers' => function($productDetailId) use ($di, $app) {
@@ -202,7 +202,7 @@ return [
             'entityClass' => ProductDetailEntity::class,
             'serviceClass' => ProductDetailService::class
         ],
-        'version' => new Version(1, 6)
+        'version' => new Version(1, 7)
     ],
     '/productChannelDetail' => [
         'controllers' => function() use ($di, $app) {

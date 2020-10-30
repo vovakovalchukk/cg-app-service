@@ -116,7 +116,7 @@ class Entity implements RulesInterface
                 'validators' => [$this->getBarcodeChainValidator(10, 13, 'isbn')]
             ],
             'gtin' => [
-                'name' => 'isbn',
+                'name' => 'gtin',
                 'required' => false,
                 'validators' => [new StringLength(['min' => 8, 'max' => 14])]
             ],
@@ -133,6 +133,11 @@ class Entity implements RulesInterface
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
                         ->setMessages(['notGreaterThanInclusive' => 'supplierId must be at least %min%'])
                 ]
+            ],
+            'hsTariffNumber' => [
+                'name' => 'hsTariffNumber',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
             ],
         ];
     }

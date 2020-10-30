@@ -107,6 +107,9 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getSupplierId())) {
             $query['productDetail.supplierId'] = $filter->getSupplierId();
         }
+        if (!empty($filter->getHsTariffNumber())) {
+            $query['productDetail.hsTariffNumber'] = $filter->getHsTariffNumber();
+        }
         return $query;
     }
 
