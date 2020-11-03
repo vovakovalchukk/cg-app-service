@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1542c8799967c63b744bf1ea3e0f7e13",
+    "content-hash": "8530856d81e9058f25f63477acb7834d",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -658,16 +658,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.17.7",
+            "version": "dev-CGIV-11547-stock-adjustment-dynamic-queue",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "9683143acc1079553cbc8e9ac8cd9383c7107faf"
+                "reference": "28fbcf8fbbbd40c77d9d1eb95c22e5437539bc47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.17.7-7afe3e.zip",
-                "reference": "9683143acc1079553cbc8e9ac8cd9383c7107faf",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-dev-CGIV-11547-stock-adjustment-dynamic-queue-87a2c9.zip",
+                "reference": "28fbcf8fbbbd40c77d9d1eb95c22e5437539bc47",
                 "shasum": null
             },
             "require": {
@@ -711,7 +711,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "1.x-dev"
+                    "dev-develop": "1.x-dev",
+                    "dev-CGIV-11547-stock-adjustment-dynamic-queue": "1.17.x-dev"
                 }
             },
             "autoload": {
@@ -725,7 +726,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2020-09-23T15:03:01+00:00"
+            "time": "2020-11-03T16:24:52+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -2008,22 +2009,22 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.56.0",
+            "version": "dev-CGIV-11547-stock-adjustment-dynamic-queue",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "2e4ed0cd8c19389efb1160b28d57275e44015928"
+                "reference": "5b94782ee0c00d90f548cee4956702ef36d8aa32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.56.0-509ab9.zip",
-                "reference": "2e4ed0cd8c19389efb1160b28d57275e44015928",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11547-stock-adjustment-dynamic-queue-dcd1fd.zip",
+                "reference": "5b94782ee0c00d90f548cee4956702ef36d8aa32",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
                 "channelgrabber/cache": "^2.1.0",
-                "channelgrabber/cglib": "^1.17.2",
+                "channelgrabber/cglib": "dev-CGIV-11547-stock-adjustment-dynamic-queue as 1.17.9",
                 "channelgrabber/channel": "^1.43.10",
                 "channelgrabber/cilex": "^1.1.4",
                 "channelgrabber/communication": "^1.0.2",
@@ -2074,6 +2075,11 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-CGIV-11547-stock-adjustment-dynamic-queue": "1.56.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -2089,7 +2095,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-09-21T15:17:54+00:00"
+            "time": "2020-11-03T16:38:48+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -12179,10 +12185,25 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.17.9",
+            "alias_normalized": "1.17.9.0",
+            "version": "dev-CGIV-11547-stock-adjustment-dynamic-queue",
+            "package": "channelgrabber/cglib"
+        },
+        {
+            "alias": "1.56.1",
+            "alias_normalized": "1.56.1.0",
+            "version": "dev-CGIV-11547-stock-adjustment-dynamic-queue",
+            "package": "channelgrabber/order"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/cglib": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
