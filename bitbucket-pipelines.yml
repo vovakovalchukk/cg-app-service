@@ -3,7 +3,11 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: channelgrabber/php71
+image:
+  name: 530826609936.dkr.ecr.eu-west-2.amazonaws.com/php:7.1
+  aws:
+    access-key: $AWS_ACCESS_KEY_ID
+    secret-key: $AWS_SECRET_ACCESS_KEY 
 
 pipelines:
   default:
