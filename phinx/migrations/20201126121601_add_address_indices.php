@@ -26,9 +26,9 @@ class AddAddressIndices extends AbstractOnlineSchemaChange implements Environmen
      */
     public function down()
     {
-        $this->onlineSchemaChange('stockAdjustmentLog', implode(', ', [
-            'DROP COLUMN `referenceSku`',
-            'DROP COLUMN `referenceQuantity`',
+        $this->onlineSchemaChange('address', implode(', ', [
+            'DROP INDEX `addressCountry`',
+            'DROP INDEX `idx_address_addressCountryCode`',
         ]), 200);
     }
 }
