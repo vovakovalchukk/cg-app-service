@@ -369,6 +369,7 @@ use CG\Order\Shared\CustomerCounts\StorageInterface as CustomerCountStorage;
 use CG\Order\Shared\CustomerCounts\Repository as CustomerCountRepository;
 use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
 use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
+use CG\Order\Shared\CustomerCounts\NullStorage as CustomerCountNullStorage;
 
 // Amazon Logistics
 use CG\Amazon\ShippingService\StorageInterface as AmazonShippingServiceStorage;
@@ -1778,7 +1779,7 @@ $config = array(
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
-                CustomerCountStorage::class => CustomerCountRepository::class,
+                CustomerCountStorage::class => CustomerCountNullStorage::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelMetaPlusLabelDataStorage::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryDbStorage::class,
