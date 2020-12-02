@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "939e9bc0658199a910e4682b4a983967",
+    "content-hash": "cb4aa9046bed658bdeb5af39eaea9a08",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1965,16 +1965,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.56.3",
+            "version": "dev-CGIV-11742-order-auto-archive",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "767aa0ccfb2736357a5135aa9716d10e9d9aeab7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.56.3-5464db.zip",
-                "reference": "767aa0ccfb2736357a5135aa9716d10e9d9aeab7"
+                "reference": "2aa8404722520d7ceab407d969393c3b2bf9a084"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -11704,6 +11699,12 @@
     ],
     "aliases": [
         {
+            "alias": "1.56.4",
+            "alias_normalized": "1.56.4.0",
+            "version": "dev-CGIV-11742-order-auto-archive",
+            "package": "channelgrabber/order"
+        },
+        {
             "alias": "1.9.1",
             "alias_normalized": "1.9.1.0",
             "version": "dev-CGIV-11742-order-auto-archive",
@@ -11713,6 +11714,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20

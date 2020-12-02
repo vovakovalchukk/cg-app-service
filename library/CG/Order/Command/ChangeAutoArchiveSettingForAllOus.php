@@ -4,40 +4,40 @@ namespace CG\Order\Command;
 use CG\Order\Shared\Command\AutoArchiveOrders;
 use CG\OrganisationUnit\Entity as OrganisationUnit;
 use CG\Settings\Order\AutoArchiveTimeframe;
+use CG\Settings\Order\Entity as OrderSettings;
 
 class ChangeAutoArchiveSettingForAllOus extends AutoArchiveOrders
 {
+    protected const LOG_CODE = 'ChangeTimeFrameAndAutoArchiveOrders';
+    protected const LOG_INVOKED = 'ChangeTimeFrame and AutoArchiveOrders invoked';
+
     public function __invoke()
     {
-        $this->logDebug(static::LOG_INVOKED, [], [static::LOG_CODE, 'Invoked']);
+        $this->logDebug(static::LOG_INVOKED, [], [static::LOG_CODE]);
 
         $organisationUnits = $this->fetchAllOrganisationUnits();
-        // Perform modulus on collection to spread them out over time
-        $this->filterCollection($organisationUnits);
-        $this->logDebug(static::LOG_COUNT_MODULATED, [count($organisationUnits)], [static::LOG_CODE, 'CountModulated']);
 
         foreach ($organisationUnits as $organisationUnit) {
             $this->processOrganisationUnit($organisationUnit);
             $this->getLogger() && $this->getLogger()->flushLogs();
         }
 
-        $this->logDebug(static::LOG_DONE, [], [static::LOG_CODE, 'Done']);
+        $this->logDebug(static::LOG_DONE, [], [static::LOG_CODE]);
     }
 
-    protected function updateAutoArchiveTimeframeForOU(OrganisationUnit $organisationUnit)
+    protected function getOrderSettingsForOu(OrganisationUnit $organisationUnit): ?OrderSettings
     {
-        $settings = $this->getOrderSettingsForOu($organisationUnit);
-
-        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::ONE_YEAR) {
+        $settings = parent::getOrderSettingsForOu($organisationUnit);
+        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::DEFAULT_TIMEFRAME) {
             return null;
         }
 
-
-    }
-
-    protected function getOrderSettingsForOu(OrganisationUnit $organisationUnit) {
-        $settings = parent::getOrderSettingsForOu($organisationUnit);
-        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::ONE_YEAR) {
+        $settings->setAutoArchiveTimeframe(AutoArchiveTimeframe::DEFAULT_TIMEFRAME);
+        try {
+            $this->orderSettingsService->save($settings);
+            return $settings;
+        } catch (\Throwable $throwable) {
+            $this->logWarningException($throwable, 'Settings Saving Exception', [], static::LOG_CODE);
             return null;
         }
     }

@@ -12,6 +12,7 @@ use CG\Order\Client\Gearman\WorkerFunction\SetItemImages as SetItemImagesWorkerF
 use CG\Order\Client\Gearman\Workload\SetInvoiceByOU as Workload;
 use CG\Order\Client\Gearman\Workload\SetItemImages as SetItemImagesWorkload;
 use CG\Order\Client\StorageInterface as OrderStorage;
+use CG\Order\Command\ChangeAutoArchiveSettingForAllOus;
 use CG\Order\Command\ClearCachedCustomerCountsByPattern as ClearCachedCustomerCountsByPatternCommand;
 use CG\Order\Command\UpdateItemsWithSuppliers;
 use CG\Order\Service\Filter as OrderFilter;
@@ -742,5 +743,14 @@ SQL;
             ],
         ],
         'options' => [],
+    ],
+    'ad-hoc:updateTimeFrameAndRunAutoArchive' => [
+        'description' => "Updates all OU with default time frame for Auto Archive and run Auto Archive for updated OUs",
+        'options' => [],
+        'command' => function() use ($di)
+        {
+            $command = $di->get(ChangeAutoArchiveSettingForAllOus::class);
+            $command();
+        }
     ],
 ];
