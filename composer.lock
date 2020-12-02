@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c059078e0857a9102a022d78747759a1",
+    "content-hash": "15e6a7463284ca8e8aefe563914f53f2",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -373,22 +373,22 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.37.0",
+            "version": "1.37.15",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "2d0e5e68261f1a4a0c0468315b9ceb817e4b970e"
+                "reference": "8eea97a15fbc9a0f89cdfdf36d2005db758674b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.37.0-0cb0a8.zip",
-                "reference": "2d0e5e68261f1a4a0c0468315b9ceb817e4b970e"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.37.15-296d62.zip",
+                "reference": "8eea97a15fbc9a0f89cdfdf36d2005db758674b6"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.4.2",
                 "channelgrabber/cglib": "^1.14.0",
-                "channelgrabber/channel": "~1.44.4",
+                "channelgrabber/channel": "^1.44.4",
                 "channelgrabber/communication": "^1.0.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.9",
@@ -398,10 +398,10 @@
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.18.4",
-                "channelgrabber/locale": "^1.1.3",
+                "channelgrabber/locale": "^1.2.4",
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/order": "^1.49.1",
+                "channelgrabber/order": "^1.56.3",
                 "channelgrabber/predis": "^1.1.14",
                 "channelgrabber/product": "^1.18.6",
                 "channelgrabber/scraper": "^1.2.0",
@@ -436,7 +436,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2020-05-22T12:29:00+00:00"
+            "time": "2020-12-01T11:40:24+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -1686,16 +1686,16 @@
         },
         {
             "name": "channelgrabber/locale",
-            "version": "1.2.1",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-locale.git",
-                "reference": "d7c1ac9ef3d43406007e751fccc5a4071850ce55"
+                "reference": "dffda2b611fab5cb98ee0d23e76823ea414168e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/locale/channelgrabber-locale-1.2.1-fb7f25.zip",
-                "reference": "d7c1ac9ef3d43406007e751fccc5a4071850ce55"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/locale/channelgrabber-locale-1.2.4-68de60.zip",
+                "reference": "dffda2b611fab5cb98ee0d23e76823ea414168e2"
             },
             "require": {
                 "php": ">=7.1",
@@ -1718,7 +1718,7 @@
                     "CG\\Locale\\Test\\": "tests"
                 }
             },
-            "time": "2018-08-29T08:47:40+00:00"
+            "time": "2020-08-14T11:36:37+00:00"
         },
         {
             "name": "channelgrabber/location",
@@ -1969,12 +1969,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "70361204efc73b056b6be85b6d6317c121fe1d14"
+                "reference": "61c5e85537e9676df328a9c64a682b048a601e7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11664-invoice-multilabels-231012.zip",
-                "reference": "70361204efc73b056b6be85b6d6317c121fe1d14"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11664-invoice-multilabels-b6784f.zip",
+                "reference": "61c5e85537e9676df328a9c64a682b048a601e7f"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2045,7 +2045,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-11-20T13:05:21+00:00"
+            "time": "2020-12-02T14:59:04+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -11704,8 +11704,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.56.2",
-            "alias_normalized": "1.56.2.0",
+            "alias": "1.56.4",
+            "alias_normalized": "1.56.4.0",
             "version": "dev-CGIV-11664-invoice-multilabels",
             "package": "channelgrabber/order"
         },
