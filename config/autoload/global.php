@@ -152,9 +152,10 @@ use CG\CGLib\Command\EnsureProductsAndListingsAssociatedWithRootOu as EnsureProd
 use CG\Listing\Command\CorrectPendingListingsStatusFromSiblingListings as CorrectPendingListingsStatusFromSiblingListingsCommand;
 use CG\Listing\Command\AddSkusToListings as AddSkusToListingsCommand;
 use CG\Listing\Command\DeleteAlreadyImportedUnimportedListings as DeleteAlreadyImportedUnimportedListingsCommand;
+use CG\Order\Command\ChangeAutoArchiveSettingForAllOus as ChangeAutoArchiveSettingForAllOusCommand;
+use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 use CG\Stock\Command\CreateMissingStock as CreateMissingStockCommand;
 use CG\Stock\Command\RemoveDuplicateStock as RemoveDuplicateStockCommand;
-use CG\Order\Shared\Command\AutoArchiveOrders as AutoArchiveOrdersCommand;
 use CG\Stock\Command\FindIncorrectlyAllocatedStock as FindIncorrectlyAllocatedStockCommand;
 use CG\Order\Client\Gearman\Generator\SaveOrderShippingMethod;
 
@@ -1643,6 +1644,11 @@ $config = array(
                 ]
             ],
             AutoArchiveOrdersCommand::class => [
+                'parameter' => [
+                    'sqlClient' => 'ReadCGSql'
+                ]
+            ],
+            ChangeAutoArchiveSettingForAllOusCommand::class => [
                 'parameter' => [
                     'sqlClient' => 'ReadCGSql'
                 ]

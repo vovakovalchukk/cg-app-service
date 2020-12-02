@@ -8,15 +8,13 @@ use CG\Settings\Order\Entity as OrderSettings;
 
 class ChangeAutoArchiveSettingForAllOus extends AutoArchiveOrders
 {
-    protected const LOG_CODE = 'ChangeTimeFrameAndAutoArchiveOrders';
-    protected const LOG_INVOKED = 'ChangeTimeFrame and AutoArchiveOrders invoked';
+    public const LOG_CODE = 'ChangeTimeFrameAndAutoArchiveOrders';
+    public const LOG_INVOKED = 'ChangeTimeFrame and AutoArchiveOrders invoked';
 
     public function __invoke()
     {
         $this->logDebug(static::LOG_INVOKED, [], [static::LOG_CODE]);
-
         $organisationUnits = $this->fetchAllOrganisationUnits();
-
         foreach ($organisationUnits as $organisationUnit) {
             $this->processOrganisationUnit($organisationUnit);
             $this->getLogger() && $this->getLogger()->flushLogs();
