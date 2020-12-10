@@ -134,6 +134,8 @@ use CG\Order\Service\Label\Storage\MetaPlusLabelData as LabelMetaPlusLabelDataSt
 use CG\Order\Service\Label\Storage\LabelData\S3 as LabelLabelDataS3Storage;
 use CG\Order\Service\Label\Storage\MetaData\Db as LabelMetaDataDbStorage;
 use CG\FileStorage\S3\Adapter as S3LabelDataAdapter;
+use CG\Order\Service\Label\Storage\LabelData\MultiPageRepository as LabelDataMultiPageRepository;
+use CG\Order\Service\Label\Storage\LabelData\MultiPage\S3 as LabelDataMultiPageS3Storage;
 
 //Cilex Command
 use CG\Channel\Command\Order\Download as OrderDownloadCommand;
@@ -369,6 +371,7 @@ use CG\Order\Shared\CustomerCounts\StorageInterface as CustomerCountStorage;
 use CG\Order\Shared\CustomerCounts\Repository as CustomerCountRepository;
 use CG\Order\Shared\CustomerCounts\Storage\Cache as CustomerCountCacheStorage;
 use CG\Order\Shared\CustomerCounts\Storage\OrderLookup as CustomerCountOrderLookupStorage;
+use CG\Order\Shared\CustomerCounts\NullStorage as CustomerCountNullStorage;
 
 // Amazon Logistics
 use CG\Amazon\ShippingService\StorageInterface as AmazonShippingServiceStorage;
@@ -902,10 +905,16 @@ $config = array(
                     'predisClient' => 'unreliable_redis'
                 ]
             ],
+            LabelDataMultiPageRepository::class => [
+                'parameter' => [
+                    'multiPageStorage' => LabelDataMultiPageS3Storage::class,
+                    'singlePageStorage' => LabelLabelDataS3Storage::class,
+                ]
+            ],
             LabelMetaPlusLabelDataStorage::class => [
                 'parameter' => [
                     'metaDataStorage' => LabelMetaDataDbStorage::class,
-                    'labelDataStorage' => LabelLabelDataS3Storage::class,
+                    'labelDataStorage' => LabelDataMultiPageRepository::class,
                 ]
             ],
             AccountCommandService::class => array(
@@ -1778,7 +1787,7 @@ $config = array(
                 StockLogStorage::class => StockLogDbStorage::class,
                 LockingStorage::class => LockingRedisStorage::class,
                 FilterEntityStorage::class => FilterEntityCacheStorage::class,
-                CustomerCountStorage::class => CustomerCountRepository::class,
+                CustomerCountStorage::class => CustomerCountNullStorage::class,
                 AmazonShippingServiceStorage::class => AmazonShippingServiceRepository::class,
                 LabelStorage::class => LabelMetaPlusLabelDataStorage::class,
                 ListingStatusHistoryStorage::class => ListingStatusHistoryDbStorage::class,
