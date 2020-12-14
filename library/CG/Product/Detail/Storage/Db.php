@@ -110,6 +110,9 @@ class Db extends DbAbstract implements StorageInterface
         if (!empty($filter->getHsTariffNumber())) {
             $query['productDetail.hsTariffNumber'] = $filter->getHsTariffNumber();
         }
+        if (!empty($filter->getCountryOfManufacture())) {
+            $query['productDetail.countryOfManufacture'] = $filter->getCountryOfManufacture();
+        }
         return $query;
     }
 

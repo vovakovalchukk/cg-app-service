@@ -139,6 +139,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new StringLength(['min' => 1])]
             ],
+            'countryOfManufacture' => [
+                'name' => 'countryOfManufacture',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 2, 'max' => 2])]
+            ],
         ];
     }
 

@@ -163,6 +163,8 @@ return [
                 'Versioniser_ProductDetailEntity_5' => ProductDetailEntity\Versioniser5::class,
                 'Versioniser_ProductDetailCollection_6' => ProductDetailCollection\Versioniser6::class,
                 'Versioniser_ProductDetailEntity_6' => ProductDetailEntity\Versioniser6::class,
+                'Versioniser_ProductDetailCollection_7' => ProductDetailCollection\Versioniser7::class,
+                'Versioniser_ProductDetailEntity_7' => ProductDetailEntity\Versioniser7::class,
                 'Versioniser_ProductCollection_1' => ProductCollection\Versioniser1::class,
                 'Versioniser_ProductEntity_1' => ProductEntity\Versioniser1::class,
                 'Versioniser_ProductCollection_2' => ProductCollection\Versioniser2::class,
@@ -447,6 +449,11 @@ return [
             'Versioniser_ProductDetailCollection_6' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_ProductDetailEntity_6'
+                ],
+            ],
+            'Versioniser_ProductDetailCollection_7' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_ProductDetailEntity_7'
                 ],
             ],
             'Versioniser_ProductCollection_1' => [

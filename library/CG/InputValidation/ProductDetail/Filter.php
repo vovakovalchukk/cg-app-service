@@ -88,6 +88,11 @@ class Filter implements RulesInterface
                     'required'=> false,
                     'validators'=> [new IsArrayValidator(['name' => 'hsTariffNumber'])]
                 ],
+                'countryOfManufacture' => [
+                    'name'=> 'countryOfManufacture',
+                    'required'=> false,
+                    'validators'=> [new IsArrayValidator(['name' => 'countryOfManufacture'])]
+                ],
             ]
         );
     }
