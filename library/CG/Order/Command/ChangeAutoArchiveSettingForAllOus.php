@@ -26,11 +26,11 @@ class ChangeAutoArchiveSettingForAllOus extends AutoArchiveOrders
     protected function getOrderSettingsForOu(OrganisationUnit $organisationUnit): ?OrderSettings
     {
         $settings = parent::getOrderSettingsForOu($organisationUnit);
-        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::DEFAULT_TIMEFRAME) {
+        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::ONE_YEAR) {
             return null;
         }
 
-        $settings->setAutoArchiveTimeframe(AutoArchiveTimeframe::DEFAULT_TIMEFRAME);
+        $settings->setAutoArchiveTimeframe(AutoArchiveTimeframe::ONE_YEAR);
         try {
             $this->orderSettingsService->save($settings);
             return $settings;
