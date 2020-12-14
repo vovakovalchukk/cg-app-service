@@ -745,7 +745,7 @@ SQL;
         'options' => [],
     ],
     'ad-hoc:updateTimeFrameAndRunAutoArchive' => [
-        'description' => "Updates all OU with default time frame for Auto Archive and run Auto Archive for updated OUs",
+        'description' => "Updates all OU with 1 year time frame for Auto Archive and run Auto Archive for updated OUs",
         'options' => [],
         'command' => function() use ($di)
         {
