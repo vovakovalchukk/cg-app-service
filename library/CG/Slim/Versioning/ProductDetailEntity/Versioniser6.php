@@ -33,7 +33,7 @@ class Versioniser6 implements VersioniserInterface
         }
 
         if (!isset($data['hsTariffNumber'])) {
-            $data['hsTariffNumber'] = $productDetail->getGtin();
+            $data['hsTariffNumber'] = $productDetail->getHsTariffNumber();
         }
 
         $request->setData($data);
