@@ -6,7 +6,7 @@ use CG\OrganisationUnit\Entity as OrganisationUnit;
 use CG\Settings\Order\AutoArchiveTimeframe;
 use CG\Settings\Order\Entity as OrderSettings;
 
-class ChangeAutoArchiveSettingForAllOus extends AutoArchiveOrders
+class ChangeAutoArchiveSetting extends AutoArchiveOrders
 {
     public const LOG_CODE = 'ChangeTimeFrameAndAutoArchiveOrders';
     public const LOG_INVOKED = 'ChangeTimeFrame and AutoArchiveOrders invoked';
@@ -26,7 +26,7 @@ class ChangeAutoArchiveSettingForAllOus extends AutoArchiveOrders
     protected function getOrderSettingsForOu(OrganisationUnit $organisationUnit): ?OrderSettings
     {
         $settings = parent::getOrderSettingsForOu($organisationUnit);
-        if ($settings->getAutoArchiveTimeframe() == AutoArchiveTimeframe::ONE_YEAR) {
+        if (AutoArchiveTimeframe::isValid($settings->getAutoArchiveTimeframe())) {
             return null;
         }
 
