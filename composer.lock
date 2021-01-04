@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb14b9cb1517fa34318fe8dc30335325",
+    "content-hash": "41cb9162451449da6b988f8405205e75",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1969,12 +1969,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "5b4817b811c7e3a15f71e14a99aeba92ba817aab"
+                "reference": "05c9eb16763cad2b4d3ed36a60b76504a8fbb069"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11742-order-auto-archive-f96f69.zip",
-                "reference": "5b4817b811c7e3a15f71e14a99aeba92ba817aab"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11742-order-auto-archive-288b1f.zip",
+                "reference": "05c9eb16763cad2b4d3ed36a60b76504a8fbb069"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2045,7 +2045,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-12-14T11:05:47+00:00"
+            "time": "2021-01-04T10:55:47+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2264,16 +2264,16 @@
         },
         {
             "name": "channelgrabber/product",
-            "version": "1.20.6",
+            "version": "1.20.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "d6e3a30577c6ddaca4f18d4b656873b4bb5c39eb"
+                "reference": "f202aaba4ddb56f34885de3c02326ec3e6a04819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.20.6-f09053.zip",
-                "reference": "d6e3a30577c6ddaca4f18d4b656873b4bb5c39eb"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-1.20.8-e2c49d.zip",
+                "reference": "f202aaba4ddb56f34885de3c02326ec3e6a04819"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2322,7 +2322,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-08-27T14:11:24+00:00"
+            "time": "2020-12-15T12:46:36+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
@@ -2656,12 +2656,12 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "f65143f77e6714858b2af04339a7fc8b4208c100"
+                "reference": "657448037f0ece74a686a71680088c2d31bd9e67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-CGIV-11742-order-auto-archive-1d0284.zip",
-                "reference": "f65143f77e6714858b2af04339a7fc8b4208c100"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-CGIV-11742-order-auto-archive-2a36b2.zip",
+                "reference": "657448037f0ece74a686a71680088c2d31bd9e67"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2684,7 +2684,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2020-12-14T11:10:19+00:00"
+            "time": "2020-12-14T11:40:58+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -11704,8 +11704,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.56.6",
-            "alias_normalized": "1.56.6.0",
+            "alias": "1.57.1",
+            "alias_normalized": "1.57.1.0",
             "version": "dev-CGIV-11742-order-auto-archive",
             "package": "channelgrabber/order"
         },
