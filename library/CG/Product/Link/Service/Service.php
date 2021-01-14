@@ -294,17 +294,9 @@ class Service extends BaseService
             // No related stock entities - can't invalidate nginx cache
             return;
         }
-
-        /** @var StockLocation $stockLocation */
-        foreach ($stockLocations as $stockLocation) {
-            $stock = $stockCollection->getById($stockLocation->getStockId());
-            if (!($stock instanceof Stock)) {
-                continue;
-            }
-            $this->productStockNginxCacheInvalidator->invalidateProductsForStockLocation(
-                $stockLocation,
-                $stock
-            );
-        }
+        $this->productStockNginxCacheInvalidator->invalidateProductsForStockLocations(
+            $stockLocations,
+            $stockCollection
+        );
     }
 }
