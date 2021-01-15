@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3f6329aa139de869110b7ef61fd928d",
+    "content-hash": "f430c0d243a795e845d2fba9cda9eca0",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1965,16 +1965,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-11742-order-auto-archive",
+            "version": "1.57.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "507690b9cadaad03a4d57f8656add26a4dd65336"
+                "reference": "7d8f694ba2e27564982bfc0c4bdda98688e9c98d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-11742-order-auto-archive-e57404.zip",
-                "reference": "507690b9cadaad03a4d57f8656add26a4dd65336"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.57.1-11ba82.zip",
+                "reference": "7d8f694ba2e27564982bfc0c4bdda98688e9c98d"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2045,7 +2045,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2021-01-14T15:11:21+00:00"
+            "time": "2021-01-15T15:24:55+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2652,16 +2652,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-CGIV-11742-order-auto-archive",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "657448037f0ece74a686a71680088c2d31bd9e67"
+                "reference": "008e335501b674bcd5c4bc9cb878796530fe6288"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-CGIV-11742-order-auto-archive-2a36b2.zip",
-                "reference": "657448037f0ece74a686a71680088c2d31bd9e67"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.9.2-eefeca.zip",
+                "reference": "008e335501b674bcd5c4bc9cb878796530fe6288"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2684,7 +2684,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2020-12-14T11:40:58+00:00"
+            "time": "2021-01-15T15:28:41+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -4304,6 +4304,7 @@
                 "contextio",
                 "imap"
             ],
+            "abandoned": true,
             "time": "2015-08-25T01:42:05+00:00"
         },
         {
@@ -11702,25 +11703,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.57.1",
-            "alias_normalized": "1.57.1.0",
-            "version": "dev-CGIV-11742-order-auto-archive",
-            "package": "channelgrabber/order"
-        },
-        {
-            "alias": "1.9.2",
-            "alias_normalized": "1.9.2.0",
-            "version": "dev-CGIV-11742-order-auto-archive",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
-        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
