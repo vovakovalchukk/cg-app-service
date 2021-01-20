@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc28a41b339126f0dbab62fdb4408e97",
+    "content-hash": "c34c370c43c6d399fd8c4437be666a90",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -658,16 +658,16 @@
         },
         {
             "name": "channelgrabber/cglib",
-            "version": "1.17.10",
+            "version": "1.17.9",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-cglib.git",
-                "reference": "87f535674060c7627994c450179ffc2e96a080ea"
+                "reference": "255efec4ac8a13efe674bfe23509412078284c28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.17.10-79e76b.zip",
-                "reference": "87f535674060c7627994c450179ffc2e96a080ea",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/cglib/channelgrabber-cglib-1.17.9-33743a.zip",
+                "reference": "255efec4ac8a13efe674bfe23509412078284c28",
                 "shasum": null
             },
             "require": {
@@ -725,7 +725,7 @@
                     "CG\\CGLib\\Test\\": "tests"
                 }
             },
-            "time": "2020-11-23T11:27:51+00:00"
+            "time": "2020-11-06T09:58:24+00:00"
         },
         {
             "name": "channelgrabber/channel",
@@ -1488,16 +1488,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.8.4",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "c28d524a45195d043beb09ef4a49c146f5581a79"
+                "reference": "a1fc913dcc421ffc3c80ad3020241eaa359e542d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.8.4-89357e.zip",
-                "reference": "c28d524a45195d043beb09ef4a49c146f5581a79",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.9.1-e33263.zip",
+                "reference": "a1fc913dcc421ffc3c80ad3020241eaa359e542d",
                 "shasum": null
             },
             "require": {
@@ -1535,7 +1535,7 @@
                     "CG\\Gearman\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-03-30T10:05:37+00:00"
+            "time": "2020-12-01T11:34:17+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -2008,16 +2008,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.56.4",
+            "version": "1.57.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "9c26f8d008cf05eef60070068fccd67f4322efdb"
+                "reference": "7d8f694ba2e27564982bfc0c4bdda98688e9c98d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.56.4-068241.zip",
-                "reference": "9c26f8d008cf05eef60070068fccd67f4322efdb",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.57.1-11ba82.zip",
+                "reference": "7d8f694ba2e27564982bfc0c4bdda98688e9c98d",
                 "shasum": null
             },
             "require": {
@@ -2045,7 +2045,7 @@
                 "channelgrabber/opsgenie": "^1.0.0",
                 "channelgrabber/permission": ">=1.0.0",
                 "channelgrabber/predis": "^1.0.12",
-                "channelgrabber/product": "^1.16.7",
+                "channelgrabber/product": "^1.20.6",
                 "channelgrabber/redis": ">=0.1.1",
                 "channelgrabber/sequential-numbering": "^1.0.0",
                 "channelgrabber/settings": "^1.6.4",
@@ -2074,11 +2074,6 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-11732-convert-busy-queues-to-dynamic": "1.56.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Order\\": "src"
@@ -2094,7 +2089,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2020-12-07T15:41:34+00:00"
+            "time": "2021-01-15T15:24:55+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -2717,16 +2712,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "1.9.1",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "55d95602bd0fd334cd02601d6d82bc5e2617f121"
+                "reference": "008e335501b674bcd5c4bc9cb878796530fe6288"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.9.1-42bcff.zip",
-                "reference": "55d95602bd0fd334cd02601d6d82bc5e2617f121",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.9.2-eefeca.zip",
+                "reference": "008e335501b674bcd5c4bc9cb878796530fe6288",
                 "shasum": null
             },
             "require": {
@@ -2750,7 +2745,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2020-12-07T15:44:05+00:00"
+            "time": "2021-01-15T15:28:41+00:00"
         },
         {
             "name": "channelgrabber/shopify",
