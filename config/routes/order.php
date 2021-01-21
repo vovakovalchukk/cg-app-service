@@ -185,7 +185,7 @@ return [
             'filterRules' => OrderTrackingFilterValidationRules::class,
             'flatten' => false
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
     ],
     '/order/:orderId/tracking/:trackingId' => [
         'controllers' => function ($orderId, $trackingId) use ($di) {
@@ -205,7 +205,7 @@ return [
             'filterRules' => null,
             'flatten' => false
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,
