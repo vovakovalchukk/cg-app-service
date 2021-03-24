@@ -7,7 +7,7 @@ class OrderValue implements MetricInterface
 
     public function getSelect()
     {
-        return 'ROUND(SUM(total * COALESCE(exchangeRate, IF (currencyCode="GBP", 1, 0))), 2) as ' . $this->getKey();
+        return 'ROUND(SUM(total / COALESCE(exchangeRate, IF (currencyCode="GBP", 1, 0))), 2) as ' . $this->getKey();
     }
 
     public function getKey()
