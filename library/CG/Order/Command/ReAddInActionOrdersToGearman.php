@@ -13,6 +13,7 @@ use CG\Order\Service\Cancel\Service as OrderCancelService;
 use CG\Order\Service\Item\Service as OrderItemService;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Cancel\Collection as Cancellations;
+use CG\Order\Shared\Cancel\Reasons as CancelReasons;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
 use CG\Order\Shared\Status as OrderStatus;
@@ -145,6 +146,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
         } catch (NotFound $e) {
             return $this->reconstructCancelValue($order);
         } catch (\Throwable $e) {
+            $this->logDebugException($e, 'Exception fetching cancel value for order %s', ['order' => $order->getId()], static::LOG_CODE);
             throw new NotFound('Could not find or reconstruct cancel value for order ' . $order->getId());
         }
     }
@@ -171,9 +173,16 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
             $this->logDebug('Skipping creating cancellation/refund job for order %s as no order items were found', [$order->getId()], static::LOG_CODE);
             throw $e;
         }
+        $items = [];
         foreach ($orderItems as $item) {
             $items[] = new CancelItem($item->getId(), $item->getItemQuantity(), $item->getIndividualItemPrice(), 0.00, $item->getItemSku());
         }
-        return new CancelValue($order->getStatus() == OrderStatus::REFUNDING ? CancelValue::REFUND_TYPE : CancelValue::CANCEL_TYPE, date(CGDateTime::FORMAT), "Customer no longer wants item", $items, $order->getShippingPrice());
+        return new CancelValue(
+            $order->getStatus() == OrderStatus::REFUNDING ? CancelValue::REFUND_TYPE : CancelValue::CANCEL_TYPE,
+            date(CGDateTime::FORMAT),
+            CancelReasons::CUSTOMER_CANCEL,
+            $items,
+            $order->getShippingPrice()
+        );
     }
 }
