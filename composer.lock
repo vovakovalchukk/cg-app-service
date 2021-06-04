@@ -2312,7 +2312,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-product.git",
-                "reference": "efd3f2638d4f2e355f6717caae7ef4ae2203db1f"
+                "reference": "e02e2c13342c462e354b19a41ec1b10d6665b503"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/product/channelgrabber-product-dev-CGIV-12038-improve-fetching-products-eba54e.zip",
+                "reference": "e02e2c13342c462e354b19a41ec1b10d6665b503",
+                "shasum": null
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2361,7 +2367,7 @@
                     "CG\\Product\\Test\\": "tests/src"
                 }
             },
-            "time": "2021-06-03T15:17:40+00:00"
+            "time": "2021-06-04T08:18:24+00:00"
         },
         {
             "name": "channelgrabber/product-locking",
