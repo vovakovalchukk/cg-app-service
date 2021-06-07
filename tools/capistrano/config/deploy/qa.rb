@@ -1,3 +1,3 @@
 set :stage, :qa
 
-server 'www-data@88.198.40.116', :roles => [:app, :php71]
+server 'www-data@85.10.240.34', :roles => [:app, :php71]
