@@ -457,6 +457,11 @@ class Entity implements RulesInterface
                 'required' => false,
                 'validators' => [new BooleanValidator(['name' => 'linkable'])]
             ],
+            'iossNumber' => [
+                'name' => 'iossNumber',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])]
+            ],
         );
     }
 
