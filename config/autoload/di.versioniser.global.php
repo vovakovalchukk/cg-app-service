@@ -109,6 +109,8 @@ return [
                 'Versioniser_OrderEntity_19' => OrderEntity\Versioniser19::class,
                 'Versioniser_OrderCollection_20' => OrderCollection\Versioniser20::class,
                 'Versioniser_OrderEntity_20' => OrderEntity\Versioniser20::class,
+                'Versioniser_OrderCollection_21' => OrderCollection\Versioniser21::class,
+                'Versioniser_OrderEntity_21' => OrderEntity\Versioniser21::class,
                 'Versioniser_OrderItemCollection_1' => OrderItemCollection\Versioniser1::class,
                 'Versioniser_OrderItemEntity_1' => OrderItemEntity\Versioniser1::class,
                 'Versioniser_OrderItemCollection_2' => OrderItemCollection\Versioniser2::class,
