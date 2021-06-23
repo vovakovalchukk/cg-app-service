@@ -359,6 +359,56 @@ return [
                     'entityVersioner' => 'Versioniser_OrderEntity_11',
                 ],
             ],
+            'Versioniser_OrderCollection_12' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_12',
+                ],
+            ],
+            'Versioniser_OrderCollection_13' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_13',
+                ],
+            ],
+            'Versioniser_OrderCollection_14' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_14',
+                ],
+            ],
+            'Versioniser_OrderCollection_15' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_15',
+                ],
+            ],
+            'Versioniser_OrderCollection_16' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_16',
+                ],
+            ],
+            'Versioniser_OrderCollection_17' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_17',
+                ],
+            ],
+            'Versioniser_OrderCollection_18' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_18',
+                ],
+            ],
+            'Versioniser_OrderCollection_19' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_19',
+                ],
+            ],
+            'Versioniser_OrderCollection_20' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_20',
+                ],
+            ],
+            'Versioniser_OrderCollection_21' => [
+                'parameter' => [
+                    'entityVersioner' => 'Versioniser_OrderEntity_21',
+                ],
+            ],
             'Versioniser_OrderItemCollection_1' => [
                 'parameter' => [
                     'entityVersioner' => 'Versioniser_OrderItemEntity_1',
