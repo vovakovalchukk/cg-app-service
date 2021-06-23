@@ -2,8 +2,6 @@
 namespace CG\Slim\Versioning\OrderEntity;
 
 use CG\Order\Service\Service;
-use CG\Order\Shared\Address\Redacted as AddressRedacted;
-use CG\Order\Shared\AddressInterface as Address;
 use CG\Order\Shared\Entity as Order;
 use CG\Slim\Versioning\VersioniserInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
