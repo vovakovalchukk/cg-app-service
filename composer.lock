@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fbfef764e4b03c390ca6d5d01a9410a",
+    "content-hash": "732ea9653bb709360eaa1c4bc23b3546",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1343,21 +1343,21 @@
         },
         {
             "name": "channelgrabber/etsy",
-            "version": "1.2.2.1",
+            "version": "dev-CGIV-12093-etsy-apply-ioss-number",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-etsy.git",
-                "reference": "7898a817d27af5b2f5aca81d2eaf1b1e6efd05e5"
+                "reference": "a08dc37a98912fff8e62f958b71d9bfe3a8368ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-1.2.2.1-7d928b.zip",
-                "reference": "7898a817d27af5b2f5aca81d2eaf1b1e6efd05e5",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/etsy/channelgrabber-etsy-dev-CGIV-12093-etsy-apply-ioss-number-d4d0f6.zip",
+                "reference": "a08dc37a98912fff8e62f958b71d9bfe3a8368ed",
                 "shasum": null
             },
             "require": {
                 "channelgrabber/cglib": "^1.16.12",
-                "channelgrabber/channel": "^1.42.11",
+                "channelgrabber/channel": "^1.45.5",
                 "channelgrabber/constants": "dev-master",
                 "channelgrabber/feature-flags": "^2.1.0",
                 "channelgrabber/gearman": "^1.5.0",
@@ -1383,7 +1383,7 @@
                     "CG\\Etsy\\Test\\": "tests/src/"
                 }
             },
-            "time": "2020-03-18T16:36:37+00:00"
+            "time": "2021-06-29T15:36:16+00:00"
         },
         {
             "name": "channelgrabber/exchangerate",
@@ -12185,10 +12185,18 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.2.7",
+            "alias_normalized": "1.2.7.0",
+            "version": "dev-CGIV-12093-etsy-apply-ioss-number",
+            "package": "channelgrabber/etsy"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
+        "channelgrabber/etsy": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
