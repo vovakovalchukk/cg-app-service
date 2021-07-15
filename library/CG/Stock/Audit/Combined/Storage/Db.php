@@ -57,7 +57,6 @@ class Db extends DbAbstract implements StorageInterface
 
             $this->applySorting($select, $filter)
                 ->applyPagination($select, $filter);
-$this->logDebug((string)$select->getSqlString($this->readSql->getAdapter()->getPlatform()), [], ['Oliver','Query']);
 
             $collection = $this->fetchPaginatedCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
