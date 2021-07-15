@@ -4,9 +4,19 @@ use Phinx\Migration\EnvironmentAwareInterface;
 
 class StockAdjustmentLogRelated extends AbstractMigration implements EnvironmentAwareInterface
 {
-    const TABLES = [
-        'stockAdjustmentLogRelated',
-        'stockAdjustmentLogRelatedArchive'
+    protected const TABLE_STOCK_ADJUSTMENT_LOG_RELATED = 'stockAdjustmentLogRelated';
+    protected const TABLE_STOCK_ADJUSTMENT_LOG_RELATED_ARCHIVE = 'stockAdjustmentLogRelatedArchive';
+    protected const TABLES = [
+        self::TABLE_STOCK_ADJUSTMENT_LOG_RELATED,
+        self::TABLE_STOCK_ADJUSTMENT_LOG_RELATED_ARCHIVE,
+    ];
+    protected const TABLES_ENVIRONMENT_OVERRIDES = [
+        self::TABLE_STOCK_ADJUSTMENT_LOG_RELATED_ARCHIVE =>
+            [
+                'dev' => true,
+                'qa' => true,
+                'live' => false,
+            ],
     ];
 
     public function supportsEnvironment($environment)
@@ -42,5 +52,26 @@ class StockAdjustmentLogRelated extends AbstractMigration implements Environment
         foreach (static::TABLES as $table) {
             $this->table($table)->drop();
         }
+    }
+
+    protected function getTableNames(): \Generator
+    {
+        foreach (static::TABLES as $table) {
+            if (!$this->supportsProductionEnvironment($table)) {
+                continue;
+            }
+            yield $table;
+        }
+    }
+
+    protected function supportsProductionEnvironment(string $tableName): bool
+    {
+        if (!isset(static::TABLES_ENVIRONMENT_OVERRIDES[$tableName])) {
+            return true;
+        }
+        if (!isset(static::TABLES_ENVIRONMENT_OVERRIDES[$tableName][ENVIRONMENT])) {
+            return true;
+        }
+        return static::TABLES_ENVIRONMENT_OVERRIDES[$tableName][ENVIRONMENT];
     }
 }
