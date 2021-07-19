@@ -227,20 +227,24 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     ): void {
         $loadTimer = $migrationTimer->getLoadTimer();
         $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
+        // $stockAdjustmentLogIds = $collection->getIds();
+        // $relatedCollection = $this->relatedStorage->fetchByStockAuditAdjustmentIds($collection->getIds());
         $loadTimer();
         $migrationProgress->incrementResultsFound($collection->count());
-        $transactionCommitted = false;
+        $primaryTransactionCompleted = false;
+        $bothTransactionsCommitted = false;
         try {
             $this->storage->beginTransaction();
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollection($collection);
-            $this->storage->commitTransaction();
-            $transactionCommitted = true;
+            $primaryTransactionCompleted = true;
+            // $this->migrateRelated($relatedCollection);
+            $this->commitTransactions();
             $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
             $migrationProgress->incrementResultsMigrated($collection->count());
             $this->updateProcessTimeout();
         } catch (\Throwable $throwable) {
-            if (!$transactionCommitted) {
+            if (!$primaryTransactionCompleted) {
                 $this->storage->rollbackTransaction();
             }
             $this->logAlertException($throwable, static::LOG_MSG_FAILURE, [], [static::LOG_CODE, static::LOG_CODE_FAILURE], ['period' => $migrationPeriod]);
@@ -251,6 +255,31 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
             gc_collect_cycles();
             gc_mem_caches();
         }
+    }
+
+    protected function migrateRelatedBatch(): bool
+    {
+        $transactionCompleted = false;
+        try {
+            // $this->relatedStorage->beginTransaction();
+            // $this->relatedArchive->saveCollection();
+            // $this->relatedStorage->removeCollection();
+            // $this->relatedStorage->commitTransaction();
+            $transactionCompleted = true;
+        } catch (\Throwable $throwable) {
+            if (!$transactionCompleted) {
+                // $this->relatedStorage->rollbackTransaction();
+            }
+            throw $throwable;
+        } finally {
+            return $transactionCompleted;
+        }
+    }
+
+    protected function commitTransactions(): void
+    {
+        $this->storage->commitTransaction();
+        //$this->relatedStorage->commitTransaction();
     }
 
     protected function handleSpecificMigrationException(\Throwable $throwable): void
