@@ -40,6 +40,7 @@ class StockAdjustmentLogRelated extends AbstractMigration implements Environment
                 ->addIndex(['id'])
                 ->addIndex(['organisationUnitId', 'sku'])
                 ->addIndex(['sku'])
+                ->addIndex(['stockAdjustmentLogId'])
                 ->create();
         }
     }
