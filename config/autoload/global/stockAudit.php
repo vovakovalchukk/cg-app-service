@@ -19,6 +19,8 @@ return [
                 'parameters' => [
                     'storage' => AdjustmentDbStorage::class,
                     'archive' => AdjustmentArchiveDbStorage::class,
+                    'relatedStorage' => AdjustmentRelatedDbStorage::class,
+                    'relatedArchive' => AdjustmentRelatedArchiveDbStorage::class,
                     'predis' => 'reliable_redis',
                     'lockingService' => 'LockingServiceStockAdjustmentMigration',
                 ],
