@@ -242,11 +242,11 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         $migrationProgress->incrementResultsFound($collection->count());
         $primaryTransactionCompleted = false;
         try {
+            $this->migrateRelatedBatch($relatedCollection);
             $this->storage->beginTransaction();
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollection($collection);
             $primaryTransactionCompleted = true;
-            $this->migrateRelatedBatch($relatedCollection);
             $this->commitTransactions();
             $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
             $migrationProgress->incrementResultsMigrated($collection->count());
