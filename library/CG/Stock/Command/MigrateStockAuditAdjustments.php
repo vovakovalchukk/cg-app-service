@@ -16,6 +16,8 @@ use CG\Stock\Audit\Adjustment\AbortException;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationProgress;
 use CG\Stock\Audit\Adjustment\MigrationTimer;
+use CG\Stock\Audit\Adjustment\Related\Collection as RelatedCollection;
+use CG\Stock\Audit\Adjustment\Related\StorageInterface as RelatedStorageInterface;
 use CG\Stock\Audit\Adjustment\StorageInterface;
 use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
 use Predis\Client as Predis;
@@ -59,6 +61,10 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected $storage;
     /** @var StorageInterface */
     protected $archive;
+    /** @var RelatedStorageInterface */
+    protected $relatedStorage;
+    /** @var RelatedStorageInterface */
+    protected $relatedArchive;
     /** @var Predis */
     protected $predis;
     /** @var LockingService */
@@ -69,12 +75,16 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     public function __construct(
         StorageInterface $storage,
         StorageInterface $archive,
+        RelatedStorageInterface $relatedStorage,
+        RelatedStorageInterface $relatedArchive,
         Predis $predis,
         LockingService $lockingService,
         ItidService $itidService
     ) {
         $this->storage = $storage;
         $this->archive = $archive;
+        $this->relatedStorage = $relatedStorage;
+        $this->relatedArchive = $relatedArchive;
         $this->setPredis($predis);
         $this->lockingService = $lockingService;
         $this->itidService = $itidService;
@@ -227,18 +237,16 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     ): void {
         $loadTimer = $migrationTimer->getLoadTimer();
         $collection = $this->storage->fetchCollectionForMigrationPeriod($migrationPeriod);
-        // $stockAdjustmentLogIds = $collection->getIds();
-        // $relatedCollection = $this->relatedStorage->fetchByStockAuditAdjustmentIds($collection->getIds());
+        $relatedCollection = $this->relatedStorage->fetchByStockAuditAdjustmentIds($collection->getIds());
         $loadTimer();
         $migrationProgress->incrementResultsFound($collection->count());
         $primaryTransactionCompleted = false;
-        $bothTransactionsCommitted = false;
         try {
             $this->storage->beginTransaction();
             $this->archive->saveCollection($collection, $migrationTimer);
             $this->storage->removeCollection($collection);
             $primaryTransactionCompleted = true;
-            // $this->migrateRelated($relatedCollection);
+            $this->migrateRelatedBatch($relatedCollection);
             $this->commitTransactions();
             $this->statsIncrement(static::STAT_MIGRATION_COUNT, [$this->getServerName()], $collection->count());
             $migrationProgress->incrementResultsMigrated($collection->count());
@@ -257,18 +265,18 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
         }
     }
 
-    protected function migrateRelatedBatch(): bool
+    protected function migrateRelatedBatch(RelatedCollection $relatedCollection): bool
     {
         $transactionCompleted = false;
         try {
-            // $this->relatedStorage->beginTransaction();
-            // $this->relatedArchive->saveCollection();
-            // $this->relatedStorage->removeCollection();
-            // $this->relatedStorage->commitTransaction();
+            $this->relatedStorage->beginTransaction();
+            $this->relatedArchive->saveCollection($relatedCollection);
+            $this->relatedStorage->removeCollection($relatedCollection);
+            $this->relatedStorage->commitTransaction();
             $transactionCompleted = true;
         } catch (\Throwable $throwable) {
             if (!$transactionCompleted) {
-                // $this->relatedStorage->rollbackTransaction();
+                $this->relatedStorage->rollbackTransaction();
             }
             throw $throwable;
         } finally {
@@ -279,7 +287,7 @@ class MigrateStockAuditAdjustments implements LoggerAwareInterface
     protected function commitTransactions(): void
     {
         $this->storage->commitTransaction();
-        //$this->relatedStorage->commitTransaction();
+        $this->relatedStorage->commitTransaction();
     }
 
     protected function handleSpecificMigrationException(\Throwable $throwable): void
