@@ -3,6 +3,7 @@
 use CG\CGLib\Adjustment\Queuer as StockAdjustmentQueuer;
 use CG\Log\Shared\StorageInterface as LogStorage;
 use CG\Stock\Command\AuditAllStock;
+use CG\Stock\Command\ConvertArchivedStockAuditAdjustments;
 use CG\Stock\Command\CreateMissingStock;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
 use CG\Stock\Command\ProcessAudit;
@@ -171,6 +172,20 @@ return [
         'arguments' => [
             'age' => [
                 'description' => 'How old the processing queue needs to be before re-queuing it',
+                'required' => false,
+            ],
+        ],
+        'options' => [],
+    ],
+    'stock:convertArchivedAdjustmentAudits' => [
+        'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
+            $command = $di->get(ConvertArchivedStockAuditAdjustments::class);
+            $command($output, $input->getArgument('timeFrame'));
+        },
+        'description' => 'Converts archived stock adjustment logs to the new format',
+        'arguments' => [
+            'timeFrame' => [
+                'description' => 'Converts any stock adjustments older than date',
                 'required' => false,
             ],
         ],
