@@ -7,6 +7,7 @@ use CG\Stock\Audit\Adjustment\Related\Storage\ArchiveDb as AdjustmentRelatedArch
 use CG\Stock\Audit\Adjustment\Related\Storage\Db as AdjustmentRelatedDbStorage;
 use CG\Stock\Audit\Adjustment\Storage\ArchiveDb as AdjustmentArchiveDbStorage;
 use CG\Stock\Audit\Adjustment\Storage\Db as AdjustmentDbStorage;
+use CG\Stock\Command\ConvertArchivedStockAuditAdjustments;
 use CG\Stock\Command\MigrateStockAuditAdjustments;
 
 return [
@@ -23,6 +24,12 @@ return [
                     'relatedArchive' => AdjustmentRelatedArchiveDbStorage::class,
                     'predis' => 'reliable_redis',
                     'lockingService' => 'LockingServiceStockAdjustmentMigration',
+                ],
+            ],
+            ConvertArchivedStockAuditAdjustments::class => [
+                'parameters' => [
+                    'adjustmentStorage' => AdjustmentArchiveDbStorage::class,
+                    'adjustmentRelatedStorage' => AdjustmentRelatedArchiveDbStorage::class,
                 ],
             ],
             AdjustmentDbStorage::class => [
