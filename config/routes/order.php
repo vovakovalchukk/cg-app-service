@@ -102,7 +102,7 @@ return [
         'via' => ['GET', 'PATCH', 'OPTIONS'],
         'name' => 'OrderCollection',
         'validation' => ['dataRules' => null, 'filterRules' => OrderFilterValidationRules::class, 'flatten' => false],
-        'version' => new Version(1, 21),
+        'version' => new Version(1, 22),
         'entityRoute' => '/order/:orderId'
     ],
     '/order/:orderId' => [
@@ -119,7 +119,7 @@ return [
         'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'OrderEntity',
         'validation' => ['dataRules' => OrderEntityValidationRules::class, 'filterRules' => null, 'flatten' => false],
-        'version' => new Version(1, 21),
+        'version' => new Version(1, 22),
         'eTag' => [
             'mapperClass' => OrderMapper::class,
             'entityClass' => OrderEntity::class,
@@ -185,7 +185,7 @@ return [
             'filterRules' => OrderTrackingFilterValidationRules::class,
             'flatten' => false
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
     ],
     '/order/:orderId/tracking/:trackingId' => [
         'controllers' => function ($orderId, $trackingId) use ($di) {
@@ -205,7 +205,7 @@ return [
             'filterRules' => null,
             'flatten' => false
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 4),
         'eTag' => [
             'mapperClass' => TrackingMapper::class,
             'entityClass' => TrackingEntity::class,

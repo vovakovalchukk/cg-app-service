@@ -34,8 +34,9 @@ class Collection
                 $this->getParams('userId') ?: [],
                 $this->getParams('carrier') ?: [],
                 $this->getParams('number') ?: [],
-                $this->getParams('status') ?: []
+                $this->getParams('status') ?: [],
+                $this->getParams('shippingService') ?? []
             )
         );
     }
-} 
+}

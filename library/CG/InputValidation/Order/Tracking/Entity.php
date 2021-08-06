@@ -64,6 +64,11 @@ class Entity implements RulesInterface
                 'required'   => false,
                 'validators' => [new IntegerValidator(['name' => 'packageNumber'])]
             ],
+            'shippingService' => [
+                'name' => 'shippingService',
+                'required' => false,
+                'validators' => [new StringLength(['min' => 1])],
+            ],
         );
     }
 }
