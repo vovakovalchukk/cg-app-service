@@ -49,6 +49,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
     public function triggerCallbacksForExistingOrder(Order $order, Order $existingOrder): void
     {
         $this->updateOrderCountGenerator->createJob($order, $existingOrder);
+        $this->saveOrderShippingMethodGenerator->createJob($order, $existingOrder);
         $this->triggerCallbacksForOrder($order);
     }
 
@@ -56,6 +57,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
     {
         $this->calculateOrderWeightGenerator->generateJobForOrder($order);
         $this->updateOrderCountGenerator->createJob($order);
+        $this->saveOrderShippingMethodGenerator->createJob($order);
         $this->triggerCallbacksForOrder($order);
     }
 
@@ -63,7 +65,6 @@ class AfterOrderSave implements AfterOrderSaveInterface
     {
         $this->autoEmailInvoiceGenerator->createJobForOrder($order);
         $this->uploadInvoiceForOrder->generateJobForOrder($order);
-        $this->saveOrderShippingMethodGenerator->createJob($order);
         $this->linkMatchingOrdersGenerator->generateForOrder($order);
         $this->exchangeRateUpdater->addJobForOrder($order);
     }
