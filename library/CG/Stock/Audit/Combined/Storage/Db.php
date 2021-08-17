@@ -12,7 +12,6 @@ use CG\Stock\Audit\Combined\StorageInterface;
 use CG\Stock\Audit\Combined\Type;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
@@ -23,10 +22,6 @@ class Db extends DbAbstract implements StorageInterface
     protected const TABLE_STOCK_LOG = 'stockLog';
     protected const TABLE_STOCK_ADJUSTMENT_LOG = 'stockAdjustmentLog';
     protected const TABLE_STOCK_ADJUSTMENT_LOG_RELATED = 'stockAdjustmentLogRelated';
-    protected const INCLUDE_RELATED = [
-        self::TABLE_STOCK_LOG => false,
-        self::TABLE_STOCK_ADJUSTMENT_LOG => true,
-    ];
 
     /** @var Sql */
     protected $listingReadSql;
@@ -81,25 +76,48 @@ class Db extends DbAbstract implements StorageInterface
                 return $stockAdjustmentSelect;
             }
             $stockLogSelect = $this->getStockLogSelect();
-            $stockLogSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_LOG));
+            $stockLogSelect->where(
+                $this->addSkuQuery(
+                    $this->buildFilterQuery($filter, static::TABLE_STOCK_LOG),
+                    $filter,
+                    static::TABLE_STOCK_LOG
+                )
+            );
             return $stockLogSelect;
         }
 
         $stockLogSelect = $this->getStockLogSelect();
         $stockAdjustmentSelect = $this->getStockAdjustmentLogSelect();
-        $stockLogSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_LOG));
-        $stockAdjustmentSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG));
-        return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect);
+        $stockAdjustmentRelatedSelect = $this->getStockAdjustmentLogRelatedSelect();
+        $stockLogSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_LOG),
+                $filter,
+                static::TABLE_STOCK_LOG
+            )
+        );
+        $stockAdjustmentSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG),
+                $filter,
+                static::TABLE_STOCK_ADJUSTMENT_LOG
+            )
+        );
+        $stockAdjustmentRelatedSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG),
+                $filter,
+                static::TABLE_STOCK_ADJUSTMENT_LOG_RELATED
+            )
+        );
+        return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect, $stockAdjustmentRelatedSelect);
     }
 
     protected function buildFilterQuery(Filter $filter, $tableName)
     {
         $query = [];
         if (!empty($filter->getOrganisationUnitId())) {
-            $query = array_merge($query, $this->getOrganisationUnitIdQuery($filter->getOrganisationUnitId(), $tableName));
-        }
-        if (!empty($filter->getSku())) {
-            $query = array_merge($query, $this->getSkuQuery($filter->getSku(), $tableName));
+            $query[$tableName.'.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         if (!empty($filter->getItemStatus())) {
             $query = array_merge($query, $this->getItemStatusQuery($filter->getItemStatus(), $tableName));
@@ -118,28 +136,12 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function getOrganisationUnitIdQuery(array $organisationUnitId, string $tableName): array
+    protected function addSkuQuery(array $filterQuery, Filter $filter, string $tableName): array
     {
-        if (static::INCLUDE_RELATED[$tableName]) {
-            return [$this->getAdjustmentLogRelatedQuery($organisationUnitId, $tableName, 'organisationUnitId')];
+        if (empty($filter->getSku())) {
+            return $filterQuery;
         }
-        return [$tableName.'.organisationUnitId' => $organisationUnitId];
-    }
-
-    protected function getSkuQuery(array $sku, string $tableName): array
-    {
-        if (static::INCLUDE_RELATED[$tableName]) {
-            return [$this->getAdjustmentLogRelatedQuery($sku, $tableName, 'sku')];
-        }
-        return [$tableName.'.sku' => $sku];
-    }
-
-    protected function getAdjustmentLogRelatedQuery(array $filterValues, string $tableName, string $columnName): Predicate
-    {
-        return (new Predicate())
-            ->in($tableName . '.' . $columnName, $filterValues)
-            ->or
-            ->in(static::TABLE_STOCK_ADJUSTMENT_LOG_RELATED . '.' . $columnName, $filterValues);
+        return array_merge($filterQuery, [$tableName.'.sku' => $filter->getSku()]);
     }
 
     protected function getItemStatusQuery(array $itemStatus, $tableName)
@@ -199,10 +201,15 @@ class Db extends DbAbstract implements StorageInterface
         return $this;
     }
 
-    protected function getCombinedSelect(Select $stockLogSelect, Select $stockAdjustmentSelect): Select
-    {
-        $stockLogSelect->combine($stockAdjustmentSelect);
-        return $this->getReadSql()->select(['sl' => $stockLogSelect]);
+    protected function getCombinedSelect(
+        Select $stockLogSelect,
+        Select $stockAdjustmentSelect,
+        Select $stockAdjustmentRelatedSelect
+    ): Select {
+        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Select::COMBINE_UNION);
+        $derivedSelect = $this->getReadSql()->select()->from(['sal' => $stockAdjustmentSelect]);
+        $derivedSelect->combine($stockLogSelect, Select::COMBINE_UNION);
+        return $this->getReadSql()->select(['sl' => $derivedSelect]);
     }
 
     protected function getStockLogSelect(): Select
@@ -233,18 +240,16 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockAdjustmentLog');
         $select->columns([
             // Columns common to both tables
-            'type' => new Expression("'" . Type::ADJUSTMENT . "'"),
-            'id' => new Expression('IFNULL(stockAdjustmentLogRelated.id, stockAdjustmentLog.id)'),
+            'type' => new Expression("'" . Type::ADJUSTMENT . "'"), 'id',
             'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId',
-            'sku' => new Expression('IF(stockAdjustmentLogRelated.id IS NULL, stockAdjustmentLog.sku, stockAdjustmentLogRelated.sku)'),
+            'sku',
             // Columns only present on stockAdjustmentLog
             'stid', 'action', 'accountId', 'stockManagement',
             'listingId', 'productId', 'itemStatus', 'listingStatus',
-            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',// 'adjustmentQty' => 'quantity',
-            'adjustmentQty' => new Expression('IF(stockAdjustmentLogRelated.id IS NULL, stockAdjustmentLog.quantity, stockAdjustmentLogRelated.quantity)'),
-            'referenceSku' => new Expression('IF(stockAdjustmentLogRelated.id IS NOT NULL, stockAdjustmentLog.sku, null)'),
-            'adjustmentReferenceQuantity' => new Expression('IF(stockAdjustmentLogRelated.id IS NOT NULL, stockAdjustmentLog.quantity, null)'),
-            //'referenceSku', 'adjustmentReferenceQuantity' => 'referenceQuantity',
+            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',
+            'adjustmentQty' => 'quantity',
+            'referenceSku' => new Expression('null'),
+            'adjustmentReferenceQuantity' => new Expression('null'),
             // Columns only present on stockLog
             'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
             'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
@@ -275,11 +280,60 @@ class Db extends DbAbstract implements StorageInterface
             [],
             Select::JOIN_LEFT
         );
+        return $select;
+    }
+
+    protected function getStockAdjustmentLogRelatedSelect(): Select
+    {
+        $select = $this->getReadSql()->select('stockAdjustmentLog');
+        $select->columns([
+            // Columns common to both tables
+            'type' => new Expression("'" . Type::ADJUSTMENT . "'"),
+            'id' => new Expression('`stockAdjustmentLogRelated`.`id`'),
+            'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId',
+            'sku' => new Expression('`stockAdjustmentLogRelated`.`sku`'),
+            // Columns only present on stockAdjustmentLog
+            'stid', 'action', 'accountId', 'stockManagement',
+            'listingId', 'productId', 'itemStatus', 'listingStatus',
+            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',
+            'adjustmentQty' => new Expression('`stockAdjustmentLogRelated`.`quantity`'),
+            'referenceSku' => new Expression('`stockAdjustmentLog`.`sku`'),
+            'adjustmentReferenceQuantity' => new Expression('`stockAdjustmentLog`.`quantity`'),
+            // Columns only present on stockLog
+            'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
+            'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
+            // Columns from joined tables
+            'orderId' => new Expression('IFNULL(itemOrder.id, orderDirect.id)'), 'orderExternalId' => new Expression('IFNULL(itemOrder.externalId, orderDirect.externalId)'),
+        ]);
+        $select->join(
+            new TableIdentifier('account', 'account'),
+            'account.account.id = stockAdjustmentLog.accountId',
+            ['accountName' => 'displayName'],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            'item',
+            'item.id = stockAdjustmentLog.stid AND item.organisationUnitId = stockAdjustmentLog.organisationUnitId',
+            [],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            ['itemOrder' => 'order'],
+            'itemOrder.id = item.orderId',
+            [],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            ['orderDirect' => 'order'],
+            'orderDirect.id = stockAdjustmentLog.stid AND orderDirect.organisationUnitId = stockAdjustmentLog.organisationUnitId',
+            [],
+            Select::JOIN_LEFT
+        );
         $select->join(
             'stockAdjustmentLogRelated',
             'stockAdjustmentLog.id = stockAdjustmentLogRelated.stockAdjustmentLogId',
             [],
-            Select::JOIN_LEFT
+            Select::JOIN_INNER
         );
         return $select;
     }
