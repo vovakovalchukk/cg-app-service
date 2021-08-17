@@ -111,7 +111,6 @@ class Db extends DbAbstract implements StorageInterface
                 static::TABLE_STOCK_ADJUSTMENT_LOG_RELATED
             )
         );
-        //$this->combineAdjustmentAndRelatedQueries($stockAdjustmentSelect, $stockAdjustmentRelatedSelect);
         return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect, $stockAdjustmentRelatedSelect);
     }
 
@@ -208,18 +207,10 @@ class Db extends DbAbstract implements StorageInterface
         Select $stockAdjustmentSelect,
         Select $stockAdjustmentRelatedSelect
     ): Select {
-        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Combine::COMBINE_UNION, Select::QUANTIFIER_ALL);
+        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Select::COMBINE_UNION);
         $derivedSelect = $this->getReadSql()->select()->from(['sal' => $stockAdjustmentSelect]);
-        $derivedSelect->combine($stockLogSelect);
+        $derivedSelect->combine($stockLogSelect, Select::COMBINE_UNION);
         return $this->getReadSql()->select(['sl' => $derivedSelect]);
-    }
-
-    protected function combineAdjustmentAndRelatedQueries(
-        Select $stockAdjustmentSelect,
-        Select $stockAdjustmentRelatedSelect
-    ): Select {
-        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Select::COMBINE_UNION, Select::QUANTIFIER_ALL);
-        return $stockAdjustmentSelect;
     }
 
     protected function getStockLogSelect(): Select
