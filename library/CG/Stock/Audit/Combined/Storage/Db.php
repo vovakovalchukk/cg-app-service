@@ -10,7 +10,6 @@ use CG\Stock\Audit\Combined\Entity as StockLog;
 use CG\Stock\Audit\Combined\Filter as Filter;
 use CG\Stock\Audit\Combined\StorageInterface;
 use CG\Stock\Audit\Combined\Type;
-use Zend\Db\Sql\Combine;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
@@ -89,7 +88,7 @@ class Db extends DbAbstract implements StorageInterface
 
         $stockLogSelect = $this->getStockLogSelect();
         $stockAdjustmentSelect = $this->getStockAdjustmentLogSelect();
-        $stockAdjustmentRelatedSelect = clone($stockAdjustmentSelect);
+        $stockAdjustmentRelatedSelect = $this->getStockAdjustmentLogRelatedSelect();
         $stockLogSelect->where(
             $this->addSkuQuery(
                 $this->buildFilterQuery($filter, static::TABLE_STOCK_LOG),
@@ -241,18 +240,16 @@ class Db extends DbAbstract implements StorageInterface
         $select = $this->getReadSql()->select('stockAdjustmentLog');
         $select->columns([
             // Columns common to both tables
-            'type' => new Expression("'" . Type::ADJUSTMENT . "'"),
-            'id' => new Expression('IFNULL(stockAdjustmentLogRelated.id, stockAdjustmentLog.id)'),
+            'type' => new Expression("'" . Type::ADJUSTMENT . "'"), 'id',
             'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId',
-            'sku' => new Expression('IF(stockAdjustmentLogRelated.id IS NULL, stockAdjustmentLog.sku, stockAdjustmentLogRelated.sku)'),
+            'sku',
             // Columns only present on stockAdjustmentLog
             'stid', 'action', 'accountId', 'stockManagement',
             'listingId', 'productId', 'itemStatus', 'listingStatus',
-            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',// 'adjustmentQty' => 'quantity',
-            'adjustmentQty' => new Expression('IF(stockAdjustmentLogRelated.id IS NULL, stockAdjustmentLog.quantity, stockAdjustmentLogRelated.quantity)'),
-            'referenceSku' => new Expression('IF(stockAdjustmentLogRelated.id IS NOT NULL, stockAdjustmentLog.sku, null)'),
-            'adjustmentReferenceQuantity' => new Expression('IF(stockAdjustmentLogRelated.id IS NOT NULL, stockAdjustmentLog.quantity, null)'),
-            //'referenceSku', 'adjustmentReferenceQuantity' => 'referenceQuantity',
+            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',
+            'adjustmentQty' => 'quantity',
+            'referenceSku' => new Expression('null'),
+            'adjustmentReferenceQuantity' => new Expression('null'),
             // Columns only present on stockLog
             'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
             'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
@@ -283,11 +280,60 @@ class Db extends DbAbstract implements StorageInterface
             [],
             Select::JOIN_LEFT
         );
+        return $select;
+    }
+
+    protected function getStockAdjustmentLogRelatedSelect(): Select
+    {
+        $select = $this->getReadSql()->select('stockAdjustmentLog');
+        $select->columns([
+            // Columns common to both tables
+            'type' => new Expression("'" . Type::ADJUSTMENT . "'"),
+            'id' => new Expression('`stockAdjustmentLogRelated`.`id`'),
+            'date', 'time', 'dateTime' => new Expression("CONCAT(`date`, ' ', `time`)"), 'itid', 'organisationUnitId',
+            'sku' => new Expression('`stockAdjustmentLogRelated`.`sku`'),
+            // Columns only present on stockAdjustmentLog
+            'stid', 'action', 'accountId', 'stockManagement',
+            'listingId', 'productId', 'itemStatus', 'listingStatus',
+            'adjustmentType' => 'type', 'adjustmentOperator' => 'operator',
+            'adjustmentQty' => new Expression('`stockAdjustmentLogRelated`.`quantity`'),
+            'referenceSku' => new Expression('`stockAdjustmentLog`.`sku`'),
+            'adjustmentReferenceQuantity' => new Expression('`stockAdjustmentLog`.`quantity`'),
+            // Columns only present on stockLog
+            'stockId' => new Expression('null'), 'locationId' => new Expression('null'),
+            'allocatedQty' => new Expression('null'), 'onHandQty' => new Expression('null'),
+            // Columns from joined tables
+            'orderId' => new Expression('IFNULL(itemOrder.id, orderDirect.id)'), 'orderExternalId' => new Expression('IFNULL(itemOrder.externalId, orderDirect.externalId)'),
+        ]);
+        $select->join(
+            new TableIdentifier('account', 'account'),
+            'account.account.id = stockAdjustmentLog.accountId',
+            ['accountName' => 'displayName'],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            'item',
+            'item.id = stockAdjustmentLog.stid AND item.organisationUnitId = stockAdjustmentLog.organisationUnitId',
+            [],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            ['itemOrder' => 'order'],
+            'itemOrder.id = item.orderId',
+            [],
+            Select::JOIN_LEFT
+        );
+        $select->join(
+            ['orderDirect' => 'order'],
+            'orderDirect.id = stockAdjustmentLog.stid AND orderDirect.organisationUnitId = stockAdjustmentLog.organisationUnitId',
+            [],
+            Select::JOIN_LEFT
+        );
         $select->join(
             'stockAdjustmentLogRelated',
             'stockAdjustmentLog.id = stockAdjustmentLogRelated.stockAdjustmentLogId',
             [],
-            Select::JOIN_LEFT
+            Select::JOIN_INNER
         );
         return $select;
     }
