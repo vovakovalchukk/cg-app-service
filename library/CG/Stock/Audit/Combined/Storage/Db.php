@@ -10,9 +10,9 @@ use CG\Stock\Audit\Combined\Entity as StockLog;
 use CG\Stock\Audit\Combined\Filter as Filter;
 use CG\Stock\Audit\Combined\StorageInterface;
 use CG\Stock\Audit\Combined\Type;
+use Zend\Db\Sql\Combine;
 use Zend\Db\Sql\Exception\ExceptionInterface;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
@@ -23,10 +23,6 @@ class Db extends DbAbstract implements StorageInterface
     protected const TABLE_STOCK_LOG = 'stockLog';
     protected const TABLE_STOCK_ADJUSTMENT_LOG = 'stockAdjustmentLog';
     protected const TABLE_STOCK_ADJUSTMENT_LOG_RELATED = 'stockAdjustmentLogRelated';
-    protected const INCLUDE_RELATED = [
-        self::TABLE_STOCK_LOG => false,
-        self::TABLE_STOCK_ADJUSTMENT_LOG => true,
-    ];
 
     /** @var Sql */
     protected $listingReadSql;
@@ -81,25 +77,49 @@ class Db extends DbAbstract implements StorageInterface
                 return $stockAdjustmentSelect;
             }
             $stockLogSelect = $this->getStockLogSelect();
-            $stockLogSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_LOG));
+            $stockLogSelect->where(
+                $this->addSkuQuery(
+                    $this->buildFilterQuery($filter, static::TABLE_STOCK_LOG),
+                    $filter,
+                    static::TABLE_STOCK_LOG
+                )
+            );
             return $stockLogSelect;
         }
 
         $stockLogSelect = $this->getStockLogSelect();
         $stockAdjustmentSelect = $this->getStockAdjustmentLogSelect();
-        $stockLogSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_LOG));
-        $stockAdjustmentSelect->where($this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG));
-        return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect);
+        $stockAdjustmentRelatedSelect = clone($stockAdjustmentSelect);
+        $stockLogSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_LOG),
+                $filter,
+                static::TABLE_STOCK_LOG
+            )
+        );
+        $stockAdjustmentSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG),
+                $filter,
+                static::TABLE_STOCK_ADJUSTMENT_LOG
+            )
+        );
+        $stockAdjustmentRelatedSelect->where(
+            $this->addSkuQuery(
+                $this->buildFilterQuery($filter, static::TABLE_STOCK_ADJUSTMENT_LOG),
+                $filter,
+                static::TABLE_STOCK_ADJUSTMENT_LOG_RELATED
+            )
+        );
+        //$this->combineAdjustmentAndRelatedQueries($stockAdjustmentSelect, $stockAdjustmentRelatedSelect);
+        return $this->getCombinedSelect($stockLogSelect, $stockAdjustmentSelect, $stockAdjustmentRelatedSelect);
     }
 
     protected function buildFilterQuery(Filter $filter, $tableName)
     {
         $query = [];
         if (!empty($filter->getOrganisationUnitId())) {
-            $query = array_merge($query, $this->getOrganisationUnitIdQuery($filter->getOrganisationUnitId(), $tableName));
-        }
-        if (!empty($filter->getSku())) {
-            $query = array_merge($query, $this->getSkuQuery($filter->getSku(), $tableName));
+            $query[$tableName.'.organisationUnitId'] = $filter->getOrganisationUnitId();
         }
         if (!empty($filter->getItemStatus())) {
             $query = array_merge($query, $this->getItemStatusQuery($filter->getItemStatus(), $tableName));
@@ -118,28 +138,12 @@ class Db extends DbAbstract implements StorageInterface
         return $query;
     }
 
-    protected function getOrganisationUnitIdQuery(array $organisationUnitId, string $tableName): array
+    protected function addSkuQuery(array $filterQuery, Filter $filter, string $tableName): array
     {
-        if (static::INCLUDE_RELATED[$tableName]) {
-            return [$this->getAdjustmentLogRelatedQuery($organisationUnitId, $tableName, 'organisationUnitId')];
+        if (empty($filter->getSku())) {
+            return $filterQuery;
         }
-        return [$tableName.'.organisationUnitId' => $organisationUnitId];
-    }
-
-    protected function getSkuQuery(array $sku, string $tableName): array
-    {
-        if (static::INCLUDE_RELATED[$tableName]) {
-            return [$this->getAdjustmentLogRelatedQuery($sku, $tableName, 'sku')];
-        }
-        return [$tableName.'.sku' => $sku];
-    }
-
-    protected function getAdjustmentLogRelatedQuery(array $filterValues, string $tableName, string $columnName): Predicate
-    {
-        return (new Predicate())
-            ->in($tableName . '.' . $columnName, $filterValues)
-            ->or
-            ->in(static::TABLE_STOCK_ADJUSTMENT_LOG_RELATED . '.' . $columnName, $filterValues);
+        return array_merge($filterQuery, [$tableName.'.sku' => $filter->getSku()]);
     }
 
     protected function getItemStatusQuery(array $itemStatus, $tableName)
@@ -199,10 +203,23 @@ class Db extends DbAbstract implements StorageInterface
         return $this;
     }
 
-    protected function getCombinedSelect(Select $stockLogSelect, Select $stockAdjustmentSelect): Select
-    {
-        $stockLogSelect->combine($stockAdjustmentSelect);
-        return $this->getReadSql()->select(['sl' => $stockLogSelect]);
+    protected function getCombinedSelect(
+        Select $stockLogSelect,
+        Select $stockAdjustmentSelect,
+        Select $stockAdjustmentRelatedSelect
+    ): Select {
+        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Combine::COMBINE_UNION, Select::QUANTIFIER_ALL);
+        $derivedSelect = $this->getReadSql()->select()->from(['sal' => $stockAdjustmentSelect]);
+        $derivedSelect->combine($stockLogSelect);
+        return $this->getReadSql()->select(['sl' => $derivedSelect]);
+    }
+
+    protected function combineAdjustmentAndRelatedQueries(
+        Select $stockAdjustmentSelect,
+        Select $stockAdjustmentRelatedSelect
+    ): Select {
+        $stockAdjustmentSelect->combine($stockAdjustmentRelatedSelect, Select::COMBINE_UNION, Select::QUANTIFIER_ALL);
+        return $stockAdjustmentSelect;
     }
 
     protected function getStockLogSelect(): Select
