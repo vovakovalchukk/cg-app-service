@@ -10,15 +10,17 @@ use CG\Stdlib\Log\LogTrait;
 use CG\Stock\Audit\Adjustment\AbortException;
 use CG\Stock\Audit\Adjustment\Collection as Adjustments;
 use CG\Stock\Audit\Adjustment\Entity as Adjustment;
-use CG\Stock\Audit\Adjustment\RawDataCollection as AdjustmentsRawData;
 use CG\Stock\Audit\Adjustment\Mapper as AdjustmentMapper;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
+use CG\Stock\Audit\Adjustment\MigrationPeriod;
+use CG\Stock\Audit\Adjustment\RawDataCollection as AdjustmentsRawData;
 use CG\Stock\Audit\Adjustment\Related\Collection as AdjustmentRelateds;
-use CG\Stock\Audit\Adjustment\Related\RawDataCollection as AdjustmentRelatedsRawData;
 use CG\Stock\Audit\Adjustment\Related\Mapper as AdjustmentRelatedMapper;
-use CG\Stock\Audit\Adjustment\StorageInterface as AdjustmentStorage;
+use CG\Stock\Audit\Adjustment\Related\RawDataCollection as AdjustmentRelatedsRawData;
 use CG\Stock\Audit\Adjustment\Related\StorageInterface as AdjustmentRelatedStorage;
-use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod;
+use CG\Stock\Audit\Adjustment\StorageInterface as AdjustmentStorage;
+use CG\Stock\Locking\Audit\Adjustment\MigrationPeriod as LockingMigrationPeriod;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
@@ -29,6 +31,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_CODE = 'ConvertArchivedStockAuditAdjustments';
     protected const LOG_CODE_TIME_FRAME = 'Converting stock audit adjustments';
     protected const LOG_MSG_TIME_FRAME = 'Converting stock audit adjustments older than or equal to %s';
+    protected const LOG_MSG_RESUME_FROM = 'Resuming from date %s';
     protected const LOG_CODE_UNSUPPORTED_STORAGE = 'Can not fetch migration periods from storage';
     protected const LOG_MSG_UNSUPPORTED_STORAGE = 'Can not fetch migration periods from storage';
     protected const LOG_CODE_NO_DATA = 'Found no stock audit adjustments to convert';
@@ -64,21 +67,22 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         $this->adjustmentRelatedMapper = $adjustmentRelatedMapper;
     }
 
-    public function __invoke(OutputInterface $output, ?string $timeFrame): void
+    public function __invoke(InputInterface $input, OutputInterface $output): void
     {
         try {
             $this->registerSignalHandler(function (int $signal) {
                 throw new AbortException(sprintf('Aborting due to %s signal', $this->signalName($signal)));
             }, SIGINT, SIGTERM);
-            $this->convertData($output, $timeFrame);
+            $this->convertData($input, $output);
         } finally {
             $this->restoreSignalHandler(SIGINT, SIGTERM);
         }
     }
 
-    protected function convertData(OutputInterface $output, ?string $timeFrame): void
+    protected function convertData(InputInterface $input, OutputInterface $output): void
     {
-        $date = new Date((new DateTime($timeFrame))->resetTime()->stdDateFormat());
+        $date = $this->getEndDate($input);
+        $resumeFromDate = $this->getStartDate($input);
         $this->logDebug(static::LOG_MSG_TIME_FRAME, ['date' => $date->getDate()], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
         $output->writeln(sprintf(static::LOG_MSG_TIME_FRAME, $date->getDate()));
 
@@ -89,7 +93,11 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
             throw $exception;
         }
 
-        $migrationPeriods = $this->adjustmentStorage->fetchMigrationPeriodsWithDataOlderThanOrEqualTo($date);
+        $migrationPeriods = $this->fetchMigrationPeriods($date, $resumeFromDate);
+        if ($resumeFromDate !== null) {
+            $this->logDebug(static::LOG_MSG_RESUME_FROM, ['resumeFromDate' => $resumeFromDate->getDate()], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
+            $output->writeln(sprintf(static::LOG_MSG_RESUME_FROM, $resumeFromDate->getDate()));
+        }
         if (empty($migrationPeriods)) {
             $this->logWarning(static::LOG_MSG_NO_DATA, [], [static::LOG_CODE, static::LOG_CODE_NO_DATA]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_NO_DATA));
@@ -102,7 +110,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
             gc_mem_caches();
             foreach ($migrationPeriods as $migrationPeriod) {
                 try {
-                    $this->convertByMigrationPeriod($output, new MigrationPeriod($migrationPeriod));
+                    $this->convertByMigrationPeriod($output, new LockingMigrationPeriod($migrationPeriod));
                 } finally {
                     gc_collect_cycles();
                     gc_mem_caches();
@@ -113,7 +121,21 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         }
     }
 
-    protected function convertByMigrationPeriod(OutputInterface $output, MigrationPeriod $migrationPeriod): void
+    protected function fetchMigrationPeriods(Date $date, ?Date $resumeFromDate)
+    {
+        $migrationPeriods = $this->adjustmentStorage->fetchMigrationPeriodsWithDataOlderThanOrEqualTo($date);
+        if ($date === null) {
+            return $migrationPeriods;
+        }
+        return array_filter(
+            $migrationPeriods,
+            function (MigrationPeriod $migrationPeriod) use ($resumeFromDate) {
+                return ($migrationPeriod->getFrom() < $resumeFromDate) && ($migrationPeriod->getTo() < $resumeFromDate);
+            }
+        );
+    }
+
+    protected function convertByMigrationPeriod(OutputInterface $output, LockingMigrationPeriod $migrationPeriod): void
     {
         $this->beginTransactions();
         $adjustmentRelatedsCreatedAndSaved = false;
@@ -141,7 +163,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         }
     }
 
-    protected function fetchAdjustments(MigrationPeriod $migrationPeriod): Adjustments
+    protected function fetchAdjustments(LockingMigrationPeriod $migrationPeriod): Adjustments
     {
         return $this->adjustmentStorage->fetchCollectionForMigrationPeriod($migrationPeriod);
     }
@@ -245,5 +267,23 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
             $this->logDebug(static::LOG_MSG_TRANSACTION_ROLLBACK_ADJUSTMENT, [], [static::LOG_CODE, static::LOG_CODE_TRANSACTION_ROLLBACK]);
             $this->adjustmentStorage->rollbackTransaction();
         }
+    }
+
+    protected function getEndDate(InputInterface $input): Date
+    {
+        return $this->getFormattedDate($input->getArgument('to') ?? 'now');
+    }
+
+    protected function getStartDate(InputInterface $input): ?Date
+    {
+        if ($input->getArgument('from') === null) {
+            return null;
+        }
+        return $this->getFormattedDate($input->getArgument('from'));
+    }
+
+    protected function getFormattedDate(string $timeString): Date
+    {
+        return new Date((new DateTime($timeString))->resetTime()->stdDateFormat());
     }
 }

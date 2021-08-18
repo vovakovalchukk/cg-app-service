@@ -180,13 +180,17 @@ return [
     'stock:convertArchivedAdjustmentAudits' => [
         'command' => function (InputInterface $input, OutputInterface $output) use ($di) {
             $command = $di->get(ConvertArchivedStockAuditAdjustments::class);
-            $command($output, $input->getArgument('timeFrame'));
+            $command($input, $output);
         },
         'description' => 'Converts archived stock adjustment logs to the new format',
         'arguments' => [
-            'timeFrame' => [
+            'to' => [
                 'description' => 'Converts any stock adjustments older than date',
                 'required' => false,
+            ],
+            'from' => [
+                'description' => 'Converts any stock adjustments newer than date',
+                'required' => false
             ],
         ],
         'options' => [],
