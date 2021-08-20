@@ -124,7 +124,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
     protected function fetchMigrationPeriods(Date $date, ?Date $resumeFromDate)
     {
         $migrationPeriods = $this->adjustmentStorage->fetchMigrationPeriodsWithDataOlderThanOrEqualTo($date);
-        if ($date === null) {
+        if ($resumeFromDate === null) {
             return $migrationPeriods;
         }
         return array_filter(
