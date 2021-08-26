@@ -130,7 +130,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         return array_filter(
             $migrationPeriods,
             function (MigrationPeriod $migrationPeriod) use ($resumeFromDate) {
-                return ($migrationPeriod->getFrom() < $resumeFromDate) && ($migrationPeriod->getTo() < $resumeFromDate);
+                return ($migrationPeriod->getFrom() >= $resumeFromDate) && ($migrationPeriod->getTo() >= $resumeFromDate);
             }
         );
     }
