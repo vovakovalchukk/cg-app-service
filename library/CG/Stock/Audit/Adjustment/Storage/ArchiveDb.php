@@ -27,13 +27,19 @@ class ArchiveDb extends Db implements ConvertibleMigrationInterface
         }
     }
 
-    public function fetchMigrationPeriodsWithConvertibleDataOlderThanOrEqualTo(Date $date, int $limit = null): array
-    {
+    public function fetchMigrationPeriodsWithConvertibleDataOlderThanOrEqualTo(
+        Date $date,
+        ?Date $resumeFromDate = null,
+        int $limit = null
+    ): array {
         $dates = $this->getSelect()->quantifier(Select::QUANTIFIER_DISTINCT)->columns(['date'])->order(['date']);
         $dates->where
             ->lessThanOrEqualTo('date', $date->getDate())
             ->isNotNull('referenceSku')
             ->isNotNull('referenceQuantity');
+        if ($resumeFromDate instanceof Date) {
+            $dates->where->greaterThanOrEqualTo('date', $resumeFromDate->getDate());
+        }
 
         /** @var Select $select */
         $select = $this->getReadSql()->select(['tbl' => $dates]);
