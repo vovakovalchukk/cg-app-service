@@ -124,25 +124,27 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
 
     protected function convertByMigrationPeriod(OutputInterface $output, LockingMigrationPeriod $migrationPeriod): void
     {
-        $this->beginTransactions();
-        $adjustmentRelatedsCreatedAndSaved = false;
-        $relevantAdjustmentsRemoved = false;
-        try {
-            $adjustments = $this->adjustmentStorage->fetchConvertibleCollectionForMigrationPeriod($migrationPeriod);
-            $adjustmentRelatedsCreatedAndSaved = $this->saveAdjustmentRelateds(
-                $this->createAdjustmentRelateds($adjustments)
-            );
-            $relevantAdjustmentsRemoved = $this->removeAdjustments($adjustments);
-        } catch (NotFound $e) {
-            $this->logWarning(static::LOG_MSG_NO_DATA_FOR_PERIOD, [(string)$migrationPeriod], [static::LOG_CODE, static::LOG_CODE_NO_DATA_FOR_PERIOD]);
-            $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_NO_DATA_FOR_PERIOD, (string)$migrationPeriod)));
-            return;
-        } catch (\Throwable $e) {
-            $this->logDebugException($e, static::LOG_MSG_CONVERSION_EXCEPTION, [get_class($e)], [static::LOG_CODE, static::LOG_CODE_CONVERSION_EXCEPTION]);
-            $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_CONVERSION_EXCEPTION, get_class($e))));
-            return;
-        } finally {
-            $this->concludeTransactions($output, $migrationPeriod, $adjustmentRelatedsCreatedAndSaved, $relevantAdjustmentsRemoved);
+        while (true) {
+            $this->beginTransactions();
+            $adjustmentRelatedsCreatedAndSaved = false;
+            $relevantAdjustmentsRemoved = false;
+            try {
+                $adjustments = $this->adjustmentStorage->fetchConvertibleCollectionForMigrationPeriod($migrationPeriod);
+                $adjustmentRelatedsCreatedAndSaved = $this->saveAdjustmentRelateds(
+                    $this->createAdjustmentRelateds($adjustments)
+                );
+                $relevantAdjustmentsRemoved = $this->removeAdjustments($adjustments);
+            } catch (NotFound $e) {
+                $this->logWarning(static::LOG_MSG_NO_DATA_FOR_PERIOD, [(string)$migrationPeriod], [static::LOG_CODE, static::LOG_CODE_NO_DATA_FOR_PERIOD]);
+                $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_NO_DATA_FOR_PERIOD, (string)$migrationPeriod)));
+                return;
+            } catch (\Throwable $e) {
+                $this->logDebugException($e, static::LOG_MSG_CONVERSION_EXCEPTION, [get_class($e)], [static::LOG_CODE, static::LOG_CODE_CONVERSION_EXCEPTION]);
+                $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_CONVERSION_EXCEPTION, get_class($e))));
+                return;
+            } finally {
+                $this->concludeTransactions($output, $migrationPeriod, $adjustmentRelatedsCreatedAndSaved, $relevantAdjustmentsRemoved);
+            }
         }
     }
 
