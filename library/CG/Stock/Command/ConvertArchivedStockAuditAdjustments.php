@@ -11,6 +11,7 @@ use CG\Stock\Audit\Adjustment\AbortException;
 use CG\Stock\Audit\Adjustment\Collection as Adjustments;
 use CG\Stock\Audit\Adjustment\Entity as Adjustment;
 use CG\Stock\Audit\Adjustment\Mapper as AdjustmentMapper;
+use CG\Stock\Audit\Adjustment\ConvertibleMigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationInterface;
 use CG\Stock\Audit\Adjustment\MigrationPeriod;
 use CG\Stock\Audit\Adjustment\RawDataCollection as AdjustmentsRawData;
@@ -46,7 +47,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_MSG_TRANSACTION_ROLLBACK_ADJUSTMENT = 'Rolling back transaction where adjustments are removed';
     protected const LOG_MSG_TRANSACTION_ROLLBACK_RELATED = 'Rolling back transaction where adjustment relateds are saved';
 
-    /** @var AdjustmentStorage | MigrationInterface */
+    /** @var AdjustmentStorage | ConvertibleMigrationInterface */
     protected $adjustmentStorage;
     /** @var AdjustmentRelatedStorage */
     protected $adjustmentRelatedStorage;
@@ -86,14 +87,14 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         $this->logDebug(static::LOG_MSG_TIME_FRAME, ['date' => $date->getDate()], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
         $output->writeln(sprintf(static::LOG_MSG_TIME_FRAME, $date->getDate()));
 
-        if (!($this->adjustmentStorage instanceof MigrationInterface)) {
-            $exception = new \LogicException(sprintf('Storage does not implement %s', MigrationInterface::class));
+        if (!($this->adjustmentStorage instanceof ConvertibleMigrationInterface)) {
+            $exception = new \LogicException(sprintf('Storage does not implement %s', ConvertibleMigrationInterface::class));
             $this->logErrorException($exception, static::LOG_MSG_UNSUPPORTED_STORAGE, [], [static::LOG_CODE, static::LOG_CODE_UNSUPPORTED_STORAGE]);
             $output->writeln(sprintf('<error>%s</error>', static::LOG_MSG_UNSUPPORTED_STORAGE));
             throw $exception;
         }
 
-        $migrationPeriods = $this->fetchMigrationPeriods($date, $resumeFromDate);
+        $migrationPeriods = $this->adjustmentStorage->fetchMigrationPeriodsWithConvertibleDataOlderThanOrEqualTo($date, $resumeFromDate);
         if ($resumeFromDate !== null) {
             $this->logDebug(static::LOG_MSG_RESUME_FROM, ['resumeFromDate' => $resumeFromDate->getDate()], [static::LOG_CODE, static::LOG_CODE_TIME_FRAME]);
             $output->writeln(sprintf(static::LOG_MSG_RESUME_FROM, $resumeFromDate->getDate()));
@@ -121,31 +122,13 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         }
     }
 
-    protected function fetchMigrationPeriods(Date $date, ?Date $resumeFromDate)
-    {
-        $migrationPeriods = $this->adjustmentStorage->fetchMigrationPeriodsWithDataOlderThanOrEqualTo($date);
-        if ($resumeFromDate === null) {
-            return $migrationPeriods;
-        }
-        return array_filter(
-            $migrationPeriods,
-            function (MigrationPeriod $migrationPeriod) use ($resumeFromDate) {
-                return ($migrationPeriod->getFrom() >= $resumeFromDate) && ($migrationPeriod->getTo() >= $resumeFromDate);
-            }
-        );
-    }
-
     protected function convertByMigrationPeriod(OutputInterface $output, LockingMigrationPeriod $migrationPeriod): void
     {
         $this->beginTransactions();
         $adjustmentRelatedsCreatedAndSaved = false;
         $relevantAdjustmentsRemoved = false;
-        // the command doesn't take an optional limit due to the nature of how it works
-        // it needs to grab everything in one go. we will revisit if/when necessary
         try {
-            $adjustments = $this->filterToRelevantAdjustments(
-                $this->fetchAdjustments($migrationPeriod)
-            );
+            $adjustments = $this->adjustmentStorage->fetchConvertibleCollectionForMigrationPeriod($migrationPeriod);
             $adjustmentRelatedsCreatedAndSaved = $this->saveAdjustmentRelateds(
                 $this->createAdjustmentRelateds($adjustments)
             );
@@ -161,24 +144,6 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         } finally {
             $this->concludeTransactions($output, $migrationPeriod, $adjustmentRelatedsCreatedAndSaved, $relevantAdjustmentsRemoved);
         }
-    }
-
-    protected function fetchAdjustments(LockingMigrationPeriod $migrationPeriod): Adjustments
-    {
-        return $this->adjustmentStorage->fetchCollectionForMigrationPeriod($migrationPeriod);
-    }
-
-    protected function filterToRelevantAdjustments(Adjustments $adjustments): AdjustmentsRawData
-    {
-        return new AdjustmentsRawData(
-            $this->adjustmentMapper,
-            array_filter(
-                $this->getDataForAdjustments($adjustments),
-                function (array $adjustmentDatum) {
-                    return ($adjustmentDatum['referenceSku'] ?? null) && is_int(($adjustmentDatum['referenceQuantity'] ?? null));
-                }
-            )
-        );
     }
 
     protected function getDataForAdjustments(Adjustments $adjustments): array
