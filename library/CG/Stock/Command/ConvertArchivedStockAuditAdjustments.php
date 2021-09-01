@@ -37,8 +37,8 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
     protected const LOG_MSG_UNSUPPORTED_STORAGE = 'Can not fetch migration periods from storage';
     protected const LOG_CODE_NO_DATA = 'Found no stock audit adjustments to convert';
     protected const LOG_MSG_NO_DATA = 'Found no stock audit adjustments to convert';
-    protected const LOG_CODE_NO_DATA_FOR_PERIOD = 'Found no stock audit adjustments to convert for period %s';
-    protected const LOG_MSG_NO_DATA_FOR_PERIOD = 'Found no stock audit adjustments to convert for period %s';
+    protected const LOG_CODE_NO_DATA_REMAINING_FOR_PERIOD = 'No remaining stock audit adjustments to convert for period %s';
+    protected const LOG_MSG_NO_DATA_REMAINING_FOR_PERIOD = 'No remaining stock audit adjustments to convert for period %s';
     protected const LOG_CODE_CONVERSION_EXCEPTION = 'Exception thrown whilst converting data';
     protected const LOG_MSG_CONVERSION_EXCEPTION = 'Exception of type %s thrown whilst converting data';
     protected const LOG_CODE_CONVERSION_SUCCESSFUL = 'Successfully converted all data';
@@ -135,17 +135,19 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
                 );
                 $relevantAdjustmentsRemoved = $this->removeAdjustments($adjustments);
             } catch (NotFound $e) {
-                $this->logWarning(static::LOG_MSG_NO_DATA_FOR_PERIOD, [(string)$migrationPeriod], [static::LOG_CODE, static::LOG_CODE_NO_DATA_FOR_PERIOD]);
-                $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_NO_DATA_FOR_PERIOD, (string)$migrationPeriod)));
-                return;
+                $this->logWarning(static::LOG_MSG_NO_DATA_REMAINING_FOR_PERIOD, [(string)$migrationPeriod], [static::LOG_CODE, static::LOG_CODE_NO_DATA_REMAINING_FOR_PERIOD]);
+                $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_NO_DATA_REMAINING_FOR_PERIOD, (string)$migrationPeriod)));
+                break;
             } catch (\Throwable $e) {
                 $this->logDebugException($e, static::LOG_MSG_CONVERSION_EXCEPTION, [get_class($e)], [static::LOG_CODE, static::LOG_CODE_CONVERSION_EXCEPTION]);
                 $output->writeln(sprintf('<error>%s</error>', sprintf(static::LOG_MSG_CONVERSION_EXCEPTION, get_class($e))));
-                return;
+                break;
             } finally {
-                $this->concludeTransactions($output, $migrationPeriod, $adjustmentRelatedsCreatedAndSaved, $relevantAdjustmentsRemoved);
+                $this->concludeTransactions($adjustmentRelatedsCreatedAndSaved, $relevantAdjustmentsRemoved);
             }
         }
+        $this->logDebug(static::LOG_MSG_CONVERSION_SUCCESSFUL, [(string) $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_CONVERSION_SUCCESSFUL]);
+        $output->writeln(sprintf(static::LOG_MSG_CONVERSION_SUCCESSFUL, (string) $migrationPeriod));
     }
 
     protected function getDataForAdjustments(Adjustments $adjustments): array
@@ -213,8 +215,6 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
     }
 
     protected function concludeTransactions(
-        OutputInterface $output,
-        MigrationPeriod $migrationPeriod,
         bool $adjustmentRelatedsCreatedAndSaved,
         bool $relevantAdjustmentsRemoved
     ): void
@@ -222,8 +222,7 @@ class ConvertArchivedStockAuditAdjustments implements LoggerAwareInterface
         if ($adjustmentRelatedsCreatedAndSaved && $relevantAdjustmentsRemoved) {
             $this->adjustmentStorage->commitTransaction();
             $this->adjustmentRelatedStorage->commitTransaction();
-            $this->logDebug(static::LOG_MSG_CONVERSION_SUCCESSFUL, [(string) $migrationPeriod], [static::LOG_CODE, static::LOG_CODE_CONVERSION_SUCCESSFUL]);
-            $output->writeln(sprintf(static::LOG_MSG_CONVERSION_SUCCESSFUL, (string) $migrationPeriod));
+
             return;
         }
         if (!$adjustmentRelatedsCreatedAndSaved) {
