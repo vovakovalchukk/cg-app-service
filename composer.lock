@@ -2018,16 +2018,11 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "1.58.3",
+            "version": "dev-CGIV-12143-amazon-partial-refund",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "353c4c7134de9f06f6d20d9d207579f7ff00bc8d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.58.3-cd31a0.zip",
-                "reference": "353c4c7134de9f06f6d20d9d207579f7ff00bc8d"
+                "reference": "893525be6dd980693f977a0566556637c7444ce3"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -12011,12 +12006,19 @@
             "alias_normalized": "1.40.3.0",
             "version": "dev-CGIV-12143-amazon-partial-refund",
             "package": "channelgrabber/amazon"
+        },
+        {
+            "alias": "1.58.4",
+            "alias_normalized": "1.58.4.0",
+            "version": "dev-CGIV-12143-amazon-partial-refund",
+            "package": "channelgrabber/order"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
+        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
