@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b03345e0375579c5e3dcfa381853648",
+    "content-hash": "cac200d6fdfa17c62ea595fe3e4fe7d0",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -373,35 +373,36 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.39.10",
+            "version": "dev-CGIV-12143-amazon-partial-refund",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "8216d285ce8cf5f5667f2587f582ffabd30490cd"
+                "reference": "c7e22b74e7ff75f36aeaf8b143b6a3ddc37ea9e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.39.10-b1d6ad.zip",
-                "reference": "8216d285ce8cf5f5667f2587f582ffabd30490cd"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-12143-amazon-partial-refund-fbc80c.zip",
+                "reference": "c7e22b74e7ff75f36aeaf8b143b6a3ddc37ea9e6"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.4.2",
                 "channelgrabber/cglib": "^1.14.0",
-                "channelgrabber/channel": "^1.46.0",
+                "channelgrabber/channel": "^1.47.2",
                 "channelgrabber/communication": "^1.0.2",
+                "channelgrabber/courier": "^1.4.7",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.9",
                 "channelgrabber/email-verification": "^1.0.0",
                 "channelgrabber/exchangerate": "^1.1.1",
-                "channelgrabber/gearman": "^1.8.1",
+                "channelgrabber/gearman": "^1.10.0",
                 "channelgrabber/http": ">=1.3.0,<2.0.0",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.18.4",
                 "channelgrabber/locale": "^1.2.4",
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/order": "^1.57.2",
+                "channelgrabber/order": "^1.58.0",
                 "channelgrabber/predis": "^1.1.14",
                 "channelgrabber/product": "^1.18.6",
                 "channelgrabber/scraper": "^1.2.0",
@@ -436,7 +437,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2021-06-21T10:52:37+00:00"
+            "time": "2021-09-07T13:36:38+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -717,16 +718,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.46.1",
+            "version": "1.47.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "3e88c15b45f8afa1674c044cd0ae3fc90d004b3d"
+                "reference": "c7041a2870f9689395d45fd902e6cad2abc6711a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.46.1-fb930c.zip",
-                "reference": "3e88c15b45f8afa1674c044cd0ae3fc90d004b3d"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.47.2-39c24c.zip",
+                "reference": "c7041a2870f9689395d45fd902e6cad2abc6711a"
             },
             "require": {
                 "channelgrabber/access": "^1.1.2",
@@ -737,7 +738,7 @@
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/feature-flags": "^2.1.0",
-                "channelgrabber/gearman": "^1.8.4",
+                "channelgrabber/gearman": "^1.10.0",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.20.0",
@@ -754,7 +755,7 @@
                 "channelgrabber/settings": "^1.3.9",
                 "channelgrabber/slim": "^1.15.0",
                 "channelgrabber/stats": ">=1.0.1,<2.0.0",
-                "channelgrabber/stdlib": "^2.16.11",
+                "channelgrabber/stdlib": "^2.17.2",
                 "channelgrabber/stock": "^1.17.1",
                 "channelgrabber/stock-locking": "^1.1.0",
                 "channelgrabber/user": "^1.28.1",
@@ -780,11 +781,6 @@
                 "phpunit/phpunit": "~6.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-CGIV-11710-blacklist-listing-imports": "1.45.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "CG\\Channel\\": "src/Channel",
@@ -799,7 +795,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2021-06-22T11:15:55+00:00"
+            "time": "2021-08-20T09:50:15+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -936,17 +932,69 @@
             "time": "2019-01-13T22:34:47+00:00"
         },
         {
-            "name": "channelgrabber/courieradapter",
-            "version": "1.6.0",
+            "name": "channelgrabber/courier",
+            "version": "1.4.8",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:channelgrabber/cg-courier-adapter.git",
-                "reference": "deee4b66643a9450837889c433223c9eabba2a52"
+                "url": "git@bitbucket.org:channelgrabber/courier.git",
+                "reference": "d9ee58c8c44f42a3cd0f206b13c38308cd1c94e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/courieradapter/channelgrabber-courieradapter-1.6.0-5c816f.zip",
-                "reference": "deee4b66643a9450837889c433223c9eabba2a52"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/courier/channelgrabber-courier-1.4.8-091867.zip",
+                "reference": "d9ee58c8c44f42a3cd0f206b13c38308cd1c94e0"
+            },
+            "require": {
+                "channelgrabber/courieradapter": "^1.7.4",
+                "channelgrabber/locale": "^1.0.17",
+                "channelgrabber/stdlib": "^2.0.0",
+                "guzzlehttp/guzzle": "^5.0.0",
+                "iio/libmergepdf": "~3.0",
+                "maennchen/zipstream-php": "~0.3.1",
+                "php": ">=7.1",
+                "phpseclib/phpseclib": "~2.0.0",
+                "zendframework/zend-di": "^2.3",
+                "zendframework/zend-servicemanager": "^2.3"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.9",
+                "phpunit/phpunit": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CG\\Courier\\": "src"
+                },
+                "classmap": [
+                    "src/classes/"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CG\\Courier\\Test\\": "tests"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew King",
+                    "email": "matthew.king@channelgrabber.com"
+                }
+            ],
+            "description": "Courier",
+            "time": "2021-09-06T08:29:52+00:00"
+        },
+        {
+            "name": "channelgrabber/courieradapter",
+            "version": "1.7.4",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:channelgrabber/cg-courier-adapter.git",
+                "reference": "bb2c0dd6df4a7c6a2a70e4e01aeef14fd8d1a4d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/courieradapter/channelgrabber-courieradapter-1.7.4-7b0077.zip",
+                "reference": "bb2c0dd6df4a7c6a2a70e4e01aeef14fd8d1a4d6"
             },
             "require": {
                 "psr/log": "^1.0",
@@ -970,7 +1018,7 @@
                 }
             ],
             "description": "A suite of interfaces that describe courier functionality",
-            "time": "2019-07-24T09:56:55+00:00"
+            "time": "2021-06-29T15:48:51+00:00"
         },
         {
             "name": "channelgrabber/currency",
@@ -1462,16 +1510,16 @@
         },
         {
             "name": "channelgrabber/gearman",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-gearman.git",
-                "reference": "a1fc913dcc421ffc3c80ad3020241eaa359e542d"
+                "reference": "3f16fba6535050ded15ae0253afba669ca33e095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.9.1-e33263.zip",
-                "reference": "a1fc913dcc421ffc3c80ad3020241eaa359e542d"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/gearman/channelgrabber-gearman-1.10.0-2f3043.zip",
+                "reference": "3f16fba6535050ded15ae0253afba669ca33e095"
             },
             "require": {
                 "channelgrabber/cache": "^2.8.0",
@@ -1495,7 +1543,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-CGIV-11176-gearman-dynamic-queues": "1.8.x-dev"
+                    "dev-CGIV-11842-overhaul-gearman-queue-drainer": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -1508,7 +1556,7 @@
                     "CG\\Gearman\\Test\\": "tests/src"
                 }
             },
-            "time": "2020-12-01T11:34:17+00:00"
+            "time": "2021-07-07T09:35:02+00:00"
         },
         {
             "name": "channelgrabber/http",
@@ -4792,6 +4840,57 @@
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
+            "name": "iio/libmergepdf",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hanneskod/libmergepdf.git",
+                "reference": "77059d0f5d9c5ebfe6df2d094109e6aee90ae647"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hanneskod/libmergepdf/zipball/77059d0f5d9c5ebfe6df2d094109e6aee90ae647",
+                "reference": "77059d0f5d9c5ebfe6df2d094109e6aee90ae647",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "setasign/fpdi-fpdf": "^2.0"
+            },
+            "require-dev": {
+                "hanneskod/readme-tester": "1.0-beta.1",
+                "phpunit/phpunit": "^5.0",
+                "symfony/finder": "^2.0"
+            },
+            "suggest": {
+                "symfony/finder": "Bulk add files using finder."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "iio\\libmergepdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "WTFPL"
+            ],
+            "authors": [
+                {
+                    "name": "Hannes Forsgård",
+                    "email": "hannes.forsgard@gmail.com"
+                }
+            ],
+            "description": "Library for merging multiple PDFs",
+            "homepage": "https://github.com/hanneskod/libmergepdf",
+            "keywords": [
+                "concatenate",
+                "merge",
+                "pdf"
+            ],
+            "time": "2017-12-11T20:42:07+00:00"
+        },
+        {
             "name": "jakeasmith/http_build_url",
             "version": "1.0.1",
             "source": {
@@ -4996,6 +5095,58 @@
                 "statsd"
             ],
             "time": "2015-07-23T23:12:45+00:00"
+        },
+        {
+            "name": "maennchen/zipstream-php",
+            "version": "0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maennchen/ZipStream-PHP.git",
+                "reference": "c492ddf4abcb0f6bed287faae35ebe77be7b690f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/c492ddf4abcb0f6bed287faae35ebe77be7b690f",
+                "reference": "c492ddf4abcb0f6bed287faae35ebe77be7b690f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">= 5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Duncan",
+                    "email": "pabs@pablotron.org"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
+                },
+                {
+                    "name": "Jonatan Männchen",
+                    "email": "jonatan@maennchen.ch"
+                }
+            ],
+            "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "time": "2016-02-27T22:32:42+00:00"
         },
         {
             "name": "mongodb/mongodb",
@@ -6423,6 +6574,151 @@
                 "phra"
             ],
             "time": "2020-01-13T10:41:09+00:00"
+        },
+        {
+            "name": "setasign/fpdf",
+            "version": "1.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDF.git",
+                "reference": "b0ddd9c5b98ced8230ef38534f6f3c17308a7974"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/b0ddd9c5b98ced8230ef38534f6f3c17308a7974",
+                "reference": "b0ddd9c5b98ced8230ef38534f6f3c17308a7974",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-zlib": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fpdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Plathey",
+                    "email": "oliver@fpdf.org",
+                    "homepage": "http://fpdf.org/"
+                }
+            ],
+            "description": "FPDF is a PHP class which allows to generate PDF files with pure PHP. F from FPDF stands for Free: you may use it for any kind of usage and modify it to suit your needs.",
+            "homepage": "http://www.fpdf.org",
+            "keywords": [
+                "fpdf",
+                "pdf"
+            ],
+            "time": "2021-08-30T07:50:06+00:00"
+        },
+        {
+            "name": "setasign/fpdi",
+            "version": "v2.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDI.git",
+                "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
+                "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zlib": "*",
+                "php": "^5.6 || ^7.0 || ^8.0"
+            },
+            "conflict": {
+                "setasign/tfpdf": "<1.31"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7",
+                "setasign/fpdf": "~1.8",
+                "setasign/tfpdf": "1.31",
+                "squizlabs/php_codesniffer": "^3.5",
+                "tecnickcom/tcpdf": "~6.2"
+            },
+            "suggest": {
+                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "setasign\\Fpdi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                },
+                {
+                    "name": "Maximilian Kresse",
+                    "email": "maximilian.kresse@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                }
+            ],
+            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+            "homepage": "https://www.setasign.com/fpdi",
+            "keywords": [
+                "fpdf",
+                "fpdi",
+                "pdf"
+            ],
+            "time": "2021-02-11T11:37:01+00:00"
+        },
+        {
+            "name": "setasign/fpdi-fpdf",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDI-FPDF.git",
+                "reference": "f2fdc44e4d5247a3bb55ed2c2c1396ef05c02357"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDI-FPDF/zipball/f2fdc44e4d5247a3bb55ed2c2c1396ef05c02357",
+                "reference": "f2fdc44e4d5247a3bb55ed2c2c1396ef05c02357",
+                "shasum": ""
+            },
+            "require": {
+                "setasign/fpdf": "^1.8.2",
+                "setasign/fpdi": "^2.3"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                }
+            ],
+            "description": "Kind of metadata package for dependencies of the latest versions of FPDI and FPDF.",
+            "homepage": "https://www.setasign.com/fpdi",
+            "keywords": [
+                "fpdf",
+                "fpdi",
+                "pdf"
+            ],
+            "abandoned": true,
+            "time": "2020-02-19T12:21:53+00:00"
         },
         {
             "name": "slim/slim",
@@ -11709,9 +12005,17 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.40.3",
+            "alias_normalized": "1.40.3.0",
+            "version": "dev-CGIV-12143-amazon-partial-refund",
+            "package": "channelgrabber/amazon"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
