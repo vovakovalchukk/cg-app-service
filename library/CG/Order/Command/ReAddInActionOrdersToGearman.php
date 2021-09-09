@@ -13,13 +13,14 @@ use CG\Order\Service\Cancel\Service as OrderCancelService;
 use CG\Order\Service\Item\Service as OrderItemService;
 use CG\Order\Service\Filter as OrderFilter;
 use CG\Order\Shared\Cancel\Collection as Cancellations;
+use CG\Order\Shared\Cancel\Item as CancelItem;
 use CG\Order\Shared\Cancel\Reasons as CancelReasons;
+use CG\Order\Shared\Cancel\Value as CancelValue;
 use CG\Order\Shared\Collection as Orders;
 use CG\Order\Shared\Entity as Order;
-use CG\Order\Shared\Status as OrderStatus;
 use CG\Order\Shared\Mapper as OrderMapper;
-use CG\Order\Shared\Cancel\Value as CancelValue;
-use CG\Order\Shared\Cancel\Item as CancelItem;
+use CG\Order\Shared\Refund\Factory as OrderRefundFactory;
+use CG\Order\Shared\Status as OrderStatus;
 use CG\Stdlib\DateTime as CGDateTime;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Log\LoggerAwareInterface;
@@ -44,6 +45,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
     protected $orderItemService;
     protected $accountLockingStampedePrevention;
     protected $orderCancelService;
+    protected $orderRefundFactory;
 
     public function __construct(
         DispatchGenerator $dispatchGenerator,
@@ -52,7 +54,8 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
         OrderService $orderService,
         OrderItemService $orderItemService,
         AccountLockingStampedePrevention $accountLockingStampedePrevention,
-        OrderCancelService $orderCancelService
+        OrderCancelService $orderCancelService,
+        OrderRefundFactory $orderRefundFactory
     ) {
         $this->dispatchGenerator = $dispatchGenerator;
         $this->cancelGenerator = $cancelGenerator;
@@ -61,6 +64,7 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
         $this->orderItemService = $orderItemService;
         $this->accountLockingStampedePrevention = $accountLockingStampedePrevention;
         $this->orderCancelService = $orderCancelService;
+        $this->orderRefundFactory = $orderRefundFactory;
     }
 
     public function __invoke()
@@ -116,6 +120,9 @@ class ReAddInActionOrdersToGearman implements LoggerAwareInterface, ModulusAware
             $this->requeueDispatch($order, $account);
         } elseif ($order->getStatus() == OrderStatus::CANCELLING || $order->getStatus() == OrderStatus::REFUNDING) {
             try {
+                if ($order->getStatus() == OrderStatus::REFUNDING && !($this->orderRefundFactory)($account->getChannel())->shouldRefundOrder($order, $account)) {
+                    return;
+                }
                 $cancelValue = $this->fetchCancelValue($order, $orderCancellations);
                 $this->cancelGenerator->generateJob($account, $order, $cancelValue);
                 $this->logDebug('Created %s job for order %s', [$cancelValue->getType(), $order->getId()], static::LOG_CODE);
