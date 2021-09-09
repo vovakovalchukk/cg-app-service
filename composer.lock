@@ -379,6 +379,11 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
                 "reference": "75b3614c4b9e75c06d1783cfc3c90c59f96800f8"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-12143-amazon-partial-refund-65a990.zip",
+                "reference": "75b3614c4b9e75c06d1783cfc3c90c59f96800f8"
+            },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.4.2",
@@ -432,7 +437,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2021-09-09T08:41:28+00:00"
+            "time": "2021-09-09T13:53:12+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -2019,6 +2024,11 @@
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
                 "reference": "6b20a5e1ce9a6de29033b70de7efe12015a5707b"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-12143-amazon-partial-refund-ebfc75.zip",
+                "reference": "6b20a5e1ce9a6de29033b70de7efe12015a5707b"
+            },
             "require": {
                 "channelgrabber/access": "^1.0.0",
                 "channelgrabber/cache": "^2.1.0",
@@ -2088,7 +2098,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2021-09-09T08:32:58+00:00"
+            "time": "2021-09-09T14:57:11+00:00"
         },
         {
             "name": "channelgrabber/partner",
