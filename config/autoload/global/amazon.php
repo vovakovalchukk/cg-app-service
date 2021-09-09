@@ -8,9 +8,9 @@ use CG\Amazon\Feed\Message\Service as FeedMessageService;
 use CG\Amazon\Feed\Message\Storage\Db as FeedMessageDb;
 use CG\Amazon\Feed\Message\Storage\Cache as FeedMessageCache;
 use CG\Amazon\Feed\Message\StorageInterface as FeedMessageStorage;
+use CG\Amazon\Feed\Service as FeedService;
 use CG\Amazon\Feed\Storage\Db as FeedDb;
 use CG\Amazon\Feed\StorageInterface as FeedStorage;
-use CG\Amazon\Feed\Service as FeedService;
 
 return [
     'di' => [
