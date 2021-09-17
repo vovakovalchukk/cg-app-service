@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a45d8133d7f7c42c71a4b27729e3f8a0",
+    "content-hash": "715b594003d7ba6b1aaee6ac2a76c120",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -373,16 +373,16 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "dev-CGIV-12143-amazon-partial-refund",
+            "version": "1.41.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "7a359c12915a02c43ceff5f461ba11aa3eb293c4"
+                "reference": "b8f1bc3237083c708e04d7ec102a483e71306cf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-12143-amazon-partial-refund-a45053.zip",
-                "reference": "7a359c12915a02c43ceff5f461ba11aa3eb293c4"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.41.0-f3c71d.zip",
+                "reference": "b8f1bc3237083c708e04d7ec102a483e71306cf9"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
@@ -402,7 +402,7 @@
                 "channelgrabber/locale": "^1.2.4",
                 "channelgrabber/location": "^1.2.0",
                 "channelgrabber/log": "^2.1.1",
-                "channelgrabber/order": "dev-CGIV-12143-amazon-partial-refund as 1.58.4",
+                "channelgrabber/order": "^1.58.5",
                 "channelgrabber/predis": "^1.1.14",
                 "channelgrabber/product": "^1.18.6",
                 "channelgrabber/scraper": "^1.2.0",
@@ -437,7 +437,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2021-09-09T15:05:54+00:00"
+            "time": "2021-09-17T08:38:34+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -2017,16 +2017,16 @@
         },
         {
             "name": "channelgrabber/order",
-            "version": "dev-CGIV-12143-amazon-partial-refund",
+            "version": "1.58.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-order.git",
-                "reference": "6b20a5e1ce9a6de29033b70de7efe12015a5707b"
+                "reference": "9bad005f21c87c41ef69fef4b38f6f304f4ddf94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-dev-CGIV-12143-amazon-partial-refund-ebfc75.zip",
-                "reference": "6b20a5e1ce9a6de29033b70de7efe12015a5707b"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/order/channelgrabber-order-1.58.5-9f7e63.zip",
+                "reference": "9bad005f21c87c41ef69fef4b38f6f304f4ddf94"
             },
             "require": {
                 "channelgrabber/access": "^1.0.0",
@@ -2097,7 +2097,7 @@
                     "CG\\Test\\": "vendor/channelgrabber/channel/tests/assets"
                 }
             },
-            "time": "2021-09-09T14:57:11+00:00"
+            "time": "2021-09-17T08:30:48+00:00"
         },
         {
             "name": "channelgrabber/partner",
@@ -12005,25 +12005,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.41.0",
-            "alias_normalized": "1.41.0.0",
-            "version": "dev-CGIV-12143-amazon-partial-refund",
-            "package": "channelgrabber/amazon"
-        },
-        {
-            "alias": "1.58.4",
-            "alias_normalized": "1.58.4.0",
-            "version": "dev-CGIV-12143-amazon-partial-refund",
-            "package": "channelgrabber/order"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/amazon": 20,
         "channelgrabber/constants": 20,
-        "channelgrabber/order": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
