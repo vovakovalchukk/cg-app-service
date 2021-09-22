@@ -56,7 +56,7 @@ class Db extends DbAbstract implements StorageInterface
                 $select
             );
             $productCollection->setTotal($total);
-            $this->appendImages($productCollection);
+            $this->appendImages($productCollection, $filter);
             if ($filter->getReturnNonEmptyNames()) {
                 $this->addMissingProductNames($productCollection);
             }
@@ -332,13 +332,13 @@ class Db extends DbAbstract implements StorageInterface
         return $products->getById($id);
     }
 
-    public function appendImages(ProductCollection $collection)
+    public function appendImages(ProductCollection $collection, ?Filter $filter = null)
     {
         if ($collection->count() == 0) {
             return;
         }
 
-        $select = $this->getImageSelect($collection->getIds());
+        $select = $this->getImageSelect($collection->getIds(), $filter);
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if ($results->count() == 0) {
             return;
@@ -384,17 +384,22 @@ class Db extends DbAbstract implements StorageInterface
         }
     }
 
-    protected function getImageSelect(array $productIds)
+    protected function getImageSelect(array $productIds, ?Filter $filter = null)
     {
+        $where = ['productId' => $productIds];
+        if (isset($filter) && $filter->getReturnOnlyFirstImage()) {
+            $where['order'] = 0;
+        }
+
         $productImages = $this->getReadSql()
             ->select('productImage')
             ->columns(['productId' => 'productId', 'listingId' => null, 'imageId' => 'imageId', 'order' => 'order'])
-            ->where(['productId' => $productIds]);
+            ->where($where);
 
         $productListingImages = $this->getReadSql()
             ->select('productListingImage')
             ->columns(['productId' => 'productId', 'listingId' => 'listingId', 'imageId' => 'imageId', 'order' => 'order'])
-            ->where(['productId' => $productIds]);
+            ->where($where);
 
         return $productImages->combine($productListingImages);
     }
