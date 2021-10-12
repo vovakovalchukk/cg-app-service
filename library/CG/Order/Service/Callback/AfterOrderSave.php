@@ -7,6 +7,7 @@ use CG\Order\Client\Gearman\Generator\AutoEmailInvoice as AutoEmailInvoiceGenera
 use CG\Order\Client\Gearman\Generator\CalculateOrderWeight as CalculateOrderWeightGenerator;
 use CG\Order\Client\Gearman\Generator\LinkMatchingOrders as LinkMatchingOrdersGenerator;
 use CG\Order\Client\Gearman\Generator\SaveOrderShippingMethod as SaveOrderShippingMethodGenerator;
+use CG\Order\Client\Gearman\Generator\UpdateCustomerOrderCount as UpdateCustomerOrderCountGenerator;
 use CG\Order\Client\Gearman\Generator\UpdateExchangeRate;
 use CG\Order\Client\Gearman\Generator\UpdateOrderCount as UpdateOrderCountGenerator;
 use CG\Order\Shared\Entity as Order;
@@ -27,6 +28,8 @@ class AfterOrderSave implements AfterOrderSaveInterface
     protected $linkMatchingOrdersGenerator;
     /** @var UpdateExchangeRate */
     protected $exchangeRateUpdater;
+    /** @var UpdateCustomerOrderCountGenerator */
+    protected $updateCustomerOrderCountGenerator;
 
     public function __construct(
         UploadInvoiceForOrder $uploadInvoiceForOrder,
@@ -35,7 +38,8 @@ class AfterOrderSave implements AfterOrderSaveInterface
         SaveOrderShippingMethodGenerator $saveOrderShippingMethodGenerator,
         UpdateOrderCountGenerator $updateOrderCountGenerator,
         LinkMatchingOrdersGenerator $linkMatchingOrdersGenerator,
-        UpdateExchangeRate $exchangeRateUpdater
+        UpdateExchangeRate $exchangeRateUpdater,
+        UpdateCustomerOrderCountGenerator $updateCustomerOrderCountGenerator
     ) {
         $this->uploadInvoiceForOrder = $uploadInvoiceForOrder;
         $this->autoEmailInvoiceGenerator = $autoEmailInvoiceGenerator;
@@ -44,6 +48,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
         $this->updateOrderCountGenerator = $updateOrderCountGenerator;
         $this->linkMatchingOrdersGenerator = $linkMatchingOrdersGenerator;
         $this->exchangeRateUpdater = $exchangeRateUpdater;
+        $this->updateCustomerOrderCountGenerator = $updateCustomerOrderCountGenerator;
     }
 
     public function triggerCallbacksForExistingOrder(Order $order, Order $existingOrder): void
@@ -58,6 +63,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
         $this->calculateOrderWeightGenerator->generateJobForOrder($order);
         $this->updateOrderCountGenerator->createJob($order);
         $this->saveOrderShippingMethodGenerator->createJob($order);
+        $this->updateCustomerOrderCountGenerator->generateJobForOrder($order);
         $this->triggerCallbacksForOrder($order);
     }
 
