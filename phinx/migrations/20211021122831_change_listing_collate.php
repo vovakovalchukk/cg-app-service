@@ -8,7 +8,7 @@ class ChangeListingCollate extends AbstractOnlineSchemaChange implements Environ
 
     public function supportsEnvironment($environment)
     {
-        return $environment === 'cg_app';
+        return $environment === 'listings';
     }
 
     /**
@@ -16,6 +16,7 @@ class ChangeListingCollate extends AbstractOnlineSchemaChange implements Environ
      */
     public function up()
     {
+        $this->onlineSchemaChange('listing', 'MODIFY description MEDIUMTEXT COLLATE utf8mb4_0900_ai_ci');
     }
 
     /**
@@ -23,5 +24,6 @@ class ChangeListingCollate extends AbstractOnlineSchemaChange implements Environ
      */
     public function down()
     {
+        $this->onlineSchemaChange('listing', 'MODIFY description MEDIUMTEXT COLLATE utf8_general_ci');
     }
 }

@@ -16,6 +16,7 @@ class ChangeProductDetailCollate extends AbstractOnlineSchemaChange implements E
      */
     public function up()
     {
+        $this->onlineSchemaChange('productDetail', 'MODIFY description MEDIUMTEXT COLLATE utf8mb4_0900_ai_ci');
     }
 
     /**
@@ -23,5 +24,6 @@ class ChangeProductDetailCollate extends AbstractOnlineSchemaChange implements E
      */
     public function down()
     {
-    }jukkk
+        $this->onlineSchemaChange('productDetail', 'MODIFY description MEDIUMTEXT COLLATE utf8_general_ci');
+    }
 }
