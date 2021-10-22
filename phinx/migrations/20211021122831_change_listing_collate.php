@@ -26,4 +26,11 @@ class ChangeListingCollate extends AbstractOnlineSchemaChange implements Environ
     {
         $this->onlineSchemaChange('listing', 'MODIFY description MEDIUMTEXT COLLATE utf8_general_ci');
     }
+
+    protected function getAdditionalArguments(): array
+    {
+        return [
+            '--chunk-time=1'
+        ];
+    }
 }
