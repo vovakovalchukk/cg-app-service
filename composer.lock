@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b00b97e58fdce09c6a599e4dc193f460",
+    "content-hash": "632a2b04b796aac30174f103d52733bc",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -718,16 +718,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "dev-CGIV-12268-dhl-parcel-uk",
+            "version": "1.47.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "a66f09bbeab46c5bf1f0f3a01309d7b7dd2f4396"
+                "reference": "b0e7b3f3f9e7f41e2191c6d4ffe2146e620d9248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-CGIV-12268-dhl-parcel-uk-941805.zip",
-                "reference": "a66f09bbeab46c5bf1f0f3a01309d7b7dd2f4396"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.47.3-ab8f61.zip",
+                "reference": "b0e7b3f3f9e7f41e2191c6d4ffe2146e620d9248"
             },
             "require": {
                 "channelgrabber/access": "^1.1.2",
@@ -795,7 +795,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2021-11-08T10:57:54+00:00"
+            "time": "2021-11-15T16:30:35+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -12004,17 +12004,9 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.47.3",
-            "alias_normalized": "1.47.3.0",
-            "version": "dev-CGIV-12268-dhl-parcel-uk",
-            "package": "channelgrabber/channel"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
