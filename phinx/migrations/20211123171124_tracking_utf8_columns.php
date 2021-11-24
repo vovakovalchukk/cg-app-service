@@ -7,17 +7,17 @@ class TrackingUtf8Columns extends AbstractOnlineSchemaChange
     protected const TABLE = 'tracking';
     protected const COLUMNS = [
         [
-            'name',
+            'carrier',
             'varchar(120)',
             'utf8mb4_0900_ai_ci',
         ],
         [
-            'name',
+            'number',
             'varchar(120)',
             'utf8mb4_0900_ai_ci',
         ],
         [
-            'name',
+            'shippingService',
             'varchar(120)',
             'utf8mb4_0900_ai_ci',
         ],
