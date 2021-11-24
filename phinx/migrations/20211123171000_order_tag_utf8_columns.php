@@ -7,12 +7,7 @@ class OrderTagUtf8Columns extends AbstractOnlineSchemaChange
     protected const TABLE = 'orderTag';
     protected const COLUMNS = [
         [
-            'sku',
-            'varchar(255)',
-            'utf8mb4_0900_ai_ci',
-        ],
-        [
-            'name',
+            'orderTag',
             'varchar(255)',
             'utf8mb4_0900_ai_ci',
         ],
