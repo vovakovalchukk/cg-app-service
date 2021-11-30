@@ -1,8 +1,9 @@
 <?php
 
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class OrderTagsUtf8Columns extends AbstractOnlineSchemaChange
+class OrderTagsUtf8Columns extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     protected const TABLE = 'orderTags';
     protected const COLUMNS = [
@@ -25,5 +26,10 @@ class OrderTagsUtf8Columns extends AbstractOnlineSchemaChange
     {
         // we don't want to reverse this
         return;
+    }
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
     }
 }

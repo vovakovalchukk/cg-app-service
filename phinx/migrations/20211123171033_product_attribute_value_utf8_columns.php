@@ -1,8 +1,9 @@
 <?php
 
 use Phinx\Migration\AbstractOnlineSchemaChange;
+use Phinx\Migration\EnvironmentAwareInterface;
 
-class ProductAttributeValueUtf8Columns extends AbstractOnlineSchemaChange
+class ProductAttributeValueUtf8Columns extends AbstractOnlineSchemaChange implements EnvironmentAwareInterface
 {
     protected const TABLE = 'productAttributeValue';
     protected const COLUMNS = [
@@ -25,5 +26,10 @@ class ProductAttributeValueUtf8Columns extends AbstractOnlineSchemaChange
     {
         // we don't want to reverse this
         return;
+    }
+
+    public function supportsEnvironment($environment)
+    {
+        return $environment === 'cg_app';
     }
 }
