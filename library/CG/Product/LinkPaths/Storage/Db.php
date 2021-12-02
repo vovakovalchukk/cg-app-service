@@ -3,6 +3,7 @@ namespace CG\Product\LinkPaths\Storage;
 
 use CG\Product\Link\Storage\DbLinkIdTrait;
 use CG\Product\Link\Storage\DbMaxOrderSelectTrait;
+use CG\Product\Link\Storage\LogMatchingLinkIdsOnNotFoundTrait;
 use CG\Product\LinkPaths\Collection;
 use CG\Product\LinkPaths\Entity as LinkPaths;
 use CG\Product\LinkPaths\Filter;
@@ -21,6 +22,9 @@ class Db implements StorageInterface, LoggerAwareInterface
     use LogTrait;
     use DbLinkIdTrait;
     use DbMaxOrderSelectTrait;
+    use LogMatchingLinkIdsOnNotFoundTrait;
+
+    protected const LOG_CODE = 'LinkPathsStorageDb';
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -37,8 +41,8 @@ class Db implements StorageInterface, LoggerAwareInterface
     {
         $select = $this->getSelect($this->getLinkIdSelect($id), $id);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
-
         if ($results->count() == 0) {
+            $this->logMatchingLinkIdsOnNotFound($this->readSql, $this->getLinkIdSelect($id), $select);
             throw new NotFound(sprintf('ProductLinkPaths not found with id %s', $id));
         }
 
@@ -139,5 +143,10 @@ class Db implements StorageInterface, LoggerAwareInterface
                 'relatedLeafPath.pathId' => Select::ORDER_ASCENDING,
                 'relatedLeafPath.order' => Select::ORDER_DESCENDING
             ]);
+    }
+
+    protected function getLogCode(): string
+    {
+        return static::LOG_CODE;
     }
 }

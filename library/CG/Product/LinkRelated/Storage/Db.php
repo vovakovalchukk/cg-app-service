@@ -3,6 +3,7 @@ namespace CG\Product\LinkRelated\Storage;
 
 use CG\Product\Link\Storage\DbLinkIdTrait;
 use CG\Product\Link\Storage\DbMaxOrderSelectTrait;
+use CG\Product\Link\Storage\LogMatchingLinkIdsOnNotFoundTrait;
 use CG\Product\LinkRelated\Collection;
 use CG\Product\LinkRelated\Entity as LinkRelated;
 use CG\Product\LinkRelated\Filter;
@@ -21,6 +22,9 @@ class Db implements StorageInterface, LoggerAwareInterface
     use LogTrait;
     use DbLinkIdTrait;
     use DbMaxOrderSelectTrait;
+    use LogMatchingLinkIdsOnNotFoundTrait;
+
+    protected const LOG_CODE = 'LinkRelatedStorageDb';
 
     /** @var Sql $readSql */
     protected $readSql;
@@ -37,8 +41,8 @@ class Db implements StorageInterface, LoggerAwareInterface
     {
         $select = $this->getSelect($this->getLinkIdSelect($id), $id);
         $results = $this->readSql->prepareStatementForSqlObject($select)->execute();
-
         if ($results->count() == 0) {
+            $this->logMatchingLinkIdsOnNotFound($this->readSql, $this->getLinkIdSelect($id), $select);
             throw new NotFound(sprintf('ProductLinkRelated not found with id %s', $id));
         }
 
@@ -151,5 +155,10 @@ class Db implements StorageInterface, LoggerAwareInterface
             ->join(['relatedRootPath' => 'productLinkPath'], 'relatedMaxPath.linkId = relatedRootPath.linkId', [])
             ->join(['relatedLeafPath' => 'productLinkPath'], 'relatedRootPath.pathId = relatedLeafPath.pathId', [])
             ->join(['related' => 'productLink'], 'relatedLeafPath.linkId = related.linkId', ['relatedSku' => 'sku']);
+    }
+
+    protected function getLogCode(): string
+    {
+        return static::LOG_CODE;
     }
 }
