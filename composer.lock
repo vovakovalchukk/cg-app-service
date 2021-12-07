@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "890be3478886c8601a3b6a7d8a6b077c",
+    "content-hash": "5eb31497b21d0b7fb93e7c918736059b",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2211,16 +2211,16 @@
         },
         {
             "name": "channelgrabber/phinx",
-            "version": "dev-CGIV-12214-mysql-utf8mb4-updates",
+            "version": "0.5.8",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/phinx.git",
-                "reference": "af35c057db925d8f20ced48173ee42098f166e85"
+                "reference": "30da725881b4068bb2583458945320148a8ead5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-dev-CGIV-12214-mysql-utf8mb4-updates-ba3afb.zip",
-                "reference": "af35c057db925d8f20ced48173ee42098f166e85",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/phinx/channelgrabber-phinx-0.5.8-b400ab.zip",
+                "reference": "30da725881b4068bb2583458945320148a8ead5e",
                 "shasum": null
             },
             "require": {
@@ -2275,7 +2275,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2021-11-23T15:34:38+00:00"
+            "time": "2021-12-07T10:35:49+00:00"
         },
         {
             "name": "channelgrabber/predis",
@@ -12481,18 +12481,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.5.8",
-            "alias_normalized": "0.5.8.0",
-            "version": "dev-CGIV-12214-mysql-utf8mb4-updates",
-            "package": "channelgrabber/phinx"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/phinx": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
