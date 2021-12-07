@@ -129,11 +129,11 @@ class Service extends BaseService implements StatsAwareInterface
             /** @var $productLinkRelated \CG\Product\LinkRelated\Entity */
             $productLinkRelated = $this->productLinkRelatedStorage->fetch($productLinkRelatedId);
             $productSkus = $productLinkRelated->getRelatedSkusMap();
+            $this->logDebugDump($productSkus, 'Found related product skus to %s for ouId %d', ['sku' => $stock->getSku(), 'ou' => $stock->getOrganisationUnitId()], static::LOG_CODE);
         } catch (NotFound $e) {
             $productSkus = [];
+            $this->logDebug('No related product skus to %s for ouId %d', ['sku' => $stock->getSku(), 'ou' => $stock->getOrganisationUnitId()], static::LOG_CODE);
         }
-
-        $this->logDebugDump($productSkus, 'Found related product skus to %s for ouId %d', [$stock->getSku(), $stock->getOrganisationUnitId()], static::LOG_CODE);
 
         $filter = (new StockLocationFilter('all', 1))->setOuIdSku(array_map(
             function ($sku) use ($stock) {
