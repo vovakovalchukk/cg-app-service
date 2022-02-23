@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3c9ef03eb2a112398e406d8fec9c217",
+    "content-hash": "2f11ebd0ac9bc851a9b0ee63f8d18f75",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -374,25 +374,25 @@
         },
         {
             "name": "channelgrabber/amazon",
-            "version": "1.41.0",
+            "version": "dev-CGIV-12327-import-listings-blacklist",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-amazon.git",
-                "reference": "b8f1bc3237083c708e04d7ec102a483e71306cf9"
+                "reference": "12f5d237c5b1333dd0685ba5301880b79400b701"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-1.41.0-f3c71d.zip",
-                "reference": "b8f1bc3237083c708e04d7ec102a483e71306cf9",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/amazon/channelgrabber-amazon-dev-CGIV-12327-import-listings-blacklist-5b318d.zip",
+                "reference": "12f5d237c5b1333dd0685ba5301880b79400b701",
                 "shasum": null
             },
             "require": {
                 "aws/aws-sdk-php": "^3.19",
                 "channelgrabber/cache": "^2.4.2",
                 "channelgrabber/cglib": "^1.14.0",
-                "channelgrabber/channel": "^1.47.2",
+                "channelgrabber/channel": "dev-CGIV-12327-import-listings-blacklist as 1.48.1",
                 "channelgrabber/communication": "^1.0.2",
-                "channelgrabber/courier": "^1.4.7",
+                "channelgrabber/courier": "^1.5.2",
                 "channelgrabber/di": "^2.2.0",
                 "channelgrabber/email": "^1.0.9",
                 "channelgrabber/email-verification": "^1.0.0",
@@ -439,7 +439,7 @@
                     "CG\\CGLib\\Test\\": "vendor/channelgrabber/cglib/tests/"
                 }
             },
-            "time": "2021-09-17T08:38:34+00:00"
+            "time": "2022-02-22T10:55:21+00:00"
         },
         {
             "name": "channelgrabber/bigcommerce",
@@ -725,16 +725,16 @@
         },
         {
             "name": "channelgrabber/channel",
-            "version": "1.47.3",
+            "version": "dev-CGIV-12327-import-listings-blacklist",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-channel.git",
-                "reference": "b0e7b3f3f9e7f41e2191c6d4ffe2146e620d9248"
+                "reference": "68067c474406827514ce94e1725f7c87dc761fd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-1.47.3-ab8f61.zip",
-                "reference": "b0e7b3f3f9e7f41e2191c6d4ffe2146e620d9248",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/channel/channelgrabber-channel-dev-CGIV-12327-import-listings-blacklist-e8b61b.zip",
+                "reference": "68067c474406827514ce94e1725f7c87dc761fd5",
                 "shasum": null
             },
             "require": {
@@ -746,7 +746,7 @@
                 "channelgrabber/email": "^1.0.8",
                 "channelgrabber/etag": "^1.5.4",
                 "channelgrabber/feature-flags": "^2.1.0",
-                "channelgrabber/gearman": "^1.10.0",
+                "channelgrabber/gearman": "^1.10.1",
                 "channelgrabber/http": "^1.3.14",
                 "channelgrabber/image": "^1.2.2",
                 "channelgrabber/listing": "^1.20.0",
@@ -803,7 +803,7 @@
                     "CG\\Gearman\\Test\\": "vendor/channelgrabber/gearman/tests/src"
                 }
             },
-            "time": "2021-11-15T16:30:35+00:00"
+            "time": "2022-02-22T10:47:53+00:00"
         },
         {
             "name": "channelgrabber/cilex",
@@ -944,16 +944,16 @@
         },
         {
             "name": "channelgrabber/courier",
-            "version": "1.4.8",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/courier.git",
-                "reference": "d9ee58c8c44f42a3cd0f206b13c38308cd1c94e0"
+                "reference": "2d1e1c643f6b0f8b5d4a5daaaa72751c0c4f53c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/courier/channelgrabber-courier-1.4.8-091867.zip",
-                "reference": "d9ee58c8c44f42a3cd0f206b13c38308cd1c94e0",
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/courier/channelgrabber-courier-1.6.0-e6003b.zip",
+                "reference": "2d1e1c643f6b0f8b5d4a5daaaa72751c0c4f53c1",
                 "shasum": null
             },
             "require": {
@@ -993,7 +993,7 @@
                 }
             ],
             "description": "Courier",
-            "time": "2021-09-06T08:29:52+00:00"
+            "time": "2022-01-05T13:52:34+00:00"
         },
         {
             "name": "channelgrabber/courieradapter",
@@ -12091,9 +12091,24 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.41.6",
+            "alias_normalized": "1.41.6.0",
+            "version": "dev-CGIV-12327-import-listings-blacklist",
+            "package": "channelgrabber/amazon"
+        },
+        {
+            "alias": "1.48.1",
+            "alias_normalized": "1.48.1.0",
+            "version": "dev-CGIV-12327-import-listings-blacklist",
+            "package": "channelgrabber/channel"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "channelgrabber/amazon": 20,
+        "channelgrabber/channel": 20,
         "channelgrabber/constants": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
