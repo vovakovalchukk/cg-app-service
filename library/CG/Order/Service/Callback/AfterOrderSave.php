@@ -91,7 +91,7 @@ class AfterOrderSave implements AfterOrderSaveInterface
      * @return DateTime|null
      * @throws \Exception
      */
-    private function formatDate ($date): ?DateTime
+    private function formatDate($date): ?DateTime
     {
         if (is_string($date) && !date_parse($date)['warnings']) {
             return new DateTime($date);
