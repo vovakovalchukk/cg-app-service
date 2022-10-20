@@ -11,6 +11,7 @@ use CG\Order\Client\Gearman\Generator\UpdateCustomerOrderCount as UpdateCustomer
 use CG\Order\Client\Gearman\Generator\UpdateExchangeRate;
 use CG\Order\Client\Gearman\Generator\UpdateOrderCount as UpdateOrderCountGenerator;
 use CG\Order\Shared\Entity as Order;
+use CG\Stdlib\DateTime;
 
 class AfterOrderSave implements AfterOrderSaveInterface
 {
@@ -54,17 +55,31 @@ class AfterOrderSave implements AfterOrderSaveInterface
     public function triggerCallbacksForExistingOrder(Order $order, Order $existingOrder): void
     {
         $this->updateOrderCountGenerator->createJob($order, $existingOrder);
-        $this->saveOrderShippingMethodGenerator->createJob($order, $existingOrder);
-        $this->triggerCallbacksForOrder($order);
+
+        /** @var DateTime $purchaseDate */
+        $purchaseDate = $order->getPurchaseDate();
+
+        // Limits the number of gearman jobs for historic orders (PRD-192)
+        if ($purchaseDate->diffInDays(new \DateTime) <= 90) {
+            $this->saveOrderShippingMethodGenerator->createJob($order, $existingOrder);
+            $this->triggerCallbacksForOrder($order);
+        }
     }
 
     public function triggerCallbacksForNewOrder(Order $order): void
     {
-        $this->calculateOrderWeightGenerator->generateJobForOrder($order);
         $this->updateOrderCountGenerator->createJob($order);
-        $this->saveOrderShippingMethodGenerator->createJob($order);
-        $this->updateCustomerOrderCountGenerator->generateJobForOrder($order);
-        $this->triggerCallbacksForOrder($order);
+
+        /** @var DateTime $purchaseDate */
+        $purchaseDate = $order->getPurchaseDate();
+
+        // Limits the number of gearman jobs for historic orders (PRD-192)
+        if ($purchaseDate->diffInDays(new \DateTime) <= 90) {
+            $this->calculateOrderWeightGenerator->generateJobForOrder($order);
+            $this->saveOrderShippingMethodGenerator->createJob($order);
+            $this->updateCustomerOrderCountGenerator->generateJobForOrder($order);
+            $this->triggerCallbacksForOrder($order);
+        }
     }
 
     protected function triggerCallbacksForOrder(Order $order): void
