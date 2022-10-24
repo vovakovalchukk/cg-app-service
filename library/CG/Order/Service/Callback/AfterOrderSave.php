@@ -11,6 +11,7 @@ use CG\Order\Client\Gearman\Generator\UpdateCustomerOrderCount as UpdateCustomer
 use CG\Order\Client\Gearman\Generator\UpdateExchangeRate;
 use CG\Order\Client\Gearman\Generator\UpdateOrderCount as UpdateOrderCountGenerator;
 use CG\Order\Shared\Entity as Order;
+use CG\Stdlib\DateTime;
 
 class AfterOrderSave implements AfterOrderSaveInterface
 {
@@ -54,17 +55,53 @@ class AfterOrderSave implements AfterOrderSaveInterface
     public function triggerCallbacksForExistingOrder(Order $order, Order $existingOrder): void
     {
         $this->updateOrderCountGenerator->createJob($order, $existingOrder);
+
+        /** @var null|DateTime $purchaseDate */
+        $purchaseDate = $this->formatDate($order->getPurchaseDate());
+
+        // Limits the number of gearman jobs for historic orders (PRD-192)
+        if ($purchaseDate && $purchaseDate->diffInDays(new \DateTime) > 90) {
+            return;
+        }
+
         $this->saveOrderShippingMethodGenerator->createJob($order, $existingOrder);
         $this->triggerCallbacksForOrder($order);
     }
 
     public function triggerCallbacksForNewOrder(Order $order): void
     {
-        $this->calculateOrderWeightGenerator->generateJobForOrder($order);
         $this->updateOrderCountGenerator->createJob($order);
+
+        /** @var null|DateTime $purchaseDate */
+        $purchaseDate = $this->formatDate($order->getPurchaseDate());
+
+        // Limits the number of gearman jobs for historic orders (PRD-192)
+        if ($purchaseDate && $purchaseDate->diffInDays(new \DateTime) > 90) {
+            return;
+        }
+
+        $this->calculateOrderWeightGenerator->generateJobForOrder($order);
         $this->saveOrderShippingMethodGenerator->createJob($order);
         $this->updateCustomerOrderCountGenerator->generateJobForOrder($order);
         $this->triggerCallbacksForOrder($order);
+    }
+
+    /**
+     * @param mixed $date
+     * @return DateTime|null
+     * @throws \Exception
+     */
+    private function formatDate($date): ?DateTime
+    {
+        if (is_string($date) && !date_parse($date)['warnings']) {
+            return new DateTime($date);
+        }
+
+        if ($date instanceof \DateTime) {
+            return new DateTime($date->getTimestamp());
+        }
+
+        return null;
     }
 
     protected function triggerCallbacksForOrder(Order $order): void
