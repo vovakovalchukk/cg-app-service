@@ -20,7 +20,7 @@ use CG\Settings\Invoice\Service\Service as InvoiceService;
 
 use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
-use CG\Settings\Shipping\Alias\Service as AliasService;
+use CG\Settings\Shipping\Alias\RestService as AliasService;
 
 use CG\Controllers\Settings\PickList;
 use CG\Controllers\Settings\PickList\Collection as PickListCollection;
@@ -158,13 +158,14 @@ return [
     ],
     '/settings/shipping/alias' => [
         'controllers' => function() use ($di, $app) {
-                $method = $app->request()->getMethod();
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-                $controller = $di->get(AliasCollection::class);
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($app->request()->getBody())
-                );
+            $controller = $di->get(AliasCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'AliasSettingsCollection',
@@ -177,13 +178,14 @@ return [
     ],
     '/settings/shipping/alias/:aliasId' => [
         'controllers' => function($aliasId) use ($di, $app) {
-                $method = $app->request()->getMethod();
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-                $controller = $di->get(Alias::class);
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($aliasId, $app->request()->getBody())
-                );
+            $controller = $di->get(Alias::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($aliasId, $app->request()->getBody())
+            );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'AliasSettingsEntity',
