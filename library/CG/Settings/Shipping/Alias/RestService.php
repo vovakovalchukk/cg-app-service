@@ -12,9 +12,10 @@ class RestService extends Service
     public const DEFAULT_LIMIT = 10;
     public const DEFAULT_PAGE = 1;
 
+    protected $repository;
+    protected $mapper;
     /** @var RuleRestService */
     protected $ruleRestService;
-    protected $mapper;
 
     public function __construct(
         StorageInterface $repository,
@@ -28,6 +29,7 @@ class RestService extends Service
     public function fetchAsHal($id): Hal
     {
         $entity = $this->fetch($id);
+        /** @var Entity $entity */
         $this->fetchAndAddEmbedsToEntity($entity);
         return $this->mapper->toHal($entity);
     }

@@ -157,7 +157,7 @@ return [
         'name' => "ShippingSettings"
     ],
     '/settings/shipping/alias' => [
-        'controllers' => function() use ($di, $app) {
+        'controllers' => function() use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 
@@ -177,7 +177,7 @@ return [
         'version' => new Version(1, 3),
     ],
     '/settings/shipping/alias/:aliasId' => [
-        'controllers' => function($aliasId) use ($di, $app) {
+        'controllers' => function($aliasId) use ($di) {
             $app = $di->get(Slim::class);
             $method = $app->request()->getMethod();
 

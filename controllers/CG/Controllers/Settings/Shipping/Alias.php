@@ -14,10 +14,10 @@ class Alias
 {
     use ControllerTrait, GetTrait, PutTrait, DeleteTrait;
 
-    public function __construct(Slim $app, Di $di, RestService $service)
+    public function __construct(Slim $app, RestService $service, Di $di)
     {
-        $this->slim = $app;
-        $this->di = $di;
-        $this->service = $service;
+        $this->setSlim($app)
+            ->setService($service)
+            ->setDi($di);
     }
 }
