@@ -3,7 +3,7 @@
 namespace CG\Controllers\Settings\Shipping\Alias\Rule;
 
 use CG\Settings\Shipping\Alias\Rule\Filter;
-use CG\Settings\Shipping\Alias\Rule\Service;
+use CG\Settings\Shipping\Alias\Rule\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -14,7 +14,7 @@ class Collection
 {
     use ControllerTrait, GetTrait, PostTrait;
 
-    public function __construct(Slim $app, Service $service, Di $di)
+    public function __construct(Slim $app, RestService $service, Di $di)
     {
         $this->setSlim($app)
             ->setService($service)
@@ -27,7 +27,8 @@ class Collection
             new Filter(
                 $this->getParams('limit'),
                 $this->getParams('page'),
-                $this->getParams('id') ?: []
+                $this->getParams('id') ?: [],
+                $this->getParams('shippingAliasId') ?: []
             )
         );
     }
