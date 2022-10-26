@@ -238,7 +238,7 @@ return [
             );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
-        'name' => 'AliasSettingsEntity',
+        'name' => 'AliasRuleSettingsEntity',
         'validation' => [
             "dataRules" => RuleEntityValidation::class,
         ],

@@ -2,7 +2,7 @@
 
 namespace CG\InputValidation\Settings\Alias\Rule;
 
-use CG\Validation\Rules\ArrayOfIntegersValidator;
+use CG\Validation\Rules\ArrayOfPositiveIntegersValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
@@ -20,8 +20,15 @@ class Filter implements RulesInterface
                 'name' => 'id',
                 'required' => false,
                 'validators' => [
-                    new ArrayOfIntegersValidator(new IntegerValidator(), 'id')
+                    new ArrayOfPositiveIntegersValidator(new IntegerValidator(), 'id')
                 ]
+            ],
+            'shippingAliasId' => [
+                'name' => 'shippingAliasId',
+                'required' => false,
+                'validators' => [
+                    new ArrayOfPositiveIntegersValidator(new IntegerValidator(), 'shippingAliasId')
+                ],
             ],
         ];
     }

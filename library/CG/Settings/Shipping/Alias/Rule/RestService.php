@@ -2,6 +2,7 @@
 
 namespace CG\Settings\Shipping\Alias\Rule;
 
+use CG\Settings\Shipping\Alias\Nginx\Cache\Invalidator;
 use CG\Slim\Renderer\ResponseType\Hal;
 
 class RestService extends Service
@@ -9,8 +10,12 @@ class RestService extends Service
     protected const DEFAULT_LIMIT = 10;
     protected const DEFAULT_PAGE = 1;
 
-    public function __construct(StorageInterface $repository, Mapper $mapper)
+    /** @var Invalidator */
+    protected $invalidator;
+
+    public function __construct(StorageInterface $repository, Mapper $mapper, Invalidator $invalidator)
     {
+        $this->invalidator = $invalidator;
         parent::__construct($repository, $mapper);
     }
 
@@ -30,5 +35,18 @@ class RestService extends Service
             $filter->getPage(),
             $filter->toArray()
         );
+    }
+
+    public function save($entity)
+    {
+        $response = parent::save($entity);
+        $this->invalidator->invalidateAliasForRules($entity);
+        return $response;
+    }
+
+    public function remove($entity)
+    {
+        parent::remove($entity);
+        $this->invalidator->invalidateAliasForRules($entity);
     }
 }

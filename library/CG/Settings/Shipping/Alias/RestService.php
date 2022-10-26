@@ -4,6 +4,7 @@ namespace CG\Settings\Shipping\Alias;
 
 use CG\Settings\Shipping\Alias\Rule\Collection as RuleCollection;
 use CG\Settings\Shipping\Alias\Rule\RestService as RuleRestService;
+use CG\Settings\Shipping\Alias\Nginx\Cache\Invalidator;
 use CG\Slim\Renderer\ResponseType\Hal;
 use CG\Stdlib\Exception\Runtime\NotFound;
 
@@ -16,13 +17,17 @@ class RestService extends Service
     protected $mapper;
     /** @var RuleRestService */
     protected $ruleRestService;
+    /** @var Invalidator */
+    protected $invalidator;
 
     public function __construct(
         StorageInterface $repository,
         Mapper $mapper,
-        RuleRestService $ruleRestService
+        RuleRestService $ruleRestService,
+        Invalidator $invalidator
     ) {
         $this->ruleRestService = $ruleRestService;
+        $this->invalidator = $invalidator;
         parent::__construct($repository, $mapper);
     }
 
@@ -76,5 +81,20 @@ class RestService extends Service
         } catch (NotFound $e) {
             return;
         }
+    }
+
+    public function save($entity)
+    {
+        $response = parent::save($entity);
+        $this->invalidator->invalidateAlias($entity);
+        return $response;
+    }
+
+    public function remove($entity)
+    {
+        $aliasRules = $this->ruleRestService->fetchCollectionForAlias($entity);
+        $this->ruleRestService->removeCollection($aliasRules);
+        parent::remove($entity);
+        $this->invalidator->invalidateAlias($entity);
     }
 }
