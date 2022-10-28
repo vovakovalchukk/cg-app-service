@@ -28,7 +28,7 @@ class RestService extends Service
     ) {
         $this->ruleRestService = $ruleRestService;
         $this->invalidator = $invalidator;
-        parent::__construct($repository, $mapper);
+        parent::__construct($repository, $mapper, $ruleRestService);
     }
 
     public function fetchAsHal($id): Hal
