@@ -47,10 +47,16 @@ class Db extends DbAbstract implements StorageInterface
             }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
+            $order = $this->getOrderByFilter($filter);
+            $additionalJoin = $this->getAdditionalTableJoin($order);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
-            $select = $this->getSelect();
+            $select = $this->getSelect($additionalJoin);
             $select->where($idInIds);
-            $select->order('product.id ASC');
+            if ($order) {
+                $select->order($order);
+            } else {
+                $select->order('product.id ASC');
+            }
             $productCollection = $this->fetchCollectionWithJoinQuery(
                 new ProductCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $select
@@ -139,6 +145,14 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntitiesIds(Filter $filter)
     {
         $select = $this->createSelectFromFilter($filter);
+        $order = $this->getOrderByFilter($filter);
+        $additionalJoin = $this->getAdditionalTableJoin($order);
+
+        if ($order) {
+            $select->order($order);
+        } else {
+            $select->order('_id ASC');
+        }
 
         if ($filter->getLimit() != 'all') {
             $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -146,7 +160,30 @@ class Db extends DbAbstract implements StorageInterface
                 ->offset($offset);
         }
 
-        $select->order('_id ASC');
+        if ($additionalJoin === 'productDetail') {
+            $select->join(
+                'productDetail',
+                'productDetail.sku = product.sku',
+                ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'],
+                Select::JOIN_LEFT);
+            $select->group('_id');
+        } else if ($additionalJoin === 'stockLocation') {
+            $select->join(
+                'stock',
+                'stock.sku = product.sku',
+                ['stockId' => 'id'],
+                Select::JOIN_LEFT
+            )
+                ->join(
+                    'stockLocation',
+                    'stockLocation.stockId = stock.id',
+                    ['onHand', 'allocated', 'onPurchaseOrder'],
+                    Select::JOIN_LEFT
+                );
+            $select->group('_id');
+        }
+
+
 
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
         if($results->count() == 0) {
@@ -692,35 +729,56 @@ class Db extends DbAbstract implements StorageInterface
     /**
      * @return Select
      */
-    protected function getSelect()
+    protected function getSelect($additionalJoin = null)
     {
-        return $this->getReadSql()->select('product')
-            ->join(
-                'productAttribute',
-                'productAttribute.productId = product.id',
-                ['attributeName' => 'name'],
+        $select = $this->getReadSql()->select('product');
+        if ($additionalJoin == 'productDetail') {
+            $select->join(
+                'productDetail',
+                'productDetail.sku = product.sku',
+                ['weight', 'hsTariffNumber', 'countryOfManufacture', 'cost'],
                 Select::JOIN_LEFT
-            )->join(
-                ['parent' => 'product'],
-                'parent.id = product.parentProductId',
-                [],
-                Select::JOIN_LEFT
-            )->join(
-                ['parentProductAttribute' => 'productAttribute'],
-                'parentProductAttribute.productId = parent.id',
-                ['parentAttributeName' => 'name'],
-                Select::JOIN_LEFT
-            )->join(
-                'productAttributeValue',
-                'productAttributeValue.productId = product.id AND productAttributeValue.productAttributeId = parentProductAttribute.id',
-                ['attributeValue' => 'value'],
-                Select::JOIN_LEFT
-            )->join(
-                'productTaxRate',
-                'productTaxRate.productId = product.id',
-                ['taxRateId', 'VATCountryCode'],
+            );
+        } else if ($additionalJoin == 'stockLocation') {
+            $select->join(
+                'stock',
+                'stock.sku = product.sku',
+                ['stockId' => 'id'],
                 Select::JOIN_LEFT
             )
+                ->join(
+                    'stockLocation',
+                    'stockLocation.stockId = stock.id',
+                    ['onHand', 'allocated', 'onPurchaseOrder'],
+                    Select::JOIN_LEFT
+                );
+        }
+        return $select->join(
+            'productAttribute',
+            'productAttribute.productId = product.id',
+            ['attributeName' => 'name'],
+            Select::JOIN_LEFT
+        )->join(
+            ['parent' => 'product'],
+            'parent.id = product.parentProductId',
+            [],
+            Select::JOIN_LEFT
+        )->join(
+            ['parentProductAttribute' => 'productAttribute'],
+            'parentProductAttribute.productId = parent.id',
+            ['parentAttributeName' => 'name'],
+            Select::JOIN_LEFT
+        )->join(
+            'productAttributeValue',
+            'productAttributeValue.productId = product.id AND productAttributeValue.productAttributeId = parentProductAttribute.id',
+            ['attributeValue' => 'value'],
+            Select::JOIN_LEFT
+        )->join(
+            'productTaxRate',
+            'productTaxRate.productId = product.id',
+            ['taxRateId', 'VATCountryCode'],
+            Select::JOIN_LEFT
+        )
             ->join(
                 'productPickingLocation',
                 'productPickingLocation.productId = product.id',
@@ -747,5 +805,43 @@ class Db extends DbAbstract implements StorageInterface
     public function getEntityClass()
     {
         return ProductEntity::class;
+    }
+
+    protected function getOrderByFilter($filter)
+    {
+        $productTableColumns = ['name', 'sku'];
+        $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
+        $productDetailTableColumns = ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'];
+        $filterOrder = $filter->getOrder();
+        $order = [];
+        if ($filterOrder) {
+            $order = explode(',', $filterOrder);
+            if (in_array($order[0], $productDetailTableColumns)) {
+                if ($order[0] == 'hstariffnumber' or $order[0] == 'cost') {
+                    $order = new Query('ABS(productDetail.' . $order[0] . ') ' . $order[1]);
+                } else {
+                    $order = 'productDetail.' . $order[0] . ' ' . $order[1];
+                }
+            } else if ((in_array($order[0], $productTableColumns))) {
+                $order = 'product.' . $order[0] . ' ' . $order[1];
+            } else if ((in_array($order[0], $stockLocationTableColumns))) {
+                $order = 'stockLocation.' . $order[0] . ' ' . $order[1];
+            } else {
+                $order = null;
+            }
+        }
+
+        return $order ? $order : null;
+    }
+
+    protected function getAdditionalTableJoin($order)
+    {
+        if ($order instanceof Query) {
+            return 'productDetail';
+        } else if ($order) {
+            return explode('.', $order)[0];
+        } else {
+            return null;
+        }
     }
 }
