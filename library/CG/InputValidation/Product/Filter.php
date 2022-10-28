@@ -119,6 +119,13 @@ class Filter implements RulesInterface
                         new BooleanValidator(['name' => 'returnOnlyFirstImage'])
                     ]
                 ],
+                'order' => [
+                    'name'       => 'order',
+                    'required'   => false,
+                    'validators' => [
+                        new IsArrayValidator('order')
+                    ]
+                ],
             ]
         );
     }
