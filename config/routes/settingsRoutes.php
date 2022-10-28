@@ -224,7 +224,7 @@ return [
             'dataRules' => RuleEntityValidation::class
         ],
         'entityRoute' => '/settings/shipping/alias/:aliasId/rule/:ruleId',
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 1),
     ],
     '/settings/shipping/alias/:aliasId/rule/:ruleId' => [
         'controllers' => function($aliasId, $ruleId) use ($di) {
@@ -247,7 +247,7 @@ return [
             'entityClass' => RuleEntity::class,
             'serviceClass' => RuleService::class
         ],
-        'version' => new Version(1, 3),
+        'version' => new Version(1, 1),
     ],
     '/settings/pickList' => [
         'controllers' => function() use ($di) {

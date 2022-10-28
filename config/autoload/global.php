@@ -191,13 +191,6 @@ use CG\Settings\Invoice\Service\Storage\Db as InvoiceSettingsDbStorage;
 use CG\Settings\Invoice\Shared\Repository as InvoiceSettingsRepository;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceSettingsMapper;
 
-// Alias Settings
-use CG\Settings\Shipping\Alias\Service as AliasSettingsService;
-use CG\Settings\Shipping\Alias\Mapper as AliasSettingsMapper;
-use CG\Settings\Shipping\Alias\Storage\Cache as AliasSettingsCacheStorage;
-use CG\Settings\Shipping\Alias\Storage\Db as AliasSettingsDbStorage;
-use CG\Settings\Shipping\Alias\Repository as AliasSettingsRepository;
-
 //Usage
 use CG\Usage\Storage\Db as UsageDb;
 use CG\Usage\Aggregate\Storage\Db as UsageAggregateDb;
@@ -1049,31 +1042,6 @@ $config = array(
                     'aggregateStorage' => UsageAggregateDb::class
                 ]
             ],
-            AliasSettingsService::class => array(
-                'parameters' => array(
-                    'repository' => AliasSettingsRepository::class,
-                    'mapper' => AliasSettingsMapper::class
-                )
-            ),
-            AliasSettingsMapper::class => array (
-                'parameters' => array (
-                    'shippingMethodMapper' => ShippingMethodMapper::class
-                )
-            ),
-            AliasSettingsRepository::class => array(
-                'parameter' => array (
-                    'storage' => AliasSettingsCacheStorage::class,
-                    'repository' => AliasSettingsDbStorage::class
-                )
-            ),
-            AliasSettingsDbStorage::class => array(
-                'parameter' => array(
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
-                    'mapper' => AliasSettingsMapper::class
-                )
-            ),
             ImageService::class => [
                 'parameter' => [
                     'repository' => ImageApi::class
