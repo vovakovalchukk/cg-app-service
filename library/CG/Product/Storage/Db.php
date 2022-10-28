@@ -812,7 +812,7 @@ class Db extends DbAbstract implements StorageInterface
         $productTableColumns = ['name', 'sku'];
         $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
         $productDetailTableColumns = ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'];
-        $filterOrder = $filter->getOrder();
+        $filterOrder = ($filter->getOrder())[0];
         $order = [];
         if ($filterOrder) {
             $order = explode(',', $filterOrder);
