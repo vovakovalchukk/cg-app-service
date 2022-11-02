@@ -6,7 +6,6 @@ use CG\Http\StatusCode;
 use CG\Settings\Shipping\Alias\Rule\Filter;
 use CG\Settings\Shipping\Alias\Rule\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
-use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
 use Nocarrier\Hal;
 use Slim\Slim;
@@ -14,7 +13,7 @@ use Zend\Di\Di;
 
 class Collection
 {
-    use ControllerTrait, GetTrait, PostTrait;
+    use ControllerTrait, GetTrait;
 
     public function __construct(Slim $app, RestService $service, Di $di)
     {

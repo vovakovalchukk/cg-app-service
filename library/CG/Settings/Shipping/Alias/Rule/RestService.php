@@ -37,7 +37,7 @@ class RestService extends Service
         );
     }
 
-    public function save($entity)
+    public function save($entity): Hal
     {
         $response = parent::save($entity);
         $this->invalidator->invalidateAliasForRules($entity);

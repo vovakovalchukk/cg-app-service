@@ -19,7 +19,7 @@ class Entity implements RulesInterface
             ],
             'shippingAliasId' => [
                 'name'       => 'shippingAliasId',
-                'required'   => true,
+                'required'   => false,
                 'validators' => [
                     new IntegerValidator(['name' => 'shippingAliasId']),
                     (new GreaterThan(['min' => 1, 'inclusive' => true]))
