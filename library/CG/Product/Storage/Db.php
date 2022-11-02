@@ -47,13 +47,13 @@ class Db extends DbAbstract implements StorageInterface
             }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
-            $order = $this->getOrderByFilter($filter);
-            $additionalJoin = $this->getAdditionalTableJoin($order);
+            $sort = $this->getSortByFilter($filter);
+            $additionalJoin = $this->getAdditionalTableJoin($sort);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
             $select = $this->getSelect($additionalJoin);
             $select->where($idInIds);
-            if ($order) {
-                $select->order($order);
+            if ($sort) {
+                $select->order($sort);
             } else {
                 $select->order('product.id ASC');
             }
@@ -145,7 +145,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntitiesIds(Filter $filter)
     {
         $select = $this->createSelectFromFilter($filter);
-        $order = $this->getOrderByFilter($filter);
+        $order = $this->getSortByFilter($filter);
         $additionalJoin = $this->getAdditionalTableJoin($order);
 
         if ($order) {
@@ -807,12 +807,12 @@ class Db extends DbAbstract implements StorageInterface
         return ProductEntity::class;
     }
 
-    protected function getOrderByFilter($filter)
+    protected function getSortByFilter(Filter $filter)
     {
         $productTableColumns = ['name', 'sku'];
         $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
         $productDetailTableColumns = ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'];
-        $filterOrder = ($filter->getOrder())[0];
+        $filterOrder = $filter->getSort()[0];
         $order = [];
         if ($filterOrder) {
             $order = explode(',', $filterOrder);
