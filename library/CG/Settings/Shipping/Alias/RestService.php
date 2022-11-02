@@ -92,8 +92,12 @@ class RestService extends Service
 
     public function remove($entity)
     {
-        $aliasRules = $this->ruleRestService->fetchCollectionForAlias($entity);
-        $this->ruleRestService->removeCollection($aliasRules);
+        try {
+            $aliasRules = $this->ruleRestService->fetchCollectionForAlias($entity);
+            $this->ruleRestService->removeCollection($aliasRules);
+        } catch (NotFound $e) {
+            // no rules found, continue with delete
+        }
         parent::remove($entity);
         $this->invalidator->invalidateAlias($entity);
     }

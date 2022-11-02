@@ -2,6 +2,7 @@
 
 namespace CG\Controllers\Settings\Shipping\Alias;
 
+use CG\Settings\Shipping\Alias\Rule\Filter;
 use CG\Settings\Shipping\Alias\Rule\RestService;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
@@ -19,5 +20,17 @@ class Rule
         $this->setSlim($app)
             ->setService($service)
             ->setDi($di);
+    }
+
+    public function getData()
+    {
+        return $this->getService()->fetchCollectionByFilterAsHal(
+            new Filter(
+                $this->getParams('limit'),
+                $this->getParams('page'),
+                $this->getParams('id') ?: [],
+                $this->getParams('shippingAliasId') ?: []
+            )
+        );
     }
 }

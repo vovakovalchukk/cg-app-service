@@ -2,11 +2,13 @@
 
 namespace CG\Controllers\Settings\Shipping\Alias\Rule;
 
+use CG\Http\StatusCode;
 use CG\Settings\Shipping\Alias\Rule\Filter;
 use CG\Settings\Shipping\Alias\Rule\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
+use Nocarrier\Hal;
 use Slim\Slim;
 use Zend\Di\Di;
 
@@ -31,5 +33,12 @@ class Collection
                 $this->getParams('shippingAliasId') ?: []
             )
         );
+    }
+
+    public function post($aliasId, Hal $hal)
+    {
+        $hal = $this->getService()->saveHal($hal, array("shippingAliasId" => $aliasId));
+        $this->getSlim()->response()->setStatus(StatusCode::CREATED);
+        return $hal;
     }
 }
