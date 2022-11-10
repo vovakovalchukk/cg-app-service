@@ -11,12 +11,14 @@ use CG\InputValidation\Settings\Invoice\Entity as EntityValidation;
 use CG\Controllers\Settings\Shipping\Alias as Alias;
 use CG\Controllers\Settings\Shipping\Alias\Collection as AliasCollection;
 use CG\Controllers\Settings\Shipping\Alias\Rule as Rule;
+use CG\Controllers\Settings\Shipping\Alias\Rule\PriorityChange as PriorityChange;
 use CG\Controllers\Settings\Shipping\Alias\Rule\Collection as RuleCollection;
 
 use CG\InputValidation\Settings\Alias\Filter as AliasCollectionValidation;
 use CG\InputValidation\Settings\Alias\Entity as AliasEntityValidation;
-use CG\InputValidation\Settings\Alias\Rule\Filter as RuleCollectionValidation;
+use CG\InputValidation\Settings\Alias\Rule\Filter as RuleFilterValidation;
 use CG\InputValidation\Settings\Alias\Rule\Entity as RuleEntityValidation;
+use CG\InputValidation\Settings\Alias\Rule\PriorityChange as PriorityChangeValidation;
 
 use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceMapper;
@@ -25,6 +27,7 @@ use CG\Settings\Invoice\Service\Service as InvoiceService;
 use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
 use CG\Settings\Shipping\Alias\RestService as AliasService;
+use CG\Settings\Shipping\Alias\EtagHelper as AliasEtagHelper;
 use CG\Settings\Shipping\Alias\Rule\Entity as RuleEntity;
 use CG\Settings\Shipping\Alias\Rule\Mapper as RuleMapper;
 use CG\Settings\Shipping\Alias\Rule\RestService as RuleService;
@@ -206,6 +209,32 @@ return [
         ],
         'version' => new Version(1, 3),
     ],
+    '/settings/shipping/alias/:aliasId/rule/priorityChange' => [
+        'controllers' => function($aliasId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(PriorityChange::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($aliasId, $app->request()->getBody())
+            );
+        },
+        'via' => ['PUT', 'OPTIONS'],
+        'name' => 'AliasRulesSettingsCollection',
+        'validation' => [
+            'dataRules' => PriorityChangeValidation::class
+        ],
+        'eTag' => [
+            'mapperClass' => AliasMapper::class,
+            'entityClass' => AliasEntity::class,
+            'serviceClass' => AliasService::class,
+            'helper' => function () use ($di) {
+                return $di->get(AliasEtagHelper::class);
+            }
+        ],
+        'version' => new Version(1, 1)
+    ],
     '/settings/shipping/alias/:aliasId/rule' => [
         'controllers' => function($aliasId) use ($di) {
             $app = $di->get(Slim::class);
@@ -220,7 +249,7 @@ return [
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'AliasRuleSettingsCollection',
         'validation' => [
-            'filterRules' => RuleCollectionValidation::class,
+            'filterRules' => RuleFilterValidation::class,
             'dataRules' => RuleEntityValidation::class
         ],
         'entityRoute' => '/settings/shipping/alias/:aliasId/rule/:ruleId',

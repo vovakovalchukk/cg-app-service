@@ -28,6 +28,8 @@ class Collection
             new Filter(
                 $this->getParams('limit'),
                 $this->getParams('page'),
+                $this->getParams('orderBy') ?: 'priority',
+                $this->getParams('orderDirection') ?: 'ASC',
                 $this->getParams('id') ?: [],
                 $this->getParams('shippingAliasId') ?: []
             )

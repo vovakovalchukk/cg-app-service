@@ -5,8 +5,9 @@ namespace CG\Settings\Shipping\Alias;
 use CG\Settings\Shipping\Alias\Rule\Collection as RuleCollection;
 use CG\Settings\Shipping\Alias\Rule\RestService as RuleRestService;
 use CG\Settings\Shipping\Alias\Nginx\Cache\Invalidator;
-use CG\Slim\Renderer\ResponseType\Hal;
+use CG\Slim\Renderer\ResponseType\Hal as ResponseHal;
 use CG\Stdlib\Exception\Runtime\NotFound;
+use Nocarrier\Hal;
 
 class RestService extends Service
 {
@@ -31,7 +32,7 @@ class RestService extends Service
         parent::__construct($repository, $mapper, $ruleRestService);
     }
 
-    public function fetchAsHal($id): Hal
+    public function fetchAsHal($id): ResponseHal
     {
         $entity = $this->fetch($id);
         /** @var Entity $entity */
@@ -39,7 +40,7 @@ class RestService extends Service
         return $this->mapper->toHal($entity);
     }
 
-    public function fetchCollectionByFilterAsHal(Filter $filter): Hal
+    public function fetchCollectionByFilterAsHal(Filter $filter): ResponseHal
     {
         if (!$filter->getPage()) {
             $filter->setPage(static::DEFAULT_PAGE);
@@ -83,7 +84,7 @@ class RestService extends Service
         }
     }
 
-    public function save($entity)
+    public function save($entity): ResponseHal
     {
         $response = parent::save($entity);
         $this->invalidator->invalidateAlias($entity);
@@ -100,5 +101,15 @@ class RestService extends Service
         }
         parent::remove($entity);
         $this->invalidator->invalidateAlias($entity);
+    }
+
+    public function updateRulesHal(Entity $entity, Hal $hal)
+    {
+        $ruleCollection = $this->ruleRestService->fetchCollectionForAlias($entity);
+        $entity->setRules($ruleCollection);
+
+        $response = parent::updateRulesHal($entity, $hal);
+        $this->invalidator->invalidateAlias($entity);
+        return $response;
     }
 }
