@@ -33,6 +33,7 @@ class Mapper
             ->addLink('productLinkPaths', '/productLinkPaths')
             ->addLink('productLinkLeaf', '/productLinkLeaf')
             ->addLink('productLinkNode', '/productLinkNode')
+            ->addLink('productFilter', '/productFilter')
             ->addLink('settings', '/settings')
             ->addLink('shippingMethod', '/shippingMethod')
             ->addLink('stock', '/stock')

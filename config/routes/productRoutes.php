@@ -80,6 +80,11 @@ use CG\Controllers\ProductPickingLocation\Collection as ProductPickingLocationCo
 use CG\InputValidation\ProductPickingLocation\Entity as ProductPickingLocationEntityValidation;
 use CG\InputValidation\ProductPickingLocation\Filter as ProductPickingLocationCollectionValidation;
 
+use CG\Controllers\ProductFilter\Entity as ProductFilterController;
+use CG\Controllers\ProductFilter\ProductFilter\Collection as ProductFilterCollectionController;
+use CG\InputValidation\ProductFilter\Entity as ProductFilterEntityValidation;
+use CG\InputValidation\ProductFilter\Filter as ProductFilterCollectionValidation;
+
 use CG\Slim\Versioning\Version;
 
 return [
@@ -536,5 +541,42 @@ return [
         ],
         'eTag' => false,
         'version' => new Version(1, 1)
+    ],
+    '/productFilter' => [
+        'controllers' => function() use ($di, $app) {
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(ProductFilterCollectionController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'ProductFilterCollection',
+        'entityRoute' => '/productFilter/:productFilterId',
+        'validation' => [
+            'filterRules' => ProductFilterCollectionValidation::class,
+            'dataRules' => ProductFilterEntityValidation::class
+        ],
+        'version' => new Version(1, 1),
+    ],
+    '/productFilter/:productFilterId' => [
+        'controllers' => function($productFilterId) use ($di, $app) {
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(ProductFilterController::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($productFilterId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'OPTIONS'],
+        'name' => 'ProductFilterEntity',
+        'validation' => [
+            'dataRules' => ProductFilterEntityValidation::class,
+        ],
+        'eTag' => false,
+        'version' => new Version(1, 1),
     ],
 ];

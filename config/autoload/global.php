@@ -226,6 +226,13 @@ use CG\Product\Detail\Storage\Cache as ProductDetailCacheStorage;
 use CG\Product\Detail\Storage\Db as ProductDetailDbStorage;
 use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 
+// ProductFilter
+use CG\Product\ProductFilter\Mapper as ProductFilterMapper;
+use CG\Product\ProductFilter\Repository as ProductFilterRepository;
+use CG\Product\ProductFilter\Storage\Cache as ProductFilterCacheStorage;
+use CG\Product\ProductFilter\Storage\Db as ProductFilterDbStorage;
+use CG\Product\ProductFilter\StorageInterface as ProductFilterStorage;
+
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
 use CG\Transaction\GetOldTransactionsClientInterface;
@@ -1138,6 +1145,20 @@ $config = array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => ProductDetailMapper::class
+                ]
+            ],
+            ProductFilterRepository::class => [
+                'parameter' => [
+                    'storage' => ProductFilterCacheStorage::class,
+                    'repository' => ProductFilterDbStorage::class
+                ]
+            ],
+            ProductFilterDbStorage::class => [
+                'parameter' => [
+                    'readSql' => 'ReadSql',
+                    'fastReadSql' => 'FastReadSql',
+                    'writeSql' => 'WriteSql',
+                    'mapper' => ProductFilterMapper::class
                 ]
             ],
             TransactionRedisClient::class => [
