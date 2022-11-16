@@ -1,4 +1,5 @@
 <?php
+
 namespace CG\Product\Storage;
 
 use CG\Product\Collection as ProductCollection;
@@ -47,16 +48,11 @@ class Db extends DbAbstract implements StorageInterface
             }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
-            $sort = $this->getSortByFilter($filter);
-            $additionalJoin = $this->getAdditionalTableJoin($sort);
+            [$sort, $joinTable] = $this->getSortInfoByFilter($filter);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
-            $select = $this->getSelect($additionalJoin);
+            $select = $this->getSelect($joinTable);
             $select->where($idInIds);
-            if ($sort) {
-                $select->order($sort);
-            } else {
-                $select->order('product.id ASC');
-            }
+            $select = $this->setOrderBy($select, $sort);
             $productCollection = $this->fetchCollectionWithJoinQuery(
                 new ProductCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $select
@@ -81,7 +77,7 @@ class Db extends DbAbstract implements StorageInterface
             ->columns(['_id' => 'id'])
             ->where($this->buildFilterQuery($filter));
 
-        $sku = (array) $filter->getSku();
+        $sku = (array)$filter->getSku();
         $typeQuery = $this->buildTypeQuery(array_fill_keys($filter->getType(), true), $joinWithVariations);
         $skuMatchTypeQuery = $this->buildSkuMatchQuery($sku, array_fill_keys($filter->getSkuMatchType(), true));
 
@@ -117,7 +113,7 @@ class Db extends DbAbstract implements StorageInterface
         if ($skuMatchTypeQuery->count() > 0) {
             $this->addSkuMatchToSelect(
                 $select,
-                (array) $filter->getOrganisationUnitId(),
+                (array)$filter->getOrganisationUnitId(),
                 $sku,
                 $skuMatchTypeQuery
             );
@@ -145,14 +141,9 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntitiesIds(Filter $filter)
     {
         $select = $this->createSelectFromFilter($filter);
-        $order = $this->getSortByFilter($filter);
-        $additionalJoin = $this->getAdditionalTableJoin($order);
+        [$sort, $joinTable] = $this->getSortInfoByFilter($filter);
 
-        if ($order) {
-            $select->order($order);
-        } else {
-            $select->order('_id ASC');
-        }
+        $select = $this->setOrderBy($select, $sort);
 
         if ($filter->getLimit() != 'all') {
             $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -160,33 +151,14 @@ class Db extends DbAbstract implements StorageInterface
                 ->offset($offset);
         }
 
-        if ($additionalJoin === 'productDetail') {
-            $select->join(
-                'productDetail',
-                'productDetail.sku = product.sku',
-                ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'],
-                Select::JOIN_LEFT);
-            $select->group('_id');
-        } else if ($additionalJoin === 'stockLocation') {
-            $select->join(
-                'stock',
-                'stock.sku = product.sku',
-                ['stockId' => 'id'],
-                Select::JOIN_LEFT
-            )
-                ->join(
-                    'stockLocation',
-                    'stockLocation.stockId = stock.id',
-                    ['onHand', 'allocated', 'onPurchaseOrder'],
-                    Select::JOIN_LEFT
-                );
+        if ($joinTable) {
+            $select = $this->getAdditionalTableJoin($select, $joinTable);
             $select->group('_id');
         }
 
 
-
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
-        if($results->count() == 0) {
+        if ($results->count() == 0) {
             throw new NotFound();
         }
         return array_column(iterator_to_array($results), '_id');
@@ -226,7 +198,7 @@ class Db extends DbAbstract implements StorageInterface
     {
         $searchQuery = [];
         $searchFields = ['`product`.sku', '`product`.name', '`variation`.sku'];
-        $likeSearchTerm  = "%" . \CG\Stdlib\escapeLikeValue($searchTerm) . "%";
+        $likeSearchTerm = "%" . \CG\Stdlib\escapeLikeValue($searchTerm) . "%";
 
         foreach ($searchFields as $field) {
             $searchQuery[] = $field . ' LIKE ?';
@@ -307,7 +279,7 @@ class Db extends DbAbstract implements StorageInterface
             )
             ->where([
                 'variation.id' => null,
-                new Predicate(array_map(function($sku) {
+                new Predicate(array_map(function ($sku) {
                     return new Like('simple.sku', escapeLikeValue($sku));
                 }, array_values($sku)), Predicate::COMBINED_BY_OR),
             ]);
@@ -327,7 +299,7 @@ class Db extends DbAbstract implements StorageInterface
             )
             ->where([
                 'parent.parentProductId' => 0,
-                new Predicate(array_map(function($sku) {
+                new Predicate(array_map(function ($sku) {
                     return new Like('lookup.sku', escapeLikeValue($sku));
                 }, array_values($sku)), Predicate::COMBINED_BY_OR),
             ]);
@@ -338,7 +310,7 @@ class Db extends DbAbstract implements StorageInterface
         }
 
         $column = "`skuMatch`.`sku`";
-        $skuSelect = implode(" OR ", array_map(function($sku) use($column) {
+        $skuSelect = implode(" OR ", array_map(function ($sku) use ($column) {
             return sprintf("%s LIKE '%s'", $column, addcslashes(escapeLikeValue($sku), '\''));
         }, $sku));
 
@@ -496,7 +468,7 @@ class Db extends DbAbstract implements StorageInterface
 
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
         $results = $this->getReadSql()->prepareStatementForSqlObject($select)->execute();
-        if($results->count() == 0) {
+        if ($results->count() == 0) {
             throw new NotFound();
         }
 
@@ -539,7 +511,7 @@ class Db extends DbAbstract implements StorageInterface
 
         return new Predicate(
             array_map(
-                function($value, $identifier) {
+                function ($value, $identifier) {
                     return new Like($identifier, escapeLikeValue($value));
                 },
                 array_values($values),
@@ -582,7 +554,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function saveAttributeRelation(ProductEntity $entity)
     {
         $productAttributeInsert = new InsertIgnore('productAttribute');
-        foreach($entity->getAttributeNames() as $attributeName) {
+        foreach ($entity->getAttributeNames() as $attributeName) {
             $productAttributeInsert->values([
                 'productId' => $entity->getId(),
                 'name' => $attributeName
@@ -590,7 +562,7 @@ class Db extends DbAbstract implements StorageInterface
             $this->getWriteSql()->prepareStatementForSqlObject($productAttributeInsert)->execute();
         }
         $productAttributeValueInsert = $this->getWriteSql()->insert('productAttributeValue');
-        foreach($entity->getAttributeValues() as $attributeName => $attributeValue) {
+        foreach ($entity->getAttributeValues() as $attributeName => $attributeValue) {
             $select = $this->getWriteSql()->select('productAttribute')->where([
                 new Like('productAttribute.name', \CG\Stdlib\escapeLikeValue($attributeName)),
                 'productAttribute.productId' => $entity->getParentProductId()
@@ -729,31 +701,11 @@ class Db extends DbAbstract implements StorageInterface
     /**
      * @return Select
      */
-    protected function getSelect($additionalJoin = null)
+    protected function getSelect($joinTable = null)
     {
         $select = $this->getReadSql()->select('product');
-        if ($additionalJoin == 'productDetail') {
-            $select->join(
-                'productDetail',
-                'productDetail.sku = product.sku',
-                ['weight', 'hsTariffNumber', 'countryOfManufacture', 'cost'],
-                Select::JOIN_LEFT
-            );
-        } else if ($additionalJoin == 'stockLocation') {
-            $select->join(
-                'stock',
-                'stock.sku = product.sku',
-                ['stockId' => 'id'],
-                Select::JOIN_LEFT
-            )
-                ->join(
-                    'stockLocation',
-                    'stockLocation.stockId = stock.id',
-                    ['onHand', 'allocated', 'onPurchaseOrder'],
-                    Select::JOIN_LEFT
-                );
-        }
-        return $select->join(
+
+        $select->join(
             'productAttribute',
             'productAttribute.productId = product.id',
             ['attributeName' => 'name'],
@@ -778,13 +730,19 @@ class Db extends DbAbstract implements StorageInterface
             'productTaxRate.productId = product.id',
             ['taxRateId', 'VATCountryCode'],
             Select::JOIN_LEFT
-        )
-            ->join(
-                'productPickingLocation',
-                'productPickingLocation.productId = product.id',
-                ['pickingLocationLevel' => 'level', 'pickingLocationName' => 'name'],
-                Select::JOIN_LEFT
-            );
+        )->join(
+            'productPickingLocation',
+            'productPickingLocation.productId = product.id',
+            ['pickingLocationLevel' => 'level', 'pickingLocationName' => 'name'],
+            Select::JOIN_LEFT
+        );
+
+        if ($joinTable) {
+            return $this->getAdditionalTableJoin($select, $joinTable);
+        }
+
+        return $select;
+
     }
 
     protected function getInsert()
@@ -807,41 +765,61 @@ class Db extends DbAbstract implements StorageInterface
         return ProductEntity::class;
     }
 
-    protected function getSortByFilter(Filter $filter)
+    protected function getSortInfoByFilter(Filter $filter)
     {
         $productTableColumns = ['name', 'sku'];
         $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
-        $productDetailTableColumns = ['weight', 'hstariffnumber', 'countryofmanufacture', 'cost'];
+        $productDetailTableColumns = ['weight', 'countryofmanufacture'];
+        $productDetailTableNumberColumns = ['hstariffnumber', 'cost'];
         $filterOrder = $filter->getSort()[0];
-        $order = [];
+        $order = null;
+        $tableName = null;
         if ($filterOrder) {
-            $order = explode(',', $filterOrder);
-            if (in_array($order[0], $productDetailTableColumns)) {
-                if ($order[0] == 'hstariffnumber' or $order[0] == 'cost') {
-                    $order = new Query('ABS(productDetail.' . $order[0] . ') ' . $order[1]);
-                } else {
-                    $order = 'productDetail.' . $order[0] . ' ' . $order[1];
-                }
-            } else if ((in_array($order[0], $productTableColumns))) {
-                $order = 'product.' . $order[0] . ' ' . $order[1];
-            } else if ((in_array($order[0], $stockLocationTableColumns))) {
-                $order = 'stockLocation.' . $order[0] . ' ' . $order[1];
-            } else {
-                $order = null;
+            [$column, $direction] = explode(',', $filterOrder);
+
+            if (in_array($column, $productDetailTableNumberColumns)) {
+                $order = new Query('ABS(productDetail.' . $column . ') ' . $direction);
+                $tableName = 'productDetail';
+            } elseif (in_array($column, $productDetailTableColumns)) {
+                $tableName = 'productDetail';
+            } elseif (in_array($column, $stockLocationTableColumns)) {
+                $tableName = 'stockLocation';
+            } elseif (in_array($column, $productTableColumns)) {
+                $tableName = 'product';
             }
+            $order = $order ?: "$tableName.$column $direction";
         }
 
-        return $order ? $order : null;
+        return [$order, $tableName];
     }
 
-    protected function getAdditionalTableJoin($order)
+    protected function getAdditionalTableJoin($select, $joinTable)
     {
-        if ($order instanceof Query) {
-            return 'productDetail';
-        } else if ($order) {
-            return explode('.', $order)[0];
-        } else {
-            return null;
+        if ($joinTable == 'productDetail') {
+            $select->join(
+                'productDetail',
+                'productDetail.sku = product.sku',
+                ['weight', 'hsTariffNumber', 'countryOfManufacture', 'cost'],
+                Select::JOIN_LEFT
+            );
+        } else if ($joinTable == 'stockLocation') {
+            $select->join(
+                'stock',
+                'stock.sku = product.sku',
+                ['stockId' => 'id'],
+                Select::JOIN_LEFT
+            )->join(
+                'stockLocation',
+                'stockLocation.stockId = stock.id',
+                ['onHand', 'allocated', 'onPurchaseOrder'],
+                Select::JOIN_LEFT
+            );
         }
+        return $select;
+    }
+
+    protected function setOrderBy($select, $sort)
+    {
+        return $sort ? $select->order($sort):$select->order('product.id ASC');
     }
 }
