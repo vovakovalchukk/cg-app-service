@@ -106,7 +106,7 @@ class Db extends DbAbstract implements StorageInterface
      * @param Filter $filter
      * @return Predicate\PredicateSet
      */
-    public function getDefaultFilterForOrg(Filter $filter): Predicate\PredicateSet
+    protected function getDefaultFilterForOrg(Filter $filter): Predicate\PredicateSet
     {
         return new Predicate\PredicateSet([
             new Predicate\Operator('productFilter.organisationUnitId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getOrganisationUnitId()),
@@ -119,7 +119,7 @@ class Db extends DbAbstract implements StorageInterface
      * @param Filter $filter
      * @return Predicate\PredicateSet
      */
-    public function getDefaultFilterForUser(Filter $filter): Predicate\PredicateSet
+    protected function getDefaultFilterForUser(Filter $filter): Predicate\PredicateSet
     {
         return new Predicate\PredicateSet([
             new Predicate\Operator('productFilter.organisationUnitId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getOrganisationUnitId()),
