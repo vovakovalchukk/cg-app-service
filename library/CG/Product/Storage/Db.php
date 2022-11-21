@@ -48,11 +48,11 @@ class Db extends DbAbstract implements StorageInterface
             }
             $ids = $this->fetchEntitiesIds($filter);
             $idInIds = new In('product.id', $ids);
-            [$sort, $joinTable] = $this->getSortInfoByFilter($filter);
+            [$orderBy, $joinTable] = $this->getOrderByInfoByFilter($filter);
             // Do NOT apply the filter limit to this query as we get multiple rows back per Product
             $select = $this->getSelect($joinTable);
             $select->where($idInIds);
-            $select = $this->setOrderBy($select, $sort);
+            $select = $this->setOrderBy($select, $orderBy);
             $productCollection = $this->fetchCollectionWithJoinQuery(
                 new ProductCollection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $select
@@ -141,9 +141,9 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntitiesIds(Filter $filter)
     {
         $select = $this->createSelectFromFilter($filter);
-        [$sort, $joinTable] = $this->getSortInfoByFilter($filter);
+        [$orderBy, $joinTable] = $this->getOrderByInfoByFilter($filter);
 
-        $select = $this->setOrderBy($select, $sort);
+        $select = $this->setOrderBy($select, $orderBy);
 
         if ($filter->getLimit() != 'all') {
             $offset = ($filter->getPage() - 1) * $filter->getLimit();
@@ -765,35 +765,39 @@ class Db extends DbAbstract implements StorageInterface
         return ProductEntity::class;
     }
 
-    protected function getSortInfoByFilter(Filter $filter)
+    protected function getOrderByInfoByFilter(Filter $filter)
     {
         $productTableColumns = ['name', 'sku'];
         $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
         $productDetailTableColumns = ['weight', 'countryofmanufacture'];
         $productDetailTableNumberColumns = ['hstariffnumber', 'cost'];
-        $filterOrder = $filter->getSort()[0];
+        $filterOrder = $filter->getOrderBy();
         $order = null;
         $tableName = null;
-        if ($filterOrder) {
-            [$column, $direction] = explode(',', $filterOrder);
-
-            if (in_array($column, $productDetailTableNumberColumns)) {
-                $order = new Query('ABS(productDetail.' . $column . ') ' . $direction);
-                $tableName = 'productDetail';
-            } elseif (in_array($column, $productDetailTableColumns)) {
-                $tableName = 'productDetail';
-            } elseif (in_array($column, $stockLocationTableColumns)) {
-                $tableName = 'stockLocation';
-            } elseif (in_array($column, $productTableColumns)) {
-                $tableName = 'product';
-            }
-            $order = $order ?: "$tableName.$column $direction";
+        if (!$filter->getOrderBy()) {
+            return [$order, $tableName];
         }
+
+        // multi-column sort will be addressed in PRD-252
+        [$column, $direction] = explode(',', $filterOrder[0]);
+
+        if (in_array($column, $productDetailTableNumberColumns)) {
+            $order = new Query('ABS(productDetail.' . $column . ') ' . $direction);
+            $tableName = 'productDetail';
+        } elseif (in_array($column, $productDetailTableColumns)) {
+            $tableName = 'productDetail';
+        } elseif (in_array($column, $stockLocationTableColumns)) {
+            $tableName = 'stockLocation';
+        } elseif (in_array($column, $productTableColumns)) {
+            $tableName = 'product';
+        }
+        $order = $order ?: "$tableName.$column $direction";
 
         return [$order, $tableName];
     }
 
-    protected function getAdditionalTableJoin($select, $joinTable)
+    protected
+    function getAdditionalTableJoin($select, $joinTable)
     {
         if ($joinTable == 'productDetail') {
             $select->join(
@@ -818,8 +822,9 @@ class Db extends DbAbstract implements StorageInterface
         return $select;
     }
 
-    protected function setOrderBy($select, $sort)
+    protected
+    function setOrderBy($select, $orderBy)
     {
-        return $sort ? $select->order($sort):$select->order('product.id ASC');
+        return $orderBy ? $select->order($orderBy) : $select->order('product.id ASC');
     }
 }
