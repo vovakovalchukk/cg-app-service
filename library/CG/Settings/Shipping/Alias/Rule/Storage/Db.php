@@ -20,6 +20,9 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
         try {
             $query = $this->buildFilterQuery($filter);
             $select = $this->getSelect()->where($query);
+            if (!empty($filter->getOrderBy()) && !empty($filter->getOrderDirection())) {
+                $select->order($filter->getOrderBy() . ' ' . $filter->getOrderDirection());
+            }
             if ($filter->getLimit() != 'all') {
                 $offset = ($filter->getPage() - 1) * $filter->getLimit();
                 $select->limit($filter->getLimit())->offset($offset);
@@ -40,7 +43,7 @@ class Db extends DbAbstract implements StorageInterface, SaveCollectionInterface
     protected function buildFilterQuery(Filter $filter)
     {
         $query = array_filter($filter->toArray());
-        unset($query['limit'], $query['page']);
+        unset($query['limit'], $query['page'], $query['orderBy'], $query['orderDirection']);
         return $query;
     }
 
