@@ -444,6 +444,10 @@ use CG\Billing\BillingWindow\Storage\Api as BillingWindowStorageApi;
 // Classic
 use CG\Classic\Gearman\Generator\MultiAccountOrderDownload as ClassicOrderDownloadGenerator;
 
+// Shipping Alias
+use CG\Settings\Shipping\Alias\Entity as ShippingAliasEntity;
+use CG\Settings\Shipping\Alias\Rule\Entity as ShippingAliasRuleEntity;
+
 $config = array(
     'di' => array(
         'definition' => [
@@ -621,6 +625,16 @@ $config = array(
                         ],
                         PurchaseOrderEntity::class => [
                             ['entityClass' => ItemEntity::class],
+                        ],
+                        ShippingAliasRuleEntity::class => [
+                            [
+                                'entityClass' => ShippingAliasEntity::class,
+                                'type' => InvalidationHandler::RELATION_TYPE_PARENT_ENTITY,
+                                'getter' => 'getShippingAliasId'
+                            ]
+                        ],
+                        ShippingAliasEntity::class => [
+                            ['entityClass' => ShippingAliasRuleEntity::class],
                         ],
                     ],
                     'debugCachable' => [
