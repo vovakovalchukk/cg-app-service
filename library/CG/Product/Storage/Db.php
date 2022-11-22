@@ -796,8 +796,7 @@ class Db extends DbAbstract implements StorageInterface
         return [$order, $tableName];
     }
 
-    protected
-    function getAdditionalTableJoin($select, $joinTable)
+    protected function getAdditionalTableJoin($select, $joinTable)
     {
         if ($joinTable == 'productDetail') {
             $select->join(
@@ -822,8 +821,7 @@ class Db extends DbAbstract implements StorageInterface
         return $select;
     }
 
-    protected
-    function setOrderBy($select, $orderBy)
+    protected function setOrderBy($select, $orderBy)
     {
         return $orderBy ? $select->order($orderBy) : $select->order('product.id ASC');
     }
