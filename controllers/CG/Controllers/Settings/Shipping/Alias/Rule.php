@@ -33,6 +33,12 @@ class Rule
         }
     }
 
+    public function patch($aliasId, $ruleId, Hal $hal)
+    {
+        $this->getService()->patchEntity($ruleId, $aliasId, $hal);
+        $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
+    }
+
     public function put($aliasId, $ruleId, Hal $hal)
     {
         return $this->getService()->saveHal($hal, array("shippingAliasId" => $aliasId, "id" => $ruleId));
