@@ -7,7 +7,6 @@ use CG\Settings\Shipping\Alias\Rule\RestService as RuleRestService;
 use CG\Settings\Shipping\Alias\Nginx\Cache\Invalidator;
 use CG\Slim\Renderer\ResponseType\Hal as ResponseHal;
 use CG\Stdlib\Exception\Runtime\NotFound;
-use Nocarrier\Hal;
 
 class RestService extends Service
 {
@@ -101,15 +100,5 @@ class RestService extends Service
         }
         parent::remove($entity);
         $this->invalidator->invalidateAlias($entity);
-    }
-
-    public function updateRulesHal(Entity $entity, Hal $hal)
-    {
-        $ruleCollection = $this->ruleRestService->fetchCollectionForAlias($entity);
-        $entity->setRules($ruleCollection);
-
-        $response = parent::updateRulesHal($entity, $hal);
-        $this->invalidator->invalidateAlias($entity);
-        return $response;
     }
 }
