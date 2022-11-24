@@ -35,7 +35,7 @@ class Rule
 
     public function patch($aliasId, $ruleId, Hal $hal)
     {
-        $this->getService()->patchEntity($ruleId, $aliasId, $hal);
+        $this->getService()->patchEntity($ruleId, $hal);
         $this->getSlim()->response()->setStatus(StatusCode::NO_CONTENT);
     }
 
