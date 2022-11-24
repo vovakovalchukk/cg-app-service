@@ -4,6 +4,7 @@ namespace CG\Settings\Shipping\Alias\Rule;
 
 use CG\Settings\Shipping\Alias\Nginx\Cache\Invalidator;
 use CG\Slim\Renderer\ResponseType\Hal;
+use Zend\EventManager\GlobalEventManager;
 
 class RestService extends Service
 {
@@ -13,10 +14,15 @@ class RestService extends Service
     /** @var Invalidator */
     protected $invalidator;
 
-    public function __construct(StorageInterface $repository, Mapper $mapper, Invalidator $invalidator)
+    public function __construct(
+        StorageInterface $repository,
+        Mapper $mapper,
+        Invalidator $invalidator,
+        GlobalEventManager $globalEventManager
+    )
     {
+        parent::__construct($repository, $mapper, $globalEventManager);
         $this->invalidator = $invalidator;
-        parent::__construct($repository, $mapper);
     }
 
     public function fetchCollectionByFilterAsHal(Filter $filter): Hal

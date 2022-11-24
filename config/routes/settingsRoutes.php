@@ -237,7 +237,7 @@ return [
                 $controller->$method($aliasId, $ruleId, $app->request()->getBody())
             );
         },
-        'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+        'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         'name' => 'AliasRuleSettingsEntity',
         'validation' => [
             "dataRules" => RuleEntityValidation::class,
