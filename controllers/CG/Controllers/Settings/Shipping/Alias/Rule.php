@@ -5,7 +5,6 @@ namespace CG\Controllers\Settings\Shipping\Alias;
 use CG\Http\Exception\Exception4xx\NotFound as HttpNotFound;
 use CG\Http\StatusCode;
 use CG\Settings\Shipping\Alias\Rule\RestService;
-use CG\Slim\Controller\Entity\PatchTrait;
 use CG\Slim\ControllerTrait;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use Nocarrier\Hal;
@@ -15,7 +14,6 @@ use Zend\Di\Di;
 class Rule
 {
     use ControllerTrait;
-    use PatchTrait;
 
     public function __construct(Slim $app, RestService $service, Di $di)
     {
