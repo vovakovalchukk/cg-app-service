@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cab4642d07aef7d9c850b92947857271",
+    "content-hash": "74f29eec35c7af8124ac05837986ac88",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2704,16 +2704,16 @@
         },
         {
             "name": "channelgrabber/settings",
-            "version": "dev-PRD-92-Priorities",
+            "version": "1.9.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:channelgrabber/cg-settings.git",
-                "reference": "44d47ea0bb19de1c641c50346fe7dcd7dd9cf8c3"
+                "reference": "b24b16b132bea014da542ccfe9f39335c5281a5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-dev-PRD-92-Priorities-537285.zip",
-                "reference": "44d47ea0bb19de1c641c50346fe7dcd7dd9cf8c3"
+                "url": "https://d1erq3dexipllg.cloudfront.net/dist/channelgrabber/settings/channelgrabber-settings-1.9.4-524141.zip",
+                "reference": "b24b16b132bea014da542ccfe9f39335c5281a5a"
             },
             "require": {
                 "channelgrabber/cache": "^2.0.6",
@@ -2736,7 +2736,7 @@
                     "CG\\Settings\\": "src"
                 }
             },
-            "time": "2022-11-24T17:44:36+00:00"
+            "time": "2022-12-02T14:30:55+00:00"
         },
         {
             "name": "channelgrabber/shopify",
@@ -12055,18 +12055,10 @@
             "time": "2015-11-25T15:29:49+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.9.2",
-            "alias_normalized": "1.9.2.0",
-            "version": "dev-PRD-92-Priorities",
-            "package": "channelgrabber/settings"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "channelgrabber/constants": 20,
-        "channelgrabber/settings": 20,
         "phpish/link_header": 20,
         "realityking/hash_equals": 20
     },
