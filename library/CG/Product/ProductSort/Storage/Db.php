@@ -1,10 +1,10 @@
 <?php
-namespace CG\Product\ProductFilter\Storage;
+namespace CG\Product\ProductSort\Storage;
 
-use CG\Product\ProductFilter\Collection;
-use CG\Product\ProductFilter\Entity as ProductFilter;
-use CG\Product\ProductFilter\Filter as Filter;
-use CG\Product\ProductFilter\StorageInterface;
+use CG\Product\ProductSort\Collection;
+use CG\Product\ProductSort\Entity as ProductSort;
+use CG\Product\ProductSort\Filter as Filter;
+use CG\Product\ProductSort\StorageInterface;
 use CG\Stdlib\Exception\Runtime\NotFound;
 use CG\Stdlib\Exception\Storage as StorageException;
 use CG\Stdlib\Storage\Db\DbAbstract;
@@ -24,7 +24,7 @@ class Db extends DbAbstract implements StorageInterface
             $query = $this->buildFilterQuery($filter);
             $total = $this->fetchEntityCount($query);
             if ($total == 0) {
-                throw new NotFound('No matching ProductFilters found matching requested filters');
+                throw new NotFound('No matching ProductSorts found matching requested filters');
             }
             $select = $this->getSelect()->quantifier(Select::QUANTIFIER_DISTINCT)->columns(['id'])->where($query);
 
@@ -40,17 +40,17 @@ class Db extends DbAbstract implements StorageInterface
             );
 
             if (empty($ids)) {
-                throw new NotFound('No matching ProductFilters found matching requested filters');
+                throw new NotFound('No matching ProductSorts found matching requested filters');
             }
 
-            $productFilters = $this->fetchCollection(
+            $productSorts = $this->fetchCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
                 $this->getSelect()->where(['id' => $ids]),
                 $this->getMapper()
             );
-            $productFilters->setTotal($total);
-            return $productFilters;
+            $productSorts->setTotal($total);
+            return $productSorts;
 
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
@@ -60,7 +60,7 @@ class Db extends DbAbstract implements StorageInterface
     protected function fetchEntityCount($query)
     {
         $select = $this->getReadSql()
-            ->select('productFilter')
+            ->select('productSort')
             ->quantifier(Select::QUANTIFIER_DISTINCT)
             ->columns(['count' => new Expression('COUNT(id)')])
             ->where($query);
@@ -71,26 +71,12 @@ class Db extends DbAbstract implements StorageInterface
 
     protected function buildFilterQuery(Filter $filter)
     {
-        if (!empty($filter->getOrganisationUnitId()) && empty($filter->getId())) {
-            if (empty($filter->getUserId())) {
-                $query = $this->getDefaultFilterForOrg($filter);
-            } else {
-                $query = $this->getDefaultFilterForUser($filter);
-            }
+        if (empty($filter->getId())) {
+            $query = $this->getDefaultFilterForUser($filter);
         } else { // generic filter
-            $query = [];
-            if (!empty($filter->getId())) {
-                $query['productFilter.id'] = $filter->getId();
-            }
-            if (!empty($filter->getOrganisationUnitId())) {
-                $query['productFilter.organisationUnitId'] = $filter->getOrganisationUnitId();
-            }
-            if (!empty($filter->getUserId())) {
-                $query['productFilter.userId'] = $filter->getUserId();
-            }
-            if (!empty($filter->isDefaultFilter())) {
-                $query['productFilter.defaultFilter'] = $filter->isDefaultFilter();
-            }
+            $query = [
+                'productSort.id' => $filter->getId(),
+            ];
         }
         return $query;
     }
@@ -98,21 +84,8 @@ class Db extends DbAbstract implements StorageInterface
     protected function getSelect(): Select
     {
         /** @var Select $select */
-        $select = $this->getReadSql()->select('productFilter');
+        $select = $this->getReadSql()->select('productSort');
         return $select;
-    }
-
-    /**
-     * @param Filter $filter
-     * @return Predicate\PredicateSet
-     */
-    protected function getDefaultFilterForOrg(Filter $filter): Predicate\PredicateSet
-    {
-        return new Predicate\PredicateSet([
-            new Predicate\Operator('productFilter.organisationUnitId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getOrganisationUnitId()),
-            new Predicate\IsNull('productFilter.userId'),
-            new Predicate\Operator('productFilter.defaultFilter', Predicate\Operator::OPERATOR_EQUAL_TO, true),
-        ]);
     }
 
     /**
@@ -122,34 +95,33 @@ class Db extends DbAbstract implements StorageInterface
     protected function getDefaultFilterForUser(Filter $filter): Predicate\PredicateSet
     {
         return new Predicate\PredicateSet([
-            new Predicate\Operator('productFilter.organisationUnitId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getOrganisationUnitId()),
+            new Predicate\Operator('productSort.organisationUnitId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getOrganisationUnitId()),
             new Predicate\PredicateSet([
-                    new Predicate\Operator('productFilter.userId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getUserId()),
-                    new Predicate\IsNull('productFilter.userId'),
+                    new Predicate\Operator('productSort.userId', Predicate\Operator::OPERATOR_EQUAL_TO, $filter->getUserId()),
+                    new Predicate\IsNull('productSort.userId'),
                 ],
                 Predicate\PredicateSet::COMBINED_BY_OR
             ),
-            new Predicate\Operator('productFilter.defaultFilter', Predicate\Operator::OPERATOR_EQUAL_TO, true),
         ]);
     }
 
-    protected function getInsert($table = 'productFilter'): Insert
+    protected function getInsert($table = 'productSort'): Insert
     {
         return $this->getWriteSql()->insert($table);
     }
 
-    protected function getUpdate($table = 'productFilter'): Update
+    protected function getUpdate($table = 'productSort'): Update
     {
         return $this->getWriteSql()->update($table);
     }
 
-    protected function getDelete($table = 'productFilter'): Delete
+    protected function getDelete($table = 'productSort'): Delete
     {
         return $this->getWriteSql()->delete($table);
     }
 
     public function getEntityClass()
     {
-        return ProductFilter::class;
+        return ProductSort::class;
     }
 }

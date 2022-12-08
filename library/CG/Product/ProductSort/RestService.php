@@ -1,7 +1,7 @@
 <?php
-namespace CG\Product\ProductFilter;
+namespace CG\Product\ProductSort;
 
-use CG\Product\ProductFilter\Entity as ProductFilter;
+use CG\Product\ProductSort\Entity as ProductSort;
 use CG\Stdlib\Exception\Runtime\NotFound;
 
 class RestService extends Service
@@ -10,7 +10,7 @@ class RestService extends Service
     const DEFAULT_PAGE = 1;
 
     /**
-     * @param ProductFilter $entity
+     * @param ProductSort $entity
      * @return mixed
      */
     public function save($entity, array $adjustmentIds = [])
@@ -19,7 +19,6 @@ class RestService extends Service
             if (is_null($entity->getId())) {
                 throw new NotFound();
             }
-            $previousEntity = $this->fetch($entity->getId());
         } catch (NotFound $exception) {
             //noop
         }
@@ -37,7 +36,7 @@ class RestService extends Service
 
         $collection = $this->fetchCollectionByFilter($filter);
         return $this->getMapper()->collectionToHal(
-            $collection, "/productFilter", $filter->getLimit(), $filter->getPage(), $filter->toArray()
+            $collection, "/productSort", $filter->getLimit(), $filter->getPage(), $filter->toArray()
         );
     }
 }

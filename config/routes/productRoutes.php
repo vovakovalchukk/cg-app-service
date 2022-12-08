@@ -80,10 +80,10 @@ use CG\Controllers\ProductPickingLocation\Collection as ProductPickingLocationCo
 use CG\InputValidation\ProductPickingLocation\Entity as ProductPickingLocationEntityValidation;
 use CG\InputValidation\ProductPickingLocation\Filter as ProductPickingLocationCollectionValidation;
 
-use CG\Controllers\ProductFilter\Entity as ProductFilterController;
-use CG\Controllers\ProductFilter\ProductFilter\Collection as ProductFilterCollectionController;
-use CG\InputValidation\ProductFilter\Entity as ProductFilterEntityValidation;
-use CG\InputValidation\ProductFilter\Filter as ProductFilterCollectionValidation;
+use CG\Controllers\ProductSort\Entity as ProductSortController;
+use CG\Controllers\ProductSort\ProductSort\Collection as ProductSortCollectionController;
+use CG\InputValidation\ProductSort\Entity as ProductSortEntityValidation;
+use CG\InputValidation\ProductSort\Filter as ProductSortCollectionValidation;
 
 use CG\Slim\Versioning\Version;
 
@@ -542,39 +542,39 @@ return [
         'eTag' => false,
         'version' => new Version(1, 1)
     ],
-    '/productFilter' => [
+    '/productSort' => [
         'controllers' => function() use ($di, $app) {
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(ProductFilterCollectionController::class);
+            $controller = $di->get(ProductSortCollectionController::class);
             $app->view()->set(
                 'RestResponse',
                 $controller->$method($app->request()->getBody())
             );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
-        'name' => 'ProductFilterCollection',
-        'entityRoute' => '/productFilter/:productFilterId',
+        'name' => 'ProductSortCollection',
+        'entityRoute' => '/productSort/:productSortId',
         'validation' => [
-            'filterRules' => ProductFilterCollectionValidation::class,
-            'dataRules' => ProductFilterEntityValidation::class
+            'filterRules' => ProductSortCollectionValidation::class,
+            'dataRules' => ProductSortEntityValidation::class
         ],
         'version' => new Version(1, 1),
     ],
-    '/productFilter/:productFilterId' => [
-        'controllers' => function($productFilterId) use ($di, $app) {
+    '/productSort/:productSortId' => [
+        'controllers' => function($productSortId) use ($di, $app) {
             $method = $app->request()->getMethod();
 
-            $controller = $di->get(ProductFilterController::class);
+            $controller = $di->get(ProductSortController::class);
             $app->view()->set(
                 'RestResponse',
-                $controller->$method($productFilterId, $app->request()->getBody())
+                $controller->$method($productSortId, $app->request()->getBody())
             );
         },
         'via' => ['GET', 'PUT', 'OPTIONS'],
-        'name' => 'ProductFilterEntity',
+        'name' => 'ProductSortEntity',
         'validation' => [
-            'dataRules' => ProductFilterEntityValidation::class,
+            'dataRules' => ProductSortEntityValidation::class,
         ],
         'eTag' => false,
         'version' => new Version(1, 1),

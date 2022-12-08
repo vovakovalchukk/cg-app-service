@@ -1,8 +1,8 @@
 <?php
-namespace CG\Controllers\ProductFilter\ProductFilter;
+namespace CG\Controllers\ProductSort\ProductSort;
 
-use CG\Product\ProductFilter\Filter;
-use CG\Product\ProductFilter\RestService;
+use CG\Product\ProductSort\Filter;
+use CG\Product\ProductSort\RestService;
 use CG\Slim\Controller\Collection\GetTrait;
 use CG\Slim\Controller\Collection\PostTrait;
 use CG\Slim\ControllerTrait;
@@ -11,7 +11,7 @@ use Zend\Di\Di;
 
 /**
  * Class Collection
- * @package CG\Controllers\ProductFilter\ProductFilter
+ * @package CG\Controllers\ProductSort\ProductSort
  * @method Di getDi()
  * @method RestService getService()
  */

@@ -226,12 +226,12 @@ use CG\Product\Detail\Storage\Cache as ProductDetailCacheStorage;
 use CG\Product\Detail\Storage\Db as ProductDetailDbStorage;
 use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 
-// ProductFilter
-use CG\Product\ProductFilter\Mapper as ProductFilterMapper;
-use CG\Product\ProductFilter\Repository as ProductFilterRepository;
-use CG\Product\ProductFilter\Storage\Cache as ProductFilterCacheStorage;
-use CG\Product\ProductFilter\Storage\Db as ProductFilterDbStorage;
-use CG\Product\ProductFilter\StorageInterface as ProductFilterStorage;
+// ProductSort
+use CG\Product\ProductSort\Mapper as ProductSortMapper;
+use CG\Product\ProductSort\Repository as ProductSortRepository;
+use CG\Product\ProductSort\Storage\Cache as ProductSortCacheStorage;
+use CG\Product\ProductSort\Storage\Db as ProductSortDbStorage;
+use CG\Product\ProductSort\StorageInterface as ProductSortStorage;
 
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
@@ -1147,18 +1147,18 @@ $config = array(
                     'mapper' => ProductDetailMapper::class
                 ]
             ],
-            ProductFilterRepository::class => [
+            ProductSortRepository::class => [
                 'parameter' => [
-                    'storage' => ProductFilterCacheStorage::class,
-                    'repository' => ProductFilterDbStorage::class
+                    'storage' => ProductSortCacheStorage::class,
+                    'repository' => ProductSortDbStorage::class
                 ]
             ],
-            ProductFilterDbStorage::class => [
+            ProductSortDbStorage::class => [
                 'parameter' => [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => ProductFilterMapper::class
+                    'mapper' => ProductSortMapper::class
                 ]
             ],
             TransactionRedisClient::class => [

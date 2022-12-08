@@ -1,9 +1,9 @@
 <?php
 use Phinx\Migration\AbstractMigration;
 
-class ProductFilter extends AbstractMigration
+class ProductSort extends AbstractMigration
 {
-    protected const TABLE = 'productFilter';
+    protected const TABLE = 'productSort';
 
     public function supportsEnvironment($environment): bool
     {
@@ -16,8 +16,7 @@ class ProductFilter extends AbstractMigration
             ->table(static::TABLE, ['row_format' => 'COMPRESSED'])
             ->addColumn('organisationUnitId', 'integer', ['null' => false])
             ->addColumn('userId', 'integer', ['null' => true])
-            ->addColumn('filters', 'json')
-            ->addColumn('defaultFilter', 'boolean')
+            ->addColumn('data', 'json')
             ->addIndex(['organisationUnitId', 'userId'])
             ->create();
     }

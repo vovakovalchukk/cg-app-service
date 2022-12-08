@@ -1,7 +1,7 @@
 <?php
-namespace CG\Controllers\ProductFilter;
+namespace CG\Controllers\ProductSort;
 
-use CG\Product\ProductFilter\RestService;
+use CG\Product\ProductSort\RestService;
 use CG\Slim\Controller\Entity\DeleteTrait;
 use CG\Slim\Controller\Entity\GetTrait;
 use CG\Slim\Controller\Entity\PutTrait;

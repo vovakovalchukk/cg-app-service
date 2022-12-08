@@ -1,5 +1,5 @@
 <?php
-namespace CG\InputValidation\ProductFilter;
+namespace CG\InputValidation\ProductSort;
 
 use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;

@@ -1,7 +1,7 @@
 <?php
-use CG\Product\ProductFilter\Storage\Db as DbStorage;
-use CG\Product\ProductFilter\StorageInterface;
-use CG\Product\ProductFilter\Mapper as ProductFilterMapper;
+use CG\Product\ProductSort\Storage\Db as DbStorage;
+use CG\Product\ProductSort\StorageInterface;
+use CG\Product\ProductSort\Mapper as ProductSortMapper;
 
 return [
     'di' => [
@@ -14,7 +14,7 @@ return [
                     'readSql' => 'ReadSql',
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
-                    'mapper' => ProductFilterMapper::class
+                    'mapper' => ProductSortMapper::class
                 ],
             ],
         ],

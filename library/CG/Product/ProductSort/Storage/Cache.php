@@ -1,10 +1,10 @@
 <?php
-namespace CG\Product\ProductFilter\Storage;
+namespace CG\Product\ProductSort\Storage;
 
-use CG\Product\ProductFilter\Collection;
-use CG\Product\ProductFilter\Filter;
-use CG\Product\ProductFilter\Mapper;
-use CG\Product\ProductFilter\StorageInterface;
+use CG\Product\ProductSort\Collection;
+use CG\Product\ProductSort\Filter;
+use CG\Product\ProductSort\Mapper;
+use CG\Product\ProductSort\StorageInterface;
 use CG\Cache\CacheAbstract;
 use CG\Cache\Storage\CollectionTrait;
 use CG\Cache\Storage\FetchTrait;
