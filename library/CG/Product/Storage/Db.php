@@ -768,7 +768,6 @@ class Db extends DbAbstract implements StorageInterface
     protected function getOrderByInfoByFilter(Filter $filter)
     {
         $productTableColumns = ['name', 'sku'];
-        $stockLocationTableColumns = ['onhand', 'allocated', 'onpurchaseorder'];
         $productDetailTableColumns = ['weight', 'countryofmanufacture'];
         $productDetailTableNumberColumns = ['hstariffnumber', 'cost'];
         $filterOrder = $filter->getOrderBy();
@@ -786,8 +785,6 @@ class Db extends DbAbstract implements StorageInterface
             $tableName = 'productDetail';
         } elseif (in_array($column, $productDetailTableColumns)) {
             $tableName = 'productDetail';
-        } elseif (in_array($column, $stockLocationTableColumns)) {
-            $tableName = 'stockLocation';
         } elseif (in_array($column, $productTableColumns)) {
             $tableName = 'product';
         }
@@ -801,20 +798,8 @@ class Db extends DbAbstract implements StorageInterface
         if ($joinTable == 'productDetail') {
             $select->join(
                 'productDetail',
-                'productDetail.sku = product.sku',
+                new Expression('productDetail.sku = product.sku and productDetail.organisationUnitId = product.organisationUnitId'),
                 ['weight', 'hsTariffNumber', 'countryOfManufacture', 'cost'],
-                Select::JOIN_LEFT
-            );
-        } else if ($joinTable == 'stockLocation') {
-            $select->join(
-                'stock',
-                'stock.sku = product.sku',
-                ['stockId' => 'id'],
-                Select::JOIN_LEFT
-            )->join(
-                'stockLocation',
-                'stockLocation.stockId = stock.id',
-                ['onHand', 'allocated', 'onPurchaseOrder'],
                 Select::JOIN_LEFT
             );
         }
