@@ -1,7 +1,6 @@
 <?php
 namespace CG\InputValidation\ProductSort;
 
-use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\Rules\PaginationTrait;
 use CG\Validation\RulesInterface;
@@ -39,11 +38,6 @@ class Filter implements RulesInterface
                         new IntegerValidator(['name' => 'userId']),
                         new GreaterThan(['min' => 1, 'inclusive' => true]),
                     ],
-                ],
-                'defaultFilter' => [
-                    'name'       => 'defaultFilter',
-                    'required'   => false,
-                    'validators' => [new BooleanValidator(['name' => 'defaultFilter'])],
                 ],
             ]
         );

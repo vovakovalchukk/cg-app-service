@@ -1,7 +1,6 @@
 <?php
 namespace CG\InputValidation\ProductSort;
 
-use CG\Validation\Rules\BooleanValidator;
 use CG\Validation\Rules\IntegerValidator;
 use CG\Validation\RulesInterface;
 use Zend\Validator\GreaterThan;
@@ -39,17 +38,11 @@ class Entity implements RulesInterface
                         ->setMessages(['notGreaterThanInclusive' => 'userId must be at least %min%'])
                 ],
             ],
-            'filters' => [
-                'name' => 'filters',
+            'data' => [
+                'name' => 'data',
                 'required' => true,
                 'allow_empty' => false,
                 'validators' => [new StringLength(['min' => 1])],
-            ],
-            'defaultFilter' => [
-                'name'       => 'defaultFilter',
-                'required'   => false,
-                'allow_empty' => true,
-                'validators' => [new BooleanValidator(['name' => 'defaultFilter'])],
             ],
         ];
     }

@@ -9,22 +9,6 @@ class RestService extends Service
     const DEFAULT_LIMIT = 10;
     const DEFAULT_PAGE = 1;
 
-    /**
-     * @param ProductSort $entity
-     * @return mixed
-     */
-    public function save($entity, array $adjustmentIds = [])
-    {
-        try {
-            if (is_null($entity->getId())) {
-                throw new NotFound();
-            }
-        } catch (NotFound $exception) {
-            //noop
-        }
-        return parent::save($entity);
-    }
-
     public function fetchCollectionByFilterAsHal(Filter $filter)
     {
         if (!$filter->getLimit()) {

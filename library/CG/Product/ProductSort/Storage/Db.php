@@ -43,6 +43,8 @@ class Db extends DbAbstract implements StorageInterface
                 throw new NotFound('No matching ProductSorts found matching requested filters');
             }
 
+            $select = $this->getSelect()->where(['id' => $ids]);
+            $this->addOrderByUserId($filter, $select);
             $productSorts = $this->fetchCollection(
                 new Collection($this->getEntityClass(), __FUNCTION__, $filter->toArray()),
                 $this->getReadSql(),
@@ -54,6 +56,20 @@ class Db extends DbAbstract implements StorageInterface
 
         } catch (ExceptionInterface $e) {
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * If we are looking for saved sort for the user, sort by userId to prefer their own over organisational
+     *
+     * @param Filter $filter
+     * @param Select $select
+     * @return void
+     */
+    protected function addOrderByUserId(Filter $filter, Select $select)
+    {
+        if (empty($filter->getId()) && !empty($filter->getUserId())) {
+            $select->order('productSort.userId DESC');
         }
     }
 
