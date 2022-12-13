@@ -10,9 +10,13 @@ use CG\InputValidation\Settings\Invoice\Entity as EntityValidation;
 
 use CG\Controllers\Settings\Shipping\Alias as Alias;
 use CG\Controllers\Settings\Shipping\Alias\Collection as AliasCollection;
+use CG\Controllers\Settings\Shipping\Alias\Rule as Rule;
+use CG\Controllers\Settings\Shipping\Alias\Rule\Collection as RuleCollection;
 
 use CG\InputValidation\Settings\Alias\Filter as AliasCollectionValidation;
 use CG\InputValidation\Settings\Alias\Entity as AliasEntityValidation;
+use CG\InputValidation\Settings\Alias\Rule\Filter as RuleFilterValidation;
+use CG\InputValidation\Settings\Alias\Rule\Entity as RuleEntityValidation;
 
 use CG\Settings\Invoice\Shared\Entity as InvoiceEntity;
 use CG\Settings\Invoice\Shared\Mapper as InvoiceMapper;
@@ -20,7 +24,10 @@ use CG\Settings\Invoice\Service\Service as InvoiceService;
 
 use CG\Settings\Shipping\Alias\Entity as AliasEntity;
 use CG\Settings\Shipping\Alias\Mapper as AliasMapper;
-use CG\Settings\Shipping\Alias\Service as AliasService;
+use CG\Settings\Shipping\Alias\RestService as AliasService;
+use CG\Settings\Shipping\Alias\Rule\Entity as RuleEntity;
+use CG\Settings\Shipping\Alias\Rule\Mapper as RuleMapper;
+use CG\Settings\Shipping\Alias\Rule\RestService as RuleService;
 
 use CG\Controllers\Settings\PickList;
 use CG\Controllers\Settings\PickList\Collection as PickListCollection;
@@ -157,14 +164,15 @@ return [
         'name' => "ShippingSettings"
     ],
     '/settings/shipping/alias' => [
-        'controllers' => function() use ($di, $app) {
-                $method = $app->request()->getMethod();
+        'controllers' => function() use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-                $controller = $di->get(AliasCollection::class);
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($app->request()->getBody())
-                );
+            $controller = $di->get(AliasCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($app->request()->getBody())
+            );
         },
         'via' => ['GET', 'POST', 'OPTIONS'],
         'name' => 'AliasSettingsCollection',
@@ -176,14 +184,15 @@ return [
         'version' => new Version(1, 3),
     ],
     '/settings/shipping/alias/:aliasId' => [
-        'controllers' => function($aliasId) use ($di, $app) {
-                $method = $app->request()->getMethod();
+        'controllers' => function($aliasId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
 
-                $controller = $di->get(Alias::class);
-                $app->view()->set(
-                    'RestResponse',
-                    $controller->$method($aliasId, $app->request()->getBody())
-                );
+            $controller = $di->get(Alias::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($aliasId, $app->request()->getBody())
+            );
         },
         'via' => ['GET', 'PUT', 'DELETE', 'OPTIONS'],
         'name' => 'AliasSettingsEntity',
@@ -196,6 +205,49 @@ return [
             'serviceClass' => AliasService::class
         ],
         'version' => new Version(1, 3),
+    ],
+    '/settings/shipping/alias/:aliasId/rule' => [
+        'controllers' => function($aliasId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(RuleCollection::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($aliasId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'POST', 'OPTIONS'],
+        'name' => 'AliasRuleSettingsCollection',
+        'validation' => [
+            'filterRules' => RuleFilterValidation::class,
+            'dataRules' => RuleEntityValidation::class
+        ],
+        'entityRoute' => '/settings/shipping/alias/:aliasId/rule/:ruleId',
+        'version' => new Version(1, 1),
+    ],
+    '/settings/shipping/alias/:aliasId/rule/:ruleId' => [
+        'controllers' => function($aliasId, $ruleId) use ($di) {
+            $app = $di->get(Slim::class);
+            $method = $app->request()->getMethod();
+
+            $controller = $di->get(Rule::class);
+            $app->view()->set(
+                'RestResponse',
+                $controller->$method($aliasId, $ruleId, $app->request()->getBody())
+            );
+        },
+        'via' => ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        'name' => 'AliasRuleSettingsEntity',
+        'validation' => [
+            "dataRules" => RuleEntityValidation::class,
+        ],
+        'eTag' => [
+            'mapperClass' => RuleMapper::class,
+            'entityClass' => RuleEntity::class,
+            'serviceClass' => RuleService::class
+        ],
+        'version' => new Version(1, 1),
     ],
     '/settings/pickList' => [
         'controllers' => function() use ($di) {
