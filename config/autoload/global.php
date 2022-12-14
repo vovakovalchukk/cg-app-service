@@ -226,13 +226,6 @@ use CG\Product\Detail\Storage\Cache as ProductDetailCacheStorage;
 use CG\Product\Detail\Storage\Db as ProductDetailDbStorage;
 use CG\Product\Detail\StorageInterface as ProductDetailStorage;
 
-// ProductSort
-use CG\Product\ProductSort\Mapper as ProductSortMapper;
-use CG\Product\ProductSort\Repository as ProductSortRepository;
-use CG\Product\ProductSort\Storage\Cache as ProductSortCacheStorage;
-use CG\Product\ProductSort\Storage\Db as ProductSortDbStorage;
-use CG\Product\ProductSort\StorageInterface as ProductSortStorage;
-
 // Transaction
 use CG\Transaction\ClientInterface as TransactionClientInterface;
 use CG\Transaction\GetOldTransactionsClientInterface;
@@ -1145,20 +1138,6 @@ $config = array(
                     'fastReadSql' => 'FastReadSql',
                     'writeSql' => 'WriteSql',
                     'mapper' => ProductDetailMapper::class
-                ]
-            ],
-            ProductSortRepository::class => [
-                'parameter' => [
-                    'storage' => ProductSortCacheStorage::class,
-                    'repository' => ProductSortDbStorage::class
-                ]
-            ],
-            ProductSortDbStorage::class => [
-                'parameter' => [
-                    'readSql' => 'ReadSql',
-                    'fastReadSql' => 'FastReadSql',
-                    'writeSql' => 'WriteSql',
-                    'mapper' => ProductSortMapper::class
                 ]
             ],
             TransactionRedisClient::class => [
