@@ -768,8 +768,8 @@ class Db extends DbAbstract implements StorageInterface
     protected function getOrderByInfoByFilter(Filter $filter)
     {
         $productTableColumns = ['name', 'sku'];
-        $productDetailTableColumns = ['weight', 'countryofmanufacture'];
-        $productDetailTableNumberColumns = ['hstariffnumber', 'cost'];
+        $productDetailTableColumns = ['weight', 'countryofmanufacture', 'hstariffnumber'];
+        $productDetailTableNumberColumns = ['cost',];
         $filterOrder = $filter->getOrderBy();
         $order = null;
         $tableName = null;
